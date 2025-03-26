@@ -4,7 +4,7 @@ SPDX-FileCopyrightText: 2025 DB Systel GmbH
 SPDX-License-Identifier: Apache-2.0
 -->
 
-# db-ux-design-system.github.io
+# db-ux-design-system.github.io (with custom domain design-system.deutschebahn.com)
 
 ![Apache 2.0 license badge](https://img.shields.io/badge/License-Apache_2.0-blue.svg)
 [![REUSE Compliance Check](https://github.com/db-ux-design-system/db-ux-design-system.github.io/actions/workflows/99-reuse-compliance-check.yml/badge.svg)](https://github.com/db-ux-design-system/db-ux-design-system.github.io/actions/workflows/99-reuse-compliance-check.yml) Creates copyright & license annotations with [REUSE](https://git.fsfe.org/reuse/tool)
