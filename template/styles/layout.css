@@ -1,0 +1,107 @@
+.dba-main-grid {
+  display: grid;
+  grid-template-rows: 1fr min-content;
+  block-size: 100%;
+}
+
+.dba-toc {
+  overflow-y: auto;
+  max-height: calc(100svh - var(--header-height) - var(--footer-height) - 3rem);
+}
+
+.dba-main-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  > img {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.dba-main > astro-island:empty + .dba-main-inner {
+  margin-left: 0 !important;
+}
+
+.dba-main-content {
+    padding: var(--db-spacing-fixed-3xl);
+}
+
+.dba-main-footer-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--db-spacing-fixed-md);
+  margin-bottom: var(--db-spacing-fixed-sm);
+  gap: var(--db-spacing-fixed-lg);
+
+  .db-button {
+    gap: var(--db-spacing-fixed-sm);
+  }
+}
+
+.dba-article-heading {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.dba-pulse-underline {
+  display: block;
+  border-radius: 0.25rem;
+  background-color: var(--db-brand-origin-default);
+  height: 0.5rem;
+  width: 4rem;
+  margin-bottom: 2rem;
+}
+
+.dba-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: var(--footer-height);
+  padding: var(--db-spacing-fixed-md);
+  background-color: var(--db-adaptive-bg-basic-level-1-default);
+  border-block-start: var(--db-border-width-3xs) solid
+    var(--db-adaptive-on-bg-basic-emphasis-60-default);
+  justify-content: center;
+  margin-block-start: auto;
+
+  p {
+    margin: 0;
+    margin-block: auto;
+    white-space: pre;
+  }
+
+  a:not(:hover) {
+    text-decoration: none;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .dba-side-nav {
+    display: block;
+  }
+
+  body:has(.dba-side-nav) {
+    .dba-main {
+      margin-left: calc(
+        max(var(--side-nav-width), calc((100% - var(--content-width)) / 2))
+      );
+    }
+  }
+
+  .dba-main-footer-nav {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .dba-footer {
+    flex-direction: row;
+    width: 100%;
+    .db-divider {
+      height: 100%;
+    }
+  }
+}

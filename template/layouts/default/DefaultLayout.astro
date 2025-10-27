@@ -1,0 +1,28 @@
+---
+import type { MarkdownHeading } from "astro";
+import "../../styles/global.css";
+import HtmlHead from "./html-head";
+import MainContent from "./main-content";
+import { Footer } from "./footer";
+import { appConfig } from "@root/app.config.ts";
+import { Shell } from "./shell";
+
+const { headings, frontmatter } = Astro.props as {
+  headings: MarkdownHeading[];
+  frontmatter: FrontMatter;
+};
+---
+
+<!doctype html>
+<html lang={appConfig.language || "en"}>
+  <HtmlHead title={frontmatter.title} />
+  <body>
+    <Shell client:only="react">
+      <div class="dba-main-grid">
+      <MainContent frontmatter={frontmatter} headings={headings}>
+        <slot />
+      </MainContent>
+      <Footer /></div>
+    </Shell>
+  </body>
+</html>

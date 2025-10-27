@@ -1,0 +1,35 @@
+{
+  "name": "one-platform",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "prettier --check . && astro check",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.4",
+    "@astrojs/mdx": "4.3.6",
+    "@astrojs/react": "4.3.1",
+    "@astrojs/sitemap": "3.6.0",
+    "@db-ux/db-theme": "5.2.0",
+    "@db-ux/core-components": "3.0.2-shell4-bdb351c",
+    "@db-ux/core-foundations": "3.0.2-shell4-bdb351c",
+    "@db-ux/react-core-components": "3.0.2-shell4-bdb351c",
+    "@orama/orama": "3.1.14",
+    "@orama/plugin-astro": "3.1.14",
+    "@types/react": "19.2.0",
+    "astro": "5.13.10",
+    "prettier": "3.6.2",
+    "prettier-plugin-astro": "0.14.1",
+    "typescript": "5.9.2"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

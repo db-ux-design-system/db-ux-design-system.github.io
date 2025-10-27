@@ -1,0 +1,22 @@
+/* Temporary implementation of table stylings. This file can be deleted in the future when @db-ux releases corporate styling for tables. */
+table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--db-spacing-fixed-md);
+}
+
+table td,
+table th {
+  border: 1px solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+  padding: var(--db-spacing-fixed-sm);
+  padding-inline: var(--db-spacing-fixed-lg);
+  text-align: start;
+}
+
+table thead {
+  background-color: var(--db-adaptive-on-bg-basic-emphasis-50-default);
+}
+table tbody tr:nth-child(2n) {
+  background-color: var(--db-adaptive-bg-basic-level-2-default);
+}

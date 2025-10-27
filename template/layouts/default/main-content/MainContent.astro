@@ -1,0 +1,28 @@
+---
+import type { MarkdownHeading } from "astro";
+import { TableOfContents } from "./toc";
+import { FooterNav } from "./footer-nav";
+
+const { headings, frontmatter } = Astro.props as {
+  headings: MarkdownHeading[];
+  frontmatter: FrontMatter;
+};
+const toc = headings && headings?.length > 0 && frontmatter.toc ;
+---
+
+<>
+  {toc && <TableOfContents client:only astro={Astro} headings={headings} />}
+
+  <div class="dba-main-content">
+    {
+      frontmatter.title && (
+        <>
+          <h1 class="dba-article-heading">{frontmatter.title}</h1>
+          <span class="dba-pulse-underline" aria-hidden="true" />
+        </>
+      )
+    }
+    <slot />
+    {frontmatter.nav  && <FooterNav client:only />}
+  </div>
+</>

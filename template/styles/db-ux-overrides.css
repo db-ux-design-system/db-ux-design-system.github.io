@@ -1,0 +1,8 @@
+.db-sub-navigation,
+.dba-side-nav {
+  .db-navigation-item {
+    a[aria-current="page"] {
+      color: var(--db-brand-on-bg-basic-emphasis-70-default);
+    }
+  }
+}
