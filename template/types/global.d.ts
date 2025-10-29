@@ -43,11 +43,11 @@ declare interface NavigationItem {
    * The title of the navigation item.
    */
   title: string;
-  /*
+  /**
    * An optional icon that can be used to represent the navigation item.
    */
   icon?: string;
-  /*
+  /**
    * An optional icon that can be used to represent the navigation item.
    */
   iconTrailing?: string;
@@ -62,9 +62,9 @@ declare interface NavigationItem {
    */
   children?: NavigationItem[];
   /**
-   * An optional sub navigation.
+   * If true, the children will be rendered as sub-navigation items.
    */
-  subNavigation?: NavigationItem[];
+  isSubNavigation?: boolean;
 }
 
 /**

@@ -3,7 +3,7 @@ export const appNavigation: AppNavigation = [
     title: "Products & Services",
     children: [
       { title: "Foundations", path: "products-and-services/foundations" },
-      { title: "Components & Patterns", path: "products-and-services/components-and-patterns", },
+      { title: "Components & Patterns", path: "products-and-services/components-and-patterns" },
       { title: "Templates", path: "products-and-services/templates" },
       { title: "Extensions", path: "products-and-services/extensions" },
     ],
@@ -13,9 +13,11 @@ export const appNavigation: AppNavigation = [
     children: [
       {
         title: "Documentation",
+        path: "resources/documentation",
+        isSubNavigation: true,
         children: [
-          { title: "Getting Started", path: "resources/documentation/getting-started", },
-          { title: "Foundations", path: "resources/documentation/foundations", },
+          { title: "Getting Started", path: "resources/documentation/getting-started" },
+          { title: "Foundations", path: "resources/documentation/foundations" },
         ],
       },
     ],
