@@ -1,7 +1,7 @@
 ---
 layout: "@template/layouts/default"
 title: "Extensions"
-toc: false
+showPage: true
 ---
 
 XXX

@@ -1,7 +1,7 @@
 ---
 layout: "@template/layouts/default"
 title: "Foundations"
-toc: false
+showPage: true
 ---
 
 XXX

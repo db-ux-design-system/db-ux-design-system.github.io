@@ -1,7 +1,8 @@
 ---
 layout: "@template/layouts/default"
 title: "Documentation"
-toc: false
+showPage: false
+isSubNavigation: true
 ---
 
 XXX

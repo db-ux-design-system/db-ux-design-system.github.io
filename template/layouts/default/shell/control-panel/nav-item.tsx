@@ -6,16 +6,13 @@ const NavItem = ({ path, title, icon, iconTrailing, children, isSubNavigation }:
     // if sub-navigation node, do not render children here
     if (isSubNavigation) {
         const target = path ?? getFirstChildPath(children);
-        const currentPath = typeof window !== "undefined" ? window.location.pathname : "/";
-        const isActive = covers({ path, title, icon, iconTrailing, children, isSubNavigation }, currentPath);
+        const isActive =
+            typeof window !== "undefined" &&
+            covers({ path, title, icon, iconTrailing, children, isSubNavigation }, window.location.pathname);
 
         return (
             <DBNavigationItem icon={icon} key={`router-leaf-${target ?? title}`}>
-                <a
-                    href={target}
-                    aria-current={isActive ? "page" : undefined}
-                    data-icon-trailing={iconTrailing}
-                >
+                <a href={target} aria-current={isActive ? "page" : undefined} data-icon-trailing={iconTrailing}>
                     {title}
                 </a>
             </DBNavigationItem>
@@ -26,8 +23,8 @@ const NavItem = ({ path, title, icon, iconTrailing, children, isSubNavigation }:
     if (children && children.length > 0) {
         return (
             <DBNavigationItemGroup text={title} key={`router-group-${path ?? title}`}>
-                {children.map((subItem) => (
-                    <NavItem key={`router-sub-path-${subItem.path ?? subItem.title}`} {...subItem} />
+                {children.map((sub) => (
+                    <NavItem key={`router-sub-${sub.path ?? sub.title}`} {...sub} />
                 ))}
             </DBNavigationItemGroup>
         );
@@ -36,11 +33,7 @@ const NavItem = ({ path, title, icon, iconTrailing, children, isSubNavigation }:
     // leaf-node, no children
     return (
         <DBNavigationItem icon={icon} key={`router-leaf-${path ?? title}`}>
-            <a
-                href={path}
-                aria-current={path ? getAriaCurrent(path) : undefined}
-                data-icon-trailing={iconTrailing}
-            >
+            <a href={path} aria-current={getAriaCurrent(path)} data-icon-trailing={iconTrailing}>
                 {title}
             </a>
         </DBNavigationItem>

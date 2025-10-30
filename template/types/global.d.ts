@@ -33,6 +33,18 @@ declare interface FrontMatter {
    * @default true
    */
   nav?: boolean;
+  /**
+   * If true, children will be rendered as sub-navigation on child pages.
+   */
+  isSubNavigation?: boolean;
+  /**
+   * If false, the page itself will not be shown; instead, a redirect to the first child will occur.
+   */
+  showPage?: boolean;
+  /**
+   * An optional icon that can be used to represent the page.
+   */
+  iconTrailing?: string;
 }
 
 /**
@@ -65,6 +77,11 @@ declare interface NavigationItem {
    * If true, the children will be rendered as sub-navigation items.
    */
   isSubNavigation?: boolean;
+
+  /**
+   * The order of the navigation item. Lower numbers will appear first.
+   */
+  order?: number;
 }
 
 /**
