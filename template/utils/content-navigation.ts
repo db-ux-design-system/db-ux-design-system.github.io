@@ -98,14 +98,14 @@ export function buildAppNavigationFromContent(): AppNavigation {
         if (fm.nav === false) continue;
 
         const title = fm.title || (segments.length ? toTitleFromSegment(segments[segments.length - 1]) : "Home");
-        const showPage = fm.showPage !== false; // default: true
+        const hidePage = fm.hidePage === true;
         const isSubNavigation = fm.isSubNavigation ?? fm.isSubnavigation ?? false;
         const iconTrailing = fm.iconTrailing;
         const order = getOrder(fm);
 
         const node: NavigationItem = {
             title,
-            path: showPage ? rel : undefined,
+            path: hidePage ? undefined : rel,
             isSubNavigation,
             iconTrailing,
             children: [],
