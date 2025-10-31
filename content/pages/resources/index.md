@@ -1,5 +1,5 @@
 ---
 title: "Resources"
-showPage: false
+hidePage: true
 order: 2
 ---

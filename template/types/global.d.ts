@@ -38,9 +38,9 @@ declare interface FrontMatter {
    */
   isSubNavigation?: boolean;
   /**
-   * If false, the page itself will not be shown; instead, a redirect to the first child will occur.
+   * If true, the page itself will not be shown; instead, a redirect to the first child will occur.
    */
-  showPage?: boolean;
+  hidePage?: boolean;
   /**
    * An optional icon that can be used to represent the page.
    */
