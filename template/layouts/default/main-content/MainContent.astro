@@ -7,7 +7,7 @@ const { headings, frontmatter } = Astro.props as {
   headings: MarkdownHeading[];
   frontmatter: FrontMatter;
 };
-const toc = headings && headings?.length > 0 && frontmatter.toc ;
+const toc = (headings?.length ?? 0) > 0 && frontmatter.toc === true;
 ---
 
 <>
