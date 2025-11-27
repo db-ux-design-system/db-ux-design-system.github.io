@@ -33,7 +33,7 @@ export default defineConfig({
     },
     resolve: {
       alias: {
-        '@components': new URL('./components', import.meta.url).pathname,
+        '@components': new URL('./template/components', import.meta.url).pathname,
         '@template': new URL('./template', import.meta.url).pathname,
         '@content': new URL('./content', import.meta.url).pathname,
         '@config': new URL('./app.config.ts', import.meta.url).pathname,

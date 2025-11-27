@@ -3,7 +3,7 @@ import type { MarkdownHeading } from "astro";
 import { TableOfContents } from "./toc";
 import { FooterNav } from "./footer-nav";
 import { DBSection } from '@db-ux/react-core-components';
-import PageHero from '@components/PageHero/PageHero.astro';
+import { PageHero } from '@components';
 
 const { headings, frontmatter } = Astro.props as {
   headings: MarkdownHeading[];
