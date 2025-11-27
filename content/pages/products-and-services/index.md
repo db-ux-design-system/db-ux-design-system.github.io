@@ -1,5 +1,5 @@
 ---
-title: "Products and Services"
+title: "Products & Services"
 hidePage: true
 order: 1
 ---

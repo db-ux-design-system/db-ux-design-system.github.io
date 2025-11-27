@@ -1,0 +1,21 @@
+---
+order: 3
+layout: "@template/layouts/default"
+title: "Extensions"
+headline: "Extend with purpose"
+description: "Contextual standards that build on the core system to support domain-specific needs."
+heroImage: "/one-platform/assets/extensions/Extensions--C.png"
+heroImageAlt: "Components Visual"
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import { CTA } from '@components';
+import { appConfig } from '@config';
+
+<DBSection width="medium" spacing="medium">
+  <CTA
+    title="Move faster with shared standards."
+    primaryAction={{ label: 'Get Started', href: `${appConfig.basePath}resources/documentation/getting-started`, variant: 'brand' }}
+  secondaryAction={{ label: 'Contact us', href: 'mailto:db-ux-designsystem@deutschebahn.com' }}
+  />
+</DBSection>

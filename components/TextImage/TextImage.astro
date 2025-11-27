@@ -1,0 +1,96 @@
+---
+/**
+ * TextImage Component
+ * Zeigt Text neben einem Bild an und bricht auf Mobile untereinander.
+ */
+import './TextImage.css';
+
+interface Props {
+  title?: string;
+  imageSrc: string;
+  imageAlt: string;
+  imagePosition?: 'image-left' | 'image-right';
+  reversed?: boolean;
+  alignContent?: 'start' | 'center' | 'end';
+  /**
+   * Überschreibt die Headline-Größe (HTML Tag). Standard ist h4.
+   */
+  headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
+  /**
+   * Verhältnis zwischen Text und Bild. "equal" = 50/50, "text-wide" = 66/33 (Text breiter).
+   */
+  layoutRatio?: 'equal' | 'text-wide';
+  /**
+   * Grundlayout: horizontal (Standard nebeneinander) oder vertical (Bild über Text).
+   */
+  layout?: 'horizontal' | 'vertical';
+  /**
+   * Optionaler Masken-Effekt für das Bild. Unterstützte Werte:
+   * fade-right, fade-left, fade-top, fade-bottom,
+   * fade-bottom-right, fade-bottom-left, fade-top-right, fade-top-left.
+   */
+  mask?: 
+    | 'fade-right'
+    | 'fade-left'
+    | 'fade-top'
+    | 'fade-bottom'
+    | 'fade-bottom-right'
+    | 'fade-bottom-left'
+    | 'fade-top-right'
+    | 'fade-top-left';
+  /**
+   * Rundet das Bild (aktiviert border-radius Styles)
+   */
+  rounded?: boolean;
+  /**
+   * Abstand zwischen Headline und Text.
+   * "auto" drückt den Body nach unten; sm/md/lg/xl setzen festen Gap.
+   * Standard ist "sm".
+   */
+  textGap?: 'auto' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
+}
+
+const {
+  title,
+  imageSrc,
+  imageAlt,
+  imagePosition = 'image-right',
+  reversed = false,
+  alignContent = 'center',
+  layoutRatio = 'equal',
+  layout = 'horizontal',
+  mask,
+  rounded = false,
+  textGap = 'sm',
+  headlineLevel = 4
+} = Astro.props as Props;
+
+const effectivePosition = reversed ? 'image-left' : imagePosition;
+// Headline stets h6 – Typografie kommt aus globalen Styles
+---
+
+<div
+  class="text-image"
+  data-image-position={effectivePosition}
+  data-align={alignContent}
+  data-layout-ratio={layoutRatio}
+  data-layout={layout}
+  data-text-gap={textGap}
+>
+  <div class="text-image__content">
+    {title && (
+      headlineLevel === 1 ? <h1 class="text-image__title">{title}</h1>
+      : headlineLevel === 2 ? <h2 class="text-image__title">{title}</h2>
+      : headlineLevel === 3 ? <h3 class="text-image__title">{title}</h3>
+      : headlineLevel === 4 ? <h4 class="text-image__title">{title}</h4>
+      : headlineLevel === 5 ? <h5 class="text-image__title">{title}</h5>
+      : <h6 class="text-image__title">{title}</h6>
+    )}
+    <div class="text-image__text">
+      <slot />
+    </div>
+  </div>
+  <div class="text-image__image">
+    <img src={imageSrc} alt={imageAlt} loading="lazy" data-mask={mask} data-rounded={rounded ? 'true' : undefined} />
+  </div>
+</div>

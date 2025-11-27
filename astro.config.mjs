@@ -31,6 +31,14 @@ export default defineConfig({
     ssr: {
       noExternal: ["@db-ux/react-core-components"],
     },
+    resolve: {
+      alias: {
+        '@components': new URL('./components', import.meta.url).pathname,
+        '@template': new URL('./template', import.meta.url).pathname,
+        '@content': new URL('./content', import.meta.url).pathname,
+        '@config': new URL('./app.config.ts', import.meta.url).pathname,
+      },
+    },
   },
   devToolbar: {
     enabled: false,

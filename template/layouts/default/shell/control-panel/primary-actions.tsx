@@ -6,7 +6,7 @@ const PrimaryActions = () => (
   <DBControlPanelPrimaryActions>
     { <Search /> }
     <a className="db-button" href={`${appConfig.basePath}resources/documentation/getting-started`} data-variant="brand">
-      Start now
+      Get Started
     </a>
   </DBControlPanelPrimaryActions>
 );

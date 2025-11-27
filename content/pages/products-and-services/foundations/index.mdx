@@ -1,0 +1,77 @@
+---
+order: 1
+layout: "@template/layouts/default"
+title: "Foundation"
+headline: "Start with clarity"
+description: "Shared base tokens and modes provide a stable foundation for clear and coherent interfaces."
+heroImage: "/one-platform/assets/foundations/Foundations--C.png"
+heroImageAlt: "Foundations Visual"
+
+
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import { TextImage, CTA } from '@components';
+import { appConfig } from '@config';
+
+<DBSection width="medium" spacing="medium">
+
+<TextImage 
+  title="Base-Tokens"
+  imageSrc={`${appConfig.basePath}assets/foundations/Base-Tokens--Lightmode--C.png`}
+  imageAlt="Diagram showing base token categories (colors, spacing, typography)"
+  mask="fade-bottom-right"
+>
+  Define reusable design values applied consistently across the system.
+</TextImage>
+
+</DBSection>
+
+<DBSection width="medium" spacing="medium" >
+
+<TextImage 
+  title="Adaptive Colors"
+  imageSrc={`${appConfig.basePath}assets/foundations/Adaptive-Colors--Lightmode--C.png`}
+  imageAlt="Palette illustrating adaptive color shifts between light and dark mode"
+  imagePosition="image-left"
+  mask="fade-bottom-right"
+>
+  Maintain consistent contrast and tone across different color modes and contexts.
+</TextImage>
+
+</DBSection>
+
+<DBSection width="medium" spacing="medium" >
+
+<TextImage 
+  title="Materials"
+  imageSrc={`${appConfig.basePath}assets/foundations/Materials--Lightmode--C.png`}
+  imageAlt="Layered panels showing elevation, border and opacity material styles"
+  mask="fade-bottom-right"
+>
+  Create visual hierarchy through variations in borders, opacity, and fill.
+</TextImage>
+
+</DBSection>
+
+<DBSection width="medium" spacing="medium" >
+
+<TextImage 
+  title="Darkmode"
+  imageSrc={`${appConfig.basePath}assets/foundations/Darkmode--Lightmode--C.png`}
+  imageAlt="Comparison of interface elements in light versus dark mode"
+  imagePosition="image-left"
+  mask="fade-bottom-right"
+>
+  Support comfortable and readable interfaces across different luminance environments.
+</TextImage>
+
+</DBSection>
+
+<DBSection width="medium" spacing="medium">
+  <CTA
+    title="Move faster with shared standards."
+    primaryAction={{ label: 'Get Started', href: `${appConfig.basePath}resources/documentation/getting-started`, variant: 'brand' }}
+  secondaryAction={{ label: 'Contact us', href: 'mailto:db-ux-designsystem@deutschebahn.com' }}
+  />
+</DBSection>

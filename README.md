@@ -88,3 +88,36 @@ Below is an explanation of each field:
 * Avoid duplicate titles in the same folder level.
 * For “section overview” pages that should not have content themselves, set  `hidePage: true` and place the actual content in child pages.
 * Only set `isSubNavigation: true` on parent pages that have multiple related subpages.
+\n+## 🎨 TextImage Bildmasken
+\n+Der `TextImage` Komponenten-Prop `mask` erlaubt weiche Ausblendungen (Fades) an einer oder zwei Kanten – ähnlich wie bei linear.app.
+\n+### Verwendung
+\n+```astro
+<TextImage
+   title="Beispiel"
+   imageSrc="/assets/example.png"
+   imageAlt="Beispiel Illustration"
+   mask="fade-bottom-right"
+>
+   Beschreibungstext …
+</TextImage>
+```
+\n+### Unterstützte Werte
+\n+Einzelne Richtungen:
+* `fade-right`
+* `fade-left`
+* `fade-top`
+* `fade-bottom`
+\n+Ecken (Kombination aus zwei Fades):
+* `fade-bottom-right`
+* `fade-bottom-left`
+* `fade-top-right`
+* `fade-top-left`
+\n+### Technische Umsetzung
+* Realisiert über CSS `mask-image` bzw. `-webkit-mask-image` mit zwei linearen Gradients bei Eck-Varianten.
+* Die Gradients werden via `mask-composite: intersect` (WebKit: `-webkit-mask-composite: source-in`) kombiniert.
+* Fallback: Browser ohne Mask-Unterstützung zeigen das Bild unverändert (keine zusätzliche Logik nötig).
+\n+### Hinweise & Anpassung
+* Die Intensität (z.B. 20% → 100%) kann bei Bedarf zentral in der CSS Datei (`TextImage.css`) angepasst werden.
+* Für individuelle Projekte können weitere Varianten über zusätzliche `data-mask` Selektoren ergänzt werden.
+\n+### Barrierefreiheit
+* Die Maskierung beeinflusst nur die visuelle Darstellung, nicht den Alternativtext – `alt` sollte weiterhin aussagekräftig bleiben.

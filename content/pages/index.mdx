@@ -4,14 +4,172 @@ toc: false
 ---
 
 import { appConfig } from "../../app.config";
+import { DBSection, DBCard, DBButton, DBStack } from '@db-ux/react-core-components';
+import { PageHero, SectionTitle, TextImage, CTA, Carousel } from '@components';
 
-# Das Design System für Customer und Enterprise. One Single Source for all.
+<DBSection width="medium" spacing="large" aria-label="Hero section">
+  <PageHero
+    layout="split"
+    imageSide="right"
+    headline="DB UX Design System is designed to align teams and streamline product delivery."
+    headlineLevel="1"
+    description="Brings clarity to design and implementation through shared standards and reusable components."
+    imageSrc={`${appConfig.basePath}assets/Design-System--C.png`}
+    imageAlt="Design System Visual"
+    align="start"
+  />
+</DBSection>
 
-Starte jetzt – und bringe Konsistenz, Effizienz und Qualität in jedes Projekt
+<DBSection width="medium" spacing="medium" aria-label="Unified model section">
+  <SectionTitle title="A unified model for product teams" description="Shared fundamentals, components and domain-specific extensions that support clarity and alignment." />
+  <DBStack gap="large">
+  <a href={`${appConfig.basePath}products-and-services/foundations`} aria-label="Open Foundations page">
+  <DBCard behavior="interactive" spacing="large">
+  <TextImage 
+      title="Foundation"
+      imageSrc={`${appConfig.basePath}assets/Foundations-Teaser--C.png`}
+      imageAlt="Foundations Visual"
+      layoutRatio="text-wide"
+  mask="fade-bottom-right"
+      >
+      Shared base tokens and modes provide a stable foundation for clear and coherent interfaces.
+      </TextImage>
+    </DBCard>
+    </a>
+  <a href={`${appConfig.basePath}products-and-services/components`} aria-label="Open Components page">
+    <DBCard behavior="interactive" spacing="large">
+  <TextImage 
+      title="Components"
+      imageSrc={`${appConfig.basePath}assets/Components-Teaser--C.png`}
+      imageAlt="Foundations Visual"
+      layoutRatio="text-wide"
+  mask="fade-bottom-right"
+      >
+      Core components ensure predictable interactions across products.
+      </TextImage>
+    </DBCard>
+    </a>
+  <a href={`${appConfig.basePath}products-and-services/extensions`} aria-label="Open Extensions page">
+    <DBCard behavior="interactive" spacing="large">
+  <TextImage 
+      title="Extensions"
+      imageSrc={`${appConfig.basePath}assets/Extensions-Teaser--C.png`}
+      imageAlt="Foundations Visual"
+      layoutRatio="text-wide"
+  mask="fade-bottom-right"
+      >
+      Contextual standards that build on the core system to support domain-specific needs.
+      </TextImage>
+    </DBCard>
+    </a>
+  </DBStack>
+</DBSection>
 
-<a className="db-button" href={`${appConfig.basePath}resources/documentation/getting-started`} data-variant="brand">
-  Start now
-</a>
-<a className="db-button" data-variant="ghost">
-  Contact
-</a>
+<DBSection width="medium" spacing="medium" aria-label="How the system supports your work section">
+  <SectionTitle title="How the system supports your work" description="A shared system that improves collaboration and decision-making for product, development, and design." />
+  <div class="cards-row-fixed">
+  <a href={`${appConfig.basePath}products-and-services/foundations`} aria-label="Open Foundations page">
+    <DBCard behavior="interactive" spacing="large" data-color="violet">
+  <TextImage
+      layout="vertical"
+      alignContent="start"
+      title="Efficient Delivery"
+      imageSrc={`${appConfig.basePath}assets/for-productmanagement/Efficient-Delivery--Lightmode--C.png`}
+      imageAlt="Foundations Visual"
+  mask="fade-bottom-right"
+      >
+      Reduce time spent on repeated design and implementation decisions.
+      </TextImage>
+    </DBCard>
+  </a>
+  <a href={`${appConfig.basePath}products-and-services/components`} aria-label="Open Components page">
+    <DBCard behavior="interactive" spacing="large" data-color="green">
+  <TextImage
+      layout="vertical"
+      alignContent="start"
+      title="Predictable Maintenance"
+      imageSrc={`${appConfig.basePath}assets/for-developer/Predictable-Maintenance--Lightmode--C.png`}
+      imageAlt="Foundations Visual"
+      layoutRatio="text-wide"
+  mask="fade-bottom-right"
+      >
+      Rely on scheduled updates and stable versioning to plan changes confidently.
+      </TextImage>
+    </DBCard>
+    </a>
+
+  <a href={`${appConfig.basePath}products-and-services/extensions`} aria-label="Open Extensions page">
+    <DBCard behavior="interactive" spacing="large" data-color="blue">
+  <TextImage 
+      layout="vertical"
+      alignContent="start"
+      title="Flexible Choices"
+      imageSrc={`${appConfig.basePath}assets/for-designer/Flexible-Choices--Lightmode--C.png`}
+      imageAlt="Foundations Visual"
+      layoutRatio="text-wide"
+  mask="fade-bottom-right"
+      >
+      Adapt components and tokens to fit context without losing alignment.
+      </TextImage>
+    </DBCard>
+    </a>
+  </div>
+</DBSection>
+
+<DBSection width="medium" spacing="medium" aria-label="Unified model section">
+  <Carousel ariaLabel="Testimonials horizontal scroll">
+  <DBCard spacing="medium">
+      <TextImage 
+      title="“The foundation gives me a clear starting point for my product design decisions.”"
+      headlineLevel={2} 
+      imagePosition="image-left"
+      rounded
+      imageSrc={`${appConfig.basePath}assets/people/Tobias-Oberpaul--C.jpg`}
+      imageAlt="Tobias Oberpaul"
+      layoutRatio="text-wide"
+      textGap="2xl"
+      >
+      Tobias Oberpaul <br/>
+      @DB Fernverkehr AG
+      </TextImage>
+  </DBCard>
+  <DBCard spacing="medium">
+      <TextImage 
+      title="“The foundation gives me a clear starting point for my product design decisions.”"
+      headlineLevel={2} 
+      imagePosition="image-left"
+      rounded
+      imageSrc={`${appConfig.basePath}assets/people/Danny-Koppenhagen--C.jpg`}
+      imageAlt="Danny Koppenhagen"
+      layoutRatio="text-wide"
+      textGap="2xl"
+      >
+      Danny Koppenhagen <br/>
+      @DB Fernverkehr AG
+      </TextImage>
+    </DBCard>
+  <DBCard spacing="medium">
+      <TextImage 
+      title="“The foundation gives me a clear starting point for my product design decisions.”"
+      headlineLevel={2} 
+      imagePosition="image-left"
+      rounded
+      imageSrc={`${appConfig.basePath}assets/people/Finn-Hoffmeister--C.jpg`}
+      imageAlt="Finn Hoffmeister"
+      layoutRatio="text-wide"
+      textGap="2xl"
+      >
+      Finn Hoffmeister <br/>
+      @DB Fernverkehr AG
+      </TextImage>
+    </DBCard>
+  </Carousel>
+</DBSection>
+
+<DBSection width="medium" spacing="medium" aria-label="Homepage CTA section">
+  <CTA
+    title="Move faster with shared standards."
+    primaryAction={{ label: 'Get Started', href: `${appConfig.basePath}resources/documentation/getting-started`, variant: 'brand' }}
+  secondaryAction={{ label: 'Contact us', href: 'mailto:db-ux-designsystem@deutschebahn.com', ariaLabel: 'Contact the DB UX Design System team via email' }}
+  />
+</DBSection>
