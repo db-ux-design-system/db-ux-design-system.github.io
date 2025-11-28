@@ -1,0 +1,64 @@
+---
+import { DBCard, DBStack } from '@db-ux/react-core-components';
+import './Avatar.css';
+
+export interface Props {
+    src: string;
+    alt?: string;
+    ariaLabel?: string;
+    name?: string;
+    position?: string;
+    hoverSrc?: string; // alternative animation/model to use on hover
+}
+
+const {
+    src,
+    alt = 'Avatar',
+    ariaLabel = 'Avatar viewer',
+    name = 'Name',
+    position = 'Position',
+    hoverSrc,
+} = Astro.props as Props;
+---
+<DBStack class="avatar" aria-label={ariaLabel}>
+    <DBCard spacing="none" elevationLevel="2" style={{ width: '100%' }}>
+        <div class="avatar-viewer" data-has-hover={Boolean(hoverSrc)}>
+            <model-viewer
+                class="viewer-base"
+                alt={alt}
+                src={src}
+                interaction-prompt="none"
+                camera-controls
+                disable-zoom
+                disable-pan
+                autoplay
+                camera-target="0m 1.4m 0m"
+                camera-orbit="-30deg 90deg 3m"
+                max-camera-orbit="Infinity 180deg auto"
+                field-of-view="20deg"
+                loading="eager"
+            ></model-viewer>
+            {hoverSrc && (
+                <model-viewer
+                    class="viewer-hover"
+                    alt={alt}
+                    src={hoverSrc}
+                    interaction-prompt="none"
+                    camera-controls
+                    disable-zoom
+                    disable-pan
+                    autoplay
+                    camera-target="0m 1.4m 0m"
+                    camera-orbit="0deg 90deg 3m"
+                    max-camera-orbit="Infinity 180deg auto"
+                    field-of-view="20deg"
+                loading="eager"
+                ></model-viewer>
+            )}
+        </div>
+    </DBCard>
+    <div class="avatar-meta">
+        <h6>{name}</h6>
+        <p>{position}</p>
+    </div>
+</DBStack>
