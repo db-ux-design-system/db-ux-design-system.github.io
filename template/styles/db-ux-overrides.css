@@ -39,3 +39,22 @@
 @media (max-width: 767px) {
   .cards-row-fixed { grid-template-columns: 1fr; }
 }
+
+/* Dark blue image tint for signatures or other images */
+.img--tint-dark-blue {
+  /* Using filter chain to approximate dark DB brand blue while preserving alpha */
+  filter: saturate(0) brightness(0.4) sepia(1) hue-rotate(190deg) saturate(4) brightness(0.8);
+}
+
+/* Dark mode: render these signature images white for contrast */
+@media (prefers-color-scheme: dark) {
+  .img--tint-dark-blue {
+    /* Turn image white: remove hue influence, boost brightness, invert if needed */
+    filter: brightness(0) invert(1) sepia(0) saturate(0) contrast(1.1);
+  }
+}
+
+/* Attribute-based mode hook (e.g., <html data-mode="dark">) */
+[data-mode="dark"] .img--tint-dark-blue {
+  filter: brightness(0) invert(1) sepia(0) saturate(0) contrast(1.1);
+}

@@ -10,7 +10,7 @@ import { DBButton, DBCard, DBStack } from '@db-ux/react-core-components';
 interface Action {
   label: string;
   href: string;
-  variant?: 'brand' | 'ghost' | 'secondary' | 'danger';
+  variant?: 'brand' | 'outlined' | 'filled' | 'danger';
 }
 
 interface Props {
@@ -34,7 +34,7 @@ const { title, text, primaryAction, secondaryAction, align = 'center' } = Astro.
       </a>
       {secondaryAction && (
         <a href={secondaryAction.href} class="cta__action" aria-label={secondaryAction.label}>
-          <DBButton variant={secondaryAction.variant || 'outlined'}>{secondaryAction.label}</DBButton>
+          <DBButton variant={secondaryAction.variant || 'filled'}>{secondaryAction.label}</DBButton>
         </a>
       )}
     </div>

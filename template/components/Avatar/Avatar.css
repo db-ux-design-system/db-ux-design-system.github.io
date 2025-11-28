@@ -6,12 +6,17 @@
 /* Heading inside avatar meta */
 .avatar-meta > h6 {
   margin: 0;
+  font: var(--db-type-headline-3xs);
+  text-align: center;
 }
 
 /* Paragraph inside avatar meta */
 .avatar-meta > p {
   margin: 0;
+  text-align: center;
   color: var(--db-adaptive-on-bg-basic-emphasis-70-default);
+  font: var(--db-type-body-xs);
+  white-space: pre-line;
 }
 
 /* Viewer layering for hover swap */
@@ -25,6 +30,12 @@
   inset: 0;
   width: 100%;
   height: 100%;
+}
+
+@media (max-width: 767px) {
+  .avatar-viewer {
+    height: 160px; /* Mobile reduced height */
+  }
 }
 
 .viewer-base {
