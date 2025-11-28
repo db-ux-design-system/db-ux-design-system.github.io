@@ -1,24 +1,18 @@
 ---
 layout: "@template/layouts/default"
 toc: false
+headline: "The Desing System is designed to align teams and streamline product delivery."
+description: "Brings clarity to design and implementation through shared standards and reusable components."
 ---
 
 import { appConfig } from "../../app.config";
 import { DBSection, DBCard, DBButton, DBStack } from '@db-ux/react-core-components';
 import { PageHero, SectionTitle, TextImage, CTA, Carousel } from '@components';
 
-
-<DBSection width="medium" spacing="large" aria-label="Hero section">
-  <PageHero
-    layout="split"
-    imageSide="right"
-    headline="DB UX Design System is designed to align teams and streamline product delivery."
-    headlineLevel="1"
-    description="Brings clarity to design and implementation through shared standards and reusable components."
-    imageSrc={`${appConfig.basePath}assets/Design-System--C.png`}
-    imageAlt="Design System Visual"
-    align="start"
-  />
+<DBSection width="medium" spacing="medium">
+  <DBCard spacing="none" style={{overflow: 'hidden'}}>
+    <img src={`${appConfig.basePath}/assets/interactive-demo/Dashboard--Lightmode--C.png`} alt="Example Dashboard" />
+  </DBCard>
 </DBSection>
 
 <DBSection width="medium" spacing="medium" aria-label="Unified model section">
