@@ -22,7 +22,7 @@ const toc = (headings?.length ?? 0) > 0 && frontmatter.toc === true;
             title={frontmatter.title}
             headline={frontmatter.headline}
             description={frontmatter.description}
-            headlineLevel={frontmatter.headlineLevel}
+            headlineLevel={frontmatter.headlineLevel ?? 1}
             imageSrc={frontmatter.heroImage}
             imageAlt={frontmatter.heroImageAlt}
           />

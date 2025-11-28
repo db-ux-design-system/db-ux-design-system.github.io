@@ -13,7 +13,8 @@
       "@root/*": ["./*"],
       "@content/*": ["content/*"],
       "@template/*": ["template/*"],
-      "@components/*": ["components/*"],
+      "@components": ["template/components/index.ts"],
+      "@components/*": ["template/components/*"],
       "@config": ["app.config.ts"]
     }
   }

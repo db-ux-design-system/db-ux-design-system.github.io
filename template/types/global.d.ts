@@ -19,6 +19,10 @@ declare interface FrontMatter {
    */
   headline?: string;
   /**
+   * Optional semantic heading level (1-6) for hero headline.
+   */
+  headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
+  /**
    * Optional hero image URL.
    */
   heroImage?: string;
