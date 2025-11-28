@@ -14,22 +14,31 @@ interface ColorModeContextValue {
     toggleColorMode: () => void;
 }
 
+const STORAGE_KEY = "db-ux-mode";
+const SHELL_SELECTOR = ".db-shell";
+
 const ColorModeContext = createContext<ColorModeContextValue | undefined>(undefined);
 
-export const ColorModeProvider = ({ children }: { children: ReactNode }) => {
-    const [colorMode, setColorMode] = useState<ColorMode>("light");
+function getInitialColorMode(): ColorMode {
+    if (typeof window === "undefined") {
+        return "light";
+    }
 
-    useEffect(() => {
-        const stored = window.localStorage.getItem("db-ux-mode");
-        if (stored === "light" || stored === "dark") {
-            setColorMode(stored);
-        }
-    }, []);
+    const stored = window.localStorage.getItem(STORAGE_KEY);
+    if (stored === "light" || stored === "dark") {
+        return stored;
+    }
+
+    return "light";
+}
+
+export const ColorModeProvider = ({ children }: { children: ReactNode }) => {
+    const [colorMode, setColorMode] = useState<ColorMode>(getInitialColorMode);
 
     useEffect(() => {
         window.localStorage.setItem("db-ux-mode", colorMode);
 
-        const shell = document.querySelector(".db-shell");
+        const shell = document.querySelector(SHELL_SELECTOR);
         if (shell instanceof HTMLElement) {
             shell.setAttribute("data-mode", colorMode);
         }
