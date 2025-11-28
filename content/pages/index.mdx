@@ -6,7 +6,7 @@ description: "Brings clarity to design and implementation through shared standar
 ---
 
 import { appConfig } from "../../app.config";
-import { DBSection, DBCard, DBButton, DBStack } from '@db-ux/react-core-components';
+import { DBSection, DBCard, DBButton, DBStack, DBTag } from '@db-ux/react-core-components';
 import { PageHero, SectionTitle, TextImage, CTA, Carousel } from '@components';
 
 <DBSection width="medium" spacing="medium">
@@ -22,10 +22,11 @@ import { PageHero, SectionTitle, TextImage, CTA, Carousel } from '@components';
   <DBCard behavior="interactive" spacing="large">
   <TextImage 
       title="Foundation"
+      imagePosition="right"
+      imageWidth="33"
       imageSrc={`${appConfig.basePath}assets/Foundations-Teaser--C.png`}
       imageAlt="Foundations Visual"
-      layoutRatio="text-wide"
-  mask="fade-bottom-right"
+      mask="fade-bottom-right"
       >
       Shared base tokens and modes provide a stable foundation for clear and coherent interfaces.
       </TextImage>
@@ -35,10 +36,11 @@ import { PageHero, SectionTitle, TextImage, CTA, Carousel } from '@components';
     <DBCard behavior="interactive" spacing="large">
   <TextImage 
       title="Components"
+      imagePosition="right"
+      imageWidth="33"
       imageSrc={`${appConfig.basePath}assets/Components-Teaser--C.png`}
       imageAlt="Foundations Visual"
-      layoutRatio="text-wide"
-  mask="fade-bottom-right"
+      mask="fade-bottom-right"
       >
       Core components ensure predictable interactions across products.
       </TextImage>
@@ -46,12 +48,13 @@ import { PageHero, SectionTitle, TextImage, CTA, Carousel } from '@components';
     </a>
   <a href={`${appConfig.basePath}products-and-services/extensions`} aria-label="Open Extensions page">
     <DBCard behavior="interactive" spacing="large">
-  <TextImage 
+  <TextImage
+      imagePosition="right"
+      imageWidth="33"
       title="Extensions"
       imageSrc={`${appConfig.basePath}assets/Extensions-Teaser--C.png`}
       imageAlt="Foundations Visual"
-      layoutRatio="text-wide"
-  mask="fade-bottom-right"
+      mask="fade-bottom-right"
       >
       Contextual standards that build on the core system to support domain-specific needs.
       </TextImage>
@@ -63,49 +66,59 @@ import { PageHero, SectionTitle, TextImage, CTA, Carousel } from '@components';
 <DBSection width="medium" spacing="medium" aria-label="How the system supports your work section">
   <SectionTitle title="How the system supports your work" description="A shared system that improves collaboration and decision-making for product, development, and design." />
   <div class="cards-row-fixed">
-  <a href={`${appConfig.basePath}products-and-services/foundations`} aria-label="Open Foundations page">
-    <DBCard behavior="interactive" spacing="large" data-color="violet">
-  <TextImage
-      layout="vertical"
-      alignContent="start"
+  <a href={`${appConfig.basePath}products-and-services/for-productmanagement`} aria-label="Open for productmanagement page">
+    <DBCard behavior="interactive" data-color="violet">
+      <DBStack gap="medium">
+  <TextImage 
+      imagePosition="bottom" 
+      contentAlign="start"
+      imageWidth="33"
       title="Efficient Delivery"
       imageSrc={`${appConfig.basePath}assets/for-productmanagement/Efficient-Delivery--Lightmode--C.png`}
-      imageAlt="Foundations Visual"
-  mask="fade-bottom-right"
+      imageAlt="Efficient Delivery"
+      mask="fade-bottom-right"
+      tag={{ label: 'For Product Management', emphasis: 'strong' }}
       >
       Reduce time spent on repeated design and implementation decisions.
       </TextImage>
+      </DBStack>
     </DBCard>
   </a>
-  <a href={`${appConfig.basePath}products-and-services/components`} aria-label="Open Components page">
-    <DBCard behavior="interactive" spacing="large" data-color="green">
+  <a href={`${appConfig.basePath}products-and-services/for-developer`} aria-label="Open for developer page">
+    <DBCard behavior="interactive" data-color="green">
+      <DBStack gap="medium">
   <TextImage
-      layout="vertical"
-      alignContent="start"
+      imagePosition="bottom" 
+      contentAlign="start"
+      imageWidth="33"
       title="Predictable Maintenance"
       imageSrc={`${appConfig.basePath}assets/for-developer/Predictable-Maintenance--Lightmode--C.png`}
-      imageAlt="Foundations Visual"
-      layoutRatio="text-wide"
+      imageAlt="Predictable Maintenance"
   mask="fade-bottom-right"
+      tag={{ label: 'For Developer', emphasis: 'strong' }}
       >
       Rely on scheduled updates and stable versioning to plan changes confidently.
       </TextImage>
+      </DBStack>
     </DBCard>
     </a>
 
-  <a href={`${appConfig.basePath}products-and-services/extensions`} aria-label="Open Extensions page">
-    <DBCard behavior="interactive" spacing="large" data-color="blue">
-  <TextImage 
-      layout="vertical"
-      alignContent="start"
-      title="Flexible Choices"
-      imageSrc={`${appConfig.basePath}assets/for-designer/Flexible-Choices--Lightmode--C.png`}
-      imageAlt="Foundations Visual"
-      layoutRatio="text-wide"
-  mask="fade-bottom-right"
-      >
-      Adapt components and tokens to fit context without losing alignment.
-      </TextImage>
+  <a href={`${appConfig.basePath}products-and-services/for-designer`} aria-label="Open for designer page">
+    <DBCard behavior="interactive" data-color="blue">
+      <DBStack gap="medium">
+        <TextImage
+          imagePosition="bottom"
+          contentAlign="start"
+          imageWidth="33"
+          title="Flexible Choices"
+          imageSrc={`${appConfig.basePath}assets/for-designer/Flexible-Choices--Lightmode--C.png`}
+          imageAlt="Flexible Choices"
+          mask="fade-bottom-right"
+          tag={{ label: 'For Designer', emphasis: 'strong' }}
+          >
+          Adapt components and tokens to fit context without losing alignment.
+        </TextImage>
+      </DBStack>
     </DBCard>
     </a>
   </div>
@@ -117,11 +130,11 @@ import { PageHero, SectionTitle, TextImage, CTA, Carousel } from '@components';
       <TextImage 
       title="“Since adopting the system, our teams spend less time aligning on UI details and more time solving real product problems.”"
       headlineLevel={2} 
-      imagePosition="image-left"
+      imagePosition="left"
+      imageWidth="33"
       rounded
       imageSrc={`${appConfig.basePath}assets/people/Finn-Hoffmeister--C.jpg`}
       imageAlt="Finn Hoffmeister"
-      layoutRatio="text-wide"
       textGap="2xl"
       >
       Finn Hoffmeister <br/>
@@ -132,11 +145,11 @@ import { PageHero, SectionTitle, TextImage, CTA, Carousel } from '@components';
         <TextImage 
       title="“The foundation gives me a clear starting point for my product design decisions.”"
       headlineLevel={2} 
-      imagePosition="image-left"
+      imagePosition="left"
+      imageWidth="33"
       rounded
       imageSrc={`${appConfig.basePath}assets/people/Tobias-Oberpaul--C.jpg`}
       imageAlt="Tobias Oberpaul"
-      layoutRatio="text-wide"
       textGap="2xl"
       >
       Tobias Oberpaul <br/>
@@ -147,11 +160,11 @@ import { PageHero, SectionTitle, TextImage, CTA, Carousel } from '@components';
       <TextImage 
       title="“The foundation gives me a clear starting point for my product design decisions.”"
       headlineLevel={2} 
-      imagePosition="image-left"
+      imagePosition="left"
+      imageWidth="33"
       rounded
       imageSrc={`${appConfig.basePath}assets/people/Danny-Koppenhagen--C.jpg`}
       imageAlt="Danny Koppenhagen"
-      layoutRatio="text-wide"
       textGap="2xl"
       >
       Danny Koppenhagen <br/>

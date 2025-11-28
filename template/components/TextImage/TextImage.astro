@@ -4,26 +4,28 @@
  * Zeigt Text neben einem Bild an und bricht auf Mobile untereinander.
  */
 import './TextImage.css';
+import { DBTag } from '@db-ux/react-core-components';
 
 interface Props {
   title?: string;
   imageSrc: string;
   imageAlt: string;
-  imagePosition?: 'image-left' | 'image-right';
   reversed?: boolean;
-  alignContent?: 'start' | 'center' | 'end';
+  contentAlign?: 'start' | 'center' | 'end';
   /**
    * Überschreibt die Headline-Größe (HTML Tag). Standard ist h4.
    */
   headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
   /**
-   * Verhältnis zwischen Text und Bild. "equal" = 50/50, "text-wide" = 66/33 (Text breiter).
+   * Verhältnis zwischen Text und Bild. "50" = 50/50, "text-wide" = 66/33 (Text breiter).
    */
-  layoutRatio?: 'equal' | 'text-wide';
+  imageWidth?: '50' | '33' | '66';
   /**
    * Grundlayout: horizontal (Standard nebeneinander) oder vertical (Bild über Text).
    */
   layout?: 'horizontal' | 'vertical';
+  /** For vertical layout choose if image appears on top or bottom (default top) */
+  imagePosition?: 'top' | 'bottom' | 'left' | 'right';
   /**
    * Optionaler Masken-Effekt für das Bild. Unterstützte Werte:
    * fade-right, fade-left, fade-top, fade-bottom,
@@ -47,37 +49,37 @@ interface Props {
    * "auto" drückt den Body nach unten; sm/md/lg/xl setzen festen Gap.
    * Standard ist "sm".
    */
-  textGap?: 'auto' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
+  textGap?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
+  /** Optional Tag above the body text */
+  tag?: { label: string; emphasis?: 'strong' | 'weak' | 'default' };
 }
 
 const {
   title,
   imageSrc,
   imageAlt,
-  imagePosition = 'image-right',
-  reversed = false,
-  alignContent = 'center',
-  layoutRatio = 'equal',
-  layout = 'horizontal',
+  imagePosition = 'right',
+  contentAlign = 'center',
+  imageWidth = '66',
   mask,
   rounded = false,
   textGap = 'sm',
-  headlineLevel = 4
+  headlineLevel = 4,
+  tag
 } = Astro.props as Props;
 
-const effectivePosition = reversed ? 'image-left' : imagePosition;
 // Headline stets h6 – Typografie kommt aus globalen Styles
 ---
 
 <div
   class="text-image"
-  data-image-position={effectivePosition}
-  data-align={alignContent}
-  data-layout-ratio={layoutRatio}
-  data-layout={layout}
+  data-image-position={imagePosition}
+  data-image-width={imageWidth}
+  data-content-align={contentAlign}
   data-text-gap={textGap}
 >
   <div class="text-image__content">
+  {tag && <div class="text-image__tag" data-density="functional"><DBTag emphasis={tag.emphasis === 'default' ? undefined : tag.emphasis}>{tag.label}</DBTag></div>}
     {title && (
       headlineLevel === 1 ? <h1 class="text-image__title">{title}</h1>
       : headlineLevel === 2 ? <h2 class="text-image__title">{title}</h2>

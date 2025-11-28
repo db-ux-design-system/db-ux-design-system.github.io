@@ -2,36 +2,22 @@
 
 .text-image {
   display: flex;
-  align-items: center;
-  gap: var(--db-spacing-fixed-2xl); /* 48px laut Figma */
+  flex-direction: row;
+  gap: var(--db-spacing-fixed-3xl);
+  height: 100%;
 }
 
-/* Vertical Layout */
-.text-image[data-layout="vertical"] {
+/* Image Position */
+.text-image[data-image-position="top"], .text-image[data-image-position="bottom"] {
   flex-direction: column;
-  align-items: stretch;
   gap: var(--db-spacing-fixed-xl);
 }
-.text-image[data-layout="vertical"] .text-image__image { order: 1; width: 100%; }
-.text-image[data-layout="vertical"] .text-image__content { order: 2; }
-/* Force vertical ordering to override horizontal image position rules */
-.text-image[data-layout="vertical"][data-image-position="image-left"] .text-image__image { order: 1 !important; }
-.text-image[data-layout="vertical"][data-image-position="image-left"] .text-image__content { order: 2 !important; }
-.text-image[data-layout="vertical"][data-image-position="image-right"] .text-image__image { order: 1 !important; }
-.text-image[data-layout="vertical"][data-image-position="image-right"] .text-image__content { order: 2 !important; }
-/* Neutralize flex ratios in vertical (stack) */
-.text-image[data-layout="vertical"] .text-image__content,
-.text-image[data-layout="vertical"] .text-image__image { flex: unset; }
 
-/* Vertikal soll Verhältnis (text-wide) keinen Einfluss haben */
-.text-image[data-layout="vertical"][data-layout-ratio="text-wide"] .text-image__content,
-.text-image[data-layout="vertical"][data-layout-ratio="text-wide"] .text-image__image { flex: unset !important; }
+.text-image[data-image-position="top"] .text-image__image, .text-image[data-image-position="left"] .text-image__image { order: 1; width: 100%; }
+.text-image[data-image-position="top"] .text-image__content , .text-image[data-image-position="left"] .text-image__content { order: 2; }
 
-/* Bildpositionierung über order */
-.text-image[data-image-position="image-left"] .text-image__content { order: 2; }
-.text-image[data-image-position="image-left"] .text-image__image { order: 1; }
-.text-image[data-image-position="image-right"] .text-image__content { order: 1; }
-.text-image[data-image-position="image-right"] .text-image__image { order: 2; }
+.text-image[data-image-position="bottom"] .text-image__image, .text-image[data-image-position="right"] .text-image__image { order: 2; width: 100%; }
+.text-image[data-image-position="bottom"] .text-image__content , .text-image[data-image-position="right"] .text-image__content { order: 1; }
 
 /* Content Column */
 .text-image__content {
@@ -52,22 +38,6 @@
 .text-image[data-text-gap="2xl"] .text-image__content { gap: var(--db-spacing-fixed-2xl); }
 .text-image[data-text-gap="3xl"] .text-image__content { gap: var(--db-spacing-fixed-3xl); }
 
-/* Auto: Body nach unten drücken */
-.text-image[data-text-gap="auto"] .text-image__text { margin-top: auto; }
-.text-image[data-text-gap="auto"] .text-image__content {
-  flex: 1 1 auto;
-  min-height: 100%;
-}
-.text-image[data-text-gap="auto"][data-layout="horizontal"] { align-items: stretch; }
-.text-image[data-text-gap="auto"][data-layout="horizontal"] .text-image__content { justify-content: flex-start; }
-.text-image[data-text-gap="auto"][data-layout="horizontal"] .text-image__image { display: flex; flex-direction: column; }
-/* Im vertikalen Layout explizit volle Höhe innerhalb von Karten-Kontexten */
-.cards-row-fixed .text-image[data-layout="vertical"][data-text-gap="auto"] {
-  height: 100%;
-}
-.cards-row-fixed .text-image[data-layout="vertical"][data-text-gap="auto"] .text-image__content {
-  flex: 1 1 auto;
-}
 
 /* Paragraph Spacing nur innerhalb der Komponente */
 .text-image__text > p {
@@ -175,40 +145,31 @@ img[data-mask] {
 
 /* Layout Ratio Variants */
 /* 66/33: Text breiter */
-.text-image[data-layout-ratio="text-wide"] .text-image__content { flex: 2 1 0; }
-.text-image[data-layout-ratio="text-wide"] .text-image__image { flex: 1 1 0; }
+.text-image[data-image-width="33"] .text-image__content { flex: 2 1 0; }
+.text-image[data-image-width="33"] .text-image__image { flex: 1 1 0; }
 
-/* Wenn Bild links steht, bleibt Verhältnis gleich (Text bleibt 2fr) */
-.text-image[data-layout-ratio="text-wide"][data-image-position="image-left"] .text-image__content { flex: 2 1 0; }
-.text-image[data-layout-ratio="text-wide"][data-image-position="image-left"] .text-image__image { flex: 1 1 0; }
+.text-image[data-image-width="66"] .text-image__content { flex: 1 1 0; }
+.text-image[data-image-width="66"] .text-image__image { flex: 2 1 0; }
 
 /* Align Varianten (optional) */
-.text-image[data-align="start"] { align-items: flex-start; }
-.text-image[data-align="center"] { align-items: center; }
-.text-image[data-align="end"] { align-items: flex-end; }
+.text-image[data-content-align="start"] .text-image__content { justify-content: start; }
+.text-image[data-content-align="center"] .text-image__content { justify-content: center; }
+.text-image[data-content-align="end"] .text-image__content { justify-content: end; }
 
 /* Typographie entfernt – globale Styles sollen greifen */
 .text-image__title { margin: 0; }
 
 /* Responsive Stack */
 @media (max-width: 767px) {
-  .text-image[data-layout="horizontal"] {
-    flex-direction: column;
-    align-items: stretch;
-    gap: var(--db-spacing-fixed-xl); /* etwas kompakter */
+  .text-image {
+  flex-direction: column;
+  gap: var(--db-spacing-fixed-lg);
   }
-  .text-image[data-layout="horizontal"] .text-image__image { order: 1 !important; }
-  .text-image[data-layout="horizontal"] .text-image__content { order: 2 !important; }
+  
+  .text-image[data-image-position="left"] .text-image__image, .text-image[data-image-position="right"] .text-image__image  { order: 2 !important; flex: 1 1 0 !important; }
+  .text-image[data-image-position="left"] .text-image__content, .text-image[data-image-position="right"] .text-image__content { order: 1 !important; flex: 2 1 0 !important; }
 
   /* Mobile: textGap stets sm, egal welche Variante gewählt wurde */
   .text-image .text-image__content { gap: var(--db-spacing-fixed-sm) !important; }
 
-}
-
-/* ========================================= */
-/* Vertical Cards inside .cards-row-fixed     */
-/* Ziel: Bild oben, Textbereich unten bündig  */
-/* ========================================= */
-.cards-row-fixed .text-image[data-layout="vertical"] .text-image__content {
-  margin-top: auto; /* schiebt den Content nach unten; ursprüngliches gap bleibt erhalten */
 }
