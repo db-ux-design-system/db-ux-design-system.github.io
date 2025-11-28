@@ -1,18 +1,37 @@
 ---
 layout: "@template/layouts/default"
 toc: false
-headline: "The Desing System is designed to align teams and streamline product delivery."
-description: "Brings clarity to design and implementation through shared standards and reusable components."
 ---
 
 import { appConfig } from "../../app.config";
 import { DBSection, DBCard, DBButton, DBStack, DBTag } from '@db-ux/react-core-components';
 import { PageHero, SectionTitle, TextImage, CTA, Carousel } from '@components';
 
-<DBSection width="medium" spacing="medium">
+<DBSection width="large" spacing="medium" >
+<DBStack gap="3x-large" style={{ overflow: 'unset' }}>
+  <PageHero 
+    title="DB UX Design System"
+    headlineLevel={1}
+    headline="The Desing System is designed to align teams and streamline product delivery."
+    description="Brings clarity to design and implementation through shared standards and reusable components."/>
+    <DBStack style={{ overflow: 'unset' }}>
+  <DBCard style={{ position: 'sticky', top: 'var(--db-spacing-fixed-md)', width: '100%', maxWidth: 'fit-content', margin: '0 auto' }}>
+  <DBStack direction="row" gap="3x-large">
+    <DBStack direction="row" gap="x-small">
+      <DBButton variant="filled" data-color="neutral">Neutral</DBButton>
+      <DBButton icon="db" variant="filled" data-color="red">Deutsche Bahn</DBButton>
+      <DBButton icon="s_bahn" variant="filled" data-color="green">S-Bahn</DBButton>
+      <DBButton icon="train_station" variant="filled" data-color="blue">Station & Service</DBButton>
+      <DBButton icon="pen" variant="filled" disabled data-color="neutral">Custom</DBButton>
+    </DBStack>
+    <DBButton icon="sun" variant="ghost" noText/>
+    </DBStack>
+  </DBCard>
   <DBCard spacing="none" style={{overflow: 'hidden'}}>
     <img src={`${appConfig.basePath}/assets/interactive-demo/Dashboard--Lightmode--C.png`} alt="Example Dashboard" />
   </DBCard>
+  </DBStack>
+  </DBStack>
 </DBSection>
 
 <DBSection width="medium" spacing="medium" aria-label="Unified model section">
