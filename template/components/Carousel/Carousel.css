@@ -7,21 +7,31 @@
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory;
-  padding-bottom: var(--db-spacing-fixed-sm);
-  align-items: stretch;
-  /* Hide scrollbar cross-browser while keeping scroll functional */
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge legacy */
+  padding: 0 var(--db-spacing-fixed-xl);
 }
 .carousel > * {
   flex: 0 0 auto;
-  scroll-snap-align: start;
+  scroll-snap-align: center;
 }
 .carousel > .db-card {
-  width: 100%;
+  width: 80%;
 }
 
 /* WebKit */
 .carousel::-webkit-scrollbar {
-  display: none;
+  width: 0;
+  height: 0;
+}
+
+
+.fadeout-horizontal {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black var(--db-spacing-fixed-xl),
+    black calc(100% - var(--db-spacing-fixed-xl)),
+    transparent
+  );
 }

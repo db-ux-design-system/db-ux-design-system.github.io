@@ -1,13 +1,17 @@
 ---
 interface Props {
   ariaLabel?: string;
+  maskRight?: boolean; // enables right fade mask
+  maskBoth?: boolean; // enables fade on both sides
 }
-const { ariaLabel } = Astro.props as Props;
+const { ariaLabel, maskRight, maskBoth } = Astro.props as Props;
 ---
 <style is:global>
 @import "./Carousel.css";
 </style>
 
-<div class="carousel" aria-label={ariaLabel}>
-  <slot />
+<div class="carousel-wrapper fadeout-horizontal"> 
+  <div class="carousel" aria-label={ariaLabel}>
+    <slot />
+  </div>
 </div>

@@ -9,6 +9,10 @@ export interface Props {
     name?: string;
     position?: string;
     hoverSrc?: string; // alternative animation/model to use on hover
+    cameraTarget?: string; // e.g. "0m 1.4m 0m"
+    cameraOrbit?: string;  // e.g. "-30deg 90deg 3m"
+    hoverCameraTarget?: string; // separate target for hover variant
+    hoverCameraOrbit?: string;  // separate orbit for hover variant
 }
 
 const {
@@ -18,7 +22,15 @@ const {
     name = 'Name',
     position = 'Position',
     hoverSrc,
+    cameraTarget = '0m 1.4m 0m',
+    cameraOrbit = '-30deg 85deg 3m',
+    hoverCameraTarget = '0m 1m 0m',
+    hoverCameraOrbit = '0deg 90deg 15m',
 } = Astro.props as Props;
+
+// Fallback hover camera values default to the non-hover ones if not provided
+const _hoverCameraTarget = hoverCameraTarget || cameraTarget;
+const _hoverCameraOrbit = hoverCameraOrbit || cameraOrbit;
 ---
 <DBStack class="avatar" aria-label={ariaLabel}>
     <DBCard spacing="none" elevationLevel="2" style={{ width: '100%' }}>
@@ -32,8 +44,8 @@ const {
                 disable-zoom
                 disable-pan
                 autoplay
-                camera-target="0m 1.4m 0m"
-                camera-orbit="-30deg 90deg 3m"
+                camera-target={cameraTarget}
+                camera-orbit={cameraOrbit}
                 max-camera-orbit="Infinity 180deg auto"
                 field-of-view="20deg"
                 loading="eager"
@@ -48,11 +60,10 @@ const {
                     disable-zoom
                     disable-pan
                     autoplay
-                    camera-target="0m 1.4m 0m"
-                    camera-orbit="0deg 90deg 3m"
-                    max-camera-orbit="Infinity 180deg auto"
+                    camera-target={hoverCameraTarget}
+                    camera-orbit={hoverCameraOrbit}
                     field-of-view="20deg"
-                loading="eager"
+                    loading="eager"
                 ></model-viewer>
             )}
         </div>
@@ -62,3 +73,26 @@ const {
         <p>{position}</p>
     </div>
 </DBStack>
+
+    <script>
+        // Restart hover animation each time the user hovers/focuses the avatar
+        const root = document.currentScript?.parentElement;
+        const viewerWrapper = root?.querySelector('.avatar-viewer');
+        const hoverViewer = viewerWrapper?.querySelector('.viewer-hover');
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (viewerWrapper && hoverViewer && !prefersReducedMotion) {
+            const restart = () => {
+                const src = hoverViewer.getAttribute('src');
+                if (!src) return;
+                // Force reload to restart the animation
+                hoverViewer.removeAttribute('src');
+                // Small microtask to allow attribute removal to take effect
+                queueMicrotask(() => hoverViewer.setAttribute('src', src));
+            };
+
+            viewerWrapper.addEventListener('mouseenter', restart);
+            viewerWrapper.addEventListener('focus', restart, true);
+        }
+    </script>
