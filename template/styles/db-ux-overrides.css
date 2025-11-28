@@ -58,3 +58,9 @@
 [data-mode="dark"] .img--tint-dark-blue {
   filter: brightness(0) invert(1) sepia(0) saturate(0) contrast(1.1);
 }
+
+.db-stack > a > .db-card {
+  /* Ensure cards in stacks stretch to full width */
+  height: 100%;
+  box-sizing: border-box;
+}

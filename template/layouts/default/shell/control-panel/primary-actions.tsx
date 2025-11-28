@@ -5,7 +5,7 @@ import { Search } from "@template/layouts/default/shell/search";
 const PrimaryActions = () => (
   <DBControlPanelPrimaryActions>
     { <Search /> }
-    <a className="db-button" href={`${appConfig.basePath}resources/documentation/getting-started`} data-variant="brand">
+    <a className="db-button" href={`${appConfig.basePath}documentation/getting-started`} data-variant="brand">
       Get Started
     </a>
   </DBControlPanelPrimaryActions>
