@@ -40,21 +40,23 @@
 .cta :is(.db-button)[data-variant="outlined"],
 .cta :is(.db-button--outlined) {
   background: transparent;
-  color: var(--db-brand-on-origin-default);
+  color: var(--db-brand-on-origin);
   border: var(--db-border-width-3xs) solid var(--db-adaptive-bg-basic-level-1-default);
 }
-.cta :is(.db-button)[data-variant="outlined"]:hover,
-.cta :is(.db-button--outlined):hover {
-  background: rgba(255,255,255,0.08);
-}
+
 .cta :is(.db-button)[data-variant="brand"]:hover,
 .cta :is(.db-button--brand):hover {
-  background: var(--db-adaptive-bg-basic-level-2-default);
+  opacity: 0.88;
+  background: var(--db-adaptive-bg-basic-level-1-default);
+  color: var(--db-brand-origin-default);
+  border: var(--db-border-width-3xs) solid var(--db-brand-origin-default);
 }
-.cta :is(.db-button)[data-variant="brand"]:focus-visible,
-.cta :is(.db-button--brand):focus-visible {
-  outline: var(--db-border-width-2xs) solid var(--db-brand-origin-default);
-  outline-offset: var(--db-border-width-4xs);
+
+.cta :is(.db-button)[data-variant="outlined"]:hover,
+.cta :is(.db-button--outlined):hover {
+  background: rgba(255,255,255,0.24);
+  color: var(--db-brand-on-origin);
+  border: var(--db-border-width-3xs) solid var(--db-adaptive-bg-basic-level-1-default);
 }
 
 @media (max-width: 767px) {
