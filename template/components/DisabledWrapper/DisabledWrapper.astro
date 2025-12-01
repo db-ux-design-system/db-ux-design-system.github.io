@@ -1,0 +1,30 @@
+---
+import './DisabledWrapper.css';
+import { DBBadge } from '@db-ux/react-core-components';
+
+interface Props {
+  /** Text im DBBadge Overlay */
+  label: string;
+  /** Falls true: Wrapper deaktiviert Kinder (Pointer Events) + Opacity 40% */
+  disabled?: boolean;
+  /** Badge Variante (optional, z.B. strong/weak) */
+  emphasis?: 'strong' | 'weak' | 'default';
+  /** Badge Größe */
+  size?: 'small' | 'medium';
+  /** Optionaler aria-label für das Overlay */
+  ariaLabel?: string;
+}
+
+const { label, disabled = true, emphasis, size = 'medium', ariaLabel } = Astro.props as Props;
+---
+
+<div class={"disabled-wrapper"} data-disabled={disabled ? 'true' : 'false'}>
+  <div class="disabled-wrapper__content">
+    <slot />
+  </div>
+  {disabled && (
+    <div class="disabled-wrapper__overlay" aria-label={ariaLabel || label}>
+  <DBBadge size={size} semantic="informational"emphasis={emphasis === 'default' ? undefined : emphasis}>{label}</DBBadge>
+    </div>
+  )}
+</div>

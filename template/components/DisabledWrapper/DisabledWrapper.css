@@ -1,0 +1,28 @@
+.disabled-wrapper {
+  position: relative;
+  display: block;
+}
+
+.disabled-wrapper[data-disabled="true"] .disabled-wrapper__content {
+  opacity: 0.4;
+  pointer-events: none;
+  filter: grayscale(0.2);
+}
+
+.disabled-wrapper__content > * {
+  /* Ensure child components can shrink properly */
+  min-width: 0;
+}
+
+.disabled-wrapper__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* Overlay selbst nicht interaktiv */
+}
+
+.disabled-wrapper__overlay > * {
+  z-index: 1;
+}
