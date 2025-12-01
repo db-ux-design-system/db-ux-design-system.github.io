@@ -1,17 +1,15 @@
+/* DisabledWrapper styles - follows DB UX design tokens */
+
 .disabled-wrapper {
   position: relative;
   display: block;
 }
 
+/* Content wrapper: styles applied via data-disabled selector below */
+
 .disabled-wrapper[data-disabled="true"] .disabled-wrapper__content {
   opacity: 0.4;
   pointer-events: none;
-  filter: grayscale(0.2);
-}
-
-.disabled-wrapper__content > * {
-  /* Ensure child components can shrink properly */
-  min-width: 0;
 }
 
 .disabled-wrapper__overlay {
@@ -20,9 +18,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: none; /* Overlay selbst nicht interaktiv */
+  pointer-events: none; /* overlay should not block scroll; badge itself remains visible */
+  /* spacing (none); container keeps card layout underneath */
 }
 
-.disabled-wrapper__overlay > * {
+/* Make sure the badge remains readable above blurred/dimmed content */
+.disabled-wrapper__overlay .db-badge {
   z-index: 1;
+}
+
+/* Optional: ensure a minimum tap target size when used on small cards */
+@media (hover: none) and (pointer: coarse) {
+  .disabled-wrapper__overlay .db-badge {
+    min-height: var(--db-sizing-sm);
+  }
 }
