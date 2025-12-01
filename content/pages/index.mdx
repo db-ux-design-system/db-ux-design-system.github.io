@@ -5,7 +5,7 @@ toc: false
 
 import { appConfig } from '@config';
 import { DBSection, DBCard, DBButton, DBStack, DBTag } from '@db-ux/react-core-components';
-import { PageHero, SectionTitle, TextImage, CTA, Carousel, ImageToggle } from '@components';
+import { PageHero, SectionTitle, TextImage, CTA, Carousel, DisabledWrapper, ImageToggle } from '@components';
 
 <DBSection width="large" spacing="medium">
   <ImageToggle
@@ -99,6 +99,36 @@ import { PageHero, SectionTitle, TextImage, CTA, Carousel, ImageToggle } from '@
       </TextImage>
     </DBCard>
     </a>
+    <DBStack direction="row">
+    <DisabledWrapper label="Coming Soon" size="medium">
+    <DBCard spacing="large">
+    <TextImage
+      imagePosition="right"
+      imageWidth="33"
+      title="Patterns"
+      imageSrc={`${appConfig.basePath}assets/Patterns-Teaser--C.png`}
+      imageAlt="Patterns Visual"
+      mask="fade-bottom-right"
+      >
+      Provide reusable interaction models that guide consistent behavior across products.
+      </TextImage>
+    </DBCard>
+    </DisabledWrapper>
+    <DisabledWrapper label="Coming Soon" size="medium">
+    <DBCard spacing="large">
+    <TextImage
+      imagePosition="right"
+      imageWidth="33"
+      title="Templates"
+      imageSrc={`${appConfig.basePath}assets/Templates-Teaser--C.png`}
+      imageAlt="Templates Visual"
+      mask="fade-bottom-right"
+      >
+      Offer structured starting points that speed up page creation and enforce coherent layouts.
+      </TextImage>
+    </DBCard>
+    </DisabledWrapper>
+    </DBStack>
   </DBStack>
 </DBSection>
 
