@@ -3,9 +3,29 @@ layout: "@template/layouts/default"
 toc: false
 ---
 
-import { appConfig } from "../../app.config";
+import { appConfig } from '@config';
 import { DBSection, DBCard, DBButton, DBStack, DBTag } from '@db-ux/react-core-components';
-import { PageHero, SectionTitle, TextImage, CTA, Carousel } from '@components';
+import { PageHero, SectionTitle, TextImage, CTA, Carousel, ImageToggle } from '@components';
+
+<DBSection width="large" spacing="medium">
+  <ImageToggle
+    items={[
+      {
+        id: "light",
+        icon: "sun",
+        src: `${appConfig.basePath}assets/interactive-demo/Dashboard--Lightmode--C.png`,
+        alt: "Light mode",
+      },
+      {
+        id: "dark",
+        icon: "moon",
+        src: `${appConfig.basePath}assets/interactive-demo/Dashboard--Darkmode--C.png`,
+        alt: "Dark mode",
+      },
+    ]}
+    initialId="light"
+  />
+</DBSection>
 
 <DBSection width="large" spacing="medium" >
 <DBStack gap="3x-large" style={{ overflow: 'unset' }}>
