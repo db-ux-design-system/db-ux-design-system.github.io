@@ -1,0 +1,150 @@
+---
+import { DBButton, DBStack, DBCard } from "@db-ux/react-core-components";
+
+const items = Array.isArray(Astro.props.items) ? Astro.props.items : [];
+const initialId = Astro.props.initialId;
+const initialItem = (initialId && items.find((i) => i.id === initialId)) ?? items[0] ?? null;
+---
+
+{items.length === 0 || !initialItem ? null : (
+  <div data-image-toggle-root>
+    <DBStack style={{ overflow: 'unset' }}>
+    <div style="padding: var(--db-spacing-fixed-2xs); background: var(--db-adaptive-bg-basic-level-1-default); border-radius: var(--db-border-radius-sm); border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default); position: sticky; top: var(--db-spacing-fixed-md); width: 100%; max-width: fit-content; margin: 0 auto;">
+    <DBStack direction="row" gap="2x-small">
+    <DBStack direction="row" gap="2x-small">
+    {items.map((item) => (
+      <DBButton
+        icon={item.icon}
+        variant={item.variant}
+        data-color={item.color}
+        data-image-toggle-button
+        data-image-id={item.id}
+        data-image-src={item.src}
+        data-image-alt={item.alt ?? item.label}
+      >
+        {item.label}
+      </DBButton>
+    ))}
+    </DBStack>
+    <DBButton
+      icon="moon"
+      variant="ghost"
+      noText
+      data-image-toggle-light
+      aria-label="Switch to dark mode"
+    />
+    <DBButton
+      icon="sun"
+      variant="ghost"
+      noText
+      data-image-toggle-dark
+      aria-label="Switch to light mode"
+    />
+    </DBStack>
+    </div> 
+    <DBCard spacing="none" style={{overflow: 'hidden'}}>
+    <img
+      data-image-toggle-target
+      src={initialItem.src}
+      alt={initialItem.alt ?? initialItem.label}
+    />
+    </DBCard>
+    </DBStack>
+  </div>
+)}
+
+<script>
+  const initializedRoots: WeakSet<Element> = new WeakSet();
+
+  const initRoot = (root: Element) => {
+    if (initializedRoots.has(root)) return;
+    initializedRoots.add(root);
+
+  const buttons: NodeListOf<HTMLButtonElement> = root.querySelectorAll('[data-image-toggle-button]');
+  const img: HTMLImageElement | null = root.querySelector('[data-image-toggle-target]');
+  const toggleLight: HTMLButtonElement | null = root.querySelector('[data-image-toggle-light]');
+  const toggleDark: HTMLButtonElement | null = root.querySelector('[data-image-toggle-dark]');
+
+  buttons.forEach((button: HTMLButtonElement) => {
+      button.addEventListener('click', () => {
+        const srcTemplate = button.getAttribute('data-image-src');
+        const alt = button.getAttribute('data-image-alt') ?? '';
+        if (img && srcTemplate) {
+          const current = img.getAttribute('src') || '';
+          const isDark = current.includes('--Darkmode--');
+          // Normalize template to current mode by replacing any Light/Dark marker
+          const next = srcTemplate.replace(/--(Light|Dark)mode--/, isDark ? '--Darkmode--' : '--Lightmode--');
+          img.setAttribute('src', next);
+          img.setAttribute('alt', alt);
+          // update toggle visibility to reflect current mode after brand change
+          updateToggleVisibility();
+          // Scroll image into viewport after change
+          try { img.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+        }
+      });
+    });
+
+    // Helper: show/hide correct toggle button based on current img src
+    const updateToggleVisibility = () => {
+      if (!img) return;
+      const s = img.getAttribute('src') || '';
+      const isLight = s.includes('--Lightmode--');
+      if (toggleLight) toggleLight.style.display = isLight ? '' : 'none';
+      if (toggleDark) toggleDark.style.display = isLight ? 'none' : '';
+    };
+
+    // Toggle to dark
+    toggleLight?.addEventListener('click', () => {
+      if (!img) return;
+      const s = img.getAttribute('src') || '';
+      const next = s.includes('--Lightmode--') ? s.replace('--Lightmode--', '--Darkmode--') : s;
+      if (next !== s) {
+        img.setAttribute('src', next);
+        updateToggleVisibility();
+        // Scroll image into viewport after toggle
+        try { img.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+      }
+    });
+    // Toggle to light
+    toggleDark?.addEventListener('click', () => {
+      if (!img) return;
+      const s = img.getAttribute('src') || '';
+      const next = s.includes('--Darkmode--') ? s.replace('--Darkmode--', '--Lightmode--') : s;
+      if (next !== s) {
+        img.setAttribute('src', next);
+        updateToggleVisibility();
+      }
+    });
+
+  // Initial visibility state
+  updateToggleVisibility();
+  };
+
+  const scanRoots = () => {
+    const roots = document.querySelectorAll('[data-image-toggle-root]');
+    roots.forEach((root) => initRoot(root));
+  };
+
+  const setup = () => {
+    // check what is already in the DOM
+    scanRoots();
+
+    // observe future changes
+    const observer = new MutationObserver(() => {
+      scanRoots();
+    });
+
+    if (document.body) {
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+      });
+    }
+  };
+
+  if (document.readyState === 'loading') {
+    window.addEventListener('DOMContentLoaded', setup, { once: true });
+  } else {
+    setup();
+  }
+</script>

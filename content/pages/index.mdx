@@ -5,33 +5,27 @@ toc: false
 
 import { appConfig } from "../../app.config";
 import { DBSection, DBCard, DBButton, DBStack, DBTag } from '@db-ux/react-core-components';
-import { PageHero, SectionTitle, TextImage, CTA, Carousel, DisabledWrapper } from '@components';
+import { PageHero, SectionTitle, TextImage, CTA, Carousel, DisabledWrapper, InteractiveDemo } from '@components';
 
-<DBSection width="large" spacing="medium" >
+
+<DBSection width="medium" spacing="medium">
 <DBStack gap="3x-large" style={{ overflow: 'unset' }}>
-  <PageHero 
-    title="DB UX Design System"
-    headlineLevel={1}
-    headline="The Desing System is designed to align teams and streamline product delivery."
-    description="Brings clarity to design and implementation through shared standards and reusable components."/>
-    <DBStack style={{ overflow: 'unset' }}>
-  <div style="padding: var(--db-spacing-fixed-2xs); background: var(--db-adaptive-bg-basic-level-1-default); border-radius: var(--db-border-radius-sm); border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default); position: sticky; top: var(--db-spacing-fixed-md); width: 100%; max-width: fit-content; margin: 0 auto;">
-  <DBStack direction="row" gap="2x-small">
-    <DBStack direction="row" gap="2x-small">
-      <DBButton variant="filled" data-color="neutral">Neutral</DBButton>
-      <DBButton icon="db" variant="filled" data-color="red">Deutsche Bahn</DBButton>
-      <DBButton icon="s_bahn" variant="filled" data-color="green">S-Bahn</DBButton>
-      <DBButton icon="train_station" variant="filled" data-color="blue">Station & Service</DBButton>
-      <DBButton icon="pen" variant="filled" disabled data-color="neutral">Custom</DBButton>
-    </DBStack>
-    <DBButton icon="sun" variant="ghost" noText/>
-    </DBStack>
-  </div>
-  <DBCard spacing="none" style={{overflow: 'hidden'}}>
-    <img src={`${appConfig.basePath}/assets/interactive-demo/Dashboard--Lightmode--C.png`} alt="Example Dashboard" />
-  </DBCard>
-  </DBStack>
-  </DBStack>
+<PageHero 
+  title="DB UX Design System"
+  headlineLevel={1}
+  headline="The Desing System is designed to align teams and streamline product delivery."
+  description="Brings clarity to design and implementation through shared standards and reusable components."
+/>
+<InteractiveDemo
+  items={[
+    { id: 'neutral-light', color: 'neutral', variant: 'filled', src: `${appConfig.basePath}assets/interactive-demo/Neutral--Lightmode--C.png`, label: 'Neutral' },
+    { id: 'db-light', icon: 'db', color: 'red', variant: 'filled', src: `${appConfig.basePath}assets/interactive-demo/DB--Lightmode--C.png`, label: 'Deutsche Bahn' },
+    { id: 'sbahn-light', icon: 's_bahn', color: 'green', variant: 'filled', src: `${appConfig.basePath}assets/interactive-demo/SB--Lightmode--C.png`, label: 'S-Bahn' },
+    { id: 'ri-light', icon: 'train_station', color: 'blue', variant: 'filled', src: `${appConfig.basePath}assets/interactive-demo/RI--Lightmode--C.png`, label: 'Station & Service' },
+  ]}
+  initialId="db-light"
+/>
+</DBStack>
 </DBSection>
 
 <DBSection width="medium" spacing="medium" aria-label="Unified model section">
