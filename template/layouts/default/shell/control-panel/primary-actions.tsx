@@ -6,7 +6,7 @@ import ColorModeSwitch from "@template/components/color-mode-switch/ColorModeSwi
 const PrimaryActions = () => (
     <DBControlPanelPrimaryActions>
         <ColorModeSwitch />
-        <Search />
+        {/* <Search /> */}
         <a className="db-button" href={`${appConfig.basePath}resources/documentation/getting-started`} data-variant="brand">
             Start now
         </a>

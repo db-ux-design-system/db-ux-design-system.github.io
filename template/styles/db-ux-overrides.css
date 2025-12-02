@@ -27,10 +27,12 @@
 /* Fixed 3 columns -> 1 column (no 2-col intermediate) */
 .cards-row-fixed {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--db-spacing-fixed-lg);
   align-items: stretch;
 }
+.cards-row-fixed > * { min-width: 0; }
+.cards-row-fixed > a { display: block; width: 100%; }
 .cards-row-fixed > a,
 .cards-row-fixed > a > .db-card,
 .cards-row-fixed > .db-card { height: 100%; display: flex; flex-direction: column; }
