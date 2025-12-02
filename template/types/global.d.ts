@@ -98,6 +98,11 @@ declare interface NavigationItem {
    * The order of the navigation item. Lower numbers will appear first.
    */
   order?: number;
+
+  /**
+   * If true, the navigation item will be rendered as disabled.
+   */
+  disabled?: boolean;
 }
 
 /**

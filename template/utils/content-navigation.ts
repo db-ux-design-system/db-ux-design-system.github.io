@@ -101,6 +101,7 @@ export function buildAppNavigationFromContent(): AppNavigation {
         const hidePage = fm.hidePage === true;
         const isSubNavigation = fm.isSubNavigation ?? fm.isSubnavigation ?? false;
         const iconTrailing = fm.iconTrailing;
+        const disabled = fm.isMenuItemDisabled === true;
         const order = getOrder(fm);
 
         const node: NavigationItem = {
@@ -109,6 +110,7 @@ export function buildAppNavigationFromContent(): AppNavigation {
             isSubNavigation,
             iconTrailing,
             children: [],
+            disabled,
         };
         (node as any).order = order;
 
