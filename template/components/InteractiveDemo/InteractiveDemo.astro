@@ -1,5 +1,6 @@
 ---
 import { DBButton, DBStack, DBCard } from "@db-ux/react-core-components";
+import "./InteractiveDemo.css";
 
 const items = Array.isArray(Astro.props.items) ? Astro.props.items : [];
 const initialId = Astro.props.initialId;
@@ -21,6 +22,7 @@ const initialItem = (initialId && items.find((i) => i.id === initialId)) ?? item
         data-image-id={item.id}
         data-image-src={item.src}
         data-image-alt={item.alt ?? item.label}
+        {...(item.id === initialItem.id ? { 'data-active': '' } : {})}
       >
         {item.label}
       </DBButton>
@@ -65,6 +67,16 @@ const initialItem = (initialId && items.find((i) => i.id === initialId)) ?? item
   const toggleLight: HTMLButtonElement | null = root.querySelector('[data-image-toggle-light]');
   const toggleDark: HTMLButtonElement | null = root.querySelector('[data-image-toggle-dark]');
 
+  const setActiveButton = (activeId: string) => {
+    buttons.forEach(btn => {
+      if (btn.getAttribute('data-image-id') === activeId) {
+        btn.setAttribute('data-active', '');
+      } else {
+        btn.removeAttribute('data-active');
+      }
+    });
+  };
+
   buttons.forEach((button: HTMLButtonElement) => {
       button.addEventListener('click', () => {
         const srcTemplate = button.getAttribute('data-image-src');
@@ -80,6 +92,8 @@ const initialItem = (initialId && items.find((i) => i.id === initialId)) ?? item
           updateToggleVisibility();
           // Scroll image into viewport after change
           try { img.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+          const id = button.getAttribute('data-image-id');
+          if (id) setActiveButton(id);
         }
       });
     });
@@ -118,6 +132,8 @@ const initialItem = (initialId && items.find((i) => i.id === initialId)) ?? item
 
   // Initial visibility state
   updateToggleVisibility();
+  const initialActive = buttons[0]?.getAttribute('data-image-id');
+  if (initialActive) setActiveButton(initialActive);
   };
 
   const scanRoots = () => {
