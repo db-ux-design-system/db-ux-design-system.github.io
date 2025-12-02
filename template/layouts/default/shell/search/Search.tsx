@@ -73,7 +73,7 @@ export function Search(): ReactElement {
         onClick={() => setSearchOpen(true)}
       >
         Open Search
-        <DBTooltip placement="left">Open Search</DBTooltip>
+        <DBTooltip>Open Search</DBTooltip>
       </DBButton>
       <DBDrawer open={searchOpen} onClose={() => setSearchOpen(false)}>
         <div className="dba-search-result-container">
