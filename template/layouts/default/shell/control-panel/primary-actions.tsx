@@ -4,7 +4,7 @@ import { Search } from "@template/layouts/default/shell/search";
 
 const PrimaryActions = () => (
   <DBControlPanelPrimaryActions>
-    { <Search /> }
+    {/* { <Search /> } */}
     <a className="db-button" href={`mailto:db-ux-designsystem@deutschebahn.com`} data-variant="brand">
       Contact Us
     </a>
