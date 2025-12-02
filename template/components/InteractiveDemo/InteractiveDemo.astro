@@ -142,9 +142,24 @@ const initialItem = (initialId && items.find((i) => i.id === initialId)) ?? item
     }
   };
 
+  // Debounced setup for dynamic swaps
+  let setupTimer: number | undefined;
+  const scheduleSetup = () => {
+    if (setupTimer) window.clearTimeout(setupTimer);
+    setupTimer = window.setTimeout(() => {
+      // wait one frame to allow DOM to settle
+      requestAnimationFrame(() => setup());
+    }, 0);
+  };
+
+  // Init on first load
   if (document.readyState === 'loading') {
-    window.addEventListener('DOMContentLoaded', setup, { once: true });
+    document.addEventListener('DOMContentLoaded', setup, { once: true });
   } else {
     setup();
   }
+
+  // Also init on Astro client-side navigations (View Transitions / partial swaps)
+  document.addEventListener('astro:page-load', scheduleSetup);
+  document.addEventListener('astro:after-swap', scheduleSetup);
 </script>
