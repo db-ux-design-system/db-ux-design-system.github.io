@@ -10,6 +10,7 @@ interface Props {
   title?: string;
   imageSrc: string;
   imageAlt: string;
+  imageSrcDark?: string;
   reversed?: boolean;
   contentAlign?: 'start' | 'center' | 'end';
   /**
@@ -58,6 +59,7 @@ const {
   title,
   imageSrc,
   imageAlt,
+  imageSrcDark,
   imagePosition = 'right',
   contentAlign = 'center',
   imageWidth = '66',
@@ -79,7 +81,10 @@ const {
   data-text-gap={textGap}
 >
   <div class="text-image__content">
-  {tag && <div class="text-image__tag" data-density="functional"><DBTag emphasis={tag.emphasis === 'default' ? undefined : tag.emphasis}>{tag.label}</DBTag></div>}
+  {tag && (
+    <div class="text-image__tag" data-density="functional">
+        <DBTag emphasis={tag.emphasis === 'default' ? undefined : tag.emphasis}>{tag.label}</DBTag>
+    </div>)}
     {title && (
       headlineLevel === 1 ? <h1 class="text-image__title">{title}</h1>
       : headlineLevel === 2 ? <h2 class="text-image__title">{title}</h2>
@@ -93,6 +98,46 @@ const {
     </div>
   </div>
   <div class="text-image__image">
-    <img src={imageSrc} alt={imageAlt} loading="lazy" data-mask={mask} data-rounded={rounded ? 'true' : undefined} />
+    <img
+        src={imageSrc}
+        alt={imageAlt}
+        loading="lazy"
+        data-mask={mask}
+        data-rounded={rounded ? 'true' : undefined}
+        data-image-src={imageSrc}
+        data-image-src-dark={imageSrcDark}/>
   </div>
 </div>
+<script>
+    // sync image with the current color mode.
+    if (typeof window !== 'undefined') {
+        const shell = document.querySelector('.db-shell');
+        const images = document.querySelectorAll<HTMLImageElement>('.text-image__image img[data-image-src]');
+
+        if (shell && images.length > 0) {
+            const applyMode = (mode: string | null) => {
+                images.forEach((img) => {
+                    const light = img.dataset.imageSrc;
+                    const dark = img.dataset.imageSrcDark;
+                    if (mode === 'dark' && dark) {
+                        img.src = dark;
+                    } else if (light) {
+                        img.src = light;
+                    }
+                });
+            };
+
+            applyMode(shell.getAttribute('data-mode'));
+
+            const observer = new MutationObserver((mutations) => {
+                for (const m of mutations) {
+                    if (m.type === 'attributes' && m.attributeName === 'data-mode') {
+                        applyMode(shell.getAttribute('data-mode'));
+                    }
+                }
+            });
+
+            observer.observe(shell, { attributes: true, attributeFilter: ['data-mode'] });
+        }
+    }
+</script>
