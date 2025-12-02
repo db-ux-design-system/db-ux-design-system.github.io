@@ -19,6 +19,11 @@
   width: 80%;
 }
 
+.carousel .text-image__image img {
+  height: 100%;
+  object-fit: cover;
+}
+
 /* WebKit */
 .carousel::-webkit-scrollbar {
   width: 0;
