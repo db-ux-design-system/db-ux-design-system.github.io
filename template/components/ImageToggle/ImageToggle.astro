@@ -44,6 +44,9 @@ const initialItem = (initialId && items.find((i) => i.id === initialId)) ?? item
         button.addEventListener("click", () => {
           const src = button.getAttribute("data-image-src");
           const alt = button.getAttribute("data-image-alt") ?? "";
+
+          if (!img || !src) return;
+
           img.setAttribute("src", src);
           img.setAttribute("alt", alt);
         });
