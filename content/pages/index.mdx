@@ -9,13 +9,15 @@ import { PageHero, SectionTitle, TextImage, CTA, Carousel, DisabledWrapper, Inte
 
 
 <DBSection width="medium" spacing="medium">
-<DBStack gap="3x- large" style={{ overflow: 'unset' }}>
 <PageHero 
   title="DB UX Design System"
   headlineLevel={1}
   headline="The Desing System is designed to align teams and streamline product delivery."
   description="Brings clarity to design and implementation through shared standards and reusable components."
 />
+</DBSection>
+
+<DBSection width="medium" spacing="medium">
 <InteractiveDemo
   items={[
     { id: 'neutral-light', color: 'neutral', variant: 'filled', src: `${appConfig.basePath}assets/interactive-demo/Neutral--Lightmode--C.png`, label: 'Neutral' },
@@ -25,7 +27,6 @@ import { PageHero, SectionTitle, TextImage, CTA, Carousel, DisabledWrapper, Inte
   ]}
   initialId="db-light"
 />
-</DBStack>
 </DBSection>
 
 <DBSection width="medium" spacing="medium" aria-label="Unified model section">
@@ -110,7 +111,7 @@ import { PageHero, SectionTitle, TextImage, CTA, Carousel, DisabledWrapper, Inte
   <SectionTitle title="How the system supports your work" description="A shared system that improves collaboration and decision-making for product, development, and design." />
   <div class="cards-row-fixed">
   <a href={`${appConfig.basePath}products-and-services/for-productmanagement`} aria-label="Open for productmanagement page">
-    <DBCard behavior="interactive" data-color="violet">
+    <DBCard behavior="interactive" data-color="violet" spacing="large">
       <DBStack gap="medium">
   <TextImage 
       imagePosition="bottom" 
@@ -128,7 +129,7 @@ import { PageHero, SectionTitle, TextImage, CTA, Carousel, DisabledWrapper, Inte
     </DBCard>
   </a>
   <a href={`${appConfig.basePath}products-and-services/for-developer`} aria-label="Open for developer page">
-    <DBCard behavior="interactive" data-color="green">
+    <DBCard behavior="interactive" data-color="green" spacing="large">
       <DBStack gap="medium">
   <TextImage
       imagePosition="bottom" 
@@ -147,7 +148,7 @@ import { PageHero, SectionTitle, TextImage, CTA, Carousel, DisabledWrapper, Inte
     </a>
 
   <a href={`${appConfig.basePath}products-and-services/for-designer`} aria-label="Open for designer page">
-    <DBCard behavior="interactive" data-color="blue">
+    <DBCard behavior="interactive" data-color="blue" spacing="large">
       <DBStack gap="medium">
         <TextImage
           imagePosition="bottom"
@@ -169,7 +170,7 @@ import { PageHero, SectionTitle, TextImage, CTA, Carousel, DisabledWrapper, Inte
 
 <DBSection width="large" spacing="medium" aria-label="Unified model section">
   <Carousel ariaLabel="Testimonials horizontal scroll">
-    <DBCard spacing="medium" elevationLevel="2">
+    <DBCard spacing="medium">
       <TextImage 
       title="“Since adopting the system, our teams spend less time aligning on UI details and more time solving real product problems.”"
       headlineLevel={2} 
@@ -184,7 +185,7 @@ import { PageHero, SectionTitle, TextImage, CTA, Carousel, DisabledWrapper, Inte
       Product Owner @ DB Systel
       </TextImage>
     </DBCard>
-  <DBCard spacing="medium" elevationLevel="2">
+  <DBCard spacing="medium">
         <TextImage 
       title="“New team members ramp up faster because the system explains how we design and build our products.”"
       headlineLevel={2} 
@@ -199,7 +200,7 @@ import { PageHero, SectionTitle, TextImage, CTA, Carousel, DisabledWrapper, Inte
       Design Lead @ DB Fernverkehr 
       </TextImage>
   </DBCard>
-  <DBCard spacing="medium" elevationLevel="2">
+  <DBCard spacing="medium">
       <TextImage 
       title="“Design and development finally speak the same language — handoff feels predictable instead of repetitive.”"
       headlineLevel={2} 
@@ -220,7 +221,6 @@ import { PageHero, SectionTitle, TextImage, CTA, Carousel, DisabledWrapper, Inte
 <DBSection width="medium" spacing="medium" aria-label="Homepage CTA section">
   <CTA
     title="Move faster with shared standards."
-    primaryAction={{ label: 'Get Started', href: `${appConfig.basePath}documentation/getting-started`, variant: 'brand' }}
-  secondaryAction={{ label: 'Contact us', href: 'mailto:db-ux-designsystem@deutschebahn.com', ariaLabel: 'Contact the DB UX Design System team via email' }}
+    primaryAction={{ label: 'Contact Us', href: `mailto:db-ux-designsystem@deutschebahn.com`, variant: 'brand' }}
   />
 </DBSection>
