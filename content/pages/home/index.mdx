@@ -4,7 +4,7 @@ nav: false
 ---
 
 import { appConfig } from '@config';
-import { DBSection, DBCard, DBButton, DBStack, DBTag } from '@db-ux/react-core-components';
+import { DBSection, DBCard, DBButton, DBStack, DBTag, DBLink } from '@db-ux/react-core-components';
 import { PageHero, SectionTitle, TextImage, CTA, Carousel, DisabledWrapper, InteractiveDemo } from '@components';
 import { interactiveDemoOptions, interactiveDemoDefaultOptionId } from './home.config.ts';
 
@@ -102,12 +102,12 @@ import { interactiveDemoOptions, interactiveDemoDefaultOptionId } from './home.c
 <DBSection width="medium" spacing="medium" aria-label="How the system supports your work section">
   <SectionTitle title="How the system supports your work" description="A shared system that improves collaboration and decision-making for product, development, and design." />
   <div class="cards-row-fixed">
-  <a href={`${appConfig.basePath}products-and-services/for-productmanagement`} aria-label="Open for productmanagement page">
+  <a href={`${appConfig.basePath}products-and-services/for-productmanagement`} aria-label="Open for Product Management page">
     <DBCard behavior="interactive" data-color="violet" spacing="large">
       <DBStack gap="medium">
   <TextImage 
-      imagePosition="bottom" 
-      contentAlign="start"
+      imagePosition="top" 
+      contentAlign="end"
       imageWidth="33"
       title="Efficient Delivery"
       imageSrc={`${appConfig.basePath}assets/for-productmanagement/Efficient-Delivery--Lightmode--C.png`}
@@ -117,15 +117,16 @@ import { interactiveDemoOptions, interactiveDemoDefaultOptionId } from './home.c
       >
       Reduce time spent on repeated design and implementation decisions.
       </TextImage>
+      <DBButton variant='filled' width='full' style={{ boxSizing: 'border-box' }}>Explore all Benefits</DBButton>
       </DBStack>
     </DBCard>
   </a>
   <a href={`${appConfig.basePath}products-and-services/for-developer`} aria-label="Open for developer page">
     <DBCard behavior="interactive" data-color="green" spacing="large">
-      <DBStack gap="medium">
+      <DBStack gap="large">
   <TextImage
-      imagePosition="bottom" 
-      contentAlign="start"
+      imagePosition="top" 
+      contentAlign="end"
       imageWidth="33"
       title="Predictable Maintenance"
       imageSrc={`${appConfig.basePath}assets/for-developer/Predictable-Maintenance--Lightmode--C.png`}
@@ -135,16 +136,17 @@ import { interactiveDemoOptions, interactiveDemoDefaultOptionId } from './home.c
       >
       Rely on scheduled updates and stable versioning to plan changes confidently.
       </TextImage>
+      <DBButton variant='filled' width='full' style={{ boxSizing: 'border-box' }}>Explore all Benefits</DBButton>
       </DBStack>
     </DBCard>
     </a>
 
   <a href={`${appConfig.basePath}products-and-services/for-designer`} aria-label="Open for designer page">
     <DBCard behavior="interactive" data-color="blue" spacing="large">
-      <DBStack gap="medium">
+      <DBStack gap="large">
         <TextImage
-          imagePosition="bottom"
-          contentAlign="start"
+          imagePosition="top"
+          contentAlign="end"
           imageWidth="33"
           title="Flexible Choices"
           imageSrc={`${appConfig.basePath}assets/for-designer/Flexible-Choices--Lightmode--C.png`}
@@ -154,13 +156,14 @@ import { interactiveDemoOptions, interactiveDemoDefaultOptionId } from './home.c
           >
           Adapt components and tokens to fit context without losing alignment.
         </TextImage>
+        <DBButton variant='filled' width='full' style={{ boxSizing: 'border-box' }}>Explore all Benefits</DBButton>
       </DBStack>
     </DBCard>
     </a>
   </div>
 </DBSection>
 
-<DBSection width="large" spacing="medium" aria-label="Unified model section">
+<DBSection width="large" spacing="large" aria-label="Unified model section">
   <Carousel ariaLabel="Testimonials horizontal scroll">
     <DBCard spacing="medium">
       <TextImage 
@@ -185,7 +188,7 @@ import { interactiveDemoOptions, interactiveDemoDefaultOptionId } from './home.c
       imageWidth="33"
       rounded
       imageSrc={`${appConfig.basePath}assets/people/Patrick-Weber--C.jpg`}
-      imageAlt="Tobias Oberpaul"
+      imageAlt="Patrick Weber"
       textGap="2xl"
       >
       Patrick Weber <br/>

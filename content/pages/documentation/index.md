@@ -6,5 +6,3 @@ hidePage: true
 isSubNavigation: true
 isMenuItemDisabled: true
 ---
-
-XXX

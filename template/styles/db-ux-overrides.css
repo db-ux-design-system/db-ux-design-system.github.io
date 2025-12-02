@@ -40,6 +40,9 @@
   .cards-row-fixed { grid-template-columns: 1fr; }
 }
 
+.cards-row-fixed .db-card a.db-link { text-decoration: underline; }
+.cards-row-fixed .db-card a { text-decoration: none; }
+
 /* Dark blue image tint for signatures or other images */
 .img--tint-dark-blue {
   /* Using filter chain to approximate dark DB brand blue while preserving alpha */
