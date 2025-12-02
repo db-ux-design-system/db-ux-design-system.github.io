@@ -18,3 +18,9 @@
   outline-offset: var(--db-border-width-3xs);
 }
 */
+/* Responsive Stack */
+@media (max-width: 767px) {
+.db-stack {
+  overflow: auto;
+}
+}

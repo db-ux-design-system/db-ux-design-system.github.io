@@ -132,8 +132,19 @@ const initialItem = (initialId && items.find((i) => i.id === initialId)) ?? item
 
   // Initial visibility state
   updateToggleVisibility();
-  const initialActive = buttons[0]?.getAttribute('data-image-id');
-  if (initialActive) setActiveButton(initialActive);
+  // Do not override SSR-marked active button; derive from current image src if needed
+  const currentSrc = img?.getAttribute('src') || '';
+  const preMarked = Array.from(buttons).find(b => b.hasAttribute('data-active'));
+  if (!preMarked && currentSrc) {
+    const match = Array.from(buttons).find(b => {
+      const tpl = b.getAttribute('data-image-src') || '';
+      // Normalize mode marker for comparison
+      const normalizedTpl = tpl.replace(/--(Light|Dark)mode--/, currentSrc.includes('--Darkmode--') ? '--Darkmode--' : '--Lightmode--');
+      return normalizedTpl === currentSrc;
+    });
+    const id = match?.getAttribute('data-image-id');
+    if (id) setActiveButton(id);
+  }
   };
 
   const scanRoots = () => {
