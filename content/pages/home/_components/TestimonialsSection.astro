@@ -1,0 +1,55 @@
+---
+import { appConfig } from '@config';
+import { DBCard, DBSection } from '@db-ux/react-core-components';
+import { Carousel, TextImage } from '@components';
+---
+
+<DBSection width="large" spacing="medium" aria-label="Unified model section">
+    <Carousel ariaLabel="Testimonials horizontal scroll">
+        <DBCard spacing="medium">
+            <TextImage
+                    title="“Since adopting the system, our teams spend less time aligning on UI details and more time solving real product problems.”"
+                    headlineLevel={2}
+                    imagePosition="left"
+                    imageWidth="33"
+                    rounded
+                    imageSrc={`${appConfig.basePath}assets/people/Finn-Hoffmeister--C.jpg`}
+                    imageAlt="Finn Hoffmeister"
+                    textGap="2xl"
+            >
+                Finn Hoffmeister <br/>
+                Product Owner @ DB Systel
+            </TextImage>
+        </DBCard>
+        <DBCard spacing="medium">
+            <TextImage
+                    title="“New team members ramp up faster because the system explains how we design and build our products.”"
+                    headlineLevel={2}
+                    imagePosition="left"
+                    imageWidth="33"
+                    rounded
+                    imageSrc={`${appConfig.basePath}assets/people/Patrick-Weber--C.jpg`}
+                    imageAlt="Tobias Oberpaul"
+                    textGap="2xl"
+            >
+                Patrick Weber <br/>
+                Design Lead @ DB Fernverkehr
+            </TextImage>
+        </DBCard>
+        <DBCard spacing="medium">
+            <TextImage
+                    title="“Design and development finally speak the same language — handoff feels predictable instead of repetitive.”"
+                    headlineLevel={2}
+                    imagePosition="left"
+                    imageWidth="33"
+                    rounded
+                    imageSrc={`${appConfig.basePath}assets/people/Danny-Koppenhagen--C.jpg`}
+                    imageAlt="Danny Koppenhagen"
+                    textGap="2xl"
+            >
+                Danny Koppenhagen <br/>
+                Frontend Architect @ DB Systel
+            </TextImage>
+        </DBCard>
+    </Carousel>
+</DBSection>

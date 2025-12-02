@@ -1,0 +1,9 @@
+---
+import { DBSection } from '@db-ux/react-core-components';
+import InteractiveDemo from '@template/components/InteractiveDemo/InteractiveDemo.astro';
+import { interactiveDemoOptions, interactiveDemoDefaultOptionId } from '../home.config.ts';
+---
+
+<DBSection width="medium" spacing="medium">
+    <InteractiveDemo items={interactiveDemoOptions} initialId={interactiveDemoDefaultOptionId} />
+</DBSection>
