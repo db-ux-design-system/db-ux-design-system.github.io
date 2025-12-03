@@ -8,67 +8,19 @@ heroImage: "/one-platform/assets/for-developer/For-Developer--C.png"
 heroImageAlt: "For Developer Visual"
 ---
 
-import { DBSection } from '@db-ux/react-core-components';
-import { TextImage, CTA } from '@components';
-import { appConfig } from '@config';
+import EfficientWorkflowsSection from './_components/EfficientWorkflowsSection.astro';
+import FlexibleIntegrationSection from './_components/FlexibleIntegrationSection.astro';
+import PredictableMaintenanceSection from './_components/PredictableMaintenanceSection.astro';
+import SmoothHandoffSection from './_components/SmoothHandoffSection.astro';
+import ContactUsSection from './_components/ContactUsSection.astro';
 
-<DBSection width="medium" spacing="medium" aria-label="For Developer section">
 
-<TextImage 
-  title="Efficient Workflows"
-  imageSrc={`${appConfig.basePath}assets/for-developer/Efficient-Workflows--Lightmode--C.png`}
-  imageAlt="Code editor and component library speeding up workflow"
-  mask="fade-right"
->
-  Re-use stable components to reduce repetitive implementation effort.
-</TextImage>
+<EfficientWorkflowsSection />
 
-</DBSection>
+<FlexibleIntegrationSection />
 
-<DBSection width="medium" spacing="medium" >
+<PredictableMaintenanceSection />
 
-<TextImage 
-  title="Flexible Integration"
-  imageSrc={`${appConfig.basePath}assets/for-developer/Flexible-Integration--Lightmode--C.png`}
-  imageAlt="Config panel showing integration and customization options"
-  imagePosition="left"
-  mask="fade-bottom-right"
->
-  Adjust variants and tokens to meet product needs without diverging from the system.
-</TextImage>
+<SmoothHandoffSection />
 
-</DBSection>
-
-<DBSection width="medium" spacing="medium" >
-
-<TextImage 
-  title="Predictable Maintenance"
-  imageSrc={`${appConfig.basePath}assets/for-developer/Predictable-Maintenance--Lightmode--C.png`}
-  imageAlt="Version timeline and update badges denoting planned maintenance"
-  mask="fade-bottom-right"
->
-  Rely on scheduled updates and stable versioning to plan changes confidently.
-</TextImage>
-
-</DBSection>
-
-<DBSection width="medium" spacing="medium" >
-
-<TextImage 
-  title="Smooth Handoff"
-  imageSrc={`${appConfig.basePath}assets/for-developer/Smooth-Handoff--Lightmode--C.png`}
-  imageAlt="Shared spec sheet bridging design and development"
-  imagePosition="left"
-  mask="fade-bottom-right"
->
-  Use aligned specifications and shared models to reduce ambiguity between design and development.
-</TextImage>
-
-</DBSection>
-
-<DBSection width="medium" spacing="medium">
-  <CTA
-    title="Move faster with shared standards."
-    primaryAction={{ label: 'Contact Us', href: `mailto:db-ux-designsystem@deutschebahn.com`, variant: 'brand' }}
-  />
-</DBSection>
+<ContactUsSection />

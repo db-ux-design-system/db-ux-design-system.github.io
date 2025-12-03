@@ -1,0 +1,17 @@
+---
+import { appConfig } from '@config';
+import { DBSection } from '@db-ux/react-core-components';
+import { TextImage } from '@components';
+---
+
+<DBSection width="medium" spacing="medium" >
+    <TextImage
+        title="Smooth Handoff"
+        imageSrc={`${appConfig.basePath}assets/for-developer/Smooth-Handoff--Lightmode--C.png`}
+        imageAlt="Shared spec sheet bridging design and development"
+        imagePosition="left"
+        mask="fade-bottom-right"
+    >
+        Use aligned specifications and shared models to reduce ambiguity between design and development.
+    </TextImage>
+</DBSection>
