@@ -6,72 +6,20 @@ headline: "Start with clarity"
 description: "Shared base tokens and modes provide a stable foundation for clear and coherent interfaces."
 heroImage: "/one-platform/assets/foundations/Foundations--C.png"
 heroImageAlt: "Foundations Visual"
-
-
 ---
 
-import { DBSection } from '@db-ux/react-core-components';
-import { TextImage, CTA } from '@components';
-import { appConfig } from '@config';
+import BaseTokensSection from './_components/BaseTokensSection.astro';
+import AdaptiveColorsSection from './_components/AdaptiveColorsSection.astro';
+import MaterialsSection from './_components/MaterialsSection.astro';
+import DarkModeSection from './_components/DarkModeSection.astro';
+import ContactUsSection from './_components/ContactUsSection.astro';
 
-<DBSection width="medium" spacing="medium">
+<BaseTokensSection />
 
-<TextImage 
-  title="Base-Tokens"
-  imageSrc={`${appConfig.basePath}assets/foundations/Base-Tokens--Lightmode--C.png`}
-  imageSrcDark={`${appConfig.basePath}assets/foundations/Base-Tokens--Darkmode--C.png`}
-  imageAlt="Diagram showing base token categories (colors, spacing, typography)"
-  mask="fade-bottom-right"
->
-  Define reusable design values applied consistently across the system.
-</TextImage>
+<AdaptiveColorsSection />
 
-</DBSection>
+<MaterialsSection />
 
-<DBSection width="medium" spacing="medium" >
+<DarkModeSection />
 
-<TextImage 
-  title="Adaptive Colors"
-  imageSrc={`${appConfig.basePath}assets/foundations/Adaptive-Colors--Lightmode--C.png`}
-  imageAlt="Palette illustrating adaptive color shifts between light and dark mode"
-  imagePosition="left"
-  mask="fade-bottom-right"
->
-  Maintain consistent contrast and tone across different color modes and contexts.
-</TextImage>
-
-</DBSection>
-
-<DBSection width="medium" spacing="medium" >
-
-<TextImage 
-  title="Materials"
-  imageSrc={`${appConfig.basePath}assets/foundations/Materials--Lightmode--C.png`}
-  imageAlt="Layered panels showing elevation, border and opacity material styles"
-  mask="fade-bottom-right"
->
-  Create visual hierarchy through variations in borders, opacity, and fill.
-</TextImage>
-
-</DBSection>
-
-<DBSection width="medium" spacing="medium" >
-
-<TextImage 
-  title="Darkmode"
-  imageSrc={`${appConfig.basePath}assets/foundations/Darkmode--Lightmode--C.png`}
-  imageAlt="Comparison of interface elements in light versus dark mode"
-  imagePosition="left"
-  mask="fade-bottom-right"
->
-  Support comfortable and readable interfaces across different luminance environments.
-</TextImage>
-
-</DBSection>
-
-<DBSection width="medium" spacing="medium">
-  <CTA
-    title="Move faster with shared standards."
-    primaryAction={{ label: 'Contact Us', href: `mailto:db-ux-designsystem@deutschebahn.com`, variant: 'brand' }}
-  />
-</DBSection>
+<ContactUsSection />
