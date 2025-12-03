@@ -8,80 +8,21 @@ heroImage: "/one-platform/assets/components/Components--C.png"
 heroImageAlt: "Components Visual"
 ---
 
-import { DBSection } from '@db-ux/react-core-components';
-import { TextImage, CTA } from '@components';
-import { appConfig } from '@config';
+import TestedAndVerifiedSection from './_components/TestedAndVerifiedSection.astro';
+import ConfigurableSection from './_components/ConfigurableSection.astro';
+import MaintenanceSection from './_components/MaintenanceSection.astro';
+import SharedSourceSection from './_components/SharedSourceSection.astro';
+import PracticalGuidanceSection from './_components/PracticalGuidanceSection.astro';
+import ContactUsSection from './_components/ContactUsSection.astro';
 
-<DBSection width="medium" spacing="medium" aria-label="Components section">
+<TestedAndVerifiedSection />
 
-<TextImage 
-  title="Tested & Verified"
-  imageSrc={`${appConfig.basePath}assets/components/Tested--Lightmode--C.png`}
-  imageAlt="Accessibility and test status badges for a UI component"
-  mask="fade-bottom-right"
->
-  Components meet accessibility and reliability requirements.
-</TextImage>
+<ConfigurableSection />
 
-</DBSection>
+<MaintenanceSection />
 
-<DBSection width="medium" spacing="medium" >
+<SharedSourceSection />
 
-<TextImage 
-  title="Configurable"
-  imageSrc={`${appConfig.basePath}assets/components/Configurable--Lightmode--C.png`}
-  imageAlt="Component panel showing adjustable variants and size options"
-  imagePosition='left'
-  mask="fade-bottom-right"
->
-  Variants, sizes, and content adapt to product needs without altering structure.
-</TextImage>
+<PracticalGuidanceSection />
 
-</DBSection>
-
-<DBSection width="medium" spacing="medium" >
-
-<TextImage 
-  title="Ongoing Maintenance"
-  imageSrc={`${appConfig.basePath}assets/components/Ongoing-Maintenance--Lightmode--C.png`}
-  imageAlt="Roadmap and update indicators representing continuous maintenance"
-  mask="fade-bottom-right"
->
-  Regular updates improve stability and support long-term use.
-</TextImage>
-
-</DBSection>
-
-<DBSection width="medium" spacing="medium" >
-
-<TextImage 
-  title="Shared Source"
-  imageSrc={`${appConfig.basePath}assets/components/Shared-Source--Lightmode--C.png`}
-  imageAlt="Design and code views aligned side by side"
-  imagePosition='left'
-  mask="fade-bottom-right"
->
-  Design and code rely on the same underlying logic for aligned implementation.
-</TextImage>
-
-</DBSection>
-
-<DBSection width="medium" spacing="medium" >
-
-<TextImage 
-  title="Practical Guidance"
-  imageSrc={`${appConfig.basePath}assets/components/Practical-Guidance--Lightmode--C.png`}
-  imageAlt="Usage guidelines and do/don't examples for a component"
-  mask="fade-bottom-right"
->
-  Usage recommendations support clear decisions and coherent user experiences.
-</TextImage>
-
-</DBSection>
-
-<DBSection width="medium" spacing="medium">
-  <CTA
-    title="Move faster with shared standards."
-    primaryAction={{ label: 'Contact Us', href: `mailto:db-ux-designsystem@deutschebahn.com`, variant: 'brand' }}
-  />
-</DBSection>
+<ContactUsSection />
