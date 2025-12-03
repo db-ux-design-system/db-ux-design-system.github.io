@@ -6,71 +6,25 @@ headline: "Design with confidence"
 description: "A shared system that supports clear decisions and consistent interfaces across teams."
 heroImage: "/one-platform/assets/for-designer/For-Designer--C.png"
 heroImageAlt: "For Designer Visual"
-
-
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
 import { TextImage, CTA } from '@components';
 import { appConfig } from '@config';
 
-<DBSection width="medium" spacing="medium" aria-label="For Designer section">
 
-<TextImage 
-  title="Consistent Results"
-  imageSrc={`${appConfig.basePath}assets/for-designer/Consistent-Results--Lightmode--C.png`}
-  imageAlt="Screens showing unified interface layouts across devices"
-  mask="fade-bottom-right"
->
-  Ensure a shared visual language and predictable outcomes across products and devices.
-</TextImage>
+import ConsistentResultsSection from './_components/ConsistentResultsSection.astro';
+import FlexibleChoicesSection from './_components/FlexibleChoicesSection.astro';
+import ReliableQualitySection from './_components/ReliableQualitySection.astro';
+import SmoothHandoffSection from './_components/SmoothHandoffSection.astro';
+import ContactUsSection from './_components/ContactUsSection.astro';
 
-</DBSection>
+<ConsistentResultsSection />
 
-<DBSection width="medium" spacing="medium" >
+<FlexibleChoicesSection />
 
-<TextImage 
-  title="Flexible Choices"
-  imageSrc={`${appConfig.basePath}assets/for-designer/Flexible-Choices--Lightmode--C.png`}
-  imageAlt="Component variants demonstrating adaptable design options"
-  imagePosition="left"
-  mask="fade-bottom-right"
->
-  Adapt components and tokens to fit context without losing alignment.
-</TextImage>
+<ReliableQualitySection />
 
-</DBSection>
+<SmoothHandoffSection />
 
-<DBSection width="medium" spacing="medium" >
-
-<TextImage 
-  title="Reliable Quality"
-  imageSrc={`${appConfig.basePath}assets/for-designer/Reliable-Quality--Lightmode--C.png`}
-  imageAlt="Checklist and UI examples indicating quality assurance"
-  mask="fade-bottom-right"
->
-  Use tested patterns that reduce errors and rework.
-</TextImage>
-
-</DBSection>
-
-<DBSection width="medium" spacing="medium" >
-
-<TextImage 
-  title="Smooth Handoff"
-  imageSrc={`${appConfig.basePath}assets/for-designer/Smooth-Handoff--Lightmode--C.png`}
-  imageAlt="Design-to-code handoff illustration with specs and components"
-  imagePosition="left"
-  mask="fade-bottom-right"
->
-  Rely on clear specs and shared foundations for efficient collaboration with developers.
-</TextImage>
-
-</DBSection>
-
-<DBSection width="medium" spacing="medium">
-  <CTA
-    title="Move faster with shared standards."
-    primaryAction={{ label: 'Contact Us', href: `mailto:db-ux-designsystem@deutschebahn.com`, variant: 'brand' }}
-  />
-</DBSection>
+<ContactUsSection />
