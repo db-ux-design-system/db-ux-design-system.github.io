@@ -8,53 +8,15 @@ heroImage: "/one-platform/assets/for-productmanagement/For-Productmanagement--C.
 heroImageAlt: "For Product Management Visual"
 ---
 
-import { DBSection } from '@db-ux/react-core-components';
-import { TextImage, CTA } from '@components';
-import { appConfig } from '@config';
+import EfficientDeliverySection from './_components/EfficientDeliverySection.astro';
+import LowerRiskSection from './_components/LowerRiskSection.astro';
+import ScalableApproachSection from './_components/ScalableApproachSection.astro';
+import ContactUsSection from './_components/ContactUsSection.astro';
 
-<DBSection width="medium" spacing="medium" aria-label="For Product Management section">
+<EfficientDeliverySection />
 
-<TextImage 
-  title="Efficient Delivery"
-  imageSrc={`${appConfig.basePath}assets/for-productmanagement/Efficient-Delivery--Lightmode--C.png`}
-  imageAlt="Timeline compression illustrating faster delivery cycles"
-  mask="fade-bottom-right"
->
-  Reduce time spent on repeated design and implementation decisions.
-</TextImage>
+<LowerRiskSection />
 
-</DBSection>
+<ScalableApproachSection />
 
-<DBSection width="medium" spacing="medium" >
-
-<TextImage 
-  title="Lower Risk"
-  imageSrc={`${appConfig.basePath}assets/for-productmanagement/Lower-Risk--Lightmode--C.png`}
-  imageAlt="Shield and compliant UI elements symbolizing reduced product risk"
-  imagePosition="left"
-  mask="fade-bottom-right"
->
-  Rely on accessible, brand-aligned, and tested patterns to prevent avoidable rework.
-</TextImage>
-
-</DBSection>
-
-<DBSection width="medium" spacing="medium" >
-
-<TextImage 
-  title="Scalable Approach"
-  imageSrc={`${appConfig.basePath}assets/for-productmanagement/Scalable-Approach--Lightmode--C.png`}
-  imageAlt="Expanding grid of product modules showing scalable standards"
-  mask="fade-right"
->
-  Support multiple teams and products with standards that grow over time.
-</TextImage>
-
-</DBSection>
-
-<DBSection width="medium" spacing="medium">
-  <CTA
-    title="Move faster with shared standards."
-    primaryAction={{ label: 'Contact Us', href: `mailto:db-ux-designsystem@deutschebahn.com`, variant: 'brand' }}
-  />
-</DBSection>
+<ContactUsSection />
