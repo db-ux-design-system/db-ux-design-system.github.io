@@ -1,6 +1,6 @@
 ---
-import { appConfig } from "@root/app.config";
-import { ClientRouter } from "astro:transitions";
+import { appConfig } from '@root/app.config';
+import { ClientRouter } from 'astro:transitions';
 
 const { title } = Astro.props as {
   title: string;
@@ -14,5 +14,7 @@ const { title } = Astro.props as {
   <base href={appConfig.basePath} />
   <title>{title}</title>
   <ClientRouter />
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+  <script
+    type="module"
+    src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
 </head>

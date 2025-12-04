@@ -1,11 +1,11 @@
 // @ts-check
-import { defineConfig } from "astro/config";
-import { appConfig } from "./app.config";
-import react from "@astrojs/react";
-import mdx from "@astrojs/mdx";
-import sitemap from "@astrojs/sitemap";
-import { filterSitemapBlacklist } from "./template/integrations/sitemap";
-import orama from "@orama/plugin-astro";
+import { defineConfig } from 'astro/config';
+import { appConfig } from './app.config';
+import react from '@astrojs/react';
+import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
+import { filterSitemapBlacklist } from './template/integrations/sitemap';
+import orama from '@orama/plugin-astro';
 
 // https://astro.build/config
 export default defineConfig({
@@ -20,16 +20,16 @@ export default defineConfig({
     orama({
       pages: {
         pathMatcher: /\/.+\//,
-        language: "english",
+        language: 'english',
       },
     }),
   ],
-  srcDir: "./content",
-  outDir: "./public",
-  publicDir: "./static",
+  srcDir: './content',
+  outDir: './public',
+  publicDir: './static',
   vite: {
     ssr: {
-      noExternal: ["@db-ux/react-core-components"],
+      noExternal: ['@db-ux/react-core-components'],
     },
     resolve: {
       alias: {
@@ -44,6 +44,6 @@ export default defineConfig({
     enabled: false,
   },
   build: {
-    inlineStylesheets: "always",
+    inlineStylesheets: 'always',
   },
 });

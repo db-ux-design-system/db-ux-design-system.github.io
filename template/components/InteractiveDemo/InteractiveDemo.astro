@@ -1,59 +1,61 @@
 ---
-import { DBButton, DBStack, DBCard } from "@db-ux/react-core-components";
-import "./InteractiveDemo.css";
+import { DBButton, DBStack, DBCard } from '@db-ux/react-core-components';
+import './InteractiveDemo.css';
 
 const items = Array.isArray(Astro.props.items) ? Astro.props.items : [];
 const initialId = Astro.props.initialId;
 const initialItem = (initialId && items.find((i) => i.id === initialId)) ?? items[0] ?? null;
 ---
 
-{items.length === 0 || !initialItem ? null : (
-  <div data-image-toggle-root>
-    <DBStack style={{ overflow: 'unset' }}>
-    <div style="padding: var(--db-spacing-fixed-2xs); background: var(--db-adaptive-bg-basic-level-1-default); border-radius: var(--db-border-radius-sm); border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default); position: sticky; top: var(--db-spacing-fixed-md); width: 100%; max-width: fit-content; margin: 0 auto;">
-    <DBStack direction="row" gap="2x-small">
-    <DBStack direction="row" gap="2x-small">
-    {items.map((item) => (
-      <DBButton
-        icon={item.icon}
-        variant={item.variant}
-        data-color={item.color}
-        data-image-toggle-button
-        data-image-id={item.id}
-        data-image-src={item.src}
-        data-image-alt={item.alt ?? item.label}
-        {...(item.id === initialItem.id ? { 'data-active': '' } : {})}
-      >
-        {item.label}
-      </DBButton>
-    ))}
-    </DBStack>
-    <DBButton
-      icon="moon"
-      variant="ghost"
-      noText
-      data-image-toggle-light
-      aria-label="Switch to dark mode"
-    />
-    <DBButton
-      icon="sun"
-      variant="ghost"
-      noText
-      data-image-toggle-dark
-      aria-label="Switch to light mode"
-    />
-    </DBStack>
-    </div> 
-    <DBCard spacing="none" style={{overflow: 'hidden'}}>
-    <img
-      data-image-toggle-target
-      src={initialItem.src}
-      alt={initialItem.alt ?? initialItem.label}
-    />
-    </DBCard>
-    </DBStack>
-  </div>
-)}
+{
+  items.length === 0 || !initialItem ? null : (
+    <div data-image-toggle-root>
+      <DBStack style={{ overflow: 'unset' }}>
+        <div style="padding: var(--db-spacing-fixed-2xs); background: var(--db-adaptive-bg-basic-level-1-default); border-radius: var(--db-border-radius-sm); border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default); position: sticky; top: var(--db-spacing-fixed-md); width: 100%; max-width: fit-content; margin: 0 auto;">
+          <DBStack direction="row" gap="2x-small">
+            <DBStack direction="row" gap="2x-small">
+              {items.map((item) => (
+                <DBButton
+                  icon={item.icon}
+                  variant={item.variant}
+                  data-color={item.color}
+                  data-image-toggle-button
+                  data-image-id={item.id}
+                  data-image-src={item.src}
+                  data-image-alt={item.alt ?? item.label}
+                  {...(item.id === initialItem.id ? { 'data-active': '' } : {})}
+                >
+                  {item.label}
+                </DBButton>
+              ))}
+            </DBStack>
+            <DBButton
+              icon="moon"
+              variant="ghost"
+              noText
+              data-image-toggle-light
+              aria-label="Switch to dark mode"
+            />
+            <DBButton
+              icon="sun"
+              variant="ghost"
+              noText
+              data-image-toggle-dark
+              aria-label="Switch to light mode"
+            />
+          </DBStack>
+        </div>
+        <DBCard spacing="none" style={{ overflow: 'hidden' }}>
+          <img
+            data-image-toggle-target
+            src={initialItem.src}
+            alt={initialItem.alt ?? initialItem.label}
+          />
+        </DBCard>
+      </DBStack>
+    </div>
+  )
+}
 
 <script>
   const initializedRoots: WeakSet<Element> = new WeakSet();
@@ -62,22 +64,24 @@ const initialItem = (initialId && items.find((i) => i.id === initialId)) ?? item
     if (initializedRoots.has(root)) return;
     initializedRoots.add(root);
 
-  const buttons: NodeListOf<HTMLButtonElement> = root.querySelectorAll('[data-image-toggle-button]');
-  const img: HTMLImageElement | null = root.querySelector('[data-image-toggle-target]');
-  const toggleLight: HTMLButtonElement | null = root.querySelector('[data-image-toggle-light]');
-  const toggleDark: HTMLButtonElement | null = root.querySelector('[data-image-toggle-dark]');
+    const buttons: NodeListOf<HTMLButtonElement> = root.querySelectorAll(
+      '[data-image-toggle-button]',
+    );
+    const img: HTMLImageElement | null = root.querySelector('[data-image-toggle-target]');
+    const toggleLight: HTMLButtonElement | null = root.querySelector('[data-image-toggle-light]');
+    const toggleDark: HTMLButtonElement | null = root.querySelector('[data-image-toggle-dark]');
 
-  const setActiveButton = (activeId: string) => {
-    buttons.forEach(btn => {
-      if (btn.getAttribute('data-image-id') === activeId) {
-        btn.setAttribute('data-active', '');
-      } else {
-        btn.removeAttribute('data-active');
-      }
-    });
-  };
+    const setActiveButton = (activeId: string) => {
+      buttons.forEach((btn) => {
+        if (btn.getAttribute('data-image-id') === activeId) {
+          btn.setAttribute('data-active', '');
+        } else {
+          btn.removeAttribute('data-active');
+        }
+      });
+    };
 
-  buttons.forEach((button: HTMLButtonElement) => {
+    buttons.forEach((button: HTMLButtonElement) => {
       button.addEventListener('click', () => {
         const srcTemplate = button.getAttribute('data-image-src');
         const alt = button.getAttribute('data-image-alt') ?? '';
@@ -85,13 +89,18 @@ const initialItem = (initialId && items.find((i) => i.id === initialId)) ?? item
           const current = img.getAttribute('src') || '';
           const isDark = current.includes('--Darkmode--');
           // Normalize template to current mode by replacing any Light/Dark marker
-          const next = srcTemplate.replace(/--(Light|Dark)mode--/, isDark ? '--Darkmode--' : '--Lightmode--');
+          const next = srcTemplate.replace(
+            /--(Light|Dark)mode--/,
+            isDark ? '--Darkmode--' : '--Lightmode--',
+          );
           img.setAttribute('src', next);
           img.setAttribute('alt', alt);
           // update toggle visibility to reflect current mode after brand change
           updateToggleVisibility();
           // Scroll image into viewport after change
-          try { img.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+          try {
+            img.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } catch (e) {}
           const id = button.getAttribute('data-image-id');
           if (id) setActiveButton(id);
         }
@@ -116,7 +125,9 @@ const initialItem = (initialId && items.find((i) => i.id === initialId)) ?? item
         img.setAttribute('src', next);
         updateToggleVisibility();
         // Scroll image into viewport after toggle
-        try { img.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+        try {
+          img.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } catch (e) {}
       }
     });
     // Toggle to light
@@ -130,21 +141,24 @@ const initialItem = (initialId && items.find((i) => i.id === initialId)) ?? item
       }
     });
 
-  // Initial visibility state
-  updateToggleVisibility();
-  // Do not override SSR-marked active button; derive from current image src if needed
-  const currentSrc = img?.getAttribute('src') || '';
-  const preMarked = Array.from(buttons).find(b => b.hasAttribute('data-active'));
-  if (!preMarked && currentSrc) {
-    const match = Array.from(buttons).find(b => {
-      const tpl = b.getAttribute('data-image-src') || '';
-      // Normalize mode marker for comparison
-      const normalizedTpl = tpl.replace(/--(Light|Dark)mode--/, currentSrc.includes('--Darkmode--') ? '--Darkmode--' : '--Lightmode--');
-      return normalizedTpl === currentSrc;
-    });
-    const id = match?.getAttribute('data-image-id');
-    if (id) setActiveButton(id);
-  }
+    // Initial visibility state
+    updateToggleVisibility();
+    // Do not override SSR-marked active button; derive from current image src if needed
+    const currentSrc = img?.getAttribute('src') || '';
+    const preMarked = Array.from(buttons).find((b) => b.hasAttribute('data-active'));
+    if (!preMarked && currentSrc) {
+      const match = Array.from(buttons).find((b) => {
+        const tpl = b.getAttribute('data-image-src') || '';
+        // Normalize mode marker for comparison
+        const normalizedTpl = tpl.replace(
+          /--(Light|Dark)mode--/,
+          currentSrc.includes('--Darkmode--') ? '--Darkmode--' : '--Lightmode--',
+        );
+        return normalizedTpl === currentSrc;
+      });
+      const id = match?.getAttribute('data-image-id');
+      if (id) setActiveButton(id);
+    }
   };
 
   const scanRoots = () => {

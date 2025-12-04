@@ -18,13 +18,21 @@ interface Props {
 const { label, disabled = true, emphasis, size = 'medium', ariaLabel } = Astro.props as Props;
 ---
 
-<div class={"disabled-wrapper"} data-disabled={disabled ? 'true' : 'false'}>
+<div class={'disabled-wrapper'} data-disabled={disabled ? 'true' : 'false'}>
   <div class="disabled-wrapper__content">
     <slot />
   </div>
-  {disabled && (
-    <div class="disabled-wrapper__overlay" aria-label={ariaLabel || label}>
-  <DBBadge size={size} semantic="informational"emphasis={emphasis === 'default' ? undefined : emphasis}>{label}</DBBadge>
-    </div>
-  )}
+  {
+    disabled && (
+      <div class="disabled-wrapper__overlay" aria-label={ariaLabel || label}>
+        <DBBadge
+          size={size}
+          semantic="informational"
+          emphasis={emphasis === 'default' ? undefined : emphasis}
+        >
+          {label}
+        </DBBadge>
+      </div>
+    )
+  }
 </div>

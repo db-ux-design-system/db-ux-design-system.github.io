@@ -1,10 +1,10 @@
 ---
-import type { MarkdownHeading } from "astro";
-import "../../styles/global.css";
-import HtmlHead from "./html-head";
-import MainContent from "./main-content";
-import { appConfig } from "@root/app.config.ts";
-import { Shell } from "./shell";
+import type { MarkdownHeading } from 'astro';
+import '../../styles/global.css';
+import HtmlHead from './html-head';
+import MainContent from './main-content';
+import { appConfig } from '@root/app.config.ts';
+import { Shell } from './shell';
 
 const { headings, frontmatter } = Astro.props as {
   headings: MarkdownHeading[];
@@ -13,7 +13,7 @@ const { headings, frontmatter } = Astro.props as {
 ---
 
 <!doctype html>
-<html lang={appConfig.language || "en"}>
+<html lang={appConfig.language || 'en'}>
   <HtmlHead title={frontmatter.title} />
   <body>
     <Shell client:only="react">

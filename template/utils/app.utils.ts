@@ -1,4 +1,4 @@
-import type { AstroGlobal } from "astro";
+import type { AstroGlobal } from 'astro';
 
 /**
  * Attempts to retrieve the current pathname from the `astro` or the `window` global.
@@ -7,11 +7,11 @@ import type { AstroGlobal } from "astro";
  */
 export function getCurrentPathname(astro?: AstroGlobal): string {
   if (astro && astro.url) {
-    return astro.url.pathname.replace(/\/+$/, "");
+    return astro.url.pathname.replace(/\/+$/, '');
   } else if (window && window.location) {
-    return window.location.pathname.replace(/\/+$/, "");
+    return window.location.pathname.replace(/\/+$/, '');
   } else {
-    throw new Error("Unable to retrieve current path.");
+    throw new Error('Unable to retrieve current path.');
   }
 }
 
@@ -20,8 +20,7 @@ export function getCurrentPathname(astro?: AstroGlobal): string {
  * @param fn
  * @param ms
  */
-export const delay = (fn: () => void, ms: number) =>
-  new Promise(() => setTimeout(fn, ms));
+export const delay = (fn: () => void, ms: number) => new Promise(() => setTimeout(fn, ms));
 
 /**
  * Get a start and end index of a content string based on a search term

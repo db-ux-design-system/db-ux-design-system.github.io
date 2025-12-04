@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 /**
  * Debounce hook for inputs to prevent too many requests against a database, server etc.
