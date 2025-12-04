@@ -18,19 +18,15 @@
 .carousel > .db-card {
   width: 80%;
 }
-
 .carousel .text-image__image img {
   height: 100%;
   object-fit: cover;
 }
-
 /* WebKit */
 .carousel::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
-
-
 .fadeout-horizontal {
   mask-image: linear-gradient(
     to right,

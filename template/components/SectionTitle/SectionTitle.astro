@@ -1,14 +1,9 @@
 ---
-/**
- * SectionTitle Component
- * Headline mit optionaler Beschreibung.
- */
 import './SectionTitle.css';
 
 interface Props {
   title: string;
   description?: string;
-  /** Layout: 'split' (33/66 nebeneinander) oder 'stack' (untereinander) */
   layout?: 'split' | 'stack';
 }
 

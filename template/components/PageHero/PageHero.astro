@@ -1,9 +1,4 @@
 ---
-/**
- * PageHero Component
- * Zeigt oberhalb einer Seite Titel, Headline und Beschreibung im gewünschten Layout.
- * Figma Referenz: Marketing Page Hero Block.
- */
 import './PageHero.css';
 
 interface Props {
@@ -15,10 +10,6 @@ interface Props {
   align?: 'start' | 'center' | 'end';
   layout?: 'stack' | 'split';
   imageSide?: 'left' | 'right';
-  /**
-   * Überschreibt die Headline Ebene. Standard ist 1 (h1). Werte werden auf 1..6 begrenzt.
-   * Nutzung: <PageHero headlineLevel={2} ... /> erzeugt ein <h2> statt <h1>.
-   */
   headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 const {
@@ -33,7 +24,6 @@ const {
   headlineLevel = 2,
 } = Astro.props as Props;
 
-// Clamp headline level to valid range (1..6)
 const safeHeadlineLevel = Math.min(Math.max(headlineLevel, 1), 6);
 const HeadingTag = `h${safeHeadlineLevel}` as keyof astroHTML.JSX.Tag;
 ---

@@ -1,8 +1,4 @@
 ---
-/**
- * TextImage Component
- * Zeigt Text neben einem Bild an und bricht auf Mobile untereinander.
- */
 import './TextImage.css';
 import { DBTag } from '@db-ux/react-core-components';
 
@@ -13,25 +9,10 @@ interface Props {
   imageSrcDark?: string;
   reversed?: boolean;
   contentAlign?: 'start' | 'center' | 'end';
-  /**
-   * Überschreibt die Headline-Größe (HTML Tag). Standard ist h4.
-   */
   headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
-  /**
-   * Verhältnis zwischen Text und Bild. "50" = 50/50, "text-wide" = 66/33 (Text breiter).
-   */
   imageWidth?: '50' | '33' | '66';
-  /**
-   * Grundlayout: horizontal (Standard nebeneinander) oder vertical (Bild über Text).
-   */
   layout?: 'horizontal' | 'vertical';
-  /** For vertical layout choose if image appears on top or bottom (default top) */
   imagePosition?: 'top' | 'bottom' | 'left' | 'right';
-  /**
-   * Optionaler Masken-Effekt für das Bild. Unterstützte Werte:
-   * fade-right, fade-left, fade-top, fade-bottom,
-   * fade-bottom-right, fade-bottom-left, fade-top-right, fade-top-left.
-   */
   mask?:
     | 'fade-right'
     | 'fade-left'
@@ -41,17 +22,8 @@ interface Props {
     | 'fade-bottom-left'
     | 'fade-top-right'
     | 'fade-top-left';
-  /**
-   * Rundet das Bild (aktiviert border-radius Styles)
-   */
   rounded?: boolean;
-  /**
-   * Abstand zwischen Headline und Text.
-   * "auto" drückt den Body nach unten; sm/md/lg/xl setzen festen Gap.
-   * Standard ist "sm".
-   */
   textGap?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
-  /** Optional Tag above the body text */
   tag?: { label: string; emphasis?: 'strong' | 'weak' | 'default' };
 }
 

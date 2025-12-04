@@ -3,15 +3,10 @@ import './DisabledWrapper.css';
 import { DBBadge } from '@db-ux/react-core-components';
 
 interface Props {
-  /** Text im DBBadge Overlay */
   label: string;
-  /** Falls true: Wrapper deaktiviert Kinder (Pointer Events) + Opacity 40% */
   disabled?: boolean;
-  /** Badge Variante (optional, z.B. strong/weak) */
   emphasis?: 'strong' | 'weak' | 'default';
-  /** Badge Größe */
   size?: 'small' | 'medium';
-  /** Optionaler aria-label für das Overlay */
   ariaLabel?: string;
 }
 
