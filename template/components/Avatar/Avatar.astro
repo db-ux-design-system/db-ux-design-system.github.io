@@ -27,10 +27,6 @@ const {
   hoverCameraTarget = '0m 1m 0m',
   hoverCameraOrbit = '0deg 90deg 15m',
 } = Astro.props as Props;
-
-// Fallback hover camera values default to the non-hover ones if not provided
-const _hoverCameraTarget = hoverCameraTarget || cameraTarget;
-const _hoverCameraOrbit = hoverCameraOrbit || cameraOrbit;
 ---
 
 <DBStack class="avatar" aria-label={ariaLabel}>

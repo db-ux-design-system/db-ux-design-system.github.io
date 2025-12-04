@@ -52,7 +52,7 @@ iconTrailing: "arrow_right"
 Below is an explanation of each field:
 
 | Property              | Type      | Default  | Description                                                                                                                                                                                                            |
-| --------------------- | --------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------------------|-----------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **`layout`**          | `string`  | required | Always use `@template/layouts/default` for standard pages.                                                                                                                                                             |
 | **`title`**           | `string`  | —        | The name shown in the navigation and as the page headline.                                                                                                                                                             |
 | **`hidePage`**        | `boolean` | `false`  | If set to `true`, this page will **not** be directly visible in the navigation and users will be redirected to the first visible child page instead. Useful for sections that act as folders rather than actual pages. |
