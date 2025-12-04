@@ -2,6 +2,7 @@
 import { appConfig } from '@config';
 import { DBSection, DBStack } from '@db-ux/react-core-components';
 import { Avatar } from '@components';
+import './AvatarSection.css';
 ---
 
 <DBSection width="small" spacing="medium" id="about-us--avatar-section">
@@ -30,20 +31,16 @@ import { Avatar } from '@components';
       />
     </DBStack>
     <div>
-      <p
-        style="font: var(--db-type-body-xl); text-align: center; margin: 0 auto var(--db-spacing-fixed-xl); 0;"
-      >
+      <p class="about-us-avatar-paragraph about-us-avatar-paragraph-spaced">
         DB is home to many exceptional product teams. Our role is to create the conditions in which
         their work can thrive, scale, and continuously improve.
       </p>
-      <p
-        style="font: var(--db-type-body-xl); text-align: center; margin: 0 auto var(--db-spacing-fixed-xl); 0;"
-      >
+      <p class="about-us-avatar-paragraph about-us-avatar-paragraph-spaced">
         The DB UX Design System Team works on the core content and framework of the design system,
         advancing it both strategically and operationally. Our aim remains the same: to make the
         system accessible to all DB employees and meaningfully support their daily work.
       </p>
-      <p style="font: var(--db-type-body-xl); text-align: center; margin: 0 auto;">
+      <p class="about-us-avatar-paragraph">
         We empower designers and engineers across DB to actively shape the system. With guidance,
         shared standards, and clear contribution paths, the system grows through the expertise of
         those who use it every day. This collective approach strengthens coherence, accelerates
@@ -82,8 +79,3 @@ import { Avatar } from '@components';
     </DBStack>
   </DBStack>
 </DBSection>
-
-<script
-  is:inline
-  type="module"
-  src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
