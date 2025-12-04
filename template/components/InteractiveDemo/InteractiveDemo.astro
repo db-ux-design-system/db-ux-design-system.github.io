@@ -32,14 +32,14 @@ const initialItem = (initialId && items.find((i) => i.id === initialId)) ?? item
             <DBButton
               icon="moon"
               variant="ghost"
-              noText
+              noText={true}
               data-image-toggle-light
               aria-label="Switch to dark mode"
             />
             <DBButton
               icon="sun"
               variant="ghost"
-              noText
+              noText={true}
               data-image-toggle-dark
               aria-label="Switch to light mode"
             />
