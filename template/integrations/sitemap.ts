@@ -1,4 +1,4 @@
-import { appConfig } from '@config';
+import { appConfig } from '../../app.config';
 
 /**
  * Filters out pages that are blacklisted from the sitemap.
