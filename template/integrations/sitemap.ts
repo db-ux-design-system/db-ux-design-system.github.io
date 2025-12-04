@@ -15,7 +15,6 @@ export function filterSitemapBlacklist(page: string): boolean {
       page = page + '/';
     }
     if (fullBlacklistedPage === page) {
-      console.log(`${page} is blacklisted and will not be included into the sitemap.`);
       return false;
     }
   }
