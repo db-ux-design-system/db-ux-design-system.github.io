@@ -1,4 +1,13 @@
-type MdModule = { frontmatter: FrontMatter };
+type NavigationFrontmatter = FrontMatter & {
+  hidePage?: boolean;
+  isSubNavigation?: boolean;
+  iconTrailing?: string;
+  isMenuItemDisabled?: boolean;
+  order?: number;
+  nav?: boolean | { order?: number };
+};
+
+type MdModule = { frontmatter: NavigationFrontmatter };
 type Modules = Record<string, MdModule>;
 
 /**
@@ -44,7 +53,7 @@ function ensureChild(parent: NavigationItem, child: NavigationItem) {
  * @param fm - The frontmatter object.
  * @returns A number representing the sort order, or `undefined` if not set.
  */
-function getOrder(fm: any): number | undefined {
+function getOrder(fm: NavigationFrontmatter): number | undefined {
   if (typeof fm?.order === 'number') return fm.order;
   return undefined;
 }
@@ -57,8 +66,8 @@ function getOrder(fm: any): number | undefined {
  * @returns -1, 0, or 1 depending on order.
  */
 function compareNav(a: NavigationItem, b: NavigationItem) {
-  const ao = (a as any).order ?? Number.MAX_SAFE_INTEGER;
-  const bo = (b as any).order ?? Number.MAX_SAFE_INTEGER;
+  const ao = a.order ?? Number.MAX_SAFE_INTEGER;
+  const bo = b.order ?? Number.MAX_SAFE_INTEGER;
   if (ao !== bo) return ao - bo;
   return (a.title || '').localeCompare(b.title || '');
 }
@@ -92,7 +101,7 @@ export function buildAppNavigationFromContent(): AppNavigation {
   for (const [key, mod] of Object.entries(mods)) {
     const rel = strip(key);
     const segments = rel.split('/').filter(Boolean);
-    const fm = (mod.frontmatter ?? {}) as any;
+    const fm: NavigationFrontmatter = mod.frontmatter ?? ({} as NavigationFrontmatter);
 
     if (rel === '') continue;
     if (fm.nav === false) continue;
@@ -100,7 +109,7 @@ export function buildAppNavigationFromContent(): AppNavigation {
     const title =
       fm.title || (segments.length ? toTitleFromSegment(segments[segments.length - 1]) : 'Home');
     const hidePage = fm.hidePage === true;
-    const isSubNavigation = fm.isSubNavigation ?? fm.isSubnavigation ?? false;
+    const isSubNavigation = fm.isSubNavigation ?? false;
     const iconTrailing = fm.iconTrailing;
     const disabled = fm.isMenuItemDisabled === true;
     const order = getOrder(fm);
@@ -112,8 +121,8 @@ export function buildAppNavigationFromContent(): AppNavigation {
       iconTrailing,
       children: [],
       disabled,
+      order,
     };
-    (node as any).order = order;
 
     nodes.set(rel, node);
 
