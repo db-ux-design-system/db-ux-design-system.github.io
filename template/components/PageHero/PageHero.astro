@@ -12,6 +12,10 @@ interface Props {
   imageSide?: 'left' | 'right';
   headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 }
+
+type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
+type HeadingTagName = `h${HeadingLevel}`;
+
 const {
   title,
   headline,
@@ -24,8 +28,8 @@ const {
   headlineLevel = 2,
 } = Astro.props as Props;
 
-const safeHeadlineLevel = Math.min(Math.max(headlineLevel, 1), 6);
-const HeadingTag = `h${safeHeadlineLevel}` as keyof astroHTML.JSX.Tag;
+const safeHeadlineLevel = Math.min(Math.max(headlineLevel, 1), 6) as HeadingLevel;
+const HeadingTag = `h${safeHeadlineLevel}` as HeadingTagName;
 ---
 
 {
