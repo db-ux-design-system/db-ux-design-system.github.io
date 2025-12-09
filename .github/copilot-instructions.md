@@ -100,4 +100,140 @@ If you use tailwind follow those rules as well:
   - use for `DBAccordion` or `Accordion` the file node_modules/@db-ux/react-core-components/agent/Accordion.md
 
 --- END: DB UX Copilot Instructions – do not edit above ---
-		
+
+
+# onePlatform Guidelines
+
+These instructions tell GitHub Copilot how to write, structure and propose content inside this repository.
+They ensure code & content generation is consistent with our architecture and expectations.
+
+---
+
+## 📁 Project Structure Rules
+
+| Location | Purpose |
+|---|---|
+| content/pages/... | Real page content (MD/MDX only) |
+| content/pages/**/_components | Page-local components — only used on that page |
+| template/components/... | Global reusable Astro/React UI components |
+| template/utils/... | Shared logic, navigation, helpers, transforms |
+| public/static/... | Assets served directly without processing |
+| styles/... | Global CSS, tokens, utilities |
+
+Copilot must ask before creating files outside this structure.
+
+---
+
+## 🏗 Content Creation Rules
+
+### Markdown / MDX Pages
+- Always place pages under `content/pages/<section>/index.mdx`
+- The folder name becomes the navigation label unless overridden
+- Avoid deeply nested pages — prefer `_components` for reuse
+
+Example:
+
+`content/pages/resources/documentation/index.mdx`
+
+`content/pages/resources/documentation/getting-started/index.mdx`
+
+---
+
+### Frontmatter Standards
+
+| Field | Type | Default | Meaning |
+|---|---|---|---|
+| title | string | required | Visible page heading |
+| order | number | 999 | Sorting (lower = earlier) |
+| hidePage | boolean | false | Page exists but should redirect to child |
+| isSubNavigation | boolean | false | Children render sidebar |
+| nav | boolean | true | Exclude page from main nav if false |
+
+Example:
+
+```bash
+---
+title: "Foundations"
+order: 1
+isSubNavigation: true
+---
+```
+
+---
+
+## 🧭 Navigation Behavior
+
+Navigation is generated automatically from folder structure — not from config files.
+
+Page is visible when:
+
+`index.mdx` exists AND `hidePage:false` AND `nav:true`
+
+Subnavigation appears when:
+
+`parent.isSubNavigation == true`
+
+If `hidePage: true` → page URL forwards to its first child.
+
+---
+
+## 🧩 Component Rules
+
+| Type | Location | Notes |
+|---|---|---|
+| Reusable components | template/components/** | Should have .astro + optional .css/.tsx |
+| Page-local components | content/pages/**/_components | Only used within single page |
+| Interactive logic | use .astro wrapper + .tsx island | No logic directly in MDX |
+| No inline CSS | Always extract to .css |
+
+Component architecture:
+
+📁 Component.astro — markup only  
+📁 Component.css — styling  
+📁 Component.tsx — (optional) interaction
+
+---
+
+## 🌗 Theme / ColorMode Rules
+
+`data-mode="light|dark"` lives on `.db-shell`
+
+Copilot MUST:
+- use existing provider
+- not create new theme toggles
+- prefer tokens & CSS vars over raw colors
+
+---
+
+## 🧪 Code Quality Requirements
+
+| Rule | Reason |
+|---|---|
+| prettier + eslint must autoformat | readability |
+| no unused imports | hygiene |
+| avoid console.log in final merges | cleanliness |
+| do not place CSS in Astro markup | separation of concerns |
+| always type props | maintainability |
+
+---
+
+## 🚨 If unsure — ask BEFORE generating
+
+Good Copilot messages:
+
+"Should this be global or page-local?"
+
+"Do you want this config in frontmatter or TS?"
+
+Bad Copilot behavior:
+
+❌ modify navigation manually  
+❌ inline CSS  
+❌ write logic inside MDX directly
+
+---
+
+## Final Rule
+
+If Copilot is unsure, it must ask.  
+Otherwise, it may generate confidently.
