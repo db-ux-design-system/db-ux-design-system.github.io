@@ -8,10 +8,10 @@ const PrimaryActions = () => (
     {/* <Search /> */}
     <a
       className="db-button"
-      href={`${appConfig.basePath}resources/documentation/getting-started`}
+      href={`mailto:db-ux-designsystem@deutschebahn.com`}
       data-variant="brand"
     >
-      Start now
+      Contact Us
     </a>
   </DBControlPanelPrimaryActions>
 );
