@@ -1,7 +1,7 @@
 .cta {
-  background: var(--db-brand-origin-default);
-  color: var(--db-brand-on-origin-default);
-  border-radius: var(--db-border-radius-sm);
+  background: var(--db-brand-origin-default) !important;
+  color: var(--db-brand-on-origin-default) !important;
+  border-radius: var(--db-border-radius-sm) !important;
 }
 .cta__content {
   display: flex;
@@ -10,11 +10,25 @@
   padding: var(--db-spacing-fixed-xl) 0;
 }
 
-.cta__content[data-align="start"] { align-items: flex-start; text-align: left; }
-.cta__content[data-align="end"] { align-items: flex-end; text-align: right; }
+.cta__content[data-align='start'] {
+  align-items: flex-start;
+  text-align: left;
+}
+.cta__content[data-align='end'] {
+  align-items: flex-end;
+  text-align: right;
+}
 
-.cta__title { max-width: 480px; text-align: center; margin: 0 auto; }
-.cta__text { max-width: 60ch; text-align: center; margin: 0 auto; }
+.cta__title {
+  max-width: 480px;
+  text-align: center;
+  margin: 0 auto;
+}
+.cta__text {
+  max-width: 60ch;
+  text-align: center;
+  margin: 0 auto;
+}
 
 .cta__actions {
   display: flex;
@@ -23,23 +37,25 @@
   gap: var(--db-spacing-fixed-sm);
 }
 
-.cta__action { text-decoration: none; }
+.cta__action {
+  text-decoration: none;
+}
 
 /* Inverted primary action button (white with brand text) */
-.cta :is(.db-button)[data-variant="brand"],
+.cta :is(.db-button)[data-variant='brand'],
 .cta :is(.db-button--brand) {
   background: var(--db-brand-on-origin-default);
   color: var(--db-brand-origin-default);
   border: var(--db-border-width-3xs) solid var(--db-brand-origin-default);
 }
-.cta :is(.db-button)[data-variant="outlined"],
+.cta :is(.db-button)[data-variant='outlined'],
 .cta :is(.db-button--outlined) {
   background: transparent;
   color: var(--db-brand-on-origin-default);
   border: var(--db-border-width-3xs) solid var(--db-brand-on-origin-default);
 }
 
-.cta :is(.db-button)[data-variant="brand"]:hover,
+.cta :is(.db-button)[data-variant='brand']:hover,
 .cta :is(.db-button--brand):hover {
   opacity: 0.88;
   background: var(--db-brand-on-origin-default);
@@ -47,9 +63,9 @@
   border: var(--db-border-width-3xs) solid var(--db-brand-origin-default);
 }
 
-.cta :is(.db-button)[data-variant="outlined"]:hover,
+.cta :is(.db-button)[data-variant='outlined']:hover,
 .cta :is(.db-button--outlined):hover {
-  background: rgba(255,255,255,0.24);
+  background: rgba(255, 255, 255, 0.24);
   color: var(--db-brand-on-origin-default);
   border: var(--db-border-width-3xs) solid var(--db-brand-on-origin-default);
 }
