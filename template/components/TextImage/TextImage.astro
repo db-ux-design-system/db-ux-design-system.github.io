@@ -30,8 +30,8 @@ interface Props {
 const {
   title,
   imageSrc,
-  imageAlt,
   imageSrcDark,
+  imageAlt,
   imagePosition = 'right',
   contentAlign = 'center',
   imageWidth = '66',
@@ -41,8 +41,6 @@ const {
   headlineLevel = 4,
   tag,
 } = Astro.props as Props;
-
-// Headline stets h6 – Typografie kommt aus globalen Styles
 ---
 
 <div
@@ -84,48 +82,20 @@ const {
   </div>
   <div class="text-image__image">
     <img
+      class="lightmode-image"
       src={imageSrc}
       alt={imageAlt}
       loading="lazy"
       data-mask={mask}
       data-rounded={rounded ? 'true' : undefined}
-      data-image-src={imageSrc}
-      data-image-src-dark={imageSrcDark}
+    />
+    <img
+      class="darkmode-image"
+      src={imageSrcDark ?? imageSrc}
+      alt={imageAlt}
+      loading="lazy"
+      data-mask={mask}
+      data-rounded={rounded ? 'true' : undefined}
     />
   </div>
 </div>
-<script>
-  // sync image with the current color mode.
-  if (typeof window !== 'undefined') {
-    const shell = document.querySelector('.db-shell');
-    const images = document.querySelectorAll<HTMLImageElement>(
-      '.text-image__image img[data-image-src]',
-    );
-
-    if (shell && images.length > 0) {
-      const applyMode = (mode: string | null) => {
-        images.forEach((img) => {
-          const light = img.dataset.imageSrc;
-          const dark = img.dataset.imageSrcDark;
-          if (mode === 'dark' && dark) {
-            img.src = dark;
-          } else if (light) {
-            img.src = light;
-          }
-        });
-      };
-
-      applyMode(shell.getAttribute('data-mode'));
-
-      const observer = new MutationObserver((mutations) => {
-        for (const m of mutations) {
-          if (m.type === 'attributes' && m.attributeName === 'data-mode') {
-            applyMode(shell.getAttribute('data-mode'));
-          }
-        }
-      });
-
-      observer.observe(shell, { attributes: true, attributeFilter: ['data-mode'] });
-    }
-  }
-</script>
