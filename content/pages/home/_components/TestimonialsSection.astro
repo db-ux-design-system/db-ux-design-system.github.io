@@ -1,7 +1,7 @@
 ---
 import { appConfig } from '@config';
-import { DBCard, DBSection } from '@db-ux/react-core-components';
-import { Carousel, TextImage } from '@components';
+import { DBSection, DBCard } from '@db-ux/react-core-components';
+import { TextImage, Carousel } from '@components';
 ---
 
 <DBSection
@@ -10,7 +10,7 @@ import { Carousel, TextImage } from '@components';
   aria-label="Unified model section"
   id="home--testimonials-section"
 >
-  <Carousel ariaLabel="Testimonials horizontal scroll">
+  <Carousel>
     <DBCard spacing="medium">
       <TextImage
         title="“Since adopting the system, our teams spend less time aligning on UI details and more time solving real product problems.”"
@@ -20,7 +20,7 @@ import { Carousel, TextImage } from '@components';
         rounded={true}
         imageSrc={`${appConfig.basePath}assets/people/Finn-Hoffmeister--C.jpg`}
         imageAlt="Finn Hoffmeister"
-        textGap="3xl"
+        textGap="2xl"
       >
         Finn Hoffmeister <br />
         Product Owner @ DB Systel
@@ -34,8 +34,8 @@ import { Carousel, TextImage } from '@components';
         imageWidth="33"
         rounded={true}
         imageSrc={`${appConfig.basePath}assets/people/Patrick-Weber--C.jpg`}
-        imageAlt="Patrick Weber"
-        textGap="3xl"
+        imageAlt="Tobias Oberpaul"
+        textGap="2xl"
       >
         Patrick Weber <br />
         Design Lead @ DB Fernverkehr
@@ -50,7 +50,7 @@ import { Carousel, TextImage } from '@components';
         rounded={true}
         imageSrc={`${appConfig.basePath}assets/people/Danny-Koppenhagen--C.jpg`}
         imageAlt="Danny Koppenhagen"
-        textGap="3xl"
+        textGap="2xl"
       >
         Danny Koppenhagen <br />
         Frontend Architect @ DB Systel

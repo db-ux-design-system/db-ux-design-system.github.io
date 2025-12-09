@@ -1,38 +1,42 @@
 /* Local styles for Carousel (horizontal scroll wrapper) */
 .carousel {
-  width: 100%;
-  display: flex;
-  gap: var(--db-spacing-fixed-lg);
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge legacy */
-  padding: 0 var(--db-spacing-fixed-xl);
+    width: 100%;
+    display: flex;
+    gap: var(--db-spacing-fixed-lg);
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge legacy */
+    padding: 0 var(--db-spacing-fixed-xl);
 }
 .carousel > * {
-  flex: 0 0 auto;
-  scroll-snap-align: center;
+    flex: 0 0 auto;
+    scroll-snap-align: center;
 }
 .carousel > .db-card {
-  width: 80%;
+    width: 80%;
 }
+
 .carousel .text-image__image img {
-  height: 100%;
-  object-fit: cover;
+    height: 100%;
+    object-fit: cover;
 }
+
 /* WebKit */
 .carousel::-webkit-scrollbar {
-  width: 0;
-  height: 0;
+    width: 0;
+    height: 0;
 }
+
+
 .fadeout-horizontal {
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black var(--db-spacing-fixed-xl),
-    black calc(100% - var(--db-spacing-fixed-xl)),
-    transparent
-  );
+    mask-image: linear-gradient(
+            to right,
+            transparent,
+            black var(--db-spacing-fixed-xl),
+            black calc(100% - var(--db-spacing-fixed-xl)),
+            transparent
+    );
 }
