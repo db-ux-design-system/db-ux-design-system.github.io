@@ -45,7 +45,7 @@ const initialItem = (initialId && items.find((i) => i.id === initialId)) ?? item
             />
           </DBStack>
         </div>
-        <DBCard spacing="none" style={{ overflow: 'hidden' }}>
+        <DBCard spacing="none" style={{ overflow: 'hidden' }} data-image-card>
           <img
             data-image-toggle-target
             src={initialItem.src}
@@ -71,6 +71,34 @@ const initialItem = (initialId && items.find((i) => i.id === initialId)) ?? item
     const toggleLight: HTMLButtonElement | null = root.querySelector('[data-image-toggle-light]');
     const toggleDark: HTMLButtonElement | null = root.querySelector('[data-image-toggle-dark]');
 
+    let cardEl: HTMLElement | null = root.querySelector('[data-image-card]');
+    if (!cardEl) cardEl = root as HTMLElement; // fallback to root if card not found
+
+    const getLocalMode = (): 'dark' | 'light' => {
+      const attr = cardEl?.getAttribute('data-local-mode');
+      if (attr === 'dark' || attr === 'light') return attr as 'dark' | 'light';
+      // Fallback to OS preference if not set locally
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
+    };
+
+    const setLocalMode = (mode: 'dark' | 'light') => {
+      cardEl?.setAttribute('data-local-mode', mode);
+    };
+
+    const applyModeToImage = () => {
+      if (!img) return;
+      const mode = getLocalMode();
+      const s = img.getAttribute('src') || '';
+      const next = s.replace(
+        /--(Light|Dark)mode--/,
+        mode === 'dark' ? '--Darkmode--' : '--Lightmode--',
+      );
+      if (next !== s) img.setAttribute('src', next);
+      updateToggleVisibility();
+    };
+
     const setActiveButton = (activeId: string) => {
       buttons.forEach((btn) => {
         if (btn.getAttribute('data-image-id') === activeId) {
@@ -86,16 +114,15 @@ const initialItem = (initialId && items.find((i) => i.id === initialId)) ?? item
         const srcTemplate = button.getAttribute('data-image-src');
         const alt = button.getAttribute('data-image-alt') ?? '';
         if (img && srcTemplate) {
-          const current = img.getAttribute('src') || '';
-          const isDark = current.includes('--Darkmode--');
-          // Normalize template to current mode by replacing any Light/Dark marker
+          const mode = getLocalMode();
+          // Normalize template to current shell mode by replacing any Light/Dark marker
           const next = srcTemplate.replace(
             /--(Light|Dark)mode--/,
-            isDark ? '--Darkmode--' : '--Lightmode--',
+            mode === 'dark' ? '--Darkmode--' : '--Lightmode--',
           );
           img.setAttribute('src', next);
           img.setAttribute('alt', alt);
-          // update toggle visibility to reflect current mode after brand change
+          // update toggle visibility to reflect current local mode after brand change
           updateToggleVisibility();
           // Scroll image into viewport after change
           try {
@@ -109,9 +136,8 @@ const initialItem = (initialId && items.find((i) => i.id === initialId)) ?? item
 
     // Helper: show/hide correct toggle button based on current img src
     const updateToggleVisibility = () => {
-      if (!img) return;
-      const s = img.getAttribute('src') || '';
-      const isLight = s.includes('--Lightmode--');
+      const mode = getLocalMode();
+      const isLight = mode === 'light';
       if (toggleLight) toggleLight.style.display = isLight ? '' : 'none';
       if (toggleDark) toggleDark.style.display = isLight ? 'none' : '';
     };
@@ -119,30 +145,23 @@ const initialItem = (initialId && items.find((i) => i.id === initialId)) ?? item
     // Toggle to dark
     toggleLight?.addEventListener('click', () => {
       if (!img) return;
-      const s = img.getAttribute('src') || '';
-      const next = s.includes('--Lightmode--') ? s.replace('--Lightmode--', '--Darkmode--') : s;
-      if (next !== s) {
-        img.setAttribute('src', next);
-        updateToggleVisibility();
-        // Scroll image into viewport after toggle
-        try {
-          img.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } catch (e) {}
-      }
+      setLocalMode('dark');
+      applyModeToImage();
+      // Scroll image into viewport after toggle
+      try {
+        img.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (e) {}
     });
     // Toggle to light
     toggleDark?.addEventListener('click', () => {
       if (!img) return;
-      const s = img.getAttribute('src') || '';
-      const next = s.includes('--Darkmode--') ? s.replace('--Darkmode--', '--Lightmode--') : s;
-      if (next !== s) {
-        img.setAttribute('src', next);
-        updateToggleVisibility();
-      }
+      setLocalMode('light');
+      applyModeToImage();
+      updateToggleVisibility();
     });
 
     // Initial visibility state
-    updateToggleVisibility();
+    applyModeToImage();
     // Do not override SSR-marked active button; derive from current image src if needed
     const currentSrc = img?.getAttribute('src') || '';
     const preMarked = Array.from(buttons).find((b) => b.hasAttribute('data-active'));
@@ -159,6 +178,8 @@ const initialItem = (initialId && items.find((i) => i.id === initialId)) ?? item
       const id = match?.getAttribute('data-image-id');
       if (id) setActiveButton(id);
     }
+
+    // Local mode is independent; no observation of global shell mode.
   };
 
   const scanRoots = () => {
