@@ -1,0 +1,42 @@
+/* SectionTitle Styles */
+.section-title {
+  display: flex;
+  flex-direction: column;
+  gap: var(--db-spacing-fixed-lg);
+  align-items: flex-start;
+  margin-bottom: var(--db-spacing-responsive-sm);
+}
+
+/* Split: Headline 33%, Description 66% */
+.section-title[data-layout="split"] {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* 33/66 */
+  align-items: center;
+  gap: var(--db-spacing-fixed-lg);
+}
+.section-title[data-layout="split"] .section-title__col--headline { align-self: start; }
+.section-title[data-layout="split"] .section-title__col--description { align-self: center; }
+
+.section-title__headline {
+  margin: 0;
+  line-height: 1.2;
+}
+
+.section-title__description {
+  margin: 0;
+  max-width: 65ch;
+  opacity: 0.75;
+  font: var(--db-type-body-md);
+}
+
+/* Alignment variants */
+
+/* Mobile: Stack */
+@media (max-width: 767px) {
+  .section-title[data-layout="split"] {
+    display: flex;
+    flex-direction: column;
+    gap: var(--db-spacing-fixed-md);
+  }
+  .section-title[data-layout="split"] .section-title__col--description { align-self: start; }
+}

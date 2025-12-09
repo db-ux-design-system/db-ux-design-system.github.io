@@ -1,0 +1,88 @@
+---
+import { appConfig } from '@config';
+import { DBSection, DBStack } from '@db-ux/react-core-components';
+import { Avatar } from '@components';
+import './AvatarSection.css';
+---
+
+<DBSection width="small" spacing="medium" id="about-us--avatar-section">
+  <DBStack direction="column" gap="3x-large" alignment="center">
+    <DBStack direction="row" alignment="stretch" gap="medium">
+      <Avatar
+        src={`${appConfig.basePath}assets/people/Tobias-Oberpaul--Avatar-1--C.glb`}
+        hoverSrc={`${appConfig.basePath}assets/people/Tobias-Oberpaul--Avatar-2--C.glb`}
+        alt="Tobias Oberpaul"
+        name="Tobias Oberpaul"
+        position="Lead @ DB UX"
+      />
+      <Avatar
+        src={`${appConfig.basePath}assets/people/Lea-Perchermeier--Avatar-1--C.glb`}
+        hoverSrc={`${appConfig.basePath}assets/people/Lea-Perchermeier--Avatar-2--C.glb`}
+        alt="Lea Perchermeier"
+        name="Lea Perchermeier"
+        position={`Design Lead @ DB UX \n Design System`}
+      />
+      <Avatar
+        src={`${appConfig.basePath}assets/people/Maximilian-Franzke--Avatar-1--C.glb`}
+        hoverSrc={`${appConfig.basePath}assets/people/Maximilian-Franzke--Avatar-2--C.glb`}
+        alt="Maximilian Franzke"
+        name="Maximilian Franzke"
+        position={`Engineering Lead @ DB UX \n Design System`}
+      />
+      <Avatar
+        src={`${appConfig.basePath}assets/people/Luis-Schroff--Avatar-1--C.glb`}
+        hoverSrc={`${appConfig.basePath}assets/people/Luis-Schroff--Avatar-2--C.glb`}
+        alt="Luis Schroff"
+        name="Luis Schroff"
+        position={`Product Owner @ DB UX \n Design System`}
+      />
+    </DBStack>
+    <div>
+      <p class="about-us-avatar-paragraph about-us-avatar-paragraph-spaced">
+        DB is home to many exceptional product teams. Our role is to create the conditions in which
+        their work can thrive, scale, and continuously improve.
+      </p>
+      <p class="about-us-avatar-paragraph about-us-avatar-paragraph-spaced">
+        The DB UX Design System Team works on the core content and framework of the design system,
+        advancing it both strategically and operationally. Our aim remains the same: to make the
+        system accessible to all DB employees and meaningfully support their daily work.
+      </p>
+      <p class="about-us-avatar-paragraph">
+        We empower designers and engineers across DB to actively shape the system. With guidance,
+        shared standards, and clear contribution paths, the system grows through the expertise of
+        those who use it every day. This collective approach strengthens coherence, accelerates
+        delivery, and establishes the Design System as a shared asset for the entire organization.
+      </p>
+    </div>
+    <DBStack direction="column" alignment="center">
+      <DBStack direction="row" alignment="center" justifyContent="center" gap="large">
+        <img
+          class="img--tint-dark-blue"
+          src={`${appConfig.basePath}assets/signatures/Tobias-Oberpaul--Signature--C.png`}
+          alt="Signature Tobias Oberpaul"
+          width="200px"
+        />
+        <img
+          class="img--tint-dark-blue"
+          src={`${appConfig.basePath}assets/signatures/Lea-Perchermeier--Signature--C.png`}
+          alt="Signature Lea Perchermeier"
+          width="150px"
+        />
+      </DBStack>
+      <DBStack direction="row" alignment="center" justifyContent="center" gap="large">
+        <img
+          class="img--tint-dark-blue"
+          src={`${appConfig.basePath}assets/signatures/Maximilian-Franzke--Signature--C.png`}
+          alt="Signature Maximilian Franzke"
+          width="250px"
+        />
+        <img
+          class="img--tint-dark-blue"
+          src={`${appConfig.basePath}assets/signatures/Luis-Schroff--Signature--C.png`}
+          alt="Signature Luis Schroff"
+          width="150px"
+        />
+      </DBStack>
+    </DBStack>
+  </DBStack>
+</DBSection>

@@ -1,0 +1,17 @@
+---
+import { appConfig } from '@config';
+import { DBSection } from '@db-ux/react-core-components';
+import { TextImage } from '@components';
+---
+
+<DBSection width="medium" spacing="medium" id="components--maintenance-section">
+  <TextImage
+    title="Ongoing Maintenance"
+    imageSrc={`${appConfig.basePath}assets/components/Ongoing-Maintenance--Lightmode--C.png`}
+    imageSrcDark={`${appConfig.basePath}assets/components/Ongoing-Maintenance--Darkmode--C.png`}
+    imageAlt="Roadmap and update indicators representing continuous maintenance"
+    mask="fade-bottom-right"
+  >
+    Regular updates improve stability and support long-term use.
+  </TextImage>
+</DBSection>

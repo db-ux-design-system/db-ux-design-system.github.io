@@ -1,8 +1,8 @@
-import { DBButton, DBIcon } from "@db-ux/react-core-components";
-import { appConfig } from "@root/app.config";
-import { getCurrentPathname } from "@root/template/utils/app.utils";
-import { getNavigationItemParent } from "@root/template/utils/navigation.utils";
-import type { ReactElement } from "react";
+import { DBButton, DBIcon } from '@db-ux/react-core-components';
+import { appConfig } from '@root/app.config';
+import { getCurrentPathname } from '@root/template/utils/app.utils';
+import { getNavigationItemParent } from '@root/template/utils/navigation.utils';
+import type { ReactElement } from 'react';
 
 export function FooterNav(): ReactElement | null {
   const currentPathname = getCurrentPathname();
@@ -10,7 +10,7 @@ export function FooterNav(): ReactElement | null {
   const siblings = parent?.children;
   const getCurrentIndex = (): number => {
     return parent?.children?.findIndex((item) => {
-      const fullPath = `${appConfig.basePath}${item.path}`.replace(/\/+$/, "");
+      const fullPath = `${appConfig.basePath}${item.path}`.replace(/\/+$/, '');
       return fullPath === currentPathname;
     })!;
   };
@@ -23,9 +23,7 @@ export function FooterNav(): ReactElement | null {
   const previousNavItem = getPreviousNavItem();
 
   const getNextNavItem = (): NavigationItem | undefined => {
-    return currentIndex < siblings?.length - 1
-      ? siblings[currentIndex + 1]
-      : undefined;
+    return currentIndex < siblings?.length - 1 ? siblings[currentIndex + 1] : undefined;
   };
   const nextNavItem = getNextNavItem();
 

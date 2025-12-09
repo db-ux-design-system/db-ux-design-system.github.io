@@ -1,0 +1,91 @@
+---
+import { appConfig } from '@config';
+import { DBCard, DBSection, DBStack } from '@db-ux/react-core-components';
+import { DisabledWrapper, TextImage } from '@components';
+---
+
+<DBSection
+  width="medium"
+  spacing="medium"
+  aria-label="Unified model section"
+  id="extensions--extensions-section"
+>
+  <DBStack gap="large">
+    <DBStack gap="large" direction="row">
+      <a
+        href={`https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/Reisendeninformation/UX-Standards`}
+        aria-label="Open Foundations page"
+      >
+        <DBCard behavior="interactive" spacing="large">
+          <TextImage
+            title="RI Extension"
+            imagePosition="bottom"
+            imageSrc={`${appConfig.basePath}assets/extensions/RI--Lightmode--C.png`}
+            imageSrcDark={`${appConfig.basePath}assets/extensions/RI--Darkmode--C.png`}
+            imageAlt="RI Extension Visual"
+            mask="fade-bottom-right"
+          >
+            Deliver reliable traveler information.
+          </TextImage>
+        </DBCard>
+      </a>
+      <a
+        href={`https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/db-ux-design-system/extensions/dataviz`}
+        aria-label="Open Components page"
+      >
+        <DBCard behavior="interactive" spacing="large">
+          <TextImage
+            title="DataViz Extension"
+            imagePosition="bottom"
+            imageSrc={`${appConfig.basePath}assets/extensions/DataViz--Lightmode--C.png`}
+            imageSrcDark={`${appConfig.basePath}assets/extensions/DataViz--Darkmode--C.png`}
+            imageAlt="Foundations Extension Visual"
+            mask="fade-bottom-right"
+          >
+            Enable clear visualization of complex data.
+          </TextImage>
+        </DBCard>
+      </a>
+    </DBStack>
+    <DBStack gap="large" direction="row">
+      <DisabledWrapper label="Coming Soon" size="medium">
+        <a
+          href={`${appConfig.basePath}products-and-services/foundations`}
+          aria-label="Open Foundations page"
+        >
+          <DBCard behavior="interactive" spacing="large">
+            <TextImage
+              title="Table Extension"
+              imagePosition="bottom"
+              imageSrc={`${appConfig.basePath}assets/extensions/Table--Lightmode--C.png`}
+              imageSrcDark={`${appConfig.basePath}assets/extensions/Table--Darkmode--C.png`}
+              imageAlt="Table Extension Visual"
+              mask="fade-bottom-right"
+            >
+              Display large datasets in a consistent format.
+            </TextImage>
+          </DBCard>
+        </a>
+      </DisabledWrapper>
+      <DisabledWrapper label="Coming Soon" size="medium">
+        <a
+          href={`${appConfig.basePath}products-and-services/components`}
+          aria-label="Open Components page"
+        >
+          <DBCard behavior="interactive" spacing="large">
+            <TextImage
+              title="Content Extension"
+              imagePosition="bottom"
+              imageSrc={`${appConfig.basePath}assets/extensions/Content--Lightmode--C.png`}
+              imageSrcDark={`${appConfig.basePath}assets/extensions/Content--Darkmode--C.png`}
+              imageAlt="Content Extension Visual"
+              mask="fade-bottom-right"
+            >
+              Support consistent communication across channels.
+            </TextImage>
+          </DBCard>
+        </a>
+      </DisabledWrapper>
+    </DBStack>
+  </DBStack>
+</DBSection>

@@ -1,0 +1,43 @@
+---
+import './CTA.css';
+import { DBButton, DBCard } from '@db-ux/react-core-components';
+
+interface Action {
+  label: string;
+  href: string;
+  variant?: 'brand' | 'outlined' | 'filled' | 'danger';
+}
+
+interface Props {
+  title?: string;
+  text?: string;
+  primaryAction: Action;
+  secondaryAction?: Action;
+  align?: 'center' | 'start' | 'end';
+}
+
+const { title, text, primaryAction, secondaryAction, align = 'center' } = Astro.props as Props;
+---
+
+{
+  primaryAction && (
+    <DBCard spacing="large" elevationLevel="2" className="cta">
+      <div class="cta__content" data-align={align}>
+        {title && <h3 class="cta__title">{title}</h3>}
+        {text && <p class="cta__text">{text}</p>}
+        <div class="cta__actions">
+          <a href={primaryAction.href} class="cta__action" aria-label={primaryAction.label}>
+            <DBButton variant={primaryAction.variant || 'brand'}>{primaryAction.label}</DBButton>
+          </a>
+          {secondaryAction && (
+            <a href={secondaryAction.href} class="cta__action" aria-label={secondaryAction.label}>
+              <DBButton variant={secondaryAction.variant || 'outlined'}>
+                {secondaryAction.label}
+              </DBButton>
+            </a>
+          )}
+        </div>
+      </div>
+    </DBCard>
+  )
+}

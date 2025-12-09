@@ -15,6 +15,22 @@ declare interface FrontMatter {
    */
   description?: string;
   /**
+   * Main headline for hero section.
+   */
+  headline?: string;
+  /**
+   * Optional semantic heading level (1-6) for hero headline.
+   */
+  headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
+  /**
+   * Optional hero image URL.
+   */
+  heroImage?: string;
+  /**
+   * Alt text for the hero image.
+   */
+  heroImageAlt?: string;
+  /**
    * The creation date of the page.
    */
   date?: Date;
@@ -82,6 +98,11 @@ declare interface NavigationItem {
    * The order of the navigation item. Lower numbers will appear first.
    */
   order?: number;
+
+  /**
+   * If true, the navigation item will be rendered as disabled.
+   */
+  disabled?: boolean;
 }
 
 /**
@@ -112,4 +133,10 @@ declare interface AppConfig {
    * The language of the application.
    */
   language: string;
+}
+
+// Allow importing .astro files in TypeScript contexts (e.g., barrel index.ts)
+declare module '*.astro' {
+  const Component: any;
+  export default Component;
 }

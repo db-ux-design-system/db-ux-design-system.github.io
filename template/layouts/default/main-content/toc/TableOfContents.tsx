@@ -1,6 +1,6 @@
-import { getCurrentPathname } from "@root/template/utils/app.utils";
-import type { AstroGlobal, MarkdownHeading } from "astro";
-import { useEffect, useRef, useState, type ReactElement } from "react";
+import { getCurrentPathname } from '@root/template/utils/app.utils';
+import type { AstroGlobal, MarkdownHeading } from 'astro';
+import { useEffect, useRef, useState, type ReactElement } from 'react';
 
 interface Props {
   astro: AstroGlobal;
@@ -12,9 +12,9 @@ export function TableOfContents(props: Props): ReactElement | null {
   const slugs = headings.map((h) => h.slug);
   const currentPath = getCurrentPathname(props.astro);
   const toc = useRef<HTMLUListElement>(null);
-  const [currentID, setCurrentID] = useState("");
+  const [currentID, setCurrentID] = useState('');
   const activeIDs = useRef(new Set<string>());
-  const onThisPageID = "on-this-page-heading";
+  const onThisPageID = 'on-this-page-heading';
 
   useEffect(() => {
     if (!toc.current) return;
@@ -23,9 +23,7 @@ export function TableOfContents(props: Props): ReactElement | null {
       for (const entry of entries) {
         const { id } = entry.target;
         if (id === onThisPageID) continue;
-        entry.isIntersecting
-          ? activeIDs.current.add(id)
-          : activeIDs.current.delete(id);
+        entry.isIntersecting ? activeIDs.current.add(id) : activeIDs.current.delete(id);
         highlightFirstActive(id);
       }
     };
@@ -34,19 +32,14 @@ export function TableOfContents(props: Props): ReactElement | null {
       // Negative top margin accounts for `scroll-margin`.
       // Negative bottom margin means heading needs to be towards top of viewport to trigger intersection.
       root: null,
-      rootMargin: "-96px 0px 0px 0px",
+      rootMargin: '-96px 0px 0px 0px',
       threshold: 1,
     };
 
-    const headingsObserver = new IntersectionObserver(
-      setCurrent,
-      observerOptions,
-    );
+    const headingsObserver = new IntersectionObserver(setCurrent, observerOptions);
 
     // Observe all the headings in the main page content.
-    const allHeadings = document.querySelectorAll(
-      "h2[id], h3[id], h4[id], h5[id], h6[id]",
-    );
+    const allHeadings = document.querySelectorAll('h2[id], h3[id], h4[id], h5[id], h6[id]');
     allHeadings.forEach((h) => headingsObserver.observe(h));
 
     // Stop observing when the component is unmounted.
@@ -64,9 +57,9 @@ export function TableOfContents(props: Props): ReactElement | null {
 
   const handleLinkClick = (e: any) => {
     e.preventDefault();
-    const id = e.target.getAttribute("href").split("#")[1];
+    const id = e.target.getAttribute('href').split('#')[1];
     const hashId = `#${id}`;
-    history?.pushState(null, "", `${currentPath}${hashId}`);
+    history?.pushState(null, '', `${currentPath}${hashId}`);
     document.querySelector(hashId)?.scrollIntoView();
     setTimeout(() => setCurrentID(id), 100);
   };

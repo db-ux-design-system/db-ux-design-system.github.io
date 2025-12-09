@@ -1,0 +1,138 @@
+/* PageHero Component Styles */
+
+.page-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Default center */
+  text-align: center;
+}
+
+/* Split Layout */
+.page-hero[data-layout="split"] {
+  display: grid;
+  /* 66/33 Verteilung bei imageSide=right (Content breiter) */
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+  gap: var(--db-spacing-fixed-2xl);
+  text-align: left; /* Content left aligned by default in split */
+}
+.page-hero[data-layout="split"] .page-hero__content {
+  align-items: flex-start;
+  max-width: 100%;
+}
+.page-hero[data-layout="split"][data-image-side="left"] {
+  direction: ltr;
+}
+.page-hero[data-layout="split"][data-image-side="right"] {
+  direction: ltr;
+}
+.page-hero[data-layout="split"][data-image-side="left"] {
+  grid-template-columns: 1fr 2fr; /* Bild schmal (33%), Content breit (66%) */
+}
+
+.page-hero__content {
+  display: flex;
+  gap: var(--db-spacing-fixed-lg);
+  flex-direction: column;
+  align-items: center;
+  max-width: 720px;
+  width: 100%;
+}
+
+.page-hero__title {
+  margin: 0;
+}
+
+.page-hero__headline {
+  margin: 0;
+}
+
+.page-hero__description {
+  margin: 0;
+  max-width: 480px;
+  opacity: 0.75;
+  font: var(--db-type-body-md);
+}
+
+.page-hero__underline {
+  display: block;
+  width: 4rem; /* kann aus Token ersetzt werden falls vorhanden */
+  height: .5rem;
+  border-radius: var(--db-border-radius-xs);
+  background: var(--db-brand-origin-default);
+}
+
+.page-hero__media {
+  margin-top: var(--db-spacing-fixed-2xl);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.page-hero[data-layout="split"] .page-hero__media {
+  margin-top: 0;
+  justify-content: center; /* default if no side specified */
+}
+/* Desktop: Bild rechts ausrichten wenn imageSide=right */
+.page-hero[data-layout="split"][data-image-side="right"] .page-hero__media { justify-content: flex-end; }
+/* Desktop: Bild links ausrichten wenn imageSide=left */
+.page-hero[data-layout="split"][data-image-side="left"] .page-hero__media { justify-content: flex-start; }
+.page-hero__media img {
+  display: block;
+  max-height: 320px;
+  width: auto;
+  height: auto;
+}
+
+/* Zentrierter Variant (z.B. Landing Pages) */
+/* Alignment Variants */
+.page-hero[data-align="start"] {
+  text-align: left;
+  align-items: flex-start;
+}
+.page-hero[data-align="start"] .page-hero__content { align-items: flex-start; }
+.page-hero[data-align="start"] .page-hero__media { justify-content: flex-start; }
+
+.page-hero[data-align="end"] {
+  text-align: right;
+  align-items: flex-end;
+}
+.page-hero[data-align="end"] .page-hero__content { align-items: flex-end; }
+.page-hero[data-align="end"] .page-hero__media { justify-content: flex-end; }
+
+/* Mobile Anpassungen */
+@media (max-width: 767px) {
+  .page-hero {
+    gap: var(--db-spacing-fixed-md);
+    margin-block-end: var(--db-spacing-fixed-xl);
+  }
+  .page-hero[data-layout="split"] {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .page-hero[data-layout="split"] .page-hero__content {
+    align-items: center;
+  }
+  .page-hero[data-layout="split"] .page-hero__media {
+    margin-top: var(--db-spacing-fixed-lg);
+    justify-content: center; /* Mobile immer zentriert */
+  }
+  /* Mobile: Immer Medienbereich zentrieren, auch bei stack + align=start/end */
+  .page-hero .page-hero__media { justify-content: center !important; }
+  .page-hero[data-align="start"] .page-hero__media,
+  .page-hero[data-align="end"] .page-hero__media { justify-content: center !important; }
+
+  .page-hero__headline {
+    line-height: 1.2;
+  }
+
+  .page-hero__underline {
+    margin-top: var(--db-spacing-fixed-md);
+    width: 3.5rem;
+    height: .5rem;
+  }
+
+  .page-hero__media {
+    margin-top: var(--db-spacing-fixed-lg);
+  }
+}

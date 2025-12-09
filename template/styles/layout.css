@@ -25,7 +25,8 @@
 }
 
 .dba-main-content {
-    padding: var(--db-spacing-fixed-3xl);
+    padding: 0;
+    max-width: 100vw;
 }
 
 .dba-main-footer-nav {
@@ -53,7 +54,6 @@
   background-color: var(--db-brand-origin-default);
   height: 0.5rem;
   width: 4rem;
-  margin-bottom: 2rem;
 }
 
 .dba-footer {
@@ -70,7 +70,7 @@
 
   p {
     margin: 0;
-    margin-block: auto;
+    /* Entfernt margin-block:auto – verhinderte erwartete vertikale Spacing außerhalb des Footer-Kontexts */
     white-space: pre;
   }
 

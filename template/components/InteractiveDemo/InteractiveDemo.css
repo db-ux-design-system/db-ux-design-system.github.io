@@ -1,0 +1,26 @@
+/* Styles specific to InteractiveDemo component */
+
+/* Active state button styling: highlights the currently selected brand/theme */
+[data-image-toggle-root] [data-image-toggle-button][data-active] {
+  background: var(--db-adaptive-origin-default);
+  color: var(--db-adaptive-on-origin-default);
+}
+
+[data-image-toggle-root] [data-image-toggle-button][data-active]:hover {
+    opacity: 0.88;
+  background: var(--db-adaptive-origin-default);
+  color: var(--db-adaptive-on-origin-default);
+}
+
+/* Optional: focus ring for accessibility (commented out)
+[data-image-toggle-root] [data-image-toggle-button][data-active]:focus-visible {
+  outline: var(--db-border-width-2xs) solid var(--db-brand-origin-default);
+  outline-offset: var(--db-border-width-3xs);
+}
+*/
+/* Responsive Stack */
+@media (max-width: 767px) {
+.db-stack {
+  overflow: auto;
+}
+}

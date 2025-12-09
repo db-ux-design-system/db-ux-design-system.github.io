@@ -1,0 +1,22 @@
+---
+import { appConfig } from '@config';
+import { DBSection } from '@db-ux/react-core-components';
+import { TextImage } from '@components';
+---
+
+<DBSection
+  width="medium"
+  spacing="medium"
+  aria-label="Components section"
+  id="components--tested-and-verified-section"
+>
+  <TextImage
+    title="Tested & Verified"
+    imageSrc={`${appConfig.basePath}assets/components/Tested--Lightmode--C.png`}
+    imageSrcDark={`${appConfig.basePath}assets/components/Tested--Darkmode--C.png`}
+    imageAlt="Accessibility and test status badges for a UI component"
+    mask="fade-bottom-right"
+  >
+    Components meet accessibility and reliability requirements.
+  </TextImage>
+</DBSection>

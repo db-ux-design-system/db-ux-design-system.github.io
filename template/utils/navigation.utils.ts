@@ -1,5 +1,5 @@
-import { appConfig } from "@root/app.config";
-import { appNavigation } from "@root/app.navigation";
+import { appConfig } from '@root/app.config';
+import { appNavigation } from '@root/app.navigation';
 
 /**
  * Normalizes a path by removing trailing slashes.
@@ -7,7 +7,7 @@ import { appNavigation } from "@root/app.navigation";
  * @param path - The path to normalize
  * @returns The normalized path without trailing slashes
  */
-const norm = (path: string) => path.replace(/\/+$/, "");
+const norm = (path: string) => path.replace(/\/+$/, '');
 
 /**
  * Prepends the base path to a relative path and normalizes the result.
@@ -16,8 +16,8 @@ const norm = (path: string) => path.replace(/\/+$/, "");
  * @returns The normalized absolute path including the base path
  */
 function withBase(relPath: string) {
-  const base = norm(appConfig.basePath || "/");
-  const rel = relPath.startsWith("/") ? relPath : `/${relPath}`;
+  const base = norm(appConfig.basePath || '/');
+  const rel = relPath.startsWith('/') ? relPath : `/${relPath}`;
   return norm(`${base}${rel}`);
 }
 
@@ -41,7 +41,7 @@ export function getFirstChildPath(children?: NavigationItem[]): string | undefin
 export function covers(item: NavigationItem, currentPath: string): boolean {
   if (item.path) {
     const full = withBase(item.path);
-    if (currentPath === full || currentPath.startsWith(full + "/")) return true;
+    if (currentPath === full || currentPath.startsWith(full + '/')) return true;
   }
   for (const child of item.children ?? []) {
     if (covers(child, currentPath)) return true;
@@ -71,20 +71,20 @@ export function findSubNavigation(currentPathname: string): NavigationItem[] | u
 }
 
 /**
-* Finds the parent navigation item for a given pathname.
-*
-* @param pathname - The pathname to find the parent for
-* @returns The parent navigation item if found, undefined otherwise
-*/
+ * Finds the parent navigation item for a given pathname.
+ *
+ * @param pathname - The pathname to find the parent for
+ * @returns The parent navigation item if found, undefined otherwise
+ */
 export function getNavigationItemParent(pathname: string): NavigationItem | undefined {
   const { basePath } = appConfig;
-  const norm = (p: string) => p.replace(/\/+$/, "");
+  const norm = (p: string) => p.replace(/\/+$/, '');
   const _pathname = norm(pathname);
 
   const withBase = (relPath?: string) => {
     if (!relPath) return undefined;
-    const base = norm(basePath || "/");
-    const rel = relPath.startsWith("/") ? relPath : `/${relPath}`;
+    const base = norm(basePath || '/');
+    const rel = relPath.startsWith('/') ? relPath : `/${relPath}`;
     return norm(`${base}${rel}`);
   };
 

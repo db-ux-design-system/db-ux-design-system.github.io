@@ -4,14 +4,18 @@
     "./content",
     "./template",
     "./app.config.ts",
-    "./app.navigation.ts"
+    "./app.navigation.ts",
+    "./components"
   ],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@root/*": ["./*"],
       "@content/*": ["content/*"],
-      "@template/*": ["template/*"]
+      "@template/*": ["template/*"],
+      "@components": ["template/components/index.ts"],
+      "@components/*": ["template/components/*"],
+      "@config": ["app.config.ts"]
     }
   }
 }

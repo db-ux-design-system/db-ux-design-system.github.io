@@ -1,0 +1,18 @@
+---
+import { appConfig } from '@config';
+import { DBSection } from '@db-ux/react-core-components';
+import { TextImage } from '@components';
+---
+
+<DBSection width="medium" spacing="medium" id="components--shared-source-section">
+  <TextImage
+    title="Shared Source"
+    imageSrc={`${appConfig.basePath}assets/components/Shared-Source--Lightmode--C.png`}
+    imageSrcDark={`${appConfig.basePath}assets/components/Shared-Source--Darkmode--C.png`}
+    imageAlt="Design and code views aligned side by side"
+    imagePosition="left"
+    mask="fade-bottom-right"
+  >
+    Design and code rely on the same underlying logic for aligned implementation.
+  </TextImage>
+</DBSection>

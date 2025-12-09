@@ -1,0 +1,22 @@
+---
+import { appConfig } from '@config';
+import { DBSection } from '@db-ux/react-core-components';
+import { TextImage } from '@components';
+---
+
+<DBSection
+  width="medium"
+  spacing="medium"
+  aria-label="For Developer section"
+  id="for-developer--efficient-workflows-section"
+>
+  <TextImage
+    title="Efficient Workflows"
+    imageSrc={`${appConfig.basePath}assets/for-developer/Efficient-Workflows--Lightmode--C.png`}
+    imageSrcDark={`${appConfig.basePath}assets/for-developer/Efficient-Workflows--Darkmode--C.png`}
+    imageAlt="Code editor and component library speeding up workflow"
+    mask="fade-right"
+  >
+    Re-use stable components to reduce repetitive implementation effort.
+  </TextImage>
+</DBSection>
