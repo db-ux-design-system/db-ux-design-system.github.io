@@ -2,58 +2,127 @@
 import { DBButton, DBStack, DBCard } from '@db-ux/react-core-components';
 import './InteractiveDemo.css';
 
-const items = Array.isArray(Astro.props.items) ? Astro.props.items : [];
-const initialId = Astro.props.initialId;
+type InteractiveDemoItem = {
+  id: string;
+  label: string;
+  icon?: string;
+  color?: string;
+  variant?: string;
+  lightSrc: string;
+  darkSrc: string;
+  alt?: string;
+};
+
+interface Props {
+  items: readonly InteractiveDemoItem[];
+  initialId?: string;
+}
+
+const props = Astro.props as Props;
+const items = Array.isArray(props.items) ? props.items : [];
+const initialId = props.initialId;
 const initialItem = (initialId && items.find((i) => i.id === initialId)) ?? items[0] ?? null;
+const initialMode = 'light';
 ---
 
 {
   items.length === 0 || !initialItem ? null : (
-    <div data-image-toggle-root>
-      <DBStack style={{ overflow: 'unset' }}>
-        <div style="padding: var(--db-spacing-fixed-2xs); background: var(--db-adaptive-bg-basic-level-1-default); border-radius: var(--db-border-radius-sm); border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default); position: sticky; top: var(--db-spacing-fixed-md); width: 100%; max-width: fit-content; margin: 0 auto;">
-          <DBStack direction="row" gap="2x-small">
-            <DBStack direction="row" gap="2x-small">
+    <div class="interactive-demo" data-image-toggle-root data-active-id={initialItem.id}>
+      {/* State carrier for the script (must NOT affect theming/layout) */}
+      <span
+        class="interactive-demo__state"
+        data-image-toggle-state
+        data-mode={initialMode}
+        hidden
+      />
+
+      <DBStack direction="column" gap="medium" class="interactive-demo__layout">
+        <div class="interactive-demo__controls">
+          <DBStack direction="row" gap="2x-small" justifyContent="center">
+            <DBStack direction="row" gap="2x-small" justifyContent="center">
               {items.map((item) => (
                 <DBButton
+                  type="button"
                   icon={item.icon}
                   variant={item.variant}
                   data-color={item.color}
                   data-image-toggle-button
                   data-image-id={item.id}
-                  data-image-src={item.src}
-                  data-image-alt={item.alt ?? item.label}
-                  {...(item.id === initialItem.id ? { 'data-active': '' } : {})}
+                  {...(item.id === initialItem.id ? { 'data-active': 'true' } : {})}
                 >
                   {item.label}
                 </DBButton>
               ))}
             </DBStack>
+
+            {/* Initial state: light is active -> show only "switch to dark" (moon) */}
             <DBButton
+              type="button"
               icon="moon"
               variant="ghost"
               noText={true}
-              data-image-toggle-light
+              data-image-toggle-to="dark"
               aria-label="Switch to dark mode"
+              style={{ display: 'inline-flex' }}
             />
             <DBButton
+              type="button"
               icon="sun"
               variant="ghost"
               noText={true}
-              data-image-toggle-dark
+              data-image-toggle-to="light"
               aria-label="Switch to light mode"
+              style={{ display: 'none' }}
             />
           </DBStack>
         </div>
-        <DBCard spacing="none" style={{ overflow: 'hidden' }} data-image-card>
-          <img
-            data-image-toggle-target
-            src={initialItem.src}
-            alt={initialItem.alt ?? initialItem.label}
-          />
-        </DBCard>
+
+        <div class="interactive-demo__cards">
+          {items.map((item) => (
+            <>
+              <div
+                class="interactive-demo__card"
+                data-image-card
+                data-image-id={item.id}
+                data-image-mode="light"
+                {...(item.id === initialItem.id ? { 'data-active': 'true' } : {})}
+              >
+                <DBCard spacing="none" class="interactive-demo__card-inner">
+                  <img
+                    class="interactive-demo__img"
+                    src={item.lightSrc}
+                    alt={item.alt ?? item.label}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </DBCard>
+              </div>
+
+              <div
+                class="interactive-demo__card"
+                data-image-card
+                data-image-id={item.id}
+                data-image-mode="dark"
+              >
+                <DBCard spacing="none" class="interactive-demo__card-inner">
+                  <img
+                    class="interactive-demo__img"
+                    src={item.darkSrc}
+                    alt={item.alt ?? item.label}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </DBCard>
+              </div>
+            </>
+          ))}
+        </div>
       </DBStack>
+
+      <script
+        is:inline
+        src={`${import.meta.env.BASE_URL}assets/interactive-demo/interactiveDemo.client.js`}
+      ></script>
     </div>
   )
 }
-<script src="./interactiveDemo.client.js"></script>

@@ -1,5 +1,4 @@
 import { DBControlPanelPrimaryActions } from '@db-ux/react-core-components';
-import { appConfig } from '@root/app.config.ts';
 import ColorModeSwitch from '@template/components/color-mode-switch/ColorModeSwitch.tsx';
 
 const PrimaryActions = () => (

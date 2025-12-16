@@ -1,4 +1,4 @@
-import { type PropsWithChildren, type ReactElement } from "react";
+import { type PropsWithChildren, type ReactElement, useMemo } from "react";
 import { ColorModeProvider } from "@template/context/color-mode-context.tsx";
 import { DBControlPanelDesktop, DBControlPanelMobile, DBShell } from "@db-ux/react-core-components";
 import PrimaryActions from "@template/layouts/default/shell/control-panel/primary-actions.tsx";
@@ -7,8 +7,14 @@ import SubNavigation from "@template/layouts/default/shell/control-panel/sub-nav
 import Brand from "@template/layouts/default/shell/control-panel/brand.tsx";
 import { findSubNavigation } from "@template/utils/navigation.utils.ts";
 
-export function Shell({ children }: PropsWithChildren): ReactElement {
-    const subNavigation = findSubNavigation(window.location.pathname);
+type Props = PropsWithChildren & {
+  pathname?: string;
+};
+
+export function Shell({ children, pathname = "/" }: Props): ReactElement {
+  const subNavigation = useMemo(() => {
+    return findSubNavigation(pathname);
+  }, [pathname]);
 
     /*
     * TODO: We need to get the subNavigation if we are inside a subNavigation Item as well

@@ -1,26 +1,37 @@
-/* Styles specific to InteractiveDemo component */
-
-/* Active state button styling: highlights the currently selected brand/theme */
-[data-image-toggle-root] [data-image-toggle-button][data-active] {
-  background: var(--db-adaptive-origin-default);
-  color: var(--db-adaptive-on-origin-default);
+.interactive-demo {
+  color-scheme: light;
 }
 
-[data-image-toggle-root] [data-image-toggle-button][data-active]:hover {
-    opacity: 0.88;
-  background: var(--db-adaptive-origin-default);
-  color: var(--db-adaptive-on-origin-default);
+.interactive-demo__layout {
+  overflow: unset;
 }
 
-/* Optional: focus ring for accessibility (commented out)
-[data-image-toggle-root] [data-image-toggle-button][data-active]:focus-visible {
-  outline: var(--db-border-width-2xs) solid var(--db-brand-origin-default);
-  outline-offset: var(--db-border-width-3xs);
+.interactive-demo__controls {
+  padding: var(--db-spacing-fixed-2xs);
+  background: var(--db-adaptive-bg-basic-level-1-default);
+  border-radius: var(--db-border-radius-sm);
+  border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+  position: sticky;
+  top: var(--db-spacing-fixed-md);
+  width: 100%;
+  max-width: fit-content;
+  margin: 0 auto;
 }
-*/
-/* Responsive Stack */
-@media (max-width: 767px) {
-.db-stack {
-  overflow: auto;
+
+.interactive-demo__card {
+  display: none;
 }
+
+.interactive-demo__card[data-active="true"] {
+  display: block;
+}
+
+.interactive-demo__card-inner {
+  overflow: hidden;
+}
+
+.interactive-demo__img {
+  display: block;
+  width: 100%;
+  height: auto;
 }

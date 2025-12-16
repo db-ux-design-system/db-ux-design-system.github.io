@@ -1,146 +1,137 @@
 (function () {
   const initializedRoots = new WeakSet();
 
-  const initRoot = (root) => {
+  function isMode(v) {
+    return v === "light" || v === "dark";
+  }
+
+  function initRoot(root) {
+    if (!(root instanceof HTMLElement)) return;
     if (initializedRoots.has(root)) return;
     initializedRoots.add(root);
 
-    const buttons = root.querySelectorAll('[data-image-toggle-button]');
-    const img = root.querySelector('[data-image-toggle-target]');
-    const toggleLight = root.querySelector('[data-image-toggle-light]');
-    const toggleDark = root.querySelector('[data-image-toggle-dark]');
+    const optionButtons = Array.from(
+      root.querySelectorAll("[data-image-toggle-button]")
+    ).filter((n) => n instanceof HTMLElement);
 
-    let cardEl = root.querySelector('[data-image-card]');
-    if (!cardEl) cardEl = root; // fallback to root if card not found
+    const modeButtons = Array.from(
+      root.querySelectorAll("[data-image-toggle-to]")
+    ).filter((n) => n instanceof HTMLElement);
 
-    const getLocalMode = () => {
-      const attr = cardEl.getAttribute('data-local-mode');
-      if (attr === 'dark' || attr === 'light') return attr;
-      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light';
-    };
+    const cards = Array.from(root.querySelectorAll("[data-image-card]")).filter(
+      (n) => n instanceof HTMLElement
+    );
 
-    const setLocalMode = (mode) => {
-      cardEl.setAttribute('data-local-mode', mode);
-    };
+    const getMode = () => root.getAttribute("data-mode") === "dark" ? "dark" : "light";
+    const setMode = (mode) => root.setAttribute("data-mode", mode);
 
-    const updateToggleVisibility = () => {
-      const mode = getLocalMode();
-      const isLight = mode === 'light';
-      if (toggleLight) toggleLight.style.display = isLight ? '' : 'none';
-      if (toggleDark) toggleDark.style.display = isLight ? 'none' : '';
-    };
+    const getActiveId = () =>
+      root.getAttribute("data-active-id") ||
+      optionButtons[0]?.getAttribute("data-image-id") ||
+      "";
 
-    const applyModeToImage = () => {
-      if (!img) return;
-      const mode = getLocalMode();
-      const s = img.getAttribute('src') || '';
-      const next = s.replace(
-        /--(Light|Dark)mode--/,
-        mode === 'dark' ? '--Darkmode--' : '--Lightmode--',
-      );
-      if (next !== s) img.setAttribute('src', next);
-      updateToggleVisibility();
-    };
+    const setActiveId = (id) => root.setAttribute("data-active-id", id);
 
-    const setActiveButton = (activeId) => {
-      buttons.forEach((btn) => {
-        if (btn.getAttribute('data-image-id') === activeId) {
-          btn.setAttribute('data-active', '');
-        } else {
-          btn.removeAttribute('data-active');
-        }
-      });
-    };
+    const updateModeButtons = () => {
+      const mode = getMode();
 
-    buttons.forEach((button) => {
-      button.addEventListener('click', () => {
-        const srcTemplate = button.getAttribute('data-image-src');
-        const alt = button.getAttribute('data-image-alt') ?? '';
-        if (img && srcTemplate) {
-          const mode = getLocalMode();
-          const next = srcTemplate.replace(
-            /--(Light|Dark)mode--/,
-            mode === 'dark' ? '--Darkmode--' : '--Lightmode--',
-          );
-          img.setAttribute('src', next);
-          img.setAttribute('alt', alt);
-          updateToggleVisibility();
-          try {
-            img.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          } catch (e) {}
-          const id = button.getAttribute('data-image-id');
-          if (id) setActiveButton(id);
-        }
-      });
-    });
+      modeButtons.forEach((btn) => {
+        const to = btn.getAttribute("data-image-toggle-to");
+        const show =
+          (mode === "light" && to === "dark") ||
+          (mode === "dark" && to === "light");
 
-    toggleLight &&
-      toggleLight.addEventListener('click', () => {
-        if (!img) return;
-        setLocalMode('dark');
-        applyModeToImage();
+        btn.style.display = show ? "" : "none";
+        btn.setAttribute("aria-hidden", show ? "false" : "true");
+
         try {
-          img.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          btn.tabIndex = show ? 0 : -1;
         } catch (e) {}
       });
+    };
 
-    toggleDark &&
-      toggleDark.addEventListener('click', () => {
-        if (!img) return;
-        setLocalMode('light');
-        applyModeToImage();
-        updateToggleVisibility();
+    const update = () => {
+      const mode = getMode();
+      const activeId = getActiveId();
+
+      optionButtons.forEach((btn) => {
+        const id = btn.getAttribute("data-image-id");
+        if (id === activeId) btn.setAttribute("data-active", "true");
+        else btn.removeAttribute("data-active");
       });
 
-    applyModeToImage();
+      cards.forEach((card) => {
+        const id = card.getAttribute("data-image-id");
+        const cardMode = card.getAttribute("data-image-mode");
+        const isActive = id === activeId && cardMode === mode;
 
-    const currentSrc = img?.getAttribute('src') || '';
-    const preMarked = Array.from(buttons).find((b) => b.hasAttribute('data-active'));
-    if (!preMarked && currentSrc) {
-      const match = Array.from(buttons).find((b) => {
-        const tpl = b.getAttribute('data-image-src') || '';
-        const normalizedTpl = tpl.replace(
-          /--(Light|Dark)mode--/,
-          currentSrc.includes('--Darkmode--') ? '--Darkmode--' : '--Lightmode--',
-        );
-        return normalizedTpl === currentSrc;
+        if (isActive) {
+          card.setAttribute("data-active", "true");
+          card.setAttribute("aria-hidden", "false");
+        } else {
+          card.removeAttribute("data-active");
+          card.setAttribute("aria-hidden", "true");
+        }
       });
-      const id = match?.getAttribute('data-image-id');
-      if (id) setActiveButton(id);
-    }
-  };
 
-  const scanRoots = () => {
-    const roots = document.querySelectorAll('[data-image-toggle-root]');
-    roots.forEach((root) => initRoot(root));
-  };
+      updateModeButtons();
+    };
 
-  const setup = () => {
-    scanRoots();
-    const observer = new MutationObserver(() => {
-      scanRoots();
+    optionButtons.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const id = btn.getAttribute("data-image-id");
+        if (id) {
+          setActiveId(id);
+          update();
+        }
+      });
     });
-    if (document.body) {
-      observer.observe(document.body, { childList: true, subtree: true });
-    }
-  };
 
-  let setupTimer;
-  const scheduleSetup = () => {
-    if (setupTimer) window.clearTimeout(setupTimer);
-    setupTimer = window.setTimeout(() => {
-      requestAnimationFrame(() => setup());
-    }, 0);
-  };
+    modeButtons.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setup, { once: true });
-  } else {
-    setup();
+        const to = btn.getAttribute("data-image-toggle-to");
+
+        if (isMode(to)) {
+          setMode(to);
+          update();
+        }
+      });
+    });
+
+    update();
   }
 
-  document.addEventListener('astro:page-load', scheduleSetup);
-  document.addEventListener('astro:after-swap', scheduleSetup);
+  function scan() {
+    const roots = document.querySelectorAll("[data-image-toggle-root]");
+    roots.forEach(initRoot);
+  }
+
+  function setupObserver() {
+    if (!document.body) return;
+    const obs = new MutationObserver(() => scan());
+    obs.observe(document.body, { childList: true, subtree: true });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
+        scan();
+        setupObserver();
+      },
+      { once: true }
+    );
+  } else {
+    scan();
+    setupObserver();
+  }
+
+  document.addEventListener("astro:page-load", scan);
+  document.addEventListener("astro:after-swap", scan);
 })();

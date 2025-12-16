@@ -2,36 +2,40 @@ import { appConfig } from '@config';
 
 export const interactiveDemoOptions = [
   {
-    id: 'neutral-light',
+    id: 'neutral',
     color: 'neutral',
     variant: 'filled',
-    src: `${appConfig.basePath}assets/interactive-demo/Neutral--Lightmode--C.png`,
+    lightSrc: `${appConfig.basePath}assets/interactive-demo/Neutral--Lightmode--C.png`,
+    darkSrc: `${appConfig.basePath}assets/interactive-demo/Neutral--Darkmode--C.png`,
     label: 'Neutral',
   },
   {
-    id: 'db-light',
+    id: 'db',
     icon: 'db',
     color: 'red',
     variant: 'filled',
-    src: `${appConfig.basePath}assets/interactive-demo/DB--Lightmode--C.png`,
+    lightSrc: `${appConfig.basePath}assets/interactive-demo/DB--Lightmode--C.png`,
+    darkSrc: `${appConfig.basePath}assets/interactive-demo/DB--Darkmode--C.png`,
     label: 'Deutsche Bahn',
   },
   {
-    id: 'sbahn-light',
+    id: 'sbahn',
     icon: 's_bahn',
     color: 'green',
     variant: 'filled',
-    src: `${appConfig.basePath}assets/interactive-demo/SB--Lightmode--C.png`,
+    lightSrc: `${appConfig.basePath}assets/interactive-demo/SB--Lightmode--C.png`,
+    darkSrc: `${appConfig.basePath}assets/interactive-demo/SB--Darkmode--C.png`,
     label: 'S-Bahn',
   },
   {
-    id: 'ri-light',
+    id: 'ri',
     icon: 'train_station',
     color: 'blue',
     variant: 'filled',
-    src: `${appConfig.basePath}assets/interactive-demo/RI--Lightmode--C.png`,
+    lightSrc: `${appConfig.basePath}assets/interactive-demo/RI--Lightmode--C.png`,
+    darkSrc: `${appConfig.basePath}assets/interactive-demo/RI--Darkmode--C.png`,
     label: 'Station & Service',
   },
-];
+] as const;
 
-export const interactiveDemoDefaultOptionId = 'db-light';
+export const interactiveDemoDefaultOptionId = 'db';

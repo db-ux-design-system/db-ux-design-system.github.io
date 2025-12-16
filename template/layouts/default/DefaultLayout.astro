@@ -5,6 +5,7 @@ import HtmlHead from './html-head';
 import MainContent from './main-content';
 import { appConfig } from '@root/app.config.ts';
 import { Shell } from './shell';
+import interactiveDemoScriptUrl from '@template/components/InteractiveDemo/interactiveDemo.client.js?url';
 
 const { headings, frontmatter } = Astro.props as {
   headings: MarkdownHeading[];
@@ -23,5 +24,6 @@ const { headings, frontmatter } = Astro.props as {
         </MainContent>
       </div>
     </Shell>
+    <script type="module" src={interactiveDemoScriptUrl}></script>
   </body>
 </html>
