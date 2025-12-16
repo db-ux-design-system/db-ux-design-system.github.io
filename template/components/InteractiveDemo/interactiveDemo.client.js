@@ -22,6 +22,12 @@
       (n) => n instanceof HTMLElement
     );
 
+    optionButtons.forEach((btn) => {
+      if (!btn.hasAttribute("data-default-variant")) {
+        btn.setAttribute("data-default-variant", btn.getAttribute("data-variant") || "filled");
+      }
+    });
+
     const getMode = () => root.getAttribute("data-mode") === "dark" ? "dark" : "light";
     const setMode = (mode) => root.setAttribute("data-mode", mode);
 
@@ -56,8 +62,18 @@
 
       optionButtons.forEach((btn) => {
         const id = btn.getAttribute("data-image-id");
-        if (id === activeId) btn.setAttribute("data-active", "true");
-        else btn.removeAttribute("data-active");
+        const isActive = id === activeId;
+
+        if (isActive) {
+          btn.setAttribute("data-active", "true");
+          btn.setAttribute("aria-pressed", "true");
+          const defaultVariant = btn.getAttribute("data-default-variant") || "filled";
+          btn.setAttribute("data-variant", defaultVariant);
+        } else {
+          btn.removeAttribute("data-active");
+          btn.setAttribute("aria-pressed", "false");
+          btn.setAttribute("data-variant", "ghost");
+        }
       });
 
       cards.forEach((card) => {
@@ -96,7 +112,6 @@
         e.stopPropagation();
 
         const to = btn.getAttribute("data-image-toggle-to");
-
         if (isMode(to)) {
           setMode(to);
           update();
