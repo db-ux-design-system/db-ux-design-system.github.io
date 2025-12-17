@@ -15,12 +15,13 @@
   width: 100%;
   max-width: fit-content;
   margin: 0 auto;
-  background-color: var(--db-adaptive-bg-basic-level-1-default);
+    background-color: var(--db-adaptive-bg-basic-level-1-default);
 }
 
 .interactive-demo__card {
   display: none;
 }
+
 .interactive-demo__card .db-card {
   overflow: hidden;
 }
@@ -74,7 +75,7 @@
 
 /* Green (S-Bahn) */
 .interactive-demo [data-image-toggle-button][data-color="green"] {
-  --demo-bg-active: var(--db-semantic-success-default);
+  --demo-bg-active: var(--db-semantic-success-default, #2e7d32);
   --demo-bg-inactive: color-mix(in srgb, var(--db-semantic-success-default, #2e7d32) 22%, white 78%);
 }
 .db-shell[data-mode="light"] .interactive-demo [data-image-toggle-button][data-color="green"] {
@@ -86,7 +87,7 @@
 
 /* Blue (Station & Service) */
 .interactive-demo [data-image-toggle-button][data-color="blue"] {
-  --demo-bg-active: var(--db-semantic-informational-default);
+  --demo-bg-active: var(--db-semantic-informational-default, #1565c0);
   --demo-bg-inactive: color-mix(in srgb, var(--db-semantic-informational-default, #1565c0) 22%, white 78%);
 }
 .db-shell[data-mode="light"] .interactive-demo [data-image-toggle-button][data-color="blue"] {
