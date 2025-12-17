@@ -34,3 +34,60 @@
   width: 100%;
   height: auto;
 }
+
+/* All inactive buttons */
+.interactive-demo [data-image-toggle-button] {
+  background-color: var(--demo-bg-inactive) !important;
+  color: var(--demo-color-inactive) !important;
+}
+
+/* Active button */
+.interactive-demo [data-image-toggle-button][data-active],
+.interactive-demo [data-image-toggle-button][data-active="true"] {
+  background-color: var(--demo-bg-active) !important;
+  color: var(--demo-color-active) !important;
+}
+
+/* Neutral */
+.interactive-demo [data-image-toggle-button][data-color="neutral"] {
+  --demo-bg-active: var(--db-adaptive-bg-basic-level-2-default);
+  --demo-bg-inactive: var(--db-adaptive-bg-basic-level-1-default);
+  --demo-color-active: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+  --demo-color-inactive: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+}
+
+/* Red (DB) */
+.interactive-demo [data-image-toggle-button][data-color="red"] {
+  --demo-bg-active: var(--db-brand-origin-default);
+}
+.db-shell[data-mode="light"] .interactive-demo [data-image-toggle-button][data-color="red"] {
+  --demo-bg-inactive: var(--db-brand-on-bg-basic-emphasis-60-default);
+  --demo-color-active: var(--db-adaptive-bg-basic-level-2-default);
+}
+.db-shell[data-mode="dark"] .interactive-demo [data-image-toggle-button][data-color="red"] {
+  --demo-bg-inactive: var(--db-brand-bg-basic-level-3-default);
+}
+
+/* Green (S-Bahn) */
+.interactive-demo [data-image-toggle-button][data-color="green"] {
+  --demo-bg-active: var(--db-semantic-success-default, #2e7d32);
+  --demo-bg-inactive: color-mix(in srgb, var(--db-semantic-success-default, #2e7d32) 22%, white 78%);
+}
+.db-shell[data-mode="light"] .interactive-demo [data-image-toggle-button][data-color="green"] {
+  --demo-color-active: var(--db-adaptive-bg-basic-level-2-default);;
+}
+.db-shell[data-mode="dark"] .interactive-demo [data-image-toggle-button][data-color="green"] {
+  --demo-color-inactive: var(--db-adaptive-bg-basic-level-2-default);
+}
+
+/* Blue (Station & Service) */
+.interactive-demo [data-image-toggle-button][data-color="blue"] {
+  --demo-bg-active: var(--db-semantic-informational-default, #1565c0);
+  --demo-bg-inactive: color-mix(in srgb, var(--db-semantic-informational-default, #1565c0) 22%, white 78%);
+}
+.db-shell[data-mode="light"] .interactive-demo [data-image-toggle-button][data-color="blue"] {
+  --demo-color-active: var(--db-adaptive-bg-basic-level-2-default);
+}
+.db-shell[data-mode="dark"] .interactive-demo [data-image-toggle-button][data-color="blue"] {
+  --demo-color-inactive: var(--db-adaptive-bg-basic-level-2-default);
+}
