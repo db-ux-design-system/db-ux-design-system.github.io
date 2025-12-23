@@ -24,10 +24,24 @@ const {
   ...rest
 } = Astro.props;
 
+// Supported image formats that can be optimized
+const SUPPORTED_FORMATS = ['.png', '.jpg', '.jpeg'];
+
 // Generate WebP and AVIF paths by replacing the file extension
 const getOptimizedPaths = (imageSrc: string) => {
   const lastDotIndex = imageSrc.lastIndexOf('.');
-  if (lastDotIndex === -1) return null;
+  if (lastDotIndex === -1) {
+    console.warn(
+      `OptimizedImage: No file extension found for "${imageSrc}". Falling back to regular img tag.`,
+    );
+    return null;
+  }
+
+  const ext = imageSrc.substring(lastDotIndex).toLowerCase();
+  if (!SUPPORTED_FORMATS.includes(ext)) {
+    // Image is already optimized or not supported
+    return null;
+  }
 
   const basePath = imageSrc.substring(0, lastDotIndex);
   return {

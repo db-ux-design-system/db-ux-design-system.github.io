@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 import sharp from 'sharp';
-import { readdir, stat, mkdir } from 'fs/promises';
+import { readdir, stat, mkdir, access } from 'fs/promises';
 import { join, relative, dirname, basename, extname } from 'path';
 import { fileURLToPath } from 'url';
+import { constants } from 'fs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const staticDir = join(__dirname, '../static');
@@ -41,6 +42,28 @@ async function convertImage(sourcePath) {
   const avifPath = join(dir, `${base}.avif`);
 
   try {
+    // Check if source file is newer than existing optimized files
+    const sourceStats = await stat(sourcePath);
+    let shouldConvert = false;
+
+    try {
+      const webpStats = await stat(webpPath);
+      const avifStats = await stat(avifPath);
+
+      // Reconvert if source is newer than optimized files
+      if (sourceStats.mtimeMs > webpStats.mtimeMs || sourceStats.mtimeMs > avifStats.mtimeMs) {
+        shouldConvert = true;
+      }
+    } catch {
+      // Files don't exist, need to convert
+      shouldConvert = true;
+    }
+
+    if (!shouldConvert) {
+      // Skip if optimized files are up to date
+      return;
+    }
+
     // Convert to WebP
     await sharp(sourcePath).webp({ quality: QUALITY.webp }).toFile(webpPath);
 
