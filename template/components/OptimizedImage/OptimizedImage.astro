@@ -1,0 +1,71 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  decoding?: 'async' | 'sync' | 'auto';
+  width?: number;
+  height?: number;
+  'data-mask'?: string;
+  'data-rounded'?: string;
+  'data-image-toggle-target'?: boolean;
+  [key: string]: any;
+}
+
+const {
+  src,
+  alt,
+  class: className,
+  loading = 'lazy',
+  decoding = 'async',
+  width,
+  height,
+  ...rest
+} = Astro.props;
+
+// Generate WebP and AVIF paths by replacing the file extension
+const getOptimizedPaths = (imageSrc: string) => {
+  const lastDotIndex = imageSrc.lastIndexOf('.');
+  if (lastDotIndex === -1) return null;
+  
+  const basePath = imageSrc.substring(0, lastDotIndex);
+  return {
+    avif: `${basePath}.avif`,
+    webp: `${basePath}.webp`,
+    original: imageSrc,
+  };
+};
+
+const optimizedPaths = getOptimizedPaths(src);
+---
+
+{
+  optimizedPaths ? (
+    <picture>
+      <source type="image/avif" srcset={optimizedPaths.avif} />
+      <source type="image/webp" srcset={optimizedPaths.webp} />
+      <img
+        src={optimizedPaths.original}
+        alt={alt}
+        loading={loading}
+        decoding={decoding}
+        class={className}
+        width={width}
+        height={height}
+        {...rest}
+      />
+    </picture>
+  ) : (
+    <img
+      src={src}
+      alt={alt}
+      loading={loading}
+      decoding={decoding}
+      class={className}
+      width={width}
+      height={height}
+      {...rest}
+    />
+  )
+}

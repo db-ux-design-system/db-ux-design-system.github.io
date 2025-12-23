@@ -1,6 +1,7 @@
 ---
 import { DBButton, DBStack, DBCard } from '@db-ux/react-core-components';
 import './InteractiveDemo.css';
+import OptimizedImage from '../OptimizedImage/OptimizedImage.astro';
 
 type InteractiveDemoItem = {
   id: string;
@@ -88,7 +89,7 @@ const initialMode = 'light';
                 {...(item.id === initialItem.id ? { 'data-active': 'true' } : {})}
               >
                 <DBCard spacing="none" class="interactive-demo__card-inner">
-                  <img
+                  <OptimizedImage
                     class="interactive-demo__img"
                     src={item.lightSrc}
                     alt={item.alt ?? item.label}
@@ -105,7 +106,7 @@ const initialMode = 'light';
                 data-image-mode="dark"
               >
                 <DBCard spacing="none" class="interactive-demo__card-inner">
-                  <img
+                  <OptimizedImage
                     class="interactive-demo__img"
                     src={item.darkSrc}
                     alt={item.alt ?? item.label}

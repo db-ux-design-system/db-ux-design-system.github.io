@@ -1,6 +1,7 @@
 ---
 import './TextImage.css';
 import { DBTag } from '@db-ux/react-core-components';
+import OptimizedImage from '../OptimizedImage/OptimizedImage.astro';
 
 interface Props {
   title?: string;
@@ -81,7 +82,7 @@ const {
     </div>
   </div>
   <div class="text-image__image">
-    <img
+    <OptimizedImage
       class="lightmode-image"
       src={imageSrc}
       alt={imageAlt}
@@ -89,7 +90,7 @@ const {
       data-mask={mask}
       data-rounded={rounded ? 'true' : undefined}
     />
-    <img
+    <OptimizedImage
       class="darkmode-image"
       src={imageSrcDark ?? imageSrc}
       alt={imageAlt}
