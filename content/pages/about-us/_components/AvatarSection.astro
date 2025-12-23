@@ -2,6 +2,7 @@
 import { appConfig } from '@config';
 import { DBSection, DBStack } from '@db-ux/react-core-components';
 import { Avatar } from '@components';
+import OptimizedImage from '@components/OptimizedImage/OptimizedImage.astro';
 import './AvatarSection.css';
 ---
 
@@ -56,31 +57,31 @@ import './AvatarSection.css';
     </div>
     <DBStack direction="column" alignment="center">
       <DBStack direction="row" alignment="center" justifyContent="center" gap="large">
-        <img
+        <OptimizedImage
           class="img--tint-dark-blue"
           src={`${appConfig.basePath}assets/signatures/Tobias-Oberpaul--Signature--C.png`}
           alt="Signature Tobias Oberpaul"
-          width="200px"
+          width={200}
         />
-        <img
+        <OptimizedImage
           class="img--tint-dark-blue"
           src={`${appConfig.basePath}assets/signatures/Lea-Perchermeier--Signature--C.png`}
           alt="Signature Lea Perchermeier"
-          width="150px"
+          width={150}
         />
       </DBStack>
       <DBStack direction="row" alignment="center" justifyContent="center" gap="large">
-        <img
+        <OptimizedImage
           class="img--tint-dark-blue"
           src={`${appConfig.basePath}assets/signatures/Maximilian-Franzke--Signature--C.png`}
           alt="Signature Maximilian Franzke"
-          width="250px"
+          width={250}
         />
-        <img
+        <OptimizedImage
           class="img--tint-dark-blue"
           src={`${appConfig.basePath}assets/signatures/Luis-Schroff--Signature--C.png`}
           alt="Signature Luis Schroff"
-          width="150px"
+          width={150}
         />
       </DBStack>
     </DBStack>

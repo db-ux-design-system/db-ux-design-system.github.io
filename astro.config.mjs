@@ -46,4 +46,11 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'always',
   },
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+    },
+    domains: [],
+    remotePatterns: [],
+  },
 });

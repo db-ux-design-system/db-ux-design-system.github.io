@@ -35,12 +35,12 @@ content/
 
 Field / Type / Default / Purpose
 
-title             (string)   – required for nav label + page title
-order             (number)   – optional sorting priority
-hidePage          (boolean)  – false = visible, true = only child pages visible
-isSubNavigation   (boolean)  – enables local sub-nav for children
-iconTrailing      (string)   – optional icon for nav entry
-layout            (string)   – MUST always be "@template/layouts/default"
+title (string) – required for nav label + page title
+order (number) – optional sorting priority
+hidePage (boolean) – false = visible, true = only child pages visible
+isSubNavigation (boolean) – enables local sub-nav for children
+iconTrailing (string) – optional icon for nav entry
+layout (string) – MUST always be "@template/layouts/default"
 
 Example:
 
@@ -68,20 +68,20 @@ hidePage: false
 
 ## 🧩 Component Architecture — Best Practices
 
-| Type | Location |
-|------|----------|
-| Reusable UI components | template/components/ |
-| Page-specific components | content/pages/**/_components/ |
-| Shared styling | same folder as component (component.css) |
-| Interactive React islands | template/interactive/ + astro wrapper |
-| Config content (Text blocks, image refs) | content/pages/**/xxx.config.ts |
+| Type                                     | Location                                 |
+| ---------------------------------------- | ---------------------------------------- |
+| Reusable UI components                   | template/components/                     |
+| Page-specific components                 | content/pages/\*\*/\_components/         |
+| Shared styling                           | same folder as component (component.css) |
+| Interactive React islands                | template/interactive/ + astro wrapper    |
+| Config content (Text blocks, image refs) | content/pages/\*\*/xxx.config.ts         |
 
 Rules:
 
-* No inline styles in `.astro` files → always external CSS
-* MD/MDX may contain only content — no component logic
-* If a component needs state → convert into React Island
-* Dark/light image mapping handled inside component, not page
+- No inline styles in `.astro` files → always external CSS
+- MD/MDX may contain only content — no component logic
+- If a component needs state → convert into React Island
+- Dark/light image mapping handled inside component, not page
 
 ---
 
@@ -106,9 +106,9 @@ Do not:
 
 ## ⚙️ Interactive Component Pattern (React Islands)
 
-1) Write UI in `template/interactive/MyComponent.tsx`
-2) Wrap with `MyComponent.astro`
-3) Load only where needed in MDX
+1. Write UI in `template/interactive/MyComponent.tsx`
+2. Wrap with `MyComponent.astro`
+3. Load only where needed in MDX
 
 Client hydration options:
 
@@ -122,13 +122,63 @@ Never hydrate the entire Shell.
 
 ---
 
+## 🖼️ Image Optimization
+
+The project automatically optimizes all images for web delivery using modern formats:
+
+### Automatic Optimization
+
+All PNG, JPG, and JPEG images are automatically converted to:
+
+- **WebP format** (80% quality) - 30-50% smaller file sizes
+- **AVIF format** (75% quality) - 40-50% smaller file sizes
+
+The build process generates these optimized versions automatically.
+
+### Using OptimizedImage Component
+
+```astro
+---
+import OptimizedImage from '@components/OptimizedImage/OptimizedImage.astro';
+---
+
+<OptimizedImage src="/one-platform/assets/my-image.png" alt="Description" loading="lazy" />
+```
+
+This generates a `<picture>` element with AVIF, WebP, and original fallback:
+
+```html
+<picture>
+  <source type="image/avif" srcset="/path/to/image.avif" />
+  <source type="image/webp" srcset="/path/to/image.webp" />
+  <img src="/path/to/image.png" alt="Description" loading="lazy" />
+</picture>
+```
+
+### How It Works
+
+1. **Build Time**: `scripts/optimize-images.mjs` converts all images in `static/` directory
+2. **Runtime**: `OptimizedImage` component serves the best format for each browser
+3. **Fallback**: Original images are preserved for older browsers
+
+### Benefits
+
+✅ Significant file size reduction (30-55% smaller)  
+✅ Faster page loads and better Core Web Vitals  
+✅ Automatic browser compatibility  
+✅ Zero manual work required
+
+See `scripts/README.md` and `template/components/OptimizedImage/README.md` for details.
+
+---
+
 ## 🚀 Performance Guidance
 
 Before production go-live:
 
 • run Vite bundle-analyzer  
 • inspect assets in Chrome → Network > Size  
-• convert hero + testimonial images to WebP  
+• ✅ images are auto-optimized to WebP/AVIF  
 • lazy-load all non-critical visuals  
 • 3D GLB assets must NOT load eager
 

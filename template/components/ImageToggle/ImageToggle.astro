@@ -1,5 +1,6 @@
 ---
 import { DBButton } from '@db-ux/react-core-components';
+import OptimizedImage from '../OptimizedImage/OptimizedImage.astro';
 
 const items = Array.isArray(Astro.props.items) ? Astro.props.items : [];
 const initialId = Astro.props.initialId;
@@ -23,7 +24,7 @@ const initialItem = (initialId && items.find((i) => i.id === initialId)) ?? item
         );
       })}
 
-      <img
+      <OptimizedImage
         data-image-toggle-target
         src={initialItem.src}
         alt={initialItem.alt ?? initialItem.label}

@@ -1,5 +1,6 @@
 ---
 import './PageHero.css';
+import OptimizedImage from '../OptimizedImage/OptimizedImage.astro';
 
 interface Props {
   title?: string;
@@ -43,7 +44,7 @@ const HeadingTag = `h${safeHeadlineLevel}` as HeadingTagName;
     >
       {layout === 'split' && imageSrc && imageSide === 'left' && (
         <div class="page-hero__media">
-          <img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
+          <OptimizedImage src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
         </div>
       )}
       <div class="page-hero__content">
@@ -54,12 +55,12 @@ const HeadingTag = `h${safeHeadlineLevel}` as HeadingTagName;
       </div>
       {layout === 'split' && imageSrc && imageSide === 'right' && (
         <div class="page-hero__media">
-          <img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
+          <OptimizedImage src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
         </div>
       )}
       {layout === 'stack' && imageSrc && (
         <div class="page-hero__media">
-          <img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
+          <OptimizedImage src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
         </div>
       )}
     </div>

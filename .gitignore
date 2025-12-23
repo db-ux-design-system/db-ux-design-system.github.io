@@ -19,3 +19,7 @@ pnpm-debug.log*
 .idea/
 
 **/*/.env
+
+# Generated optimized images (regenerated at build time)
+static/**/*.webp
+static/**/*.avif
