@@ -1,2 +1,2 @@
-import MainContent from "./MainContent.astro";
+import MainContent from './MainContent.astro';
 export default MainContent;

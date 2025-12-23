@@ -28,7 +28,7 @@ const {
 const getOptimizedPaths = (imageSrc: string) => {
   const lastDotIndex = imageSrc.lastIndexOf('.');
   if (lastDotIndex === -1) return null;
-  
+
   const basePath = imageSrc.substring(0, lastDotIndex);
   return {
     avif: `${basePath}.avif`,

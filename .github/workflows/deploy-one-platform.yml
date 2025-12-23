@@ -2,7 +2,7 @@ name: Deploy one-platform to /one-platform on main
 
 on:
   push:
-    branches: ["one-platform"]
+    branches: ['one-platform']
 
 permissions:
   contents: write

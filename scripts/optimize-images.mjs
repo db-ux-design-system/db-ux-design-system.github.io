@@ -29,30 +29,26 @@ async function* walkDir(dir) {
 
 async function convertImage(sourcePath) {
   const ext = extname(sourcePath).toLowerCase();
-  
+
   if (!CONVERT_FORMATS.includes(ext)) {
     return;
   }
 
   const dir = dirname(sourcePath);
   const base = basename(sourcePath, ext);
-  
+
   const webpPath = join(dir, `${base}.webp`);
   const avifPath = join(dir, `${base}.avif`);
 
   try {
     // Convert to WebP
-    await sharp(sourcePath)
-      .webp({ quality: QUALITY.webp })
-      .toFile(webpPath);
-    
+    await sharp(sourcePath).webp({ quality: QUALITY.webp }).toFile(webpPath);
+
     console.log(`✓ Created ${relative(staticDir, webpPath)}`);
 
     // Convert to AVIF
-    await sharp(sourcePath)
-      .avif({ quality: QUALITY.avif })
-      .toFile(avifPath);
-    
+    await sharp(sourcePath).avif({ quality: QUALITY.avif }).toFile(avifPath);
+
     console.log(`✓ Created ${relative(staticDir, avifPath)}`);
   } catch (error) {
     console.error(`✗ Failed to convert ${relative(staticDir, sourcePath)}:`, error.message);
@@ -61,7 +57,7 @@ async function convertImage(sourcePath) {
 
 async function main() {
   console.log('🖼️  Converting images to WebP and AVIF...\n');
-  
+
   let count = 0;
   for await (const file of walkDir(staticDir)) {
     if (CONVERT_FORMATS.includes(extname(file).toLowerCase())) {
@@ -69,7 +65,7 @@ async function main() {
       count++;
     }
   }
-  
+
   console.log(`\n✅ Processed ${count} images`);
 }
 

@@ -18,25 +18,21 @@ The `OptimizedImage` component automatically serves images in modern formats (AV
 import OptimizedImage from '@components/OptimizedImage/OptimizedImage.astro';
 ---
 
-<OptimizedImage
-  src="/one-platform/assets/my-image.png"
-  alt="Description of image"
-  loading="lazy"
-/>
+<OptimizedImage src="/one-platform/assets/my-image.png" alt="Description of image" loading="lazy" />
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `src` | `string` | Required | Path to the image (PNG, JPG, or JPEG) |
-| `alt` | `string` | Required | Alt text for accessibility |
-| `class` | `string` | - | CSS class name(s) |
-| `loading` | `'lazy' \| 'eager'` | `'lazy'` | Loading strategy |
-| `decoding` | `'async' \| 'sync' \| 'auto'` | `'async'` | Decoding hint |
-| `width` | `number` | - | Width attribute |
-| `height` | `number` | - | Height attribute |
-| `data-*` | `any` | - | Data attributes pass through |
+| Prop       | Type                          | Default   | Description                           |
+| ---------- | ----------------------------- | --------- | ------------------------------------- |
+| `src`      | `string`                      | Required  | Path to the image (PNG, JPG, or JPEG) |
+| `alt`      | `string`                      | Required  | Alt text for accessibility            |
+| `class`    | `string`                      | -         | CSS class name(s)                     |
+| `loading`  | `'lazy' \| 'eager'`           | `'lazy'`  | Loading strategy                      |
+| `decoding` | `'async' \| 'sync' \| 'auto'` | `'async'` | Decoding hint                         |
+| `width`    | `number`                      | -         | Width attribute                       |
+| `height`   | `number`                      | -         | Height attribute                      |
+| `data-*`   | `any`                         | -         | Data attributes pass through          |
 
 ## How It Works
 
