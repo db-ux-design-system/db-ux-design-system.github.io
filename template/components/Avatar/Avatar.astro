@@ -75,10 +75,12 @@ const {
 <script>
   import { loadModelViewer } from '@template/utils/loadModelViewer';
 
+  // Store reference to the parent element before async operation
+  const root = document.currentScript?.parentElement;
+
   // Load model-viewer library before initializing the component
   loadModelViewer().then(() => {
     // Restart hover animation each time the user hovers/focuses the avatar
-    const root = document.currentScript?.parentElement;
     const viewerWrapper = root?.querySelector('.avatar-viewer');
     const hoverViewer = viewerWrapper?.querySelector('.viewer-hover');
 
