@@ -4,37 +4,26 @@
  * and avoids external CDN dependencies
  */
 
-let isLoading = false;
-let isLoaded = false;
+let loadingPromise: Promise<void> | null = null;
 
 export async function loadModelViewer(): Promise<void> {
-  // If already loaded, return immediately
-  if (isLoaded) {
-    return;
+  // If already loaded or currently loading, return the existing promise
+  if (loadingPromise) {
+    return loadingPromise;
   }
 
-  // If currently loading, wait for it to finish
-  if (isLoading) {
-    return new Promise((resolve) => {
-      const checkLoaded = setInterval(() => {
-        if (isLoaded) {
-          clearInterval(checkLoaded);
-          resolve();
-        }
-      }, 50);
-    });
-  }
+  // Create and store the loading promise
+  loadingPromise = (async () => {
+    try {
+      // Dynamically import the model-viewer module
+      await import('@google/model-viewer');
+    } catch (error) {
+      console.error('Failed to load model-viewer:', error);
+      // Reset the promise so it can be retried
+      loadingPromise = null;
+      throw error;
+    }
+  })();
 
-  isLoading = true;
-
-  try {
-    // Dynamically import the model-viewer module
-    await import('@google/model-viewer');
-    isLoaded = true;
-  } catch (error) {
-    console.error('Failed to load model-viewer:', error);
-    throw error;
-  } finally {
-    isLoading = false;
-  }
+  return loadingPromise;
 }
