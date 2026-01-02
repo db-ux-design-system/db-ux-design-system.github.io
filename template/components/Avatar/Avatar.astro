@@ -73,31 +73,28 @@ const {
 </DBStack>
 
 <script>
-  import { loadModelViewer } from '@template/utils/loadModelViewer';
+  import '@google/model-viewer';
 
   // Store reference to the parent element before async operation
   const root = document.currentScript?.parentElement;
 
-  // Load model-viewer library before initializing the component
-  loadModelViewer().then(() => {
-    // Restart hover animation each time the user hovers/focuses the avatar
-    const viewerWrapper = root?.querySelector('.avatar-viewer');
-    const hoverViewer = viewerWrapper?.querySelector('.viewer-hover');
+  // Restart hover animation each time the user hovers/focuses the avatar
+  const viewerWrapper = root?.querySelector('.avatar-viewer');
+  const hoverViewer = viewerWrapper?.querySelector('.viewer-hover');
 
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    if (viewerWrapper && hoverViewer && !prefersReducedMotion) {
-      const restart = () => {
-        const src = hoverViewer.getAttribute('src');
-        if (!src) return;
-        // Force reload to restart the animation
-        hoverViewer.removeAttribute('src');
-        // Small microtask to allow attribute removal to take effect
-        queueMicrotask(() => hoverViewer.setAttribute('src', src));
-      };
+  if (viewerWrapper && hoverViewer && !prefersReducedMotion) {
+    const restart = () => {
+      const src = hoverViewer.getAttribute('src');
+      if (!src) return;
+      // Force reload to restart the animation
+      hoverViewer.removeAttribute('src');
+      // Small microtask to allow attribute removal to take effect
+      queueMicrotask(() => hoverViewer.setAttribute('src', src));
+    };
 
-      viewerWrapper.addEventListener('mouseenter', restart);
-      viewerWrapper.addEventListener('focus', restart, true);
-    }
-  });
+    viewerWrapper.addEventListener('mouseenter', restart);
+    viewerWrapper.addEventListener('focus', restart, true);
+  }
 </script>
