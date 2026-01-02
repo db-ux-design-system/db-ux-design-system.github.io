@@ -73,8 +73,12 @@ const {
 </DBStack>
 
 <script>
-  // Restart hover animation each time the user hovers/focuses the avatar
+  import '@google/model-viewer';
+
+  // Store reference to the parent element before async operation
   const root = document.currentScript?.parentElement;
+
+  // Restart hover animation each time the user hovers/focuses the avatar
   const viewerWrapper = root?.querySelector('.avatar-viewer');
   const hoverViewer = viewerWrapper?.querySelector('.viewer-hover');
 
