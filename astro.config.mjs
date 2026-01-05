@@ -7,43 +7,59 @@ import sitemap from '@astrojs/sitemap';
 import { filterSitemapBlacklist } from './template/integrations/sitemap';
 import orama from '@orama/plugin-astro';
 
+import { viteStaticCopy } from 'vite-plugin-static-copy';
+
 // https://astro.build/config
 export default defineConfig({
-  site: appConfig.hostname,
-  base: appConfig.basePath,
-  integrations: [
-    react({}),
-    mdx(),
-    sitemap({
-      filter: filterSitemapBlacklist,
-    }),
-    orama({
-      pages: {
-        pathMatcher: /\/.+\//,
-        language: 'english',
-      },
-    }),
-  ],
-  srcDir: './content',
-  outDir: './public',
-  publicDir: './static',
-  vite: {
-    ssr: {
-      noExternal: ['@db-ux/react-core-components'],
-    },
-    resolve: {
-      alias: {
-        '@components': new URL('./template/components', import.meta.url).pathname,
-        '@template': new URL('./template', import.meta.url).pathname,
-        '@content': new URL('./content', import.meta.url).pathname,
-        '@config': new URL('./app.config.ts', import.meta.url).pathname,
-      },
-    },
-  },
-  devToolbar: {
-    enabled: false,
-  },
-  build: {
-    inlineStylesheets: 'always',
-  },
+	site: appConfig.hostname,
+	base: appConfig.basePath,
+	integrations: [
+		react({}),
+		mdx(),
+		sitemap({
+			filter: filterSitemapBlacklist,
+		}),
+		orama({
+			pages: {
+				pathMatcher: /\/.+\//,
+				language: 'english',
+			},
+		}),
+	],
+	srcDir: './content',
+	outDir: './public',
+	publicDir: './static',
+	vite: {
+		plugins: [
+			viteStaticCopy({
+				targets: [
+					{
+						src: './node_modules/@google/model-viewer/dist/model-viewer.min.js',
+						dest: './',
+					},
+					{
+						src: './node_modules/@google/model-viewer/dist/model-viewer.min.js.map',
+						dest: './',
+					},
+				],
+			}),
+		],
+		ssr: {
+			noExternal: ['@db-ux/react-core-components'],
+		},
+		resolve: {
+			alias: {
+				'@components': new URL('./template/components', import.meta.url).pathname,
+				'@template': new URL('./template', import.meta.url).pathname,
+				'@content': new URL('./content', import.meta.url).pathname,
+				'@config': new URL('./app.config.ts', import.meta.url).pathname,
+			},
+		},
+	},
+	devToolbar: {
+		enabled: false,
+	},
+	build: {
+		inlineStylesheets: 'always',
+	},
 });

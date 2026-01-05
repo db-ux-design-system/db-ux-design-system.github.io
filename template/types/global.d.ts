@@ -61,6 +61,10 @@ declare interface FrontMatter {
    * An optional icon that can be used to represent the page.
    */
   iconTrailing?: string;
+	/**
+	 * If true, load the model viewer web-component on this page.
+	 */
+	loadModelViewer?: boolean;
 }
 
 /**
