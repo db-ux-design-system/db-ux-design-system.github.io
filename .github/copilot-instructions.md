@@ -98,9 +98,7 @@ If you use tailwind follow those rules as well:
   - use for `DBAccordionItem` or `AccordionItem` the file node_modules/@db-ux/react-core-components/agent/AccordionItem.md
   - use for `DBAccordion` or `Accordion` the file node_modules/@db-ux/react-core-components/agent/Accordion.md
 
----
-
-END: DB UX Copilot Instructions – do not edit above ---
+--- END: DB UX Copilot Instructions – do not edit above ---
 
 # onePlatform Guidelines
 
