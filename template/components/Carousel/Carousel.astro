@@ -1,16 +1,16 @@
 ---
 interface Props {
-  ariaLabel?: string;
+	ariaLabel?: string;
 }
 const { ariaLabel } = Astro.props as Props;
 ---
 
 <style is:global>
-  @import './Carousel.css';
+	@import './Carousel.css';
 </style>
 
 <div class="carousel-wrapper fadeout-horizontal">
-  <div class="carousel" aria-label={ariaLabel}>
-    <slot />
-  </div>
+	<div class="carousel" aria-label={ariaLabel}>
+		<slot />
+	</div>
 </div>

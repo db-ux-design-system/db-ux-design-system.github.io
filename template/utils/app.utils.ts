@@ -6,15 +6,15 @@ import type { AstroGlobal } from 'astro';
  * @returns The current pathname.
  */
 export function getCurrentPathname(astro?: AstroGlobal): string {
-  if (astro?.url) {
-    return astro.url.pathname.replace(/\/+$/, '') || '/';
-  }
+	if (astro?.url) {
+		return astro.url.pathname.replace(/\/+$/, '') || '/';
+	}
 
-  if (typeof window !== 'undefined' && window.location) {
-    return window.location.pathname.replace(/\/+$/, '') || '/';
-  }
+	if (typeof window !== 'undefined' && window.location) {
+		return window.location.pathname.replace(/\/+$/, '') || '/';
+	}
 
-  return '/';
+	return '/';
 }
 
 /**
@@ -23,31 +23,31 @@ export function getCurrentPathname(astro?: AstroGlobal): string {
  * @param ms
  */
 export const delay = (fn: () => void, ms: number) =>
-  new Promise<void>((resolve) => {
-    setTimeout(() => {
-      fn();
-      resolve();
-    }, ms);
-  });
+	new Promise<void>((resolve) => {
+		setTimeout(() => {
+			fn();
+			resolve();
+		}, ms);
+	});
 
 /**
  * Get a start and end index of a content string based on a search term
  */
 export const getMarkedContent = (
-  content: string,
-  term: string,
-  range: number = 50,
+	content: string,
+	term: string,
+	range: number = 50,
 ): { start: number; termIndex: number; end: number } => {
-  let start = 0;
-  let end = content.length - 1;
+	let start = 0;
+	let end = content.length - 1;
 
-  const termIndex = content.toLowerCase().indexOf(term.toLowerCase());
-  if (termIndex - range > 0) {
-    start = termIndex - range;
-  }
-  if (termIndex + range < end) {
-    end = termIndex + range;
-  }
+	const termIndex = content.toLowerCase().indexOf(term.toLowerCase());
+	if (termIndex - range > 0) {
+		start = termIndex - range;
+	}
+	if (termIndex + range < end) {
+		end = termIndex + range;
+	}
 
-  return { start, termIndex, end };
+	return { start, termIndex, end };
 };

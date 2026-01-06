@@ -35,12 +35,12 @@ content/
 
 Field / Type / Default / Purpose
 
-title             (string)   – required for nav label + page title
-order             (number)   – optional sorting priority
-hidePage          (boolean)  – false = visible, true = only child pages visible
-isSubNavigation   (boolean)  – enables local sub-nav for children
-iconTrailing      (string)   – optional icon for nav entry
-layout            (string)   – MUST always be "@template/layouts/default"
+title (string) – required for nav label + page title
+order (number) – optional sorting priority
+hidePage (boolean) – false = visible, true = only child pages visible
+isSubNavigation (boolean) – enables local sub-nav for children
+iconTrailing (string) – optional icon for nav entry
+layout (string) – MUST always be "@template/layouts/default"
 
 Example:
 
@@ -68,20 +68,20 @@ hidePage: false
 
 ## 🧩 Component Architecture — Best Practices
 
-| Type | Location |
-|------|----------|
-| Reusable UI components | template/components/ |
-| Page-specific components | content/pages/**/_components/ |
-| Shared styling | same folder as component (component.css) |
-| Interactive React islands | template/interactive/ + astro wrapper |
-| Config content (Text blocks, image refs) | content/pages/**/xxx.config.ts |
+| Type                                     | Location                                 |
+| ---------------------------------------- | ---------------------------------------- |
+| Reusable UI components                   | template/components/                     |
+| Page-specific components                 | content/pages/\*\*/\_components/         |
+| Shared styling                           | same folder as component (component.css) |
+| Interactive React islands                | template/interactive/ + astro wrapper    |
+| Config content (Text blocks, image refs) | content/pages/\*\*/xxx.config.ts         |
 
 Rules:
 
-* No inline styles in `.astro` files → always external CSS
-* MD/MDX may contain only content — no component logic
-* If a component needs state → convert into React Island
-* Dark/light image mapping handled inside component, not page
+- No inline styles in `.astro` files → always external CSS
+- MD/MDX may contain only content — no component logic
+- If a component needs state → convert into React Island
+- Dark/light image mapping handled inside component, not page
 
 ---
 
@@ -106,9 +106,9 @@ Do not:
 
 ## ⚙️ Interactive Component Pattern (React Islands)
 
-1) Write UI in `template/interactive/MyComponent.tsx`
-2) Wrap with `MyComponent.astro`
-3) Load only where needed in MDX
+1. Write UI in `template/interactive/MyComponent.tsx`
+2. Wrap with `MyComponent.astro`
+3. Load only where needed in MDX
 
 Client hydration options:
 

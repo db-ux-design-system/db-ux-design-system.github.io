@@ -1,24 +1,24 @@
 code {
-  border-radius: var(--db-border-radius-xs);
-  background-color: #24292e !important;
-  color: #e1e4e8 !important;
+	border-radius: var(--db-border-radius-xs);
+	background-color: #24292e !important;
+	color: #e1e4e8 !important;
 }
 
 pre {
-  padding: var(--db-spacing-fixed-xs);
-  border-radius: var(--db-border-radius-xs);
+	padding: var(--db-spacing-fixed-xs);
+	border-radius: var(--db-border-radius-xs);
 }
 
-pre[data-language="plaintext"] > code {
-  color: #e1e4e8;
+pre[data-language='plaintext'] > code {
+	color: #e1e4e8;
 }
 
 pre > code {
-  border-radius: 0;
-  padding: 0 !important;
+	border-radius: 0;
+	padding: 0 !important;
 
-  .line:last-child:empty,
-  .line:last-child:has(span:empty) {
-    display: none;
-  }
+	.line:last-child:empty,
+	.line:last-child:has(span:empty) {
+		display: none;
+	}
 }

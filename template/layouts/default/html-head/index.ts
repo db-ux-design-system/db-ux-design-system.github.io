@@ -1,2 +1,2 @@
-import HtmlHead from "./HtmlHead.astro";
+import HtmlHead from './HtmlHead.astro';
 export default HtmlHead;

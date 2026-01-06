@@ -1,2 +1,2 @@
-import DefaultLayout from "./DefaultLayout.astro";
+import DefaultLayout from './DefaultLayout.astro';
 export default DefaultLayout;

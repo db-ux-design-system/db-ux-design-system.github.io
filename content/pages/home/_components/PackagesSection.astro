@@ -5,98 +5,98 @@ import { SectionTitle, TextImage, DisabledWrapper } from '@components';
 ---
 
 <DBSection
-  width="medium"
-  spacing="medium"
-  aria-label="Unified model section"
-  id="home--unified-model-section"
+	width="medium"
+	spacing="medium"
+	aria-label="Unified model section"
+	id="home--unified-model-section"
 >
-  <SectionTitle
-    title="A unified model for product teams"
-    description="Shared fundamentals, components and domain-specific extensions that support clarity and alignment."
-  />
-  <DBStack gap="large">
-    <a
-      href={`${appConfig.basePath}products-and-services/foundations`}
-      aria-label="Open Foundations page"
-    >
-      <DBCard behavior="interactive" spacing="large">
-        <TextImage
-          title="Foundation"
-          imagePosition="right"
-          imageWidth="33"
-          imageSrc={`${appConfig.basePath}assets/Foundations-Teaser--C.png`}
-          imageAlt="Foundations Visual"
-          mask="fade-bottom-right"
-        >
-          Shared base tokens and modes provide a stable foundation for clear and coherent
-          interfaces.
-        </TextImage>
-      </DBCard>
-    </a>
-    <a
-      href={`${appConfig.basePath}products-and-services/components`}
-      aria-label="Open Components page"
-    >
-      <DBCard behavior="interactive" spacing="large">
-        <TextImage
-          title="Components"
-          imagePosition="right"
-          imageWidth="33"
-          imageSrc={`${appConfig.basePath}assets/Components-Teaser--C.png`}
-          imageAlt="Foundations Visual"
-          mask="fade-bottom-right"
-        >
-          Core components ensure predictable interactions across products.
-        </TextImage>
-      </DBCard>
-    </a>
-    <a
-      href={`${appConfig.basePath}products-and-services/extensions`}
-      aria-label="Open Extensions page"
-    >
-      <DBCard behavior="interactive" spacing="large">
-        <TextImage
-          imagePosition="right"
-          imageWidth="33"
-          title="Extensions"
-          imageSrc={`${appConfig.basePath}assets/Extensions-Teaser--C.png`}
-          imageAlt="Foundations Visual"
-          mask="fade-bottom-right"
-        >
-          Contextual standards that build on the core system to support domain-specific needs.
-        </TextImage>
-      </DBCard>
-    </a>
-    <DBStack direction="row">
-      <DisabledWrapper label="Coming Soon" size="medium">
-        <DBCard spacing="large">
-          <TextImage
-            imagePosition="right"
-            imageWidth="33"
-            title="Patterns"
-            imageSrc={`${appConfig.basePath}assets/Patterns-Teaser--C.png`}
-            imageAlt="Patterns Visual"
-            mask="fade-bottom-right"
-          >
-            Provide reusable interaction models that guide consistent behavior across products.
-          </TextImage>
-        </DBCard>
-      </DisabledWrapper>
-      <DisabledWrapper label="Coming Soon" size="medium">
-        <DBCard spacing="large">
-          <TextImage
-            imagePosition="right"
-            imageWidth="33"
-            title="Templates"
-            imageSrc={`${appConfig.basePath}assets/Templates-Teaser--C.png`}
-            imageAlt="Templates Visual"
-            mask="fade-bottom-right"
-          >
-            Offer structured starting points that speed up page creation and enforce coherent
-            layouts.
-          </TextImage>
-        </DBCard>
-      </DisabledWrapper>
-    </DBStack>
-  </DBStack>
+	<SectionTitle
+		title="A unified model for product teams"
+		description="Shared fundamentals, components and domain-specific extensions that support clarity and alignment."
+	/>
+	<DBStack gap="large">
+		<a
+			href={`${appConfig.basePath}products-and-services/foundations`}
+			aria-label="Open Foundations page"
+		>
+			<DBCard behavior="interactive" spacing="large">
+				<TextImage
+					title="Foundation"
+					imagePosition="right"
+					imageWidth="33"
+					imageSrc={`${appConfig.basePath}assets/Foundations-Teaser--C.png`}
+					imageAlt="Foundations Visual"
+					mask="fade-bottom-right"
+				>
+					Shared base tokens and modes provide a stable foundation for clear and coherent
+					interfaces.
+				</TextImage>
+			</DBCard>
+		</a>
+		<a
+			href={`${appConfig.basePath}products-and-services/components`}
+			aria-label="Open Components page"
+		>
+			<DBCard behavior="interactive" spacing="large">
+				<TextImage
+					title="Components"
+					imagePosition="right"
+					imageWidth="33"
+					imageSrc={`${appConfig.basePath}assets/Components-Teaser--C.png`}
+					imageAlt="Foundations Visual"
+					mask="fade-bottom-right"
+				>
+					Core components ensure predictable interactions across products.
+				</TextImage>
+			</DBCard>
+		</a>
+		<a
+			href={`${appConfig.basePath}products-and-services/extensions`}
+			aria-label="Open Extensions page"
+		>
+			<DBCard behavior="interactive" spacing="large">
+				<TextImage
+					imagePosition="right"
+					imageWidth="33"
+					title="Extensions"
+					imageSrc={`${appConfig.basePath}assets/Extensions-Teaser--C.png`}
+					imageAlt="Foundations Visual"
+					mask="fade-bottom-right"
+				>
+					Contextual standards that build on the core system to support domain-specific needs.
+				</TextImage>
+			</DBCard>
+		</a>
+		<DBStack direction="row">
+			<DisabledWrapper label="Coming Soon" size="medium">
+				<DBCard spacing="large">
+					<TextImage
+						imagePosition="right"
+						imageWidth="33"
+						title="Patterns"
+						imageSrc={`${appConfig.basePath}assets/Patterns-Teaser--C.png`}
+						imageAlt="Patterns Visual"
+						mask="fade-bottom-right"
+					>
+						Provide reusable interaction models that guide consistent behavior across products.
+					</TextImage>
+				</DBCard>
+			</DisabledWrapper>
+			<DisabledWrapper label="Coming Soon" size="medium">
+				<DBCard spacing="large">
+					<TextImage
+						imagePosition="right"
+						imageWidth="33"
+						title="Templates"
+						imageSrc={`${appConfig.basePath}assets/Templates-Teaser--C.png`}
+						imageAlt="Templates Visual"
+						mask="fade-bottom-right"
+					>
+						Offer structured starting points that speed up page creation and enforce coherent
+						layouts.
+					</TextImage>
+				</DBCard>
+			</DisabledWrapper>
+		</DBStack>
+	</DBStack>
 </DBSection>

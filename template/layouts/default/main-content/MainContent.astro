@@ -1,34 +1,36 @@
 ---
-import type { MarkdownHeading } from "astro";
-import { TableOfContents } from "./toc";
-import { FooterNav } from "./footer-nav";
+import type { MarkdownHeading } from 'astro';
+import { TableOfContents } from './toc';
+import { FooterNav } from './footer-nav';
 import { DBSection } from '@db-ux/react-core-components';
 import { PageHero } from '@components';
 
 const { headings, frontmatter } = Astro.props as {
-  headings: MarkdownHeading[];
-  frontmatter: FrontMatter;
+	headings: MarkdownHeading[];
+	frontmatter: FrontMatter;
 };
 const toc = (headings?.length ?? 0) > 0 && frontmatter.toc === true;
 ---
 
 <>
-  {toc && <TableOfContents client:only astro={Astro} headings={headings} />}
+	{toc && <TableOfContents client:only astro={Astro} headings={headings} />}
 
-  <div class="dba-main-content">
-    { (frontmatter.title || frontmatter.headline || frontmatter.description) && (
-        <DBSection width="large" spacing="large">
-          <PageHero
-            title={frontmatter.title}
-            headline={frontmatter.headline}
-            description={frontmatter.description}
-            headlineLevel={frontmatter.headlineLevel ?? 1}
-            imageSrc={frontmatter.heroImage}
-            imageAlt={frontmatter.heroImageAlt}
-          />
-        </DBSection>
-      ) }
-    <slot />
-    {frontmatter.nav  && <FooterNav client:only />}
-  </div>
+	<div class="dba-main-content">
+		{
+			(frontmatter.title || frontmatter.headline || frontmatter.description) && (
+				<DBSection width="large" spacing="large">
+					<PageHero
+						title={frontmatter.title}
+						headline={frontmatter.headline}
+						description={frontmatter.description}
+						headlineLevel={frontmatter.headlineLevel ?? 1}
+						imageSrc={frontmatter.heroImage}
+						imageAlt={frontmatter.heroImageAlt}
+					/>
+				</DBSection>
+			)
+		}
+		<slot />
+		{frontmatter.nav && <FooterNav client:only />}
+	</div>
 </>

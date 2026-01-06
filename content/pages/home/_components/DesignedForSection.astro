@@ -5,88 +5,88 @@ import { SectionTitle, TextImage } from '@components';
 ---
 
 <DBSection
-  width="medium"
-  spacing="medium"
-  aria-label="How the system supports your work section"
-  id="home--designed-for-section"
+	width="medium"
+	spacing="medium"
+	aria-label="How the system supports your work section"
+	id="home--designed-for-section"
 >
-  <SectionTitle
-    title="How the system supports your work"
-    description="A shared system that improves collaboration and decision-making for product, development, and design."
-  />
-  <div class="cards-row-fixed">
-    <a
-      href={`${appConfig.basePath}products-and-services/for-productmanagement`}
-      aria-label="Open for productmanagement page"
-    >
-      <DBCard behavior="interactive" data-color="violet" spacing="large">
-        <DBStack gap="medium">
-          <TextImage
-            imagePosition="top"
-            contentAlign="end"
-            imageWidth="33"
-            title="Efficient Delivery"
-            imageSrc={`${appConfig.basePath}assets/for-productmanagement/Efficient-Delivery--Lightmode--C.png`}
-            imageAlt="Efficient Delivery"
-            mask="fade-bottom-right"
-            tag={{ label: 'For Product Management', emphasis: 'strong' }}
-          >
-            Reduce time spent on repeated design and implementation decisions.
-          </TextImage>
-          <DBButton variant="filled" width="full" style={{ boxSizing: 'border-box' }}
-            >See all Benefits</DBButton
-          >
-        </DBStack>
-      </DBCard>
-    </a>
-    <a
-      href={`${appConfig.basePath}products-and-services/for-developer`}
-      aria-label="Open for developer page"
-    >
-      <DBCard behavior="interactive" data-color="green" spacing="large">
-        <DBStack gap="medium">
-          <TextImage
-            imagePosition="top"
-            contentAlign="end"
-            imageWidth="33"
-            title="Predictable Maintenance"
-            imageSrc={`${appConfig.basePath}assets/for-developer/Predictable-Maintenance--Lightmode--C.png`}
-            imageAlt="Predictable Maintenance"
-            mask="fade-bottom-right"
-            tag={{ label: 'For Developer', emphasis: 'strong' }}
-          >
-            Rely on scheduled updates and stable versioning to plan changes confidently.
-          </TextImage>
-          <DBButton variant="filled" width="full" style={{ boxSizing: 'border-box' }}
-            >See all Benefits</DBButton
-          >
-        </DBStack>
-      </DBCard>
-    </a>
+	<SectionTitle
+		title="How the system supports your work"
+		description="A shared system that improves collaboration and decision-making for product, development, and design."
+	/>
+	<div class="cards-row-fixed">
+		<a
+			href={`${appConfig.basePath}products-and-services/for-productmanagement`}
+			aria-label="Open for productmanagement page"
+		>
+			<DBCard behavior="interactive" data-color="violet" spacing="large">
+				<DBStack gap="medium">
+					<TextImage
+						imagePosition="top"
+						contentAlign="end"
+						imageWidth="33"
+						title="Efficient Delivery"
+						imageSrc={`${appConfig.basePath}assets/for-productmanagement/Efficient-Delivery--Lightmode--C.png`}
+						imageAlt="Efficient Delivery"
+						mask="fade-bottom-right"
+						tag={{ label: 'For Product Management', emphasis: 'strong' }}
+					>
+						Reduce time spent on repeated design and implementation decisions.
+					</TextImage>
+					<DBButton variant="filled" width="full" style={{ boxSizing: 'border-box' }}
+						>See all Benefits</DBButton
+					>
+				</DBStack>
+			</DBCard>
+		</a>
+		<a
+			href={`${appConfig.basePath}products-and-services/for-developer`}
+			aria-label="Open for developer page"
+		>
+			<DBCard behavior="interactive" data-color="green" spacing="large">
+				<DBStack gap="medium">
+					<TextImage
+						imagePosition="top"
+						contentAlign="end"
+						imageWidth="33"
+						title="Predictable Maintenance"
+						imageSrc={`${appConfig.basePath}assets/for-developer/Predictable-Maintenance--Lightmode--C.png`}
+						imageAlt="Predictable Maintenance"
+						mask="fade-bottom-right"
+						tag={{ label: 'For Developer', emphasis: 'strong' }}
+					>
+						Rely on scheduled updates and stable versioning to plan changes confidently.
+					</TextImage>
+					<DBButton variant="filled" width="full" style={{ boxSizing: 'border-box' }}
+						>See all Benefits</DBButton
+					>
+				</DBStack>
+			</DBCard>
+		</a>
 
-    <a
-      href={`${appConfig.basePath}products-and-services/for-designer`}
-      aria-label="Open for designer page"
-    >
-      <DBCard behavior="interactive" data-color="blue" spacing="large">
-        <DBStack gap="medium">
-          <TextImage
-            imagePosition="top"
-            contentAlign="end"
-            imageWidth="33"
-            title="Flexible Choices"
-            imageSrc={`${appConfig.basePath}assets/for-designer/Flexible-Choices--Lightmode--C.png`}
-            imageAlt="Flexible Choices"
-            mask="fade-bottom-right"
-            tag={{ label: 'For Designer', emphasis: 'strong' }}
-          >
-            Adapt components and tokens to fit context without losing alignment.
-          </TextImage>
-          <DBButton variant="filled" width="full" style={{ boxSizing: 'border-box' }}
-            >See all Benefits</DBButton
-          >
-        </DBStack>
-      </DBCard>
-    </a>
-  </div>
+		<a
+			href={`${appConfig.basePath}products-and-services/for-designer`}
+			aria-label="Open for designer page"
+		>
+			<DBCard behavior="interactive" data-color="blue" spacing="large">
+				<DBStack gap="medium">
+					<TextImage
+						imagePosition="top"
+						contentAlign="end"
+						imageWidth="33"
+						title="Flexible Choices"
+						imageSrc={`${appConfig.basePath}assets/for-designer/Flexible-Choices--Lightmode--C.png`}
+						imageAlt="Flexible Choices"
+						mask="fade-bottom-right"
+						tag={{ label: 'For Designer', emphasis: 'strong' }}
+					>
+						Adapt components and tokens to fit context without losing alignment.
+					</TextImage>
+					<DBButton variant="filled" width="full" style={{ boxSizing: 'border-box' }}
+						>See all Benefits</DBButton
+					>
+				</DBStack>
+			</DBCard>
+		</a>
+	</div>
 </DBSection>
