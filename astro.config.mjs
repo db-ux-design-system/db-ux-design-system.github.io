@@ -7,6 +7,8 @@ import sitemap from '@astrojs/sitemap';
 import { filterSitemapBlacklist } from './template/integrations/sitemap';
 import orama from '@orama/plugin-astro';
 
+import { viteStaticCopy } from 'vite-plugin-static-copy';
+
 // https://astro.build/config
 export default defineConfig({
 	site: appConfig.hostname,
@@ -28,6 +30,20 @@ export default defineConfig({
 	outDir: './public',
 	publicDir: './static',
 	vite: {
+		plugins: [
+			viteStaticCopy({
+				targets: [
+					{
+						src: './node_modules/@google/model-viewer/dist/model-viewer.min.js',
+						dest: './',
+					},
+					{
+						src: './node_modules/@google/model-viewer/dist/model-viewer.min.js.map',
+						dest: './',
+					},
+				],
+			}),
+		],
 		ssr: {
 			noExternal: ['@db-ux/react-core-components'],
 		},
