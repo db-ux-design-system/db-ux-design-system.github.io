@@ -1,21 +1,15 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "include": [
-    "./content",
-    "./template",
-    "./app.config.ts",
-    "./app.navigation.ts",
-    "./components"
-  ],
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@root/*": ["./*"],
-      "@content/*": ["content/*"],
-      "@template/*": ["template/*"],
-      "@components": ["template/components/index.ts"],
-      "@components/*": ["template/components/*"],
-      "@config": ["app.config.ts"]
-    }
-  }
+	"extends": "astro/tsconfigs/strict",
+	"include": ["./content", "./template", "./app.config.ts", "./app.navigation.ts", "./components"],
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@root/*": ["./*"],
+			"@content/*": ["content/*"],
+			"@template/*": ["template/*"],
+			"@components": ["template/components/index.ts"],
+			"@components/*": ["template/components/*"],
+			"@config": ["app.config.ts"]
+		}
+	}
 }

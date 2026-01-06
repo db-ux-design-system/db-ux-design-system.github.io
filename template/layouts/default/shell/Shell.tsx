@@ -1,53 +1,45 @@
-import { type PropsWithChildren, type ReactElement, useMemo } from "react";
-import { ColorModeProvider } from "@template/context/color-mode-context.tsx";
-import { DBControlPanelDesktop, DBControlPanelMobile, DBShell } from "@db-ux/react-core-components";
-import PrimaryActions from "@template/layouts/default/shell/control-panel/primary-actions.tsx";
-import MainNavigation from "@template/layouts/default/shell/control-panel/main-navigation.tsx";
-import SubNavigation from "@template/layouts/default/shell/control-panel/sub-navigation.tsx";
-import Brand from "@template/layouts/default/shell/control-panel/brand.tsx";
-import { findSubNavigation } from "@template/utils/navigation.utils.ts";
+import { type PropsWithChildren, type ReactElement, useMemo } from 'react';
+import { ColorModeProvider } from '@template/context/color-mode-context.tsx';
+import { DBControlPanelDesktop, DBControlPanelMobile, DBShell } from '@db-ux/react-core-components';
+import PrimaryActions from '@template/layouts/default/shell/control-panel/primary-actions.tsx';
+import MainNavigation from '@template/layouts/default/shell/control-panel/main-navigation.tsx';
+import SubNavigation from '@template/layouts/default/shell/control-panel/sub-navigation.tsx';
+import Brand from '@template/layouts/default/shell/control-panel/brand.tsx';
+import { findSubNavigation } from '@template/utils/navigation.utils.ts';
 
 type Props = PropsWithChildren & {
-  pathname?: string;
+	pathname?: string;
 };
 
-export function Shell({ children, pathname = "/" }: Props): ReactElement {
-  const subNavigation = useMemo(() => {
-    return findSubNavigation(pathname);
-  }, [pathname]);
+export function Shell({ children, pathname = '/' }: Props): ReactElement {
+	const subNavigation = useMemo(() => {
+		return findSubNavigation(pathname);
+	}, [pathname]);
 
-    /*
-    * TODO: We need to get the subNavigation if we are inside a subNavigation Item as well
-    * */
+	/*
+	 * TODO: We need to get the subNavigation if we are inside a subNavigation Item as well
+	 * */
 
-    return (
-        <ColorModeProvider>
-            <DBShell
-                fadeIn
-                subNavigationDesktopPosition="left"
-                subNavigation={
-                    subNavigation ? <SubNavigation navigationItems={subNavigation} /> : null
-                }
-                subNavigationMobilePosition="none"
-                controlPanelDesktop={
-                    <DBControlPanelDesktop
-                        brand={<Brand />}
-                        primaryActions={<PrimaryActions />}
-                    >
-                        <MainNavigation />
-                    </DBControlPanelDesktop>
-                }
-                controlPanelMobile={
-                    <DBControlPanelMobile
-                        brand={<Brand />}
-                        primaryActions={<PrimaryActions />}
-                    >
-                        <MainNavigation mobile />
-                    </DBControlPanelMobile>
-                }
-            >
-                {children}
-            </DBShell>
-        </ColorModeProvider>
-    );
+	return (
+		<ColorModeProvider>
+			<DBShell
+				fadeIn
+				subNavigationDesktopPosition="left"
+				subNavigation={subNavigation ? <SubNavigation navigationItems={subNavigation} /> : null}
+				subNavigationMobilePosition="none"
+				controlPanelDesktop={
+					<DBControlPanelDesktop brand={<Brand />} primaryActions={<PrimaryActions />}>
+						<MainNavigation />
+					</DBControlPanelDesktop>
+				}
+				controlPanelMobile={
+					<DBControlPanelMobile brand={<Brand />} primaryActions={<PrimaryActions />}>
+						<MainNavigation mobile />
+					</DBControlPanelMobile>
+				}
+			>
+				{children}
+			</DBShell>
+		</ColorModeProvider>
+	);
 }

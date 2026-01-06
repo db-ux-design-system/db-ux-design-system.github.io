@@ -16,9 +16,9 @@ const norm = (path: string) => path.replace(/\/+$/, '');
  * @returns The normalized absolute path including the base path
  */
 function withBase(relPath: string) {
-  const base = norm(appConfig.basePath || '/');
-  const rel = relPath.startsWith('/') ? relPath : `/${relPath}`;
-  return norm(`${base}${rel}`);
+	const base = norm(appConfig.basePath || '/');
+	const rel = relPath.startsWith('/') ? relPath : `/${relPath}`;
+	return norm(`${base}${rel}`);
 }
 
 /**
@@ -27,7 +27,7 @@ function withBase(relPath: string) {
  * @returns The path of the first child navigation item or undefined if there are no children.
  */
 export function getFirstChildPath(children?: NavigationItem[]): string | undefined {
-  return children && children.length > 0 ? children[0]?.path : undefined;
+	return children && children.length > 0 ? children[0]?.path : undefined;
 }
 
 /**
@@ -39,14 +39,14 @@ export function getFirstChildPath(children?: NavigationItem[]): string | undefin
  * @returns {boolean} True if the item or its descendants cover the current path, false otherwise
  */
 export function covers(item: NavigationItem, currentPath: string): boolean {
-  if (item.path) {
-    const full = withBase(item.path);
-    if (currentPath === full || currentPath.startsWith(full + '/')) return true;
-  }
-  for (const child of item.children ?? []) {
-    if (covers(child, currentPath)) return true;
-  }
-  return false;
+	if (item.path) {
+		const full = withBase(item.path);
+		if (currentPath === full || currentPath.startsWith(full + '/')) return true;
+	}
+	for (const child of item.children ?? []) {
+		if (covers(child, currentPath)) return true;
+	}
+	return false;
 }
 
 /**
@@ -56,18 +56,18 @@ export function covers(item: NavigationItem, currentPath: string): boolean {
  * @returns An array of navigation items if a matching sub-navigation is found, undefined otherwise
  */
 export function findSubNavigation(currentPathname: string): NavigationItem[] | undefined {
-  const current = norm(currentPathname);
-  let match: { node: NavigationItem; depth: number } | undefined;
+	const current = norm(currentPathname);
+	let match: { node: NavigationItem; depth: number } | undefined;
 
-  const walk = (node: NavigationItem, depth: number) => {
-    if (node.isSubNavigation && covers(node, current)) {
-      if (!match || depth > match.depth) match = { node, depth };
-    }
-    for (const child of node.children ?? []) walk(child, depth + 1);
-  };
+	const walk = (node: NavigationItem, depth: number) => {
+		if (node.isSubNavigation && covers(node, current)) {
+			if (!match || depth > match.depth) match = { node, depth };
+		}
+		for (const child of node.children ?? []) walk(child, depth + 1);
+	};
 
-  for (const top of appNavigation) walk(top, 0);
-  return match?.node.children;
+	for (const top of appNavigation) walk(top, 0);
+	return match?.node.children;
 }
 
 /**
@@ -77,31 +77,31 @@ export function findSubNavigation(currentPathname: string): NavigationItem[] | u
  * @returns The parent navigation item if found, undefined otherwise
  */
 export function getNavigationItemParent(pathname: string): NavigationItem | undefined {
-  const { basePath } = appConfig;
-  const norm = (p: string) => p.replace(/\/+$/, '');
-  const _pathname = norm(pathname);
+	const { basePath } = appConfig;
+	const norm = (p: string) => p.replace(/\/+$/, '');
+	const _pathname = norm(pathname);
 
-  const withBase = (relPath?: string) => {
-    if (!relPath) return undefined;
-    const base = norm(basePath || '/');
-    const rel = relPath.startsWith('/') ? relPath : `/${relPath}`;
-    return norm(`${base}${rel}`);
-  };
+	const withBase = (relPath?: string) => {
+		if (!relPath) return undefined;
+		const base = norm(basePath || '/');
+		const rel = relPath.startsWith('/') ? relPath : `/${relPath}`;
+		return norm(`${base}${rel}`);
+	};
 
-  const findParent = (nodes: NavigationItem[]): NavigationItem | undefined => {
-    for (const node of nodes) {
-      const children = node.children ?? [];
-      for (const child of children) {
-        const full = withBase(child.path);
-        if (full && full === _pathname) {
-          return node;
-        }
-      }
-      const found = findParent(children);
-      if (found) return found;
-    }
-    return undefined;
-  };
+	const findParent = (nodes: NavigationItem[]): NavigationItem | undefined => {
+		for (const node of nodes) {
+			const children = node.children ?? [];
+			for (const child of children) {
+				const full = withBase(child.path);
+				if (full && full === _pathname) {
+					return node;
+				}
+			}
+			const found = findParent(children);
+			if (found) return found;
+		}
+		return undefined;
+	};
 
-  return findParent(appNavigation);
+	return findParent(appNavigation);
 }

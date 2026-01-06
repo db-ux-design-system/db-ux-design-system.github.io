@@ -3,99 +3,99 @@ import './TextImage.css';
 import { DBTag } from '@db-ux/react-core-components';
 
 interface Props {
-  title?: string;
-  imageSrc: string;
-  imageAlt: string;
-  imageSrcDark?: string;
-  reversed?: boolean;
-  contentAlign?: 'start' | 'center' | 'end';
-  headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
-  imageWidth?: '50' | '33' | '66';
-  layout?: 'horizontal' | 'vertical';
-  imagePosition?: 'top' | 'bottom' | 'left' | 'right';
-  mask?:
-    | 'fade-right'
-    | 'fade-left'
-    | 'fade-top'
-    | 'fade-bottom'
-    | 'fade-bottom-right'
-    | 'fade-bottom-left'
-    | 'fade-top-right'
-    | 'fade-top-left';
-  rounded?: boolean;
-  textGap?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
-  tag?: { label: string; emphasis?: 'strong' | 'weak' | 'default' };
+	title?: string;
+	imageSrc: string;
+	imageAlt: string;
+	imageSrcDark?: string;
+	reversed?: boolean;
+	contentAlign?: 'start' | 'center' | 'end';
+	headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
+	imageWidth?: '50' | '33' | '66';
+	layout?: 'horizontal' | 'vertical';
+	imagePosition?: 'top' | 'bottom' | 'left' | 'right';
+	mask?:
+		| 'fade-right'
+		| 'fade-left'
+		| 'fade-top'
+		| 'fade-bottom'
+		| 'fade-bottom-right'
+		| 'fade-bottom-left'
+		| 'fade-top-right'
+		| 'fade-top-left';
+	rounded?: boolean;
+	textGap?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
+	tag?: { label: string; emphasis?: 'strong' | 'weak' | 'default' };
 }
 
 const {
-  title,
-  imageSrc,
-  imageSrcDark,
-  imageAlt,
-  imagePosition = 'right',
-  contentAlign = 'center',
-  imageWidth = '66',
-  mask,
-  rounded = false,
-  textGap = 'sm',
-  headlineLevel = 4,
-  tag,
+	title,
+	imageSrc,
+	imageSrcDark,
+	imageAlt,
+	imagePosition = 'right',
+	contentAlign = 'center',
+	imageWidth = '66',
+	mask,
+	rounded = false,
+	textGap = 'sm',
+	headlineLevel = 4,
+	tag,
 } = Astro.props as Props;
 ---
 
 <div
-  class="text-image"
-  data-image-position={imagePosition}
-  data-image-width={imageWidth}
-  data-content-align={contentAlign}
-  data-text-gap={textGap}
+	class="text-image"
+	data-image-position={imagePosition}
+	data-image-width={imageWidth}
+	data-content-align={contentAlign}
+	data-text-gap={textGap}
 >
-  <div class="text-image__content">
-    {
-      tag && (
-        <div class="text-image__tag" data-density="functional">
-          <DBTag emphasis={tag.emphasis === 'default' ? undefined : tag.emphasis}>
-            {tag.label}
-          </DBTag>
-        </div>
-      )
-    }
-    {
-      title &&
-        (headlineLevel === 1 ? (
-          <h1 class="text-image__title">{title}</h1>
-        ) : headlineLevel === 2 ? (
-          <h2 class="text-image__title">{title}</h2>
-        ) : headlineLevel === 3 ? (
-          <h3 class="text-image__title">{title}</h3>
-        ) : headlineLevel === 4 ? (
-          <h4 class="text-image__title">{title}</h4>
-        ) : headlineLevel === 5 ? (
-          <h5 class="text-image__title">{title}</h5>
-        ) : (
-          <h6 class="text-image__title">{title}</h6>
-        ))
-    }
-    <div class="text-image__text">
-      <slot />
-    </div>
-  </div>
-  <div class="text-image__image">
-    <img
-      class="lightmode-image"
-      src={imageSrc}
-      alt={imageAlt}
-      loading="lazy"
-      data-mask={mask}
-      data-rounded={rounded ? 'true' : undefined}
-    />
-    <img
-      class="darkmode-image"
-      src={imageSrcDark ?? imageSrc}
-      alt={imageAlt}
-      loading="lazy"
-      data-mask={mask}
-      data-rounded={rounded ? 'true' : undefined}
-    />
-  </div>
+	<div class="text-image__content">
+		{
+			tag && (
+				<div class="text-image__tag" data-density="functional">
+					<DBTag emphasis={tag.emphasis === 'default' ? undefined : tag.emphasis}>
+						{tag.label}
+					</DBTag>
+				</div>
+			)
+		}
+		{
+			title &&
+				(headlineLevel === 1 ? (
+					<h1 class="text-image__title">{title}</h1>
+				) : headlineLevel === 2 ? (
+					<h2 class="text-image__title">{title}</h2>
+				) : headlineLevel === 3 ? (
+					<h3 class="text-image__title">{title}</h3>
+				) : headlineLevel === 4 ? (
+					<h4 class="text-image__title">{title}</h4>
+				) : headlineLevel === 5 ? (
+					<h5 class="text-image__title">{title}</h5>
+				) : (
+					<h6 class="text-image__title">{title}</h6>
+				))
+		}
+		<div class="text-image__text">
+			<slot />
+		</div>
+	</div>
+	<div class="text-image__image">
+		<img
+			class="lightmode-image"
+			src={imageSrc}
+			alt={imageAlt}
+			loading="lazy"
+			data-mask={mask}
+			data-rounded={rounded ? 'true' : undefined}
+		/>
+		<img
+			class="darkmode-image"
+			src={imageSrcDark ?? imageSrc}
+			alt={imageAlt}
+			loading="lazy"
+			data-mask={mask}
+			data-rounded={rounded ? 'true' : undefined}
+		/>
+	</div>
 </div>

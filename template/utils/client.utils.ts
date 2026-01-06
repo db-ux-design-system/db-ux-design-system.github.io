@@ -6,10 +6,10 @@ import { appConfig } from '@root/app.config';
  * @returns The aria-current attribute value if the path matches the current URL, otherwise undefined.
  */
 export function getAriaCurrent(path?: string): 'page' | undefined {
-  if (typeof window === 'undefined' || !path) return undefined;
+	if (typeof window === 'undefined' || !path) return undefined;
 
-  const { basePath } = appConfig;
-  const pathname = window.location.pathname.replace(/\/+$/, '');
-  const fullPath = `${basePath}${path}`.replace(/\/+$/, '');
-  return pathname === fullPath ? 'page' : undefined;
+	const { basePath } = appConfig;
+	const pathname = window.location.pathname.replace(/\/+$/, '');
+	const fullPath = `${basePath}${path}`.replace(/\/+$/, '');
+	return pathname === fullPath ? 'page' : undefined;
 }

@@ -2,30 +2,30 @@
 import './PageHero.css';
 
 interface Props {
-  title?: string;
-  headline?: string;
-  description?: string;
-  imageSrc?: string;
-  imageAlt?: string;
-  align?: 'start' | 'center' | 'end';
-  layout?: 'stack' | 'split';
-  imageSide?: 'left' | 'right';
-  headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
+	title?: string;
+	headline?: string;
+	description?: string;
+	imageSrc?: string;
+	imageAlt?: string;
+	align?: 'start' | 'center' | 'end';
+	layout?: 'stack' | 'split';
+	imageSide?: 'left' | 'right';
+	headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 type HeadingTagName = `h${HeadingLevel}`;
 
 const {
-  title,
-  headline,
-  description,
-  imageSrc,
-  imageAlt,
-  align = 'center',
-  layout = 'stack',
-  imageSide = 'right',
-  headlineLevel = 2,
+	title,
+	headline,
+	description,
+	imageSrc,
+	imageAlt,
+	align = 'center',
+	layout = 'stack',
+	imageSide = 'right',
+	headlineLevel = 2,
 } = Astro.props as Props;
 
 const safeHeadlineLevel = Math.min(Math.max(headlineLevel, 1), 6) as HeadingLevel;
@@ -33,35 +33,35 @@ const HeadingTag = `h${safeHeadlineLevel}` as HeadingTagName;
 ---
 
 {
-  (title || headline || description || imageSrc) && (
-    <div
-      class="page-hero"
-      data-align={align}
-      data-layout={layout}
-      data-image-side={imageSide}
-      aria-label="Page introduction"
-    >
-      {layout === 'split' && imageSrc && imageSide === 'left' && (
-        <div class="page-hero__media">
-          <img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
-        </div>
-      )}
-      <div class="page-hero__content">
-        {title && <p class="page-hero__title">{title}</p>}
-        {headline && <HeadingTag class="page-hero__headline">{headline}</HeadingTag>}
-        <span class="page-hero__underline" aria-hidden="true" />
-        {description && <p class="page-hero__description">{description}</p>}
-      </div>
-      {layout === 'split' && imageSrc && imageSide === 'right' && (
-        <div class="page-hero__media">
-          <img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
-        </div>
-      )}
-      {layout === 'stack' && imageSrc && (
-        <div class="page-hero__media">
-          <img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
-        </div>
-      )}
-    </div>
-  )
+	(title || headline || description || imageSrc) && (
+		<div
+			class="page-hero"
+			data-align={align}
+			data-layout={layout}
+			data-image-side={imageSide}
+			aria-label="Page introduction"
+		>
+			{layout === 'split' && imageSrc && imageSide === 'left' && (
+				<div class="page-hero__media">
+					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
+				</div>
+			)}
+			<div class="page-hero__content">
+				{title && <p class="page-hero__title">{title}</p>}
+				{headline && <HeadingTag class="page-hero__headline">{headline}</HeadingTag>}
+				<span class="page-hero__underline" aria-hidden="true" />
+				{description && <p class="page-hero__description">{description}</p>}
+			</div>
+			{layout === 'split' && imageSrc && imageSide === 'right' && (
+				<div class="page-hero__media">
+					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
+				</div>
+			)}
+			{layout === 'stack' && imageSrc && (
+				<div class="page-hero__media">
+					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
+				</div>
+			)}
+		</div>
+	)
 }

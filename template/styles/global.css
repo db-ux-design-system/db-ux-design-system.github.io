@@ -1,26 +1,25 @@
-@import "@db-ux/core-foundations/build/styles/relative.css";
-@import "@db-ux/core-components/build/styles/rollup.css";
-@import "@db-ux/db-theme/build/styles/rollup.css";
+@import '@db-ux/core-foundations/build/styles/relative.css';
+@import '@db-ux/core-components/build/styles/rollup.css';
+@import '@db-ux/db-theme/build/styles/rollup.css';
 
-@import "./layout.css";
-@import "./markdown.css";
-@import "./table-of-contents.css";
-@import "./table.css";
-@import "./db-ux-overrides.css";
+@import './layout.css';
+@import './markdown.css';
+@import './table-of-contents.css';
+@import './table.css';
+@import './db-ux-overrides.css';
 
 :root {
-  --header-height: 64px;
-  --footer-height: 80px;
-  --toc-width: 300px;
-  --side-nav-width: 350px;
-  --content-width: min(1440px, 100svw);
+	--header-height: 64px;
+	--footer-height: 80px;
+	--toc-width: 300px;
+	--side-nav-width: 350px;
+	--content-width: min(1440px, 100svw);
 
-  @media screen and (min-width: 1024px) {
-    --footer-height: 64px;
-  }
+	@media screen and (min-width: 1024px) {
+		--footer-height: 64px;
+	}
 }
 
 html {
-  scroll-padding-top: var(--header-height);
+	scroll-padding-top: var(--header-height);
 }
-

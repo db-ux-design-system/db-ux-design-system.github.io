@@ -3,15 +3,15 @@ import { appConfig } from '@root/app.config';
 import { ClientRouter } from 'astro:transitions';
 
 const { title } = Astro.props as {
-  title: string;
+	title: string;
 };
 ---
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width" />
-  <meta name="generator" content={Astro.generator} />
-  <base href={appConfig.basePath} />
-  <title>{title}</title>
-  <ClientRouter />
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width" />
+	<meta name="generator" content={Astro.generator} />
+	<base href={appConfig.basePath} />
+	<title>{title}</title>
+	<ClientRouter />
 </head>

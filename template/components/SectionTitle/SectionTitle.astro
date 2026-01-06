@@ -2,32 +2,32 @@
 import './SectionTitle.css';
 
 interface Props {
-  title: string;
-  description?: string;
-  layout?: 'split' | 'stack';
+	title: string;
+	description?: string;
+	layout?: 'split' | 'stack';
 }
 
 const { title, description, layout = 'split' } = Astro.props as Props;
 ---
 
 <div class="section-title" data-layout={layout}>
-  {
-    layout === 'split' ? (
-      <>
-        <div class="section-title__col section-title__col--headline">
-          <h3 class="section-title__headline">{title}</h3>
-        </div>
-        {description && (
-          <div class="section-title__col section-title__col--description">
-            <p class="section-title__description">{description}</p>
-          </div>
-        )}
-      </>
-    ) : (
-      <>
-        <h2 class="section-title__headline">{title}</h2>
-        {description && <p class="section-title__description">{description}</p>}
-      </>
-    )
-  }
+	{
+		layout === 'split' ? (
+			<>
+				<div class="section-title__col section-title__col--headline">
+					<h3 class="section-title__headline">{title}</h3>
+				</div>
+				{description && (
+					<div class="section-title__col section-title__col--description">
+						<p class="section-title__description">{description}</p>
+					</div>
+				)}
+			</>
+		) : (
+			<>
+				<h2 class="section-title__headline">{title}</h2>
+				{description && <p class="section-title__description">{description}</p>}
+			</>
+		)
+	}
 </div>

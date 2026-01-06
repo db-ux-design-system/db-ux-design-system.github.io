@@ -1,75 +1,98 @@
 .db-sub-navigation,
 .dba-side-nav {
-  .db-navigation-item {
-    a[aria-current="page"] {
-      color: var(--db-brand-on-bg-basic-emphasis-70-default);
-    }
-  }
+	.db-navigation-item {
+		a[aria-current='page'] {
+			color: var(--db-brand-on-bg-basic-emphasis-70-default);
+		}
+	}
 }
 
 /* Equal-height card rows */
 .cards-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: var(--db-spacing-fixed-lg);
-  align-items: stretch;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: var(--db-spacing-fixed-lg);
+	align-items: stretch;
 }
 .cards-row > a,
 .cards-row > a > .db-card,
 .cards-row > .db-card {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
 }
-.cards-row .text-image { flex: 1 1 auto; }
-.cards-row .text-image__content { flex: 1 1 auto; }
+.cards-row .text-image {
+	flex: 1 1 auto;
+}
+.cards-row .text-image__content {
+	flex: 1 1 auto;
+}
 
 /* Fixed 3 columns -> 1 column (no 2-col intermediate) */
 .cards-row-fixed {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--db-spacing-fixed-lg);
-  align-items: stretch;
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: var(--db-spacing-fixed-lg);
+	align-items: stretch;
 }
-.cards-row-fixed > * { min-width: 0; }
-.cards-row-fixed > a { display: block; width: 100%; }
+.cards-row-fixed > * {
+	min-width: 0;
+}
+.cards-row-fixed > a {
+	display: block;
+	width: 100%;
+}
 .cards-row-fixed > a,
 .cards-row-fixed > a > .db-card,
-.cards-row-fixed > .db-card { height: 100%; display: flex; flex-direction: column; }
-.cards-row-fixed .text-image { flex: 1 1 auto; }
-.cards-row-fixed .text-image__content { flex: 1 1 auto; }
+.cards-row-fixed > .db-card {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+.cards-row-fixed .text-image {
+	flex: 1 1 auto;
+}
+.cards-row-fixed .text-image__content {
+	flex: 1 1 auto;
+}
 @media (max-width: 767px) {
-  .cards-row-fixed { grid-template-columns: 1fr; }
+	.cards-row-fixed {
+		grid-template-columns: 1fr;
+	}
 }
 
-.cards-row-fixed .db-card a.db-link { text-decoration: underline; }
-.cards-row-fixed .db-card a { text-decoration: none; }
+.cards-row-fixed .db-card a.db-link {
+	text-decoration: underline;
+}
+.cards-row-fixed .db-card a {
+	text-decoration: none;
+}
 
 /* Dark blue image tint for signatures or other images */
 .img--tint-dark-blue {
-  /* Using filter chain to approximate dark DB brand blue while preserving alpha */
-  filter: saturate(0) brightness(0.4) sepia(1) hue-rotate(190deg) saturate(4) brightness(0.8);
+	/* Using filter chain to approximate dark DB brand blue while preserving alpha */
+	filter: saturate(0) brightness(0.4) sepia(1) hue-rotate(190deg) saturate(4) brightness(0.8);
 }
 
 /* Dark mode: render these signature images white for contrast */
 @media (prefers-color-scheme: dark) {
-  .img--tint-dark-blue {
-    /* Turn image white: remove hue influence, boost brightness, invert if needed */
-    filter: brightness(0) invert(1) sepia(0) saturate(0) contrast(1.1);
-  }
+	.img--tint-dark-blue {
+		/* Turn image white: remove hue influence, boost brightness, invert if needed */
+		filter: brightness(0) invert(1) sepia(0) saturate(0) contrast(1.1);
+	}
 }
 
 /* Attribute-based mode hook (e.g., <html data-mode="dark">) */
-[data-mode="dark"] .img--tint-dark-blue {
-  filter: brightness(0) invert(1) sepia(0) saturate(0) contrast(1.1);
+[data-mode='dark'] .img--tint-dark-blue {
+	filter: brightness(0) invert(1) sepia(0) saturate(0) contrast(1.1);
 }
 
 .db-stack > a > .db-card {
-  /* Ensure cards in stacks stretch to full width */
-  height: 100%;
-  box-sizing: border-box;
+	/* Ensure cards in stacks stretch to full width */
+	height: 100%;
+	box-sizing: border-box;
 }
 
 .db-stack {
-  overflow: visible;
+	overflow: visible;
 }

@@ -8,22 +8,22 @@ import { Shell } from './shell';
 import interactiveDemoScriptUrl from '@template/components/InteractiveDemo/interactiveDemo.client.js?url';
 
 const { headings, frontmatter } = Astro.props as {
-  headings: MarkdownHeading[];
-  frontmatter: FrontMatter;
+	headings: MarkdownHeading[];
+	frontmatter: FrontMatter;
 };
 ---
 
 <!doctype html>
 <html lang={appConfig.language || 'en'}>
-  <HtmlHead title={frontmatter.title} />
-  <body>
-    <Shell client:only="react">
-      <div class="dba-main-grid">
-        <MainContent frontmatter={frontmatter} headings={headings}>
-          <slot />
-        </MainContent>
-      </div>
-    </Shell>
-    <script type="module" src={interactiveDemoScriptUrl}></script>
-  </body>
+	<HtmlHead title={frontmatter.title} />
+	<body>
+		<Shell client:only="react">
+			<div class="dba-main-grid">
+				<MainContent frontmatter={frontmatter} headings={headings}>
+					<slot />
+				</MainContent>
+			</div>
+		</Shell>
+		<script type="module" src={interactiveDemoScriptUrl}></script>
+	</body>
 </html>
