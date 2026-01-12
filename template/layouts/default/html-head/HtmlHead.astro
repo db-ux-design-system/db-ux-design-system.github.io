@@ -2,8 +2,9 @@
 import { appConfig } from '@root/app.config';
 import { ClientRouter } from 'astro:transitions';
 
-const { title } = Astro.props as {
+const { title, loadModelViewer } = Astro.props as {
 	title: string;
+	loadModelViewer?: boolean;
 };
 ---
 
@@ -13,5 +14,11 @@ const { title } = Astro.props as {
 	<meta name="generator" content={Astro.generator} />
 	<base href={appConfig.basePath} />
 	<title>{title}</title>
+	{
+		loadModelViewer && (
+			<script type="module" is:inline src={`${appConfig.basePath}model-viewer.min.js`} />
+		)
+	}
+
 	<ClientRouter />
 </head>
