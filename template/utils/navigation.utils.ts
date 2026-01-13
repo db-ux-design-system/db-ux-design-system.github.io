@@ -22,6 +22,16 @@ function withBase(relPath: string) {
 }
 
 /**
+ * Trims the file extension from a path.
+ *
+ * @param path - The path to trim the extension from
+ * @returns The path without the file extension
+ */
+export function trimExtension(path?: string): string | undefined {
+	return path?.replace(/\.[^/.]+$/, '');
+}
+
+/**
  * Returns the path of the first child navigation item, if any.
  * @param children - An array of navigation items.
  * @returns The path of the first child navigation item or undefined if there are no children.

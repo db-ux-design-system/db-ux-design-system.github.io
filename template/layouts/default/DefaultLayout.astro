@@ -7,17 +7,23 @@ import { appConfig } from '@root/app.config.ts';
 import { Shell } from './shell';
 import interactiveDemoScriptUrl from '@template/components/InteractiveDemo/interactiveDemo.client.js?url';
 
-const { headings, frontmatter } = Astro.props as {
+interface Props {
 	headings: MarkdownHeading[];
 	frontmatter: FrontMatter;
-};
+}
+const { headings, frontmatter } = Astro.props;
+const currentPath = Astro.url.pathname;
 ---
 
 <!doctype html>
 <html lang={appConfig.language || 'en'}>
 	<HtmlHead title={frontmatter.title} loadModelViewer={frontmatter.loadModelViewer} />
 	<body>
-		<Shell client:only="react">
+		<Shell
+			client:only="react"
+			pathname={currentPath}
+			subNavigationVariant={frontmatter.subNavigationVariant}
+		>
 			<div class="dba-main-grid">
 				<MainContent frontmatter={frontmatter} headings={headings}>
 					<slot />

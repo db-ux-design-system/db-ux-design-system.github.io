@@ -1,6 +1,6 @@
 import { DBNavigationItem, DBNavigationItemGroup } from '@db-ux/react-core-components';
 import { getAriaCurrent } from '@template/utils/client.utils.ts';
-import { covers, getFirstChildPath } from '@template/utils/navigation.utils.ts';
+import { covers, getFirstChildPath, trimExtension } from '@template/utils/navigation.utils.ts';
 
 const NavItem = ({
 	path,
@@ -12,14 +12,14 @@ const NavItem = ({
 	disabled,
 }: NavigationItem) => {
 	// if sub-navigation node, do not render children here
+	const isActive =
+		typeof window !== 'undefined' &&
+		covers(
+			{ path, title, icon, iconTrailing, children, isSubNavigation },
+			window.location.pathname,
+		);
 	if (isSubNavigation) {
 		const target = path ?? getFirstChildPath(children);
-		const isActive =
-			typeof window !== 'undefined' &&
-			covers(
-				{ path, title, icon, iconTrailing, children, isSubNavigation },
-				window.location.pathname,
-			);
 
 		return (
 			<DBNavigationItem
@@ -29,7 +29,7 @@ const NavItem = ({
 				aria-disabled={disabled ? 'true' : undefined}
 			>
 				<a
-					href={target}
+					href={trimExtension(target)}
 					aria-current={isActive ? 'page' : undefined}
 					data-icon-trailing={iconTrailing}
 				>
@@ -46,6 +46,7 @@ const NavItem = ({
 				text={title}
 				key={`router-group-${path ?? title}`}
 				aria-disabled={disabled ? 'true' : undefined}
+				expanded={isActive}
 			>
 				{children.map((sub) => (
 					<NavItem key={`router-sub-${sub.path ?? sub.title}`} {...sub} />
@@ -62,7 +63,11 @@ const NavItem = ({
 			disabled={disabled}
 			aria-disabled={disabled ? 'true' : undefined}
 		>
-			<a href={path} aria-current={getAriaCurrent(path)} data-icon-trailing={iconTrailing}>
+			<a
+				href={trimExtension(path)}
+				aria-current={getAriaCurrent(trimExtension(path))}
+				data-icon-trailing={iconTrailing}
+			>
 				{title}
 			</a>
 		</DBNavigationItem>

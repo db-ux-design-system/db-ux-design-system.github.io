@@ -93,7 +93,7 @@ function sortTree(node: NavigationItem) {
  * @returns A fully structured and sorted `AppNavigation` tree.
  */
 export function buildAppNavigationFromContent(): AppNavigation {
-	const mods = import.meta.glob<MdModule>('../../content/pages/**/index.{md,mdx}', {
+	const mods = import.meta.glob<MdModule>('../../content/pages/**/*.{md,mdx}', {
 		eager: true,
 	}) as Modules;
 	const nodes = new Map<string, NavigationItem>();

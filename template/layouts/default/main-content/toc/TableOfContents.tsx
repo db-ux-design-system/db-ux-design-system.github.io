@@ -5,11 +5,15 @@ import { useEffect, useRef, useState, type ReactElement } from 'react';
 interface Props {
 	astro: AstroGlobal;
 	headings: MarkdownHeading[];
+	tocMaxDepth?: number;
 }
 
 export function TableOfContents(props: Props): ReactElement | null {
 	const { headings = [] } = props;
-	const slugs = headings.map((h) => h.slug);
+	const filteredHeadings = headings.filter(
+		({ depth }) => !props.tocMaxDepth || props.tocMaxDepth >= depth,
+	);
+	const slugs = filteredHeadings.map((h) => h.slug);
 	const currentPath = getCurrentPathname(props.astro);
 	const toc = useRef<HTMLUListElement>(null);
 	const [currentID, setCurrentID] = useState('');
@@ -39,7 +43,13 @@ export function TableOfContents(props: Props): ReactElement | null {
 		const headingsObserver = new IntersectionObserver(setCurrent, observerOptions);
 
 		// Observe all the headings in the main page content.
-		const allHeadings = document.querySelectorAll('h2[id], h3[id], h4[id], h5[id], h6[id]');
+		// TODO: Create this based on depth
+		const allHeadings = document.querySelectorAll(
+			[2, 3, 4, 5, 6]
+				.filter((depth) => !props.tocMaxDepth || props.tocMaxDepth >= depth)
+				.map((depth) => `h${depth}[id]`)
+				.join(','),
+		);
 		allHeadings.forEach((h) => headingsObserver.observe(h));
 
 		// Stop observing when the component is unmounted.
@@ -67,7 +77,7 @@ export function TableOfContents(props: Props): ReactElement | null {
 	return (
 		<aside className="dba-toc">
 			<ul ref={toc}>
-				{headings.map(({ depth, slug, text }) => (
+				{filteredHeadings.map(({ depth, slug, text }) => (
 					<li
 						key={slug}
 						className="dba-toc-heading"

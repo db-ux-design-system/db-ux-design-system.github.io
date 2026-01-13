@@ -6,12 +6,14 @@ import MainNavigation from '@template/layouts/default/shell/control-panel/main-n
 import SubNavigation from '@template/layouts/default/shell/control-panel/sub-navigation.tsx';
 import Brand from '@template/layouts/default/shell/control-panel/brand.tsx';
 import { findSubNavigation } from '@template/utils/navigation.utils.ts';
+import type { NavigationItemGroupVariantType } from '@db-ux/react-core-components/dist/shared/model';
 
 type Props = PropsWithChildren & {
 	pathname?: string;
+	subNavigationVariant?: NavigationItemGroupVariantType;
 };
 
-export function Shell({ children, pathname = '/' }: Props): ReactElement {
+export function Shell({ children, pathname = '/', subNavigationVariant }: Props): ReactElement {
 	const subNavigation = useMemo(() => {
 		return findSubNavigation(pathname);
 	}, [pathname]);
@@ -25,7 +27,9 @@ export function Shell({ children, pathname = '/' }: Props): ReactElement {
 			<DBShell
 				fadeIn
 				subNavigationDesktopPosition="left"
-				subNavigation={subNavigation ? <SubNavigation navigationItems={subNavigation} /> : null}
+				subNavigation={
+					subNavigation ? <SubNavigation navigationItems={subNavigation} variant={subNavigationVariant} /> : null
+				}
 				subNavigationMobilePosition="none"
 				controlPanelDesktop={
 					<DBControlPanelDesktop brand={<Brand />} primaryActions={<PrimaryActions />}>

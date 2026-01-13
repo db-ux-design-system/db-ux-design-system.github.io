@@ -53,6 +53,7 @@ export default defineConfig({
 				'@template': new URL('./template', import.meta.url).pathname,
 				'@content': new URL('./content', import.meta.url).pathname,
 				'@config': new URL('./app.config.ts', import.meta.url).pathname,
+				'@assets': new URL('./static/assets', import.meta.url).pathname,
 			},
 		},
 	},
