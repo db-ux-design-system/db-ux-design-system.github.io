@@ -44,6 +44,11 @@ declare interface FrontMatter {
 	 */
 	toc?: boolean;
 	/**
+	 * Choose the maximum depth of the table of contents.
+	 * @default undefined
+	 */
+	tocMaxDepth?: number | undefined;
+	/**
 	 * Whether the page should render a navigation sidebar. Not visible on mobile devices and not visible
 	 * if the page does not have any sibling pages.
 	 * @default true
@@ -53,6 +58,11 @@ declare interface FrontMatter {
 	 * If true, children will be rendered as sub-navigation on child pages.
 	 */
 	isSubNavigation?: boolean;
+	/**
+	 * The variant of the sub-navigation. If not set, the variant will be determined automatically.
+	 * @default 'tree'
+	 */
+	subNavigationVariant?: 'tree' | 'popover';
 	/**
 	 * If true, the page itself will not be shown; instead, a redirect to the first child will occur.
 	 */

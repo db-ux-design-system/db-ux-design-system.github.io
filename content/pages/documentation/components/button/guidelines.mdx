@@ -1,0 +1,196 @@
+---
+order: 2
+layout: '@template/layouts/default'
+toc: true
+title: 'Guidelines'
+headline: 'Button'
+description: 'Der Button wird verwendet, um Nutzer:innen zur Interaktion aufzufordern und eine Aktion auszulösen.'
+---
+
+import ComponentLifecycleNotification from '@template/components/ComponentLifecycleNotification/ComponentLifecycleNotification.tsx';
+
+import buttonPlaygroundImage from '@assets/documentation/components/button/Component-Action-Button-Playground-data.png';
+
+<ComponentLifecycleNotification state="stable" />
+
+<img src={buttonPlaygroundImage.src} alt="Component--Action--Button--Playground" />
+
+
+## Navigation
+
+- [Hierarchie](#hierarchy)
+- [Label](#label)
+- [Icons](#icon)
+- [Positionierung](#position)
+- [Breite](#width)
+- [Button? Link?](#buttonlink)
+- [Accessibility](#accessibility)
+
+## Kurz, Knackig, Klar
+
+### Setze die Button-Komponente ein, wenn
+
+- eine **Aktion** ausgelöst werden soll, z. B. „Senden", „Speichern" oder „Löschen".
+- eine **Aufgabe** oder ein **Dialog gestartet** werden soll
+- Nutzer klar erkennen sollen, dass eine **Interaktion** oder **Bestätigung** erwartet wird.
+- Du eine **primäre oder sekundäre Aktion** visuell hervorheben möchtest.
+
+### Guidelines to Go
+
+- **Brand-Button:**
+  - stärkster Call-to-Action (CTA), leitet zur Conversion.
+  - idealerweise nur einmal pro Viewport verwenden.
+- **Outlined-Button:**
+  - mittelstarke Hervorhebung für wichtige, aber nicht primäre Aktionen.
+  - gut kombinierbar als sekundäre Aktionen mit Brand-Button.
+- **Label** soll einzeilig, kurz und prägnant sein und eine klare Handlungsaufforderung vermitteln.
+- **Icons** sollen Intuitiv und allgemein verständlich sein.
+- **Button** für Aktionen und **Links** für Navigation verwenden.
+- Gebe beim Icon Button immer einen **Screenreader Text** an
+
+## Hierarchie
+
+Lege eine klare Hierarchie für Buttons fest, um visuell und funktional zu zeigen, welche Aktionen priorisiert sind. Beachten dabei die Wichtigkeit der Aktionen und deren Relevanz für den Nutzerkontext.
+
+### Outlined Buttons
+
+Outlined Buttons sind mittelstark hervorgehobene Buttons. Sie beinhalten wichtige Aktionen, die jedoch nicht die primäre Aktion in der Anwendung darstellen. Sie lassen sich gut mit dem Brand-Button kombinieren, um eine alternative, sekundäre Aktion anzuzeigen.
+
+![Button - Variant - Do_Dont - Hierarchie](/resource/blob/12822692/f2377678d54689f6a6389190e63405f9/Button-Variant-Do_Dont-Hierarchie-data.png)
+
+_🟢 Aktionen sind priorisiert: Brand-Button und Outlined-Button
+🔴 Aktionen sind nicht priorisiert: Zwei Brand-Buttons gleichzeitig_
+
+### Brand Button
+
+Der Brand Button ist der stärkste CTA und soll die Nutzer:innen zum Conversion Target leiten. Aus diesem Grund verwenden wir ihn im besten Fall nur einmal pro Viewport.
+
+![Button - Content - Viewport](/resource/blob/13107688/ac240f62a85290f7aa237a9513414c01/Button-Content-Viewport-data.png)
+
+![Button - Content - Viewport2Button](/resource/blob/13107690/e329c6b06d14d9d15cb5f2f4d8b6be13/Button-Content-DoDont-Viewport-data.png)
+
+_🟢 Ein Brand-Button pro Viewport
+🔴 Mehrere Brand-Buttons pro Viewport_
+
+### Kombinationsmöglichkeiten
+
+Die verschiedenen Buttons können unterschiedlich miteinander kombiniert werden.
+
+(1) Bei **Kombinationen mit dem Brand-Button** steht dieser im Mittelpunkt, während Outlined, Filled oder Ghost-Buttons unterstützende oder sekundäre Aktionen markieren.
+
+(2) Bei **Kombinationen mit Outlined-Buttons** eignen sich für wichtige, aber nicht primäre Aktionen. In Kombination mit Filled oder Ghost entsteht eine klare visuelle Abstufung zwischen den Aktionen. **Filled-Buttons** sind visuell stärker, **Ghost-Buttons** dezent. Zusammen bieten sie eine flexible Möglichkeit, Aktionen unterschiedlich zu gewichten.
+
+(3) **Outlined-Buttons** nebeneinander bieten eine gleichwertige Darstellung für wichtige, aber nicht primäre Aktionen. **Filled-Buttons** zusammen heben Aktionen moderat hervor, ohne visuell zu dominant zu wirken. **Ghost-Buttons** nebeneinander schaffen eine dezente, unaufdringliche Option für gleichrangige, weniger zentrale Aktionen.
+
+![Button - Content - Kombination](/resource/blob/13107806/f05ec7637a5f40b54bdafe14a499eb3d/Button-Content-Kombination-data.png)
+
+## Label
+
+Halte das Label des Buttons kurz und prägnant, um eine klare und verständliche Handlungsaufforderung zu gewährleisten.
+
+![Button-Content-Do-Label](/resource/blob/12795456/127e90cdc40b810625b7d2a1392b46ae/Button-Content-Do-Label-data.png)
+
+Labeltexte in Auto Width Buttons sind immer einzeilig und sollten kurz gehalten werden. Breche den Text nicht manuell um.
+
+![Button - Content - DoDont - LabelButton](/resource/blob/13092868/5d910927fe634690013c0df0687dfa51/Button-Content-DoDont-Label-data.png)
+
+_🟢 Labeltexte sind standardmäßig immer einzeilig
+🔴 Labeltext soll nicht manuell umgebrochen werden_
+
+Wird der Text innerhalb des FullWidth Buttons länger, als die Breite ermöglicht, kann der Text mehrzeilig werden. Dies sollte durch kurze Labeltexte grundsätzlich vermieden werden und ist nur für Ausnahmefällen, wie der Verlängerung des Textes durch Übersetzung der Sprache oder Verkleinerung der Screenbreite, angedacht.
+
+![Button - Content - DoDont - LabelMultiline](/resource/blob/13552372/7bc0749046a4d94d362cdcd0a7371c93/Button-Content-DoDont-LabelMultiline-data.png)
+
+_🟢 Bei Verkleinerung der Screenbreite und Sprachänderung kann der Full Width Button mehrzeilig werden, um den gesamten Labeltext anzuzeigen.
+🔴 Mehrzeiligkeit sollte nicht für lange, komplizierte Labeltexte verwendet werden._
+
+## Icons
+
+Die verwendeten Icons in den Buttons sollten intuitiv und allgemein verständlich sein (z. B. ein Papierkorb für "Löschen" oder ein Stiftsymbol für "Bearbeiten"). Unklare oder komplexe Icons können Verwirrung stiften.
+
+### Icon Button
+
+Reine Icon-Buttons eignen sich besonders gut für Toolbars, Navigationsleisten und mobile Interfaces, wo eine klare und kompakte Darstellung von Aktionen wichtig ist.
+
+![Button - Content - IconsButton](/resource/blob/13092872/33676afa8a574aef90a61d786e29b5bb/Button-Content-Icons-data.png)
+
+Icon-Buttons sollten im Hover-Zustand einen Tooltip mit der auszulösenden Aktion anzeigen.
+
+![Button-Content-Do-Tooltip](/resource/blob/12795458/7e5a8dc653641b11f30e581c2889fce2/Button-Content-Do-Tooltip-data.png)
+
+_Zeige für den Icon-Button im Hover-State einen Tooltip an_
+
+(Icon-) Buttons können durch Badges ergänzt werden, um z.B. Benachrichtigungen oder Änderungen anzuzeigen. Guidelines zur Platzierung sind in der [Badge Dokumentation](/marketingportal/Guidelines-13095480) zu finden.
+
+![Button - Content - Badge](/resource/blob/13153124/07680c5a3e7ad17bfe647c0f100e2c73/Button-Content-Badge-data.png)
+
+Je nach Anwendungsfall können Buttons entweder ein Leading Icon oder ein Trailing Icon beinhalten. Die Kombination beider sollte vermieden werden, um die Übersicht zu bewahren und eine intuitive Nutzererfahrung sicherzustellen.
+
+![Button - Content - LeadingTrailingIcons](/resource/blob/13447022/fac32818f81b6f673c575fac4bb0ba53/Button-Content-LeadingTrailingIcons-data.png)
+
+_🟢 Nutze Leading- und Trailing Icons als sinnvolle Ergänzung für die jeweilige Aktion.
+🔴 Verwende innerhalb eines Buttons keine zwei Icons._
+
+## Positionierung
+
+Vermeide es, Buttons untereinander zu platzieren wenn genügend Platz für eine horizontale Darstellung gegeben ist.
+
+![Button - Weitere_Guidelines - Do_Dont - Platzierung](/resource/blob/12822694/0a5ddd052d7e3ba4007aea4f9e75a8c8/Button-Weitere_Guidelines-Do_Dont-Platzierung_Visual-data.png)
+
+_🟢 Buttons nebeneinander
+🔴 Buttons untereinander_
+
+## Breite
+
+Der Standard-Button passt sich in der Breite dem Inhalt an (Auto Width). Wenn du Buttons in responsiven Layouts einsetzt, können diese auch die Breite des Containers einnehmen. Insbesondere in Mobile-Layouts werden die Full Width-Buttons verwendet. Die Button-Breite kann nie kleiner als der Inhalt sein.
+
+![Button - Content - DoDont - WidthButton](/resource/blob/13092870/26cfd6c34be084c9343a2f029b99bfc6/Button-Content-DoDont-Width-data.png)
+
+_🟢 Button Breite entspricht dem Inhalt (Auto Width)
+🟢 Button Breite entspricht dem Container (Full Width)
+🔴 Inhalt ist breiter als Button_
+
+## Button oder Link?
+
+Nutze Buttons, um Aktionen auszulösen, allerdings nicht, um auf andere Seiten zu leiten – dafür werden Links verwendet.
+
+![Button-Weitere_Guidelines-Button_vs_Link](/resource/blob/12795484/8d89ca456ebb3beb20a2ae921949e9d9/Button-Weitere_Guidelines-Button_vs_Link-data.png)
+
+## Accessibility
+
+### Kontrastwerte
+
+Um die WCAG-Richtlinien zu erfüllen, muss der Text eines Buttons ein Kontrastverhältnis von 4,5:1, Icons ein Kontrastverhältnis von 3:1 gegenüber ihrem Hintergrund in allen interaktiven Zuständen aufweisen. Disabled Buttons sind nicht interaktiv und müssen keine Farbkontrastanforderungen erfüllen. Die Nutzung der Komponenten des DB UX Design Systems gewährleistet die Erfüllung der WCAG-Richtlinien.
+
+![Button-Accessibility-Visual](/resource/blob/12795502/297b79471c03a800554b1aed0df63865/Button-Accessibility-Visual-data.png)
+
+### Screenreader Text
+
+Achte darauf, dass auch bei **Icon Button** der Screenreader-Text immer mit an die Entwicklung übergeben wird, auch wenn es keinen visuell sichtbaren Text gibt. Ohne diese Angaben kann der Tag nicht barrierefrei genutzt werden.
+
+![Button - Content - AccessibilityScreenreader](/resource/blob/13176436/43400fa8184d3a10f760f40e9be1023f/Button-Content-AccessibilityScreenreader-data.png)
+
+_Gib immer einen Text an, auch wenn er nicht sichtbar ist._
+
+### Hinweis für den Button Small (Functional)
+
+Der Button "Small" in der Density "Functional" hat eine Höhe von 20 px. Um Barrierefreiheitsrichtlinien zu gewährleisten, muss die Klickfläche jedoch mindestens 24 px haben. In diesem Bereich dürfen keine weitere interaktive Elemente platziert werden. Der notwendige Bereich kann entweder durch die Größe des Elements oder aber durch entsprechenden Umraum zu anderen interaktiven Elementen erreicht werden (hier relevant).
+
+![Button -Content - Accessibility - Functional Small](/resource/blob/13191428/ea2754df358921a40bb3c0cdfdf80313/Button-Content-Accessibility-Functional-Small-data.png)
+
+_🟢 Die Klickfläche von 24 px wird eingehalten.
+🔴 Die Klickfläche von 24 px wird durch ein anderes Element beschnitten._
+
+
+## Das könnte dich auch noch interessieren
+
+## Related Components
+
+- [Link](/marketingportal/Design-Anwendungen/db-ux-design-system/components/link#10447656) - Links werden als Navigationselemente verwendet. Sie können alleinstehend, innerhalb eines Satzes oder Absatzes oder …
+- [Badge](/marketingportal/Design-Anwendungen/db-ux-design-system/components/badge#10451968) - Badges sind visuelle Indikatoren, um wichtige Informationen hervorzuheben und den Status von Elementen, Komponenten …
+
+## Du hast Fragen oder Input?
+
+Wir haben alles dafür gegeben, dass unser Design System mit möglichst wenigen Regeln auskommt. So wird es einfach in der Anwendung, führt zu konsistenten Ergebnissen und stärkt die Marke Deutsche Bahn! Solltest du dir jedoch unsicher sein, Fragen oder einfach nur eine gute Verbesserungsidee haben, so sind wir gerne für dich da!
+
+[E-Mail schreiben](mailto:db-ux-designsystem@deutschebahn.com) [Feedback in Github](https://github.com/db-ux-design-system/core/issues)

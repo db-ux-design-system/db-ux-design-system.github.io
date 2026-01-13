@@ -13,12 +13,21 @@ const toc = (headings?.length ?? 0) > 0 && frontmatter.toc === true;
 ---
 
 <>
-	{toc && <TableOfContents client:only astro={Astro} headings={headings} />}
+	{
+		toc && (
+			<TableOfContents
+				client:only
+				astro={Astro}
+				headings={headings}
+				tocMaxDepth={frontmatter.tocMaxDepth}
+			/>
+		)
+	}
 
 	<div class="dba-main-content">
 		{
 			(frontmatter.title || frontmatter.headline || frontmatter.description) && (
-				<DBSection width="large" spacing="large">
+				<DBSection id={frontmatter.title} width="large" spacing="large">
 					<PageHero
 						title={frontmatter.title}
 						headline={frontmatter.headline}
@@ -30,7 +39,9 @@ const toc = (headings?.length ?? 0) > 0 && frontmatter.toc === true;
 				</DBSection>
 			)
 		}
-		<slot />
+		<DBSection id="main-content-section" width="full" spacing="none">
+			<slot />
+		</DBSection>
 		{frontmatter.nav && <FooterNav client:only />}
 	</div>
 </>
