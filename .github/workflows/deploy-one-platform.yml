@@ -27,13 +27,16 @@ jobs:
           cache: npm
 
       - name: Install deps
-        env:
-          ASSET_PASSWORD: ${{ secrets.ASSET_PASSWORD }}
-          ASSET_INIT_VECTOR: ${{ secrets.ASSET_INIT_VECTOR }}
         run: npm ci
 
       - name: Build
-        run: npm run build
+        env:
+          ASSET_PASSWORD: ${{ secrets.ASSET_PASSWORD }}
+          ASSET_INIT_VECTOR: ${{ secrets.ASSET_INIT_VECTOR }}
+        run: |
+          node node_modules/@db-ux/db-theme-fonts/build/scripts/index.js
+          node node_modules/@db-ux/db-theme-icons/build/scripts/index.js
+          npm run build
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
