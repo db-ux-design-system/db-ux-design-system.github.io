@@ -24,6 +24,6 @@ const { headings, frontmatter } = Astro.props as {
 				</MainContent>
 			</div>
 		</Shell>
-		<script type="module" src={interactiveDemoScriptUrl}></script>
+		<script is:inline type="module" src={interactiveDemoScriptUrl}></script>
 	</body>
 </html>
