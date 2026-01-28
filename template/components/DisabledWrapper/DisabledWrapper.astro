@@ -14,12 +14,12 @@ const { label, disabled = true, emphasis, size = 'medium', ariaLabel } = Astro.p
 ---
 
 <div class={'disabled-wrapper'} data-disabled={disabled ? 'true' : 'false'}>
-	<div class="disabled-wrapper__content">
+	<div class="disabled-wrapper-content">
 		<slot />
 	</div>
 	{
 		disabled && (
-			<div class="disabled-wrapper__overlay" aria-label={ariaLabel || label}>
+			<div class="disabled-wrapper-overlay" aria-label={ariaLabel || label}>
 				<DBBadge
 					size={size}
 					semantic="informational"

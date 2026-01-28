@@ -50,10 +50,10 @@ const {
 	data-content-align={contentAlign}
 	data-text-gap={textGap}
 >
-	<div class="text-image__content">
+	<div class="text-image-content">
 		{
 			tag && (
-				<div class="text-image__tag" data-density="functional">
+				<div class="text-image-tag" data-density="functional">
 					<DBTag emphasis={tag.emphasis === 'default' ? undefined : tag.emphasis}>
 						{tag.label}
 					</DBTag>
@@ -63,24 +63,24 @@ const {
 		{
 			title &&
 				(headlineLevel === 1 ? (
-					<h1 class="text-image__title">{title}</h1>
+					<h1 class="text-image-title">{title}</h1>
 				) : headlineLevel === 2 ? (
-					<h2 class="text-image__title">{title}</h2>
+					<h2 class="text-image-title">{title}</h2>
 				) : headlineLevel === 3 ? (
-					<h3 class="text-image__title">{title}</h3>
+					<h3 class="text-image-title">{title}</h3>
 				) : headlineLevel === 4 ? (
-					<h4 class="text-image__title">{title}</h4>
+					<h4 class="text-image-title">{title}</h4>
 				) : headlineLevel === 5 ? (
-					<h5 class="text-image__title">{title}</h5>
+					<h5 class="text-image-title">{title}</h5>
 				) : (
-					<h6 class="text-image__title">{title}</h6>
+					<h6 class="text-image-title">{title}</h6>
 				))
 		}
-		<div class="text-image__text">
+		<div class="text-image-text">
 			<slot />
 		</div>
 	</div>
-	<div class="text-image__image">
+	<div class="text-image-image">
 		<img
 			class="lightmode-image"
 			src={imageSrc}

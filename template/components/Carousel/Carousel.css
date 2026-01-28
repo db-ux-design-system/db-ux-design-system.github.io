@@ -3,23 +3,24 @@
 	width: 100%;
 	display: flex;
 	gap: var(--db-spacing-fixed-lg);
-	overflow-x: auto;
-	overflow-y: hidden;
+	overflow: auto hidden;
 	-webkit-overflow-scrolling: touch;
 	scroll-snap-type: x mandatory;
 	scrollbar-width: none; /* Firefox */
 	-ms-overflow-style: none; /* IE/Edge legacy */
 	padding: 0 var(--db-spacing-fixed-xl);
 }
+
 .carousel > * {
 	flex: 0 0 auto;
 	scroll-snap-align: center;
 }
+
 .carousel > .db-card {
 	width: 80%;
 }
 
-.carousel .text-image__image img {
+.carousel .text-image-image img {
 	height: 100%;
 	object-fit: cover;
 }

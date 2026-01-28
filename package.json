@@ -10,7 +10,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "prettier --check . && astro check",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "lint:stylelint": "stylelint **/*.css"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.4",
@@ -19,6 +20,7 @@
     "@astrojs/sitemap": "3.6.0",
     "@db-ux/core-components": "3.0.2-shell4-bdb351c",
     "@db-ux/core-foundations": "3.0.2-shell4-bdb351c",
+    "@db-ux/core-stylelint": "4.4.0",
     "@db-ux/db-theme": "5.2.0",
     "@db-ux/react-core-components": "3.0.2-shell4-bdb351c",
     "@orama/orama": "3.1.14",
@@ -27,6 +29,8 @@
     "astro": "5.16.6",
     "prettier": "3.6.2",
     "prettier-plugin-astro": "0.14.1",
+    "stylelint": "17.0.0",
+    "stylelint-config-standard": "40.0.0",
     "typescript": "5.9.2",
     "vite-plugin-static-copy": "3.1.4"
   },

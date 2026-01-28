@@ -1,14 +1,14 @@
 .dba-toc {
 	width: 300px;
 
-	@media screen and (min-width: 1024px) {
+	@media screen and (width >= 1024px) {
 		position: fixed;
-		margin-top: 1rem;
+		margin-top: var(--db-spacing-fixed-md);
 	}
 }
 
 .dba-toc-heading {
-	padding: 0.1rem 0 0.1rem 1rem;
+	padding: var(--db-spacing-fixed-3xs) 0 var(--db-spacing-fixed-3xs) var(--db-spacing-fixed-md);
 	border-left: 4px solid var(--db-neutral-on-bg-inverted-pressed);
 	transition:
 		border 0.1s ease-out,
@@ -19,7 +19,10 @@
 	color: transparent;
 }
 
-.dba-toc-heading:focus,
+.dba-toc-heading:focus {
+	color: inherit;
+}
+
 .dba-toc-heading a:focus {
 	color: inherit;
 }
@@ -40,9 +43,9 @@
 
 .dba-toc-heading a {
 	display: inline-flex;
-	gap: 0.5em;
+	gap: var(--db-spacing-fixed-xs);
 	width: 100%;
-	padding: 0.15em 0 0.15em 0;
+	padding: var(--db-spacing-fixed-3xs) 0;
 	font: inherit;
 	color: inherit;
 	text-decoration: none;
@@ -54,9 +57,9 @@
 }
 
 .dba-toc-heading[data-depth='3'] {
-	padding-left: 2rem;
+	padding-left: var(--db-spacing-fixed-lg);
 }
 
 .dba-toc-heading[data-depth='4'] {
-	padding-left: 3rem;
+	padding-left: var(--db-spacing-fixed-xl);
 }

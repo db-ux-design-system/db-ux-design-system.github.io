@@ -22,15 +22,15 @@ const { title, text, primaryAction, secondaryAction, align = 'center' } = Astro.
 {
 	primaryAction && (
 		<DBCard spacing="large" elevationLevel="2" className="cta">
-			<div class="cta__content" data-align={align}>
-				{title && <h3 class="cta__title">{title}</h3>}
-				{text && <p class="cta__text">{text}</p>}
-				<div class="cta__actions">
-					<a href={primaryAction.href} class="cta__action" aria-label={primaryAction.label}>
+			<div class="cta-content" data-align={align}>
+				{title && <h3 class="cta-title">{title}</h3>}
+				{text && <p class="cta-text">{text}</p>}
+				<div class="cta-actions">
+					<a href={primaryAction.href} class="cta-action" aria-label={primaryAction.label}>
 						<DBButton variant={primaryAction.variant || 'brand'}>{primaryAction.label}</DBButton>
 					</a>
 					{secondaryAction && (
-						<a href={secondaryAction.href} class="cta__action" aria-label={secondaryAction.label}>
+						<a href={secondaryAction.href} class="cta-action" aria-label={secondaryAction.label}>
 							<DBButton variant={secondaryAction.variant || 'outlined'}>
 								{secondaryAction.label}
 							</DBButton>
