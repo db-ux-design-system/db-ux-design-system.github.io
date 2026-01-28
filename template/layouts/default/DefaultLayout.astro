@@ -30,6 +30,6 @@ const currentPath = Astro.url.pathname;
 				</MainContent>
 			</div>
 		</Shell>
-		<script type="module" src={interactiveDemoScriptUrl}></script>
+		<script is:inline type="module" src={interactiveDemoScriptUrl}></script>
 	</body>
 </html>

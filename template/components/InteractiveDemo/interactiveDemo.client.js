@@ -143,6 +143,9 @@
 		setupObserver();
 	}
 
-	document.addEventListener('astro:page-load', scan);
-	document.addEventListener('astro:after-swap', scan);
+    document.addEventListener('astro:after-swap', () => {
+        scan();
+        setupObserver();
+    });
+    document.addEventListener('astro:page-load', scan);
 })();
