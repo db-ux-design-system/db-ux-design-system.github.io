@@ -1,6 +1,7 @@
 name: Deploy site (main) to GitHub Pages
 
 on:
+  pull_request:
   push:
     branches: ['main']
 
@@ -43,15 +44,18 @@ jobs:
           npm run build
 
       - name: Configure Pages
+        if: ${{github.event_name != 'pull_request'}}
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
+        if: ${{github.event_name != 'pull_request'}}
         uses: actions/upload-pages-artifact@v3
         with:
           path: public
 
   deploy:
     needs: build
+    if: ${{github.event_name != 'pull_request'}}
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
