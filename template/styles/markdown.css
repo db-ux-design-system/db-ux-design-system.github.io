@@ -9,10 +9,6 @@ pre {
 	border-radius: var(--db-border-radius-xs);
 }
 
-pre[data-language='plaintext'] > code {
-	color: #e1e4e8;
-}
-
 pre > code {
 	border-radius: 0;
 	padding: 0 !important;
@@ -21,4 +17,8 @@ pre > code {
 	.line:last-child:has(span:empty) {
 		display: none;
 	}
+}
+
+pre[data-language='plaintext'] > code {
+	color: #e1e4e8;
 }

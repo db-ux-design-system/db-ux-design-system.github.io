@@ -42,23 +42,23 @@ const HeadingTag = `h${safeHeadlineLevel}` as HeadingTagName;
 			aria-label="Page introduction"
 		>
 			{layout === 'split' && imageSrc && imageSide === 'left' && (
-				<div class="page-hero__media">
+				<div class="page-hero-media">
 					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
 				</div>
 			)}
-			<div class="page-hero__content">
-				{title && <p class="page-hero__title">{title}</p>}
-				{headline && <HeadingTag class="page-hero__headline">{headline}</HeadingTag>}
-				<span class="page-hero__underline" aria-hidden="true" />
-				{description && <p class="page-hero__description">{description}</p>}
+			<div class="page-hero-content">
+				{title && <p class="page-hero-title">{title}</p>}
+				{headline && <HeadingTag class="page-hero-headline">{headline}</HeadingTag>}
+				<span class="page-hero-underline" aria-hidden="true" />
+				{description && <p class="page-hero-description">{description}</p>}
 			</div>
 			{layout === 'split' && imageSrc && imageSide === 'right' && (
-				<div class="page-hero__media">
+				<div class="page-hero-media">
 					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
 				</div>
 			)}
 			{layout === 'stack' && imageSrc && (
-				<div class="page-hero__media">
+				<div class="page-hero-media">
 					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
 				</div>
 			)}

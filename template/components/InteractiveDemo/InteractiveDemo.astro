@@ -30,14 +30,14 @@ const initialMode = 'light';
 		<div class="interactive-demo" data-image-toggle-root data-active-id={initialItem.id}>
 			{/* State carrier for the script (must NOT affect theming/layout) */}
 			<span
-				class="interactive-demo__state"
+				class="interactive-demo-state"
 				data-image-toggle-state
 				data-mode={initialMode}
 				hidden
 			/>
 
-			<DBStack direction="column" gap="medium" class="interactive-demo__layout">
-				<div class="interactive-demo__controls">
+			<DBStack direction="column" gap="medium" class="interactive-demo-layout">
+				<div class="interactive-demo-controls">
 					<DBStack direction="row" gap="2x-small" justifyContent="center">
 						<DBStack direction="row" gap="2x-small" justifyContent="center">
 							{items.map((item) => (
@@ -77,19 +77,19 @@ const initialMode = 'light';
 					</DBStack>
 				</div>
 
-				<div class="interactive-demo__cards">
+				<div class="interactive-demo-cards">
 					{items.map((item) => (
 						<>
 							<div
-								class="interactive-demo__card"
+								class="interactive-demo-card"
 								data-image-card
 								data-image-id={item.id}
 								data-image-mode="light"
 								{...(item.id === initialItem.id ? { 'data-active': 'true' } : {})}
 							>
-								<DBCard spacing="none" class="interactive-demo__card-inner">
+								<DBCard spacing="none" class="interactive-demo-card-inner">
 									<img
-										class="interactive-demo__img"
+										class="interactive-demo-img"
 										src={item.lightSrc}
 										alt={item.alt ?? item.label}
 										loading="lazy"
@@ -99,14 +99,14 @@ const initialMode = 'light';
 							</div>
 
 							<div
-								class="interactive-demo__card"
+								class="interactive-demo-card"
 								data-image-card
 								data-image-id={item.id}
 								data-image-mode="dark"
 							>
-								<DBCard spacing="none" class="interactive-demo__card-inner">
+								<DBCard spacing="none" class="interactive-demo-card-inner">
 									<img
-										class="interactive-demo__img"
+										class="interactive-demo-img"
 										src={item.darkSrc}
 										alt={item.alt ?? item.label}
 										loading="lazy"

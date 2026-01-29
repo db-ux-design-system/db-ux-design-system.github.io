@@ -2,11 +2,11 @@
 	color-scheme: inherit;
 }
 
-.interactive-demo__layout {
+.interactive-demo-layout {
 	overflow: unset;
 }
 
-.interactive-demo__controls {
+.interactive-demo-controls {
 	padding: var(--db-spacing-fixed-2xs);
 	border-radius: var(--db-border-radius-sm);
 	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
@@ -18,23 +18,23 @@
 	background-color: var(--db-adaptive-bg-basic-level-1-default);
 }
 
-.interactive-demo__card {
+.interactive-demo-card {
 	display: none;
 }
 
-.interactive-demo__card .db-card {
+.interactive-demo-card .db-card {
 	overflow: hidden;
 }
 
-.interactive-demo__card[data-active='true'] {
+.interactive-demo-card[data-active='true'] {
 	display: block;
 }
 
-.interactive-demo__card-inner {
+.interactive-demo-card-inner {
 	overflow: hidden;
 }
 
-.interactive-demo__img {
+.interactive-demo-img {
 	display: block;
 	width: 100%;
 	height: auto;
@@ -65,10 +65,12 @@
 .interactive-demo [data-image-toggle-button][data-color='red'] {
 	--demo-bg-active: var(--db-brand-origin-default);
 }
+
 .db-shell[data-mode='light'] .interactive-demo [data-image-toggle-button][data-color='red'] {
 	--demo-bg-inactive: var(--db-brand-on-bg-basic-emphasis-60-default);
 	--demo-color-active: var(--db-adaptive-bg-basic-level-2-default);
 }
+
 .db-shell[data-mode='dark'] .interactive-demo [data-image-toggle-button][data-color='red'] {
 	--demo-bg-inactive: var(--db-brand-bg-basic-level-3-default);
 }
@@ -82,9 +84,11 @@
 		white 78%
 	);
 }
+
 .db-shell[data-mode='light'] .interactive-demo [data-image-toggle-button][data-color='green'] {
 	--demo-color-active: var(--db-adaptive-bg-basic-level-2-default);
 }
+
 .db-shell[data-mode='dark'] .interactive-demo [data-image-toggle-button][data-color='green'] {
 	--demo-color-inactive: var(--db-adaptive-bg-basic-level-2-default);
 }
@@ -98,9 +102,11 @@
 		white 78%
 	);
 }
+
 .db-shell[data-mode='light'] .interactive-demo [data-image-toggle-button][data-color='blue'] {
 	--demo-color-active: var(--db-adaptive-bg-basic-level-2-default);
 }
+
 .db-shell[data-mode='dark'] .interactive-demo [data-image-toggle-button][data-color='blue'] {
 	--demo-color-inactive: var(--db-adaptive-bg-basic-level-2-default);
 }
