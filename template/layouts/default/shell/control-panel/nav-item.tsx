@@ -26,12 +26,13 @@ const NavItem = ({
 				icon={icon}
 				key={`router-leaf-${target ?? title}`}
 				disabled={disabled}
-				aria-disabled={disabled ? 'true' : undefined}
 			>
 				<a
 					href={trimExtension(target)}
 					aria-current={isActive ? 'page' : undefined}
 					data-icon-trailing={iconTrailing}
+					tabIndex={disabled ? '-1' : undefined}
+					aria-disabled={disabled ? 'true' : undefined}
 				>
 					{title}
 				</a>
@@ -61,12 +62,13 @@ const NavItem = ({
 			icon={icon}
 			key={`router-leaf-${path ?? title}`}
 			disabled={disabled}
-			aria-disabled={disabled ? 'true' : undefined}
 		>
 			<a
 				href={trimExtension(path)}
 				aria-current={getAriaCurrent(trimExtension(path))}
 				data-icon-trailing={iconTrailing}
+				tabIndex={disabled ? '-1' : undefined}
+				aria-disabled={disabled ? 'true' : undefined}
 			>
 				{title}
 			</a>
