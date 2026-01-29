@@ -1,10 +1,15 @@
 .dba-toc {
-	width: 300px;
+	inline-size: var(--db-container-xs);
+	background-color: var(--db-neutral-bg-basic-level-1-default);
 
 	@media screen and (min-width: 1024px) {
 		position: fixed;
-		margin-top: 1rem;
+		margin-top: var(--db-spacing-fixed-sm);
+		inset-inline-end: var(--db-spacing-fixed-sm);
 	}
+
+	overflow-y: auto;
+	max-block-size: calc(100svh - var(--header-height) - var(--footer-height));
 }
 
 .dba-toc-heading {
