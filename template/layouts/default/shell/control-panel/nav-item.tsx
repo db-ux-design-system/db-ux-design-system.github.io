@@ -31,7 +31,7 @@ const NavItem = ({
 					href={trimExtension(target)}
 					aria-current={isActive ? 'page' : undefined}
 					data-icon-trailing={iconTrailing}
-					tabindex={disabled ? '-1' : undefined}
+					tabIndex={disabled ? '-1' : undefined}
 					aria-disabled={disabled ? 'true' : undefined}
 				>
 					{title}
@@ -67,7 +67,7 @@ const NavItem = ({
 				href={trimExtension(path)}
 				aria-current={getAriaCurrent(trimExtension(path))}
 				data-icon-trailing={iconTrailing}
-				tabindex={disabled ? '-1' : undefined}
+				tabIndex={disabled ? '-1' : undefined}
 				aria-disabled={disabled ? 'true' : undefined}
 			>
 				{title}
