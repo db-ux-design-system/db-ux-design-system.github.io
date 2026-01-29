@@ -10,13 +10,15 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "prettier --check . && astro check",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "update:agent": "npx @db-ux/agent-cli ."
   },
   "devDependencies": {
     "@astrojs/check": "0.9.4",
     "@astrojs/mdx": "4.3.6",
     "@astrojs/react": "4.3.1",
     "@astrojs/sitemap": "3.6.0",
+    "@db-ux/agent-cli": "4.4.0",
     "@db-ux/core-components": "3.0.2-shell4-bdb351c",
     "@db-ux/core-foundations": "3.0.2-shell4-bdb351c",
     "@db-ux/db-theme": "5.2.0",
