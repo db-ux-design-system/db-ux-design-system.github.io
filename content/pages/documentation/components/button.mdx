@@ -2,7 +2,7 @@
 order: 1
 layout: '@template/layouts/default'
 toc: true
-title: 'Button All in One'
+title: 'Button'
 headline: 'Button'
 description: 'Der Button wird verwendet, um Nutzer:innen zur Interaktion aufzufordern und eine Aktion auszulösen.'
 ---
@@ -16,13 +16,6 @@ import buttonPlaygroundImage from '@assets/documentation/components/button/Compo
 <img src={buttonPlaygroundImage.src} alt="Component--Action--Button--Playground" />
 
 ## Overview
-
-### Navigation
-
-- [Properties](#properties)
-- [Boxmodel](#boxmodel)
-- [Token](#token)
-- [Unterschied zu v2](#v2v3)
 
 ### Properties
 
@@ -43,6 +36,7 @@ Properties definieren die Eigenschaften und verschiedenen Ausprägungen einer Ko
 Die Variant-Property definiert das visuelle Erscheinungsbild des Buttons. Es umfasst verschiedene Stile wie _Brand_ für hervorgehobene CTAs, _Outlined_ als Default-Button, gefolgt vom _Filled_ und _Ghost_-Button für dezente, oftmals alternative Interaktionen.
 
 <iframe
+	title="Button Variant Examples"
 	width="100%"
 	height="320"
 	style={{ border: 'none' }}
@@ -55,6 +49,7 @@ Die Variant-Property definiert das visuelle Erscheinungsbild des Buttons. Es umf
 Die Disabled-Property legt fest, ob der Button aktiv oder inaktiv ist. Bei _Disabled = False_ ist der Button interaktiv und unterstützt Zustände wie _Hover, Pressed_ und _Focused_. Wenn _Disabled = True_ gesetzt ist, wird der Button inaktiv und zeigt keine interaktiven Zustände mehr. In diesem Fall ist er nicht klickbar.
 
 <iframe
+	title="Button Disabled State Examples"
 	width="100%"
 	height="320"
 	style={{ border: 'none' }}
@@ -67,6 +62,7 @@ Die Disabled-Property legt fest, ob der Button aktiv oder inaktiv ist. Bei _Disa
 Die Size-Property bestimmt die physikalische Größe des Buttons. Hierbei kann zwischen _Medium_ als Default-Größe für vielseitige Anwendungen und _Small_ als kompakterer Button für begrenzten Platz oder spezielle Anforderungen gewählt werden.
 
 <iframe
+	title="Button Size Examples"
 	width="100%"
 	height="320"
 	style={{ border: 'none' }}
@@ -79,6 +75,7 @@ Die Size-Property bestimmt die physikalische Größe des Buttons. Hierbei kann z
 Die Show-Icon-Leading Property legt fest, ob ein Icon vor dem Text im Button angezeigt wird. Wenn die Property auf _True_ gesetzt ist, wird ein Icon dargestellt. Der Standardwert ist _False_, bei dem kein Icon angezeigt wird.
 
 <iframe
+	title="Button Show Icon Leading Examples"
 	width="100%"
 	height="320"
 	style={{ border: 'none' }}
@@ -91,6 +88,7 @@ Die Show-Icon-Leading Property legt fest, ob ein Icon vor dem Text im Button ang
 Die Show-Icon-Trailing Property legt fest, ob ein Icon nach dem Text im Button angezeigt wird. Wenn die Property auf _True_ gesetzt ist, wird ein Icon dargestellt. Der Standardwert ist _False_, bei dem kein Icon angezeigt wird.
 
 <iframe
+	title="Button Show Icon Trailing Examples"
 	width="100%"
 	height="320"
 	style={{ border: 'none' }}
@@ -103,6 +101,7 @@ Die Show-Icon-Trailing Property legt fest, ob ein Icon nach dem Text im Button a
 Die No-Text-Property legt fest, ob der Text des Buttons ausgeblendet wird. Bei _Show Icon = False_ muss _No Text_ immer _False_ sein. Wird jedoch _Show Icon = True_ und _No Text = True_ gesetzt, wird ein reiner Icon-Button dargestellt.
 
 <iframe
+	title="Button No Text Examples"
 	width="100%"
 	height="320"
 	style={{ border: 'none' }}
@@ -115,6 +114,7 @@ Die No-Text-Property legt fest, ob der Text des Buttons ausgeblendet wird. Bei _
 Die Width-Property beeinflusst das dynamische Verhalten des Buttons. _Auto_ sorgt dafür, dass die Breite automatisch dem Inhalt angepasst wird, während _Full_ den Button über die gesamte verfügbare Breite erstreckt.
 
 <iframe
+	title="Button Width Examples"
 	width="100%"
 	height="320"
 	style={{ border: 'none' }}
@@ -325,6 +325,7 @@ _🟢 Die Klickfläche von 24 px wird eingehalten.
 ## Development
 
 <iframe
+	title="Button Angular Documentation"
 	width="100%"
 	height="600"
 	style={{ border: 'none' }}
@@ -333,6 +334,7 @@ _🟢 Die Klickfläche von 24 px wird eingehalten.
 ></iframe>
 
 <iframe
+	title="Button Properties Reference"
 	width="100%"
 	height="1700"
 	style={{ border: 'none' }}

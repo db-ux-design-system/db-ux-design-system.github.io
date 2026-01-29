@@ -28,7 +28,8 @@ function withBase(relPath: string) {
  * @returns The path without the file extension
  */
 export function trimExtension(path?: string): string | undefined {
-	return path?.replace(/\.[^/.]+$/, '');
+	if (!path) return undefined;
+	return path.replace(/\.[^/.]+$/, '');
 }
 
 /**
