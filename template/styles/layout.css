@@ -4,11 +4,6 @@
 	block-size: 100%;
 }
 
-.dba-toc {
-	overflow-y: auto;
-	max-height: calc(100svh - var(--header-height) - var(--footer-height) - 3rem);
-}
-
 .dba-main-inner {
 	display: flex;
 	flex-direction: column;
@@ -81,6 +76,13 @@
 }
 
 @media screen and (width >= 1024px) {
+	.dba-main-grid {
+		&:has(.dba-toc) {
+			.dba-main-content {
+				padding-inline-end: calc(var(--db-container-xs) + var(--db-spacing-fixed-sm));
+			}
+		}
+	}
 	.dba-side-nav {
 		display: block;
 	}
