@@ -29,8 +29,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin-block-start: var(--db-spacing-fixed-md);
-	margin-block-end: var(--db-spacing-fixed-sm);
+	margin-block: var(--db-spacing-fixed-md) var(--db-spacing-fixed-sm);
 	gap: var(--db-spacing-fixed-lg);
 
 	.db-button {
@@ -39,8 +38,7 @@
 }
 
 .dba-article-heading {
-	margin-block-start: var(--db-spacing-fixed-md);
-	margin-block-end: var(--db-spacing-fixed-xs);
+	margin-block: var(--db-spacing-fixed-md) var(--db-spacing-fixed-xs);
 }
 
 .dba-pulse-underline {
