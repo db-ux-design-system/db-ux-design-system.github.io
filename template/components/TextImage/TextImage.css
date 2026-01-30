@@ -218,11 +218,7 @@ img[data-mask='fade-bottom-left'] {
 
 /* Top-Right */
 img[data-mask='fade-top-right'] {
-	--ti-mask-top: linear-gradient(
-		to top,
-		var(--ti-mask-visible) 50%,
-		var(--ti-mask-invisible) 100%
-	);
+	--ti-mask-top: linear-gradient(to top, var(--ti-mask-visible) 50%, var(--ti-mask-invisible) 100%);
 	--ti-mask-right: linear-gradient(
 		to right,
 		var(--ti-mask-visible) 20%,
@@ -236,11 +232,7 @@ img[data-mask='fade-top-right'] {
 
 /* Top-Left */
 img[data-mask='fade-top-left'] {
-	--ti-mask-top: linear-gradient(
-		to top,
-		var(--ti-mask-visible) 50%,
-		var(--ti-mask-invisible) 100%
-	);
+	--ti-mask-top: linear-gradient(to top, var(--ti-mask-visible) 50%, var(--ti-mask-invisible) 100%);
 	--ti-mask-left: linear-gradient(
 		to left,
 		var(--ti-mask-visible) 20%,

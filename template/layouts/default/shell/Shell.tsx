@@ -28,7 +28,9 @@ export function Shell({ children, pathname = '/', subNavigationVariant }: Props)
 				fadeIn
 				subNavigationDesktopPosition="left"
 				subNavigation={
-					subNavigation ? <SubNavigation navigationItems={subNavigation} variant={subNavigationVariant} /> : null
+					subNavigation ? (
+						<SubNavigation navigationItems={subNavigation} variant={subNavigationVariant} />
+					) : null
 				}
 				subNavigationMobilePosition="none"
 				controlPanelDesktop={
