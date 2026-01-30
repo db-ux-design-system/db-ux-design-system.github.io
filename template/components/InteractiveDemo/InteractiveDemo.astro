@@ -29,12 +29,7 @@ const initialMode = 'light';
 	items.length === 0 || !initialItem ? null : (
 		<div class="interactive-demo" data-image-toggle-root data-active-id={initialItem.id}>
 			{/* State carrier for the script (must NOT affect theming/layout) */}
-			<span
-				class="interactive-demo-state"
-				data-image-toggle-state
-				data-mode={initialMode}
-				hidden
-			/>
+			<span class="interactive-demo-state" data-image-toggle-state data-mode={initialMode} hidden />
 
 			<DBStack direction="column" gap="medium" class="interactive-demo-layout">
 				<div class="interactive-demo-controls">
