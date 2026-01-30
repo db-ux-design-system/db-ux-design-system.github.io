@@ -4,7 +4,7 @@
 
 	@media screen and (width >= 1024px) {
 		position: fixed;
-		margin-top: var(--db-spacing-fixed-sm);
+		margin-block-start: var(--db-spacing-fixed-sm);
 		inset-inline-end: var(--db-spacing-fixed-sm);
 	}
 
@@ -14,7 +14,7 @@
 
 .dba-toc-heading {
 	padding: var(--db-spacing-fixed-3xs) 0 var(--db-spacing-fixed-3xs) var(--db-spacing-fixed-md);
-	border-left: 4px solid var(--db-neutral-on-bg-inverted-pressed);
+	border-inline-start: 4px solid var(--db-neutral-on-bg-inverted-pressed);
 	transition:
 		border 0.1s ease-out,
 		color 0.1s ease-out;
@@ -62,9 +62,9 @@
 }
 
 .dba-toc-heading[data-depth='3'] {
-	padding-left: var(--db-spacing-fixed-lg);
+	padding-inline-start: var(--db-spacing-fixed-lg);
 }
 
 .dba-toc-heading[data-depth='4'] {
-	padding-left: var(--db-spacing-fixed-xl);
+	padding-inline-start: var(--db-spacing-fixed-xl);
 }
