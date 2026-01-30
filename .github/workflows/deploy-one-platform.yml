@@ -21,11 +21,22 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: 🖼️ Display node and pnpm version
+        shell: bash
+        run: |
+          node --version
+          pnpm --version
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: npm
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
 
       - name: Install deps
         run: pnpm install
