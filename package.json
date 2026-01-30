@@ -41,5 +41,13 @@
     "@google/model-viewer": "4.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@db-ux/db-theme",
+      "@db-ux/db-theme-fonts",
+      "@db-ux/db-theme-icons",
+      "@db-ux/db-theme-illustrative-icons"
+    ]
   }
 }

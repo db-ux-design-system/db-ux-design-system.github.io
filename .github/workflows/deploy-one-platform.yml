@@ -28,20 +28,18 @@ jobs:
           cache: npm
 
       - name: Install deps
-        run: npm ci
+        run: pnpm install
 
       - name: Lint
         run: |
-          npm run lint:stylelint
+          pnpm run lint:stylelint
 
       - name: Build
         env:
           ASSET_PASSWORD: ${{ secrets.ASSET_PASSWORD }}
           ASSET_INIT_VECTOR: ${{ secrets.ASSET_INIT_VECTOR }}
         run: |
-          node node_modules/@db-ux/db-theme-fonts/build/scripts/index.js
-          node node_modules/@db-ux/db-theme-icons/build/scripts/index.js
-          npm run build
+          pnpm run build
 
       - name: Configure Pages
         if: ${{github.event_name != 'pull_request'}}
