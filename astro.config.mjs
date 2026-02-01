@@ -12,9 +12,7 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 // https://astro.build/config
 export default defineConfig({
 	site: appConfig.hostname,
-	custom: {
-		titleSuffix: 'DB UX Design System',
-	},
+
 	base: appConfig.basePath,
 	integrations: [
 		react({}),

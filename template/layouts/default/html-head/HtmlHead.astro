@@ -3,7 +3,7 @@ import { appConfig } from '@root/app.config';
 import { ClientRouter } from 'astro:transitions';
 
 const { title, loadModelViewer } = Astro.props as {
-	title: string;
+	title?: string;
 	loadModelViewer?: boolean;
 };
 ---
