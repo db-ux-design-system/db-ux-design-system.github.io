@@ -24,7 +24,7 @@ const toc = (headings?.length ?? 0) > 0 && frontmatter.toc === true;
 		)
 	}
 
-	<div class="dba-main-content">
+	<main class="dba-main-content">
 		{
 			(frontmatter.title || frontmatter.headline || frontmatter.description) && (
 				<DBSection id={frontmatter.title} width="large" spacing="large">
@@ -43,5 +43,5 @@ const toc = (headings?.length ?? 0) > 0 && frontmatter.toc === true;
 			<slot />
 		</DBSection>
 		{frontmatter.nav && <FooterNav client:only />}
-	</div>
+	</main>
 </>
