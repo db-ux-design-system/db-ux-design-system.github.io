@@ -19,6 +19,9 @@ const currentPath = Astro.url.pathname;
 <html lang={appConfig.language || 'en'}>
 	<HtmlHead title={frontmatter.title} loadModelViewer={frontmatter.loadModelViewer} />
 	<body>
+		<!-- Accessibility: Ensure h1 is always present in DOM for screen readers and a11y scanners -->
+		{frontmatter.title && <h1 class="sr-only">{frontmatter.title}</h1>}
+		{!frontmatter.title && currentPath === '/' && <h1 class="sr-only">DB UX Design System</h1>}
 		<Shell
 			client:only="react"
 			pathname={currentPath}
