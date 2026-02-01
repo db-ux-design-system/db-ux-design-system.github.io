@@ -12,7 +12,6 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 // https://astro.build/config
 export default defineConfig({
 	site: appConfig.hostname,
-
 	base: appConfig.basePath,
 	integrations: [
 		react({}),
