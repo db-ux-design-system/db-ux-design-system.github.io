@@ -9,8 +9,8 @@ jobs:
         id: generate_cache_key
         shell: bash
         run: |
-          # Generate a cache key using the branch name, replacing characters (e.g. `\`) which would create unexpected results
-          CACHE_KEY=$(printf 'cached_results-%s.json' "${{ github.ref_name }}" | tr -cs 'A-Za-z0-9._-' '_')
+          # Generate a cache key using the branch name, replacing characters (e.g. `/`) which would create unexpected paths.
+          CACHE_KEY=$(printf 'cached_results-%s.json' "${{ github.ref_name }}" | tr -cs 'A-Za-z0-9._-' '_')
           echo "cache_key=$CACHE_KEY" >> $GITHUB_OUTPUT
       - uses: github/accessibility-scanner@v2
         with:
