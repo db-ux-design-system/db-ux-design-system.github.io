@@ -4,4 +4,5 @@ export const appConfig: AppConfig = {
 	basePath: '/',
 	sitemapBlacklist: [],
 	language: 'en',
+	titleSuffix: 'DB UX Design System',
 };

@@ -147,6 +147,10 @@ declare interface AppConfig {
 	 * The language of the application.
 	 */
 	language: string;
+	/**
+	 * Optional suffix to append to page titles.
+	 */
+	titleSuffix?: string;
 }
 
 // Allow importing .astro files in TypeScript contexts (e.g., barrel index.ts)
