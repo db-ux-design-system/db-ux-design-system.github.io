@@ -52,3 +52,14 @@
 .component-playground .controls-area h6 {
 	margin: 0;
 }
+
+/* Disable transitions in playground for instant updates */
+.component-playground .preview-area .db-select label {
+	transition: none !important;
+}
+
+/* Hide label when data-label-hidden is set (for floating variant without value) */
+.component-playground .preview-area .db-select[data-label-hidden="true"] label {
+	opacity: 0 !important;
+	pointer-events: none !important;
+}

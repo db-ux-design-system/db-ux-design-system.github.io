@@ -94,6 +94,21 @@ const dualCaseProps = {
 					/>
 					<span id="playground-checkbox-label">Accept terms</span>
 				</label>
+			) : config.elementId === 'playground-select' ? (
+				<div class="db-select" id={config.elementId} data-hide-label="false" data-variant="above">
+					<label id="playground-select-label">{config.defaultProps.label || 'Country'}</label>
+					<select id="playground-select-field" aria-invalid="false" onchange="const wrapper = document.getElementById('playground-select'); if(wrapper.getAttribute('data-variant') === 'floating') { if(this.value) { wrapper.removeAttribute('data-label-hidden'); } else { wrapper.setAttribute('data-label-hidden', 'true'); } }">
+						<option id="playground-select-placeholder" value="" hidden="">{config.defaultProps.placeholder || 'Choose an option'}</option>
+						<option value="de">Germany</option>
+						<option value="fr">France</option>
+						<option value="it">Italy</option>
+						<option value="es">Spain</option>
+					</select>
+					<span id="playground-select-message" class="db-infotext" data-size="small" data-show-icon-leading="true" style="display: none;">Please choose your country</span>
+					<span id="playground-select-infotext-valid" class="db-infotext" data-semantic="successful" data-size="small" data-show-icon-leading="true" style="display: none;">Valid selection</span>
+					<span id="playground-select-infotext" class="db-infotext" data-semantic="critical" data-size="small" data-show-icon-leading="true" style="display: none;">Please select a valid option</span>
+					<span data-visually-hidden="true" role="status"></span>
+				</div>
 			) : (
 				<Component {...config.defaultProps} id={config.elementId}>
 					{config.textElementId && <span id={config.textElementId}>{config.defaultText}</span>}
@@ -117,8 +132,13 @@ const dualCaseProps = {
 							let updateAction;
 							if (config.elementId === 'playground-input' && prop.name === 'label') {
 								updateAction = `document.getElementById('${targetId}').textContent = this.value;`;
-							} else if (config.elementId === 'playground-input' && prop.name === 'validation') {
-								updateAction = `const field = document.getElementById('playground-input-field'); const validInfo = document.getElementById('playground-input-infotext-valid'); const invalidInfo = document.getElementById('playground-input-infotext'); if(this.value === 'invalid') { field.setAttribute('aria-invalid', 'true'); field.setAttribute('data-custom-validity', 'invalid'); validInfo.style.display = 'none'; invalidInfo.style.display = ''; } else if(this.value === 'valid') { field.setAttribute('aria-invalid', 'false'); field.setAttribute('data-custom-validity', 'valid'); validInfo.style.display = ''; invalidInfo.style.display = 'none'; } else if(this.value === 'no-validation') { field.setAttribute('aria-invalid', 'false'); field.setAttribute('data-custom-validity', 'no-validation'); validInfo.style.display = 'none'; invalidInfo.style.display = 'none'; }`;
+							} else if ((config.elementId === 'playground-input' || config.elementId === 'playground-select') && prop.name === 'validation') {
+								const fieldId = config.elementId === 'playground-input' ? 'playground-input-field' : 'playground-select-field';
+								const validInfoId = config.elementId === 'playground-input' ? 'playground-input-infotext-valid' : 'playground-select-infotext-valid';
+								const invalidInfoId = config.elementId === 'playground-input' ? 'playground-input-infotext' : 'playground-select-infotext';
+								updateAction = `const field = document.getElementById('${fieldId}'); const validInfo = document.getElementById('${validInfoId}'); const invalidInfo = document.getElementById('${invalidInfoId}'); if(this.value === 'invalid') { field.setAttribute('aria-invalid', 'true'); field.setAttribute('data-custom-validity', 'invalid'); validInfo.style.display = 'none'; invalidInfo.style.display = ''; } else if(this.value === 'valid') { field.setAttribute('aria-invalid', 'false'); field.setAttribute('data-custom-validity', 'valid'); validInfo.style.display = ''; invalidInfo.style.display = 'none'; } else if(this.value === 'no-validation') { field.setAttribute('aria-invalid', 'false'); field.setAttribute('data-custom-validity', 'no-validation'); validInfo.style.display = 'none'; invalidInfo.style.display = 'none'; }`;
+							} else if (config.elementId === 'playground-select' && prop.name === 'variant') {
+								updateAction = `const wrapper = document.getElementById('${config.elementId}'); wrapper.setAttribute('data-variant', this.value); const placeholder = document.getElementById('playground-select-placeholder'); if(this.value === 'floating') { placeholder.textContent = ''; } else { const placeholderInput = document.querySelector('.controls-area input[oninput*="playground-select-placeholder"]'); if(placeholderInput) placeholder.textContent = placeholderInput.value; } if(this.value !== 'floating') { wrapper.removeAttribute('data-label-hidden'); }`;
 							} else {
 								updateAction = `document.getElementById('${targetId}').setAttribute('${attrName}', this.value);`;
 							}
@@ -185,6 +205,30 @@ const dualCaseProps = {
 										/>
 									</div>
 								);
+							} else if (config.elementId === 'playground-select' && prop.name === 'label') {
+								const labelProp = config.properties.find(p => p.name === 'label');
+								return (
+									<div class="db-input">
+										<label>{prop.label}</label>
+										<input
+											type="text"
+											value={labelProp?.defaultValue || 'Country'}
+											oninput={`document.getElementById('playground-select-label').textContent = this.value;`}
+										/>
+									</div>
+								);
+							} else if (config.elementId === 'playground-select' && prop.name === 'placeholder') {
+								const placeholderProp = config.properties.find(p => p.name === 'placeholder');
+								return (
+									<div class="db-input">
+										<label>{prop.label}</label>
+										<input
+											type="text"
+											value={placeholderProp?.defaultValue || 'Choose an option'}
+											oninput={`const placeholder = document.getElementById('playground-select-placeholder'); const wrapper = document.getElementById('playground-select'); if(placeholder && wrapper.getAttribute('data-variant') !== 'floating') placeholder.textContent = this.value;`}
+										/>
+									</div>
+								);
 							} else if (config.elementId === 'playground-input' && (prop.name === 'validMessage' || prop.name === 'valid-message')) {
 								return (
 									<div class="db-input">
@@ -196,14 +240,36 @@ const dualCaseProps = {
 										/>
 									</div>
 								);
-							} else if (config.elementId === 'playground-input' && (prop.name === 'invalidMessage' || prop.name === 'invalid-message')) {
+							} else if (config.elementId === 'playground-select' && prop.name === 'message') {
 								return (
 									<div class="db-input">
 										<label>{prop.label}</label>
 										<input
 											type="text"
 											value={prop.defaultValue}
-											oninput={`document.getElementById('playground-input-infotext').textContent = this.value;`}
+											oninput={`document.getElementById('playground-select-message').textContent = this.value;`}
+										/>
+									</div>
+								);
+							} else if (config.elementId === 'playground-select' && (prop.name === 'validMessage' || prop.name === 'valid-message')) {
+								return (
+									<div class="db-input">
+										<label>{prop.label}</label>
+										<input
+											type="text"
+											value={prop.defaultValue}
+											oninput={`document.getElementById('playground-select-infotext-valid').textContent = this.value;`}
+										/>
+									</div>
+								);
+							} else if (config.elementId === 'playground-select' && (prop.name === 'invalidMessage' || prop.name === 'invalid-message')) {
+								return (
+									<div class="db-input">
+										<label>{prop.label}</label>
+										<input
+											type="text"
+											value={prop.defaultValue}
+											oninput={`document.getElementById('playground-select-infotext').textContent = this.value;`}
 										/>
 									</div>
 								);
@@ -233,14 +299,24 @@ const dualCaseProps = {
 							let action;
 							if (prop.name === 'disabled') {
 								const targetId = config.elementId === 'playground-input' ? 'playground-input-field' : (config.elementId === 'playground-switch' || config.elementId === 'playground-radio' || config.elementId === 'playground-checkbox') ? `${config.elementId}-input` : config.elementId;
-								action = config.useAriaDisabled
-									? `if(this.checked) document.getElementById('${targetId}').setAttribute('aria-disabled', 'true'); else document.getElementById('${targetId}').removeAttribute('aria-disabled');`
-									: `if(this.checked) document.getElementById('${targetId}').setAttribute('${prop.name}', ''); else document.getElementById('${targetId}').removeAttribute('${prop.name}');`;
+								if (config.elementId === 'playground-select') {
+									action = `const select = document.getElementById('playground-select-field'); if(select) { if(this.checked) select.setAttribute('disabled', ''); else select.removeAttribute('disabled'); }`;
+								} else {
+									action = config.useAriaDisabled
+										? `if(this.checked) document.getElementById('${targetId}').setAttribute('aria-disabled', 'true'); else document.getElementById('${targetId}').removeAttribute('aria-disabled');`
+										: `if(this.checked) document.getElementById('${targetId}').setAttribute('${prop.name}', ''); else document.getElementById('${targetId}').removeAttribute('${prop.name}');`;
+								}
 							} else if (prop.name === 'checked') {
 								const targetId = (config.elementId === 'playground-switch' || config.elementId === 'playground-radio' || config.elementId === 'playground-checkbox') ? `${config.elementId}-input` : config.elementId;
 								action = `const target = document.getElementById('${targetId}'); target.checked = this.checked; if(this.checked) target.setAttribute('checked', ''); else target.removeAttribute('checked');`;
 							} else if ((config.elementId === 'playground-switch' || config.elementId === 'playground-radio' || config.elementId === 'playground-checkbox') && (prop.name === 'show-label' || prop.name === 'showLabel')) {
 								action = `const label = document.getElementById('${config.elementId}-label'); if(this.checked) label.style.display = ''; else label.style.display = 'none';`;
+							} else if (config.elementId === 'playground-select' && (prop.name === 'showLabel' || prop.name === 'show-label')) {
+								action = `const wrapper = document.getElementById('${config.elementId}'); if(wrapper) wrapper.setAttribute('data-hide-label', this.checked ? 'false' : 'true');`;
+							} else if (config.elementId === 'playground-select' && (prop.name === 'showMessage' || prop.name === 'show-message')) {
+								action = `const message = document.getElementById('playground-select-message'); if(message) message.style.display = this.checked ? '' : 'none';`;
+							} else if (config.elementId === 'playground-select' && prop.name === 'required') {
+								action = `const field = document.getElementById('playground-select-field'); if(field) { if(this.checked) field.setAttribute('required', ''); else field.removeAttribute('required'); }`;
 							} else if (config.elementId === 'playground-checkbox' && prop.name === 'indeterminate') {
 								action = `const target = document.getElementById('playground-checkbox-input'); target.indeterminate = this.checked;`;
 							} else {
