@@ -1,0 +1,289 @@
+---
+order: 6
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Switch'
+title: 'Switch'
+description: 'Switch toggles a setting between two states (on/off) and applies the change immediately. It is best for enabling or disabling features, preferences, or behaviors where users expect instant feedback.'
+align: start
+status: 'stable'
+toc: true
+---
+
+import { DBSwitch, DBSection, DBAccordion, DBAccordionItem } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import { switchConfig } from '@template/configs/switch.config.js';
+
+- Turn a setting on or off with immediate effect (e.g., "Enable notifications")
+- Activate/deactivate a feature in context without leaving the page
+- Control availability of an option that updates the UI instantly
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+Experiment with the Switch component and its properties.
+
+<ComponentPlayground config={switchConfig} component="switch" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+		},
+		{
+			title: 'Vue',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
+		},
+		{
+			title: 'Angular',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg',
+		},
+		{
+			title: 'Web C.',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties
+
+Configure the switch through its properties, such as checked state, disabled, and label.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable config={switchConfig} />
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Properties" expandedText="Hide some Properties" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+###### Use Switch for immediate state changes
+
+Use Switch only when toggling should take effect right away. If users are selecting options to be applied later (e.g., on submit), use Checkbox instead.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=1-1132&embed-host=share&scaling=scale-down-width"
+		description='Use a switch for "Enable automatic updates" when the change applies instantly.'
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=1-1133&embed-host=share&scaling=scale-down-width"
+		description='Use a switch inside a form where changes only apply after pressing "Save".'
+	/>
+</div>
+
+###### Make state change clear and observable
+
+Users must be able to immediately understand whether the switch is on or off and see the effect of the change (UI update, enabled feature, or confirmation feedback).
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=3-1110&embed-host=share&scaling=scale-down-width"
+		description="Reflect the new state visually and, if needed, provide lightweight feedback (e.g., infotext/notification)."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=3-1112&embed-host=share&scaling=scale-down-width"
+		description="Toggle a switch without visible state clarity or without any observable outcome."
+	/>
+</div>
+
+###### Write short, positive label text
+
+Keep labels concise and avoid negative wording that can create confusion ("Don't", double negatives). If helpful, use dynamic labels that describe the current state in plain language.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=3-1113&embed-host=share&scaling=scale-down-width"
+		description='Use "Enable notifications" instead of negative phrasing.'
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=3-1114&embed-host=share&scaling=scale-down-width"
+		description='Use labels like "Do not notify" or wording that becomes ambiguous when toggled.'
+	/>
+</div>
+
+###### Use visual aids only when they add meaning
+
+Icons can help users recognize state faster, but they must reinforce (not replace) the label. Use only clear, unambiguous icons that match the message.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=3-1116&embed-host=share&scaling=scale-down-width"
+		description="Use a simple icon that directly corresponds to the label (e.g., bell for notifications)."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=3-1117&embed-host=share&scaling=scale-down-width"
+		description="Use decorative icons or icons that contradict the label meaning."
+	/>
+</div>
+
+###### Switch vs Checkbox decision
+
+Switch is for enabling/disabling a setting with immediate effect. Checkbox is for selecting one or more options, often as part of a form that may be confirmed later.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=3-1118&embed-host=share&scaling=scale-down-width"
+		description="Use a switch for a preference that updates instantly; use checkbox for form selections and multi-select lists."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=3-1119&embed-host=share&scaling=scale-down-width"
+		description="Use a checkbox for instant on/off settings or a switch for multi-select choices."
+	/>
+</div>
+
+###### Accessibility and screenreader text
+
+Every switch needs an accessible name. If the visible label is hidden, provide equivalent screenreader label text. Ensure keyboard interaction works and focus is clearly visible.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=3-1122&embed-host=share&scaling=scale-down-width"
+		description="Support Tab focus, Space/Enter toggling, visible focus styling, and screenreader labeling."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=3-1123&embed-host=share&scaling=scale-down-width"
+		description="Ship a switch without an accessible label or rely on position/icon-only meaning."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<DBAccordion>
+	<DBAccordionItem headlinePlain="When should I use Switch vs Checkbox?">
+		Use Switch for immediate on/off settings. Use Checkbox for selecting options (often multiple)
+		and for choices that may be confirmed later.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain='Should a switch require a "Save" button?'>
+		No. Switch implies immediate application. If saving is required, use Checkbox (or another form
+		control) and apply changes on submit.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="Can I change the label based on on/off state?">
+		Yes, if it improves clarity (e.g., "Notifications enabled/disabled"). Keep wording consistent
+		and avoid ambiguity.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="Do I need icons on switches?">
+		No. Icons are optional. Use them only when they add clarity and never as the sole carrier of
+		meaning.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="How do I make a switch accessible if the label is hidden?">
+		Provide screenreader label text and ensure the switch is keyboard operable with a visible focus
+		indicator.
+	</DBAccordionItem>
+</DBAccordion>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+	## Related Content
+	<TeaserCard
+		teasers={[
+			{
+				title: 'Checkbox',
+				description: 'Multi-select control and form selection pattern',
+				url: '/documentation/components/checkbox',
+			},
+			{
+				title: 'Radio',
+				description: 'Single-choice selection within a mutually exclusive set',
+				url: '/documentation/components/radio',
+			},
+			{
+				title: 'Input',
+				description: 'Form field often used alongside settings controls',
+				url: '/documentation/components/input',
+			},
+		]}
+	/>
+</DBSection>
