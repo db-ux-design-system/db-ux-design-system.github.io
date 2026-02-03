@@ -1,0 +1,250 @@
+---
+order: 4
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Badge'
+title: 'Badge'
+description: 'The Badge component is used to display short, contextual information such as status, category, or metadata in close relation to another element.'
+align: start
+status: 'stable'
+toc: true
+---
+
+import { DBBadge, DBSection, DBAccordion, DBAccordionItem } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import { badgeConfig } from '@template/configs/badge.config.js';
+
+- Indicate status or state of an item (e.g. new, error, success)
+- Label or categorize content with a short descriptor
+- Highlight supplementary information next to UI elements
+
+<DBSection spacing="small" width="auto">
+	## Playground Experiment with the Badge component and its properties.
+	<ComponentPlayground config={badgeConfig} component={DBBadge} />
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+		},
+		{
+			title: 'Vue',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
+		},
+		{
+			title: 'Angular',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg',
+		},
+		{
+			title: 'Web C.',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties
+
+Configure the badge through its properties, such as semantic, size, and content.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable config={badgeConfig} />
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Properties" expandedText="Hide some Properties" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+###### Use badges for supplementary information
+
+Badges should provide additional context and must not carry essential information on their own.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=1-1132&embed-host=share"
+		description="Use a badge to display a status next to a list item or title."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=1-1133&embed-host=share"
+		description="Use a badge as the only indicator for critical information."
+	/>
+</div>
+
+###### Keep label text short
+
+Badge labels must be concise and scannable to ensure quick recognition.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1110&embed-host=share"
+		description="Use one or two short words such as 'New' or 'Draft'."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1112&embed-host=share"
+		description="Use long sentences or detailed explanations inside a badge."
+	/>
+</div>
+
+###### Position badges clearly
+
+Place badges close to the element they describe, without breaking layout or alignment.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1113&embed-host=share"
+		description="Align the badge consistently next to the related label or component."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1114&embed-host=share"
+		description="Place badges far away or detached from their reference element."
+	/>
+</div>
+
+###### Badge vs Tag
+
+Use badges for status or metadata, and tags for filtering, grouping, or interactive categorization.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1116&embed-host=share"
+		description="Use a badge to show status like 'Active' or 'Archived'."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1117&embed-host=share"
+		description="Use a badge when the element is meant to be clickable or removable."
+	/>
+</div>
+
+###### Accessibility considerations
+
+Ensure badge information is available to assistive technologies and not conveyed by color alone.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1118&embed-host=share"
+		description="Provide clear text labels and sufficient color contrast."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1119&embed-host=share"
+		description="Rely only on color or position to communicate meaning."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<DBAccordion>
+	<DBAccordionItem headlinePlain="Can a badge be interactive?">
+		No, badges are non-interactive. If interaction is required, use a Tag or Button instead.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="How many badges can be shown together?">
+		Use badges sparingly. Too many badges reduce readability and visual clarity.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="Can icons be used inside badges?">
+		Only if they support the text label and do not replace it.
+	</DBAccordionItem>
+</DBAccordion>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+	## Related Content
+	<TeaserCard
+		teasers={[
+			{
+				title: 'Tag',
+				description: 'Interactive element for categorization and filtering',
+				url: '/documentation/components/tag',
+			},
+			{
+				title: 'Label',
+				description: 'Describes form fields or UI elements',
+				url: '/documentation/components/label',
+			},
+			{
+				title: 'Status Indicator',
+				description: 'Visual representation of system or item state',
+				url: '/documentation/components/status-indicator',
+			},
+		]}
+	/>
+</DBSection>

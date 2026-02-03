@@ -1,0 +1,40 @@
+---
+import { DBBadge } from '@db-ux/react-core-components';
+
+interface Props {
+	variant: 'do' | 'dont';
+	figmaUrl: string;
+	description: string;
+}
+
+const { variant, figmaUrl, description } = Astro.props;
+const semantic = variant === 'do' ? 'successful' : 'critical';
+const label = variant === 'do' ? 'Do' : "Don't";
+const fullUrl = `${figmaUrl}&embed-host=share&footer=false&viewport-controls=false&page-selector=false&scaling=scale-down-width`;
+---
+
+<div style={{ position: 'relative', display: 'inline-block', width: '50%' }}>
+	<DBBadge
+		semantic={semantic}
+		size="medium"
+		style={{
+			position: 'absolute',
+			top: 'var(--db-spacing-fixed-md)',
+			left: 'var(--db-spacing-fixed-md)',
+			zIndex: 1,
+		}}
+	>
+		<span>{label}</span>
+	</DBBadge>
+	<iframe
+		style={{
+			border: 'var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default)',
+			borderRadius: 'var(--db-border-radius-md)',
+			width: '100%',
+			aspectRatio: '16/9',
+		}}
+		src={fullUrl}
+		loading="eager"
+		allowfullscreen></iframe>
+	<p>{description}</p>
+</div>
