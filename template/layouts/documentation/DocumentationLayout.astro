@@ -1,0 +1,35 @@
+---
+import type { MarkdownHeading } from 'astro';
+import '../../styles/global.css';
+import HtmlHead from '@template/components/HtmlHead';
+import DocumentationContent from './DocumentationContent.astro';
+import { appConfig } from '@root/app.config.ts';
+import { Shell } from '@template/components/Shell';
+import interactiveDemoScriptUrl from '@template/components/InteractiveDemo/interactiveDemo.client.js?url';
+
+interface Props {
+	headings: MarkdownHeading[];
+	frontmatter: FrontMatter;
+}
+const { headings, frontmatter } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang={appConfig.language || 'en'}>
+	<HtmlHead title={frontmatter.title} loadModelViewer={frontmatter.loadModelViewer} />
+	<body>
+		<Shell
+			client:only="react"
+			pathname={currentPath}
+			subNavigationVariant={frontmatter.subNavigationVariant}
+		>
+			<div class="dba-main-grid">
+				<DocumentationContent frontmatter={frontmatter} headings={headings}>
+					<slot />
+				</DocumentationContent>
+			</div>
+		</Shell>
+		<script is:inline type="module" src={interactiveDemoScriptUrl}></script>
+	</body>
+</html>
