@@ -9,38 +9,46 @@ const { config } = Astro.props;
 
 function getPropertyValues(property) {
 	if (property.type === 'select') {
-		const values = property.options.map(opt => opt.label).join(', ');
-		const defaultOpt = property.options.find(opt => opt.default);
+		const values = property.options.map((opt) => opt.label).join(', ');
+		const defaultOpt = property.options.find((opt) => opt.default);
 		return `(Default) ${defaultOpt?.label || property.defaultValue}, ${values.replace(defaultOpt?.label + ', ', '').replace(', ' + defaultOpt?.label, '')}`;
 	}
-	
+
 	if (property.type === 'checkbox') {
 		return `(Default) ${property.defaultValue}, True`;
 	}
-	
+
 	if (property.type === 'text') {
 		return `Text input`;
 	}
-	
+
 	return 'Various';
 }
 ---
 
-<table>
-	<thead>
-		<tr>
-			<th>Property</th>
-			<th>Values</th>
-			<th>Description</th>
-		</tr>
-	</thead>
-	<tbody>
-		{config.properties.map((property) => (
+<div class="properties-table-wrapper">
+	<table>
+		<thead>
 			<tr>
-				<td>{property.alternativeName ? `${property.name} / ${property.alternativeName}` : property.name}</td>
-				<td>{getPropertyValues(property)}</td>
-				<td>{property.description}</td>
+				<th>Property</th>
+				<th>Values</th>
+				<th>Description</th>
 			</tr>
-		))}
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			{
+				config.properties.map((property) => (
+					<tr>
+						<td>
+							{property.alternativeName
+								? `${property.name} / ${property.alternativeName}`
+								: property.name}
+						</td>
+						<td>{getPropertyValues(property)}</td>
+						<td>{property.description}</td>
+					</tr>
+				))
+			}
+		</tbody>
+	</table>
+</div>
