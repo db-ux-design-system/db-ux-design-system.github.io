@@ -79,7 +79,7 @@
 	.dba-main-grid {
 		&:has(.dba-toc) {
 			.dba-main-content {
-				padding-inline-end: calc(var(--db-container-xs) + var(--db-spacing-fixed-sm));
+				padding-inline-end: var(--db-container-3xs);
 			}
 		}
 	}

@@ -1,10 +1,10 @@
 ---
 import type { MarkdownHeading } from 'astro';
 import '../../styles/global.css';
-import HtmlHead from './html-head';
+import HtmlHead from '@template/components/HtmlHead';
 import MainContent from './main-content';
 import { appConfig } from '@root/app.config.ts';
-import { Shell } from './shell';
+import { Shell } from '@template/components/Shell';
 import interactiveDemoScriptUrl from '@template/components/InteractiveDemo/interactiveDemo.client.js?url';
 
 interface Props {

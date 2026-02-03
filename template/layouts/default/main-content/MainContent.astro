@@ -1,7 +1,7 @@
 ---
 import type { MarkdownHeading } from 'astro';
-import { TableOfContents } from './toc';
-import { FooterNav } from './footer-nav';
+import { TableOfContents } from '@template/components/TableOfContents';
+import { FooterNav } from '@template/components/FooterNav';
 import { DBSection } from '@db-ux/react-core-components';
 import { PageHero } from '@components';
 
@@ -27,7 +27,7 @@ const toc = (headings?.length ?? 0) > 0 && frontmatter.toc === true;
 	<div class="dba-main-content">
 		{
 			(frontmatter.title || frontmatter.headline || frontmatter.description) && (
-				<DBSection id={frontmatter.title} width="large" spacing="large">
+				<DBSection id={frontmatter.title} width="full" spacing="large">
 					<PageHero
 						title={frontmatter.title}
 						headline={frontmatter.headline}
@@ -35,6 +35,7 @@ const toc = (headings?.length ?? 0) > 0 && frontmatter.toc === true;
 						headlineLevel={frontmatter.headlineLevel ?? 1}
 						imageSrc={frontmatter.heroImage}
 						imageAlt={frontmatter.heroImageAlt}
+						align={frontmatter.align}
 					/>
 				</DBSection>
 			)
