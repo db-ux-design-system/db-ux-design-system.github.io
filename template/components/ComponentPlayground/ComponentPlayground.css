@@ -1,0 +1,54 @@
+/* Component Playground Styles */
+.component-playground {
+	display: grid;
+	grid-template-columns: 1fr 250px;
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+	border-radius: var(--db-border-radius-md);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	overflow: hidden;
+	max-width: 100%;
+}
+
+.component-playground .preview-area {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 150px;
+	padding: var(--db-spacing-fixed-lg);
+	overflow: hidden;
+}
+
+.component-playground .badge-container {
+	position: relative;
+	width: 240px;
+	background-color: var(--db-adaptive-bg-basic-transparent-semi-default);
+	border-radius: var(--db-border-radius-sm);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--db-spacing-fixed-sm);
+	padding: var(--db-spacing-fixed-xs) var(--db-spacing-fixed-sm);
+}
+
+.component-playground .badge-list-item-text {
+	font: var(--db-type-body-md);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+}
+
+.component-playground .controls-area {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-sm);
+	padding: var(--db-spacing-fixed-lg);
+	border-left: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}
+.component-playground .controls-area .controls-area-content {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-sm);
+}
+
+.component-playground .controls-area h6 {
+	margin: 0;
+}
