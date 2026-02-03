@@ -1,0 +1,284 @@
+---
+order: 8
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Checkbox'
+title: 'Checkbox'
+description: 'Checkbox lets users select one or more independent options and clearly shows the current selection state. Use it in forms, filters, and settings where multiple choices can apply at the same time.'
+align: start
+status: 'stable'
+toc: true
+---
+
+import { DBCheckbox, DBSection, DBAccordion, DBAccordionItem } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import { checkboxConfig } from '@template/configs/checkbox.config.js';
+
+- Select multiple options from a list (e.g., notification channels)
+- Confirm consent or acknowledgment (e.g., accept terms)
+- Apply filters that can be combined (e.g., categories, attributes)
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+Experiment with the Checkbox component and its properties.
+
+<ComponentPlayground config={checkboxConfig} component="checkbox" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+		},
+		{
+			title: 'Vue',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
+		},
+		{
+			title: 'Angular',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg',
+		},
+		{
+			title: 'Web C.',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties
+
+Configure the checkbox through its properties, such as checked state, disabled, and label.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable config={checkboxConfig} />
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Properties" expandedText="Hide some Properties" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+###### Use Checkbox for multi-select, not single-choice
+
+Use checkboxes when users can select any number of options (including none). If the user must pick exactly one option, use Radio instead.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=1-1132&embed-host=share"
+		description='Use a checkbox group for "Email", "SMS", "Post" where multiple selections are allowed.'
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=1-1133&embed-host=share"
+		description='Use checkboxes for mutually exclusive choices like "German / English / Spanish".'
+	/>
+</div>
+
+###### Write short, positive labels
+
+Labels must be clear and concise. Prefer positive phrasing to reduce cognitive load and avoid double negatives.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1110&embed-host=share"
+		description='Use "Subscribe to newsletter" instead of negative constructions.'
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1112&embed-host=share"
+		description='Use labels like "Do not subscribe" or "Not signed in" that can confuse when checked.'
+	/>
+</div>
+
+###### Make groups easy to scan
+
+In checkbox groups, keep options parallel in wording and length. If a group needs context, add a group label or short description above it.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1113&embed-host=share"
+		description='Use a clear group label (e.g., "Notification channels") and consistent option phrasing.'
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1114&embed-host=share"
+		description="Mix unrelated options or inconsistent wording that makes scanning harder."
+	/>
+</div>
+
+###### Use "Select all" and indeterminate state carefully
+
+If you provide "Select all", it must reflect the group state: checked when all are selected, unchecked when none are selected, and indeterminate when some are selected.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1116&embed-host=share"
+		description="Use an indeterminate state for partial selection and keep it synchronized with the group."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1117&embed-host=share"
+		description='Show "Select all" as checked when only some options are selected.'
+	/>
+</div>
+
+###### Keep interaction and states consistent
+
+Ensure checked, unchecked, disabled, and error states are visually distinct and consistent across the UI. Don't make the click target too small; the label should be clickable.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1118&embed-host=share"
+		description="Allow clicking the label to toggle and use consistent spacing between checkbox and label."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1119&embed-host=share"
+		description="Make only the small box clickable or use inconsistent spacing across lists."
+	/>
+</div>
+
+###### Accessibility and screenreader text
+
+Every checkbox needs an accessible name. If the visible label is hidden, provide a screenreader label text. Communicate group context and required/invalid states to assistive technologies.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1122&embed-host=share"
+		description="Provide a programmatic label and a screenreader label when the visual label is not shown."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1123&embed-host=share"
+		description="Ship a checkbox without an accessible label or rely on position/placeholder-like text to explain it."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<DBAccordion>
+	<DBAccordionItem headlinePlain="When should I use Checkbox vs Switch?">
+		Use Checkbox for selections in forms, lists, and filters (often multiple at once). Use Switch for a single on/off setting that takes effect immediately.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="When should I use Checkbox vs Radio?">
+		Use Checkbox when multiple options can be selected. Use Radio when exactly one option must be chosen within a set.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="Can I hide the visible label?">
+		Only if you provide equivalent screenreader text and the meaning is still clear in context. Prefer visible labels whenever possible.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="How should I validate checkbox groups?">
+		If at least one option is required, validate the group (not each item) and show a clear error message that explains what is missing.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain='Do I need a "Select all" option?'>
+		Only when it saves effort for large groups and users commonly select most options. Keep the state accurate and support indeterminate for partial selection.
+	</DBAccordionItem>
+</DBAccordion>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+	## Related Content
+	<TeaserCard
+		teasers={[
+			{
+				title: 'Radio',
+				description: 'Single-choice selection within a mutually exclusive set',
+				url: '/documentation/components/radio',
+			},
+			{
+				title: 'Switch',
+				description: 'Immediate on/off setting toggle',
+				url: '/documentation/components/switch',
+			},
+			{
+				title: 'Select',
+				description: 'Single-choice selection from a dropdown list',
+				url: '/documentation/components/select',
+			},
+		]}
+	/>
+</DBSection>
