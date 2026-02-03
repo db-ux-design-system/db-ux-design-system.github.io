@@ -3,7 +3,7 @@ import { appConfig } from '@root/app.config';
 import { ClientRouter } from 'astro:transitions';
 
 const { title, loadModelViewer } = Astro.props as {
-	title: string;
+	title?: string;
 	loadModelViewer?: boolean;
 };
 ---
@@ -13,7 +13,13 @@ const { title, loadModelViewer } = Astro.props as {
 	<meta name="viewport" content="width=device-width" />
 	<meta name="generator" content={Astro.generator} />
 	<base href={appConfig.basePath} />
-	<title>{title}</title>
+	<title>
+		{
+			title
+				? `${title}${appConfig.titleSuffix ? ` - ${appConfig.titleSuffix}` : ''}`
+				: appConfig.titleSuffix || 'DB UX Design System'
+		}
+	</title>
 	{
 		loadModelViewer && (
 			<script type="module" is:inline src={`${appConfig.basePath}model-viewer.min.js`} />
