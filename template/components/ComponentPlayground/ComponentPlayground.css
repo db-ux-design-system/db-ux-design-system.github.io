@@ -9,6 +9,17 @@
 	max-width: 100%;
 }
 
+@media (max-width: 768px) {
+	.component-playground {
+		grid-template-columns: 1fr;
+	}
+
+	.component-playground .controls-area {
+		border-left: none;
+		border-top: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	}
+}
+
 .component-playground .preview-area {
 	display: flex;
 	align-items: center;
