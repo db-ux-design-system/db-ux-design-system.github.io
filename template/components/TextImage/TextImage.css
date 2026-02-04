@@ -86,16 +86,16 @@
 }
 
 .text-image-text > p + p {
-	margin-top: var(--db-spacing-fixed-md);
+	margin-block-start: var(--db-spacing-fixed-md);
 }
 
 /* Remove default first/last paragraph margins to avoid extra top/bottom spacing */
 .text-image-text > p:first-child {
-	margin-top: 0;
+	margin-block-start: 0;
 }
 
 .text-image-text > p:last-child {
-	margin-bottom: 0;
+	margin-block-end: 0;
 }
 
 .text-image-image img {

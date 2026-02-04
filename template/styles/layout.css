@@ -16,7 +16,7 @@
 }
 
 .dba-main > astro-island:empty + .dba-main-inner {
-	margin-left: 0 !important;
+	margin-inline-start: 0 !important;
 }
 
 .dba-main-content {
@@ -29,8 +29,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin-top: var(--db-spacing-fixed-md);
-	margin-bottom: var(--db-spacing-fixed-sm);
+	margin-block: var(--db-spacing-fixed-md) var(--db-spacing-fixed-sm);
 	gap: var(--db-spacing-fixed-lg);
 
 	.db-button {
@@ -39,8 +38,7 @@
 }
 
 .dba-article-heading {
-	margin-top: var(--db-spacing-fixed-md);
-	margin-bottom: var(--db-spacing-fixed-xs);
+	margin-block: var(--db-spacing-fixed-md) var(--db-spacing-fixed-xs);
 }
 
 .dba-pulse-underline {
@@ -91,7 +89,9 @@
 	body:has(.dba-side-nav) {
 		.dba-main {
 			/* stylelint-disable-next-line db-ux/use-spacings */
-			margin-left: calc(max(var(--side-nav-width), calc((100% - var(--content-width)) / 2)));
+			margin-inline-start: calc(
+				max(var(--side-nav-width), calc((100% - var(--content-width)) / 2))
+			);
 		}
 	}
 
