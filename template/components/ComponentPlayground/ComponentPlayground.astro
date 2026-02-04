@@ -68,7 +68,7 @@ const dualCaseProps = {
 						role="switch"
 						checked={config.defaultProps.checked}
 						disabled={config.defaultProps.disabled}
-						onchange="const control = document.querySelector('.controls-area input[type=checkbox][onchange*=checked]'); if(control) control.checked = this.checked;"
+						onchange="const controls = document.querySelectorAll('.controls-area input[type=checkbox]'); controls.forEach(c => { if(c.onchange && c.onchange.toString().includes('target.checked')) c.checked = this.checked; });"
 					/>
 					<span id="playground-switch-label">Enable notifications</span>
 				</label>
@@ -79,7 +79,7 @@ const dualCaseProps = {
 						type="radio"
 						checked={config.defaultProps.checked}
 						disabled={config.defaultProps.disabled}
-						onchange="const control = document.querySelector('.controls-area input[type=checkbox][onchange*=checked]'); if(control) control.checked = this.checked;"
+						onchange="const controls = document.querySelectorAll('.controls-area input[type=checkbox]'); controls.forEach(c => { if(c.onchange && c.onchange.toString().includes('target.checked')) c.checked = this.checked; });"
 					/>
 					<span id="playground-radio-label">Option 1</span>
 				</label>
@@ -90,7 +90,7 @@ const dualCaseProps = {
 						type="checkbox"
 						checked={config.defaultProps.checked}
 						disabled={config.defaultProps.disabled}
-						onchange="const control = document.querySelector('.controls-area input[type=checkbox][onchange*=checked]'); if(control) control.checked = this.checked;"
+						onchange="const controls = document.querySelectorAll('.controls-area input[type=checkbox]'); controls.forEach(c => { if(c.onchange && c.onchange.toString().includes('target.checked')) c.checked = this.checked; });"
 					/>
 					<span id="playground-checkbox-label">Accept terms</span>
 				</label>
@@ -159,13 +159,14 @@ const dualCaseProps = {
 						if (prop.type === 'text') {
 							const attrName = nativeAttributes.includes(prop.name) ? prop.name : `data-${prop.name}`;
 							if (prop.name === 'text') {
+								const targetId = config.textElementId || config.elementId;
 								return (
 									<div class="db-input">
 										<label>{prop.label}</label>
 										<input
 											type="text"
 											value={prop.defaultValue}
-											oninput={`document.getElementById('${config.textElementId}').textContent = this.value;`}
+											oninput={`document.getElementById('${targetId}').textContent = this.value;`}
 										/>
 									</div>
 								);
