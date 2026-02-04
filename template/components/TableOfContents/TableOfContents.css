@@ -14,14 +14,14 @@
 }
 
 .dba-toc ul {
-	padding: 0 0 0 8px;
+	padding: 0 0 0 var(--db-spacing-fixed-2xs);
 }
 
 .dba-toc-indicator {
 	position: absolute;
 	left: 0;
 	top: 0;
-	width: 4px;
+	width: var(--db-border-width-xs);
 	background-color: var(--db-brand-on-bg-basic-emphasis-70-default);
 	border-radius: var(--db-border-radius-full);
 	transition:
@@ -51,10 +51,10 @@
 .dba-toc-heading::before {
 	content: '';
 	position: absolute;
-	left: -8px;
+	left: calc(var(--db-spacing-fixed-2xs) * -1);
 	top: 0;
 	bottom: 0;
-	width: 4px;
+	width: var(--db-border-width-xs);
 	background-color: var(--db-neutral-on-bg-inverted-pressed);
 }
 
@@ -69,7 +69,7 @@
 }
 
 .dba-toc-heading svg {
-	opacity: 0.6;
+	opacity: var(--db-opacity-md);
 }
 
 .dba-toc-heading a {
@@ -91,14 +91,14 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 32px;
-	width: 32px;
+	height: var(--db-spacing-fixed-xl);
+	width: var(--db-spacing-fixed-xl);
 	background: transparent;
 	border: none;
 	border-radius: var(--db-border-radius-xs);
 	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
 	cursor: pointer;
-	font-size: 16px;
+	font-size: var(--db-sizing-2xs);
 	line-height: 1;
 	transition: background-color 0.2s ease;
 	position: absolute;
