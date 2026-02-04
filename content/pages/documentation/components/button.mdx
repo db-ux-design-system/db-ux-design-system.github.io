@@ -1,346 +1,278 @@
 ---
-order: 1
-layout: '@template/layouts/default'
-toc: true
-title: 'Button'
+order: 2
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small' # none, small, medium, large
+sectionWidth: 'auto' # auto, full
 headline: 'Button'
-description: 'Der Button wird verwendet, um Nutzer:innen zur Interaktion aufzufordern und eine Aktion auszulösen.'
+title: 'Button'
+description: 'Buttons initiate actions and confirm decisions. Use them to guide users through key tasks and flows.'
+align: start
+toc: true
+status: 'stable'
 ---
 
-import ComponentLifecycleNotification from '@template/components/ComponentLifecycleNotification/ComponentLifecycleNotification.tsx';
+import {
+	DBButton,
+	DBBadge,
+	DBSection,
+	DBAccordion,
+	DBAccordionItem,
+	DBCard,
+	DBLink,
+} from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 
-import buttonPlaygroundImage from '@assets/documentation/components/button/Component-Action-Button-Playground-data.png';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import { buttonConfig } from '@template/configs/button.config.js';
 
-<ComponentLifecycleNotification state="stable" />
+- Trigger an action (e.g., Send, Save, Delete)
+- Indicate that interaction or confirmation is expected
+- Highlight a primary or secondary action
 
-<img src={buttonPlaygroundImage.src} alt="Component--Action--Button--Playground" />
+<DBSection spacing="small" width="auto">
 
-## Overview
+    ## Playground
+    Experiment with the Button component and its properties.
 
-### Properties
+    <ComponentPlayground config={buttonConfig} component={DBButton} />
 
-Properties definieren die Eigenschaften und verschiedenen Ausprägungen einer Komponente. Sie ermöglichen, die Komponente flexibel an unterschiedliche Anforderungen anzupassen. Da Properties in Design und Entwicklung identisch sind, wird die Übergabe vereinfacht und die Konsistenz sichergestellt.
+</DBSection>
 
-| Property                                | Values                                   |
-| --------------------------------------- | ---------------------------------------- |
-| Variant                    | (Default) Outlined, Filled, Ghost, Brand |
-| Disabled                 | (Default) False, True                    |
-| Size                          | (Default) Medium, Small                  |
-| Show Icon Leading   | (Default) False, True                    |
-| Show Icon Trailing| (Default) False, True                    |
-| No Text                     | (Default) False, True                    |
-| Width                         | (Default) Auto, Full                     |
+<DBSection spacing="small" width="auto">
 
-#### Variant
+## Resources
 
-Die Variant-Property definiert das visuelle Erscheinungsbild des Buttons. Es umfasst verschiedene Stile wie _Brand_ für hervorgehobene CTAs, _Outlined_ als Default-Button, gefolgt vom _Filled_ und _Ghost_-Button für dezente, oftmals alternative Interaktionen.
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+		},
+		{
+			title: 'Vue',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
+		},
+		{
+			title: 'Angular',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg',
+		},
+		{
+			title: 'Web C.',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
+		},
+	]}
+/>
 
-<iframe
-	title="Button Variant Examples"
-	width="100%"
-	height="320"
-	style={{ border: 'none' }}
-	src="https://db-ux-design-system.github.io/core-web/review/main/components/button?page=variant"
-	allow="clipboard-read; clipboard-write"
-></iframe>
+</DBSection>
 
-#### Disabled
+<DBSection spacing="small" width="auto">
 
-Die Disabled-Property legt fest, ob der Button aktiv oder inaktiv ist. Bei _Disabled = False_ ist der Button interaktiv und unterstützt Zustände wie _Hover, Pressed_ und _Focused_. Wenn _Disabled = True_ gesetzt ist, wird der Button inaktiv und zeigt keine interaktiven Zustände mehr. In diesem Fall ist er nicht klickbar.
+## Properties
 
-<iframe
-	title="Button Disabled State Examples"
-	width="100%"
-	height="320"
-	style={{ border: 'none' }}
-	src="https://db-ux-design-system.github.io/core-web/review/main/components/button/overview?page=disabled"
-	allow="clipboard-read; clipboard-write"
-></iframe>
+Configure the button through its properties, such as variant, size, icon, and disabled state.
 
-#### Size
+<CollapsibleWrapper collapsedHeight="320px">
 
-Die Size-Property bestimmt die physikalische Größe des Buttons. Hierbei kann zwischen _Medium_ als Default-Größe für vielseitige Anwendungen und _Small_ als kompakterer Button für begrenzten Platz oder spezielle Anforderungen gewählt werden.
+<PropertiesTable config={buttonConfig} />
 
-<iframe
-	title="Button Size Examples"
-	width="100%"
-	height="320"
-	style={{ border: 'none' }}
-	src="https://db-ux-design-system.github.io/core-web/review/main/components/button?page=size"
-	allow="clipboard-read; clipboard-write"
-></iframe>
+</CollapsibleWrapper>
 
-#### Show Icon Leading
+<CollapseButton collapsedText="Show all Properties" expandedText="Hide some Properties" />
 
-Die Show-Icon-Leading Property legt fest, ob ein Icon vor dem Text im Button angezeigt wird. Wenn die Property auf _True_ gesetzt ist, wird ein Icon dargestellt. Der Standardwert ist _False_, bei dem kein Icon angezeigt wird.
+</DBSection>
 
-<iframe
-	title="Button Show Icon Leading Examples"
-	width="100%"
-	height="320"
-	style={{ border: 'none' }}
-	src="https://design-system.deutschebahn.com/core-web/review/main/components/action/button/overview?page=show+icon+leading"
-	allow="clipboard-read; clipboard-write"
-></iframe>
-
-#### Show Icon Trailing
-
-Die Show-Icon-Trailing Property legt fest, ob ein Icon nach dem Text im Button angezeigt wird. Wenn die Property auf _True_ gesetzt ist, wird ein Icon dargestellt. Der Standardwert ist _False_, bei dem kein Icon angezeigt wird.
-
-<iframe
-	title="Button Show Icon Trailing Examples"
-	width="100%"
-	height="320"
-	style={{ border: 'none' }}
-	src="https://design-system.deutschebahn.com/core-web/review/main/components/action/button/overview?page=show+icon+trailing"
-	allow="clipboard-read; clipboard-write"
-></iframe>
-
-#### No Text
-
-Die No-Text-Property legt fest, ob der Text des Buttons ausgeblendet wird. Bei _Show Icon = False_ muss _No Text_ immer _False_ sein. Wird jedoch _Show Icon = True_ und _No Text = True_ gesetzt, wird ein reiner Icon-Button dargestellt.
-
-<iframe
-	title="Button No Text Examples"
-	width="100%"
-	height="320"
-	style={{ border: 'none' }}
-	src="https://db-ux-design-system.github.io/core-web/review/main/components/button/overview?page=no+text"
-	allow="clipboard-read; clipboard-write"
-></iframe>
-
-#### Width
-
-Die Width-Property beeinflusst das dynamische Verhalten des Buttons. _Auto_ sorgt dafür, dass die Breite automatisch dem Inhalt angepasst wird, während _Full_ den Button über die gesamte verfügbare Breite erstreckt.
-
-<iframe
-	title="Button Width Examples"
-	width="100%"
-	height="320"
-	style={{ border: 'none' }}
-	src="https://db-ux-design-system.github.io/core-web/review/main/components/button?page=width"
-	allow="clipboard-read; clipboard-write"
-></iframe>
-
-### Boxmodel
-
-Das Boxmodel definiert den Aufbau einer Komponente. Es nutzt die unten genannten Tokens, um Konsistenz und Skalierbarkeit zu gewährleisten.
-
-![Button - Boxmodel](/resource/blob/13107562/7105da3fb6ffc7783df5c8f204734d14/Button-Boxmodel-data.png)
-
-### Token
-
-|                   | (Default) Medium          | Small                     |
-| ----------------- | ------------------------- | ------------------------- |
-| **Size**          | db-sizing-fixed-md        | db-sizing-fixed-sm        |
-| **Padding-Full**  | db-spacing-fixed-xs       | db-spacing-fixed-3xs      |
-| **Padding-H**     | db-spacing-fixed-md       | db-spacing-fixed-sm       |
-| **Spacing**       | db-spacing-fixed-xs       | db-spacing-fixed-2xs      |
-| **Border Radius** | db-radius-xs              | db-radius-xs              |
-| **Border Height** | db-border-height-3xs      | db-border-height-3xs      |
-| **Icon Size**     | db-base-icon-font-size-md | db-base-icon-font-size-sm |
-| **Text Size**     | db-type-body-md-bold      | db-type-body-sm-bold      |
-
-### Unterschied zu v2
-
-- Kompatibilität mit dem adaptiven Farb- und Größensystem
-- Aufbau mit Spacing- und Typo-Token
-- Einsatz der Icons v3
-- Neue Varianten-Struktur und Namings
-  1. Primary Brand ➔ **Brand**
-  2. Secondary Outlined ➔ **Outlined**
-  3. Secondary Solid ➔ **Filled**
-  4. Tertiary ➔ **Ghost**
-- Primary (dunkel) ist in der v3 nicht mehr vorhanden. Für Produkte, die rot als Signalfarbe einsetzen und aus sicherheitsrechtlichen Gründen den roten Brand Button nicht verwenden dürfen, wird eine Alternative bereitgestellt. **Bitte nicht den Brand Button umfärben.**
-
-![Button - Content - v2v3](/resource/blob/13107692/61cece205a7a7f5fa18da9d432a43c5d/Button-Content-v2v3-data.png)
+<DBSection spacing="small" width="auto">
 
 ## Guidelines
 
-### Kurz, Knackig, Klar
-
-#### Setze die Button-Komponente ein, wenn
-
-- eine **Aktion** ausgelöst werden soll, z. B. „Senden", „Speichern" oder „Löschen".
-- eine **Aufgabe** oder ein **Dialog gestartet** werden soll
-- Nutzer klar erkennen sollen, dass eine **Interaktion** oder **Bestätigung** erwartet wird.
-- Du eine **primäre oder sekundäre Aktion** visuell hervorheben möchtest.
-
-#### Guidelines to Go
-
-- **Brand-Button:**
-  - stärkster Call-to-Action (CTA), leitet zur Conversion.
-  - idealerweise nur einmal pro Viewport verwenden.
-- **Outlined-Button:**
-  - mittelstarke Hervorhebung für wichtige, aber nicht primäre Aktionen.
-  - gut kombinierbar als sekundäre Aktionen mit Brand-Button.
-- **Label** soll einzeilig, kurz und prägnant sein und eine klare Handlungsaufforderung vermitteln.
-- **Icons** sollen Intuitiv und allgemein verständlich sein.
-- **Button** für Aktionen und **Links** für Navigation verwenden.
-- Gebe beim Icon Button immer einen **Screenreader Text** an
-
-### Hierarchie
-
-Lege eine klare Hierarchie für Buttons fest, um visuell und funktional zu zeigen, welche Aktionen priorisiert sind. Beachten dabei die Wichtigkeit der Aktionen und deren Relevanz für den Nutzerkontext.
-
-#### Outlined Buttons
-
-Outlined Buttons sind mittelstark hervorgehobene Buttons. Sie beinhalten wichtige Aktionen, die jedoch nicht die primäre Aktion in der Anwendung darstellen. Sie lassen sich gut mit dem Brand-Button kombinieren, um eine alternative, sekundäre Aktion anzuzeigen.
-
-![Button - Variant - Do_Dont - Hierarchie](/resource/blob/12822692/f2377678d54689f6a6389190e63405f9/Button-Variant-Do_Dont-Hierarchie-data.png)
-
-_🟢 Aktionen sind priorisiert: Brand-Button und Outlined-Button
-🔴 Aktionen sind nicht priorisiert: Zwei Brand-Buttons gleichzeitig_
-
-#### Brand Button
-
-Der Brand Button ist der stärkste CTA und soll die Nutzer:innen zum Conversion Target leiten. Aus diesem Grund verwenden wir ihn im besten Fall nur einmal pro Viewport.
-
-![Button - Content - Viewport](/resource/blob/13107688/ac240f62a85290f7aa237a9513414c01/Button-Content-Viewport-data.png)
-
-![Button - Content - Viewport2Button](/resource/blob/13107690/e329c6b06d14d9d15cb5f2f4d8b6be13/Button-Content-DoDont-Viewport-data.png)
-
-_🟢 Ein Brand-Button pro Viewport
-🔴 Mehrere Brand-Buttons pro Viewport_
-
-#### Kombinationsmöglichkeiten
-
-Die verschiedenen Buttons können unterschiedlich miteinander kombiniert werden.
-
-(1) Bei **Kombinationen mit dem Brand-Button** steht dieser im Mittelpunkt, während Outlined, Filled oder Ghost-Buttons unterstützende oder sekundäre Aktionen markieren.
-
-(2) Bei **Kombinationen mit Outlined-Buttons** eignen sich für wichtige, aber nicht primäre Aktionen. In Kombination mit Filled oder Ghost entsteht eine klare visuelle Abstufung zwischen den Aktionen. **Filled-Buttons** sind visuell stärker, **Ghost-Buttons** dezent. Zusammen bieten sie eine flexible Möglichkeit, Aktionen unterschiedlich zu gewichten.
-
-(3) **Outlined-Buttons** nebeneinander bieten eine gleichwertige Darstellung für wichtige, aber nicht primäre Aktionen. **Filled-Buttons** zusammen heben Aktionen moderat hervor, ohne visuell zu dominant zu wirken. **Ghost-Buttons** nebeneinander schaffen eine dezente, unaufdringliche Option für gleichrangige, weniger zentrale Aktionen.
-
-![Button - Content - Kombination](/resource/blob/13107806/f05ec7637a5f40b54bdafe14a499eb3d/Button-Content-Kombination-data.png)
-
-### Label
-
-Halte das Label des Buttons kurz und prägnant, um eine klare und verständliche Handlungsaufforderung zu gewährleisten.
-
-![Button-Content-Do-Label](/resource/blob/12795456/127e90cdc40b810625b7d2a1392b46ae/Button-Content-Do-Label-data.png)
-
-Labeltexte in Auto Width Buttons sind immer einzeilig und sollten kurz gehalten werden. Breche den Text nicht manuell um.
-
-![Button - Content - DoDont - LabelButton](/resource/blob/13092868/5d910927fe634690013c0df0687dfa51/Button-Content-DoDont-Label-data.png)
-
-_🟢 Labeltexte sind standardmäßig immer einzeilig
-🔴 Labeltext soll nicht manuell umgebrochen werden_
-
-Wird der Text innerhalb des FullWidth Buttons länger, als die Breite ermöglicht, kann der Text mehrzeilig werden. Dies sollte durch kurze Labeltexte grundsätzlich vermieden werden und ist nur für Ausnahmefällen, wie der Verlängerung des Textes durch Übersetzung der Sprache oder Verkleinerung der Screenbreite, angedacht.
-
-![Button - Content - DoDont - LabelMultiline](/resource/blob/13552372/7bc0749046a4d94d362cdcd0a7371c93/Button-Content-DoDont-LabelMultiline-data.png)
-
-_🟢 Bei Verkleinerung der Screenbreite und Sprachänderung kann der Full Width Button mehrzeilig werden, um den gesamten Labeltext anzuzeigen.
-🔴 Mehrzeiligkeit sollte nicht für lange, komplizierte Labeltexte verwendet werden._
-
-### Icons
-
-Die verwendeten Icons in den Buttons sollten intuitiv und allgemein verständlich sein (z. B. ein Papierkorb für "Löschen" oder ein Stiftsymbol für "Bearbeiten"). Unklare oder komplexe Icons können Verwirrung stiften.
-
-#### Icon Button
-
-Reine Icon-Buttons eignen sich besonders gut für Toolbars, Navigationsleisten und mobile Interfaces, wo eine klare und kompakte Darstellung von Aktionen wichtig ist.
-
-![Button - Content - IconsButton](/resource/blob/13092872/33676afa8a574aef90a61d786e29b5bb/Button-Content-Icons-data.png)
-
-Icon-Buttons sollten im Hover-Zustand einen Tooltip mit der auszulösenden Aktion anzeigen.
-
-![Button-Content-Do-Tooltip](/resource/blob/12795458/7e5a8dc653641b11f30e581c2889fce2/Button-Content-Do-Tooltip-data.png)
-
-_Zeige für den Icon-Button im Hover-State einen Tooltip an_
-
-(Icon-) Buttons können durch Badges ergänzt werden, um z.B. Benachrichtigungen oder Änderungen anzuzeigen. Guidelines zur Platzierung sind in der [Badge Dokumentation](/marketingportal/Guidelines-13095480) zu finden.
-
-![Button - Content - Badge](/resource/blob/13153124/07680c5a3e7ad17bfe647c0f100e2c73/Button-Content-Badge-data.png)
-
-Je nach Anwendungsfall können Buttons entweder ein Leading Icon oder ein Trailing Icon beinhalten. Die Kombination beider sollte vermieden werden, um die Übersicht zu bewahren und eine intuitive Nutzererfahrung sicherzustellen.
-
-![Button - Content - LeadingTrailingIcons](/resource/blob/13447022/fac32818f81b6f673c575fac4bb0ba53/Button-Content-LeadingTrailingIcons-data.png)
-
-_🟢 Nutze Leading- und Trailing Icons als sinnvolle Ergänzung für die jeweilige Aktion.
-🔴 Verwende innerhalb eines Buttons keine zwei Icons._
-
-### Positionierung
-
-Vermeide es, Buttons untereinander zu platzieren wenn genügend Platz für eine horizontale Darstellung gegeben ist.
-
-![Button - Weitere_Guidelines - Do_Dont - Platzierung](/resource/blob/12822694/0a5ddd052d7e3ba4007aea4f9e75a8c8/Button-Weitere_Guidelines-Do_Dont-Platzierung_Visual-data.png)
-
-_🟢 Buttons nebeneinander
-🔴 Buttons untereinander_
-
-### Breite
-
-Der Standard-Button passt sich in der Breite dem Inhalt an (Auto Width). Wenn du Buttons in responsiven Layouts einsetzt, können diese auch die Breite des Containers einnehmen. Insbesondere in Mobile-Layouts werden die Full Width-Buttons verwendet. Die Button-Breite kann nie kleiner als der Inhalt sein.
-
-![Button - Content - DoDont - WidthButton](/resource/blob/13092870/26cfd6c34be084c9343a2f029b99bfc6/Button-Content-DoDont-Width-data.png)
-
-_🟢 Button Breite entspricht dem Inhalt (Auto Width)
-🟢 Button Breite entspricht dem Container (Full Width)
-🔴 Inhalt ist breiter als Button_
-
-### Button oder Link?
-
-Nutze Buttons, um Aktionen auszulösen, allerdings nicht, um auf andere Seiten zu leiten – dafür werden Links verwendet.
-
-![Button-Weitere_Guidelines-Button_vs_Link](/resource/blob/12795484/8d89ca456ebb3beb20a2ae921949e9d9/Button-Weitere_Guidelines-Button_vs_Link-data.png)
-
-### Accessibility
-
-#### Kontrastwerte
-
-Um die WCAG-Richtlinien zu erfüllen, muss der Text eines Buttons ein Kontrastverhältnis von 4,5:1, Icons ein Kontrastverhältnis von 3:1 gegenüber ihrem Hintergrund in allen interaktiven Zuständen aufweisen. Disabled Buttons sind nicht interaktiv und müssen keine Farbkontrastanforderungen erfüllen. Die Nutzung der Komponenten des DB UX Design Systems gewährleistet die Erfüllung der WCAG-Richtlinien.
-
-![Button-Accessibility-Visual](/resource/blob/12795502/297b79471c03a800554b1aed0df63865/Button-Accessibility-Visual-data.png)
-
-#### Screenreader Text
-
-Achte darauf, dass auch bei **Icon Button** der Screenreader-Text immer mit an die Entwicklung übergeben wird, auch wenn es keinen visuell sichtbaren Text gibt. Ohne diese Angaben kann der Tag nicht barrierefrei genutzt werden.
-
-![Button - Content - AccessibilityScreenreader](/resource/blob/13176436/43400fa8184d3a10f760f40e9be1023f/Button-Content-AccessibilityScreenreader-data.png)
-
-_Gib immer einen Text an, auch wenn er nicht sichtbar ist._
-
-#### Hinweis für den Button Small (Functional)
-
-Der Button "Small" in der Density "Functional" hat eine Höhe von 20 px. Um Barrierefreiheitsrichtlinien zu gewährleisten, muss die Klickfläche jedoch mindestens 24 px haben. In diesem Bereich dürfen keine weitere interaktive Elemente platziert werden. Der notwendige Bereich kann entweder durch die Größe des Elements oder aber durch entsprechenden Umraum zu anderen interaktiven Elementen erreicht werden (hier relevant).
-
-![Button -Content - Accessibility - Functional Small](/resource/blob/13191428/ea2754df358921a40bb3c0cdfdf80313/Button-Content-Accessibility-Functional-Small-data.png)
-
-_🟢 Die Klickfläche von 24 px wird eingehalten.
-🔴 Die Klickfläche von 24 px wird durch ein anderes Element beschnitten._
-
-## Development
-
-<iframe
-	title="Button Angular Documentation"
-	width="100%"
-	height="600"
-	style={{ border: 'none' }}
-	src="https://design-system.deutschebahn.com/core-web/review/main/components/action/button/docs/Angular"
-	id="myIframeAngular"
-></iframe>
-
-<iframe
-	title="Button Properties Reference"
-	width="100%"
-	height="1700"
-	style={{ border: 'none' }}
-	src="https://design-system.deutschebahn.com/core-web/review/main/components/button/properties?fullscreen=true&noh1=true"
-	id="properties-iframe"
-></iframe>
-
-## Das könnte dich auch noch interessieren
-
-### Related Components
-
-- [Link](/marketingportal/Design-Anwendungen/db-ux-design-system/components/link#10447656) - Links werden als Navigationselemente verwendet. Sie können alleinstehend, innerhalb eines Satzes oder Absatzes oder …
-- [Badge](/marketingportal/Design-Anwendungen/db-ux-design-system/components/badge#10451968) - Badges sind visuelle Indikatoren, um wichtige Informationen hervorzuheben und den Status von Elementen, Komponenten …
-
-## Du hast Fragen oder Input?
-
-Wir haben alles dafür gegeben, dass unser Design System mit möglichst wenigen Regeln auskommt. So wird es einfach in der Anwendung, führt zu konsistenten Ergebnissen und stärkt die Marke Deutsche Bahn! Solltest du dir jedoch unsicher sein, Fragen oder einfach nur eine gute Verbesserungsidee haben, so sind wir gerne für dich da!
-
-[E-Mail schreiben](mailto:db-ux-designsystem@deutschebahn.com) [Feedback in Github](https://github.com/db-ux-design-system/core/issues)
+<CollapsibleWrapper collapsedHeight="320px">
+
+###### Hierarchy and primary CTA
+
+Establish a clear hierarchy so users can see which actions matter most. Use the Brand Button as the strongest CTA to drive conversion and use it only once per viewport.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-852&embed-host=share"
+		description="Use one primary button to highlight the main action. Place secondary actions next to it with lower emphasis."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-863&embed-host=share"
+		description="Do not place two primary buttons next to each other or in the same viewport. Competing primary actions make it harder to decide what to do."
+	/>
+</div>
+
+###### Labels
+
+Keep labels short, specific, and action‑oriented. Auto‑width buttons are single‑line by default; do not insert manual line breaks. Full‑width buttons may wrap only in edge cases (e.g., localization or narrow screens).
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-1125&embed-host=share"
+		description="Use concise, single‑line labels."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-1137&embed-host=share"
+		description="Manually break lines or use long, complex label text."
+	/>
+</div>
+
+###### Icons
+
+Use intuitive, universally understood icons. Add at most one icon inside a button and choose a suitable position (leading or trailing). Icon‑only buttons suit toolbars, navigation, and mobile; always show a tooltip on hover.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-1152&embed-host=share"
+		description="Use clear icons with a hover tooltip for icon‑only buttons"
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-1460&embed-host=share"
+		description="Don't place two icons inside one button"
+	/>
+</div>
+
+###### Layout and responsive
+
+Place related buttons horizontally if space allows. Use auto width by default; switch to full width in responsive/mobile layouts. The button must never be narrower than its content.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-1594&embed-host=share"
+		description="Preferably align buttons side by side if space allows"
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-3298&embed-host=share"
+		description="Don't Stack buttons vertically when horizontal space exists, or let content overflow the button."
+	/>
+</div>
+
+###### Button vs Link
+
+Use buttons to trigger actions that change state. Use links to navigate to other pages or views.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-3649&embed-host=share"
+		description="Use a button to perform an in‑app action that changes state and a link to navigate to another page or view"
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-3823&embed-host=share"
+		description="Don't use a button for page navigation"
+	/>
+</div>
+
+###### Accessibility
+
+The small button in functional density has a height of 20 px. To meet accessibility requirements, its interactive target must be at least 24×24 px in size. You can achieve this by ensuring there is sufficient space around the button. No other interactive elements may occupy or overlap this target area.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-3342&embed-host=share"
+		description="Provide a 24×24 px clickable area via surrounding spacing."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-3600&embed-host=share"
+		description="Don't allow adjacent controls to intrude into the required 24×24 px area."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<DBAccordion>
+	<DBAccordionItem headlinePlain="Why does the icon button have a text property?">
+		For icon buttons, the screen reader text must always be included in the development handoff,
+		even if there is no visually visible text. Without this information, the tag cannot be used in
+		an accessible manner.
+	</DBAccordionItem>
+</DBAccordion>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+	## Related Content
+	<TeaserCard
+		teasers={[
+			{
+				title: 'Link',
+				description: 'Learn about links for navigation between pages and external resources.',
+				url: '/documentation/components/link',
+				component: 'DBLink',
+			},
+			{
+				title: 'Badge',
+				description: 'Display status, labels, and notifications with badges.',
+				url: '/documentation/components/badge',
+				component: 'DBBadge',
+			},
+		]}
+	/>
+</DBSection>

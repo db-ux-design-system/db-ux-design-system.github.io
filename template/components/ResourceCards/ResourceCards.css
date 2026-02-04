@@ -1,0 +1,43 @@
+.resource-cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+	gap: var(--db-spacing-fixed-md);
+	align-items: stretch;
+}
+
+.resource-cards .db-card {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.resource-cards .db-card a {
+	text-decoration: none;
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-xs);
+	height: 100%;
+}
+
+.resource-text {
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+}
+
+.resource-cards .db-card a.db-link {
+	text-decoration: underline;
+}
+
+.resource-cards .db-card h5 {
+	margin: 0;
+}
+
+.resource-cards .db-card p {
+	margin: 0;
+	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+}
+
+.resource-cards .db-card button {
+	margin-top: auto;
+}

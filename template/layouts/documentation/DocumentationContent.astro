@@ -1,0 +1,80 @@
+---
+import type { MarkdownHeading } from 'astro';
+import { TableOfContents } from '@template/components/TableOfContents';
+import { FooterNav } from '@template/components/FooterNav';
+import { DBSection } from '@db-ux/react-core-components';
+import { PageHero } from '@components';
+
+interface Props {
+	headings: MarkdownHeading[];
+	frontmatter: FrontMatter & {
+		heroSpacing?: 'none' | 'small' | 'medium' | 'large';
+		heroWidth?: 'auto' | 'full';
+		sectionSpacing?: 'none' | 'small' | 'medium' | 'large';
+		sectionWidth?: 'auto' | 'full';
+	};
+}
+
+const { headings, frontmatter } = Astro.props as Props;
+const toc = (headings?.length ?? 0) > 0 && frontmatter.toc === true;
+---
+
+<>
+	{
+		toc && (
+			<TableOfContents
+				client:only
+				astro={Astro}
+				headings={headings}
+				tocMaxDepth={frontmatter.tocMaxDepth}
+			/>
+		)
+	}
+
+	<div class="dba-main-content">
+		{
+			(frontmatter.headline || frontmatter.description) && (
+				<DBSection id={frontmatter.title} width="large" spacing="small">
+					<PageHero
+						headline={frontmatter.headline}
+						description={frontmatter.description}
+						badgeText={
+							frontmatter.status === 'concept'
+								? 'Concept'
+								: frontmatter.status === 'beta'
+									? 'Beta'
+									: frontmatter.status === 'stable'
+										? 'Stable'
+										: frontmatter.status === 'deprecated'
+											? 'Deprecated'
+											: frontmatter.status === 'legacy'
+												? 'Legacy'
+												: undefined
+						}
+						badgeSemantic={
+							frontmatter.status === 'concept'
+								? 'warning'
+								: frontmatter.status === 'beta'
+									? 'informational'
+									: frontmatter.status === 'stable'
+										? 'successful'
+										: frontmatter.status === 'deprecated'
+											? 'critical'
+											: frontmatter.status === 'legacy'
+												? 'warning'
+												: 'adaptive'
+						}
+						headlineLevel={frontmatter.headlineLevel ?? 1}
+						imageSrc={frontmatter.heroImage}
+						imageAlt={frontmatter.heroImageAlt}
+						align={frontmatter.align}
+					/>
+				</DBSection>
+			)
+		}
+		<DBSection id="main-content-section" width="large" spacing="none">
+			<slot />
+		</DBSection>
+		{frontmatter.nav && <FooterNav client:only />}
+	</div>
+</>

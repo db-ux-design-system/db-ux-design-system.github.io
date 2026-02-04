@@ -1,0 +1,284 @@
+---
+order: 6
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Radio'
+title: 'Radio'
+description: 'Radio lets users select exactly one option from a set of mutually exclusive choices. It supports clear comparison between options and should be used when seeing all choices at once helps users decide.'
+align: start
+status: 'stable'
+toc: true
+---
+
+import { DBRadio, DBSection, DBAccordion, DBAccordionItem } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import { radioConfig } from '@template/configs/radio.config.js';
+
+- Select one option from a small set (e.g., language, delivery type)
+- Configure a single preference in settings (e.g., "Light / Dark / System")
+- Choose one form option where only one is valid (e.g., contact method)
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+Experiment with the Radio component and its properties.
+
+<ComponentPlayground config={radioConfig} component="radio" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+		},
+		{
+			title: 'Vue',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
+		},
+		{
+			title: 'Angular',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg',
+		},
+		{
+			title: 'Web C.',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties
+
+Configure the radio through its properties, such as checked state, disabled, and label.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable config={radioConfig} />
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Properties" expandedText="Hide some Properties" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+###### Use Radio for single-choice sets
+
+Use radio buttons when users must choose exactly one option from a group. If multiple selections are allowed, use Checkbox instead.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=1-1132&embed-host=share"
+		description='Use a radio group for mutually exclusive options like "German / English / Spanish".'
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=1-1133&embed-host=share"
+		description='Use radio buttons for multi-select scenarios like "Email + SMS + Post".'
+	/>
+</div>
+
+###### Prefer Radio over Select when comparison matters
+
+Use Radio when the number of options is small and users benefit from seeing all options at once. Use Select when options are many or screen space is limited.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1110&embed-host=share"
+		description="Use radio buttons for 2–6 options that users should compare quickly."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1112&embed-host=share"
+		description="Use radio buttons for long lists where scrolling and scanning becomes hard."
+	/>
+</div>
+
+###### Write short, unambiguous labels
+
+Labels must be concise and clearly distinct from each other. Keep wording parallel and avoid vague or overlapping terms.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1113&embed-host=share"
+		description='Use clear labels like "Private", "Business", "Both".'
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1114&embed-host=share"
+		description='Use unclear labels like "Standard", "Advanced", "Other" without context.'
+	/>
+</div>
+
+###### Arrange options for easy scanning
+
+Prefer vertical stacking for readability and accessibility. Use horizontal layout only when there are few, short options and sufficient space.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1116&embed-host=share"
+		description="Stack options vertically and keep spacing consistent within the group."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1117&embed-host=share"
+		description="Place many options in a single horizontal row where labels wrap or alignment breaks."
+	/>
+</div>
+
+###### Set and communicate a sensible default
+
+If a safe default exists, preselect it to reduce effort. If no default is appropriate, start with no selection and validate on submit as needed.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1118&embed-host=share"
+		description="Preselect the most common/safest option when it does not create risk."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1119&embed-host=share"
+		description="Preselect an option that implies consent or a high-impact choice without user intent."
+	/>
+</div>
+
+###### Accessibility and screenreader text
+
+Every radio must have an accessible name, and the group should have a clear group label. If the visible label is hidden, provide screenreader label text. Ensure keyboard navigation works as expected within the group.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1122&embed-host=share"
+		description="Provide a group label, support arrow-key navigation, and include screenreader text when labels are visually hidden."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1123&embed-host=share"
+		description="Ship radios without a group label or rely on visual context only."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<DBAccordion>
+	<DBAccordionItem headlinePlain="When should I use Radio vs Checkbox?">
+		Use Radio when exactly one option can be selected in a set. Use Checkbox when users can select multiple independent options.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="When should I use Radio vs Select?">
+		Use Radio when there are few options and comparison matters. Use Select when there are many options or when space is limited.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="Should radio groups always have a default selection?">
+		Only when there is a safe, expected default. Avoid defaulting to choices that imply consent or have significant consequences.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="How should I validate radio groups?">
+		Validate at the group level. If selection is required, show one clear error message near the group label explaining what the user must choose.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="Can I lay out radio buttons horizontally?">
+		Yes, but only for a small number of short labels. Prefer vertical layout for readability, scanning, and responsive behavior.
+	</DBAccordionItem>
+</DBAccordion>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+	## Related Content
+	<TeaserCard
+		teasers={[
+			{
+				title: 'Checkbox',
+				description: 'Multi-select control for independent options',
+				url: '/documentation/components/checkbox',
+			},
+			{
+				title: 'Select',
+				description: 'Dropdown control for choosing one option from many',
+				url: '/documentation/components/select',
+			},
+			{
+				title: 'Switch',
+				description: 'On/off setting toggle that applies immediately',
+				url: '/documentation/components/switch',
+			},
+		]}
+	/>
+</DBSection>

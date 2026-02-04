@@ -5,6 +5,7 @@ type NavigationFrontmatter = FrontMatter & {
 	isMenuItemDisabled?: boolean;
 	order?: number;
 	nav?: boolean | { order?: number };
+	status?: 'concept' | 'beta' | 'stable' | 'deprecated' | 'legacy';
 };
 
 type MdModule = { frontmatter: NavigationFrontmatter };
@@ -113,6 +114,7 @@ export function buildAppNavigationFromContent(): AppNavigation {
 		const iconTrailing = fm.iconTrailing;
 		const disabled = fm.isMenuItemDisabled === true;
 		const order = getOrder(fm);
+		const status = fm.status;
 
 		const node: NavigationItem = {
 			title,
@@ -122,6 +124,7 @@ export function buildAppNavigationFromContent(): AppNavigation {
 			children: [],
 			disabled,
 			order,
+			status,
 		};
 
 		nodes.set(rel, node);

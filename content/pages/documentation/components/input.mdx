@@ -1,0 +1,287 @@
+---
+order: 4
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Input'
+title: 'Input'
+description: 'Input captures short, single-line user text entries in forms and dialogs. It should be predictable, clearly labeled, and provide guidance and validation feedback when needed.'
+align: start
+status: 'stable'
+toc: true
+---
+
+import { DBInput, DBSection, DBAccordion, DBAccordionItem } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import { inputConfig } from '@template/configs/input.config.js';
+
+- Collect short text values (e.g., name, city, email, IBAN depending on product rules)
+- Support structured entry with formatting hints (e.g., "No spaces", "Use format DD.MM.YYYY")
+- Provide immediate or on-submit feedback for validity (success/error) with helper text
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+Experiment with the Input component and its properties.
+
+<ComponentPlayground config={inputConfig} component="input" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+		},
+		{
+			title: 'Vue',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
+		},
+		{
+			title: 'Angular',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg',
+		},
+		{
+			title: 'Web C.',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties
+
+Configure the input through its properties, such as type, label, placeholder, and validation state.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable config={inputConfig} />
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Properties" expandedText="Hide some Properties" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+###### Use the right control
+
+Use Input for free text entry. If users must choose from predefined options, use a selection component instead (e.g., Select, Autocomplete, Radio/Checkbox depending on the case).
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
+		description="Use Input when the user can type any value and the expected entry is short."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
+		description="Use Input for choosing from a fixed list (forces typing, increases errors)."
+	/>
+</div>
+
+###### Always provide a visible label
+
+Every Input must have a clear, descriptive label that explains what to enter. Keep labels short and specific; avoid vague labels. Do not replace the label with a placeholder.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
+		description="Place a visible label directly associated with the field (above or consistently aligned)."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
+		description="Use only placeholder text as the label or omit the label entirely."
+	/>
+</div>
+
+###### Use placeholder text only as an example
+
+Placeholder text is optional and should provide an example format/value, not instructions or required context. Placeholders must not contain critical information because they disappear when users type.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
+		description='Use placeholder for an example (e.g., "name@company.com") while the label carries meaning.'
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
+		description='Put requirements or help text only in the placeholder (e.g., "Enter your email to receive updates").'
+	/>
+</div>
+
+###### Helper text explains, validation text decides
+
+Use helper text to prevent errors (format, constraints, expectations). Use validation messages to explain what is wrong and how to fix it. Keep messages concise and actionable.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
+		description="Show a short helper message for format guidance and an explicit error message when invalid."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
+		description='Show long paragraphs, duplicate the label as helper/error text, or use unclear errors (e.g., "Invalid input").'
+	/>
+</div>
+
+###### Align within the layout and keep spacing consistent
+
+Inputs must align to the layout grid and maintain consistent spacing between label, field, helper/validation text, and adjacent fields. Avoid stretching labels or misaligning fields in responsive layouts.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
+		description="Keep label, input, and helper/validation text aligned and consistently spaced across breakpoints."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
+		description="Let label/field/helper drift out of alignment or create uneven spacing compared to other fields."
+	/>
+</div>
+
+###### Accessibility and assistive text
+
+Ensure every Input has an accessible name that matches the visible label. If a label is visually hidden, provide an equivalent screenreader label. Required/optional indicators must be announced meaningfully.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
+		description="Use programmatic labeling (label-for / aria-labelledby) and provide screenreader text when the visible label is not available."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
+		description="Rely on placeholder-only labeling or icons without accessible text."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<DBAccordion>
+	<DBAccordionItem headlinePlain="When should I use Input vs Textarea?">
+		Use Input for single-line, short values. Use Textarea for multi-line, longer content (comments,
+		descriptions, messages).
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="Can I omit the label if the UI is compact?">
+		No. Keep a visible label whenever possible. If space is extremely constrained, use a visually
+		hidden label but keep the accessible name intact.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="Should validation happen while typing or on submit?">
+		Prefer validating on blur or on submit for most fields to reduce distraction. Use inline,
+		real-time validation only when it clearly prevents errors (e.g., format constraints) and
+		messages remain calm and actionable.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="What should I show for required vs optional fields?">
+		Follow the system rule consistently: either mark required fields (common) or mark optional
+		fields (common when most are required). In all cases, ensure the requirement is conveyed to
+		screenreaders and reflected in validation messaging.
+	</DBAccordionItem>
+</DBAccordion>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+	## Related Content
+	<TeaserCard
+		teasers={[
+			{
+				title: 'Textarea',
+				description: 'Multi-line text input for longer content',
+				url: '/documentation/components/textarea',
+			},
+			{
+				title: 'Select',
+				description: 'Choose one option from a predefined list',
+				url: '/documentation/components/select',
+			},
+			{
+				title: 'Autocomplete',
+				description: 'Searchable selection for large option sets',
+				url: '/documentation/components/autocomplete',
+			},
+		]}
+	/>
+</DBSection>

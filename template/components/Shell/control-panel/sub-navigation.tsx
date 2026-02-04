@@ -1,5 +1,5 @@
 import { DBNavigation, DBShellSubNavigation } from '@db-ux/react-core-components';
-import NavItem from '@template/layouts/default/shell/control-panel/nav-item.tsx';
+import NavItem from './nav-item.tsx';
 import type { NavigationItemGroupVariantType } from '@db-ux/react-core-components/dist/shared/model';
 
 const SubNavigation = ({
@@ -9,7 +9,12 @@ const SubNavigation = ({
 	navigationItems: NavigationItem[];
 	variant?: NavigationItemGroupVariantType;
 }) => (
-	<DBShellSubNavigation>
+	<DBShellSubNavigation
+		style={{
+			paddingLeft: 'var(--db-spacing-fixed-md)',
+			paddingRight: 'var(--db-spacing-fixed-md)',
+		}}
+	>
 		<DBNavigation aria-label="sub navigation" variant={variant ?? 'tree'}>
 			{navigationItems.map((navigationItem: NavigationItem) => (
 				<NavItem

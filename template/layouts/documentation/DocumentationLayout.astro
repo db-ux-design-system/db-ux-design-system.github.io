@@ -2,7 +2,7 @@
 import type { MarkdownHeading } from 'astro';
 import '../../styles/global.css';
 import HtmlHead from '@template/components/HtmlHead';
-import MainContent from './main-content';
+import DocumentationContent from './DocumentationContent.astro';
 import { appConfig } from '@root/app.config.ts';
 import { Shell } from '@template/components/Shell';
 import interactiveDemoScriptUrl from '@template/components/InteractiveDemo/interactiveDemo.client.js?url';
@@ -25,9 +25,9 @@ const currentPath = Astro.url.pathname;
 			subNavigationVariant={frontmatter.subNavigationVariant}
 		>
 			<div class="dba-main-grid">
-				<MainContent frontmatter={frontmatter} headings={headings}>
+				<DocumentationContent frontmatter={frontmatter} headings={headings}>
 					<slot />
-				</MainContent>
+				</DocumentationContent>
 			</div>
 		</Shell>
 		<script is:inline type="module" src={interactiveDemoScriptUrl}></script>
