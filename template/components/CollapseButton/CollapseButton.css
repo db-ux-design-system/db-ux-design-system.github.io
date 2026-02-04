@@ -2,13 +2,13 @@
 	height: var(--collapsed-height, 320px);
 	overflow: hidden;
 	mask-image: linear-gradient(to bottom, black calc(100% - 160px), transparent);
-	-webkit-mask-image: linear-gradient(to bottom, black calc(100% - 160px), transparent);
+	mask-image: linear-gradient(to bottom, black calc(100% - 160px), transparent);
 }
 
 .collapsible-wrapper[data-collapsed='false'] {
 	height: auto;
 	mask-image: none;
-	-webkit-mask-image: none;
+	mask-image: none;
 }
 
 .collapse-button {
