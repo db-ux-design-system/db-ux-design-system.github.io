@@ -93,6 +93,7 @@
 	height: var(--db-spacing-fixed-xl);
 	width: var(--db-spacing-fixed-xl);
 	background: transparent;
+	/* stylelint-disable-next-line db-ux/use-border-width */
 	border: transparent;
 	border-radius: var(--db-border-radius-xs);
 	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
