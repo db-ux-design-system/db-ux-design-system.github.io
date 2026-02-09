@@ -77,6 +77,7 @@
 	.dba-main-grid {
 		&:has(.dba-toc) {
 			.dba-main-content {
+				/* stylelint-disable-next-line db-ux/use-spacings */
 				padding-inline-end: var(--db-container-3xs);
 			}
 		}
