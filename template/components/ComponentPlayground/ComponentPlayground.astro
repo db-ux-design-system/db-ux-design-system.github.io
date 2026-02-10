@@ -1,6 +1,14 @@
 ---
 import './ComponentPlayground.css';
-
+import ShellExample from '@template/components/ShellExample/ShellExample.tsx';
+import {
+	DBShell,
+	DBControlPanelDesktop,
+	DBControlPanelBrand,
+	DBNavigation,
+	DBNavigationItem,
+	DBControlPanelPrimaryActions,
+} from '@db-ux/react-core-components';
 interface Props {
 	config: any;
 	component: any;
@@ -231,6 +239,40 @@ const dualCaseProps = {
 					</span>
 					<span data-visually-hidden="true" role="status" />
 				</div>
+			) : config.elementId === 'playground-header' ? (
+				<ShellExample />
+			) : config.elementId === 'playground-tag' ? (
+				<div
+					class="db-tag"
+					id={config.elementId}
+					data-behavior={config.defaultProps.behavior}
+					data-semantic={config.defaultProps.semantic}
+					data-emphasis={config.defaultProps.emphasis}
+				>
+					<span id="playground-tag-text">{config.defaultText}</span>
+					{config.defaultProps.behavior === 'removable' && (
+						<button
+							class="db-button db-tab-remove-button"
+							data-icon="cross"
+							data-size="small"
+							data-no-text="true"
+							data-variant="ghost"
+							type="button"
+						>
+							<i
+								role="tooltip"
+								aria-hidden="true"
+								data-gap="true"
+								class="db-tooltip"
+								id="playground-tag-tooltip"
+								data-animation="true"
+								data-show-arrow="true"
+							>
+								Remove
+							</i>
+						</button>
+					)}
+				</div>
 			) : (
 				<Component {...config.defaultProps} id={config.elementId}>
 					{config.textElementId && <span id={config.textElementId}>{config.defaultText}</span>}
@@ -280,6 +322,8 @@ const dualCaseProps = {
 									updateAction = `const field = document.getElementById('${fieldId}'); const validInfo = document.getElementById('${validInfoId}'); const invalidInfo = document.getElementById('${invalidInfoId}'); if(this.value === 'invalid') { field.setAttribute('aria-invalid', 'true'); field.setAttribute('data-custom-validity', 'invalid'); validInfo.style.display = 'none'; invalidInfo.style.display = ''; } else if(this.value === 'valid') { field.setAttribute('aria-invalid', 'false'); field.setAttribute('data-custom-validity', 'valid'); validInfo.style.display = ''; invalidInfo.style.display = 'none'; } else if(this.value === 'no-validation') { field.setAttribute('aria-invalid', 'false'); field.setAttribute('data-custom-validity', 'no-validation'); validInfo.style.display = 'none'; invalidInfo.style.display = 'none'; }`;
 								} else if (config.elementId === 'playground-select' && prop.name === 'variant') {
 									updateAction = `const wrapper = document.getElementById('${config.elementId}'); wrapper.setAttribute('data-variant', this.value); const placeholder = document.getElementById('playground-select-placeholder'); if(this.value === 'floating') { placeholder.textContent = ''; } else { const placeholderInput = document.querySelector('.controls-area input[oninput*="playground-select-placeholder"]'); if(placeholderInput) placeholder.textContent = placeholderInput.value; } if(this.value !== 'floating') { wrapper.removeAttribute('data-label-hidden'); }`;
+								} else if (config.elementId === 'playground-tag' && prop.name === 'behavior') {
+									updateAction = `const tag = document.getElementById('playground-tag'); const existingBtn = tag.querySelector('.db-tab-remove-button'); if(this.value === 'removable' && !existingBtn) { const btn = document.createElement('button'); btn.className = 'db-button db-tab-remove-button'; btn.setAttribute('data-icon', 'cross'); btn.setAttribute('data-size', 'small'); btn.setAttribute('data-no-text', 'true'); btn.setAttribute('data-variant', 'ghost'); btn.type = 'button'; const tooltip = document.createElement('i'); tooltip.role = 'tooltip'; tooltip.setAttribute('aria-hidden', 'true'); tooltip.setAttribute('data-gap', 'true'); tooltip.className = 'db-tooltip'; tooltip.id = 'playground-tag-tooltip'; tooltip.setAttribute('data-animation', 'true'); tooltip.setAttribute('data-show-arrow', 'true'); tooltip.textContent = 'Remove'; btn.appendChild(tooltip); tag.appendChild(btn); tag.setAttribute('data-behavior', 'removable'); } else if(this.value === 'static' && existingBtn) { existingBtn.remove(); tag.setAttribute('data-behavior', 'static'); }`;
 								} else if (config.elementId === 'demo-navigation-item' && prop.name === 'width') {
 									updateAction = `document.getElementById('demo-navigation-item').setAttribute('data-width', this.value);`;
 								} else {
@@ -495,7 +539,9 @@ const dualCaseProps = {
 
 							if (prop.type === 'checkbox') {
 								let action;
-								if (prop.name === 'disabled') {
+								if (config.elementId === 'playground-tag' && prop.name === 'overflow') {
+									action = `const tag = document.getElementById('playground-tag'); if(this.checked) tag.setAttribute('data-overflow', 'true'); else tag.removeAttribute('data-overflow');`;
+								} else if (prop.name === 'disabled') {
 									const targetId =
 										config.elementId === 'playground-input'
 											? 'playground-input-field'
