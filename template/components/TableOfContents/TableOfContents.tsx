@@ -104,6 +104,8 @@ export function TableOfContents(props: Props): ReactElement | null {
 										className="dba-toc-toggle"
 										onClick={() => toggleH2(slug)}
 										aria-label={expandedH2s.has(slug) ? 'Collapse' : 'Expand'}
+										aria-expanded={expandedH2s.has(slug)}
+										aria-controls={`toc-children-${slug}`}
 									>
 										<DBIcon icon={expandedH2s.has(slug) ? 'chevron_up' : 'chevron_down'} />
 									</button>
