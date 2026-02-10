@@ -3,6 +3,26 @@ export const switchConfig = {
 	defaultProps: {
 		checked: false,
 	},
+	slots: [
+		{
+			name: 'children',
+			description: 'default slot',
+		},
+	],
+	events: [
+		{
+			name: 'change / onChange',
+			type: '---',
+		},
+		{
+			name: 'blur / onBlur',
+			type: '---',
+		},
+		{
+			name: 'focus / onFocus',
+			type: '---',
+		},
+	],
 	properties: [
 		// Content
 		{
