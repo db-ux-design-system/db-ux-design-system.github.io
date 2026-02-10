@@ -94,9 +94,8 @@ export function TableOfContents(props: Props): ReactElement | null {
 								className="dba-toc-heading"
 								data-depth={depth}
 								data-slug={slug}
-								data-active={activeIDs.includes(slug)}
 							>
-								<a href={`${currentPath}#${slug}`} onClick={handleLinkClick}>
+								<a href={`${currentPath}#${slug}`} onClick={handleLinkClick} aria-current={activeIDs.includes(slug) ? 'location' : undefined}>
 									{text}
 								</a>
 								{showChildren && (
@@ -120,9 +119,8 @@ export function TableOfContents(props: Props): ReactElement | null {
 								className="dba-toc-heading"
 								data-depth={depth}
 								data-slug={slug}
-								data-active={activeIDs.includes(slug)}
 							>
-								<a href={`${currentPath}#${slug}`} onClick={handleLinkClick}>
+								<a href={`${currentPath}#${slug}`} onClick={handleLinkClick} aria-current={activeIDs.includes(slug) ? 'location' : undefined}>
 									{text}
 								</a>
 							</li>
