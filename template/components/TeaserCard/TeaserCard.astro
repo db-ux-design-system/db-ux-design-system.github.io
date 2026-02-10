@@ -17,12 +17,12 @@ const { teasers } = Astro.props;
 	{
 		teasers.map((teaser) => (
 			<DBCard behavior="interactive" spacing="none">
-				<a href={teaser.url}>
+				<DBLink href={teaser.url} variant="inline">
 					<div class="teaser-content">
 						<h6>{teaser.title}</h6>
 						<p>{teaser.description}</p>
 					</div>
-				</a>
+				</DBLink>
 			</DBCard>
 		))
 	}
