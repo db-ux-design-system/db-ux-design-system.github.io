@@ -108,18 +108,6 @@
 	}
 }
 
-.dba-toc-heading[data-depth='3'] a {
-	padding-left: var(--db-spacing-fixed-lg);
-}
-
-.dba-toc-heading[data-depth='4'] a {
-	padding-left: var(--db-spacing-fixed-lg);
-}
-
-.dba-toc-heading[data-depth='5'] a {
-	padding-left: var(--db-spacing-fixed-lg);
-}
-
-.dba-toc-heading[data-depth='6'] a {
+.dba-toc-heading:is([data-depth='3'], [data-depth='4'], [data-depth='5'], [data-depth='6']) a {
 	padding-left: var(--db-spacing-fixed-lg);
 }
