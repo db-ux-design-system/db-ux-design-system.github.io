@@ -326,6 +326,16 @@ const dualCaseProps = {
 						</button>
 					)}
 				</div>
+			) : config.elementId === 'demo-infotext' ? (
+				<span
+					class="db-infotext"
+					id={config.elementId}
+					data-semantic={config.defaultProps.semantic}
+					data-size={config.defaultProps.size}
+					data-show-icon-leading={String(config.defaultProps.showIcon)}
+				>
+					<span id="demo-infotext-text">{config.defaultText}</span>
+				</span>
 			) : (
 				<Component {...config.defaultProps} id={config.elementId}>
 					{config.textElementId && <span id={config.textElementId}>{config.defaultText}</span>}
@@ -706,6 +716,11 @@ const dualCaseProps = {
 									(prop.name === 'show-icon' || prop.name === 'showIcon')
 								) {
 									action = `const item = document.getElementById('${config.elementId}'); if(this.checked) item.setAttribute('data-show-icon', 'true'); else item.setAttribute('data-show-icon', 'false');`;
+								} else if (
+									config.elementId === 'demo-infotext' &&
+									(prop.name === 'show-icon / showIcon')
+								) {
+									action = `const infotext = document.getElementById('demo-infotext'); if(this.checked) infotext.setAttribute('data-show-icon-leading', 'true'); else infotext.setAttribute('data-show-icon-leading', 'false');`;
 								} else if (config.elementId === 'demo-navigation-item' && prop.name === 'active') {
 									action = `const item = document.getElementById('${config.elementId}'); if(this.checked) item.setAttribute('data-active', 'true'); else item.removeAttribute('data-active');`;
 								} else if (config.elementId === 'demo-navigation-item' && prop.name === 'wrap') {
