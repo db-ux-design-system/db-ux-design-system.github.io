@@ -11,12 +11,13 @@ status: 'stable'
 toc: true
 ---
 
-import { DBInput, DBSection, DBAccordion, DBAccordionItem } from '@db-ux/react-core-components';
+import { DBInput, DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
@@ -73,9 +74,9 @@ Experiment with the Input component and its properties.
 
 <DBSection spacing="small" width="auto">
 
-## Properties
+## Properties, Slots & Events
 
-Configure the input through its properties, such as type, label, placeholder, and validation state.
+Configure the input through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
@@ -83,7 +84,7 @@ Configure the input through its properties, such as type, label, placeholder, an
 
 </CollapsibleWrapper>
 
-<CollapseButton collapsedText="Show all Properties" expandedText="Hide some Properties" />
+<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
 
 </DBSection>
 
@@ -240,26 +241,9 @@ Ensure every Input has an accessible name that matches the visible label. If a l
 
 ## FAQ
 
-<DBAccordion>
-	<DBAccordionItem headlinePlain="When should I use Input vs Textarea?">
-		Use Input for single-line, short values. Use Textarea for multi-line, longer content (comments,
-		descriptions, messages).
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="Can I omit the label if the UI is compact?">
-		No. Keep a visible label whenever possible. If space is extremely constrained, use a visually
-		hidden label but keep the accessible name intact.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="Should validation happen while typing or on submit?">
-		Prefer validating on blur or on submit for most fields to reduce distraction. Use inline,
-		real-time validation only when it clearly prevents errors (e.g., format constraints) and
-		messages remain calm and actionable.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="What should I show for required vs optional fields?">
-		Follow the system rule consistently: either mark required fields (common) or mark optional
-		fields (common when most are required). In all cases, ensure the requirement is conveyed to
-		screenreaders and reflected in validation messaging.
-	</DBAccordionItem>
-</DBAccordion>
+Have a question about the Input component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Input" />
 
 </DBSection>
 

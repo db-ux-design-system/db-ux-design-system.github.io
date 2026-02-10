@@ -1,5 +1,5 @@
 ---
-order: 7
+order: 10
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -11,12 +11,13 @@ status: 'stable'
 toc: true
 ---
 
-import { DBSelect, DBSection, DBAccordion, DBAccordionItem } from '@db-ux/react-core-components';
+import { DBSelect, DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
@@ -73,9 +74,9 @@ Experiment with the Select component and its properties.
 
 <DBSection spacing="small" width="auto">
 
-## Properties
+## Properties, Slots & Events
 
-Configure the select through its properties, such as options, disabled, and label.
+Configure the select through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
@@ -83,7 +84,7 @@ Configure the select through its properties, such as options, disabled, and labe
 
 </CollapsibleWrapper>
 
-<CollapseButton collapsedText="Show all Properties" expandedText="Hide some Properties" />
+<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
 
 </DBSection>
 
@@ -240,28 +241,9 @@ Use helper text to prevent mistakes (format, constraints). Use validation to exp
 
 ## FAQ
 
-<DBAccordion>
-	<DBAccordionItem headlinePlain="When should I use Select vs Radio?">
-		Use Select to save space or when there are more options. Use Radio when there are few options
-		and users benefit from seeing them all for quick comparison.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="When should I use Select vs Autocomplete?">
-		Use Select for short-to-moderate lists where scanning is easy. Use Autocomplete when the list is
-		long, needs search, or users typically know what they want to type.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="Should I preselect a default option?">
-		Only when there is a safe, expected default that does not create risk. If users must actively
-		choose, start empty and validate as required.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="How should I validate a required Select?">
-		Validate on submit (or on blur) and show a clear error message near the field explaining what
-		must be selected.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="Can I hide the visible label?">
-		Prefer visible labels. If you must hide it, provide equivalent screenreader label text and keep
-		context clear for all users.
-	</DBAccordionItem>
-</DBAccordion>
+Have a question about the uselect component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="uselect" />
 
 </DBSection>
 

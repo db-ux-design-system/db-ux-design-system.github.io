@@ -11,12 +11,13 @@ status: 'stable'
 toc: true
 ---
 
-import { DBLink, DBSection, DBAccordion, DBAccordionItem } from '@db-ux/react-core-components';
+import { DBLink, DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
@@ -72,9 +73,9 @@ import { linkConfig } from '@template/configs/link.config.js';
 
 <DBSection spacing="small" width="auto">
 
-## Properties
+## Properties, Slots & Events
 
-Configure the link through its properties, such as variant, size, content type, and disabled state.
+Configure the link through its properties and slots.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
@@ -82,7 +83,7 @@ Configure the link through its properties, such as variant, size, content type, 
 
 </CollapsibleWrapper>
 
-<CollapseButton collapsedText="Show all Properties" expandedText="Hide some Properties" />
+<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
 
 </DBSection>
 
@@ -92,7 +93,7 @@ Configure the link through its properties, such as variant, size, content type, 
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-###### Use links only for navigation
+###### Purpose
 
 Use the Link component exclusively when the primary purpose is navigation to a different location or resource.
 
@@ -115,9 +116,9 @@ Use the Link component exclusively when the primary purpose is navigation to a d
 	/>
 </div>
 
-###### Inline text usage
+###### Inline
 
-For links within running text, use text links instead of the standalone Link component.
+For links within running text, use text-link styles instead of the standalone Link component.
 
 <div
 	style={{
@@ -138,7 +139,7 @@ For links within running text, use text links instead of the standalone Link com
 	/>
 </div>
 
-###### Visual emphasis
+###### Emphasis
 
 Use the brand variant sparingly to highlight particularly important navigational links.
 
@@ -146,7 +147,6 @@ Use the brand variant sparingly to highlight particularly important navigational
 	style={{
 		display: 'flex',
 		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
 	}}
 >
 	<GuidelineExample
@@ -161,28 +161,6 @@ Use the brand variant sparingly to highlight particularly important navigational
 	/>
 </div>
 
-###### Accessibility and clarity
-
-Links must be clearly identifiable, descriptive, and accessible via keyboard and assistive technologies.
-
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-	}}
->
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/3HjaNLCvfdsdoRZKbFnV3s/Doku--Link?node-id=3-1116&embed-host=share"
-		description="Use meaningful link labels that describe the destination."
-	/>
-	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/3HjaNLCvfdsdoRZKbFnV3s/Doku--Link?node-id=3-1117&embed-host=share"
-		description="Use vague labels like 'Click here' or rely on color alone."
-	/>
-</div>
-
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
@@ -193,19 +171,9 @@ Links must be clearly identifiable, descriptive, and accessible via keyboard and
 
 ## FAQ
 
-<DBAccordion>
-	<DBAccordionItem headlinePlain="When should I use a Link instead of a Button?">
-		Use a Link for navigation. Use a Button for actions that trigger changes, submit data, or
-		manipulate content.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="Can a Link include an icon?">
-		Yes, links may include an icon to indicate direction or external navigation, as long as the
-		label remains clear.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="Are links allowed inside text paragraphs?">
-		Yes, but use dedicated text-link styles rather than the standalone Link component.
-	</DBAccordionItem>
-</DBAccordion>
+Have a question about the Link component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Link" />
 
 </DBSection>
 
@@ -219,14 +187,9 @@ Links must be clearly identifiable, descriptive, and accessible via keyboard and
 				url: '/documentation/components/button',
 			},
 			{
-				title: 'Text Link',
-				description: 'Inline navigational link within body text',
-				url: '/documentation/components/text-link',
-			},
-			{
-				title: 'Icon',
-				description: 'Visual indicator that can complement links',
-				url: '/documentation/components/icon',
+				title: 'Navigation',
+				description: 'Groups multiple navigation destinations',
+				url: '/documentation/components/navigation',
 			},
 		]}
 	/>

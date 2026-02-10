@@ -1,5 +1,5 @@
 ---
-order: 8
+order: 11
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -11,12 +11,13 @@ status: 'stable'
 toc: true
 ---
 
-import { DBSwitch, DBSection, DBAccordion, DBAccordionItem } from '@db-ux/react-core-components';
+import { DBSwitch, DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
@@ -73,9 +74,9 @@ Experiment with the Switch component and its properties.
 
 <DBSection spacing="small" width="auto">
 
-## Properties
+## Properties, Slots & Events
 
-Configure the switch through its properties, such as checked state, disabled, and label.
+Configure the switch through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
@@ -83,7 +84,7 @@ Configure the switch through its properties, such as checked state, disabled, an
 
 </CollapsibleWrapper>
 
-<CollapseButton collapsedText="Show all Properties" expandedText="Hide some Properties" />
+<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
 
 </DBSection>
 
@@ -240,28 +241,9 @@ Every switch needs an accessible name. If the visible label is hidden, provide e
 
 ## FAQ
 
-<DBAccordion>
-	<DBAccordionItem headlinePlain="When should I use Switch vs Checkbox?">
-		Use Switch for immediate on/off settings. Use Checkbox for selecting options (often multiple)
-		and for choices that may be confirmed later.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain='Should a switch require a "Save" button?'>
-		No. Switch implies immediate application. If saving is required, use Checkbox (or another form
-		control) and apply changes on submit.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="Can I change the label based on on/off state?">
-		Yes, if it improves clarity (e.g., "Notifications enabled/disabled"). Keep wording consistent
-		and avoid ambiguity.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="Do I need icons on switches?">
-		No. Icons are optional. Use them only when they add clarity and never as the sole carrier of
-		meaning.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="How do I make a switch accessible if the label is hidden?">
-		Provide screenreader label text and ensure the switch is keyboard operable with a visible focus
-		indicator.
-	</DBAccordionItem>
-</DBAccordion>
+Have a question about the uswitch component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="uswitch" />
 
 </DBSection>
 

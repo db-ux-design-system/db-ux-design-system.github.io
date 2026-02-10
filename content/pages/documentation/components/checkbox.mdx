@@ -11,12 +11,13 @@ status: 'stable'
 toc: true
 ---
 
-import { DBCheckbox, DBSection, DBAccordion, DBAccordionItem } from '@db-ux/react-core-components';
+import { DBCheckbox, DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
@@ -73,9 +74,9 @@ Experiment with the Checkbox component and its properties.
 
 <DBSection spacing="small" width="auto">
 
-## Properties
+## Properties, Slots & Events
 
-Configure the checkbox through its properties, such as checked state, disabled, and label.
+Configure the checkbox through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
@@ -83,7 +84,7 @@ Configure the checkbox through its properties, such as checked state, disabled, 
 
 </CollapsibleWrapper>
 
-<CollapseButton collapsedText="Show all Properties" expandedText="Hide some Properties" />
+<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
 
 </DBSection>
 
@@ -240,23 +241,9 @@ Every checkbox needs an accessible name. If the visible label is hidden, provide
 
 ## FAQ
 
-<DBAccordion>
-	<DBAccordionItem headlinePlain="When should I use Checkbox vs Switch?">
-		Use Checkbox for selections in forms, lists, and filters (often multiple at once). Use Switch for a single on/off setting that takes effect immediately.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="When should I use Checkbox vs Radio?">
-		Use Checkbox when multiple options can be selected. Use Radio when exactly one option must be chosen within a set.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="Can I hide the visible label?">
-		Only if you provide equivalent screenreader text and the meaning is still clear in context. Prefer visible labels whenever possible.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="How should I validate checkbox groups?">
-		If at least one option is required, validate the group (not each item) and show a clear error message that explains what is missing.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain='Do I need a "Select all" option?'>
-		Only when it saves effort for large groups and users commonly select most options. Keep the state accurate and support indeterminate for partial selection.
-	</DBAccordionItem>
-</DBAccordion>
+Have a question about the Checkbox component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Checkbox" />
 
 </DBSection>
 

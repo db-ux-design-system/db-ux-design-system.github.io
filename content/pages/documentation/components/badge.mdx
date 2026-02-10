@@ -11,12 +11,13 @@ status: 'stable'
 toc: true
 ---
 
-import { DBBadge, DBSection, DBAccordion, DBAccordionItem } from '@db-ux/react-core-components';
+import { DBBadge, DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
@@ -72,7 +73,7 @@ import { badgeConfig } from '@template/configs/badge.config.js';
 
 <DBSection spacing="small" width="auto">
 
-## Properties
+## Properties, Slots & Events
 
 Configure the badge through its properties, such as semantic, size, and content.
 
@@ -82,7 +83,7 @@ Configure the badge through its properties, such as semantic, size, and content.
 
 </CollapsibleWrapper>
 
-<CollapseButton collapsedText="Show all Properties" expandedText="Hide some Properties" />
+<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
 
 </DBSection>
 
@@ -216,17 +217,9 @@ Ensure badge information is available to assistive technologies and not conveyed
 
 ## FAQ
 
-<DBAccordion>
-	<DBAccordionItem headlinePlain="Can a badge be interactive?">
-		No, badges are non-interactive. If interaction is required, use a Tag or Button instead.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="How many badges can be shown together?">
-		Use badges sparingly. Too many badges reduce readability and visual clarity.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="Can icons be used inside badges?">
-		Only if they support the text label and do not replace it.
-	</DBAccordionItem>
-</DBAccordion>
+Have a question about the Badge component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Badge" />
 
 </DBSection>
 

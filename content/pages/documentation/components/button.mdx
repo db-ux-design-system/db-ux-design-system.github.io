@@ -15,8 +15,6 @@ import {
 	DBButton,
 	DBBadge,
 	DBSection,
-	DBAccordion,
-	DBAccordionItem,
 	DBCard,
 	DBLink,
 } from '@db-ux/react-core-components';
@@ -25,6 +23,7 @@ import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleW
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
@@ -80,7 +79,7 @@ import { buttonConfig } from '@template/configs/button.config.js';
 
 <DBSection spacing="small" width="auto">
 
-## Properties
+## Properties, Slots & Events
 
 Configure the button through its properties, such as variant, size, icon, and disabled state.
 
@@ -90,7 +89,7 @@ Configure the button through its properties, such as variant, size, icon, and di
 
 </CollapsibleWrapper>
 
-<CollapseButton collapsedText="Show all Properties" expandedText="Hide some Properties" />
+<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
 
 </DBSection>
 
@@ -247,13 +246,9 @@ The small button in functional density has a height of 20 px. To meet accessibil
 
 ## FAQ
 
-<DBAccordion>
-	<DBAccordionItem headlinePlain="Why does the icon button have a text property?">
-		For icon buttons, the screen reader text must always be included in the development handoff,
-		even if there is no visually visible text. Without this information, the tag cannot be used in
-		an accessible manner.
-	</DBAccordionItem>
-</DBAccordion>
+Have a question about the Button component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Button" />
 
 </DBSection>
 

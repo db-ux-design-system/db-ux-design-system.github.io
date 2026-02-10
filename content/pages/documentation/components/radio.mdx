@@ -1,5 +1,5 @@
 ---
-order: 6
+order: 9
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -11,12 +11,13 @@ status: 'stable'
 toc: true
 ---
 
-import { DBRadio, DBSection, DBAccordion, DBAccordionItem } from '@db-ux/react-core-components';
+import { DBRadio, DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
@@ -73,9 +74,9 @@ Experiment with the Radio component and its properties.
 
 <DBSection spacing="small" width="auto">
 
-## Properties
+## Properties, Slots & Events
 
-Configure the radio through its properties, such as checked state, disabled, and label.
+Configure the radio through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
@@ -83,7 +84,7 @@ Configure the radio through its properties, such as checked state, disabled, and
 
 </CollapsibleWrapper>
 
-<CollapseButton collapsedText="Show all Properties" expandedText="Hide some Properties" />
+<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
 
 </DBSection>
 
@@ -240,23 +241,9 @@ Every radio must have an accessible name, and the group should have a clear grou
 
 ## FAQ
 
-<DBAccordion>
-	<DBAccordionItem headlinePlain="When should I use Radio vs Checkbox?">
-		Use Radio when exactly one option can be selected in a set. Use Checkbox when users can select multiple independent options.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="When should I use Radio vs Select?">
-		Use Radio when there are few options and comparison matters. Use Select when there are many options or when space is limited.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="Should radio groups always have a default selection?">
-		Only when there is a safe, expected default. Avoid defaulting to choices that imply consent or have significant consequences.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="How should I validate radio groups?">
-		Validate at the group level. If selection is required, show one clear error message near the group label explaining what the user must choose.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="Can I lay out radio buttons horizontally?">
-		Yes, but only for a small number of short labels. Prefer vertical layout for readability, scanning, and responsive behavior.
-	</DBAccordionItem>
-</DBAccordion>
+Have a question about the uradio component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="uradio" />
 
 </DBSection>
 
