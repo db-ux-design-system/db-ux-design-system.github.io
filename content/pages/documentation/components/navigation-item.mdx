@@ -1,0 +1,132 @@
+---
+order: 7
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Navigation Item'
+title: 'Navigation Item'
+description: 'Navigation Item is a subcomponent used within Navigation to represent individual destinations. It supports icons, active states, disabled states, and nested sub-navigation for hierarchical structures.'
+align: start
+status: 'stable'
+toc: true
+---
+
+import {
+	DBNavigation,
+	DBNavigationItem,
+	DBSection,
+	DBAccordion,
+	DBAccordionItem,
+} from '@db-ux/react-core-components';
+
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import { navigationItemConfig } from '@template/configs/navigation-item.config.js';
+
+- Always wrap content in an anchor element for proper navigation semantics
+- Use the active property or aria-current="page" to indicate the current location
+- Add icons to improve scannability and recognition
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+Experiment with the Navigation Item component and its properties.
+
+<ComponentPlayground config={navigationItemConfig} component={DBNavigationItem} />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+		},
+		{
+			title: 'Vue',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
+		},
+		{
+			title: 'Angular',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg',
+		},
+		{
+			title: 'Web C.',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties, Slots & Events
+
+Configure the navigation item through its properties, slots and events.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable config={navigationItemConfig} />
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the Navigation Item component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Navigation Item" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Navigation',
+			description: 'Parent component for organizing navigation items into menus',
+			url: '/documentation/components/navigation',
+		},
+		{
+			title: 'Header',
+			description: 'Hosts primary navigation and global actions at the top of the page',
+			url: '/documentation/components/header',
+		},
+		{
+			title: 'Link',
+			description: 'Navigational element used in content and secondary menus',
+			url: '/documentation/components/link',
+		},
+	]}
+/>
+
+</DBSection>

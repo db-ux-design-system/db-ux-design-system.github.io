@@ -1,0 +1,230 @@
+---
+order: 6
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Navigation'
+title: 'Navigation'
+description: 'Navigation provides a set of destinations that help users move through an application consistently across desktop and mobile. It supports different orientations and responsive behaviors while clearly indicating the current location and available paths.'
+align: start
+status: 'stable'
+toc: true
+---
+
+import { DBNavigation, DBNavigationItem, DBSection } from '@db-ux/react-core-components';
+
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import { navigationConfig } from '@template/configs/navigation.config.js';
+
+- Offer primary destinations at the top level (global navigation)
+- Support structured sub-navigation for deeper sections (nested levels)
+- Adapt navigation patterns to mobile with compact, touch-friendly behavior
+
+<DBSection spacing="small" width="auto">
+
+    ## Playground
+    Experiment with the Navigation component and its properties.
+
+    <ComponentPlayground config={navigationConfig} component={DBNavigation} />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+		},
+		{
+			title: 'Vue',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
+		},
+		{
+			title: 'Angular',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg',
+		},
+		{
+			title: 'Web C.',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties
+
+Configure the navigation through its properties.
+
+<PropertiesTable config={navigationConfig} />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+###### Destinations
+
+Use Navigation items to take users to pages or views. For operations (create, save, export), use Buttons or Menus, not navigation items.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/lDMxw7YqQoJaWQdBlG7kwB/Doku--Navigation?node-id=1-1132&embed-host=share"
+		description="Use navigation items for stable destinations like 'Overview', 'Reports', 'Settings', displayed as a consistent list/tab set with a clear active item."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/lDMxw7YqQoJaWQdBlG7kwB/Doku--Navigation?node-id=1-1133&embed-host=share"
+		description="Use navigation items for one-off actions like 'Download now' or 'Submit', shown as destinations instead of an action control."
+	/>
+</div>
+
+###### Variant
+
+Choose horizontal navigation for shallow structures with enough space. Use vertical navigation for sidebars, longer lists, or deeper hierarchies that must stay visible.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/lDMxw7YqQoJaWQdBlG7kwB/Doku--Navigation?node-id=3-1110&embed-host=share"
+		description="Use horizontal navigation for top-level destinations and vertical navigation for section navigation, with labels fully visible and easy to scan."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/lDMxw7YqQoJaWQdBlG7kwB/Doku--Navigation?node-id=3-1112&embed-host=share"
+		description="Force horizontal navigation into tight spaces where labels truncate, wrap unpredictably, or reduce scannability."
+	/>
+</div>
+
+###### Labels
+
+Keep labels short, clear, and parallel in wording. Avoid repeating the same prefix across items and keep the set stable over time.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/lDMxw7YqQoJaWQdBlG7kwB/Doku--Navigation?node-id=3-1113&embed-host=share"
+		description="Use concise, descriptive labels that fit common viewports without truncation, aligned to a consistent text style and casing."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/lDMxw7YqQoJaWQdBlG7kwB/Doku--Navigation?node-id=3-1114&embed-host=share"
+		description="Use long phrases, mixed grammar/casing, or frequently change item names/order in ways that break recognition."
+	/>
+</div>
+
+###### Hierarchy
+
+Keep hierarchy shallow and predictable. If there are too many items, use an overflow pattern (e.g., 'More') or a menu-based expansion.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/lDMxw7YqQoJaWQdBlG7kwB/Doku--Navigation?node-id=3-1116&embed-host=share"
+		description="Limit visible top-level items and move the rest into an overflow entry, visually grouped and clearly labeled."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/lDMxw7YqQoJaWQdBlG7kwB/Doku--Navigation?node-id=3-1117&embed-host=share"
+		description="Create deep multi-level trees that require excessive drilling without clear grouping, cues, or a stable structure."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the Navigation component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Navigation" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+	## Related Content
+	<TeaserCard
+		teasers={[
+			{
+				title: 'Header',
+				description: 'Hosts primary navigation and global actions at the top of the page',
+				url: '/documentation/components/header',
+			},
+			{
+				title: 'Drawer',
+				description: 'Common container for mobile or overflow navigation',
+				url: '/documentation/components/drawer',
+			},
+			{
+				title: 'Link',
+				description: 'Navigational element used in content and secondary menus',
+				url: '/documentation/components/link',
+			},
+			{
+				title: 'Popover',
+				description: 'Often used for secondary menus or overflow navigation',
+				url: '/documentation/components/popover',
+			},
+			{
+				title: 'Divider',
+				description: 'Separates navigation groups in sidebars or menus',
+				url: '/documentation/components/divider',
+			},
+		]}
+	/>
+</DBSection>
