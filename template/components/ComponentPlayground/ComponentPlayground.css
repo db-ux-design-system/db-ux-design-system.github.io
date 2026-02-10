@@ -95,43 +95,43 @@
 }
 
 /* Navigation item width control in playground */
-.component-playground .preview-area .db-navigation {
+.component-playground .preview-area > .db-navigation {
 	display: flex;
 	justify-content: center;
 	width: 100%;
 }
 
-.component-playground .preview-area .db-navigation menu {
+.component-playground .preview-area > .db-navigation menu {
 	display: flex;
 	justify-content: center;
 	width: 100%;
 }
 
-.component-playground .preview-area .db-navigation:not([data-variant='vertical']) menu {
+.component-playground .preview-area > .db-navigation:not([data-variant='vertical']) menu {
 	flex-direction: row;
 	gap: var(--db-spacing-fixed-sm);
 }
 
-.component-playground .preview-area .db-navigation[data-variant='vertical'] {
+.component-playground .preview-area > .db-navigation[data-variant='vertical'] {
 	max-width: 300px;
 }
 
-.component-playground .preview-area .db-navigation .db-navigation-item[data-width='full'] {
+.component-playground .preview-area > .db-navigation .db-navigation-item[data-width='full'] {
 	width: 100% !important;
 	inline-size: 100% !important;
 }
 
-.component-playground .preview-area .db-navigation .db-navigation-item[data-width='auto'] {
+.component-playground .preview-area > .db-navigation .db-navigation-item[data-width='auto'] {
 	width: fit-content !important;
 	inline-size: fit-content !important;
 	margin: auto;
 }
 
 /* Override navigation item width behavior in playground */
-.component-playground .preview-area .db-navigation-item[data-width='full'] {
+.component-playground .preview-area > .db-navigation-item[data-width='full'] {
 	inline-size: 100% !important;
 }
 
-.component-playground .preview-area .db-navigation-item[data-width='auto'] {
+.component-playground .preview-area > .db-navigation-item[data-width='auto'] {
 	inline-size: fit-content !important;
 }
