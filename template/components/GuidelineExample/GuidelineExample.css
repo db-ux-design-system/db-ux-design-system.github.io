@@ -1,0 +1,9 @@
+.guideline-examples {
+	display: flex;
+	gap: var(--db-spacing-fixed-md);
+	margin-bottom: var(--db-spacing-fixed-2xl);
+}
+
+.guideline-examples:last-child {
+	margin-bottom: 0;
+}
