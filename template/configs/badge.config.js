@@ -7,6 +7,12 @@ export const badgeConfig = {
 		size: 'medium',
 		emphasis: 'strong',
 	},
+	slots: [
+		{
+			name: 'children',
+			description: 'default slot',
+		},
+	],
 	properties: [
 		// Content
 		{

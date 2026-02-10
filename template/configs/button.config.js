@@ -7,6 +7,18 @@ export const buttonConfig = {
 		size: 'medium',
 		variant: 'outlined'
 	},
+	slots: [
+		{
+			name: 'children',
+			description: 'default slot',
+		},
+	],
+	events: [
+		{
+			name: 'click / onClick',
+			type: '---',
+		},
+	],
 	properties: [
 		// Content
 		{
