@@ -5,6 +5,30 @@ export const inputConfig = {
 		placeholder: 'Placeholder',
 		type: 'text',
 	},
+	slots: [
+		{
+			name: 'children',
+			description: 'default slot',
+		},
+	],
+	events: [
+		{
+			name: 'input / onInput',
+			type: '---',
+		},
+		{
+			name: 'change / onChange',
+			type: '---',
+		},
+		{
+			name: 'blur / onBlur',
+			type: '---',
+		},
+		{
+			name: 'focus / onFocus',
+			type: '---',
+		},
+	],
 	properties: [
 		// Content
 		{

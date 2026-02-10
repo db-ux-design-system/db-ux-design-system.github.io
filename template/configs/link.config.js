@@ -7,6 +7,12 @@ export const linkConfig = {
 		href: '#',
 		content: '',
 	},
+	slots: [
+		{
+			name: 'children',
+			description: 'default slot',
+		},
+	],
 	properties: [
 		// Content
 		{
