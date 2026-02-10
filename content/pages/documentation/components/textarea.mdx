@@ -1,0 +1,196 @@
+---
+order: 8
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Textarea'
+title: 'Textarea'
+description: 'Textarea lets users enter and review longer, multi-line text in forms and dialogs. It should be clearly labeled, sized to the expected content, and provide helpful guidance and validation feedback when needed.'
+align: start
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import { textareaConfig } from '@template/configs/textarea.config.js';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
+
+- Capture longer free-text input (e.g., feedback, comments, descriptions)
+- Support structured longer entries with hints (e.g., formatting expectations, character limits)
+- Allow users to review and edit multi-line content comfortably before submitting
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+Experiment with the Textarea component and its properties.
+
+<ComponentPlayground config={textareaConfig} />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'TBD',
+			url: '#',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'TBD',
+			url: '#',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties, Slots & Events
+
+Configure the textarea through its properties, slots and events.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable config={textareaConfig} />
+
+</CollapsibleWrapper>
+
+<CollapseButton
+	collapsedText="Show all Properties, Slots & Events"
+	expandedText="Hide some Properties, Slots & Events"
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+###### Textarea vs Input
+
+Use Textarea when users are expected to enter multiple lines or a longer message. For short, single-line values, use Input.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=1-1132&embed-host=share"
+		description="Use Textarea for comments, messages, descriptions, and feedback."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=1-1133&embed-host=share"
+		description="Use Textarea for short values like name, email, or city (use Input instead)."
+	/>
+</div>
+
+###### Labels
+
+Provide a clear label that describes what to write. Do not replace the label with placeholder text; placeholders disappear when typing.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=3-1110&embed-host=share"
+		description="Use a short, specific label placed consistently above or floating. Also consider surrounding form components."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=3-1112&embed-host=share"
+		description="Use multi-line labels or punctuate them."
+	/>
+</div>
+
+###### Height
+
+Choose a height that matches the expected amount of text input. Avoid very small textareas that force scrolling immediately and very tall ones that dominate the page. Use a "Fixed" field size (default: four rows, customizable) or the "Content" variant, which starts with one row and expands with input.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=3-1113&embed-host=share"
+		description="Start with an appropriate height that matches the expected input and the context of use."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=3-1114&embed-host=share"
+		description="Use a small Textarea if a lot of input is expected and there is sufficient space."
+	/>
+</div>
+
+###### Message
+
+Helper text prevents errors (format, tone, limits). Validation messages explain what's wrong and how to fix it. Keep both concise and actionable; do not duplicate the label.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=3-1116&embed-host=share"
+		description="Provide a brief helper hint and a clear error message when invalid."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=3-1117&embed-host=share"
+		description="Use long paragraphs, vague errors ('Invalid'), or put essential requirements only in placeholder text."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the Textarea component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Textarea" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Input',
+			description: 'Single-line text entry for short values',
+			url: '/documentation/components/input',
+		},
+	]}
+/>
+
+</DBSection>
