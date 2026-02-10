@@ -102,10 +102,10 @@
 	position: absolute;
 	right: var(--db-spacing-fixed-2xs);
 	z-index: 2;
-}
 
-.dba-toc-toggle:hover {
-	background: var(--db-adaptive-bg-basic-transparent-semi-hovered);
+	&:hover {
+		background: var(--db-adaptive-bg-basic-transparent-semi-hovered);
+	}
 }
 
 .dba-toc-heading[data-depth='3'] a {
