@@ -1,0 +1,201 @@
+---
+order: 7
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Tooltip'
+title: 'Tooltip'
+description: 'Tooltip provides brief, contextual information on hover or focus without interrupting the user flow. It is best for clarifying icons, truncated text, or unfamiliar UI controls, and should not contain critical or lengthy content.'
+align: start
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import { tooltipConfig } from '@template/configs/tooltip.config.js';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
+
+- Explain the meaning of an icon-only control (e.g., "Download", "Copy link")
+- Reveal truncated text or labels (e.g., full file name, full table header)
+- Add short hints for optional inputs or uncommon terms
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+Experiment with the Tooltip component and its properties.
+
+<ComponentPlayground config={tooltipConfig} />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'TBD',
+			url: '#',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'TBD',
+			url: '#',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties, Slots & Events
+
+Configure the tooltip through its properties, slots and events.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable config={tooltipConfig} />
+
+</CollapsibleWrapper>
+
+<CollapseButton
+	collapsedText="Show all Properties, Slots & Events"
+	expandedText="Hide some Properties, Slots & Events"
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+###### Usage
+
+Tooltips display contextual information and must not contain required instructions or critical information needed to complete a task. If users must read it to proceed, use infotext, inline guidance, or a popover instead.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%80%BC%EF%B8%8F?node-id=1-1132&embed-host=share"
+		description="Use a tooltip to clarify an icon button."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%80%BC%EF%B8%8F?node-id=1-1133&embed-host=share"
+		description="Put mandatory form instructions or key policy text into a tooltip."
+	/>
+</div>
+
+###### Content
+
+Tooltip content should be one short sentence or phrase. Avoid links, multiple actions, or long paragraphs. If content needs structure or interaction, use a popover/dialog.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%80%BC%EF%B8%8F?node-id=3-1110&embed-host=share"
+		description="Use concise wording and plain language."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%80%BC%EF%B8%8F?node-id=3-1112&embed-host=share"
+		description="Use multi-line explanations, lists, or interactive content inside a tooltip."
+	/>
+</div>
+
+###### Trigger
+
+Show the tooltip on hover and keyboard focus. Use a small delay to prevent flicker, and hide it on blur, mouse leave, scroll, or Escape. Do not require precision hovering.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%80%BC%EF%B8%8F?node-id=3-1113&embed-host=share"
+		description="Trigger on hover/focus, dismiss on blur/leave/Escape."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%80%BC%EF%B8%8F?node-id=3-1114&embed-host=share"
+		description="Show tooltips only on hover (keyboard users miss them)."
+	/>
+</div>
+
+###### Placement
+
+Place tooltips close to the trigger and avoid covering what the user is trying to read or click. Auto-flip when near viewport edges and keep an appropriate offset.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%80%BC%EF%B8%8F?node-id=3-1116&embed-host=share"
+		description="Clearly show the tooltip's association with the trigger and do not overlap any relevant information."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%80%BC%EF%B8%8F?node-id=3-1117&embed-host=share"
+		description="Cover the triggering control, important content, or create off-screen clipped tooltips."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the Tooltip component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Tooltip" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Popover',
+			description: 'Floating container for richer, interactive content anchored to a trigger',
+			url: '/documentation/components/popover',
+		},
+		{
+			title: 'Button',
+			description: 'Common tooltip trigger when the control is icon-only',
+			url: '/documentation/components/button',
+		},
+	]}
+/>
+
+</DBSection>

@@ -1,6 +1,7 @@
 ---
 import './ComponentPlayground.css';
 import ShellExample from '@template/components/ShellExample/ShellExample.tsx';
+import TooltipExample from '@template/components/TooltipExample/TooltipExample.tsx';
 import {
 	DBShell,
 	DBControlPanelDesktop,
@@ -241,6 +242,15 @@ const dualCaseProps = {
 				</div>
 			) : config.elementId === 'playground-header' ? (
 				<ShellExample />
+			) : config.elementId === 'demo-tooltip' ? (
+				<TooltipExample
+					text={config.defaultText}
+					placement={config.defaultProps.placement}
+					animation={config.defaultProps.animation}
+					showArrow={config.defaultProps.showArrow}
+					emphasis={config.defaultProps.emphasis}
+					width={config.defaultProps.width}
+				/>
 			) : config.elementId === 'playground-tag' ? (
 				<div
 					class="db-tag"
