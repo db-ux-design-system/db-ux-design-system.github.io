@@ -525,6 +525,24 @@ const dualCaseProps = {
 					</span>
 					<span data-visually-hidden="true" role="status" />
 				</div>
+			) : config.elementId === 'demo-backdrop' ? (
+				<>
+					<button
+						class="db-button"
+						type="button"
+						data-variant="primary"
+						onclick="const backdrop = document.getElementById('demo-backdrop'); backdrop.style.display = 'block'; const checkbox = document.querySelector('.controls-area input[type=checkbox][onchange*=demo-backdrop]'); if(checkbox) checkbox.checked = true;"
+					>
+						Show Backdrop
+					</button>
+					<div
+						id={config.elementId}
+						class="demo-backdrop"
+						data-emphasis={config.defaultProps.emphasis}
+						style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000;"
+						onclick="this.style.display = 'none'; const checkbox = document.querySelector('.controls-area input[type=checkbox][onchange*=demo-backdrop]'); if(checkbox) checkbox.checked = false;"
+					/>
+				</>
 			) : config.elementId === 'demo-divider' ? (
 				<>
 					{config.defaultProps.variant === 'vertical' ? (
@@ -615,6 +633,8 @@ const dualCaseProps = {
 									} else {
 										updateAction = `document.getElementById('demo-divider').setAttribute('data-emphasis', this.value);`;
 									}
+								} else if (config.elementId === 'demo-backdrop' && prop.name === 'emphasis') {
+									updateAction = `document.getElementById('demo-backdrop').setAttribute('data-emphasis', this.value);`;
 								} else if (config.elementId === 'demo-drawer' && prop.name === 'direction') {
 									updateAction = `const drawer = document.getElementById('demo-drawer'); const container = drawer.querySelector('.db-drawer-container'); drawer.setAttribute('data-direction', this.value); container.setAttribute('data-direction', this.value);`;
 								} else if (config.elementId === 'demo-drawer' && prop.name === 'backdrop') {
@@ -953,7 +973,9 @@ const dualCaseProps = {
 
 							if (prop.type === 'checkbox') {
 								let action;
-								if (config.elementId === 'demo-drawer' && prop.name === 'open') {
+								if (config.elementId === 'demo-backdrop' && prop.name === 'open') {
+									action = `const backdrop = document.getElementById('demo-backdrop'); if(this.checked) backdrop.style.display = 'block'; else backdrop.style.display = 'none';`;
+								} else if (config.elementId === 'demo-drawer' && prop.name === 'open') {
 									action = `const drawer = document.getElementById('demo-drawer'); if(this.checked) drawer.showModal(); else drawer.close();`;
 								} else if (config.elementId === 'playground-tag' && prop.name === 'overflow') {
 									action = `const tag = document.getElementById('playground-tag'); if(this.checked) tag.setAttribute('data-overflow', 'true'); else tag.removeAttribute('data-overflow');`;

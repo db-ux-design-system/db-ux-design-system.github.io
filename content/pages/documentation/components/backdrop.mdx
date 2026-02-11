@@ -17,7 +17,8 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import CodeBlock from '@template/components/CodeBlock/CodeBlock.astro';
+import { backdropConfig } from '@template/configs/backdrop.config.js';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 
 - Highlight an open overlay (e.g., Dialog, Modal, Drawer)
 - Dim background during a blocking loading state or process
@@ -25,54 +26,11 @@ import CodeBlock from '@template/components/CodeBlock/CodeBlock.astro';
 
 <DBSection spacing="small" width="auto">
 
-## Implementation
+## Playground
 
-There is no Backdrop component. If you need a backdrop like the one in DBDrawer you should apply those styles:
+Experiment with the Backdrop and its properties.
 
-### CSS
-
-```css
-.my-backdrop {
-	background-color: color(
-		from var(--db-adaptive-on-bg-basic-emphasis-100-default) srgb r g b /
-			var(--db-opacity-lg)
-	);
-}
-
-/* OR */
-
-dialog::backdrop {
-	background-color: color(
-		from var(--db-adaptive-on-bg-basic-emphasis-100-default) srgb r g b /
-			var(--db-opacity-lg)
-	);
-}
-```
-
-### SCSS
-
-```scss
-@use "@db-ux/core-foundations/build/styles/colors";
-@use "@db-ux/core-foundations/build/styles/variables";
-
-.my-backdrop {
-	background-color: color(
-		from #{colors.$db-adaptive-on-bg-basic-emphasis-100-default} srgb r g
-			b / #{variables.$db-opacity-lg}
-	);
-}
-
-/* OR */
-
-dialog::backdrop {
-	background-color: color(
-		from #{colors.$db-adaptive-on-bg-basic-emphasis-100-default} srgb r g
-			b / #{variables.$db-opacity-lg}
-	);
-}
-```
-
-**Note:** If you want to use the weak variant you should use the `db-opacity-sm` variable.
+<ComponentPlayground config={backdropConfig} />
 
 </DBSection>
 
@@ -107,6 +65,66 @@ dialog::backdrop {
 			icon: 'html5',
 		},
 	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Implementation
+
+There is no Backdrop component. If you need a backdrop like the one in DBDrawer you should apply those styles:
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### CSS
+
+```css
+.my-backdrop {
+	background-color: color(
+		from var(--db-adaptive-on-bg-basic-emphasis-100-default) srgb r g b / var(--db-opacity-lg)
+	);
+}
+
+/* OR */
+
+dialog::backdrop {
+	background-color: color(
+		from var(--db-adaptive-on-bg-basic-emphasis-100-default) srgb r g b / var(--db-opacity-lg)
+	);
+}
+```
+
+### SCSS
+
+```scss
+@use '@db-ux/core-foundations/build/styles/colors';
+@use '@db-ux/core-foundations/build/styles/variables';
+
+.my-backdrop {
+	background-color: color(
+		from #{colors.$db-adaptive-on-bg-basic-emphasis-100-default} srgb r g b /
+			#{variables.$db-opacity-lg}
+	);
+}
+
+/* OR */
+
+dialog::backdrop {
+	background-color: color(
+		from #{colors.$db-adaptive-on-bg-basic-emphasis-100-default} srgb r g b /
+			#{variables.$db-opacity-lg}
+	);
+}
+```
+
+**Note:** If you want to use the weak variant you should use the `db-opacity-sm` variable.
+
+</CollapsibleWrapper>
+
+<CollapseButton
+	collapsedText="Show all Implementation Details"
+	expandedText="Hide some Implementation Details"
 />
 
 </DBSection>
@@ -179,14 +197,6 @@ Ensure foreground content has sufficient contrast against the dimmed background.
 ## FAQ
 
 Have a question about the Backdrop? We'll answer it and add frequently asked questions to this page.
-
-**When should I use Backdrop vs no Backdrop?**
-
-Use Backdrop when a foreground surface should be the primary focus and background should visually recede. Avoid Backdrop when users must continue interacting with background content.
-
-**How do I pick the emphasis?**
-
-Use the weak emphasis for optional, low-risk overlays and strong for blocking, high-focus overlays. Keep the choice consistent across the same overlay type.
 
 <QuestionForm componentName="Backdrop" />
 

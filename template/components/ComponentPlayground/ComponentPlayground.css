@@ -144,3 +144,17 @@
 .component-playground .preview-area > .db-navigation-item[data-width='auto'] {
 	inline-size: fit-content !important;
 }
+
+.demo-backdrop {
+	background-color: color(
+		from var(--db-adaptive-on-bg-basic-emphasis-100-default) srgb r g b /
+			var(--db-opacity-lg)
+	);
+}
+
+.demo-backdrop[data-emphasis='weak'] {
+	background-color: color(
+		from var(--db-adaptive-on-bg-basic-emphasis-100-default) srgb r g b /
+			var(--db-opacity-sm)
+	);
+}
