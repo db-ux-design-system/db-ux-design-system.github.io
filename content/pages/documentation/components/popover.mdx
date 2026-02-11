@@ -1,0 +1,184 @@
+---
+order: 10
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Popover'
+title: 'Popover'
+description: 'Popover is a floating container anchored to a trigger that reveals additional, contextual content on click or hover. It supports richer content than a tooltip and can include actions, but should remain lightweight and easy to dismiss.'
+align: start
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import { popoverConfig } from '@template/configs/popover.config.js';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
+
+- Provide contextual actions or settings near a control (e.g., "More options", quick preferences)
+- Show short explanatory content with links or small controls (e.g., help + "Learn more")
+- Display compact, interactive content without navigating away (e.g., quick filters)
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+Experiment with the Popover component and its properties.
+
+<ComponentPlayground config={popoverConfig} />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'TBD',
+			url: '#',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'TBD',
+			url: '#',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties & Slots
+
+Configure the popover through its properties and slots.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable config={popoverConfig} />
+
+</CollapsibleWrapper>
+
+<CollapseButton
+	collapsedText="Show all Properties & Slots"
+	expandedText="Hide some Properties & Slots"
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+###### Popover vs Tooltip
+
+Use Popover when content is related to a specific trigger and users may need to interact with it. Use Tooltip for brief, non-interactive hints on hover/focus.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/JNtTZmwnMHbHVeh0FhcO1c/Doku--Popover-%E2%80%BC%EF%B8%8F?node-id=1-1132&embed-host=share"
+		description="Use a popover for a set of related options anchored to an object."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/JNtTZmwnMHbHVeh0FhcO1c/Doku--Popover-%E2%80%BC%EF%B8%8F?node-id=1-1133&embed-host=share"
+		description="Use a popover for displaying the label of a icon button (use tooltip instead)."
+	/>
+</div>
+
+###### Content
+
+Popover content should be concise and scannable. Prefer a clear title (if needed), short text, and a small number of actions. Avoid dense layouts.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/JNtTZmwnMHbHVeh0FhcO1c/Doku--Popover-%E2%80%BC%EF%B8%8F?node-id=3-1110&embed-host=share"
+		description="Present one topic with a clear hierarchy and a limited number of controls."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/JNtTZmwnMHbHVeh0FhcO1c/Doku--Popover-%E2%80%BC%EF%B8%8F?node-id=3-1112&embed-host=share"
+		description="Pack multiple unrelated sections or large, scroll-heavy content into a popover."
+	/>
+</div>
+
+###### Placement
+
+Choose a placement that keeps the popover near its trigger and within the viewport. Allow auto-flip when near edges and avoid covering the trigger or key content.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/JNtTZmwnMHbHVeh0FhcO1c/Doku--Popover-%E2%80%BC%EF%B8%8F?node-id=3-1113&embed-host=share"
+		description="Use default placement and enable flipping to keep the popover fully visible."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/JNtTZmwnMHbHVeh0FhcO1c/Doku--Popover-%E2%80%BC%EF%B8%8F?node-id=3-1114&embed-host=share"
+		description="Force a placement that causes clipping, overlaps critical UI, or hides the trigger."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the Popover component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Popover" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Tooltip',
+			description: 'Brief, non-interactive hint on hover or focus',
+			url: '/documentation/components/tooltip',
+		},
+		{
+			title: 'Card',
+			description: 'Structured container for grouping related content or actions',
+			url: '/documentation/components/card',
+		},
+	]}
+/>
+
+</DBSection>
