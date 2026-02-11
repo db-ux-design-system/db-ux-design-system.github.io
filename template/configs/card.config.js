@@ -1,10 +1,10 @@
 export const cardConfig = {
 	elementId: 'demo-card',
-	defaultText: 'Card content goes here',
+	defaultText: 'Card',
 	defaultProps: {
 		id: 'demo-card',
 		behavior: 'static',
-		elevationLevel: '1',
+		'elevation-level': '1',
 		spacing: 'medium',
 	},
 	slots: [
@@ -36,7 +36,7 @@ export const cardConfig = {
 			showInPlayground: true,
 		},
 		{
-			name: 'elevation-level / elevationLevel',
+			name: 'elevation-level',
 			label: 'Elevation Level',
 			type: 'select',
 			defaultValue: '1',
