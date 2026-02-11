@@ -1,0 +1,224 @@
+---
+order: 2
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Backdrop'
+title: 'Backdrop'
+description: 'Backdrop is a helper component that dims the page behind an overlay to guide attention to a foreground surface (e.g., modal, dialog, drawer). It separates active content from background content and can optionally prevent interaction with the background.'
+align: start
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import CodeBlock from '@template/components/CodeBlock/CodeBlock.astro';
+
+- Highlight an open overlay (e.g., Dialog, Modal, Drawer)
+- Dim background during a blocking loading state or process
+- Visually separate focused content from the rest of the page
+
+<DBSection spacing="small" width="auto">
+
+## Implementation
+
+There is no Backdrop component. If you need a backdrop like the one in DBDrawer you should apply those styles:
+
+### CSS
+
+```css
+.my-backdrop {
+	background-color: color(
+		from var(--db-adaptive-on-bg-basic-emphasis-100-default) srgb r g b /
+			var(--db-opacity-lg)
+	);
+}
+
+/* OR */
+
+dialog::backdrop {
+	background-color: color(
+		from var(--db-adaptive-on-bg-basic-emphasis-100-default) srgb r g b /
+			var(--db-opacity-lg)
+	);
+}
+```
+
+### SCSS
+
+```scss
+@use "@db-ux/core-foundations/build/styles/colors";
+@use "@db-ux/core-foundations/build/styles/variables";
+
+.my-backdrop {
+	background-color: color(
+		from #{colors.$db-adaptive-on-bg-basic-emphasis-100-default} srgb r g
+			b / #{variables.$db-opacity-lg}
+	);
+}
+
+/* OR */
+
+dialog::backdrop {
+	background-color: color(
+		from #{colors.$db-adaptive-on-bg-basic-emphasis-100-default} srgb r g
+			b / #{variables.$db-opacity-lg}
+	);
+}
+```
+
+**Note:** If you want to use the weak variant you should use the `db-opacity-sm` variable.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'TBD',
+			url: '#',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'TBD',
+			url: '#',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+###### Focus attention
+
+Use Backdrop when the user should focus on a single active UI layer. If users must keep working with the background, avoid Backdrop and use a non-blocking pattern instead.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/tREBXQmJlK75D2ZBjtuBx9/Doku--Backdrop?node-id=1-1132&embed-host=share"
+		description="Use Backdrop behind a dialog or drawer to clearly indicate an active overlay layer."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/tREBXQmJlK75D2ZBjtuBx9/Doku--Backdrop?node-id=1-1133&embed-host=share"
+		description="Use Backdrop for decorative emphasis when no overlay is present."
+	/>
+</div>
+
+###### Context
+
+Backdrop should reduce distraction, not remove necessary context. If users need to reference background information, consider an alternative (side panel, inline expansion, or non-modal popover).
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/tREBXQmJlK75D2ZBjtuBx9/Doku--Backdrop?node-id=3-1110&embed-host=share"
+		description="Use Backdrop only when the user can complete the task without needing background content."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/tREBXQmJlK75D2ZBjtuBx9/Doku--Backdrop?node-id=3-1112&embed-host=share"
+		description="Avoid unnecessary layering unless there is a clear need to darken the background."
+	/>
+</div>
+
+###### Accessibility
+
+Ensure foreground content has sufficient contrast against the dimmed background. When Backdrop indicates a modal state, keep focus within the active overlay and ensure assistive tech cannot navigate background content.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/tREBXQmJlK75D2ZBjtuBx9/Doku--Backdrop?node-id=3-1113&embed-host=share"
+		description="Only enable interactivity in the foreground."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/tREBXQmJlK75D2ZBjtuBx9/Doku--Backdrop?node-id=3-1114&embed-host=share"
+		description="Use the background without placing the content on an element with sufficient contrast."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the Backdrop? We'll answer it and add frequently asked questions to this page.
+
+**When should I use Backdrop vs no Backdrop?**
+
+Use Backdrop when a foreground surface should be the primary focus and background should visually recede. Avoid Backdrop when users must continue interacting with background content.
+
+**How do I pick the emphasis?**
+
+Use the weak emphasis for optional, low-risk overlays and strong for blocking, high-focus overlays. Keep the choice consistent across the same overlay type.
+
+<QuestionForm componentName="Backdrop" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Drawer',
+			description: 'Side overlay panel often paired with a backdrop',
+			url: '/documentation/components/drawer',
+		},
+		{
+			title: 'Popover',
+			description: 'Non-modal anchored surface; usually does not need a backdrop',
+			url: '/documentation/components/popover',
+		},
+		{
+			title: 'Notification',
+			description: 'Non-blocking feedback that should not require a backdrop',
+			url: '/documentation/components/notification',
+		},
+		{
+			title: 'Tooltip',
+			description: 'Brief hint; never use with a backdrop',
+			url: '/documentation/components/tooltip',
+		},
+	]}
+/>
+
+</DBSection>
