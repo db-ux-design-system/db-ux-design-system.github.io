@@ -26,14 +26,6 @@ export const drawerConfig = {
 	],
 	properties: [
 		{
-			name: 'open',
-			label: 'Open',
-			type: 'checkbox',
-			defaultValue: false,
-			description: 'The open attribute opens or closes the drawer based on the state.',
-			showInPlayground: true,
-		},
-		{
 			name: 'direction',
 			label: 'Direction',
 			type: 'select',
@@ -59,6 +51,14 @@ export const drawerConfig = {
 				{ value: 'weak', label: 'Weak' },
 				{ value: 'invisible', label: 'Invisible' },
 			],
+			showInPlayground: true,
+		},
+		{
+			name: 'open',
+			label: 'Open',
+			type: 'checkbox',
+			defaultValue: false,
+			description: 'The open attribute opens or closes the drawer based on the state.',
 			showInPlayground: true,
 		},
 		{

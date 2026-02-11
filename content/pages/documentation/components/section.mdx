@@ -1,0 +1,171 @@
+---
+order: 11
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Section'
+title: 'Section'
+description: 'Section separates and structures content areas on a page by applying consistent spacing and optional width constraints. It helps create clear visual grouping and rhythm without manually managing margins for each block.'
+align: start
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import { sectionConfig } from '@template/configs/section.config.js';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
+
+- Group related content into a distinct page area (e.g., "Overview", "Details", "Next steps")
+- Create consistent vertical spacing between major content blocks
+- Constrain content width for readability while keeping full-bleed backgrounds possible
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+Experiment with the Section component and its properties.
+
+<ComponentPlayground config={sectionConfig} />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'TBD',
+			url: '#',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'TBD',
+			url: '#',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties & Slots
+
+Configure the section through its properties and slots.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable config={sectionConfig} />
+
+</CollapsibleWrapper>
+
+<CollapseButton
+	collapsedText="Show all Properties & Slots"
+	expandedText="Hide some Properties & Slots"
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+###### Structuring
+
+Use Section for high-level grouping of content blocks. It should define consistent spacing between major areas, not micro-spacing between individual elements.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/YER9qlSt9hGtlnFAqe2s7s/Doku--Section-%E2%80%BC%EF%B8%8F?node-id=1-1132&embed-host=share"
+		description="Wrap a logical page block in a Section to standardize spacing."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/YER9qlSt9hGtlnFAqe2s7s/Doku--Section-%E2%80%BC%EF%B8%8F?node-id=1-1133&embed-host=share"
+		description="Use Sections as a substitute for small margins/padding between related elements."
+	/>
+</div>
+
+###### Spacing and Width
+
+Try to choose the spacing and width options as consistent as possible and suitable for the respective context.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/YER9qlSt9hGtlnFAqe2s7s/Doku--Section-%E2%80%BC%EF%B8%8F?node-id=3-1110&embed-host=share"
+		description="Choose from the provided spacing presets to match other pages and templates."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/YER9qlSt9hGtlnFAqe2s7s/Doku--Section-%E2%80%BC%EF%B8%8F?node-id=3-1112&embed-host=share"
+		description="Create visual clutter by using many different widths and spacings."
+	/>
+</div>
+
+###### Accessibility
+
+Section is a layout tool, not a semantic substitute. Ensure content inside is properly structured with headings and landmarks when appropriate (e.g., meaningful heading levels, ARIA landmarks only when needed).
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the Section component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Section" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Divider',
+			description: 'Visual separator for nearby content blocks',
+			url: '/documentation/components/divider',
+		},
+		{
+			title: 'Card',
+			description: 'Surface container with padding and optional background/border',
+			url: '/documentation/components/card',
+		},
+	]}
+/>
+
+</DBSection>

@@ -541,6 +541,30 @@ const dualCaseProps = {
 						</article>
 					</div>
 				</div>
+			) : config.elementId === 'demo-section' ? (
+				<div id="demo-section-wrapper" style="display: flex; flex-direction: column; justify-content: center; width: 100%; height: 100%;">
+					<section
+						class="db-section demo-section-item"
+						id={config.elementId}
+						data-spacing={config.defaultProps.spacing}
+						data-width={config.defaultProps.width}
+						style="width: 100%;"
+					>
+						<div style="background-color: var(--db-cyan-bg-basic-level-1-default); padding: var(--db-spacing-fixed-md);">
+							Section 1
+						</div>
+					</section>
+					<section
+						class="db-section demo-section-item"
+						data-spacing={config.defaultProps.spacing}
+						data-width={config.defaultProps.width}
+						style="width: 100%;"
+					>
+						<div style="background-color: var(--db-cyan-bg-basic-level-1-default); padding: var(--db-spacing-fixed-md);">
+							Section 2
+						</div>
+					</section>
+				</div>
 			) : config.elementId === 'demo-accordion' ? (
 				<ul class="db-accordion" id={config.elementId} data-variant={config.defaultProps.variant}>
 					<li class="db-accordion-item">
@@ -675,6 +699,11 @@ const dualCaseProps = {
 									(prop.name === 'spacing' || prop.name === 'placement' || prop.name === 'width')
 								) {
 									updateAction = `const article = document.querySelector('#demo-popover .db-popover-content'); if(article) article.setAttribute('data-${prop.name}', this.value);`;
+								} else if (
+									config.elementId === 'demo-section' &&
+									(prop.name === 'spacing' || prop.name === 'width')
+								) {
+									updateAction = `document.querySelectorAll('.demo-section-item').forEach(s => s.setAttribute('data-${prop.name}', this.value));`;
 								} else if (config.elementId === 'demo-accordion' && prop.name === 'variant') {
 									updateAction = `document.getElementById('demo-accordion').setAttribute('data-variant', this.value);`;
 								} else if (config.elementId === 'demo-accordion' && prop.name === 'behavior') {
@@ -718,7 +747,7 @@ const dualCaseProps = {
 								) {
 									updateAction = `const wrapper = document.getElementById('demo-custom-select'); const validInfo = document.getElementById('demo-custom-select-infotext-valid'); const invalidInfo = document.getElementById('demo-custom-select-infotext'); if(this.value === 'invalid') { wrapper.setAttribute('aria-invalid', 'true'); wrapper.setAttribute('data-custom-validity', 'invalid'); validInfo.style.display = 'none'; invalidInfo.style.display = ''; } else if(this.value === 'valid') { wrapper.setAttribute('aria-invalid', 'false'); wrapper.setAttribute('data-custom-validity', 'valid'); validInfo.style.display = ''; invalidInfo.style.display = 'none'; } else { wrapper.setAttribute('aria-invalid', 'false'); wrapper.setAttribute('data-custom-validity', 'no-validation'); validInfo.style.display = 'none'; invalidInfo.style.display = 'none'; }`;
 								} else if (config.elementId === 'demo-custom-select' && prop.name === 'variant') {
-									updateAction = `document.getElementById('demo-custom-select').setAttribute('data-variant', this.value);`;
+									updateAction = `const wrapper = document.getElementById('demo-custom-select'); wrapper.setAttribute('data-variant', this.value); const placeholder = document.getElementById('demo-custom-select-placeholder'); if(this.value === 'floating') { placeholder.style.display = 'none'; } else { placeholder.style.display = ''; }`;
 								} else if (
 									config.elementId === 'demo-custom-select' &&
 									(prop.name === 'selected-type / selectedType' || prop.name === 'selectedType')
@@ -1026,7 +1055,7 @@ const dualCaseProps = {
 								} else if (config.elementId === 'playground-tag' && prop.name === 'overflow') {
 									action = `const tag = document.getElementById('playground-tag'); if(this.checked) tag.setAttribute('data-overflow', 'true'); else tag.removeAttribute('data-overflow');`;
 								} else if (config.elementId === 'demo-custom-select' && prop.name === 'disabled') {
-									action = `const select = document.getElementById('demo-custom-select-field'); if(select) { if(this.checked) select.setAttribute('disabled', ''); else select.removeAttribute('disabled'); }`;
+									action = `const summary = document.getElementById('demo-custom-select-summary'); if(this.checked) summary?.setAttribute('aria-disabled', 'true'); else summary?.removeAttribute('aria-disabled');`;
 								} else if (prop.name === 'disabled') {
 									const targetId =
 										config.elementId === 'playground-input'
