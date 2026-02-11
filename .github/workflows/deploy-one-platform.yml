@@ -39,7 +39,7 @@ jobs:
           pnpm --version
 
       - name: Install deps
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Lint
         run: |
