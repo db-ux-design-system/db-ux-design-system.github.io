@@ -2,6 +2,7 @@
 import './ComponentPlayground.css';
 import ShellExample from '@template/components/ShellExample/ShellExample.tsx';
 import TooltipExample from '@template/components/TooltipExample/TooltipExample.tsx';
+import DrawerExample from '@template/components/DrawerExample/DrawerExample.tsx';
 import {
 	DBShell,
 	DBControlPanelDesktop,
@@ -294,6 +295,45 @@ const dualCaseProps = {
 					emphasis={config.defaultProps.emphasis}
 					width={config.defaultProps.width}
 				/>
+			) : config.elementId === 'demo-drawer' ? (
+				<>
+					<button
+						class="db-button"
+						type="button"
+						data-variant="primary"
+						onclick="const drawer = document.getElementById('demo-drawer'); drawer.showModal(); const checkbox = document.querySelector('.controls-area input[type=checkbox][onchange*=showModal]'); if(checkbox) checkbox.checked = true;"
+					>
+						Open Drawer
+					</button>
+					<dialog
+						class="db-drawer"
+						id={config.elementId}
+						data-backdrop={config.defaultProps.backdrop}
+						data-direction={config.defaultProps.direction}
+						onclick="if(event.target === this) { this.close(); const checkbox = document.querySelector('.controls-area input[type=checkbox][onchange*=showModal]'); if(checkbox) checkbox.checked = false; }"
+					>
+						<article class="db-drawer-container" data-direction={config.defaultProps.direction}>
+							<header class="db-drawer-header">
+								<div class="db-drawer-header-text">
+									<header id="drawer-header-content">Drawer Title</header>
+								</div>
+								<button
+									class="db-button button-close-drawer"
+									type="button"
+									data-icon="cross"
+									data-variant="ghost"
+									data-no-text="true"
+									onclick="const drawer = document.getElementById('demo-drawer'); drawer.close(); const checkbox = document.querySelector('.controls-area input[type=checkbox][onchange*=showModal]'); if(checkbox) checkbox.checked = false;"
+								>
+									Close
+								</button>
+							</header>
+							<div class="db-drawer-content" id="drawer-content">
+								<p>This is the drawer content. You can add any content here.</p>
+							</div>
+						</article>
+					</dialog>
+				</>
 			) : config.elementId === 'playground-tag' ? (
 				<div
 					class="db-tag"
@@ -363,7 +403,11 @@ const dualCaseProps = {
 											: 'playground-input-field'
 										: config.elementId;
 								let updateAction;
-								if (config.elementId === 'playground-input' && prop.name === 'label') {
+								if (config.elementId === 'demo-drawer' && prop.name === 'direction') {
+									updateAction = `const drawer = document.getElementById('demo-drawer'); const container = drawer.querySelector('.db-drawer-container'); drawer.setAttribute('data-direction', this.value); container.setAttribute('data-direction', this.value);`;
+								} else if (config.elementId === 'demo-drawer' && prop.name === 'backdrop') {
+									updateAction = `document.getElementById('demo-drawer').setAttribute('data-backdrop', this.value);`;
+								} else if (config.elementId === 'playground-input' && prop.name === 'label') {
 									updateAction = `document.getElementById('${targetId}').textContent = this.value;`;
 								} else if (
 									(config.elementId === 'playground-input' ||
@@ -655,7 +699,9 @@ const dualCaseProps = {
 
 							if (prop.type === 'checkbox') {
 								let action;
-								if (config.elementId === 'playground-tag' && prop.name === 'overflow') {
+								if (config.elementId === 'demo-drawer' && prop.name === 'open') {
+									action = `const drawer = document.getElementById('demo-drawer'); if(this.checked) drawer.showModal(); else drawer.close();`;
+								} else if (config.elementId === 'playground-tag' && prop.name === 'overflow') {
 									action = `const tag = document.getElementById('playground-tag'); if(this.checked) tag.setAttribute('data-overflow', 'true'); else tag.removeAttribute('data-overflow');`;
 								} else if (prop.name === 'disabled') {
 									const targetId =
