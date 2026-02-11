@@ -1,0 +1,236 @@
+---
+order: 5
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Card'
+title: 'Card'
+description: 'Card groups related content into a contained surface to improve scanning and create clear visual structure. It can be static for content grouping or interactive as an entry point to deeper content, but should stay simple and consistent.'
+align: start
+toc: true
+---
+
+import { DBSection, DBCard } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import { cardConfig } from '@template/configs/card.config.js';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
+
+- Group related information and actions into a single, scannable block
+- Present multiple items in a grid/list of consistent surfaces (card groups)
+- Provide an interactive "preview" that links to details (interactive card)
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+Experiment with the Card component and its properties.
+
+<ComponentPlayground config={cardConfig} component={DBCard} />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'TBD',
+			url: '#',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'TBD',
+			url: '#',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties & Slots
+
+Configure the card through its properties and slots.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable config={cardConfig} />
+
+</CollapsibleWrapper>
+
+<CollapseButton
+	collapsedText="Show all Properties & Slots"
+	expandedText="Hide some Properties & Slots"
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+###### Grouping
+
+Use Card when content belongs together and benefits from a distinct surface. Avoid wrapping everything in cards; too many cards reduce hierarchy and readability.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/2mqTMWDvKZPz91u1XrztAA/Doku--Card?node-id=1-1132&embed-host=share"
+		description="Use cards to group a small set of related actions."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/2mqTMWDvKZPz91u1XrztAA/Doku--Card?node-id=1-1133&embed-host=share"
+		description="Place every single UI element in a card, creating unnecessary visual noise."
+	/>
+</div>
+
+###### Static or Interactive
+
+Static cards are for grouping; interactive cards are for navigation or selection. If a card is interactive, the whole pattern must behave consistently and feel clickable.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/2mqTMWDvKZPz91u1XrztAA/Doku--Card?node-id=3-1110&embed-host=share"
+		description="Make interactive cards clearly clickable and apply one consistent interaction pattern per list/grid."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/2mqTMWDvKZPz91u1XrztAA/Doku--Card?node-id=3-1112&embed-host=share"
+		description="Mix clickable and non-clickable cards in the same group without clear differentiation."
+	/>
+</div>
+
+###### Content Alignment
+
+In card groups, align content consistently (headlines, media, actions) to support scanning. Maintain equal heights only when it improves comparability; otherwise let content size naturally.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/2mqTMWDvKZPz91u1XrztAA/Doku--Card?node-id=3-1113&embed-host=share"
+		description="Align titles and primary actions consistently across cards in the same grid."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/2mqTMWDvKZPz91u1XrztAA/Doku--Card?node-id=3-1114&embed-host=share"
+		description="Let each card use a different internal layout, making the grid hard to scan."
+	/>
+</div>
+
+###### Card vs. List
+
+Use lists for dense, comparable rows and quick scanning. Use cards when content needs grouping, hierarchy, or richer presentation (media, metadata, actions).
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/2mqTMWDvKZPz91u1XrztAA/Doku--Card?node-id=3-1116&embed-host=share"
+		description="Use a list for many similar items; use cards for richer previews and mixed content."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/2mqTMWDvKZPz91u1XrztAA/Doku--Card?node-id=3-1117&embed-host=share"
+		description="Use cards for very dense datasets where a list/table would be more efficient."
+	/>
+</div>
+
+###### Accessibility
+
+If the card is interactive, it must be keyboard reachable and expose correct semantics (link or button). Focus must be visible, and nested interactive elements must not cause conflicting click targets.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/2mqTMWDvKZPz91u1XrztAA/Doku--Card?node-id=3-1118&embed-host=share"
+		description="Ensure one clear interactive target (or clearly separated targets) with visible focus and correct roles."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/2mqTMWDvKZPz91u1XrztAA/Doku--Card?node-id=3-1119&embed-host=share"
+		description="Make the entire card clickable while also placing multiple nested links/buttons that compete for clicks."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the Card component? We'll answer it and add frequently asked questions to this page.
+
+**Can a card contain multiple actions?**
+
+Yes, but keep it minimal. Prefer one primary action and optional secondary actions. If there are many actions, consider moving them into a menu or a dedicated details view.
+
+**What background level should I use?**
+
+Use the default background level for most cards. Use higher-contrast backgrounds only to support hierarchy (e.g., grouped sections) and keep the choice consistent across the page.
+
+<QuestionForm componentName="Card" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Section',
+			description: 'Structures page areas and spacing around grouped content',
+			url: '/documentation/components/section',
+		},
+		{
+			title: 'Divider',
+			description: 'Separates content within or between surfaces when needed',
+			url: '/documentation/components/divider',
+		},
+		{
+			title: 'Accordion',
+			description: 'Collapses optional content inside a structured area',
+			url: '/documentation/components/accordion',
+		},
+		{
+			title: 'Popover',
+			description: 'Provides lightweight contextual actions without navigating away',
+			url: '/documentation/components/popover',
+		},
+	]}
+/>
+
+</DBSection>
