@@ -1,0 +1,201 @@
+---
+order: 1
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Accordion'
+title: 'Accordion'
+description: 'Accordion groups content into collapsible sections to save space and let users reveal details progressively. It is best for optional information and structured content where users do not need to see everything at once.'
+align: start
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import { accordionConfig } from '@template/configs/accordion.config.js';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
+
+- Present FAQs or help content where users open only what they need
+- Hide optional details behind clear section headlines (progressive disclosure)
+- Improve readability when a page contains many content sections
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+Experiment with the Accordion component and its properties.
+
+<ComponentPlayground config={accordionConfig} />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'TBD',
+			url: '#',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'TBD',
+			url: '#',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties & Slots
+
+Configure the accordion through its properties and slots.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable config={accordionConfig} />
+
+</CollapsibleWrapper>
+
+<CollapseButton
+	collapsedText="Show all Properties & Slots"
+	expandedText="Hide some Properties & Slots"
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+###### Collapsable Content
+
+Use Accordion for optional, expandable content. If users must compare multiple sections or see everything at once, use a visible list, sections, or cards instead.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion?node-id=1-1132&embed-host=share"
+		description="Use Accordion for FAQs or 'Details' content that users open on demand."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion?node-id=1-1133&embed-host=share"
+		description="Use Accordion when users need to scan or compare all sections simultaneously."
+	/>
+</div>
+
+###### Headline wording
+
+Headlines must describe the content inside and remain short and scannable. Avoid generic labels and avoid repeating the same word across all items.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion?node-id=3-1110&embed-host=share"
+		description="Use descriptive headlines and keep it scannable."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion?node-id=3-1112&embed-host=share"
+		description="Use vague headlines like 'Information 1/2/3' or 'More details'."
+	/>
+</div>
+
+###### Use of variants
+
+Select one Accordion variant for a page/area and apply it consistently. Mixing variants makes scanning harder and weakens hierarchy.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion?node-id=3-1113&embed-host=share"
+		description="Use one consistent visual style for all accordion items in the same container."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion?node-id=3-1114&embed-host=share"
+		description="Mix different accordion variants within the same list without a clear reason."
+	/>
+</div>
+
+###### Nesting
+
+Nested accordions quickly become hard to understand and navigate. If nesting is unavoidable, keep it shallow and ensure clear hierarchy and spacing.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion?node-id=3-1116&embed-host=share"
+		description="Provide a flat and simple structure."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion?node-id=3-1117&embed-host=share"
+		description="Build multi-level accordion trees that hide important information and confuse users."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the Accordion component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Accordion" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Card',
+			description: 'Groups related content on a surface with padding and optional header',
+			url: '/documentation/components/card',
+		},
+		{
+			title: 'Divider',
+			description: 'Visually separates nearby content blocks without collapsing',
+			url: '/documentation/components/divider',
+		},
+	]}
+/>
+
+</DBSection>

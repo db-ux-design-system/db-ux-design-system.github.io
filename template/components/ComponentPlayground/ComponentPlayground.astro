@@ -525,6 +525,27 @@ const dualCaseProps = {
 					</span>
 					<span data-visually-hidden="true" role="status" />
 				</div>
+			) : config.elementId === 'demo-accordion' ? (
+				<ul class="db-accordion" id={config.elementId} data-variant={config.defaultProps.variant}>
+					<li class="db-accordion-item">
+						<details>
+							<summary>Title</summary>
+							<div>Content</div>
+						</details>
+					</li>
+					<li class="db-accordion-item">
+						<details>
+							<summary>Title</summary>
+							<div>Content</div>
+						</details>
+					</li>
+					<li class="db-accordion-item">
+						<details>
+							<summary>Title</summary>
+							<div>Content</div>
+						</details>
+					</li>
+				</ul>
 			) : config.elementId === 'demo-backdrop' ? (
 				<>
 					<button
@@ -633,6 +654,8 @@ const dualCaseProps = {
 									} else {
 										updateAction = `document.getElementById('demo-divider').setAttribute('data-emphasis', this.value);`;
 									}
+								} else if (config.elementId === 'demo-accordion' && prop.name === 'behavior') {
+									updateAction = `const accordion = document.getElementById('demo-accordion'); const details = accordion.querySelectorAll('details'); if(this.value === 'single') { details.forEach(d => d.setAttribute('name', 'accordion-group')); } else { details.forEach(d => d.removeAttribute('name')); }`;
 								} else if (config.elementId === 'demo-backdrop' && prop.name === 'emphasis') {
 									updateAction = `document.getElementById('demo-backdrop').setAttribute('data-emphasis', this.value);`;
 								} else if (config.elementId === 'demo-drawer' && prop.name === 'direction') {
