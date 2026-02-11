@@ -1,0 +1,17 @@
+.properties-table-wrapper {
+	overflow-x: auto;
+	width: 100%;
+	min-width: 0;
+	-webkit-overflow-scrolling: touch;
+}
+
+.properties-table-wrapper table {
+	width: auto;
+	min-width: 100%;
+}
+
+.properties-table-wrapper table td {
+	overflow-wrap: break-word;
+	word-break: break-all;
+	hyphens: auto;
+}

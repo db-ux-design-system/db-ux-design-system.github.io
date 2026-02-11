@@ -1,0 +1,56 @@
+.teaser-cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: var(--db-spacing-fixed-md);
+}
+
+.teaser-cards .db-card > a {
+	display: flex;
+	flex-direction: column;
+	text-decoration: none;
+	color: inherit;
+	height: 100%;
+}
+
+.teaser-cards .db-card > .teaser-wrapper {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.teaser-preview {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 160px;
+	background: var(--db-adaptive-bg-basic-level-3-default);
+	flex-shrink: 0;
+	margin-top: auto;
+}
+
+.teaser-preview .db-link {
+	width: auto;
+	display: inline-flex !important;
+	flex-direction: row !important;
+	text-decoration: none !important;
+}
+
+.teaser-preview .db-link::after {
+	text-decoration: none !important;
+}
+
+.teaser-content {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-xs);
+	padding: var(--db-spacing-fixed-md);
+}
+
+.teaser-cards .db-card h6 {
+	margin: 0;
+}
+
+.teaser-cards .db-card p {
+	margin: 0;
+	color: var(--db-adaptive-on-bg-basic-emphasis-70-default);
+}

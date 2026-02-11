@@ -1,0 +1,15 @@
+.collapsible-wrapper[data-collapsed='true'] {
+	height: var(--collapsed-height, 320px);
+	overflow: hidden;
+	mask-image: linear-gradient(to bottom, black calc(100% - 160px), transparent);
+}
+
+.collapsible-wrapper[data-collapsed='false'] {
+	height: auto;
+	mask-image: none;
+}
+
+.collapse-button {
+	margin: auto;
+	margin-top: var(--db-spacing-fixed-2xl);
+}

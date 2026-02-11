@@ -1,0 +1,31 @@
+---
+interface Props {
+	collapsedText?: string;
+	expandedText?: string;
+}
+
+const { collapsedText = 'Show all', expandedText = 'Hide some' } = Astro.props;
+import './CollapseButton.css';
+---
+
+<button
+	class="db-button collapse-button"
+	data-variant="filled"
+	data-collapsed-text={collapsedText}
+	data-expanded-text={expandedText}
+	onclick="
+		let wrapper = this.previousElementSibling;
+		while (wrapper && !wrapper.classList.contains('collapsible-wrapper')) {
+			wrapper = wrapper.previousElementSibling;
+		}
+		if (!wrapper) return;
+		const isCollapsed = wrapper.getAttribute('data-collapsed') === 'true';
+		wrapper.setAttribute('data-collapsed', isCollapsed ? 'false' : 'true');
+		const span = this.querySelector('span');
+		const collapsedText = this.getAttribute('data-collapsed-text') || 'Show all';
+		const expandedText = this.getAttribute('data-expanded-text') || 'Hide some';
+		if (span) span.textContent = isCollapsed ? expandedText : collapsedText;
+	"
+>
+	<span>{collapsedText}</span>
+</button>

@@ -1,0 +1,233 @@
+---
+order: 5
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Link'
+title: 'Link'
+description: 'The Link component is used for navigation to other pages, sections, or external destinations and visually indicates a navigational affordance within the interface.'
+align: start
+status: 'stable'
+toc: true
+---
+
+import { DBLink, DBSection, DBAccordion, DBAccordionItem } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import { linkConfig } from '@template/configs/link.config.js';
+
+- Navigate to another page within the application
+- Navigate to an external website or document
+- Jump to a specific section within the same page
+
+<DBSection spacing="small" width="auto">
+
+    ## Playground
+    Experiment with the Link component and its properties.
+
+    <ComponentPlayground config={linkConfig} component={DBLink} />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+		},
+		{
+			title: 'Vue',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
+		},
+		{
+			title: 'Angular',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg',
+		},
+		{
+			title: 'Web C.',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties
+
+Configure the link through its properties, such as variant, size, content type, and disabled state.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable config={linkConfig} />
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Properties" expandedText="Hide some Properties" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+###### Use links only for navigation
+
+Use the Link component exclusively when the primary purpose is navigation to a different location or resource.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/3HjaNLCvfdsdoRZKbFnV3s/Doku--Link?node-id=1-1132&embed-host=share"
+		description="Use a link to navigate to another page or section."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/3HjaNLCvfdsdoRZKbFnV3s/Doku--Link?node-id=1-1133&embed-host=share"
+		description="Use a link to trigger an action or change data."
+	/>
+</div>
+
+###### Inline text usage
+
+For links within running text, use text links instead of the standalone Link component.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/3HjaNLCvfdsdoRZKbFnV3s/Doku--Link?node-id=3-1110&embed-host=share"
+		description="Use text links inside paragraphs for inline navigation."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/3HjaNLCvfdsdoRZKbFnV3s/Doku--Link?node-id=3-1112&embed-host=share"
+		description="Place the Link component inside continuous body text."
+	/>
+</div>
+
+###### Visual emphasis
+
+Use the brand variant sparingly to highlight particularly important navigational links.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/3HjaNLCvfdsdoRZKbFnV3s/Doku--Link?node-id=3-1113&embed-host=share"
+		description="Highlight a key navigational link with the brand variant."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/3HjaNLCvfdsdoRZKbFnV3s/Doku--Link?node-id=3-1114&embed-host=share"
+		description="Overuse emphasized link styles for all links on a page."
+	/>
+</div>
+
+###### Accessibility and clarity
+
+Links must be clearly identifiable, descriptive, and accessible via keyboard and assistive technologies.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/3HjaNLCvfdsdoRZKbFnV3s/Doku--Link?node-id=3-1116&embed-host=share"
+		description="Use meaningful link labels that describe the destination."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/3HjaNLCvfdsdoRZKbFnV3s/Doku--Link?node-id=3-1117&embed-host=share"
+		description="Use vague labels like 'Click here' or rely on color alone."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<DBAccordion>
+	<DBAccordionItem headlinePlain="When should I use a Link instead of a Button?">
+		Use a Link for navigation. Use a Button for actions that trigger changes, submit data, or
+		manipulate content.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="Can a Link include an icon?">
+		Yes, links may include an icon to indicate direction or external navigation, as long as the
+		label remains clear.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="Are links allowed inside text paragraphs?">
+		Yes, but use dedicated text-link styles rather than the standalone Link component.
+	</DBAccordionItem>
+</DBAccordion>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+	## Related Content
+	<TeaserCard
+		teasers={[
+			{
+				title: 'Button',
+				description: 'Triggers an action or state change',
+				url: '/documentation/components/button',
+			},
+			{
+				title: 'Text Link',
+				description: 'Inline navigational link within body text',
+				url: '/documentation/components/text-link',
+			},
+			{
+				title: 'Icon',
+				description: 'Visual indicator that can complement links',
+				url: '/documentation/components/icon',
+			},
+		]}
+	/>
+</DBSection>

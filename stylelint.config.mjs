@@ -1,8 +1,7 @@
 /** @type {import('stylelint').Config} */
 export default {
 	extends: ['stylelint-config-standard'],
-	// TODO: 'stylelint-use-logical' needs to be compatible with Stylelint 17 first
-	plugins: ['@double-great/stylelint-a11y', '@db-ux/core-stylelint'],
+	plugins: ['@double-great/stylelint-a11y', '@db-ux/core-stylelint', 'stylelint-use-logical'],
 	rules: {
 		'db-ux/use-spacings': [
 			true,

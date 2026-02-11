@@ -7,7 +7,8 @@ interface UseActiveHeadingOptions {
 
 export function useActiveHeading({ slugs, tocMaxDepth }: UseActiveHeadingOptions) {
 	const [currentID, setCurrentID] = useState('');
-	const activeIDs = useRef(new Set<string>());
+	const [activeIDs, setActiveIDs] = useState<string[]>([]);
+	const activeIDsRef = useRef(new Set<string>());
 
 	const headingSelector = useMemo(
 		() =>
@@ -19,26 +20,32 @@ export function useActiveHeading({ slugs, tocMaxDepth }: UseActiveHeadingOptions
 	);
 
 	useEffect(() => {
-		const highlightFirstActive = (id: string) => {
-			const sortedActiveIds = [...activeIDs.current].sort(
+		const updateActiveIDs = () => {
+			const sortedActiveIds = [...activeIDsRef.current].sort(
 				(a, b) => slugs.indexOf(a) - slugs.indexOf(b),
 			);
-			if (sortedActiveIds.length > 0) return setCurrentID(sortedActiveIds[0]);
-			setCurrentID(id);
+			setActiveIDs(sortedActiveIds);
+			if (sortedActiveIds.length > 0) {
+				setCurrentID(sortedActiveIds[0]);
+			}
 		};
 
 		const setCurrent: IntersectionObserverCallback = (entries) => {
 			for (const entry of entries) {
 				const { id } = entry.target;
 				if (id === 'on-this-page-heading') continue;
-				entry.isIntersecting ? activeIDs.current.add(id) : activeIDs.current.delete(id);
-				highlightFirstActive(id);
+				if (entry.isIntersecting) {
+					activeIDsRef.current.add(id);
+				} else {
+					activeIDsRef.current.delete(id);
+				}
+				updateActiveIDs();
 			}
 		};
 
 		const headingsObserver = new IntersectionObserver(setCurrent, {
 			root: null,
-			rootMargin: '-96px 0px 0px 0px',
+			rootMargin: '-48px 0px 0px 0px',
 			threshold: 1,
 		});
 
@@ -48,5 +55,5 @@ export function useActiveHeading({ slugs, tocMaxDepth }: UseActiveHeadingOptions
 		return () => headingsObserver.disconnect();
 	}, [headingSelector, slugs]);
 
-	return { currentID, setCurrentID };
+	return { currentID, activeIDs, setCurrentID };
 }

@@ -1,0 +1,36 @@
+---
+import { DBCard, DBButton } from '@db-ux/react-core-components';
+import './ResourceCards.css';
+
+interface Resource {
+	title: string;
+	description: string;
+	url: string;
+	icon: string;
+}
+
+interface Props {
+	resources: Resource[];
+}
+
+const { resources } = Astro.props;
+---
+
+<div class="resource-cards">
+	{
+		resources.map((resource) => (
+			<DBCard behavior="interactive">
+				<a href={resource.url} target="_blank" rel="noopener noreferrer">
+					<img src={resource.icon} alt="" width="32" height="32" />
+					<div class="resource-text">
+						<b>{resource.title}</b>
+						<p>{resource.description}</p>
+					</div>
+					<DBButton variant="filled" width="full" size="small" iconTrailing="arrow_up_right">
+						View Storybook
+					</DBButton>
+				</a>
+			</DBCard>
+		))
+	}
+</div>

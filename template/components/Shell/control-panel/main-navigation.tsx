@@ -1,6 +1,6 @@
 import { DBNavigation } from '@db-ux/react-core-components';
 import { appNavigation } from '@root/app.navigation.ts';
-import NavItem from '@template/layouts/default/shell/control-panel/nav-item.tsx';
+import NavItem from './nav-item.tsx';
 
 const MainNavigation = ({ mobile }: { mobile?: boolean }) => (
 	<DBNavigation variant={mobile ? 'tree' : 'popover'} aria-label="main navigation">

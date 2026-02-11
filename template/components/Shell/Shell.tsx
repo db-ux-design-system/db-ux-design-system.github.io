@@ -1,10 +1,10 @@
 import { type PropsWithChildren, type ReactElement, useMemo } from 'react';
 import { ColorModeProvider } from '@template/context/color-mode-context.tsx';
 import { DBControlPanelDesktop, DBControlPanelMobile, DBShell } from '@db-ux/react-core-components';
-import PrimaryActions from '@template/layouts/default/shell/control-panel/primary-actions.tsx';
-import MainNavigation from '@template/layouts/default/shell/control-panel/main-navigation.tsx';
-import SubNavigation from '@template/layouts/default/shell/control-panel/sub-navigation.tsx';
-import Brand from '@template/layouts/default/shell/control-panel/brand.tsx';
+import PrimaryActions from './control-panel/primary-actions.tsx';
+import MainNavigation from './control-panel/main-navigation.tsx';
+import SubNavigation from './control-panel/sub-navigation.tsx';
+import Brand from './control-panel/brand.tsx';
 import { findSubNavigation } from '@template/utils/navigation.utils.ts';
 import type { NavigationItemGroupVariantType } from '@db-ux/react-core-components/dist/shared/model';
 

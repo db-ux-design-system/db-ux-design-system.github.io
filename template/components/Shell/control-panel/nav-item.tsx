@@ -1,6 +1,25 @@
-import { DBNavigationItem, DBNavigationItemGroup } from '@db-ux/react-core-components';
+import { DBBadge, DBNavigationItem, DBNavigationItemGroup } from '@db-ux/react-core-components';
 import { getAriaCurrent } from '@template/utils/client.utils.ts';
 import { covers, getFirstChildPath, trimExtension } from '@template/utils/navigation.utils.ts';
+
+const getStatusBadge = (status?: string) => {
+	if (!status || status === 'stable') return null;
+	
+	const config = {
+		concept: { semantic: 'warning', label: 'Concept' },
+		beta: { semantic: 'informative', label: 'Beta' },
+		deprecated: { semantic: 'critical', label: 'Deprecated' },
+		legacy: { semantic: 'warning', label: 'Legacy' },
+	}[status];
+
+	if (!config) return null;
+
+	return (
+		<DBBadge semantic={config.semantic as any} size="small" style={{ marginLeft: 'auto' }}>
+			{config.label}
+		</DBBadge>
+	);
+};
 
 const NavItem = ({
 	path,
@@ -10,8 +29,8 @@ const NavItem = ({
 	children,
 	isSubNavigation,
 	disabled,
+	status,
 }: NavigationItem) => {
-	// if sub-navigation node, do not render children here
 	const isActive =
 		typeof window !== 'undefined' &&
 		covers(
@@ -31,15 +50,15 @@ const NavItem = ({
 				<a
 					href={trimExtension(target)}
 					aria-current={isActive ? 'page' : undefined}
-					data-icon-trailing={iconTrailing}
+					style={{ display: 'flex', alignItems: 'center', width: '100%' }}
 				>
 					{title}
+					{getStatusBadge(status)}
 				</a>
 			</DBNavigationItem>
 		);
 	}
 
-	// node with children
 	if (children && children.length > 0) {
 		return (
 			<DBNavigationItemGroup
@@ -55,7 +74,6 @@ const NavItem = ({
 		);
 	}
 
-	// leaf-node, no children
 	return (
 		<DBNavigationItem
 			icon={icon}
@@ -66,9 +84,10 @@ const NavItem = ({
 			<a
 				href={trimExtension(path)}
 				aria-current={getAriaCurrent(trimExtension(path))}
-				data-icon-trailing={iconTrailing}
+				style={{ display: 'flex', alignItems: 'center', width: '100%' }}
 			>
 				{title}
+				{getStatusBadge(status)}
 			</a>
 		</DBNavigationItem>
 	);

@@ -1,0 +1,84 @@
+/* Component Playground Styles */
+.component-playground {
+	display: grid;
+	grid-template-columns: 1fr 250px;
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+	border-radius: var(--db-border-radius-md);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	overflow: hidden;
+	max-width: 100%;
+}
+
+@media (width <= 768px) {
+	.component-playground {
+		grid-template-columns: 1fr;
+	}
+
+	.component-playground .controls-area {
+		border-left: none;
+		border-top: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	}
+}
+
+.component-playground .preview-area {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 150px;
+	padding: var(--db-spacing-fixed-lg);
+	overflow: hidden;
+	min-width: 0;
+}
+
+.component-playground .preview-area > * {
+	max-width: 100%;
+	min-width: 0;
+}
+
+.component-playground .badge-container {
+	position: relative;
+	max-width: 240px;
+	width: 100%;
+	background-color: var(--db-adaptive-bg-basic-transparent-semi-default);
+	border-radius: var(--db-border-radius-sm);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--db-spacing-fixed-sm);
+	padding: var(--db-spacing-fixed-xs) var(--db-spacing-fixed-sm);
+}
+
+.component-playground .badge-list-item-text {
+	font: var(--db-type-body-md);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+}
+
+.component-playground .controls-area {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-sm);
+	padding: var(--db-spacing-fixed-lg);
+	border-left: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}
+
+.component-playground .controls-area .controls-area-content {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-sm);
+}
+
+.component-playground .controls-area h6 {
+	margin: 0;
+}
+
+/* Disable transitions in playground for instant updates */
+.component-playground .preview-area .db-select label {
+	transition: none !important;
+}
+
+/* Hide label when data-label-hidden is set (for floating variant without value) */
+.component-playground .preview-area .db-select[data-label-hidden='true'] label {
+	opacity: 0 !important;
+	pointer-events: none !important;
+}

@@ -1,0 +1,289 @@
+---
+order: 7
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Select'
+title: 'Select'
+description: "Select lets users choose one option from a predefined list via a dropdown. It is best when options are mutually exclusive and users don't need to see all choices at once, while still providing clear labeling, guidance, and validation."
+align: start
+status: 'stable'
+toc: true
+---
+
+import { DBSelect, DBSection, DBAccordion, DBAccordionItem } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import { selectConfig } from '@template/configs/select.config.js';
+
+- Choose one value from a known set (e.g., country, category, priority)
+- Save space compared to showing all options as radios
+- Provide a controlled input when free text is not allowed
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+Experiment with the Select component and its properties.
+
+<ComponentPlayground config={selectConfig} component={DBSelect} />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+		},
+		{
+			title: 'Vue',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
+		},
+		{
+			title: 'Angular',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg',
+		},
+		{
+			title: 'Web C.',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties
+
+Configure the select through its properties, such as options, disabled, and label.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable config={selectConfig} />
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Properties" expandedText="Hide some Properties" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+###### Use Select for single-choice, predefined options
+
+Use Select when the user must choose exactly one option from a list. If users need to choose multiple options, use Checkbox or a multi-select pattern. If users benefit from seeing all options, consider Radio.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=1-1132&embed-host=share"
+		description="Use Select for one choice from a predefined set where space is limited or options are moderate in count."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=1-1133&embed-host=share"
+		description="Use Select for multi-select needs or when users must compare all options at once."
+	/>
+</div>
+
+###### Keep dropdown options clear and manageable
+
+Options must be easy to scan and understand. Use concise labels, consistent capitalization, and avoid duplicates. If the list becomes long or needs search, use an Autocomplete pattern instead.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1110&embed-host=share"
+		description="Use short, distinct option labels and a logical ordering (alphabetical or by frequency)."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1112&embed-host=share"
+		description="Put very long lists into a basic select without search or grouping support."
+	/>
+</div>
+
+###### Always provide a visible label
+
+Every Select needs a clear label describing what the choice controls. Do not rely on placeholder text as a label, because it can be misunderstood and may not be available to all users.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1113&embed-host=share"
+		description="Provide a short, specific label aligned consistently with other form fields."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1114&embed-host=share"
+		description="Omit the label or use placeholder-only labeling to explain the field."
+	/>
+</div>
+
+###### Handle empty, default, and disabled states intentionally
+
+Define whether a default is appropriate. If selection is required, make the empty state explicit (e.g., "Choose an option") and validate appropriately. Disable the control only when it cannot be used, and explain why if needed.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1116&embed-host=share"
+		description="Use a clear empty option/placeholder and validate when required; disable only with a clear reason."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1117&embed-host=share"
+		description="Preselect a risky default that implies consent or hides that the user must choose."
+	/>
+</div>
+
+###### Width and alignment must follow the layout grid
+
+Select should align with surrounding inputs and respect container widths. Avoid arbitrary widths that break form rhythm; keep the dropdown aligned to the field.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1118&embed-host=share"
+		description="Match Select width to the form layout and keep alignment consistent across the page."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1119&embed-host=share"
+		description="Use inconsistent widths that misalign labels/fields or cause uneven spacing in forms."
+	/>
+</div>
+
+###### Helper text, validation, and accessibility
+
+Use helper text to prevent mistakes (format, constraints). Use validation to explain what's wrong and how to fix it. Ensure the Select has an accessible name; if the visible label is hidden, provide screenreader label text and expose required/invalid state.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1122&embed-host=share"
+		description="Provide concise helper/validation messages and correct accessible labeling (including screenreader text when needed)."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1123&embed-host=share"
+		description='Show vague errors ("Invalid"), duplicate the label as helper text, or ship a Select without an accessible label.'
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<DBAccordion>
+	<DBAccordionItem headlinePlain="When should I use Select vs Radio?">
+		Use Select to save space or when there are more options. Use Radio when there are few options
+		and users benefit from seeing them all for quick comparison.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="When should I use Select vs Autocomplete?">
+		Use Select for short-to-moderate lists where scanning is easy. Use Autocomplete when the list is
+		long, needs search, or users typically know what they want to type.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="Should I preselect a default option?">
+		Only when there is a safe, expected default that does not create risk. If users must actively
+		choose, start empty and validate as required.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="How should I validate a required Select?">
+		Validate on submit (or on blur) and show a clear error message near the field explaining what
+		must be selected.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="Can I hide the visible label?">
+		Prefer visible labels. If you must hide it, provide equivalent screenreader label text and keep
+		context clear for all users.
+	</DBAccordionItem>
+</DBAccordion>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+	## Related Content
+	<TeaserCard
+		teasers={[
+			{
+				title: 'Input',
+				description: 'Free-text entry when users must type a value',
+				url: '/documentation/components/input',
+			},
+			{
+				title: 'Radio',
+				description: 'Single-choice set displayed openly for quick comparison',
+				url: '/documentation/components/radio',
+			},
+			{
+				title: 'Checkbox',
+				description: 'Multi-select control for independent options',
+				url: '/documentation/components/checkbox',
+			},
+		]}
+	/>
+</DBSection>
