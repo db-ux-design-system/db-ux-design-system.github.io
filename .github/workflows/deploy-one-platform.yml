@@ -26,17 +26,17 @@ jobs:
         with:
           run_install: false
 
-      - name: 🖼️ Display node and pnpm version
-        shell: bash
-        run: |
-          node --version
-          pnpm --version
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
+
+      - name: 🖼️ Display node and pnpm version
+        shell: bash
+        run: |
+          node --version
+          pnpm --version
 
       - name: Install deps
         run: pnpm install
