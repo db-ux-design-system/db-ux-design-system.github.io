@@ -1,0 +1,184 @@
+---
+order: 12
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Divider'
+title: 'Divider'
+description: 'Divider is a thin horizontal or vertical line that separates UI elements into logical sections and improves layout clarity. It should be used sparingly and together with spacing and hierarchy to avoid visual clutter.'
+align: start
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import { dividerConfig } from '@template/configs/divider.config.js';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
+
+- Separate content blocks within a page or card (horizontal divider)
+- Split columns or side-by-side regions in a layout (vertical divider)
+- Add a subtle boundary between groups of related items (e.g., list sections)
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+Experiment with the Divider component and its properties.
+
+<ComponentPlayground config={dividerConfig} />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'TBD',
+			url: '#',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'TBD',
+			url: '#',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties & Slots
+
+Configure the divider through its properties and slots.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable config={dividerConfig} />
+
+</CollapsibleWrapper>
+
+<CollapseButton
+	collapsedText="Show all Properties & Slots"
+	expandedText="Hide some Properties & Slots"
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+###### Emphasis
+
+Use Weak for subtle separation. Use Strong only when you need a more pronounced boundary between major sections and the layout would be unclear with spacing alone.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/gdUAKTrAb1eXjhYDGpzUUZ/Doku--Divider?node-id=1-1132&embed-host=share"
+		description="Use weak emphasis for subtle separation without disrupting the user flow."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/gdUAKTrAb1eXjhYDGpzUUZ/Doku--Divider?node-id=1-1133&embed-host=share"
+		description="Use Strong dividers everywhere or to compensate for missing layout structure."
+	/>
+</div>
+
+###### Usage
+
+Dividers support grouping, but spacing and headings create the primary structure. Add a divider only when spacing alone does not provide enough separation or scanning support.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/gdUAKTrAb1eXjhYDGpzUUZ/Doku--Divider?node-id=3-1110&embed-host=share"
+		description="Use consistent spacing tokens and add a divider only where it improves comprehension."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/gdUAKTrAb1eXjhYDGpzUUZ/Doku--Divider?node-id=3-1112&embed-host=share"
+		description="Add dividers between every element, creating visual noise and reducing hierarchy."
+	/>
+</div>
+
+###### Aligning
+
+Align dividers to the content container and grid. Avoid partial or "floating" dividers that don't match content width/height and create accidental alignment breaks.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/gdUAKTrAb1eXjhYDGpzUUZ/Doku--Divider?node-id=3-1113&embed-host=share"
+		description="Match divider length to the content area and keep alignment consistent across a page/section."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/gdUAKTrAb1eXjhYDGpzUUZ/Doku--Divider?node-id=3-1114&embed-host=share"
+		description="Use arbitrary divider lengths or misaligned dividers that don't follow the layout grid."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the Divider component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Divider" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Section',
+			description: 'Layout grouping and consistent spacing between content areas',
+			url: '/documentation/components/section',
+		},
+		{
+			title: 'Card',
+			description: 'Surface container that may use internal dividers to separate regions',
+			url: '/documentation/components/card',
+		},
+	]}
+/>
+
+</DBSection>

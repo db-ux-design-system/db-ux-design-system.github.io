@@ -126,6 +126,16 @@
 	margin: auto;
 }
 
+/* Divider full width/height in playground */
+.component-playground .preview-area > .db-divider[data-variant='horizontal'] {
+	width: 100%;
+}
+
+.component-playground .preview-area > .db-divider[data-variant='vertical'] {
+	height: 100%;
+	min-height: 200px;
+}
+
 /* Override navigation item width behavior in playground */
 .component-playground .preview-area > .db-navigation-item[data-width='full'] {
 	inline-size: 100% !important;
