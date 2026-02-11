@@ -1,0 +1,12 @@
+---
+import DrawerExampleReact from './DrawerExample.tsx';
+
+interface Props {
+	direction?: string;
+	backdrop?: string;
+}
+
+const { direction = 'right', backdrop = 'strong' } = Astro.props;
+---
+
+<DrawerExampleReact direction={direction} backdrop={backdrop} client:load />
