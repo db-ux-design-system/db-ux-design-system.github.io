@@ -368,6 +368,70 @@ const dualCaseProps = {
 				>
 					<span id="demo-infotext-text">{config.defaultText}</span>
 				</span>
+			) : config.elementId === 'demo-custom-select' ? (
+				<div class="db-custom-select" id={config.elementId} aria-invalid="false" data-custom-validity="no-validation" data-variant="above">
+					<label id="demo-custom-select-label">{config.defaultProps.label || 'Label'}
+						<select id="demo-custom-select-field" multiple role="none" hidden tabindex="-1" disabled={config.defaultProps.disabled}>
+							<option value="Option 1">Option 1</option>
+							<option value="Option 2">Option 2</option>
+							<option value="Option 3">Option 3</option>
+							<option value="Option 4">Option 4</option>
+							<option value="Option 5">Option 5</option>
+						</select>
+					</label>
+					<details id="demo-custom-select-details">
+						<summary class="db-custom-select-form-field" id="demo-custom-select-summary" aria-describedby="demo-custom-select-placeholder demo-custom-select-selected" aria-labelledby="demo-custom-select-label">
+						</summary>
+						<article data-spacing="none" class="db-custom-select-dropdown db-card">
+							<div role="group" class="db-custom-select-list">
+								<ul>
+									<li class="db-custom-select-list-item db-checkbox" data-divider="false">
+										<label>
+											<input class="db-custom-select-list-item-checkbox" data-disable-focus="true" type="checkbox" name="demo-custom-select" value="Option 1" onchange="const s=Array.from(document.querySelectorAll('input[name=demo-custom-select]:checked')).map(i=>i.value);const sum=document.getElementById('demo-custom-select-summary');if(s.length){sum.innerHTML='<span data-visually-hidden=true>Selected</span>'+s.join(', ');document.getElementById('demo-custom-select-placeholder').style.display='none';}else{sum.innerHTML='';document.getElementById('demo-custom-select-placeholder').style.display='';}" />
+											Option 1
+										</label>
+									</li>
+									<li class="db-custom-select-list-item db-checkbox" data-divider="false">
+										<label>
+											<input class="db-custom-select-list-item-checkbox" data-disable-focus="true" type="checkbox" name="demo-custom-select" value="Option 2" onchange="const s=Array.from(document.querySelectorAll('input[name=demo-custom-select]:checked')).map(i=>i.value);const sum=document.getElementById('demo-custom-select-summary');if(s.length){sum.innerHTML='<span data-visually-hidden=true>Selected</span>'+s.join(', ');document.getElementById('demo-custom-select-placeholder').style.display='none';}else{sum.innerHTML='';document.getElementById('demo-custom-select-placeholder').style.display='';}" />
+											Option 2
+										</label>
+									</li>
+									<li class="db-custom-select-list-item db-checkbox" data-divider="false">
+										<label>
+											<input class="db-custom-select-list-item-checkbox" data-disable-focus="true" type="checkbox" name="demo-custom-select" value="Option 3" onchange="const s=Array.from(document.querySelectorAll('input[name=demo-custom-select]:checked')).map(i=>i.value);const sum=document.getElementById('demo-custom-select-summary');if(s.length){sum.innerHTML='<span data-visually-hidden=true>Selected</span>'+s.join(', ');document.getElementById('demo-custom-select-placeholder').style.display='none';}else{sum.innerHTML='';document.getElementById('demo-custom-select-placeholder').style.display='';}" />
+											Option 3
+										</label>
+									</li>
+									<li class="db-custom-select-list-item db-checkbox" data-divider="false">
+										<label>
+											<input class="db-custom-select-list-item-checkbox" data-disable-focus="true" type="checkbox" name="demo-custom-select" value="Option 4" onchange="const s=Array.from(document.querySelectorAll('input[name=demo-custom-select]:checked')).map(i=>i.value);const sum=document.getElementById('demo-custom-select-summary');if(s.length){sum.innerHTML='<span data-visually-hidden=true>Selected</span>'+s.join(', ');document.getElementById('demo-custom-select-placeholder').style.display='none';}else{sum.innerHTML='';document.getElementById('demo-custom-select-placeholder').style.display='';}" />
+											Option 4
+										</label>
+									</li>
+									<li class="db-custom-select-list-item db-checkbox" data-divider="false">
+										<label>
+											<input class="db-custom-select-list-item-checkbox" data-disable-focus="true" type="checkbox" name="demo-custom-select" value="Option 5" onchange="const s=Array.from(document.querySelectorAll('input[name=demo-custom-select]:checked')).map(i=>i.value);const sum=document.getElementById('demo-custom-select-summary');if(s.length){sum.innerHTML='<span data-visually-hidden=true>Selected</span>'+s.join(', ');document.getElementById('demo-custom-select-placeholder').style.display='none';}else{sum.innerHTML='';document.getElementById('demo-custom-select-placeholder').style.display='';}" />
+											Option 5
+										</label>
+									</li>
+								</ul>
+							</div>
+							<div>
+								<button class="db-button" type="button" data-icon="cross" data-size="small" data-width="full" data-variant="ghost" onclick="document.getElementById('demo-custom-select-details').removeAttribute('open');">
+									Close
+								</button>
+							</div>
+						</article>
+					</details>
+					<button class="db-button" type="button" data-icon="cross" data-size="small" data-variant="ghost" data-no-text="true" onclick="document.querySelectorAll('input[name=demo-custom-select]:checked').forEach(i=>i.checked=false);document.getElementById('demo-custom-select-summary').innerHTML='';document.getElementById('demo-custom-select-placeholder').style.display='';">
+						Clear selection
+					</button>
+					<span class="db-custom-select-placeholder" aria-hidden="true" id="demo-custom-select-placeholder">{config.defaultProps.placeholder || config.defaultText || 'Placeholder'}</span>
+					<span id="demo-custom-select-infotext-valid" class="db-infotext" data-semantic="successful" data-size="small" data-show-icon-leading="true" style="display: none;">Valid selection</span>
+					<span id="demo-custom-select-infotext" class="db-infotext" data-semantic="critical" data-size="small" data-show-icon-leading="true" style="display: none;">Please select a valid option</span>
+					<span data-visually-hidden="true" role="status" />
+				</div>
 			) : (
 				<Component {...config.defaultProps} id={config.elementId}>
 					{config.textElementId && <span id={config.textElementId}>{config.defaultText}</span>}
@@ -426,6 +490,12 @@ const dualCaseProps = {
 												? 'playground-select-infotext'
 												: 'playground-textarea-infotext';
 									updateAction = `const field = document.getElementById('${fieldId}'); const validInfo = document.getElementById('${validInfoId}'); const invalidInfo = document.getElementById('${invalidInfoId}'); if(this.value === 'invalid') { field.setAttribute('aria-invalid', 'true'); field.setAttribute('data-custom-validity', 'invalid'); validInfo.style.display = 'none'; invalidInfo.style.display = ''; } else if(this.value === 'valid') { field.setAttribute('aria-invalid', 'false'); field.setAttribute('data-custom-validity', 'valid'); validInfo.style.display = ''; invalidInfo.style.display = 'none'; } else if(this.value === 'no-validation') { field.setAttribute('aria-invalid', 'false'); field.setAttribute('data-custom-validity', 'no-validation'); validInfo.style.display = 'none'; invalidInfo.style.display = 'none'; }`;
+								} else if (config.elementId === 'demo-custom-select' && prop.name === 'validation') {
+									updateAction = `const wrapper = document.getElementById('demo-custom-select'); const validInfo = document.getElementById('demo-custom-select-infotext-valid'); const invalidInfo = document.getElementById('demo-custom-select-infotext'); if(this.value === 'invalid') { wrapper.setAttribute('aria-invalid', 'true'); wrapper.setAttribute('data-custom-validity', 'invalid'); validInfo.style.display = 'none'; invalidInfo.style.display = ''; } else if(this.value === 'valid') { wrapper.setAttribute('aria-invalid', 'false'); wrapper.setAttribute('data-custom-validity', 'valid'); validInfo.style.display = ''; invalidInfo.style.display = 'none'; } else { wrapper.setAttribute('aria-invalid', 'false'); wrapper.setAttribute('data-custom-validity', 'no-validation'); validInfo.style.display = 'none'; invalidInfo.style.display = 'none'; }`;
+								} else if (config.elementId === 'demo-custom-select' && prop.name === 'variant') {
+									updateAction = `document.getElementById('demo-custom-select').setAttribute('data-variant', this.value);`;
+								} else if (config.elementId === 'demo-custom-select' && (prop.name === 'selected-type / selectedType' || prop.name === 'selectedType')) {
+									updateAction = `document.getElementById('demo-custom-select').setAttribute('data-selected-type', this.value);`;
 								} else if (config.elementId === 'playground-select' && prop.name === 'variant') {
 									updateAction = `const wrapper = document.getElementById('${config.elementId}'); wrapper.setAttribute('data-variant', this.value); const placeholder = document.getElementById('playground-select-placeholder'); if(this.value === 'floating') { placeholder.textContent = ''; } else { const placeholderInput = document.querySelector('.controls-area input[oninput*="playground-select-placeholder"]'); if(placeholderInput) placeholder.textContent = placeholderInput.value; } if(this.value !== 'floating') { wrapper.removeAttribute('data-label-hidden'); }`;
 								} else if (config.elementId === 'playground-tag' && prop.name === 'behavior') {
@@ -476,6 +546,28 @@ const dualCaseProps = {
 												type="text"
 												value={prop.defaultValue}
 												oninput={`document.getElementById('${targetId}').textContent = this.value;`}
+											/>
+										</div>
+									);
+								} else if (config.elementId === 'demo-custom-select' && prop.name === 'label') {
+									return (
+										<div class="db-input">
+											<label>{prop.label}</label>
+											<input
+												type="text"
+												value={prop.defaultValue}
+												oninput={`document.getElementById('demo-custom-select-label').textContent = this.value;`}
+											/>
+										</div>
+									);
+								} else if (config.elementId === 'demo-custom-select' && prop.name === 'placeholder') {
+									return (
+										<div class="db-input">
+											<label>{prop.label}</label>
+											<input
+												type="text"
+												value={prop.defaultValue}
+												oninput={`document.getElementById('demo-custom-select-placeholder').textContent = this.value;`}
 											/>
 										</div>
 									);
@@ -700,6 +792,8 @@ const dualCaseProps = {
 									action = `const drawer = document.getElementById('demo-drawer'); if(this.checked) drawer.showModal(); else drawer.close();`;
 								} else if (config.elementId === 'playground-tag' && prop.name === 'overflow') {
 									action = `const tag = document.getElementById('playground-tag'); if(this.checked) tag.setAttribute('data-overflow', 'true'); else tag.removeAttribute('data-overflow');`;
+								} else if (config.elementId === 'demo-custom-select' && prop.name === 'disabled') {
+									action = `const select = document.getElementById('demo-custom-select-field'); if(select) { if(this.checked) select.setAttribute('disabled', ''); else select.removeAttribute('disabled'); }`;
 								} else if (prop.name === 'disabled') {
 									const targetId =
 										config.elementId === 'playground-input'
