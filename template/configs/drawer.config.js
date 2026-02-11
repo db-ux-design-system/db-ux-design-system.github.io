@@ -1,0 +1,158 @@
+export const drawerConfig = {
+	elementId: 'demo-drawer',
+	defaultText: 'Drawer content',
+	defaultProps: {
+		id: 'demo-drawer',
+		open: false,
+		direction: 'right',
+		backdrop: 'strong',
+		position: 'fixed',
+	},
+	slots: [
+		{
+			name: 'children',
+			description: 'default slot',
+		},
+		{
+			name: 'drawerHeader',
+			description: 'Slot for changing the header of the drawer.',
+		},
+	],
+	events: [
+		{
+			name: 'close / onClose',
+			type: '---',
+		},
+	],
+	properties: [
+		{
+			name: 'open',
+			label: 'Open',
+			type: 'checkbox',
+			defaultValue: false,
+			description: 'The open attribute opens or closes the drawer based on the state.',
+			showInPlayground: true,
+		},
+		{
+			name: 'direction',
+			label: 'Direction',
+			type: 'select',
+			defaultValue: 'right',
+			description: 'The direction attribute changes the position & animation of the drawer',
+			options: [
+				{ value: 'left', label: 'Left' },
+				{ value: 'right', label: 'Right', default: true },
+				{ value: 'up', label: 'Up' },
+				{ value: 'down', label: 'Down' },
+			],
+			showInPlayground: true,
+		},
+		{
+			name: 'backdrop',
+			label: 'Backdrop',
+			type: 'select',
+			defaultValue: 'strong',
+			description: 'The backdrop attribute changes the opacity of the backdrop',
+			options: [
+				{ value: 'none', label: 'None' },
+				{ value: 'strong', label: 'Strong', default: true },
+				{ value: 'weak', label: 'Weak' },
+				{ value: 'invisible', label: 'Invisible' },
+			],
+			showInPlayground: true,
+		},
+		{
+			name: 'position',
+			label: 'Position',
+			type: 'select',
+			defaultValue: 'fixed',
+			description:
+				'The position attribute changes the css-position (fixed or absolute) of the drawer',
+			options: [
+				{ value: 'fixed', label: 'Fixed', default: true },
+				{ value: 'absolute', label: 'Absolute' },
+			],
+			showInPlayground: false,
+		},
+		{
+			name: 'spacing',
+			label: 'Spacing',
+			type: 'select',
+			defaultValue: 'medium',
+			description: 'The spacing attribute changes the padding of the component',
+			options: [
+				{ value: 'none', label: 'None' },
+				{ value: 'small', label: 'Small' },
+				{ value: 'medium', label: 'Medium', default: true },
+				{ value: 'large', label: 'Large' },
+			],
+			showInPlayground: false,
+		},
+		{
+			name: 'width',
+			label: 'Width',
+			type: 'select',
+			defaultValue: 'auto',
+			description:
+				'Width of the component. Auto width based on children size, full width based on parent elements width',
+			options: [
+				{ value: 'auto', label: 'Auto', default: true },
+				{ value: 'full', label: 'Full' },
+			],
+			showInPlayground: false,
+		},
+		{
+			name: 'rounded',
+			label: 'Rounded',
+			type: 'checkbox',
+			defaultValue: false,
+			description:
+				'The rounded attribute changes the border radius of the corners on the end of the drawer',
+			showInPlayground: false,
+		},
+		{
+			name: 'variant',
+			label: 'Variant',
+			type: 'select',
+			defaultValue: 'modal',
+			description: 'Set the variant modal inside. Defaults to modal.',
+			options: [
+				{ value: 'modal', label: 'Modal', default: true },
+				{ value: 'inside', label: 'Inside' },
+			],
+			showInPlayground: false,
+		},
+		{
+			name: 'close-button-id / closeButtonId',
+			label: 'Close Button ID',
+			type: 'text',
+			defaultValue: '',
+			description: 'The closeButtonId attribute changes the id inside the close button.',
+			showInPlayground: false,
+		},
+		{
+			name: 'close-button-text / closeButtonText',
+			label: 'Close Button Text',
+			type: 'text',
+			defaultValue: '',
+			description: 'The closeButtonText attribute changes the text inside the close button.',
+			showInPlayground: false,
+		},
+		{
+			name: 'id',
+			label: 'ID',
+			type: 'text',
+			defaultValue: '',
+			description: 'ID of the component',
+			showInPlayground: false,
+		},
+		{
+			name: 'className',
+			label: 'Class Name',
+			type: 'text',
+			defaultValue: '',
+			description: 'React specific for adding className to the component',
+			showInPlayground: false,
+		},
+	],
+};
