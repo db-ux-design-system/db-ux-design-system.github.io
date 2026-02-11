@@ -1,7 +1,6 @@
 ---
 import './ComponentPlayground.css';
 import ShellExample from '@template/components/ShellExample/ShellExample.tsx';
-import TooltipExample from '@template/components/TooltipExample/TooltipExample.tsx';
 import DrawerExample from '@template/components/DrawerExample/DrawerExample.tsx';
 import {
 	DBShell,
@@ -270,7 +269,8 @@ const dualCaseProps = {
 						data-show-icon-leading="true"
 						style="display: none;"
 					>
-						{config.properties.find((p) => p.name === 'valid-message / validMessage')?.defaultValue || 'Valid input'}
+						{config.properties.find((p) => p.name === 'valid-message / validMessage')
+							?.defaultValue || 'Valid input'}
 					</span>
 					<span
 						id="playground-textarea-infotext"
@@ -280,21 +280,13 @@ const dualCaseProps = {
 						data-show-icon-leading="true"
 						style="display: none;"
 					>
-						{config.properties.find((p) => p.name === 'invalid-message / invalidMessage')?.defaultValue || 'Please enter a valid message'}
+						{config.properties.find((p) => p.name === 'invalid-message / invalidMessage')
+							?.defaultValue || 'Please enter a valid message'}
 					</span>
 					<span data-visually-hidden="true" role="status" />
 				</div>
 			) : config.elementId === 'playground-header' ? (
 				<ShellExample />
-			) : config.elementId === 'demo-tooltip' ? (
-				<TooltipExample
-					text={config.defaultText}
-					placement={config.defaultProps.placement}
-					animation={config.defaultProps.animation}
-					showArrow={config.defaultProps.showArrow}
-					emphasis={config.defaultProps.emphasis}
-					width={config.defaultProps.width}
-				/>
 			) : config.elementId === 'demo-drawer' ? (
 				<>
 					<button
@@ -419,20 +411,20 @@ const dualCaseProps = {
 										config.elementId === 'playground-input'
 											? 'playground-input-field'
 											: config.elementId === 'playground-select'
-											? 'playground-select-field'
-											: 'playground-textarea-field';
+												? 'playground-select-field'
+												: 'playground-textarea-field';
 									const validInfoId =
 										config.elementId === 'playground-input'
 											? 'playground-input-infotext-valid'
 											: config.elementId === 'playground-select'
-											? 'playground-select-infotext-valid'
-											: 'playground-textarea-infotext-valid';
+												? 'playground-select-infotext-valid'
+												: 'playground-textarea-infotext-valid';
 									const invalidInfoId =
 										config.elementId === 'playground-input'
 											? 'playground-input-infotext'
 											: config.elementId === 'playground-select'
-											? 'playground-select-infotext'
-											: 'playground-textarea-infotext';
+												? 'playground-select-infotext'
+												: 'playground-textarea-infotext';
 									updateAction = `const field = document.getElementById('${fieldId}'); const validInfo = document.getElementById('${validInfoId}'); const invalidInfo = document.getElementById('${invalidInfoId}'); if(this.value === 'invalid') { field.setAttribute('aria-invalid', 'true'); field.setAttribute('data-custom-validity', 'invalid'); validInfo.style.display = 'none'; invalidInfo.style.display = ''; } else if(this.value === 'valid') { field.setAttribute('aria-invalid', 'false'); field.setAttribute('data-custom-validity', 'valid'); validInfo.style.display = ''; invalidInfo.style.display = 'none'; } else if(this.value === 'no-validation') { field.setAttribute('aria-invalid', 'false'); field.setAttribute('data-custom-validity', 'no-validation'); validInfo.style.display = 'none'; invalidInfo.style.display = 'none'; }`;
 								} else if (config.elementId === 'playground-select' && prop.name === 'variant') {
 									updateAction = `const wrapper = document.getElementById('${config.elementId}'); wrapper.setAttribute('data-variant', this.value); const placeholder = document.getElementById('playground-select-placeholder'); if(this.value === 'floating') { placeholder.textContent = ''; } else { const placeholderInput = document.querySelector('.controls-area input[oninput*="playground-select-placeholder"]'); if(placeholderInput) placeholder.textContent = placeholderInput.value; } if(this.value !== 'floating') { wrapper.removeAttribute('data-label-hidden'); }`;
@@ -578,7 +570,9 @@ const dualCaseProps = {
 									);
 								} else if (
 									config.elementId === 'playground-textarea' &&
-									(prop.name === 'validMessage' || prop.name === 'valid-message' || prop.name === 'valid-message / validMessage')
+									(prop.name === 'validMessage' ||
+										prop.name === 'valid-message' ||
+										prop.name === 'valid-message / validMessage')
 								) {
 									return (
 										<div class="db-input">
@@ -592,7 +586,9 @@ const dualCaseProps = {
 									);
 								} else if (
 									config.elementId === 'playground-textarea' &&
-									(prop.name === 'invalidMessage' || prop.name === 'invalid-message' || prop.name === 'invalid-message / invalidMessage')
+									(prop.name === 'invalidMessage' ||
+										prop.name === 'invalid-message' ||
+										prop.name === 'invalid-message / invalidMessage')
 								) {
 									return (
 										<div class="db-input">
@@ -671,19 +667,20 @@ const dualCaseProps = {
 											? prop.name === 'label'
 												? 'playground-input-label'
 												: 'playground-input-field'
-											: config.elementId === 'playground-textarea' && nativeAttributes.includes(prop.name)
-											? prop.name === 'label'
-												? 'playground-textarea-label'
-												: 'playground-textarea-field'
-											: (config.elementId === 'playground-switch' ||
-														config.elementId === 'playground-radio' ||
-														config.elementId === 'playground-checkbox') &&
-												  (prop.name === 'icon-leading' ||
-														prop.name === 'iconLeading' ||
-														prop.name === 'icon-trailing' ||
-														prop.name === 'iconTrailing')
-												? config.elementId
-												: config.elementId;
+											: config.elementId === 'playground-textarea' &&
+												  nativeAttributes.includes(prop.name)
+												? prop.name === 'label'
+													? 'playground-textarea-label'
+													: 'playground-textarea-field'
+												: (config.elementId === 'playground-switch' ||
+															config.elementId === 'playground-radio' ||
+															config.elementId === 'playground-checkbox') &&
+													  (prop.name === 'icon-leading' ||
+															prop.name === 'iconLeading' ||
+															prop.name === 'icon-trailing' ||
+															prop.name === 'iconTrailing')
+													? config.elementId
+													: config.elementId;
 									const updateAction =
 										config.elementId === 'playground-input' && prop.name === 'label'
 											? `if(this.value) document.getElementById('${targetId}').textContent = this.value; else document.getElementById('${targetId}').textContent = 'Label';`
@@ -708,12 +705,12 @@ const dualCaseProps = {
 										config.elementId === 'playground-input'
 											? 'playground-input-field'
 											: config.elementId === 'playground-textarea'
-											? 'playground-textarea-field'
-											: config.elementId === 'playground-switch' ||
-												  config.elementId === 'playground-radio' ||
-												  config.elementId === 'playground-checkbox'
-												? `${config.elementId}-input`
-												: config.elementId;
+												? 'playground-textarea-field'
+												: config.elementId === 'playground-switch' ||
+													  config.elementId === 'playground-radio' ||
+													  config.elementId === 'playground-checkbox'
+													? `${config.elementId}-input`
+													: config.elementId;
 									if (config.elementId === 'playground-select') {
 										action = `const select = document.getElementById('playground-select-field'); if(select) { if(this.checked) select.setAttribute('disabled', ''); else select.removeAttribute('disabled'); }`;
 									} else if (config.elementId === 'playground-textarea') {
@@ -764,7 +761,7 @@ const dualCaseProps = {
 									action = `const item = document.getElementById('${config.elementId}'); if(this.checked) item.setAttribute('data-show-icon', 'true'); else item.setAttribute('data-show-icon', 'false');`;
 								} else if (
 									config.elementId === 'demo-infotext' &&
-									(prop.name === 'show-icon / showIcon')
+									prop.name === 'show-icon / showIcon'
 								) {
 									action = `const infotext = document.getElementById('demo-infotext'); if(this.checked) infotext.setAttribute('data-show-icon-leading', 'true'); else infotext.setAttribute('data-show-icon-leading', 'false');`;
 								} else if (config.elementId === 'demo-navigation-item' && prop.name === 'active') {
