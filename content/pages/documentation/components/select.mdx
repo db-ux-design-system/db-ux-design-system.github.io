@@ -1,5 +1,5 @@
 ---
-order: 7
+order: 10
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -11,12 +11,13 @@ status: 'stable'
 toc: true
 ---
 
-import { DBSelect, DBSection, DBAccordion, DBAccordionItem } from '@db-ux/react-core-components';
+import { DBSelect, DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
@@ -46,25 +47,25 @@ Experiment with the Select component and its properties.
 			title: 'React',
 			description: 'Interactive examples and documentation.',
 			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+			icon: 'react',
 		},
 		{
 			title: 'Vue',
 			description: 'Interactive examples and documentation.',
 			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
+			icon: 'vue',
 		},
 		{
 			title: 'Angular',
 			description: 'Interactive examples and documentation.',
 			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg',
+			icon: 'angular',
 		},
 		{
-			title: 'Web C.',
+			title: 'Web Components',
 			description: 'Interactive examples and documentation.',
 			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
+			icon: 'html5',
 		},
 	]}
 />
@@ -73,9 +74,9 @@ Experiment with the Select component and its properties.
 
 <DBSection spacing="small" width="auto">
 
-## Properties
+## Properties, Slots & Events
 
-Configure the select through its properties, such as options, disabled, and label.
+Configure the select through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
@@ -83,7 +84,7 @@ Configure the select through its properties, such as options, disabled, and labe
 
 </CollapsibleWrapper>
 
-<CollapseButton collapsedText="Show all Properties" expandedText="Hide some Properties" />
+<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
 
 </DBSection>
 
@@ -97,13 +98,7 @@ Configure the select through its properties, such as options, disabled, and labe
 
 Use Select when the user must choose exactly one option from a list. If users need to choose multiple options, use Checkbox or a multi-select pattern. If users benefit from seeing all options, consider Radio.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=1-1132&embed-host=share"
@@ -120,13 +115,7 @@ Use Select when the user must choose exactly one option from a list. If users ne
 
 Options must be easy to scan and understand. Use concise labels, consistent capitalization, and avoid duplicates. If the list becomes long or needs search, use an Autocomplete pattern instead.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1110&embed-host=share"
@@ -143,13 +132,7 @@ Options must be easy to scan and understand. Use concise labels, consistent capi
 
 Every Select needs a clear label describing what the choice controls. Do not rely on placeholder text as a label, because it can be misunderstood and may not be available to all users.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1113&embed-host=share"
@@ -166,13 +149,7 @@ Every Select needs a clear label describing what the choice controls. Do not rel
 
 Define whether a default is appropriate. If selection is required, make the empty state explicit (e.g., "Choose an option") and validate appropriately. Disable the control only when it cannot be used, and explain why if needed.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1116&embed-host=share"
@@ -189,13 +166,7 @@ Define whether a default is appropriate. If selection is required, make the empt
 
 Select should align with surrounding inputs and respect container widths. Avoid arbitrary widths that break form rhythm; keep the dropdown aligned to the field.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1118&embed-host=share"
@@ -212,12 +183,7 @@ Select should align with surrounding inputs and respect container widths. Avoid 
 
 Use helper text to prevent mistakes (format, constraints). Use validation to explain what's wrong and how to fix it. Ensure the Select has an accessible name; if the visible label is hidden, provide screenreader label text and expose required/invalid state.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1122&embed-host=share"
@@ -240,28 +206,9 @@ Use helper text to prevent mistakes (format, constraints). Use validation to exp
 
 ## FAQ
 
-<DBAccordion>
-	<DBAccordionItem headlinePlain="When should I use Select vs Radio?">
-		Use Select to save space or when there are more options. Use Radio when there are few options
-		and users benefit from seeing them all for quick comparison.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="When should I use Select vs Autocomplete?">
-		Use Select for short-to-moderate lists where scanning is easy. Use Autocomplete when the list is
-		long, needs search, or users typically know what they want to type.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="Should I preselect a default option?">
-		Only when there is a safe, expected default that does not create risk. If users must actively
-		choose, start empty and validate as required.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="How should I validate a required Select?">
-		Validate on submit (or on blur) and show a clear error message near the field explaining what
-		must be selected.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="Can I hide the visible label?">
-		Prefer visible labels. If you must hide it, provide equivalent screenreader label text and keep
-		context clear for all users.
-	</DBAccordionItem>
-</DBAccordion>
+Have a question about the uselect component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="uselect" />
 
 </DBSection>
 

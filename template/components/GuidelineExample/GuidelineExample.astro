@@ -2,18 +2,19 @@
 import { DBBadge } from '@db-ux/react-core-components';
 
 interface Props {
-	variant: 'do' | 'dont';
+	variant: 'do' | 'dont' | 'caution';
 	figmaUrl: string;
 	description: string;
+	fullWidth?: boolean;
 }
 
-const { variant, figmaUrl, description } = Astro.props;
-const semantic = variant === 'do' ? 'successful' : 'critical';
-const label = variant === 'do' ? 'Do' : "Don't";
+const { variant, figmaUrl, description, fullWidth = false } = Astro.props;
+const semantic = variant === 'do' ? 'successful' : variant === 'caution' ? 'warning' : 'critical';
+const label = variant === 'do' ? 'Do' : variant === 'caution' ? 'Caution' : "Don't";
 const fullUrl = `${figmaUrl}&embed-host=share&footer=false&viewport-controls=false&page-selector=false&scaling=scale-down-width`;
 ---
 
-<div style={{ position: 'relative', display: 'inline-block', width: '50%' }}>
+<div style={{ position: 'relative', display: 'inline-block', width: fullWidth ? '100%' : '50%' }}>
 	<DBBadge
 		semantic={semantic}
 		size="medium"
@@ -31,7 +32,7 @@ const fullUrl = `${figmaUrl}&embed-host=share&footer=false&viewport-controls=fal
 			border: 'var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default)',
 			borderRadius: 'var(--db-border-radius-md)',
 			width: '100%',
-			aspectRatio: '16/9',
+			aspectRatio: fullWidth ? '32/9' : '16/9',
 		}}
 		src={fullUrl}
 		loading="eager"

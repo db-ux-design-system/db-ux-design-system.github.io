@@ -1,0 +1,234 @@
+---
+order: 12
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Tag'
+title: 'Tag'
+description: 'Tag is a compact label used to categorize, highlight attributes, or represent selections. It can be static for display or interactive for filtering and selection, with optional removal where appropriate.'
+align: start
+status: 'stable'
+toc: true
+---
+
+import { DBTag, DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import { tagConfig } from '@template/configs/tag.config.js';
+
+- Display short categories or attributes (e.g., "New", "Marketing", "Internal")
+- Enable filtering/selection in lists or search results (interactive tags)
+- Represent selected items that can be removed (e.g., applied filters)
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+Experiment with the Tag component and its properties.
+
+<ComponentPlayground config={tagConfig} component={DBTag} />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties, Slots & Events
+
+Configure the tag through its properties, slots and events.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable config={tagConfig} />
+
+</CollapsibleWrapper>
+
+<CollapseButton
+	collapsedText="Show all Properties, Slots & Events"
+	expandedText="Hide some Properties, Slots & Events"
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+###### Behavior
+
+Tags should be used according to their behavior: Static for non-interactive categorization, Interactive (Button / Link) for context-related actions, Interactive (Checkbox / Radio) for filtering or selection, and Removable for allowing users to delete selections.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=1-1132&embed-host=share"
+		description="Use the appropriate tag type for its intended behavior."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=1-1133&embed-host=share"
+		description="Use Tags as substitutes for primary navigation or main actions."
+	/>
+</div>
+
+###### Labels
+
+Try to keep the content of the tag as short and concise as possible. Tags should always remain single-line.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=3-1110&embed-host=share"
+		description="In exceptional cases, a long label can be dotted. In this case, a tooltip should display the complete text."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=3-1112&embed-host=share"
+		description="Break the text and make it multi-line."
+	/>
+</div>
+
+###### Hierarchy
+
+Combining the different emphases of the tag creates a clear visual hierarchy that highlights important information with the strong emphasis, while the weak emphasis provides subtle support to subtly mark secondary data.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=3-1113&embed-host=share"
+		description="Use strong to emphasize specific information."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=3-1114&embed-host=share"
+		description="Use different emphases within a context without good reason."
+	/>
+</div>
+
+###### Tag vs Badge
+
+Use Tag to categorize, filter, or represent selectable items. Use Badge for counts or small numeric/status indicators attached to another element (e.g., notifications on an icon).
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=3-1116&embed-host=share"
+		description="Use Tag to filter content on a page."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=3-1117&embed-host=share"
+		description="Use Tag to indicate a status. (Use Badge instead)"
+	/>
+</div>
+
+###### Coloring
+
+The adaptive Tag can be colored when used, for example, to identify different categories. To do this, the tag is placed in the respective color context.
+
+<GuidelineExample
+	variant="do"
+	figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=4014-7&embed-host=share"
+	description="Use the additional color palettes available in the system to highlight categories."
+	fullWidth
+/>
+
+###### Accessibility
+
+The interactive Tag in "Functional" density has a height of 20 px. To meet accessibility requirements, its clickable area must be at least 24 px high, without overlapping other interactive elements. This can be achieved either by the tag's size or by providing sufficient space around it.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=3-1118&embed-host=share"
+		description="Provide a 24×24 px clickable area via surrounding spacing."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=3-1119&embed-host=share"
+		description="Allow adjacent controls to intrude into the required 24×24 px area."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the Tag component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Tag" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+	## Related Content
+	<TeaserCard
+		teasers={[
+			{
+				title: 'Badge',
+				description: 'Small indicator for counts or status attached to another element',
+				url: '/documentation/components/badge',
+			},
+			{
+				title: 'Button',
+				description:
+					'Primary action control; use instead of interactive tags for prominent actions',
+				url: '/documentation/components/button',
+			},
+			{
+				title: 'Checkbox',
+				description: 'Multi-select control; alternative to checked tags in forms',
+				url: '/documentation/components/checkbox',
+			},
+		]}
+	/>
+</DBSection>

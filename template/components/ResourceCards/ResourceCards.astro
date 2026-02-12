@@ -14,6 +14,24 @@ interface Props {
 }
 
 const { resources } = Astro.props;
+
+// Map icon names to local paths
+const iconMap: Record<string, string> = {
+	react: '/assets/framework-icons/react.svg',
+	vue: '/assets/framework-icons/vue.svg',
+	angular: '/assets/framework-icons/angular.svg',
+	html5: '/assets/framework-icons/html5.svg',
+	'web-components': '/assets/framework-icons/html5.svg',
+};
+
+const getIconPath = (icon: string): string => {
+	// If it's already a full path/URL, return as is (backwards compatibility)
+	if (icon.startsWith('/') || icon.startsWith('http')) {
+		return icon;
+	}
+	// Otherwise map the icon name
+	return iconMap[icon] || icon;
+};
 ---
 
 <div class="resource-cards">
@@ -21,7 +39,7 @@ const { resources } = Astro.props;
 		resources.map((resource) => (
 			<DBCard behavior="interactive">
 				<a href={resource.url} target="_blank" rel="noopener noreferrer">
-					<img src={resource.icon} alt="" width="32" height="32" />
+					<img src={getIconPath(resource.icon)} alt="" width="32" height="32" />
 					<div class="resource-text">
 						<b>{resource.title}</b>
 						<p>{resource.description}</p>

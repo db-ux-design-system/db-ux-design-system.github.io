@@ -15,7 +15,8 @@ function getPropertyValues(property) {
 	}
 
 	if (property.type === 'checkbox') {
-		return `(Default) ${property.defaultValue}, True`;
+		const otherValue = property.defaultValue ? 'false' : 'true';
+		return `(Default) ${property.defaultValue}, ${otherValue}`;
 	}
 
 	if (property.type === 'text') {
@@ -24,6 +25,9 @@ function getPropertyValues(property) {
 
 	return 'Various';
 }
+
+const slots = config.slots || [];
+const events = config.events || [];
 ---
 
 <div class="properties-table-wrapper">
@@ -52,3 +56,55 @@ function getPropertyValues(property) {
 		</tbody>
 	</table>
 </div>
+
+{
+	slots.length > 0 && (
+		<div class="properties-table-wrapper properties-table-spacing">
+			<table>
+				<thead>
+					<tr>
+						<th>Slot</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					{slots.map((slot) => (
+						<tr>
+							<td>
+								<code>{slot.name}</code>
+							</td>
+							<td>{slot.description}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+	)
+}
+
+{
+	events.length > 0 && (
+		<div class="properties-table-wrapper properties-table-spacing">
+			<table>
+				<thead>
+					<tr>
+						<th>Event</th>
+						<th>Type</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					{events.map((event) => (
+						<tr>
+							<td>
+								<code>{event.name}</code>
+							</td>
+							<td>{event.type}</td>
+							<td>{event.description}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+	)
+}

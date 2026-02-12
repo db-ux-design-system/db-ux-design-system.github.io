@@ -1,0 +1,201 @@
+---
+order: 10
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Drawer'
+title: 'Drawer'
+description: 'Drawer is a sliding panel that appears from the side, top, or bottom to show supplemental content or lightweight interactions while keeping the user in context. It is ideal for optional details and simple tasks, and must always be easy to dismiss.'
+align: start
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import { drawerConfig } from '@template/configs/drawer.config.js';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
+
+- Show additional details or secondary information without leaving the current page
+- Provide simple, optional form inputs or quick edits in context
+- Offer secondary navigation or actions in layouts with limited space
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+Experiment with the Drawer component and its properties.
+
+<ComponentPlayground config={drawerConfig} />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'TBD',
+			url: '#',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'TBD',
+			url: '#',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties, Slots & Events
+
+Configure the drawer through its properties, slots and events.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable config={drawerConfig} />
+
+</CollapsibleWrapper>
+
+<CollapseButton
+	collapsedText="Show all Properties, Slots & Events"
+	expandedText="Hide some Properties, Slots & Events"
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+###### Usage
+
+Use a drawer when users can continue their primary task and the drawer content is helpful but not essential. If the content is critical, blocking, or requires full attention, use a Dialog or dedicated page.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=1-1132&embed-host=share"
+		description="Use the drawer for contextual content that provides additional details without leaving the main page."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=1-1133&embed-host=share"
+		description="Use the drawer for important or critical information that needs to remain in view at all times."
+	/>
+</div>
+
+###### Content
+
+Drawers work best for lightweight actions (a few controls). Avoid complex, multi-step forms or long processes that become hard to complete and review in a constrained panel.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=3-1110&embed-host=share"
+		description="Use short optional forms and clear actions."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=3-1112&embed-host=share"
+		description="Run multi-step processes, lengthy forms, or complex validation-heavy flows in a drawer."
+	/>
+</div>
+
+###### Placement
+
+Regardless of which side the drawer is displayed from, it always takes up the entire width and height of the page. This full-screen display allows the drawer to get the right amount of attention.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=3-1113&embed-host=share"
+		description="The display of the drawers always overlays the entire page width and height, including the header."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=3-1114&embed-host=share"
+		description="Place the drawer only above a specific page area"
+	/>
+</div>
+
+###### Closing
+
+Always provide a way to close the drawer, such as clicking outside the drawer area. Include a close button in the header for keyboard accessibility. For drawers without a backdrop, a close button is required, since clicking outside will not close the drawer.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=3-1116&embed-host=share"
+		description="Always provide an option to collapse/close the drawer."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=3-1117&embed-host=share"
+		description="Remove the closing button without a valid reason."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the Drawer component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Drawer" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Backdrop',
+			description: 'Dims the background and can block interaction for modal drawers',
+			url: '/documentation/components/backdrop',
+		},
+		{
+			title: 'Popover',
+			description: 'Smaller anchored surface for lightweight contextual content',
+			url: '/documentation/components/popover',
+		},
+	]}
+/>
+
+</DBSection>

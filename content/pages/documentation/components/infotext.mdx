@@ -1,0 +1,223 @@
+---
+order: 9
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Infotext'
+title: 'Infotext'
+description: 'Infotext provides a clear, compact way to communicate short supporting information or guidance directly in the interface. It helps users understand context, avoid errors, or interpret states without interrupting the flow.'
+align: start
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import { infotextConfig } from '@template/configs/infotext.config.js';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
+
+- Give short hints or explanations near UI elements (e.g., what a setting changes)
+- Provide brief warnings or important notes in context (e.g., constraints or limitations)
+- Support form usage with concise guidance or validation-related context
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+Experiment with the Infotext component and its properties.
+
+<ComponentPlayground config={infotextConfig} />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'TBD',
+			url: '#',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'TBD',
+			url: '#',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties, Slots & Events
+
+Configure the infotext through its properties, slots and events.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable config={infotextConfig} />
+
+</CollapsibleWrapper>
+
+<CollapseButton
+	collapsedText="Show all Properties, Slots & Events"
+	expandedText="Hide some Properties, Slots & Events"
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+###### One focused message
+
+Keep Infotext short and focused on one message. The text must communicate complete meaning on its own, even without the icon.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/Iv8YHqQm11phTjrl656Sfx/Doku--Infotext?node-id=1-1132&embed-host=share"
+		description="Use one short sentence that clarifies meaning or next steps where the user needs it."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/Iv8YHqQm11phTjrl656Sfx/Doku--Infotext?node-id=1-1133&embed-host=share"
+		description="Do not use long paragraphs or multiple topics that require scrolling or heavy reading."
+	/>
+</div>
+
+###### Minimal emphasis
+
+Use bold sparingly to highlight only a few key words. The message should remain understandable without emphasis and should not rely on styling for meaning.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/Iv8YHqQm11phTjrl656Sfx/Doku--Infotext?node-id=3-1110&embed-host=share"
+		description="Bold a single term or constraint that users must notice (e.g., 'Only once per day')."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/Iv8YHqQm11phTjrl656Sfx/Doku--Infotext?node-id=3-1112&embed-host=share"
+		description="Bold large parts of the sentence or use emphasis as the primary way to convey meaning."
+	/>
+</div>
+
+###### Contextual placement
+
+Place Infotext exactly where the decision is made. It must relate directly to the nearby UI element and not be used as general page messaging.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/Iv8YHqQm11phTjrl656Sfx/Doku--Infotext?node-id=3-1113&embed-host=share"
+		description="Attach Infotext to the relevant section/field so users see it at the moment of need."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/Iv8YHqQm11phTjrl656Sfx/Doku--Infotext?node-id=3-1114&embed-host=share"
+		description="Use Infotext far away from the element it describes or as a generic announcement area."
+	/>
+</div>
+
+###### Match severity
+
+Choose the correct semantic meaning (e.g., neutral, info, warning, critical) so users can interpret urgency and intent. Semantics must be consistent across the product.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/Iv8YHqQm11phTjrl656Sfx/Doku--Infotext-%E2%9C%85?node-id=3-1116&embed-host=share"
+		description="Use warning/critical only when there is real risk or required attention, and explain what to do."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/Iv8YHqQm11phTjrl656Sfx/Doku--Infotext-%E2%9C%85?node-id=3-1117&embed-host=share"
+		description="Use warning/critical styling for neutral tips or to add visual emphasis without real urgency."
+	/>
+</div>
+
+###### Supplement form fields
+
+In forms, Infotext can support understanding (format, constraints) and complement validation, but it must not replace labels or be used as placeholder-only guidance.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/Iv8YHqQm11phTjrl656Sfx/Doku--Infotext?node-id=3-1118&embed-host=share"
+		description="Use Infotext to clarify constraints near a field and keep validation errors in the validation pattern."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/Iv8YHqQm11phTjrl656Sfx/Doku--Infotext?node-id=3-1119&embed-host=share"
+		description="Use Infotext as a substitute for the label or put essential instructions only into the placeholder."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the Infotext component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Infotext" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Tooltip',
+			description: 'Optional, brief hint shown on hover or focus',
+			url: '/documentation/components/tooltip',
+		},
+		{
+			title: 'Notification',
+			description: 'Communicates event feedback that may appear temporarily',
+			url: '/documentation/components/notification',
+		},
+		{
+			title: 'Input',
+			description: 'Often paired with guidance and validation messaging in forms',
+			url: '/documentation/components/input',
+		},
+	]}
+/>
+
+</DBSection>

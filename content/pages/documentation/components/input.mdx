@@ -11,12 +11,13 @@ status: 'stable'
 toc: true
 ---
 
-import { DBInput, DBSection, DBAccordion, DBAccordionItem } from '@db-ux/react-core-components';
+import { DBInput, DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
@@ -46,25 +47,25 @@ Experiment with the Input component and its properties.
 			title: 'React',
 			description: 'Interactive examples and documentation.',
 			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+			icon: 'react',
 		},
 		{
 			title: 'Vue',
 			description: 'Interactive examples and documentation.',
 			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
+			icon: 'vue',
 		},
 		{
 			title: 'Angular',
 			description: 'Interactive examples and documentation.',
 			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg',
+			icon: 'angular',
 		},
 		{
-			title: 'Web C.',
+			title: 'Web Components',
 			description: 'Interactive examples and documentation.',
 			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
+			icon: 'html5',
 		},
 	]}
 />
@@ -73,9 +74,9 @@ Experiment with the Input component and its properties.
 
 <DBSection spacing="small" width="auto">
 
-## Properties
+## Properties, Slots & Events
 
-Configure the input through its properties, such as type, label, placeholder, and validation state.
+Configure the input through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
@@ -83,7 +84,7 @@ Configure the input through its properties, such as type, label, placeholder, an
 
 </CollapsibleWrapper>
 
-<CollapseButton collapsedText="Show all Properties" expandedText="Hide some Properties" />
+<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
 
 </DBSection>
 
@@ -97,13 +98,7 @@ Configure the input through its properties, such as type, label, placeholder, an
 
 Use Input for free text entry. If users must choose from predefined options, use a selection component instead (e.g., Select, Autocomplete, Radio/Checkbox depending on the case).
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
@@ -120,13 +115,7 @@ Use Input for free text entry. If users must choose from predefined options, use
 
 Every Input must have a clear, descriptive label that explains what to enter. Keep labels short and specific; avoid vague labels. Do not replace the label with a placeholder.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
@@ -143,13 +132,7 @@ Every Input must have a clear, descriptive label that explains what to enter. Ke
 
 Placeholder text is optional and should provide an example format/value, not instructions or required context. Placeholders must not contain critical information because they disappear when users type.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
@@ -166,13 +149,7 @@ Placeholder text is optional and should provide an example format/value, not ins
 
 Use helper text to prevent errors (format, constraints, expectations). Use validation messages to explain what is wrong and how to fix it. Keep messages concise and actionable.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
@@ -189,13 +166,7 @@ Use helper text to prevent errors (format, constraints, expectations). Use valid
 
 Inputs must align to the layout grid and maintain consistent spacing between label, field, helper/validation text, and adjacent fields. Avoid stretching labels or misaligning fields in responsive layouts.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
@@ -212,12 +183,7 @@ Inputs must align to the layout grid and maintain consistent spacing between lab
 
 Ensure every Input has an accessible name that matches the visible label. If a label is visually hidden, provide an equivalent screenreader label. Required/optional indicators must be announced meaningfully.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
@@ -240,26 +206,9 @@ Ensure every Input has an accessible name that matches the visible label. If a l
 
 ## FAQ
 
-<DBAccordion>
-	<DBAccordionItem headlinePlain="When should I use Input vs Textarea?">
-		Use Input for single-line, short values. Use Textarea for multi-line, longer content (comments,
-		descriptions, messages).
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="Can I omit the label if the UI is compact?">
-		No. Keep a visible label whenever possible. If space is extremely constrained, use a visually
-		hidden label but keep the accessible name intact.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="Should validation happen while typing or on submit?">
-		Prefer validating on blur or on submit for most fields to reduce distraction. Use inline,
-		real-time validation only when it clearly prevents errors (e.g., format constraints) and
-		messages remain calm and actionable.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="What should I show for required vs optional fields?">
-		Follow the system rule consistently: either mark required fields (common) or mark optional
-		fields (common when most are required). In all cases, ensure the requirement is conveyed to
-		screenreaders and reflected in validation messaging.
-	</DBAccordionItem>
-</DBAccordion>
+Have a question about the Input component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Input" />
 
 </DBSection>
 

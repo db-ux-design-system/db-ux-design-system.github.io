@@ -25,6 +25,12 @@
 	gap: 0;
 }
 
+.resource-text b {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 .resource-cards .db-card a.db-link {
 	text-decoration: underline;
 }

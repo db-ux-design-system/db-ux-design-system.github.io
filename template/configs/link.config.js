@@ -7,23 +7,67 @@ export const linkConfig = {
 		href: '#',
 		content: '',
 	},
+	slots: [
+		{
+			name: 'children',
+			description: 'default slot',
+		},
+	],
 	properties: [
+		// Content
 		{
-			name: 'id',
+			name: 'text',
+			label: 'Text',
 			type: 'text',
-			label: 'ID',
-			description: 'ID of the component, generated automatically for some components as a fallback if unset.',
-			defaultValue: '',
-			showInPlayground: false
+			defaultValue: 'Link Text',
+			description: 'Alternative for default slot/children.',
+		},
+
+		// Appearance
+		{
+			name: 'variant',
+			label: 'Variant',
+			type: 'select',
+			description:
+				'Change the styling of the link. inline will remove the arrow. Defaults to adaptive.',
+			options: [
+				{ value: 'adaptive', label: 'Adaptive', default: true },
+				{ value: 'brand', label: 'Brand' },
+				{ value: 'inline', label: 'Inline' },
+			],
 		},
 		{
-			name: 'className',
-			type: 'text',
-			label: 'Class Name',
-			description: 'React specific for adding className to the component.',
-			defaultValue: '',
-			showInPlayground: false
+			name: 'size',
+			label: 'Size',
+			type: 'select',
+			description: 'Change the size of the link',
+			options: [
+				{ value: 'medium', label: 'Medium', default: true },
+				{ value: 'small', label: 'Small' },
+			],
 		},
+		{
+			name: 'content',
+			label: 'Content',
+			type: 'select',
+			description: 'Adds a different arrow after the link to indicate external or internal link',
+			options: [
+				{ value: '', label: 'None', default: true },
+				{ value: 'external', label: 'External' },
+				{ value: 'internal', label: 'Internal' },
+			],
+		},
+
+		// States
+		{
+			name: 'disabled',
+			label: 'Disabled',
+			type: 'checkbox',
+			defaultValue: false,
+			description: 'Disables the link.',
+		},
+
+		// Hidden properties
 		{
 			name: 'href',
 			label: 'Href',
@@ -44,6 +88,39 @@ export const linkConfig = {
 				{ value: '_top', label: '_top' },
 			],
 			showInPlayground: false,
+		},
+		{
+			name: 'show-icon',
+			alternativeName: 'showIcon',
+			type: 'checkbox',
+			label: 'Show Icon',
+			description: 'Enables or disables the visibility of the icon.',
+			defaultValue: false,
+			showInPlayground: false
+		},
+		{
+			name: 'wrap',
+			label: 'Wrap',
+			type: 'checkbox',
+			defaultValue: false,
+			description: 'Determines whether the text should wrap when its parent container is too small, preventing overflow.',
+			showInPlayground: false,
+		},
+		{
+			name: 'id',
+			type: 'text',
+			label: 'ID',
+			description: 'ID of the component, generated automatically for some components as a fallback if unset.',
+			defaultValue: '',
+			showInPlayground: false
+		},
+		{
+			name: 'className',
+			type: 'text',
+			label: 'Class Name',
+			description: 'React specific for adding className to the component.',
+			defaultValue: '',
+			showInPlayground: false
 		},
 		{
 			name: 'rel',
@@ -85,70 +162,6 @@ export const linkConfig = {
 			description: 'Hints for the human language of the linked page or document.',
 			defaultValue: '',
 			showInPlayground: false
-		},
-		{
-			name: 'disabled',
-			label: 'Disabled',
-			type: 'checkbox',
-			defaultValue: false,
-			description: 'Disables the link.',
-		},
-		{
-			name: 'size',
-			label: 'Size',
-			type: 'select',
-			description: 'Change the size of the link',
-			options: [
-				{ value: 'medium', label: 'Medium', default: true },
-				{ value: 'small', label: 'Small' },
-			],
-		},
-		{
-			name: 'show-icon',
-			alternativeName: 'showIcon',
-			type: 'checkbox',
-			label: 'Show Icon',
-			description: 'Enables or disables the visibility of the icon.',
-			defaultValue: false,
-			showInPlayground: false
-		},
-		{
-			name: 'variant',
-			label: 'Variant',
-			type: 'select',
-			description:
-				'Change the styling of the link. inline will remove the arrow. Defaults to adaptive.',
-			options: [
-				{ value: 'adaptive', label: 'Adaptive', default: true },
-				{ value: 'brand', label: 'Brand' },
-				{ value: 'inline', label: 'Inline' },
-			],
-		},
-		{
-			name: 'content',
-			label: 'Content',
-			type: 'select',
-			description: 'Adds a different arrow after the link to indicate external or internal link',
-			options: [
-				{ value: '', label: 'None', default: true },
-				{ value: 'external', label: 'External' },
-				{ value: 'internal', label: 'Internal' },
-			],
-		},
-		{
-			name: 'wrap',
-			label: 'Wrap',
-			type: 'checkbox',
-			defaultValue: false,
-			description: 'Determines whether the text should wrap when its parent container is too small, preventing overflow.',
-			showInPlayground: false,
-		},
-		{
-			name: 'text',
-			label: 'Text',
-			type: 'text',
-			defaultValue: 'Link Text',
-			description: 'Alternative for default slot/children.',
 		},
 	],
 };

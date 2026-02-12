@@ -11,12 +11,13 @@ status: 'stable'
 toc: true
 ---
 
-import { DBBadge, DBSection, DBAccordion, DBAccordionItem } from '@db-ux/react-core-components';
+import { DBBadge, DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
@@ -45,25 +46,25 @@ import { badgeConfig } from '@template/configs/badge.config.js';
 			title: 'React',
 			description: 'Interactive examples and documentation.',
 			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+			icon: 'react',
 		},
 		{
 			title: 'Vue',
 			description: 'Interactive examples and documentation.',
 			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
+			icon: 'vue',
 		},
 		{
 			title: 'Angular',
 			description: 'Interactive examples and documentation.',
 			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg',
+			icon: 'angular',
 		},
 		{
-			title: 'Web C.',
+			title: 'Web Components',
 			description: 'Interactive examples and documentation.',
 			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
+			icon: 'html5',
 		},
 	]}
 />
@@ -72,7 +73,7 @@ import { badgeConfig } from '@template/configs/badge.config.js';
 
 <DBSection spacing="small" width="auto">
 
-## Properties
+## Properties, Slots & Events
 
 Configure the badge through its properties, such as semantic, size, and content.
 
@@ -82,7 +83,7 @@ Configure the badge through its properties, such as semantic, size, and content.
 
 </CollapsibleWrapper>
 
-<CollapseButton collapsedText="Show all Properties" expandedText="Hide some Properties" />
+<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
 
 </DBSection>
 
@@ -96,13 +97,7 @@ Configure the badge through its properties, such as semantic, size, and content.
 
 Badges should provide additional context and must not carry essential information on their own.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=1-1132&embed-host=share"
@@ -119,13 +114,7 @@ Badges should provide additional context and must not carry essential informatio
 
 Badge labels must be concise and scannable to ensure quick recognition.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1110&embed-host=share"
@@ -142,13 +131,7 @@ Badge labels must be concise and scannable to ensure quick recognition.
 
 Place badges close to the element they describe, without breaking layout or alignment.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1113&embed-host=share"
@@ -165,13 +148,7 @@ Place badges close to the element they describe, without breaking layout or alig
 
 Use badges for status or metadata, and tags for filtering, grouping, or interactive categorization.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1116&embed-host=share"
@@ -188,12 +165,7 @@ Use badges for status or metadata, and tags for filtering, grouping, or interact
 
 Ensure badge information is available to assistive technologies and not conveyed by color alone.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1118&embed-host=share"
@@ -216,17 +188,9 @@ Ensure badge information is available to assistive technologies and not conveyed
 
 ## FAQ
 
-<DBAccordion>
-	<DBAccordionItem headlinePlain="Can a badge be interactive?">
-		No, badges are non-interactive. If interaction is required, use a Tag or Button instead.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="How many badges can be shown together?">
-		Use badges sparingly. Too many badges reduce readability and visual clarity.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="Can icons be used inside badges?">
-		Only if they support the text label and do not replace it.
-	</DBAccordionItem>
-</DBAccordion>
+Have a question about the Badge component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Badge" />
 
 </DBSection>
 

@@ -1,5 +1,5 @@
 ---
-order: 6
+order: 9
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -11,12 +11,13 @@ status: 'stable'
 toc: true
 ---
 
-import { DBRadio, DBSection, DBAccordion, DBAccordionItem } from '@db-ux/react-core-components';
+import { DBRadio, DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
@@ -46,25 +47,25 @@ Experiment with the Radio component and its properties.
 			title: 'React',
 			description: 'Interactive examples and documentation.',
 			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+			icon: 'react',
 		},
 		{
 			title: 'Vue',
 			description: 'Interactive examples and documentation.',
 			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
+			icon: 'vue',
 		},
 		{
 			title: 'Angular',
 			description: 'Interactive examples and documentation.',
 			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg',
+			icon: 'angular',
 		},
 		{
-			title: 'Web C.',
+			title: 'Web Components',
 			description: 'Interactive examples and documentation.',
 			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
+			icon: 'html5',
 		},
 	]}
 />
@@ -73,9 +74,9 @@ Experiment with the Radio component and its properties.
 
 <DBSection spacing="small" width="auto">
 
-## Properties
+## Properties, Slots & Events
 
-Configure the radio through its properties, such as checked state, disabled, and label.
+Configure the radio through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
@@ -83,7 +84,7 @@ Configure the radio through its properties, such as checked state, disabled, and
 
 </CollapsibleWrapper>
 
-<CollapseButton collapsedText="Show all Properties" expandedText="Hide some Properties" />
+<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
 
 </DBSection>
 
@@ -97,13 +98,7 @@ Configure the radio through its properties, such as checked state, disabled, and
 
 Use radio buttons when users must choose exactly one option from a group. If multiple selections are allowed, use Checkbox instead.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=1-1132&embed-host=share"
@@ -120,13 +115,7 @@ Use radio buttons when users must choose exactly one option from a group. If mul
 
 Use Radio when the number of options is small and users benefit from seeing all options at once. Use Select when options are many or screen space is limited.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1110&embed-host=share"
@@ -143,13 +132,7 @@ Use Radio when the number of options is small and users benefit from seeing all 
 
 Labels must be concise and clearly distinct from each other. Keep wording parallel and avoid vague or overlapping terms.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1113&embed-host=share"
@@ -166,13 +149,7 @@ Labels must be concise and clearly distinct from each other. Keep wording parall
 
 Prefer vertical stacking for readability and accessibility. Use horizontal layout only when there are few, short options and sufficient space.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1116&embed-host=share"
@@ -189,13 +166,7 @@ Prefer vertical stacking for readability and accessibility. Use horizontal layou
 
 If a safe default exists, preselect it to reduce effort. If no default is appropriate, start with no selection and validate on submit as needed.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1118&embed-host=share"
@@ -212,12 +183,7 @@ If a safe default exists, preselect it to reduce effort. If no default is approp
 
 Every radio must have an accessible name, and the group should have a clear group label. If the visible label is hidden, provide screenreader label text. Ensure keyboard navigation works as expected within the group.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1122&embed-host=share"
@@ -240,23 +206,9 @@ Every radio must have an accessible name, and the group should have a clear grou
 
 ## FAQ
 
-<DBAccordion>
-	<DBAccordionItem headlinePlain="When should I use Radio vs Checkbox?">
-		Use Radio when exactly one option can be selected in a set. Use Checkbox when users can select multiple independent options.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="When should I use Radio vs Select?">
-		Use Radio when there are few options and comparison matters. Use Select when there are many options or when space is limited.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="Should radio groups always have a default selection?">
-		Only when there is a safe, expected default. Avoid defaulting to choices that imply consent or have significant consequences.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="How should I validate radio groups?">
-		Validate at the group level. If selection is required, show one clear error message near the group label explaining what the user must choose.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="Can I lay out radio buttons horizontally?">
-		Yes, but only for a small number of short labels. Prefer vertical layout for readability, scanning, and responsive behavior.
-	</DBAccordionItem>
-</DBAccordion>
+Have a question about the uradio component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="uradio" />
 
 </DBSection>
 
