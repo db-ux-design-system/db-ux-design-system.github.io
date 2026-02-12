@@ -4,6 +4,8 @@ on: workflow_dispatch # This configures the workflow to run manually, instead of
 jobs:
   accessibility_scanner:
     runs-on: ubuntu-24.04 # Use Ubuntu 24.04 explicitly
+    permissions:
+      contents: read
     steps:
       - name: Generate cache key
         id: generate_cache_key
@@ -30,4 +32,4 @@ jobs:
           # username: # Optional: Username for authentication
           # password: ${{ secrets.PASSWORD }} # Optional: Password for authentication (use secrets!)
           # auth_context: # Optional: Stringified JSON object for complex authentication
-          # skip_copilot_assignment: false # Optional: Set to true to skip assigning issues to GitHub Copilot (or if you don't have GitHub Copilot)
+          skip_copilot_assignment: true # Optional: Set to true to skip assigning issues to GitHub Copilot (or if you don't have GitHub Copilot)
