@@ -21,28 +21,36 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
-          cache: npm
+          cache: 'pnpm'
+
+      - name: 🖼️ Display node and pnpm version
+        shell: bash
+        run: |
+          node --version
+          pnpm --version
 
       - name: Install deps
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Lint
         run: |
-          npm run lint:stylelint
+          pnpm run lint:stylelint
 
       - name: Build
         env:
           ASSET_PASSWORD: ${{ secrets.ASSET_PASSWORD }}
           ASSET_INIT_VECTOR: ${{ secrets.ASSET_INIT_VECTOR }}
         run: |
-          node node_modules/@db-ux/db-theme/build/scripts/index.js
-          node node_modules/@db-ux/db-theme-fonts/build/scripts/index.js
-          node node_modules/@db-ux/db-theme-icons/build/scripts/index.js
-          npm run build
+          pnpm run build
 
       - name: Configure Pages
         if: ${{github.event_name != 'pull_request'}}
