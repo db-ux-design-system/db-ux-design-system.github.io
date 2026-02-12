@@ -84,7 +84,10 @@ Configure the select through its properties, slots and events.
 
 </CollapsibleWrapper>
 
-<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
+<CollapseButton
+	collapsedText="Show all Properties, Slots & Events"
+	expandedText="Hide some Properties, Slots & Events"
+/>
 
 </DBSection>
 
@@ -94,43 +97,43 @@ Configure the select through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-###### Use Select for single-choice, predefined options
+###### Select vs Radio
 
-Use Select when the user must choose exactly one option from a list. If users need to choose multiple options, use Checkbox or a multi-select pattern. If users benefit from seeing all options, consider Radio.
+The select component should be used when the number of choices exceeds what can be reasonably displayed on screen without cluttering the UI. Typically, this applies when there are more than five options. Radio buttons are better suited for selecting from fewer options, as all options are visible at once.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=1-1132&embed-host=share"
-		description="Use Select for one choice from a predefined set where space is limited or options are moderate in count."
+		description="Use Select for for five or more options."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=1-1133&embed-host=share"
-		description="Use Select for multi-select needs or when users must compare all options at once."
+		description="Don't use Select for fewer than five options. (Use Radio Buttons instead)"
 	/>
 </div>
 
-###### Keep dropdown options clear and manageable
+###### Select vs Custom Select
 
-Options must be easy to scan and understand. Use concise labels, consistent capitalization, and avoid duplicates. If the list becomes long or needs search, use an Autocomplete pattern instead.
+Prefer Select for simple single-choice lists. It uses the operating system's native dropdown and should be preferred if it is suitable for the use case. Use Custom Select when you need multi-select, search, grouping, or a clearer representation of multiple selected values.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1110&embed-host=share"
-		description="Use short, distinct option labels and a logical ordering (alphabetical or by frequency)."
+		description="Use Select for an simple single selection without a search function."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1112&embed-host=share"
-		description="Put very long lists into a basic select without search or grouping support."
+		description="Don't use Select for very long lists that would benefit from a search function or grouping."
 	/>
 </div>
 
-###### Always provide a visible label
+###### Labels
 
-Every Select needs a clear label describing what the choice controls. Do not rely on placeholder text as a label, because it can be misunderstood and may not be available to all users.
+Labels must be clear and concise. Do not rely on placeholder text as a label, because it disappears when a selection has been made.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -141,58 +144,41 @@ Every Select needs a clear label describing what the choice controls. Do not rel
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1114&embed-host=share"
-		description="Omit the label or use placeholder-only labeling to explain the field."
+		description="Don't omit the label, which means that after selection, it is no longer clear what it is about."
 	/>
 </div>
 
-###### Handle empty, default, and disabled states intentionally
+###### Width
 
-Define whether a default is appropriate. If selection is required, make the empty state explicit (e.g., "Choose an option") and validate appropriately. Disable the control only when it cannot be used, and explain why if needed.
+Select fields in responsive layouts should not take up the entire width of a wide screen (tablet and desktop). They should reflect a realistic length of content and be based on the columns or layout grid.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1116&embed-host=share"
-		description="Use a clear empty option/placeholder and validate when required; disable only with a clear reason."
+		description="Base the width on a realistic selection length and the layout grid."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1117&embed-host=share"
-		description="Preselect a risky default that implies consent or hides that the user must choose."
+		description="Avoid placing the Select across the entire width of a desktop screen."
 	/>
 </div>
 
-###### Width and alignment must follow the layout grid
+###### Message
 
-Select should align with surrounding inputs and respect container widths. Avoid arbitrary widths that break form rhythm; keep the dropdown aligned to the field.
+Use the message to prevent mistakes. Use validation to explain what’s wrong and how to fix it. Keep the message short and concise.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1118&embed-host=share"
-		description="Match Select width to the form layout and keep alignment consistent across the page."
+		description="Provide concise helper/validation messages."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1119&embed-host=share"
-		description="Use inconsistent widths that misalign labels/fields or cause uneven spacing in forms."
-	/>
-</div>
-
-###### Helper text, validation, and accessibility
-
-Use helper text to prevent mistakes (format, constraints). Use validation to explain what's wrong and how to fix it. Ensure the Select has an accessible name; if the visible label is hidden, provide screenreader label text and expose required/invalid state.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1122&embed-host=share"
-		description="Provide concise helper/validation messages and correct accessible labeling (including screenreader text when needed)."
-	/>
-	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1123&embed-host=share"
-		description='Show vague errors ("Invalid"), duplicate the label as helper text, or ship a Select without an accessible label.'
+		description="Don't show vague errors or duplicate the label as helper text."
 	/>
 </div>
 

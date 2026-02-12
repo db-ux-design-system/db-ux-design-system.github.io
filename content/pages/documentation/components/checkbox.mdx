@@ -84,7 +84,10 @@ Configure the checkbox through its properties, slots and events.
 
 </CollapsibleWrapper>
 
-<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
+<CollapseButton
+	collapsedText="Show all Properties, Slots & Events"
+	expandedText="Hide some Properties, Slots & Events"
+/>
 
 </DBSection>
 
@@ -94,7 +97,7 @@ Configure the checkbox through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-###### Use Checkbox for multi-select, not single-choice
+###### Checkbox vs Radio
 
 Use checkboxes when users can select any number of options (including none). If the user must pick exactly one option, use Radio instead.
 
@@ -102,16 +105,16 @@ Use checkboxes when users can select any number of options (including none). If 
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=1-1132&embed-host=share"
-		description='Use a checkbox group for "Email", "SMS", "Post" where multiple selections are allowed.'
+		description="Use checkboxes where multiple selections are allowed."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=1-1133&embed-host=share"
-		description='Use checkboxes for mutually exclusive choices like "German / English / Spanish".'
+		description="Don't use checkboxes for mutually exclusive choices like."
 	/>
 </div>
 
-###### Write short, positive labels
+###### Labels
 
 Labels must be clear and concise. Prefer positive phrasing to reduce cognitive load and avoid double negatives.
 
@@ -119,16 +122,16 @@ Labels must be clear and concise. Prefer positive phrasing to reduce cognitive l
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1110&embed-host=share"
-		description='Use "Subscribe to newsletter" instead of negative constructions.'
+		description="Use clear and concise labels."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1112&embed-host=share"
-		description='Use labels like "Do not subscribe" or "Not signed in" that can confuse when checked.'
+		description="Avoid double negatives that can confuse when checked."
 	/>
 </div>
 
-###### Make groups easy to scan
+###### Grouping
 
 In checkbox groups, keep options parallel in wording and length. If a group needs context, add a group label or short description above it.
 
@@ -136,63 +139,12 @@ In checkbox groups, keep options parallel in wording and length. If a group need
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1113&embed-host=share"
-		description='Use a clear group label (e.g., "Notification channels") and consistent option phrasing.'
+		description="Use a clear group label and consistent option phrasing."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1114&embed-host=share"
-		description="Mix unrelated options or inconsistent wording that makes scanning harder."
-	/>
-</div>
-
-###### Use "Select all" and indeterminate state carefully
-
-If you provide "Select all", it must reflect the group state: checked when all are selected, unchecked when none are selected, and indeterminate when some are selected.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1116&embed-host=share"
-		description="Use an indeterminate state for partial selection and keep it synchronized with the group."
-	/>
-	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1117&embed-host=share"
-		description='Show "Select all" as checked when only some options are selected.'
-	/>
-</div>
-
-###### Keep interaction and states consistent
-
-Ensure checked, unchecked, disabled, and error states are visually distinct and consistent across the UI. Don't make the click target too small; the label should be clickable.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1118&embed-host=share"
-		description="Allow clicking the label to toggle and use consistent spacing between checkbox and label."
-	/>
-	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1119&embed-host=share"
-		description="Make only the small box clickable or use inconsistent spacing across lists."
-	/>
-</div>
-
-###### Accessibility and screenreader text
-
-Every checkbox needs an accessible name. If the visible label is hidden, provide a screenreader label text. Communicate group context and required/invalid states to assistive technologies.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1122&embed-host=share"
-		description="Provide a programmatic label and a screenreader label when the visual label is not shown."
-	/>
-	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1123&embed-host=share"
-		description="Ship a checkbox without an accessible label or rely on position/placeholder-like text to explain it."
+		description="Don't mix unrelated options or inconsistent wording that makes scanning harder."
 	/>
 </div>
 

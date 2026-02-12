@@ -11,13 +11,7 @@ toc: true
 status: 'stable'
 ---
 
-import {
-	DBButton,
-	DBBadge,
-	DBSection,
-	DBCard,
-	DBLink,
-} from '@db-ux/react-core-components';
+import { DBButton, DBBadge, DBSection, DBCard, DBLink } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
@@ -89,7 +83,10 @@ Configure the button through its properties, such as variant, size, icon, and di
 
 </CollapsibleWrapper>
 
-<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
+<CollapseButton
+	collapsedText="Show all Properties, Slots & Events"
+	expandedText="Hide some Properties, Slots & Events"
+/>
 
 </DBSection>
 
@@ -112,7 +109,7 @@ Establish a clear hierarchy so users can see which actions matter most. Use the 
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-863&embed-host=share"
-		description="Do not place two primary buttons next to each other or in the same viewport. Competing primary actions make it harder to decide what to do."
+		description="Don't place two primary buttons next to each other or in the same viewport. Competing primary actions make it harder to decide what to do."
 	/>
 </div>
 
@@ -129,7 +126,7 @@ Keep labels short, specific, and action‑oriented. Auto‑width buttons are sin
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-1137&embed-host=share"
-		description="Manually break lines or use long, complex label text."
+		description="Don't manually break lines or use long, complex label text."
 	/>
 </div>
 
@@ -163,7 +160,7 @@ Place related buttons horizontally if space allows. Use auto width by default; s
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-3298&embed-host=share"
-		description="Don't Stack buttons vertically when horizontal space exists, or let content overflow the button."
+		description="Avoid stacking buttons vertically when horizontal space exists, or let content overflow the button."
 	/>
 </div>
 

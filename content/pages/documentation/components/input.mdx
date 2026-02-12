@@ -84,7 +84,10 @@ Configure the input through its properties, slots and events.
 
 </CollapsibleWrapper>
 
-<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
+<CollapseButton
+	collapsedText="Show all Properties, Slots & Events"
+	expandedText="Hide some Properties, Slots & Events"
+/>
 
 </DBSection>
 
@@ -94,9 +97,9 @@ Configure the input through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-###### Use the right control
+###### Right data input type
 
-Use Input for free text entry. If users must choose from predefined options, use a selection component instead (e.g., Select, Autocomplete, Radio/Checkbox depending on the case).
+Use Input for short, single-line free text entry. Use Textarea if users are expected to enter multiple lines or longer messages. If users must choose from predefined options, use a selection component instead (e.g., Select, Radio/Checkbox depending on the case).
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -106,93 +109,93 @@ Use Input for free text entry. If users must choose from predefined options, use
 	/>
 	<GuidelineExample
 		variant="dont"
-		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
-		description="Use Input for choosing from a fixed list (forces typing, increases errors)."
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1133&embed-host=share&scaling=scale-down-width"
+		description="Don't use Input for choosing from a fixed list (forces typing, increases errors)."
 	/>
 </div>
 
-###### Always provide a visible label
+###### Label text
 
-Every Input must have a clear, descriptive label that explains what to enter. Keep labels short and specific; avoid vague labels. Do not replace the label with a placeholder.
+Provide a clear and short label that describes what to write. Do not replace the label with placeholder text; placeholders disappear when typing.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
-		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
-		description="Place a visible label directly associated with the field (above or consistently aligned)."
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1110&embed-host=share&scaling=scale-down-width"
+		description="Place a visible label directly associated with the field and keep it short an precise."
 	/>
 	<GuidelineExample
 		variant="dont"
-		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
-		description="Use only placeholder text as the label or omit the label entirely."
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1112&embed-host=share&scaling=scale-down-width"
+		description="Don't use long descriptive labels."
 	/>
 </div>
 
-###### Use placeholder text only as an example
+###### Show/hide label
+
+Use visible labels (above or floating) as the default. Only use hidden labels in exceptional cases where space is extremely constrained. When using hidden labels, always provide screenreader text so assistive technology users know what to enter.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1122&embed-host=share&scaling=scale-down-width"
+		description="Use 'Label above' or 'Floating label' variants with visible text labels."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1123&embed-host=share&scaling=scale-down-width"
+		description="Don't use  inputs without any visible label text (unless extreme space constraints require it and screenreader text is provided)."
+	/>
+</div>
+
+###### Placeholders as examples
 
 Placeholder text is optional and should provide an example format/value, not instructions or required context. Placeholders must not contain critical information because they disappear when users type.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
-		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
-		description='Use placeholder for an example (e.g., "name@company.com") while the label carries meaning.'
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1113&embed-host=share&scaling=scale-down-width"
+		description="Use placeholder for an example while the label carries meaning."
 	/>
 	<GuidelineExample
 		variant="dont"
-		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
-		description='Put requirements or help text only in the placeholder (e.g., "Enter your email to receive updates").'
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1114&embed-host=share&scaling=scale-down-width"
+		description="Avoid putting requirements or help text only in the placeholder."
 	/>
 </div>
 
-###### Helper text explains, validation text decides
+###### Message
 
 Use helper text to prevent errors (format, constraints, expectations). Use validation messages to explain what is wrong and how to fix it. Keep messages concise and actionable.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
-		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1116&embed-host=share&scaling=scale-down-width"
 		description="Show a short helper message for format guidance and an explicit error message when invalid."
 	/>
 	<GuidelineExample
 		variant="dont"
-		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
-		description='Show long paragraphs, duplicate the label as helper/error text, or use unclear errors (e.g., "Invalid input").'
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1117&embed-host=share&scaling=scale-down-width"
+		description="Don't show long paragraphs, duplicate the label as helper/error text, or use unclear errors."
 	/>
 </div>
 
-###### Align within the layout and keep spacing consistent
+###### Field width
 
-Inputs must align to the layout grid and maintain consistent spacing between label, field, helper/validation text, and adjacent fields. Avoid stretching labels or misaligning fields in responsive layouts.
+Input width should reflect the expected content length and align to the layout grid. Avoid stretching inputs to fill the entire screen width. Size them appropriately for realistic content.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
-		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1119&embed-host=share&scaling=scale-down-width"
 		description="Keep label, input, and helper/validation text aligned and consistently spaced across breakpoints."
 	/>
 	<GuidelineExample
 		variant="dont"
-		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
-		description="Let label/field/helper drift out of alignment or create uneven spacing compared to other fields."
-	/>
-</div>
-
-###### Accessibility and assistive text
-
-Ensure every Input has an accessible name that matches the visible label. If a label is visually hidden, provide an equivalent screenreader label. Required/optional indicators must be announced meaningfully.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
-		description="Use programmatic labeling (label-for / aria-labelledby) and provide screenreader text when the visible label is not available."
-	/>
-	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
-		description="Rely on placeholder-only labeling or icons without accessible text."
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1118&embed-host=share&scaling=scale-down-width"
+		description="Don't let label/field/helper drift out of alignment or create uneven spacing compared to other fields."
 	/>
 </div>
 
