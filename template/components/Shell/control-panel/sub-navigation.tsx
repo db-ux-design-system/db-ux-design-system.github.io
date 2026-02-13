@@ -11,8 +11,8 @@ const SubNavigation = ({
 }) => (
 	<DBShellSubNavigation
 		style={{
-			paddingLeft: 'var(--db-spacing-fixed-md)',
-			paddingRight: 'var(--db-spacing-fixed-md)',
+			paddingInlineStart: 'var(--db-spacing-fixed-md)',
+			paddingInlineEnd: 'var(--db-spacing-fixed-md)',
 		}}
 	>
 		<DBNavigation aria-label="sub navigation" variant={variant ?? 'tree'}>

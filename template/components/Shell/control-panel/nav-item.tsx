@@ -4,7 +4,7 @@ import { covers, getFirstChildPath, trimExtension } from '@template/utils/naviga
 
 const getStatusBadge = (status?: string) => {
 	if (!status || status === 'stable') return null;
-	
+
 	const config = {
 		concept: { semantic: 'warning', label: 'Concept' },
 		beta: { semantic: 'informative', label: 'Beta' },
@@ -15,7 +15,7 @@ const getStatusBadge = (status?: string) => {
 	if (!config) return null;
 
 	return (
-		<DBBadge semantic={config.semantic as any} size="small" style={{ marginLeft: 'auto' }}>
+		<DBBadge semantic={config.semantic as any} size="small" style={{ marginInlineStart: 'auto' }}>
 			{config.label}
 		</DBBadge>
 	);

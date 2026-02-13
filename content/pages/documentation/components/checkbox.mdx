@@ -101,7 +101,7 @@ Use checkboxes when users can select any number of options (including none). If 
 	style={{
 		display: 'flex',
 		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
+		marginBlockEnd: 'var(--db-spacing-fixed-2xl)',
 	}}
 >
 	<GuidelineExample
@@ -124,7 +124,7 @@ Labels must be clear and concise. Prefer positive phrasing to reduce cognitive l
 	style={{
 		display: 'flex',
 		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
+		marginBlockEnd: 'var(--db-spacing-fixed-2xl)',
 	}}
 >
 	<GuidelineExample
@@ -147,7 +147,7 @@ In checkbox groups, keep options parallel in wording and length. If a group need
 	style={{
 		display: 'flex',
 		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
+		marginBlockEnd: 'var(--db-spacing-fixed-2xl)',
 	}}
 >
 	<GuidelineExample
@@ -170,7 +170,7 @@ If you provide "Select all", it must reflect the group state: checked when all a
 	style={{
 		display: 'flex',
 		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
+		marginBlockEnd: 'var(--db-spacing-fixed-2xl)',
 	}}
 >
 	<GuidelineExample
@@ -193,7 +193,7 @@ Ensure checked, unchecked, disabled, and error states are visually distinct and 
 	style={{
 		display: 'flex',
 		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
+		marginBlockEnd: 'var(--db-spacing-fixed-2xl)',
 	}}
 >
 	<GuidelineExample
@@ -242,19 +242,24 @@ Every checkbox needs an accessible name. If the visible label is hidden, provide
 
 <DBAccordion>
 	<DBAccordionItem headlinePlain="When should I use Checkbox vs Switch?">
-		Use Checkbox for selections in forms, lists, and filters (often multiple at once). Use Switch for a single on/off setting that takes effect immediately.
+		Use Checkbox for selections in forms, lists, and filters (often multiple at once). Use Switch
+		for a single on/off setting that takes effect immediately.
 	</DBAccordionItem>
 	<DBAccordionItem headlinePlain="When should I use Checkbox vs Radio?">
-		Use Checkbox when multiple options can be selected. Use Radio when exactly one option must be chosen within a set.
+		Use Checkbox when multiple options can be selected. Use Radio when exactly one option must be
+		chosen within a set.
 	</DBAccordionItem>
 	<DBAccordionItem headlinePlain="Can I hide the visible label?">
-		Only if you provide equivalent screenreader text and the meaning is still clear in context. Prefer visible labels whenever possible.
+		Only if you provide equivalent screenreader text and the meaning is still clear in context.
+		Prefer visible labels whenever possible.
 	</DBAccordionItem>
 	<DBAccordionItem headlinePlain="How should I validate checkbox groups?">
-		If at least one option is required, validate the group (not each item) and show a clear error message that explains what is missing.
+		If at least one option is required, validate the group (not each item) and show a clear error
+		message that explains what is missing.
 	</DBAccordionItem>
 	<DBAccordionItem headlinePlain='Do I need a "Select all" option?'>
-		Only when it saves effort for large groups and users commonly select most options. Keep the state accurate and support indeterminate for partial selection.
+		Only when it saves effort for large groups and users commonly select most options. Keep the
+		state accurate and support indeterminate for partial selection.
 	</DBAccordionItem>
 </DBAccordion>
 
