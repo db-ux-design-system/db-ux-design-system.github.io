@@ -45,7 +45,6 @@ const NavItem = ({
 				icon={icon}
 				key={`router-leaf-${target ?? title}`}
 				disabled={disabled}
-				aria-disabled={disabled ? 'true' : undefined}
 			>
 				<a
 					href={trimExtension(target)}
@@ -79,7 +78,6 @@ const NavItem = ({
 			icon={icon}
 			key={`router-leaf-${path ?? title}`}
 			disabled={disabled}
-			aria-disabled={disabled ? 'true' : undefined}
 		>
 			<a
 				href={trimExtension(path)}
