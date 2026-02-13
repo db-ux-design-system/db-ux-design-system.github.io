@@ -1,0 +1,201 @@
+---
+order: 20
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Stack'
+title: 'Stack'
+description: 'Stack arranges child elements in a vertical or horizontal layout with consistent spacing. Use it to create structured layouts without writing custom CSS.'
+align: start
+toc: true
+status: 'stable'
+---
+
+import { DBStack, DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import { stackConfig } from '@template/configs/stack.config.js';
+
+- Arrange form elements, buttons, or content blocks with consistent spacing
+- Create vertical or horizontal layouts without custom CSS
+- Build responsive layouts that adapt to different screen sizes
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+Experiment with the Stack component and its properties.
+
+<ComponentPlayground config={stackConfig} component={DBStack} />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties & Slots
+
+Configure the Stack through its properties, such as gap, direction, alignment, and wrap behavior.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable config={stackConfig} />
+
+</CollapsibleWrapper>
+
+<CollapseButton
+	collapsedText="Show all Properties & Slots"
+	expandedText="Hide some Properties & Slots"
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+###### Consistent spacing
+
+Use Stack to maintain consistent spacing between elements instead of adding margins manually to each child.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/uBCf96A16t1871VinjYHHV/Doku--Stack?node-id=1-1132&embed-host=share"
+		description="Use Stack with a defined gap to create consistent spacing between elements."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/[designId]?node-id=[nodeId]&embed-host=share"
+		description="Don't add individual margins to each child element when Stack can handle spacing."
+	/>
+</div>
+
+###### Direction and alignment
+
+Choose the appropriate direction (column or row) and alignment based on your layout needs.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/[designId]?node-id=[nodeId]&embed-host=share"
+		description="Use column direction for vertical lists and row direction for horizontal button groups."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/[designId]?node-id=[nodeId]&embed-host=share"
+		description="Don't use row direction for long lists of content that should stack vertically."
+	/>
+</div>
+
+###### Divider variant
+
+Use the divider variant to visually separate stacked elements when needed.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/[designId]?node-id=[nodeId]&embed-host=share"
+		description="Add DBDivider components between children when using variant='divider'."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/[designId]?node-id=[nodeId]&embed-host=share"
+		description="Don't use divider variant without adding DBDivider components."
+	/>
+</div>
+
+###### Responsive wrapping
+
+Enable wrap for horizontal stacks that should adapt to smaller screens.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/[designId]?node-id=[nodeId]&embed-host=share"
+		description="Use wrap for button groups or tags that should flow to multiple lines on small screens."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/[designId]?node-id=[nodeId]&embed-host=share"
+		description="Don't disable wrap for horizontal content that might overflow on mobile devices."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the Stack component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Stack" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Section',
+			description: 'Container component for page sections with spacing and width control',
+			url: '/documentation/components/section',
+		},
+		{
+			title: 'Divider',
+			description: 'Visual separator for content sections',
+			url: '/documentation/components/divider',
+		},
+	]}
+/>
+
+</DBSection>
