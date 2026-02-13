@@ -29,6 +29,7 @@ import { stackConfig } from '@template/configs/stack.config.js';
 <DBSection spacing="small" width="auto">
 
 ## Playground
+
 Experiment with the Stack component and its properties.
 
 <ComponentPlayground config={stackConfig} component={DBStack} />
@@ -95,71 +96,54 @@ Configure the Stack through its properties, such as gap, direction, alignment, a
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-###### Consistent spacing
+###### Gap
 
-Use Stack to maintain consistent spacing between elements instead of adding margins manually to each child.
+Use the 'gap' property to provide consistent spacing between items in a Stack, improving readability and visual structure.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/uBCf96A16t1871VinjYHHV/Doku--Stack?node-id=1-1132&embed-host=share"
-		description="Use Stack with a defined gap to create consistent spacing between elements."
+		description="Use a defined gap to evenly space items and create a clean, organized layout."
 	/>
 	<GuidelineExample
 		variant="dont"
-		figmaUrl="https://embed.figma.com/design/[designId]?node-id=[nodeId]&embed-host=share"
-		description="Don't add individual margins to each child element when Stack can handle spacing."
+		figmaUrl="https://embed.figma.com/design/uBCf96A16t1871VinjYHHV/Doku--Stack?node-id=1-1133&embed-host=share"
+		description="Don't manually add margins to individual items instead of using gap. It can lead to inconsistent spacing and harder maintenance."
 	/>
 </div>
 
 ###### Direction and alignment
 
-Choose the appropriate direction (column or row) and alignment based on your layout needs.
+Choose the appropriate direction (column or row) and alignment based on your layout and content needs.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
-		figmaUrl="https://embed.figma.com/design/[designId]?node-id=[nodeId]&embed-host=share"
-		description="Use column direction for vertical lists and row direction for horizontal button groups."
+		figmaUrl="https://embed.figma.com/design/uBCf96A16t1871VinjYHHV/Doku--Stack?node-id=3-1110&embed-host=share"
+		description="Use horizontal (row) direction to arrange related actions making them quickly accessible and visually grouped."
 	/>
 	<GuidelineExample
 		variant="dont"
-		figmaUrl="https://embed.figma.com/design/[designId]?node-id=[nodeId]&embed-host=share"
-		description="Don't use row direction for long lists of content that should stack vertically."
+		figmaUrl="https://embed.figma.com/design/uBCf96A16t1871VinjYHHV/Doku--Stack?node-id=3-1112&embed-host=share"
+		description="Don't use center alignment in columns if the content has different lengths and is intended to be quickly scanned."
 	/>
 </div>
 
-###### Divider variant
+###### Wrapping
 
-Use the divider variant to visually separate stacked elements when needed.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/[designId]?node-id=[nodeId]&embed-host=share"
-		description="Add DBDivider components between children when using variant='divider'."
-	/>
-	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/[designId]?node-id=[nodeId]&embed-host=share"
-		description="Don't use divider variant without adding DBDivider components."
-	/>
-</div>
-
-###### Responsive wrapping
-
-Enable wrap for horizontal stacks that should adapt to smaller screens.
+Enable wrap for stacks that should adapt to smaller screens.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
-		figmaUrl="https://embed.figma.com/design/[designId]?node-id=[nodeId]&embed-host=share"
-		description="Use wrap for button groups or tags that should flow to multiple lines on small screens."
+		figmaUrl="https://embed.figma.com/design/uBCf96A16t1871VinjYHHV/Doku--Stack?node-id=3-1113&embed-host=share"
+		description="Use wrap when you have many items or expect it to be used on different screen sizes."
 	/>
 	<GuidelineExample
 		variant="dont"
-		figmaUrl="https://embed.figma.com/design/[designId]?node-id=[nodeId]&embed-host=share"
-		description="Don't disable wrap for horizontal content that might overflow on mobile devices."
+		figmaUrl="https://embed.figma.com/design/uBCf96A16t1871VinjYHHV/Doku--Stack?node-id=3-1114&embed-host=share"
+		description="Don't use “No Wrap” when there's a risk of overflowing and the content should be easily accessible."
 	/>
 </div>
 
