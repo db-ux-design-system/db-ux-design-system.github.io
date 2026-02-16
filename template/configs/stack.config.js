@@ -15,6 +15,18 @@ export const stackConfig = {
 	],
 	properties: [
 		{
+			name: 'direction',
+			type: 'select',
+			label: 'Direction',
+			description: 'Set the direction of the stack. Defaults to "column"',
+			defaultValue: 'column',
+			showInPlayground: true,
+			options: [
+				{ value: 'column', label: 'Column', default: true },
+				{ value: 'row', label: 'Row' }
+			]
+		},
+		{
 			name: 'gap',
 			type: 'select',
 			label: 'Gap',
@@ -44,18 +56,6 @@ export const stackConfig = {
 			options: [
 				{ value: 'simple', label: 'Simple', default: true },
 				{ value: 'divider', label: 'Divider' }
-			]
-		},
-		{
-			name: 'direction',
-			type: 'select',
-			label: 'Direction',
-			description: 'Set the direction of the stack. Defaults to "column"',
-			defaultValue: 'column',
-			showInPlayground: true,
-			options: [
-				{ value: 'column', label: 'Column', default: true },
-				{ value: 'row', label: 'Row' }
 			]
 		},
 		{
@@ -93,7 +93,7 @@ export const stackConfig = {
 			label: 'Wrap',
 			description: 'If the stack should wrap if parent is too small otherwise you get an overflow',
 			defaultValue: false,
-			showInPlayground: true
+			showInPlayground: false
 		},
 		{
 			name: 'id',

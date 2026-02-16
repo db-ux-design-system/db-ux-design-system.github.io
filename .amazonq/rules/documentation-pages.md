@@ -241,6 +241,18 @@ export const [component]Config = {
 };
 ```
 
+## Property Order in Config
+- Properties in the config should be ordered logically based on user workflow
+- Start with fundamental properties (e.g., direction, size, variant)
+- Follow with styling properties (e.g., spacing, alignment)
+- End with advanced/optional properties
+- Example order: direction → gap → variant → alignment → justify-content
+
+## Documentation Page Order
+- All component documentation pages must be sorted alphabetically by component name
+- Use the `order` field in frontmatter to control the alphabetical sorting
+- Example: Accordion (order: 1), Badge (order: 2), Button (order: 3), etc.
+
 ## Important Notes
 - Always wrap content in `<DBSection spacing="small" width="auto">`
 - Use `<CollapsibleWrapper collapsedHeight="320px">` for long content

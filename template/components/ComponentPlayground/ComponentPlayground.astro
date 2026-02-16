@@ -565,6 +565,27 @@ const dualCaseProps = {
 						</div>
 					</section>
 				</div>
+			) : config.elementId === 'demo-stack' ? (
+				<div
+					class="db-stack"
+					id={config.elementId}
+					data-gap={config.defaultProps.gap}
+					data-variant={config.defaultProps.variant}
+					data-direction={config.defaultProps.direction}
+					data-alignment={config.defaultProps.alignment}
+				>
+					<div style="background-color: var(--db-cyan-bg-basic-level-1-default); padding: var(--db-spacing-fixed-md);">
+						Item 1
+					</div>
+					{config.defaultProps.variant === 'divider' && <div class="db-divider" />}
+					<div style="background-color: var(--db-cyan-bg-basic-level-1-default); padding: var(--db-spacing-fixed-md);">
+						Item 2
+					</div>
+					{config.defaultProps.variant === 'divider' && <div class="db-divider" />}
+					<div style="background-color: var(--db-cyan-bg-basic-level-1-default); padding: var(--db-spacing-fixed-md);">
+						Item 3
+					</div>
+				</div>
 			) : config.elementId === 'demo-accordion' ? (
 				<ul class="db-accordion" id={config.elementId} data-variant={config.defaultProps.variant}>
 					<li class="db-accordion-item">
@@ -699,6 +720,21 @@ const dualCaseProps = {
 									(prop.name === 'spacing' || prop.name === 'placement' || prop.name === 'width')
 								) {
 									updateAction = `const article = document.querySelector('#demo-popover .db-popover-content'); if(article) article.setAttribute('data-${prop.name}', this.value);`;
+								} else if (
+									config.elementId === 'demo-stack' &&
+									(prop.name === 'gap' || prop.name === 'variant' || prop.name === 'direction' || prop.name === 'alignment' || prop.name === 'justify-content / justifyContent')
+								) {
+									if (prop.name === 'gap') {
+										updateAction = `document.getElementById('demo-stack').setAttribute('data-gap', this.value);`;
+									} else if (prop.name === 'variant') {
+										updateAction = `const stack = document.getElementById('demo-stack'); stack.setAttribute('data-variant', this.value); const dividers = stack.querySelectorAll('.db-divider'); dividers.forEach(d => d.remove()); if(this.value === 'divider') { const items = Array.from(stack.children).filter(c => !c.classList.contains('db-divider')); items.forEach((item, i) => { if(i < items.length - 1) { const divider = document.createElement('div'); divider.className = 'db-divider'; const direction = stack.getAttribute('data-direction'); divider.setAttribute('data-variant', direction === 'row' ? 'vertical' : 'horizontal'); item.after(divider); } }); stack.setAttribute('data-alignment', 'stretch'); const selects = document.querySelectorAll('.controls-area select'); selects.forEach(s => { if(s !== this && s.onchange && s.onchange.toString().includes('data-alignment')) { const oldHandler = s.onchange; s.onchange = null; s.value = 'stretch'; s.onchange = oldHandler; } }); }`;
+									} else if (prop.name === 'alignment') {
+										updateAction = `const stack = document.getElementById('demo-stack'); stack.setAttribute('data-alignment', this.value); if(this.value !== 'stretch' && stack.getAttribute('data-variant') === 'divider') { stack.setAttribute('data-variant', 'simple'); const dividers = stack.querySelectorAll('.db-divider'); dividers.forEach(d => d.remove()); const selects = document.querySelectorAll('.controls-area select'); selects.forEach(s => { if(s !== this && s.onchange && s.onchange.toString().includes("stack.setAttribute('data-variant'")) { const oldHandler = s.onchange; s.onchange = null; s.value = 'simple'; s.onchange = oldHandler; } }); }`;
+									} else if (prop.name === 'direction') {
+										updateAction = `const stack = document.getElementById('demo-stack'); stack.setAttribute('data-direction', this.value); const dividers = stack.querySelectorAll('.db-divider'); dividers.forEach(d => { d.setAttribute('data-variant', this.value === 'row' ? 'vertical' : 'horizontal'); });`;
+									} else if (prop.name === 'justify-content / justifyContent') {
+										updateAction = `document.getElementById('demo-stack').setAttribute('data-justify-content', this.value);`;
+									}
 								} else if (
 									config.elementId === 'demo-section' &&
 									(prop.name === 'spacing' || prop.name === 'width')
@@ -1133,6 +1169,8 @@ const dualCaseProps = {
 									action = `const h = document.getElementById('notification-headline'); if(this.checked) { if(!h) { const notification = document.getElementById('demo-notification'); const header = document.createElement('header'); header.id = 'notification-headline'; header.textContent = notification.getAttribute('data-headline') || 'Success'; notification.insertBefore(header, notification.firstChild); } else { h.style.display = ''; } } else { if(h) h.remove(); }`;
 								} else if (config.elementId === 'demo-popover' && prop.name === 'gap') {
 									action = `const article = document.querySelector('#demo-popover .db-popover-content'); if(article) { if(this.checked) article.setAttribute('data-gap', 'true'); else article.setAttribute('data-gap', 'false'); }`;
+								} else if (config.elementId === 'demo-stack' && prop.name === 'wrap') {
+									action = `const stack = document.getElementById('demo-stack'); if(this.checked) stack.setAttribute('data-wrap', 'true'); else stack.removeAttribute('data-wrap');`;
 								} else {
 									action = `if(this.checked) document.getElementById('${config.elementId}').setAttribute('data-${prop.name}', 'true'); else document.getElementById('${config.elementId}').setAttribute('data-${prop.name}', 'false');`;
 								}
