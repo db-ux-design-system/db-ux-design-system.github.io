@@ -132,7 +132,7 @@ const dualCaseProps = {
 							let updateAction;
 							if (config.elementId === 'playground-input' && prop.name === 'label') {
 								updateAction = `document.getElementById('${targetId}').textContent = this.value;`;
-							} else if ((config.elementId === 'playground-input' || config.elementId === 'playground-select') && prop.name === 'validation') {
+							} else if (['playground-select', 'playground-input'].includes(config.elementId) && prop.name === 'validation') {
 								const fieldId = config.elementId === 'playground-input' ? 'playground-input-field' : 'playground-select-field';
 								const validInfoId = config.elementId === 'playground-input' ? 'playground-input-infotext-valid' : 'playground-select-infotext-valid';
 								const invalidInfoId = config.elementId === 'playground-input' ? 'playground-input-infotext' : 'playground-select-infotext';
@@ -229,7 +229,7 @@ const dualCaseProps = {
 										/>
 									</div>
 								);
-							} else if (config.elementId === 'playground-input' && (prop.name === 'validMessage' || prop.name === 'valid-message')) {
+							} else if (config.elementId === 'playground-input' && ['validMessage', 'valid-message'].includes(prop.name)) {
 								return (
 									<div class="db-input">
 										<label>{prop.label}</label>
@@ -251,7 +251,7 @@ const dualCaseProps = {
 										/>
 									</div>
 								);
-							} else if (config.elementId === 'playground-select' && (prop.name === 'validMessage' || prop.name === 'valid-message')) {
+							} else if (config.elementId === 'playground-select' && ['validMessage', 'valid-message'].includes(prop.name)) {
 								return (
 									<div class="db-input">
 										<label>{prop.label}</label>
@@ -262,7 +262,7 @@ const dualCaseProps = {
 										/>
 									</div>
 								);
-							} else if (config.elementId === 'playground-select' && (prop.name === 'invalidMessage' || prop.name === 'invalid-message')) {
+							} else if (config.elementId === 'playground-select' && ['invalidMessage', 'invalid-message'].includes(prop.name)) {
 								return (
 									<div class="db-input">
 										<label>{prop.label}</label>
@@ -276,7 +276,7 @@ const dualCaseProps = {
 							} else {
 								const targetId = config.elementId === 'playground-input' && nativeAttributes.includes(prop.name)
 									? (prop.name === 'label' ? 'playground-input-label' : 'playground-input-field')
-									: (config.elementId === 'playground-switch' || config.elementId === 'playground-radio' || config.elementId === 'playground-checkbox') && (prop.name === 'icon-leading' || prop.name === 'iconLeading' || prop.name === 'icon-trailing' || prop.name === 'iconTrailing')
+									: ['playground-switch', 'playground-radio', 'playground-checkbox'].includes(config.elementId) && ['icon-leading', 'iconLeading', 'icon-trailing', 'iconTrailing'].includes(prop.name)
 									? config.elementId
 									: config.elementId;
 								const updateAction = config.elementId === 'playground-input' && prop.name === 'label'
@@ -298,7 +298,7 @@ const dualCaseProps = {
 						if (prop.type === 'checkbox') {
 							let action;
 							if (prop.name === 'disabled') {
-								const targetId = config.elementId === 'playground-input' ? 'playground-input-field' : (config.elementId === 'playground-switch' || config.elementId === 'playground-radio' || config.elementId === 'playground-checkbox') ? `${config.elementId}-input` : config.elementId;
+								const targetId = config.elementId === 'playground-input' ? 'playground-input-field' : ['playground-switch', 'playground-radio', 'playground-checkbox'].includes(config.elementId) ? `${config.elementId}-input` : config.elementId;
 								if (config.elementId === 'playground-select') {
 									action = `const select = document.getElementById('playground-select-field'); if(select) { if(this.checked) select.setAttribute('disabled', ''); else select.removeAttribute('disabled'); }`;
 								} else {
@@ -307,13 +307,13 @@ const dualCaseProps = {
 										: `if(this.checked) document.getElementById('${targetId}').setAttribute('${prop.name}', ''); else document.getElementById('${targetId}').removeAttribute('${prop.name}');`;
 								}
 							} else if (prop.name === 'checked') {
-								const targetId = (config.elementId === 'playground-switch' || config.elementId === 'playground-radio' || config.elementId === 'playground-checkbox') ? `${config.elementId}-input` : config.elementId;
+								const targetId = ['playground-switch', 'playground-radio', 'playground-checkbox'].includes(config.elementId) ? `${config.elementId}-input` : config.elementId;
 								action = `const target = document.getElementById('${targetId}'); target.checked = this.checked; if(this.checked) target.setAttribute('checked', ''); else target.removeAttribute('checked');`;
-							} else if ((config.elementId === 'playground-switch' || config.elementId === 'playground-radio' || config.elementId === 'playground-checkbox') && (prop.name === 'show-label' || prop.name === 'showLabel')) {
+							} else if (['playground-switch', 'playground-radio', 'playground-checkbox'].includes(config.elementId) && (prop.name === 'show-label' || prop.name === 'showLabel')) {
 								action = `const label = document.getElementById('${config.elementId}-label'); if(this.checked) label.style.display = ''; else label.style.display = 'none';`;
-							} else if (config.elementId === 'playground-select' && (prop.name === 'showLabel' || prop.name === 'show-label')) {
+							} else if (config.elementId === 'playground-select' && ['showLabel', 'show-label'].includes(prop.name)) {
 								action = `const wrapper = document.getElementById('${config.elementId}'); if(wrapper) wrapper.setAttribute('data-hide-label', this.checked ? 'false' : 'true');`;
-							} else if (config.elementId === 'playground-select' && (prop.name === 'showMessage' || prop.name === 'show-message')) {
+							} else if (config.elementId === 'playground-select' && ['showMessage', 'show-message'].includes(prop.name)) {
 								action = `const message = document.getElementById('playground-select-message'); if(message) message.style.display = this.checked ? '' : 'none';`;
 							} else if (config.elementId === 'playground-select' && prop.name === 'required') {
 								action = `const field = document.getElementById('playground-select-field'); if(field) { if(this.checked) field.setAttribute('required', ''); else field.removeAttribute('required'); }`;
