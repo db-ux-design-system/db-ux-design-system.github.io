@@ -202,7 +202,7 @@ const dualCaseProps = {
 						aria-invalid="false"
 						onchange="const wrapper = document.getElementById('playground-select'); if(wrapper.getAttribute('data-variant') === 'floating') { if(this.value) { wrapper.removeAttribute('data-label-hidden'); } else { wrapper.setAttribute('data-label-hidden', 'true'); } }"
 					>
-						<option id="playground-select-placeholder" value="" hidden="">
+						<option id="playground-select-placeholder" value="" hidden>
 							{config.defaultProps.placeholder || 'Choose an option'}
 						</option>
 						<option value="de">Germany</option>
