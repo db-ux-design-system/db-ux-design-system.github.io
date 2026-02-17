@@ -7,3 +7,11 @@
 .about-us-avatar-paragraph-spaced {
 	margin-block-end: var(--db-spacing-fixed-xl);
 }
+
+.img--tint-dark-blue {
+	filter: brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(2234%) hue-rotate(182deg) brightness(95%) contrast(95%);
+}
+
+[data-mode='dark'] .img--tint-dark-blue {
+	filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+}
