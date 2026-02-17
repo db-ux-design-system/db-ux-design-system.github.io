@@ -29,7 +29,7 @@ Backdrop is a helper component that dims the page behind an overlay to guide att
 
 ## Playground
 
-Experiment with the Backdrop and its properties.
+Experiment with the backdrop and its properties.
 
 <ComponentPlayground config={backdropConfig} />
 
@@ -74,7 +74,7 @@ Experiment with the Backdrop and its properties.
 
 ## Implementation
 
-There is no Backdrop component. If you need a backdrop like the one in DBDrawer you should apply those styles:
+There is no backdrop component. If you need a backdrop like the one in DBDrawer you should apply those styles:
 
 <CollapsibleWrapper collapsedHeight="320px">
 
@@ -138,18 +138,18 @@ dialog::backdrop {
 
 ###### Focus attention
 
-Use Backdrop when the user should focus on a single active UI layer. If users must keep working with the background, avoid Backdrop and use a non-blocking pattern instead.
+Use backdrop when the user should focus on a single active UI layer. If users must keep working with the background, avoid Backdrop and use a non-blocking pattern instead.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/tREBXQmJlK75D2ZBjtuBx9/Doku--Backdrop?node-id=1-1132&embed-host=share"
-		description="Use Backdrop behind a dialog or drawer to clearly indicate an active overlay layer."
+		description="Use backdrop behind a dialog or drawer to clearly indicate an active overlay layer."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/tREBXQmJlK75D2ZBjtuBx9/Doku--Backdrop?node-id=1-1133&embed-host=share"
-		description="Don't use Backdrop for decorative emphasis when no overlay is present."
+		description="Don't use backdrop for decorative emphasis when no overlay is present."
 	/>
 </div>
 
@@ -161,7 +161,7 @@ Backdrop should reduce distraction, not remove necessary context. If users need 
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/tREBXQmJlK75D2ZBjtuBx9/Doku--Backdrop?node-id=3-1110&embed-host=share"
-		description="Use Backdrop only when the user can complete the task without needing background content."
+		description="Use backdrop only when the user can complete the task without needing background content."
 	/>
 	<GuidelineExample
 		variant="dont"
@@ -172,7 +172,7 @@ Backdrop should reduce distraction, not remove necessary context. If users need 
 
 ###### Accessibility
 
-Ensure foreground content has sufficient contrast against the dimmed background. When Backdrop indicates a modal state, keep focus within the active overlay and ensure assistive tech cannot navigate background content.
+Ensure foreground content has sufficient contrast against the dimmed background. When the backdrop indicates a modal state, keep focus within the active overlay and ensure assistive tech cannot navigate background content.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -197,7 +197,7 @@ Ensure foreground content has sufficient contrast against the dimmed background.
 
 ## FAQ
 
-Have a question about the Backdrop? We'll answer it and add frequently asked questions to this page.
+Have a question about the backdrop? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Backdrop" />
 

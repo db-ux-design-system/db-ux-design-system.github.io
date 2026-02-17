@@ -32,7 +32,7 @@ Input captures short, single-line user text entries in forms and dialogs. It sho
 
 ## Playground
 
-Experiment with the Input component and its properties.
+Experiment with the input component and its properties.
 
 <ComponentPlayground config={inputConfig} component="input" />
 
@@ -98,26 +98,26 @@ Configure the input through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-###### Right data input type
+###### Input type
 
-Use Input for short, single-line free text entry. Use Textarea if users are expected to enter multiple lines or longer messages. If users must choose from predefined options, use a selection component instead (e.g., Select, Radio/Checkbox depending on the case).
+Use input for short, single-line free text entry. Use textarea if users are expected to enter multiple lines or longer messages. If users must choose from predefined options, use a selection component instead (e.g., select, radio/checkbox depending on the case).
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
-		description="Use Input when the user can type any value and the expected entry is short."
+		description="Use input when the user can type any value and the expected entry is short."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1133&embed-host=share&scaling=scale-down-width"
-		description="Don't use Input for choosing from a fixed list (forces typing, increases errors)."
+		description="Don't use input for choosing from a fixed list (forces typing, increases errors)."
 	/>
 </div>
 
 ###### Label text
 
-Provide a clear and short label that describes what to write. Do not replace the label with placeholder text; placeholders disappear when typing.
+Provide a clear and short label that describes what to write. Do not replace the label with placeholder text. Placeholders disappear when typing.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -140,16 +140,16 @@ Use visible labels (above or floating) as the default. Only use hidden labels in
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1122&embed-host=share&scaling=scale-down-width"
-		description="Use 'Label above' or 'Floating label' variants with visible text labels."
+		description="Use 'label above' or 'floating label' variants with visible text labels."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1123&embed-host=share&scaling=scale-down-width"
-		description="Don't use  inputs without any visible label text (unless extreme space constraints require it and screenreader text is provided)."
+		description="Don't use inputs without any visible label text (unless extreme space constraints require it and screenreader text is provided)."
 	/>
 </div>
 
-###### Placeholders as examples
+###### Placeholders
 
 Placeholder text is optional and should provide an example format/value, not instructions or required context. Placeholders must not contain critical information because they disappear when users type.
 
@@ -210,7 +210,7 @@ Input width should reflect the expected content length and align to the layout g
 
 ## FAQ
 
-Have a question about the Input component? We'll answer it and add frequently asked questions to this page.
+Have a question about the input component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Input" />
 

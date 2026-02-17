@@ -22,7 +22,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { badgeConfig } from '@template/configs/badge.config.js';
 
-The Badge component is used to display short, contextual information such as status, category, or metadata in close relation to another element.
+The badge component is used to display short, contextual information such as status, category, or metadata in close relation to another element.
 
 - Indicate status or state of an item (e.g. new, error, success)
 - Label or categorize content with a short descriptor
@@ -31,7 +31,7 @@ The Badge component is used to display short, contextual information such as sta
 <DBSection spacing="small" width="auto">
 
     ## Playground
-    Experiment with the Badge component and its properties.
+    Experiment with the badge component and its properties.
 
     <ComponentPlayground config={badgeConfig} component={DBBadge} />
 
@@ -76,7 +76,7 @@ The Badge component is used to display short, contextual information such as sta
 
 ## Properties & Slots
 
-Configure the Badge through its properties, such as semantic, size, and content.
+Configure the badge through its properties, such as semantic, size, and content.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
@@ -97,7 +97,7 @@ Configure the Badge through its properties, such as semantic, size, and content.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-###### Use badges for supplementary information
+###### Content
 
 Badges should provide additional context and must not carry essential information on their own.
 
@@ -105,16 +105,16 @@ Badges should provide additional context and must not carry essential informatio
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=1-1132&embed-host=share"
-		description="Use a Badge to display a status next to a list item or title."
+		description="Use a badge to display a status next to a list item or title."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=1-1133&embed-host=share"
-		description="Don't use a Badge as the only indicator for critical information."
+		description="Don't use a badge as the only indicator for critical information."
 	/>
 </div>
 
-###### Keep label text short
+###### Labels
 
 Badge labels must be concise and scannable to ensure quick recognition.
 
@@ -127,47 +127,47 @@ Badge labels must be concise and scannable to ensure quick recognition.
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1112&embed-host=share"
-		description="Avoid long sentences or detailed explanations inside a Badge."
+		description="Avoid long sentences or detailed explanations inside a badge."
 	/>
 </div>
 
-###### Position badges clearly
+###### Positioning
 
-Place Badges close to the element they describe, without breaking layout or alignment.
+Place badges close to the element they describe, without breaking layout or alignment.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1113&embed-host=share"
-		description="Align the Badge consistently next to the related label or component."
+		description="Align the badge consistently next to the related label or component."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1114&embed-host=share"
-		description="Don't place Badges far away or detached from their reference element."
+		description="Don't place badges far away or detached from their reference element."
 	/>
 </div>
 
 ###### Badge vs Tag
 
-Use Badges for status or metadata, and tags for filtering, grouping, or interactive categorization.
+Use badges for status or metadata, and tags for filtering, grouping, or interactive categorization.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1116&embed-host=share"
-		description="Use a Badge to show status like 'Active' or 'Archived'."
+		description="Use a badge to show status like 'Active' or 'Archived'."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1117&embed-host=share"
-		description="Don't use a Badge when the element is meant to be clickable or removable."
+		description="Don't use a badge when the element is meant to be clickable or removable."
 	/>
 </div>
 
-###### Accessibility considerations
+###### Accessibility
 
-Ensure Badge information is available to assistive technologies and not conveyed by color alone.
+Ensure badge information is available to assistive technologies and not conveyed by color alone.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -192,7 +192,7 @@ Ensure Badge information is available to assistive technologies and not conveyed
 
 ## FAQ
 
-Have a question about the Badge component? We'll answer it and add frequently asked questions to this page.
+Have a question about the badge component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Badge" />
 

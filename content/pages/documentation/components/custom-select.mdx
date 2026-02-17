@@ -20,7 +20,7 @@ import PropertiesTable from '@template/components/PropertiesTable/PropertiesTabl
 import { customSelectConfig } from '@template/configs/customSelect.config.js';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 
-Custom Select is an advanced dropdown for choosing one or multiple predefined options with support for search, grouping, and showing selected values. Use it when a basic Select is not sufficient due to option volume, selection complexity, or the need for better scanning and management of chosen items.
+Custom Select is an advanced dropdown for choosing one or multiple predefined options with support for search, grouping, and showing selected values. Use it when a basic select is not sufficient due to option volume, selection complexity, or the need for better scanning and management of chosen items.
 
 - Select multiple items from a longer list with optional "Select all"
 - Search and filter within options to quickly find values
@@ -30,7 +30,7 @@ Custom Select is an advanced dropdown for choosing one or multiple predefined op
 
 ## Playground
 
-Experiment with the Custom Select component and its properties.
+Experiment with the custom select component and its properties.
 
 <ComponentPlayground config={customSelectConfig} />
 
@@ -98,35 +98,35 @@ Configure the custom select through its properties, slots and events.
 
 ###### Custom Select vs Select
 
-Prefer Select for simple single-choice lists. Use Custom Select when you need multi-select, search, grouping, or a clearer representation of multiple selected values.
+Prefer select for simple single-choice lists. Use custom select when you need multi-select, search, grouping, or a clearer representation of multiple selected values.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select?node-id=1-1132&embed-host=share"
-		description="Use the Custom Select for multi-select with many options or when users need search/grouping."
+		description="Use the custom select for multi-select with many options or when users need search/grouping."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select?node-id=1-1133&embed-host=share"
-		description="Don't use the Custom Select for short, simple single-choice lists where a basic Select or Radio is clearer."
+		description="Don't use the custom select for short, simple single-choice lists where a basic select or radio is clearer."
 	/>
 </div>
 
 ###### Custom Select vs Radio / Checkbox
 
-Use Custom Select when the list contains more options than can be shown clearly on screen—typically five or more. For fewer options, use radios (single selection) or checkboxes (multiple selection) so users can see and choose all options at once without opening a dropdown.
+Use custom select when the list contains more options than can be shown clearly on screen—typically five or more. For fewer options, use radios (single selection) or checkboxes (multiple selection) so users can see and choose all options at once without opening a dropdown.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select?node-id=4016-10306&embed-host=share"
-		description="Use the Custom Select for five or more selection options."
+		description="Use the custom select for five or more selection options."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select?node-id=4016-10307&embed-host=share"
-		description="Don't use the Custom Select for fewer than five selection options (use radios/checkboxes in this cases)."
+		description="Don't use the custom select for fewer than five selection options (use radios/checkboxes in this cases)."
 	/>
 </div>
 
@@ -143,7 +143,7 @@ Decide early whether the control is single-select or multi-select. If multi-sele
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select?node-id=3-1112&embed-host=share"
-		description="Don't use multiselect if only one selection should be made. (Use single select for this case)"
+		description="Don't use multiselect if only one selection should be made. Use single select for this case."
 	/>
 </div>
 
@@ -160,7 +160,7 @@ Ensure selected options are always easy to review without reopening the list. Us
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select?node-id=3-1114&embed-host=share"
-		description="Don't use the Amount Type for a single selection; text or tags are more suitable here."
+		description="Don't use the amount type for a single selection; text or tags are more suitable here."
 	/>
 </div>
 
@@ -191,7 +191,7 @@ Enable search when the list is long or users know what they want. Use grouping o
 
 ## FAQ
 
-Have a question about the Custom Select component? We'll answer it and add frequently asked questions to this page.
+Have a question about the custom select component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Custom Select" />
 

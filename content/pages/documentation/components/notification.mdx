@@ -38,7 +38,7 @@ Notification communicates a brief message about an event, state change, or syste
 <DBSection spacing="small" width="auto">
 
     ## Playground
-    Experiment with the Notification component and its properties.
+    Experiment with the notification component and its properties.
 
     <ComponentPlayground config={notificationConfig} component={DBNotification} />
 
@@ -106,7 +106,7 @@ Configure the notification through its properties, slots and events.
 
 ###### Usage
 
-Use Notification for feedback that lets users continue their task. If the message requires an immediate decision, confirmation, or blocks a critical flow, use a Dialog instead.
+Use notification for feedback that lets users continue their task. If the message requires an immediate decision, confirmation, or blocks a critical flow, use a Dialog instead.
 
 <div
 	style={{
@@ -129,7 +129,7 @@ Use Notification for feedback that lets users continue their task. If the messag
 
 ###### Semantics
 
-Use semantic variants consistently: Success for completion, Info for neutral updates, Warning for risk/attention, Error for failures that need correction. Ensure the message is understandable without color.
+Use semantic variants consistently: Successful for completion, informational for new updates, warning for risk/attention, critical for failures that need correction. Ensure the message is understandable without color.
 
 <div
 	style={{
@@ -141,12 +141,12 @@ Use semantic variants consistently: Success for completion, Info for neutral upd
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=3-1110&embed-host=share"
-		description="Use an Error notification for failed actions, stating what happened and the next step, with an error icon and clear label text."
+		description="Use an critical notification for failed actions, stating what happened and the next step, with an error icon and clear label text."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=3-1112&embed-host=share"
-		description="Don't use Success styling for neutral updates or rely on color alone to communicate urgency or meaning."
+		description="Don't use successful styling for neutral updates or rely on color alone to communicate urgency or meaning."
 	/>
 </div>
 
@@ -228,7 +228,7 @@ Place notifications where they are noticeable but do not cover primary controls.
 
 ## FAQ
 
-Have a question about the Notification component? We'll answer it and add frequently asked questions to this page.
+Have a question about the notification component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Notification" />
 
