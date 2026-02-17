@@ -20,13 +20,16 @@ export const dividerConfig = {
 	],
 	properties: [
 		{
-			name: 'id',
-			label: 'ID',
-			type: 'text',
-			defaultValue: '',
-			description:
-				'ID of the component, generated automatically for some components as a fallback if unset.',
-			showInPlayground: false,
+			name: 'variant',
+			label: 'Variant',
+			type: 'select',
+			defaultValue: 'horizontal',
+			description: 'Changes the orientation of the divider.',
+			options: [
+				{ value: 'horizontal', label: 'Horizontal', default: true },
+				{ value: 'vertical', label: 'Vertical' },
+			],
+			showInPlayground: true,
 		},
 		{
 			name: 'emphasis',
@@ -42,18 +45,6 @@ export const dividerConfig = {
 			showInPlayground: true,
 		},
 		{
-			name: 'variant',
-			label: 'Variant',
-			type: 'select',
-			defaultValue: 'horizontal',
-			description: 'Changes the orientation of the divider.',
-			options: [
-				{ value: 'horizontal', label: 'Horizontal', default: true },
-				{ value: 'vertical', label: 'Vertical' },
-			],
-			showInPlayground: true,
-		},
-		{
 			name: 'margin',
 			label: 'Margin',
 			type: 'select',
@@ -64,6 +55,15 @@ export const dividerConfig = {
 				{ value: 'none', label: 'None' },
 			],
 			showInPlayground: true,
+		},
+		{
+			name: 'id',
+			label: 'ID',
+			type: 'text',
+			defaultValue: '',
+			description:
+				'ID of the component, generated automatically for some components as a fallback if unset.',
+			showInPlayground: false,
 		},
 		{
 			name: 'width',

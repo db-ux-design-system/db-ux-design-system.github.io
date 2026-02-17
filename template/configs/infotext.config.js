@@ -43,19 +43,19 @@ export const infotextConfig = {
 			showInPlayground: true,
 		},
 		{
-			name: 'text',
-			label: 'Text',
-			type: 'text',
-			defaultValue: 'This is helpful information',
-			description: 'Alternative for default slot/children',
-			showInPlayground: true,
-		},
-		{
 			name: 'show-icon / showIcon',
 			label: 'Show Icon',
 			type: 'checkbox',
 			defaultValue: true,
 			description: 'Enables or disables the visibility of the icon',
+			showInPlayground: true,
+		},
+		{
+			name: 'text',
+			label: 'Text',
+			type: 'text',
+			defaultValue: 'This is helpful information',
+			description: 'Alternative for default slot/children',
 			showInPlayground: true,
 		},
 		{

@@ -9,19 +9,6 @@ export const popoverConfig = {
 	},
 	properties: [
 		{
-			name: 'spacing',
-			label: 'Spacing',
-			type: 'select',
-			defaultValue: 'medium',
-			description: 'Controls the padding inside the popover via `data-spacing` attribute on the `<article>` element. Default is `var(--db-spacing-fixed-sm)` when `data-spacing` is not set.',
-			options: [
-				{ label: 'None', value: 'none', default: false },
-				{ label: 'Small', value: 'small', default: false },
-				{ label: 'Medium', value: 'medium', default: true },
-				{ label: 'Large', value: 'large', default: false },
-			],
-		},
-		{
 			name: 'placement',
 			label: 'Placement',
 			type: 'select',
@@ -32,6 +19,19 @@ export const popoverConfig = {
 				{ label: 'Bottom', value: 'bottom', default: false },
 				{ label: 'Left', value: 'left', default: false },
 				{ label: 'Right', value: 'right', default: false },
+			],
+		},
+		{
+			name: 'spacing',
+			label: 'Spacing',
+			type: 'select',
+			defaultValue: 'medium',
+			description: 'Controls the padding inside the popover via `data-spacing` attribute on the `<article>` element. Default is `var(--db-spacing-fixed-sm)` when `data-spacing` is not set.',
+			options: [
+				{ label: 'None', value: 'none', default: false },
+				{ label: 'Small', value: 'small', default: false },
+				{ label: 'Medium', value: 'medium', default: true },
+				{ label: 'Large', value: 'large', default: false },
 			],
 		},
 		{

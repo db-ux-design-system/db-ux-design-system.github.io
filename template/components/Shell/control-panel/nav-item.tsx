@@ -7,7 +7,7 @@ const getStatusBadge = (status?: string) => {
 	
 	const config = {
 		concept: { semantic: 'warning', label: 'Concept' },
-		beta: { semantic: 'informative', label: 'Beta' },
+		beta: { semantic: 'informational', label: 'Beta' },
 		deprecated: { semantic: 'critical', label: 'Deprecated' },
 		legacy: { semantic: 'warning', label: 'Legacy' },
 	}[status];

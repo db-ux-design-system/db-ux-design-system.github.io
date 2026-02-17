@@ -32,20 +32,6 @@ export const customSelectConfig = {
 	],
 	properties: [
 		{
-			name: 'validation',
-			label: 'Validation',
-			type: 'select',
-			defaultValue: 'no-validation',
-			description:
-				'Marks an input element as invalid (red) / valid (green) / no-validation (grey). Overwrites the :user-valid selector.',
-			options: [
-				{ value: 'invalid', label: 'Invalid' },
-				{ value: 'valid', label: 'Valid' },
-				{ value: 'no-validation', label: 'No Validation', default: true },
-			],
-			showInPlayground: true,
-		},
-		{
 			name: 'variant',
 			label: 'Variant',
 			type: 'select',
@@ -71,6 +57,20 @@ export const customSelectConfig = {
 			type: 'text',
 			defaultValue: 'Placeholder',
 			description: 'Text that appears in the form control when it has no value set',
+			showInPlayground: true,
+		},
+		{
+			name: 'validation',
+			label: 'Validation',
+			type: 'select',
+			defaultValue: 'no-validation',
+			description:
+				'Marks an input element as invalid (red) / valid (green) / no-validation (grey). Overwrites the :user-valid selector.',
+			options: [
+				{ value: 'invalid', label: 'Invalid' },
+				{ value: 'valid', label: 'Valid' },
+				{ value: 'no-validation', label: 'No Validation', default: true },
+			],
 			showInPlayground: true,
 		},
 		{
