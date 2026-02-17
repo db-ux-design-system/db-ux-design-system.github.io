@@ -39,11 +39,11 @@ function getPropertyValues(property) {
 			{
 				config.properties.map((property) => (
 					<tr>
-						<td>
+						<th scope="row">
 							{property.alternativeName
 								? `${property.name} / ${property.alternativeName}`
 								: property.name}
-						</td>
+						</th>
 						<td>{getPropertyValues(property)}</td>
 						<td>{property.description}</td>
 					</tr>
