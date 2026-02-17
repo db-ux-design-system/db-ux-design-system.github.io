@@ -43,11 +43,11 @@ const events = config.events || [];
 			{
 				config.properties.map((property) => (
 					<tr>
-						<td>
+						<th scope="row">
 							{property.alternativeName
 								? `${property.name} / ${property.alternativeName}`
 								: property.name}
-						</td>
+						</th>
 						<td>{getPropertyValues(property)}</td>
 						<td>{property.description}</td>
 					</tr>
@@ -70,9 +70,9 @@ const events = config.events || [];
 				<tbody>
 					{slots.map((slot) => (
 						<tr>
-							<td>
+							<th scope="row">
 								<code>{slot.name}</code>
-							</td>
+							</th>
 							<td>{slot.description}</td>
 						</tr>
 					))}
@@ -96,9 +96,9 @@ const events = config.events || [];
 				<tbody>
 					{events.map((event) => (
 						<tr>
-							<td>
+							<th scope="row">
 								<code>{event.name}</code>
-							</td>
+							</th>
 							<td>{event.type}</td>
 							<td>{event.description}</td>
 						</tr>
