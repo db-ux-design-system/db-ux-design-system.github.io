@@ -78,16 +78,18 @@ html {
 .cards-row-fixed > a {
 	display: block;
 	width: 100%;
+	height: 100%;
 }
 
-.cards-row-fixed > .db-card {
+.cards-row-fixed > a > .db-card {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
+	box-sizing: border-box;
 }
 
 .cards-row-fixed .text-image {
-	flex: 1 1 auto;
+	flex: 0 1 auto;
 }
 
 .cards-row-fixed .text-image-content {
