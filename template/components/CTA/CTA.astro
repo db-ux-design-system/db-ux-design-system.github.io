@@ -1,6 +1,6 @@
 ---
 import './CTA.css';
-import { DBButton, DBCard } from '@db-ux/react-core-components';
+import { DBCard } from '@db-ux/react-core-components';
 
 interface Action {
 	label: string;
@@ -26,14 +26,22 @@ const { title, text, primaryAction, secondaryAction, align = 'center' } = Astro.
 				{title && <h3 class="cta-title">{title}</h3>}
 				{text && <p class="cta-text">{text}</p>}
 				<div class="cta-actions">
-					<a href={primaryAction.href} class="cta-action" aria-label={primaryAction.label}>
-						<DBButton variant={primaryAction.variant || 'brand'}>{primaryAction.label}</DBButton>
+					<a
+						href={primaryAction.href}
+						class="db-button cta-action"
+						data-variant={primaryAction.variant || 'brand'}
+						aria-label={primaryAction.label}
+					>
+						{primaryAction.label}
 					</a>
 					{secondaryAction && (
-						<a href={secondaryAction.href} class="cta-action" aria-label={secondaryAction.label}>
-							<DBButton variant={secondaryAction.variant || 'outlined'}>
-								{secondaryAction.label}
-							</DBButton>
+						<a
+							href={secondaryAction.href}
+							class="db-button cta-action"
+							data-variant={secondaryAction.variant || 'outlined'}
+							aria-label={secondaryAction.label}
+						>
+							{secondaryAction.label}
 						</a>
 					)}
 				</div>
