@@ -10,12 +10,21 @@
 }
 
 .properties-table-wrapper table {
-	width: auto;
-	min-width: 100%;
+	width: 100%;
+	table-layout: fixed;
+}
+.properties-table-wrapper table th:nth-child(1) {
+	max-width: 50px;
 }
 
-.properties-table-wrapper table td {
+.properties-table-wrapper table td,
+.properties-table-wrapper table th {
 	overflow-wrap: break-word;
-	word-break: break-all;
+	word-break: normal;
 	hyphens: auto;
+}
+
+.properties-table-wrapper table tbody tr:last-child th,
+.properties-table-wrapper table tbody tr:last-child td {
+	border-bottom: none;
 }

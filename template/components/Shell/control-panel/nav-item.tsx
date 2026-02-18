@@ -4,7 +4,7 @@ import { covers, getFirstChildPath, trimExtension } from '@template/utils/naviga
 
 const getStatusBadge = (status?: string) => {
 	if (!status || status === 'stable') return null;
-	
+
 	const config = {
 		concept: { semantic: 'warning', label: 'Concept' },
 		beta: { semantic: 'informational', label: 'Beta' },
@@ -68,7 +68,11 @@ const NavItem = ({
 				expanded={isActive}
 			>
 				{children.map((sub) => (
-					<NavItem key={`router-sub-${sub.path ?? sub.title}`} {...sub} />
+					<NavItem
+						key={`router-sub-${sub.path ?? sub.title}`}
+						{...sub}
+						icon={sub.icon ?? 'circle_small'}
+					/>
 				))}
 			</DBNavigationItemGroup>
 		);
