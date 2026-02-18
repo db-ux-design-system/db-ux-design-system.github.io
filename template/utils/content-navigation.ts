@@ -60,13 +60,25 @@ function getOrder(fm: NavigationFrontmatter): number | undefined {
 }
 
 /**
- * Comparator function for sorting navigation items. First by `order`, then alphabetically by `title`.
+ * Comparator function for sorting navigation items. First by status priority, then by `order`, then alphabetically by `title`.
  *
  * @param a - The first navigation item.
  * @param b - The second navigation item.
  * @returns -1, 0, or 1 depending on order.
  */
 function compareNav(a: NavigationItem, b: NavigationItem) {
+	// Status priority: stable > beta > concept > legacy > deprecated
+	const statusPriority: Record<string, number> = {
+		stable: 1,
+		beta: 1,
+		concept: 3,
+		legacy: 4,
+		deprecated: 5,
+	};
+	const aStatus = statusPriority[a.status || 'stable'] || 0;
+	const bStatus = statusPriority[b.status || 'stable'] || 0;
+	if (aStatus !== bStatus) return aStatus - bStatus;
+
 	const ao = a.order ?? Number.MAX_SAFE_INTEGER;
 	const bo = b.order ?? Number.MAX_SAFE_INTEGER;
 	if (ao !== bo) return ao - bo;
@@ -113,7 +125,9 @@ export function buildAppNavigationFromContent(): AppNavigation {
 		const isSubNavigation = fm.isSubNavigation ?? false;
 		const iconTrailing = fm.iconTrailing;
 		const disabled = fm.isMenuItemDisabled === true;
-		const order = getOrder(fm);
+		// Auto-order alphabetically for documentation/components, otherwise use frontmatter order
+		const isComponentPage = rel.startsWith('documentation/components/') && segments.length === 3;
+		const order = isComponentPage ? undefined : getOrder(fm);
 		const status = fm.status;
 
 		const node: NavigationItem = {
