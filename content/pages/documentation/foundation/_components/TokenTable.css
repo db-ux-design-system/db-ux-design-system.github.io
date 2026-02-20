@@ -16,6 +16,7 @@
 	text-align: left;
 	padding: var(--db-spacing-fixed-md) var(--db-spacing-fixed-xs);
 	font: var(--db-type-body-sm);
+	vertical-align: middle;
 }
 
 .token-table th {
@@ -37,13 +38,13 @@
 
 .token-table td:first-child {
 	font-family: monospace;
-	padding: var(--db-spacing-fixed-xs);
 }
 
 .token-cell {
 	display: flex;
 	align-items: center;
 	gap: var(--db-spacing-fixed-xs);
+	min-height: 2rem;
 }
 
 .token-cell [data-icon-trailing] {
@@ -53,10 +54,6 @@
 
 .token-table td:nth-child(1) {
 	padding-left: var(--db-spacing-fixed-md);
-}
-
-.token-table td:nth-child(2) {
-	padding: var(--db-spacing-fixed-xs);
 }
 
 .token-table tbody tr {
@@ -92,6 +89,10 @@ table tbody tr:nth-child(2n) {
 	height: var(--db-sizing-md);
 	border: 1px solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
 	border-radius: var(--db-border-radius-xs);
+}
+
+.token-table th:has(.color-swatch) {
+	padding: var(--db-spacing-fixed-xs);
 }
 
 .accordion-headline {

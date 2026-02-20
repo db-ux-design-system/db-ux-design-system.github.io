@@ -1,0 +1,76 @@
+---
+import { DBAccordion, DBAccordionItem, DBTag, DBIcon } from '@db-ux/react-core-components';
+
+const sizingTokens = [
+	{ token: 'db-sizing-3xs', functional: '1rem (16px)', regular: '1.25rem (20px)', expressive: '1.5rem (24px)' },
+	{ token: 'db-sizing-2xs', functional: '1.25rem (20px)', regular: '1.5rem (24px)', expressive: '1.75rem (28px)' },
+	{ token: 'db-sizing-xs', functional: '1.5rem (24px)', regular: '2rem (32px)', expressive: '2.5rem (40px)' },
+	{ token: 'db-sizing-sm', functional: '1.75rem (28px)', regular: '2.5rem (40px)', expressive: '3rem (48px)' },
+	{ token: 'db-sizing-md', functional: '2rem (32px)', regular: '3rem (48px)', expressive: '3.5rem (56px)' },
+	{ token: 'db-sizing-lg', functional: '2.5rem (40px)', regular: '3.5rem (56px)', expressive: '4rem (64px)' },
+	{ token: 'db-sizing-xl', functional: '3rem (48px)', regular: '4rem (64px)', expressive: '5rem (80px)' },
+	{ token: 'db-sizing-2xl', functional: '4rem (64px)', regular: '5rem (80px)', expressive: '6rem (96px)' },
+	{ token: 'db-sizing-3xl', functional: '5rem (80px)', regular: '6rem (96px)', expressive: '7rem (112px)' },
+];
+
+const containerTokens = [
+	{ token: 'db-container-xs', functional: '20rem (320px)', regular: '20rem (320px)', expressive: '20rem (320px)' },
+	{ token: 'db-container-sm', functional: '40rem (640px)', regular: '40rem (640px)', expressive: '40rem (640px)' },
+	{ token: 'db-container-md', functional: '48rem (768px)', regular: '48rem (768px)', expressive: '48rem (768px)' },
+	{ token: 'db-container-lg', functional: '64rem (1024px)', regular: '64rem (1024px)', expressive: '64rem (1024px)' },
+	{ token: 'db-container-xl', functional: '80rem (1280px)', regular: '80rem (1280px)', expressive: '80rem (1280px)' },
+	{ token: 'db-container-2xl', functional: '96rem (1536px)', regular: '96rem (1536px)', expressive: '96rem (1536px)' },
+];
+
+const categories = [
+	{ key: 'sizing', label: 'Component', icon: 'list', tokens: sizingTokens, showDensity: true },
+	{ key: 'container', label: 'Container', icon: 'list', tokens: containerTokens, showDensity: true },
+];
+---
+
+<div class="token-table">
+	<DBAccordion variant="card">
+		{
+			categories.map(({ key, label, icon, tokens, showDensity }) => (
+				<DBAccordionItem headline={label}>
+					<span slot="headline" class="accordion-headline">
+						<DBIcon icon={icon} />
+						{label}
+					</span>
+					<table>
+						<thead>
+							<tr>
+								<th>Token</th>
+								<th>Functional</th>
+								<th>Regular</th>
+								<th>Expressive</th>
+							</tr>
+						</thead>
+						<tbody>
+							{tokens.map((item) => (
+								<tr
+									onclick={`const span = this.querySelector('.copy-text'); span.textContent='Copied'; setTimeout(() => span.textContent='Copy Token', 2000); navigator.clipboard.writeText('var(--${item.token})')`}
+								>
+									<td>
+										<div class="token-cell">
+											<DBTag data-color="neutral">--{item.token}</DBTag>{' '}
+											<span class="copy-text">Copy Token</span>
+											<span data-icon-trailing="copy" data-icon-weight="16" />
+										</div>
+									</td>
+									<td>{item.functional}</td>
+									<td>{item.regular}</td>
+									<td>{item.expressive}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</DBAccordionItem>
+			))
+		}
+	</DBAccordion>
+</div>
+
+<style is:global>
+	@import './TokenTable.css';
+</style>
