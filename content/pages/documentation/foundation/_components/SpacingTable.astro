@@ -1,0 +1,137 @@
+---
+import { DBAccordion, DBAccordionItem, DBTag, DBIcon } from '@db-ux/react-core-components';
+import './TokenTable.css';
+
+const spacingTokens = {
+	fixed: [
+		{
+			token: 'db-spacing-fixed-3xs',
+			regular: '0.125rem',
+			expressive: '0.25rem',
+			functional: '0.125rem',
+		},
+		{
+			token: 'db-spacing-fixed-2xs',
+			regular: '0.25rem',
+			expressive: '0.5rem',
+			functional: '0.25rem',
+		},
+		{
+			token: 'db-spacing-fixed-xs',
+			regular: '0.5rem',
+			expressive: '0.75rem',
+			functional: '0.375rem',
+		},
+		{ token: 'db-spacing-fixed-sm', regular: '0.75rem', expressive: '1rem', functional: '0.5rem' },
+		{ token: 'db-spacing-fixed-md', regular: '1rem', expressive: '1.5rem', functional: '0.75rem' },
+		{ token: 'db-spacing-fixed-lg', regular: '1.5rem', expressive: '2rem', functional: '1rem' },
+		{ token: 'db-spacing-fixed-xl', regular: '2rem', expressive: '3rem', functional: '1.5rem' },
+		{ token: 'db-spacing-fixed-2xl', regular: '3rem', expressive: '5rem', functional: '2rem' },
+		{ token: 'db-spacing-fixed-3xl', regular: '5rem', expressive: '7.5rem', functional: '3rem' },
+	],
+	responsive: [
+		{
+			token: 'db-spacing-responsive-3xs',
+			regular: '1.25rem',
+			expressive: '1.75rem',
+			functional: '1rem',
+		},
+		{
+			token: 'db-spacing-responsive-2xs',
+			regular: '1.5rem',
+			expressive: '2rem',
+			functional: '1.25rem',
+		},
+		{
+			token: 'db-spacing-responsive-xs',
+			regular: '2rem',
+			expressive: '3rem',
+			functional: '1.75rem',
+		},
+		{
+			token: 'db-spacing-responsive-sm',
+			regular: '3rem',
+			expressive: '5rem',
+			functional: '2.5rem',
+		},
+		{
+			token: 'db-spacing-responsive-md',
+			regular: '5rem',
+			expressive: '7.5rem',
+			functional: '4rem',
+		},
+		{
+			token: 'db-spacing-responsive-lg',
+			regular: '7.5rem',
+			expressive: '15rem',
+			functional: '6rem',
+		},
+		{
+			token: 'db-spacing-responsive-xl',
+			regular: '15rem',
+			expressive: '30rem',
+			functional: '10rem',
+		},
+		{
+			token: 'db-spacing-responsive-2xl',
+			regular: '30rem',
+			expressive: '40rem',
+			functional: '15rem',
+		},
+		{
+			token: 'db-spacing-responsive-3xl',
+			regular: '40rem',
+			expressive: '50rem',
+			functional: '30rem',
+		},
+	],
+};
+
+const categories = [
+	{ key: 'fixed', label: 'Fixed', icon: 'list' },
+	{ key: 'responsive', label: 'Responsive', icon: 'list' },
+];
+---
+
+<div class="token-table">
+	<DBAccordion variant="card">
+		{
+			categories.map(({ key, label, icon }) => (
+				<DBAccordionItem headline={label}>
+					<span slot="headline" class="accordion-headline">
+						<DBIcon icon={icon} />
+						{label}
+					</span>
+					<table>
+						<thead>
+							<tr>
+								<th>Token</th>
+								<th>Functional</th>
+								<th>Regular</th>
+								<th>Expressive</th>
+							</tr>
+						</thead>
+						<tbody>
+							{spacingTokens[key].map(({ token, regular, expressive, functional }) => (
+								<tr
+									onclick={`const span = this.querySelector('.copy-text'); span.textContent='Copied'; setTimeout(() => span.textContent='Copy Token', 2000); navigator.clipboard.writeText('var(--${token})')`}
+								>
+									<td>
+										<div class="token-cell">
+											<DBTag data-color="neutral">--{token}</DBTag>{' '}
+											<span class="copy-text">Copy Token</span>
+											<span data-icon-trailing="copy" data-icon-weight="16" />
+										</div>
+									</td>
+									<td>{functional}</td>
+									<td>{regular}</td>
+									<td>{expressive}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</DBAccordionItem>
+			))
+		}
+	</DBAccordion>
+</div>

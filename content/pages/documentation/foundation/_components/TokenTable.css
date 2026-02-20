@@ -1,0 +1,109 @@
+.token-table table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.token-table .db-accordion-item {
+	--db-accordion-item-content-padding: 0;
+}
+
+.token-table .db-accordion-item > details > summary + div {
+	padding: 0;
+}
+
+.token-table th,
+.token-table td {
+	text-align: left;
+	padding: var(--db-spacing-fixed-md) var(--db-spacing-fixed-xs);
+	font: var(--db-type-body-sm);
+}
+
+.token-table th {
+	font: var(--db-type-headline-3xs);
+	background-color: transparent;
+	border-bottom: 1px solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+}
+
+.token-table th:nth-child(1) {
+	padding-left: var(--db-spacing-fixed-md);
+}
+.token-table th {
+	border-right: none;
+}
+
+.token-table table thead {
+	background: transparent;
+}
+
+.token-table td:first-child {
+	font-family: monospace;
+	padding: var(--db-spacing-fixed-xs);
+}
+
+.token-cell {
+	display: flex;
+	align-items: center;
+	gap: var(--db-spacing-fixed-xs);
+}
+
+.token-cell [data-icon-trailing] {
+	color: var(--db-adaptive-on-bg-basic-emphasis-70-default);
+	font-size: 14px;
+}
+
+.token-table td:nth-child(1) {
+	padding-left: var(--db-spacing-fixed-md);
+}
+
+.token-table td:nth-child(2) {
+	padding: var(--db-spacing-fixed-xs);
+}
+
+.token-table tbody tr {
+	cursor: pointer;
+}
+
+.token-table tbody tr:hover {
+	background-color: var(--db-adaptive-bg-basic-transparent-full-hovered);
+}
+
+.token-table tbody tr:active {
+	background-color: var(--db-adaptive-bg-basic-transparent-full-pressed);
+}
+
+.copy-text {
+	opacity: 0;
+	margin-left: auto;
+	font: var(--db-type-body-sm);
+	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+}
+
+.token-table tbody tr:hover .copy-text {
+	opacity: 1;
+}
+
+table tbody tr:nth-child(2n) {
+	background-color: var(--db-adaptive-bg-basic-transparent-full-default);
+}
+
+.color-swatch {
+	display: block;
+	width: 100%;
+	height: var(--db-sizing-md);
+	border: 1px solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-xs);
+}
+
+.accordion-headline {
+	display: flex;
+	align-items: center;
+	gap: var(--db-spacing-fixed-sm);
+}
+
+.color-preview {
+	display: inline-block;
+	width: var(--db-sizing-sm);
+	height: var(--db-sizing-sm);
+	border: 1px solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-xs);
+}
