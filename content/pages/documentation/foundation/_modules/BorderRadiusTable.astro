@@ -1,0 +1,48 @@
+---
+import { DBTag, DBIcon } from '@db-ux/react-core-components';
+import './TokenTable.css';
+
+const borderRadiusTokens = [
+	{ token: 'db-border-radius-3xs', value: '0.0625rem (1px)' },
+	{ token: 'db-border-radius-2xs', value: '0.125rem (2px)' },
+	{ token: 'db-border-radius-xs', value: '0.25rem (4px)' },
+	{ token: 'db-border-radius-sm', value: '0.5rem (8px)' },
+	{ token: 'db-border-radius-md', value: '0.75rem (12px)' },
+	{ token: 'db-border-radius-lg', value: '1rem (16px)' },
+	{ token: 'db-border-radius-xl', value: '1.5rem (24px)' },
+	{ token: 'db-border-radius-2xl', value: '1.75rem (28px)' },
+	{ token: 'db-border-radius-3xl', value: '2rem (32px)' },
+	{ token: 'db-border-radius-full', value: '500rem (8000px)' },
+];
+---
+
+<div class="token-table">
+	<table>
+		<thead>
+			<tr>
+				<th>Token</th>
+				<th>Value</th>
+				<th>Preview</th>
+			</tr>
+		</thead>
+		<tbody>
+			{borderRadiusTokens.map(({ token, value }) => (
+				<tr
+					onclick={`const span = this.querySelector('.copy-text'); span.textContent='Copied'; setTimeout(() => span.textContent='Copy Token', 2000); navigator.clipboard.writeText('var(--${token})')`}
+				>
+					<td>
+						<div class="token-cell">
+							<DBTag data-color="neutral">--{token}</DBTag>{' '}
+							<span class="copy-text">Copy Token</span>
+							<span data-icon-trailing="copy" data-icon-weight="16" />
+						</div>
+					</td>
+					<td>{value}</td>
+					<td>
+						<div class="border-radius-preview" data-border-radius={token} />
+					</td>
+				</tr>
+			))}
+		</tbody>
+	</table>
+</div>

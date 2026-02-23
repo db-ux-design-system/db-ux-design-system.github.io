@@ -1,0 +1,48 @@
+---
+import { DBTag } from '@db-ux/react-core-components';
+import './TokenTable.css';
+
+const opacityTokens = [
+	{ token: 'db-opacity-full', value: '1 (100%)' },
+	{ token: 'db-opacity-3xl', value: '0.92 (92%)' },
+	{ token: 'db-opacity-2xl', value: '0.84 (84%)' },
+	{ token: 'db-opacity-xl', value: '0.76 (76%)' },
+	{ token: 'db-opacity-lg', value: '0.68 (68%)' },
+	{ token: 'db-opacity-md', value: '0.4 (40%)' },
+	{ token: 'db-opacity-sm', value: '0.32 (32%)' },
+	{ token: 'db-opacity-xs', value: '0.24 (24%)' },
+	{ token: 'db-opacity-2xs', value: '0.16 (16%)' },
+	{ token: 'db-opacity-3xs', value: '0.08 (8%)' },
+];
+---
+
+<div class="token-table">
+	<table>
+		<thead>
+			<tr>
+				<th>Token</th>
+				<th>Value</th>
+				<th>Preview</th>
+			</tr>
+		</thead>
+		<tbody>
+			{opacityTokens.map(({ token, value }) => (
+				<tr
+					onclick={`const span = this.querySelector('.copy-text'); span.textContent='Copied'; setTimeout(() => span.textContent='Copy Token', 2000); navigator.clipboard.writeText('var(--${token})')`}
+				>
+					<td>
+						<div class="token-cell">
+							<DBTag data-color="neutral">--{token}</DBTag>{' '}
+							<span class="copy-text">Copy Token</span>
+							<span data-icon-trailing="copy" data-icon-weight="16" />
+						</div>
+					</td>
+					<td>{value}</td>
+					<td>
+						<div class="opacity-preview" data-opacity={token} />
+					</td>
+				</tr>
+			))}
+		</tbody>
+	</table>
+</div>

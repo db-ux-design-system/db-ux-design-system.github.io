@@ -1,0 +1,149 @@
+---
+import { DBAccordion, DBAccordionItem, DBTag, DBIcon } from '@db-ux/react-core-components';
+import './TokenTable.css';
+
+const typographyTokens = {
+	fontFamilies: [
+		{ token: 'db-font-family-sans', value: '"OpenSans", helvetica, arial, sans-serif', name: 'Sans (Body)' },
+		{ token: 'db-font-family-head', value: '"OpenSans Head", helvetica, arial, sans-serif', name: 'Head (Headlines)' },
+	],
+	weights: [
+		{ token: 'db-font-weight-light', value: '300', name: 'Light' },
+		{ token: 'db-font-weight-regular', value: '400', name: 'Regular' },
+		{ token: 'db-font-weight-medium', value: '500', name: 'Medium' },
+		{ token: 'db-font-weight-semibold', value: '600', name: 'SemiBold' },
+		{ token: 'db-font-weight-bold', value: '700', name: 'Bold' },
+	],
+	headline: [
+		{ token: 'db-type-headline-3xl', size: { functional: '2.5rem (40px)', regular: '5rem (80px)', expressive: '6rem (96px)' }, lineHeight: { functional: '3rem (48px)', regular: '6rem (96px)', expressive: '7.5rem (120px)' }, weight: '700 (Bold)' },
+		{ token: 'db-type-headline-2xl', size: { functional: '2.5rem (40px)', regular: '4rem (64px)', expressive: '5rem (80px)' }, lineHeight: { functional: '3rem (48px)', regular: '5rem (80px)', expressive: '6rem (96px)' }, weight: '700 (Bold)' },
+		{ token: 'db-type-headline-xl', size: { functional: '2rem (32px)', regular: '3rem (48px)', expressive: '4rem (64px)' }, lineHeight: { functional: '2.5rem (40px)', regular: '4rem (64px)', expressive: '5rem (80px)' }, weight: '700 (Bold)' },
+		{ token: 'db-type-headline-lg', size: { functional: '1.75rem (28px)', regular: '2.5rem (40px)', expressive: '3rem (48px)' }, lineHeight: { functional: '2rem (32px)', regular: '3rem (48px)', expressive: '4rem (64px)' }, weight: '700 (Bold)' },
+		{ token: 'db-type-headline-md', size: { functional: '1.5rem (24px)', regular: '2rem (32px)', expressive: '2.5rem (40px)' }, lineHeight: { functional: '1.75rem (28px)', regular: '2.5rem (40px)', expressive: '3rem (48px)' }, weight: '700 (Bold)' },
+		{ token: 'db-type-headline-sm', size: { functional: '1.25rem (20px)', regular: '1.75rem (28px)', expressive: '2rem (32px)' }, lineHeight: { functional: '1.5rem (24px)', regular: '2rem (32px)', expressive: '2.5rem (40px)' }, weight: '700 (Bold)' },
+		{ token: 'db-type-headline-xs', size: { functional: '1rem (16px)', regular: '1.5rem (24px)', expressive: '1.75rem (28px)' }, lineHeight: { functional: '1.25rem (20px)', regular: '1.75rem (28px)', expressive: '2rem (32px)' }, weight: '700 (Bold)' },
+		{ token: 'db-type-headline-2xs', size: { functional: '0.875rem (14px)', regular: '1.25rem (20px)', expressive: '1.5rem (24px)' }, lineHeight: { functional: '1rem (16px)', regular: '1.5rem (24px)', expressive: '1.75rem (28px)' }, weight: '700 (Bold)' },
+		{ token: 'db-type-headline-3xs', size: { functional: '0.875rem (14px)', regular: '1rem (16px)', expressive: '1.25rem (20px)' }, lineHeight: { functional: '1rem (16px)', regular: '1.25rem (20px)', expressive: '1.5rem (24px)' }, weight: '700 (Bold)' },
+	],
+	body: [
+		{ token: 'db-type-body-xl', size: { functional: '1.25rem (20px)', regular: '1.5rem (24px)', expressive: '1.75rem (28px)' }, lineHeight: { functional: '1.75rem (28px)', regular: '2rem (32px)', expressive: '2.5rem (40px)' }, weight: '400 (Regular)' },
+		{ token: 'db-type-body-lg', size: { functional: '1rem (16px)', regular: '1.25rem (20px)', expressive: '1.5rem (24px)' }, lineHeight: { functional: '1.5rem (24px)', regular: '1.75rem (28px)', expressive: '2rem (32px)' }, weight: '400 (Regular)' },
+		{ token: 'db-type-body-md', size: { functional: '0.875rem (14px)', regular: '1rem (16px)', expressive: '1.25rem (20px)' }, lineHeight: { functional: '1.25rem (20px)', regular: '1.5rem (24px)', expressive: '1.75rem (28px)' }, weight: '400 (Regular)' },
+		{ token: 'db-type-body-sm', size: { functional: '0.75rem (12px)', regular: '0.875rem (14px)', expressive: '1rem (16px)' }, lineHeight: { functional: '1rem (16px)', regular: '1.25rem (20px)', expressive: '1.5rem (24px)' }, weight: '400 (Regular)' },
+		{ token: 'db-type-body-xs', size: { functional: '0.625rem (10px)', regular: '0.75rem (12px)', expressive: '0.875rem (14px)' }, lineHeight: { functional: '0.875rem (14px)', regular: '1rem (16px)', expressive: '1.25rem (20px)' }, weight: '400 (Regular)' },
+	],
+};
+
+const categories = [
+	{ key: 'headline', label: 'Headline', icon: 'pen' },
+	{ key: 'body', label: 'Body', icon: 'pen' },
+	{ key: 'fontFamilies', label: 'Font Families', icon: 'pen' },
+	{ key: 'weights', label: 'Font Weights', icon: 'pen' },
+];
+---
+
+<div class="token-table">
+	<DBAccordion variant="card">
+		{
+			categories.map(({ key, label, icon }) => (
+				<DBAccordionItem headline={label}>
+					<span slot="headline" class="accordion-headline">
+						<DBIcon icon={icon} />
+						{label}
+					</span>
+					<table>
+						<thead>
+							{key === 'fontFamilies' ? (
+								<tr>
+									<th>Token</th>
+									<th>Value</th>
+									<th>Name</th>
+								</tr>
+							) : key === 'weights' ? (
+								<tr>
+									<th>Token</th>
+									<th>Value</th>
+									<th>Name</th>
+								</tr>
+							) : (
+								<>
+									<tr>
+										<th rowspan="2">Token</th>
+										<th colspan="2">Functional</th>
+										<th colspan="2">Regular</th>
+										<th colspan="2">Expressive</th>
+										<th rowspan="2">Weight</th>
+									</tr>
+									<tr>
+										<th>Size</th>
+										<th>Line Height</th>
+										<th>Size</th>
+										<th>Line Height</th>
+										<th>Size</th>
+										<th>Line Height</th>
+									</tr>
+								</>
+							)}
+						</thead>
+						<tbody>
+							{key === 'fontFamilies' ? (
+								typographyTokens[key].map(({ token, value, name }) => (
+									<tr
+										onclick={`const span = this.querySelector('.copy-text'); span.textContent='Copied'; setTimeout(() => span.textContent='Copy Token', 2000); navigator.clipboard.writeText('var(--${token})')`}
+									>
+										<td>
+											<div class="token-cell">
+												<DBTag data-color="neutral">--{token}</DBTag>{' '}
+												<span class="copy-text">Copy Token</span>
+												<span data-icon-trailing="copy" data-icon-weight="16" />
+											</div>
+										</td>
+										<td>{value}</td>
+										<td>{name}</td>
+									</tr>
+								))
+							) : key === 'weights' ? (
+								typographyTokens[key].map(({ token, value, name }) => (
+									<tr
+										onclick={`const span = this.querySelector('.copy-text'); span.textContent='Copied'; setTimeout(() => span.textContent='Copy Token', 2000); navigator.clipboard.writeText('var(--${token})')`}
+									>
+										<td>
+											<div class="token-cell">
+												<DBTag data-color="neutral">--{token}</DBTag>{' '}
+												<span class="copy-text">Copy Token</span>
+												<span data-icon-trailing="copy" data-icon-weight="16" />
+											</div>
+										</td>
+										<td>{value}</td>
+										<td>{name}</td>
+									</tr>
+								))
+							) : (
+								typographyTokens[key].map(({ token, size, lineHeight, weight }) => (
+									<tr
+										onclick={`const span = this.querySelector('.copy-text'); span.textContent='Copied'; setTimeout(() => span.textContent='Copy Token', 2000); navigator.clipboard.writeText('var(--${token})')`}
+									>
+										<td>
+											<div class="token-cell">
+												<DBTag data-color="neutral">--{token}</DBTag>{' '}
+												<span class="copy-text">Copy Token</span>
+												<span data-icon-trailing="copy" data-icon-weight="16" />
+											</div>
+										</td>
+										<td>{size.functional}</td>
+										<td>{lineHeight.functional}</td>
+										<td>{size.regular}</td>
+										<td>{lineHeight.regular}</td>
+										<td>{size.expressive}</td>
+										<td>{lineHeight.expressive}</td>
+										<td>{weight}</td>
+									</tr>
+								))
+							)}
+						</tbody>
+					</table>
+				</DBAccordionItem>
+			))
+		}
+	</DBAccordion>
+</div>

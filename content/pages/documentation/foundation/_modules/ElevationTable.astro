@@ -1,0 +1,41 @@
+---
+import { DBTag } from '@db-ux/react-core-components';
+import './TokenTable.css';
+
+const elevationTokens = [
+	{ token: 'db-elevation-sm', value: '0 1px 2px 0 rgba(0, 0, 0, 0.1)' },
+	{ token: 'db-elevation-md', value: '0 2px 4px 0 rgba(0, 0, 0, 0.1)' },
+	{ token: 'db-elevation-lg', value: '0 4px 8px 0 rgba(0, 0, 0, 0.1)' },
+];
+---
+
+<div class="token-table">
+	<table>
+		<thead>
+			<tr>
+				<th>Token</th>
+				<th>Value</th>
+				<th>Preview</th>
+			</tr>
+		</thead>
+		<tbody>
+			{elevationTokens.map(({ token, value }) => (
+				<tr
+					onclick={`const span = this.querySelector('.copy-text'); span.textContent='Copied'; setTimeout(() => span.textContent='Copy Token', 2000); navigator.clipboard.writeText('var(--${token})')`}
+				>
+					<td>
+						<div class="token-cell">
+							<DBTag data-color="neutral">--{token}</DBTag>{' '}
+							<span class="copy-text">Copy Token</span>
+							<span data-icon-trailing="copy" data-icon-weight="16" />
+						</div>
+					</td>
+					<td>{value}</td>
+					<td>
+						<div class="elevation-preview" data-elevation={token} />
+					</td>
+				</tr>
+			))}
+		</tbody>
+	</table>
+</div>
