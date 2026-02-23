@@ -14,7 +14,7 @@
 .token-table th,
 .token-table td {
 	text-align: left;
-	padding: var(--db-spacing-fixed-md) var(--db-spacing-fixed-xs);
+	padding: var(--db-spacing-fixed-md) var(--db-spacing-fixed-sm);
 	font: var(--db-type-body-sm);
 	vertical-align: middle;
 }
@@ -23,12 +23,11 @@
 	font: var(--db-type-headline-3xs);
 	background-color: transparent;
 	border-bottom: 1px solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	word-break: normal;
 }
-
-.token-table th:nth-child(1) {
-	padding-left: var(--db-spacing-fixed-md);
-}
-.token-table th {
+ken-table th {
 	border-right: none;
 }
 
@@ -44,16 +43,14 @@
 	display: flex;
 	align-items: center;
 	gap: var(--db-spacing-fixed-xs);
-	min-height: 2rem;
 }
 
 .token-cell [data-icon-trailing] {
 	color: var(--db-adaptive-on-bg-basic-emphasis-70-default);
 	font-size: 14px;
 }
-
-.token-table td:nth-child(1) {
-	padding-left: var(--db-spacing-fixed-md);
+.token-cell [data-icon-trailing]:after {
+	margin-inline-start: 0px;
 }
 
 .token-table tbody tr {
@@ -91,7 +88,7 @@ table tbody tr:nth-child(2n) {
 	border-radius: var(--db-border-radius-xs);
 }
 
-.token-table th:has(.color-swatch) {
+.token-table td:has(.color-swatch) {
 	padding: var(--db-spacing-fixed-xs);
 }
 
