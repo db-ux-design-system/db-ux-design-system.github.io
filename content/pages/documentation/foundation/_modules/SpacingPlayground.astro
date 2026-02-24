@@ -1,0 +1,153 @@
+---
+import { DBStack } from '@db-ux/react-core-components';
+import './SpacingPlayground.css';
+
+interface Props {
+	layout?: 'horizontal' | 'vertical';
+}
+
+const { layout = 'horizontal' } = Astro.props;
+
+const spacings = [
+	{ value: '3xs', label: '3XS' },
+	{ value: '2xs', label: '2XS' },
+	{ value: 'xs', label: 'XS' },
+	{ value: 'sm', label: 'SM' },
+	{ value: 'md', label: 'MD' },
+	{ value: 'lg', label: 'LG' },
+	{ value: 'xl', label: 'XL' },
+	{ value: '2xl', label: '2XL' },
+	{ value: '3xl', label: '3XL' },
+];
+
+const densities = [
+	{ value: 'functional', label: 'Functional' },
+	{ value: 'regular', label: 'Regular' },
+	{ value: 'expressive', label: 'Expressive' },
+];
+
+const cardSpacings = [
+	{ value: 'none', label: 'None' },
+	{ value: 'sm', label: 'Small' },
+	{ value: 'md', label: 'Medium' },
+	{ value: 'lg', label: 'Large' },
+];
+---
+
+<div class="spacing-playground" data-layout={layout}>
+	<div class="spacing-playground-controls" data-density="regular">
+		<div class="db-select" data-variant="floating">
+			<label>Gap Spacing</label>
+			<select
+				id="spacing-select"
+				onchange="const stack = document.getElementById('spacing-stack'); const content = document.getElementById('spacing-token-content'); stack.setAttribute('data-gap', this.value); stack.setAttribute('data-token', '--db-spacing-fixed-' + this.value); const computedPx = getComputedStyle(stack).gap; const computedRem = parseFloat(computedPx) / 16; content.innerHTML = '<h6>DBStack</h6><div>Gap: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>--db-spacing-fixed-' + this.value + '</span> (' + computedRem + 'rem / ' + computedPx + ')</div>';"
+			>
+				{
+					spacings.map((spacing) => (
+						<option value={spacing.value} selected={spacing.value === 'md'}>
+							{spacing.label}
+						</option>
+					))
+				}
+			</select>
+		</div>
+		<div class="db-select" data-variant="floating">
+			<label>Card Spacing</label>
+			<select
+				id="card-spacing-select"
+				onchange="const cards = document.querySelectorAll('.spacing-card'); cards.forEach(card => card.setAttribute('data-spacing', this.value));"
+			>
+				{
+					cardSpacings.map((spacing) => (
+						<option value={spacing.value} selected={spacing.value === 'md'}>
+							{spacing.label}
+						</option>
+					))
+				}
+			</select>
+		</div>
+		<div class="db-select" data-variant="floating">
+			<label>Density</label>
+			<select
+				id="density-select"
+				onchange="const stack = document.getElementById('spacing-stack'); const content = document.getElementById('spacing-token-content'); const cards = document.querySelectorAll('.spacing-card'); stack.setAttribute('data-density', this.value); cards.forEach(card => card.setAttribute('data-density', this.value)); const token = stack.getAttribute('data-token'); const computedPx = getComputedStyle(stack).gap; const computedRem = parseFloat(computedPx) / 16; content.innerHTML = '<h6>DBStack</h6><div>Gap: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span> (' + computedRem + 'rem / ' + computedPx + ')</div>';"
+			>
+				{
+					densities.map((density) => (
+						<option value={density.value} selected={density.value === 'regular'}>
+							{density.label}
+						</option>
+					))
+				}
+			</select>
+		</div>
+	</div>
+	<div class="spacing-playground-preview">
+		<div
+			id="spacing-stack"
+			class="spacing-stack"
+			data-gap="md"
+			data-density="regular"
+			data-element="DBStack"
+			data-token="--db-spacing-fixed-md"
+			onmouseenter="const content = document.getElementById('spacing-token-content'); const token = this.getAttribute('data-token'); const computedPx = getComputedStyle(this).gap; const computedRem = parseFloat(computedPx) / 16; content.innerHTML = '<h6>' + this.getAttribute('data-element') + '</h6><div>Gap: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span> (' + computedRem + 'rem / ' + computedPx + ')</div>';"
+			onmouseleave="document.getElementById('spacing-token-content').textContent = 'Hover over the gap between cards to see the spacing token'"
+		>
+			<div
+				class="db-card spacing-card"
+				data-density="regular"
+				data-element="DBCard"
+				data-spacing="md"
+				onmouseenter="event.stopPropagation(); const content = document.getElementById('spacing-token-content'); const styles = getComputedStyle(this); const paddingPx = styles.padding; const paddingRem = parseFloat(paddingPx) / 16; const spacing = this.getAttribute('data-spacing'); const token = spacing === 'none' ? '0' : '--db-spacing-fixed-' + spacing; content.innerHTML = '<h6>DBCard</h6><div>Padding: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span> (' + paddingRem + 'rem / ' + paddingPx + ')</div>';"
+				onmouseleave="const content = document.getElementById('spacing-token-content'); const stack = document.getElementById('spacing-stack'); const token = stack.getAttribute('data-token'); const computedPx = getComputedStyle(stack).gap; const computedRem = parseFloat(computedPx) / 16; content.innerHTML = '<h6>DBStack</h6><div>Gap: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span> (' + computedRem + 'rem / ' + computedPx + ')</div>';"
+			>
+				<h6>Card 1</h6>
+				<p>Example content</p>
+			</div>
+			<div
+				class="db-card spacing-card"
+				data-density="regular"
+				data-element="DBCard"
+				data-spacing="md"
+				onmouseenter="event.stopPropagation(); const content = document.getElementById('spacing-token-content'); const styles = getComputedStyle(this); const paddingPx = styles.padding; const paddingRem = parseFloat(paddingPx) / 16; const spacing = this.getAttribute('data-spacing'); const token = spacing === 'none' ? '0' : '--db-spacing-fixed-' + spacing; content.innerHTML = '<h6>DBCard</h6><div>Padding: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span> (' + paddingRem + 'rem / ' + paddingPx + ')</div>';"
+				onmouseleave="const content = document.getElementById('spacing-token-content'); const stack = document.getElementById('spacing-stack'); const token = stack.getAttribute('data-token'); const computedPx = getComputedStyle(stack).gap; const computedRem = parseFloat(computedPx) / 16; content.innerHTML = '<h6>DBStack</h6><div>Gap: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span> (' + computedRem + 'rem / ' + computedPx + ')</div>';"
+			>
+				<h6>Card 2</h6>
+				<p>Example content</p>
+			</div>
+			<div
+				class="db-card spacing-card"
+				data-density="regular"
+				data-element="DBCard"
+				data-spacing="md"
+				onmouseenter="event.stopPropagation(); const content = document.getElementById('spacing-token-content'); const styles = getComputedStyle(this); const paddingPx = styles.padding; const paddingRem = parseFloat(paddingPx) / 16; const spacing = this.getAttribute('data-spacing'); const token = spacing === 'none' ? '0' : '--db-spacing-fixed-' + spacing; content.innerHTML = '<h6>DBCard</h6><div>Padding: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span> (' + paddingRem + 'rem / ' + paddingPx + ')</div>';"
+				onmouseleave="const content = document.getElementById('spacing-token-content'); const stack = document.getElementById('spacing-stack'); const token = stack.getAttribute('data-token'); const computedPx = getComputedStyle(stack).gap; const computedRem = parseFloat(computedPx) / 16; content.innerHTML = '<h6>DBStack</h6><div>Gap: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span> (' + computedRem + 'rem / ' + computedPx + ')</div>';"
+			>
+				<h6>Card 3</h6>
+				<p>Example content</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="spacing-playground-token-display" id="spacing-token-display" data-color="informational">
+		<span data-icon="information_circle" class="token-icon"></span>
+		<div class="token-content" id="spacing-token-content">
+			<h6>DBStack</h6>
+			<div>
+				Gap: <span class="db-tag" data-color="neutral" data-emphasis="weak">--db-spacing-fixed-md</span> (1.5rem
+				/ 24px)
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	const spacingSelect = document.getElementById('spacing-select');
+	const stack = document.getElementById('spacing-stack');
+
+	spacingSelect?.addEventListener('change', () => {
+		const value = spacingSelect.value;
+		stack?.setAttribute('data-gap', value);
+		stack?.setAttribute('data-token', `--db-spacing-fixed-${value}`);
+	});
+</script>

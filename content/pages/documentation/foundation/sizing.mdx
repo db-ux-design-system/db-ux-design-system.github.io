@@ -8,8 +8,19 @@ align: start
 toc: true
 ---
 
-import { DBSection } from '@db-ux/react-core-components';
+import { DBSection, DBStack } from '@db-ux/react-core-components';
 import SizingTable from './_modules/SizingTable.astro';
+import SizingPlayground from './_modules/SizingPlayground.astro';
+
+<DBSection spacing="small" width="auto">
+	<DBStack gap="x-large">
+		<DBStack gap="none">
+			## Playground <br />
+			Experiment with sizing tokens to see how they scale across different densities.
+		</DBStack>
+		<SizingPlayground layout="horizontal" />
+	</DBStack>
+</DBSection>
 
 Sizing refers to the consistent use of set sizes for elements and components, regardless of device screen. Fixed sizings ensure that layouts remain balanced and components are easily recognizable across desktop, tablet, and mobile devices.
 

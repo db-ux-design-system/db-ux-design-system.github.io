@@ -1,0 +1,61 @@
+---
+import './BorderWidthPlayground.css';
+
+interface Props {
+	layout?: 'horizontal' | 'vertical';
+}
+
+const { layout = 'horizontal' } = Astro.props;
+
+const widths = [
+	{ value: '3xs', label: '3XS' },
+	{ value: '2xs', label: '2XS' },
+	{ value: 'xs', label: 'XS' },
+	{ value: 'sm', label: 'SM' },
+	{ value: 'md', label: 'MD' },
+	{ value: 'lg', label: 'LG' },
+	{ value: 'xl', label: 'XL' },
+	{ value: '2xl', label: '2XL' },
+	{ value: '3xl', label: '3XL' },
+];
+---
+
+<div class="border-width-playground" data-layout={layout}>
+	<div class="border-width-playground-controls" data-density="regular">
+		<div class="db-select" data-variant="floating">
+			<label>Border Width</label>
+			<select
+				id="width-select"
+				onchange="const box = document.getElementById('width-box'); box.setAttribute('data-width', this.value); box.setAttribute('data-token', '--db-border-width-' + this.value);"
+			>
+				{
+					widths.map((width) => (
+						<option value={width.value} selected={width.value === 'md'}>
+							{width.label}
+						</option>
+					))
+				}
+			</select>
+		</div>
+	</div>
+	<div class="border-width-playground-preview">
+		<div
+			id="width-box"
+			class="db-card width-box"
+			data-spacing="none"
+			data-width="md"
+			data-element="Card"
+			data-token="--db-border-width-md"
+			onmouseenter="const content = document.getElementById('width-token-content'); const token = this.getAttribute('data-token'); const computedWidth = getComputedStyle(this).borderWidth; const widthRem = parseFloat(computedWidth) / 16; content.innerHTML = '<h6>' + this.getAttribute('data-element') + '</h6><div>Border Width: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span> (' + widthRem + 'rem / ' + computedWidth + ')</div>';"
+			onmouseleave="document.getElementById('width-token-content').textContent = 'Hover over the card to see the border width token'"
+		>
+		</div>
+	</div>
+
+	<div class="border-width-playground-token-display" id="width-token-display" data-color="informational">
+		<span data-icon="information_circle" class="token-icon"></span>
+		<div class="token-content" id="width-token-content">
+			Hover over the card to see the border width token
+		</div>
+	</div>
+</div>

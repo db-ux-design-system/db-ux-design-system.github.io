@@ -1,0 +1,124 @@
+---
+import { DBCard, DBButton, DBBadge, DBTag, DBStack } from '@db-ux/react-core-components';
+import './ColorPlayground.css';
+
+interface Props {
+	layout?: 'horizontal' | 'vertical';
+}
+
+const { layout = 'vertical' } = Astro.props;
+---
+
+<div class="color-playground" data-layout={layout}>
+	<div class="color-playground-controls" data-density="regular">
+		<div class="db-select" data-variant="floating">
+			<label>data-color=</label>
+			<select
+				id="color-select"
+				onchange="document.getElementById('color-preview').setAttribute('data-color', this.value);"
+			>
+				<optgroup label="Semantic Colors">
+					<option value="neutral" selected>"neutral"</option>
+					<option value="brand">"brand"</option>
+					<option value="informational">"informational"</option>
+					<option value="warning">"warning"</option>
+					<option value="successful">"successful"</option>
+					<option value="critical">"critical"</option>
+				</optgroup>
+				<optgroup label="Additional Colors">
+					<option value="yellow">"yellow"</option>
+					<option value="orange">"orange"</option>
+					<option value="red">"red"</option>
+					<option value="pink">"pink"</option>
+					<option value="violet">"violet"</option>
+					<option value="blue">"blue"</option>
+					<option value="cyan">"cyan"</option>
+					<option value="turquoise">"turquoise"</option>
+					<option value="green">"green"</option>
+					<option value="burgundy">"burgundy"</option>
+				</optgroup>
+			</select>
+		</div>
+	</div>
+	<div class="color-playground-preview">
+		<div
+			class="db-card"
+			data-color="neutral"
+			id="color-preview"
+			data-element="Card"
+			data-token-bg="--db-adaptive-bg-basic-level-1-default"
+			data-token-border="--db-adaptive-on-bg-basic-emphasis-60-default"
+			onmouseenter="const content = document.getElementById('token-content'); content.innerHTML = '<h6>' + this.getAttribute('data-element') + '</h6><div>Background: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + this.getAttribute('data-token-bg') + '</span></div><div>Border: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + this.getAttribute('data-token-border') + '</span></div>';"
+			onmouseleave="document.getElementById('token-content').textContent = 'Hover over elements to see their color tokens'"
+		>
+			<DBStack gap="large">
+				<DBStack gap="medium" direction="row" justifyContent="space-between">
+					<h6
+						data-element="Headline (h6)"
+						data-token="--db-adaptive-on-bg-basic-emphasis-100-default"
+						onmouseenter="event.stopPropagation(); const content = document.getElementById('token-content'); content.innerHTML = '<h6>' + this.getAttribute('data-element') + '</h6><div>Color: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + this.getAttribute('data-token') + '</span></div>';"
+						onmouseleave="const card = document.getElementById('color-preview'); const content = document.getElementById('token-content'); content.innerHTML = '<h6>' + card.getAttribute('data-element') + '</h6><div>Background: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + card.getAttribute('data-token-bg') + '</span></div><div>Border: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + card.getAttribute('data-token-border') + '</span></div>';"
+					>
+						Example Card
+					</h6>
+					<span
+						class="db-tag"
+						data-emphasis="strong"
+						data-element="Tag"
+						data-token-bg="--db-adaptive-bg-vibrant-default"
+						data-token-text="--db-adaptive-on-bg-vibrant-default"
+						data-token-border="--db-adaptive-on-bg-basic-emphasis-70-default"
+						onmouseenter="event.stopPropagation(); const content = document.getElementById('token-content'); content.innerHTML = '<h6>' + this.getAttribute('data-element') + '</h6><div>Background: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + this.getAttribute('data-token-bg') + '</span></div><div>Text: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + this.getAttribute('data-token-text') + '</span></div><div>Border: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + this.getAttribute('data-token-border') + '</span></div>';"
+						onmouseleave="const card = document.getElementById('color-preview'); const content = document.getElementById('token-content'); content.innerHTML = '<h6>' + card.getAttribute('data-element') + '</h6><div>Background: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + card.getAttribute('data-token-bg') + '</span></div><div>Border: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + card.getAttribute('data-token-border') + '</span></div>';"
+					>
+						Status Tag
+					</span>
+				</DBStack>
+				<p
+					data-element="Paragraph"
+					data-token="--db-adaptive-on-bg-basic-emphasis-100-default"
+					onmouseenter="event.stopPropagation(); const content = document.getElementById('token-content'); content.innerHTML = '<h6>' + this.getAttribute('data-element') + '</h6><div>Color: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + this.getAttribute('data-token') + '</span></div>';"
+					onmouseleave="const card = document.getElementById('color-preview'); const content = document.getElementById('token-content'); content.innerHTML = '<h6>' + card.getAttribute('data-element') + '</h6><div>Background: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + card.getAttribute('data-token-bg') + '</span></div><div>Border: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + card.getAttribute('data-token-border') + '</span></div>';"
+				>
+					This card uses adaptive color tokens. When you change the color schemes, the background
+					and text colors adapt automatically.
+				</p>
+
+				<DBStack gap="medium" direction="row" justifyContent="space-between">
+					<button
+						class="db-button"
+						type="button"
+						data-variant="ghost"
+						data-width="full"
+						data-element="Button (Ghost)"
+						data-token-bg="--db-adaptive-bg-basic-transparent-full-default"
+						data-token-text="--db-adaptive-on-bg-basic-emphasis-100-default"
+						onmouseenter="event.stopPropagation(); const content = document.getElementById('token-content'); content.innerHTML = '<h6>' + this.getAttribute('data-element') + '</h6><div>Background: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + this.getAttribute('data-token-bg') + '</span></div><div>Text: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + this.getAttribute('data-token-text') + '</span></div>';"
+						onmouseleave="const card = document.getElementById('color-preview'); const content = document.getElementById('token-content'); content.innerHTML = '<h6>' + card.getAttribute('data-element') + '</h6><div>Background: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + card.getAttribute('data-token-bg') + '</span></div><div>Border: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + card.getAttribute('data-token-border') + '</span></div>';"
+					>
+						Secondary Action
+					</button>
+					<button
+						class="db-button"
+						type="button"
+						data-variant="brand"
+						data-width="full"
+						data-element="Button (Brand)"
+						data-token-bg="--db-brand-origin-default"
+						data-token-text="--db-brand-on-origin-default"
+						data-token-border="--db-brand-on-bg-basic-emphasis-70-default"
+						onmouseenter="event.stopPropagation(); const content = document.getElementById('token-content'); content.innerHTML = '<h6>' + this.getAttribute('data-element') + '</h6><div>Background: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + this.getAttribute('data-token-bg') + '</span></div><div>Text: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + this.getAttribute('data-token-text') + '</span></div><div>Border: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + this.getAttribute('data-token-border') + '</span></div>';"
+						onmouseleave="const card = document.getElementById('color-preview'); const content = document.getElementById('token-content'); content.innerHTML = '<h6>' + card.getAttribute('data-element') + '</h6><div>Background: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + card.getAttribute('data-token-bg') + '</span></div><div>Border: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + card.getAttribute('data-token-border') + '</span></div>';"
+					>
+						Primary Action
+					</button>
+				</DBStack>
+			</DBStack>
+		</div>
+	</div>
+
+	<div class="color-playground-token-display" id="token-display" data-color="informational">
+		<span data-icon="information_circle" class="token-icon"></span>
+		<div class="token-content" id="token-content">Hover over elements to see their color tokens</div>
+	</div>
+</div>

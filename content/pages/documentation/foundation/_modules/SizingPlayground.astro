@@ -1,0 +1,94 @@
+---
+import './SizingPlayground.css';
+
+interface Props {
+	layout?: 'horizontal' | 'vertical';
+}
+
+const { layout = 'horizontal' } = Astro.props;
+
+const sizes = [
+	{ value: '3xs', label: '3XS' },
+	{ value: '2xs', label: '2XS' },
+	{ value: 'xs', label: 'XS' },
+	{ value: 'sm', label: 'SM' },
+	{ value: 'md', label: 'MD' },
+	{ value: 'lg', label: 'LG' },
+	{ value: 'xl', label: 'XL' },
+	{ value: '2xl', label: '2XL' },
+	{ value: '3xl', label: '3XL' },
+];
+
+const densities = [
+	{ value: 'functional', label: 'Functional' },
+	{ value: 'regular', label: 'Regular' },
+	{ value: 'expressive', label: 'Expressive' },
+];
+---
+
+<div class="sizing-playground" data-layout={layout}>
+	<div class="sizing-playground-controls" data-density="regular">
+		<div class="db-select" data-variant="floating">
+			<label>Size</label>
+			<select
+				id="sizing-select"
+				onchange="const box = document.getElementById('sizing-box'); box.setAttribute('data-size', this.value); box.setAttribute('data-token', '--db-sizing-' + this.value);"
+			>
+				{
+					sizes.map((size) => (
+						<option value={size.value} selected={size.value === 'md'}>
+							{size.label}
+						</option>
+					))
+				}
+			</select>
+		</div>
+		<div class="db-select" data-variant="floating">
+			<label>Density</label>
+			<select
+				id="density-select"
+				onchange="const preview = document.getElementById('sizing-preview'); const box = document.getElementById('sizing-box'); preview.setAttribute('data-density', this.value); box.setAttribute('data-density', this.value);"
+			>
+				{
+					densities.map((density) => (
+						<option value={density.value} selected={density.value === 'regular'}>
+							{density.label}
+						</option>
+					))
+				}
+			</select>
+		</div>
+	</div>
+	<div class="sizing-playground-preview" data-density="regular" id="sizing-preview">
+		<div
+			id="sizing-box"
+			class="db-card sizing-box"
+			data-spacing="none"
+			data-size="md"
+			data-density="regular"
+			data-element="Card"
+			data-token="--db-sizing-md"
+			onmouseenter="const content = document.getElementById('sizing-token-content'); const token = this.getAttribute('data-token'); const computedWidth = getComputedStyle(this).width; const computedHeight = getComputedStyle(this).height; const widthRem = parseFloat(computedWidth) / 16; const heightRem = parseFloat(computedHeight) / 16; content.innerHTML = '<h6>' + this.getAttribute('data-element') + '</h6><div>Width: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span> (' + widthRem + 'rem / ' + computedWidth + ')</div><div>Height: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span> (' + heightRem + 'rem / ' + computedHeight + ')</div>';"
+			onmouseleave="document.getElementById('sizing-token-content').textContent = 'Hover over the card to see the sizing token'"
+		>
+		</div>
+	</div>
+
+	<div class="sizing-playground-token-display" id="sizing-token-display" data-color="informational">
+		<span data-icon="information_circle" class="token-icon"></span>
+		<div class="token-content" id="sizing-token-content">
+			Hover over the card to see the sizing token
+		</div>
+	</div>
+</div>
+
+<script>
+	const sizingSelect = document.getElementById('sizing-select');
+	const box = document.getElementById('sizing-box');
+
+	sizingSelect?.addEventListener('change', () => {
+		const value = sizingSelect.value;
+		box?.setAttribute('data-size', value);
+		box?.setAttribute('data-token', `--db-sizing-${value}`);
+	});
+</script>

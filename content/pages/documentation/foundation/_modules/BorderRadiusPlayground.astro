@@ -1,0 +1,62 @@
+---
+import './BorderRadiusPlayground.css';
+
+interface Props {
+	layout?: 'horizontal' | 'vertical';
+}
+
+const { layout = 'horizontal' } = Astro.props;
+
+const radii = [
+	{ value: '3xs', label: '3XS' },
+	{ value: '2xs', label: '2XS' },
+	{ value: 'xs', label: 'XS' },
+	{ value: 'sm', label: 'SM' },
+	{ value: 'md', label: 'MD' },
+	{ value: 'lg', label: 'LG' },
+	{ value: 'xl', label: 'XL' },
+	{ value: '2xl', label: '2XL' },
+	{ value: '3xl', label: '3XL' },
+	{ value: 'full', label: 'Full' },
+];
+---
+
+<div class="border-radius-playground" data-layout={layout}>
+	<div class="border-radius-playground-controls" data-density="regular">
+		<div class="db-select" data-variant="floating">
+			<label>Border Radius</label>
+			<select
+				id="radius-select"
+				onchange="const box = document.getElementById('radius-box'); box.setAttribute('data-radius', this.value); box.setAttribute('data-token', '--db-border-radius-' + this.value);"
+			>
+				{
+					radii.map((radius) => (
+						<option value={radius.value} selected={radius.value === 'md'}>
+							{radius.label}
+						</option>
+					))
+				}
+			</select>
+		</div>
+	</div>
+	<div class="border-radius-playground-preview">
+		<div
+			id="radius-box"
+			class="db-card radius-box"
+			data-spacing="none"
+			data-radius="md"
+			data-element="Card"
+			data-token="--db-border-radius-md"
+			onmouseenter="const content = document.getElementById('radius-token-content'); const token = this.getAttribute('data-token'); const computedRadius = getComputedStyle(this).borderRadius; const radiusRem = parseFloat(computedRadius) / 16; content.innerHTML = '<h6>' + this.getAttribute('data-element') + '</h6><div>Border Radius: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span> (' + radiusRem + 'rem / ' + computedRadius + ')</div>';"
+			onmouseleave="document.getElementById('radius-token-content').textContent = 'Hover over the card to see the border radius token'"
+		>
+		</div>
+	</div>
+
+	<div class="border-radius-playground-token-display" id="radius-token-display" data-color="informational">
+		<span data-icon="information_circle" class="token-icon"></span>
+		<div class="token-content" id="radius-token-content">
+			Hover over the card to see the border radius token
+		</div>
+	</div>
+</div>

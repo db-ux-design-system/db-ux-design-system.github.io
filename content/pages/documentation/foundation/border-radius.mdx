@@ -8,10 +8,21 @@ align: start
 toc: true
 ---
 
-import { DBSection } from '@db-ux/react-core-components';
+import { DBSection, DBStack } from '@db-ux/react-core-components';
+import BorderRadiusPlayground from './_modules/BorderRadiusPlayground.astro';
 import BorderRadiusTable from './_modules/BorderRadiusTable.astro';
 
 The border radius defines the rounded corners of UI elements, which influences the visual aesthetics of the design system. These tokens enable consistent corner properties for a harmonious user interface.
+
+<DBSection spacing="small" width="auto">
+	<DBStack gap="x-large">
+		<DBStack gap="none">
+			## Playground <br />
+			Experiment with border radius tokens to see how they affect corner rounding.
+		</DBStack>
+		<BorderRadiusPlayground layout="horizontal" />
+	</DBStack>
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

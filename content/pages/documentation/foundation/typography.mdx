@@ -8,10 +8,21 @@ align: start
 toc: true
 ---
 
-import { DBSection } from '@db-ux/react-core-components';
+import { DBSection, DBStack } from '@db-ux/react-core-components';
+import TypographyPlayground from './_modules/TypographyPlayground.astro';
 import TypographyTable from './_modules/TypographyTable.astro';
 
 Typography helps establish hierarchy and communicate key content through clear visual patterns. Well-designed typography improves readability and directly enhances the user experience.
+
+<DBSection spacing="small" width="auto">
+	<DBStack gap="x-large">
+		<DBStack gap="none">
+			## Playground <br />
+			Experiment with typography tokens to see how font styles scale across different densities.
+		</DBStack>
+		<TypographyPlayground layout="horizontal" />
+	</DBStack>
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

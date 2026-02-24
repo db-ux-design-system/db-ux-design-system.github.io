@@ -1,0 +1,55 @@
+---
+import './ElevationPlayground.css';
+
+interface Props {
+	layout?: 'horizontal' | 'vertical';
+}
+
+const { layout = 'horizontal' } = Astro.props;
+
+const elevations = [
+	{ value: 'sm', label: 'Small' },
+	{ value: 'md', label: 'Medium' },
+	{ value: 'lg', label: 'Large' },
+];
+---
+
+<div class="elevation-playground" data-layout={layout}>
+	<div class="elevation-playground-controls" data-density="regular">
+		<div class="db-select" data-variant="floating">
+			<label>Elevation</label>
+			<select
+				id="elevation-select"
+				onchange="const box = document.getElementById('elevation-box'); box.setAttribute('data-elevation', this.value); box.setAttribute('data-token', '--db-elevation-' + this.value);"
+			>
+				{
+					elevations.map((elevation) => (
+						<option value={elevation.value} selected={elevation.value === 'sm'}>
+							{elevation.label}
+						</option>
+					))
+				}
+			</select>
+		</div>
+	</div>
+	<div class="elevation-playground-preview">
+		<div
+			id="elevation-box"
+			class="db-card elevation-box"
+			data-spacing="none"
+			data-elevation="sm"
+			data-element="Card"
+			data-token="--db-elevation-sm"
+			onmouseenter="const content = document.getElementById('elevation-token-content'); const token = this.getAttribute('data-token'); const computed = getComputedStyle(this).boxShadow; content.innerHTML = '<h6>' + this.getAttribute('data-element') + '</h6><div>Elevation: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span></div><div style=&quot;word-break: break-all;&quot;>' + computed + '</div>';"
+			onmouseleave="document.getElementById('elevation-token-content').textContent = 'Hover over the card to see the elevation token'"
+		>
+		</div>
+	</div>
+
+	<div class="elevation-playground-token-display" id="elevation-token-display" data-color="informational">
+		<span data-icon="information_circle" class="token-icon"></span>
+		<div class="token-content" id="elevation-token-content">
+			Hover over the card to see the elevation token
+		</div>
+	</div>
+</div>

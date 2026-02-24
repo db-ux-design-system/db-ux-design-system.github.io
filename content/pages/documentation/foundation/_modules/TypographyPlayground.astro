@@ -1,0 +1,86 @@
+---
+import './TypographyPlayground.css';
+
+interface Props {
+	layout?: 'horizontal' | 'vertical';
+}
+
+const { layout = 'horizontal' } = Astro.props;
+
+const types = [
+	{ value: 'headline-3xl', label: 'Headline 3XL' },
+	{ value: 'headline-2xl', label: 'Headline 2XL' },
+	{ value: 'headline-xl', label: 'Headline XL' },
+	{ value: 'headline-lg', label: 'Headline LG' },
+	{ value: 'headline-md', label: 'Headline MD' },
+	{ value: 'headline-sm', label: 'Headline SM' },
+	{ value: 'headline-xs', label: 'Headline XS' },
+	{ value: 'headline-2xs', label: 'Headline 2XS' },
+	{ value: 'headline-3xs', label: 'Headline 3XS' },
+	{ value: 'body-xl', label: 'Body XL' },
+	{ value: 'body-lg', label: 'Body LG' },
+	{ value: 'body-md', label: 'Body MD' },
+	{ value: 'body-sm', label: 'Body SM' },
+	{ value: 'body-xs', label: 'Body XS' },
+];
+
+const densities = [
+	{ value: 'functional', label: 'Functional' },
+	{ value: 'regular', label: 'Regular' },
+	{ value: 'expressive', label: 'Expressive' },
+];
+---
+
+<div class="typography-playground" data-layout={layout}>
+	<div class="typography-playground-controls" data-density="regular">
+		<div class="db-select" data-variant="floating">
+			<label>Typography</label>
+			<select
+				id="typography-select"
+				onchange="const box = document.getElementById('typography-box'); box.setAttribute('data-type', this.value); box.setAttribute('data-token', '--db-type-' + this.value);"
+			>
+				{
+					types.map((type) => (
+						<option value={type.value} selected={type.value === 'body-md'}>
+							{type.label}
+						</option>
+					))
+				}
+			</select>
+		</div>
+		<div class="db-select" data-variant="floating">
+			<label>Density</label>
+			<select
+				id="density-select"
+				onchange="const preview = document.getElementById('typography-preview'); preview.setAttribute('data-density', this.value);"
+			>
+				{
+					densities.map((density) => (
+						<option value={density.value} selected={density.value === 'regular'}>
+							{density.label}
+						</option>
+					))
+				}
+			</select>
+		</div>
+	</div>
+	<div class="typography-playground-preview" data-density="regular" id="typography-preview">
+		<div
+			id="typography-box"
+			class="typography-box"
+			data-type="body-md"
+			data-token="--db-type-body-md"
+			onmouseenter="const content = document.getElementById('typography-token-content'); const token = this.getAttribute('data-token'); const styles = getComputedStyle(this); const fontSize = styles.fontSize; const lineHeight = styles.lineHeight; const fontWeight = styles.fontWeight; const fontSizeRem = parseFloat(fontSize) / 16; const lineHeightRem = parseFloat(lineHeight) / 16; content.innerHTML = '<h6>Typography</h6><div>Token: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span></div><div>Font Size: ' + fontSizeRem + 'rem (' + fontSize + ')</div><div>Line Height: ' + lineHeightRem + 'rem (' + lineHeight + ')</div><div>Font Weight: ' + fontWeight + '</div>';"
+			onmouseleave="document.getElementById('typography-token-content').textContent = 'Hover over the text to see the typography token'"
+		>
+			The quick brown fox jumps over the lazy dog
+		</div>
+	</div>
+
+	<div class="typography-playground-token-display" id="typography-token-display" data-color="informational">
+		<span data-icon="information_circle" class="token-icon"></span>
+		<div class="token-content" id="typography-token-content">
+			Hover over the text to see the typography token
+		</div>
+	</div>
+</div>

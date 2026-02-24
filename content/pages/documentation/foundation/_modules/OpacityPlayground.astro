@@ -1,0 +1,62 @@
+---
+import './OpacityPlayground.css';
+
+interface Props {
+	layout?: 'horizontal' | 'vertical';
+}
+
+const { layout = 'horizontal' } = Astro.props;
+
+const opacities = [
+	{ value: '3xs', label: '3XS' },
+	{ value: '2xs', label: '2XS' },
+	{ value: 'xs', label: 'XS' },
+	{ value: 'sm', label: 'SM' },
+	{ value: 'md', label: 'MD' },
+	{ value: 'lg', label: 'LG' },
+	{ value: 'xl', label: 'XL' },
+	{ value: '2xl', label: '2XL' },
+	{ value: '3xl', label: '3XL' },
+	{ value: 'full', label: 'Full' },
+];
+---
+
+<div class="opacity-playground" data-layout={layout}>
+	<div class="opacity-playground-controls" data-density="regular">
+		<div class="db-select" data-variant="floating">
+			<label>Opacity</label>
+			<select
+				id="opacity-select"
+				onchange="const box = document.getElementById('opacity-box'); box.setAttribute('data-opacity', this.value); box.setAttribute('data-token', '--db-opacity-' + this.value);"
+			>
+				{
+					opacities.map((opacity) => (
+						<option value={opacity.value} selected={opacity.value === 'md'}>
+							{opacity.label}
+						</option>
+					))
+				}
+			</select>
+		</div>
+	</div>
+	<div class="opacity-playground-preview">
+		<div
+			id="opacity-box"
+			class="db-card opacity-box"
+			data-spacing="none"
+			data-opacity="md"
+			data-element="Card"
+			data-token="--db-opacity-md"
+			onmouseenter="const content = document.getElementById('opacity-token-content'); const token = this.getAttribute('data-token'); const computedOpacity = getComputedStyle(this).opacity; content.innerHTML = '<h6>' + this.getAttribute('data-element') + '</h6><div>Opacity: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span> (' + computedOpacity + ')</div>';"
+			onmouseleave="document.getElementById('opacity-token-content').textContent = 'Hover over the card to see the opacity token'"
+		>
+		</div>
+	</div>
+
+	<div class="opacity-playground-token-display" id="opacity-token-display" data-color="informational">
+		<span data-icon="information_circle" class="token-icon"></span>
+		<div class="token-content" id="opacity-token-content">
+			Hover over the card to see the opacity token
+		</div>
+	</div>
+</div>

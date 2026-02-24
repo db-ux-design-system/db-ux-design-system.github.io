@@ -1,0 +1,98 @@
+.elevation-playground {
+	display: grid;
+	grid-template-rows: auto minmax(400px, auto) auto;
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+	border-radius: var(--db-border-radius-md);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	max-width: 100%;
+	overflow: hidden;
+}
+
+.elevation-playground[data-layout='vertical'] {
+	grid-template-columns: 1fr 250px;
+	grid-template-rows: minmax(400px, auto) auto;
+}
+
+.elevation-playground[data-layout='vertical'] .elevation-playground-controls {
+	grid-row: 1;
+	grid-column: 2;
+	border-left: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-top: none;
+}
+
+.elevation-playground[data-layout='vertical'] .elevation-playground-preview {
+	grid-row: 1;
+	grid-column: 1;
+}
+
+.elevation-playground-preview {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 150px;
+	padding: var(--db-spacing-fixed-2xl);
+	min-width: 0;
+}
+
+.elevation-box {
+	cursor: pointer;
+	transition: box-shadow 0.3s ease;
+	width: 200px;
+	height: 200px;
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}
+
+.elevation-box:hover {
+	background-color: var(--db-informational-bg-basic-level-3-default);
+}
+
+.elevation-box[data-elevation='sm'] {
+	box-shadow: var(--db-elevation-sm);
+}
+
+.elevation-box[data-elevation='md'] {
+	box-shadow: var(--db-elevation-md);
+}
+
+.elevation-box[data-elevation='lg'] {
+	box-shadow: var(--db-elevation-lg);
+}
+
+.elevation-playground-token-display {
+	grid-column: 1 / -1;
+	padding: var(--db-spacing-fixed-md);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+	border-top: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	align-items: start;
+	display: flex;
+	gap: var(--db-spacing-fixed-xs);
+}
+
+.elevation-playground-token-display .token-icon {
+	color: var(--db-adaptive-on-bg-basic-emphasis-70-default);
+	flex-shrink: 0;
+}
+
+.elevation-playground-token-display .token-content {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-2xs);
+	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+}
+
+.elevation-playground-token-display h6 {
+	margin: 0;
+}
+
+.elevation-playground-controls {
+	display: flex;
+	flex-direction: row;
+	gap: var(--db-spacing-fixed-sm);
+	padding: var(--db-spacing-fixed-md);
+	border-bottom: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}
+
+.elevation-playground-controls .db-select {
+	width: 100%;
+}

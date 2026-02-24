@@ -8,10 +8,21 @@ align: start
 toc: true
 ---
 
-import { DBSection } from '@db-ux/react-core-components';
+import { DBSection, DBStack } from '@db-ux/react-core-components';
+import BorderWidthPlayground from './_modules/BorderWidthPlayground.astro';
 import BorderWidthTable from './_modules/BorderWidthTable.astro';
 
 The border width defines the stroke widths within the design system, ensuring a consistent visual appearance and clear structure of the user interface.
+
+<DBSection spacing="small" width="auto">
+	<DBStack gap="x-large">
+		<DBStack gap="none">
+			## Playground <br />
+			Experiment with border width tokens to see how they affect border thickness.
+		</DBStack>
+		<BorderWidthPlayground layout="horizontal" />
+	</DBStack>
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

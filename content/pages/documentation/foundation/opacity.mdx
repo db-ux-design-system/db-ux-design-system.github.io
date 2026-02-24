@@ -8,10 +8,21 @@ align: start
 toc: true
 ---
 
-import { DBSection } from '@db-ux/react-core-components';
+import { DBSection, DBStack } from '@db-ux/react-core-components';
+import OpacityPlayground from './_modules/OpacityPlayground.astro';
 import OpacityTable from './_modules/OpacityTable.astro';
 
 Opacity tokens determine the transparency of elements in our design system and influence visual depth and readability. Careful gradations in opacity can be used to emphasize essential information and downplay secondary content.
+
+<DBSection spacing="small" width="auto">
+	<DBStack gap="x-large">
+		<DBStack gap="none">
+			## Playground <br />
+			Experiment with opacity tokens to see how transparency affects visual elements.
+		</DBStack>
+		<OpacityPlayground layout="horizontal" />
+	</DBStack>
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

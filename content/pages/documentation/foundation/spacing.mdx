@@ -8,12 +8,23 @@ align: start
 toc: true
 ---
 
-import { DBSection } from '@db-ux/react-core-components';
+import { DBSection, DBStack } from '@db-ux/react-core-components';
 import SpacingTable from './_modules/SpacingTable.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import SpacingPlayground from './_modules/SpacingPlayground.astro';
 
 Spacing is a key element of our design system and defines the gaps between different components. Consistent use of spacing ensures a harmonious, clear, and user-friendly appearance.
+
+<DBSection spacing="small" width="auto">
+	<DBStack gap="x-large">
+		<DBStack gap="none">
+			## Playground <br />
+			Experiment with spacing tokens to see how gap and padding affect layout.
+		</DBStack>
+		<SpacingPlayground layout="horizontal" />
+	</DBStack>
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

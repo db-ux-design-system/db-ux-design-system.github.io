@@ -8,8 +8,20 @@ align: start
 toc: true
 ---
 
-import { DBSection } from '@db-ux/react-core-components';
+import { DBSection, DBStack } from '@db-ux/react-core-components';
 import ColorTable from './_modules/ColorTable.astro';
+import ColorPlayground from './_modules/ColorPlayground.astro';
+
+<DBSection spacing="small" width="auto">
+	<DBStack gap="x-large">
+		<DBStack gap="none">
+			## Playground <br />
+			Experience how adaptive color tokens work. Select a different data-color to see how the
+			example card adapts automatically.
+		</DBStack>
+		<ColorPlayground layout="horizontal" />
+	</DBStack>
+</DBSection>
 
 Colors play a central role in the design of user interfaces. They can reinforce messages and help communicate meanings, as well as enable targeted user guidance.
 
