@@ -10,8 +10,12 @@ toc: true
 
 import { DBSection } from '@db-ux/react-core-components';
 import SpacingTable from './_modules/SpacingTable.astro';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-[DESCRIPTION]
+Spacing is a key element of our design system and defines the gaps between different components. Consistent use of spacing ensures a harmonious, clear, and user-friendly appearance.
 
 <DBSection spacing="small" width="auto">
 
@@ -21,6 +25,32 @@ import SpacingTable from './_modules/SpacingTable.astro';
 
 </DBSection>
 
-[GUIDELINES]
+<DBSection spacing="small" width="auto">
 
-[FAQ]
+## Guidelines
+
+###### Fixed Spacing
+
+Fixed spacings are gaps that remain the same regardless of screen size. They are typically used within components and modules to ensure a uniform and clear structure across different devices.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/Ji70muzdgUXAcN0Qs8eSY2/Doku--Spacing?node-id=1-1132&embed-host=share"
+		description="Fixed spacings are gaps that remain the same regardless of screen size."
+		fullWidth={true}
+	/>
+</div>
+
+###### Responsive Spacing
+
+Responsive spacings are gaps that automatically adapt to the size of the device screen (desktop, tablet, mobile). They are ideal for separating different layout areas and ensure a consistent, user-friendly appearance across all devices.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/Ji70muzdgUXAcN0Qs8eSY2/Doku--Spacing?node-id=1-1133&embed-host=share"
+		description="Responsive spacings are gaps that automatically adapt to the size of the device screen."
+		fullWidth={true}
+	/>
+</div>
+
+</DBSection>
