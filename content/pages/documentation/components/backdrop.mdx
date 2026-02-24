@@ -19,7 +19,7 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import { backdropConfig } from '@template/configs/backdrop.config.js';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 
-Backdrop is a helper component that dims the page behind an overlay to guide attention to a foreground surface (e.g., modal, dialog, drawer). It separates active content from background content and can optionally prevent interaction with the background.
+Backdrop is a helper component that dims content behind an overlay to direct attention to the foreground (e.g., modal, dialog, drawer). It separates active content from background content and can optionally block interaction with the background.
 
 - Highlight an open overlay (e.g., Dialog, Modal, Drawer)
 - Dim background during a blocking loading state or process
@@ -136,7 +136,7 @@ dialog::backdrop {
 
 ###### Focus attention
 
-Use backdrop when the user should focus on a single active UI layer. If users must keep working with the background, avoid Backdrop and use a non-blocking pattern instead.
+Use backdrop when the user should focus on a single active UI layer and has to complete the task in the overlay to continue on the main page. If users must keep working with the background, avoid Backdrop and use a non-blocking pattern instead.
 
 <div className="guideline-examples">
 	<GuidelineExample
