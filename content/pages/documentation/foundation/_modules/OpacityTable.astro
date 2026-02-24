@@ -1,5 +1,5 @@
 ---
-import { DBTag } from '@db-ux/react-core-components';
+import { DBAccordion, DBAccordionItem, DBTag, DBIcon } from '@db-ux/react-core-components';
 import './TokenTable.css';
 
 const opacityTokens = [
@@ -17,32 +17,40 @@ const opacityTokens = [
 ---
 
 <div class="token-table">
-	<table>
-		<thead>
-			<tr>
-				<th>Token</th>
-				<th>Value</th>
-				<th>Preview</th>
-			</tr>
-		</thead>
-		<tbody>
-			{opacityTokens.map(({ token, value }) => (
-				<tr
-					onclick={`const span = this.querySelector('.copy-text'); span.textContent='Copied'; setTimeout(() => span.textContent='Copy Token', 2000); navigator.clipboard.writeText('var(--${token})')`}
-				>
-					<td>
-						<div class="token-cell">
-							<DBTag data-color="neutral">--{token}</DBTag>{' '}
-							<span class="copy-text">Copy Token</span>
-							<span data-icon-trailing="copy" data-icon-weight="16" />
-						</div>
-					</td>
-					<td>{value}</td>
-					<td>
-						<div class="opacity-preview" data-opacity={token} />
-					</td>
-				</tr>
-			))}
-		</tbody>
-	</table>
+	<DBAccordion variant="card">
+		<DBAccordionItem headline="Opacity">
+			<span slot="headline" class="accordion-headline">
+				<DBIcon icon="list" />
+				Opacity
+			</span>
+			<table>
+				<thead>
+					<tr>
+						<th>Token</th>
+						<th>Value</th>
+						<th>Preview</th>
+					</tr>
+				</thead>
+				<tbody>
+					{opacityTokens.map(({ token, value }) => (
+						<tr
+							onclick={`const span = this.querySelector('.copy-text'); span.textContent='Copied'; setTimeout(() => span.textContent='Copy Token', 2000); navigator.clipboard.writeText('var(--${token})')`}
+						>
+							<td>
+								<div class="token-cell">
+									<DBTag data-color="neutral">--{token}</DBTag>{' '}
+									<span class="copy-text">Copy Token</span>
+									<span data-icon-trailing="copy" data-icon-weight="16" />
+								</div>
+							</td>
+							<td>{value}</td>
+							<td>
+								<div class="opacity-preview" data-opacity={token} />
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</DBAccordionItem>
+	</DBAccordion>
 </div>

@@ -1,14 +1,37 @@
-.token-table table {
+.token-table {
 	width: 100%;
-	border-collapse: collapse;
+	max-width: 100%;
+	contain: layout;
+}
+
+.token-table .db-accordion {
+	width: 100%;
+	max-width: 100%;
 }
 
 .token-table .db-accordion-item {
 	--db-accordion-item-content-padding: 0;
+	width: 100%;
+	max-width: 100%;
+}
+
+.token-table .db-accordion-item > details {
+	width: 100%;
+	max-width: 100%;
 }
 
 .token-table .db-accordion-item > details > summary + div {
 	padding: 0;
+	overflow-x: auto;
+	width: 100%;
+	max-width: 100%;
+	border-top: 1px solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+}
+
+.token-table table {
+	width: max-content;
+	min-width: 100%;
+	border-collapse: collapse;
 }
 
 .token-table th,
@@ -17,22 +40,20 @@
 	padding: var(--db-spacing-fixed-md) var(--db-spacing-fixed-sm);
 	font: var(--db-type-body-sm);
 	vertical-align: middle;
+	border: 1px solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
 }
 
 .token-table table thead tr th {
 	z-index: 10;
 	font: var(--db-type-headline-3xs);
 	background-color: var(--db-adaptive-bg-basic-level-1-default);
-	border-bottom: 1px solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
-	border-right: 1px solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
-	border-top: 1px solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
 	hyphens: auto;
 	-webkit-hyphens: auto;
 	word-break: normal;
 }
 
 .token-table table thead tr:first-child th:last-child {
-	border-right: none;
+	/* Border already applied via th,td rule */
 }
 
 .token-table table thead {
@@ -74,6 +95,7 @@
 	margin-left: auto;
 	font: var(--db-type-body-sm);
 	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+	text-align: right;
 }
 
 .token-table tbody tr:hover .copy-text {

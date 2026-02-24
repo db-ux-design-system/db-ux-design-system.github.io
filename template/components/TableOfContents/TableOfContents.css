@@ -2,8 +2,10 @@
 	position: relative;
 	inline-size: var(--db-container-3xs);
 	background-color: var(--db-neutral-bg-basic-level-1-default);
+	display: none;
 
 	@media screen and (width >= 1024px) {
+		display: block;
 		position: fixed;
 		margin-top: var(--db-spacing-fixed-sm);
 		inset-inline-end: var(--db-spacing-fixed-sm);
