@@ -64,14 +64,14 @@
 }
 
 .db-control-panel-brand::before {
-	color: #ec0016;
+	color: var(--db-critical-origin-default);
 }
 
 .db-control-panel-brand[data-icon='train']::before {
 	color: var(--db-brand-on-bg-basic-emphasis-100-default);
-	font-size: 1.75rem;
-	width: 1.75rem;
-	height: 1.75rem;
+	font-size: var(--db-base-headline-icon-font-size-xs);
+	width: var(--db-base-headline-icon-font-size-xs);
+	height: var(--db-base-headline-icon-font-size-xs);
 }
 
 @media screen and (48em < width) {
