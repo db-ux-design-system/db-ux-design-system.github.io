@@ -8,17 +8,6 @@ const DemoPrimaryActions = () => {
 
 	return (
 		<DBControlPanelPrimaryActions>
-			<DBSelect
-				value={theme}
-				onChange={(e: any) => setTheme(e.target.value)}
-				variant="floating"
-				label="Theme"
-			>
-				<option value="default">Deutsche Bahn</option>
-				<option value="station">Station</option>
-				<option value="s-bahn">S-Bahn</option>
-				<option value="neutral">Neutral</option>
-			</DBSelect>
 			<DBButton
 				variant="ghost"
 				iconLeading={colorMode === 'dark' ? 'sun' : 'moon'}
@@ -33,6 +22,17 @@ const DemoPrimaryActions = () => {
 					window.history.replaceState({}, '', url);
 				}}
 			></DBButton>
+			<DBSelect
+				value={theme}
+				onChange={(e: any) => setTheme(e.target.value)}
+				variant="floating"
+				label="Theme"
+			>
+				<option value="default">Deutsche Bahn</option>
+				<option value="station">Station</option>
+				<option value="s-bahn">S-Bahn</option>
+				<option value="neutral">Neutral</option>
+			</DBSelect>
 			<DBButton variant="ghost" iconLeading="magnifying_glass" noText></DBButton>
 		</DBControlPanelPrimaryActions>
 	);

@@ -6,7 +6,7 @@ import {
 	DBStack,
 } from '@db-ux/react-core-components';
 import ColorModeSwitch from '@root/template/components/color-mode-switch/ColorModeSwitch';
-import ThemeSwitch from '../../ThemeSwitch';
+import ThemeSwitch from '@root/content/pages/_shared/demo-shell/ThemeSwitch';
 
 const DemoSubNavigation = () => (
 	<DBShellSubNavigation>

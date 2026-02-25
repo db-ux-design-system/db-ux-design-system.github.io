@@ -11,31 +11,32 @@ import './InteractiveDemoSection.css';
 					class="db-button"
 					data-variant="filled"
 					id="toggle-demo"
-					onclick="var d1=document.getElementById('demo-buttons'),d2=document.getElementById('demo-2-buttons'),ifr=document.getElementById('demo-iframe'),btn=this;if(d1.style.display==='none'){d1.style.display='contents';d2.style.display='none';ifr.src='/demo';btn.textContent='Zeige B2C Demo';}else{d1.style.display='none';d2.style.display='contents';ifr.src='/demo-2';btn.textContent='Zeige B2B Demo';}"
+					onclick="var d1=document.getElementById('demo-buttons'),d2=document.getElementById('demo-2-buttons'),ifr=document.getElementById('demo-iframe'),btn=this;if(d1.style.display==='none'){d1.style.display='contents';d2.style.display='none';ifr.src='/demo-b2b';btn.textContent='Zeige B2C Demo';}else{d1.style.display='none';d2.style.display='contents';ifr.src='/demo-b2c';btn.textContent='Zeige B2B Demo';}"
 					>Zeige B2C Demo</button
 				>
 				<div id="demo-buttons" style="display: contents;">
 					<button
 						class="db-button theme-db"
 						data-variant="brand"
-						onclick="document.getElementById('demo-iframe').src='/demo?theme=default'"
+						onclick="document.getElementById('demo-iframe').src='/demo-b2b?theme=default'"
 						>Deutsche Bahn</button
 					>
 					<button
 						class="db-button theme-station"
 						data-variant="brand"
-						onclick="document.getElementById('demo-iframe').src='/demo?theme=station'"
+						onclick="document.getElementById('demo-iframe').src='/demo-b2b?theme=station'"
 						>Station</button
 					>
 					<button
 						class="db-button theme-sbahn"
 						data-variant="brand"
-						onclick="document.getElementById('demo-iframe').src='/demo?theme=s-bahn'">S-Bahn</button
+						onclick="document.getElementById('demo-iframe').src='/demo-b2b?theme=s-bahn'"
+						>S-Bahn</button
 					>
 					<button
 						class="db-button theme-neutral"
 						data-variant="brand"
-						onclick="document.getElementById('demo-iframe').src='/demo?theme=neutral'"
+						onclick="document.getElementById('demo-iframe').src='/demo-b2b?theme=neutral'"
 						>Neutral</button
 					>
 					<button
@@ -43,14 +44,15 @@ import './InteractiveDemoSection.css';
 						data-variant="filled"
 						data-no-text="true"
 						data-icon="sun"
-						onclick="document.getElementById('demo-iframe').src='/demo?mode=light'">Light</button
+						onclick="document.getElementById('demo-iframe').src='/demo-b2b?mode=light'"
+						>Light</button
 					>
 					<button
 						class="db-button"
 						data-variant="filled"
 						data-no-text="true"
 						data-icon="moon"
-						onclick="document.getElementById('demo-iframe').src='/demo?mode=dark'">Dark</button
+						onclick="document.getElementById('demo-iframe').src='/demo-b2b?mode=dark'">Dark</button
 					>
 					<button
 						class="db-button"
@@ -65,25 +67,25 @@ import './InteractiveDemoSection.css';
 					<button
 						class="db-button theme-db"
 						data-variant="brand"
-						onclick="document.getElementById('demo-iframe').src='/demo-2?theme=default'"
+						onclick="document.getElementById('demo-iframe').src='/demo-b2c?theme=default'"
 						>Deutsche Bahn</button
 					>
 					<button
 						class="db-button theme-station"
 						data-variant="brand"
-						onclick="document.getElementById('demo-iframe').src='/demo-2?theme=station'"
+						onclick="document.getElementById('demo-iframe').src='/demo-b2c?theme=station'"
 						>Station</button
 					>
 					<button
 						class="db-button theme-sbahn"
 						data-variant="brand"
-						onclick="document.getElementById('demo-iframe').src='/demo-2?theme=s-bahn'"
+						onclick="document.getElementById('demo-iframe').src='/demo-b2c?theme=s-bahn'"
 						>S-Bahn</button
 					>
 					<button
 						class="db-button theme-neutral"
 						data-variant="brand"
-						onclick="document.getElementById('demo-iframe').src='/demo-2?theme=neutral'"
+						onclick="document.getElementById('demo-iframe').src='/demo-b2c?theme=neutral'"
 						>Neutral</button
 					>
 					<button
@@ -91,14 +93,15 @@ import './InteractiveDemoSection.css';
 						data-variant="filled"
 						data-no-text="true"
 						data-icon="sun"
-						onclick="document.getElementById('demo-iframe').src='/demo-2?mode=light'">Light</button
+						onclick="document.getElementById('demo-iframe').src='/demo-b2c?mode=light'"
+						>Light</button
 					>
 					<button
 						class="db-button"
 						data-variant="filled"
 						data-no-text="true"
 						data-icon="moon"
-						onclick="document.getElementById('demo-iframe').src='/demo-2?mode=dark'">Dark</button
+						onclick="document.getElementById('demo-iframe').src='/demo-b2c?mode=dark'">Dark</button
 					>
 					<button
 						class="db-button"
@@ -112,11 +115,12 @@ import './InteractiveDemoSection.css';
 			</DBStack>
 		</DBCard>
 		<DBCard spacing="none">
-			<iframe id="demo-iframe" src="/demo" style="
+			<iframe id="demo-iframe" src="/demo-b2b" style="
 				width: 100%;
 				height: 110vh;
 				zoom: 0.6;
-			"></iframe>
+			"
+			></iframe>
 		</DBCard>
 	</DBStack>
 </DBSection>
