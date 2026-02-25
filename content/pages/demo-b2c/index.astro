@@ -1,7 +1,10 @@
 ---
+layout: '@template/layouts/demo.astro';
+title: 'B2B Demo - DB UX Design System';
 import '@db-ux/core-components/build/styles/rollup.css';
 import '@db-ux/db-theme/build/styles/rollup.css';
 import './index.css';
+import DemoLayout from '@template/layouts/demo.astro';
 import { DemoShell } from './_modules/demo-shell/DemoShell';
 import {
 	DBSection,
@@ -13,159 +16,126 @@ import {
 } from '@db-ux/react-core-components';
 ---
 
-<!doctype html>
-<html lang="de">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>B2C Demo - DB UX Design System</title>
-	</head>
-	<body>
-		<DemoShell client:only="react">
-			<main>
-				<DBSection width="large" className="hero-section">
-					<DBCard className="teaser" data-color="brand">
-						<DBStack gap="small">
-							<h6>Erkunden Sie Europa ab 19,99 €</h6>
-							<small>Reisen Sie schnell und günstig zu vielen europäischen Zielen.</small>
-							<DBButton width="full" variant="filled">Günstigen Preis finden</DBButton>
-						</DBStack>
-					</DBCard>
-				</DBSection>
-				<DBSection spacing="none" width="small" className="journey-section">
-					<DBCard>
-						<DBStack gap="medium">
-							<DBStack direction="row" gap="small" justifyContent="space-between">
-								<b class="pulse">Verbindungssuche</b>
-
-								<DBStack direction="row" alignment="center">
-									<div class="buttongroup">
-										<button
-											class="db-button"
-											data-variant="brand"
-											data-size="small"
-											id="class-1"
-											onclick="document.getElementById('class-1').setAttribute('data-variant','brand');document.getElementById('class-2').setAttribute('data-variant','filled');"
-											>1. Klasse</button
-										>
-										<button
-											class="db-button"
-											data-variant="filled"
-											data-size="small"
-											id="class-2"
-											onclick="document.getElementById('class-2').setAttribute('data-variant','brand');document.getElementById('class-1').setAttribute('data-variant','filled');"
-											>2. Klasse</button
-										>
-									</div>
-
-									<DBButton iconLeading="map" variant="ghost" size="small" noText>
-										Karte anzeigen
-									</DBButton>
-								</DBStack>
-							</DBStack>
-							<DBStack
-								direction="row"
-								gap="small"
-								justifyContent="space-between"
-								className="journey"
-							>
-								<DBInput
-									iconLeading="start"
-									label="Start"
-									variant="floating"
-									placeholder="Wo geht die Reise los?"
-									width="100%"
-								/>
-								<DBInput
-									iconLeading="map_pin"
-									label="Ziel"
-									variant="floating"
-									placeholder="Wohin soll es gehen?"
-									width="100%"
-								/>
-								<DBButton variant="brand"> Suche </DBButton>
-							</DBStack>
-							<DBStack
-								direction="row"
-								gap="small"
-								justifyContent="space-between"
-								className="column"
-							>
-								<DBButton width="full" variant="filled" iconLeading="calendar">
-									Heute, ab 14:30
-								</DBButton>
-								<DBButton width="full" variant="filled" iconLeading="calendar">
-									Rückfahrt hinzufügen
-								</DBButton>
-								<DBButton width="full" variant="filled" iconLeading="person">
-									Infos zumReisenden
-								</DBButton>
-							</DBStack>
-						</DBStack>
-					</DBCard>
-				</DBSection>
-				<DBSection spacing="small" width="medium">
+<DemoLayout title="B2C Demo - DB UX Design System">
+	<DemoShell client:only="react">
+		<main>
+			<DBSection width="large" className="hero-section">
+				<DBCard className="teaser" data-color="brand">
+					<DBStack gap="small">
+						<h6>Erkunden Sie Europa ab 19,99 €</h6>
+						<small>Reisen Sie schnell und günstig zu vielen europäischen Zielen.</small>
+						<DBButton width="full" variant="filled">Günstigen Preis finden</DBButton>
+					</DBStack>
+				</DBCard>
+			</DBSection>
+			<DBSection spacing="none" width="small" className="journey-section">
+				<DBCard>
 					<DBStack gap="medium">
-						<h2>Neues von der Deutschen Bahn</h2>
-						<DBStack direction="row" className="column">
-							<DBCard
-								className="data-card"
-								spacing="none"
-								className="article"
-								behavior="interactive"
-							>
-								<img
-									src="https://images.unsplash.com/photo-1584371577738-40b929ee5f13?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-								/>
-								<DBStack gap="small" className="article-content">
-									<h6>Article</h6>
-									<p>
-										Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-										tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-									</p>
-									<DBLink href="/xx">Link zum Artikel</DBLink>
-								</DBStack>
-							</DBCard>
-							<DBCard
-								className="data-card"
-								spacing="none"
-								className="article"
-								behavior="interactive"
-							>
-								<img
-									src="https://images.unsplash.com/photo-1570187453437-ffd1671232e9?q=80&w=2148&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-								/>
-								<DBStack gap="small" className="article-content">
-									<h6>Article</h6>
-									<p>
-										Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-										tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-									</p>
-									<DBLink>Link zum Artikel</DBLink>
-								</DBStack>
-							</DBCard>
-							<DBCard
-								className="data-card"
-								spacing="none"
-								className="article"
-								behavior="interactive"
-							>
-								<img
-									src="https://images.unsplash.com/photo-1562078809-7ef447ae26c6?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-								/>
-								<DBStack gap="small" className="article-content">
-									<h6>Article</h6>
-									<p>
-										Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-										tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-									</p>
-									<DBLink>Link zum Artikel</DBLink>
-								</DBStack>
-							</DBCard>
+						<DBStack direction="row" gap="small" justifyContent="space-between">
+							<b class="pulse">Verbindungssuche</b>
+
+							<DBStack direction="row" alignment="center">
+								<div class="buttongroup">
+									<button
+										class="db-button"
+										data-variant="brand"
+										data-size="small"
+										id="class-1"
+										onclick="document.getElementById('class-1').setAttribute('data-variant','brand');document.getElementById('class-2').setAttribute('data-variant','filled');"
+										>1. Klasse</button
+									>
+									<button
+										class="db-button"
+										data-variant="filled"
+										data-size="small"
+										id="class-2"
+										onclick="document.getElementById('class-2').setAttribute('data-variant','brand');document.getElementById('class-1').setAttribute('data-variant','filled');"
+										>2. Klasse</button
+									>
+								</div>
+
+								<DBButton iconLeading="map" variant="ghost" size="small" noText>
+									Karte anzeigen
+								</DBButton>
+							</DBStack>
+						</DBStack>
+						<DBStack direction="row" gap="small" justifyContent="space-between" className="journey">
+							<DBInput
+								iconLeading="start"
+								label="Start"
+								variant="floating"
+								placeholder="Wo geht die Reise los?"
+								width="100%"
+							/>
+							<DBInput
+								iconLeading="map_pin"
+								label="Ziel"
+								variant="floating"
+								placeholder="Wohin soll es gehen?"
+								width="100%"
+							/>
+							<DBButton variant="brand"> Suche </DBButton>
+						</DBStack>
+						<DBStack direction="row" gap="small" justifyContent="space-between" className="column">
+							<DBButton width="full" variant="filled" iconLeading="calendar">
+								Heute, ab 14:30
+							</DBButton>
+							<DBButton width="full" variant="filled" iconLeading="calendar">
+								Rückfahrt hinzufügen
+							</DBButton>
+							<DBButton width="full" variant="filled" iconLeading="person">
+								Infos zumReisenden
+							</DBButton>
 						</DBStack>
 					</DBStack>
-				</DBSection>
-			</main>
-		</DemoShell>
-	</body>
-</html>
+				</DBCard>
+			</DBSection>
+			<DBSection spacing="small" width="medium">
+				<DBStack gap="medium">
+					<h2>Neues von der Deutschen Bahn</h2>
+					<DBStack direction="row" className="column">
+						<DBCard className="data-card" spacing="none" className="article" behavior="interactive">
+							<img
+								src="https://images.unsplash.com/photo-1584371577738-40b929ee5f13?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+							/>
+							<DBStack gap="small" className="article-content">
+								<h6>Article</h6>
+								<p>
+									Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+									tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+								</p>
+								<DBLink href="/xx">Link zum Artikel</DBLink>
+							</DBStack>
+						</DBCard>
+						<DBCard className="data-card" spacing="none" className="article" behavior="interactive">
+							<img
+								src="https://images.unsplash.com/photo-1570187453437-ffd1671232e9?q=80&w=2148&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+							/>
+							<DBStack gap="small" className="article-content">
+								<h6>Article</h6>
+								<p>
+									Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+									tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+								</p>
+								<DBLink>Link zum Artikel</DBLink>
+							</DBStack>
+						</DBCard>
+						<DBCard className="data-card" spacing="none" className="article" behavior="interactive">
+							<img
+								src="https://images.unsplash.com/photo-1562078809-7ef447ae26c6?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+							/>
+							<DBStack gap="small" className="article-content">
+								<h6>Article</h6>
+								<p>
+									Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+									tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+								</p>
+								<DBLink>Link zum Artikel</DBLink>
+							</DBStack>
+						</DBCard>
+					</DBStack>
+				</DBStack>
+			</DBSection>
+		</main>
+	</DemoShell>
+</DemoLayout>
