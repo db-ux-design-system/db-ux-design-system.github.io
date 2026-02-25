@@ -49,6 +49,7 @@ export default defineConfig({
 		},
 		resolve: {
 			alias: {
+				'@db-ux': new URL('./node_modules/@db-ux', import.meta.url).pathname,
 				'@components': new URL('./template/components', import.meta.url).pathname,
 				'@template': new URL('./template', import.meta.url).pathname,
 				'@content': new URL('./content', import.meta.url).pathname,
