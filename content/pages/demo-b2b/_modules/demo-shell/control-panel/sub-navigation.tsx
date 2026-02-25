@@ -6,7 +6,7 @@ import {
 	DBStack,
 } from '@db-ux/react-core-components';
 import { useColorMode } from '@template/context/color-mode-context';
-import ThemeSwitch from '@root/content/pages/_shared/demo-shell/ThemeSwitch';
+import ThemeSwitch from '@template/components/theme-switch/ThemeSwitch';
 
 const DemoSubNavigation = () => {
 	const { colorMode, setColorMode } = useColorMode();

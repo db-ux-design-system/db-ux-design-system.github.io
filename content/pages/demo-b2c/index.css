@@ -1,21 +1,4 @@
-.db-notification {
-	border-top: none;
-	border-right: none;
-	border-left: none;
-}
-
-.db-shell-sub-navigation {
-	min-block-size: var(--db-sizing-lg); /* 64px - closest to 72px */
-	padding: var(--db-spacing-fixed-sm) var(--db-spacing-fixed-md);
-}
-
-.db-shell-sub-navigation .db-navigation {
-	block-size: 100%;
-}
-
-.db-shell-sub-navigation .db-navigation menu {
-	align-items: center;
-}
+@import '@template/styles/demo.css';
 
 .data-card {
 	inline-size: 100%;
@@ -25,63 +8,17 @@
 	flex-wrap: wrap;
 }
 
-.cta-card {
-	background: var(--db-brand-origin-default);
-	color: var(--db-brand-on-origin-default);
-	min-block-size: var(--db-sizing-3xl);
-}
-
-.cta-card .db-stack {
-	margin: auto;
-	block-size: auto;
-}
-
-.cta-card h3,
-.cta-card p {
-	margin: 0;
-}
-
-.cta-card .cta-button {
-	background-color: var(--db-brand-on-origin-default);
-	border-color: var(--db-brand-on-bg-basic-emphasis-70-default);
-	color: var(--db-brand-origin-default);
-
-	&:hover {
-		background-color: var(--db-brand-on-origin-default);
-		opacity: var(--db-opacity-2xl);
-	}
-
-	&:active {
-		background-color: var(--db-brand-on-origin-default);
-		opacity: var(--db-opacity-xl);
-	}
-}
-
 @media screen and (width < 62em) {
 	.db-section .db-stack[data-direction='row'].column {
 		flex-direction: column;
 	}
 }
 
-.db-control-panel-brand::before {
-	color: var(--db-critical-origin-default);
-}
-
 .db-control-panel-brand[data-icon='train']::before {
 	color: var(--db-brand-on-bg-basic-emphasis-70-default);
-	font-size: var(--db-sizing-sm); /* 24px */
+	font-size: var(--db-sizing-sm);
 	inline-size: var(--db-sizing-sm);
 	block-size: var(--db-sizing-sm);
-}
-
-@media screen and (48em < width) {
-	.db-shell[data-control-panel-desktop-position='left']:has(
-			> * > db-shell-sub-navigation > .db-shell-sub-navigation,
-			> db-shell-sub-navigation > .db-shell-sub-navigation,
-			> .db-shell-sub-navigation
-		) {
-		grid-template-rows: max-content 1fr;
-	}
 }
 
 .db-stack .db-stack {
@@ -205,5 +142,5 @@
 .journey-section {
 	position: relative;
 	z-index: 2;
-	margin-top: calc(-1 * var(--db-spacing-fixed-3xl)); /* 80px, closest to -90px */
+	margin-top: calc(-1 * var(--db-spacing-fixed-3xl));
 }

@@ -1,0 +1,102 @@
+/* Shared demo shell styles */
+
+.db-notification {
+	border-top: none;
+	border-right: none;
+	border-left: none;
+}
+
+.db-shell-sub-navigation {
+	padding: var(--db-spacing-fixed-md);
+	block-size: calc(var(--db-sizing-regular-md) + 2 * var(--db-spacing-fixed-md));
+}
+
+.db-shell-sub-navigation .db-navigation {
+	block-size: 100%;
+}
+
+.db-shell-sub-navigation .db-navigation menu {
+	align-items: center;
+}
+
+.cta-card {
+	background: var(--db-brand-origin-default);
+	color: var(--db-brand-on-origin-default);
+	min-block-size: var(--db-sizing-3xl);
+}
+
+.cta-card .db-stack {
+	margin: auto;
+	block-size: auto;
+}
+
+.cta-card h3,
+.cta-card p {
+	margin: 0;
+}
+
+.cta-card .db-button.cta-button {
+	background-color: var(--db-brand-on-origin-default);
+	border-color: var(--db-brand-on-bg-basic-emphasis-70-default);
+	color: var(--db-brand-origin-default);
+}
+
+.cta-card .db-button.cta-button:hover {
+	background-color: var(--db-brand-on-origin-default);
+	opacity: var(--db-opacity-2xl);
+}
+
+.cta-card .db-button.cta-button:active {
+	background-color: var(--db-brand-on-origin-default);
+	opacity: var(--db-opacity-xl);
+}
+
+.db-control-panel-brand::before {
+	color: var(--db-brand-origin-default);
+}
+
+@media screen and (48em < width) {
+	.db-shell[data-control-panel-desktop-position='left']:has(
+			> * > db-shell-sub-navigation > .db-shell-sub-navigation,
+			> db-shell-sub-navigation > .db-shell-sub-navigation,
+			> .db-shell-sub-navigation
+		) {
+		grid-template-rows: max-content 1fr;
+	}
+}
+
+/* Table */
+
+table {
+	display: table;
+	inline-size: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+	overflow: hidden;
+}
+
+table td,
+table th {
+	border-right: 0 solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-bottom: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	padding: var(--db-spacing-fixed-sm);
+	padding-inline: var(--db-spacing-fixed-lg);
+	text-align: start;
+}
+
+table td:last-child,
+table th:last-child {
+	border-right: none;
+}
+
+table tr:last-child td {
+	border-bottom: none;
+}
+
+table thead {
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}
+
+table tbody tr:nth-child(2n) {
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}

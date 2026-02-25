@@ -4,7 +4,6 @@ import {
 	DBButton,
 	DBSelect,
 	DBInput,
-	DBIcon,
 	DBStack,
 } from '@db-ux/react-core-components';
 import { useState } from 'react';
@@ -120,9 +119,10 @@ export const SelectableTable = () => {
 						</DBSelect>
 						<DBButton
 							variant="filled"
+							iconLeading={sortOrder === 'asc' ? 'arrow_upward' : 'arrow_downward'}
 							onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
 						>
-							<DBIcon icon={sortOrder === 'asc' ? 'arrow_upward' : 'arrow_downward'} /> Sort Metric
+							Sort Metric
 						</DBButton>
 					</DBStack>
 				</DBStack>

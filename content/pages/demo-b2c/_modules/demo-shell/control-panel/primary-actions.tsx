@@ -24,7 +24,12 @@ const DemoPrimaryActions = () => {
 			></DBButton>
 			<DBSelect
 				value={theme.name}
-				onChange={(e: any) => setTheme(e.target.value)}
+				onChange={(e) => {
+					setTheme(e.target.value as 'default' | 's-bahn' | 'station' | 'neutral');
+					const url = new URL(window.location.href);
+					url.searchParams.delete('theme');
+					window.history.replaceState({}, '', url);
+				}}
 				variant="floating"
 				label="Theme"
 			>
