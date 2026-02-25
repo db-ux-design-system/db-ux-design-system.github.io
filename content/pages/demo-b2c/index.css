@@ -48,11 +48,11 @@
 
 	&:hover {
 		background-color: var(--db-brand-on-origin-default);
-		opacity: 0.9;
+		opacity: var(--db-opacity-2xl);
 	}
 	&:active {
 		background-color: var(--db-brand-on-origin-default);
-		opacity: 0.8;
+		opacity: var(--db-opacity-xl);
 	}
 }
 
@@ -182,12 +182,12 @@
 
 .hero-section .db-card .db-button[data-variant='filled']:hover {
 	background: var(--db-brand-on-origin-default);
-	opacity: 0.9;
+	opacity: var(--db-opacity-2xl);
 }
 
 .hero-section .db-card .db-button[data-variant='filled']:active {
 	background: var(--db-brand-on-origin-default);
-	opacity: 0.8;
+	opacity: var(--db-opacity-xl);
 }
 
 .hero-section h6,

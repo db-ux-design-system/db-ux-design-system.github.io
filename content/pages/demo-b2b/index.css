@@ -49,12 +49,12 @@
 
 .cta-card .db-button.cta-button:hover {
 	background-color: var(--db-brand-on-origin-default);
-	opacity: 0.9;
+	opacity: var(--db-opacity-2xl);
 }
 
 .cta-card .db-button.cta-button:active {
 	background-color: var(--db-brand-on-origin-default);
-	opacity: 0.8;
+	opacity: var(--db-opacity-xl);
 }
 
 @media screen and (width < 62em) {
