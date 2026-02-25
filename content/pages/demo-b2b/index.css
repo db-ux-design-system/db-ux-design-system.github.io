@@ -5,12 +5,12 @@
 }
 
 .db-shell-sub-navigation {
-	min-height: 72px;
+	min-block-size: 72px; /* No exact token: between --db-sizing-lg (64px) and --db-sizing-xl (96px) */
 	padding: var(--db-spacing-fixed-sm) var(--db-spacing-fixed-md);
 }
 
 .db-shell-sub-navigation .db-navigation {
-	height: 100%;
+	block-size: 100%;
 }
 
 .db-shell-sub-navigation .db-navigation menu {
@@ -18,7 +18,7 @@
 }
 
 .data-card {
-	width: 100%;
+	inline-size: 100%;
 }
 
 .cards-container {
@@ -28,12 +28,12 @@
 .cta-card {
 	background: var(--db-brand-origin-default);
 	color: var(--db-brand-on-origin-default);
-	min-height: var(--db-sizing-3xl);
+	min-block-size: var(--db-sizing-3xl);
 }
 
 .cta-card .db-stack {
 	margin: auto;
-	height: auto;
+	block-size: auto;
 }
 
 .cta-card h3,
@@ -70,8 +70,8 @@
 .db-control-panel-brand[data-icon='train']::before {
 	color: var(--db-brand-on-bg-basic-emphasis-100-default);
 	font-size: var(--db-base-headline-icon-font-size-xs);
-	width: var(--db-base-headline-icon-font-size-xs);
-	height: var(--db-base-headline-icon-font-size-xs);
+	inline-size: var(--db-base-headline-icon-font-size-xs);
+	block-size: var(--db-base-headline-icon-font-size-xs);
 }
 
 @media screen and (48em < width) {
@@ -88,7 +88,7 @@
 
 table {
 	display: table;
-	width: 100%;
+	inline-size: 100%;
 	border-collapse: separate;
 	border-spacing: 0;
 	overflow: hidden;
@@ -125,7 +125,7 @@ table tbody tr:nth-child(2n) {
 }
 
 .db-stack .db-stack {
-	width: auto;
+	inline-size: auto;
 }
 
 .db-stack {

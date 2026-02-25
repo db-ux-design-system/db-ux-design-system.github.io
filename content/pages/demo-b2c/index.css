@@ -5,12 +5,12 @@
 }
 
 .db-shell-sub-navigation {
-	min-height: 72px;
+	min-block-size: 72px; /* No exact token: between --db-sizing-lg (64px) and --db-sizing-xl (96px) */
 	padding: var(--db-spacing-fixed-sm) var(--db-spacing-fixed-md);
 }
 
 .db-shell-sub-navigation .db-navigation {
-	height: 100%;
+	block-size: 100%;
 }
 
 .db-shell-sub-navigation .db-navigation menu {
@@ -18,7 +18,7 @@
 }
 
 .data-card {
-	width: 100%;
+	inline-size: 100%;
 }
 
 .cards-container {
@@ -28,12 +28,12 @@
 .cta-card {
 	background: var(--db-brand-origin-default);
 	color: var(--db-brand-on-origin-default);
-	min-height: var(--db-sizing-3xl);
+	min-block-size: var(--db-sizing-3xl);
 }
 
 .cta-card .db-stack {
 	margin: auto;
-	height: auto;
+	block-size: auto;
 }
 
 .cta-card h3,
@@ -61,11 +61,15 @@
 		flex-direction: column;
 	}
 }
+.db-control-panel-brand::before {
+	color: var(--db-critical-origin-default);
+}
+
 .db-control-panel-brand[data-icon='train']::before {
 	color: var(--db-brand-on-bg-basic-emphasis-70-default);
 	font-size: var(--db-base-headline-icon-font-size-xs);
-	width: var(--db-base-headline-icon-font-size-xs);
-	height: var(--db-base-headline-icon-font-size-xs);
+	inline-size: var(--db-base-headline-icon-font-size-xs);
+	block-size: var(--db-base-headline-icon-font-size-xs);
 }
 
 @media screen and (48em < width) {
@@ -79,7 +83,7 @@
 }
 
 .db-stack .db-stack {
-	width: auto;
+	inline-size: auto;
 }
 
 .db-stack {
@@ -87,7 +91,7 @@
 }
 
 .journey .db-input {
-	width: 100%;
+	inline-size: 100%;
 }
 
 .pulse {
@@ -97,8 +101,8 @@
 		display: block;
 		position: relative;
 		top: var(--db-spacing-fixed-sm);
-		width: var(--db-sizing-sm); /* 32px */
-		height: var(--db-border-width-sm); /* 4px */
+		inline-size: var(--db-sizing-sm);
+		block-size: var(--db-border-width-sm);
 		background-color: var(--db-brand-on-bg-basic-emphasis-70-default);
 		border-radius: var(--db-border-radius-full);
 	}
@@ -107,7 +111,7 @@
 .buttongroup {
 	display: flex;
 	gap: 0;
-	width: auto;
+	inline-size: auto;
 	border: solid var(--db-border-width-3xs) var(--db-adaptive-on-bg-basic-emphasis-60-default);
 	border-radius: var(--db-border-radius-xs);
 }
@@ -133,7 +137,7 @@
 
 .article img {
 	aspect-ratio: 16 / 9;
-	max-height: var(--db-sizing-2xl);
+	max-block-size: var(--db-sizing-2xl);
 	object-fit: cover;
 }
 
@@ -151,7 +155,7 @@
 	background-image: url('https://images.unsplash.com/photo-1723816254296-6b8bf36e1cc9?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
 	background-size: cover;
 	background-position: center;
-	min-height: 40vh;
+	min-block-size: 40vh;
 }
 
 .hero-section::before {
@@ -164,7 +168,7 @@
 
 .hero-section .db-card {
 	float: right;
-	max-width: var(--db-container-xs);
+	max-inline-size: var(--db-container-xs);
 	background: var(--db-brand-origin-default);
 	color: var(--db-brand-on-origin-default);
 }
