@@ -5,8 +5,8 @@
 }
 
 .db-shell-sub-navigation {
-	min-block-size: var(--db-sizing-lg); /* 64px - closest to 72px */
-	padding: var(--db-spacing-fixed-sm) var(--db-spacing-fixed-md);
+	padding: var(--db-spacing-fixed-md);
+	block-size: calc(var(--db-sizing-regular-md) + 2 * var(--db-spacing-fixed-md));
 }
 
 .db-shell-sub-navigation .db-navigation {

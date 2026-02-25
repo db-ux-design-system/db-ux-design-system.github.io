@@ -11,13 +11,10 @@ import { useState } from 'react';
 import './SelectableTable.css';
 
 export const SelectableTable = () => {
-	const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
+	const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
 	const [statusFilter, setStatusFilter] = useState<string>('All');
 	const [searchQuery, setSearchQuery] = useState<string>('');
 	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-	const allRows = [1, 2, 3, 4, 5];
-	const allSelected = allRows.every((row) => selectedRows.has(row));
-	const someSelected = selectedRows.size > 0 && !allSelected;
 
 	const tableData = [
 		{
@@ -62,23 +59,23 @@ export const SelectableTable = () => {
 		},
 	];
 
-	const toggleRow = (rowIndex: number) => {
+	const toggleRow = (metric: string) => {
 		setSelectedRows((prev) => {
 			const newSet = new Set(prev);
-			if (newSet.has(rowIndex)) {
-				newSet.delete(rowIndex);
+			if (newSet.has(metric)) {
+				newSet.delete(metric);
 			} else {
-				newSet.add(rowIndex);
+				newSet.add(metric);
 			}
 			return newSet;
 		});
 	};
 
 	const toggleAll = () => {
-		if (allSelected) {
+		if (filteredData.every((item) => selectedRows.has(item.metric))) {
 			setSelectedRows(new Set());
 		} else {
-			setSelectedRows(new Set(allRows));
+			setSelectedRows(new Set(filteredData.map((item) => item.metric)));
 		}
 	};
 
@@ -143,8 +140,9 @@ export const SelectableTable = () => {
 							<tr>
 								<th>
 									<DBCheckbox
-										checked={allSelected}
-										indeterminate={someSelected}
+										label="Select all"
+										checked={filteredData.length > 0 && filteredData.every((item) => selectedRows.has(item.metric))}
+										indeterminate={selectedRows.size > 0 && !filteredData.every((item) => selectedRows.has(item.metric))}
 										onChange={toggleAll}
 									/>
 								</th>
@@ -156,19 +154,20 @@ export const SelectableTable = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{filteredData.map((item, index) => (
+							{filteredData.map((item) => (
 								<tr
-									key={index}
-									className={selectedRows.has(index + 1) ? 'selected' : ''}
+									key={item.metric}
+									className={selectedRows.has(item.metric) ? 'selected' : ''}
 									onClick={(e) => {
 										if ((e.target as HTMLElement).closest('td:first-child')) return;
-										toggleRow(index + 1);
+										toggleRow(item.metric);
 									}}
 								>
 									<td>
 										<DBCheckbox
-											checked={selectedRows.has(index + 1)}
-											onChange={() => toggleRow(index + 1)}
+											label={`Select ${item.metric}`}
+											checked={selectedRows.has(item.metric)}
+											onChange={() => toggleRow(item.metric)}
 										/>
 									</td>
 									<td>{item.metric}</td>

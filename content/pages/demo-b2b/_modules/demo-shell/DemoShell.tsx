@@ -5,10 +5,6 @@ import {
 	DBShell,
 	DBControlPanelDesktop,
 	DBControlPanelMobile,
-	DBNotification,
-	DBNavigation,
-	DBNavigationItem,
-	DBShellSubNavigation,
 } from '@db-ux/react-core-components';
 import DemoBrand from './control-panel/brand';
 import DemoNavigation from './control-panel/navigation';

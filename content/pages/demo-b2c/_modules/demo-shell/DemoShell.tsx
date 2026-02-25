@@ -5,10 +5,6 @@ import {
 	DBShell,
 	DBControlPanelDesktop,
 	DBControlPanelMobile,
-	DBNotification,
-	DBNavigation,
-	DBNavigationItem,
-	DBShellSubNavigation,
 } from '@db-ux/react-core-components';
 import DemoBrand from './control-panel/brand';
 import DemoMetaNavigation from './control-panel/meta-navigation';
@@ -31,7 +27,7 @@ function DemoShellContent({ children }: PropsWithChildren): ReactElement {
 			document.documentElement.setAttribute('data-mode', mode);
 		}
 
-		if (theme) {
+		if (theme && (theme === 'default' || theme === 's-bahn' || theme === 'station' || theme === 'neutral')) {
 			setTheme(theme);
 		}
 	}, [setColorMode, setTheme]);
