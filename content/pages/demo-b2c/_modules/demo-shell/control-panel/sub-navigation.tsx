@@ -11,7 +11,7 @@ import ThemeSwitch from '@root/content/pages/_shared/demo-shell/ThemeSwitch';
 const DemoSubNavigation = () => (
 	<DBShellSubNavigation>
 		<DBStack direction="row" justifyContent="space-between" alignment="center">
-			<b>Analytics</b>
+			<b>Reiseplanung</b>
 			<DBStack direction="row" gap="small" alignment="center">
 				<ColorModeSwitch />
 				<ThemeSwitch />

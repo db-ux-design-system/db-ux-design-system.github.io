@@ -50,7 +50,7 @@ export const SelectableTable = () => {
 			notes: 'Consistent usage pattern',
 		},
 		{
-			metric: 'Troughput',
+			metric: 'Throughput',
 			value: '19.600 req/min',
 			trend: '+ 12,8 %',
 			status: 'Warning',
