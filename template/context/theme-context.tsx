@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
-import { appConfig } from '@config';
 
 export type ThemeName = 'default' | 's-bahn' | 'station' | 'neutral';
 
@@ -59,34 +58,18 @@ function getInitialTheme(): Theme {
 	return THEMES.default;
 }
 
-function loadThemeCSS(theme: Theme) {
-	const existingLink = document.getElementById('theme-css');
-	if (existingLink) {
-		existingLink.remove();
-	}
-
-	if (theme.name === 'default') return;
-
-	const link = document.createElement('link');
-	link.id = 'theme-css';
-	link.rel = 'stylesheet';
-	const themePath =
-		theme.name === 's-bahn'
-			? 'sbahn-variables.css'
-			: theme.name === 'neutral'
-			? 'neutral-variables.css'
-			: 'station-variables.css';
-	link.href = `${appConfig.basePath}template/themes/${themePath}`;
-	document.head.appendChild(link);
-}
-
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 	const [theme, setThemeState] = useState<Theme>(getInitialTheme);
 
 	useEffect(() => {
 		window.localStorage.setItem(STORAGE_KEY, theme.name);
-		loadThemeCSS(theme);
+		document.documentElement.setAttribute('data-theme', theme.name);
 	}, [theme]);
+
+	useEffect(() => {
+		// Set initial theme on mount
+		document.documentElement.setAttribute('data-theme', theme.name);
+	}, []);
 
 	const setTheme = (name: ThemeName) => {
 		setThemeState(THEMES[name]);

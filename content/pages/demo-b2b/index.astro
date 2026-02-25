@@ -2,6 +2,7 @@
 import '@db-ux/core-components/build/styles/rollup.css';
 import '@db-ux/db-theme/build/styles/rollup.css';
 import './index.css';
+import DemoLayout from '@template/layouts/demo.astro';
 import { DemoShell } from './_modules/demo-shell/DemoShell';
 import SelectableTable from './_modules/SelectableTable.astro';
 import {
@@ -14,7 +15,8 @@ import {
 } from '@db-ux/react-core-components';
 ---
 
-<DemoShell client:only="react">
+<DemoLayout title="B2B Demo - DB UX Design System">
+	<DemoShell client:only="react">
 	<main>
 		<DBSection spacing="small">
 			<DBStack direction="row">
@@ -64,5 +66,6 @@ import {
 				</DBStack>
 			</DBCard>
 		</DBSection>
-	</main>
-</DemoShell>
+		</main>
+	</DemoShell>
+</DemoLayout>

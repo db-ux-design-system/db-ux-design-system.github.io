@@ -7,7 +7,7 @@ const ThemeSwitch = () => {
 	return (
 		<DBSelect
 			label="Theme"
-			value={theme}
+			value={theme.name}
 			variant="floating"
 			onChange={(e) => setTheme(e.target.value as 'default' | 's-bahn' | 'station' | 'neutral')}
 		>
