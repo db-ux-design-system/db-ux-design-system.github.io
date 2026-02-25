@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
+import { appConfig } from '@config';
 
 type Theme = 'default' | 's-bahn' | 'station' | 'neutral';
 
@@ -59,12 +60,13 @@ function loadThemeCSS(theme: Theme) {
 	const link = document.createElement('link');
 	link.id = 'theme-css';
 	link.rel = 'stylesheet';
-	link.href =
+	const themePath =
 		theme === 's-bahn'
-			? '/template/themes/sbahn-variables.css'
+			? 'sbahn-variables.css'
 			: theme === 'neutral'
-			? '/template/themes/neutral-variables.css'
-			: '/template/themes/station-variables.css';
+			? 'neutral-variables.css'
+			: 'station-variables.css';
+	link.href = `${appConfig.basePath}template/themes/${themePath}`;
 	document.head.appendChild(link);
 }
 
