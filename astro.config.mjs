@@ -41,6 +41,10 @@ export default defineConfig({
 						src: './node_modules/@google/model-viewer/dist/model-viewer.min.js.map',
 						dest: './',
 					},
+					{
+						src: './node_modules/@db-ux/core-foundations/assets/**/*',
+						dest: './assets',
+					},
 				],
 			}),
 		],

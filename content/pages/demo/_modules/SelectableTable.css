@@ -1,0 +1,12 @@
+table tbody tr {
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+table tbody tr.selected {
+	background-color: var(--db-adaptive-bg-basic-level-3-default) !important;
+}
+
+table tbody tr:hover {
+	background-color: var(--db-adaptive-bg-basic-level-2-default) !important;
+}

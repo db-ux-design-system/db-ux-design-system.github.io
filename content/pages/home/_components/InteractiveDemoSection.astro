@@ -1,9 +1,122 @@
 ---
-import { DBSection } from '@db-ux/react-core-components';
-import InteractiveDemo from '@template/components/InteractiveDemo/InteractiveDemo.astro';
-import { interactiveDemoOptions, interactiveDemoDefaultOptionId } from '../home.config.ts';
+import { DBSection, DBStack, DBCard } from '@db-ux/react-core-components';
+import './InteractiveDemoSection.css';
 ---
 
 <DBSection width="medium" spacing="medium" id="home--interactive-demo-section">
-	<InteractiveDemo items={interactiveDemoOptions} initialId={interactiveDemoDefaultOptionId} />
+	<DBStack>
+		<DBCard spacing="small" className="actionbar">
+			<DBStack direction="row" gap="2x-small">
+				<button
+					class="db-button"
+					data-variant="filled"
+					id="toggle-demo"
+					onclick="var d1=document.getElementById('demo-buttons'),d2=document.getElementById('demo-2-buttons'),ifr=document.getElementById('demo-iframe'),btn=this;if(d1.style.display==='none'){d1.style.display='contents';d2.style.display='none';ifr.src='/demo';btn.textContent='Zeige B2C Demo';}else{d1.style.display='none';d2.style.display='contents';ifr.src='/demo-2';btn.textContent='Zeige B2B Demo';}"
+					>Zeige B2C Demo</button
+				>
+				<div id="demo-buttons" style="display: contents;">
+					<button
+						class="db-button theme-db"
+						data-variant="brand"
+						onclick="document.getElementById('demo-iframe').src='/demo?theme=default'"
+						>Deutsche Bahn</button
+					>
+					<button
+						class="db-button theme-station"
+						data-variant="brand"
+						onclick="document.getElementById('demo-iframe').src='/demo?theme=station'"
+						>Station</button
+					>
+					<button
+						class="db-button theme-sbahn"
+						data-variant="brand"
+						onclick="document.getElementById('demo-iframe').src='/demo?theme=s-bahn'">S-Bahn</button
+					>
+					<button
+						class="db-button theme-neutral"
+						data-variant="brand"
+						onclick="document.getElementById('demo-iframe').src='/demo?theme=neutral'"
+						>Neutral</button
+					>
+					<button
+						class="db-button"
+						data-variant="filled"
+						data-no-text="true"
+						data-icon="sun"
+						onclick="document.getElementById('demo-iframe').src='/demo?mode=light'">Light</button
+					>
+					<button
+						class="db-button"
+						data-variant="filled"
+						data-no-text="true"
+						data-icon="moon"
+						onclick="document.getElementById('demo-iframe').src='/demo?mode=dark'">Dark</button
+					>
+					<button
+						class="db-button"
+						data-variant="filled"
+						data-no-text="true"
+						data-icon="fullscreen"
+						onclick="window.open(document.getElementById('demo-iframe').src, '_blank')"
+						>Fullscreen</button
+					>
+				</div>
+				<div id="demo-2-buttons" style="display: none;">
+					<button
+						class="db-button theme-db"
+						data-variant="brand"
+						onclick="document.getElementById('demo-iframe').src='/demo-2?theme=default'"
+						>Deutsche Bahn</button
+					>
+					<button
+						class="db-button theme-station"
+						data-variant="brand"
+						onclick="document.getElementById('demo-iframe').src='/demo-2?theme=station'"
+						>Station</button
+					>
+					<button
+						class="db-button theme-sbahn"
+						data-variant="brand"
+						onclick="document.getElementById('demo-iframe').src='/demo-2?theme=s-bahn'"
+						>S-Bahn</button
+					>
+					<button
+						class="db-button theme-neutral"
+						data-variant="brand"
+						onclick="document.getElementById('demo-iframe').src='/demo-2?theme=neutral'"
+						>Neutral</button
+					>
+					<button
+						class="db-button"
+						data-variant="filled"
+						data-no-text="true"
+						data-icon="sun"
+						onclick="document.getElementById('demo-iframe').src='/demo-2?mode=light'">Light</button
+					>
+					<button
+						class="db-button"
+						data-variant="filled"
+						data-no-text="true"
+						data-icon="moon"
+						onclick="document.getElementById('demo-iframe').src='/demo-2?mode=dark'">Dark</button
+					>
+					<button
+						class="db-button"
+						data-variant="filled"
+						data-no-text="true"
+						data-icon="fullscreen"
+						onclick="window.open(document.getElementById('demo-iframe').src, '_blank')"
+						>Fullscreen</button
+					>
+				</div>
+			</DBStack>
+		</DBCard>
+		<DBCard spacing="none">
+			<iframe id="demo-iframe" src="/demo" style="
+				width: 100%;
+				height: 110vh;
+				zoom: 0.6;
+			"></iframe>
+		</DBCard>
+	</DBStack>
 </DBSection>

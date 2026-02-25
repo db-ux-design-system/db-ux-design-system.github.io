@@ -142,3 +142,7 @@ html {
 	display: inline-flex !important;
 	flex-direction: row !important;
 }
+
+.db-card:has(iframe) {
+	overflow: hidden;
+}

@@ -1,0 +1,78 @@
+---
+import '@db-ux/core-components/build/styles/rollup.css';
+import '@db-ux/db-theme/build/styles/rollup.css';
+import './index.css';
+import { DemoShell } from './_modules/demo-shell/DemoShell';
+import SelectableTable from './_modules/SelectableTable.astro';
+import {
+	DBSection,
+	DBStack,
+	DBCard,
+	DBBadge,
+	DBInfotext,
+	DBButton,
+} from '@db-ux/react-core-components';
+---
+
+<!doctype html>
+<html lang="de">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Interactive Demo - DB UX Design System</title>
+	</head>
+	<body>
+		<DemoShell client:only="react">
+			<main>
+				<DBSection spacing="small">
+					<DBStack direction="row">
+						<DBCard className="data-card">
+							<DBStack gap="3x-small">
+								<DBStack direction="row" justifyContent="space-between">
+									Avg. Response Time <DBBadge size="medium" semantic="successful">+12,5%</DBBadge>
+								</DBStack>
+								<p class="metric-value">142 ms</p>
+								Based on the last 10.000 requests
+								<DBInfotext semantic="successful">Normal</DBInfotext>
+							</DBStack>
+						</DBCard>
+						<DBCard className="data-card">
+							<DBStack gap="3x-small">
+								<DBStack direction="row" justifyContent="space-between">
+									Peak Load Today <DBBadge size="medium" semantic="warning">-20%</DBBadge>
+								</DBStack>
+								<p class="metric-value">61 %</p>
+								Resource usage within limits
+								<DBInfotext semantic="warning">Warning</DBInfotext>
+							</DBStack>
+						</DBCard>
+						<DBCard className="data-card">
+							<DBStack gap="3x-small">
+								<DBStack direction="row" justifyContent="space-between">
+									Requests Served <DBBadge size="medium" semantic="successful">+7,2%</DBBadge>
+								</DBStack>
+								<p class="metric-value">1,2 M</p>
+								Since midnight
+								<DBInfotext semantic="successful">Normal</DBInfotext>
+							</DBStack>
+						</DBCard>
+					</DBStack>
+				</DBSection>
+				<DBSection spacing="none">
+					<SelectableTable />
+				</DBSection>
+				<DBSection spacing="small">
+					<DBCard className="cta-card" spacing="large">
+						<DBStack alignment="center" gap="large">
+							<DBStack gap="2x-small" alignment="center">
+								<h3>Need assistance?</h3>
+								<p>Our support team is here for you – we’re just a click away.</p>
+							</DBStack>
+							<DBButton className="cta-button">Create Support Ticket</DBButton>
+						</DBStack>
+					</DBCard>
+				</DBSection>
+			</main>
+		</DemoShell>
+	</body>
+</html>

@@ -1,0 +1,132 @@
+.db-notification {
+	border-top: none;
+	border-right: none;
+	border-left: none;
+}
+
+.db-shell-sub-navigation {
+	min-height: 72px;
+	padding: var(--db-spacing-fixed-sm) var(--db-spacing-fixed-md);
+}
+
+.db-shell-sub-navigation .db-navigation {
+	height: 100%;
+}
+
+.db-shell-sub-navigation .db-navigation menu {
+	align-items: center;
+}
+
+.data-card {
+	width: 100%;
+}
+
+.cards-container {
+	flex-wrap: wrap;
+}
+
+.cta-card {
+	background: var(--db-brand-origin-default);
+	color: var(--db-brand-on-origin-default);
+	min-height: var(--db-sizing-3xl);
+}
+
+.cta-card .db-stack {
+	margin: auto;
+	height: auto;
+}
+
+.cta-card h3,
+.cta-card p {
+	margin: 0;
+}
+
+.cta-card .cta-button {
+	background-color: var(--db-brand-on-origin-default);
+	border-color: var(--db-brand-on-bg-basic-emphasis-70-default);
+	color: var(--db-brand-origin-default);
+
+	&:hover {
+		background-color: var(--db-brand-on-origin-default) !important;
+		opacity: 0.8;
+	}
+	&:active {
+		background-color: var(--db-brand-on-origin-default) !important;
+		opacity: 0.6;
+	}
+}
+
+@media screen and (width < 62em) {
+	.db-section .db-stack[data-direction='row'] {
+		flex-direction: column !important;
+	}
+}
+
+.db-control-panel-brand::before {
+	color: #ec0016;
+}
+
+.db-control-panel-brand[data-icon='train']::before {
+	color: var(--db-brand-on-bg-basic-emphasis-100-default);
+	font-size: 1.75rem;
+	width: 1.75rem;
+	height: 1.75rem;
+}
+
+@media screen and (48em < width) {
+	.db-shell[data-control-panel-desktop-position='left']:has(
+			> * > db-shell-sub-navigation > .db-shell-sub-navigation,
+			> db-shell-sub-navigation > .db-shell-sub-navigation,
+			> .db-shell-sub-navigation
+		) {
+		grid-template-rows: max-content 1fr;
+	}
+}
+
+/* Table */
+
+table {
+	display: table;
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+	overflow: hidden;
+}
+
+table td,
+table th {
+	border-right: 0 solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-bottom: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	padding: var(--db-spacing-fixed-sm);
+	padding-inline: var(--db-spacing-fixed-lg);
+	text-align: start;
+}
+
+table td:last-child,
+table th:last-child {
+	border-right: none;
+}
+
+table tr:last-child td {
+	border-bottom: none;
+}
+
+table thead {
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}
+
+table tbody tr:nth-child(2n) {
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}
+
+.metric-value {
+	font: var(--db-type-headline-xl);
+}
+
+.db-stack .db-stack {
+	width: auto;
+}
+
+.db-stack {
+	overflow: visible;
+}
