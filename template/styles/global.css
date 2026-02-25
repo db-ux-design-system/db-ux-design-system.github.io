@@ -6,13 +6,12 @@
 @import url('./table.css');
 
 :root {
-	--header-height: 64px;
-	--footer-height: 80px;
-	--side-nav-width: 350px;
+	--header-height: var(--db-sizing-lg);
+	--footer-height: var(--db-sizing-xl);
 	--content-width: min(1440px, 100svw);
 
 	@media screen and (width >= 1024px) {
-		--footer-height: 64px;
+		--footer-height: var(--db-sizing-lg);
 	}
 }
 

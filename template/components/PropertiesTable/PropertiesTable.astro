@@ -7,10 +7,10 @@ interface Props {
 
 const { config } = Astro.props;
 
-function getPropertyValues(property) {
+function getPropertyValues(property: any) {
 	if (property.type === 'select') {
-		const values = property.options.map((opt) => opt.label).join(', ');
-		const defaultOpt = property.options.find((opt) => opt.default);
+		const values = property.options.map((opt: any) => opt.label).join(', ');
+		const defaultOpt = property.options.find((opt: any) => opt.default);
 		return `(Default) ${defaultOpt?.label || property.defaultValue}, ${values.replace(defaultOpt?.label + ', ', '').replace(', ' + defaultOpt?.label, '')}`;
 	}
 
@@ -37,7 +37,7 @@ function getPropertyValues(property) {
 		</thead>
 		<tbody>
 			{
-				config.properties.map((property) => (
+				config.properties.map((property: any) => (
 					<tr>
 						<td>
 							{property.alternativeName

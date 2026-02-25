@@ -75,6 +75,14 @@ declare interface FrontMatter {
 	 * If true, load the model viewer web-component on this page.
 	 */
 	loadModelViewer?: boolean;
+
+	/**
+	 * Set a badge inside sub-navigation
+	 */
+	status?: 'concept' | 'beta' | 'stable' | 'deprecated' | 'legacy';
+
+
+	align?: 'start' | 'center' | 'end';
 }
 
 /**
@@ -117,6 +125,11 @@ declare interface NavigationItem {
 	 * If true, the navigation item will be rendered as disabled.
 	 */
 	disabled?: boolean;
+
+	/**
+	 * Set a badge inside sub-navigation
+	 */
+	status?: 'concept' | 'beta' | 'stable' | 'deprecated' | 'legacy';
 }
 
 /**

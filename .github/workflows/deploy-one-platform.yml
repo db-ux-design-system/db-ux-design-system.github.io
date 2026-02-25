@@ -50,6 +50,7 @@ jobs:
           ASSET_PASSWORD: ${{ secrets.ASSET_PASSWORD }}
           ASSET_INIT_VECTOR: ${{ secrets.ASSET_INIT_VECTOR }}
         run: |
+          pnpm run decode-db-theme-assets
           pnpm run build
 
       - name: Configure Pages
@@ -62,10 +63,10 @@ jobs:
         with:
           path: public
 
-  deploy:
-    needs: build
-    if: ${{github.event_name != 'pull_request'}}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+#  deploy:
+#    needs: build
+#    if: ${{github.event_name != 'pull_request'}}
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Deploy to GitHub Pages
+#        uses: actions/deploy-pages@v4
