@@ -63,10 +63,10 @@ jobs:
         with:
           path: public
 
-  deploy:
-    needs: build
-    if: ${{github.event_name != 'pull_request'}}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+#  deploy:
+#    needs: build
+#    if: ${{github.event_name != 'pull_request'}}
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Deploy to GitHub Pages
+#        uses: actions/deploy-pages@v4
