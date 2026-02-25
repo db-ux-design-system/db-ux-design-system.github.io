@@ -1,52 +1,62 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import { appConfig } from '@config';
 
-type Theme = 'default' | 's-bahn' | 'station' | 'neutral';
+export type ThemeName = 'default' | 's-bahn' | 'station' | 'neutral';
 
-interface ThemeContextValue {
-	theme: Theme;
-	setTheme: (theme: Theme) => void;
+export interface Theme {
+	name: ThemeName;
 	logo: string;
 	icon: string;
 	logoSvg: string | null;
 }
 
+interface ThemeContextValue {
+	theme: Theme;
+	setTheme: (name: ThemeName) => void;
+}
+
 const STORAGE_KEY = 'db-ux-theme';
 
-const THEME_LOGOS: Record<Theme, string> = {
-	default: 'Deutsche Bahn',
-	's-bahn': 'S-Bahn',
-	station: 'Station',
-	neutral: 'Neutral',
-};
-
-const THEME_LOGO_SVGS: Record<Theme, string | null> = {
-	default: null,
-	's-bahn': '/sbahn-logo.svg',
-	station: null,
-	neutral: null,
-};
-
-const THEME_ICONS: Record<Theme, string> = {
-	default: 'brand',
-	's-bahn': 'brand',
-	station: 'brand',
-	neutral: 'train',
+const THEMES: Record<ThemeName, Theme> = {
+	default: {
+		name: 'default',
+		logo: 'Deutsche Bahn',
+		icon: 'brand',
+		logoSvg: null,
+	},
+	's-bahn': {
+		name: 's-bahn',
+		logo: 'S-Bahn',
+		icon: 'brand',
+		logoSvg: '/sbahn-logo.svg',
+	},
+	station: {
+		name: 'station',
+		logo: 'Station',
+		icon: 'brand',
+		logoSvg: null,
+	},
+	neutral: {
+		name: 'neutral',
+		logo: 'Neutral',
+		icon: 'train',
+		logoSvg: null,
+	},
 };
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 function getInitialTheme(): Theme {
 	if (typeof window === 'undefined') {
-		return 'default';
+		return THEMES.default;
 	}
 
-	const stored = window.localStorage.getItem(STORAGE_KEY);
-	if (stored === 'default' || stored === 's-bahn' || stored === 'station' || stored === 'neutral') {
-		return stored;
+	const stored = window.localStorage.getItem(STORAGE_KEY) as ThemeName | null;
+	if (stored && stored in THEMES) {
+		return THEMES[stored];
 	}
 
-	return 'default';
+	return THEMES.default;
 }
 
 function loadThemeCSS(theme: Theme) {
@@ -55,15 +65,15 @@ function loadThemeCSS(theme: Theme) {
 		existingLink.remove();
 	}
 
-	if (theme === 'default') return;
+	if (theme.name === 'default') return;
 
 	const link = document.createElement('link');
 	link.id = 'theme-css';
 	link.rel = 'stylesheet';
 	const themePath =
-		theme === 's-bahn'
+		theme.name === 's-bahn'
 			? 'sbahn-variables.css'
-			: theme === 'neutral'
+			: theme.name === 'neutral'
 			? 'neutral-variables.css'
 			: 'station-variables.css';
 	link.href = `${appConfig.basePath}template/themes/${themePath}`;
@@ -71,25 +81,23 @@ function loadThemeCSS(theme: Theme) {
 }
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-	const [theme, setTheme] = useState<Theme>(getInitialTheme);
-	const [logo, setLogo] = useState<string>(THEME_LOGOS[getInitialTheme()]);
-	const [icon, setIcon] = useState<string>(THEME_ICONS[getInitialTheme()]);
-	const [logoSvg, setLogoSvg] = useState<string | null>(THEME_LOGO_SVGS[getInitialTheme()]);
+	const [theme, setThemeState] = useState<Theme>(getInitialTheme);
 
 	useEffect(() => {
-		window.localStorage.setItem(STORAGE_KEY, theme);
+		window.localStorage.setItem(STORAGE_KEY, theme.name);
 		loadThemeCSS(theme);
-		setLogo(THEME_LOGOS[theme]);
-		setIcon(THEME_ICONS[theme]);
-		setLogoSvg(THEME_LOGO_SVGS[theme]);
 	}, [theme]);
 
-	const value: ThemeContextValue = { theme, setTheme, logo, icon, logoSvg };
+	const setTheme = (name: ThemeName) => {
+		setThemeState(THEMES[name]);
+	};
+
+	const value: ThemeContextValue = { theme, setTheme };
 
 	return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 };
 
-export const useTheme = (): ThemeContextValue => {
+export const useTheme = () => {
 	const ctx = useContext(ThemeContext);
 	if (!ctx) {
 		throw new Error('useTheme must be used inside a ThemeProvider');

@@ -23,7 +23,7 @@ const DemoPrimaryActions = () => {
 				}}
 			></DBButton>
 			<DBSelect
-				value={theme}
+				value={theme.name}
 				onChange={(e: any) => setTheme(e.target.value)}
 				variant="floating"
 				label="Theme"
