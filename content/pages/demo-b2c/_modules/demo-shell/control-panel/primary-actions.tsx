@@ -4,7 +4,7 @@ import { useTheme } from '@template/context/theme-context';
 
 const DemoPrimaryActions = () => {
 	const { colorMode, setColorMode } = useColorMode();
-	const { theme, setTheme } = useTheme();
+	const { themeName, setTheme } = useTheme();
 
 	return (
 		<DBControlPanelPrimaryActions>
@@ -23,7 +23,7 @@ const DemoPrimaryActions = () => {
 				}}
 			></DBButton>
 			<DBSelect
-				value={theme.name}
+				value={themeName}
 				onChange={(e) => {
 					setTheme(e.target.value as 'default' | 's-bahn' | 'station' | 'neutral');
 					const url = new URL(window.location.href);

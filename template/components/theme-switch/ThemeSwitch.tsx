@@ -2,12 +2,12 @@ import { DBSelect } from '@db-ux/react-core-components';
 import { useTheme } from '@template/context/theme-context.tsx';
 
 const ThemeSwitch = () => {
-	const { theme, setTheme } = useTheme();
+	const { themeName, setTheme } = useTheme();
 
 	return (
 		<DBSelect
 			label="Theme"
-			value={theme.name}
+			value={themeName}
 			variant="floating"
 			onChange={(e) => {
 				setTheme(e.target.value as 'default' | 's-bahn' | 'station' | 'neutral');
