@@ -50,6 +50,7 @@ jobs:
           ASSET_PASSWORD: ${{ secrets.ASSET_PASSWORD }}
           ASSET_INIT_VECTOR: ${{ secrets.ASSET_INIT_VECTOR }}
         run: |
+          pnpm run decode-db-theme-assets
           pnpm run build
 
       - name: Configure Pages

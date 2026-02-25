@@ -12,7 +12,8 @@
     "check": "prettier --check . && astro check",
     "format": "prettier --write .",
     "update:agent": "npx @db-ux/agent-cli .",
-    "lint:stylelint": "stylelint **/*.css"
+    "lint:stylelint": "stylelint **/*.css",
+    "decode-db-theme-assets": "node decode-db-assets.js"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.6",
@@ -23,7 +24,7 @@
     "@db-ux/core-components": "3.0.2-shell4-bdb351c",
     "@db-ux/core-foundations": "3.0.2-shell4-bdb351c",
     "@db-ux/core-stylelint": "4.5.0",
-    "@db-ux/db-theme": "5.2.0",
+    "@db-ux/db-theme": "5.4.2",
     "@db-ux/db-theme-icons": "3.6.0",
     "@db-ux/db-theme-illustrative-icons": "3.1.1",
     "@db-ux/db-theme-fonts": "2.0.5",
