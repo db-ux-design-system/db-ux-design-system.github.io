@@ -5,7 +5,7 @@
 }
 
 .db-shell-sub-navigation {
-	min-block-size: 72px; /* No exact token: between --db-sizing-lg (64px) and --db-sizing-xl (96px) */
+	min-block-size: var(--db-sizing-lg); /* 64px - closest to 72px */
 	padding: var(--db-spacing-fixed-sm) var(--db-spacing-fixed-md);
 }
 
@@ -65,13 +65,6 @@
 
 .db-control-panel-brand::before {
 	color: var(--db-critical-origin-default);
-}
-
-.db-control-panel-brand[data-icon='train']::before {
-	color: var(--db-brand-on-bg-basic-emphasis-100-default);
-	font-size: var(--db-base-headline-icon-font-size-xs);
-	inline-size: var(--db-base-headline-icon-font-size-xs);
-	block-size: var(--db-base-headline-icon-font-size-xs);
 }
 
 @media screen and (48em < width) {

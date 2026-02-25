@@ -39,7 +39,7 @@ const THEMES: Record<ThemeName, Theme> = {
 		name: 'neutral',
 		logo: 'Neutral',
 		icon: 'train',
-		logoSvg: null,
+		logoSvg: '/neutral-logo.svg',
 	},
 };
 

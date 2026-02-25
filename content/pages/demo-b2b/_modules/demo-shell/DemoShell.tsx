@@ -30,7 +30,7 @@ function DemoShellContent({ children }: PropsWithChildren): ReactElement {
 			document.documentElement.setAttribute('data-mode', mode);
 		}
 
-		if (theme) {
+		if (theme && (theme === 'default' || theme === 's-bahn' || theme === 'station' || theme === 'neutral')) {
 			setTheme(theme);
 		}
 	}, [setColorMode, setTheme]);

@@ -9,7 +9,12 @@ const ThemeSwitch = () => {
 			label="Theme"
 			value={theme.name}
 			variant="floating"
-			onChange={(e) => setTheme(e.target.value as 'default' | 's-bahn' | 'station' | 'neutral')}
+			onChange={(e) => {
+				setTheme(e.target.value as 'default' | 's-bahn' | 'station' | 'neutral');
+				const url = new URL(window.location.href);
+				url.searchParams.delete('theme');
+				window.history.replaceState({}, '', url);
+			}}
 		>
 			<option value="default">Deutsche Bahn</option>
 			<option value="neutral">Neutral</option>
