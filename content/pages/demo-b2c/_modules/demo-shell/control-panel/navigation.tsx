@@ -2,15 +2,15 @@ import { DBNavigation, DBNavigationItem } from '@db-ux/react-core-components';
 
 const DemoNavigation = () => (
 	<DBNavigation variant="tree">
-		<DBNavigationItem label="Dashboard">
+		<DBNavigationItem>
 			<a href="#" aria-current="page">
 				Ticktes & Angebote
 			</a>
 		</DBNavigationItem>
-		<DBNavigationItem label="Analytics">
+		<DBNavigationItem>
 			<a href="#">Info & Services</a>
 		</DBNavigationItem>
-		<DBNavigationItem label="Projects">
+		<DBNavigationItem>
 			<a href="#">Meine Reisen</a>
 		</DBNavigationItem>
 	</DBNavigation>

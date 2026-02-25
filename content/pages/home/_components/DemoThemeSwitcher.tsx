@@ -9,7 +9,7 @@ export const DemoThemeSwitcher = () => {
 	};
 
 	return (
-		<DBStack direction="row" gap="sm">
+		<DBStack direction="row" gap="small">
 			<DBButton variant="outlined" onClick={() => switchTheme('light')}>
 				Light
 			</DBButton>

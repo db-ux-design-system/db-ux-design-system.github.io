@@ -2,18 +2,18 @@ import { DBNavigation, DBNavigationItem } from '@db-ux/react-core-components';
 
 const DemoNavigation = () => (
 	<DBNavigation variant="tree">
-		<DBNavigationItem icon="speedometer" label="Dashboard">
+		<DBNavigationItem icon="speedometer">
 			<a href="#" aria-current="page">
 				Dashboard
 			</a>
 		</DBNavigationItem>
-		<DBNavigationItem icon="line_chart" label="Analytics">
+		<DBNavigationItem icon="line_chart">
 			<a href="#">Analytics</a>
 		</DBNavigationItem>
-		<DBNavigationItem icon="folder" label="Projects">
+		<DBNavigationItem icon="folder">
 			<a href="#">Projects</a>
 		</DBNavigationItem>
-		<DBNavigationItem icon="persons" label="Teams">
+		<DBNavigationItem icon="persons">
 			<a href="#">Teams</a>
 		</DBNavigationItem>
 	</DBNavigation>

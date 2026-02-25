@@ -96,8 +96,8 @@ export const SelectableTable = () => {
 
 	return (
 		<>
-			<DBStack gap="sm">
-				<DBStack direction="row" justifyContent="space-between" gap="sm">
+			<DBStack gap="small">
+				<DBStack direction="row" justifyContent="space-between" gap="small">
 					<DBInput
 						label="Search"
 						placeholder="Search..."
@@ -105,7 +105,7 @@ export const SelectableTable = () => {
 						variant="floating"
 						onInput={(e) => setSearchQuery((e.target as HTMLInputElement).value)}
 					/>
-					<DBStack direction="row" gap="sm">
+					<DBStack direction="row" gap="small">
 						<DBSelect
 							label="Status"
 							value={statusFilter}
@@ -188,3 +188,5 @@ export const SelectableTable = () => {
 		</>
 	);
 };
+
+export default SelectableTable;

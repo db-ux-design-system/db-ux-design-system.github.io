@@ -1,7 +1,5 @@
 import {
 	DBShellSubNavigation,
-	DBNavigation,
-	DBNavigationItem,
 	DBButton,
 	DBStack,
 } from '@db-ux/react-core-components';

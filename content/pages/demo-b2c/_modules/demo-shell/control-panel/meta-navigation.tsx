@@ -4,24 +4,24 @@ const DemoMetaNavigation = () => (
 	<DBControlPanelMetaNavigation>
 		<DBStack direction="row" justifyContent="space-between">
 			<DBStack direction="row">
-				<DBLink size="small" variant="inline" href="#" icon="help">
+				<DBLink size="small" variant="inline" href="#">
 					Privatreisen
 				</DBLink>
-				<DBLink size="small" variant="inline" href="#" icon="warning">
+				<DBLink size="small" variant="inline" href="#">
 					Geschäftsreisen
 				</DBLink>
 			</DBStack>
 			<DBStack direction="row">
-				<DBLink size="small" variant="inline" href="#" icon="help">
+				<DBLink size="small" variant="inline" href="#">
 					Hilfe & Kontakt
 				</DBLink>
-				<DBLink size="small" variant="inline" href="#" icon="warning">
+				<DBLink size="small" variant="inline" href="#">
 					Verkehrsmeldungen
 				</DBLink>
-				<DBLink size="small" variant="inline" href="#" icon="construction">
+				<DBLink size="small" variant="inline" href="#">
 					Baustellen
 				</DBLink>
-				<DBLink size="small" variant="inline" href="#" icon="language">
+				<DBLink size="small" variant="inline" href="#">
 					Deutsch
 				</DBLink>
 			</DBStack>
