@@ -61,10 +61,10 @@ function loadThemeCSS(theme: Theme) {
 	link.rel = 'stylesheet';
 	link.href =
 		theme === 's-bahn'
-			? '/template/themes/S-BahnTheme/StyleDictionary/css/variables.css'
+			? '/template/themes/sbahn-variables.css'
 			: theme === 'neutral'
-			? '/template/themes/NeutralTheme/StyleDictionary/css/variables.css'
-			: '/template/themes/StationTheme/StyleDictionary/css/variables.css';
+			? '/template/themes/neutral-variables.css'
+			: '/template/themes/station-variables.css';
 	document.head.appendChild(link);
 }
 
