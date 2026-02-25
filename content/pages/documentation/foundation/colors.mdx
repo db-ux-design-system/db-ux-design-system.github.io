@@ -11,6 +11,7 @@ toc: true
 import { DBSection, DBStack } from '@db-ux/react-core-components';
 import ColorTable from './_modules/ColorTable.astro';
 import ColorPlayground from './_modules/ColorPlayground.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 
 Colors play a central role in the design of user interfaces. They can reinforce messages and help communicate meanings, as well as enable targeted user guidance.
 
@@ -30,5 +31,47 @@ Colors play a central role in the design of user interfaces. They can reinforce 
 ## Tokens
 
 <ColorTable />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+###### Background & On-Background
+
+The entire color system is based on the principle that there are defined backgrounds (bg) with matching content colors (on-bg). There are four different groups: Basic, Inverted, Vibrant & Origin. The corresponding bg and on-bg tokens always belong together and should not be mixed. This ensures contrast, readability, and consistency.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/2eiyzoohpAvz4zw8wWSBqu/Doku--Color?node-id=1-1132&embed-host=share"
+		fullWidth={true}
+		description="Always combine the matching on-bg token with the respective bg token."
+	/>
+</div>
+
+###### Accessibility
+
+For accessible design, text needs a 4.5:1 contrast ratio, while icons can have a 3:1 contrast ratio. For basic backgrounds, you should only use on-bg-basic-emphasis-100, -90, or -80 for text. For icons, -70 is also permitted. In the Inverted group, you should only place text on bg-inverted-contrast-max or -contrast-high. Icons can also be placed on -contrast-low. In Figma, the use of color in typography is scoped, which ensures this rule is followed.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/2eiyzoohpAvz4zw8wWSBqu/Doku--Color?node-id=1-1133&embed-host=share"
+		fullWidth={true}
+		description="Follow the rule to ensure accessibility."
+	/>
+</div>
+
+###### Adaptive Coloring
+
+Use adaptive tokens by default. Due to the identical structure of the individual color palettes, elements can easily be placed in a different color context. If a data-color is assigned to a container, all elements within it are recolored in the selected color context. Explicitly colored elements that do not use adaptive color tokens are not affected by the data-color. Take a look at the playground for a better understanding.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/2eiyzoohpAvz4zw8wWSBqu/Doku--Color?node-id=7011-10&embed-host=share"
+		fullWidth={true}
+		description="Elements with adaptive color tokens change color to match the context. Explicit colors remain unchanged."
+	/>
+</div>
 
 </DBSection>
