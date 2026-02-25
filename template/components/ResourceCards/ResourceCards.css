@@ -11,23 +11,12 @@
 	flex-direction: column;
 }
 
-.resource-cards .db-card a {
-	text-decoration: none;
-	display: flex;
-	flex-direction: column;
-	gap: var(--db-spacing-fixed-xs);
-	height: 100%;
-}
-
 .resource-text {
 	display: flex;
 	flex-direction: column;
 	gap: 0;
 }
 
-.resource-cards .db-card a.db-link {
-	text-decoration: underline;
-}
 
 .resource-cards .db-card h5 {
 	margin: 0;
@@ -38,6 +27,6 @@
 	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
 }
 
-.resource-cards .db-card button {
+.resource-cards .db-card strong {
 	margin-top: auto;
 }

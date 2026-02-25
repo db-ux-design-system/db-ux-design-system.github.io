@@ -1,7 +1,12 @@
 .collapsible-wrapper[data-collapsed='true'] {
-	height: var(--collapsed-height, 320px);
+	/* stylelint-disable-next-line db-ux/use-sizing */
+	height: var(--collapsed-height, var(--db-container-xs));
 	overflow: hidden;
-	mask-image: linear-gradient(to bottom, black calc(100% - 160px), transparent);
+	mask-image: linear-gradient(
+		to bottom,
+		black calc(100% - calc(var(--db-container-xs) / 2)),
+		transparent
+	);
 }
 
 .collapsible-wrapper[data-collapsed='false'] {
@@ -10,6 +15,5 @@
 }
 
 .collapse-button {
-	margin: auto;
-	margin-top: var(--db-spacing-fixed-2xl);
+	margin: var(--db-spacing-fixed-2xl) auto auto;
 }

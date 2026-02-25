@@ -19,18 +19,16 @@ const { resources } = Astro.props;
 <div class="resource-cards">
 	{
 		resources.map((resource) => (
-			<DBCard behavior="interactive">
-				<a href={resource.url} target="_blank" rel="noopener noreferrer">
+			<a href={resource.url} target="_blank" rel="noopener noreferrer">
+				<DBCard behavior="interactive">
 					<img src={resource.icon} alt="" width="32" height="32" />
 					<div class="resource-text">
 						<b>{resource.title}</b>
 						<p>{resource.description}</p>
 					</div>
-					<DBButton variant="filled" width="full" size="small" iconTrailing="arrow_up_right">
-						View Storybook
-					</DBButton>
-				</a>
-			</DBCard>
+					<strong data-icon-trailing="arrow_up_right">View Storybook</strong>
+				</DBCard>
+			</a>
 		))
 	}
 </div>

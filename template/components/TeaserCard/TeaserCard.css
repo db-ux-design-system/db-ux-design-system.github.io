@@ -1,6 +1,6 @@
 .teaser-cards {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(var(--db-container-2xs), 1fr));
 	gap: var(--db-spacing-fixed-md);
 }
 
@@ -22,7 +22,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-height: 160px;
+	min-height: var(--db-sizing-2xl);
 	background: var(--db-adaptive-bg-basic-level-3-default);
 	flex-shrink: 0;
 	margin-top: auto;

@@ -6,7 +6,7 @@
 	@media screen and (width >= 1024px) {
 		position: fixed;
 		margin-top: var(--db-spacing-fixed-sm);
-		inset-inline-end: var(--db-spacing-fixed-sm);
+		inset-inline-end: var(--db-spacing-fixed-md);
 	}
 
 	overflow-y: auto;
@@ -14,14 +14,14 @@
 }
 
 .dba-toc ul {
-	padding: 0 0 0 8px;
+	padding: 0 0 0 var(--db-spacing-fixed-xs);
 }
 
 .dba-toc-indicator {
 	position: absolute;
 	left: 0;
 	top: 0;
-	width: 4px;
+	width: var(--db-border-width-sm);
 	background-color: var(--db-brand-on-bg-basic-emphasis-70-default);
 	border-radius: var(--db-border-radius-full);
 	transition:
@@ -54,8 +54,8 @@
 	left: -8px;
 	top: 0;
 	bottom: 0;
-	width: 4px;
-	background-color: var(--db-neutral-on-bg-inverted-pressed);
+	width: var(--db-border-width-sm);
+	background-color: var(--db-neutral-on-bg-inverted-pressed); /* 😠 */
 }
 
 .dba-toc-heading:first-child::before {
@@ -80,28 +80,15 @@
 	min-height: var(--db-sizing-md);
 	padding: var(--db-spacing-fixed-2xs) var(--db-spacing-fixed-2xs) var(--db-spacing-fixed-2xs)
 		var(--db-spacing-fixed-sm);
-	border-radius: var(--db-border-radius-sm);
+	border-radius: var(--db-border-radius-xs);
 	font: inherit;
 	color: inherit;
 	text-decoration: none;
 }
 
 .dba-toc-toggle {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 32px;
-	width: 32px;
-	background: transparent;
-	border: none;
-	border-radius: var(--db-border-radius-xs);
-	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
-	cursor: pointer;
-	font-size: 16px;
-	line-height: 1;
-	transition: background-color 0.2s ease;
 	position: absolute;
-	right: var(--db-spacing-fixed-2xs);
+	right: 0;
 	z-index: 2;
 }
 
