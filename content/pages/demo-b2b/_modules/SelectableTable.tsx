@@ -104,6 +104,7 @@ export const SelectableTable = () => {
 						value={searchQuery}
 						variant="floating"
 						onInput={(e) => setSearchQuery((e.target as HTMLInputElement).value)}
+						type="text"
 					/>
 					<DBStack direction="row" gap="small">
 						<DBSelect
@@ -121,6 +122,7 @@ export const SelectableTable = () => {
 							variant="filled"
 							iconLeading={sortOrder === 'asc' ? 'arrow_upward' : 'arrow_downward'}
 							onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+							type="button"
 						>
 							Sort Metric
 						</DBButton>
@@ -141,8 +143,14 @@ export const SelectableTable = () => {
 								<th>
 									<DBCheckbox
 										label="Select all"
-										checked={filteredData.length > 0 && filteredData.every((item) => selectedRows.has(item.metric))}
-										indeterminate={selectedRows.size > 0 && !filteredData.every((item) => selectedRows.has(item.metric))}
+										checked={
+											filteredData.length > 0 &&
+											filteredData.every((item) => selectedRows.has(item.metric))
+										}
+										indeterminate={
+											selectedRows.size > 0 &&
+											!filteredData.every((item) => selectedRows.has(item.metric))
+										}
 										onChange={toggleAll}
 									/>
 								</th>

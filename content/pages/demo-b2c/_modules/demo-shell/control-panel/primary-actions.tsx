@@ -1,4 +1,9 @@
-import { DBControlPanelPrimaryActions, DBButton, DBSelect } from '@db-ux/react-core-components';
+import {
+	DBControlPanelPrimaryActions,
+	DBButton,
+	DBSelect,
+	DBTooltip,
+} from '@db-ux/react-core-components';
 import { useColorMode } from '@template/context/color-mode-context';
 import { useTheme } from '@template/context/theme-context';
 
@@ -21,7 +26,10 @@ const DemoPrimaryActions = () => {
 					url.searchParams.delete('mode');
 					window.history.replaceState({}, '', url);
 				}}
-			></DBButton>
+				type="button"
+			>
+				<DBTooltip>Describe action</DBTooltip>
+			</DBButton>
 			<DBSelect
 				value={themeName}
 				onChange={(e) => {
@@ -38,7 +46,9 @@ const DemoPrimaryActions = () => {
 				<option value="s-bahn">S-Bahn</option>
 				<option value="neutral">Neutral</option>
 			</DBSelect>
-			<DBButton variant="ghost" iconLeading="magnifying_glass" noText></DBButton>
+			<DBButton variant="ghost" iconLeading="magnifying_glass" noText type="submit">
+				<DBTooltip>Describe action</DBTooltip>
+			</DBButton>
 		</DBControlPanelPrimaryActions>
 	);
 };
