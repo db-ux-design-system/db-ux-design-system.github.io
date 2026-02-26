@@ -9,7 +9,7 @@
 		inset-inline-end: var(--db-spacing-fixed-md);
 	}
 
-	overflow-y: auto;
+	overflow: hidden auto;
 	max-block-size: calc(100svh - var(--header-height) - var(--footer-height));
 }
 
