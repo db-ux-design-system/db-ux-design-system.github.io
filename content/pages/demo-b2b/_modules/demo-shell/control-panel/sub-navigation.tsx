@@ -8,7 +8,7 @@ const DemoSubNavigation = () => {
 	return (
 		<DBShellSubNavigation>
 			<DBStack direction="row" justifyContent="space-between" alignment="center">
-				<b>Analytics</b>
+				<h1 data-headline-size="3xs">Analytics</h1>
 				<DBStack direction="row" gap="small" alignment="center">
 					<DBButton
 						variant="ghost"

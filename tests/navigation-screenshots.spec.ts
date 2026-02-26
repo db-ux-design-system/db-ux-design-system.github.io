@@ -14,6 +14,20 @@ const response = await fetch('http://localhost:4321/api/app-navigation.json');
 const appNavigation = await response.json();
 const allPaths = [...collectAllPaths(appNavigation), 'demo-b2b', 'demo-b2c'];
 
+const pageMasks: Record<string, string> = {
+	'about-us': '.avatar-viewer',
+};
+
+const getMask = async (page: Page, path: string) => {
+	if (path.startsWith('documentation/components')) {
+		return await page.locator('.guideline-example-iframe').all();
+	}
+	if (pageMasks[path]) {
+		return await page.locator(pageMasks[path]).all();
+	}
+	return [];
+};
+
 export const waitForDBShell = async (page: Page) => {
 	const dbPage = page.locator('.db-shell');
 	// We wait till db-page fully loaded
@@ -50,9 +64,7 @@ test.describe('Navigation Screenshots', () => {
 			await waitForDBShell(page);
 			await setScrollViewport(page);
 
-			const mask = path.startsWith('documentation/components')
-				? await page.locator('.guideline-example-iframe').all()
-				: [];
+			const mask = await getMask(page, path);
 
 			await expect(page).toHaveScreenshot(`${path.replace(/\//g, '-')}.png`, { mask });
 
@@ -61,7 +73,10 @@ test.describe('Navigation Screenshots', () => {
 					// There is an a11y error inside DBShell implementation
 					path.startsWith('documentation') || path === 'demo-b2b'
 						? ['aria-required-parent', 'aria-required-children', 'presentation-role-conflict']
-						: [],
+						: // There is an a11y error inside Googles model viewer implementation
+							path === 'about-us'
+							? ['landmark-unique']
+							: [],
 				)
 				.include('html')
 				.analyze();
