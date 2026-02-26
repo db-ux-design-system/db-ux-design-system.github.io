@@ -10,6 +10,7 @@
 	}
 
 	overflow-y: auto;
+	overflow-x: hidden;
 	max-block-size: calc(100svh - var(--header-height) - var(--footer-height));
 }
 

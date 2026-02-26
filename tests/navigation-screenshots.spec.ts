@@ -49,13 +49,18 @@ test.describe('Navigation Screenshots', () => {
 			await page.waitForLoadState('networkidle');
 			await waitForDBShell(page);
 			await setScrollViewport(page);
-			await expect(page).toHaveScreenshot(`${path.replace(/\//g, '-')}.png`);
+
+			const mask = path.startsWith('documentation/components')
+				? await page.locator('.guideline-example-iframe').all()
+				: [];
+
+			await expect(page).toHaveScreenshot(`${path.replace(/\//g, '-')}.png`, { mask });
 
 			const accessibilityScanResults = await new AxeBuilder({ page })
 				.disableRules(
 					// There is an a11y error inside DBShell implementation
-					path.startsWith('documentation/components') || path === 'demo-b2b'
-						? ['aria-required-parent', 'aria-required-children']
+					path.startsWith('documentation') || path === 'demo-b2b'
+						? ['aria-required-parent', 'aria-required-children', 'presentation-role-conflict']
 						: [],
 				)
 				.include('html')

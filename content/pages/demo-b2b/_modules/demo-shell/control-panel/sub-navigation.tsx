@@ -24,7 +24,8 @@ const DemoSubNavigation = () => {
 						}}
 						type="button"
 					>
-						<DBTooltip>Describe action</DBTooltip>
+						Switch color scheme (light/dark)
+						<DBTooltip>Switch color scheme (light/dark)</DBTooltip>
 					</DBButton>
 					<ThemeSwitch />
 					<DBButton variant="brand" type="submit">

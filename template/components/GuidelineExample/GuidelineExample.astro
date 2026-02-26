@@ -1,5 +1,6 @@
 ---
 import { DBBadge } from '@db-ux/react-core-components';
+import './GuidelineExample.css';
 
 interface Props {
 	variant: 'do' | 'dont';
@@ -13,26 +14,12 @@ const label = variant === 'do' ? 'Do' : "Don't";
 const fullUrl = `${figmaUrl}&embed-host=share&footer=false&viewport-controls=false&page-selector=false&scaling=scale-down-width`;
 ---
 
-<div style={{ position: 'relative', display: 'inline-block', width: '50%' }}>
-	<DBBadge
-		semantic={semantic}
-		size="medium"
-		style={{
-			position: 'absolute',
-			top: 'var(--db-spacing-fixed-md)',
-			left: 'var(--db-spacing-fixed-md)',
-			zIndex: 1,
-		}}
-	>
+<div class="guideline-example-container">
+	<DBBadge semantic={semantic} size="medium" class="guideline-example-badge">
 		<span>{label}</span>
 	</DBBadge>
 	<iframe
-		style={{
-			border: 'var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default)',
-			borderRadius: 'var(--db-border-radius-md)',
-			width: '100%',
-			aspectRatio: '16/9',
-		}}
+		class="guideline-example-iframe"
 		src={fullUrl}
 		loading="eager"
 		allowfullscreen></iframe>
