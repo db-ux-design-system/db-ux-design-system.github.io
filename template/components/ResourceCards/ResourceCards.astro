@@ -2,18 +2,40 @@
 import { DBCard } from '@db-ux/react-core-components';
 import './ResourceCards.css';
 
-interface Resource {
-	title: string;
-	description: string;
-	url: string;
-	icon: string;
-}
-
 interface Props {
-	resources: Resource[];
+	path: string;
 }
 
-const { resources } = Astro.props;
+const { path } = Astro.props;
+
+const baseUrl = 'https://design-system.deutschebahn.com/core-web/review/main';
+
+const resources = [
+	{
+		title: 'React',
+		description: 'Interactive examples and documentation.',
+		url: `${baseUrl}/react-storybook${path}`,
+		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+	},
+	{
+		title: 'Vue',
+		description: 'Interactive examples and documentation.',
+		url: `${baseUrl}/vue-storybook${path}`,
+		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
+	},
+	{
+		title: 'Angular',
+		description: 'Interactive examples and documentation.',
+		url: `${baseUrl}/angular-storybook${path}`,
+		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg',
+	},
+	{
+		title: 'Web C.',
+		description: 'Interactive examples and documentation.',
+		url: `${baseUrl}/angular-storybook${path}`,
+		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
+	},
+];
 ---
 
 <div class="resource-cards">
