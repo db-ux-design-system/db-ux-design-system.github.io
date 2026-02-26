@@ -1,9 +1,43 @@
 ---
-import { DBSection } from '@db-ux/react-core-components';
-import InteractiveDemo from '@template/components/InteractiveDemo/InteractiveDemo.astro';
-import { interactiveDemoOptions, interactiveDemoDefaultOptionId } from '../home.config.ts';
+import { DBSection, DBStack, DBCard, DBButton, DBTooltip } from '@db-ux/react-core-components';
+import './InteractiveDemoSection.css';
+import '@template/themes/variables.css';
 ---
 
 <DBSection width="medium" spacing="medium" id="home--interactive-demo-section">
-	<InteractiveDemo items={interactiveDemoOptions} initialId={interactiveDemoDefaultOptionId} />
+	<DBStack>
+		<DBCard spacing="small" className="actionbar">
+			<DBStack direction="row" gap="2x-small">
+				<DBButton variant="filled" id="toggle-demo">Zeige B2C Demo</DBButton>
+				<DBButton variant="brand" data-action="theme" data-value="default">Deutsche Bahn</DBButton>
+				<DBButton data-theme="station" variant="brand" data-action="theme" data-value="station"
+					>Station</DBButton
+				>
+				<DBButton data-theme="s-bahn" variant="brand" data-action="theme" data-value="s-bahn"
+					>S-Bahn</DBButton
+				>
+				<DBButton data-theme="neutral" variant="brand" data-action="theme" data-value="neutral"
+					>Neutral</DBButton
+				>
+				<DBButton title="Light" variant="filled" noText="true" icon="sun" data-action="mode" data-value="light"
+					><DBTooltip>Light</DBTooltip></DBButton
+				>
+				<DBButton title="Dark" variant="filled" noText="true" icon="moon" data-action="mode" data-value="dark"
+					>Dark</DBButton
+				>
+				<a title="Fullscreen"
+					class="db-button"
+					target="_blank"
+					referrerpolicy="no-referrer"
+					data-variant="filled"
+					data-no-text="true"
+					data-icon="fullscreen"
+					id="fullscreen-anchor">Fullscreen</a
+				>
+			</DBStack>
+		</DBCard>
+		<DBCard spacing="none">
+			<iframe id="demo-iframe" src="/demo-b2b"></iframe>
+		</DBCard>
+	</DBStack>
 </DBSection>

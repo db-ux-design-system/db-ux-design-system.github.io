@@ -1,0 +1,166 @@
+@layer themes {
+	[data-theme='s-bahn'] {
+		--db-brand-0: #041103;
+		--db-brand-1: #091c06;
+		--db-brand-2: #10290b;
+		--db-brand-3: #173712;
+		--db-brand-4: #1f4619;
+		--db-brand-5: #275520;
+		--db-brand-6: #336a2a;
+		--db-brand-7: #428636;
+		--db-brand-8: #51a243;
+		--db-brand-9: #61c051;
+		--db-brand-10: #71de5f;
+		--db-brand-11: #96f989;
+		--db-brand-12: #c7fbc2;
+		--db-brand-13: #dbfcd8;
+		--db-brand-14: #eefeec;
+		--db-brand-origin-base: #408335; /* This is just to resolve the original origin color */
+		--db-brand-origin-light-default: #408335;
+		--db-brand-origin-light-hovered: #1c4116;
+		--db-brand-origin-light-pressed: #316828;
+		--db-brand-origin-dark-default: #408335;
+		--db-brand-origin-dark-hovered: #1c4116;
+		--db-brand-origin-dark-pressed: #316828;
+		--db-brand-on-origin-light-default: #f7fef6;
+		--db-brand-on-origin-dark-default: #f7fef6;
+	}
+
+	[data-theme='neutral'] {
+		--db-brand-0: #0e0e0e;
+		--db-brand-1: #181818;
+		--db-brand-2: #242424;
+		--db-brand-3: #303030;
+		--db-brand-4: #3e3e3e;
+		--db-brand-5: #4b4b4b;
+		--db-brand-6: #5e5e5e;
+		--db-brand-7: #777;
+		--db-brand-8: #919191;
+		--db-brand-9: #ababab;
+		--db-brand-10: #c6c6c6;
+		--db-brand-11: #e2e2e2;
+		--db-brand-12: #eee;
+		--db-brand-13: #f3f3f3;
+		--db-brand-14: #f9f9f9;
+		--db-brand-origin-base: #000; /* This is just to resolve the original origin color */
+		--db-brand-origin-light-default: #000;
+		--db-brand-origin-light-hovered: #3b3b3b;
+		--db-brand-origin-light-pressed: #1b1b1b;
+		--db-brand-origin-dark-default: #000;
+		--db-brand-origin-dark-hovered: #3b3b3b;
+		--db-brand-origin-dark-pressed: #1b1b1b;
+		--db-brand-on-origin-light-default: #f9f9f9;
+		--db-brand-on-origin-dark-default: #f9f9f9;
+	}
+
+	[data-theme='station'] {
+		--db-brand-0: #050833;
+		--db-brand-1: #090f48;
+		--db-brand-2: #111964;
+		--db-brand-3: #182381;
+		--db-brand-4: #212da0;
+		--db-brand-5: #2938c0;
+		--db-brand-6: #3c4adf;
+		--db-brand-7: #6069e8;
+		--db-brand-8: #8187ed;
+		--db-brand-9: #a1a5f2;
+		--db-brand-10: #c0c2f6;
+		--db-brand-11: #e0e1fb;
+		--db-brand-12: #ecedfc;
+		--db-brand-13: #f2f3fd;
+		--db-brand-14: #f9f9fe;
+		--db-brand-origin-base: #17217c; /* This is just to resolve the original origin color */
+		--db-brand-origin-light-default: #17217c;
+		--db-brand-origin-light-hovered: #4b57e3;
+		--db-brand-origin-light-pressed: #2532af;
+		--db-brand-origin-dark-default: #17217c;
+		--db-brand-origin-dark-hovered: #4b57e3;
+		--db-brand-origin-dark-pressed: #2532af;
+		--db-brand-on-origin-light-default: #f9f9fe;
+		--db-brand-on-origin-dark-default: #f9f9fe;
+	}
+
+	[data-theme] {
+		--db-brand-origin-default: light-dark(
+			var(--db-brand-origin-light-default),
+			var(--db-brand-origin-dark-default)
+		);
+		--db-brand-origin-hovered: light-dark(
+			var(--db-brand-origin-light-hovered),
+			var(--db-brand-origin-dark-hovered)
+		);
+		--db-brand-origin-pressed: light-dark(
+			var(--db-brand-origin-light-pressed),
+			var(--db-brand-origin-dark-pressed)
+		);
+		--db-brand-on-origin-default: light-dark(
+			var(--db-brand-on-origin-light-default),
+			var(--db-brand-on-origin-dark-default)
+		);
+		--db-brand-on-bg-basic-emphasis-50-default: light-dark(var(--db-brand-12), var(--db-brand-3));
+		--db-brand-on-bg-basic-emphasis-60-default: light-dark(var(--db-brand-10), var(--db-brand-6));
+		--db-brand-on-bg-basic-emphasis-70-default: light-dark(var(--db-brand-7), var(--db-brand-8));
+		--db-brand-on-bg-basic-emphasis-70-hovered: light-dark(var(--db-brand-4), var(--db-brand-10));
+		--db-brand-on-bg-basic-emphasis-70-pressed: light-dark(var(--db-brand-6), var(--db-brand-9));
+		--db-brand-on-bg-basic-emphasis-80-default: light-dark(var(--db-brand-6), var(--db-brand-9));
+		--db-brand-on-bg-basic-emphasis-80-hovered: light-dark(var(--db-brand-3), var(--db-brand-12));
+		--db-brand-on-bg-basic-emphasis-80-pressed: light-dark(var(--db-brand-5), var(--db-brand-10));
+		--db-brand-on-bg-basic-emphasis-90-default: light-dark(var(--db-brand-4), var(--db-brand-10));
+		--db-brand-on-bg-basic-emphasis-90-hovered: light-dark(var(--db-brand-0), var(--db-brand-14));
+		--db-brand-on-bg-basic-emphasis-90-pressed: light-dark(var(--db-brand-3), var(--db-brand-11));
+		--db-brand-on-bg-basic-emphasis-100-default: light-dark(var(--db-brand-1), var(--db-brand-12));
+		--db-brand-on-bg-basic-emphasis-100-hovered: light-dark(var(--db-brand-5), var(--db-brand-9));
+		--db-brand-on-bg-basic-emphasis-100-pressed: light-dark(var(--db-brand-2), var(--db-brand-11));
+		--db-brand-on-bg-inverted-default: light-dark(var(--db-brand-14), var(--db-brand-3));
+		--db-brand-on-bg-inverted-hovered: light-dark(var(--db-brand-11), var(--db-brand-0));
+		--db-brand-on-bg-inverted-pressed: light-dark(var(--db-brand-13), var(--db-brand-2));
+		--db-brand-on-bg-vibrant-default: light-dark(var(--db-brand-1), var(--db-brand-1));
+		--db-brand-on-bg-vibrant-hovered: light-dark(var(--db-brand-4), var(--db-brand-4));
+		--db-brand-on-bg-vibrant-pressed: light-dark(var(--db-brand-2), var(--db-brand-2));
+		--db-brand-bg-basic-level-1-default: light-dark(var(--db-brand-14), var(--db-brand-1));
+		--db-brand-bg-basic-level-1-hovered: light-dark(var(--db-brand-13), var(--db-brand-3));
+		--db-brand-bg-basic-level-1-pressed: light-dark(var(--db-brand-12), var(--db-brand-4));
+		--db-brand-bg-basic-level-2-default: light-dark(var(--db-brand-13), var(--db-brand-2));
+		--db-brand-bg-basic-level-2-hovered: light-dark(var(--db-brand-12), var(--db-brand-4));
+		--db-brand-bg-basic-level-2-pressed: light-dark(var(--db-brand-11), var(--db-brand-5));
+		--db-brand-bg-basic-level-3-default: light-dark(var(--db-brand-12), var(--db-brand-3));
+		--db-brand-bg-basic-level-3-hovered: light-dark(var(--db-brand-11), var(--db-brand-1));
+		--db-brand-bg-basic-level-3-pressed: light-dark(var(--db-brand-10), var(--db-brand-0));
+		--db-brand-bg-basic-transparent-full-default: light-dark(
+			color-mix(in srgb, transparent 100%, var(--db-brand-6)),
+			color-mix(in srgb, transparent 100%, var(--db-brand-9))
+		);
+		--db-brand-bg-basic-transparent-full-hovered: light-dark(
+			color-mix(in srgb, transparent 76%, var(--db-brand-6)),
+			color-mix(in srgb, transparent 76%, var(--db-brand-9))
+		);
+		--db-brand-bg-basic-transparent-full-pressed: light-dark(
+			color-mix(in srgb, transparent 68%, var(--db-brand-6)),
+			color-mix(in srgb, transparent 68%, var(--db-brand-9))
+		);
+		--db-brand-bg-basic-transparent-semi-default: light-dark(
+			color-mix(in srgb, transparent 92%, var(--db-brand-6)),
+			color-mix(in srgb, transparent 84%, var(--db-brand-9))
+		);
+		--db-brand-bg-basic-transparent-semi-hovered: light-dark(
+			color-mix(in srgb, transparent 76%, var(--db-brand-6)),
+			color-mix(in srgb, transparent 76%, var(--db-brand-9))
+		);
+		--db-brand-bg-basic-transparent-semi-pressed: light-dark(
+			color-mix(in srgb, transparent 68%, var(--db-brand-6)),
+			color-mix(in srgb, transparent 68%, var(--db-brand-9))
+		);
+		--db-brand-bg-inverted-contrast-max-default: light-dark(var(--db-brand-1), var(--db-brand-12));
+		--db-brand-bg-inverted-contrast-max-hovered: light-dark(var(--db-brand-5), var(--db-brand-9));
+		--db-brand-bg-inverted-contrast-max-pressed: light-dark(var(--db-brand-2), var(--db-brand-11));
+		--db-brand-bg-inverted-contrast-high-default: light-dark(var(--db-brand-6), var(--db-brand-9));
+		--db-brand-bg-inverted-contrast-high-hovered: light-dark(var(--db-brand-2), var(--db-brand-12));
+		--db-brand-bg-inverted-contrast-high-pressed: light-dark(var(--db-brand-5), var(--db-brand-10));
+		--db-brand-bg-inverted-contrast-low-default: light-dark(var(--db-brand-7), var(--db-brand-8));
+		--db-brand-bg-inverted-contrast-low-hovered: light-dark(var(--db-brand-3), var(--db-brand-12));
+		--db-brand-bg-inverted-contrast-low-pressed: light-dark(var(--db-brand-6), var(--db-brand-9));
+		--db-brand-bg-vibrant-default: light-dark(var(--db-brand-9), var(--db-brand-9));
+		--db-brand-bg-vibrant-hovered: light-dark(var(--db-brand-12), var(--db-brand-12));
+		--db-brand-bg-vibrant-pressed: light-dark(var(--db-brand-10), var(--db-brand-10));
+	}
+}

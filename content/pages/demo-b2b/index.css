@@ -1,0 +1,27 @@
+@import url('@template/styles/demo.css');
+
+.data-card {
+	inline-size: 100%;
+}
+
+.cards-container {
+	flex-wrap: wrap;
+}
+
+@media screen and (width < 62em) {
+	.db-section .db-stack[data-direction='row'] {
+		flex-direction: column;
+	}
+}
+
+.metric-value {
+	font: var(--db-type-headline-xl);
+}
+
+.db-stack .db-stack {
+	inline-size: auto;
+}
+
+.db-stack {
+	overflow: visible;
+}

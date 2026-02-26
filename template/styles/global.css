@@ -1,5 +1,7 @@
-@import url('@db-ux/core-components/build/styles/rollup.css');
-@import url('@db-ux/db-theme/build/styles/rollup.css');
+@layer db-ux,themes, db-theme ;
+
+@import url('@db-ux/core-components/build/styles/rollup.css') layer(db-ux);
+@import url('@db-ux/db-theme/build/styles/rollup.css') layer(db-theme);
 @import url('./layout.css');
 @import url('./markdown.css');
 @import url('../components/TableOfContents/TableOfContents.css');
@@ -140,4 +142,8 @@ html {
 	width: auto;
 	display: inline-flex !important;
 	flex-direction: row !important;
+}
+
+.db-card:has(iframe) {
+	overflow: hidden;
 }

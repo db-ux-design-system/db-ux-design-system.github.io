@@ -1,0 +1,58 @@
+---
+import PageHeroSection from './home/_components/PageHeroSection.astro';
+import InteractiveDemoSection from './home/_components/InteractiveDemoSection.astro';
+import PackagesSection from './home/_components/PackagesSection.astro';
+import DesignedForSection from './home/_components/DesignedForSection.astro';
+import TestimonialsSection from './home/_components/TestimonialsSection.astro';
+import SharedStandardsSection from './home/_components/SharedStandardsSection.astro';
+import DefaultLayout from '@template/layouts/default';
+---
+
+<DefaultLayout frontmatter={{}}>
+	<PageHeroSection />
+
+	<InteractiveDemoSection />
+
+	<PackagesSection />
+
+	<DesignedForSection />
+
+	<TestimonialsSection />
+
+	<SharedStandardsSection />
+</DefaultLayout>
+
+<script is:inline slot="script">
+	function initDemo() {
+		const iframe = document.getElementById('demo-iframe');
+		const toggle = document.getElementById('toggle-demo');
+		const fullscreenAnchor = document.getElementById('fullscreen-anchor');
+
+		if (!iframe || !toggle || !fullscreenAnchor) return;
+
+		let currentDemo = 'b2b';
+
+		fullscreenAnchor.href = iframe.src;
+
+		toggle.addEventListener('click', () => {
+			currentDemo = currentDemo === 'b2b' ? 'b2c' : 'b2b';
+			const href = `/demo-${currentDemo}`;
+			iframe.src = href;
+			fullscreenAnchor.href = href;
+			toggle.textContent = currentDemo === 'b2b' ? 'Zeige B2C Demo' : 'Zeige B2B Demo';
+		});
+
+		document.addEventListener('click', (e) => {
+			const target = e.target;
+			const action = target.dataset.action;
+			const value = target.dataset.value;
+			if (action && value) {
+				iframe.src = `/demo-${currentDemo}?${action}=${value}`;
+			}
+		});
+	}
+
+	window?.addEventListener('load', async () => {
+		new Promise(() => setTimeout(() => initDemo(), 1000));
+	});
+</script>

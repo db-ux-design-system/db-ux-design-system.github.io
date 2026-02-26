@@ -5,10 +5,9 @@ import HtmlHead from '@template/components/HtmlHead';
 import MainContent from './main-content';
 import { appConfig } from '@root/app.config.ts';
 import { Shell } from '@template/components/Shell';
-import interactiveDemoScriptUrl from '@template/components/InteractiveDemo/interactiveDemo.client.js?url';
 
 interface Props {
-	headings: MarkdownHeading[];
+	headings?: MarkdownHeading[];
 	frontmatter: FrontMatter;
 }
 const { headings, frontmatter } = Astro.props;
@@ -30,6 +29,7 @@ const currentPath = Astro.url.pathname;
 				</MainContent>
 			</div>
 		</Shell>
-		<script is:inline type="module" src={interactiveDemoScriptUrl}></script>
 	</body>
 </html>
+
+<slot name="script"/>
