@@ -67,8 +67,8 @@ importers:
         specifier: 3.1.18
         version: 3.1.18
       '@orama/plugin-astro':
-        specifier: 3.1.14
-        version: 3.1.14(astro@5.16.6(@types/node@25.1.0)(rollup@4.57.1)(typescript@5.9.2)(yaml@2.8.2))
+        specifier: 3.1.18
+        version: 3.1.18(astro@5.16.6(@types/node@25.1.0)(rollup@4.57.1)(typescript@5.9.2)(yaml@2.8.2))
       '@types/react':
         specifier: 19.2.0
         version: 19.2.0
@@ -706,16 +706,12 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@orama/orama@3.1.14':
-    resolution: {integrity: sha512-Iq4RxYC7y0pA/hLgcUGpYYs5Vze4qNmJk0Qi1uIrg2bHGpm6A06nbjWcH9h4HQsddkDFFlanLj/zYBH3Sxdb4w==}
-    engines: {node: '>= 20.0.0'}
-
   '@orama/orama@3.1.18':
     resolution: {integrity: sha512-a61ljmRVVyG5MC/698C8/FfFDw5a8LOIvyOLW5fztgUXqUpc1jOfQzOitSCbge657OgXXThmY3Tk8fpiDb4UcA==}
     engines: {node: '>= 20.0.0'}
 
-  '@orama/plugin-astro@3.1.14':
-    resolution: {integrity: sha512-MWnCFDfB1iuUAnvKgzMifl3bhFKJK8rOG4pPp30aPIsvzCjz4SuH2V9UPN58WVlJSTyJuvMIeiT12dzG0L5aQQ==}
+  '@orama/plugin-astro@3.1.18':
+    resolution: {integrity: sha512-6JZAkwMwEPIFE39EfbNS86w8hH6aVCV+EtwBJblBfR0xCkG9EjcMBRNSm2swYcTxaQCG2NydAEIF6yD/3hjp2w==}
     engines: {node: '>= 20.0.0'}
     peerDependencies:
       astro: ^2.0.4
@@ -3427,13 +3423,11 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.20.1
 
-  '@orama/orama@3.1.14': {}
-
   '@orama/orama@3.1.18': {}
 
-  '@orama/plugin-astro@3.1.14(astro@5.16.6(@types/node@25.1.0)(rollup@4.57.1)(typescript@5.9.2)(yaml@2.8.2))':
+  '@orama/plugin-astro@3.1.18(astro@5.16.6(@types/node@25.1.0)(rollup@4.57.1)(typescript@5.9.2)(yaml@2.8.2))':
     dependencies:
-      '@orama/orama': 3.1.14
+      '@orama/orama': 3.1.18
       astro: 5.16.6(@types/node@25.1.0)(rollup@4.57.1)(typescript@5.9.2)(yaml@2.8.2)
       html-to-text: 9.0.5
 
