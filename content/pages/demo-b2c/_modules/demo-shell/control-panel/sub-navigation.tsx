@@ -13,7 +13,7 @@ const DemoSubNavigation = () => (
 			<DBStack direction="row" gap="small" alignment="center">
 				<ColorModeSwitch />
 				<ThemeSwitch />
-				<DBButton variant="brand">Manage Metrics</DBButton>
+				<DBButton variant="brand" type="button">Manage Metrics</DBButton>
 			</DBStack>
 		</DBStack>
 	</DBShellSubNavigation>

@@ -45,12 +45,6 @@ declare interface FrontMatter {
 	 */
 	tocMaxDepth?: number | undefined;
 	/**
-	 * Whether the page should render a navigation sidebar. Not visible on mobile devices and not visible
-	 * if the page does not have any sibling pages.
-	 * @default true
-	 */
-	nav?: boolean;
-	/**
 	 * If true, children will be rendered as sub-navigation on child pages.
 	 */
 	isSubNavigation?: boolean;

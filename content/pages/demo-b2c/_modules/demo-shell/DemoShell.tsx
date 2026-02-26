@@ -11,7 +11,6 @@ import DemoMetaNavigation from './control-panel/meta-navigation';
 import DemoNavigation from './control-panel/navigation';
 import DemoPrimaryActions from './control-panel/primary-actions';
 import DemoSecondaryActions from './control-panel/secondary-actions';
-import DemoSubNavigation from './control-panel/sub-navigation.tsx';
 
 function DemoShellContent({ children }: PropsWithChildren): ReactElement {
 	const { setColorMode } = useColorMode();
