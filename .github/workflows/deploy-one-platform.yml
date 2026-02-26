@@ -43,7 +43,7 @@ jobs:
 
       - name: Lint
         run: |
-          pnpm run lint:stylelint
+          pnpm run lint
 
       - name: Build
         env:

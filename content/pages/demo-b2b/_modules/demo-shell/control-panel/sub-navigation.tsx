@@ -1,8 +1,4 @@
-import {
-	DBShellSubNavigation,
-	DBButton,
-	DBStack,
-} from '@db-ux/react-core-components';
+import { DBShellSubNavigation, DBButton, DBStack, DBTooltip } from '@db-ux/react-core-components';
 import { useColorMode } from '@template/context/color-mode-context';
 import ThemeSwitch from '@template/components/theme-switch/ThemeSwitch';
 
@@ -26,9 +22,14 @@ const DemoSubNavigation = () => {
 							url.searchParams.delete('mode');
 							window.history.replaceState({}, '', url);
 						}}
-					></DBButton>
+						type="button"
+					>
+						<DBTooltip>Describe action</DBTooltip>
+					</DBButton>
 					<ThemeSwitch />
-					<DBButton variant="brand">Manage Metrics</DBButton>
+					<DBButton variant="brand" type="submit">
+						Manage Metrics
+					</DBButton>
 				</DBStack>
 			</DBStack>
 		</DBShellSubNavigation>

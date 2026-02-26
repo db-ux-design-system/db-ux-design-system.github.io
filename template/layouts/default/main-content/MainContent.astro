@@ -1,7 +1,6 @@
 ---
 import type { MarkdownHeading } from 'astro';
 import { TableOfContents } from '@template/components/TableOfContents';
-import { FooterNav } from '@template/components/FooterNav';
 import { DBSection } from '@db-ux/react-core-components';
 import { PageHero } from '@components';
 
@@ -16,7 +15,7 @@ const toc = (headings?.length ?? 0) > 0 && frontmatter.toc === true;
 	{
 		toc && (
 			<TableOfContents
-				client:only
+				client:only="react"
 				astro={Astro}
 				headings={headings}
 				tocMaxDepth={frontmatter.tocMaxDepth}
@@ -43,6 +42,5 @@ const toc = (headings?.length ?? 0) > 0 && frontmatter.toc === true;
 		<DBSection id="main-content-section" width="full" spacing="none">
 			<slot />
 		</DBSection>
-		{frontmatter.nav && <FooterNav client:only />}
 	</div>
 </>

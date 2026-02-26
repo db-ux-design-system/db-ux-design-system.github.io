@@ -3,7 +3,7 @@ import type { AstroGlobal, MarkdownHeading } from 'astro';
 import type { ReactElement } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { useActiveHeading } from './useActiveHeading';
-import { DBButton, DBIcon } from '@db-ux/react-core-components';
+import { DBButton, DBIcon, DBTooltip } from '@db-ux/react-core-components';
 
 interface Props {
 	astro: AstroGlobal;
@@ -18,7 +18,7 @@ export function TableOfContents(props: Props): ReactElement | null {
 	);
 	const slugs = filteredHeadings.map((h) => h.slug);
 	const currentPath = getCurrentPathname(props.astro);
-	const { currentID, activeIDs, setCurrentID } = useActiveHeading({
+	const { activeIDs, setCurrentID } = useActiveHeading({
 		slugs,
 		tocMaxDepth: props.tocMaxDepth,
 	});
@@ -106,8 +106,11 @@ export function TableOfContents(props: Props): ReactElement | null {
 										noText
 										icon={expandedH2s.has(slug) ? 'chevron_up' : 'chevron_down'}
 										onClick={() => toggleH2(slug)}
+										type="button"
 									>
 										{expandedH2s.has(slug) ? 'Collapse' : 'Expand'}
+
+										<DBTooltip>{expandedH2s.has(slug) ? 'Collapse' : 'Expand'}</DBTooltip>
 									</DBButton>
 								)}
 							</li>
