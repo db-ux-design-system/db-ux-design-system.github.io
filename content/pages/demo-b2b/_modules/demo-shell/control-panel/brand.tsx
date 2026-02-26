@@ -2,12 +2,12 @@ import { DBControlPanelBrand, DBStack } from '@db-ux/react-core-components';
 import { useTheme } from '@template/context/theme-context';
 
 const DemoBrand = () => {
-	const { logoSvg, icon, logo } = useTheme();
+	const { logoSvg, logo } = useTheme();
 
 	return (
-		<DBControlPanelBrand icon={logoSvg ? undefined : icon}>
+		<DBControlPanelBrand>
 			<a href="#">
-				<DBStack direction="row" alignment="center" gap="2x-small">
+				<DBStack direction="row" alignment="center" gap="x-small">
 					{logoSvg && <img src={logoSvg} alt={logo} style={{ height: 'var(--db-sizing-sm)' }} />}
 					{logo}
 				</DBStack>

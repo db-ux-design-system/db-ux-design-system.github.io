@@ -6,7 +6,6 @@ interface ThemeContextValue {
 	themeName: ThemeName;
 	setTheme: (name: ThemeName) => void;
 	logo: string;
-	icon: string;
 	logoSvg: string | null;
 }
 
@@ -19,17 +18,10 @@ const THEME_LOGOS: Record<ThemeName, string> = {
 	neutral: 'Neutral',
 };
 
-const THEME_ICONS: Record<ThemeName, string> = {
-	default: 'brand',
-	's-bahn': 'brand',
-	station: 'brand',
-	neutral: 'train',
-};
-
 const THEME_LOGO_SVGS: Record<ThemeName, string | null> = {
-	default: null,
+	default: "/db_logo.svg",
 	's-bahn': '/sbahn-logo.svg',
-	station: '/station-logo.svg',
+	station: '/db_logo.svg',
 	neutral: '/neutral-logo.svg',
 };
 
@@ -64,7 +56,6 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 		themeName,
 		setTheme: setThemeName,
 		logo: THEME_LOGOS[themeName],
-		icon: THEME_ICONS[themeName],
 		logoSvg: THEME_LOGO_SVGS[themeName],
 	};
 
