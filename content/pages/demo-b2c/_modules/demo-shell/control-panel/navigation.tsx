@@ -4,7 +4,7 @@ const DemoNavigation = () => (
 	<DBNavigation variant="tree">
 		<DBNavigationItem>
 			<a href="#" aria-current="page">
-				Tickets & Angebote
+				Tickets &amp; Angebote
 			</a>
 		</DBNavigationItem>
 		<DBNavigationItem>
