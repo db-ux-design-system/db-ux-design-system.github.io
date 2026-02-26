@@ -5,11 +5,7 @@ declare interface FrontMatter {
 	/**
 	 * The title of the page.
 	 */
-	title: string;
-	/**
-	 * The author of the page.
-	 */
-	author: string;
+	title?: string;
 	/**
 	 * The description of the page.
 	 */

@@ -29,7 +29,7 @@ const THEME_ICONS: Record<ThemeName, string> = {
 const THEME_LOGO_SVGS: Record<ThemeName, string | null> = {
 	default: null,
 	's-bahn': '/sbahn-logo.svg',
-	station: null,
+	station: '/station-logo.svg',
 	neutral: '/neutral-logo.svg',
 };
 

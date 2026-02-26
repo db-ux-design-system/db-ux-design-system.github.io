@@ -7,7 +7,7 @@ import { appConfig } from '@root/app.config.ts';
 import { Shell } from '@template/components/Shell';
 
 interface Props {
-	headings: MarkdownHeading[];
+	headings?: MarkdownHeading[];
 	frontmatter: FrontMatter;
 }
 const { headings, frontmatter } = Astro.props;
@@ -31,3 +31,5 @@ const currentPath = Astro.url.pathname;
 		</Shell>
 	</body>
 </html>
+
+<slot name="script"/>
