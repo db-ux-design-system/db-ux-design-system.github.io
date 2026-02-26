@@ -57,7 +57,7 @@ jobs:
         id: playwright
         continue-on-error: true
         run: |
-          npx playwright install --with-deps
+          npx playwright install --with-deps chromium
           pnpm run test
 
       - name: Playwright regenerate snapshots
