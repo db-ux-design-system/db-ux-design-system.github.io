@@ -55,7 +55,7 @@ jobs:
 
       - name: Playwright
         id: playwright
-        continue-on-error: true
+        continue-on-error: ${{ github.event_name == 'pull_request' }}
         run: |
           npx playwright install --with-deps chromium
           pnpm run test
@@ -63,7 +63,6 @@ jobs:
       - name: Playwright regenerate snapshots
         if: steps.playwright.outcome == 'failure' && github.event_name == 'pull_request'
         id: playwright-regenerate
-        continue-on-error: true
         run: pnpm run test:regenerate
 
       - name: 🚘 Auto commit

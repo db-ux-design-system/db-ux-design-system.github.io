@@ -60,13 +60,16 @@ test.describe('Navigation Screenshots', () => {
 	for (const path of allPaths) {
 		test(`${path}`, async ({ page }) => {
 			await page.goto(`/${path}`);
-			await page.waitForLoadState('networkidle');
+			await page.waitForLoadState('domcontentloaded');
 			await waitForDBShell(page);
 			await setScrollViewport(page);
 
 			const mask = await getMask(page, path);
 
-			await expect(page).toHaveScreenshot(`${path.replace(/\//g, '-')}.png`, { mask });
+			await expect(page).toHaveScreenshot(`${path.replace(/\//g, '-')}.png`, {
+				mask,
+				timeout: 10_000,
+			});
 
 			const accessibilityScanResults = await new AxeBuilder({ page })
 				.disableRules(

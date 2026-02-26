@@ -35,7 +35,7 @@ const nativeAttributes = [
 				</div>
 			) : config.elementId === 'playground-input' ? (
 				<div class="db-input" id={config.elementId}>
-					<label id="playground-input-label">{config.defaultProps.label || 'Label'}</label>
+					<label id="playground-input-label" for="playground-input-field">{config.defaultProps.label || 'Label'}</label>
 					<input
 						id="playground-input-field"
 						aria-invalid="false"
@@ -96,7 +96,7 @@ const nativeAttributes = [
 				</label>
 			) : config.elementId === 'playground-select' ? (
 				<div class="db-select" id={config.elementId} data-hide-label="false" data-variant="above">
-					<label id="playground-select-label">{config.defaultProps.label || 'Country'}</label>
+					<label id="playground-select-label" for="playground-select-field">{config.defaultProps.label || 'Country'}</label>
 					<select
 						id="playground-select-field"
 						aria-invalid="false"
@@ -191,10 +191,11 @@ const nativeAttributes = [
 							} else {
 								updateAction = `document.getElementById('${targetId}').setAttribute('${attrName}', this.value);`;
 							}
+							const selectId = `control-select-${prop.name}`;
 							return (
 								<div class="db-select">
-									<label>{prop.label}</label>
-									<select onchange={updateAction}>
+									<label for={selectId}>{prop.label}</label>
+									<select id={selectId} onchange={updateAction}>
 										{prop.options.map((option: any) => (
 											<option value={option.value} selected={option.default}>
 												{option.label}
@@ -210,10 +211,12 @@ const nativeAttributes = [
 								? prop.name
 								: `data-${prop.name}`;
 							if (prop.name === 'text') {
+								const inputId = `control-input-text`;
 								return (
 									<div class="db-input">
-										<label>{prop.label}</label>
+										<label for={inputId}>{prop.label}</label>
 										<input
+											id={inputId}
 											type="text"
 											value={prop.defaultValue}
 											oninput={`document.getElementById('${config.textElementId}').textContent = this.value;`}
@@ -222,10 +225,12 @@ const nativeAttributes = [
 								);
 							} else if (config.elementId === 'playground-switch' && prop.name === 'label') {
 								const labelProp = config.properties.find((p: any) => p.name === 'label');
+								const inputId = `control-input-switch-label`;
 								return (
 									<div class="db-input">
-										<label>{prop.label}</label>
+										<label for={inputId}>{prop.label}</label>
 										<input
+											id={inputId}
 											type="text"
 											value={labelProp?.defaultValue || 'Enable notifications'}
 											oninput={`document.getElementById('playground-switch-label').textContent = this.value;`}
@@ -234,10 +239,12 @@ const nativeAttributes = [
 								);
 							} else if (config.elementId === 'playground-radio' && prop.name === 'label') {
 								const labelProp = config.properties.find((p: any) => p.name === 'label');
+								const inputId = `control-input-radio-label`;
 								return (
 									<div class="db-input">
-										<label>{prop.label}</label>
+										<label for={inputId}>{prop.label}</label>
 										<input
+											id={inputId}
 											type="text"
 											value={labelProp?.defaultValue || 'Option 1'}
 											oninput={`document.getElementById('playground-radio-label').textContent = this.value;`}
@@ -246,10 +253,12 @@ const nativeAttributes = [
 								);
 							} else if (config.elementId === 'playground-checkbox' && prop.name === 'label') {
 								const labelProp = config.properties.find((p: any) => p.name === 'label');
+								const inputId = `control-input-checkbox-label`;
 								return (
 									<div class="db-input">
-										<label>{prop.label}</label>
+										<label for={inputId}>{prop.label}</label>
 										<input
+											id={inputId}
 											type="text"
 											value={labelProp?.defaultValue || 'Accept terms'}
 											oninput={`document.getElementById('playground-checkbox-label').textContent = this.value;`}
@@ -258,10 +267,12 @@ const nativeAttributes = [
 								);
 							} else if (config.elementId === 'playground-select' && prop.name === 'label') {
 								const labelProp = config.properties.find((p: any) => p.name === 'label');
+								const inputId = `control-input-select-label`;
 								return (
 									<div class="db-input">
-										<label>{prop.label}</label>
+										<label for={inputId}>{prop.label}</label>
 										<input
+											id={inputId}
 											type="text"
 											value={labelProp?.defaultValue || 'Country'}
 											oninput={`document.getElementById('playground-select-label').textContent = this.value;`}
@@ -272,10 +283,12 @@ const nativeAttributes = [
 								const placeholderProp = config.properties.find(
 									(p: any) => p.name === 'placeholder',
 								);
+								const inputId = `control-input-select-placeholder`;
 								return (
 									<div class="db-input">
-										<label>{prop.label}</label>
+										<label for={inputId}>{prop.label}</label>
 										<input
+											id={inputId}
 											type="text"
 											value={placeholderProp?.defaultValue || 'Choose an option'}
 											oninput={`const placeholder = document.getElementById('playground-select-placeholder'); const wrapper = document.getElementById('playground-select'); if(placeholder && wrapper.getAttribute('data-variant') !== 'floating') placeholder.textContent = this.value;`}
@@ -286,10 +299,12 @@ const nativeAttributes = [
 								config.elementId === 'playground-input' &&
 								['validMessage', 'valid-message'].includes(prop.name)
 							) {
+								const inputId = `control-input-valid-message`;
 								return (
 									<div class="db-input">
-										<label>{prop.label}</label>
+										<label for={inputId}>{prop.label}</label>
 										<input
+											id={inputId}
 											type="text"
 											value={prop.defaultValue}
 											oninput={`document.getElementById('playground-input-infotext-valid').textContent = this.value;`}
@@ -297,10 +312,12 @@ const nativeAttributes = [
 									</div>
 								);
 							} else if (config.elementId === 'playground-select' && prop.name === 'message') {
+								const inputId = `control-input-select-message`;
 								return (
 									<div class="db-input">
-										<label>{prop.label}</label>
+										<label for={inputId}>{prop.label}</label>
 										<input
+											id={inputId}
 											type="text"
 											value={prop.defaultValue}
 											oninput={`document.getElementById('playground-select-message').textContent = this.value;`}
@@ -311,10 +328,12 @@ const nativeAttributes = [
 								config.elementId === 'playground-select' &&
 								['validMessage', 'valid-message'].includes(prop.name)
 							) {
+								const inputId = `control-input-select-valid-message`;
 								return (
 									<div class="db-input">
-										<label>{prop.label}</label>
+										<label for={inputId}>{prop.label}</label>
 										<input
+											id={inputId}
 											type="text"
 											value={prop.defaultValue}
 											oninput={`document.getElementById('playground-select-infotext-valid').textContent = this.value;`}
@@ -325,10 +344,12 @@ const nativeAttributes = [
 								config.elementId === 'playground-select' &&
 								['invalidMessage', 'invalid-message'].includes(prop.name)
 							) {
+								const inputId = `control-input-select-invalid-message`;
 								return (
 									<div class="db-input">
-										<label>{prop.label}</label>
+										<label for={inputId}>{prop.label}</label>
 										<input
+											id={inputId}
 											type="text"
 											value={prop.defaultValue}
 											oninput={`document.getElementById('playground-select-infotext').textContent = this.value;`}
@@ -353,10 +374,11 @@ const nativeAttributes = [
 									config.elementId === 'playground-input' && prop.name === 'label'
 										? `if(this.value) document.getElementById('${targetId}').textContent = this.value; else document.getElementById('${targetId}').textContent = 'Label';`
 										: `if(this.value) document.getElementById('${targetId}').setAttribute('${attrName}', this.value); else document.getElementById('${targetId}').removeAttribute('${attrName}');`;
+								const inputId = `control-input-${prop.name}`;
 								return (
 									<div class="db-input">
-										<label>{prop.label}</label>
-										<input type="text" value={prop.defaultValue} oninput={updateAction} />
+										<label for={inputId}>{prop.label}</label>
+										<input id={inputId} type="text" value={prop.defaultValue} oninput={updateAction} />
 									</div>
 								);
 							}
@@ -417,9 +439,11 @@ const nativeAttributes = [
 								action = `if(this.checked) document.getElementById('${config.elementId}').setAttribute('data-${prop.name}', 'true'); else document.getElementById('${config.elementId}').setAttribute('data-${prop.name}', 'false');`;
 							}
 
+							const checkboxId = `control-checkbox-${prop.name}`;
 							return (
-								<label class="db-switch">
+								<label class="db-switch" for={checkboxId}>
 									<input
+										id={checkboxId}
 										type="checkbox"
 										role="switch"
 										checked={prop.defaultValue}
