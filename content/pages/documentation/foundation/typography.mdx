@@ -11,6 +11,7 @@ toc: true
 import { DBSection, DBStack } from '@db-ux/react-core-components';
 import TypographyPlayground from './_modules/TypographyPlayground.astro';
 import TypographyTable from './_modules/TypographyTable.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 
 Typography helps establish hierarchy and communicate key content through clear visual patterns. Well-designed typography improves readability and directly enhances the user experience.
 
@@ -29,5 +30,23 @@ Typography helps establish hierarchy and communicate key content through clear v
 ## Tokens
 
 <TypographyTable />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+###### Code Mapping
+
+Our typography has a simple and effective code mapping system that links the most common HTML tags (h1, h2, h3, h4, h5, h6, p, small) directly to our typography tokens 3xs to 3xl.
+If this is not sufficient for a particular use case, specific tokens can be used instead.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/No7xHLQEEhplMWCiJkIlI8/Doku--Typography?node-id=1-1132&embed-host=share"
+		fullWidth={true}
+	/>
+</div>
 
 </DBSection>
