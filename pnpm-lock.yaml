@@ -67,8 +67,8 @@ importers:
         specifier: 3.0.2-shell4-bdb351c
         version: 3.0.2-shell4-bdb351c
       '@double-great/stylelint-a11y':
-        specifier: 3.4.1
-        version: 3.4.1(stylelint@17.4.0(typescript@5.9.2))
+        specifier: 3.4.3
+        version: 3.4.3(stylelint@17.4.0(typescript@5.9.2))
       '@orama/orama':
         specifier: 3.1.18
         version: 3.1.18
@@ -362,8 +362,8 @@ packages:
   '@db-ux/react-core-components@3.0.2-shell4-bdb351c':
     resolution: {integrity: sha512-H4kka+9J9OFGXIPZa68jXxD7G9OT3EV7grRccWTM/ZXHYm/qNvPqjSJB3Bm6XWV3+cLR7cvgPTKj/g/PC+jRqQ==}
 
-  '@double-great/stylelint-a11y@3.4.1':
-    resolution: {integrity: sha512-Z9wH2Z2yXgTvztZsm4b9E2up5Ri6VNRg4dciGmZWejH3yO+d42prLwVbWoXIngc62gWTAymzMyAht1gkaZQ9Pw==}
+  '@double-great/stylelint-a11y@3.4.3':
+    resolution: {integrity: sha512-AhAMyxl/w/wQvKdY1jdWDkF8BEgt6DKEZNGNyecJnKzY/MEq9iA1o63qwPtPTPHFN1jQjp5Vnq0fySxlfFw3fA==}
     engines: {node: '>=18.12.0'}
     peerDependencies:
       stylelint: '>=16.0.0'
@@ -3587,7 +3587,7 @@ snapshots:
       '@db-ux/core-components': 3.0.2-shell4-bdb351c
       '@db-ux/core-foundations': 3.0.2-shell4-bdb351c
 
-  '@double-great/stylelint-a11y@3.4.1(stylelint@17.4.0(typescript@5.9.2))':
+  '@double-great/stylelint-a11y@3.4.3(stylelint@17.4.0(typescript@5.9.2))':
     dependencies:
       postcss: 8.5.6
       stylelint: 17.4.0(typescript@5.9.2)
