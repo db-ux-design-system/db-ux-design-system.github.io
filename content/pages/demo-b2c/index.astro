@@ -16,122 +16,122 @@ import {
 
 <DemoLayout title="B2C Demo - DB UX Design System">
 	<DemoShell client:only="react">
-			<DBSection width="large" className="hero-section">
-				<DBCard className="teaser" data-color="brand">
-					<DBStack gap="small">
-						<h2>Explore Europe from €19.99</h2>
-						<small>Travel fast and affordably to many European destinations.</small>
-						<DBButton width="full" variant="filled">Find cheap price</DBButton>
-					</DBStack>
-				</DBCard>
-			</DBSection>
-			<DBSection spacing="none" width="small" className="journey-section">
-				<DBCard>
-					<DBStack gap="medium">
-						<DBStack direction="row" gap="small" justifyContent="space-between">
-							<b class="pulse">Journey search</b>
-
-							<DBStack direction="row" alignment="center">
-								<div class="buttongroup">
-									<button
-										class="db-button"
-										data-variant="brand"
-										data-size="small"
-										id="class-1"
-										onclick="document.getElementById('class-1').setAttribute('data-variant','brand');document.getElementById('class-2').setAttribute('data-variant','filled');"
-										>1st Class</button
-									>
-									<button
-										class="db-button"
-										data-variant="filled"
-										data-size="small"
-										id="class-2"
-										onclick="document.getElementById('class-2').setAttribute('data-variant','brand');document.getElementById('class-1').setAttribute('data-variant','filled');"
-										>2nd Class</button
-									>
-								</div>
-
-								<DBButton iconLeading="map" variant="ghost" size="small" noText>
-									Show map
-								</DBButton>
-							</DBStack>
-						</DBStack>
-						<DBStack direction="row" gap="small" justifyContent="space-between" className="journey">
-							<DBInput
-								iconLeading="start"
-								label="Start"
-								variant="floating"
-								placeholder="Where does the journey start?"
-								width="100%"
-							/>
-							<DBInput
-								iconLeading="map_pin"
-								label="Ziel"
-								variant="floating"
-								placeholder="Where do you want to go?"
-								width="100%"
-							/>
-							<DBButton variant="brand"> Search </DBButton>
-						</DBStack>
-						<DBStack direction="row" gap="small" justifyContent="space-between" className="column">
-							<DBButton width="full" variant="filled" iconLeading="calendar">
-								Today, from 2:30 PM
-							</DBButton>
-							<DBButton width="full" variant="filled" iconLeading="calendar">
-								Add return trip
-							</DBButton>
-							<DBButton width="full" variant="filled" iconLeading="person">
-								Traveler info
-							</DBButton>
-						</DBStack>
-					</DBStack>
-				</DBCard>
-			</DBSection>
-			<DBSection spacing="small" width="medium">
+		<h1>Main page</h1>
+		<DBSection width="large" className="hero-section">
+			<DBCard className="teaser" data-color="brand">
+				<DBStack gap="small">
+					<h2>Explore Europe from €19.99</h2>
+					<small>Travel fast and affordably to many European destinations.</small>
+					<DBButton width="full" variant="filled">Find cheap price</DBButton>
+				</DBStack>
+			</DBCard>
+		</DBSection>
+		<DBSection spacing="none" width="small" className="journey-section">
+			<DBCard>
 				<DBStack gap="medium">
-					<h2>News from Deutsche Bahn</h2>
-					<DBStack direction="row" className="column">
-						<DBCard className="data-card article" spacing="none" behavior="interactive">
-							<img
-								src="https://images.unsplash.com/photo-1584371577738-40b929ee5f13?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-							/>
-							<DBStack gap="small" className="article-content">
-								<h2>Article</h2>
-								<p>
-									Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-									tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-								</p>
-								<DBLink href="/xx">Link to article</DBLink>
-							</DBStack>
-						</DBCard>
-						<DBCard className="data-card article" spacing="none" behavior="interactive">
-							<img
-								src="https://images.unsplash.com/photo-1570187453437-ffd1671232e9?q=80&w=2148&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-							/>
-							<DBStack gap="small" className="article-content">
-								<h2>Article</h2>
-								<p>
-									Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-									tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-								</p>
-								<DBLink href="#">Link to article</DBLink>
-							</DBStack>
-						</DBCard>
-						<DBCard className="data-card article" spacing="none" behavior="interactive">
-							<img
-								src="https://images.unsplash.com/photo-1562078809-7ef447ae26c6?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-							/>
-							<DBStack gap="small" className="article-content">
-								<h2>Article</h2>
-								<p>
-									Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-									tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-								</p>
-								<DBLink href="#">Link to article</DBLink>
-							</DBStack>
-						</DBCard>
+					<DBStack direction="row" gap="small" justifyContent="space-between">
+						<b class="pulse">Journey search</b>
+
+						<DBStack direction="row" alignment="center">
+							<div class="buttongroup">
+								<button
+									class="db-button"
+									data-variant="brand"
+									data-size="small"
+									id="class-1"
+									onclick="document.getElementById('class-1').setAttribute('data-variant','brand');document.getElementById('class-2').setAttribute('data-variant','filled');"
+									>1st Class</button
+								>
+								<button
+									class="db-button"
+									data-variant="filled"
+									data-size="small"
+									id="class-2"
+									onclick="document.getElementById('class-2').setAttribute('data-variant','brand');document.getElementById('class-1').setAttribute('data-variant','filled');"
+									>2nd Class</button
+								>
+							</div>
+
+							<DBButton iconLeading="map" variant="ghost" size="small" noText> Show map </DBButton>
+						</DBStack>
+					</DBStack>
+					<DBStack direction="row" gap="small" justifyContent="space-between" className="journey">
+						<DBInput
+							iconLeading="start"
+							label="Start"
+							variant="floating"
+							placeholder="Where does the journey start?"
+							width="100%"
+						/>
+						<DBInput
+							iconLeading="map_pin"
+							label="Ziel"
+							variant="floating"
+							placeholder="Where do you want to go?"
+							width="100%"
+						/>
+						<DBButton variant="brand"> Search </DBButton>
+					</DBStack>
+					<DBStack direction="row" gap="small" justifyContent="space-between" className="column">
+						<DBButton width="full" variant="filled" iconLeading="calendar">
+							Today, from 2:30 PM
+						</DBButton>
+						<DBButton width="full" variant="filled" iconLeading="calendar">
+							Add return trip
+						</DBButton>
+						<DBButton width="full" variant="filled" iconLeading="person"> Traveler info </DBButton>
 					</DBStack>
 				</DBStack>
-			</DBSection>
+			</DBCard>
+		</DBSection>
+		<DBSection spacing="small" width="medium">
+			<DBStack gap="medium">
+				<h2>News from Deutsche Bahn</h2>
+				<DBStack direction="row" className="column">
+					<DBCard className="data-card article" spacing="none" behavior="interactive">
+						<img
+							alt="Image of an regio train of Deutsche Bahn"
+							src="https://images.unsplash.com/photo-1584371577738-40b929ee5f13?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+						/>
+						<DBStack gap="small" className="article-content">
+							<h2>Article</h2>
+							<p>
+								Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+								tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+							</p>
+							<DBLink href="/xx">Link to article</DBLink>
+						</DBStack>
+					</DBCard>
+					<DBCard className="data-card article" spacing="none" behavior="interactive">
+						<img
+							alt="Image of berlin main station"
+							src="https://images.unsplash.com/photo-1570187453437-ffd1671232e9?q=80&w=2148&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+						/>
+						<DBStack gap="small" className="article-content">
+							<h2>Article</h2>
+							<p>
+								Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+								tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+							</p>
+							<DBLink href="#">Link to article</DBLink>
+						</DBStack>
+					</DBCard>
+					<DBCard className="data-card article" spacing="none" behavior="interactive">
+						<img
+							alt="Image of an inter city express of Deutsche Bahn"
+							src="https://images.unsplash.com/photo-1562078809-7ef447ae26c6?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+						/>
+						<DBStack gap="small" className="article-content">
+							<h2>Article</h2>
+							<p>
+								Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+								tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+							</p>
+							<DBLink href="#">Link to article</DBLink>
+						</DBStack>
+					</DBCard>
+				</DBStack>
+			</DBStack>
+		</DBSection>
 	</DemoShell>
 </DemoLayout>

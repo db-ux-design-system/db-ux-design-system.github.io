@@ -64,13 +64,6 @@ test.describe('Navigation Screenshots', () => {
 			await waitForDBShell(page);
 			await setScrollViewport(page);
 
-			const mask = await getMask(page, path);
-
-			await expect(page).toHaveScreenshot(`${path.replace(/\//g, '-')}.png`, {
-				mask,
-				timeout: 10_000,
-			});
-
 			const accessibilityScanResults = await new AxeBuilder({ page })
 				.disableRules(
 					// There is an a11y error inside DBShell implementation
@@ -85,6 +78,13 @@ test.describe('Navigation Screenshots', () => {
 				.analyze();
 
 			expect(accessibilityScanResults.violations).toEqual([]);
+
+			const mask = await getMask(page, path);
+
+			await expect(page).toHaveScreenshot(`${path.replace(/\//g, '-')}.png`, {
+				mask,
+				timeout: 10_000,
+			});
 		});
 	}
 });

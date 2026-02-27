@@ -30,7 +30,11 @@
 	block-size: auto;
 }
 
-.cta-card h3,
+.cta-card h2 {
+	font: var(--db-type-headline-md);
+}
+
+.cta-card h2,
 .cta-card p {
 	margin: 0;
 }

@@ -6,9 +6,9 @@ const DemoSubNavigation = () => {
 	const { colorMode, setColorMode } = useColorMode();
 
 	return (
-		<DBShellSubNavigation>
+		<DBShellSubNavigation role="complementary">
 			<DBStack direction="row" justifyContent="space-between" alignment="center">
-				<h1 data-headline-size="3xs">Analytics</h1>
+				<b>Analytics</b>
 				<DBStack direction="row" gap="small" alignment="center">
 					<DBButton
 						variant="ghost"
