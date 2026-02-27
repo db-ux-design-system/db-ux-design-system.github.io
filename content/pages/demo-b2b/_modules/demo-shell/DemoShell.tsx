@@ -36,7 +36,7 @@ function DemoShellContent({ children }: PropsWithChildren): ReactElement {
 			fadeIn
 			controlPanelDesktopPosition="left"
 			subNavigationDesktopPosition="top"
-			subNavigation={<DemoSubNavigation></DemoSubNavigation>}
+			subNavigation={<DemoSubNavigation/>}
 			controlPanelDesktop={
 				<DBControlPanelDesktop brand={<DemoBrand />} secondaryActions={<DemoSecondaryActions />}>
 					<DemoNavigation />

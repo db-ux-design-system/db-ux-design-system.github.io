@@ -30,7 +30,7 @@ const { teasers } = Astro.props;
 							style="cursor: pointer;"
 						>
 							<div class="teaser-content">
-								<h6>{teaser.title}</h6>
+								<h2>{teaser.title}</h2>
 								<p>{teaser.description}</p>
 							</div>
 							{Component && (
@@ -49,7 +49,7 @@ const { teasers } = Astro.props;
 						<a href={teaser.url}>
 							<!-- TODO: The anchor should wrap DBCard instead -->
 							<div class="teaser-content">
-								<h6>{teaser.title}</h6>
+								<h2>{teaser.title}</h2>
 								<p>{teaser.description}</p>
 							</div>
 							{Component && (
