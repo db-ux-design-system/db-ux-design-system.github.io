@@ -64,8 +64,8 @@ importers:
         specifier: 3.1.1
         version: 3.1.1
       '@db-ux/react-core-components':
-        specifier: 3.0.2-shell4-bdb351c
-        version: 3.0.2-shell4-bdb351c
+        specifier: 4.5.0
+        version: 4.5.0
       '@double-great/stylelint-a11y':
         specifier: 3.4.3
         version: 3.4.3(stylelint@17.4.0(typescript@5.9.2))
@@ -334,6 +334,9 @@ packages:
   '@db-ux/core-components@3.0.2-shell4-bdb351c':
     resolution: {integrity: sha512-5497N5czPXvmyLp647Tpko8J43QuVoNPC/2uLkG92GgRiMu4GoylI+g3yldO7Mz9zJ5yc5fxhw/cKsAHdDP6xA==}
 
+  '@db-ux/core-components@4.5.0':
+    resolution: {integrity: sha512-irNw2YL66PHmCvhAS57oC8w5axUEe5iDyP4GDIizcxrqbA3ECx0ZrdY/51I9c/lx8nKmjbgu1s0omeNsut+1Iw==}
+
   '@db-ux/core-eslint-plugin@4.5.0':
     resolution: {integrity: sha512-9N1j2wBEvsDCK0ILC01JX2AzWfB4SUAYerGZS7Y0H/+m48A2hErJJr6sQIJIM98C5qZ7s9TMq2Hbn+n8t9jqJg==}
     peerDependencies:
@@ -341,6 +344,9 @@ packages:
 
   '@db-ux/core-foundations@3.0.2-shell4-bdb351c':
     resolution: {integrity: sha512-PmsChmJ5JLw48YOtmhPsM1pMmq9kQB5DidOCk9UQFyJ2DdrOuoL+ptYalw7YcNPOT7CTU+K0AiIA83VDEXJYuQ==}
+
+  '@db-ux/core-foundations@4.5.0':
+    resolution: {integrity: sha512-i7gMZRlZfIfKjpwCiyRzopoJSR5db3oJiE4R08YkA4EOG22THmFXOxgWUhk9p+V+FVutLFCjAonnJtXtV7hs9Q==}
 
   '@db-ux/core-stylelint@4.5.0':
     resolution: {integrity: sha512-K0bjJnQ91cLRNkBlaPFOOSlRT008gk0l0S++behnI4/u71N6uAxNqM4ywZqYV3xFj+3ptBEGxrL0/plvezJZeQ==}
@@ -359,8 +365,8 @@ packages:
   '@db-ux/db-theme@5.4.2':
     resolution: {integrity: sha512-OdxCemY20836sIz/SgI0iOfxjjXKOzLS/cBI2Dhvy30KS0n9T8GSGHU8C05tBit0cY6nmq4x/V/B8UqeZXFIow==}
 
-  '@db-ux/react-core-components@3.0.2-shell4-bdb351c':
-    resolution: {integrity: sha512-H4kka+9J9OFGXIPZa68jXxD7G9OT3EV7grRccWTM/ZXHYm/qNvPqjSJB3Bm6XWV3+cLR7cvgPTKj/g/PC+jRqQ==}
+  '@db-ux/react-core-components@4.5.0':
+    resolution: {integrity: sha512-NzcJsKG6mn3iyUlDxIdyggSxW3lU1Q9Q5ZTAr5H+hY6SVGyGr96eggVjBhWVJZM0ISDImqAhN+AhjdWN0jEFuA==}
 
   '@double-great/stylelint-a11y@3.4.3':
     resolution: {integrity: sha512-AhAMyxl/w/wQvKdY1jdWDkF8BEgt6DKEZNGNyecJnKzY/MEq9iA1o63qwPtPTPHFN1jQjp5Vnq0fySxlfFw3fA==}
@@ -3555,6 +3561,10 @@ snapshots:
     dependencies:
       '@db-ux/core-foundations': 3.0.2-shell4-bdb351c
 
+  '@db-ux/core-components@4.5.0':
+    dependencies:
+      '@db-ux/core-foundations': 4.5.0
+
   '@db-ux/core-eslint-plugin@4.5.0(eslint@10.0.2)(typescript@5.9.2)':
     dependencies:
       '@angular-eslint/utils': 20.7.0(@typescript-eslint/utils@8.54.0(eslint@10.0.2)(typescript@5.9.2))(eslint@10.0.2)(typescript@5.9.2)
@@ -3565,6 +3575,8 @@ snapshots:
       - typescript
 
   '@db-ux/core-foundations@3.0.2-shell4-bdb351c': {}
+
+  '@db-ux/core-foundations@4.5.0': {}
 
   '@db-ux/core-stylelint@4.5.0(stylelint@17.4.0(typescript@5.9.2))':
     dependencies:
@@ -3582,10 +3594,10 @@ snapshots:
       '@db-ux/db-theme-icons': 3.6.0
       '@db-ux/db-theme-illustrative-icons': 3.1.1
 
-  '@db-ux/react-core-components@3.0.2-shell4-bdb351c':
+  '@db-ux/react-core-components@4.5.0':
     dependencies:
-      '@db-ux/core-components': 3.0.2-shell4-bdb351c
-      '@db-ux/core-foundations': 3.0.2-shell4-bdb351c
+      '@db-ux/core-components': 4.5.0
+      '@db-ux/core-foundations': 4.5.0
 
   '@double-great/stylelint-a11y@3.4.3(stylelint@17.4.0(typescript@5.9.2))':
     dependencies:
