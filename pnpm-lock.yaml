@@ -34,8 +34,8 @@ importers:
         specifier: 3.7.0
         version: 3.7.0
       '@db-ux/agent-cli':
-        specifier: 4.4.0
-        version: 4.4.0
+        specifier: 4.5.0
+        version: 4.5.0
       '@db-ux/core-components':
         specifier: 3.0.2-shell4-bdb351c
         version: 3.0.2-shell4-bdb351c
@@ -313,8 +313,8 @@ packages:
     peerDependencies:
       postcss-selector-parser: ^7.1.1
 
-  '@db-ux/agent-cli@4.4.0':
-    resolution: {integrity: sha512-YOdzq7QxsudhsbFKGnN12S3/J/h5cYSyT8Azvxuso+yDBppbQV3+UgHGH+Z+yVQbT5MFEQnFw+ecT3rr2idkPA==}
+  '@db-ux/agent-cli@4.5.0':
+    resolution: {integrity: sha512-LgMWjXh7qzPGfYZXQO+kr8pn8UuRRDGUJsClME23RZnZNLAQ82iAWttC4cu30YZ2vlhCLhdoiIRJgI2ZzFEgTw==}
     hasBin: true
 
   '@db-ux/core-components@3.0.2-shell4-bdb351c':
@@ -1407,8 +1407,8 @@ packages:
     resolution: {integrity: sha512-yPVavfyCcRhmorC7rWlkHn15b4wDVgVmBA7kV4QVBsF7kv/9TKJAbAXVTxvTnwP8HHKjRCJDClKbciiYS7p0DQ==}
     engines: {node: '>=16'}
 
-  commander@14.0.2:
-    resolution: {integrity: sha512-TywoWNNRbhoD0BXs1P3ZEScW8W5iKrnbithIl0YH+uCmBd0QpPOA8yc82DS3BIE5Ma6FnBVUsJ7wVUDz4dvOWQ==}
+  commander@14.0.3:
+    resolution: {integrity: sha512-H+y0Jo/T1RZ9qPP4Eh1pkcQcLRglraJaSLoyOtHxu6AapkjWVCy2Sit1QQ4x3Dng8qDlSsZEet7g5Pq06MvTgw==}
     engines: {node: '>=20'}
 
   common-ancestor-path@1.0.1:
@@ -3504,9 +3504,9 @@ snapshots:
     dependencies:
       postcss-selector-parser: 7.1.1
 
-  '@db-ux/agent-cli@4.4.0':
+  '@db-ux/agent-cli@4.5.0':
     dependencies:
-      commander: 14.0.2
+      commander: 14.0.3
 
   '@db-ux/core-components@3.0.2-shell4-bdb351c':
     dependencies:
@@ -4599,7 +4599,7 @@ snapshots:
 
   commander@11.1.0: {}
 
-  commander@14.0.2: {}
+  commander@14.0.3: {}
 
   common-ancestor-path@1.0.1: {}
 
