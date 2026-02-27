@@ -8,7 +8,13 @@ const DemoBrand = () => {
 		<DBControlPanelBrand>
 			<a href="#">
 				<DBStack direction="row" alignment="center" gap="x-small">
-					{logoSvg && <img src={logoSvg} alt={logo} style={{ height: 'var(--db-sizing-sm)' }} />}
+					{logoSvg && (
+						<img
+							src={logoSvg}
+							alt={`Image of ${logo} logo`}
+							style={{ height: 'var(--db-sizing-sm)' }}
+						/>
+					)}
 					{logo}
 				</DBStack>
 			</a>

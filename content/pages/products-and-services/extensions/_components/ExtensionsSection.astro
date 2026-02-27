@@ -15,6 +15,8 @@ import { DisabledWrapper, TextImage } from '@components';
 			<a
 				href={`https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/Reisendeninformation/UX-Standards`}
 				aria-label="Open Foundations page"
+				target="_blank"
+				referrerpolicy="no-referrer"
 			>
 				<DBCard behavior="interactive" spacing="large">
 					<TextImage
@@ -32,6 +34,8 @@ import { DisabledWrapper, TextImage } from '@components';
 			<a
 				href={`https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/db-ux-design-system/extensions/dataviz`}
 				aria-label="Open Components page"
+				target="_blank"
+				referrerpolicy="no-referrer"
 			>
 				<DBCard behavior="interactive" spacing="large">
 					<TextImage
@@ -49,42 +53,32 @@ import { DisabledWrapper, TextImage } from '@components';
 		</DBStack>
 		<DBStack gap="large" direction="row">
 			<DisabledWrapper label="Coming Soon" size="medium">
-				<a
-					href={`${appConfig.basePath}products-and-services/foundations`}
-					aria-label="Open Foundations page"
-				>
-					<DBCard behavior="interactive" spacing="large">
-						<TextImage
-							title="Table Extension"
-							imagePosition="bottom"
-							imageSrc={`${appConfig.basePath}assets/extensions/Table--Lightmode--C.png`}
-							imageSrcDark={`${appConfig.basePath}assets/extensions/Table--Darkmode--C.png`}
-							imageAlt="Table Extension Visual"
-							mask="fade-bottom-right"
-						>
-							Display large datasets in a consistent format.
-						</TextImage>
-					</DBCard>
-				</a>
+				<DBCard spacing="large">
+					<TextImage
+						title="Table Extension"
+						imagePosition="bottom"
+						imageSrc={`${appConfig.basePath}assets/extensions/Table--Lightmode--C.png`}
+						imageSrcDark={`${appConfig.basePath}assets/extensions/Table--Darkmode--C.png`}
+						imageAlt="Table Extension Visual"
+						mask="fade-bottom-right"
+					>
+						Display large datasets in a consistent format.
+					</TextImage>
+				</DBCard>
 			</DisabledWrapper>
 			<DisabledWrapper label="Coming Soon" size="medium">
-				<a
-					href={`${appConfig.basePath}products-and-services/components`}
-					aria-label="Open Components page"
-				>
-					<DBCard behavior="interactive" spacing="large">
-						<TextImage
-							title="Content Extension"
-							imagePosition="bottom"
-							imageSrc={`${appConfig.basePath}assets/extensions/Content--Lightmode--C.png`}
-							imageSrcDark={`${appConfig.basePath}assets/extensions/Content--Darkmode--C.png`}
-							imageAlt="Content Extension Visual"
-							mask="fade-bottom-right"
-						>
-							Support consistent communication across channels.
-						</TextImage>
-					</DBCard>
-				</a>
+				<DBCard spacing="large">
+					<TextImage
+						title="Content Extension"
+						imagePosition="bottom"
+						imageSrc={`${appConfig.basePath}assets/extensions/Content--Lightmode--C.png`}
+						imageSrcDark={`${appConfig.basePath}assets/extensions/Content--Darkmode--C.png`}
+						imageAlt="Content Extension Visual"
+						mask="fade-bottom-right"
+					>
+						Support consistent communication across channels.
+					</TextImage>
+				</DBCard>
 			</DisabledWrapper>
 		</DBStack>
 	</DBStack>

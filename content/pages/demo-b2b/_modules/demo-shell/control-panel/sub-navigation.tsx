@@ -6,7 +6,7 @@ const DemoSubNavigation = () => {
 	const { colorMode, setColorMode } = useColorMode();
 
 	return (
-		<DBShellSubNavigation>
+		<DBShellSubNavigation role="complementary">
 			<DBStack direction="row" justifyContent="space-between" alignment="center">
 				<b>Analytics</b>
 				<DBStack direction="row" gap="small" alignment="center">
@@ -24,7 +24,8 @@ const DemoSubNavigation = () => {
 						}}
 						type="button"
 					>
-						<DBTooltip>Describe action</DBTooltip>
+						Switch color scheme (light/dark)
+						<DBTooltip>Switch color scheme (light/dark)</DBTooltip>
 					</DBButton>
 					<ThemeSwitch />
 					<DBButton variant="brand" type="submit">
