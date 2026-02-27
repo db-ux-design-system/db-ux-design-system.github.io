@@ -1,6 +1,6 @@
 export const appConfig: AppConfig = {
 	title: 'Design System',
-	hostname: 'https://db-ux-design-system.github.io',
+	hostname: 'https://design-system.deutschebahn.com',
 	basePath: '/',
 	sitemapBlacklist: [],
 	language: 'en',

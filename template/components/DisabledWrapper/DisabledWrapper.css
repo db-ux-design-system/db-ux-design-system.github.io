@@ -4,10 +4,9 @@
 	display: block;
 }
 
-/* Content wrapper: styles applied via data-disabled selector below */
-.disabled-wrapper[data-disabled='true'] .disabled-wrapper-content {
-	opacity: 0.4;
-	pointer-events: none;
+/* Content wrapper: styles applied via aria-disabled selector below */
+.disabled-wrapper[aria-disabled='true'] .disabled-wrapper-content {
+	opacity: var(--db-opacity-md);
 }
 
 .disabled-wrapper-overlay {

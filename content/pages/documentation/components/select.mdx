@@ -40,34 +40,7 @@ Experiment with the Select component and its properties.
 
 ## Resources
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
-		},
-		{
-			title: 'Vue',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
-		},
-		{
-			title: 'Angular',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg',
-		},
-		{
-			title: 'Web C.',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbselect-density--docs" />
 
 </DBSection>
 
@@ -93,7 +66,7 @@ Configure the select through its properties, such as options, disabled, and labe
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-###### Use Select for single-choice, predefined options
+### Use Select for single-choice, predefined options
 
 Use Select when the user must choose exactly one option from a list. If users need to choose multiple options, use Checkbox or a multi-select pattern. If users benefit from seeing all options, consider Radio.
 
@@ -116,7 +89,7 @@ Use Select when the user must choose exactly one option from a list. If users ne
 	/>
 </div>
 
-###### Keep dropdown options clear and manageable
+### Keep dropdown options clear and manageable
 
 Options must be easy to scan and understand. Use concise labels, consistent capitalization, and avoid duplicates. If the list becomes long or needs search, use an Autocomplete pattern instead.
 
@@ -139,7 +112,7 @@ Options must be easy to scan and understand. Use concise labels, consistent capi
 	/>
 </div>
 
-###### Always provide a visible label
+### Always provide a visible label
 
 Every Select needs a clear label describing what the choice controls. Do not rely on placeholder text as a label, because it can be misunderstood and may not be available to all users.
 
@@ -162,7 +135,7 @@ Every Select needs a clear label describing what the choice controls. Do not rel
 	/>
 </div>
 
-###### Handle empty, default, and disabled states intentionally
+### Handle empty, default, and disabled states intentionally
 
 Define whether a default is appropriate. If selection is required, make the empty state explicit (e.g., "Choose an option") and validate appropriately. Disable the control only when it cannot be used, and explain why if needed.
 
@@ -185,7 +158,7 @@ Define whether a default is appropriate. If selection is required, make the empt
 	/>
 </div>
 
-###### Width and alignment must follow the layout grid
+### Width and alignment must follow the layout grid
 
 Select should align with surrounding inputs and respect container widths. Avoid arbitrary widths that break form rhythm; keep the dropdown aligned to the field.
 
@@ -208,7 +181,7 @@ Select should align with surrounding inputs and respect container widths. Avoid 
 	/>
 </div>
 
-###### Helper text, validation, and accessibility
+### Helper text, validation, and accessibility
 
 Use helper text to prevent mistakes (format, constraints). Use validation to explain what's wrong and how to fix it. Ensure the Select has an accessible name; if the visible label is hidden, provide screenreader label text and expose required/invalid state.
 

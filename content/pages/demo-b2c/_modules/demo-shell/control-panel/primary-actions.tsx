@@ -28,7 +28,8 @@ const DemoPrimaryActions = () => {
 				}}
 				type="button"
 			>
-				<DBTooltip>Describe action</DBTooltip>
+				Switch color scheme (light/dark)
+				<DBTooltip>Switch color scheme (light/dark)</DBTooltip>
 			</DBButton>
 			<DBSelect
 				value={themeName}
@@ -47,7 +48,8 @@ const DemoPrimaryActions = () => {
 				<option value="neutral">Neutral</option>
 			</DBSelect>
 			<DBButton variant="ghost" iconLeading="magnifying_glass" noText type="submit">
-				<DBTooltip>Describe action</DBTooltip>
+				Search
+				<DBTooltip>Search</DBTooltip>
 			</DBButton>
 		</DBControlPanelPrimaryActions>
 	);

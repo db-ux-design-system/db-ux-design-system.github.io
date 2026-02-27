@@ -3,13 +3,16 @@ import { DBControlPanelSecondaryActions, DBButton, DBTooltip } from '@db-ux/reac
 const DemoSecondaryActions = () => (
 	<DBControlPanelSecondaryActions>
 		<DBButton variant="ghost" iconLeading="magnifying_glass" noText type="button">
-			<DBTooltip>Describe action</DBTooltip>
+			Search
+			<DBTooltip>Search</DBTooltip>
 		</DBButton>
 		<DBButton variant="ghost" iconLeading="question_mark_circle" noText type="button">
-			<DBTooltip>Describe action</DBTooltip>
+			Help
+			<DBTooltip>Help</DBTooltip>
 		</DBButton>
 		<DBButton variant="ghost" iconLeading="wrench" noText type="button">
-			<DBTooltip>Describe action</DBTooltip>
+			Settings
+			<DBTooltip>Settings</DBTooltip>
 		</DBButton>
 	</DBControlPanelSecondaryActions>
 );

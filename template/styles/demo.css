@@ -30,7 +30,11 @@
 	block-size: auto;
 }
 
-.cta-card h3,
+.cta-card h2 {
+	font: var(--db-type-headline-md);
+}
+
+.cta-card h2,
 .cta-card p {
 	margin: 0;
 }
@@ -99,4 +103,9 @@ table thead {
 
 table tbody tr:nth-child(2n) {
 	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}
+
+h2 {
+	margin: 0;
+	font: var(--db-type-headline-3xs);
 }
