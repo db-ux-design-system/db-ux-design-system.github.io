@@ -8,6 +8,7 @@ import { filterSitemapBlacklist } from './template/integrations/sitemap';
 import orama from '@orama/plugin-astro';
 
 import { viteStaticCopy } from 'vite-plugin-static-copy';
+import pngToWebpIntegration from './astro-integration-png-to-webp.mjs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -25,6 +26,7 @@ export default defineConfig({
 				language: 'english',
 			},
 		}),
+		pngToWebpIntegration(),
 	],
 	srcDir: './content',
 	outDir: './public',
