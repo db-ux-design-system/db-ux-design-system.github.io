@@ -1,0 +1,44 @@
+---
+import { iconNames } from './icon-data.ts';
+import { DBButton } from '@db-ux/react-core-components';
+import './IconGalleryInteractive.css';
+---
+
+<div class="icon-gallery">
+	{
+		iconNames.map((icon) => (
+			<DBButton
+				iconLeading={icon}
+				noText
+				variant="filled"
+				data-icon-name={icon}
+				title={`Copy ${icon}`}
+			/>
+		))
+	}
+</div>
+
+<script>
+	const buttons = document.querySelectorAll('.icon-gallery .db-button');
+	console.log('Found buttons:', buttons.length);
+
+	buttons.forEach((button) => {
+		button.addEventListener('click', async () => {
+			console.log('Button clicked');
+			const iconName = button.getAttribute('data-icon-name');
+			console.log('Icon name:', iconName);
+			if (!iconName) return;
+
+			try {
+				await navigator.clipboard.writeText(iconName);
+				console.log('Copied:', iconName);
+				button.setAttribute('title', 'Icon name copied');
+				setTimeout(() => {
+					button.setAttribute('title', `Copy ${iconName}`);
+				}, 2000);
+			} catch (err) {
+				console.error('Copy failed:', err);
+			}
+		});
+	});
+</script>
