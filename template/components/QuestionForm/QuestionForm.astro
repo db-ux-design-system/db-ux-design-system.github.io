@@ -12,10 +12,14 @@ const subject = componentName
 	: 'Question about DB UX Design System';
 ---
 
-<form class="question-form" data-subject={subject} onsubmit="event.preventDefault(); var subject = this.dataset.subject || 'Question about DB UX Design System'; var body = this.querySelector('textarea').value; window.location.href = 'mailto:db-ux-designsystem@deutschebahn.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body); return false;">
+<form
+	class="question-form"
+	data-subject={subject}
+	onsubmit="event.preventDefault(); var subject = this.dataset.subject || 'Question about DB UX Design System'; var body = this.querySelector('textarea').value; window.location.href = 'mailto:db-ux-designsystem@deutschebahn.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body); return false;"
+>
 	<div class="db-textarea">
 		<label for="question" class="db-label">Your question</label>
-		<textarea id="question" required rows="5" class="db-textarea__input"></textarea>
+		<textarea id="question" required rows="5" class="db-textarea-input"></textarea>
 	</div>
 
 	<button type="submit" class="db-button" data-variant="filled">

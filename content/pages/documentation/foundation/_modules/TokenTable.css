@@ -11,6 +11,7 @@
 
 .token-table .db-accordion-item {
 	--db-accordion-item-content-padding: 0;
+
 	width: 100%;
 	max-width: 100%;
 }
@@ -25,7 +26,7 @@
 	overflow-x: auto;
 	width: 100%;
 	max-width: 100%;
-	border-top: 1px solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-top: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
 }
 
 .token-table table {
@@ -40,7 +41,7 @@
 	padding: var(--db-spacing-fixed-md) var(--db-spacing-fixed-sm);
 	font: var(--db-type-body-sm);
 	vertical-align: middle;
-	border: 1px solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
 }
 
 .token-table table thead tr th {
@@ -48,7 +49,6 @@
 	font: var(--db-type-headline-3xs);
 	background-color: var(--db-adaptive-bg-basic-level-1-default);
 	hyphens: auto;
-	-webkit-hyphens: auto;
 	word-break: normal;
 }
 
@@ -74,8 +74,9 @@
 	color: var(--db-adaptive-on-bg-basic-emphasis-70-default);
 	font-size: 14px;
 }
-.token-cell [data-icon-trailing]:after {
-	margin-inline-start: 0px;
+
+.token-cell [data-icon-trailing]::after {
+	margin-inline-start: 0;
 }
 
 .token-table tbody tr {
@@ -110,7 +111,7 @@ table tbody tr:nth-child(2n) {
 	display: block;
 	width: 100%;
 	height: var(--db-sizing-md);
-	border: 1px solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
 	border-radius: var(--db-border-radius-xs);
 }
 
@@ -128,7 +129,7 @@ table tbody tr:nth-child(2n) {
 	display: inline-block;
 	width: var(--db-sizing-sm);
 	height: var(--db-sizing-sm);
-	border: 1px solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
 	border-radius: var(--db-border-radius-xs);
 }
 
