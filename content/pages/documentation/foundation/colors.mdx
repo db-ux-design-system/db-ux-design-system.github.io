@@ -12,6 +12,8 @@ import { DBSection, DBStack } from '@db-ux/react-core-components';
 import ColorTable from './_modules/ColorTable.astro';
 import ColorPlayground from './_modules/ColorPlayground.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 
 Colors play a central role in the design of user interfaces. They can reinforce messages and help communicate meanings, as well as enable targeted user guidance.
 
@@ -28,15 +30,9 @@ Colors play a central role in the design of user interfaces. They can reinforce 
 
 <DBSection spacing="small" width="auto">
 
-## Tokens
-
-<ColorTable />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
 
 ###### Background & On-Background
 
@@ -73,5 +69,17 @@ Use adaptive tokens by default. Due to the identical structure of the individual
 		description="Elements with adaptive color tokens change color to match the context. Explicit colors remain unchanged."
 	/>
 </div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Tokens
+
+<ColorTable />
 
 </DBSection>

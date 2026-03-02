@@ -12,6 +12,8 @@ import { DBSection, DBStack } from '@db-ux/react-core-components';
 import SpacingTable from './_modules/SpacingTable.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import SpacingPlayground from './_modules/SpacingPlayground.astro';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 
 Spacing is a key element of our design system and defines the gaps between different components. Consistent use of spacing ensures a harmonious, clear, and user-friendly appearance.
 
@@ -27,15 +29,9 @@ Spacing is a key element of our design system and defines the gaps between diffe
 
 <DBSection spacing="small" width="auto">
 
-## Tokens
-
-<SpacingTable />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
 
 ###### Fixed Spacing
 
@@ -58,5 +54,17 @@ Responsive spacings are gaps that automatically adapt to the size of the device 
 		fullWidth={true}
 	/>
 </div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Tokens
+
+<SpacingTable />
 
 </DBSection>
