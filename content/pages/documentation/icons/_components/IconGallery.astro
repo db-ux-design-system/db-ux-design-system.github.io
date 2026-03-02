@@ -1,44 +1,35 @@
 ---
 import { iconNames } from './icon-data.ts';
-import { DBButton } from '@db-ux/react-core-components';
 import './IconGalleryInteractive.css';
 ---
 
-<div class="icon-gallery">
+<div class="db-input icon-search" data-variant="floating">
+	<label for="icon-search-input">Search Icons</label>
+	<input
+		id="icon-search-input"
+		aria-invalid="false"
+		type="search"
+		placeholder=""
+		oninput="const query = this.value.toLowerCase(); document.querySelectorAll('.icon-item').forEach(item => { const name = item.getAttribute('data-icon-name').toLowerCase(); item.style.display = name.includes(query) ? '' : 'none'; });"
+	/>
+</div>
+
+<div class="icon-gallery" id="icon-gallery">
 	{
 		iconNames.map((icon) => (
-			<DBButton
-				iconLeading={icon}
-				noText
-				variant="filled"
+			<button
+				class="db-button icon-item"
+				data-variant="filled"
+				data-no-text="true"
+				data-icon={icon}
 				data-icon-name={icon}
+				onclick={`navigator.clipboard.writeText('${icon}'); document.getElementById('copy-drawer').classList.add('show'); document.getElementById('copy-drawer-text').textContent = '${icon}'; setTimeout(() => document.getElementById('copy-drawer').classList.remove('show'), 3000);`}
 				title={`Copy ${icon}`}
 			/>
 		))
 	}
 </div>
 
-<script>
-	const buttons = document.querySelectorAll('.icon-gallery .db-button');
-	console.log('Found buttons:', buttons.length);
-
-	buttons.forEach((button) => {
-		button.addEventListener('click', async () => {
-			console.log('Button clicked');
-			const iconName = button.getAttribute('data-icon-name');
-			console.log('Icon name:', iconName);
-			if (!iconName) return;
-
-			try {
-				await navigator.clipboard.writeText(iconName);
-				console.log('Copied:', iconName);
-				button.setAttribute('title', 'Icon name copied');
-				setTimeout(() => {
-					button.setAttribute('title', `Copy ${iconName}`);
-				}, 2000);
-			} catch (err) {
-				console.error('Copy failed:', err);
-			}
-		});
-	});
-</script>
+<div id="copy-drawer" class="db-notification copy-drawer" role="article" data-variant="overlay">
+	<header>Copied:</header><p id="copy-drawer-text"></p>
+</div>
