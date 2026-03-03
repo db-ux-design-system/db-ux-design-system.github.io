@@ -67,8 +67,8 @@ importers:
         specifier: 3.0.2-shell4-bdb351c
         version: 3.0.2-shell4-bdb351c
       '@double-great/stylelint-a11y':
-        specifier: 3.4.3
-        version: 3.4.3(stylelint@17.4.0(typescript@5.9.2))
+        specifier: 3.4.5
+        version: 3.4.5(stylelint@17.4.0(typescript@5.9.2))
       '@orama/orama':
         specifier: 3.1.18
         version: 3.1.18
@@ -365,8 +365,8 @@ packages:
   '@db-ux/react-core-components@3.0.2-shell4-bdb351c':
     resolution: {integrity: sha512-H4kka+9J9OFGXIPZa68jXxD7G9OT3EV7grRccWTM/ZXHYm/qNvPqjSJB3Bm6XWV3+cLR7cvgPTKj/g/PC+jRqQ==}
 
-  '@double-great/stylelint-a11y@3.4.3':
-    resolution: {integrity: sha512-AhAMyxl/w/wQvKdY1jdWDkF8BEgt6DKEZNGNyecJnKzY/MEq9iA1o63qwPtPTPHFN1jQjp5Vnq0fySxlfFw3fA==}
+  '@double-great/stylelint-a11y@3.4.5':
+    resolution: {integrity: sha512-oivVlVs0QGKnge4PokkMRsML1O2Ps11UvW7ykpsXQBUm4gfvrcgTAfhXnTbjHehnjRQ4vWKkWijarixjblbtJg==}
     engines: {node: '>=18.12.0'}
     peerDependencies:
       stylelint: '>=16.0.0'
@@ -2578,6 +2578,10 @@ packages:
     resolution: {integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==}
     engines: {node: ^10 || ^12 || >=14}
 
+  postcss@8.5.8:
+    resolution: {integrity: sha512-OW/rX8O/jXnm82Ey1k44pObPtdblfiuWnrd8X7GJ7emImCOstunGbXUpp7HdBrFQX6rJzn3sPT397Wp5aCwCHg==}
+    engines: {node: ^10 || ^12 || >=14}
+
   prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
@@ -3706,9 +3710,9 @@ snapshots:
       '@db-ux/core-components': 3.0.2-shell4-bdb351c
       '@db-ux/core-foundations': 3.0.2-shell4-bdb351c
 
-  '@double-great/stylelint-a11y@3.4.3(stylelint@17.4.0(typescript@5.9.2))':
+  '@double-great/stylelint-a11y@3.4.5(stylelint@17.4.0(typescript@5.9.2))':
     dependencies:
-      postcss: 8.5.6
+      postcss: 8.5.8
       stylelint: 17.4.0(typescript@5.9.2)
 
   '@emmetio/abbreviation@2.3.3':
@@ -6203,6 +6207,12 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
+  postcss@8.5.8:
+    dependencies:
+      nanoid: 3.3.11
+      picocolors: 1.1.1
+      source-map-js: 1.2.1
+
   prelude-ls@1.2.1: {}
 
   prettier-plugin-astro@0.14.1:
@@ -6841,7 +6851,7 @@ snapshots:
       esbuild: 0.25.12
       fdir: 6.5.0(picomatch@4.0.3)
       picomatch: 4.0.3
-      postcss: 8.5.6
+      postcss: 8.5.8
       rollup: 4.59.0
       tinyglobby: 0.2.15
     optionalDependencies:
