@@ -12,6 +12,7 @@ const frontmatter = {
 	headline: 'Icons',
 	title: 'Icons',
 	description: 'Browse and copy all available DB UX icons names for usage in code.',
+	align: 'start',
 };
 
 const iconNames = Object.keys(iconDescriptions);
@@ -31,7 +32,7 @@ const iconDescriptionsJson = JSON.stringify(iconDescriptions);
 	<div class="icon-gallery" id="icon-gallery">
 		{
 			iconNames.map((icon) => {
-			const iconName = icon.replace(/-/g, '_');
+				const iconName = icon.replace(/-/g, '_');
 				const tooltipId = `tooltip-${icon}`;
 				return (
 					<DBButton
@@ -110,7 +111,6 @@ const iconDescriptionsJson = JSON.stringify(iconDescriptions);
 					tooltip.textContent = originalText;
 				}, 2000);
 			}
-
 		});
 
 		searchInput.addEventListener('input', (e) => {
