@@ -40,8 +40,8 @@ importers:
         specifier: 4.5.0
         version: 4.5.0
       '@db-ux/core-components':
-        specifier: 3.0.2-shell4-bdb351c
-        version: 3.0.2-shell4-bdb351c
+        specifier: 4.5.2
+        version: 4.5.2
       '@db-ux/core-eslint-plugin':
         specifier: 4.5.0
         version: 4.5.0(eslint@10.0.2)(typescript@5.9.3)
@@ -337,6 +337,9 @@ packages:
   '@db-ux/core-components@3.0.2-shell4-bdb351c':
     resolution: {integrity: sha512-5497N5czPXvmyLp647Tpko8J43QuVoNPC/2uLkG92GgRiMu4GoylI+g3yldO7Mz9zJ5yc5fxhw/cKsAHdDP6xA==}
 
+  '@db-ux/core-components@4.5.2':
+    resolution: {integrity: sha512-c0PJWlmwRoZvw5uqWBL/4FyqDe5sNdiKbcRx/pQA7YOEAdp867qT13ZYuPZSZmZLdNUkPkttmmAi9UnLp+9gJA==}
+
   '@db-ux/core-eslint-plugin@4.5.0':
     resolution: {integrity: sha512-9N1j2wBEvsDCK0ILC01JX2AzWfB4SUAYerGZS7Y0H/+m48A2hErJJr6sQIJIM98C5qZ7s9TMq2Hbn+n8t9jqJg==}
     peerDependencies:
@@ -344,6 +347,9 @@ packages:
 
   '@db-ux/core-foundations@3.0.2-shell4-bdb351c':
     resolution: {integrity: sha512-PmsChmJ5JLw48YOtmhPsM1pMmq9kQB5DidOCk9UQFyJ2DdrOuoL+ptYalw7YcNPOT7CTU+K0AiIA83VDEXJYuQ==}
+
+  '@db-ux/core-foundations@4.5.2':
+    resolution: {integrity: sha512-0RR1OdRVE4qYUPa465HBsiUFHwHOewMQhHovMV0Kjti5n8dYkGvAYI+zJRlpjRr6Cc1a3KzDPKARUYdPC5aYJA==}
 
   '@db-ux/core-stylelint@4.5.0':
     resolution: {integrity: sha512-K0bjJnQ91cLRNkBlaPFOOSlRT008gk0l0S++behnI4/u71N6uAxNqM4ywZqYV3xFj+3ptBEGxrL0/plvezJZeQ==}
@@ -3678,6 +3684,10 @@ snapshots:
     dependencies:
       '@db-ux/core-foundations': 3.0.2-shell4-bdb351c
 
+  '@db-ux/core-components@4.5.2':
+    dependencies:
+      '@db-ux/core-foundations': 4.5.2
+
   '@db-ux/core-eslint-plugin@4.5.0(eslint@10.0.2)(typescript@5.9.3)':
     dependencies:
       '@angular-eslint/utils': 20.7.0(@typescript-eslint/utils@8.54.0(eslint@10.0.2)(typescript@5.9.3))(eslint@10.0.2)(typescript@5.9.3)
@@ -3688,6 +3698,8 @@ snapshots:
       - typescript
 
   '@db-ux/core-foundations@3.0.2-shell4-bdb351c': {}
+
+  '@db-ux/core-foundations@4.5.2': {}
 
   '@db-ux/core-stylelint@4.5.0(stylelint@17.4.0(typescript@5.9.3))':
     dependencies:
