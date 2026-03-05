@@ -1,0 +1,137 @@
+---
+order: 10
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Resources'
+headline: 'Resources'
+description: 'Get the most out of our Design System! We provide Figma libraries for designers and code packages for developers. Our resources simplify your workflow and ensure a consistent, smooth implementation.'
+align: start
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+
+<DBSection spacing='small' width="auto">
+
+## Core Foundation
+
+A library with the basic styles and tokens of the DB UX Design System.
+
+<br />
+
+<ResourceCards
+	resources={[
+		{
+			title: 'Figma Library',
+			description: 'Design tokens, colors, typography, and spacing.',
+			url: 'https://www.figma.com/design/HiaxnfH92ilbE4gfboFMA0/DB-UX-DS-v3---Core-Foundation---v4.5.1?node-id=543-682&p=f&t=Aaf8IF4jaCaVK7iz-0',
+			icon: '/assets/icons/figma.svg',
+			label: 'Open in Figma',
+		},
+		{
+			title: 'NPM Package',
+			description: 'CSS variables, SCSS mixins, and Tailwind config.',
+			url: 'https://www.npmjs.com/package/@db-ux/core-foundations',
+			icon: '/assets/icons/npm.svg',
+			label: 'View on NPM',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing='small' width="auto">
+
+## Core Components
+
+A library with the core components of the DB UX Design System.
+
+<br />
+
+<ResourceCards
+	resources={[
+		{
+			title: 'Figma Library',
+			description: 'All core components for design and prototyping.',
+			url: 'https://www.figma.com/design/mlJ6R0GkfR15a93KSlqXtB/DB-UX-DS-v3---Core-Components---v4.5.1?node-id=18920-4578&p=f&t=JQAdgjZbiWJ8AglT-0',
+			icon: '/assets/icons/figma.svg',
+			label: 'Open in Figma',
+		},
+		{
+			title: 'Web Components',
+			description: 'Framework-agnostic web components.',
+			url: 'https://www.npmjs.com/package/@db-ux/core-components',
+			icon: '/assets/icons/html5.svg',
+			label: 'View on NPM',
+		},
+		{
+			title: 'React',
+			description: 'React wrapper components.',
+			url: 'https://www.npmjs.com/package/@db-ux/react-core-components',
+			icon: '/assets/icons/react.svg',
+			label: 'View on NPM',
+		},
+		{
+			title: 'Angular',
+			description: 'Angular wrapper components.',
+			url: 'https://www.npmjs.com/package/@db-ux/ngx-core-components',
+			icon: '/assets/icons/angular.svg',
+			label: 'View on NPM',
+		},
+		{
+			title: 'Vue',
+			description: 'Vue wrapper components.',
+			url: 'https://www.npmjs.com/package/@db-ux/v-core-components',
+			icon: '/assets/icons/vue.svg',
+			label: 'View on NPM',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing='small' width="auto">
+
+## Core Lab
+
+A library with concepts for future content of the DB UX Design System.
+
+<br />
+
+<ResourceCards
+	resources={[
+		{
+			title: 'Figma Library',
+			description: 'Experimental components and patterns.',
+			url: 'https://www.figma.com/design/jS7unqZw51v07eYyXR6qP0/DB-UX-DS-v3---%F0%9F%A7%AA-Core-Lab---lab.0.4.2?node-id=3-24741&p=f&t=ldDLOlLcLADz0C8h-0',
+			icon: '/assets/icons/figma.svg',
+			label: 'Open in Figma',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing='small' width="auto">
+
+## Extension DataViz
+
+Chart components for data visualizations.
+
+<br />
+
+<ResourceCards
+	resources={[
+		{
+			title: 'Figma Library',
+			description: 'Chart components and data visualization patterns.',
+			url: 'https://www.figma.com/design/AemgPcGQ5uMX5bMek0K64i/DB-UX-DS-v3---Extension-DataViz--Beta----v0.1.0?node-id=3-246&p=f&t=MkA5Y2BVYeBPa6nO-0',
+			icon: '/assets/icons/figma.svg',
+			label: 'Open in Figma',
+		},
+	]}
+/>
+
+</DBSection>

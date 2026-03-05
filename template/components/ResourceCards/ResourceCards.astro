@@ -1,16 +1,25 @@
 ---
-import { DBCard } from '@db-ux/react-core-components';
+import { DBCard, DBLink } from '@db-ux/react-core-components';
 import './ResourceCards.css';
 
-interface Props {
-	path: string;
+interface Resource {
+	title: string;
+	description: string;
+	url: string;
+	icon?: string;
+	label?: string;
 }
 
-const { path } = Astro.props;
+interface Props {
+	path?: string;
+	resources?: Resource[];
+}
+
+const { path, resources: customResources } = Astro.props;
 
 const baseUrl = 'https://design-system.deutschebahn.com/core-web/review/main';
 
-const resources = [
+const defaultResources = [
 	{
 		title: 'React',
 		description: 'Interactive examples and documentation.',
@@ -36,13 +45,15 @@ const resources = [
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
 	},
 ];
+
+const resources = customResources || defaultResources;
 ---
 
 <div class="resource-cards">
 	{
 		resources.map((resource) => (
-			<a href={resource.url} target="_blank" rel="noopener noreferrer">
-				<DBCard behavior="interactive">
+			<DBLink href={resource.url} target="_blank" variant="inline">
+				<DBCard behavior="interactive" class="resource-card-item">
 					<img
 						src={resource.icon}
 						alt={`Image for ${resource.title}, ${resource.description}`}
@@ -53,9 +64,9 @@ const resources = [
 						<b>{resource.title}</b>
 						<p>{resource.description}</p>
 					</div>
-					<strong data-icon-trailing="arrow_up_right">View Storybook</strong>
+					<strong data-icon-trailing="arrow_up_right">{resource.label || 'View Storybook'}</strong>
 				</DBCard>
-			</a>
+			</DBLink>
 		))
 	}
 </div>
