@@ -1,0 +1,15 @@
+.icon-gallery {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(var(--db-sizing-lg), 1fr));
+	gap: var(--db-spacing-fixed-sm);
+	padding: var(--db-spacing-fixed-lg) 0;
+}
+
+.icon-search {
+	margin-bottom: var(--db-spacing-fixed-md);
+}
+
+.db-button.icon-item {
+	width: var(--db-sizing-lg);
+	height: var(--db-sizing-lg);
+}
