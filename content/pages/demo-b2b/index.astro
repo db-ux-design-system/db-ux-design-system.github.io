@@ -1,8 +1,4 @@
 ---
-const frontmatter = {
-	hidePage: true,
-};
-
 import '@db-ux/core-components/build/styles/rollup.css';
 import '@db-ux/db-theme/build/styles/rollup.css';
 import './index.css';
@@ -19,7 +15,7 @@ import {
 } from '@db-ux/react-core-components';
 ---
 
-<DemoLayout title="B2B Demo - DB UX Design System" frontmatter={frontmatter}>
+<DemoLayout title="B2B Demo - DB UX Design System">
 	<DemoShell client:only="react">
 		<h1>Analytics</h1>
 		<DBSection spacing="small">
