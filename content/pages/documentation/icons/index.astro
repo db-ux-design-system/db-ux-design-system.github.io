@@ -26,7 +26,7 @@ const iconDescriptionsJson = JSON.stringify(iconDescriptions);
 		variant="floating"
 		label="Search Icons"
 		type="search"
-		client:only="react"
+		client:load
 	/>
 
 	<div class="icon-gallery" id="icon-gallery">
@@ -42,7 +42,7 @@ const iconDescriptionsJson = JSON.stringify(iconDescriptions);
 						icon={iconName}
 						data-icon-name={iconName}
 						data-icon-key={icon}
-						client:only="react"
+						client:load
 						data-has-tooltip="true"
 					>
 						<DBTooltip id={tooltipId}>{iconName}</DBTooltip>
