@@ -1,0 +1,23 @@
+.release-note {
+	margin-bottom: var(--db-spacing-fixed-3xl);
+}
+
+.filter-tags {
+	display: flex;
+	gap: var(--db-spacing-fixed-sm);
+	margin-block-end: var(--db-spacing-fixed-xl);
+}
+
+.filter-tag {
+	padding: var(--db-spacing-fixed-xs) var(--db-spacing-fixed-md);
+	border: 1px solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	background: transparent;
+	cursor: pointer;
+	border-radius: var(--db-border-radius-sm);
+	text-transform: capitalize;
+}
+
+.filter-tag.active {
+	background: var(--db-adaptive-bg-basic-level-2-default);
+	border-color: var(--db-adaptive-on-bg-basic-emphasis-90-default);
+}

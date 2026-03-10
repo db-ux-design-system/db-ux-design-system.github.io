@@ -1,0 +1,65 @@
+---
+import DocumentationLayout from '@template/layouts/documentation';
+import { DBSection } from '@db-ux/react-core-components';
+import './index.css';
+
+const frontmatter = {
+	order: 1,
+	layout: '@template/layouts/documentation',
+	sectionSpacing: 'small',
+	sectionWidth: 'auto',
+	headline: 'Release Notes',
+	title: 'Release Notes',
+	description:
+		'Stay up to date with the latest changes, improvements, fixes, and new features across the design system.',
+	align: 'start' as const,
+	toc: true,
+};
+
+const releaseNotes = await Astro.glob('./content/*.md');
+releaseNotes.sort((a, b) => b.file.localeCompare(a.file));
+
+const categories = [...new Set(releaseNotes.map((note) => note.frontmatter.content))];
+---
+
+<DocumentationLayout frontmatter={frontmatter} headings={[]}>
+	<DBSection spacing="small" width="auto">
+		<div class="filter-tags" id="filter-tags">
+			<button class="filter-tag active" data-category="all">All</button>
+			{categories.map((cat) => <button class="filter-tag" data-category={cat}>{cat}</button>)}
+		</div>
+		{
+			releaseNotes.map((note) => (
+				<div class="release-note" data-category={note.frontmatter.content}>
+					<h6>
+						{note.frontmatter.content} – {note.frontmatter.version}
+					</h6>
+					<p>{note.frontmatter.date}</p>
+					<note.Content />
+				</div>
+			))
+		}
+	</DBSection>
+</DocumentationLayout>
+
+<script>
+	const filterTags = document.querySelectorAll('.filter-tag');
+	const releaseNotes = document.querySelectorAll('.release-note');
+
+	filterTags.forEach((tag) => {
+		tag.addEventListener('click', () => {
+			filterTags.forEach((t) => t.classList.remove('active'));
+			tag.classList.add('active');
+
+			const category = tag.getAttribute('data-category');
+
+			releaseNotes.forEach((note) => {
+				if (category === 'all' || note.getAttribute('data-category') === category) {
+					note.style.display = '';
+				} else {
+					note.style.display = 'none';
+				}
+			});
+		});
+	});
+</script>
