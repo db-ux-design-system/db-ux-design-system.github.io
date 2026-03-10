@@ -1,4 +1,5 @@
 ---
+hidePage: true
 content: 'Illustrative Icons'
 version: 'v3.0.0'
 date: '08. Dezember 2025'
