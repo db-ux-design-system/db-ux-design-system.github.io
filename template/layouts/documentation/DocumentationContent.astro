@@ -12,6 +12,8 @@ interface Props {
 		heroWidth?: 'auto' | 'full';
 		sectionSpacing?: 'none' | 'small' | 'medium' | 'large';
 		sectionWidth?: 'auto' | 'full';
+		status?: 'concept' | 'beta' | 'stable' | 'deprecated' | 'legacy';
+		align?: 'start' | 'center' | 'end';
 	};
 }
 
@@ -55,7 +57,7 @@ const toc = (headings?.length ?? 0) > 0 && frontmatter.toc === true;
 							frontmatter.status === 'concept'
 								? 'warning'
 								: frontmatter.status === 'beta'
-									? 'informational'
+									? 'informative'
 									: frontmatter.status === 'stable'
 										? 'successful'
 										: frontmatter.status === 'deprecated'

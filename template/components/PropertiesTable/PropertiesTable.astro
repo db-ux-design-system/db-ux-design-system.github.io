@@ -2,13 +2,28 @@
 import './PropertiesTable.css';
 
 interface Props {
-	config: any;
+	config: {
+		properties: Array<{
+			name: string;
+			alternativeName?: string;
+			type: string;
+			options?: Array<{ label: string; default?: boolean }>;
+			defaultValue?: any;
+			description: string;
+		}>;
+		slots?: Array<{ name: string; description: string }>;
+		events?: Array<{ name: string; type: string; description: string }>;
+	};
 }
 
 const { config } = Astro.props;
 
-function getPropertyValues(property) {
-	if (property.type === 'select') {
+function getPropertyValues(property: {
+	type: string;
+	options?: Array<{ label: string; default?: boolean }>;
+	defaultValue?: any;
+}) {
+	if (property.type === 'select' && property.options) {
 		const values = property.options.map((opt) => opt.label).join(', ');
 		const defaultOpt = property.options.find((opt) => opt.default);
 		return `(Default) ${defaultOpt?.label || property.defaultValue}, ${values.replace(defaultOpt?.label + ', ', '').replace(', ' + defaultOpt?.label, '')}`;

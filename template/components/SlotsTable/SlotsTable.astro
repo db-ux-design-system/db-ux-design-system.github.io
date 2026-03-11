@@ -1,6 +1,8 @@
 ---
 interface Props {
-	config: any;
+	config: {
+		slots?: Array<{ name: string; description: string }>;
+	};
 }
 
 const { config } = Astro.props;
@@ -16,7 +18,7 @@ const slots = config.slots || [];
 			</tr>
 		</thead>
 		<tbody>
-			{slots.map((slot) => (
+			{slots.map((slot: { name: string; description: string }) => (
 				<tr>
 					<td><code>{slot.name}</code></td>
 					<td>{slot.description}</td>

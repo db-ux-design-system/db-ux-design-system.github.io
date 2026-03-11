@@ -2,7 +2,23 @@
 import { DBAccordion, DBAccordionItem, DBTag, DBIcon } from '@db-ux/react-core-components';
 import './TokenTable.css';
 
-const typographyTokens = {
+type TypographyToken = {
+	token: string;
+	size?: { functional: string; regular: string; expressive: string };
+	lineHeight?: { functional: string; regular: string; expressive: string };
+	weight?: string;
+	value?: string;
+	name?: string;
+};
+
+type TypographyTokens = {
+	fontFamilies: Array<{ token: string; value: string; name: string }>;
+	headline: TypographyToken[];
+	body: TypographyToken[];
+	[key: string]: TypographyToken[];
+};
+
+const typographyTokens: TypographyTokens = {
 	fontFamilies: [
 		{ token: 'db-font-family-sans', value: '"OpenSans", helvetica, arial, sans-serif', name: 'Sans (Body)' },
 		{ token: 'db-font-family-head', value: '"OpenSans Head", helvetica, arial, sans-serif', name: 'Head (Headlines)' },
@@ -77,7 +93,7 @@ const categories = [
 						</thead>
 						<tbody>
 							{key === 'fontFamilies' ? (
-								typographyTokens[key].map(({ token, value, name }) => (
+								typographyTokens.fontFamilies.map(({ token, value, name }) => (
 									<tr
 										onclick={`const span = this.querySelector('.copy-text'); span.textContent='Copied'; setTimeout(() => span.textContent='Copy Token', 2000); navigator.clipboard.writeText('var(--${token})')`}
 									>
@@ -92,8 +108,8 @@ const categories = [
 										<td>{name}</td>
 									</tr>
 								))
-							) : (
-								typographyTokens[key].map(({ token, size, lineHeight, weight }) => (
+							) : key === 'headline' ? (
+								typographyTokens.headline.map(({ token, size, lineHeight, weight }) => (
 									<tr
 										onclick={`const span = this.querySelector('.copy-text'); span.textContent='Copied'; setTimeout(() => span.textContent='Copy Token', 2000); navigator.clipboard.writeText('var(--${token})')`}
 									>
@@ -104,12 +120,33 @@ const categories = [
 												<span data-icon-trailing="copy" data-icon-weight="16" />
 											</div>
 										</td>
-										<td>{size.functional}</td>
-										<td>{lineHeight.functional}</td>
-										<td>{size.regular}</td>
-										<td>{lineHeight.regular}</td>
-										<td>{size.expressive}</td>
-										<td>{lineHeight.expressive}</td>
+										<td>{size?.functional}</td>
+										<td>{lineHeight?.functional}</td>
+										<td>{size?.regular}</td>
+										<td>{lineHeight?.regular}</td>
+										<td>{size?.expressive}</td>
+										<td>{lineHeight?.expressive}</td>
+										<td>{weight}</td>
+									</tr>
+								))
+							) : (
+								typographyTokens.body.map(({ token, size, lineHeight, weight }) => (
+									<tr
+										onclick={`const span = this.querySelector('.copy-text'); span.textContent='Copied'; setTimeout(() => span.textContent='Copy Token', 2000); navigator.clipboard.writeText('var(--${token})')`}
+									>
+										<td>
+											<div class="token-cell">
+												<DBTag data-color="neutral">--{token}</DBTag>{' '}
+												<span class="copy-text">Copy Token</span>
+												<span data-icon-trailing="copy" data-icon-weight="16" />
+											</div>
+										</td>
+										<td>{size?.functional}</td>
+										<td>{lineHeight?.functional}</td>
+										<td>{size?.regular}</td>
+										<td>{lineHeight?.regular}</td>
+										<td>{size?.expressive}</td>
+										<td>{lineHeight?.expressive}</td>
 										<td>{weight}</td>
 									</tr>
 								))

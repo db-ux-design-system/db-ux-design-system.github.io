@@ -1,6 +1,8 @@
 ---
 interface Props {
-	config: any;
+	config: {
+		events?: Array<{ name: string; type: string; description: string }>;
+	};
 }
 
 const { config } = Astro.props;
@@ -17,7 +19,7 @@ const events = config.events || [];
 			</tr>
 		</thead>
 		<tbody>
-			{events.map((event) => (
+			{events.map((event: { name: string; type: string; description: string }) => (
 				<tr>
 					<td><code>{event.name}</code></td>
 					<td>{event.type}</td>

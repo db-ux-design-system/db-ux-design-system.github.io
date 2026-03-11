@@ -1,10 +1,20 @@
 import { DBDrawer } from '@db-ux/react-core-components';
 import { useState, useEffect } from 'react';
 
-export default function DrawerExample({ direction = 'right', backdrop = 'strong' }) {
+export default function DrawerExample({
+	direction = 'right',
+	backdrop = 'strong',
+}: {
+	direction?: 'left' | 'right' | 'up' | 'down' | 'custom';
+	backdrop?: 'none' | 'strong' | 'weak' | 'invisible';
+}) {
 	const [open, setOpen] = useState(true);
-	const [currentDirection, setCurrentDirection] = useState(direction);
-	const [currentBackdrop, setCurrentBackdrop] = useState(backdrop);
+	const [currentDirection, setCurrentDirection] = useState<
+		'left' | 'right' | 'up' | 'down' | 'custom'
+	>(direction);
+	const [currentBackdrop, setCurrentBackdrop] = useState<
+		'none' | 'strong' | 'weak' | 'invisible'
+	>(backdrop);
 
 	useEffect(() => {
 		const handleOpen = (e: CustomEvent) => setOpen(e.detail);

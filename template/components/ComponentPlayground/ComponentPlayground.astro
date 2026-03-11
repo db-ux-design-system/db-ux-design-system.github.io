@@ -11,7 +11,21 @@ import {
 	DBControlPanelPrimaryActions,
 } from '@db-ux/react-core-components';
 interface Props {
-	config: any;
+	config: {
+		elementId: string;
+		textElementId?: string;
+		defaultText?: string;
+		defaultProps: any;
+		useAriaDisabled?: boolean;
+		properties: Array<{
+			name: string;
+			type: string;
+			label: string;
+			defaultValue?: any;
+			showInPlayground?: boolean;
+			options?: Array<{ value: string; label: string; default?: boolean }>;
+		}>;
+	};
 	component: any;
 }
 
@@ -804,7 +818,7 @@ const dualCaseProps = {
 									<div class="db-select">
 										<label>{prop.label}</label>
 										<select onchange={updateAction}>
-											{prop.options.map((option) => (
+											{prop.options?.map((option) => (
 												<option value={option.value} selected={option.default}>
 													{option.label}
 												</option>

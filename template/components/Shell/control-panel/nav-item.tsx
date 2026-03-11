@@ -7,7 +7,7 @@ const getStatusBadge = (status?: string) => {
 
 	const config = {
 		concept: { semantic: 'warning', label: 'Concept' },
-		beta: { semantic: 'informational', label: 'Beta' },
+		beta: { semantic: 'informative', label: 'Beta' },
 		deprecated: { semantic: 'critical', label: 'Deprecated' },
 		legacy: { semantic: 'warning', label: 'Legacy' },
 	}[status];
@@ -30,7 +30,7 @@ const NavItem = ({
 	isSubNavigation,
 	disabled,
 	status,
-}: NavigationItem) => {
+}: NavigationItem & { status?: string }) => {
 	const isActive =
 		typeof window !== 'undefined' &&
 		covers(

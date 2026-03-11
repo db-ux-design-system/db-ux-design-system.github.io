@@ -2,8 +2,8 @@
 import DrawerExampleReact from './DrawerExample.tsx';
 
 interface Props {
-	direction?: string;
-	backdrop?: string;
+	direction?: 'left' | 'right' | 'up' | 'down' | 'custom';
+	backdrop?: 'none' | 'strong' | 'weak' | 'invisible';
 }
 
 const { direction = 'right', backdrop = 'strong' } = Astro.props;

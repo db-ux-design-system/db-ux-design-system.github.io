@@ -8,6 +8,17 @@ type NavigationFrontmatter = FrontMatter & {
 	status?: 'concept' | 'beta' | 'stable' | 'deprecated' | 'legacy';
 };
 
+type NavigationItemType = {
+	title?: string;
+	path?: string;
+	isSubNavigation?: boolean;
+	iconTrailing?: string;
+	children?: NavigationItemType[];
+	disabled?: boolean;
+	order?: number;
+	status?: 'concept' | 'beta' | 'stable' | 'deprecated' | 'legacy';
+};
+
 type MdModule = { frontmatter: NavigationFrontmatter };
 type Modules = Record<string, MdModule>;
 
@@ -42,7 +53,7 @@ function toTitleFromSegment(segment: string): string {
  * @param parent - The parent navigation item.
  * @param child - The child item to add if missing.
  */
-function ensureChild(parent: NavigationItem, child: NavigationItem) {
+function ensureChild(parent: NavigationItemType, child: NavigationItemType) {
 	parent.children = parent.children ?? [];
 	const exists = parent.children.find((c) => c.path === child.path);
 	if (!exists) parent.children.push(child);
@@ -66,7 +77,7 @@ function getOrder(fm: NavigationFrontmatter): number | undefined {
  * @param b - The second navigation item.
  * @returns -1, 0, or 1 depending on order.
  */
-function compareNav(a: NavigationItem, b: NavigationItem) {
+function compareNav(a: NavigationItemType, b: NavigationItemType) {
 	// Status priority: stable > beta > concept > legacy > deprecated
 	const statusPriority: Record<string, number> = {
 		stable: 1,
@@ -91,7 +102,7 @@ function compareNav(a: NavigationItem, b: NavigationItem) {
  *
  * @param node - Root or intermediate node of the navigation tree.
  */
-function sortTree(node: NavigationItem) {
+function sortTree(node: NavigationItemType) {
 	if (node.children?.length) {
 		node.children.sort(compareNav);
 		node.children.forEach(sortTree);
@@ -109,7 +120,7 @@ export function buildAppNavigationFromContent(): AppNavigation {
 	const mods = import.meta.glob<MdModule>('../../content/pages/**/*.{md,mdx}', {
 		eager: true,
 	}) as Modules;
-	const nodes = new Map<string, NavigationItem>();
+	const nodes = new Map<string, NavigationItemType>();
 
 	for (const [key, mod] of Object.entries(mods)) {
 		const rel = strip(key);
@@ -130,7 +141,7 @@ export function buildAppNavigationFromContent(): AppNavigation {
 		const order = isComponentPage ? undefined : getOrder(fm);
 		const status = fm.status;
 
-		const node: NavigationItem = {
+		const node: NavigationItemType = {
 			title,
 			path: hidePage ? undefined : rel,
 			isSubNavigation,
@@ -146,7 +157,7 @@ export function buildAppNavigationFromContent(): AppNavigation {
 		for (let i = 1; i < segments.length; i++) {
 			const parentKey = segments.slice(0, i).join('/');
 			if (!nodes.has(parentKey)) {
-				const parentNode: NavigationItem = {
+				const parentNode: NavigationItemType = {
 					title: toTitleFromSegment(segments[i - 1]),
 					path: parentKey,
 					children: [],
@@ -156,7 +167,7 @@ export function buildAppNavigationFromContent(): AppNavigation {
 		}
 	}
 
-	const roots: Record<string, NavigationItem> = {};
+	const roots: Record<string, NavigationItemType> = {};
 	for (const [rel, node] of nodes) {
 		const segments = rel.split('/').filter(Boolean);
 		if (segments.length <= 1) {
@@ -168,7 +179,7 @@ export function buildAppNavigationFromContent(): AppNavigation {
 		}
 	}
 
-	const appNav: AppNavigation = Object.values(roots).sort(compareNav);
+	const appNav = Object.values(roots).sort(compareNav) as NavigationItem[];
 	appNav.forEach(sortTree);
 
 	return appNav;
