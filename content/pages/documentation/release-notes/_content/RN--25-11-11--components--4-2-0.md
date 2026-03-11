@@ -7,4 +7,4 @@ date: '11. November 2025'
 
 **Features für Code:**
 
-- feat: Neue Header Property closeButtonText hinzugefügt
+- feat: Neue Header Property 'closeButtonText' hinzugefügt
