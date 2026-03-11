@@ -32,7 +32,7 @@ const densities = [
 			<label>Size</label>
 			<select
 				id="sizing-select"
-				onchange="const box = document.getElementById('sizing-box'); box.setAttribute('data-size', this.value); box.setAttribute('data-token', '--db-sizing-' + this.value);"
+				onchange="var box = document.getElementById('sizing-box'); box.setAttribute('data-size', this.value); box.setAttribute('data-token', '--db-sizing-' + this.value);"
 			>
 				{
 					sizes.map((size) => (
@@ -47,7 +47,7 @@ const densities = [
 			<label>Density</label>
 			<select
 				id="density-select"
-				onchange="const preview = document.getElementById('sizing-preview'); const box = document.getElementById('sizing-box'); preview.setAttribute('data-density', this.value); box.setAttribute('data-density', this.value);"
+				onchange="var preview = document.getElementById('sizing-preview'); const box = document.getElementById('sizing-box'); preview.setAttribute('data-density', this.value); box.setAttribute('data-density', this.value);"
 			>
 				{
 					densities.map((density) => (
@@ -68,8 +68,8 @@ const densities = [
 			data-density="regular"
 			data-element="Card"
 			data-token="--db-sizing-md"
-			onload="var content = document.getElementById('sizing-token-content'); const token = this.getAttribute('data-token'); const computedWidth = getComputedStyle(this).width; const computedHeight = getComputedStyle(this).height; const widthRem = (parseFloat(computedWidth) / 16).toFixed(3); const heightRem = (parseFloat(computedHeight) / 16).toFixed(3); const widthPx = Math.round(parseFloat(computedWidth)); const heightPx = Math.round(parseFloat(computedHeight)); content.innerHTML = '<h6>' + this.getAttribute('data-element') + '</h6><div>Width: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span> (' + widthRem + 'rem / ' + widthPx + 'px)</div><div>Height: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span> (' + heightRem + 'rem / ' + heightPx + 'px)</div>';"
-			onmouseenter="var content = document.getElementById('sizing-token-content'); const token = this.getAttribute('data-token'); const computedWidth = getComputedStyle(this).width; const computedHeight = getComputedStyle(this).height; const widthRem = (parseFloat(computedWidth) / 16).toFixed(3); const heightRem = (parseFloat(computedHeight) / 16).toFixed(3); const widthPx = Math.round(parseFloat(computedWidth)); const heightPx = Math.round(parseFloat(computedHeight)); content.innerHTML = '<h6>' + this.getAttribute('data-element') + '</h6><div>Width: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span> (' + widthRem + 'rem / ' + widthPx + 'px)</div><div>Height: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span> (' + heightRem + 'rem / ' + heightPx + 'px)</div>';"
+			onload="var content = document.getElementById('sizing-token-content'); var token = this.getAttribute('data-token'); const computedWidth = getComputedStyle(this).width; const computedHeight = getComputedStyle(this).height; const widthRem = (parseFloat(computedWidth) / 16).toFixed(3); const heightRem = (parseFloat(computedHeight) / 16).toFixed(3); const widthPx = Math.round(parseFloat(computedWidth)); const heightPx = Math.round(parseFloat(computedHeight)); content.innerHTML = '<h6>' + this.getAttribute('data-element') + '</h6><div>Width: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span> (' + widthRem + 'rem / ' + widthPx + 'px)</div><div>Height: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span> (' + heightRem + 'rem / ' + heightPx + 'px)</div>';"
+			onmouseenter="var content = document.getElementById('sizing-token-content'); var token = this.getAttribute('data-token'); const computedWidth = getComputedStyle(this).width; const computedHeight = getComputedStyle(this).height; const widthRem = (parseFloat(computedWidth) / 16).toFixed(3); const heightRem = (parseFloat(computedHeight) / 16).toFixed(3); const widthPx = Math.round(parseFloat(computedWidth)); const heightPx = Math.round(parseFloat(computedHeight)); content.innerHTML = '<h6>' + this.getAttribute('data-element') + '</h6><div>Width: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span> (' + widthRem + 'rem / ' + widthPx + 'px)</div><div>Height: <span class=&quot;db-tag&quot; data-color=&quot;neutral&quot; data-emphasis=&quot;weak&quot;>' + token + '</span> (' + heightRem + 'rem / ' + heightPx + 'px)</div>';"
 			onmouseleave="document.getElementById('sizing-token-content').textContent = 'Hover over the card to see the sizing token'"
 		>
 		</div>
