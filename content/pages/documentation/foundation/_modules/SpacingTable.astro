@@ -90,7 +90,7 @@ const categories = [
 						</thead>
 						<tbody>
 							{key === 'fixed' ? (
-								spacingTokens[key].map(({ token, regular, expressive, functional }) => (
+								spacingTokens.fixed.map(({ token, regular, expressive, functional }) => (
 									<tr
 										onclick={`const span = this.querySelector('.copy-text'); span.textContent='Copied'; setTimeout(() => span.textContent='Copy Token', 2000); navigator.clipboard.writeText('var(--${token})')`}
 									>
@@ -107,7 +107,7 @@ const categories = [
 									</tr>
 								))
 							) : (
-								spacingTokens[key].map(({ token, functional, regular, expressive }) => (
+								spacingTokens.responsive.map(({ token, functional, regular, expressive }) => (
 									<tr
 										onclick={`const span = this.querySelector('.copy-text'); span.textContent='Copied'; setTimeout(() => span.textContent='Copy Token', 2000); navigator.clipboard.writeText('var(--${token})')`}
 									>

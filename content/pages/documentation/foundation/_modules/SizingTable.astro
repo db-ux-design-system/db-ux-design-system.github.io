@@ -120,12 +120,12 @@ const categories = [
 									</td>
 									{showDensity ? (
 										<>
-											<td>{item.functional}</td>
-											<td>{item.regular}</td>
-											<td>{item.expressive}</td>
+											<td>{'functional' in item ? item.functional : ''}</td>
+											<td>{'regular' in item ? item.regular : ''}</td>
+											<td>{'expressive' in item ? item.expressive : ''}</td>
 										</>
 									) : (
-										<td>{item.value}</td>
+										<td>{'value' in item ? item.value : ''}</td>
 									)}
 								</tr>
 							))}
