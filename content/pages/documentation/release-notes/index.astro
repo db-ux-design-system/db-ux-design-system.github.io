@@ -1,0 +1,95 @@
+---
+import DocumentationLayout from '@template/layouts/documentation';
+import { DBSection, DBTag, DBStack, DBCheckbox, DBDivider } from '@db-ux/react-core-components';
+import './index.css';
+
+const frontmatter = {
+	order: 1,
+	layout: '@template/layouts/documentation',
+	headline: 'Release Notes',
+	title: 'Release Notes',
+	description:
+		'Stay up to date with the latest changes, improvements, fixes, and new features across the design system.',
+	align: 'start' as const,
+	toc: true,
+};
+
+const releaseNotes = await Astro.glob('./_content/*.md');
+releaseNotes.sort((a, b) => b.file.localeCompare(a.file));
+
+const categories = [...new Set(releaseNotes.map((note) => note.frontmatter.content))];
+---
+
+<DocumentationLayout frontmatter={frontmatter} headings={[]}>
+	<DBStack id="filter-tags" direction="row" alignment="center" wrap>
+		<small>Filter:</small>
+		{
+			categories.map((cat) => (
+				<DBTag data-category={cat} client:load>
+					<DBCheckbox>{cat}</DBCheckbox>
+				</DBTag>
+			))
+		}
+	</DBStack>
+	<DBSection spacing="small">
+		{
+			releaseNotes.map((note) => (
+				<div class="release-note" data-category={note.frontmatter.content}>
+					<div class="release-note-header">
+						<span class="release-note-version">
+							{note.frontmatter.content} – {note.frontmatter.version}{' '}
+						</span>
+						<span class="release-note-date">{note.frontmatter.date}</span>
+					</div>
+
+					<note.Content />
+					<DBDivider />
+				</div>
+			))
+		}
+	</DBSection>
+</DocumentationLayout>
+
+<script is:inline slot="script">
+	function initFilter() {
+		const filterContainer = document.getElementById('filter-tags');
+		const releaseNotes = document.querySelectorAll('.release-note');
+
+		if (!filterContainer) {
+			setTimeout(initFilter, 100);
+			return;
+		}
+
+		const filterTags = filterContainer.querySelectorAll('[data-category]');
+
+		filterTags.forEach((tag) => {
+			const checkbox = tag.querySelector('input[type="checkbox"]');
+			if (checkbox) {
+				checkbox.addEventListener('change', () => {
+					const activeCategories = [];
+					filterTags.forEach((t) => {
+						const cb = t.querySelector('input[type="checkbox"]');
+						if (cb && cb.checked) {
+							activeCategories.push(t.getAttribute('data-category'));
+						}
+					});
+
+					releaseNotes.forEach((note) => {
+						const noteCategory = note.getAttribute('data-category');
+						if (activeCategories.length === 0 || activeCategories.includes(noteCategory)) {
+							note.style.display = '';
+						} else {
+							note.style.display = 'none';
+						}
+					});
+				});
+			}
+		});
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initFilter);
+	} else {
+		initFilter();
+	}
+</script>
