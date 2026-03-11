@@ -7,13 +7,6 @@ const typographyTokens = {
 		{ token: 'db-font-family-sans', value: '"OpenSans", helvetica, arial, sans-serif', name: 'Sans (Body)' },
 		{ token: 'db-font-family-head', value: '"OpenSans Head", helvetica, arial, sans-serif', name: 'Head (Headlines)' },
 	],
-	weights: [
-		{ token: 'db-font-weight-light', value: '300', name: 'Light' },
-		{ token: 'db-font-weight-regular', value: '400', name: 'Regular' },
-		{ token: 'db-font-weight-medium', value: '500', name: 'Medium' },
-		{ token: 'db-font-weight-semibold', value: '600', name: 'SemiBold' },
-		{ token: 'db-font-weight-bold', value: '700', name: 'Bold' },
-	],
 	headline: [
 		{ token: 'db-type-headline-3xl', size: { functional: '2.5rem (40px)', regular: '5rem (80px)', expressive: '6rem (96px)' }, lineHeight: { functional: '3rem (48px)', regular: '6rem (96px)', expressive: '7.5rem (120px)' }, weight: '700 (Bold)' },
 		{ token: 'db-type-headline-2xl', size: { functional: '2.5rem (40px)', regular: '4rem (64px)', expressive: '5rem (80px)' }, lineHeight: { functional: '3rem (48px)', regular: '5rem (80px)', expressive: '6rem (96px)' }, weight: '700 (Bold)' },
@@ -42,7 +35,6 @@ const categories = [
 	{ key: 'headline', label: 'Headline', icon: 'pen' },
 	{ key: 'body', label: 'Body', icon: 'pen' },
 	{ key: 'fontFamilies', label: 'Font Families', icon: 'pen' },
-	{ key: 'weights', label: 'Font Weights', icon: 'pen' },
 ];
 ---
 
@@ -58,12 +50,6 @@ const categories = [
 					<table>
 						<thead>
 							{key === 'fontFamilies' ? (
-								<tr>
-									<th>Token</th>
-									<th>Value</th>
-									<th>Name</th>
-								</tr>
-							) : key === 'weights' ? (
 								<tr>
 									<th>Token</th>
 									<th>Value</th>
@@ -91,22 +77,6 @@ const categories = [
 						</thead>
 						<tbody>
 							{key === 'fontFamilies' ? (
-								typographyTokens[key].map(({ token, value, name }) => (
-									<tr
-										onclick={`const span = this.querySelector('.copy-text'); span.textContent='Copied'; setTimeout(() => span.textContent='Copy Token', 2000); navigator.clipboard.writeText('var(--${token})')`}
-									>
-										<td>
-											<div class="token-cell">
-												<DBTag data-color="neutral">--{token}</DBTag>{' '}
-												<span class="copy-text">Copy Token</span>
-												<span data-icon-trailing="copy" data-icon-weight="16" />
-											</div>
-										</td>
-										<td>{value}</td>
-										<td>{name}</td>
-									</tr>
-								))
-							) : key === 'weights' ? (
 								typographyTokens[key].map(({ token, value, name }) => (
 									<tr
 										onclick={`const span = this.querySelector('.copy-text'); span.textContent='Copied'; setTimeout(() => span.textContent='Copy Token', 2000); navigator.clipboard.writeText('var(--${token})')`}

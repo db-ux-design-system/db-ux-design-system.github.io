@@ -8,9 +8,9 @@ interface Props {
 const { layout = 'horizontal' } = Astro.props;
 
 const elevations = [
-	{ value: 'sm', label: 'Small' },
-	{ value: 'md', label: 'Medium' },
-	{ value: 'lg', label: 'Large' },
+	{ value: 'sm', label: 'sm' },
+	{ value: 'md', label: 'md' },
+	{ value: 'lg', label: 'lg' },
 ];
 ---
 
@@ -46,7 +46,11 @@ const elevations = [
 		</div>
 	</div>
 
-	<div class="elevation-playground-token-display" id="elevation-token-display" data-color="informational">
+	<div
+		class="elevation-playground-token-display"
+		id="elevation-token-display"
+		data-color="informational"
+	>
 		<span data-icon="information_circle" class="token-icon"></span>
 		<div class="token-content" id="elevation-token-content">
 			Hover over the card to see the elevation token

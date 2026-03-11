@@ -30,60 +30,15 @@ const spacingTokens = {
 		{ token: 'db-spacing-fixed-3xl', regular: '5rem (80px)', expressive: '7.5rem (120px)', functional: '3rem (48px)' },
 	],
 	responsive: [
-		{
-			token: 'db-spacing-responsive-3xs',
-			regular: '1.25rem (20px)',
-			expressive: '1.75rem (28px)',
-			functional: '1rem (16px)',
-		},
-		{
-			token: 'db-spacing-responsive-2xs',
-			regular: '1.5rem (24px)',
-			expressive: '2rem (32px)',
-			functional: '1.25rem (20px)',
-		},
-		{
-			token: 'db-spacing-responsive-xs',
-			regular: '2rem (32px)',
-			expressive: '3rem (48px)',
-			functional: '1.75rem (28px)',
-		},
-		{
-			token: 'db-spacing-responsive-sm',
-			regular: '3rem (48px)',
-			expressive: '5rem (80px)',
-			functional: '2.5rem (40px)',
-		},
-		{
-			token: 'db-spacing-responsive-md',
-			regular: '5rem (80px)',
-			expressive: '7.5rem (120px)',
-			functional: '4rem (64px)',
-		},
-		{
-			token: 'db-spacing-responsive-lg',
-			regular: '7.5rem (120px)',
-			expressive: '15rem (240px)',
-			functional: '6rem (96px)',
-		},
-		{
-			token: 'db-spacing-responsive-xl',
-			regular: '15rem (240px)',
-			expressive: '30rem (480px)',
-			functional: '10rem (160px)',
-		},
-		{
-			token: 'db-spacing-responsive-2xl',
-			regular: '30rem (480px)',
-			expressive: '40rem (640px)',
-			functional: '15rem (240px)',
-		},
-		{
-			token: 'db-spacing-responsive-3xl',
-			regular: '40rem (640px)',
-			expressive: '50rem (800px)',
-			functional: '30rem (480px)',
-		},
+		{ token: 'db-spacing-responsive-3xs', functional: { desktop: '1rem (16px)', tablet: '1rem (16px)', mobile: '1rem (16px)' }, regular: { desktop: '1.25rem (20px)', tablet: '1rem (16px)', mobile: '1rem (16px)' }, expressive: { desktop: '1.75rem (28px)', tablet: '1.5rem (24px)', mobile: '1.25rem (20px)' } },
+		{ token: 'db-spacing-responsive-2xs', functional: { desktop: '1.25rem (20px)', tablet: '1.25rem (20px)', mobile: '1.25rem (20px)' }, regular: { desktop: '1.5rem (24px)', tablet: '1.25rem (20px)', mobile: '1.25rem (20px)' }, expressive: { desktop: '2rem (32px)', tablet: '1.75rem (28px)', mobile: '1.5rem (24px)' } },
+		{ token: 'db-spacing-responsive-xs', functional: { desktop: '1.75rem (28px)', tablet: '1.5rem (24px)', mobile: '1.25rem (20px)' }, regular: { desktop: '2rem (32px)', tablet: '1.75rem (28px)', mobile: '1.5rem (24px)' }, expressive: { desktop: '3rem (48px)', tablet: '2.5rem (40px)', mobile: '2rem (32px)' } },
+		{ token: 'db-spacing-responsive-sm', functional: { desktop: '2.5rem (40px)', tablet: '2rem (32px)', mobile: '1.75rem (28px)' }, regular: { desktop: '3rem (48px)', tablet: '2.5rem (40px)', mobile: '2rem (32px)' }, expressive: { desktop: '5rem (80px)', tablet: '4rem (64px)', mobile: '3rem (48px)' } },
+		{ token: 'db-spacing-responsive-md', functional: { desktop: '4rem (64px)', tablet: '3rem (48px)', mobile: '2.5rem (40px)' }, regular: { desktop: '5rem (80px)', tablet: '4rem (64px)', mobile: '3rem (48px)' }, expressive: { desktop: '7.5rem (120px)', tablet: '6rem (96px)', mobile: '5rem (80px)' } },
+		{ token: 'db-spacing-responsive-lg', functional: { desktop: '6rem (96px)', tablet: '5rem (80px)', mobile: '4rem (64px)' }, regular: { desktop: '7.5rem (120px)', tablet: '6rem (96px)', mobile: '5rem (80px)' }, expressive: { desktop: '15rem (240px)', tablet: '10rem (160px)', mobile: '7.5rem (120px)' } },
+		{ token: 'db-spacing-responsive-xl', functional: { desktop: '10rem (160px)', tablet: '7.5rem (120px)', mobile: '6rem (96px)' }, regular: { desktop: '15rem (240px)', tablet: '10rem (160px)', mobile: '7.5rem (120px)' }, expressive: { desktop: '30rem (480px)', tablet: '15rem (240px)', mobile: '10rem (160px)' } },
+		{ token: 'db-spacing-responsive-2xl', functional: { desktop: '15rem (240px)', tablet: '10rem (160px)', mobile: '7.5rem (120px)' }, regular: { desktop: '30rem (480px)', tablet: '15rem (240px)', mobile: '10rem (160px)' }, expressive: { desktop: '40rem (640px)', tablet: '30rem (480px)', mobile: '15rem (240px)' } },
+		{ token: 'db-spacing-responsive-3xl', functional: { desktop: '30rem (480px)', tablet: '15rem (240px)', mobile: '10rem (160px)' }, regular: { desktop: '40rem (640px)', tablet: '30rem (480px)', mobile: '15rem (240px)' }, expressive: { desktop: '50rem (800px)', tablet: '40rem (640px)', mobile: '30rem (480px)' } },
 	],
 };
 
@@ -104,30 +59,77 @@ const categories = [
 					</span>
 					<table>
 						<thead>
-							<tr>
-								<th>Token</th>
-								<th>Functional</th>
-								<th>Regular</th>
-								<th>Expressive</th>
-							</tr>
+							{key === 'fixed' ? (
+								<tr>
+									<th>Token</th>
+									<th>Functional</th>
+									<th>Regular</th>
+									<th>Expressive</th>
+								</tr>
+							) : (
+								<>
+									<tr>
+										<th rowspan="2">Token</th>
+										<th colspan="3">Functional</th>
+										<th colspan="3">Regular</th>
+										<th colspan="3">Expressive</th>
+									</tr>
+									<tr>
+										<th>Desktop</th>
+										<th>Tablet</th>
+										<th>Mobile</th>
+										<th>Desktop</th>
+										<th>Tablet</th>
+										<th>Mobile</th>
+										<th>Desktop</th>
+										<th>Tablet</th>
+										<th>Mobile</th>
+									</tr>
+								</>
+							)}
 						</thead>
 						<tbody>
-							{spacingTokens[key].map(({ token, regular, expressive, functional }) => (
-								<tr
-									onclick={`const span = this.querySelector('.copy-text'); span.textContent='Copied'; setTimeout(() => span.textContent='Copy Token', 2000); navigator.clipboard.writeText('var(--${token})')`}
-								>
-									<td>
-										<div class="token-cell">
-											<DBTag data-color="neutral">--{token}</DBTag>{' '}
-											<span class="copy-text">Copy Token</span>
-											<span data-icon-trailing="copy" data-icon-weight="16" />
-										</div>
-									</td>
-									<td>{functional}</td>
-									<td>{regular}</td>
-									<td>{expressive}</td>
-								</tr>
-							))}
+							{key === 'fixed' ? (
+								spacingTokens[key].map(({ token, regular, expressive, functional }) => (
+									<tr
+										onclick={`const span = this.querySelector('.copy-text'); span.textContent='Copied'; setTimeout(() => span.textContent='Copy Token', 2000); navigator.clipboard.writeText('var(--${token})')`}
+									>
+										<td>
+											<div class="token-cell">
+												<DBTag data-color="neutral">--{token}</DBTag>{' '}
+												<span class="copy-text">Copy Token</span>
+												<span data-icon-trailing="copy" data-icon-weight="16" />
+											</div>
+										</td>
+										<td>{functional}</td>
+										<td>{regular}</td>
+										<td>{expressive}</td>
+									</tr>
+								))
+							) : (
+								spacingTokens[key].map(({ token, functional, regular, expressive }) => (
+									<tr
+										onclick={`const span = this.querySelector('.copy-text'); span.textContent='Copied'; setTimeout(() => span.textContent='Copy Token', 2000); navigator.clipboard.writeText('var(--${token})')`}
+									>
+										<td>
+											<div class="token-cell">
+												<DBTag data-color="neutral">--{token}</DBTag>{' '}
+												<span class="copy-text">Copy Token</span>
+												<span data-icon-trailing="copy" data-icon-weight="16" />
+											</div>
+										</td>
+										<td>{functional.desktop}</td>
+										<td>{functional.tablet}</td>
+										<td>{functional.mobile}</td>
+										<td>{regular.desktop}</td>
+										<td>{regular.tablet}</td>
+										<td>{regular.mobile}</td>
+										<td>{expressive.desktop}</td>
+										<td>{expressive.tablet}</td>
+										<td>{expressive.mobile}</td>
+									</tr>
+								))
+							)}
 						</tbody>
 					</table>
 				</DBAccordionItem>
