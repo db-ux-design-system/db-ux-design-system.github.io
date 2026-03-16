@@ -48,12 +48,14 @@
 .cta .db-button[data-variant='brand'] {
 	background: var(--db-brand-on-origin-default);
 	color: var(--db-brand-origin-default);
+	/* stylelint-disable-next-line db-ux/use-border-color */
 	border-color: var(--db-brand-on-origin-default);
 }
 
 .cta .db-button[data-variant='brand']:hover {
 	background: var(--db-brand-on-origin-default);
 	color: var(--db-brand-origin-default);
+	/* stylelint-disable-next-line db-ux/use-border-color */
 	border-color: var(--db-brand-on-origin-default);
 	opacity: 0.88;
 }
@@ -61,6 +63,7 @@
 .cta .db-button[data-variant='brand']:active {
 	background: var(--db-brand-on-origin-default);
 	color: var(--db-brand-origin-default);
+	/* stylelint-disable-next-line db-ux/use-border-color */
 	border-color: var(--db-brand-on-origin-default);
 	opacity: 0.76;
 }
