@@ -11,10 +11,42 @@ interface Resource {
 }
 
 interface Props {
-	resources: Resource[];
+	path?: string;
+	resources?: Resource[];
 }
 
-const { resources } = Astro.props;
+const { path, resources: customResources } = Astro.props;
+
+const baseUrl = 'https://design-system.deutschebahn.com/core-web/review/main';
+
+const defaultResources: Resource[] = [
+	{
+		title: 'React',
+		description: 'Interactive examples and documentation.',
+		url: `${baseUrl}/react-storybook${path}`,
+		icon: 'react',
+	},
+	{
+		title: 'Vue',
+		description: 'Interactive examples and documentation.',
+		url: `${baseUrl}/vue-storybook${path}`,
+		icon: 'vue',
+	},
+	{
+		title: 'Angular',
+		description: 'Interactive examples and documentation.',
+		url: `${baseUrl}/angular-storybook${path}`,
+		icon: 'angular',
+	},
+	{
+		title: 'Web C.',
+		description: 'Interactive examples and documentation.',
+		url: `${baseUrl}/angular-storybook${path}`,
+		icon: 'web-components',
+	},
+];
+
+const resources = customResources || defaultResources;
 
 // Map icon names to local paths
 const iconMap: Record<string, string> = {
