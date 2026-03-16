@@ -3,8 +3,15 @@ import { DBCard, DBButton } from '@db-ux/react-core-components';
 import DisabledWrapper from '@template/components/DisabledWrapper/DisabledWrapper.astro';
 import './ResourceCards.css';
 
+interface Resource {
+	title: string;
+	description: string;
+	url: string;
+	icon: string;
+}
+
 interface Props {
-	path: string;
+	resources: Resource[];
 }
 
 const { resources } = Astro.props;
