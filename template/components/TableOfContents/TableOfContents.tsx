@@ -3,7 +3,7 @@ import type { AstroGlobal, MarkdownHeading } from 'astro';
 import type { ReactElement } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { useActiveHeading } from './useActiveHeading';
-import { DBIcon } from '@db-ux/react-core-components';
+import { DBButton, DBIcon, DBTooltip } from '@db-ux/react-core-components';
 
 interface Props {
 	astro: AstroGlobal;
@@ -18,7 +18,7 @@ export function TableOfContents(props: Props): ReactElement | null {
 	);
 	const slugs = filteredHeadings.map((h) => h.slug);
 	const currentPath = getCurrentPathname(props.astro);
-	const { currentID, activeIDs, setCurrentID } = useActiveHeading({
+	const { activeIDs, setCurrentID } = useActiveHeading({
 		slugs,
 		tocMaxDepth: props.tocMaxDepth,
 	});
@@ -30,7 +30,7 @@ export function TableOfContents(props: Props): ReactElement | null {
 		if (!indicatorRef.current || !listRef.current || activeIDs.length === 0) return;
 
 		// Filter only visible (rendered) elements
-		const visibleActiveIDs = activeIDs.filter(slug => {
+		const visibleActiveIDs = activeIDs.filter((slug) => {
 			const element = listRef.current?.querySelector(`[data-slug="${slug}"]`) as HTMLElement;
 			return element && element.offsetParent !== null;
 		});
@@ -64,7 +64,7 @@ export function TableOfContents(props: Props): ReactElement | null {
 	};
 
 	const toggleH2 = (slug: string) => {
-		setExpandedH2s(prev => {
+		setExpandedH2s((prev) => {
 			const next = new Set(prev);
 			if (next.has(slug)) {
 				next.delete(slug);
@@ -94,20 +94,24 @@ export function TableOfContents(props: Props): ReactElement | null {
 								className="dba-toc-heading"
 								data-depth={depth}
 								data-slug={slug}
+								data-active={activeIDs.includes(slug)}
 							>
-								<a href={`${currentPath}#${slug}`} onClick={handleLinkClick} aria-current={activeIDs.includes(slug) ? 'location' : undefined}>
+								<a href={`${currentPath}#${slug}`} onClick={handleLinkClick}>
 									{text}
 								</a>
 								{showChildren && (
-									<button
+									<DBButton
 										className="dba-toc-toggle"
+										variant="ghost"
+										noText
+										icon={expandedH2s.has(slug) ? 'chevron_up' : 'chevron_down'}
 										onClick={() => toggleH2(slug)}
-										aria-label={expandedH2s.has(slug) ? 'Collapse' : 'Expand'}
-										aria-expanded={expandedH2s.has(slug)}
-										aria-controls={`toc-children-${slug}`}
+										type="button"
 									>
-										<DBIcon icon={expandedH2s.has(slug) ? 'chevron_up' : 'chevron_down'} />
-									</button>
+										{expandedH2s.has(slug) ? 'Collapse' : 'Expand'}
+
+										<DBTooltip>{expandedH2s.has(slug) ? 'Collapse' : 'Expand'}</DBTooltip>
+									</DBButton>
 								)}
 							</li>
 						);
@@ -119,8 +123,9 @@ export function TableOfContents(props: Props): ReactElement | null {
 								className="dba-toc-heading"
 								data-depth={depth}
 								data-slug={slug}
+								data-active={activeIDs.includes(slug)}
 							>
-								<a href={`${currentPath}#${slug}`} onClick={handleLinkClick} aria-current={activeIDs.includes(slug) ? 'location' : undefined}>
+								<a href={`${currentPath}#${slug}`} onClick={handleLinkClick}>
 									{text}
 								</a>
 							</li>

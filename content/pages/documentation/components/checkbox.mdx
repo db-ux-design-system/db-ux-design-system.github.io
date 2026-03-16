@@ -41,34 +41,7 @@ Experiment with the Checkbox component and its properties.
 
 ## Resources
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
-			icon: 'react',
-		},
-		{
-			title: 'Vue',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
-			icon: 'vue',
-		},
-		{
-			title: 'Angular',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
-			icon: 'angular',
-		},
-		{
-			title: 'Web Components',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
-			icon: 'html5',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbcheckbox-density--docs" />
 
 </DBSection>
 
@@ -94,7 +67,7 @@ Configure the checkbox through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-###### Use Checkbox for multi-select, not single-choice
+### Use Checkbox for multi-select, not single-choice
 
 Use checkboxes when users can select any number of options (including none). If the user must pick exactly one option, use Radio instead.
 
@@ -111,7 +84,7 @@ Use checkboxes when users can select any number of options (including none). If 
 	/>
 </div>
 
-###### Write short, positive labels
+### Write short, positive labels
 
 Labels must be clear and concise. Prefer positive phrasing to reduce cognitive load and avoid double negatives.
 
@@ -128,7 +101,7 @@ Labels must be clear and concise. Prefer positive phrasing to reduce cognitive l
 	/>
 </div>
 
-###### Make groups easy to scan
+### Make groups easy to scan
 
 In checkbox groups, keep options parallel in wording and length. If a group needs context, add a group label or short description above it.
 
@@ -145,7 +118,7 @@ In checkbox groups, keep options parallel in wording and length. If a group need
 	/>
 </div>
 
-###### Use "Select all" and indeterminate state carefully
+### Use "Select all" and indeterminate state carefully
 
 If you provide "Select all", it must reflect the group state: checked when all are selected, unchecked when none are selected, and indeterminate when some are selected.
 
@@ -162,7 +135,7 @@ If you provide "Select all", it must reflect the group state: checked when all a
 	/>
 </div>
 
-###### Keep interaction and states consistent
+### Keep interaction and states consistent
 
 Ensure checked, unchecked, disabled, and error states are visually distinct and consistent across the UI. Don't make the click target too small; the label should be clickable.
 
@@ -179,7 +152,7 @@ Ensure checked, unchecked, disabled, and error states are visually distinct and 
 	/>
 </div>
 
-###### Accessibility and screenreader text
+### Accessibility and screenreader text
 
 Every checkbox needs an accessible name. If the visible label is hidden, provide a screenreader label text. Communicate group context and required/invalid states to assistive technologies.
 
@@ -206,9 +179,28 @@ Every checkbox needs an accessible name. If the visible label is hidden, provide
 
 ## FAQ
 
-Have a question about the Checkbox component? We'll answer it and add frequently asked questions to this page.
-
-<QuestionForm componentName="Checkbox" />
+<DBAccordion>
+	<DBAccordionItem headlinePlain="When should I use Checkbox vs Switch?">
+		Use Checkbox for selections in forms, lists, and filters (often multiple at once). Use Switch
+		for a single on/off setting that takes effect immediately.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="When should I use Checkbox vs Radio?">
+		Use Checkbox when multiple options can be selected. Use Radio when exactly one option must be
+		chosen within a set.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="Can I hide the visible label?">
+		Only if you provide equivalent screenreader text and the meaning is still clear in context.
+		Prefer visible labels whenever possible.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="How should I validate checkbox groups?">
+		If at least one option is required, validate the group (not each item) and show a clear error
+		message that explains what is missing.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain='Do I need a "Select all" option?'>
+		Only when it saves effort for large groups and users commonly select most options. Keep the
+		state accurate and support indeterminate for partial selection.
+	</DBAccordionItem>
+</DBAccordion>
 
 </DBSection>
 

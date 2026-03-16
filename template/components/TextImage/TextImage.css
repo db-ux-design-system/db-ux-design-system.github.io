@@ -82,7 +82,7 @@
 /* Paragraph Spacing nur innerhalb der Komponente */
 .text-image-text > p {
 	margin: 0;
-	max-width: 480px;
+	max-width: var(--db-container-md);
 }
 
 .text-image-text > p + p {

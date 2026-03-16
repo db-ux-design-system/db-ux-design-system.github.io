@@ -41,34 +41,7 @@ Experiment with the Input component and its properties.
 
 ## Resources
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
-			icon: 'react',
-		},
-		{
-			title: 'Vue',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
-			icon: 'vue',
-		},
-		{
-			title: 'Angular',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
-			icon: 'angular',
-		},
-		{
-			title: 'Web Components',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
-			icon: 'html5',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbinput-density--docs" />
 
 </DBSection>
 
@@ -94,7 +67,7 @@ Configure the input through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-###### Use the right control
+### Use the right control
 
 Use Input for free text entry. If users must choose from predefined options, use a selection component instead (e.g., Select, Autocomplete, Radio/Checkbox depending on the case).
 
@@ -111,7 +84,7 @@ Use Input for free text entry. If users must choose from predefined options, use
 	/>
 </div>
 
-###### Always provide a visible label
+### Always provide a visible label
 
 Every Input must have a clear, descriptive label that explains what to enter. Keep labels short and specific; avoid vague labels. Do not replace the label with a placeholder.
 
@@ -128,7 +101,7 @@ Every Input must have a clear, descriptive label that explains what to enter. Ke
 	/>
 </div>
 
-###### Use placeholder text only as an example
+### Use placeholder text only as an example
 
 Placeholder text is optional and should provide an example format/value, not instructions or required context. Placeholders must not contain critical information because they disappear when users type.
 
@@ -145,7 +118,7 @@ Placeholder text is optional and should provide an example format/value, not ins
 	/>
 </div>
 
-###### Helper text explains, validation text decides
+### Helper text explains, validation text decides
 
 Use helper text to prevent errors (format, constraints, expectations). Use validation messages to explain what is wrong and how to fix it. Keep messages concise and actionable.
 
@@ -162,7 +135,7 @@ Use helper text to prevent errors (format, constraints, expectations). Use valid
 	/>
 </div>
 
-###### Align within the layout and keep spacing consistent
+### Align within the layout and keep spacing consistent
 
 Inputs must align to the layout grid and maintain consistent spacing between label, field, helper/validation text, and adjacent fields. Avoid stretching labels or misaligning fields in responsive layouts.
 
@@ -179,7 +152,7 @@ Inputs must align to the layout grid and maintain consistent spacing between lab
 	/>
 </div>
 
-###### Accessibility and assistive text
+### Accessibility and assistive text
 
 Ensure every Input has an accessible name that matches the visible label. If a label is visually hidden, provide an equivalent screenreader label. Required/optional indicators must be announced meaningfully.
 

@@ -40,34 +40,7 @@ import { linkConfig } from '@template/configs/link.config.js';
 
 ## Resources
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
-			icon: 'react',
-		},
-		{
-			title: 'Vue',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
-			icon: 'vue',
-		},
-		{
-			title: 'Angular',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
-			icon: 'angular',
-		},
-		{
-			title: 'Web Components',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
-			icon: 'html5',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dblink-density--docs" />
 
 </DBSection>
 
@@ -93,11 +66,17 @@ Configure the link through its properties and slots.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-###### Purpose
+### Use links only for navigation
 
 Use the Link component exclusively when the primary purpose is navigation to a different location or resource.
 
-<div className="guideline-examples">
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBlockEnd: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/3HjaNLCvfdsdoRZKbFnV3s/Doku--Link?node-id=1-1132&embed-host=share"
@@ -110,7 +89,7 @@ Use the Link component exclusively when the primary purpose is navigation to a d
 	/>
 </div>
 
-###### Inline
+### Inline text usage
 
 For links within running text, use text-link styles instead of the standalone Link component.
 
@@ -127,11 +106,17 @@ For links within running text, use text-link styles instead of the standalone Li
 	/>
 </div>
 
-###### Emphasis
+### Visual emphasis
 
 Use the brand variant sparingly to highlight particularly important navigational links.
 
-<div className="guideline-examples">
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBlockEnd: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/3HjaNLCvfdsdoRZKbFnV3s/Doku--Link?node-id=3-1113&embed-host=share"
@@ -141,6 +126,28 @@ Use the brand variant sparingly to highlight particularly important navigational
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/3HjaNLCvfdsdoRZKbFnV3s/Doku--Link?node-id=3-1114&embed-host=share"
 		description="Overuse emphasized link styles for all links on a page."
+	/>
+</div>
+
+### Accessibility and clarity
+
+Links must be clearly identifiable, descriptive, and accessible via keyboard and assistive technologies.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/3HjaNLCvfdsdoRZKbFnV3s/Doku--Link?node-id=3-1116&embed-host=share"
+		description="Use meaningful link labels that describe the destination."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/3HjaNLCvfdsdoRZKbFnV3s/Doku--Link?node-id=3-1117&embed-host=share"
+		description="Use vague labels like 'Click here' or rely on color alone."
 	/>
 </div>
 
