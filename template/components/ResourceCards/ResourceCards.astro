@@ -1,61 +1,100 @@
 ---
 import { DBCard } from '@db-ux/react-core-components';
+import DisabledWrapper from '@template/components/DisabledWrapper/DisabledWrapper.astro';
 import './ResourceCards.css';
 
-interface Props {
-	path: string;
+interface Resource {
+	title: string;
+	description: string;
+	url: string;
+	icon: string;
 }
 
-const { path } = Astro.props;
+interface Props {
+	path?: string;
+	resources?: Resource[];
+}
+
+const { path, resources: customResources } = Astro.props;
 
 const baseUrl = 'https://design-system.deutschebahn.com/core-web/review/main';
 
-const resources = [
+const defaultResources: Resource[] = [
 	{
 		title: 'React',
 		description: 'Interactive examples and documentation.',
 		url: `${baseUrl}/react-storybook${path}`,
-		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+		icon: 'react',
 	},
 	{
 		title: 'Vue',
 		description: 'Interactive examples and documentation.',
 		url: `${baseUrl}/vue-storybook${path}`,
-		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
+		icon: 'vue',
 	},
 	{
 		title: 'Angular',
 		description: 'Interactive examples and documentation.',
 		url: `${baseUrl}/angular-storybook${path}`,
-		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg',
+		icon: 'angular',
 	},
 	{
 		title: 'Web C.',
 		description: 'Interactive examples and documentation.',
 		url: `${baseUrl}/angular-storybook${path}`,
-		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
+		icon: 'web-components',
 	},
 ];
+
+const resources = customResources || defaultResources;
+
+// Map icon names to local paths
+const iconMap: Record<string, string> = {
+	react: '/assets/framework-icons/react.svg',
+	vue: '/assets/framework-icons/vue.svg',
+	angular: '/assets/framework-icons/angular.svg',
+	html5: '/assets/framework-icons/html5.svg',
+	'web-components': '/assets/framework-icons/html5.svg',
+};
+
+const getIconPath = (icon: string): string => {
+	// If it's already a full path/URL, return as is (backwards compatibility)
+	if (icon.startsWith('/') || icon.startsWith('http')) {
+		return icon;
+	}
+	// Otherwise map the icon name
+	return iconMap[icon] || icon;
+};
 ---
 
 <div class="resource-cards">
 	{
 		resources.map((resource) => (
-			<a href={resource.url} target="_blank" rel="noopener noreferrer">
-				<DBCard behavior="interactive">
-					<img
-						src={resource.icon}
-						alt={`Image for ${resource.title}, ${resource.description}`}
-						width="32"
-						height="32"
-					/>
-					<div class="resource-text">
-						<b>{resource.title}</b>
-						<p>{resource.description}</p>
-					</div>
-					<strong data-icon-trailing="arrow_up_right">View Storybook</strong>
-				</DBCard>
-			</a>
+			<>
+				{resource.icon === 'html5' || resource.icon === 'web-components' ? (
+					<DisabledWrapper label="Coming Soon" size="small">
+						<DBCard behavior="interactive">
+							<a aria-disabled="true" tabindex="-1">
+								<img src={getIconPath(resource.icon)} alt="" width="32" height="32" />
+								<div class="resource-text">
+									<b>{resource.title}</b>
+									<p>{resource.description}</p>
+								</div>
+							</a>
+						</DBCard>
+					</DisabledWrapper>
+				) : (
+					<DBCard behavior="interactive">
+						<a href={resource.url} target="_blank" rel="noopener noreferrer">
+							<img src={getIconPath(resource.icon)} alt="" width="32" height="32" />
+							<div class="resource-text">
+								<b>{resource.title}</b>
+								<p>{resource.description}</p>
+							</div>
+						</a>
+					</DBCard>
+				)}
+			</>
 		))
 	}
 </div>

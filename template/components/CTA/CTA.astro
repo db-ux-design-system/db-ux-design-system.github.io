@@ -1,11 +1,13 @@
 ---
 import './CTA.css';
-import { DBButton, DBCard } from '@db-ux/react-core-components';
+import { DBCard } from '@db-ux/react-core-components';
+
+type ButtonVariant = 'brand' | 'outlined' | 'filled' | 'ghost';
 
 interface Action {
 	label: string;
 	href: string;
-	variant?: 'brand' | 'outlined' | 'filled' | 'danger';
+	variant?: ButtonVariant;
 }
 
 interface Props {
@@ -17,6 +19,11 @@ interface Props {
 }
 
 const { title, text, primaryAction, secondaryAction, align = 'center' } = Astro.props as Props;
+
+const BUTTON_VARIANTS: ButtonVariant[] = ['outlined', 'brand', 'filled', 'ghost'];
+
+const normalizeVariant = (variant: ButtonVariant | undefined, fallback: ButtonVariant): ButtonVariant =>
+	BUTTON_VARIANTS.includes(variant as ButtonVariant) ? (variant as ButtonVariant) : fallback;
 ---
 
 {
@@ -26,14 +33,20 @@ const { title, text, primaryAction, secondaryAction, align = 'center' } = Astro.
 				{title && <h3 class="cta-title">{title}</h3>}
 				{text && <p class="cta-text">{text}</p>}
 				<div class="cta-actions">
-					<a href={primaryAction.href} class="cta-action" aria-label={primaryAction.label}>
-						<DBButton variant={primaryAction.variant || 'brand'}>{primaryAction.label}</DBButton>
+					<a
+						href={primaryAction.href}
+						class="db-button cta-action"
+						data-variant={normalizeVariant(primaryAction.variant, 'brand')}
+					>
+						{primaryAction.label}
 					</a>
 					{secondaryAction && (
-						<a href={secondaryAction.href} class="cta-action" aria-label={secondaryAction.label}>
-							<DBButton variant={secondaryAction.variant || 'outlined'}>
-								{secondaryAction.label}
-							</DBButton>
+						<a
+							href={secondaryAction.href}
+							class="db-button cta-action"
+							data-variant={normalizeVariant(secondaryAction.variant, 'outlined')}
+						>
+							{secondaryAction.label}
 						</a>
 					)}
 				</div>
