@@ -68,7 +68,7 @@ const events = config.events || [];
 					</tr>
 				</thead>
 				<tbody>
-					{slots.map((slot) => (
+					{slots.map((slot: { name: string; description: string }) => (
 						<tr>
 							<td>
 								<code>{slot.name}</code>
@@ -94,7 +94,7 @@ const events = config.events || [];
 					</tr>
 				</thead>
 				<tbody>
-					{events.map((event) => (
+					{events.map((event: { name: string; type: string; description: string }) => (
 						<tr>
 							<td>
 								<code>{event.name}</code>

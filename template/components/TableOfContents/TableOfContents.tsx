@@ -3,7 +3,7 @@ import type { AstroGlobal, MarkdownHeading } from 'astro';
 import type { ReactElement } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { useActiveHeading } from './useActiveHeading';
-import { DBButton, DBIcon, DBTooltip } from '@db-ux/react-core-components';
+import { DBButton, DBTooltip } from '@db-ux/react-core-components';
 
 interface Props {
 	astro: AstroGlobal;

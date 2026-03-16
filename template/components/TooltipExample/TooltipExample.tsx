@@ -1,7 +1,11 @@
 import { DBButton, DBTooltip } from '@db-ux/react-core-components';
 import './TooltipExample.css';
 
-export default function TooltipExample({ text = 'Tooltip text', placement = 'top', animation = true, showArrow = true, emphasis = 'strong', width = 'auto' }) {
+type TooltipPlacement = 'left' | 'top' | 'bottom' | 'right' | 'left-start' | 'left-end' | 'right-start' | 'right-end' | 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end';
+type TooltipEmphasis = 'strong' | 'weak';
+type TooltipWidth = 'fixed' | 'auto';
+
+export default function TooltipExample({ text = 'Tooltip text', placement = 'top' as TooltipPlacement, animation = true, showArrow = true, emphasis = 'strong' as TooltipEmphasis, width = 'auto' as TooltipWidth }) {
 	return (
 		<div className="tooltip-example-wrapper">
 			<DBButton variant="primary">
