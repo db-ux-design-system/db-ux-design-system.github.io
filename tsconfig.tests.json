@@ -1,0 +1,8 @@
+{
+	"extends": "./tsconfig.json",
+	"include": ["./tests", "./template/types"],
+	"compilerOptions": {
+		"module": "esnext",
+		"target": "es2017"
+	}
+}

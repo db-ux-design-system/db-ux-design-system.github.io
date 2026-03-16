@@ -50,11 +50,17 @@ export function Search(): ReactElement {
 
 	return (
 		<div className="dba-search">
-			<DBButton icon="magnifying_glass" noText variant="ghost" onClick={() => setSearchOpen(true)}>
+			<DBButton
+				icon="magnifying_glass"
+				noText
+				variant="ghost"
+				onClick={() => setSearchOpen(true)}
+				type="button"
+			>
 				Open Search
 				<DBTooltip>Open Search</DBTooltip>
 			</DBButton>
-			<DBDrawer open={searchOpen} onClose={() => setSearchOpen(false)}>
+			<DBDrawer closeButtonText="Close" open={searchOpen} onClose={() => setSearchOpen(false)}>
 				<div className="dba-search-result-container">
 					<DBInput
 						label="Search"
@@ -62,6 +68,7 @@ export function Search(): ReactElement {
 						icon="magnifying_glass"
 						variant="floating"
 						onChange={(event: React.ChangeEvent<HTMLInputElement>) => setQuery(event.target.value)}
+						type="text"
 					/>
 					{(searchResults?.hits?.length || 0) > 0 ? (
 						searchResults?.hits.map((hit) => {

@@ -45,8 +45,8 @@
 	display: block;
 	border-radius: var(--db-border-radius-xs);
 	background-color: var(--db-brand-origin-default);
-	height: 0.5rem;
-	width: 4rem;
+	height: var(--db-sizing-3xs);
+	width: var(--db-sizing-lg);
 }
 
 .dba-footer {
@@ -77,21 +77,9 @@
 	.dba-main-grid {
 		&:has(.dba-toc) {
 			.dba-main-content {
-				padding-inline-end: var(--db-container-3xs);
+				/* stylelint-disable-next-line db-ux/use-spacings */
+				padding-inline-end: calc(var(--db-container-3xs) + var(--db-spacing-fixed-md));
 			}
-		}
-	}
-
-	.dba-side-nav {
-		display: block;
-	}
-
-	body:has(.dba-side-nav) {
-		.dba-main {
-			/* stylelint-disable-next-line db-ux/use-spacings */
-			margin-inline-start: calc(
-				max(var(--side-nav-width), calc((100% - var(--content-width)) / 2))
-			);
 		}
 	}
 

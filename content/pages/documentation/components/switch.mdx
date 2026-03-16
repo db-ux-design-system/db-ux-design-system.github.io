@@ -40,34 +40,7 @@ Experiment with the Switch component and its properties.
 
 ## Resources
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
-		},
-		{
-			title: 'Vue',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
-		},
-		{
-			title: 'Angular',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg',
-		},
-		{
-			title: 'Web C.',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
-			icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbswitch-density--docs" />
 
 </DBSection>
 
@@ -93,7 +66,7 @@ Configure the switch through its properties, such as checked state, disabled, an
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-###### Use Switch for immediate state changes
+### Use Switch for immediate state changes
 
 Use Switch only when toggling should take effect right away. If users are selecting options to be applied later (e.g., on submit), use Checkbox instead.
 
@@ -116,7 +89,7 @@ Use Switch only when toggling should take effect right away. If users are select
 	/>
 </div>
 
-###### Make state change clear and observable
+### Make state change clear and observable
 
 Users must be able to immediately understand whether the switch is on or off and see the effect of the change (UI update, enabled feature, or confirmation feedback).
 
@@ -139,7 +112,7 @@ Users must be able to immediately understand whether the switch is on or off and
 	/>
 </div>
 
-###### Write short, positive label text
+### Write short, positive label text
 
 Keep labels concise and avoid negative wording that can create confusion ("Don't", double negatives). If helpful, use dynamic labels that describe the current state in plain language.
 
@@ -162,7 +135,7 @@ Keep labels concise and avoid negative wording that can create confusion ("Don't
 	/>
 </div>
 
-###### Use visual aids only when they add meaning
+### Use visual aids only when they add meaning
 
 Icons can help users recognize state faster, but they must reinforce (not replace) the label. Use only clear, unambiguous icons that match the message.
 
@@ -185,7 +158,7 @@ Icons can help users recognize state faster, but they must reinforce (not replac
 	/>
 </div>
 
-###### Switch vs Checkbox decision
+### Switch vs Checkbox decision
 
 Switch is for enabling/disabling a setting with immediate effect. Checkbox is for selecting one or more options, often as part of a form that may be confirmed later.
 
@@ -208,7 +181,7 @@ Switch is for enabling/disabling a setting with immediate effect. Checkbox is fo
 	/>
 </div>
 
-###### Accessibility and screenreader text
+### Accessibility and screenreader text
 
 Every switch needs an accessible name. If the visible label is hidden, provide equivalent screenreader label text. Ensure keyboard interaction works and focus is clearly visible.
 
