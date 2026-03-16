@@ -7,7 +7,8 @@
 	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
 	overflow: hidden;
 	max-width: 100%;
-	min-height: 320px;
+	/* stylelint-disable-next-line db-ux/use-sizing */
+	min-height: var(--db-container-xs);
 }
 
 .component-playground:not(:has(.controls-area)) {
@@ -113,7 +114,7 @@
 }
 
 .component-playground .preview-area > .db-navigation[data-variant='vertical'] {
-	max-width: 300px;
+	max-width: var(--db-container-2xs);
 }
 
 .component-playground .preview-area > .db-navigation .db-navigation-item[data-width='full'] {
