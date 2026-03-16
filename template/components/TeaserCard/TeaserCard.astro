@@ -19,7 +19,7 @@ const { teasers } = Astro.props;
 <div class="teaser-cards">
 	{
 		teasers.map((teaser) => {
-			const Component = teaser.component ? DBComponents[teaser.component] : null;
+			const Component = teaser.component ? (DBComponents as any)[teaser.component] : null;
 			const isLink = teaser.component === 'DBLink';
 			return (
 				<DBCard behavior="interactive" spacing="none">
@@ -30,7 +30,7 @@ const { teasers } = Astro.props;
 							style="cursor: pointer;"
 						>
 							<div class="teaser-content">
-								<h6>{teaser.title}</h6>
+								<h2>{teaser.title}</h2>
 								<p>{teaser.description}</p>
 							</div>
 							{Component && (
@@ -47,8 +47,9 @@ const { teasers } = Astro.props;
 						</div>
 					) : (
 						<a href={teaser.url}>
+							<!-- TODO: The anchor should wrap DBCard instead -->
 							<div class="teaser-content">
-								<h6>{teaser.title}</h6>
+								<h2>{teaser.title}</h2>
 								<p>{teaser.description}</p>
 							</div>
 							{Component && (

@@ -1,0 +1,19 @@
+---
+name: On-PR to main
+
+on:
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  pull-requests: write
+  contents: write
+  actions: read
+  security-events: write
+
+jobs:
+  dependabot:
+    uses: ./.github/workflows/99-auto-merge.yml
+
+  dependency-review:
+    uses: ./.github/workflows/99-dependency-review.yml

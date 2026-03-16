@@ -41,12 +41,7 @@ const NavItem = ({
 		const target = path ?? getFirstChildPath(children);
 
 		return (
-			<DBNavigationItem
-				icon={icon}
-				key={`router-leaf-${target ?? title}`}
-				disabled={disabled}
-				aria-disabled={disabled ? 'true' : undefined}
-			>
+			<DBNavigationItem icon={icon} key={`router-leaf-${target ?? title}`} disabled={disabled}>
 				<a
 					href={trimExtension(target)}
 					aria-current={isActive ? 'page' : undefined}
@@ -78,8 +73,7 @@ const NavItem = ({
 		<DBNavigationItem
 			icon={icon}
 			key={`router-leaf-${path ?? title}`}
-			disabled={disabled}
-			aria-disabled={disabled ? 'true' : undefined}
+			disabled={disabled ? true : undefined}
 		>
 			<a
 				href={trimExtension(path)}

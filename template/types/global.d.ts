@@ -5,11 +5,7 @@ declare interface FrontMatter {
 	/**
 	 * The title of the page.
 	 */
-	title: string;
-	/**
-	 * The author of the page.
-	 */
-	author: string;
+	title?: string;
 	/**
 	 * The description of the page.
 	 */
@@ -49,12 +45,6 @@ declare interface FrontMatter {
 	 */
 	tocMaxDepth?: number | undefined;
 	/**
-	 * Whether the page should render a navigation sidebar. Not visible on mobile devices and not visible
-	 * if the page does not have any sibling pages.
-	 * @default true
-	 */
-	nav?: boolean;
-	/**
 	 * If true, children will be rendered as sub-navigation on child pages.
 	 */
 	isSubNavigation?: boolean;
@@ -75,6 +65,14 @@ declare interface FrontMatter {
 	 * If true, load the model viewer web-component on this page.
 	 */
 	loadModelViewer?: boolean;
+
+	/**
+	 * Set a badge inside sub-navigation
+	 */
+	status?: 'concept' | 'beta' | 'stable' | 'deprecated' | 'legacy';
+
+
+	align?: 'start' | 'center' | 'end';
 }
 
 /**
@@ -117,6 +115,11 @@ declare interface NavigationItem {
 	 * If true, the navigation item will be rendered as disabled.
 	 */
 	disabled?: boolean;
+
+	/**
+	 * Set a badge inside sub-navigation
+	 */
+	status?: 'concept' | 'beta' | 'stable' | 'deprecated' | 'legacy';
 }
 
 /**

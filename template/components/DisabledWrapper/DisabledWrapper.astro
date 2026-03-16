@@ -13,7 +13,7 @@ interface Props {
 const { label, disabled = true, emphasis, size = 'medium', ariaLabel } = Astro.props as Props;
 ---
 
-<div class={'disabled-wrapper'} data-disabled={disabled ? 'true' : 'false'}>
+<div class="disabled-wrapper" aria-disabled={disabled ? 'true' : 'false'}>
 	<div class="disabled-wrapper-content">
 		<slot />
 	</div>

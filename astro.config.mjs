@@ -8,6 +8,7 @@ import { filterSitemapBlacklist } from './template/integrations/sitemap';
 import orama from '@orama/plugin-astro';
 
 import { viteStaticCopy } from 'vite-plugin-static-copy';
+import pngToWebpIntegration from './astro-integration-png-to-webp.mjs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -25,6 +26,7 @@ export default defineConfig({
 				language: 'english',
 			},
 		}),
+		pngToWebpIntegration(),
 	],
 	srcDir: './content',
 	outDir: './public',
@@ -41,6 +43,10 @@ export default defineConfig({
 						src: './node_modules/@google/model-viewer/dist/model-viewer.min.js.map',
 						dest: './',
 					},
+					{
+						src: 'node_modules/@db-ux/db-theme/build/images/light/db_logo.svg',
+						dest: './',
+					},
 				],
 			}),
 		],
@@ -49,6 +55,7 @@ export default defineConfig({
 		},
 		resolve: {
 			alias: {
+				'@db-ux': new URL('./node_modules/@db-ux', import.meta.url).pathname,
 				'@components': new URL('./template/components', import.meta.url).pathname,
 				'@template': new URL('./template', import.meta.url).pathname,
 				'@content': new URL('./content', import.meta.url).pathname,
