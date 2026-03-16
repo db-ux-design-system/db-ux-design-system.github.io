@@ -74,7 +74,7 @@ const getIconPath = (icon: string): string => {
 				{resource.icon === 'html5' || resource.icon === 'web-components' ? (
 					<DisabledWrapper label="Coming Soon" size="small">
 						<DBCard behavior="interactive">
-							<a href={resource.url} target="_blank" rel="noopener noreferrer">
+							<a aria-disabled="true" tabindex="-1">
 								<img src={getIconPath(resource.icon)} alt="" width="32" height="32" />
 								<div class="resource-text">
 									<b>{resource.title}</b>
