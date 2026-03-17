@@ -9,7 +9,7 @@ status: 'beta'
 toc: true
 ---
 
-import { DBSection } from '@db-ux/react-core-components';
+import { DBSection, DBAccordion, DBAccordionItem } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
@@ -32,7 +32,7 @@ Accordions group content into collapsible sections to save space and let users r
 
 Experiment with the accordion component and its properties.
 
-<ComponentPlayground config={accordionConfig} />
+<ComponentPlayground config={accordionConfig} component={DBAccordion} />
 
 </DBSection>
 

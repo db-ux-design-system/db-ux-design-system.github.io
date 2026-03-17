@@ -9,7 +9,7 @@ status: 'stable'
 toc: true
 ---
 
-import { DBSection } from '@db-ux/react-core-components';
+import { DBSection, DBTextarea } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
@@ -32,7 +32,7 @@ Textarea lets users enter and review longer, multi-line text in forms and dialog
 
 Experiment with the textarea component and its properties.
 
-<ComponentPlayground config={textareaConfig} />
+<ComponentPlayground config={textareaConfig} component={DBTextarea} />
 
 </DBSection>
 

@@ -9,7 +9,7 @@ status: 'beta'
 toc: true
 ---
 
-import { DBSection } from '@db-ux/react-core-components';
+import { DBSection, DBCustomSelect } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
@@ -32,7 +32,7 @@ Custom Select is an advanced dropdown for choosing one or multiple predefined op
 
 Experiment with the custom select component and its properties.
 
-<ComponentPlayground config={customSelectConfig} />
+<ComponentPlayground config={customSelectConfig} component={DBCustomSelect} />
 
 </DBSection>
 

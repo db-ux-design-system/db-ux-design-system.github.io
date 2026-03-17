@@ -9,7 +9,7 @@ status: 'stable'
 toc: true
 ---
 
-import { DBSection } from '@db-ux/react-core-components';
+import { DBSection, DBDrawer } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
@@ -32,7 +32,7 @@ Drawer is a sliding panel that appears from the side, top, or bottom to show sup
 
 Experiment with the drawer component and its properties.
 
-<ComponentPlayground config={drawerConfig} />
+<ComponentPlayground config={drawerConfig} component={DBDrawer} />
 
 </DBSection>
 
