@@ -1,0 +1,27 @@
+.release-note .db-divider {
+	margin: var(--db-spacing-fixed-2xl) 0;
+}
+
+.db-section .db-section[data-spacing='small'] {
+	padding-inline: 0;
+}
+
+.release-note-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: var(--db-spacing-fixed-2xl);
+}
+
+.release-note-version {
+	font: var(--db-type-headline-sm);
+	font-family: var(--db-font-family-head);
+	font-weight: bolder;
+}
+
+.release-note-date {
+	font: var(--db-type-body-md);
+	font-family: var(--db-font-family-sans);
+	font-weight: normal;
+	opacity: 0.75;
+}

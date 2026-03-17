@@ -20,7 +20,7 @@ type Modules = Record<string, MdModule>;
 function strip(path: string): string {
 	const unix = path.replace(/\\/g, '/');
 	const withoutPrefix = unix.replace(/^.*content\/pages\//, '');
-	return withoutPrefix.replace(/(?:\/index\.(md|mdx)|^index\.(md|mdx))$/, '');
+	return withoutPrefix.replace(/(?:\/index\.(md|mdx|astro)|^index\.(md|mdx|astro))$/, '');
 }
 
 /**
@@ -94,7 +94,7 @@ function sortTree(node: NavigationItem) {
  * @returns A fully structured and sorted `AppNavigation` tree.
  */
 export function buildAppNavigationFromContent(): AppNavigation {
-	const mods = import.meta.glob<MdModule>('../../content/pages/**/*.{md,mdx}', {
+	const mods = import.meta.glob<MdModule>('../../content/pages/**/*.{md,mdx,astro}', {
 		eager: true,
 	}) as Modules;
 	const nodes = new Map<string, NavigationItem>();
@@ -102,6 +102,13 @@ export function buildAppNavigationFromContent(): AppNavigation {
 	for (const [key, mod] of Object.entries(mods)) {
 		const rel = strip(key);
 		const segments = rel.split('/').filter(Boolean);
+		
+		// Skip paths with segments starting with underscore
+		if (segments.some(seg => seg.startsWith('_'))) continue;
+		
+		// Skip demo pages
+		if (rel.startsWith('demo-b2b') || rel.startsWith('demo-b2c')) continue;
+		
 		const fm: NavigationFrontmatter = mod.frontmatter ?? ({} as NavigationFrontmatter);
 
 		if (rel === '') continue;
