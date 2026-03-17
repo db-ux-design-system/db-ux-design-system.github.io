@@ -56,7 +56,7 @@ const toc = (headings?.length ?? 0) > 0 && frontmatter.toc === true;
 							frontmatter.status === 'concept'
 								? 'warning'
 								: frontmatter.status === 'beta'
-									? 'informative'
+									? 'informational'
 									: frontmatter.status === 'stable'
 										? 'successful'
 										: frontmatter.status === 'deprecated'
