@@ -6,9 +6,10 @@ on:
     branches: ['main']
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
+  pull-requests: write
 
 concurrency:
   group: 'pages'
@@ -21,27 +22,60 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
-          cache: npm
+          cache: 'pnpm'
+
+      - name: 🖼️ Display node and pnpm version
+        shell: bash
+        run: |
+          node --version
+          pnpm --version
 
       - name: Install deps
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Lint
         run: |
-          npm run lint:stylelint
+          pnpm run lint
 
       - name: Build
         env:
           ASSET_PASSWORD: ${{ secrets.ASSET_PASSWORD }}
           ASSET_INIT_VECTOR: ${{ secrets.ASSET_INIT_VECTOR }}
         run: |
-          node node_modules/@db-ux/db-theme-fonts/build/scripts/index.js
-          node node_modules/@db-ux/db-theme-icons/build/scripts/index.js
-          npm run build
+          pnpm run decode-db-theme-assets
+          pnpm run build
+
+      - name: Playwright
+        id: playwright
+        continue-on-error: ${{ github.event_name == 'pull_request' }}
+        run: |
+          npx playwright install --with-deps chromium
+          pnpm run test
+
+      - name: Playwright regenerate snapshots
+        if: steps.playwright.outcome == 'failure' && github.event_name == 'pull_request'
+        id: playwright-regenerate
+        run: pnpm run test:regenerate
+
+      - name: 🚘 Auto commit
+        if: steps.playwright-regenerate.outcome == 'success' && github.event_name == 'pull_request'
+        uses: ./.github/actions/auto-commit
+        with:
+          branch-name: '${{ github.head_ref }}-auto'
+          commit-message: 'auto update snapshots'
+          commit-files: 'tests/*-snapshots/*'
+          auto-merge-app-id: ${{ vars.AUTO_MERGE_APP_ID }}
+          auto-merge-private-key: ${{ secrets.AUTO_MERGE_PRIVATE_KEY }}
+          gh-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Configure Pages
         if: ${{github.event_name != 'pull_request'}}

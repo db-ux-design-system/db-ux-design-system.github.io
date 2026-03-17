@@ -11,12 +11,12 @@ _tbd_
 ## Start locally
 
 ```shell
-npm run dev
+pnpm run dev
 ```
 
 ## Make changes / Before you commit
 
-Please ensure that **Husky** is installed correctly to validate your changes, e.g. by running `npm run prepare` in the codebase.
+Please ensure that **Husky** is installed correctly to validate your changes, e.g. by running `pnpm run prepare` in the codebase.
 
 Please verify you are using a valid branch name as described by the pattern in your [`package.json`](./package.json) in the section `validate-branch-name`.
 

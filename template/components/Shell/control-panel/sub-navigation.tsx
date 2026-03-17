@@ -9,12 +9,7 @@ const SubNavigation = ({
 	navigationItems: NavigationItem[];
 	variant?: NavigationItemGroupVariantType;
 }) => (
-	<DBShellSubNavigation
-		style={{
-			paddingLeft: 'var(--db-spacing-fixed-md)',
-			paddingRight: 'var(--db-spacing-fixed-md)',
-		}}
-	>
+	<DBShellSubNavigation>
 		<DBNavigation aria-label="sub navigation" variant={variant ?? 'tree'}>
 			{navigationItems.map((navigationItem: NavigationItem) => (
 				<NavItem

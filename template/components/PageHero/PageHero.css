@@ -32,7 +32,7 @@
 	gap: var(--db-spacing-fixed-lg);
 	flex-direction: column;
 	align-items: center;
-	max-width: 720px;
+	max-width: var(--db-container-3xl);
 	width: 100%;
 }
 
@@ -51,15 +51,15 @@
 
 .page-hero-description {
 	margin: 0;
-	max-width: 480px;
+	max-width: var(--db-container-md);
 	opacity: 0.75;
 	font: var(--db-type-body-md);
 }
 
 .page-hero-underline {
 	display: block;
-	width: 4rem; /* kann aus Token ersetzt werden falls vorhanden */
-	height: 0.5rem;
+	width: var(--db-sizing-lg); /* kann aus Token ersetzt werden falls vorhanden */
+	height: var(--db-sizing-3xs);
 	border-radius: var(--db-border-radius-xs);
 	background: var(--db-brand-origin-default);
 }
@@ -88,7 +88,7 @@
 
 .page-hero-media img {
 	display: block;
-	max-height: 320px;
+	max-height: var(--db-container-xs);
 	width: auto;
 	height: auto;
 }
@@ -160,8 +160,8 @@
 
 	.page-hero-underline {
 		margin-block-start: var(--db-spacing-fixed-md);
-		width: 3.5rem;
-		height: 0.5rem;
+		width: var(--db-sizing-sm);
+		height: var(--db-sizing-3xs);
 	}
 
 	.page-hero-media {

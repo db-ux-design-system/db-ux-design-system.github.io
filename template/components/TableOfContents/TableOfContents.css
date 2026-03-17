@@ -8,22 +8,22 @@
 		display: block;
 		position: fixed;
 		margin-top: var(--db-spacing-fixed-sm);
-		inset-inline-end: var(--db-spacing-fixed-sm);
+		inset-inline-end: var(--db-spacing-fixed-md);
 	}
 
-	overflow-y: auto;
+	overflow: hidden auto;
 	max-block-size: calc(100svh - var(--header-height) - var(--footer-height));
 }
 
 .dba-toc ul {
-	padding: 0 0 0 var(--db-spacing-fixed-2xs);
+	padding: 0 0 0 var(--db-spacing-fixed-xs);
 }
 
 .dba-toc-indicator {
 	position: absolute;
 	left: 0;
 	top: 0;
-	width: var(--db-border-width-xs);
+	width: var(--db-border-width-sm);
 	background-color: var(--db-brand-on-bg-basic-emphasis-70-default);
 	border-radius: var(--db-border-radius-full);
 	transition:
@@ -55,7 +55,7 @@
 	left: calc(var(--db-spacing-fixed-2xs) * -1);
 	top: 0;
 	bottom: 0;
-	width: var(--db-border-width-xs);
+	width: var(--db-border-width-sm);
 	background-color: var(--db-neutral-on-bg-inverted-pressed);
 }
 
@@ -81,28 +81,15 @@
 	min-height: var(--db-sizing-md);
 	padding: var(--db-spacing-fixed-2xs) var(--db-spacing-fixed-2xs) var(--db-spacing-fixed-2xs)
 		var(--db-spacing-fixed-sm);
-	border-radius: var(--db-border-radius-sm);
+	border-radius: var(--db-border-radius-xs);
 	font: inherit;
 	color: inherit;
 	text-decoration: none;
 }
 
 .dba-toc-toggle {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: var(--db-spacing-fixed-xl);
-	width: var(--db-spacing-fixed-xl);
-	background: transparent;
-	/* stylelint-disable-next-line db-ux/use-border-width */
-	border: transparent;
-	border-radius: var(--db-border-radius-xs);
-	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
-	cursor: pointer;
-	line-height: 1;
-	transition: background-color 0.2s ease;
 	position: absolute;
-	right: var(--db-spacing-fixed-2xs);
+	right: 0;
 	z-index: 2;
 
 	&:hover {

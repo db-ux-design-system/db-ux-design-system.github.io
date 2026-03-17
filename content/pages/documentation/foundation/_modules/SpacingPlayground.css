@@ -29,7 +29,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-height: 150px;
+	min-height: var(--db-sizing-regular-2xl);
 	padding: var(--db-spacing-fixed-2xl);
 	min-width: 0;
 }
@@ -38,7 +38,7 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	max-width: 480px;
+	max-width: var(--db-container-lg);
 	cursor: pointer;
 	position: relative;
 	border-radius: var(--db-border-radius-md);

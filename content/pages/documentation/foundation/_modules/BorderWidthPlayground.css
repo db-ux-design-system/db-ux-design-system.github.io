@@ -29,7 +29,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-height: 150px;
+	min-height: var(--db-sizing-regular-2xl);
 	padding: var(--db-spacing-fixed-2xl);
 	min-width: 0;
 }
@@ -37,8 +37,8 @@
 .width-box {
 	cursor: pointer;
 	transition: border-width 0.2s;
-	width: 200px;
-	height: 200px;
+	width: var(--db-container-3xs);
+	height: var(--db-container-3xs);
 	border-style: solid;
 	border-color: var(--db-adaptive-on-bg-basic-emphasis-60-default);
 }

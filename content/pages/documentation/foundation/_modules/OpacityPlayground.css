@@ -29,7 +29,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-height: 150px;
+	min-height: var(--db-sizing-regular-2xl);
 	padding: var(--db-spacing-fixed-2xl);
 	min-width: 0;
 	background: repeating-conic-gradient(#ddd 0% 25%, #fff 0% 50%) 50% / 20px 20px;
@@ -38,8 +38,8 @@
 .opacity-box {
 	cursor: pointer;
 	transition: opacity 0.3s ease;
-	width: 200px;
-	height: 200px;
+	width: var(--db-container-3xs);
+	height: var(--db-container-3xs);
 	background-color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
 }
 

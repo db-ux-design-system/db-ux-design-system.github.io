@@ -25,7 +25,6 @@ export function Shell({ children, pathname = '/', subNavigationVariant }: Props)
 	return (
 		<ColorModeProvider>
 			<DBShell
-				fadeIn
 				subNavigationDesktopPosition="left"
 				subNavigation={
 					subNavigation ? (

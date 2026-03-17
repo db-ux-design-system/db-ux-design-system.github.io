@@ -134,16 +134,16 @@ table tbody tr:nth-child(2n) {
 }
 
 .border-width-preview {
-	width: 100px;
-	height: 40px;
+	width: var(--db-sizing-regular-xl);
+	height: var(--db-sizing-regular-md);
 	border-style: solid;
 	border-color: var(--db-adaptive-on-bg-basic-emphasis-60-default);
 	border-radius: var(--db-border-radius-2xs);
 }
 
 .border-radius-preview {
-	width: 100px;
-	height: 100px;
+	width: var(--db-sizing-regular-xl);
+	height: var(--db-sizing-regular-xl);
 	background-color: var(--db-adaptive-bg-basic-level-1-default);
 	border: var(--db-border-width-2xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
 }
@@ -225,8 +225,8 @@ table tbody tr:nth-child(2n) {
 }
 
 .opacity-preview {
-	width: 100px;
-	height: 40px;
+	width: var(--db-sizing-regular-xl);
+	height: var(--db-sizing-regular-md);
 	background-color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
 	border-radius: var(--db-border-radius-xs);
 }
@@ -272,8 +272,8 @@ table tbody tr:nth-child(2n) {
 }
 
 .elevation-preview {
-	width: 100px;
-	height: 40px;
+	width: var(--db-sizing-regular-xl);
+	height: var(--db-sizing-regular-md);
 	background-color: var(--db-adaptive-bg-basic-level-1-default);
 	border-radius: var(--db-border-radius-xs);
 }

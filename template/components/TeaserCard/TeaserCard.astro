@@ -1,12 +1,15 @@
 ---
-import { DBCard, DBLink } from '@db-ux/react-core-components';
+import * as DBComponents from '@db-ux/react-core-components';
 import './TeaserCard.css';
+
+const { DBCard } = DBComponents;
 
 interface Props {
 	teasers: {
 		title: string;
 		description: string;
 		url: string;
+		component?: string;
 	}[];
 }
 
@@ -15,15 +18,49 @@ const { teasers } = Astro.props;
 
 <div class="teaser-cards">
 	{
-		teasers.map((teaser) => (
-			<DBCard behavior="interactive" spacing="none">
-				<DBLink href={teaser.url} variant="inline">
-					<div class="teaser-content">
-						<h6>{teaser.title}</h6>
-						<p>{teaser.description}</p>
-					</div>
-				</DBLink>
-			</DBCard>
-		))
+		teasers.map((teaser) => {
+			const Component = teaser.component ? (DBComponents as any)[teaser.component] : null;
+			const isLink = teaser.component === 'DBLink';
+			return (
+				<DBCard behavior="interactive" spacing="none">
+					{isLink ? (
+						<div
+							class="teaser-wrapper"
+							onclick={`window.location.href='${teaser.url}'`}
+							style="cursor: pointer;"
+						>
+							<div class="teaser-content">
+								<h2>{teaser.title}</h2>
+								<p>{teaser.description}</p>
+							</div>
+							{Component && (
+								<div class="teaser-preview">
+									<Component
+										href="#"
+										wrap={false}
+										onclick="event.preventDefault(); event.stopPropagation();"
+									>
+										{teaser.title}
+									</Component>
+								</div>
+							)}
+						</div>
+					) : (
+						<a href={teaser.url}>
+							<!-- TODO: The anchor should wrap DBCard instead -->
+							<div class="teaser-content">
+								<h2>{teaser.title}</h2>
+								<p>{teaser.description}</p>
+							</div>
+							{Component && (
+								<div class="teaser-preview">
+									<Component>{teaser.title}</Component>
+								</div>
+							)}
+						</a>
+					)}
+				</DBCard>
+			);
+		})
 	}
 </div>
