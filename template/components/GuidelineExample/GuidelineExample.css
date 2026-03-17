@@ -1,3 +1,13 @@
+.guideline-examples {
+	display: flex;
+	gap: var(--db-spacing-fixed-md);
+	margin-block-end: var(--db-spacing-fixed-2xl);
+}
+
+.guideline-examples:last-child {
+	margin-block-end: 0;
+}
+
 .guideline-example-container {
 	position: relative;
 	display: inline-block;

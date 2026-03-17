@@ -3,21 +3,24 @@ import { DBBadge } from '@db-ux/react-core-components';
 import './GuidelineExample.css';
 
 interface Props {
-	variant: 'do' | 'dont';
+	variant: 'do' | 'dont' | 'caution';
 	figmaUrl: string;
 	description: string;
+	fullWidth?: boolean;
 }
 
-const { variant, figmaUrl, description } = Astro.props;
-const semantic = variant === 'do' ? 'successful' : 'critical';
+const { variant, figmaUrl, description, fullWidth = false } = Astro.props;
+const semantic = variant === 'do' ? 'successful' : variant === 'caution' ? 'warning' : 'critical';
 const label = variant === 'do' ? 'Do' : "Don't";
 const fullUrl = `${figmaUrl}&embed-host=share&footer=false&viewport-controls=false&page-selector=false&scaling=scale-down-width`;
 ---
 
 <div class="guideline-example-container">
-	<DBBadge semantic={semantic} size="medium" class="guideline-example-badge">
-		<span>{label}</span>
-	</DBBadge>
+	<div class="guideline-example-badge">
+		<DBBadge semantic={semantic} size="medium">
+			<span>{label}</span>
+		</DBBadge>
+	</div>
 	<iframe
 		class="guideline-example-iframe"
 		src={fullUrl}

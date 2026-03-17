@@ -2,15 +2,6 @@
 import './ComponentPlayground.css';
 import ShellExample from '@template/components/ShellExample/ShellExample.tsx';
 import TooltipExample from '@template/components/TooltipExample/TooltipExample.tsx';
-import DrawerExample from '@template/components/DrawerExample/DrawerExample.tsx';
-import {
-	DBShell,
-	DBControlPanelDesktop,
-	DBControlPanelBrand,
-	DBNavigation,
-	DBNavigationItem,
-	DBControlPanelPrimaryActions,
-} from '@db-ux/react-core-components';
 interface Props {
 	config: any;
 	component: any;
@@ -30,29 +21,7 @@ const nativeAttributes = [
 	'name',
 	'id',
 ];
-// Properties that support both kebab-case and camelCase
-const dualCaseProps = {
-	invalidMessage: 'invalid-message',
-	validMessage: 'valid-message',
-	dataListId: 'data-list-id',
-	showMessage: 'show-message',
-	minLength: 'min-length',
-	maxLength: 'max-length',
-	showLabel: 'show-label',
-	showIconLeading: 'show-icon-leading',
-	showIcon: 'show-icon',
-	iconLeading: 'icon-leading',
-	iconTrailing: 'icon-trailing',
-	showRequiredAsterisk: 'show-required-asterisk',
-	showIconTrailing: 'show-icon-trailing',
-	fieldSizing: 'field-sizing',
-	readOnly: 'read-only',
-	ariaDescribedBy: 'aria-described-by',
-	messageSize: 'message-size',
-	messageIcon: 'message-icon',
-	validMessageSize: 'valid-message-size',
-	invalidMessageSize: 'invalid-message-size',
-};
+
 ---
 
 <div class="component-playground">
@@ -101,7 +70,7 @@ const dualCaseProps = {
 						role="switch"
 						checked={config.defaultProps.checked}
 						disabled={config.defaultProps.disabled}
-						onchange="const controls = document.querySelectorAll('.controls-area input[type=checkbox]'); controls.forEach(c => { if(c.onchange && c.onchange.toString().includes('target.checked')) c.checked = this.checked; });"
+						onchange={"var ctrls = document.querySelectorAll('.controls-area input[type=checkbox]'); ctrls.forEach(function(c){ if(c.onchange && c.onchange.toString().includes('target.checked')) c.checked = this.checked; }.bind(this));"}
 					/>
 					<span id="playground-switch-label">Enable notifications</span>
 				</label>
@@ -112,7 +81,7 @@ const dualCaseProps = {
 						type="radio"
 						checked={config.defaultProps.checked}
 						disabled={config.defaultProps.disabled}
-						onchange="const controls = document.querySelectorAll('.controls-area input[type=checkbox]'); controls.forEach(c => { if(c.onchange && c.onchange.toString().includes('target.checked')) c.checked = this.checked; });"
+						onchange={"var ctrls = document.querySelectorAll('.controls-area input[type=checkbox]'); ctrls.forEach(function(c){ if(c.onchange && c.onchange.toString().includes('target.checked')) c.checked = this.checked; }.bind(this));"}
 					/>
 					<span id="playground-radio-label">Option 1</span>
 				</label>
@@ -123,7 +92,7 @@ const dualCaseProps = {
 						type="checkbox"
 						checked={config.defaultProps.checked}
 						disabled={config.defaultProps.disabled}
-						onchange="const controls = document.querySelectorAll('.controls-area input[type=checkbox]'); controls.forEach(c => { if(c.onchange && c.onchange.toString().includes('target.checked')) c.checked = this.checked; });"
+						onchange={"var ctrls = document.querySelectorAll('.controls-area input[type=checkbox]'); ctrls.forEach(function(c){ if(c.onchange && c.onchange.toString().includes('target.checked')) c.checked = this.checked; }.bind(this));"}
 					/>
 					<span id="playground-checkbox-label">Accept terms</span>
 				</label>
@@ -162,7 +131,7 @@ const dualCaseProps = {
 					data-headline={config.defaultProps.headline}
 					data-link-variant="block"
 				>
-					{config.properties.find((p) => p.name === 'show-headline')?.defaultValue !== false && (
+					{config.properties.find((p: any) => p.name === 'show-headline')?.defaultValue !== false && (
 						<header id="notification-headline">{config.defaultProps.headline || ''}</header>
 					)}
 					<p />
@@ -186,7 +155,7 @@ const dualCaseProps = {
 						data-variant="ghost"
 						data-no-text="true"
 						style={
-							config.properties.find((p) => p.name === 'closeable')?.defaultValue === false
+							config.properties.find((p: any) => p.name === 'closeable')?.defaultValue === false
 								? 'display: none;'
 								: ''
 						}
@@ -200,7 +169,7 @@ const dualCaseProps = {
 					<select
 						id="playground-select-field"
 						aria-invalid="false"
-						onchange="const wrapper = document.getElementById('playground-select'); if(wrapper.getAttribute('data-variant') === 'floating') { if(this.value) { wrapper.removeAttribute('data-label-hidden'); } else { wrapper.setAttribute('data-label-hidden', 'true'); } }"
+						onchange={"var w = document.getElementById('playground-select'); if(w.getAttribute('data-variant') === 'floating') { if(this.value) { w.removeAttribute('data-label-hidden'); } else { w.setAttribute('data-label-hidden', 'true'); } }"}
 					>
 						<option id="playground-select-placeholder" value="" hidden>
 							{config.defaultProps.placeholder || 'Choose an option'}
@@ -270,7 +239,7 @@ const dualCaseProps = {
 						data-show-icon-leading="true"
 						style="display: none;"
 					>
-						{config.properties.find((p) => p.name === 'valid-message / validMessage')?.defaultValue || 'Valid input'}
+						{config.properties.find((p: any) => p.name === 'valid-message / validMessage')?.defaultValue || 'Valid input'}
 					</span>
 					<span
 						id="playground-textarea-infotext"
@@ -280,7 +249,7 @@ const dualCaseProps = {
 						data-show-icon-leading="true"
 						style="display: none;"
 					>
-						{config.properties.find((p) => p.name === 'invalid-message / invalidMessage')?.defaultValue || 'Please enter a valid message'}
+						{config.properties.find((p: any) => p.name === 'invalid-message / invalidMessage')?.defaultValue || 'Please enter a valid message'}
 					</span>
 					<span data-visually-hidden="true" role="status" />
 				</div>
@@ -301,7 +270,7 @@ const dualCaseProps = {
 						class="db-button"
 						type="button"
 						data-variant="primary"
-						onclick="const drawer = document.getElementById('demo-drawer'); drawer.showModal(); const checkbox = document.querySelector('.controls-area input[type=checkbox][onchange*=showModal]'); if(checkbox) checkbox.checked = true;"
+						onclick={"var d = document.getElementById('demo-drawer'); d.showModal(); var cb = document.querySelector('.controls-area input[type=checkbox][onchange*=showModal]'); if(cb) cb.checked = true;"}
 					>
 						Open Drawer
 					</button>
@@ -310,7 +279,7 @@ const dualCaseProps = {
 						id={config.elementId}
 						data-backdrop={config.defaultProps.backdrop}
 						data-direction={config.defaultProps.direction}
-						onclick="if(event.target === this) { this.close(); const checkbox = document.querySelector('.controls-area input[type=checkbox][onchange*=showModal]'); if(checkbox) checkbox.checked = false; }"
+						onclick={"if(event.target === this) { this.close(); var cb = document.querySelector('.controls-area input[type=checkbox][onchange*=showModal]'); if(cb) cb.checked = false; }"}
 					>
 						<article class="db-drawer-container" data-direction={config.defaultProps.direction}>
 							<header class="db-drawer-header">
@@ -323,7 +292,7 @@ const dualCaseProps = {
 									data-icon="cross"
 									data-variant="ghost"
 									data-no-text="true"
-									onclick="const drawer = document.getElementById('demo-drawer'); drawer.close(); const checkbox = document.querySelector('.controls-area input[type=checkbox][onchange*=showModal]'); if(checkbox) checkbox.checked = false;"
+									onclick={"var d = document.getElementById('demo-drawer'); d.close(); var cb = document.querySelector('.controls-area input[type=checkbox][onchange*=showModal]'); if(cb) cb.checked = false;"}
 								>
 									Close
 								</button>
@@ -386,12 +355,12 @@ const dualCaseProps = {
 	</div>
 
 	{
-		config.properties.filter((prop) => prop.showInPlayground !== false).length > 0 && (
+		config.properties.filter((prop: any) => prop.showInPlayground !== false).length > 0 && (
 			<div class="controls-area">
 				<div class="controls-area-content" data-density="functional">
 					{config.properties
-						.filter((prop) => prop.showInPlayground !== false)
-						.map((prop) => {
+						.filter((prop: any) => prop.showInPlayground !== false)
+						.map((prop: any) => {
 							if (prop.type === 'select') {
 								const attrName = nativeAttributes.includes(prop.name)
 									? prop.name
@@ -449,7 +418,7 @@ const dualCaseProps = {
 									<div class="db-select">
 										<label>{prop.label}</label>
 										<select onchange={updateAction}>
-											{prop.options.map((option) => (
+											{prop.options.map((option: any) => (
 												<option value={option.value} selected={option.default}>
 													{option.label}
 												</option>
@@ -488,7 +457,7 @@ const dualCaseProps = {
 										</div>
 									);
 								} else if (config.elementId === 'playground-switch' && prop.name === 'label') {
-									const labelProp = config.properties.find((p) => p.name === 'label');
+									const labelProp = config.properties.find((p: any) => p.name === 'label');
 									return (
 										<div class="db-input">
 											<label>{prop.label}</label>
@@ -500,7 +469,7 @@ const dualCaseProps = {
 										</div>
 									);
 								} else if (config.elementId === 'playground-radio' && prop.name === 'label') {
-									const labelProp = config.properties.find((p) => p.name === 'label');
+									const labelProp = config.properties.find((p: any) => p.name === 'label');
 									return (
 										<div class="db-input">
 											<label>{prop.label}</label>
@@ -512,7 +481,7 @@ const dualCaseProps = {
 										</div>
 									);
 								} else if (config.elementId === 'playground-checkbox' && prop.name === 'label') {
-									const labelProp = config.properties.find((p) => p.name === 'label');
+									const labelProp = config.properties.find((p: any) => p.name === 'label');
 									return (
 										<div class="db-input">
 											<label>{prop.label}</label>
@@ -524,7 +493,7 @@ const dualCaseProps = {
 										</div>
 									);
 								} else if (config.elementId === 'playground-select' && prop.name === 'label') {
-									const labelProp = config.properties.find((p) => p.name === 'label');
+									const labelProp = config.properties.find((p: any) => p.name === 'label');
 									return (
 										<div class="db-input">
 											<label>{prop.label}</label>
@@ -536,7 +505,7 @@ const dualCaseProps = {
 										</div>
 									);
 								} else if (config.elementId === 'playground-textarea' && prop.name === 'label') {
-									const labelProp = config.properties.find((p) => p.name === 'label');
+									const labelProp = config.properties.find((p: any) => p.name === 'label');
 									return (
 										<div class="db-input">
 											<label>{prop.label}</label>
@@ -551,7 +520,7 @@ const dualCaseProps = {
 									config.elementId === 'playground-select' &&
 									prop.name === 'placeholder'
 								) {
-									const placeholderProp = config.properties.find((p) => p.name === 'placeholder');
+									const placeholderProp = config.properties.find((p: any) => p.name === 'placeholder');
 									return (
 										<div class="db-input">
 											<label>{prop.label}</label>
