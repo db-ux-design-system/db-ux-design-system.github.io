@@ -4,7 +4,7 @@
 
 - Page must be `.astro` file (not `.mdx`) for `slot="script"` to work
 - Scripts that interact with React components using `client:only="react"` must account for hydration timing
-- Use `<script is:inline slot="script">` to place scripts in document head via layout slot mechanism
+- Use `<script is:inline slot="script">` to place scripts in document body via layout slot mechanism
 - Use `define:vars={{ data }}` to pass server-side data to client scripts
 
 ## Pattern
@@ -19,8 +19,8 @@
     }
     // initialization logic
   }
-  
-  window?.addEventListener('load', () => {
+
+  window.addEventListener('load', () => {
     setTimeout(() => tryInit(), 1000);
   });
 </script>
