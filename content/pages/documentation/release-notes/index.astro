@@ -1,17 +1,15 @@
 ---
 import DocumentationLayout from '@template/layouts/documentation';
-import { DBSection, DBTag, DBStack, DBCheckbox, DBDivider } from '@db-ux/react-core-components';
+import { DBTag, DBStack, DBCheckbox, DBDivider } from '@db-ux/react-core-components';
 import './index.css';
 import type { MarkdownInstance } from 'astro';
-import type { AstroComponentFactory } from 'astro/runtime/server';
-
 type ReleaseNote = {
 	slug: string;
 	heading: string;
 	category: string;
 	version: string;
 	date: Date;
-	Content: AstroComponentFactory;
+	Content: MarkdownInstance<any>['Content'];
 };
 
 export const frontmatter = {
