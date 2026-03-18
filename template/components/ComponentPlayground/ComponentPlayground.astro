@@ -379,9 +379,7 @@ const nativeAttributes = [
 								} else if (config.elementId === 'playground-input' && prop.name === 'label') {
 									updateAction = `document.getElementById('${targetId}').textContent = this.value;`;
 								} else if (
-									(config.elementId === 'playground-input' ||
-										config.elementId === 'playground-select' ||
-										config.elementId === 'playground-textarea') &&
+									['playground-input', 'playground-select', 'playground-textarea'].includes(config.elementId)
 									prop.name === 'validation'
 								) {
 									const fieldId =
