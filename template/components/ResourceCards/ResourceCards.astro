@@ -69,32 +69,38 @@ const getIconPath = (icon: string): string => {
 
 <div class="resource-cards">
 	{
-		resources.map((resource) => (
-			<>
-				{resource.icon === 'html5' || resource.icon === 'web-components' ? (
-					<DisabledWrapper label="Coming Soon" size="small">
-						<DBCard behavior="interactive">
-							<a aria-disabled="true" tabindex="-1">
-								<img src={getIconPath(resource.icon)} alt="" width="32" height="32" />
-								<div class="resource-text">
-									<b>{resource.title}</b>
-									<p>{resource.description}</p>
-								</div>
-							</a>
-						</DBCard>
-					</DisabledWrapper>
-				) : (
-					<DBCard behavior="interactive">
-						<a href={resource.url} target="_blank" rel="noopener noreferrer">
-							<img src={getIconPath(resource.icon)} alt="" width="32" height="32" />
-							<div class="resource-text">
-								<b>{resource.title}</b>
-								<p>{resource.description}</p>
-							</div>
+		resources.map((resource) => {
+			const isDisabled =
+				resource.icon === 'html5' || resource.icon === 'web-components';
+			const cardContent = (
+				<>
+					<img src={getIconPath(resource.icon)} alt="" width="32" height="32" />
+					<div class="resource-text">
+						<b>{resource.title}</b>
+						<p>{resource.description}</p>
+					</div>
+				</>
+			);
+			const card = (
+				<DBCard behavior="interactive">
+					{isDisabled ? (
+						<a aria-disabled="true" tabindex="-1">
+							{cardContent}
 						</a>
-					</DBCard>
-				)}
-			</>
-		))
+					) : (
+						<a href={resource.url} target="_blank" rel="noopener noreferrer">
+							{cardContent}
+						</a>
+					)}
+				</DBCard>
+			);
+			return isDisabled ? (
+				<DisabledWrapper label="Coming Soon" size="small">
+					{card}
+				</DisabledWrapper>
+			) : (
+				card
+			);
+		})
 	}
 </div>
