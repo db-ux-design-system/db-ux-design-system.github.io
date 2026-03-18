@@ -22,7 +22,10 @@ const { title, text, primaryAction, secondaryAction, align = 'center' } = Astro.
 
 const BUTTON_VARIANTS: ButtonVariant[] = ['outlined', 'brand', 'filled', 'ghost'];
 
-const normalizeVariant = (variant: ButtonVariant | undefined, fallback: ButtonVariant): ButtonVariant =>
+const normalizeVariant = (
+	variant: ButtonVariant | undefined,
+	fallback: ButtonVariant,
+): ButtonVariant =>
 	BUTTON_VARIANTS.includes(variant as ButtonVariant) ? (variant as ButtonVariant) : fallback;
 ---
 
@@ -35,7 +38,7 @@ const normalizeVariant = (variant: ButtonVariant | undefined, fallback: ButtonVa
 				<div class="cta-actions">
 					<a
 						href={primaryAction.href}
-						class="db-button cta-action"
+						class="db-button"
 						data-variant={normalizeVariant(primaryAction.variant, 'brand')}
 					>
 						{primaryAction.label}
@@ -43,7 +46,7 @@ const normalizeVariant = (variant: ButtonVariant | undefined, fallback: ButtonVa
 					{secondaryAction && (
 						<a
 							href={secondaryAction.href}
-							class="db-button cta-action"
+							class="db-button"
 							data-variant={normalizeVariant(secondaryAction.variant, 'outlined')}
 						>
 							{secondaryAction.label}

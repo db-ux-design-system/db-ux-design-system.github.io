@@ -40,7 +40,7 @@
 	gap: var(--db-spacing-fixed-sm);
 }
 
-.cta-action {
+.cta .db-button {
 	text-decoration: none;
 }
 
@@ -53,18 +53,10 @@
 }
 
 .cta .db-button[data-variant='brand']:hover {
-	background: var(--db-brand-on-origin-default);
-	color: var(--db-brand-origin-default);
-	/* stylelint-disable-next-line db-ux/use-border-color */
-	border-color: var(--db-brand-on-origin-default);
 	opacity: 0.88;
 }
 
 .cta .db-button[data-variant='brand']:active {
-	background: var(--db-brand-on-origin-default);
-	color: var(--db-brand-origin-default);
-	/* stylelint-disable-next-line db-ux/use-border-color */
-	border-color: var(--db-brand-on-origin-default);
 	opacity: 0.76;
 }
 
@@ -81,14 +73,10 @@
 
 .cta .db-button[data-variant='outlined']:hover {
 	background: rgb(255 255 255 / 24%);
-	color: var(--db-brand-on-origin-default);
-	border-color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
 }
 
 .cta .db-button[data-variant='outlined']:active {
 	background: rgb(255 255 255 / 36%);
-	color: var(--db-brand-on-origin-default);
-	border-color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
 }
 
 /* TODO: why do we define an outline on focus here, shouldn't this even already been defined by the system itself ? */
