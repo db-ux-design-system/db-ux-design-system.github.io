@@ -83,18 +83,19 @@ const iconDescriptionsJson = JSON.stringify(iconDescriptions);
 		if (!searchInput) return;
 
 		const buttons = Array.from(gallery.querySelectorAll('.icon-item'));
-		const iconKeys = Object.keys(iconDescriptions);
 		const iconMap = new Map();
 
-		buttons.forEach((button, index) => {
-			if (iconKeys[index]) {
-				const iconKey = iconKeys[index];
-				const iconName = iconKey.replace(/-/g, '_');
+		buttons.forEach((button) => {
+			const iconKey = button.getAttribute('data-icon-key');
+			const iconName = button.getAttribute('data-icon-name');
+			if (iconKey && iconName) {
 				iconMap.set(button, { iconKey, iconName });
 			}
 		});
 
 		gallery.addEventListener('click', (e) => {
+			if (!(e.target instanceof Element)) return;
+
 			const button = e.target.closest('.icon-item');
 			if (!button) return;
 
