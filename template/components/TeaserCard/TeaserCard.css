@@ -4,18 +4,18 @@
 	gap: var(--db-spacing-fixed-md);
 }
 
-.teaser-cards .db-card > a {
-	display: flex;
-	flex-direction: column;
-	text-decoration: none;
-	color: inherit;
-	height: 100%;
-}
-
 .teaser-cards .db-card > .teaser-wrapper {
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+	cursor: pointer;
+	color: inherit;
+	text-decoration: none;
+}
+
+.teaser-cards .db-card > .teaser-wrapper:focus-visible {
+	outline: var(--db-border-width-xs) solid var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	outline-offset: calc(-1 * var(--db-border-width-3xs));
 }
 
 .teaser-preview {

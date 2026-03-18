@@ -17,8 +17,7 @@
 	gap: 0;
 }
 
-
-.resource-cards .db-card h5 {
+.resource-cards .db-card .resource-title {
 	margin: 0;
 }
 
@@ -27,6 +26,6 @@
 	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
 }
 
-.resource-cards .db-card strong {
+.resource-cards .db-card .resource-link-label {
 	margin-top: auto;
 }

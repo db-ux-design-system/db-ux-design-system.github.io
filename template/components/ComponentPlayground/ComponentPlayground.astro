@@ -165,13 +165,13 @@ const nativeAttributes = [
 				</article>
 			) : config.elementId === 'playground-select' ? (
 				<div class="db-select" id={config.elementId} data-hide-label="false" data-variant="above">
-					<label id="playground-select-label">{config.defaultProps.label || 'Country'}</label>
+					<label id="playground-select-label" for="playground-select-field">{config.defaultProps.label || 'Country'}</label>
 					<select
 						id="playground-select-field"
 						aria-invalid="false"
 						onchange={"var w = document.getElementById('playground-select'); if(w.getAttribute('data-variant') === 'floating') { if(this.value) { w.removeAttribute('data-label-hidden'); } else { w.setAttribute('data-label-hidden', 'true'); } }"}
 					>
-						<option id="playground-select-placeholder" value="" hidden>
+						<option id="playground-select-placeholder" value="" hidden selected>
 							{config.defaultProps.placeholder || 'Choose an option'}
 						</option>
 						<option value="de">Germany</option>
@@ -379,7 +379,7 @@ const nativeAttributes = [
 								} else if (config.elementId === 'playground-input' && prop.name === 'label') {
 									updateAction = `document.getElementById('${targetId}').textContent = this.value;`;
 								} else if (
-									['playground-input', 'playground-select', 'playground-textarea'].includes(config.elementId)
+									['playground-input', 'playground-select', 'playground-textarea'].includes(config.elementId) &&
 									prop.name === 'validation'
 								) {
 									const fieldId =
@@ -642,9 +642,7 @@ const nativeAttributes = [
 											? prop.name === 'label'
 												? 'playground-textarea-label'
 												: 'playground-textarea-field'
-											: (config.elementId === 'playground-switch' ||
-														config.elementId === 'playground-radio' ||
-														config.elementId === 'playground-checkbox') &&
+											: ['playground-switch', 'playground-radio', 'playground-checkbox'].includes(config.elementId) &&
 												  (prop.name === 'icon-leading' ||
 														prop.name === 'iconLeading' ||
 														prop.name === 'icon-trailing' ||
@@ -676,9 +674,7 @@ const nativeAttributes = [
 											? 'playground-input-field'
 											: config.elementId === 'playground-textarea'
 											? 'playground-textarea-field'
-											: config.elementId === 'playground-switch' ||
-												  config.elementId === 'playground-radio' ||
-												  config.elementId === 'playground-checkbox'
+											: ['playground-switch', 'playground-radio', 'playground-checkbox'].includes(config.elementId)
 												? `${config.elementId}-input`
 												: config.elementId;
 									if (config.elementId === 'playground-select') {
@@ -692,27 +688,23 @@ const nativeAttributes = [
 									}
 								} else if (prop.name === 'checked') {
 									const targetId =
-										config.elementId === 'playground-switch' ||
-										config.elementId === 'playground-radio' ||
-										config.elementId === 'playground-checkbox'
+										['playground-switch', 'playground-radio', 'playground-checkbox'].includes(config.elementId)
 											? `${config.elementId}-input`
 											: config.elementId;
 									action = `const target = document.getElementById('${targetId}'); target.checked = this.checked; if(this.checked) target.setAttribute('checked', ''); else target.removeAttribute('checked');`;
 								} else if (
-									(config.elementId === 'playground-switch' ||
-										config.elementId === 'playground-radio' ||
-										config.elementId === 'playground-checkbox') &&
+									['playground-switch', 'playground-radio', 'playground-checkbox'].includes(config.elementId) &&
 									(prop.name === 'show-label' || prop.name === 'showLabel')
 								) {
 									action = `const label = document.getElementById('${config.elementId}-label'); if(this.checked) label.style.display = ''; else label.style.display = 'none';`;
 								} else if (
 									config.elementId === 'playground-select' &&
-									(prop.name === 'showLabel' || prop.name === 'show-label')
+									['showLabel', 'show-label'].includes(prop.name)
 								) {
 									action = `const wrapper = document.getElementById('${config.elementId}'); if(wrapper) wrapper.setAttribute('data-hide-label', this.checked ? 'false' : 'true');`;
 								} else if (
 									config.elementId === 'playground-select' &&
-									(prop.name === 'showMessage' || prop.name === 'show-message')
+									['showMessage', 'show-message'].includes(prop.name)
 								) {
 									action = `const message = document.getElementById('playground-select-message'); if(message) message.style.display = this.checked ? '' : 'none';`;
 								} else if (config.elementId === 'playground-select' && prop.name === 'required') {
@@ -726,7 +718,7 @@ const nativeAttributes = [
 									action = `const btn = document.getElementById('notification-close'); if(btn) btn.style.display = this.checked ? '' : 'none';`;
 								} else if (
 									config.elementId === 'demo-navigation-item' &&
-									(prop.name === 'show-icon' || prop.name === 'showIcon')
+									['show-icon', 'showIcon'].includes(prop.name)
 								) {
 									action = `const item = document.getElementById('${config.elementId}'); if(this.checked) item.setAttribute('data-show-icon', 'true'); else item.setAttribute('data-show-icon', 'false');`;
 								} else if (
@@ -743,7 +735,10 @@ const nativeAttributes = [
 									prop.name === 'disabled'
 								) {
 									action = `const item = document.getElementById('${config.elementId}'); const link = document.getElementById('navigation-item-link'); if(this.checked) { item.setAttribute('aria-disabled', 'true'); link.setAttribute('aria-disabled', 'true'); } else { item.removeAttribute('aria-disabled'); link.removeAttribute('aria-disabled'); }`;
-								} else if (config.elementId === 'demo-notification' && prop.name === 'closeable') {
+								} else if (
+									config.elementId === 'demo-notification' &&
+									(prop.name === 'show-headline' || prop.name === 'showHeadline')
+								) {
 									action = `const h = document.getElementById('notification-headline'); if(this.checked) { if(!h) { const notification = document.getElementById('demo-notification'); const header = document.createElement('header'); header.id = 'notification-headline'; header.textContent = notification.getAttribute('data-headline') || 'Success'; notification.insertBefore(header, notification.firstChild); } else { h.style.display = ''; } } else { if(h) h.remove(); }`;
 								} else {
 									action = `if(this.checked) document.getElementById('${config.elementId}').setAttribute('data-${prop.name}', 'true'); else document.getElementById('${config.elementId}').setAttribute('data-${prop.name}', 'false');`;

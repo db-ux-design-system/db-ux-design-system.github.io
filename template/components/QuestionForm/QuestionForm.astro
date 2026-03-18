@@ -10,15 +10,11 @@ const { componentName } = Astro.props;
 const subject = componentName
 	? `Question: ${componentName} component`
 	: 'Question about DB UX Design System';
+
+const mailtoHref = `mailto:db-ux-designsystem@deutschebahn.com?subject=${encodeURIComponent(subject)}`;
 ---
 
-<form class="question-form" data-subject={subject} onsubmit="event.preventDefault(); var subject = this.dataset.subject || 'Question about DB UX Design System'; var body = this.querySelector('textarea').value; window.location.href = 'mailto:db-ux-designsystem@deutschebahn.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body); return false;">
-	<div class="db-textarea">
-		<label for="question" class="db-label">Your question</label>
-		<textarea id="question" required rows="5" class="db-textarea__input"></textarea>
-	</div>
-
-	<button type="submit" class="db-button" data-variant="filled">
-		<span>Send question</span>
-	</button>
-</form>
+<section class="question-form" aria-label="Question contact">
+	<p class="question-form-text">Send us your question directly with your preferred email client.</p>
+	<a class="db-link" data-variant="brand" href={mailtoHref}>Email the DB UX team</a>
+</section>

@@ -39,7 +39,7 @@ const defaultResources: Resource[] = [
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg',
 	},
 	{
-		title: 'Web C.',
+		title: 'Web Components',
 		description: 'Interactive examples and documentation.',
 		url: `${baseUrl}/angular-storybook${path}`,
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
@@ -61,10 +61,10 @@ const resources = customResources || defaultResources;
 						height="32"
 					/>
 					<div class="resource-text">
-						<b>{resource.title}</b>
+						<strong class="resource-title">{resource.title}</strong>
 						<p>{resource.description}</p>
 					</div>
-					<strong data-icon-trailing="arrow_up_right">{resource.label || 'View Storybook'}</strong>
+					<strong class="resource-link-label" data-icon-trailing="arrow_up_right">{resource.label || 'View Storybook'}</strong>
 				</DBCard>
 			</a>
 		))

@@ -21,6 +21,7 @@ export const linkConfig = {
 			type: 'text',
 			defaultValue: 'Link Text',
 			description: 'Alternative for default slot/children.',
+			showInPlayground: true,
 		},
 
 		// Appearance
@@ -35,6 +36,7 @@ export const linkConfig = {
 				{ value: 'brand', label: 'Brand' },
 				{ value: 'inline', label: 'Inline' },
 			],
+			showInPlayground: true,
 		},
 		{
 			name: 'size',
@@ -45,6 +47,7 @@ export const linkConfig = {
 				{ value: 'medium', label: 'Medium', default: true },
 				{ value: 'small', label: 'Small' },
 			],
+			showInPlayground: true,
 		},
 		{
 			name: 'content',
@@ -56,6 +59,7 @@ export const linkConfig = {
 				{ value: 'external', label: 'External' },
 				{ value: 'internal', label: 'Internal' },
 			],
+			showInPlayground: true,
 		},
 
 		// States
@@ -65,6 +69,7 @@ export const linkConfig = {
 			type: 'checkbox',
 			defaultValue: false,
 			description: 'Disables the link.',
+			showInPlayground: true,
 		},
 
 		// Hidden properties

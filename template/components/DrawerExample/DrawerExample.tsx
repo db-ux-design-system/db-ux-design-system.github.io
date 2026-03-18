@@ -35,7 +35,11 @@ export default function DrawerExample({ direction = 'right', backdrop = 'strong'
 					}
 				} else {
 					if (dialog.hasAttribute('open')) {
-						dialog.close();
+						if (typeof dialog.requestClose === 'function') {
+							dialog.requestClose();
+						} else {
+							dialog.close();
+						}
 					}
 				}
 			}

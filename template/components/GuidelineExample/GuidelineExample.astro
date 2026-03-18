@@ -6,12 +6,11 @@ interface Props {
 	variant: 'do' | 'dont' | 'caution';
 	figmaUrl: string;
 	description: string;
-	fullWidth?: boolean;
 }
 
-const { variant, figmaUrl, description, fullWidth = false } = Astro.props;
+const { variant, figmaUrl, description } = Astro.props;
 const semantic = variant === 'do' ? 'successful' : variant === 'caution' ? 'warning' : 'critical';
-const label = variant === 'do' ? 'Do' : "Don't";
+const label = variant === 'do' ? 'Do' : variant === 'caution' ? 'Caution' : "Don't";
 const fullUrl = `${figmaUrl}&embed-host=share&footer=false&viewport-controls=false&page-selector=false&scaling=scale-down-width`;
 ---
 

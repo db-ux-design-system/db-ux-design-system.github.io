@@ -21,6 +21,7 @@ export const badgeConfig = {
 			type: 'text',
 			defaultValue: 'Badge',
 			description: 'Alternative for default slot/children.',
+			showInPlayground: true,
 		},
 		// Appearance
 		{
@@ -36,6 +37,7 @@ export const badgeConfig = {
 				{ value: 'warning', label: 'Warning' },
 				{ value: 'successful', label: 'Successful' },
 			],
+			showInPlayground: true,
 		},
 		{
 			name: 'emphasis',
@@ -46,6 +48,7 @@ export const badgeConfig = {
 				{ value: 'weak', label: 'Weak' },
 				{ value: 'strong', label: 'Strong', default: true },
 			],
+			showInPlayground: true,
 		},
 		{
 			name: 'size',
@@ -56,6 +59,7 @@ export const badgeConfig = {
 				{ value: 'small', label: 'Small' },
 				{ value: 'medium', label: 'Medium', default: true },
 			],
+			showInPlayground: true,
 		},
 		{
 			name: 'placement',
@@ -71,6 +75,7 @@ export const badgeConfig = {
 				{ value: 'corner-bottom-left', label: 'Corner Bottom Left' },
 				{ value: 'corner-bottom-right', label: 'Corner Bottom Right' },
 			],
+			showInPlayground: true,
 		},
 		// Hidden properties
 		{

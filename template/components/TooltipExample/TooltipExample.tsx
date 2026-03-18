@@ -8,7 +8,7 @@ type TooltipWidth = 'fixed' | 'auto';
 export default function TooltipExample({ text = 'Tooltip text', placement = 'top' as TooltipPlacement, animation = true, showArrow = true, emphasis = 'strong' as TooltipEmphasis, width = 'auto' as TooltipWidth }) {
 	return (
 		<div className="tooltip-example-wrapper">
-			<DBButton variant="primary">
+			<DBButton variant="primary" type="button">
 				<DBTooltip
 					placement={placement}
 					animation={animation}
