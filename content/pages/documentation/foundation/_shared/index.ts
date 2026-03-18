@@ -53,18 +53,24 @@ export const handleSimplePlaygrounds = ({
 		if (!densitySelect) return false;
 	}
 
+	const createParagraph = (text: string): HTMLParagraphElement => {
+		const p = document.createElement('p');
+		p.textContent = text;
+		return p;
+	};
+
 	const handleChange = async () => {
 		box.setAttribute(`data-${dataAttributeName}`, select.value);
 
 		await new Promise((resolve) => setTimeout(resolve, 500));
 
+		popover!.textContent = '';
+
 		if (isColor) {
 			const computedStyles = getComputedStyle(box.querySelector('.db-card')!);
-			const backGroundColor = `<p>Background Color: --db-${select.value}-bg-basic-level-1-default (${computedStyles.backgroundColor})</p>`;
-			const color = `<p>Color: --db-${select.value}-on-bg-basic-emphasis-100-default (${computedStyles.color})</p>`;
-			const borderColor = `<p>Border Color: --db-${select.value}-on-bg-basic-emphasis-60-default (${computedStyles.borderColor})</p>`;
-
-			popover!.innerHTML = [backGroundColor, color, borderColor].join('\n');
+			popover!.appendChild(createParagraph(`Background Color: --db-${select.value}-bg-basic-level-1-default (${computedStyles.backgroundColor})`));
+			popover!.appendChild(createParagraph(`Color: --db-${select.value}-on-bg-basic-emphasis-100-default (${computedStyles.color})`));
+			popover!.appendChild(createParagraph(`Border Color: --db-${select.value}-on-bg-basic-emphasis-60-default (${computedStyles.borderColor})`));
 		} else {
 			const token = `--db-${dataAttributeName}-${select.value}`;
 			const computed = (getComputedStyle(box!) as any)[computedStyle];
@@ -72,9 +78,9 @@ export const handleSimplePlaygrounds = ({
 				const rem = parseFloat(computed) / 16;
 				const radiusRem = rem === 1 ? rem : rem.toFixed(2);
 				const radiusPx = Math.round(parseFloat(computed));
-				popover!.innerHTML = `${popoverLabel}: ${token} (${radiusRem}rem / ${radiusPx}px)`;
+				popover!.appendChild(createParagraph(`${popoverLabel}: ${token} (${radiusRem}rem / ${radiusPx}px)`));
 			} else {
-				popover!.innerHTML = `${popoverLabel}: ${token} (${computed})`;
+				popover!.appendChild(createParagraph(`${popoverLabel}: ${token} (${computed})`));
 			}
 		}
 	};
