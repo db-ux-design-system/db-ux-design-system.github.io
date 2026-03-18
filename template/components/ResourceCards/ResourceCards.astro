@@ -8,6 +8,7 @@ interface Resource {
 	description: string;
 	url: string;
 	icon: string;
+	disabled?: boolean;
 }
 
 interface Props {
@@ -43,6 +44,7 @@ const defaultResources: Resource[] = [
 		description: 'Interactive examples and documentation.',
 		url: `${baseUrl}/angular-storybook${path}`,
 		icon: 'web-components',
+		disabled: true,
 	},
 ];
 
@@ -70,8 +72,7 @@ const getIconPath = (icon: string): string => {
 <div class="resource-cards">
 	{
 		resources.map((resource) => {
-			const isDisabled =
-				resource.icon === 'html5' || resource.icon === 'web-components';
+			const isDisabled = resource.disabled === true;
 			const cardContent = (
 				<>
 					<img src={getIconPath(resource.icon)} alt="" width="32" height="32" />
