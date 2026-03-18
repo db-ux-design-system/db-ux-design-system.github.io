@@ -15,7 +15,7 @@ interface Props {
 	resources?: Resource[];
 }
 
-const { path, resources: customResources } = Astro.props;
+const { path = '', resources: customResources } = Astro.props;
 
 const baseUrl = 'https://design-system.deutschebahn.com/core-web/review/main';
 
@@ -52,14 +52,16 @@ const resources = customResources || defaultResources;
 <div class="resource-cards">
 	{
 		resources.map((resource) => (
-			<DBLink href={resource.url} target="_blank" variant="inline">
-				<DBCard behavior="interactive" class="resource-card-item">
-					<img
-						src={resource.icon}
-						alt={`Image for ${resource.title}, ${resource.description}`}
-						width="32"
-						height="32"
-					/>
+			<DBLink href={resource.url} target="_blank" rel="noopener noreferrer" variant="inline">
+				<DBCard behavior="interactive" className="resource-card-item">
+					{resource.icon && (
+						<img
+							src={resource.icon}
+							alt={`Image for ${resource.title}, ${resource.description}`}
+							width="32"
+							height="32"
+						/>
+					)}
 					<div class="resource-text">
 						<b>{resource.title}</b>
 						<p>{resource.description}</p>
