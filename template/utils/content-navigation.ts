@@ -114,7 +114,6 @@ export function buildAppNavigationFromContent(): AppNavigation {
 	for (const [key, mod] of Object.entries(mods)) {
 		const rel = strip(key);
 		const segments = rel.split('/').filter(Boolean);
-
 		const fm: NavigationFrontmatter = mod.frontmatter ?? ({} as NavigationFrontmatter);
 
 		if (rel === '') continue;
