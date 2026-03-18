@@ -6,7 +6,7 @@ import { PageHero } from '@components';
 
 const { headings, frontmatter } = Astro.props as {
 	headings: MarkdownHeading[];
-	frontmatter: FrontMatter & { align?: 'start' | 'center' | 'end' };
+	frontmatter: FrontMatter;
 };
 const toc = (headings?.length ?? 0) > 0 && frontmatter.toc === true;
 ---

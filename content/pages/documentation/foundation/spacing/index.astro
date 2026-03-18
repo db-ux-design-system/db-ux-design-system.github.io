@@ -1,0 +1,92 @@
+---
+import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
+import { DBSection, DBStack } from '@db-ux/react-core-components';
+import SpacingPlayground from './_SpacingPlayground.astro';
+import SpacingTable from './_SpacingTable.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+
+const frontmatter: DocumentationFrontMatter = {
+	headline: 'Spacing',
+	title: 'Spacing',
+	align: 'start',
+	toc: true,
+	sectionSpacing: 'small',
+	sectionWidth: 'auto',
+};
+
+const headings = [
+	{ depth: 2, slug: 'playground', text: 'Playground' },
+	{ depth: 2, slug: 'guidelines', text: 'Guidelines' },
+	{ depth: 2, slug: 'tokens', text: 'Tokens' },
+];
+---
+
+<DocumentationLayout frontmatter={frontmatter} headings={headings}>
+	Spacing is a key element of our design system and defines the gaps between different components.
+	Consistent use of spacing ensures a harmonious, clear, and user-friendly appearance.
+
+	<DBSection spacing="small">
+		<DBStack gap="x-large">
+			<DBStack gap="none">
+				<h2 id="playground">Playground</h2>
+				<br />
+				Experiment with spacing tokens to see how gap and padding affect layout.
+			</DBStack>
+			<SpacingPlayground layout="horizontal" />
+		</DBStack>
+	</DBSection>
+
+	<DBSection spacing="small">
+		<h2 id="guidelines">Guidelines</h2>
+
+		<CollapsibleWrapper collapsedHeight="320px">
+			<h6>Fixed Spacing</h6>
+
+			<p>Fixed spacings are gaps that remain the same regardless of screen size. They are typically used within components and modules to ensure a uniform and clear structure across different devices.</p>
+
+			<div class="guideline-examples">
+				<GuidelineExample
+					figmaUrl="https://embed.figma.com/design/Ji70muzdgUXAcN0Qs8eSY2/Doku--Spacing?node-id=1-1132&embed-host=share"
+					fullWidth={true}
+				/>
+			</div>
+
+			<h6>Responsive Spacing</h6>
+
+			<p>Responsive spacings are gaps that automatically adapt to the size of the device screen (desktop, tablet, mobile). They are ideal for separating different layout areas and ensure a consistent, user-friendly appearance across all devices.</p>
+
+			<div class="guideline-examples">
+				<GuidelineExample
+					figmaUrl="https://embed.figma.com/design/Ji70muzdgUXAcN0Qs8eSY2/Doku--Spacing?node-id=1-1133&embed-host=share"
+					fullWidth={true}
+				/>
+			</div>
+		</CollapsibleWrapper>
+
+		<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+	</DBSection>
+
+	<DBSection spacing="small">
+		<h2 id="tokens">Tokens</h2>
+		<SpacingTable />
+	</DBSection>
+
+	<script>
+		import { waitForElements } from '@template/utils/client.utils.ts';
+		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';
+
+		function initSpacing(): boolean {
+			return handleSimplePlaygrounds({
+				dataAttributeName: 'spacing',
+				popoverLabel: 'Spacing',
+				computedStyle: 'gap',
+				remPx: true,
+				withDensity: true,
+			});
+		}
+
+		waitForElements(initSpacing);
+	</script>
+</DocumentationLayout>

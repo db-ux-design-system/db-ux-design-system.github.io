@@ -1,35 +1,35 @@
 .guideline-examples {
 	display: flex;
 	gap: var(--db-spacing-fixed-md);
-	margin-bottom: var(--db-spacing-fixed-2xl);
+	margin-block-end: var(--db-spacing-fixed-2xl);
 }
 
 .guideline-examples:last-child {
-	margin-bottom: 0;
+	margin-block-end: 0;
 }
 
 .guideline-example-container {
 	position: relative;
 	display: inline-block;
-	width: 50%;
+	inline-size: 50%;
 }
 
 .guideline-example-container.full-width {
-	width: 100%;
+	inline-size: 100%;
 }
 
 .guideline-example-badge {
 	position: absolute;
-	top: var(--db-spacing-fixed-md);
-	left: var(--db-spacing-fixed-md);
+	inset-block-start: var(--db-spacing-fixed-md);
+	inset-inline-start: var(--db-spacing-fixed-md);
 	z-index: 1;
-	width: fit-content;
+	inline-size: fit-content;
 }
 
 .guideline-example-iframe {
 	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
 	border-radius: var(--db-border-radius-md);
-	width: 100%;
+	inline-size: 100%;
 	aspect-ratio: 16/9;
 }
 

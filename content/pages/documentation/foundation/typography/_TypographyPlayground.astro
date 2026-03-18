@@ -1,0 +1,51 @@
+---
+import Playground from '../_shared/Playground.astro';
+import './TypographyPlayground.css';
+import { DBCard, DBPopover, type DBSelectOptionType } from '@db-ux/react-core-components';
+
+const types: DBSelectOptionType[] = [
+	{ value: 'headline-3xl', label: 'Headline 3XL' },
+	{ value: 'headline-2xl', label: 'Headline 2XL' },
+	{ value: 'headline-xl', label: 'Headline XL' },
+	{ value: 'headline-lg', label: 'Headline LG' },
+	{ value: 'headline-md', label: 'Headline MD' },
+	{ value: 'headline-sm', label: 'Headline SM' },
+	{ value: 'headline-xs', label: 'Headline XS' },
+	{ value: 'headline-2xs', label: 'Headline 2XS' },
+	{ value: 'headline-3xs', label: 'Headline 3XS' },
+	{ value: 'body-xl', label: 'Body XL' },
+	{ value: 'body-lg', label: 'Body LG' },
+	{ value: 'body-md', label: 'Body MD' },
+	{ value: 'body-sm', label: 'Body SM' },
+	{ value: 'body-xs', label: 'Body XS' },
+];
+
+const densities: DBSelectOptionType[] = [
+	{ value: 'functional', label: 'Functional' },
+	{ value: 'regular', label: 'Regular' },
+	{ value: 'expressive', label: 'Expressive' },
+];
+---
+
+<Playground
+	selects={[
+		{ id: 'select', label: 'Typography', defaultValue: 'body-md', options: types },
+		{ id: 'density-select', label: 'Density', defaultValue: 'regular', options: densities },
+	]}
+	previewId="typography-preview"
+	previewDataDensity="regular"
+>
+	<DBPopover width="fixed" gap="true">
+		<button
+			slot="trigger"
+			id="box"
+			class="typography-box interactive-box"
+			data-type="body-md"
+			data-density="regular"
+		>
+			<DBCard behavior="interactive" spacing="small">
+				The quick brown fox jumps over the lazy dog
+			</DBCard>
+		</button>
+	</DBPopover>
+</Playground>

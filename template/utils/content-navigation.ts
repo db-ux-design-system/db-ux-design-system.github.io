@@ -5,18 +5,6 @@ type NavigationFrontmatter = FrontMatter & {
 	isMenuItemDisabled?: boolean;
 	order?: number;
 	nav?: boolean | { order?: number };
-	status?: 'concept' | 'beta' | 'stable' | 'deprecated' | 'legacy';
-};
-
-type NavigationItemType = {
-	title?: string;
-	path?: string;
-	isSubNavigation?: boolean;
-	iconTrailing?: string;
-	children?: NavigationItemType[];
-	disabled?: boolean;
-	order?: number;
-	status?: 'concept' | 'beta' | 'stable' | 'deprecated' | 'legacy';
 };
 
 type MdModule = { frontmatter: NavigationFrontmatter };
@@ -53,7 +41,7 @@ function toTitleFromSegment(segment: string): string {
  * @param parent - The parent navigation item.
  * @param child - The child item to add if missing.
  */
-function ensureChild(parent: NavigationItemType, child: NavigationItemType) {
+function ensureChild(parent: NavigationItem, child: NavigationItem) {
 	parent.children = parent.children ?? [];
 	const exists = parent.children.find((c) => c.path === child.path);
 	if (!exists) parent.children.push(child);
@@ -77,17 +65,17 @@ function getOrder(fm: NavigationFrontmatter): number | undefined {
  * @param b - The second navigation item.
  * @returns -1, 0, or 1 depending on order.
  */
-function compareNav(a: NavigationItemType, b: NavigationItemType) {
+function compareNav(a: NavigationItem, b: NavigationItem) {
 	// Status priority: stable > beta > concept > legacy > deprecated
 	const statusPriority: Record<string, number> = {
 		stable: 1,
-		beta: 1,
+		beta: 2,
 		concept: 3,
 		legacy: 4,
 		deprecated: 5,
 	};
-	const aStatus = statusPriority[a.status || 'stable'] || 0;
-	const bStatus = statusPriority[b.status || 'stable'] || 0;
+	const aStatus = statusPriority[a.status || 'stable'] ?? 6;
+	const bStatus = statusPriority[b.status || 'stable'] ?? 6;
 	if (aStatus !== bStatus) return aStatus - bStatus;
 
 	const ao = a.order ?? Number.MAX_SAFE_INTEGER;
@@ -102,7 +90,7 @@ function compareNav(a: NavigationItemType, b: NavigationItemType) {
  *
  * @param node - Root or intermediate node of the navigation tree.
  */
-function sortTree(node: NavigationItemType) {
+function sortTree(node: NavigationItem) {
 	if (node.children?.length) {
 		node.children.sort(compareNav);
 		node.children.forEach(sortTree);
@@ -118,10 +106,10 @@ function sortTree(node: NavigationItemType) {
  */
 export function buildAppNavigationFromContent(): AppNavigation {
 	const mods = import.meta.glob<MdModule>(
-		['../../content/pages/**/*.{md,mdx,astro}', '!**/_*/**', '!**/demo-b2b/**', '!**/demo-b2c/**'],
+		['../../content/pages/**/*.{md,mdx,astro}', '!**/_*/**',  '!**/_*.astro', '!**/demo-b2b/**', '!**/demo-b2c/**'],
 		{ eager: true },
 	) as Modules;
-	const nodes = new Map<string, NavigationItemType>();
+	const nodes = new Map<string, NavigationItem>();
 
 	for (const [key, mod] of Object.entries(mods)) {
 		const rel = strip(key);
@@ -138,12 +126,10 @@ export function buildAppNavigationFromContent(): AppNavigation {
 		const isSubNavigation = fm.isSubNavigation ?? false;
 		const iconTrailing = fm.iconTrailing;
 		const disabled = fm.isMenuItemDisabled === true;
-		// Auto-order alphabetically for documentation/components, otherwise use frontmatter order
-		const isComponentPage = rel.startsWith('documentation/components/') && segments.length === 3;
-		const order = isComponentPage ? undefined : getOrder(fm);
+		const order = getOrder(fm);
 		const status = fm.status;
 
-		const node: NavigationItemType = {
+		const node: NavigationItem = {
 			title,
 			path: hidePage ? undefined : rel,
 			isSubNavigation,
@@ -159,7 +145,7 @@ export function buildAppNavigationFromContent(): AppNavigation {
 		for (let i = 1; i < segments.length; i++) {
 			const parentKey = segments.slice(0, i).join('/');
 			if (!nodes.has(parentKey)) {
-				const parentNode: NavigationItemType = {
+				const parentNode: NavigationItem = {
 					title: toTitleFromSegment(segments[i - 1]),
 					path: parentKey,
 					children: [],
@@ -169,7 +155,7 @@ export function buildAppNavigationFromContent(): AppNavigation {
 		}
 	}
 
-	const roots: Record<string, NavigationItemType> = {};
+	const roots: Record<string, NavigationItem> = {};
 	for (const [rel, node] of nodes) {
 		const segments = rel.split('/').filter(Boolean);
 		if (segments.length <= 1) {
@@ -181,7 +167,7 @@ export function buildAppNavigationFromContent(): AppNavigation {
 		}
 	}
 
-	const appNav = Object.values(roots).sort(compareNav) as NavigationItem[];
+	const appNav: AppNavigation = Object.values(roots).sort(compareNav) as NavigationItem[];
 	appNav.forEach(sortTree);
 
 	return appNav;

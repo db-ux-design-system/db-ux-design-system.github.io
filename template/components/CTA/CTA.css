@@ -13,22 +13,22 @@
 
 .cta-content[data-align='start'] {
 	align-items: flex-start;
-	text-align: left;
+	text-align: start;
 }
 
 .cta-content[data-align='end'] {
 	align-items: flex-end;
-	text-align: right;
+	text-align: end;
 }
 
 .cta-title {
-	max-width: var(--db-container-md);
+	max-inline-size: var(--db-container-md);
 	text-align: center;
 	margin: 0 auto;
 }
 
 .cta-text {
-	max-width: 60ch;
+	max-inline-size: 60ch;
 	text-align: center;
 	margin: 0 auto;
 }
@@ -52,7 +52,7 @@
 	border-color: var(--db-brand-on-origin-default);
 }
 
-.cta .db-button[data-variant='brand']:hover {
+.cta .db-button[data-variant='brand']:hover, .cta .db-button[data-variant='brand']:focus {
 	background: var(--db-brand-on-origin-default);
 	color: var(--db-brand-origin-default);
 	/* stylelint-disable-next-line db-ux/use-border-color */
@@ -79,7 +79,7 @@
 	border-color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
 }
 
-.cta .db-button[data-variant='outlined']:hover {
+.cta .db-button[data-variant='outlined']:hover, .cta .db-button[data-variant='outlined']:focus {
 	background: rgb(255 255 255 / 24%);
 	color: var(--db-brand-on-origin-default);
 	border-color: var(--db-adaptive-on-bg-basic-emphasis-100-default);

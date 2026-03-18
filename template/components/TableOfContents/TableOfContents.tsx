@@ -122,6 +122,7 @@ export function TableOfContents(props: Props): ReactElement | null {
 						return (
 							<li
 								key={slug}
+								id={`toc-children-${currentH2}`}
 								className="dba-toc-heading"
 								data-depth={depth}
 								data-slug={slug}

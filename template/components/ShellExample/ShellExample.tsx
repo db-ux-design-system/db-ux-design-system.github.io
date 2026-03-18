@@ -5,6 +5,7 @@ import {
 	DBNavigation,
 	DBNavigationItem,
 	DBControlPanelPrimaryActions,
+	DBButton,
 } from '@db-ux/react-core-components';
 
 export default function ShellExample() {
@@ -31,9 +32,9 @@ export default function ShellExample() {
 						</DBNavigationItem>
 					</DBNavigation>
 					<DBControlPanelPrimaryActions>
-						<a className="db-button" data-variant="brand">
+						<DBButton variant="brand">
 							Call to Action
-						</a>
+						</DBButton>
 					</DBControlPanelPrimaryActions>
 				</DBControlPanelDesktop>
 			}

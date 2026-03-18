@@ -1,0 +1,20 @@
+---
+import TokenTable from '../_shared/TokenTable.astro';
+
+const tokens = [
+	'db-elevation-sm',
+	'db-elevation-md',
+	'db-elevation-lg',
+];
+---
+
+<TokenTable
+	sections={[
+		{
+			headline: 'Elevation',
+			tokens,
+			previewClass: 'elevation-preview',
+			previewAttribute: 'elevation',
+		},
+	]}
+/>

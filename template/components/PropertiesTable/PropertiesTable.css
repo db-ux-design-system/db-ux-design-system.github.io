@@ -1,22 +1,22 @@
 .properties-table-wrapper {
 	overflow-x: auto;
-	width: 100%;
-	min-width: 0;
+	inline-size: 100%;
+	min-inline-size: 0;
 	-webkit-overflow-scrolling: touch;
 }
 
 .properties-table-spacing {
-	margin-top: var(--db-spacing-fixed-xl);
+	margin-block-start: var(--db-spacing-fixed-xl);
 }
 
 .properties-table-wrapper table {
-	width: 100%;
+	inline-size: 100%;
 	table-layout: fixed;
 }
 
 .properties-table-wrapper table th:nth-child(1) {
 	/* stylelint-disable-next-line db-ux/use-sizing */
-	max-width: 50px;
+	max-inline-size: 50px;
 }
 
 .properties-table-wrapper table td,
@@ -28,5 +28,5 @@
 
 .properties-table-wrapper table tbody tr:last-child th,
 .properties-table-wrapper table tbody tr:last-child td {
-	border-bottom: none;
+	border-block-end: none;
 }

@@ -7,7 +7,7 @@
 	@media screen and (width >= 1024px) {
 		display: block;
 		position: fixed;
-		margin-top: var(--db-spacing-fixed-sm);
+		margin-block-start: var(--db-spacing-fixed-sm);
 		inset-inline-end: var(--db-spacing-fixed-md);
 	}
 
@@ -19,17 +19,44 @@
 	padding: 0 0 0 var(--db-spacing-fixed-xs);
 }
 
+@media screen and (prefers-reduced-motion: reduce) {
 .dba-toc-indicator {
 	position: absolute;
-	left: 0;
-	top: 0;
-	width: var(--db-border-width-sm);
+	inset-inline-start: 0;
+	inset-block-start: 0;
+	inline-size: var(--db-border-width-sm);
+	background-color: var(--db-brand-on-bg-basic-emphasis-70-default);
+	border-radius: var(--db-border-radius-full);
+	transition:
+		none;
+	pointer-events: none;
+	z-index: 1;
+}
+}
+
+.dba-toc-indicator {
+	position: absolute;
+	inset-inline-start: 0;
+	inset-block-start: 0;
+	inline-size: var(--db-border-width-sm);
 	background-color: var(--db-brand-on-bg-basic-emphasis-70-default);
 	border-radius: var(--db-border-radius-full);
 	transition:
 		transform 0.3s ease,
 		height 0.3s ease;
+	pointer-events: none;
 	z-index: 1;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+.dba-toc-heading {
+	position: relative;
+	list-style: none;
+	display: flex;
+	align-items: center;
+	border-radius: var(--db-border-radius-sm);
+	transition: none;
+}
 }
 
 .dba-toc-heading {
@@ -41,7 +68,7 @@
 	transition: background-color 0.2s ease;
 }
 
-.dba-toc-heading:hover {
+.dba-toc-heading:hover, .dba-toc-heading:focus {
 	background: var(--db-adaptive-bg-basic-transparent-semi-hovered);
 }
 
@@ -52,21 +79,20 @@
 .dba-toc-heading::before {
 	content: '';
 	position: absolute;
-	left: calc(var(--db-spacing-fixed-xs) * -1);
-	top: 0;
-	bottom: 0;
-	width: var(--db-border-width-sm);
+	inset-inline-start: calc(var(--db-spacing-fixed-xs) * -1);
+	inset-block: 0;
+	inline-size: var(--db-border-width-sm);
 	background-color: var(--db-neutral-on-bg-inverted-pressed);
 }
 
 .dba-toc-heading:first-child::before {
-	border-top-left-radius: var(--db-border-radius-full);
-	border-top-right-radius: var(--db-border-radius-full);
+	border-start-start-radius: var(--db-border-radius-full);
+	border-start-end-radius: var(--db-border-radius-full);
 }
 
 .dba-toc-heading:last-child::before {
-	border-bottom-left-radius: var(--db-border-radius-full);
-	border-bottom-right-radius: var(--db-border-radius-full);
+	border-end-start-radius: var(--db-border-radius-full);
+	border-end-end-radius: var(--db-border-radius-full);
 }
 
 .dba-toc-heading svg {
@@ -78,7 +104,7 @@
 	align-items: center;
 	gap: var(--db-spacing-fixed-2xs);
 	flex: 1;
-	min-height: var(--db-sizing-md);
+	min-block-size: var(--db-sizing-md);
 	padding: var(--db-spacing-fixed-2xs) var(--db-spacing-fixed-2xs) var(--db-spacing-fixed-2xs)
 		var(--db-spacing-fixed-sm);
 	border-radius: var(--db-border-radius-xs);
@@ -89,14 +115,14 @@
 
 .dba-toc-toggle {
 	position: absolute;
-	right: 0;
+	inset-inline-end: 0;
 	z-index: 2;
 
-	&:hover {
+	&:hover, &:focus {
 		background: var(--db-adaptive-bg-basic-transparent-semi-hovered);
 	}
 }
 
 .dba-toc-heading:is([data-depth='3'], [data-depth='4'], [data-depth='5'], [data-depth='6']) a {
-	padding-left: var(--db-spacing-fixed-lg);
+	padding-inline-start: var(--db-spacing-fixed-lg);
 }

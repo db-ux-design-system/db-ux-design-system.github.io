@@ -1,0 +1,40 @@
+.sizing-box {
+	box-sizing: border-box;
+}
+
+.sizing-box[data-size='3xs'] {
+	inline-size: var(--db-sizing-3xs);
+	block-size: var(--db-sizing-3xs);
+}
+.sizing-box[data-size='2xs'] {
+	inline-size: var(--db-sizing-2xs);
+	block-size: var(--db-sizing-2xs);
+}
+.sizing-box[data-size='xs'] {
+	inline-size: var(--db-sizing-xs);
+	block-size: var(--db-sizing-xs);
+}
+.sizing-box[data-size='sm'] {
+	inline-size: var(--db-sizing-sm);
+	block-size: var(--db-sizing-sm);
+}
+.sizing-box[data-size='md'] {
+	inline-size: var(--db-sizing-md);
+	block-size: var(--db-sizing-md);
+}
+.sizing-box[data-size='lg'] {
+	inline-size: var(--db-sizing-lg);
+	block-size: var(--db-sizing-lg);
+}
+.sizing-box[data-size='xl'] {
+	inline-size: var(--db-sizing-xl);
+	block-size: var(--db-sizing-xl);
+}
+.sizing-box[data-size='2xl'] {
+	inline-size: var(--db-sizing-2xl);
+	block-size: var(--db-sizing-2xl);
+}
+.sizing-box[data-size='3xl'] {
+	inline-size: var(--db-sizing-3xl);
+	block-size: var(--db-sizing-3xl);
+}

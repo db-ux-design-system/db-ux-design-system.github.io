@@ -2,12 +2,12 @@
 	display: flex;
 	flex-direction: column;
 	gap: var(--db-spacing-fixed-md);
-	width: 100%;
+	inline-size: 100%;
 	align-items: flex-start;
 }
 
 .question-form .db-textarea {
-	width: 100%;
+	inline-size: 100%;
 }
 
 .question-form .db-textarea-input {

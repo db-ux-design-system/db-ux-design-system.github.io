@@ -1,0 +1,13 @@
+.color-preview {
+	border-radius: var(--db-border-radius-xs);
+
+	&::before {
+		content: '';
+		display: flex;
+		inline-size: var(--db-sizing-sm);
+		block-size: var(--db-sizing-sm);
+		border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+		border-radius: var(--db-border-radius-xs);
+		background-color: var(--db-adaptive-origin-default);
+	}
+}

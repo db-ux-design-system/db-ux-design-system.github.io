@@ -1,0 +1,29 @@
+---
+import { DBCard, DBPopover, type DBSelectOptionType } from '@db-ux/react-core-components';
+import Playground from '../_shared/Playground.astro';
+import './OpacityPlayground.css';
+
+const opacities: DBSelectOptionType[] = [
+	{ value: '3xs', label: '3XS' },
+	{ value: '2xs', label: '2XS' },
+	{ value: 'xs', label: 'XS' },
+	{ value: 'sm', label: 'SM' },
+	{ value: 'md', label: 'MD' },
+	{ value: 'lg', label: 'LG' },
+	{ value: 'xl', label: 'XL' },
+	{ value: '2xl', label: '2XL' },
+	{ value: '3xl', label: '3XL' },
+	{ value: 'full', label: 'Full' },
+];
+---
+
+<Playground
+	playgroundClass="opacity-playground"
+	selects={[{ id: 'select', label: 'Opacity', defaultValue: 'md', options: opacities }]}
+>
+	<DBPopover width="fixed" gap="true">
+		<button slot="trigger" id="box" class="opacity-box interactive-box" data-opacity="md">
+			<DBCard behavior="interactive" spacing="none"> Focus Me </DBCard>
+		</button>
+	</DBPopover>
+</Playground>

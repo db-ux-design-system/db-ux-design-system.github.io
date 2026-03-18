@@ -1,0 +1,243 @@
+---
+import {
+	DBAccordion,
+	DBAccordionItem,
+	DBTag,
+	DBButton,
+	DBPopover,
+} from '@db-ux/react-core-components';
+import './TokenTable.css';
+
+type DensityToken = {
+	token: string;
+	functional?: string;
+	regular?: string;
+	expressive?: string;
+	value?: string;
+};
+
+type ResponsiveToken = {
+	token: string;
+	functional: { desktop: string; tablet: string; mobile: string };
+	regular: { desktop: string; tablet: string; mobile: string };
+	expressive: { desktop: string; tablet: string; mobile: string };
+};
+
+type TypographyToken = {
+	token: string;
+	size?: { functional: string; regular: string; expressive: string };
+	lineHeight?: { functional: string; regular: string; expressive: string };
+	weight?: string;
+	value?: string;
+	name?: string;
+};
+
+type Section = {
+	headline: string;
+	icon?: string;
+	headlineSlot?: any;
+	tokens: any[];
+	showDensity?: boolean;
+	variant?: 'simple' | 'density' | 'responsive' | 'typography-font' | 'typography-type' | 'color';
+	previewClass?: string;
+	previewAttribute?: string;
+	colorKey?: string;
+};
+
+interface Props {
+	sections: Section[];
+}
+
+const { sections } = Astro.props;
+---
+
+<div class="token-table">
+	<DBAccordion variant="card">
+		{
+			sections.map((section) => (
+				<DBAccordionItem>
+					{section.variant === 'color' ? (
+						<span slot="headline">
+							<i class="color-preview" data-color={section.colorKey} />
+							{section.headline}
+						</span>
+					) : (
+						<span data-icon={section.icon || 'list'} slot="headline">
+							{section.headline}
+						</span>
+					)}
+
+					{section.variant === 'color' ? (
+						<div data-color="neutral">
+							<table>
+								<thead>
+									<tr>
+										<th>Token</th>
+										<th>Value</th>
+									</tr>
+								</thead>
+								<tbody>
+									{(section.tokens as string[]).map((colorToken) => {
+										const token = `--db-${section.colorKey}-${colorToken}`;
+										return (
+											<tr data-token={token}>
+												<td>
+													<div class="token-cell">
+														<DBTag data-color="neutral">{token}</DBTag>{' '}
+														<DBButton
+															className="copy-text"
+															variant="ghost"
+															iconTrailing="copy"
+															noText="true"
+														>
+															Copy Token {token}
+														</DBButton>
+													</div>
+												</td>
+												<td>
+													<span class="color-swatch" style={`background-color: var(${token})`} />
+												</td>
+											</tr>
+										);
+									})}
+								</tbody>
+							</table>
+						</div>
+					) : (
+						<table>
+							<thead>
+								{section.variant === 'responsive' ? (
+									<>
+										<tr>
+											<th rowspan="2">Token</th>
+											<th colspan="3">Functional</th>
+											<th colspan="3">Regular</th>
+											<th colspan="3">Expressive</th>
+										</tr>
+										<tr>
+											<th>Desktop</th>
+											<th>Tablet</th>
+											<th>Mobile</th>
+											<th>Desktop</th>
+											<th>Tablet</th>
+											<th>Mobile</th>
+											<th>Desktop</th>
+											<th>Tablet</th>
+											<th>Mobile</th>
+										</tr>
+									</>
+								) : section.variant === 'typography-type' ? (
+									<>
+										<tr>
+											<th rowspan="2">Token</th>
+											<th colspan="2">Functional</th>
+											<th colspan="2">Regular</th>
+											<th colspan="2">Expressive</th>
+											<th rowspan="2">Weight</th>
+										</tr>
+										<tr>
+											<th>Size</th>
+											<th>Line Height</th>
+											<th>Size</th>
+											<th>Line Height</th>
+											<th>Size</th>
+											<th>Line Height</th>
+										</tr>
+									</>
+								) : section.variant === 'typography-font' ? (
+									<tr>
+										<th>Token</th>
+										<th>Value</th>
+										<th>Name</th>
+									</tr>
+								) : section.showDensity || section.variant === 'density' ? (
+									<tr>
+										<th>Token</th>
+										<th>Functional</th>
+										<th>Regular</th>
+										<th>Expressive</th>
+									</tr>
+								) : (
+									<tr>
+										<th>Token</th>
+										<th>Value</th>
+										{section.previewClass && <th>Preview</th>}
+									</tr>
+								)}
+							</thead>
+							<tbody>
+								{section.tokens.map((item) => {
+									const token = typeof item === 'string' ? item : item.token;
+									return (
+										<tr data-token={token}>
+											<td>
+												<div class="token-cell">
+													<DBTag data-color="neutral">--{token}</DBTag>
+													<DBButton
+														className="copy-text"
+														variant="ghost"
+														iconTrailing="copy"
+														noText="true"
+													>
+														Copy Token {token}
+													</DBButton>
+												</div>
+											</td>
+
+											{section.variant === 'responsive' ? (
+												<>
+													<td>{(item as ResponsiveToken).functional.desktop}</td>
+													<td>{(item as ResponsiveToken).functional.tablet}</td>
+													<td>{(item as ResponsiveToken).functional.mobile}</td>
+													<td>{(item as ResponsiveToken).regular.desktop}</td>
+													<td>{(item as ResponsiveToken).regular.tablet}</td>
+													<td>{(item as ResponsiveToken).regular.mobile}</td>
+													<td>{(item as ResponsiveToken).expressive.desktop}</td>
+													<td>{(item as ResponsiveToken).expressive.tablet}</td>
+													<td>{(item as ResponsiveToken).expressive.mobile}</td>
+												</>
+											) : section.variant === 'typography-type' ? (
+												<>
+													<td>{(item as TypographyToken).size?.functional}</td>
+													<td>{(item as TypographyToken).lineHeight?.functional}</td>
+													<td>{(item as TypographyToken).size?.regular}</td>
+													<td>{(item as TypographyToken).lineHeight?.regular}</td>
+													<td>{(item as TypographyToken).size?.expressive}</td>
+													<td>{(item as TypographyToken).lineHeight?.expressive}</td>
+													<td>{(item as TypographyToken).weight}</td>
+												</>
+											) : section.variant === 'typography-font' ? (
+												<>
+													<td>{(item as TypographyToken).value}</td>
+													<td>{(item as TypographyToken).name}</td>
+												</>
+											) : section.showDensity || section.variant === 'density' ? (
+												<>
+													<td>{(item as DensityToken).functional || ''}</td>
+													<td>{(item as DensityToken).regular || ''}</td>
+													<td>{(item as DensityToken).expressive || ''}</td>
+												</>
+											) : (
+												<>
+													<td class="token-value" />
+													{section.previewClass && (
+														<td>
+															<div
+																class={section.previewClass}
+																{...{ [`data-${section.previewAttribute}`]: token }}
+															/>
+														</td>
+													)}
+												</>
+											)}
+										</tr>
+									);
+								})}
+							</tbody>
+						</table>
+					)}
+				</DBAccordionItem>
+			))
+		}
+	</DBAccordion>
+</div>

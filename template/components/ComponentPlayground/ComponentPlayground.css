@@ -5,8 +5,8 @@
 	background-color: var(--db-adaptive-bg-basic-level-2-default);
 	border-radius: var(--db-border-radius-md);
 	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
-	max-width: 100%;
-	min-height: var(--db-container-xs);
+	max-inline-size: 100%;
+	min-block-size: var(--db-container-xs);
 }
 
 .component-playground:not(:has(.controls-area)) {
@@ -19,8 +19,8 @@
 	}
 
 	.component-playground .controls-area {
-		border-left: none;
-		border-top: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+		border-inline-start: none;
+		border-block-start: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
 	}
 }
 
@@ -28,20 +28,20 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-height: var(--db-sizing-2xl);
+	min-block-size: var(--db-sizing-2xl);
 	padding: var(--db-spacing-fixed-lg);
-	min-width: 0;
+	min-inline-size: 0;
 }
 
 .component-playground .preview-area > * {
-	max-width: 100%;
-	min-width: 0;
+	max-inline-size: 100%;
+	min-inline-size: 0;
 }
 
 .component-playground .badge-container {
 	position: relative;
-	max-width: var(--db-sizing-3xl);
-	width: 100%;
+	max-inline-size: var(--db-sizing-3xl);
+	inline-size: 100%;
 	background-color: var(--db-adaptive-bg-basic-transparent-semi-default);
 	border-radius: var(--db-border-radius-sm);
 	display: flex;
@@ -61,7 +61,7 @@
 	flex-direction: column;
 	gap: var(--db-spacing-fixed-sm);
 	padding: var(--db-spacing-fixed-lg);
-	border-left: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-inline-start: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
 	background-color: var(--db-adaptive-bg-basic-level-1-default);
 	border-radius: 0 var(--db-border-radius-md) var(--db-border-radius-md) 0;
 }
@@ -97,13 +97,13 @@
 .component-playground .preview-area > .db-navigation {
 	display: flex;
 	justify-content: center;
-	width: 100%;
+	inline-size: 100%;
 }
 
 .component-playground .preview-area > .db-navigation menu {
 	display: flex;
 	justify-content: center;
-	width: 100%;
+	inline-size: 100%;
 }
 
 .component-playground .preview-area > .db-navigation:not([data-variant='vertical']) menu {
@@ -112,28 +112,26 @@
 }
 
 .component-playground .preview-area > .db-navigation[data-variant='vertical'] {
-	max-width: var(--db-container-xs);
+	max-inline-size: var(--db-container-xs);
 }
 
 .component-playground .preview-area > .db-navigation .db-navigation-item[data-width='full'] {
-	width: 100% !important;
 	inline-size: 100% !important;
 }
 
 .component-playground .preview-area > .db-navigation .db-navigation-item[data-width='auto'] {
-	width: fit-content !important;
 	inline-size: fit-content !important;
 	margin: auto;
 }
 
 /* Divider full width/height in playground */
 .component-playground .preview-area > .db-divider[data-variant='horizontal'] {
-	width: 100%;
+	inline-size: 100%;
 }
 
 .component-playground .preview-area > .db-divider[data-variant='vertical'] {
-	height: 100%;
-	min-height: var(--db-container-3xs);
+	block-size: 100%;
+	min-block-size: var(--db-container-3xs);
 }
 
 /* Override navigation item width behavior in playground */

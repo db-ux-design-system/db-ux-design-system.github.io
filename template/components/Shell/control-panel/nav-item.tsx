@@ -30,7 +30,7 @@ const NavItem = ({
 	isSubNavigation,
 	disabled,
 	status,
-}: NavigationItem & { status?: string }) => {
+}: NavigationItem) => {
 	const isActive =
 		typeof window !== 'undefined' &&
 		covers(
@@ -63,11 +63,7 @@ const NavItem = ({
 				expanded={isActive}
 			>
 				{children.map((sub) => (
-					<NavItem
-						key={`router-sub-${sub.path ?? sub.title}`}
-						{...sub}
-						icon={sub.icon ?? 'circle_small'}
-					/>
+					<NavItem key={`router-sub-${sub.path ?? sub.title}`} {...sub} />
 				))}
 			</DBNavigationItemGroup>
 		);
