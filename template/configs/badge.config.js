@@ -54,7 +54,8 @@ export const badgeConfig = {
 			name: 'size',
 			label: 'Size',
 			type: 'select',
-			description: 'The size attribute changes the font-size and other related sizes of the component.',
+			description:
+				'The size attribute changes the font-size and other related sizes of the component.',
 			options: [
 				{ value: 'small', label: 'Small' },
 				{ value: 'medium', label: 'Medium', default: true },
@@ -65,7 +66,8 @@ export const badgeConfig = {
 			name: 'placement',
 			label: 'Placement',
 			type: 'select',
-			description: 'The placement attributes corner-* values change the position to absolute and adds a transform based on the placement.',
+			description:
+				'The placement attributes corner-* values change the position to absolute and adds a transform based on the placement.',
 			options: [
 				{ value: 'inline', label: 'Inline', default: true },
 				{ value: 'corner-top-left', label: 'Corner Top Left' },
@@ -91,7 +93,8 @@ export const badgeConfig = {
 			label: 'ID',
 			type: 'text',
 			defaultValue: '',
-			description: 'ID of the component, generated automatically for some components as a fallback if unset.',
+			description:
+				'ID of the component, generated automatically for some components as a fallback if unset.',
 			showInPlayground: false,
 		},
 		{

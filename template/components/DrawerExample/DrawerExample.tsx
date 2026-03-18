@@ -4,7 +4,13 @@ import { useState, useEffect } from 'react';
 type DrawerDirection = 'left' | 'right' | 'up' | 'down' | 'custom';
 type DrawerBackdrop = 'none' | 'strong' | 'weak' | 'invisible';
 
-export default function DrawerExample({ direction = 'right', backdrop = 'strong' }: { direction?: DrawerDirection; backdrop?: DrawerBackdrop }) {
+export default function DrawerExample({
+	direction = 'right',
+	backdrop = 'strong',
+}: {
+	direction?: DrawerDirection;
+	backdrop?: DrawerBackdrop;
+}) {
 	const [open, setOpen] = useState(true);
 	const [currentDirection, setCurrentDirection] = useState<DrawerDirection>(direction);
 	const [currentBackdrop, setCurrentBackdrop] = useState<DrawerBackdrop>(backdrop);

@@ -23,10 +23,7 @@ const { teasers } = Astro.props;
 			const isLink = teaser.component === 'DBLink';
 			return (
 				<DBCard behavior="interactive" spacing="none">
-					<a
-						class="teaser-wrapper"
-						href={teaser.url}
-					>
+					<a class="teaser-wrapper" href={teaser.url}>
 						<div class="teaser-content">
 							<h2>{teaser.title}</h2>
 							<p>{teaser.description}</p>
