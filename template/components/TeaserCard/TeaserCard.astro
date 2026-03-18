@@ -23,10 +23,14 @@ const { teasers } = Astro.props;
 			const isLink = teaser.component === 'DBLink';
 			return (
 				<DBCard behavior="interactive" spacing="none">
-					<a class="teaser-wrapper" href={teaser.url}>
+					<div class="teaser-wrapper">
 						<div class="teaser-content">
-							<h2>{teaser.title}</h2>
-							<p>{teaser.description}</p>
+							<h2 class="teaser-title">
+								<a class="teaser-title-link" href={teaser.url}>
+									{teaser.title}
+								</a>
+							</h2>
+							<p class="teaser-description">{teaser.description}</p>
 						</div>
 						{Component && (
 							<div class="teaser-preview">
@@ -43,7 +47,7 @@ const { teasers } = Astro.props;
 								)}
 							</div>
 						)}
-					</a>
+					</div>
 				</DBCard>
 			);
 		})

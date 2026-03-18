@@ -89,12 +89,6 @@
 	pointer-events: none !important;
 }
 
-/* Hide broken tooltips in navigation items */
-.db-navigation-item .db-tooltip:has(:only-child:is(:empty, [aria-hidden='true'])),
-.db-navigation-item .db-tooltip:only-child {
-	display: none !important;
-}
-
 /* Navigation item width control in playground */
 .component-playground .preview-area > .db-navigation {
 	display: flex;
@@ -118,21 +112,21 @@
 }
 
 .component-playground .preview-area > .db-navigation .db-navigation-item[data-width='full'] {
-	width: 100% !important;
-	inline-size: 100% !important;
+	width: 100%;
+	inline-size: 100%;
 }
 
 .component-playground .preview-area > .db-navigation .db-navigation-item[data-width='auto'] {
-	width: fit-content !important;
-	inline-size: fit-content !important;
+	width: fit-content;
+	inline-size: fit-content;
 	margin: auto;
 }
 
 /* Override navigation item width behavior in playground */
 .component-playground .preview-area > .db-navigation-item[data-width='full'] {
-	inline-size: 100% !important;
+	inline-size: 100%;
 }
 
 .component-playground .preview-area > .db-navigation-item[data-width='auto'] {
-	inline-size: fit-content !important;
+	inline-size: fit-content;
 }

@@ -50,7 +50,7 @@ const nativeAttributes = [
 						data-semantic="successful"
 						data-size="small"
 						data-show-icon-leading="true"
-						style="display: none;"
+						hidden
 					/>
 					<span
 						id="playground-input-infotext"
@@ -160,10 +160,8 @@ const nativeAttributes = [
 						data-size="small"
 						data-variant="ghost"
 						data-no-text="true"
-						style={
+						hidden={
 							config.properties.find((p: any) => p.name === 'closeable')?.defaultValue === false
-								? 'display: none;'
-								: ''
 						}
 					>
 						Close
@@ -176,7 +174,6 @@ const nativeAttributes = [
 					</label>
 					<select
 						id="playground-select-field"
-						aria-invalid="false"
 						onchange={
 							"var w = document.getElementById('playground-select'); if(w.getAttribute('data-variant') === 'floating') { if(this.value) { w.removeAttribute('data-label-hidden'); } else { w.setAttribute('data-label-hidden', 'true'); } }"
 						}
@@ -194,7 +191,7 @@ const nativeAttributes = [
 						class="db-infotext"
 						data-size="small"
 						data-show-icon-leading="true"
-						style="display: none;"
+						hidden
 					>
 						Please choose your country
 					</span>
@@ -204,7 +201,7 @@ const nativeAttributes = [
 						data-semantic="successful"
 						data-size="small"
 						data-show-icon-leading="true"
-						style="display: none;"
+						hidden
 					>
 						Valid selection
 					</span>
@@ -214,7 +211,7 @@ const nativeAttributes = [
 						data-semantic="critical"
 						data-size="small"
 						data-show-icon-leading="true"
-						style="display: none;"
+						hidden
 					>
 						Please select a valid option
 					</span>
@@ -420,7 +417,7 @@ const nativeAttributes = [
 											: config.elementId === 'playground-select'
 												? 'playground-select-infotext'
 												: 'playground-textarea-infotext';
-									updateAction = `const field = document.getElementById('${fieldId}'); const validInfo = document.getElementById('${validInfoId}'); const invalidInfo = document.getElementById('${invalidInfoId}'); if(this.value === 'invalid') { field.setAttribute('aria-invalid', 'true'); field.setAttribute('data-custom-validity', 'invalid'); validInfo.style.display = 'none'; invalidInfo.style.display = ''; } else if(this.value === 'valid') { field.setAttribute('aria-invalid', 'false'); field.setAttribute('data-custom-validity', 'valid'); validInfo.style.display = ''; invalidInfo.style.display = 'none'; } else if(this.value === 'no-validation') { field.setAttribute('aria-invalid', 'false'); field.setAttribute('data-custom-validity', 'no-validation'); validInfo.style.display = 'none'; invalidInfo.style.display = 'none'; }`;
+									updateAction = `const field = document.getElementById('${fieldId}'); const validInfo = document.getElementById('${validInfoId}'); const invalidInfo = document.getElementById('${invalidInfoId}'); if(this.value === 'invalid') { field.setAttribute('aria-invalid', 'true'); field.setAttribute('data-custom-validity', 'invalid'); validInfo.hidden = true; invalidInfo.hidden = false; } else if(this.value === 'valid') { field.setAttribute('aria-invalid', 'false'); field.setAttribute('data-custom-validity', 'valid'); validInfo.hidden = false; invalidInfo.hidden = true; } else if(this.value === 'no-validation') { field.setAttribute('aria-invalid', 'false'); field.setAttribute('data-custom-validity', 'no-validation'); validInfo.hidden = true; invalidInfo.hidden = true; }`;
 								} else if (config.elementId === 'playground-select' && prop.name === 'variant') {
 									updateAction = `const wrapper = document.getElementById('${config.elementId}'); wrapper.setAttribute('data-variant', this.value); const placeholder = document.getElementById('playground-select-placeholder'); if(this.value === 'floating') { placeholder.textContent = ''; } else { const placeholderInput = document.querySelector('.controls-area input[oninput*="playground-select-placeholder"]'); if(placeholderInput) placeholder.textContent = placeholderInput.value; } if(this.value !== 'floating') { wrapper.removeAttribute('data-label-hidden'); }`;
 								} else if (config.elementId === 'playground-tag' && prop.name === 'behavior') {
@@ -742,7 +739,7 @@ const nativeAttributes = [
 									config.elementId === 'playground-select' &&
 									['showMessage', 'show-message'].includes(prop.name)
 								) {
-									action = `const message = document.getElementById('playground-select-message'); if(message) message.style.display = this.checked ? '' : 'none';`;
+									action = `const message = document.getElementById('playground-select-message'); if(message) message.hidden = !this.checked;`;
 								} else if (config.elementId === 'playground-select' && prop.name === 'required') {
 									action = `const field = document.getElementById('playground-select-field'); if(field) { if(this.checked) field.setAttribute('required', ''); else field.removeAttribute('required'); }`;
 								} else if (
@@ -751,7 +748,7 @@ const nativeAttributes = [
 								) {
 									action = `const target = document.getElementById('playground-checkbox-input'); target.indeterminate = this.checked;`;
 								} else if (config.elementId === 'demo-notification' && prop.name === 'closeable') {
-									action = `const btn = document.getElementById('notification-close'); if(btn) btn.style.display = this.checked ? '' : 'none';`;
+									action = `const btn = document.getElementById('notification-close'); if(btn) btn.hidden = !this.checked;`;
 								} else if (
 									config.elementId === 'demo-navigation-item' &&
 									['show-icon', 'showIcon'].includes(prop.name)
