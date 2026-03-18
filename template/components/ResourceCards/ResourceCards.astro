@@ -1,5 +1,6 @@
 ---
 import { DBCard, DBLink } from '@db-ux/react-core-components';
+import DisabledWrapper from '@template/components/DisabledWrapper/DisabledWrapper.astro';
 import './ResourceCards.css';
 
 interface Resource {
@@ -8,6 +9,7 @@ interface Resource {
 	url: string;
 	icon?: string;
 	label?: string;
+	disabled?: boolean;
 }
 
 interface Props {
@@ -24,36 +26,56 @@ const defaultResources: Resource[] = [
 		title: 'React',
 		description: 'Interactive examples and documentation.',
 		url: `${baseUrl}/react-storybook${path}`,
-		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+		icon: 'react',
 	},
 	{
 		title: 'Vue',
 		description: 'Interactive examples and documentation.',
 		url: `${baseUrl}/vue-storybook${path}`,
-		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
+		icon: 'vue',
 	},
 	{
 		title: 'Angular',
 		description: 'Interactive examples and documentation.',
 		url: `${baseUrl}/angular-storybook${path}`,
-		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg',
+		icon: 'angular',
 	},
 	{
 		title: 'Web C.',
 		description: 'Interactive examples and documentation.',
 		url: `${baseUrl}/angular-storybook${path}`,
-		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
+		icon: 'web-components',
+		disabled: true,
 	},
 ];
 
 const resources = customResources || defaultResources;
+
+// Map icon names to local paths
+const iconMap: Record<string, string> = {
+	react: '/assets/framework-icons/react.svg',
+	vue: '/assets/framework-icons/vue.svg',
+	angular: '/assets/framework-icons/angular.svg',
+	html5: '/assets/framework-icons/html5.svg',
+	'web-components': '/assets/framework-icons/html5.svg',
+};
+
+const getIconPath = (icon: string): string => {
+	// If it's already a full path/URL, return as is (backwards compatibility)
+	if (icon.startsWith('/') || icon.startsWith('http')) {
+		return icon;
+	}
+	// Otherwise map the icon name
+	return iconMap[icon] || icon;
+};
 ---
 
 <div class="resource-cards">
 	{
-		resources.map((resource) => (
-			<DBLink href={resource.url} target="_blank" rel="noopener noreferrer" variant="inline">
-				<DBCard behavior="interactive" className="resource-card-item">
+		resources.map((resource) => {
+			const isDisabled = resource.disabled === true;
+			const cardContent = (
+				<>
 					{resource.icon && (
 						<img
 							src={resource.icon}
@@ -67,8 +89,28 @@ const resources = customResources || defaultResources;
 						<p>{resource.description}</p>
 					</div>
 					<strong data-icon-trailing="arrow_up_right">{resource.label || 'View Storybook'}</strong>
+				</>
+			);
+			const card = (
+				<DBCard behavior="interactive">
+					{isDisabled ? (
+						<a aria-disabled="true" tabindex="-1">
+							{cardContent}
+						</a>
+					) : (
+						<a href={resource.url} target="_blank" rel="noopener noreferrer">
+							{cardContent}
+						</a>
+					)}
 				</DBCard>
-			</DBLink>
-		))
+			);
+			return isDisabled ? (
+				<DisabledWrapper label="Coming Soon" size="small">
+					{card}
+				</DisabledWrapper>
+			) : (
+				card
+			);
+		})
 	}
 </div>
