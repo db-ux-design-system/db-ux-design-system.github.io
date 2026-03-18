@@ -5,6 +5,7 @@ import HtmlHead from '@template/components/HtmlHead';
 import MainContent from './main-content';
 import { appConfig } from '@root/app.config.ts';
 import { Shell } from '@template/components/Shell';
+import Footer from '@template/components/Footer/Footer.astro';
 
 interface Props {
 	headings?: MarkdownHeading[];
@@ -27,9 +28,9 @@ const currentPath = Astro.url.pathname;
 				<MainContent frontmatter={frontmatter} headings={headings}>
 					<slot />
 				</MainContent>
+				<Footer />
 			</div>
 		</Shell>
+		<slot name="script" />
 	</body>
 </html>
-
-<slot name="script"/>
