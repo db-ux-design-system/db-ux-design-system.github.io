@@ -52,7 +52,7 @@
 	border-color: var(--db-brand-on-origin-default);
 }
 
-.cta .db-button[data-variant='brand']:hover {
+.cta .db-button[data-variant='brand']:hover, .cta .db-button[data-variant='brand']:focus {
 	opacity: 0.88;
 }
 
@@ -71,7 +71,7 @@
 	border-color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
 }
 
-.cta .db-button[data-variant='outlined']:hover {
+.cta .db-button[data-variant='outlined']:hover, .cta .db-button[data-variant='outlined']:focus {
 	background: rgb(255 255 255 / 24%);
 }
 
@@ -82,11 +82,6 @@
 /* TODO: why do we define an outline on focus here, shouldn't this even already been defined by the system itself ? */
 .cta .db-button[data-variant='outlined']:not([data-disable-focus='true']):focus-visible {
 	outline: var(--db-border-width-2xs) solid var(--db-brand-on-origin-default);
-	outline-offset: var(--db-spacing-fixed-3xs);
-}
-
-.cta .db-button[data-variant='outlined']:not([data-disable-focus='true']):focus-visible {
-	outline: var(--db-border-width-2xs) solid var(--db-neutral-on-bg-basic-emphasis-100-default);
 	outline-offset: var(--db-spacing-fixed-3xs);
 }
 

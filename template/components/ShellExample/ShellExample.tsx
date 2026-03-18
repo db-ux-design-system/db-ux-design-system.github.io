@@ -32,7 +32,7 @@ export default function ShellExample() {
 						</DBNavigationItem>
 					</DBNavigation>
 					<DBControlPanelPrimaryActions>
-						<DBButton variant="brand">
+						<DBButton type="button" variant="brand">
 							Call to Action
 						</DBButton>
 					</DBControlPanelPrimaryActions>
