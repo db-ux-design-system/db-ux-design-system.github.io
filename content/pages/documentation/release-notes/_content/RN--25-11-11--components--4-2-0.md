@@ -1,8 +1,8 @@
 ---
 hidePage: true
-content: 'Components'
+category: 'Components'
 version: 'v4.2.0'
-date: '11. November 2025'
+date: '2025-11-11'
 ---
 
 **Features für Code:**

@@ -2,8 +2,19 @@
 import DocumentationLayout from '@template/layouts/documentation';
 import { DBSection, DBTag, DBStack, DBCheckbox, DBDivider } from '@db-ux/react-core-components';
 import './index.css';
+import type { MarkdownInstance } from 'astro';
+import type { AstroComponentFactory } from 'astro/runtime/server';
 
-const frontmatter = {
+type ReleaseNote = {
+	slug: string;
+	heading: string;
+	category: string;
+	version: string;
+	date: Date;
+	Content: AstroComponentFactory;
+};
+
+export const frontmatter = {
 	order: 1,
 	layout: '@template/layouts/documentation',
 	headline: 'Release Notes',
@@ -13,47 +24,71 @@ const frontmatter = {
 	align: 'start' as const,
 	toc: true,
 };
+const releaseNoteFiles = import.meta.glob<MarkdownInstance<any>>('./_content/*.md', {
+	eager: true,
+});
+const releaseNotes: ReleaseNote[] = Object.values(releaseNoteFiles)
+	.map(({ frontmatter, Content }) => {
+		const heading = `${frontmatter.category} – ${frontmatter.version}`;
+		const slug = heading
+			.normalize('NFD')
+			.replace(/[\u0300-\u036f]/g, '')
+			.toLowerCase()
+			.replace(/[^a-z0-9]+/g, '-')
+			.replace(/^-|-$/g, '');
+		return {
+			slug,
+			heading,
+			category: frontmatter.category,
+			date: new Date(frontmatter.date),
+			Content,
+			version: frontmatter.version,
+		} as ReleaseNote;
+	})
+	.sort((a: ReleaseNote, b: ReleaseNote) => b.date.getTime() - a.date.getTime());
 
-const releaseNotes = await Astro.glob('./_content/*.md');
-releaseNotes.sort((a, b) => b.file.localeCompare(a.file));
-
-const categories = [...new Set(releaseNotes.map((note) => note.frontmatter.content))];
+const categories = [...new Set(releaseNotes.map((note) => note.category))];
 ---
 
-<DocumentationLayout frontmatter={frontmatter} headings={[]}>
-	<DBStack id="filter-tags" direction="row" alignment="center" wrap>
-		<small>Filter:</small>
-		{
-			categories.map((cat) => (
-				<DBTag data-category={cat} client:load showCheckState={false}>
-					<DBCheckbox>{cat}</DBCheckbox>
-				</DBTag>
-			))
-		}
-	</DBStack>
-	<DBSection spacing="small">
+<DocumentationLayout
+	frontmatter={frontmatter}
+	headings={releaseNotes.map(({ heading, slug }) => ({ text: heading, depth: 2, slug }))}
+>
+	<DBStack>
+		<DBStack id="filter-tags" direction="row" alignment="center" wrap="true" role="group">
+			<small>Filter:</small>
+			{
+				categories.map((cat) => (
+					<DBTag data-category={cat} client:load showCheckState={false}>
+						<DBCheckbox>{cat}</DBCheckbox>
+					</DBTag>
+				))
+			}
+		</DBStack>
 		{
 			releaseNotes.map((note) => (
-				<div class="release-note" data-category={note.frontmatter.content}>
-					<div class="release-note-header">
-						<span class="release-note-version">
-							{note.frontmatter.content} – {note.frontmatter.version}{' '}
-						</span>
-						<span class="release-note-date">{note.frontmatter.date}</span>
-					</div>
+				<article class="release-note" data-category={note.category}>
+					<DBStack direction="row" justifyContent="space-between" alignment="center">
+						<h2 id={note.slug} class="release-note-version">
+							{note.heading}
+						</h2>
+						<time class="release-note-date">{note.date.toLocaleDateString()}</time>
+					</DBStack>
 
 					<note.Content />
 					<DBDivider />
-				</div>
+				</article>
 			))
 		}
-	</DBSection>
+	</DBStack>
 </DocumentationLayout>
 
 <script is:inline slot="script">
 	function initFilter() {
 		const filterContainer = document.getElementById('filter-tags');
 		const releaseNotes = document.querySelectorAll('.release-note');
+		const tocHeadingNotes = document.querySelectorAll('.dba-toc-heading');
+		console.log(tocHeadingNotes);
 
 		if (!filterContainer) {
 			setTimeout(initFilter, 100);
@@ -76,11 +111,17 @@ const categories = [...new Set(releaseNotes.map((note) => note.frontmatter.conte
 
 					releaseNotes.forEach((note) => {
 						const noteCategory = note.getAttribute('data-category');
-						if (activeCategories.length === 0 || activeCategories.includes(noteCategory)) {
-							note.style.display = '';
-						} else {
-							note.style.display = 'none';
-						}
+						note.hidden = !(
+							activeCategories.length === 0 || activeCategories.includes(noteCategory)
+						);
+					});
+
+					tocHeadingNotes.forEach((heading) => {
+						heading.style.display =
+							activeCategories.length === 0 ||
+							activeCategories.some((category) => heading.textContent.startsWith(category))
+								? 'flex'
+								: 'none';
 					});
 				});
 			}
@@ -88,7 +129,10 @@ const categories = [...new Set(releaseNotes.map((note) => note.frontmatter.conte
 	}
 
 	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', initFilter);
+		document.addEventListener(
+			'DOMContentLoaded',
+			new Promise(() => setTimeout(() => initFilter(), 1000)),
+		);
 	} else {
 		initFilter();
 	}

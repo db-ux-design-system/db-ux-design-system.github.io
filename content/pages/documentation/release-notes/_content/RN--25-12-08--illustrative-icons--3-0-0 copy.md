@@ -1,8 +1,8 @@
 ---
 hidePage: true
-content: 'Illustrative Icons'
+category: 'Illustrative Icons'
 version: 'v3.0.0'
-date: '08. Dezember 2025'
+date: '2025-12-08'
 ---
 
 **Features für Design:**

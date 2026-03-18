@@ -94,21 +94,16 @@ function sortTree(node: NavigationItem) {
  * @returns A fully structured and sorted `AppNavigation` tree.
  */
 export function buildAppNavigationFromContent(): AppNavigation {
-	const mods = import.meta.glob<MdModule>('../../content/pages/**/*.{md,mdx,astro}', {
-		eager: true,
-	}) as Modules;
+	const mods = import.meta.glob<MdModule>(
+		['../../content/pages/**/*.{md,mdx,astro}', '!**/_*/**', '!**/demo-b2b/**', '!**/demo-b2c/**'],
+		{ eager: true },
+	) as Modules;
 	const nodes = new Map<string, NavigationItem>();
 
 	for (const [key, mod] of Object.entries(mods)) {
 		const rel = strip(key);
 		const segments = rel.split('/').filter(Boolean);
-		
-		// Skip paths with segments starting with underscore
-		if (segments.some(seg => seg.startsWith('_'))) continue;
-		
-		// Skip demo pages
-		if (rel.startsWith('demo-b2b') || rel.startsWith('demo-b2c')) continue;
-		
+
 		const fm: NavigationFrontmatter = mod.frontmatter ?? ({} as NavigationFrontmatter);
 
 		if (rel === '') continue;
