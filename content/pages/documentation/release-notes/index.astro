@@ -1,0 +1,137 @@
+---
+import DocumentationLayout from '@template/layouts/documentation';
+import { DBTag, DBStack, DBCheckbox, DBDivider } from '@db-ux/react-core-components';
+import './index.css';
+import type { MarkdownInstance } from 'astro';
+type ReleaseNote = {
+	slug: string;
+	heading: string;
+	category: string;
+	version: string;
+	date: Date;
+	Content: MarkdownInstance<any>['Content'];
+};
+
+export const frontmatter = {
+	order: 1,
+	layout: '@template/layouts/documentation',
+	headline: 'Release Notes',
+	title: 'Release Notes',
+	description:
+		'Stay up to date with the latest changes, improvements, fixes, and new features across the design system.',
+	align: 'start' as const,
+	toc: true,
+};
+const releaseNoteFiles = import.meta.glob<MarkdownInstance<any>>('./_content/*.md', {
+	eager: true,
+});
+const releaseNotes: ReleaseNote[] = Object.values(releaseNoteFiles)
+	.map(({ frontmatter, Content }) => {
+		const heading = `${frontmatter.category} – ${frontmatter.version}`;
+		const slug = heading
+			.normalize('NFD')
+			.replace(/[\u0300-\u036f]/g, '')
+			.toLowerCase()
+			.replace(/[^a-z0-9]+/g, '-')
+			.replace(/^-|-$/g, '');
+		return {
+			slug,
+			heading,
+			category: frontmatter.category,
+			date: new Date(frontmatter.date),
+			Content,
+			version: frontmatter.version,
+		} as ReleaseNote;
+	})
+	.sort((a: ReleaseNote, b: ReleaseNote) => b.date.getTime() - a.date.getTime());
+
+const categories = [...new Set(releaseNotes.map((note) => note.category))];
+---
+
+<DocumentationLayout
+	frontmatter={frontmatter}
+	headings={releaseNotes.map(({ heading, slug }) => ({ text: heading, depth: 2, slug }))}
+>
+	<DBStack>
+		<DBStack id="filter-tags" direction="row" alignment="center" wrap="true" role="group">
+			<small>Filter:</small>
+			{
+				categories.map((cat) => (
+					<DBTag data-category={cat} client:load showCheckState={false}>
+						<DBCheckbox>{cat}</DBCheckbox>
+					</DBTag>
+				))
+			}
+		</DBStack>
+		{
+			releaseNotes.map((note) => (
+				<article class="release-note" data-category={note.category}>
+					<DBStack direction="row" justifyContent="space-between" alignment="center">
+						<h2 id={note.slug} class="release-note-version">
+							{note.heading}
+						</h2>
+						<time class="release-note-date">{note.date.toLocaleDateString()}</time>
+					</DBStack>
+
+					<note.Content />
+					<DBDivider />
+				</article>
+			))
+		}
+	</DBStack>
+</DocumentationLayout>
+
+<script is:inline slot="script">
+	function initFilter() {
+		const filterContainer = document.getElementById('filter-tags');
+		const releaseNotes = document.querySelectorAll('.release-note');
+		const tocHeadingNotes = document.querySelectorAll('.dba-toc-heading');
+		console.log(tocHeadingNotes);
+
+		if (!filterContainer) {
+			setTimeout(initFilter, 100);
+			return;
+		}
+
+		const filterTags = filterContainer.querySelectorAll('[data-category]');
+
+		filterTags.forEach((tag) => {
+			const checkbox = tag.querySelector('input[type="checkbox"]');
+			if (checkbox) {
+				checkbox.addEventListener('change', () => {
+					const activeCategories = [];
+					filterTags.forEach((t) => {
+						const cb = t.querySelector('input[type="checkbox"]');
+						if (cb && cb.checked) {
+							activeCategories.push(t.getAttribute('data-category'));
+						}
+					});
+
+					releaseNotes.forEach((note) => {
+						const noteCategory = note.getAttribute('data-category');
+						note.hidden = !(
+							activeCategories.length === 0 || activeCategories.includes(noteCategory)
+						);
+					});
+
+					tocHeadingNotes.forEach((heading) => {
+						heading.style.display =
+							activeCategories.length === 0 ||
+							activeCategories.some((category) => heading.textContent.startsWith(category))
+								? 'flex'
+								: 'none';
+					});
+				});
+			}
+		});
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener(
+			'DOMContentLoaded',
+			new Promise(() => setTimeout(() => initFilter(), 1000)),
+		);
+	} else {
+		initFilter();
+	}
+</script>
