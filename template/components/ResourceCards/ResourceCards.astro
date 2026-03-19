@@ -1,12 +1,12 @@
 ---
-import { DBCard } from '@db-ux/react-core-components';
+import { DBCard, DBLink } from '@db-ux/react-core-components';
 import './ResourceCards.css';
 
 interface Resource {
 	title: string;
 	description: string;
 	url: string;
-	icon: string;
+	icon?: string;
 	label?: string;
 }
 
@@ -15,7 +15,7 @@ interface Props {
 	resources?: Resource[];
 }
 
-const { path, resources: customResources } = Astro.props;
+const { path = '', resources: customResources } = Astro.props;
 
 const baseUrl = 'https://design-system.deutschebahn.com/core-web/review/main';
 
@@ -52,14 +52,16 @@ const resources = customResources || defaultResources;
 <div class="resource-cards">
 	{
 		resources.map((resource) => (
-			<a href={resource.url} target="_blank" rel="noopener noreferrer">
-				<DBCard behavior="interactive">
-					<img
-						src={resource.icon}
-						alt={`Image for ${resource.title}, ${resource.description}`}
-						width="32"
-						height="32"
-					/>
+			<DBLink href={resource.url} target="_blank" rel="noopener noreferrer" variant="inline">
+				<DBCard behavior="interactive" className="resource-card-item">
+					{resource.icon && (
+						<img
+							src={resource.icon}
+							alt={`Image for ${resource.title}, ${resource.description}`}
+							width="32"
+							height="32"
+						/>
+					)}
 					<div class="resource-text">
 						<strong class="resource-title">{resource.title}</strong>
 						<p>{resource.description}</p>
@@ -68,7 +70,7 @@ const resources = customResources || defaultResources;
 						{resource.label || 'View Storybook'}
 					</strong>
 				</DBCard>
-			</a>
+			</DBLink>
 		))
 	}
 </div>
