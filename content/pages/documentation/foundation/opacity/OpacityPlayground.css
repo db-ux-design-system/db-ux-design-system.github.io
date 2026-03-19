@@ -1,0 +1,43 @@
+.opacity-playground .playground-preview {
+	background: repeating-conic-gradient(#ddd 0% 25%, #fff 0% 50%) 50% / 20px 20px;
+}
+
+.opacity-box[data-opacity='3xs'] {
+	opacity: var(--db-opacity-3xs);
+}
+
+.opacity-box[data-opacity='2xs'] {
+	opacity: var(--db-opacity-2xs);
+}
+
+.opacity-box[data-opacity='xs'] {
+	opacity: var(--db-opacity-xs);
+}
+
+.opacity-box[data-opacity='sm'] {
+	opacity: var(--db-opacity-sm);
+}
+
+.opacity-box[data-opacity='md'] {
+	opacity: var(--db-opacity-md);
+}
+
+.opacity-box[data-opacity='lg'] {
+	opacity: var(--db-opacity-lg);
+}
+
+.opacity-box[data-opacity='xl'] {
+	opacity: var(--db-opacity-xl);
+}
+
+.opacity-box[data-opacity='2xl'] {
+	opacity: var(--db-opacity-2xl);
+}
+
+.opacity-box[data-opacity='3xl'] {
+	opacity: var(--db-opacity-3xl);
+}
+
+.opacity-box[data-opacity='full'] {
+	opacity: var(--db-opacity-full);
+}

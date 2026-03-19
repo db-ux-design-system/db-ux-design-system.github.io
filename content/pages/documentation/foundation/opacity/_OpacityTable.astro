@@ -1,0 +1,27 @@
+---
+import TokenTable from '../_shared/TokenTable.astro';
+
+const tokens = [
+	'db-opacity-full',
+	'db-opacity-3xl',
+	'db-opacity-2xl',
+	'db-opacity-xl',
+	'db-opacity-lg',
+	'db-opacity-md',
+	'db-opacity-sm',
+	'db-opacity-xs',
+	'db-opacity-2xs',
+	'db-opacity-3xs',
+];
+---
+
+<TokenTable
+	sections={[
+		{
+			headline: 'Opacity',
+			tokens,
+			previewClass: 'opacity-preview',
+			previewAttribute: 'opacity',
+		},
+	]}
+/>

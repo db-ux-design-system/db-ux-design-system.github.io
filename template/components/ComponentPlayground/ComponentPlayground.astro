@@ -1,5 +1,6 @@
 ---
 import './ComponentPlayground.css';
+import { DBAccordionItem } from '@db-ux/react-core-components';
 import ShellExample from '@template/components/ShellExample/ShellExample.tsx';
 import TooltipExample from '@template/components/TooltipExample/TooltipExample.tsx';
 interface Props {
@@ -34,6 +35,15 @@ const nativeAttributes = [
 						{!config.textElementId && config.defaultText}
 					</Component>
 				</div>
+			) : config.elementId === 'demo-accordion' ? (
+				<Component {...config.defaultProps} id={config.elementId}>
+					<DBAccordionItem headlinePlain={`${config.defaultText} 1`}>
+						{config.defaultText}
+					</DBAccordionItem>
+					<DBAccordionItem headlinePlain={`${config.defaultText} 2`}>
+						{config.defaultText} 2
+					</DBAccordionItem>
+				</Component>
 			) : config.elementId === 'playground-input' ? (
 				<div class="db-input" id={config.elementId}>
 					<label id="playground-input-label">{config.defaultProps.label || 'Label'}</label>

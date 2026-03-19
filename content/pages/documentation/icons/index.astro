@@ -1,24 +1,20 @@
 ---
-import DocumentationLayout from '@template/layouts/documentation';
+import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
 import { DBButton, DBInput, DBTooltip } from '@db-ux/react-core-components';
 import iconDescriptions from '@db-ux/db-theme-icons/build/assets/descriptions.json';
 import './icons.css';
 
-const frontmatter = {
-	order: 1,
+export const frontmatter: DocumentationFrontMatter = {
 	layout: '@template/layouts/documentation',
 	sectionSpacing: 'small',
 	sectionWidth: 'auto',
 	headline: 'Icons',
 	title: 'Icons',
 	description: 'Browse and copy all available DB UX icons names for usage in code.',
-	align: 'start' as const,
+	align: 'start',
 };
 
-export { frontmatter };
-
 const iconNames = Object.keys(iconDescriptions);
-const iconDescriptionsJson = JSON.stringify(iconDescriptions);
 ---
 
 <DocumentationLayout frontmatter={frontmatter} headings={[]}>
@@ -55,36 +51,23 @@ const iconDescriptionsJson = JSON.stringify(iconDescriptions);
 	</div>
 </DocumentationLayout>
 
-<script define:vars={{ iconDescriptionsJson }} is:inline slot="script">
-	const iconDescriptions = JSON.parse(iconDescriptionsJson);
+<script>
+	import iconDescriptions from '@db-ux/db-theme-icons/build/assets/descriptions.json';
+	import { waitForElements } from '@template/utils/client.utils.ts';
 
-	function tryInitIconGallery(attempts = 0) {
+	function initIconGallery(): boolean {
 		const gallery = document.getElementById('icon-gallery');
 		const searchInputWrapper = document.getElementById('icon-search-input');
 
-		if (!gallery || !searchInputWrapper) {
-			if (attempts < 10) {
-				setTimeout(() => tryInitIconGallery(attempts + 1), 500);
-			}
-			return;
-		}
-
-		initIconGallery();
-	}
-
-	function initIconGallery() {
-		const gallery = document.getElementById('icon-gallery');
-		const searchInputWrapper = document.getElementById('icon-search-input');
-
-		if (!gallery || !searchInputWrapper) return;
+		if (!gallery || !searchInputWrapper) return false;
 
 		let searchInput = searchInputWrapper.querySelector('input');
 		if (!searchInput) {
 			searchInput = document.querySelector('input[type="search"]');
 		}
-		if (!searchInput) return;
+		if (!searchInput) return false;
 
-		const buttons = Array.from(gallery.querySelectorAll('.icon-item'));
+		const buttons = Array.from(gallery.querySelectorAll<HTMLButtonElement>('.icon-item'));
 		const iconMap = new Map();
 
 		buttons.forEach((button) => {
@@ -98,7 +81,7 @@ const iconDescriptionsJson = JSON.stringify(iconDescriptions);
 		gallery.addEventListener('click', (e) => {
 			if (!(e.target instanceof Element)) return;
 
-			const button = e.target.closest('.icon-item');
+			const button = e.target.closest<HTMLButtonElement>('.icon-item');
 			if (!button) return;
 
 			const iconData = iconMap.get(button);
@@ -117,9 +100,10 @@ const iconDescriptionsJson = JSON.stringify(iconDescriptions);
 		});
 
 		searchInput.addEventListener('input', (e) => {
-			const query = e.target.value.toLowerCase();
+			const target = e.target as HTMLInputElement;
+			const query = target.value.toLowerCase();
 
-			buttons.forEach((button) => {
+			buttons.forEach((button: HTMLButtonElement) => {
 				const iconData = iconMap.get(button);
 				if (!iconData) {
 					button.style.display = 'none';
@@ -131,7 +115,7 @@ const iconDescriptionsJson = JSON.stringify(iconDescriptions);
 					return;
 				}
 
-				const descData = iconDescriptions[iconData.iconKey];
+				const descData = (iconDescriptions as any)[iconData.iconKey];
 				if (!descData) {
 					button.style.display = 'none';
 					return;
@@ -159,9 +143,9 @@ const iconDescriptionsJson = JSON.stringify(iconDescriptions);
 				button.style.display = 'none';
 			});
 		});
+
+		return true;
 	}
 
-	window.addEventListener('load', () => {
-		setTimeout(() => tryInitIconGallery(), 1000);
-	});
+	waitForElements(initIconGallery);
 </script>

@@ -1,0 +1,27 @@
+---
+import TokenTable from '../_shared/TokenTable.astro';
+
+const tokens = [
+	'db-border-radius-3xs',
+	'db-border-radius-2xs',
+	'db-border-radius-xs',
+	'db-border-radius-sm',
+	'db-border-radius-md',
+	'db-border-radius-lg',
+	'db-border-radius-xl',
+	'db-border-radius-2xl',
+	'db-border-radius-3xl',
+	'db-border-radius-full',
+];
+---
+
+<TokenTable
+	sections={[
+		{
+			headline: 'Border Radius',
+			tokens,
+			previewClass: 'border-radius-preview',
+			previewAttribute: 'border-radius',
+		},
+	]}
+/>

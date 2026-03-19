@@ -1,0 +1,54 @@
+---
+import { DBCard, DBPopover, type DBSelectOptionType } from '@db-ux/react-core-components';
+import Playground from '../_shared/Playground.astro';
+import './SpacingPlayground.css';
+
+const spacings: DBSelectOptionType[] = [
+	{ value: '3xs', label: '3XS' },
+	{ value: '2xs', label: '2XS' },
+	{ value: 'xs', label: 'XS' },
+	{ value: 'sm', label: 'SM' },
+	{ value: 'md', label: 'MD' },
+	{ value: 'lg', label: 'LG' },
+	{ value: 'xl', label: 'XL' },
+	{ value: '2xl', label: '2XL' },
+	{ value: '3xl', label: '3XL' },
+];
+
+const cardSpacings: DBSelectOptionType[] = [
+	{ value: 'none', label: 'None' },
+	{ value: 'sm', label: 'Small' },
+	{ value: 'md', label: 'Medium' },
+	{ value: 'lg', label: 'Large' },
+];
+
+const densities: DBSelectOptionType[] = [
+	{ value: 'functional', label: 'Functional' },
+	{ value: 'regular', label: 'Regular' },
+	{ value: 'expressive', label: 'Expressive' },
+];
+---
+
+<Playground
+	selects={[
+		{ id: 'select', label: 'Gap Spacing', defaultValue: 'md', options: spacings },
+		{ id: 'density-select', label: 'Density', defaultValue: 'regular', options: densities },
+	]}
+>
+	<DBPopover width="fixed" gap="true">
+		<button
+			slot="trigger"
+			id="box"
+			class="spacing-stack interactive-box"
+			data-spacing="md"
+			data-density="regular"
+		>
+			<DBCard behavior="interactive" className="spacing-card" spacing="none">
+				<header>Card 1</header><p>Focus Me</p>
+			</DBCard>
+			<DBCard behavior="interactive" className="spacing-card" spacing="none">
+				<header>Card 2</header><p>Focus Me</p>
+			</DBCard>
+		</button>
+	</DBPopover>
+</Playground>
