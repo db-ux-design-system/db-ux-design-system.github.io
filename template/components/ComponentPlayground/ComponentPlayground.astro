@@ -441,8 +441,8 @@ const nativeAttributes = [
 								}
 								return (
 									<div class="db-select">
-										<label>{prop.label}</label>
-										<select onchange={updateAction}>
+										<label for={config.elementId + '-select'}>{prop.label}</label>
+										<select id={config.elementId + '-select'} onchange={updateAction}>
 											{prop.options.map((option: any) => (
 												<option value={option.value} selected={option.default}>
 													{option.label}
