@@ -9,3 +9,6 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+    ignore:
+      # We need to ignore db-ux packages for now because of shell
+      - dependency-name: "@db-ux*"

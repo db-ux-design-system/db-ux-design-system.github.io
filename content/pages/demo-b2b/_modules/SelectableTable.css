@@ -1,3 +1,10 @@
+@media screen and (prefers-reduced-motion: reduce) {
+table tbody tr {
+	cursor: pointer;
+	transition: none;
+}
+}
+
 table tbody tr {
 	cursor: pointer;
 	transition: background-color 0.2s;
@@ -7,6 +14,6 @@ table tbody tr.selected {
 	background-color: var(--db-adaptive-bg-basic-level-3-default) !important;
 }
 
-table tbody tr:hover {
+table tbody tr:hover, table tbody tr:focus {
 	background-color: var(--db-adaptive-bg-basic-level-2-default) !important;
 }

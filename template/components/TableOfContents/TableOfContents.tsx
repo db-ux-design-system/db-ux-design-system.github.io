@@ -94,9 +94,8 @@ export function TableOfContents(props: Props): ReactElement | null {
 								className="dba-toc-heading"
 								data-depth={depth}
 								data-slug={slug}
-								data-active={activeIDs.includes(slug)}
 							>
-								<a href={`${currentPath}#${slug}`} onClick={handleLinkClick}>
+								<a href={`${currentPath}#${slug}`} onClick={handleLinkClick} aria-current={activeIDs.includes(slug) ? 'location' : undefined}>
 									{text}
 								</a>
 								{showChildren && (
@@ -106,6 +105,9 @@ export function TableOfContents(props: Props): ReactElement | null {
 										noText
 										icon={expandedH2s.has(slug) ? 'chevron_up' : 'chevron_down'}
 										onClick={() => toggleH2(slug)}
+										aria-label={expandedH2s.has(slug) ? 'Collapse' : 'Expand'}
+										aria-expanded={expandedH2s.has(slug)}
+										aria-controls={`toc-children-${slug}`}
 										type="button"
 									>
 										{expandedH2s.has(slug) ? 'Collapse' : 'Expand'}
@@ -120,12 +122,12 @@ export function TableOfContents(props: Props): ReactElement | null {
 						return (
 							<li
 								key={slug}
+								id={`toc-children-${currentH2}`}
 								className="dba-toc-heading"
 								data-depth={depth}
 								data-slug={slug}
-								data-active={activeIDs.includes(slug)}
 							>
-								<a href={`${currentPath}#${slug}`} onClick={handleLinkClick}>
+								<a href={`${currentPath}#${slug}`} onClick={handleLinkClick} aria-current={activeIDs.includes(slug) ? 'location' : undefined}>
 									{text}
 								</a>
 							</li>

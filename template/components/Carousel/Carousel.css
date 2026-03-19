@@ -1,6 +1,6 @@
 /* Local styles for Carousel (horizontal scroll wrapper) */
 .carousel {
-	width: 100%;
+	inline-size: 100%;
 	display: flex;
 	gap: var(--db-spacing-fixed-lg);
 	overflow: auto hidden;
@@ -17,18 +17,18 @@
 }
 
 .carousel > .db-card {
-	width: 80%;
+	inline-size: 80%;
 }
 
 .carousel .text-image-image img {
-	height: 100%;
+	block-size: 100%;
 	object-fit: cover;
 }
 
 /* WebKit */
 .carousel::-webkit-scrollbar {
-	width: 0;
-	height: 0;
+	inline-size: 0;
+	block-size: 0;
 }
 
 .fadeout-horizontal {

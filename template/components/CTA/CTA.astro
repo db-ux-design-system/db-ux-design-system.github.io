@@ -28,7 +28,7 @@ const { title, text, primaryAction, secondaryAction, align = 'center' } = Astro.
 				<div class="cta-actions">
 					<a
 						href={primaryAction.href}
-						class="db-button"
+						class="db-button cta-action"
 						data-variant={primaryAction.variant || 'brand'}
 					>
 						{primaryAction.label}
@@ -36,7 +36,7 @@ const { title, text, primaryAction, secondaryAction, align = 'center' } = Astro.
 					{secondaryAction && (
 						<a
 							href={secondaryAction.href}
-							class="db-button"
+							class="db-button cta-action"
 							data-variant={secondaryAction.variant || 'outlined'}
 						>
 							{secondaryAction.label}

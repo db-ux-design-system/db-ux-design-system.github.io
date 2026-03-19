@@ -1,0 +1,57 @@
+---
+import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
+import { DBSection, DBStack } from '@db-ux/react-core-components';
+import ElevationPlayground from './_ElevationPlayground.astro';
+import ElevationTable from './_ElevationTable.astro';
+
+const frontmatter: DocumentationFrontMatter = {
+	headline: 'Elevation',
+	title: 'Elevation',
+	align: 'start',
+	toc: true,
+	sectionSpacing: 'small',
+	sectionWidth: 'auto',
+};
+
+const headings = [
+	{ depth: 2, slug: 'playground', text: 'Playground' },
+	{ depth: 2, slug: 'tokens', text: 'Tokens' },
+];
+---
+
+<DocumentationLayout frontmatter={frontmatter} headings={headings}>
+	Elevations are an important tool in our design system for creating visual hierarchy and depth. By
+	creating visual layers, we help users quickly and easily understand which elements are more
+	important than others.
+
+	<DBSection spacing="small">
+		<DBStack gap="x-large">
+			<DBStack gap="none">
+				<h2 id="playground">Playground</h2>
+				<br />
+				Experiment with elevation tokens to see how shadow depth affects visual hierarchy.
+			</DBStack>
+			<ElevationPlayground layout="horizontal" />
+		</DBStack>
+	</DBSection>
+
+	<DBSection spacing="small">
+		<h2 id="tokens">Tokens</h2>
+		<ElevationTable />
+	</DBSection>
+
+	<script>
+		import { waitForElements } from '@template/utils/client.utils.ts';
+		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';
+
+		function initElevation(): boolean {
+			return handleSimplePlaygrounds({
+				dataAttributeName: 'elevation',
+				popoverLabel: 'Elevation',
+				computedStyle: 'boxShadow',
+			});
+		}
+
+		waitForElements(initElevation);
+	</script>
+</DocumentationLayout>
