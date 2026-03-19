@@ -5,7 +5,6 @@ type NavigationFrontmatter = FrontMatter & {
 	isMenuItemDisabled?: boolean;
 	order?: number;
 	nav?: boolean | { order?: number };
-	status?: 'concept' | 'beta' | 'stable' | 'deprecated' | 'legacy';
 };
 
 type MdModule = { frontmatter: NavigationFrontmatter };
@@ -60,13 +59,25 @@ function getOrder(fm: NavigationFrontmatter): number | undefined {
 }
 
 /**
- * Comparator function for sorting navigation items. First by `order`, then alphabetically by `title`.
+ * Comparator function for sorting navigation items. First by status priority, then by `order`, then alphabetically by `title`.
  *
  * @param a - The first navigation item.
  * @param b - The second navigation item.
  * @returns -1, 0, or 1 depending on order.
  */
 function compareNav(a: NavigationItem, b: NavigationItem) {
+	// Status priority: stable > beta > concept > legacy > deprecated
+	const statusPriority: Record<string, number> = {
+		stable: 1,
+		beta: 2,
+		concept: 3,
+		legacy: 4,
+		deprecated: 5,
+	};
+	const aStatus = statusPriority[a.status || 'stable'] ?? 6;
+	const bStatus = statusPriority[b.status || 'stable'] ?? 6;
+	if (aStatus !== bStatus) return aStatus - bStatus;
+
 	const ao = a.order ?? Number.MAX_SAFE_INTEGER;
 	const bo = b.order ?? Number.MAX_SAFE_INTEGER;
 	if (ao !== bo) return ao - bo;
@@ -95,7 +106,7 @@ function sortTree(node: NavigationItem) {
  */
 export function buildAppNavigationFromContent(): AppNavigation {
 	const mods = import.meta.glob<MdModule>(
-		['../../content/pages/**/*.{md,mdx,astro}', '!**/_*/**', '!**/demo-b2b/**', '!**/demo-b2c/**'],
+		['../../content/pages/**/*.{md,mdx,astro}', '!**/_*/**',  '!**/_*.astro', '!**/demo-b2b/**', '!**/demo-b2c/**'],
 		{ eager: true },
 	) as Modules;
 	const nodes = new Map<string, NavigationItem>();
@@ -155,7 +166,7 @@ export function buildAppNavigationFromContent(): AppNavigation {
 		}
 	}
 
-	const appNav: AppNavigation = Object.values(roots).sort(compareNav);
+	const appNav: AppNavigation = Object.values(roots).sort(compareNav) as NavigationItem[];
 	appNav.forEach(sortTree);
 
 	return appNav;

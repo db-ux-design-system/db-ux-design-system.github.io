@@ -1,35 +1,36 @@
 ---
-order: 1
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Badge'
 title: 'Badge'
-description: 'The Badge component is used to display short, contextual information such as status, category, or metadata in close relation to another element.'
 align: start
 status: 'stable'
 toc: true
 ---
 
-import { DBBadge, DBSection, DBAccordion, DBAccordionItem } from '@db-ux/react-core-components';
+import { DBBadge, DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { badgeConfig } from '@template/configs/badge.config.js';
 
-- Indicate status or state of an item (e.g. new, error, success)
+The badge component is used to display short, contextual information such as status, category, or metadata in close relation to another element.
+
+- Indicate a status (e.g., new), a count (e.g., 5), or a notification (e.g., unread) of an item
 - Label or categorize content with a short descriptor
 - Highlight supplementary information next to UI elements
 
 <DBSection spacing="small" width="auto">
 
     ## Playground
-    Experiment with the Badge component and its properties.
+    Experiment with the badge component and its properties.
 
     <ComponentPlayground config={badgeConfig} component={DBBadge} />
 
@@ -43,10 +44,9 @@ import { badgeConfig } from '@template/configs/badge.config.js';
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+{/* <DBSection spacing="small" width="auto">
 
-## Properties
-
+## Properties & Slots
 Configure the badge through its properties, such as semantic, size, and content.
 
 <CollapsibleWrapper collapsedHeight="320px">
@@ -55,27 +55,22 @@ Configure the badge through its properties, such as semantic, size, and content.
 
 </CollapsibleWrapper>
 
-<CollapseButton collapsedText="Show all Properties" expandedText="Hide some Properties" />
+<CollapseButton
+	collapsedText="Show all Properties & Slots"
+	expandedText="Hide some Properties & Slots"
+/>
 
-</DBSection>
+</DBSection> */}
 
 <DBSection spacing="small" width="auto">
 
-## Guidelines
+## Usage Hints
 
-<CollapsibleWrapper collapsedHeight="320px">
-
-### Use badges for supplementary information
+### Content
 
 Badges should provide additional context and must not carry essential information on their own.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBlockEnd: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=1-1132&embed-host=share"
@@ -84,21 +79,15 @@ Badges should provide additional context and must not carry essential informatio
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=1-1133&embed-host=share"
-		description="Use a badge as the only indicator for critical information."
+		description="Don't use a badge as the only indicator for critical information."
 	/>
 </div>
 
-### Keep label text short
+### Labels
 
 Badge labels must be concise and scannable to ensure quick recognition.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBlockEnd: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1110&embed-host=share"
@@ -107,21 +96,15 @@ Badge labels must be concise and scannable to ensure quick recognition.
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1112&embed-host=share"
-		description="Use long sentences or detailed explanations inside a badge."
+		description="Avoid long sentences or detailed explanations inside a badge."
 	/>
 </div>
 
-### Position badges clearly
+### Positioning
 
 Place badges close to the element they describe, without breaking layout or alignment.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBlockEnd: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1113&embed-host=share"
@@ -130,7 +113,7 @@ Place badges close to the element they describe, without breaking layout or alig
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1114&embed-host=share"
-		description="Place badges far away or detached from their reference element."
+		description="Don't place badges far away or detached from their reference element."
 	/>
 </div>
 
@@ -138,13 +121,7 @@ Place badges close to the element they describe, without breaking layout or alig
 
 Use badges for status or metadata, and tags for filtering, grouping, or interactive categorization.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBlockEnd: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1116&embed-host=share"
@@ -153,20 +130,15 @@ Use badges for status or metadata, and tags for filtering, grouping, or interact
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1117&embed-host=share"
-		description="Use a badge when the element is meant to be clickable or removable."
+		description="Don't use a badge when the element is meant to be clickable or removable."
 	/>
 </div>
 
-### Accessibility considerations
+### Accessibility
 
 Ensure badge information is available to assistive technologies and not conveyed by color alone.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1118&embed-host=share"
@@ -175,13 +147,9 @@ Ensure badge information is available to assistive technologies and not conveyed
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1119&embed-host=share"
-		description="Rely only on color or position to communicate meaning."
+		description="Don't rely only on color or position to communicate meaning."
 	/>
 </div>
-
-</CollapsibleWrapper>
-
-<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
 
 </DBSection>
 
@@ -189,17 +157,9 @@ Ensure badge information is available to assistive technologies and not conveyed
 
 ## FAQ
 
-<DBAccordion>
-	<DBAccordionItem headlinePlain="Can a badge be interactive?">
-		No, badges are non-interactive. If interaction is required, use a Tag or Button instead.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="How many badges can be shown together?">
-		Use badges sparingly. Too many badges reduce readability and visual clarity.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="Can icons be used inside badges?">
-		Only if they support the text label and do not replace it.
-	</DBAccordionItem>
-</DBAccordion>
+Have a question about the badge component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Badge" />
 
 </DBSection>
 

@@ -28,6 +28,6 @@
 /* Optional: ensure a minimum tap target size when used on small cards */
 @media (hover: none) and (pointer: coarse) {
 	.disabled-wrapper-overlay .db-badge {
-		min-height: var(--db-sizing-sm);
+		min-block-size: var(--db-sizing-sm);
 	}
 }

@@ -4,7 +4,7 @@
 	display: flex;
 	flex-direction: row;
 	gap: var(--db-spacing-fixed-3xl);
-	height: 100%;
+	block-size: 100%;
 }
 
 /* Image Position */
@@ -17,19 +17,19 @@
 .text-image-image {
 	flex: 1 0 0; /* Default 50% */
 	position: relative;
-	min-width: 0;
+	min-inline-size: 0;
 }
 
 .text-image[data-image-position='top'] .text-image-image,
 .text-image[data-image-position='left'] .text-image-image {
 	order: 1;
-	width: 100%;
+	inline-size: 100%;
 }
 
 .text-image[data-image-position='bottom'] .text-image-image,
 .text-image[data-image-position='right'] .text-image-image {
 	order: 2;
-	width: 100%;
+	inline-size: 100%;
 }
 
 /* Content Column */
@@ -39,7 +39,7 @@
 	justify-content: center;
 	gap: var(--db-spacing-fixed-sm); /* 12px spacing zwischen Title und Body */
 	flex: 1 0 0; /* Default 50% in flex context */
-	min-width: 0; /* verhindert overflow issues */
+	min-inline-size: 0; /* verhindert overflow issues */
 }
 
 .text-image[data-image-position='top'] .text-image-content,
@@ -82,7 +82,7 @@
 /* Paragraph Spacing nur innerhalb der Komponente */
 .text-image-text > p {
 	margin: 0;
-	max-width: var(--db-container-md);
+	max-inline-size: var(--db-container-md);
 }
 
 .text-image-text > p + p {
@@ -99,8 +99,8 @@
 }
 
 .text-image-image img {
-	width: 100%;
-	height: auto;
+	inline-size: 100%;
+	block-size: auto;
 	display: block;
 }
 

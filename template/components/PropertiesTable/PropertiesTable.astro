@@ -2,20 +2,36 @@
 import './PropertiesTable.css';
 
 interface Props {
-	config: any;
+	config: {
+		properties: Array<{
+			name: string;
+			alternativeName?: string;
+			type: string;
+			options?: Array<{ label: string; default?: boolean }>;
+			defaultValue?: any;
+			description: string;
+		}>;
+		slots?: Array<{ name: string; description: string }>;
+		events?: Array<{ name: string; type: string; description: string }>;
+	};
 }
 
 const { config } = Astro.props;
 
-function getPropertyValues(property: any) {
-	if (property.type === 'select') {
-		const values = property.options.map((opt: any) => opt.label).join(', ');
-		const defaultOpt = property.options.find((opt: any) => opt.default);
+function getPropertyValues(property: {
+	type: string;
+	options?: Array<{ label: string; default?: boolean }>;
+	defaultValue?: any;
+}) {
+	if (property.type === 'select' && property.options) {
+		const values = property.options.map((opt) => opt.label).join(', ');
+		const defaultOpt = property.options.find((opt) => opt.default);
 		return `(Default) ${defaultOpt?.label || property.defaultValue}, ${values.replace(defaultOpt?.label + ', ', '').replace(', ' + defaultOpt?.label, '')}`;
 	}
 
 	if (property.type === 'checkbox') {
-		return `(Default) ${property.defaultValue}, True`;
+		const otherValue = property.defaultValue ? 'false' : 'true';
+		return `(Default) ${property.defaultValue}, ${otherValue}`;
 	}
 
 	if (property.type === 'text') {
@@ -24,6 +40,9 @@ function getPropertyValues(property: any) {
 
 	return 'Various';
 }
+
+const slots = config.slots || [];
+const events = config.events || [];
 ---
 
 <div class="properties-table-wrapper">
@@ -52,3 +71,55 @@ function getPropertyValues(property: any) {
 		</tbody>
 	</table>
 </div>
+
+{
+	slots.length > 0 && (
+		<div class="properties-table-wrapper properties-table-spacing">
+			<table>
+				<thead>
+					<tr>
+						<th>Slot</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					{slots.map((slot) => (
+						<tr>
+							<th scope="row">
+								<code>{slot.name}</code>
+							</th>
+							<td>{slot.description}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+	)
+}
+
+{
+	events.length > 0 && (
+		<div class="properties-table-wrapper properties-table-spacing">
+			<table>
+				<thead>
+					<tr>
+						<th>Event</th>
+						<th>Type</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					{events.map((event) => (
+						<tr>
+							<th scope="row">
+								<code>{event.name}</code>
+							</th>
+							<td>{event.type}</td>
+							<td>{event.description}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+	)
+}
