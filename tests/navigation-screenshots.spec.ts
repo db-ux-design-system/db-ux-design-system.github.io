@@ -98,16 +98,24 @@ test.describe('Axe Core', () => {
 				await page.waitForTimeout(2000);
 			}
 
+			const disabledRules: string[] = [];
+
+			// There is an a11y error inside DBShell implementation
+			if (path.startsWith('documentation') || path === 'demo-b2b') {
+				disabledRules.push(
+					'aria-required-parent',
+					'aria-required-children',
+					'presentation-role-conflict',
+				);
+			}
+
+			// There is an a11y error inside Googles model viewer / nested landmark setup
+			if (['documentation/components/header', 'about-us'].includes(path)) {
+				disabledRules.push('landmark-unique');
+			}
+
 			const accessibilityScanResults = await new AxeBuilder({ page })
-				.disableRules(
-					// There is an a11y error inside DBShell implementation
-					path.startsWith('documentation') || path === 'demo-b2b'
-						? ['aria-required-parent', 'aria-required-children', 'presentation-role-conflict']
-						: // There is an a11y error inside Googles model viewer implementation
-							path === 'about-us' || path === 'documentation/components/header'
-							? ['landmark-unique']
-							: [],
-				)
+				.disableRules([...new Set(disabledRules)])
 				.include('html')
 				.analyze();
 
