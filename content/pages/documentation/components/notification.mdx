@@ -1,9 +1,11 @@
 ---
+order: 8
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Notification'
 title: 'Notification'
+description: 'Notification communicates a brief message about an event, state change, or system feedback without blocking the user. It should be timely, concise, and clearly indicate intent (info, success, warning, error) with predictable dismissal behavior.'
 align: start
 status: 'stable'
 toc: true
@@ -28,8 +30,6 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { notificationConfig } from '@template/configs/notification.config.js';
 
-Notification communicates a brief message about an event, state change, or system feedback without blocking the user. It should be timely, concise, and clearly indicate intent (info, success, warning, error) with predictable dismissal behavior.
-
 - Confirm an action or state change (e.g., "Saved", "Filter applied")
 - Inform about a non-blocking system event (e.g., "Sync in progress", "New version available")
 - Warn or report an issue that needs attention without requiring an immediate modal decision
@@ -37,7 +37,7 @@ Notification communicates a brief message about an event, state change, or syste
 <DBSection spacing="small" width="auto">
 
     ## Playground
-    Experiment with the notification component and its properties.
+    Experiment with the Notification component and its properties.
 
     <ComponentPlayground config={notificationConfig} component={DBNotification} />
 
@@ -47,13 +47,41 @@ Notification communicates a brief message about an event, state change, or syste
 
 ## Resources
 
-<ResourceCards path="?path=/docs/components-dbnotification-density--docs" />
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'html5',
+		},
+	]}
+/>
 
 </DBSection>
 
-{/* <DBSection spacing="small" width="auto">
+<DBSection spacing="small" width="auto">
 
 ## Properties, Slots & Events
+
 Configure the notification through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
@@ -67,23 +95,19 @@ Configure the notification through its properties, slots and events.
 	expandedText="Hide some Properties, Slots & Events"
 />
 
-</DBSection> */}
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 
-## Usage Hints
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
 
 ### Usage
 
-Use notification for feedback that lets users continue their task. If the message requires an immediate decision, confirmation, or blocks a critical flow, use a Dialog instead.
+Use Notification for feedback that lets users continue their task. If the message requires an immediate decision, confirmation, or blocks a critical flow, use a Dialog instead.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=1-1132&embed-host=share"
@@ -92,30 +116,24 @@ Use notification for feedback that lets users continue their task. If the messag
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=1-1133&embed-host=share"
-		description="Don't use a notification to confirm irreversible actions or force a decision, especially when the user must respond to proceed."
+		description="Use a notification to confirm irreversible actions or force a decision, especially when the user must respond to proceed."
 	/>
 </div>
 
 ### Semantics
 
-Use semantic variants consistently: Successful for completion, informational for new updates, warning for risk/attention, critical for failures that need correction. Ensure the message is understandable without color.
+Use semantic variants consistently: Success for completion, Info for neutral updates, Warning for risk/attention, Error for failures that need correction. Ensure the message is understandable without color.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=3-1110&embed-host=share"
-		description="Use an critical notification for failed actions, stating what happened and the next step, with an error icon and clear label text."
+		description="Use an Error notification for failed actions, stating what happened and the next step, with an error icon and clear label text."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=3-1112&embed-host=share"
-		description="Don't use successful styling for neutral updates or rely on color alone to communicate urgency or meaning."
+		description="Use Success styling for neutral updates or rely on color alone to communicate urgency or meaning."
 	/>
 </div>
 
@@ -123,13 +141,7 @@ Use semantic variants consistently: Successful for completion, informational for
 
 Keep messages short and actionable. Include what happened and, if relevant, the next step. If details are needed, link to a dedicated surface (page, panel, popover).
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=3-1113&embed-host=share"
@@ -138,7 +150,7 @@ Keep messages short and actionable. Include what happened and, if relevant, the 
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=3-1114&embed-host=share"
-		description="Don't use multi-paragraph explanations or combine multiple unrelated messages into one notification block."
+		description="Use multi-paragraph explanations or combine multiple unrelated messages into one notification block."
 	/>
 </div>
 
@@ -146,13 +158,7 @@ Keep messages short and actionable. Include what happened and, if relevant, the 
 
 Match dismissal behavior to urgency. Auto-dismiss only for informational or success messages. Warnings and errors should remain until dismissed or resolved. Place the close control consistently when shown.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-		marginBottom: 'var(--db-spacing-fixed-2xl)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=3-1116&embed-host=share"
@@ -161,7 +167,7 @@ Match dismissal behavior to urgency. Auto-dismiss only for informational or succ
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=3-1117&embed-host=share"
-		description="Don't auto-dismiss warnings/errors before users can read or act, or vary close button placement between variants."
+		description="Auto-dismiss warnings/errors before users can read or act, or vary close button placement between variants."
 	/>
 </div>
 
@@ -169,12 +175,7 @@ Match dismissal behavior to urgency. Auto-dismiss only for informational or succ
 
 Place notifications where they are noticeable but do not cover primary controls. When multiple notifications appear, stack them consistently and limit how many are shown at once.
 
-<div
-	style={{
-		display: 'flex',
-		gap: 'var(--db-spacing-fixed-md)',
-	}}
->
+<div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=3-1118&embed-host=share"
@@ -183,9 +184,13 @@ Place notifications where they are noticeable but do not cover primary controls.
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=3-1119&embed-host=share"
-		description="Don't cover key actions, form fields, or navigation with persistent stacks, or let multiple messages flood the screen at once."
+		description="Cover key actions, form fields, or navigation with persistent stacks, or let multiple messages flood the screen at once."
 	/>
 </div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
 
 </DBSection>
 
@@ -193,7 +198,7 @@ Place notifications where they are noticeable but do not cover primary controls.
 
 ## FAQ
 
-Have a question about the notification component? We'll answer it and add frequently asked questions to this page.
+Have a question about the Notification component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Notification" />
 

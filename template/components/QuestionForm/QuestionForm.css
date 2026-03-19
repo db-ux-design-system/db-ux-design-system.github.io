@@ -2,14 +2,9 @@
 	display: flex;
 	flex-direction: column;
 	gap: var(--db-spacing-fixed-md);
-	inline-size: 100%;
 	align-items: flex-start;
 }
 
-.question-form .db-textarea {
-	inline-size: 100%;
-}
-
-.question-form .db-textarea-input {
-	resize: none;
+.question-form-text {
+	margin: 0;
 }

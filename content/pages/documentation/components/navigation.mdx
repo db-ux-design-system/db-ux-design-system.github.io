@@ -1,11 +1,13 @@
 ---
+order: 6
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Navigation'
 title: 'Navigation'
+description: 'Navigation provides a set of destinations that help users move through an application consistently across desktop and mobile. It supports different orientations and responsive behaviors while clearly indicating the current location and available paths.'
 align: start
-status: 'beta'
+status: 'stable'
 toc: true
 ---
 
@@ -22,8 +24,6 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { navigationConfig } from '@template/configs/navigation.config.js';
 
-Navigation provides a set of destinations that help users move through an application consistently across desktop and mobile. It supports different orientations and responsive behaviors while clearly indicating the current location and available paths.
-
 - Offer primary destinations at the top level (global navigation)
 - Support structured sub-navigation for deeper sections (nested levels)
 - Adapt navigation patterns to mobile with compact, touch-friendly behavior
@@ -31,7 +31,7 @@ Navigation provides a set of destinations that help users move through an applic
 <DBSection spacing="small" width="auto">
 
     ## Playground
-    Experiment with the navigation component and its properties.
+    Experiment with the Navigation component and its properties.
 
     <ComponentPlayground config={navigationConfig} component={DBNavigation} />
 
@@ -41,26 +41,56 @@ Navigation provides a set of destinations that help users move through an applic
 
 ## Resources
 
-<ResourceCards path="?path=/docs/components-dbnavigation-density--docs" />
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'html5',
+		},
+	]}
+/>
 
 </DBSection>
 
-{/* <DBSection spacing="small" width="auto">
+<DBSection spacing="small" width="auto">
 
 ## Properties
+
 Configure the navigation through its properties.
 
 <PropertiesTable config={navigationConfig} />
 
-</DBSection> */}
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 
-## Usage Hints
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
 
 ### Destinations
 
-Use navigation items to take users to pages or views. For operations (create, save, export), use buttons or menus, not navigation items.
+Use Navigation items to take users to pages or views. For operations (create, save, export), use Buttons or Menus, not navigation items.
 
 <div
 	style={{
@@ -77,7 +107,7 @@ Use navigation items to take users to pages or views. For operations (create, sa
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/lDMxw7YqQoJaWQdBlG7kwB/Doku--Navigation?node-id=1-1133&embed-host=share"
-		description="Don't use navigation items for one-off actions like 'Download now' or 'Submit', shown as destinations instead of an action control."
+		description="Use navigation items for one-off actions like 'Download now' or 'Submit', shown as destinations instead of an action control."
 	/>
 </div>
 
@@ -100,7 +130,7 @@ Choose horizontal navigation for shallow structures with enough space. Use verti
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/lDMxw7YqQoJaWQdBlG7kwB/Doku--Navigation?node-id=3-1112&embed-host=share"
-		description="Don't force horizontal navigation into tight spaces where labels truncate, wrap unpredictably, or reduce scannability."
+		description="Force horizontal navigation into tight spaces where labels truncate, wrap unpredictably, or reduce scannability."
 	/>
 </div>
 
@@ -123,7 +153,7 @@ Keep labels short, clear, and parallel in wording. Avoid repeating the same pref
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/lDMxw7YqQoJaWQdBlG7kwB/Doku--Navigation?node-id=3-1114&embed-host=share"
-		description="Avoid using long phrases, mixed grammar/casing, or frequently changing item names/order in ways that break recognition."
+		description="Use long phrases, mixed grammar/casing, or frequently change item names/order in ways that break recognition."
 	/>
 </div>
 
@@ -146,9 +176,13 @@ Keep hierarchy shallow and predictable. If there are too many items, use an over
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/lDMxw7YqQoJaWQdBlG7kwB/Doku--Navigation?node-id=3-1117&embed-host=share"
-		description="Don't create deep multi-level trees that require excessive drilling without clear grouping, cues, or a stable structure."
+		description="Create deep multi-level trees that require excessive drilling without clear grouping, cues, or a stable structure."
 	/>
 </div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
 
 </DBSection>
 

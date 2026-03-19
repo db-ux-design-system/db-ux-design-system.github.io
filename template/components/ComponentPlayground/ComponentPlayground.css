@@ -5,7 +5,9 @@
 	background-color: var(--db-adaptive-bg-basic-level-2-default);
 	border-radius: var(--db-border-radius-md);
 	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	overflow: hidden;
 	max-inline-size: 100%;
+	/* stylelint-disable-next-line db-ux/use-sizing */
 	min-block-size: var(--db-container-xs);
 }
 
@@ -20,7 +22,8 @@
 
 	.component-playground .controls-area {
 		border-inline-start: none;
-		border-block-start: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+		border-block-start: var(--db-border-width-3xs) solid
+			var(--db-adaptive-on-bg-basic-emphasis-60-default);
 	}
 }
 
@@ -30,6 +33,7 @@
 	justify-content: center;
 	min-block-size: var(--db-sizing-2xl);
 	padding: var(--db-spacing-fixed-lg);
+	overflow: hidden;
 	min-inline-size: 0;
 }
 
@@ -61,9 +65,9 @@
 	flex-direction: column;
 	gap: var(--db-spacing-fixed-sm);
 	padding: var(--db-spacing-fixed-lg);
-	border-inline-start: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-inline-start: var(--db-border-width-3xs) solid
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
 	background-color: var(--db-adaptive-bg-basic-level-1-default);
-	border-radius: 0 var(--db-border-radius-md) var(--db-border-radius-md) 0;
 }
 
 .component-playground .controls-area .controls-area-content {
@@ -82,15 +86,9 @@
 }
 
 /* Hide label when data-label-hidden is set (for floating variant without value) */
-.component-playground .preview-area .db-select[data-label-hidden="true"] label {
+.component-playground .preview-area .db-select[data-label-hidden='true'] label {
 	opacity: 0 !important;
 	pointer-events: none !important;
-}
-
-/* Hide broken tooltips in navigation items */
-.db-navigation-item .db-tooltip:has(:only-child:is(:empty, [aria-hidden='true'])),
-.db-navigation-item .db-tooltip:only-child {
-	display: none !important;
 }
 
 /* Navigation item width control in playground */
@@ -112,47 +110,23 @@
 }
 
 .component-playground .preview-area > .db-navigation[data-variant='vertical'] {
-	max-inline-size: var(--db-container-xs);
+	max-inline-size: var(--db-container-2xs);
 }
 
 .component-playground .preview-area > .db-navigation .db-navigation-item[data-width='full'] {
-	inline-size: 100% !important;
-}
-
-.component-playground .preview-area > .db-navigation .db-navigation-item[data-width='auto'] {
-	inline-size: fit-content !important;
-	margin: auto;
-}
-
-/* Divider full width/height in playground */
-.component-playground .preview-area > .db-divider[data-variant='horizontal'] {
 	inline-size: 100%;
 }
 
-.component-playground .preview-area > .db-divider[data-variant='vertical'] {
-	block-size: 100%;
-	min-block-size: var(--db-container-3xs);
+.component-playground .preview-area > .db-navigation .db-navigation-item[data-width='auto'] {
+	inline-size: fit-content;
+	margin: auto;
 }
 
 /* Override navigation item width behavior in playground */
 .component-playground .preview-area > .db-navigation-item[data-width='full'] {
-	inline-size: 100% !important;
+	inline-size: 100%;
 }
 
 .component-playground .preview-area > .db-navigation-item[data-width='auto'] {
-	inline-size: fit-content !important;
-}
-
-.demo-backdrop {
-	background-color: color(
-		from var(--db-adaptive-on-bg-basic-emphasis-100-default) srgb r g b /
-			var(--db-opacity-lg)
-	);
-}
-
-.demo-backdrop[data-emphasis='weak'] {
-	background-color: color(
-		from var(--db-adaptive-on-bg-basic-emphasis-100-default) srgb r g b /
-			var(--db-opacity-sm)
-	);
+	inline-size: fit-content;
 }

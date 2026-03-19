@@ -2,20 +2,13 @@
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 	gap: var(--db-spacing-fixed-md);
-	align-items: stretch;
-}
-
-.resource-cards .db-card {
-	block-size: 100%;
-	display: flex;
-	flex-direction: column;
+	align-items: start;
 }
 
 .resource-text {
 	display: flex;
 	flex-direction: column;
 	gap: 0;
-	min-inline-size: 0;
 }
 
 .resource-cards .db-link {
@@ -30,7 +23,7 @@
 	gap: var(--db-spacing-fixed-md);
 }
 
-.resource-cards .db-card h5 {
+.resource-text .resource-title {
 	margin: 0;
 }
 
@@ -39,11 +32,6 @@
 	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
 }
 
-.resource-cards .db-card strong {
-	display: inline-block;
-	max-inline-size: 100%;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+.resource-cards .db-card .resource-link-label {
 	margin-block-start: auto;
 }
