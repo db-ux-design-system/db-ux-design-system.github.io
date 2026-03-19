@@ -9,7 +9,7 @@ import Footer from '@template/components/Footer/Footer.astro';
 
 interface Props {
 	headings: MarkdownHeading[];
-	frontmatter: FrontMatter;
+	frontmatter: DocumentationFrontMatter;
 }
 const { headings, frontmatter } = Astro.props;
 const currentPath = Astro.url.pathname;

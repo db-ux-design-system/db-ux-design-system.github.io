@@ -1,0 +1,59 @@
+---
+import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
+import { DBSection, DBStack } from '@db-ux/react-core-components';
+import SizingPlayground from './_SizingPlayground.astro';
+import SizingTable from './_SizingTable.astro';
+
+const frontmatter: DocumentationFrontMatter = {
+	headline: 'Sizing',
+	title: 'Sizing',
+	align: 'start',
+	toc: true,
+	sectionSpacing: 'small',
+	sectionWidth: 'auto',
+};
+
+const headings = [
+	{ depth: 2, slug: 'playground', text: 'Playground' },
+	{ depth: 2, slug: 'tokens', text: 'Tokens' },
+];
+---
+
+<DocumentationLayout frontmatter={frontmatter} headings={headings}>
+	Sizing refers to the consistent use of set sizes for elements and components, regardless of device
+	screen. Fixed sizings ensure that layouts remain balanced and components are easily recognizable
+	across desktop, tablet, and mobile devices.
+
+	<DBSection spacing="small">
+		<DBStack gap="x-large">
+			<DBStack gap="none">
+				<h2 id="playground">Playground</h2>
+				<br />
+				Experiment with sizing tokens to see how they scale across different densities.
+			</DBStack>
+			<SizingPlayground layout="horizontal" />
+		</DBStack>
+	</DBSection>
+
+	<DBSection spacing="small">
+		<h2 id="tokens">Tokens</h2>
+		<SizingTable />
+	</DBSection>
+
+	<script>
+		import { waitForElements } from '@template/utils/client.utils.ts';
+		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';
+
+		function initSizing(): boolean {
+			return handleSimplePlaygrounds({
+				dataAttributeName: 'size',
+				popoverLabel: 'Size',
+				computedStyle: 'blockSize',
+				remPx: true,
+				withDensity: true,
+			});
+		}
+
+		waitForElements(initSizing);
+	</script>
+</DocumentationLayout>

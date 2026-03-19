@@ -1,4 +1,4 @@
-import { test, expect, type Page } from '@playwright/test';
+import { test, expect, type Page, type Locator } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
 function collectAllPaths(items: NavigationItem[]): string[] {
@@ -18,14 +18,19 @@ const pageMasks: Record<string, string> = {
 	'about-us': '.avatar-viewer',
 };
 
-const getMask = async (page: Page, path: string) => {
+const getMasks = async (page: Page, path: string): Promise<Locator[]> => {
+	const masks: Locator[] = [];
+
+	if (path.startsWith('documentation')) {
+		masks.push(...(await page.locator('.db-shell-sub-navigation').all()));
+	}
 	if (path.startsWith('documentation/components')) {
-		return await page.locator('.guideline-example-iframe').all();
+		masks.push(...(await page.locator('.guideline-example-iframe').all()));
 	}
 	if (pageMasks[path]) {
-		return await page.locator(pageMasks[path]).all();
+		masks.push(...(await page.locator(pageMasks[path]).all()));
 	}
-	return [];
+	return masks;
 };
 
 export const waitForDBShell = async (page: Page) => {
@@ -56,13 +61,37 @@ export const setScrollViewport = async (page: Page) => {
 	expect(page.viewportSize()?.height).toEqual(height);
 };
 
+const setupPage = async (page: Page, path: string) => {
+	await page.goto(`/${path}`);
+	await page.waitForLoadState('domcontentloaded');
+	await waitForDBShell(page);
+	await setScrollViewport(page);
+};
+
 test.describe('Navigation Screenshots', () => {
 	for (const path of allPaths) {
 		test(`${path}`, async ({ page }) => {
-			await page.goto(`/${path}`);
-			await page.waitForLoadState('domcontentloaded');
-			await waitForDBShell(page);
-			await setScrollViewport(page);
+			await setupPage(page, path);
+
+			const mask = await getMasks(page, path);
+
+			await expect(page).toHaveScreenshot(`${path.replace(/\//g, '-')}.png`, {
+				mask,
+				timeout: 10_000,
+			});
+		});
+	}
+});
+
+test.describe('Axe Core', () => {
+	for (const path of allPaths) {
+		test(`${path}`, async ({ page }) => {
+			await setupPage(page, path);
+
+			if (path === "documentation/icons"){
+				// We wait till input get id correctly
+				await page.waitForTimeout(2000)
+			}
 
 			const accessibilityScanResults = await new AxeBuilder({ page })
 				.disableRules(
@@ -78,13 +107,6 @@ test.describe('Navigation Screenshots', () => {
 				.analyze();
 
 			expect(accessibilityScanResults.violations).toEqual([]);
-
-			const mask = await getMask(page, path);
-
-			await expect(page).toHaveScreenshot(`${path.replace(/\//g, '-')}.png`, {
-				mask,
-				timeout: 10_000,
-			});
 		});
 	}
 });

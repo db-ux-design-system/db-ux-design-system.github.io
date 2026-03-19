@@ -1,0 +1,151 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Stack'
+title: 'Stack'
+align: start
+toc: true
+status: 'beta'
+---
+
+import { DBStack, DBSection, DBDivider } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import { stackConfig } from '@template/configs/stack.config.js';
+
+Stack arranges child elements in a vertical or horizontal layout with consistent spacing. Use it to create structured layouts without writing custom CSS.
+
+- Arrange form elements, buttons, or content blocks with consistent spacing
+- Create vertical or horizontal layouts without custom CSS
+- Build responsive layouts that adapt to different screen sizes
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+Experiment with the stack component and its properties.
+
+<ComponentPlayground config={stackConfig} component={DBStack} />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards path="?path=/docs/components-dbstack-density--docs" />
+
+</DBSection>
+
+{/* <DBSection spacing="small" width="auto">
+
+## Properties & Slots
+Configure the stack through its properties, such as gap, direction, alignment, and wrap behavior.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable config={stackConfig} />
+
+</CollapsibleWrapper>
+
+<CollapseButton
+	collapsedText="Show all Properties & Slots"
+	expandedText="Hide some Properties & Slots"
+/>
+
+</DBSection> */}
+
+<DBSection spacing="small" width="auto">
+
+## Usage Hints
+
+### Gap
+
+Use the 'gap' property to provide consistent spacing between items in a stack, improving readability and visual structure.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/uBCf96A16t1871VinjYHHV/Doku--Stack?node-id=1-1132&embed-host=share"
+		description="Use a defined gap to evenly space items and create a clean, organized layout."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/uBCf96A16t1871VinjYHHV/Doku--Stack?node-id=1-1133&embed-host=share"
+		description="Don't manually add margins to individual items instead of using gap. It can lead to inconsistent spacing and harder maintenance."
+	/>
+</div>
+
+### Direction and alignment
+
+Choose the appropriate direction (column or row) and alignment based on your layout and content needs.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/uBCf96A16t1871VinjYHHV/Doku--Stack?node-id=3-1110&embed-host=share"
+		description="Use horizontal (row) direction to arrange related actions making them quickly accessible and visually grouped."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/uBCf96A16t1871VinjYHHV/Doku--Stack?node-id=3-1112&embed-host=share"
+		description="Don't use center alignment in columns if the content has different lengths and is intended to be quickly scanned."
+	/>
+</div>
+
+### Wrapping
+
+Enable wrap for stacks that should adapt to smaller screens.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/uBCf96A16t1871VinjYHHV/Doku--Stack?node-id=3-1113&embed-host=share"
+		description="Use wrap when you have many items or expect it to be used on different screen sizes."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/uBCf96A16t1871VinjYHHV/Doku--Stack?node-id=3-1114&embed-host=share"
+		description="Don't use “No Wrap” when there's a risk of overflowing and the content should be easily accessible."
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the stack component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Stack" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Section',
+			description: 'Container component for page sections with spacing and width control',
+			url: '/documentation/components/section',
+		},
+		{
+			title: 'Divider',
+			description: 'Visual separator for content sections',
+			url: '/documentation/components/divider',
+		},
+	]}
+/>
+
+</DBSection>

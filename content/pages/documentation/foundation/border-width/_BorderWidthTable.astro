@@ -1,0 +1,26 @@
+---
+import TokenTable from '../_shared/TokenTable.astro';
+
+const tokens = [
+	'db-border-width-3xs',
+	'db-border-width-2xs',
+	'db-border-width-xs',
+	'db-border-width-sm',
+	'db-border-width-md',
+	'db-border-width-lg',
+	'db-border-width-xl',
+	'db-border-width-2xl',
+	'db-border-width-3xl',
+];
+---
+
+<TokenTable
+	sections={[
+		{
+			headline: 'Border Width',
+			tokens,
+			previewClass: 'border-width-preview',
+			previewAttribute: 'border-width',
+		},
+	]}
+/>

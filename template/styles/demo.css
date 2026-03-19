@@ -1,9 +1,9 @@
 /* Shared demo shell styles */
 
 .db-notification {
-	border-top: none;
-	border-right: none;
-	border-left: none;
+	border-block-start: none;
+	border-inline-end: none;
+	border-inline-start: none;
 }
 
 .db-shell-sub-navigation {
@@ -45,7 +45,7 @@
 	color: var(--db-brand-origin-default);
 }
 
-.cta-card .db-button.cta-button:hover {
+.cta-card .db-button.cta-button:hover, .cta-card .db-button.cta-button:focus {
 	background-color: var(--db-brand-on-origin-default);
 	opacity: var(--db-opacity-2xl);
 }
@@ -81,8 +81,8 @@ table {
 
 table td,
 table th {
-	border-right: 0 solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
-	border-bottom: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-inline-end: 0 solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-block-end: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
 	padding: var(--db-spacing-fixed-sm);
 	padding-inline: var(--db-spacing-fixed-lg);
 	text-align: start;
@@ -90,11 +90,11 @@ table th {
 
 table td:last-child,
 table th:last-child {
-	border-right: none;
+	border-inline-end: none;
 }
 
 table tr:last-child td {
-	border-bottom: none;
+	border-block-end: none;
 }
 
 table thead {

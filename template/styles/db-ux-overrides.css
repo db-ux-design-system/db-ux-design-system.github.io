@@ -1,0 +1,26 @@
+.db-stack > a > .db-card {
+	/* Ensure cards in stacks stretch to full width */
+	block-size: 100%;
+	box-sizing: border-box;
+}
+
+.db-stack {
+	overflow: visible;
+}
+
+.db-card .db-link {
+	inline-size: auto;
+	display: inline-flex !important;
+	flex-direction: row !important;
+}
+
+.db-card:has(iframe) {
+	overflow: hidden;
+}
+
+a[href^='documentation/foundation'],
+a[href^='documentation/components'] {
+	&::before {
+		--db-icon: 'circle_small';
+	}
+}

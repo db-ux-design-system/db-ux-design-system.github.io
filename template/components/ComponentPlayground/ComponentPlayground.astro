@@ -1,5 +1,6 @@
 ---
 import './ComponentPlayground.css';
+import { DBAccordionItem, DBNavigation } from '@db-ux/react-core-components';
 
 interface Props {
 	config: any;
@@ -25,128 +26,177 @@ const nativeAttributes = [
 <div class="component-playground">
 	<div class="preview-area">
 		{
-			config.elementId === 'playground-badge' ? (
-				<div class="badge-container">
-					<span>List Item</span>
-					<Component {...config.defaultProps} id={config.elementId}>
-						{config.textElementId && <span id={config.textElementId}>{config.defaultText}</span>}
-						{!config.textElementId && config.defaultText}
-					</Component>
-				</div>
-			) : config.elementId === 'playground-input' ? (
-				<div class="db-input" id={config.elementId}>
-					<label id="playground-input-label" for="playground-input-field">{config.defaultProps.label || 'Label'}</label>
-					<input
-						id="playground-input-field"
-						aria-invalid="false"
-						type={config.defaultProps.type || 'text'}
-						placeholder={config.defaultProps.placeholder || ''}
-						disabled={config.defaultProps.disabled}
-					/>
-					<span
-						id="playground-input-infotext-valid"
-						class="db-infotext"
-						data-semantic="successful"
-						data-size="small"
-						data-show-icon-leading="true"
-						style="display: none;"
-					/>
-					<span
-						id="playground-input-infotext"
-						class="db-infotext"
-						data-semantic="critical"
-						data-size="small"
-						data-show-icon-leading="true"
-					/>
-					<span data-visually-hidden="true" role="status" />
-				</div>
-			) : config.elementId === 'playground-switch' ? (
-				<label class="db-switch" id={config.elementId}>
-					<input
-						id="playground-switch-input"
-						type="checkbox"
-						role="switch"
-						checked={config.defaultProps.checked}
-						disabled={config.defaultProps.disabled}
-						onchange="{ const control = document.querySelector('.controls-area input[type=checkbox][onchange*=checked]'); if(control) control.checked = this.checked; }"
-					/>
-					<span id="playground-switch-label">Enable notifications</span>
-				</label>
-			) : config.elementId === 'playground-radio' ? (
-				<label class="db-radio" id={config.elementId}>
-					<input
-						id="playground-radio-input"
-						type="radio"
-						checked={config.defaultProps.checked}
-						disabled={config.defaultProps.disabled}
-						onchange="{ const control = document.querySelector('.controls-area input[type=checkbox][onchange*=checked]'); if(control) control.checked = this.checked; }"
-					/>
-					<span id="playground-radio-label">Option 1</span>
-				</label>
-			) : config.elementId === 'playground-checkbox' ? (
-				<label class="db-checkbox" id={config.elementId}>
-					<input
-						id="playground-checkbox-input"
-						type="checkbox"
-						checked={config.defaultProps.checked}
-						disabled={config.defaultProps.disabled}
-						onchange="{ const control = document.querySelector('.controls-area input[type=checkbox][onchange*=checked]'); if(control) control.checked = this.checked; }"
-					/>
-					<span id="playground-checkbox-label">Accept terms</span>
-				</label>
-			) : config.elementId === 'playground-select' ? (
-				<div class="db-select" id={config.elementId} data-hide-label="false" data-variant="above">
-					<label id="playground-select-label" for="playground-select-field">{config.defaultProps.label || 'Country'}</label>
-					<select
-						id="playground-select-field"
-						aria-invalid="false"
-						onchange="const wrapper = document.getElementById('playground-select'); if(wrapper.getAttribute('data-variant') === 'floating') { if(this.value) { wrapper.removeAttribute('data-label-hidden'); } else { wrapper.setAttribute('data-label-hidden', 'true'); } }"
-					>
-						<option id="playground-select-placeholder" value="" hidden="">
-							{config.defaultProps.placeholder || 'Choose an option'}
-						</option>
-						<option value="de">Germany</option>
-						<option value="fr">France</option>
-						<option value="it">Italy</option>
-						<option value="es">Spain</option>
-					</select>
-					<span
-						id="playground-select-message"
-						class="db-infotext"
-						data-size="small"
-						data-show-icon-leading="true"
-						style="display: none;"
-					>
-						Please choose your country
-					</span>
-					<span
-						id="playground-select-infotext-valid"
-						class="db-infotext"
-						data-semantic="successful"
-						data-size="small"
-						data-show-icon-leading="true"
-						style="display: none;"
-					>
-						Valid selection
-					</span>
-					<span
-						id="playground-select-infotext"
-						class="db-infotext"
-						data-semantic="critical"
-						data-size="small"
-						data-show-icon-leading="true"
-						style="display: none;"
-					>
-						Please select a valid option
-					</span>
-					<span data-visually-hidden="true" role="status" />
-				</div>
-			) : (
-				<Component {...config.defaultProps} id={config.elementId}>
-					{config.textElementId && <span id={config.textElementId}>{config.defaultText}</span>}
-					{!config.textElementId && config.defaultText}
-				</Component>
-			)
+			() => {
+				if (config.elementId === 'playground-badge') {
+					return (
+						<div class="badge-container">
+							<span>List Item</span>
+							<Component {...config.defaultProps} id={config.elementId}>
+								{config.textElementId && (
+									<span id={config.textElementId}>{config.defaultText}</span>
+								)}
+								{!config.textElementId && config.defaultText}
+							</Component>
+						</div>
+					);
+				} else if (config.elementId === 'demo-accordion') {
+					return (
+						<Component {...config.defaultProps} id={config.elementId}>
+							<DBAccordionItem headlinePlain={`${config.defaultText} 1`}>
+								{config.defaultText}
+							</DBAccordionItem>
+							<DBAccordionItem headlinePlain={`${config.defaultText} 2`}>
+								{config.defaultText} 2
+							</DBAccordionItem>
+						</Component>
+					);
+				} else if (config.elementId === 'demo-navigation-item') {
+					return (
+						<DBNavigation>
+							<Component {...config.defaultProps} id={config.elementId}>
+								{config.defaultText} 1
+							</Component>
+							<Component {...config.defaultProps} id={config.elementId}>
+								{config.defaultText} 2
+							</Component>
+						</DBNavigation>
+					);
+				} else if (config.elementId === 'playground-input') {
+					return (
+						<div class="db-input" id={config.elementId}>
+							<label id="playground-input-label" for="playground-input-field">
+								{config.defaultProps.label || 'Label'}
+							</label>
+							<input
+								id="playground-input-field"
+								aria-invalid="false"
+								type={config.defaultProps.type || 'text'}
+								placeholder={config.defaultProps.placeholder || ''}
+								disabled={config.defaultProps.disabled}
+							/>
+							<span
+								id="playground-input-infotext-valid"
+								class="db-infotext"
+								data-semantic="successful"
+								data-size="small"
+								data-show-icon-leading="true"
+								style="display: none;"
+							/>
+							<span
+								id="playground-input-infotext"
+								class="db-infotext"
+								data-semantic="critical"
+								data-size="small"
+								data-show-icon-leading="true"
+							/>
+							<span data-visually-hidden="true" role="status" />
+						</div>
+					);
+				} else if (config.elementId === 'playground-switch') {
+					return (
+						<label class="db-switch" id={config.elementId}>
+							<input
+								id="playground-switch-input"
+								type="checkbox"
+								role="switch"
+								checked={config.defaultProps.checked}
+								disabled={config.defaultProps.disabled}
+								onchange="{ const control = document.querySelector('.controls-area input[type=checkbox][onchange*=checked]'); if(control) control.checked = this.checked; }"
+							/>
+							<span id="playground-switch-label">Enable notifications</span>
+						</label>
+					);
+				} else if (config.elementId === 'playground-radio') {
+					return (
+						<label class="db-radio" id={config.elementId}>
+							<input
+								id="playground-radio-input"
+								type="radio"
+								checked={config.defaultProps.checked}
+								disabled={config.defaultProps.disabled}
+								onchange="{ const control = document.querySelector('.controls-area input[type=checkbox][onchange*=checked]'); if(control) control.checked = this.checked; }"
+							/>
+							<span id="playground-radio-label">Option 1</span>
+						</label>
+					);
+				} else if (config.elementId === 'playground-checkbox') {
+					return (
+						<label class="db-checkbox" id={config.elementId}>
+							<input
+								id="playground-checkbox-input"
+								type="checkbox"
+								checked={config.defaultProps.checked}
+								disabled={config.defaultProps.disabled}
+								onchange="{ const control = document.querySelector('.controls-area input[type=checkbox][onchange*=checked]'); if(control) control.checked = this.checked; }"
+							/>
+							<span id="playground-checkbox-label">Accept terms</span>
+						</label>
+					);
+				} else if (config.elementId === 'playground-select') {
+					return (
+						<div
+							class="db-select"
+							id={config.elementId}
+							data-hide-label="false"
+							data-variant="above"
+						>
+							<label id="playground-select-label" for="playground-select-field">
+								{config.defaultProps.label || 'Country'}
+							</label>
+							<select
+								id="playground-select-field"
+								aria-invalid="false"
+								onchange="const wrapper = document.getElementById('playground-select'); if(wrapper.getAttribute('data-variant') === 'floating') { if(this.value) { wrapper.removeAttribute('data-label-hidden'); } else { wrapper.setAttribute('data-label-hidden', 'true'); } }"
+							>
+								<option id="playground-select-placeholder" value="" hidden="">
+									{config.defaultProps.placeholder || 'Choose an option'}
+								</option>
+								<option value="de">Germany</option>
+								<option value="fr">France</option>
+								<option value="it">Italy</option>
+								<option value="es">Spain</option>
+							</select>
+							<span
+								id="playground-select-message"
+								class="db-infotext"
+								data-size="small"
+								data-show-icon-leading="true"
+								style="display: none;"
+							>
+								Please choose your country
+							</span>
+							<span
+								id="playground-select-infotext-valid"
+								class="db-infotext"
+								data-semantic="successful"
+								data-size="small"
+								data-show-icon-leading="true"
+								style="display: none;"
+							>
+								Valid selection
+							</span>
+							<span
+								id="playground-select-infotext"
+								class="db-infotext"
+								data-semantic="critical"
+								data-size="small"
+								data-show-icon-leading="true"
+								style="display: none;"
+							>
+								Please select a valid option
+							</span>
+							<span data-visually-hidden="true" role="status" />
+						</div>
+					);
+				} else {
+					return (
+						<Component {...config.defaultProps} id={config.elementId}>
+							{config.textElementId && <span id={config.textElementId}>{config.defaultText}</span>}
+							{!config.textElementId && config.defaultText}
+						</Component>
+					);
+				}
+			}
 		}
 	</div>
 
@@ -378,7 +428,12 @@ const nativeAttributes = [
 								return (
 									<div class="db-input">
 										<label for={inputId}>{prop.label}</label>
-										<input id={inputId} type="text" value={prop.defaultValue} oninput={updateAction} />
+										<input
+											id={inputId}
+											type="text"
+											value={prop.defaultValue}
+											oninput={updateAction}
+										/>
 									</div>
 								);
 							}

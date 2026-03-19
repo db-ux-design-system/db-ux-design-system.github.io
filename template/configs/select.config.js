@@ -4,6 +4,34 @@ export const selectConfig = {
 		label: 'Country',
 		placeholder: 'Choose an option',
 	},
+	slots: [
+		{
+			name: 'children',
+			description: 'default slot',
+		},
+	],
+	events: [
+		{
+			name: 'click / onClick',
+			type: '---',
+		},
+		{
+			name: 'input / onInput',
+			type: '---',
+		},
+		{
+			name: 'change / onChange',
+			type: '---',
+		},
+		{
+			name: 'blur / onBlur',
+			type: '---',
+		},
+		{
+			name: 'focus / onFocus',
+			type: '---',
+		},
+	],
 	properties: [
 		// Label
 		{

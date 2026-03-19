@@ -1,0 +1,53 @@
+.playground {
+	display: grid;
+	grid-template-rows: auto minmax(400px, auto) auto;
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+	border-radius: var(--db-border-radius-md);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	max-inline-size: 100%;
+	overflow: hidden;
+}
+
+.playground-preview {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-block-size: var(--db-sizing-regular-2xl);
+	padding: var(--db-spacing-fixed-2xl);
+	min-inline-size: 0;
+}
+
+.playground-token-display {
+	border-end-start-radius: var(--db-border-radius-md);
+	border-end-end-radius: var(--db-border-radius-md);
+}
+
+.playground-controls {
+	display: flex;
+	flex-direction: row;
+	gap: var(--db-spacing-fixed-sm);
+	padding: var(--db-spacing-fixed-md);
+	border-block-end: var(--db-border-width-3xs) solid
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+
+	& .db-select {
+		inline-size: 100%;
+	}
+}
+
+.interactive-box {
+	inline-size: var(--db-sizing-xl);
+	block-size: var(--db-sizing-xl);
+
+	.db-card {
+		inline-size: inherit;
+		block-size: inherit;
+		align-items: center;
+		justify-content: center;
+	}
+
+	@media screen and (prefers-reduced-motion: no-preference) {
+		transition: all var(--db-transition-duration-extra-slow);
+	}
+}

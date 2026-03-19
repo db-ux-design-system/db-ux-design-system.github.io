@@ -1,17 +1,32 @@
 .properties-table-wrapper {
 	overflow-x: auto;
-	width: 100%;
-	min-width: 0;
+	inline-size: 100%;
+	min-inline-size: 0;
 	-webkit-overflow-scrolling: touch;
 }
 
-.properties-table-wrapper table {
-	width: auto;
-	min-width: 100%;
+.properties-table-spacing {
+	margin-block-start: var(--db-spacing-fixed-xl);
 }
 
-.properties-table-wrapper table td {
+.properties-table-wrapper table {
+	inline-size: 100%;
+	table-layout: fixed;
+}
+
+.properties-table-wrapper table th:nth-child(1) {
+	/* stylelint-disable-next-line db-ux/use-sizing */
+	max-inline-size: 50px;
+}
+
+.properties-table-wrapper table td,
+.properties-table-wrapper table th {
 	overflow-wrap: break-word;
-	word-break: break-all;
+	word-break: normal;
 	hyphens: auto;
+}
+
+.properties-table-wrapper table tbody tr:last-child th,
+.properties-table-wrapper table tbody tr:last-child td {
+	border-block-end: none;
 }

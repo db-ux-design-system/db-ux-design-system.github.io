@@ -1,5 +1,5 @@
 ---
-import { DBBadge } from '@db-ux/react-core-components';
+import { DBBadge, type SemanticType } from '@db-ux/react-core-components';
 import './PageHero.css';
 
 interface Props {
@@ -7,10 +7,10 @@ interface Props {
 	headline?: string;
 	description?: string;
 	badgeText?: string;
-	badgeSemantic?: 'adaptive' | 'neutral' | 'informational' | 'warning' | 'critical' | 'successful';
+	badgeSemantic?: SemanticType;
 	imageSrc?: string;
 	imageAlt?: string;
-	align?: 'start' | 'center' | 'end';
+	align?: FrontMatter['align'];
 	layout?: 'stack' | 'split';
 	imageSide?: 'left' | 'right';
 	headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
@@ -24,7 +24,7 @@ const {
 	headline,
 	description,
 	badgeText,
-	badgeSemantic = 'adaptive',
+	badgeSemantic = 'informational',
 	imageSrc,
 	imageAlt,
 	align = 'center',
