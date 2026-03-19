@@ -1,6 +1,11 @@
 import { test, expect, type Page, type Locator } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
+type NavigationItem = {
+	path?: string;
+	children?: NavigationItem[];
+};
+
 function collectAllPaths(items: NavigationItem[]): string[] {
 	const paths: string[] = [];
 	for (const item of items) {
