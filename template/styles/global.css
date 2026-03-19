@@ -1,4 +1,4 @@
-@layer db-ux,themes, db-theme ;
+@layer db-ux,themes, db-theme;
 
 @import url('@db-ux/core-components/build/styles/rollup.css') layer(db-ux);
 @import url('@db-ux/db-theme/build/styles/rollup.css') layer(db-theme);
@@ -23,8 +23,6 @@ html {
 	/* stylelint-disable-next-line db-ux/use-spacings */
 	scroll-padding-block-start: var(--header-height);
 }
-
-
 
 /* Equal-height card rows */
 .cards-row {
@@ -120,4 +118,9 @@ html {
 /* Attribute-based mode hook (e.g., <html data-mode="dark">) */
 [data-mode='dark'] .img-tint-dark-blue {
 	filter: brightness(0) invert(1) sepia(0) saturate(0) contrast(1.1);
+}
+
+h3 {
+	font: var(--db-type-headline-2xs);
+	margin-block: 0;
 }

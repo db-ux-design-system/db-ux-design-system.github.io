@@ -5,6 +5,10 @@
 
 	.spacing-card {
 		inline-size: var(--db-sizing-2xl);
+
+		> header {
+			font: var(--db-type-headline-2xs);
+		}
 	}
 }
 

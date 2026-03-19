@@ -60,7 +60,6 @@ There is no backdrop component. If you need a backdrop like the one in DBDrawer 
 	);
 }
 
-/* OR */
 
 dialog::backdrop {
 	background-color: color(
@@ -107,7 +106,7 @@ dialog::backdrop {
 
 ## Usage Hints
 
-###### Focus attention
+### Focus attention
 
 Use backdrop when the user should focus on a single active UI layer and has to complete the task in the overlay to continue on the main page. If users must keep working with the background, avoid Backdrop and use a non-blocking pattern instead.
 
@@ -124,7 +123,7 @@ Use backdrop when the user should focus on a single active UI layer and has to c
 	/>
 </div>
 
-###### Context
+### Context
 
 Backdrop should reduce distraction, not remove necessary context. If users need to reference background information, consider an alternative (side panel, inline expansion, or non-modal popover).
 
@@ -141,7 +140,7 @@ Backdrop should reduce distraction, not remove necessary context. If users need 
 	/>
 </div>
 
-###### Accessibility
+### Accessibility
 
 Ensure foreground content has sufficient contrast against the dimmed background. When the backdrop indicates a modal state, keep focus within the active overlay and ensure assistive tech cannot navigate background content.
 

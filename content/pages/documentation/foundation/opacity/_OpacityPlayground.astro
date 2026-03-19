@@ -19,10 +19,10 @@ const opacities: DBSelectOptionType[] = [
 
 <Playground
 	playgroundClass="opacity-playground"
-	selects={[{ id: 'select', label: 'Opacity', defaultValue: 'md', options: opacities }]}
+	selects={[{ id: 'select', label: 'Opacity', defaultValue: 'full', options: opacities }]}
 >
 	<DBPopover width="fixed" gap="true">
-		<button slot="trigger" id="box" class="opacity-box interactive-box" data-opacity="md">
+		<button slot="trigger" id="box" class="opacity-box interactive-box" data-opacity="full">
 			<DBCard behavior="interactive" spacing="none"> Focus Me </DBCard>
 		</button>
 	</DBPopover>
