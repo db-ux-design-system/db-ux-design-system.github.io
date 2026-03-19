@@ -1,9 +1,11 @@
 ---
+order: 1
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Badge'
 title: 'Badge'
+description: 'The Badge component is used to display short, contextual information such as status, category, or metadata in close relation to another element.'
 align: start
 status: 'stable'
 toc: true
@@ -21,16 +23,14 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { badgeConfig } from '@template/configs/badge.config.js';
 
-The badge component is used to display short, contextual information such as status, category, or metadata in close relation to another element.
-
-- Indicate a status (e.g., new), a count (e.g., 5), or a notification (e.g., unread) of an item
+- Indicate status or state of an item (e.g. new, error, success)
 - Label or categorize content with a short descriptor
 - Highlight supplementary information next to UI elements
 
 <DBSection spacing="small" width="auto">
 
     ## Playground
-    Experiment with the badge component and its properties.
+    Experiment with the Badge component and its properties.
 
     <ComponentPlayground config={badgeConfig} component={DBBadge} />
 
@@ -44,9 +44,10 @@ The badge component is used to display short, contextual information such as sta
 
 </DBSection>
 
-{/* <DBSection spacing="small" width="auto">
+<DBSection spacing="small" width="auto">
 
-## Properties & Slots
+## Properties, Slots & Events
+
 Configure the badge through its properties, such as semantic, size, and content.
 
 <CollapsibleWrapper collapsedHeight="320px">
@@ -55,18 +56,17 @@ Configure the badge through its properties, such as semantic, size, and content.
 
 </CollapsibleWrapper>
 
-<CollapseButton
-	collapsedText="Show all Properties & Slots"
-	expandedText="Hide some Properties & Slots"
-/>
+<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
 
-</DBSection> */}
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 
-## Usage Hints
+## Guidelines
 
-### Content
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Use badges for supplementary information
 
 Badges should provide additional context and must not carry essential information on their own.
 
@@ -79,11 +79,11 @@ Badges should provide additional context and must not carry essential informatio
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=1-1133&embed-host=share"
-		description="Don't use a badge as the only indicator for critical information."
+		description="Use a badge as the only indicator for critical information."
 	/>
 </div>
 
-### Labels
+### Keep label text short
 
 Badge labels must be concise and scannable to ensure quick recognition.
 
@@ -96,11 +96,11 @@ Badge labels must be concise and scannable to ensure quick recognition.
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1112&embed-host=share"
-		description="Avoid long sentences or detailed explanations inside a badge."
+		description="Use long sentences or detailed explanations inside a badge."
 	/>
 </div>
 
-### Positioning
+### Position badges clearly
 
 Place badges close to the element they describe, without breaking layout or alignment.
 
@@ -113,7 +113,7 @@ Place badges close to the element they describe, without breaking layout or alig
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1114&embed-host=share"
-		description="Don't place badges far away or detached from their reference element."
+		description="Place badges far away or detached from their reference element."
 	/>
 </div>
 
@@ -130,11 +130,11 @@ Use badges for status or metadata, and tags for filtering, grouping, or interact
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1117&embed-host=share"
-		description="Don't use a badge when the element is meant to be clickable or removable."
+		description="Use a badge when the element is meant to be clickable or removable."
 	/>
 </div>
 
-### Accessibility
+### Accessibility considerations
 
 Ensure badge information is available to assistive technologies and not conveyed by color alone.
 
@@ -147,9 +147,13 @@ Ensure badge information is available to assistive technologies and not conveyed
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1119&embed-host=share"
-		description="Don't rely only on color or position to communicate meaning."
+		description="Rely only on color or position to communicate meaning."
 	/>
 </div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
 
 </DBSection>
 
@@ -157,7 +161,7 @@ Ensure badge information is available to assistive technologies and not conveyed
 
 ## FAQ
 
-Have a question about the badge component? We'll answer it and add frequently asked questions to this page.
+Have a question about the Badge component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Badge" />
 

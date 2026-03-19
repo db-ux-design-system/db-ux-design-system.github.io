@@ -1,15 +1,16 @@
 ---
+order: 10
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Drawer'
 title: 'Drawer'
+description: 'Drawer is a sliding panel that appears from the side, top, or bottom to show supplemental content or lightweight interactions while keeping the user in context. It is ideal for optional details and simple tasks, and must always be easy to dismiss.'
 align: start
-status: 'stable'
 toc: true
 ---
 
-import { DBSection, DBDrawer } from '@db-ux/react-core-components';
+import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
@@ -20,8 +21,6 @@ import PropertiesTable from '@template/components/PropertiesTable/PropertiesTabl
 import { drawerConfig } from '@template/configs/drawer.config.js';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 
-Drawer is a sliding panel that appears from the side, top, or bottom to show supplemental content or lightweight interactions while keeping the user in context. It is ideal for optional details and simple tasks, and must always be easy to dismiss.
-
 - Show additional details or secondary information without leaving the current page
 - Provide simple, optional form inputs or quick edits in context
 - Offer secondary navigation or actions in layouts with limited space
@@ -30,9 +29,9 @@ Drawer is a sliding panel that appears from the side, top, or bottom to show sup
 
 ## Playground
 
-Experiment with the drawer component and its properties.
+Experiment with the Drawer component and its properties.
 
-<ComponentPlayground config={drawerConfig} component={DBDrawer} />
+<ComponentPlayground config={drawerConfig} />
 
 </DBSection>
 
@@ -40,13 +39,41 @@ Experiment with the drawer component and its properties.
 
 ## Resources
 
-<ResourceCards path="?path=/docs/components-dbdrawer-density--docs" />
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'TBD',
+			url: '#',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'TBD',
+			url: '#',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
 
 </DBSection>
 
-{/* <DBSection spacing="small" width="auto">
+<DBSection spacing="small" width="auto">
 
 ## Properties, Slots & Events
+
 Configure the drawer through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
@@ -60,11 +87,13 @@ Configure the drawer through its properties, slots and events.
 	expandedText="Hide some Properties, Slots & Events"
 />
 
-</DBSection> */}
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 
-## Usage Hints
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
 
 ### Usage
 
@@ -79,7 +108,7 @@ Use a drawer when users can continue their primary task and the drawer content i
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=1-1133&embed-host=share"
-		description="Don't use the drawer for important or critical information that needs to remain in view at all times."
+		description="Use the drawer for important or critical information that needs to remain in view at all times."
 	/>
 </div>
 
@@ -96,7 +125,7 @@ Drawers work best for lightweight actions (a few controls). Avoid complex, multi
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=3-1112&embed-host=share"
-		description="Don't run multi-step processes, lengthy forms, or complex validation-heavy flows in a drawer."
+		description="Run multi-step processes, lengthy forms, or complex validation-heavy flows in a drawer."
 	/>
 </div>
 
@@ -113,7 +142,7 @@ Regardless of which side the drawer is displayed from, it always takes up the en
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=3-1114&embed-host=share"
-		description="Don't place the drawer only above a specific page area."
+		description="Place the drawer only above a specific page area"
 	/>
 </div>
 
@@ -130,9 +159,13 @@ Always provide a way to close the drawer, such as clicking outside the drawer ar
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=3-1117&embed-host=share"
-		description="Avoid removing the closing button without a valid reason."
+		description="Remove the closing button without a valid reason."
 	/>
 </div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
 
 </DBSection>
 
@@ -140,7 +173,7 @@ Always provide a way to close the drawer, such as clicking outside the drawer ar
 
 ## FAQ
 
-Have a question about the drawer component? We'll answer it and add frequently asked questions to this page.
+Have a question about the Drawer component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Drawer" />
 

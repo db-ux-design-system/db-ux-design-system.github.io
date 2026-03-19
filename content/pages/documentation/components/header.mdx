@@ -1,11 +1,13 @@
 ---
+order: 6
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Header'
 title: 'Header'
+description: 'Header defines the top area of a page and provides consistent access to brand identity, primary navigation, and optional actions. It anchors orientation and supports navigation patterns across responsive layouts, with optional meta navigation above the main bar.'
 align: start
-status: 'beta'
+status: 'deprecated'
 toc: true
 ---
 
@@ -20,8 +22,6 @@ import PropertiesTable from '@template/components/PropertiesTable/PropertiesTabl
 import { headerConfig } from '@template/configs/header.config.js';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 
-Header defines the top area of a page and provides consistent access to brand identity, primary navigation, and optional actions. It anchors orientation and supports navigation patterns across responsive layouts, with optional meta navigation above the main bar.
-
 - Provide global navigation entry points and current location context
 - Offer quick access to common actions like search, menu, or profile
 - Reinforce brand presence consistently across pages and breakpoints
@@ -30,9 +30,9 @@ Header defines the top area of a page and provides consistent access to brand id
 
 ## Playground
 
-Experiment with the header component and its properties.
+Experiment with the Header component and its properties.
 
-<ComponentPlayground config={headerConfig} component={'div'} />
+<ComponentPlayground config={headerConfig} />
 
 </DBSection>
 
@@ -40,13 +40,41 @@ Experiment with the header component and its properties.
 
 ## Resources
 
-<ResourceCards path="?path=/docs/components-dbheader-density--docs" />
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'TBD',
+			url: '#',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'TBD',
+			url: '#',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
 
 </DBSection>
 
-{/* <DBSection spacing="small" width="auto">
+<DBSection spacing="small" width="auto">
 
 ## Properties, Slots & Events
+
 Configure the header through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
@@ -60,13 +88,15 @@ Configure the header through its properties, slots and events.
 	expandedText="Hide some Properties, Slots & Events"
 />
 
-</DBSection> */}
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 
-## Usage Hints
+## Guidelines
 
-### Structure
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Consistent structure
 
 Use the standard order: Brand section with logo and name, primary navigation, then actions. Add meta navigation only when it serves a distinct, secondary purpose and does not compete with primary navigation.
 
@@ -79,7 +109,7 @@ Use the standard order: Brand section with logo and name, primary navigation, th
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/SAbMEPHY6sZfqYvL2OPuk9/Doku--Header-%E2%80%BC%EF%B8%8F?node-id=1-1133&embed-host=share"
-		description="Don't scatter logo, navigation, and actions randomly, or place meta navigation more prominently than primary navigation."
+		description="Scatter logo, navigation, and actions randomly, or place meta navigation more prominently than primary navigation."
 	/>
 </div>
 
@@ -96,11 +126,11 @@ Primary navigation is for destinations; actions are for immediate operations lik
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/SAbMEPHY6sZfqYvL2OPuk9/Doku--Header-%E2%80%BC%EF%B8%8F?node-id=3-1114&embed-host=share"
-		description="Don't put navigation destinations into the action area or mix actions into the nav list."
+		description="Put navigation destinations into the action area or mix actions into the nav list."
 	/>
 </div>
 
-### External links
+### Mark external links
 
 If the meta navigation contains external links, communicate that they leave the application with label or icon as defined and ensure the behavior is consistent.
 
@@ -113,9 +143,13 @@ If the meta navigation contains external links, communicate that they leave the 
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/SAbMEPHY6sZfqYvL2OPuk9/Doku--Header-%E2%80%BC%EF%B8%8F?node-id=3-1112&embed-host=share"
-		description="Don't hide external behavior or mix external and internal links without clear indication."
+		description="Hide external behavior or mix external and internal links without clear indication."
 	/>
 </div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
 
 </DBSection>
 
@@ -123,7 +157,7 @@ If the meta navigation contains external links, communicate that they leave the 
 
 ## FAQ
 
-Have a question about the header component? We'll answer it and add frequently asked questions to this page.
+Have a question about the Header component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Header" />
 
