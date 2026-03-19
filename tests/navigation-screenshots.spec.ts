@@ -114,6 +114,11 @@ test.describe('Axe Core', () => {
 				disabledRules.push('landmark-unique');
 			}
 
+			// Header playground embeds a nested <main> via DBShell
+			if (path === 'documentation/components/header') {
+				disabledRules.push('landmark-main-is-top-level', 'landmark-no-duplicate-main');
+			}
+
 			const accessibilityScanResults = await new AxeBuilder({ page })
 				.disableRules([...new Set(disabledRules)])
 				.include('html')
