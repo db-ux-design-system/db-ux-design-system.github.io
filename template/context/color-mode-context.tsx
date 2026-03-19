@@ -30,7 +30,7 @@ export const ColorModeProvider = ({ children }: { children: ReactNode }) => {
 	const [colorMode, setColorMode] = useState<ColorMode>(getInitialColorMode);
 
 	useEffect(() => {
-		window.localStorage.setItem('db-ux-mode', colorMode);
+		window.localStorage.setItem(STORAGE_KEY, colorMode);
 
 		const shell = document.querySelector(SHELL_SELECTOR);
 		if (shell instanceof HTMLElement) {
