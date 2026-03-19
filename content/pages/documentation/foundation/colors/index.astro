@@ -1,0 +1,126 @@
+---
+import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
+import { DBSection, DBStack } from '@db-ux/react-core-components';
+import ColorPlayground from './_ColorPlayground.astro';
+import ColorTable from './_ColorTable.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+
+const frontmatter: DocumentationFrontMatter = {
+	headline: 'Colors',
+	title: 'Colors',
+	align: 'start',
+	toc: true,
+	sectionSpacing: 'small',
+	sectionWidth: 'auto',
+};
+
+const headings = [
+	{ depth: 2, slug: 'playground', text: 'Playground' },
+	{ depth: 2, slug: 'guidelines', text: 'Guidelines' },
+	{ depth: 2, slug: 'tokens', text: 'Tokens' },
+];
+---
+
+<DocumentationLayout frontmatter={frontmatter} headings={headings}>
+	Colors play a central role in the design of user interfaces. They can reinforce messages and help
+	communicate meanings, as well as enable targeted user guidance.
+
+	<DBSection spacing="small">
+		<DBStack gap="x-large">
+			<DBStack gap="none">
+				<h2 id="playground">Playground</h2>
+				<br />
+				Experience how adaptive color tokens work. Select a different data-color to see how the example
+				card adapts automatically.
+			</DBStack>
+			<ColorPlayground layout="horizontal" />
+		</DBStack>
+	</DBSection>
+
+	<DBSection spacing="small">
+		<h2 id="guidelines">Guidelines</h2>
+
+		<CollapsibleWrapper collapsedHeight="320px">
+			<h3>Background & On-Background</h3>
+
+			<p>
+				The entire color system is based on the principle that there are defined backgrounds (bg)
+				with matching content colors (on-bg). There are four different groups: Basic, Inverted,
+				Vibrant & Origin. The corresponding bg and on-bg tokens always belong together and should
+				not be mixed. This ensures contrast, readability, and consistency.
+			</p>
+
+			<div class="guideline-examples">
+				<GuidelineExample
+					figmaUrl="https://embed.figma.com/design/2eiyzoohpAvz4zw8wWSBqu/Doku--Color?node-id=1-1132&embed-host=share"
+					fullWidth={true}
+					description="Always combine the matching on-bg token with the respective bg token."
+				/>
+			</div>
+
+			<h3>Accessibility</h3>
+
+			<p>
+				For accessible design, text needs a 4.5:1 contrast ratio, while icons can have a 3:1
+				contrast ratio. For basic backgrounds, you should only use on-bg-basic-emphasis-100, -90, or
+				-80 for text. For icons, -70 is also permitted. In the Inverted group, you should only place
+				text on bg-inverted-contrast-max or -contrast-high. Icons can also be placed on
+				-contrast-low. In Figma, the use of color in typography is scoped, which ensures this rule
+				is followed. When layering multiple backgrounds, the system cannot guarantee accessibility.
+				In this case, each individual case must be checked and, if necessary, contrast must be
+				ensured by using a border (e.g., bg-vibrant on bg-basic).
+			</p>
+
+			<div class="guideline-examples">
+				<GuidelineExample
+					figmaUrl="https://embed.figma.com/design/2eiyzoohpAvz4zw8wWSBqu/Doku--Color?node-id=1-1133&embed-host=share"
+					fullWidth={true}
+					description="Follow the rule to ensure accessibility."
+				/>
+			</div>
+
+			<h3>Adaptive Coloring</h3>
+
+			<p>
+				Use adaptive tokens by default. Due to the identical structure of the individual color
+				palettes, elements can easily be placed in a different color context. If a data-color is
+				assigned to a container, all elements within it are recolored in the selected color context.
+				Explicitly colored elements that do not use adaptive color tokens are not affected by the
+				data-color. Take a look at the playground for a better understanding.
+			</p>
+
+			<div class="guideline-examples">
+				<GuidelineExample
+					figmaUrl="https://embed.figma.com/design/2eiyzoohpAvz4zw8wWSBqu/Doku--Color?node-id=7011-10&embed-host=share"
+					fullWidth={true}
+					description="Elements with adaptive color tokens change color to match the context. Explicit colors remain unchanged."
+				/>
+			</div>
+		</CollapsibleWrapper>
+
+		<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+	</DBSection>
+
+	<DBSection spacing="small">
+		<h2 id="tokens">Tokens</h2>
+		<ColorTable />
+	</DBSection>
+
+	<script>
+		import { waitForElements } from '@template/utils/client.utils.ts';
+		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';
+
+		function initColors(): boolean {
+			return handleSimplePlaygrounds({
+				dataAttributeName: 'color',
+				popoverLabel: 'Color',
+				computedStyle: 'backgroundColor',
+				isColor: true,
+			});
+		}
+
+		waitForElements(initColors);
+	</script>
+</DocumentationLayout>

@@ -71,9 +71,15 @@ declare interface FrontMatter {
 	 */
 	status?: 'concept' | 'beta' | 'stable' | 'deprecated' | 'legacy';
 
-
 	align?: 'start' | 'center' | 'end';
 }
+
+declare type DocumentationFrontMatter = {
+	heroSpacing?: 'none' | 'small' | 'medium' | 'large';
+	heroWidth?: 'auto' | 'full';
+	sectionSpacing?: 'none' | 'small' | 'medium' | 'large';
+	sectionWidth?: 'auto' | 'full';
+} & FrontMatter;
 
 /**
  * A navigation item that can be used to build the navigation of the application.

@@ -1,0 +1,57 @@
+---
+import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
+import { DBSection, DBStack } from '@db-ux/react-core-components';
+import BorderWidthPlayground from './_BorderWidthPlayground.astro';
+import BorderWidthTable from './_BorderWidthTable.astro';
+
+const frontmatter: DocumentationFrontMatter = {
+	headline: 'Border Width',
+	title: 'Border Width',
+	align: 'start',
+	toc: true,
+	sectionSpacing: 'small',
+	sectionWidth: 'auto',
+};
+
+const headings = [
+	{ depth: 2, slug: 'playground', text: 'Playground' },
+	{ depth: 2, slug: 'tokens', text: 'Tokens' },
+];
+---
+
+<DocumentationLayout frontmatter={frontmatter} headings={headings}>
+	The border width defines the stroke widths within the design system, ensuring a consistent visual
+	appearance and clear structure of the user interface.
+
+	<DBSection spacing="small">
+		<DBStack gap="x-large">
+			<DBStack gap="none">
+				<h2 id="playground">Playground</h2>
+				<br />
+				Experiment with border width tokens to see how they affect border thickness.
+			</DBStack>
+			<BorderWidthPlayground layout="horizontal" />
+		</DBStack>
+	</DBSection>
+
+	<DBSection spacing="small">
+		<h2 id="tokens">Tokens</h2>
+		<BorderWidthTable />
+	</DBSection>
+
+	<script>
+		import { waitForElements } from '@template/utils/client.utils.ts';
+		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';
+
+		function initBorderWidth(): boolean {
+			return handleSimplePlaygrounds({
+				dataAttributeName: 'border-width',
+				remPx: true,
+				popoverLabel: 'Border Width',
+				computedStyle: 'borderWidth',
+			});
+		}
+
+		waitForElements(initBorderWidth);
+	</script>
+</DocumentationLayout>

@@ -1,0 +1,27 @@
+---
+import { DBCard, DBPopover, type DBSelectOptionType } from '@db-ux/react-core-components';
+import Playground from '../_shared/Playground.astro';
+import './BorderWidthPlayground.css';
+
+const widths: DBSelectOptionType[] = [
+	{ value: '3xs', label: '3XS' },
+	{ value: '2xs', label: '2XS' },
+	{ value: 'xs', label: 'XS' },
+	{ value: 'sm', label: 'SM' },
+	{ value: 'md', label: 'MD' },
+	{ value: 'lg', label: 'LG' },
+	{ value: 'xl', label: 'XL' },
+	{ value: '2xl', label: '2XL' },
+	{ value: '3xl', label: '3XL' },
+];
+---
+
+<Playground
+	selects={[{ id: 'select', label: 'Border Width', defaultValue: 'md', options: widths }]}
+>
+	<DBPopover width="fixed" gap="true">
+		<button slot="trigger" id="box" class="width-box interactive-box" data-border-width="md">
+			<DBCard behavior="interactive" spacing="none"> Focus Me </DBCard>
+		</button>
+	</DBPopover>
+</Playground>

@@ -1,0 +1,62 @@
+.typography-box {
+	text-align: center;
+	inline-size: var(--db-sizing-3xl);
+	max-inline-size: 100%;
+	overflow-wrap: break-word;
+}
+
+.typography-box[data-type='headline-3xl'] {
+	font: var(--db-type-headline-3xl);
+}
+
+.typography-box[data-type='headline-2xl'] {
+	font: var(--db-type-headline-2xl);
+}
+
+.typography-box[data-type='headline-xl'] {
+	font: var(--db-type-headline-xl);
+}
+
+.typography-box[data-type='headline-lg'] {
+	font: var(--db-type-headline-lg);
+}
+
+.typography-box[data-type='headline-md'] {
+	font: var(--db-type-headline-md);
+}
+
+.typography-box[data-type='headline-sm'] {
+	font: var(--db-type-headline-sm);
+}
+
+.typography-box[data-type='headline-xs'] {
+	font: var(--db-type-headline-xs);
+}
+
+.typography-box[data-type='headline-2xs'] {
+	font: var(--db-type-headline-2xs);
+}
+
+.typography-box[data-type='headline-3xs'] {
+	font: var(--db-type-headline-3xs);
+}
+
+.typography-box[data-type='body-xl'] {
+	font: var(--db-type-body-xl);
+}
+
+.typography-box[data-type='body-lg'] {
+	font: var(--db-type-body-lg);
+}
+
+.typography-box[data-type='body-md'] {
+	font: var(--db-type-body-md);
+}
+
+.typography-box[data-type='body-sm'] {
+	font: var(--db-type-body-sm);
+}
+
+.typography-box[data-type='body-xs'] {
+	font: var(--db-type-body-xs);
+}

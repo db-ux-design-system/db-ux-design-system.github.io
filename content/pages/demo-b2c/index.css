@@ -34,13 +34,13 @@
 }
 
 .pulse {
-	margin-bottom: var(--db-spacing-fixed-sm);
+	margin-block-end: var(--db-spacing-fixed-sm);
 
 	&::after {
 		content: '';
 		display: block;
 		position: relative;
-		top: var(--db-spacing-fixed-sm);
+		inset-block-start: var(--db-spacing-fixed-sm);
 		inline-size: var(--db-sizing-sm);
 		block-size: var(--db-border-width-xs);
 		background-color: var(--db-brand-on-bg-basic-emphasis-70-default);
@@ -65,7 +65,7 @@
 	border-color: transparent;
 	color: var(--db-adaptive-on-bg-inverted-default);
 
-	&:hover {
+	&:hover, &:focus {
 		background-color: var(--db-adaptive-bg-inverted-contrast-max-hovered);
 		border-color: transparent;
 		color: var(--db-adaptive-on-bg-inverted-default);
@@ -119,7 +119,7 @@
 	background: var(--db-brand-on-origin-default);
 }
 
-.hero-section .db-card .db-button[data-variant='filled']:hover {
+.hero-section .db-card .db-button[data-variant='filled']:hover, .hero-section .db-card .db-button[data-variant='filled']:focus {
 	background: var(--db-brand-on-origin-default);
 	opacity: var(--db-opacity-2xl);
 }
@@ -142,7 +142,7 @@
 .journey-section {
 	position: relative;
 	z-index: 2;
-	margin-top: calc(-1 * var(--db-spacing-fixed-3xl));
+	margin-block-start: calc(-1 * var(--db-spacing-fixed-3xl));
 }
 
 

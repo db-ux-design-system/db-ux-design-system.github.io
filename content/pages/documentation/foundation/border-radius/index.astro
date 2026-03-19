@@ -1,0 +1,58 @@
+---
+import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
+import { DBSection, DBStack } from '@db-ux/react-core-components';
+import BorderRadiusPlayground from './_BorderRadiusPlayground.astro';
+import BorderRadiusTable from './_BorderRadiusTable.astro';
+
+const frontmatter: DocumentationFrontMatter = {
+	headline: 'Border Radius',
+	title: 'Border Radius',
+	align: 'start',
+	toc: true,
+	sectionSpacing: 'small',
+	sectionWidth: 'auto',
+};
+
+const headings = [
+	{ depth: 2, slug: 'playground', text: 'Playground' },
+	{ depth: 2, slug: 'tokens', text: 'Tokens' },
+];
+---
+
+<DocumentationLayout frontmatter={frontmatter} headings={headings}>
+	The border radius defines the rounded corners of UI elements, which influences the visual
+	aesthetics of the design system. These tokens enable consistent corner properties for a harmonious
+	user interface.
+
+	<DBSection spacing="small">
+		<DBStack gap="x-large">
+			<DBStack gap="none">
+				<h2 id="playground">Playground</h2>
+				<br />
+				Experiment with border radius tokens to see how they affect corner rounding.
+			</DBStack>
+			<BorderRadiusPlayground layout="horizontal" />
+		</DBStack>
+	</DBSection>
+
+	<DBSection spacing="small">
+		<h2 id="tokens">Tokens</h2>
+		<BorderRadiusTable />
+	</DBSection>
+
+	<script>
+		import { waitForElements } from '@template/utils/client.utils.ts';
+		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';
+
+		function initBorderRadius(): boolean {
+			return handleSimplePlaygrounds({
+				dataAttributeName: 'border-radius',
+				remPx: true,
+				popoverLabel: 'Border Radius',
+				computedStyle: 'borderRadius',
+			});
+		}
+
+		waitForElements(initBorderRadius);
+	</script>
+</DocumentationLayout>

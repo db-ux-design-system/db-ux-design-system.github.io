@@ -15,7 +15,7 @@
 	grid-template-columns: 2fr 1fr;
 	align-items: center;
 	gap: var(--db-spacing-fixed-2xl);
-	text-align: left; /* Content left aligned by default in split */
+	text-align: start; /* Content left aligned by default in split */
 }
 
 .page-hero[data-layout='split'][data-image-side='left'] {
@@ -32,13 +32,13 @@
 	gap: var(--db-spacing-fixed-lg);
 	flex-direction: column;
 	align-items: center;
-	max-width: var(--db-container-3xl);
-	width: 100%;
+	max-inline-size: var(--db-container-3xl);
+	inline-size: 100%;
 }
 
 .page-hero[data-layout='split'] .page-hero-content {
 	align-items: flex-start;
-	max-width: 100%;
+	max-inline-size: 100%;
 }
 
 .page-hero-title {
@@ -51,15 +51,15 @@
 
 .page-hero-description {
 	margin: 0;
-	max-width: var(--db-container-md);
+	max-inline-size: var(--db-container-md);
 	opacity: 0.75;
 	font: var(--db-type-body-md);
 }
 
 .page-hero-underline {
 	display: block;
-	width: var(--db-sizing-lg); /* kann aus Token ersetzt werden falls vorhanden */
-	height: var(--db-sizing-3xs);
+	inline-size: var(--db-sizing-lg); /* kann aus Token ersetzt werden falls vorhanden */
+	block-size: var(--db-sizing-3xs);
 	border-radius: var(--db-border-radius-xs);
 	background: var(--db-brand-origin-default);
 }
@@ -68,7 +68,7 @@
 	margin-block-start: var(--db-spacing-fixed-2xl);
 	display: flex;
 	justify-content: center;
-	width: 100%;
+	inline-size: 100%;
 }
 
 .page-hero[data-layout='split'] .page-hero-media {
@@ -88,16 +88,16 @@
 
 .page-hero-media img {
 	display: block;
-	max-height: var(--db-container-xs);
-	width: auto;
-	height: auto;
+	max-block-size: var(--db-container-xs);
+	inline-size: auto;
+	block-size: auto;
 }
 
 /* Zentrierter Variant (z.B. Landing Pages) */
 
 /* Alignment Variants */
 .page-hero[data-align='start'] {
-	text-align: left;
+	text-align: start;
 	align-items: flex-start;
 }
 
@@ -110,7 +110,7 @@
 }
 
 .page-hero[data-align='end'] {
-	text-align: right;
+	text-align: end;
 	align-items: flex-end;
 }
 
@@ -160,8 +160,8 @@
 
 	.page-hero-underline {
 		margin-block-start: var(--db-spacing-fixed-md);
-		width: var(--db-sizing-sm);
-		height: var(--db-sizing-3xs);
+		inline-size: var(--db-sizing-sm);
+		block-size: var(--db-sizing-3xs);
 	}
 
 	.page-hero-media {

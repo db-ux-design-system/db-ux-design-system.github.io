@@ -1,0 +1,21 @@
+---
+import { DBCard, DBPopover, type DBSelectOptionType } from '@db-ux/react-core-components';
+import Playground from '../_shared/Playground.astro';
+import './ElevationPlayground.css';
+
+const elevations: DBSelectOptionType[] = [
+	{ value: 'sm', label: 'sm' },
+	{ value: 'md', label: 'md' },
+	{ value: 'lg', label: 'lg' },
+];
+---
+
+<Playground
+	selects={[{ id: 'select', label: 'Elevation', defaultValue: 'sm', options: elevations }]}
+>
+	<DBPopover width="fixed" gap="true">
+		<button slot="trigger" id="box" class="elevation-box interactive-box" data-elevation="md">
+			<DBCard behavior="interactive" spacing="none"> Focus Me </DBCard>
+		</button>
+	</DBPopover>
+</Playground>

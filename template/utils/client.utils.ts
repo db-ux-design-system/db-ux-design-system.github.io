@@ -13,3 +13,13 @@ export function getAriaCurrent(path?: string): 'page' | undefined {
 	const fullPath = `${basePath}${path}`.replace(/\/+$/, '');
 	return pathname === fullPath ? 'page' : undefined;
 }
+
+/**
+ * Waits for elements to be added to the DOM.
+ * @param initFn - A function that returns true when the elements are found.
+ */
+export function waitForElements(initFn: () => boolean) {
+	new MutationObserver(function (_, observer) {
+		if (initFn()) observer.disconnect();
+	}).observe(document.body, { childList: true, subtree: true });
+}
