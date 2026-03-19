@@ -92,7 +92,7 @@ const getIconPath = (icon: string): string => {
 				</>
 			);
 			const card = (
-				<DBCard behavior="interactive">
+				<DBCard behavior="interactive" className="resource-card-item">
 					{isDisabled ? (
 						<a aria-disabled="true" tabindex="-1">
 							{cardContent}
