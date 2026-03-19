@@ -1,5 +1,5 @@
 import { DBSelect } from '@db-ux/react-core-components';
-import { useTheme } from '@template/context/theme-context.tsx';
+import { useTheme, type ThemeName } from '@template/context/theme-context.tsx';
 
 const ThemeSwitch = () => {
 	const { themeName, setTheme } = useTheme();
@@ -10,7 +10,7 @@ const ThemeSwitch = () => {
 			value={themeName}
 			variant="floating"
 			onChange={(e) => {
-				setTheme(e.target.value as 'default' | 's-bahn' | 'station' | 'neutral');
+				setTheme(e.target.value as ThemeName);
 				const url = new URL(window.location.href);
 				url.searchParams.delete('theme');
 				window.history.replaceState({}, '', url);
