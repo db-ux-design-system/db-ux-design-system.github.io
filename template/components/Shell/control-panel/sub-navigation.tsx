@@ -13,7 +13,7 @@ const SubNavigation = ({
 		<DBNavigation aria-label="sub navigation" variant={variant ?? 'tree'}>
 			{navigationItems.map((navigationItem: NavigationItem) => (
 				<NavItem
-					key={`sub-navigation-${navigationItem.path}-${navigationItem.path}`}
+					key={`sub-navigation-${navigationItem.path}-${navigationItem.title}`}
 					{...navigationItem}
 				/>
 			))}
