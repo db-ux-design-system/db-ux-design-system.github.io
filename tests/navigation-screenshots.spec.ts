@@ -34,7 +34,7 @@ const getMasks = async (page: Page, path: string): Promise<Locator[]> => {
 };
 
 export const waitForDBShell = async (page: Page) => {
-	const dbPage = page.locator('.db-shell');
+	const dbPage = page.locator('.db-shell').first();
 	// We wait till db-page fully loaded
 	await dbPage.evaluate((element) => {
 		element.style.transition = 'none';

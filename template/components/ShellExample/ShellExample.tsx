@@ -6,10 +6,23 @@ import {
 	DBNavigationItem,
 	DBControlPanelPrimaryActions,
 } from '@db-ux/react-core-components';
+import { useRef, useEffect } from 'react';
 
 export default function ShellExample() {
+	const shellRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		// Demote the nested <main> to a non-landmark element so it doesn't
+		// conflict with the page's own <main> landmark.
+		const main = shellRef.current?.querySelector('main');
+		if (main) {
+			main.role = 'presentation';
+		}
+	}, []);
+
 	return (
 		<DBShell
+			ref={shellRef}
 			style={{ height: 'auto' }}
 			controlPanelDesktop={
 				<DBControlPanelDesktop
