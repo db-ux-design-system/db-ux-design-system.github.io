@@ -9,54 +9,19 @@ import {
 import { useState } from 'react';
 import './SelectableTable.css';
 
+const TABLE_DATA = [
+	{ metric: 'Response Time', value: '210ms', trend: '+8,2 %', status: 'Normal', semantic: 'successful', notes: 'Within expected range' },
+	{ metric: 'Current Load', value: '43 %', trend: '-5,4 %', status: 'Normal', semantic: 'successful', notes: 'Auto-scaling not required' },
+	{ metric: 'Error Rate', value: '0,92 %', trend: '+0,71 %', status: 'Critical', semantic: 'critical', notes: 'High failure rate detected' },
+	{ metric: 'Active Sessions', value: '2.830', trend: '+2,1 %', status: 'Normal', semantic: 'successful', notes: 'Consistent usage pattern' },
+	{ metric: 'Throughput', value: '19.600 req/min', trend: '+ 12,8 %', status: 'Warning', semantic: 'warning', notes: 'Higher variability' },
+];
+
 export const SelectableTable = () => {
 	const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
 	const [statusFilter, setStatusFilter] = useState<string>('All');
 	const [searchQuery, setSearchQuery] = useState<string>('');
 	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-
-	const tableData = [
-		{
-			metric: 'Response Time',
-			value: '210ms',
-			trend: '+8,2 %',
-			status: 'Normal',
-			semantic: 'successful',
-			notes: 'Within expected range',
-		},
-		{
-			metric: 'Current Load',
-			value: '43 %',
-			trend: '-5,4 %',
-			status: 'Normal',
-			semantic: 'successful',
-			notes: 'Auto-scaling not required',
-		},
-		{
-			metric: 'Error Rate',
-			value: '0,92 %',
-			trend: '+0,71 %',
-			status: 'Critical',
-			semantic: 'critical',
-			notes: 'High failure rate detected',
-		},
-		{
-			metric: 'Active Sessions',
-			value: '2.830',
-			trend: '+2,1 %',
-			status: 'Normal',
-			semantic: 'successful',
-			notes: 'Consistent usage pattern',
-		},
-		{
-			metric: 'Throughput',
-			value: '19.600 req/min',
-			trend: '+ 12,8 %',
-			status: 'Warning',
-			semantic: 'warning',
-			notes: 'Higher variability',
-		},
-	];
 
 	const toggleRow = (metric: string) => {
 		setSelectedRows((prev) => {
@@ -78,7 +43,7 @@ export const SelectableTable = () => {
 		}
 	};
 
-	const filteredData = tableData
+	const filteredData = TABLE_DATA
 		.filter((item) => statusFilter === 'All' || item.status === statusFilter)
 		.filter(
 			(item) =>
