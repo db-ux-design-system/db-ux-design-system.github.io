@@ -43,7 +43,7 @@ const defaultResources: Resource[] = [
 	{
 		title: 'Web C.',
 		description: 'Interactive examples and documentation.',
-		url: `${baseUrl}/angular-storybook${path}`,
+		url: `${baseUrl}/web-components-storybook${path}`,
 		icon: 'web-components',
 		disabled: true,
 	},
@@ -78,7 +78,7 @@ const getIconPath = (icon: string): string => {
 				<>
 					{resource.icon && (
 						<img
-							src={resource.icon}
+							src={getIconPath(resource.icon)}
 							alt={`Image for ${resource.title}, ${resource.description}`}
 							width="32"
 							height="32"
