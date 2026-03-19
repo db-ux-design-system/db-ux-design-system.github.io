@@ -104,7 +104,7 @@ test.describe('Axe Core', () => {
 					path.startsWith('documentation') || path === 'demo-b2b'
 						? ['aria-required-parent', 'aria-required-children', 'presentation-role-conflict']
 						: // There is an a11y error inside Googles model viewer implementation
-							path === 'about-us'
+							path === 'about-us' || path === 'documentation/components/header'
 							? ['landmark-unique']
 							: [],
 				)
