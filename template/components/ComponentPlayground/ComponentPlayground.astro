@@ -441,8 +441,8 @@ const nativeAttributes = [
 								}
 								return (
 									<div class="db-select">
-										<label for={config.elementId + '-select'}>{prop.label}</label>
-										<select id={config.elementId + '-select'} onchange={updateAction}>
+										<label for={`${config.elementId}-${prop.name}-select`}>{prop.label}</label>
+										<select id={`${config.elementId}-${prop.name}-select`} onchange={updateAction}>
 											{prop.options.map((option: any) => (
 												<option value={option.value} selected={option.default}>
 													{option.label}
@@ -457,13 +457,15 @@ const nativeAttributes = [
 								const attrName = nativeAttributes.includes(prop.name)
 									? prop.name
 									: `data-${prop.name}`;
+								const controlId = `${config.elementId}-${prop.name}-control`;
 								if (prop.name === 'text') {
 									const targetId = config.textElementId || config.elementId;
 									if (config.elementId === 'demo-navigation-item') {
 										return (
 											<div class="db-input">
-												<label for={config.elementId + '-input'}>{prop.label}</label>
+												<label for={controlId}>{prop.label}</label>
 												<input
+													id={controlId}
 													type="text"
 													id={config.elementId + '-input'}
 													value={prop.defaultValue}
@@ -474,8 +476,9 @@ const nativeAttributes = [
 									}
 									return (
 										<div class="db-input">
-											<label for={config.elementId + '-input'}>{prop.label}</label>
+											<label for={controlId}>{prop.label}</label>
 											<input
+												id={controlId}
 												type="text"
 												id={config.elementId + '-input'}
 												value={prop.defaultValue}
@@ -487,8 +490,9 @@ const nativeAttributes = [
 									const labelProp = config.properties.find((p: any) => p.name === 'label');
 									return (
 										<div class="db-input">
-											<label for={config.elementId + '-input'}>{prop.label}</label>
+											<label for={controlId}>{prop.label}</label>
 											<input
+												id={controlId}
 												type="text"
 												id={config.elementId + '-input'}
 												value={labelProp?.defaultValue || 'Enable notifications'}
@@ -500,8 +504,9 @@ const nativeAttributes = [
 									const labelProp = config.properties.find((p: any) => p.name === 'label');
 									return (
 										<div class="db-input">
-											<label for={config.elementId + '-input'}>{prop.label}</label>
+											<label for={controlId}>{prop.label}</label>
 											<input
+												id={controlId}
 												type="text"
 												id={config.elementId + '-input'}
 												value={labelProp?.defaultValue || 'Option 1'}
@@ -513,8 +518,9 @@ const nativeAttributes = [
 									const labelProp = config.properties.find((p: any) => p.name === 'label');
 									return (
 										<div class="db-input">
-											<label for={config.elementId + '-input'}>{prop.label}</label>
+											<label for={controlId}>{prop.label}</label>
 											<input
+												id={controlId}
 												type="text"
 												id={config.elementId + '-input'}
 												value={labelProp?.defaultValue || 'Accept terms'}
@@ -526,8 +532,9 @@ const nativeAttributes = [
 									const labelProp = config.properties.find((p: any) => p.name === 'label');
 									return (
 										<div class="db-input">
-											<label for={config.elementId + '-input'}>{prop.label}</label>
+											<label for={controlId}>{prop.label}</label>
 											<input
+												id={controlId}
 												type="text"
 												id={config.elementId + '-input'}
 												value={labelProp?.defaultValue || 'Country'}
@@ -539,8 +546,13 @@ const nativeAttributes = [
 									const labelProp = config.properties.find((p: any) => p.name === 'label');
 									return (
 										<div class="db-input">
+<<<<<<< HEAD
 											<label for={config.elementId + '-input'}>{prop.label}</label>
+=======
+											<label for={controlId}>{prop.label}</label>
+>>>>>>> abea69f (refactor: update selector for db-shell to target the first instance)
 											<input
+												id={controlId}
 												type="text"
 												id={config.elementId + '-input'}
 												value={labelProp?.defaultValue || 'Message'}
@@ -557,8 +569,13 @@ const nativeAttributes = [
 									);
 									return (
 										<div class="db-input">
+<<<<<<< HEAD
 											<label for={config.elementId + '-input'}>{prop.label}</label>
+=======
+											<label for={controlId}>{prop.label}</label>
+>>>>>>> abea69f (refactor: update selector for db-shell to target the first instance)
 											<input
+												id={controlId}
 												type="text"
 												id={config.elementId + '-input'}
 												value={placeholderProp?.defaultValue || 'Choose an option'}
@@ -572,8 +589,13 @@ const nativeAttributes = [
 								) {
 									return (
 										<div class="db-input">
+<<<<<<< HEAD
 											<label for={config.elementId + '-input'}>{prop.label}</label>
+=======
+											<label for={controlId}>{prop.label}</label>
+>>>>>>> abea69f (refactor: update selector for db-shell to target the first instance)
 											<input
+												id={controlId}
 												type="text"
 												id={config.elementId + '-input'}
 												value={prop.defaultValue}
@@ -589,8 +611,13 @@ const nativeAttributes = [
 								) {
 									return (
 										<div class="db-input">
+<<<<<<< HEAD
 											<label for={config.elementId + '-input'}>{prop.label}</label>
+=======
+											<label for={controlId}>{prop.label}</label>
+>>>>>>> abea69f (refactor: update selector for db-shell to target the first instance)
 											<input
+												id={controlId}
 												type="text"
 												id={config.elementId + '-input'}
 												value={prop.defaultValue}
@@ -606,8 +633,13 @@ const nativeAttributes = [
 								) {
 									return (
 										<div class="db-input">
+<<<<<<< HEAD
 											<label for={config.elementId + '-input'}>{prop.label}</label>
+=======
+											<label for={controlId}>{prop.label}</label>
+>>>>>>> abea69f (refactor: update selector for db-shell to target the first instance)
 											<input
+												id={controlId}
 												type="text"
 												id={config.elementId + '-input'}
 												value={prop.defaultValue}
@@ -618,8 +650,13 @@ const nativeAttributes = [
 								} else if (config.elementId === 'playground-select' && prop.name === 'message') {
 									return (
 										<div class="db-input">
+<<<<<<< HEAD
 											<label for={config.elementId + '-input'}>{prop.label}</label>
+=======
+											<label for={controlId}>{prop.label}</label>
+>>>>>>> abea69f (refactor: update selector for db-shell to target the first instance)
 											<input
+												id={controlId}
 												type="text"
 												id={config.elementId + '-input'}
 												value={prop.defaultValue}
@@ -633,8 +670,13 @@ const nativeAttributes = [
 								) {
 									return (
 										<div class="db-input">
+<<<<<<< HEAD
 											<label for={config.elementId + '-input'}>{prop.label}</label>
+=======
+											<label for={controlId}>{prop.label}</label>
+>>>>>>> abea69f (refactor: update selector for db-shell to target the first instance)
 											<input
+												id={controlId}
 												type="text"
 												id={config.elementId + '-input'}
 												value={prop.defaultValue}
@@ -648,8 +690,13 @@ const nativeAttributes = [
 								) {
 									return (
 										<div class="db-input">
+<<<<<<< HEAD
 											<label for={config.elementId + '-input'}>{prop.label}</label>
+=======
+											<label for={controlId}>{prop.label}</label>
+>>>>>>> abea69f (refactor: update selector for db-shell to target the first instance)
 											<input
+												id={controlId}
 												type="text"
 												id={config.elementId + '-input'}
 												value={prop.defaultValue}
@@ -660,8 +707,13 @@ const nativeAttributes = [
 								} else if (config.elementId === 'demo-navigation-item' && prop.name === 'icon') {
 									return (
 										<div class="db-input">
+<<<<<<< HEAD
 											<label for={config.elementId + '-input'}>{prop.label}</label>
+=======
+											<label for={controlId}>{prop.label}</label>
+>>>>>>> abea69f (refactor: update selector for db-shell to target the first instance)
 											<input
+												id={controlId}
 												type="text"
 												id={config.elementId + '-input'}
 												value={prop.defaultValue}
@@ -672,8 +724,13 @@ const nativeAttributes = [
 								} else if (config.elementId === 'demo-notification' && prop.name === 'headline') {
 									return (
 										<div class="db-input">
+<<<<<<< HEAD
 											<label for={config.elementId + '-input'}>{prop.label}</label>
+=======
+											<label for={controlId}>{prop.label}</label>
+>>>>>>> abea69f (refactor: update selector for db-shell to target the first instance)
 											<input
+												id={controlId}
 												type="text"
 												id={config.elementId + '-input'}
 												value={prop.defaultValue}
@@ -707,6 +764,7 @@ const nativeAttributes = [
 											: `if(this.value) document.getElementById('${targetId}').setAttribute('${attrName}', this.value); else document.getElementById('${targetId}').removeAttribute('${attrName}');`;
 									return (
 										<div class="db-input">
+<<<<<<< HEAD
 											<label for={config.elementId + '-input'}>{prop.label}</label>
 											<input
 												type="text"
@@ -714,6 +772,10 @@ const nativeAttributes = [
 												value={prop.defaultValue}
 												oninput={updateAction}
 											/>
+=======
+											<label for={controlId}>{prop.label}</label>
+											<input id={controlId} type="text" value={prop.defaultValue} oninput={updateAction} />
+>>>>>>> abea69f (refactor: update selector for db-shell to target the first instance)
 										</div>
 									);
 								}
