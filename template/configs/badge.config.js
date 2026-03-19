@@ -21,6 +21,7 @@ export const badgeConfig = {
 			type: 'text',
 			defaultValue: 'Badge',
 			description: 'Alternative for default slot/children.',
+			showInPlayground: true,
 		},
 		// Appearance
 		{
@@ -36,6 +37,7 @@ export const badgeConfig = {
 				{ value: 'warning', label: 'Warning' },
 				{ value: 'successful', label: 'Successful' },
 			],
+			showInPlayground: true,
 		},
 		{
 			name: 'emphasis',
@@ -46,22 +48,26 @@ export const badgeConfig = {
 				{ value: 'weak', label: 'Weak' },
 				{ value: 'strong', label: 'Strong', default: true },
 			],
+			showInPlayground: true,
 		},
 		{
 			name: 'size',
 			label: 'Size',
 			type: 'select',
-			description: 'The size attribute changes the font-size and other related sizes of the component.',
+			description:
+				'The size attribute changes the font-size and other related sizes of the component.',
 			options: [
 				{ value: 'small', label: 'Small' },
 				{ value: 'medium', label: 'Medium', default: true },
 			],
+			showInPlayground: true,
 		},
 		{
 			name: 'placement',
 			label: 'Placement',
 			type: 'select',
-			description: 'The placement attributes corner-* values change the position to absolute and adds a transform based on the placement.',
+			description:
+				'The placement attributes corner-* values change the position to absolute and adds a transform based on the placement.',
 			options: [
 				{ value: 'inline', label: 'Inline', default: true },
 				{ value: 'corner-top-left', label: 'Corner Top Left' },
@@ -71,6 +77,7 @@ export const badgeConfig = {
 				{ value: 'corner-bottom-left', label: 'Corner Bottom Left' },
 				{ value: 'corner-bottom-right', label: 'Corner Bottom Right' },
 			],
+			showInPlayground: true,
 		},
 		// Hidden properties
 		{
@@ -86,7 +93,8 @@ export const badgeConfig = {
 			label: 'ID',
 			type: 'text',
 			defaultValue: '',
-			description: 'ID of the component, generated automatically for some components as a fallback if unset.',
+			description:
+				'ID of the component, generated automatically for some components as a fallback if unset.',
 			showInPlayground: false,
 		},
 		{

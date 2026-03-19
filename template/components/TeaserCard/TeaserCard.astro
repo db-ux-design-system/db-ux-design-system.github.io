@@ -23,18 +23,18 @@ const { teasers } = Astro.props;
 			const isLink = teaser.component === 'DBLink';
 			return (
 				<DBCard behavior="interactive" spacing="none">
-					{isLink ? (
-						<div
-							class="teaser-wrapper"
-							onclick={`window.location.href='${teaser.url}'`}
-							style="cursor: pointer;"
-						>
-							<div class="teaser-content">
-								<h2>{teaser.title}</h2>
-								<p>{teaser.description}</p>
-							</div>
-							{Component && (
-								<div class="teaser-preview">
+					<div class="teaser-wrapper">
+						<div class="teaser-content">
+							<h2 class="teaser-title">
+								<a class="teaser-title-link" href={teaser.url}>
+									{teaser.title}
+								</a>
+							</h2>
+							<p class="teaser-description">{teaser.description}</p>
+						</div>
+						{Component && (
+							<div class="teaser-preview">
+								{isLink ? (
 									<Component
 										href="#"
 										wrap={false}
@@ -42,23 +42,12 @@ const { teasers } = Astro.props;
 									>
 										{teaser.title}
 									</Component>
-								</div>
-							)}
-						</div>
-					) : (
-						<a href={teaser.url}>
-							<!-- TODO: The anchor should wrap DBCard instead -->
-							<div class="teaser-content">
-								<h2>{teaser.title}</h2>
-								<p>{teaser.description}</p>
-							</div>
-							{Component && (
-								<div class="teaser-preview">
+								) : (
 									<Component>{teaser.title}</Component>
-								</div>
-							)}
-						</a>
-					)}
+								)}
+							</div>
+						)}
+					</div>
 				</DBCard>
 			);
 		})
