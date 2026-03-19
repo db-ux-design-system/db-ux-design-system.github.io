@@ -38,15 +38,11 @@ export const ColorModeProvider = ({ children }: { children: ReactNode }) => {
 		}
 	}, [colorMode]);
 
-	const setMode = (next: ColorMode) => {
-		setColorMode(next);
-	};
-
 	const toggleColorMode = () => {
 		setColorMode((prev) => (prev === 'light' ? 'dark' : 'light'));
 	};
 
-	const value: ColorModeContextValue = { colorMode, setColorMode: setMode, toggleColorMode };
+	const value: ColorModeContextValue = { colorMode, setColorMode, toggleColorMode };
 
 	return <ColorModeContext.Provider value={value}>{children}</ColorModeContext.Provider>;
 };
