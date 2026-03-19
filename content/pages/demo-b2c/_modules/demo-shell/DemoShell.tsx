@@ -1,35 +1,20 @@
-import { type PropsWithChildren, type ReactElement, useEffect } from 'react';
-import { ColorModeProvider, useColorMode } from '@template/context/color-mode-context';
-import { ThemeProvider, useTheme } from '@template/context/theme-context';
+import { type PropsWithChildren, type ReactElement } from 'react';
+import { ColorModeProvider } from '@template/context/color-mode-context';
+import { ThemeProvider } from '@template/context/theme-context';
 import {
 	DBShell,
 	DBControlPanelDesktop,
 	DBControlPanelMobile,
 } from '@db-ux/react-core-components';
-import DemoBrand from './control-panel/brand';
+import DemoBrand from '@template/components/DemoBrand/DemoBrand';
 import DemoMetaNavigation from './control-panel/meta-navigation';
 import DemoNavigation from './control-panel/navigation';
 import DemoPrimaryActions from './control-panel/primary-actions';
 import DemoSecondaryActions from './control-panel/secondary-actions';
+import { useDemoUrlParams } from '@template/hooks/useDemoUrlParams';
 
 function DemoShellContent({ children }: PropsWithChildren): ReactElement {
-	const { setColorMode } = useColorMode();
-	const { setTheme } = useTheme();
-
-	useEffect(() => {
-		const params = new URLSearchParams(window.location.search);
-		const mode = params.get('mode');
-		const theme = params.get('theme');
-
-		if (mode === 'light' || mode === 'dark') {
-			setColorMode(mode);
-			document.documentElement.setAttribute('data-mode', mode);
-		}
-
-		if (theme && (theme === 'default' || theme === 's-bahn' || theme === 'station' || theme === 'neutral')) {
-			setTheme(theme);
-		}
-	}, [setColorMode, setTheme]);
+	useDemoUrlParams();
 
 	return (
 		<DBShell
