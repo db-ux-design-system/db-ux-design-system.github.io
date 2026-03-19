@@ -81,38 +81,3 @@ export function findSubNavigation(currentPathname: string): NavigationItem[] | u
 	return match?.node.children;
 }
 
-/**
- * Finds the parent navigation item for a given pathname.
- *
- * @param pathname - The pathname to find the parent for
- * @returns The parent navigation item if found, undefined otherwise
- */
-export function getNavigationItemParent(pathname: string): NavigationItem | undefined {
-	const { basePath } = appConfig;
-	const norm = (p: string) => p.replace(/\/+$/, '');
-	const _pathname = norm(pathname);
-
-	const withBase = (relPath?: string) => {
-		if (!relPath) return undefined;
-		const base = norm(basePath || '/');
-		const rel = relPath.startsWith('/') ? relPath : `/${relPath}`;
-		return norm(`${base}${rel}`);
-	};
-
-	const findParent = (nodes: NavigationItem[]): NavigationItem | undefined => {
-		for (const node of nodes) {
-			const children = node.children ?? [];
-			for (const child of children) {
-				const full = withBase(child.path);
-				if (full && full === _pathname) {
-					return node;
-				}
-			}
-			const found = findParent(children);
-			if (found) return found;
-		}
-		return undefined;
-	};
-
-	return findParent(appNavigation);
-}
