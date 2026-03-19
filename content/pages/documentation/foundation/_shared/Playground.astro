@@ -1,0 +1,56 @@
+---
+import { DBSelect, DBNotification, type DBSelectOptionType } from '@db-ux/react-core-components';
+import './Playground.css';
+
+type SelectConfig = {
+	id: string;
+	label: string;
+	defaultValue: string;
+	options?: DBSelectOptionType[];
+};
+
+interface Props {
+	selects: SelectConfig[];
+	playgroundClass?: string;
+	previewId?: string;
+	previewDataDensity?: string;
+	cssImport?: string;
+}
+
+const { selects, playgroundClass = '', previewId, previewDataDensity } = Astro.props;
+
+const classes = ['playground', playgroundClass].filter(Boolean).join(' ');
+---
+
+<div class={classes}>
+	<div class="playground-controls" data-density="regular">
+		{
+			selects.map((select) => (
+				<DBSelect
+					client:only="react"
+					id={select.id}
+					label={select.label}
+					variant="floating"
+					defaultValue={select.defaultValue}
+					options={select.options}
+				/>
+			))
+		}
+	</div>
+	<div
+		class="playground-preview"
+		id={previewId}
+		{...previewDataDensity ? { 'data-density': previewDataDensity } : {}}
+	>
+		<slot />
+	</div>
+
+	<DBNotification
+		id="playground-token-display"
+		className="playground-token-display"
+		semantic="informational"
+		headline="Token"
+	>
+		Focus the element/elements to see the tokens
+	</DBNotification>
+</div>

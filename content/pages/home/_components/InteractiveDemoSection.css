@@ -1,13 +1,13 @@
 [id='demo-iframe'] {
-	width: 100%;
-	height: 110vh;
+	inline-size: 100%;
+	block-size: 110vh;
 	zoom: 0.6;
 }
 
 .db-card.actionbar {
-	width: fit-content;
+	inline-size: fit-content;
 	margin: auto;
 	padding: var(--db-spacing-fixed-2xs);
 	position: sticky;
-	top: var(--db-spacing-fixed-md);
+	inset-block-start: var(--db-spacing-fixed-md);
 }
