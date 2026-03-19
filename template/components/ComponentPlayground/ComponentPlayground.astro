@@ -467,7 +467,6 @@ const nativeAttributes = [
 												<input
 													id={controlId}
 													type="text"
-													id={config.elementId + '-input'}
 													value={prop.defaultValue}
 													oninput={`document.getElementById('navigation-item-link').textContent = this.value;`}
 												/>
@@ -480,7 +479,6 @@ const nativeAttributes = [
 											<input
 												id={controlId}
 												type="text"
-												id={config.elementId + '-input'}
 												value={prop.defaultValue}
 												oninput={`document.getElementById('${targetId}').textContent = this.value;`}
 											/>
@@ -494,7 +492,6 @@ const nativeAttributes = [
 											<input
 												id={controlId}
 												type="text"
-												id={config.elementId + '-input'}
 												value={labelProp?.defaultValue || 'Enable notifications'}
 												oninput={`document.getElementById('playground-switch-label').textContent = this.value;`}
 											/>
@@ -508,7 +505,6 @@ const nativeAttributes = [
 											<input
 												id={controlId}
 												type="text"
-												id={config.elementId + '-input'}
 												value={labelProp?.defaultValue || 'Option 1'}
 												oninput={`document.getElementById('playground-radio-label').textContent = this.value;`}
 											/>
@@ -522,7 +518,6 @@ const nativeAttributes = [
 											<input
 												id={controlId}
 												type="text"
-												id={config.elementId + '-input'}
 												value={labelProp?.defaultValue || 'Accept terms'}
 												oninput={`document.getElementById('playground-checkbox-label').textContent = this.value;`}
 											/>
@@ -536,7 +531,6 @@ const nativeAttributes = [
 											<input
 												id={controlId}
 												type="text"
-												id={config.elementId + '-input'}
 												value={labelProp?.defaultValue || 'Country'}
 												oninput={`document.getElementById('playground-select-label').textContent = this.value;`}
 											/>
@@ -546,15 +540,10 @@ const nativeAttributes = [
 									const labelProp = config.properties.find((p: any) => p.name === 'label');
 									return (
 										<div class="db-input">
-<<<<<<< HEAD
-											<label for={config.elementId + '-input'}>{prop.label}</label>
-=======
 											<label for={controlId}>{prop.label}</label>
->>>>>>> abea69f (refactor: update selector for db-shell to target the first instance)
 											<input
 												id={controlId}
 												type="text"
-												id={config.elementId + '-input'}
 												value={labelProp?.defaultValue || 'Message'}
 												oninput={`document.getElementById('playground-textarea-label').textContent = this.value;`}
 											/>
@@ -569,15 +558,10 @@ const nativeAttributes = [
 									);
 									return (
 										<div class="db-input">
-<<<<<<< HEAD
-											<label for={config.elementId + '-input'}>{prop.label}</label>
-=======
 											<label for={controlId}>{prop.label}</label>
->>>>>>> abea69f (refactor: update selector for db-shell to target the first instance)
 											<input
 												id={controlId}
 												type="text"
-												id={config.elementId + '-input'}
 												value={placeholderProp?.defaultValue || 'Choose an option'}
 												oninput={`const placeholder = document.getElementById('playground-select-placeholder'); const wrapper = document.getElementById('playground-select'); if(placeholder && wrapper.getAttribute('data-variant') !== 'floating') placeholder.textContent = this.value;`}
 											/>
@@ -589,15 +573,10 @@ const nativeAttributes = [
 								) {
 									return (
 										<div class="db-input">
-<<<<<<< HEAD
-											<label for={config.elementId + '-input'}>{prop.label}</label>
-=======
 											<label for={controlId}>{prop.label}</label>
->>>>>>> abea69f (refactor: update selector for db-shell to target the first instance)
 											<input
 												id={controlId}
 												type="text"
-												id={config.elementId + '-input'}
 												value={prop.defaultValue}
 												oninput={`document.getElementById('playground-input-infotext-valid').textContent = this.value;`}
 											/>
@@ -611,15 +590,10 @@ const nativeAttributes = [
 								) {
 									return (
 										<div class="db-input">
-<<<<<<< HEAD
-											<label for={config.elementId + '-input'}>{prop.label}</label>
-=======
 											<label for={controlId}>{prop.label}</label>
->>>>>>> abea69f (refactor: update selector for db-shell to target the first instance)
 											<input
 												id={controlId}
 												type="text"
-												id={config.elementId + '-input'}
 												value={prop.defaultValue}
 												oninput={`document.getElementById('playground-textarea-infotext-valid').textContent = this.value;`}
 											/>
@@ -633,15 +607,10 @@ const nativeAttributes = [
 								) {
 									return (
 										<div class="db-input">
-<<<<<<< HEAD
-											<label for={config.elementId + '-input'}>{prop.label}</label>
-=======
 											<label for={controlId}>{prop.label}</label>
->>>>>>> abea69f (refactor: update selector for db-shell to target the first instance)
 											<input
 												id={controlId}
 												type="text"
-												id={config.elementId + '-input'}
 												value={prop.defaultValue}
 												oninput={`document.getElementById('playground-textarea-infotext').textContent = this.value;`}
 											/>
@@ -650,15 +619,10 @@ const nativeAttributes = [
 								} else if (config.elementId === 'playground-select' && prop.name === 'message') {
 									return (
 										<div class="db-input">
-<<<<<<< HEAD
-											<label for={config.elementId + '-input'}>{prop.label}</label>
-=======
 											<label for={controlId}>{prop.label}</label>
->>>>>>> abea69f (refactor: update selector for db-shell to target the first instance)
 											<input
 												id={controlId}
 												type="text"
-												id={config.elementId + '-input'}
 												value={prop.defaultValue}
 												oninput={`document.getElementById('playground-select-message').textContent = this.value;`}
 											/>
@@ -670,15 +634,10 @@ const nativeAttributes = [
 								) {
 									return (
 										<div class="db-input">
-<<<<<<< HEAD
-											<label for={config.elementId + '-input'}>{prop.label}</label>
-=======
 											<label for={controlId}>{prop.label}</label>
->>>>>>> abea69f (refactor: update selector for db-shell to target the first instance)
 											<input
 												id={controlId}
 												type="text"
-												id={config.elementId + '-input'}
 												value={prop.defaultValue}
 												oninput={`document.getElementById('playground-select-infotext-valid').textContent = this.value;`}
 											/>
@@ -690,15 +649,10 @@ const nativeAttributes = [
 								) {
 									return (
 										<div class="db-input">
-<<<<<<< HEAD
-											<label for={config.elementId + '-input'}>{prop.label}</label>
-=======
 											<label for={controlId}>{prop.label}</label>
->>>>>>> abea69f (refactor: update selector for db-shell to target the first instance)
 											<input
 												id={controlId}
 												type="text"
-												id={config.elementId + '-input'}
 												value={prop.defaultValue}
 												oninput={`document.getElementById('playground-select-infotext').textContent = this.value;`}
 											/>
@@ -707,15 +661,10 @@ const nativeAttributes = [
 								} else if (config.elementId === 'demo-navigation-item' && prop.name === 'icon') {
 									return (
 										<div class="db-input">
-<<<<<<< HEAD
-											<label for={config.elementId + '-input'}>{prop.label}</label>
-=======
 											<label for={controlId}>{prop.label}</label>
->>>>>>> abea69f (refactor: update selector for db-shell to target the first instance)
 											<input
 												id={controlId}
 												type="text"
-												id={config.elementId + '-input'}
 												value={prop.defaultValue}
 												oninput={`const item = document.getElementById('${config.elementId}'); if(this.value) item.setAttribute('data-icon', this.value); else item.removeAttribute('data-icon');`}
 											/>
@@ -724,15 +673,10 @@ const nativeAttributes = [
 								} else if (config.elementId === 'demo-notification' && prop.name === 'headline') {
 									return (
 										<div class="db-input">
-<<<<<<< HEAD
-											<label for={config.elementId + '-input'}>{prop.label}</label>
-=======
 											<label for={controlId}>{prop.label}</label>
->>>>>>> abea69f (refactor: update selector for db-shell to target the first instance)
 											<input
 												id={controlId}
 												type="text"
-												id={config.elementId + '-input'}
 												value={prop.defaultValue}
 												oninput={`const notification = document.getElementById('demo-notification'); notification.setAttribute('data-headline', this.value); const h = document.getElementById('notification-headline'); if(h) h.textContent = this.value;`}
 											/>
@@ -764,18 +708,13 @@ const nativeAttributes = [
 											: `if(this.value) document.getElementById('${targetId}').setAttribute('${attrName}', this.value); else document.getElementById('${targetId}').removeAttribute('${attrName}');`;
 									return (
 										<div class="db-input">
-<<<<<<< HEAD
-											<label for={config.elementId + '-input'}>{prop.label}</label>
+											<label for={controlId}>{prop.label}</label>
 											<input
+												id={controlId}
 												type="text"
-												id={config.elementId + '-input'}
 												value={prop.defaultValue}
 												oninput={updateAction}
 											/>
-=======
-											<label for={controlId}>{prop.label}</label>
-											<input id={controlId} type="text" value={prop.defaultValue} oninput={updateAction} />
->>>>>>> abea69f (refactor: update selector for db-shell to target the first instance)
 										</div>
 									);
 								}
