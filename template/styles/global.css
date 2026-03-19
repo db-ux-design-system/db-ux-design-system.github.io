@@ -1,4 +1,4 @@
-@layer db-ux,themes, db-theme ;
+@layer db-ux,themes, db-theme;
 
 @import url('@db-ux/core-components/build/styles/rollup.css') layer(db-ux);
 @import url('@db-ux/db-theme/build/styles/rollup.css') layer(db-theme);
@@ -6,6 +6,8 @@
 @import url('./markdown.css');
 @import url('../components/TableOfContents/TableOfContents.css');
 @import url('./table.css');
+@import url('../components/GuidelineExample/GuidelineExample.css');
+@import url('./db-ux-overrides.css');
 
 :root {
 	--header-height: var(--db-sizing-lg);
@@ -22,16 +24,6 @@ html {
 	scroll-padding-block-start: var(--header-height);
 }
 
-/* DB UX Overrides */
-.db-sub-navigation,
-.dba-side-nav {
-	.db-navigation-item {
-		a[aria-current='page'] {
-			color: var(--db-brand-on-bg-basic-emphasis-70-default);
-		}
-	}
-}
-
 /* Equal-height card rows */
 .cards-row {
 	display: grid;
@@ -43,7 +35,7 @@ html {
 .cards-row > .db-card,
 .cards-row > a,
 .cards-row > a > .db-card {
-	height: 100%;
+	block-size: 100%;
 	display: flex;
 	flex-direction: column;
 }
@@ -73,17 +65,16 @@ html {
 }
 
 .cards-row-fixed > * {
-	min-width: 0;
+	min-inline-size: 0;
 }
 
 .cards-row-fixed > a {
 	display: block;
-	width: 100%;
-	height: 100%;
+	inline-size: 100%;
 }
 
-.cards-row-fixed > a > .db-card {
-	height: 100%;
+.cards-row-fixed > .db-card {
+	block-size: 100%;
 	display: flex;
 	flex-direction: column;
 	box-sizing: border-box;
@@ -130,22 +121,7 @@ html {
 	filter: brightness(0) invert(1) sepia(0) saturate(0) contrast(1.1);
 }
 
-.db-stack > a > .db-card {
-	/* Ensure cards in stacks stretch to full width */
-	height: 100%;
-	box-sizing: border-box;
-}
-
-.db-stack {
-	overflow: visible;
-}
-
-.db-card .db-link {
-	width: auto;
-	display: inline-flex !important;
-	flex-direction: row !important;
-}
-
-.db-card:has(iframe) {
-	overflow: hidden;
+h3 {
+	font: var(--db-type-headline-2xs);
+	margin-block: 0;
 }

@@ -1,0 +1,44 @@
+---
+import { DBCard, DBPopover, type DBSelectOptionType } from '@db-ux/react-core-components';
+import Playground from '../_shared/Playground.astro';
+import './SizingPlayground.css';
+
+const sizes: DBSelectOptionType[] = [
+	{ value: '3xs', label: '3XS' },
+	{ value: '2xs', label: '2XS' },
+	{ value: 'xs', label: 'XS' },
+	{ value: 'sm', label: 'SM' },
+	{ value: 'md', label: 'MD' },
+	{ value: 'lg', label: 'LG' },
+	{ value: 'xl', label: 'XL' },
+	{ value: '2xl', label: '2XL' },
+	{ value: '3xl', label: '3XL' },
+];
+
+const densities: DBSelectOptionType[] = [
+	{ value: 'functional', label: 'Functional' },
+	{ value: 'regular', label: 'Regular' },
+	{ value: 'expressive', label: 'Expressive' },
+];
+---
+
+<Playground
+	selects={[
+		{ id: 'select', label: 'Size', defaultValue: 'md', options: sizes },
+		{ id: 'density-select', label: 'Density', defaultValue: 'regular', options: densities },
+	]}
+	previewId="sizing-preview"
+	previewDataDensity="regular"
+>
+	<DBPopover width="fixed" gap="true">
+		<button
+			slot="trigger"
+			id="box"
+			class="sizing-box interactive-box"
+			data-size="md"
+			data-density="regular"
+		>
+			<DBCard behavior="interactive" spacing="none"> Focus Me </DBCard>
+		</button>
+	</DBPopover>
+</Playground>

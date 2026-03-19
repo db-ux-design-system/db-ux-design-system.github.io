@@ -1,21 +1,25 @@
 ---
 import type { MarkdownHeading } from 'astro';
 import { TableOfContents } from '@template/components/TableOfContents';
-import { DBSection } from '@db-ux/react-core-components';
+import { DBSection, type SemanticType } from '@db-ux/react-core-components';
 import { PageHero } from '@components';
 
 interface Props {
 	headings: MarkdownHeading[];
-	frontmatter: FrontMatter & {
-		heroSpacing?: 'none' | 'small' | 'medium' | 'large';
-		heroWidth?: 'auto' | 'full';
-		sectionSpacing?: 'none' | 'small' | 'medium' | 'large';
-		sectionWidth?: 'auto' | 'full';
-	};
+	frontmatter: DocumentationFrontMatter ;
 }
 
 const { headings, frontmatter } = Astro.props as Props;
 const toc = (headings?.length ?? 0) > 0 && frontmatter.toc === true;
+
+const badgeMap: Record<string, { text: string; semantic: SemanticType }> = {
+	concept: { text: 'Concept', semantic: 'warning' },
+	beta: { text: 'Beta', semantic: 'informational' },
+	stable: { text: 'Stable', semantic: 'successful' },
+	deprecated: { text: 'Deprecated', semantic: 'critical' },
+	legacy: { text: 'Legacy', semantic: 'warning' },
+};
+const badge = frontmatter.status ? badgeMap[frontmatter.status] : undefined;
 ---
 
 <>
@@ -37,32 +41,8 @@ const toc = (headings?.length ?? 0) > 0 && frontmatter.toc === true;
 					<PageHero
 						headline={frontmatter.headline}
 						description={frontmatter.description}
-						badgeText={
-							frontmatter.status === 'concept'
-								? 'Concept'
-								: frontmatter.status === 'beta'
-									? 'Beta'
-									: frontmatter.status === 'stable'
-										? 'Stable'
-										: frontmatter.status === 'deprecated'
-											? 'Deprecated'
-											: frontmatter.status === 'legacy'
-												? 'Legacy'
-												: undefined
-						}
-						badgeSemantic={
-							frontmatter.status === 'concept'
-								? 'warning'
-								: frontmatter.status === 'beta'
-									? 'informational'
-									: frontmatter.status === 'stable'
-										? 'successful'
-										: frontmatter.status === 'deprecated'
-											? 'critical'
-											: frontmatter.status === 'legacy'
-												? 'warning'
-												: 'adaptive'
-						}
+						badgeText={badge?.text}
+						badgeSemantic={badge?.semantic ?? 'adaptive'}
 						headlineLevel={frontmatter.headlineLevel ?? 1}
 						imageSrc={frontmatter.heroImage}
 						imageAlt={frontmatter.heroImageAlt}

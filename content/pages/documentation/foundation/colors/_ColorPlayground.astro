@@ -1,0 +1,59 @@
+---
+import {
+	DBButton,
+	DBCard,
+	DBPopover,
+	type DBSelectOptionType,
+	DBStack,
+} from '@db-ux/react-core-components';
+import Playground from '../_shared/Playground.astro';
+
+const colors: DBSelectOptionType[] = [
+	{
+		label: 'Semantic Colors',
+		value: 'Semantic Colors',
+		options: [
+			{ value: 'neutral', label: 'neutral' },
+			{ value: 'brand', label: 'brand' },
+			{ value: 'informational', label: 'informational' },
+			{ value: 'warning', label: 'warning' },
+			{ value: 'successful', label: 'successful' },
+			{ value: 'critical', label: 'critical' },
+		],
+	},
+	{
+		label: 'Additional Colors',
+		value: 'Semantic Colors',
+		options: [
+			{ value: 'yellow', label: 'yellow' },
+			{ value: 'orange', label: 'orange' },
+			{ value: 'red', label: 'red' },
+			{ value: 'pink', label: 'pink' },
+			{ value: 'violet', label: 'violet' },
+			{ value: 'blue', label: 'blue' },
+			{ value: 'cyan', label: 'cyan' },
+			{ value: 'turquoise', label: 'turquoise' },
+			{ value: 'green', label: 'green' },
+			{ value: 'burgundy', label: 'burgundy' },
+		],
+	},
+];
+---
+
+<Playground
+	playgroundClass="color-playground"
+	selects={[
+		{
+			id: 'select',
+			label: 'Color',
+			defaultValue: 'neutral',
+			options: colors,
+		},
+	]}
+>
+	<DBPopover data-density="functional" width="fixed" gap="true">
+		<button slot="trigger" id="box" class="interactive-box" data-color="neutral">
+			<DBCard behavior="interactive" spacing="none"> Focus Me </DBCard>
+		</button>
+	</DBPopover>
+</Playground>

@@ -1,0 +1,28 @@
+---
+import { DBCard, DBPopover, type DBSelectOptionType } from '@db-ux/react-core-components';
+import Playground from '../_shared/Playground.astro';
+import './BorderRadiusPlayground.css';
+
+const radii: DBSelectOptionType[] = [
+	{ value: '3xs', label: '3XS' },
+	{ value: '2xs', label: '2XS' },
+	{ value: 'xs', label: 'XS' },
+	{ value: 'sm', label: 'SM' },
+	{ value: 'md', label: 'MD' },
+	{ value: 'lg', label: 'LG' },
+	{ value: 'xl', label: 'XL' },
+	{ value: '2xl', label: '2XL' },
+	{ value: '3xl', label: '3XL' },
+	{ value: 'full', label: 'Full' },
+];
+---
+
+<Playground
+	selects={[{ id: 'select', label: 'Border Radius', defaultValue: 'md', options: radii }]}
+>
+	<DBPopover width="fixed" gap="true">
+		<button slot="trigger" id="box" class="radius-box interactive-box" data-border-radius="md">
+			<DBCard behavior="interactive" spacing="none"> Focus Me </DBCard>
+		</button>
+	</DBPopover>
+</Playground>

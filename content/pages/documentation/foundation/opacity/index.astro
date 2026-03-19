@@ -1,0 +1,57 @@
+---
+import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
+import { DBSection, DBStack } from '@db-ux/react-core-components';
+import OpacityPlayground from './_OpacityPlayground.astro';
+import OpacityTable from './_OpacityTable.astro';
+
+const frontmatter: DocumentationFrontMatter = {
+	headline: 'Opacity',
+	title: 'Opacity',
+	align: 'start',
+	toc: true,
+	sectionSpacing: 'small',
+	sectionWidth: 'auto',
+};
+
+const headings = [
+	{ depth: 2, slug: 'playground', text: 'Playground' },
+	{ depth: 2, slug: 'tokens', text: 'Tokens' },
+];
+---
+
+<DocumentationLayout frontmatter={frontmatter} headings={headings}>
+	Opacity tokens determine the transparency of elements in our design system and influence visual
+	depth and readability. Careful gradations in opacity can be used to emphasize essential
+	information and downplay secondary content.
+
+	<DBSection spacing="small">
+		<DBStack gap="x-large">
+			<DBStack gap="none">
+				<h2 id="playground">Playground</h2>
+				<br />
+				Experiment with opacity tokens to see how transparency affects visual elements.
+			</DBStack>
+			<OpacityPlayground layout="horizontal" />
+		</DBStack>
+	</DBSection>
+
+	<DBSection spacing="small">
+		<h2 id="tokens">Tokens</h2>
+		<OpacityTable />
+	</DBSection>
+
+	<script>
+		import { waitForElements } from '@template/utils/client.utils.ts';
+		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';
+
+		function initOpacity(): boolean {
+			return handleSimplePlaygrounds({
+				dataAttributeName: 'opacity',
+				popoverLabel: 'Opacity',
+				computedStyle: 'opacity',
+			});
+		}
+
+		waitForElements(initOpacity);
+	</script>
+</DocumentationLayout>
