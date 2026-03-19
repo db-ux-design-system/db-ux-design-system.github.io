@@ -20,18 +20,17 @@
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
-.dba-toc-indicator {
-	position: absolute;
-	inset-inline-start: 0;
-	inset-block-start: 0;
-	inline-size: var(--db-border-width-sm);
-	background-color: var(--db-brand-on-bg-basic-emphasis-70-default);
-	border-radius: var(--db-border-radius-full);
-	transition:
-		none;
-	pointer-events: none;
-	z-index: 1;
-}
+	.dba-toc-indicator {
+		position: absolute;
+		inset-inline-start: 0;
+		inset-block-start: 0;
+		inline-size: var(--db-border-width-sm);
+		background-color: var(--db-brand-on-bg-basic-emphasis-70-default);
+		border-radius: var(--db-border-radius-full);
+		transition: none;
+		pointer-events: none;
+		z-index: 1;
+	}
 }
 
 .dba-toc-indicator {
@@ -49,14 +48,14 @@
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
-.dba-toc-heading {
-	position: relative;
-	list-style: none;
-	display: flex;
-	align-items: center;
-	border-radius: var(--db-border-radius-sm);
-	transition: none;
-}
+	.dba-toc-heading {
+		position: relative;
+		list-style: none;
+		display: flex;
+		align-items: center;
+		border-radius: var(--db-border-radius-sm);
+		transition: none;
+	}
 }
 
 .dba-toc-heading {
@@ -68,7 +67,8 @@
 	transition: background-color 0.2s ease;
 }
 
-.dba-toc-heading:hover, .dba-toc-heading:focus {
+.dba-toc-heading:hover,
+.dba-toc-heading:focus {
 	background: var(--db-adaptive-bg-basic-transparent-semi-hovered);
 }
 
@@ -118,7 +118,8 @@
 	inset-inline-end: 0;
 	z-index: 2;
 
-	&:hover, &:focus {
+	&:hover,
+	&:focus {
 		background: var(--db-adaptive-bg-basic-transparent-semi-hovered);
 	}
 }

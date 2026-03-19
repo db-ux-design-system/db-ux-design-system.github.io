@@ -1,4 +1,4 @@
-@layer db-ux,themes, db-theme ;
+@layer db-ux,themes, db-theme;
 
 @import url('@db-ux/core-components/build/styles/rollup.css') layer(db-ux);
 @import url('@db-ux/db-theme/build/styles/rollup.css') layer(db-theme);
@@ -25,7 +25,7 @@ html {
 }
 
 .db-card .db-link {
-	width: auto;
+	inline-size: auto;
 	display: inline-flex !important;
 	flex-direction: row !important;
 }

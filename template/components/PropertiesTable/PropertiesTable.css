@@ -1,17 +1,17 @@
 .properties-table-wrapper {
 	overflow-x: auto;
-	width: 100%;
-	min-width: 0;
+	inline-size: 100%;
+	min-inline-size: 0;
 	-webkit-overflow-scrolling: touch;
 }
 
 .properties-table-spacing {
-	margin-top: var(--db-spacing-fixed-xl);
+	margin-block-start: var(--db-spacing-fixed-xl);
 }
 
 .properties-table-wrapper table {
-	width: auto;
-	min-width: 100%;
+	inline-size: auto;
+	min-inline-size: 100%;
 }
 
 .properties-table-wrapper table td {
