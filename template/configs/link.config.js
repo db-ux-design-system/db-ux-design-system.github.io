@@ -21,6 +21,7 @@ export const linkConfig = {
 			type: 'text',
 			defaultValue: 'Link Text',
 			description: 'Alternative for default slot/children.',
+			showInPlayground: true,
 		},
 
 		// Appearance
@@ -35,6 +36,7 @@ export const linkConfig = {
 				{ value: 'brand', label: 'Brand' },
 				{ value: 'inline', label: 'Inline' },
 			],
+			showInPlayground: true,
 		},
 		{
 			name: 'size',
@@ -45,6 +47,7 @@ export const linkConfig = {
 				{ value: 'medium', label: 'Medium', default: true },
 				{ value: 'small', label: 'Small' },
 			],
+			showInPlayground: true,
 		},
 		{
 			name: 'content',
@@ -56,6 +59,7 @@ export const linkConfig = {
 				{ value: 'external', label: 'External' },
 				{ value: 'internal', label: 'Internal' },
 			],
+			showInPlayground: true,
 		},
 
 		// States
@@ -65,6 +69,7 @@ export const linkConfig = {
 			type: 'checkbox',
 			defaultValue: false,
 			description: 'Disables the link.',
+			showInPlayground: true,
 		},
 
 		// Hidden properties
@@ -96,23 +101,25 @@ export const linkConfig = {
 			label: 'Show Icon',
 			description: 'Enables or disables the visibility of the icon.',
 			defaultValue: false,
-			showInPlayground: false
+			showInPlayground: false,
 		},
 		{
 			name: 'wrap',
 			label: 'Wrap',
 			type: 'checkbox',
 			defaultValue: false,
-			description: 'Determines whether the text should wrap when its parent container is too small, preventing overflow.',
+			description:
+				'Determines whether the text should wrap when its parent container is too small, preventing overflow.',
 			showInPlayground: false,
 		},
 		{
 			name: 'id',
 			type: 'text',
 			label: 'ID',
-			description: 'ID of the component, generated automatically for some components as a fallback if unset.',
+			description:
+				'ID of the component, generated automatically for some components as a fallback if unset.',
 			defaultValue: '',
-			showInPlayground: false
+			showInPlayground: false,
 		},
 		{
 			name: 'className',
@@ -120,7 +127,7 @@ export const linkConfig = {
 			label: 'Class Name',
 			description: 'React specific for adding className to the component.',
 			defaultValue: '',
-			showInPlayground: false
+			showInPlayground: false,
 		},
 		{
 			name: 'rel',
@@ -128,7 +135,7 @@ export const linkConfig = {
 			label: 'Rel',
 			description: 'The relationship of the linked URL as space-separated link types.',
 			defaultValue: '',
-			showInPlayground: false
+			showInPlayground: false,
 		},
 		{
 			name: 'role',
@@ -136,7 +143,7 @@ export const linkConfig = {
 			label: 'Role',
 			description: 'Sets aria role based on aria-role.',
 			defaultValue: '',
-			showInPlayground: false
+			showInPlayground: false,
 		},
 		{
 			name: 'referrerpolicy',
@@ -144,7 +151,7 @@ export const linkConfig = {
 			label: 'Referrer Policy',
 			description: 'How much of the referrer to send when following the link.',
 			defaultValue: '',
-			showInPlayground: false
+			showInPlayground: false,
 		},
 		{
 			name: 'referrer-policy',
@@ -153,7 +160,7 @@ export const linkConfig = {
 			label: 'Referrer Policy',
 			description: 'How much of the referrer to send when following the link.',
 			defaultValue: '',
-			showInPlayground: false
+			showInPlayground: false,
 		},
 		{
 			name: 'hreflang',
@@ -161,7 +168,7 @@ export const linkConfig = {
 			label: 'Hreflang',
 			description: 'Hints for the human language of the linked page or document.',
 			defaultValue: '',
-			showInPlayground: false
+			showInPlayground: false,
 		},
 	],
 };

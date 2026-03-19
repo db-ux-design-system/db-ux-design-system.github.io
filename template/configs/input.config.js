@@ -58,6 +58,7 @@ export const inputConfig = {
 				{ value: 'above', label: 'Above', default: true },
 				{ value: 'floating', label: 'Floating' },
 			],
+			showInPlayground: true,
 		},
 		{
 			name: 'type',
@@ -82,6 +83,7 @@ export const inputConfig = {
 				{ value: 'url', label: 'URL' },
 				{ value: 'week', label: 'Week' },
 			],
+			showInPlayground: true,
 		},
 
 		// States
@@ -106,6 +108,7 @@ export const inputConfig = {
 				{ value: 'valid', label: 'Valid' },
 				{ value: 'no-validation', label: 'No Validation', default: true },
 			],
+			showInPlayground: true,
 		},
 		{
 			name: 'invalidMessage',
@@ -134,6 +137,7 @@ export const inputConfig = {
 			defaultValue: false,
 			description:
 				'When the required attribute specified, the user will be required to fill the form element before submitting the form.',
+			showInPlayground: false,
 		},
 		{
 			name: 'show-required-asterisk',
