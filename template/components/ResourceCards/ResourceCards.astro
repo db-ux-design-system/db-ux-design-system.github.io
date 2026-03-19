@@ -88,19 +88,21 @@ const getIconPath = (icon: string): string => {
 						<b>{resource.title}</b>
 						<p>{resource.description}</p>
 					</div>
-					<strong data-icon-trailing="arrow_up_right">{resource.label || 'View Storybook'}</strong>
 				</>
 			);
 			const card = (
 				<DBCard behavior="interactive" className="resource-card-item">
 					{isDisabled ? (
-						<a aria-disabled="true" tabindex="-1">
-							{cardContent}
-						</a>
+						cardContent
 					) : (
-						<a href={resource.url} target="_blank" rel="noopener noreferrer">
+						<>
 							{cardContent}
-						</a>
+							<a href={resource.url} target="_blank" rel="noopener noreferrer" class="db-link">
+								<strong data-icon-trailing="arrow_up_right">
+									{resource.label || 'View Storybook'}
+								</strong>
+							</a>
+						</>
 					)}
 				</DBCard>
 			);

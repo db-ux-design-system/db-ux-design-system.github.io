@@ -16,7 +16,7 @@
 	height: 100%;
 }
 
-.resource-cards .db-link .db-card {
+.resource-cards .db-card:has(.db-link) {
 	height: 100%;
 	width: 100%;
 	box-sizing: border-box;
@@ -30,8 +30,4 @@
 .resource-cards .db-card p {
 	margin: 0;
 	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
-}
-
-.resource-cards .db-card strong {
-	margin-top: auto;
 }
