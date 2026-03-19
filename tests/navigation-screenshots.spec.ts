@@ -73,6 +73,11 @@ test.describe('Navigation Screenshots', () => {
 		test(`${path}`, async ({ page }) => {
 			await setupPage(page, path);
 
+			if (path === 'documentation/icons') {
+				// We wait till icons are loaded
+				await page.waitForTimeout(10000);
+			}
+
 			const mask = await getMasks(page, path);
 
 			await expect(page).toHaveScreenshot(`${path.replace(/\//g, '-')}.png`, {
@@ -88,9 +93,9 @@ test.describe('Axe Core', () => {
 		test(`${path}`, async ({ page }) => {
 			await setupPage(page, path);
 
-			if (path === "documentation/icons"){
+			if (path === 'documentation/icons') {
 				// We wait till input get id correctly
-				await page.waitForTimeout(2000)
+				await page.waitForTimeout(2000);
 			}
 
 			const accessibilityScanResults = await new AxeBuilder({ page })
