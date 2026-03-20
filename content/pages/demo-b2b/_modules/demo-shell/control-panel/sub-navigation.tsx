@@ -5,7 +5,7 @@ import ThemeSwitch from '@template/components/theme-switch/ThemeSwitch';
 const DemoSubNavigation = () => (
 	<DBShellSubNavigation role="complementary">
 		<DBStack direction="row" justifyContent="space-between" alignment="center">
-			<b>Analytics</b>
+			<strong>Analytics</strong>
 			<DBStack direction="row" gap="small" alignment="center">
 				<ColorModeSwitch />
 				<ThemeSwitch />
