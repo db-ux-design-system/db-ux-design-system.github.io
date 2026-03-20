@@ -1,15 +1,17 @@
 ---
+order: 9
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Radio'
 title: 'Radio'
+description: 'Radio lets users select exactly one option from a set of mutually exclusive choices. It supports clear comparison between options and should be used when seeing all choices at once helps users decide.'
 align: start
 status: 'stable'
 toc: true
 ---
 
-import { DBRadio, DBSection } from '@db-ux/react-core-components';
+import { DBAccordion, DBAccordionItem, DBRadio, DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
@@ -21,8 +23,6 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { radioConfig } from '@template/configs/radio.config.js';
 
-Radio lets users select exactly one option from a set of mutually exclusive choices. It supports clear comparison between options and should be used when seeing all choices at once helps users decide.
-
 - Select one option from a small set (e.g., language, delivery type)
 - Configure a single preference in settings (e.g., "Light / Dark / System")
 - Choose one form option where only one is valid (e.g., contact method)
@@ -31,7 +31,7 @@ Radio lets users select exactly one option from a set of mutually exclusive choi
 
 ## Playground
 
-Experiment with the radio component and its properties.
+Experiment with the Radio component and its properties.
 
 <ComponentPlayground config={radioConfig} component="radio" />
 
@@ -45,9 +45,10 @@ Experiment with the radio component and its properties.
 
 </DBSection>
 
-{/* <DBSection spacing="small" width="auto">
+<DBSection spacing="small" width="auto">
 
 ## Properties, Slots & Events
+
 Configure the radio through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
@@ -61,47 +62,49 @@ Configure the radio through its properties, slots and events.
 	expandedText="Hide some Properties, Slots & Events"
 />
 
-</DBSection> */}
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 
-## Usage Hints
+## Guidelines
 
-### Radio vs Checkbox
+<CollapsibleWrapper collapsedHeight="320px">
 
-Use radio buttons when users must choose exactly one option from a group. If multiple selections are allowed, use checkbox instead.
+### Use Radio for single-choice sets
+
+Use radio buttons when users must choose exactly one option from a group. If multiple selections are allowed, use Checkbox instead.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=1-1132&embed-host=share"
-		description="Use radio buttons for mutually exclusive options."
+		description='Use a radio group for mutually exclusive options like "German / English / Spanish".'
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=1-1133&embed-host=share"
-		description="Don't use radio buttons for multi-select scenarios."
+		description='Use radio buttons for multi-select scenarios like "Email + SMS + Post".'
 	/>
 </div>
 
-### Radio vs Select
+### Prefer Radio over Select when comparison matters
 
-Use radio when the number of options is small and users benefit from seeing all options at once. Use select when options are many or screen space is limited.
+Use Radio when the number of options is small and users benefit from seeing all options at once. Use Select when options are many or screen space is limited.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1110&embed-host=share"
-		description="Use radio buttons for 2–5 options that users should compare quickly."
+		description="Use radio buttons for 2–6 options that users should compare quickly."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1112&embed-host=share"
-		description="Don't use radio buttons for long lists where scrolling and scanning becomes hard."
+		description="Use radio buttons for long lists where scrolling and scanning becomes hard."
 	/>
 </div>
 
-### Labels
+### Write short, unambiguous labels
 
 Labels must be concise and clearly distinct from each other. Keep wording parallel and avoid vague or overlapping terms.
 
@@ -109,16 +112,16 @@ Labels must be concise and clearly distinct from each other. Keep wording parall
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1113&embed-host=share"
-		description="Use clear and concise labels."
+		description='Use clear labels like "Private", "Business", "Both".'
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1114&embed-host=share"
-		description="Avoid unclear labels or double negatives that can confuse."
+		description='Use unclear labels like "Standard", "Advanced", "Other" without context.'
 	/>
 </div>
 
-### Grouping
+### Arrange options for easy scanning
 
 Prefer vertical stacking for readability and accessibility. Use horizontal layout only when there are few, short options and sufficient space.
 
@@ -126,14 +129,52 @@ Prefer vertical stacking for readability and accessibility. Use horizontal layou
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1116&embed-host=share"
-		description="Stack options vertically and choose left alignment for radio groups."
+		description="Stack options vertically and keep spacing consistent within the group."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1117&embed-host=share"
-		description="Don't place many options in a single horizontal row where labels wrap or alignment breaks."
+		description="Place many options in a single horizontal row where labels wrap or alignment breaks."
 	/>
 </div>
+
+### Set and communicate a sensible default
+
+If a safe default exists, preselect it to reduce effort. If no default is appropriate, start with no selection and validate on submit as needed.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1118&embed-host=share"
+		description="Preselect the most common/safest option when it does not create risk."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1119&embed-host=share"
+		description="Preselect an option that implies consent or a high-impact choice without user intent."
+	/>
+</div>
+
+### Accessibility and screenreader text
+
+Every radio must have an accessible name, and the group should have a clear group label. If the visible label is hidden, provide screenreader label text. Ensure keyboard navigation works as expected within the group.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1122&embed-host=share"
+		description="Provide a group label, support arrow-key navigation, and include screenreader text when labels are visually hidden."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1123&embed-host=share"
+		description="Ship radios without a group label or rely on visual context only."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
 
 </DBSection>
 
@@ -143,7 +184,30 @@ Prefer vertical stacking for readability and accessibility. Use horizontal layou
 
 Have a question about the radio component? We'll answer it and add frequently asked questions to this page.
 
-<QuestionForm componentName="radio" />
+<DBAccordion>
+	<DBAccordionItem headlinePlain="When should I use Radio vs Checkbox?">
+		Use Radio when exactly one option can be selected in a set. Use Checkbox when users can select
+		multiple independent options.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="When should I use Radio vs Select?">
+		Use Radio when there are few options and comparison matters. Use Select when there are many
+		options or when space is limited.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="Should radio groups always have a default selection?">
+		Only when there is a safe, expected default. Avoid defaulting to choices that imply consent or
+		have significant consequences.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="How should I validate radio groups?">
+		Validate at the group level. If selection is required, show one clear error message near the
+		group label explaining what the user must choose.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="Can I lay out radio buttons horizontally?">
+		Yes, but only for a small number of short labels. Prefer vertical layout for readability,
+		scanning, and responsive behavior.
+	</DBAccordionItem>
+</DBAccordion>
+
+<QuestionForm componentName="Radio" />
 
 </DBSection>
 

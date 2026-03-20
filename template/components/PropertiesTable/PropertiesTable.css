@@ -10,23 +10,12 @@
 }
 
 .properties-table-wrapper table {
-	inline-size: 100%;
-	table-layout: fixed;
+	inline-size: auto;
+	min-inline-size: 100%;
 }
 
-.properties-table-wrapper table th:nth-child(1) {
-	/* stylelint-disable-next-line db-ux/use-sizing */
-	max-inline-size: 50px;
-}
-
-.properties-table-wrapper table td,
-.properties-table-wrapper table th {
+.properties-table-wrapper table td {
 	overflow-wrap: break-word;
-	word-break: normal;
+	word-break: break-all;
 	hyphens: auto;
-}
-
-.properties-table-wrapper table tbody tr:last-child th,
-.properties-table-wrapper table tbody tr:last-child td {
-	border-block-end: none;
 }

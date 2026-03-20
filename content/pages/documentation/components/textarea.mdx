@@ -1,15 +1,16 @@
 ---
+order: 8
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Textarea'
 title: 'Textarea'
+description: 'Textarea lets users enter and review longer, multi-line text in forms and dialogs. It should be clearly labeled, sized to the expected content, and provide helpful guidance and validation feedback when needed.'
 align: start
-status: 'stable'
 toc: true
 ---
 
-import { DBSection, DBTextarea } from '@db-ux/react-core-components';
+import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
@@ -20,8 +21,6 @@ import PropertiesTable from '@template/components/PropertiesTable/PropertiesTabl
 import { textareaConfig } from '@template/configs/textarea.config.js';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 
-Textarea lets users enter and review longer, multi-line text in forms and dialogs. It should be clearly labeled, sized to the expected content, and provide helpful guidance and validation feedback when needed.
-
 - Capture longer free-text input (e.g., feedback, comments, descriptions)
 - Support structured longer entries with hints (e.g., formatting expectations, character limits)
 - Allow users to review and edit multi-line content comfortably before submitting
@@ -30,9 +29,9 @@ Textarea lets users enter and review longer, multi-line text in forms and dialog
 
 ## Playground
 
-Experiment with the textarea component and its properties.
+Experiment with the Textarea component and its properties.
 
-<ComponentPlayground config={textareaConfig} component={DBTextarea} />
+<ComponentPlayground config={textareaConfig} />
 
 </DBSection>
 
@@ -40,13 +39,41 @@ Experiment with the textarea component and its properties.
 
 ## Resources
 
-<ResourceCards path="?path=/docs/components-dbtextarea-density--docs" />
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'TBD',
+			url: '#',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'TBD',
+			url: '#',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
 
 </DBSection>
 
-{/* <DBSection spacing="small" width="auto">
+<DBSection spacing="small" width="auto">
 
 ## Properties, Slots & Events
+
 Configure the textarea through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
@@ -60,26 +87,28 @@ Configure the textarea through its properties, slots and events.
 	expandedText="Hide some Properties, Slots & Events"
 />
 
-</DBSection> */}
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 
-## Usage Hints
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
 
 ### Textarea vs Input
 
-Use textarea when users are expected to enter multiple lines or a longer message. For short, single-line values, use input.
+Use Textarea when users are expected to enter multiple lines or a longer message. For short, single-line values, use Input.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=1-1132&embed-host=share"
-		description="Use the textarea for comments, messages, descriptions, and feedback."
+		description="Use Textarea for comments, messages, descriptions, and feedback."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=1-1133&embed-host=share"
-		description="Don't use the textarea for short values like name, email, or city (use input instead)."
+		description="Use Textarea for short values like name, email, or city (use Input instead)."
 	/>
 </div>
 
@@ -96,7 +125,7 @@ Provide a clear label that describes what to write. Do not replace the label wit
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=3-1112&embed-host=share"
-		description="Don't use multi-line labels or punctuate them."
+		description="Use multi-line labels or punctuate them."
 	/>
 </div>
 
@@ -113,7 +142,7 @@ Choose a height that matches the expected amount of text input. Avoid very small
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=3-1114&embed-host=share"
-		description="Avoid a small Textarea if a lot of input is expected and there is sufficient space."
+		description="Use a small Textarea if a lot of input is expected and there is sufficient space."
 	/>
 </div>
 
@@ -130,9 +159,13 @@ Helper text prevents errors (format, tone, limits). Validation messages explain 
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=3-1117&embed-host=share"
-		description="Don't use long paragraphs, vague errors ('Invalid'), or put essential requirements only in placeholder text."
+		description="Use long paragraphs, vague errors ('Invalid'), or put essential requirements only in placeholder text."
 	/>
 </div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
 
 </DBSection>
 
@@ -140,7 +173,7 @@ Helper text prevents errors (format, tone, limits). Validation messages explain 
 
 ## FAQ
 
-Have a question about the textarea component? We'll answer it and add frequently asked questions to this page.
+Have a question about the Textarea component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Textarea" />
 
