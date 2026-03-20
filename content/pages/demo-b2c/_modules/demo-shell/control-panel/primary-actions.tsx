@@ -6,7 +6,7 @@ const DemoPrimaryActions = () => (
 	<DBControlPanelPrimaryActions>
 		<ColorModeSwitch />
 		<ThemeSwitch />
-		<DBButton variant="ghost" iconLeading="magnifying_glass" noText type="submit">
+		<DBButton variant="ghost" icon="magnifying_glass" noText type="submit">
 			Search
 			<DBTooltip>Search</DBTooltip>
 		</DBButton>
