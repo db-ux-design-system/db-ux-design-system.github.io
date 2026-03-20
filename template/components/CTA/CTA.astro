@@ -2,10 +2,12 @@
 import './CTA.css';
 import { DBCard } from '@db-ux/react-core-components';
 
+type ButtonVariant = 'brand' | 'outlined' | 'filled' | 'ghost';
+
 interface Action {
 	label: string;
 	href: string;
-	variant?: 'brand' | 'outlined' | 'filled' | 'danger';
+	variant?: ButtonVariant;
 }
 
 interface Props {
@@ -17,6 +19,14 @@ interface Props {
 }
 
 const { title, text, primaryAction, secondaryAction, align = 'center' } = Astro.props as Props;
+
+const BUTTON_VARIANTS: ButtonVariant[] = ['outlined', 'brand', 'filled', 'ghost'];
+
+const normalizeVariant = (
+	variant: ButtonVariant | undefined,
+	fallback: ButtonVariant,
+): ButtonVariant =>
+	BUTTON_VARIANTS.includes(variant as ButtonVariant) ? (variant as ButtonVariant) : fallback;
 ---
 
 {
@@ -28,16 +38,16 @@ const { title, text, primaryAction, secondaryAction, align = 'center' } = Astro.
 				<div class="cta-actions">
 					<a
 						href={primaryAction.href}
-						class="db-button cta-action"
-						data-variant={primaryAction.variant || 'brand'}
+						class="db-button"
+						data-variant={normalizeVariant(primaryAction.variant, 'brand')}
 					>
 						{primaryAction.label}
 					</a>
 					{secondaryAction && (
 						<a
 							href={secondaryAction.href}
-							class="db-button cta-action"
-							data-variant={secondaryAction.variant || 'outlined'}
+							class="db-button"
+							data-variant={normalizeVariant(secondaryAction.variant, 'outlined')}
 						>
 							{secondaryAction.label}
 						</a>

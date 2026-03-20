@@ -16,7 +16,7 @@
 	block-size: 100%;
 }
 
-.resource-cards .db-link .db-card {
+.resource-cards .db-card:has(.db-link) {
 	block-size: 100%;
 	inline-size: 100%;
 	box-sizing: border-box;
