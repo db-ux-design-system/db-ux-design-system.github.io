@@ -70,6 +70,12 @@ const setupPage = async (page: Page, path: string) => {
 	await page.goto(`/${path}`);
 	await page.waitForLoadState('domcontentloaded');
 	await waitForDBShell(page);
+	
+	// Wait for icons to render before measuring viewport
+	if (path === 'documentation/icons') {
+		await page.waitForTimeout(10000);
+	}
+	
 	await setScrollViewport(page);
 };
 
@@ -77,11 +83,6 @@ test.describe('Navigation Screenshots', () => {
 	for (const path of allPaths) {
 		test(`${path}`, async ({ page }) => {
 			await setupPage(page, path);
-
-			if (path === 'documentation/icons') {
-				// We wait till icons are loaded
-				await page.waitForTimeout(10000);
-			}
 
 			const mask = await getMasks(page, path);
 
@@ -97,11 +98,6 @@ test.describe('Axe Core', () => {
 	for (const path of allPaths) {
 		test(`${path}`, async ({ page }) => {
 			await setupPage(page, path);
-
-			if (path === 'documentation/icons') {
-				// We wait till input get id correctly
-				await page.waitForTimeout(2000);
-			}
 
 			const disabledRules: string[] = [];
 
