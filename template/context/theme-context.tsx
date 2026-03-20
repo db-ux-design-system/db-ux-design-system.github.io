@@ -48,10 +48,6 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 		document.documentElement.setAttribute('data-theme', themeName);
 	}, [themeName]);
 
-	useEffect(() => {
-		document.documentElement.setAttribute('data-theme', themeName);
-	}, []);
-
 	const value: ThemeContextValue = {
 		themeName,
 		setTheme: setThemeName,
