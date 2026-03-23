@@ -6,8 +6,33 @@
 
 .db-card.actionbar {
 	inline-size: fit-content;
+	max-inline-size: 100%;
 	margin: auto;
 	padding: var(--db-spacing-fixed-2xs);
 	position: sticky;
 	inset-block-start: var(--db-spacing-fixed-md);
+}
+
+.db-card.actionbar .db-stack {
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.actionbar-group {
+	display: flex;
+	gap: var(--db-spacing-fixed-2xs);
+}
+
+.label-short {
+	display: none;
+}
+
+@media (width <= 640px) {
+	.label-full {
+		display: none;
+	}
+
+	.label-short {
+		display: inline;
+	}
 }

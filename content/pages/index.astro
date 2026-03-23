@@ -28,13 +28,15 @@ import DefaultLayout from '@template/layouts/default';
 	function initDemo(): boolean {
 		const iframe = document.querySelector<HTMLIFrameElement>('[id="demo-iframe"]');
 		const toggle = document.getElementById('toggle-demo');
+		const toggleMode = document.getElementById('toggle-mode');
 		const fullscreenAnchor: HTMLAnchorElement | null = document.querySelector<HTMLAnchorElement>(
 			'[id="fullscreen-anchor"]',
 		);
 
-		if (!iframe || !toggle || !fullscreenAnchor) return false;
+		if (!iframe || !toggle || !toggleMode || !fullscreenAnchor) return false;
 
 		let currentDemo = 'b2b';
+		let currentMode = 'light';
 
 		fullscreenAnchor.href = iframe.src;
 
@@ -44,6 +46,19 @@ import DefaultLayout from '@template/layouts/default';
 			iframe.src = href;
 			fullscreenAnchor.href = href;
 			toggle.textContent = currentDemo === 'b2b' ? 'Show B2C Example' : 'Show B2B Example';
+		});
+
+		toggleMode.addEventListener('click', () => {
+			currentMode = currentMode === 'light' ? 'dark' : 'light';
+			iframe.src = `/demo-${currentDemo}?mode=${currentMode}`;
+			toggleMode.setAttribute('data-icon', currentMode === 'light' ? 'moon' : 'sun');
+			toggleMode.setAttribute(
+				'title',
+				currentMode === 'light' ? 'Toggle dark mode' : 'Toggle light mode',
+			);
+			const tooltip = toggleMode.querySelector('.db-tooltip');
+			if (tooltip)
+				tooltip.textContent = currentMode === 'light' ? 'Toggle dark mode' : 'Toggle light mode';
 		});
 
 		document.addEventListener('click', (e) => {
