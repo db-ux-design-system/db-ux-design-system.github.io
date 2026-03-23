@@ -86,7 +86,7 @@ export const drawerConfig = {
 				{ value: 'medium', label: 'Medium', default: true },
 				{ value: 'large', label: 'Large' },
 			],
-			showInPlayground: false,
+			showInPlayground: true,
 		},
 		{
 			name: 'width',
@@ -108,7 +108,7 @@ export const drawerConfig = {
 			defaultValue: false,
 			description:
 				'The rounded attribute changes the border radius of the corners on the end of the drawer',
-			showInPlayground: false,
+			showInPlayground: true,
 		},
 		{
 			name: 'variant',
