@@ -62,25 +62,40 @@ export const handleSimplePlaygrounds = ({
 	const handleChange = async () => {
 		box.setAttribute(`data-${dataAttributeName}`, select.value);
 
-		await new Promise((resolve) => setTimeout(resolve, 500));
-
 		popover!.textContent = '';
 
 		if (isColor) {
+			// Wait for transition to settle for color values
+			await new Promise((resolve) => setTimeout(resolve, 500));
 			const computedStyles = getComputedStyle(box.querySelector('.db-card')!);
-			popover!.appendChild(createParagraph(`Background Color: --db-${select.value}-bg-basic-level-1-default (${computedStyles.backgroundColor})`));
-			popover!.appendChild(createParagraph(`Color: --db-${select.value}-on-bg-basic-emphasis-100-default (${computedStyles.color})`));
-			popover!.appendChild(createParagraph(`Border Color: --db-${select.value}-on-bg-basic-emphasis-60-default (${computedStyles.borderColor})`));
+			popover!.appendChild(
+				createParagraph(
+					`Background Color: --db-${select.value}-bg-basic-level-1-default (${computedStyles.backgroundColor})`,
+				),
+			);
+			popover!.appendChild(
+				createParagraph(
+					`Color: --db-${select.value}-on-bg-basic-emphasis-100-default (${computedStyles.color})`,
+				),
+			);
+			popover!.appendChild(
+				createParagraph(
+					`Border Color: --db-${select.value}-on-bg-basic-emphasis-60-default (${computedStyles.borderColor})`,
+				),
+			);
 		} else {
 			const token = `--db-${dataAttributeName}-${select.value}`;
-			const computed = (getComputedStyle(box!) as any)[computedStyle];
+			// Read token value directly from CSS custom property to avoid transition mid-values
+			const tokenValue = styles.getPropertyValue(token).trim();
 			if (remPx) {
-				const rem = parseFloat(computed) / 16;
-				const radiusRem = rem === 1 ? rem : rem.toFixed(2);
-				const radiusPx = Math.round(parseFloat(computed));
-				popover!.appendChild(createParagraph(`${popoverLabel}: ${token} (${radiusRem}rem / ${radiusPx}px)`));
+				const remVal = parseFloat(tokenValue);
+				const remDisplay = remVal === 1 ? remVal : remVal.toFixed(2);
+				const pxVal = Math.round(remVal * 16);
+				popover!.appendChild(
+					createParagraph(`${popoverLabel}: ${token} (${remDisplay}rem / ${pxVal}px)`),
+				);
 			} else {
-				popover!.appendChild(createParagraph(`${popoverLabel}: ${token} (${computed})`));
+				popover!.appendChild(createParagraph(`${popoverLabel}: ${token} (${tokenValue})`));
 			}
 		}
 	};

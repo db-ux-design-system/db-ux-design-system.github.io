@@ -2,17 +2,65 @@
 	inline-size: auto;
 	block-size: auto;
 	display: flex;
+	position: relative;
+
+	.spacing-card p {
+		margin: 0;
+	}
 
 	.spacing-card {
-		inline-size: var(--db-sizing-2xl);
+		position: relative;
+	}
 
-		> header {
-			font: var(--db-type-headline-2xs);
-		}
+	/* stylelint-disable db-ux/use-border-width, db-ux/use-border-color */
+	.spacing-card::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: inherit;
+		border: var(--playground-spacing) solid var(--db-pink-bg-basic-transparent-semi-default);
+		opacity: 0;
+		transition: opacity 0.2s ease;
+		pointer-events: none;
+	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		inset-block: 0;
+		inset-inline-start: 50%;
+		transform: translateX(-50%);
+		inline-size: var(--playground-spacing);
+		background-color: var(--db-pink-bg-basic-transparent-semi-default);
+		opacity: 0;
+		transition: opacity 0.2s ease;
+		pointer-events: none;
+	}
+	/* stylelint-enable db-ux/use-border-width, db-ux/use-border-color */
+
+	&:hover .spacing-card::after,
+	&:focus .spacing-card::after,
+	&:focus-within .spacing-card::after {
+		opacity: 1;
+	}
+
+	&:hover::before,
+	&:focus::before,
+	&:focus-within::before {
+		opacity: 1;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.spacing-stack .spacing-card::after,
+	.spacing-stack::before {
+		transition: none;
 	}
 }
 
 .spacing-stack[data-spacing='3xs'] {
+	--playground-spacing: var(--db-spacing-fixed-3xs);
+
 	gap: var(--db-spacing-fixed-3xs);
 
 	.spacing-card {
@@ -21,6 +69,8 @@
 }
 
 .spacing-stack[data-spacing='2xs'] {
+	--playground-spacing: var(--db-spacing-fixed-2xs);
+
 	gap: var(--db-spacing-fixed-2xs);
 
 	.spacing-card {
@@ -29,6 +79,8 @@
 }
 
 .spacing-stack[data-spacing='xs'] {
+	--playground-spacing: var(--db-spacing-fixed-xs);
+
 	gap: var(--db-spacing-fixed-xs);
 
 	.spacing-card {
@@ -37,6 +89,8 @@
 }
 
 .spacing-stack[data-spacing='sm'] {
+	--playground-spacing: var(--db-spacing-fixed-sm);
+
 	gap: var(--db-spacing-fixed-sm);
 
 	.spacing-card {
@@ -45,6 +99,8 @@
 }
 
 .spacing-stack[data-spacing='md'] {
+	--playground-spacing: var(--db-spacing-fixed-md);
+
 	gap: var(--db-spacing-fixed-md);
 
 	.spacing-card {
@@ -53,6 +109,8 @@
 }
 
 .spacing-stack[data-spacing='lg'] {
+	--playground-spacing: var(--db-spacing-fixed-lg);
+
 	gap: var(--db-spacing-fixed-lg);
 
 	.spacing-card {
@@ -61,6 +119,8 @@
 }
 
 .spacing-stack[data-spacing='xl'] {
+	--playground-spacing: var(--db-spacing-fixed-xl);
+
 	gap: var(--db-spacing-fixed-xl);
 
 	.spacing-card {
@@ -69,6 +129,8 @@
 }
 
 .spacing-stack[data-spacing='2xl'] {
+	--playground-spacing: var(--db-spacing-fixed-2xl);
+
 	gap: var(--db-spacing-fixed-2xl);
 
 	.spacing-card {
@@ -77,6 +139,8 @@
 }
 
 .spacing-stack[data-spacing='3xl'] {
+	--playground-spacing: var(--db-spacing-fixed-3xl);
+
 	gap: var(--db-spacing-fixed-3xl);
 
 	.spacing-card {
