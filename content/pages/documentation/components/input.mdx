@@ -1,5 +1,4 @@
 ---
-order: 4
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -20,7 +19,6 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { inputConfig } from '@template/configs/input.config.js';
 
 - Collect short text values (e.g., name, city, email, IBAN depending on product rules)
@@ -45,21 +43,6 @@ Experiment with the Input component and its properties.
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the input through its properties, slots and events.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={inputConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
