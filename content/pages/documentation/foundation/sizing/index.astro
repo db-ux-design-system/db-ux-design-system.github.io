@@ -3,6 +3,7 @@ import DocumentationLayout from '@template/layouts/documentation/DocumentationLa
 import { DBSection, DBStack } from '@db-ux/react-core-components';
 import SizingPlayground from './_SizingPlayground.astro';
 import SizingTable from './_SizingTable.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 const frontmatter: DocumentationFrontMatter = {
 	headline: 'Sizing',
@@ -16,6 +17,7 @@ const frontmatter: DocumentationFrontMatter = {
 const headings = [
 	{ depth: 2, slug: 'playground', text: 'Playground' },
 	{ depth: 2, slug: 'tokens', text: 'Tokens' },
+	{ depth: 2, slug: 'faq', text: 'FAQ' },
 ];
 ---
 
@@ -38,6 +40,14 @@ const headings = [
 	<DBSection spacing="small">
 		<h2 id="tokens">Tokens</h2>
 		<SizingTable />
+	</DBSection>
+
+	<DBSection spacing="small">
+		<h2 id="faq">FAQ</h2>
+		<p>
+			Have a question about Sizing? We'll answer it and add frequently asked questions to this page.
+		</p>
+		<QuestionForm componentName="Sizing" />
 	</DBSection>
 
 	<script>
