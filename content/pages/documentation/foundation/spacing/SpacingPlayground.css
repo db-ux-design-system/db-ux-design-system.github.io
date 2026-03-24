@@ -20,8 +20,11 @@
 		border-radius: inherit;
 		border: var(--playground-spacing) solid var(--db-pink-bg-basic-transparent-semi-default);
 		opacity: 0;
-		transition: opacity 0.2s ease;
 		pointer-events: none;
+
+		@media screen and not (prefers-reduced-motion: reduce) {
+			transition: opacity 0.2s ease;
+		}
 	}
 
 	&::before {
@@ -33,8 +36,11 @@
 		inline-size: var(--playground-spacing);
 		background-color: var(--db-pink-bg-basic-transparent-semi-default);
 		opacity: 0;
-		transition: opacity 0.2s ease;
 		pointer-events: none;
+
+		@media screen and not (prefers-reduced-motion: reduce) {
+			transition: opacity 0.2s ease;
+		}
 	}
 	/* stylelint-enable db-ux/use-border-width, db-ux/use-border-color */
 

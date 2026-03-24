@@ -4,11 +4,12 @@
 	border-color: transparent;
 
 	.db-card {
-		outline-style: solid;
-		outline-color: var(--db-adaptive-on-bg-basic-emphasis-60-default);
-		outline-width: var(--playground-border-width);
+		outline: var(--db-adaptive-on-bg-basic-emphasis-60-default) solid var(--playground-border-width);
 		border-radius: var(--db-border-radius-md);
-		transition: outline-width 0.2s ease;
+
+		@media screen and not (prefers-reduced-motion: reduce) {
+			transition: outline-width 0.2s ease;
+		}
 	}
 }
 
