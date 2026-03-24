@@ -1,6 +1,6 @@
 export const tooltipConfig = {
 	elementId: 'demo-tooltip',
-	defaultText: 'Tooltip söfk ösfkj ösflkj sölfkj söflsdk fölsdkjf sldkjf',
+	defaultText: 'Tooltip',
 	defaultProps: {
 		id: 'demo-tooltip',
 		placement: 'top',

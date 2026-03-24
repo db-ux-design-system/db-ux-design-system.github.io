@@ -132,9 +132,46 @@
 	inline-size: fit-content;
 }
 
-/* Tooltip width behavior in playground:
-   auto = single line, clipped at preview-area edge
-   fixed = wraps at max-width, constrained to preview-area */
-.component-playground .preview-area .db-tooltip:not([data-width='fixed']) {
+/* Tooltip playground: let the tooltip overflow the preview-area visually
+   but clip at the playground border. Constrain tooltip width so it wraps
+   before reaching the playground edge. */
+.component-playground:has(#demo-tooltip) {
+	overflow: clip;
+}
+
+.component-playground:has(#demo-tooltip) .preview-area {
+	overflow: visible;
+}
+
+/* top/bottom: tooltip can use nearly the full width, single line with ellipsis for auto */
+.component-playground .preview-area .db-tooltip[data-placement='top'],
+.component-playground .preview-area .db-tooltip[data-placement='top-start'],
+.component-playground .preview-area .db-tooltip[data-placement='top-end'],
+.component-playground .preview-area .db-tooltip[data-placement='bottom'],
+.component-playground .preview-area .db-tooltip[data-placement='bottom-start'],
+.component-playground .preview-area .db-tooltip[data-placement='bottom-end'] {
+	/* stylelint-disable-next-line declaration-no-important */
+	max-inline-size: calc(100cqi - var(--db-spacing-fixed-lg) * 2) !important;
 	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+/* left/right: fixed max-width with wrapping */
+.component-playground .preview-area .db-tooltip[data-placement='left'],
+.component-playground .preview-area .db-tooltip[data-placement='left-start'],
+.component-playground .preview-area .db-tooltip[data-placement='left-end'],
+.component-playground .preview-area .db-tooltip[data-placement='right'],
+.component-playground .preview-area .db-tooltip[data-placement='right-start'],
+.component-playground .preview-area .db-tooltip[data-placement='right-end'] {
+	/* stylelint-disable-next-line declaration-no-important, db-ux/use-container-query */
+	max-inline-size: 220px !important;
+	/* stylelint-disable-next-line declaration-no-important */
+	inline-size: max-content !important;
+}
+
+/* fixed width always wraps regardless of placement */
+.component-playground .preview-area .db-tooltip[data-width='fixed'] {
+	white-space: normal;
+	overflow: visible;
+	text-overflow: unset;
 }
