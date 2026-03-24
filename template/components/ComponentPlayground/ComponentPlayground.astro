@@ -406,36 +406,38 @@ const nativeAttributes = [
 					</dialog>
 				</>
 			) : config.elementId === 'playground-tag' ? (
-				<div
-					class="db-tag"
-					id={config.elementId}
-					data-behavior={config.defaultProps.behavior}
-					data-semantic={config.defaultProps.semantic}
-					data-emphasis={config.defaultProps.emphasis}
-				>
-					<span id="playground-tag-text">{config.defaultText}</span>
-					{config.defaultProps.behavior === 'removable' && (
-						<button
-							class="db-button db-tab-remove-button"
-							data-icon="cross"
-							data-size="small"
-							data-no-text="true"
-							data-variant="ghost"
-							type="button"
-						>
-							<i
-								role="tooltip"
-								aria-hidden="true"
-								data-gap="true"
-								class="db-tooltip"
-								id="playground-tag-tooltip"
-								data-animation="true"
-								data-show-arrow="true"
+				<div style="display: flex; gap: var(--db-spacing-fixed-xs); flex-wrap: wrap; align-items: center;">
+					<div
+						class="db-tag"
+						id={config.elementId}
+						data-behavior={config.defaultProps.behavior}
+						data-semantic={config.defaultProps.semantic}
+						data-emphasis={config.defaultProps.emphasis}
+					>
+						<span id="playground-tag-text">{config.defaultText}</span>
+						{config.defaultProps.behavior === 'removable' && (
+							<button
+								class="db-button db-tab-remove-button"
+								data-icon="cross"
+								data-size="small"
+								data-no-text="true"
+								data-variant="ghost"
+								type="button"
 							>
-								Remove
-							</i>
-						</button>
-					)}
+								<i
+									role="tooltip"
+									aria-hidden="true"
+									data-gap="true"
+									class="db-tooltip"
+									id="playground-tag-tooltip"
+									data-animation="true"
+									data-show-arrow="true"
+								>
+									Remove
+								</i>
+							</button>
+						)}
+					</div>
 				</div>
 			) : config.elementId === 'demo-infotext' ? (
 				<span
@@ -588,7 +590,7 @@ const nativeAttributes = [
 								} else if (config.elementId === 'playground-select' && prop.name === 'variant') {
 									updateAction = `const wrapper = document.getElementById('${config.elementId}'); wrapper.setAttribute('data-variant', this.value); const placeholder = document.getElementById('playground-select-placeholder'); if(this.value === 'floating') { placeholder.textContent = ''; wrapper.setAttribute('data-hide-label', 'false'); var area2 = this.closest('.controls-area-content'); if(area2) { var slCb = area2.querySelector('input[type=checkbox][onchange*="data-hide-label"]'); if(slCb) slCb.checked = true; } } else { const placeholderInput = document.querySelector('.controls-area input[oninput*="playground-select-placeholder"]'); if(placeholderInput) placeholder.textContent = placeholderInput.value; wrapper.removeAttribute('data-label-hidden'); } var area = this.closest('.controls-area-content'); if(area) area.querySelectorAll('[data-depends-on^="variant:"]').forEach(function(el){ var v = el.getAttribute('data-depends-on').split(':')[1]; if(v.charAt(0)==='!') { el.style.display = (this.value !== v.slice(1)) ? '' : 'none'; } else { el.style.display = (v === this.value) ? '' : 'none'; } }.bind(this));`;
 								} else if (config.elementId === 'playground-tag' && prop.name === 'behavior') {
-									updateAction = `const tag = document.getElementById('playground-tag'); const existingBtn = tag.querySelector('.db-tab-remove-button'); if(this.value === 'removable' && !existingBtn) { const btn = document.createElement('button'); btn.className = 'db-button db-tab-remove-button'; btn.setAttribute('data-icon', 'cross'); btn.setAttribute('data-size', 'small'); btn.setAttribute('data-no-text', 'true'); btn.setAttribute('data-variant', 'ghost'); btn.type = 'button'; const tooltip = document.createElement('i'); tooltip.role = 'tooltip'; tooltip.setAttribute('aria-hidden', 'true'); tooltip.setAttribute('data-gap', 'true'); tooltip.className = 'db-tooltip'; tooltip.id = 'playground-tag-tooltip'; tooltip.setAttribute('data-animation', 'true'); tooltip.setAttribute('data-show-arrow', 'true'); tooltip.textContent = 'Remove'; btn.appendChild(tooltip); tag.appendChild(btn); tag.setAttribute('data-behavior', 'removable'); } else if(this.value === 'static' && existingBtn) { existingBtn.remove(); tag.setAttribute('data-behavior', 'static'); }`;
+									updateAction = `var container = document.getElementById('playground-tag').parentElement; var tag = document.getElementById('playground-tag'); var tag2 = document.getElementById('playground-tag-2'); var textCtrl = document.getElementById('playground-tag-text-control'); var textCtrl2 = document.getElementById('playground-tag-text-2-control'); var tagText2 = textCtrl2 ? textCtrl2.value : 'Tag 2'; tag.setAttribute('data-behavior', this.value); if(tag2) { tag2.remove(); } var removeBtn = tag.querySelector('.db-tab-remove-button'); if(removeBtn) removeBtn.remove(); var oldBtn = tag.querySelector('button:not(.db-tab-remove-button)'); if(oldBtn) oldBtn.remove(); var oldA = tag.querySelector('a'); if(oldA) oldA.remove(); var oldLabel = tag.querySelector('label'); if(oldLabel) oldLabel.remove(); var textSpan = tag.querySelector('#playground-tag-text'); if(!textSpan) { textSpan = document.createElement('span'); textSpan.id = 'playground-tag-text'; } if(this.value === 'interactive') { var childrenSelect = document.querySelector('#playground-tag-children-select'); var childType = childrenSelect ? childrenSelect.value : 'button-link'; var needsTwo = (childType === 'checkbox' || childType === 'radio'); if(needsTwo && textCtrl && (textCtrl.value === 'Tag')) { textCtrl.value = 'Tag 1'; } var tagText = textCtrl ? textCtrl.value : (needsTwo ? 'Tag 1' : 'Tag'); textSpan.remove(); if(childType === 'checkbox') { var lbl = document.createElement('label'); var inp = document.createElement('input'); inp.type = 'checkbox'; inp.name = 'playground-tag-check'; lbl.appendChild(inp); lbl.appendChild(document.createTextNode(tagText)); tag.appendChild(lbl); var t2 = tag.cloneNode(false); t2.id = 'playground-tag-2'; t2.removeAttribute('data-disabled'); var lbl2 = document.createElement('label'); var inp2 = document.createElement('input'); inp2.type = 'checkbox'; inp2.name = 'playground-tag-check'; lbl2.appendChild(inp2); lbl2.appendChild(document.createTextNode(tagText2)); t2.appendChild(lbl2); container.appendChild(t2); } else if(childType === 'radio') { var lbl = document.createElement('label'); var inp = document.createElement('input'); inp.type = 'radio'; inp.name = 'playground-tag-radio'; lbl.appendChild(inp); lbl.appendChild(document.createTextNode(tagText)); tag.appendChild(lbl); var t2 = tag.cloneNode(false); t2.id = 'playground-tag-2'; t2.removeAttribute('data-disabled'); var lbl2 = document.createElement('label'); var inp2 = document.createElement('input'); inp2.type = 'radio'; inp2.name = 'playground-tag-radio'; lbl2.appendChild(inp2); lbl2.appendChild(document.createTextNode(tagText2)); t2.appendChild(lbl2); container.appendChild(t2); } else { if(textCtrl && textCtrl.value === 'Tag 1') textCtrl.value = 'Tag'; var btnText = textCtrl ? textCtrl.value : 'Tag'; var btn = document.createElement('button'); btn.textContent = btnText; tag.appendChild(btn); } } else { if(textCtrl && textCtrl.value === 'Tag 1') textCtrl.value = 'Tag'; var tagText = textCtrl ? textCtrl.value : 'Tag'; textSpan.textContent = tagText; if(!textSpan.parentElement) tag.appendChild(textSpan); if(this.value === 'removable') { var btn = document.createElement('button'); btn.className = 'db-button db-tab-remove-button'; btn.setAttribute('data-icon', 'cross'); btn.setAttribute('data-size', 'small'); btn.setAttribute('data-no-text', 'true'); btn.setAttribute('data-variant', 'ghost'); btn.type = 'button'; var tooltip = document.createElement('i'); tooltip.role = 'tooltip'; tooltip.setAttribute('aria-hidden', 'true'); tooltip.setAttribute('data-gap', 'true'); tooltip.className = 'db-tooltip'; tooltip.id = 'playground-tag-tooltip'; tooltip.setAttribute('data-animation', 'true'); tooltip.setAttribute('data-show-arrow', 'true'); tooltip.textContent = 'Remove'; btn.appendChild(tooltip); tag.appendChild(btn); } } var area = this.closest('.controls-area-content'); if(area) area.querySelectorAll('[data-depends-on^="behavior:"]').forEach(function(el){ var v = el.getAttribute('data-depends-on').split(':')[1]; el.style.display = (v === this.value) ? '' : 'none'; }.bind(this)); if(area) { var t2Input = document.getElementById('playground-tag-text-2-control'); if(t2Input) { var wrapper = t2Input.closest('[data-depends-on]') || t2Input.closest('.db-input'); if(wrapper) { var childrenSelect = document.querySelector('#playground-tag-children-select'); var childType = childrenSelect ? childrenSelect.value : 'button-link'; var showT2 = this.value === 'interactive' && (childType === 'checkbox' || childType === 'radio'); wrapper.style.display = showT2 ? '' : 'none'; } } var t1Label = document.querySelector('label[for=playground-tag-text-control]'); if(t1Label) { var cs = document.querySelector('#playground-tag-children-select'); var ct = cs ? cs.value : 'button-link'; var hasTwoTags = this.value === 'interactive' && (ct === 'checkbox' || ct === 'radio'); t1Label.textContent = hasTwoTags ? 'Text (Tag 1)' : 'Text'; } var scsEl = this.closest('.controls-area-content').querySelector('input[type=checkbox][onchange*="data-show-check-state"]'); if(scsEl) { var scsWrapper = scsEl.closest('[data-depends-on]') || scsEl.closest('label.db-switch'); var cs2 = document.querySelector('#playground-tag-children-select'); var ct2 = cs2 ? cs2.value : 'button-link'; var showScs = this.value === 'interactive' && (ct2 === 'checkbox' || ct2 === 'radio'); if(scsWrapper) scsWrapper.style.display = showScs ? '' : 'none'; } }`;
 								} else if (config.elementId === 'demo-notification' && prop.name === 'semantic') {
 									updateAction = `var n = document.getElementById('demo-notification'); n.setAttribute('data-semantic', this.value); var showIconCb = document.querySelector('#demo-notification-show-icon-select'); if(!showIconCb) showIconCb = document.querySelector('.controls-area input[type=checkbox][onchange*="notification-icon-style"]'); var iconVisible = showIconCb ? showIconCb.checked : true; if(iconVisible) { var styleEl = document.getElementById('notification-icon-style'); styleEl.textContent = ''; if(this.value === 'adaptive') { n.setAttribute('data-icon', 'information_circle'); } else { n.removeAttribute('data-icon'); } } else { n.removeAttribute('data-icon'); }`;
 								} else if (config.elementId === 'demo-notification' && prop.name === 'variant') {
@@ -603,6 +605,12 @@ const nativeAttributes = [
 									updateAction = `document.getElementById('playground-switch-label-wrapper').setAttribute('data-size', this.value);`;
 								} else if (config.elementId === 'demo-navigation-item' && prop.name === 'width') {
 									updateAction = `document.getElementById('demo-navigation-item').setAttribute('data-width', this.value);`;
+								} else if (config.elementId === 'playground-tag' && prop.name === 'children') {
+									updateAction = `var container = document.getElementById('playground-tag').parentElement; var tag = document.getElementById('playground-tag'); var tag2 = document.getElementById('playground-tag-2'); var textCtrl = document.getElementById('playground-tag-text-control'); var textCtrl2 = document.getElementById('playground-tag-text-2-control'); var tagText2 = textCtrl2 ? textCtrl2.value : 'Tag 2'; if(tag2) tag2.remove(); var oldBtn = tag.querySelector('button:not(.db-tab-remove-button)'); if(oldBtn) oldBtn.remove(); var oldA = tag.querySelector('a'); if(oldA) oldA.remove(); var oldLabel = tag.querySelector('label'); if(oldLabel) oldLabel.remove(); var textSpan = tag.querySelector('#playground-tag-text'); if(textSpan) textSpan.remove(); var needsTwo = (this.value === 'checkbox' || this.value === 'radio'); if(needsTwo && textCtrl && textCtrl.value === 'Tag') textCtrl.value = 'Tag 1'; if(!needsTwo && textCtrl && textCtrl.value === 'Tag 1') textCtrl.value = 'Tag'; var tagText = textCtrl ? textCtrl.value : (needsTwo ? 'Tag 1' : 'Tag'); if(this.value === 'checkbox') { var lbl = document.createElement('label'); var inp = document.createElement('input'); inp.type = 'checkbox'; inp.name = 'playground-tag-check'; lbl.appendChild(inp); lbl.appendChild(document.createTextNode(tagText)); tag.appendChild(lbl); var t2 = tag.cloneNode(false); t2.id = 'playground-tag-2'; t2.removeAttribute('data-disabled'); var lbl2 = document.createElement('label'); var inp2 = document.createElement('input'); inp2.type = 'checkbox'; inp2.name = 'playground-tag-check'; lbl2.appendChild(inp2); lbl2.appendChild(document.createTextNode(tagText2)); t2.appendChild(lbl2); container.appendChild(t2); } else if(this.value === 'radio') { var lbl = document.createElement('label'); var inp = document.createElement('input'); inp.type = 'radio'; inp.name = 'playground-tag-radio'; lbl.appendChild(inp); lbl.appendChild(document.createTextNode(tagText)); tag.appendChild(lbl); var t2 = tag.cloneNode(false); t2.id = 'playground-tag-2'; t2.removeAttribute('data-disabled'); var lbl2 = document.createElement('label'); var inp2 = document.createElement('input'); inp2.type = 'radio'; inp2.name = 'playground-tag-radio'; lbl2.appendChild(inp2); lbl2.appendChild(document.createTextNode(tagText2)); t2.appendChild(lbl2); container.appendChild(t2); } else { var btn = document.createElement('button'); btn.textContent = tagText; tag.appendChild(btn); } var t2Input = document.getElementById('playground-tag-text-2-control'); if(t2Input) { var wrapper = t2Input.closest('[data-depends-on]') || t2Input.closest('.db-input'); if(wrapper) wrapper.style.display = needsTwo ? '' : 'none'; } var t1Label = document.querySelector('label[for=playground-tag-text-control]'); if(t1Label) t1Label.textContent = needsTwo ? 'Text (Tag 1)' : 'Text'; var scsEl = this.closest('.controls-area-content').querySelector('input[type=checkbox][onchange*="data-show-check-state"]'); if(scsEl) { var scsWrapper = scsEl.closest('[data-depends-on]') || scsEl.closest('label.db-switch'); if(scsWrapper) scsWrapper.style.display = needsTwo ? '' : 'none'; }`;
+								} else if (config.elementId === 'playground-tag' && prop.name === 'semantic') {
+									updateAction = `document.getElementById('playground-tag').setAttribute('data-semantic', this.value); var t2 = document.getElementById('playground-tag-2'); if(t2) t2.setAttribute('data-semantic', this.value);`;
+								} else if (config.elementId === 'playground-tag' && prop.name === 'emphasis') {
+									updateAction = `document.getElementById('playground-tag').setAttribute('data-emphasis', this.value); var t2 = document.getElementById('playground-tag-2'); if(t2) t2.setAttribute('data-emphasis', this.value);`;
 								} else {
 									updateAction = `document.getElementById('${targetId}').setAttribute('${attrName}', this.value); var area = this.closest('.controls-area-content'); if(area) area.querySelectorAll('[data-depends-on^="${prop.name}:"]').forEach(function(el){ var v = el.getAttribute('data-depends-on').split(':')[1]; if(v.charAt(0)==='!') { el.style.display = (this.value !== v.slice(1)) ? '' : 'none'; } else { el.style.display = (v === this.value) ? '' : 'none'; } }.bind(this));`;
 								}
@@ -631,6 +639,19 @@ const nativeAttributes = [
 								const controlId = `${config.elementId}-${prop.name}-control`;
 								if (prop.name === 'text') {
 									const targetId = config.textElementId || config.elementId;
+									if (config.elementId === 'playground-tag') {
+										return (
+											<div class="db-input">
+												<label for={controlId}>{prop.label}</label>
+												<input
+													id={controlId}
+													type="text"
+													value={prop.defaultValue}
+													oninput={`var tag = document.getElementById('playground-tag'); var span = document.getElementById('playground-tag-text'); if(span) { span.textContent = this.value; } var lbl = tag.querySelector('label'); if(lbl) { var inp = lbl.querySelector('input'); if(inp) { var txt = lbl.childNodes; for(var i=txt.length-1;i>=0;i--){ if(txt[i].nodeType===3) { txt[i].textContent = this.value; break; } } } } var btn = tag.querySelector('button:not(.db-tab-remove-button)'); if(btn && !lbl) btn.textContent = this.value;`}
+												/>
+											</div>
+										);
+									}
 									if (config.elementId === 'demo-navigation-item') {
 										return (
 											<div class="db-input">
@@ -957,6 +978,44 @@ const nativeAttributes = [
 											/>
 										</div>
 									);
+								} else if (
+									config.elementId === 'playground-tag' &&
+									prop.name === 'text-2'
+								) {
+									return (
+										<div
+											class="db-input"
+											data-depends-on={depAttr}
+											style={depHidden ? 'display:none;' : ''}
+										>
+											<label for={controlId}>{prop.label}</label>
+											<input
+												id={controlId}
+												type="text"
+												value={prop.defaultValue}
+												oninput={`var tag2 = document.getElementById('playground-tag-2'); if(tag2) { var lbl = tag2.querySelector('label'); if(lbl) { var txt = lbl.childNodes; for(var i=txt.length-1;i>=0;i--){ if(txt[i].nodeType===3) { txt[i].textContent = this.value; break; } } } }`}
+											/>
+										</div>
+									);
+								} else if (
+									config.elementId === 'playground-tag' &&
+									prop.name === 'icon'
+								) {
+									return (
+										<div
+											class="db-input"
+											data-depends-on={depAttr}
+											style={depHidden ? 'display:none;' : ''}
+										>
+											<label for={controlId}>{prop.label}</label>
+											<input
+												id={controlId}
+												type="text"
+												value={prop.defaultValue}
+												oninput={`var el = document.getElementById('playground-tag'); var t2 = document.getElementById('playground-tag-2'); if(this.value) { el.setAttribute('data-icon', this.value); if(t2) t2.setAttribute('data-icon', this.value); } else { el.removeAttribute('data-icon'); if(t2) t2.removeAttribute('data-icon'); }`}
+											/>
+										</div>
+									);
 								} else if (config.elementId === 'playground-checkbox' && prop.name === 'message') {
 									return (
 										<div
@@ -1210,7 +1269,9 @@ const nativeAttributes = [
 								} else if (config.elementId === 'demo-drawer' && prop.name === 'rounded') {
 									action = `const container = document.getElementById('demo-drawer').querySelector('.db-drawer-container'); if(this.checked) container.setAttribute('data-rounded', 'true'); else container.removeAttribute('data-rounded');`;
 								} else if (config.elementId === 'playground-tag' && prop.name === 'overflow') {
-									action = `const tag = document.getElementById('playground-tag'); if(this.checked) tag.setAttribute('data-overflow', 'true'); else tag.removeAttribute('data-overflow');`;
+									action = `var el = document.getElementById('playground-tag'); var t2 = document.getElementById('playground-tag-2'); if(this.checked) { el.setAttribute('data-overflow', 'true'); if(t2) t2.setAttribute('data-overflow', 'true'); } else { el.removeAttribute('data-overflow'); if(t2) t2.removeAttribute('data-overflow'); }`;
+								} else if (config.elementId === 'playground-tag' && prop.name === 'disabled') {
+									action = `var el = document.getElementById('playground-tag'); var t2 = document.getElementById('playground-tag-2'); if(this.checked) { el.setAttribute('data-disabled', 'true'); if(t2) t2.setAttribute('data-disabled', 'true'); } else { el.removeAttribute('data-disabled'); if(t2) t2.removeAttribute('data-disabled'); }`;
 								} else if (prop.name === 'disabled') {
 									const targetId =
 										config.elementId === 'playground-input'
@@ -1269,6 +1330,11 @@ const nativeAttributes = [
 									['show-icon', 'showIcon'].includes(prop.name)
 								) {
 									action = `const el = document.getElementById('playground-select'); var ctrl = document.getElementById('playground-select-icon-control'); if(this.checked) { el.setAttribute('data-show-icon', 'true'); if(ctrl && ctrl.value) el.setAttribute('data-icon', ctrl.value); } else { el.removeAttribute('data-show-icon'); el.removeAttribute('data-icon'); } this.closest('.controls-area-content').querySelectorAll('[data-depends-on="show-icon"],[data-depends-on="showIcon"]').forEach(function(dep){ dep.style.display = this.checked ? '' : 'none'; }.bind(this));`;
+								} else if (
+									config.elementId === 'playground-tag' &&
+									['show-icon / showIcon', 'show-icon', 'showIcon'].includes(prop.name)
+								) {
+									action = `const el = document.getElementById('playground-tag'); var t2 = document.getElementById('playground-tag-2'); var ctrl = document.getElementById('playground-tag-icon-control'); if(this.checked) { el.setAttribute('data-show-icon', 'true'); if(ctrl && ctrl.value) el.setAttribute('data-icon', ctrl.value); else el.setAttribute('data-icon', 'star'); if(t2) { t2.setAttribute('data-show-icon', 'true'); if(ctrl && ctrl.value) t2.setAttribute('data-icon', ctrl.value); else t2.setAttribute('data-icon', 'star'); } } else { el.removeAttribute('data-show-icon'); el.removeAttribute('data-icon'); if(t2) { t2.removeAttribute('data-show-icon'); t2.removeAttribute('data-icon'); } } this.closest('.controls-area-content').querySelectorAll('[data-depends-on="show-icon"],[data-depends-on="showIcon"],[data-depends-on^="show-icon / showIcon"]').forEach(function(dep){ dep.style.display = this.checked ? '' : 'none'; }.bind(this));`;
 								} else if (
 									config.elementId === 'playground-input' &&
 									['showMessage', 'show-message'].includes(prop.name)
@@ -1364,6 +1430,16 @@ const nativeAttributes = [
 									(prop.name === 'show-icon' || prop.name === 'showIcon')
 								) {
 									action = `var n = document.getElementById('demo-notification'); var sem = n.getAttribute('data-semantic'); var styleEl = document.getElementById('notification-icon-style'); if(this.checked) { styleEl.textContent = ''; if(sem === 'adaptive') { n.setAttribute('data-icon', 'information_circle'); } else { n.removeAttribute('data-icon'); } } else { styleEl.textContent = '#demo-notification::before { display: none !important; }'; n.removeAttribute('data-icon'); }`;
+								} else if (
+									config.elementId === 'playground-tag' &&
+									['no-text / noText', 'no-text', 'noText'].includes(prop.name)
+								) {
+									action = `var el = document.getElementById('playground-tag'); var t2 = document.getElementById('playground-tag-2'); var iconCtrl = document.getElementById('playground-tag-icon-control'); var showIconCb = this.closest('.controls-area-content').querySelector('input[type=checkbox][onchange*="data-show-icon"]'); var showIconWrapper = showIconCb ? (showIconCb.closest('[data-depends-on]') || showIconCb.closest('label.db-switch')) : null; if(this.checked) { el.setAttribute('data-no-text', 'true'); if(t2) t2.setAttribute('data-no-text', 'true'); if(iconCtrl && !iconCtrl.value) iconCtrl.value = 'star'; var iconVal = iconCtrl ? iconCtrl.value : 'star'; el.setAttribute('data-icon', iconVal); el.setAttribute('data-show-icon', 'true'); if(t2) { t2.setAttribute('data-icon', iconVal); t2.setAttribute('data-show-icon', 'true'); } this.closest('.controls-area-content').querySelectorAll('[data-depends-on^="show-icon / showIcon"],[data-depends-on="show-icon"],[data-depends-on="showIcon"]').forEach(function(dep){ dep.style.display = ''; }); if(showIconWrapper) showIconWrapper.style.display = 'none'; } else { el.removeAttribute('data-no-text'); if(t2) t2.removeAttribute('data-no-text'); if(showIconWrapper) showIconWrapper.style.display = ''; var showIconChecked = showIconCb ? showIconCb.checked : false; if(!showIconChecked) { el.removeAttribute('data-icon'); el.removeAttribute('data-show-icon'); if(t2) { t2.removeAttribute('data-icon'); t2.removeAttribute('data-show-icon'); } this.closest('.controls-area-content').querySelectorAll('[data-depends-on^="show-icon / showIcon"],[data-depends-on="show-icon"],[data-depends-on="showIcon"]').forEach(function(dep){ dep.style.display = 'none'; }); } }`;
+								} else if (
+									config.elementId === 'playground-tag' &&
+									['show-check-state / showCheckState', 'show-check-state', 'showCheckState'].includes(prop.name)
+								) {
+									action = `var el = document.getElementById('playground-tag'); var t2 = document.getElementById('playground-tag-2'); if(this.checked) { el.setAttribute('data-show-check-state', 'true'); if(t2) t2.setAttribute('data-show-check-state', 'true'); } else { el.removeAttribute('data-show-check-state'); if(t2) t2.removeAttribute('data-show-check-state'); }`;
 								} else {
 									let setsOnTrueAction = '';
 									let setsOnFalseAction = '';
