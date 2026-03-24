@@ -2,7 +2,6 @@
 import './ComponentPlayground.css';
 import { DBAccordionItem } from '@db-ux/react-core-components';
 import ShellExample from '@template/components/ShellExample/ShellExample.tsx';
-import TooltipExample from '@template/components/TooltipExample/TooltipExample.tsx';
 interface Props {
 	config: any;
 	component: any;
@@ -352,14 +351,30 @@ const nativeAttributes = [
 			) : config.elementId === 'playground-header' ? (
 				<ShellExample />
 			) : config.elementId === 'demo-tooltip' ? (
-				<TooltipExample
-					text={config.defaultText}
-					placement={config.defaultProps.placement}
-					animation={config.defaultProps.animation}
-					showArrow={config.defaultProps.showArrow}
-					emphasis={config.defaultProps.emphasis}
-					width={config.defaultProps.width}
-				/>
+				<div style="display: flex; justify-content: center; inline-size: 100%;">
+					<button
+						class="db-button"
+						type="button"
+						data-variant="primary"
+						data-has-tooltip="true"
+						id="demo-tooltip-trigger"
+					>
+						Hover me
+						<i
+							role="tooltip"
+							class="db-tooltip"
+							id={config.elementId}
+							data-gap="true"
+							data-placement={config.defaultProps.placement}
+							data-animation={String(config.defaultProps.animation)}
+							data-show-arrow={String(config.defaultProps.showArrow)}
+							data-emphasis={config.defaultProps.emphasis}
+							data-width={config.defaultProps.width}
+						>
+							{config.defaultText}
+						</i>
+					</button>
+				</div>
 			) : config.elementId === 'demo-drawer' ? (
 				<>
 					<button
@@ -611,6 +626,10 @@ const nativeAttributes = [
 									updateAction = `document.getElementById('playground-tag').setAttribute('data-semantic', this.value); var t2 = document.getElementById('playground-tag-2'); if(t2) t2.setAttribute('data-semantic', this.value);`;
 								} else if (config.elementId === 'playground-tag' && prop.name === 'emphasis') {
 									updateAction = `document.getElementById('playground-tag').setAttribute('data-emphasis', this.value); var t2 = document.getElementById('playground-tag-2'); if(t2) t2.setAttribute('data-emphasis', this.value);`;
+								} else if (config.elementId === 'demo-tooltip' && prop.name === 'delay') {
+									updateAction = `var el = document.getElementById('demo-tooltip'); if(this.value && this.value !== 'none') el.setAttribute('data-delay', this.value); else el.removeAttribute('data-delay');`;
+								} else if (config.elementId === 'demo-tooltip' && prop.name === 'width') {
+									updateAction = `var el = document.getElementById('demo-tooltip'); el.setAttribute('data-width', this.value);`;
 								} else {
 									updateAction = `document.getElementById('${targetId}').setAttribute('${attrName}', this.value); var area = this.closest('.controls-area-content'); if(area) area.querySelectorAll('[data-depends-on^="${prop.name}:"]').forEach(function(el){ var v = el.getAttribute('data-depends-on').split(':')[1]; if(v.charAt(0)==='!') { el.style.display = (this.value !== v.slice(1)) ? '' : 'none'; } else { el.style.display = (v === this.value) ? '' : 'none'; } }.bind(this));`;
 								}
@@ -623,7 +642,11 @@ const nativeAttributes = [
 										<label for={`${config.elementId}-${prop.name}-select`}>{prop.label}</label>
 										<select id={`${config.elementId}-${prop.name}-select`} onchange={updateAction}>
 											{prop.options.map((option: any) => (
-												<option value={option.value} selected={option.default}>
+												<option
+													value={option.value}
+													selected={option.default}
+													hidden={option.noArrow && config.defaultProps?.showArrow !== false}
+												>
 													{option.label}
 												</option>
 											))}
@@ -1389,6 +1412,16 @@ const nativeAttributes = [
 									prop.name === 'indeterminate'
 								) {
 									action = `const target = document.getElementById('playground-checkbox-input'); target.indeterminate = this.checked;`;
+								} else if (
+									config.elementId === 'demo-tooltip' &&
+									['animation / data-animation', 'animation'].includes(prop.name)
+								) {
+									action = `var el = document.getElementById('demo-tooltip'); if(this.checked) el.setAttribute('data-animation', 'true'); else el.setAttribute('data-animation', 'false');`;
+								} else if (
+									config.elementId === 'demo-tooltip' &&
+									['show-arrow / showArrow', 'show-arrow', 'showArrow'].includes(prop.name)
+								) {
+									action = `var el = document.getElementById('demo-tooltip'); var placementSelect = document.getElementById('demo-tooltip-placement-select'); if(this.checked) { el.setAttribute('data-show-arrow', 'true'); if(placementSelect) { var opts = placementSelect.options; for(var i=0;i<opts.length;i++){ if(opts[i].value.indexOf('-')>-1) opts[i].hidden=true; } if(placementSelect.value.indexOf('-')>-1) { placementSelect.value = placementSelect.value.split('-')[0]; el.setAttribute('data-placement', placementSelect.value); } } } else { el.setAttribute('data-show-arrow', 'false'); if(placementSelect) { var opts = placementSelect.options; for(var i=0;i<opts.length;i++){ opts[i].hidden=false; } } }`;
 								} else if (config.elementId === 'demo-notification' && prop.name === 'closeable') {
 									action = `var n = document.getElementById('demo-notification'); var btn = document.getElementById('notification-close'); if(this.checked) { if(!btn) { btn = document.createElement('button'); btn.id = 'notification-close'; btn.className = 'db-button'; btn.type = 'button'; btn.setAttribute('data-icon','cross'); btn.setAttribute('data-size','small'); btn.setAttribute('data-variant','ghost'); btn.setAttribute('data-no-text','true'); btn.textContent = 'Close'; n.appendChild(btn); } } else { if(btn) btn.remove(); } var lvSelect = document.getElementById('demo-notification-link-variant-select'); if(lvSelect) lvSelect.dispatchEvent(new Event('change'));`;
 								} else if (

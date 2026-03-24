@@ -35,6 +35,7 @@
 	padding: var(--db-spacing-fixed-lg);
 	overflow: hidden;
 	min-inline-size: 0;
+	container-type: inline-size;
 }
 
 .component-playground .preview-area > * {
@@ -129,4 +130,11 @@
 
 .component-playground .preview-area > .db-navigation-item[data-width='auto'] {
 	inline-size: fit-content;
+}
+
+/* Tooltip width behavior in playground:
+   auto = single line, clipped at preview-area edge
+   fixed = wraps at max-width, constrained to preview-area */
+.component-playground .preview-area .db-tooltip:not([data-width='fixed']) {
+	white-space: nowrap;
 }

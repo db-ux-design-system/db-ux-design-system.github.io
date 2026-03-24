@@ -1,12 +1,12 @@
 export const tooltipConfig = {
 	elementId: 'demo-tooltip',
-	defaultText: 'Tooltip text',
+	defaultText: 'Tooltip söfk ösfkj ösflkj sölfkj söflsdk fölsdkjf sldkjf',
 	defaultProps: {
 		id: 'demo-tooltip',
 		placement: 'top',
 		animation: true,
 		showArrow: true,
-		emphasis: 'strong',
+		emphasis: 'weak',
 		width: 'auto',
 	},
 	slots: [
@@ -20,7 +20,7 @@ export const tooltipConfig = {
 			name: 'text',
 			label: 'Text',
 			type: 'text',
-			defaultValue: 'Tooltip text',
+			defaultValue: 'Tooltip',
 			description: 'The text content of the tooltip',
 			showInPlayground: true,
 		},
@@ -29,12 +29,21 @@ export const tooltipConfig = {
 			label: 'Placement',
 			type: 'select',
 			defaultValue: 'top',
-			description: 'The placement attributes values change the position to absolute and adds a transform based on the placement.',
+			description:
+				'The placement attributes values change the position to absolute and adds a transform based on the placement.',
 			options: [
 				{ value: 'top', label: 'Top', default: true },
+				{ value: 'top-start', label: 'Top Start', noArrow: true },
+				{ value: 'top-end', label: 'Top End', noArrow: true },
 				{ value: 'bottom', label: 'Bottom' },
+				{ value: 'bottom-start', label: 'Bottom Start', noArrow: true },
+				{ value: 'bottom-end', label: 'Bottom End', noArrow: true },
 				{ value: 'left', label: 'Left' },
+				{ value: 'left-start', label: 'Left Start', noArrow: true },
+				{ value: 'left-end', label: 'Left End', noArrow: true },
 				{ value: 'right', label: 'Right' },
+				{ value: 'right-start', label: 'Right Start', noArrow: true },
+				{ value: 'right-end', label: 'Right End', noArrow: true },
 			],
 			showInPlayground: true,
 		},
@@ -42,11 +51,11 @@ export const tooltipConfig = {
 			name: 'emphasis',
 			label: 'Emphasis',
 			type: 'select',
-			defaultValue: 'strong',
+			defaultValue: 'weak',
 			description: 'The emphasis attribute divides in between a weak or strong importance.',
 			options: [
-				{ value: 'weak', label: 'Weak' },
-				{ value: 'strong', label: 'Strong', default: true },
+				{ value: 'weak', label: 'Weak', default: true },
+				{ value: 'strong', label: 'Strong' },
 			],
 			showInPlayground: true,
 		},
@@ -96,7 +105,8 @@ export const tooltipConfig = {
 			label: 'Variant',
 			type: 'select',
 			defaultValue: '',
-			description: 'Change the behavior of the tooltip: description (Adds aria-describedby to parent), label (Adds aria-labelledby to parent)',
+			description:
+				'Change the behavior of the tooltip: description (Adds aria-describedby to parent), label (Adds aria-labelledby to parent)',
 			options: [
 				{ value: '', label: 'None', default: true },
 				{ value: 'description', label: 'Description' },
@@ -109,7 +119,8 @@ export const tooltipConfig = {
 			label: 'ID',
 			type: 'text',
 			defaultValue: '',
-			description: 'ID of the component, generated automatically for some components as a fallback if unset.',
+			description:
+				'ID of the component, generated automatically for some components as a fallback if unset.',
 			showInPlayground: false,
 		},
 		{
