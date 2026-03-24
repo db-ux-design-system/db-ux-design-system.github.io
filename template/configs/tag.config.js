@@ -110,7 +110,7 @@ export const tagConfig = {
 			name: 'icon',
 			label: 'Icon',
 			type: 'text',
-			defaultValue: 'star',
+			defaultValue: 'x_placeholder',
 			description:
 				'Define an icon by its identifier to get displayed in front of the elements content.',
 			dependsOn: { prop: 'show-icon / showIcon', value: 'true' },

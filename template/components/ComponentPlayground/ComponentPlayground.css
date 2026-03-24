@@ -175,3 +175,27 @@
 	overflow: visible;
 	text-overflow: unset;
 }
+
+/* Tag interactive + weak: icon on .db-tag::before should match text color (emphasis-80) */
+.component-playground
+	.preview-area
+	.db-tag:has(label, button:not(.db-tab-remove-button), a):not([data-emphasis])::before,
+.component-playground
+	.preview-area
+	.db-tag:has(label, button:not(.db-tab-remove-button), a)[data-emphasis='weak']::before {
+	--db-icon-color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+}
+
+/* Tag interactive + weak + checked: icon should use on-bg-vibrant */
+.component-playground
+	.preview-area
+	.db-tag:has(label, button:not(.db-tab-remove-button), a):not([data-emphasis]):has(
+		input:checked
+	)::before,
+.component-playground
+	.preview-area
+	.db-tag:has(label, button:not(.db-tab-remove-button), a)[data-emphasis='weak']:has(
+		input:checked
+	)::before {
+	--db-icon-color: var(--db-adaptive-on-bg-vibrant-default);
+}
