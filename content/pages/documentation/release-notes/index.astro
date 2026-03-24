@@ -82,46 +82,42 @@ const categories = [...new Set(releaseNotes.map((note) => note.category))];
 </DocumentationLayout>
 
 <script is:inline slot="script">
-	function tryInitFilter(attempts = 0) {
-		const filterContainer = document.getElementById('filter-tags');
+	document.addEventListener(
+		'change',
+		function (event) {
+			const checkbox = event.target;
+			if (!checkbox || checkbox.type !== 'checkbox') return;
 
-		if (!filterContainer) {
-			if (attempts < 10) setTimeout(() => tryInitFilter(attempts + 1), 500);
-			return;
-		}
+			const filterContainer = document.getElementById('filter-tags');
+			if (!filterContainer || !filterContainer.contains(checkbox)) return;
 
-		const releaseNotes = document.querySelectorAll('.release-note');
-		const tocHeadingNotes = document.querySelectorAll('.dba-toc-heading');
-		const filterTags = filterContainer.querySelectorAll('[data-category]');
+			const filterTags = filterContainer.querySelectorAll('[data-category]');
+			const releaseNotes = document.querySelectorAll('.release-note');
+			const tocHeadingNotes = document.querySelectorAll('.dba-toc-heading');
 
-		filterTags.forEach((tag) => {
-			const checkbox = tag.querySelector('input[type="checkbox"]');
-			if (!checkbox) return;
-
-			checkbox.addEventListener('change', () => {
-				const activeCategories = [];
-				filterTags.forEach((t) => {
-					const cb = t.querySelector('input[type="checkbox"]');
-					if (cb && cb.checked) activeCategories.push(t.getAttribute('data-category'));
-				});
-
-				releaseNotes.forEach((note) => {
-					const noteCategory = note.getAttribute('data-category');
-					note.hidden = !(
-						activeCategories.length === 0 || activeCategories.includes(noteCategory)
-					);
-				});
-
-				tocHeadingNotes.forEach((heading) => {
-					heading.style.display =
-						activeCategories.length === 0 ||
-						activeCategories.some((category) => heading.textContent.startsWith(category))
-							? 'flex'
-							: 'none';
-				});
+			const activeCategories = [];
+			filterTags.forEach(function (tag) {
+				var cb = tag.querySelector('input[type="checkbox"]');
+				if (cb && cb.checked) {
+					activeCategories.push(tag.getAttribute('data-category'));
+				}
 			});
-		});
-	}
 
-	window.addEventListener('load', () => tryInitFilter());
+			releaseNotes.forEach(function (note) {
+				var noteCategory = note.getAttribute('data-category');
+				note.hidden = !(activeCategories.length === 0 || activeCategories.includes(noteCategory));
+			});
+
+			tocHeadingNotes.forEach(function (heading) {
+				heading.style.display =
+					activeCategories.length === 0 ||
+					activeCategories.some(function (category) {
+						return heading.textContent.startsWith(category);
+					})
+						? 'flex'
+						: 'none';
+			});
+		},
+		true,
+	);
 </script>
