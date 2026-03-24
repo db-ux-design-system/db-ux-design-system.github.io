@@ -18,23 +18,12 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { cardConfig } from '@template/configs/card.config.js';
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 
 Cards group related content into a contained surface to improve scanning and create clear visual structure. They can be static for content grouping or interactive as an entry point to deeper content, but should stay simple and consistent.
 
 - Group related information and actions into a single, scannable block
 - Present multiple items in a grid/list of consistent surfaces (card groups)
 - Provide an interactive "preview" that links to details (interactive card)
-
-<DBSection spacing="small" width="auto">
-
-## Playground
-
-Experiment with the card component and its properties.
-
-<ComponentPlayground config={cardConfig} component={DBCard} />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 

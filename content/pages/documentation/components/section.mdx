@@ -18,23 +18,12 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { sectionConfig } from '@template/configs/section.config.js';
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 
 Section separates and structures content areas on a page by applying consistent spacing and optional width constraints. It helps create clear visual grouping and rhythm without manually managing margins for each block.
 
 - Group related content into a distinct page area (e.g., "Overview", "Details", "Next steps")
 - Create consistent vertical spacing between major content blocks
 - Constrain content width for readability while keeping full-bleed backgrounds possible
-
-<DBSection spacing="small" width="auto">
-
-## Playground
-
-Experiment with the section component and its properties.
-
-<ComponentPlayground config={sectionConfig} component={DBSection} />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
