@@ -82,42 +82,54 @@ const categories = [...new Set(releaseNotes.map((note) => note.category))];
 </DocumentationLayout>
 
 <script is:inline slot="script">
-	document.addEventListener(
-		'change',
-		function (event) {
-			const checkbox = event.target;
-			if (!checkbox || checkbox.type !== 'checkbox') return;
+	(function () {
+		var filterContainer;
+		var filterTags;
+		var releaseNotes;
+		var tocHeadingNotes;
 
-			const filterContainer = document.getElementById('filter-tags');
-			if (!filterContainer || !filterContainer.contains(checkbox)) return;
+		function ensureCached() {
+			if (filterContainer) return;
+			filterContainer = document.getElementById('filter-tags');
+			if (!filterContainer) return;
+			filterTags = filterContainer.querySelectorAll('[data-category]');
+			releaseNotes = document.querySelectorAll('.release-note');
+			tocHeadingNotes = document.querySelectorAll('.dba-toc-heading');
+		}
 
-			const filterTags = filterContainer.querySelectorAll('[data-category]');
-			const releaseNotes = document.querySelectorAll('.release-note');
-			const tocHeadingNotes = document.querySelectorAll('.dba-toc-heading');
+		document.addEventListener(
+			'change',
+			function (event) {
+				const checkbox = event.target;
+				if (!checkbox || checkbox.type !== 'checkbox') return;
 
-			const activeCategories = [];
-			filterTags.forEach(function (tag) {
-				var cb = tag.querySelector('input[type="checkbox"]');
-				if (cb && cb.checked) {
-					activeCategories.push(tag.getAttribute('data-category'));
-				}
-			});
+				ensureCached();
+				if (!filterContainer || !filterContainer.contains(checkbox)) return;
 
-			releaseNotes.forEach(function (note) {
-				var noteCategory = note.getAttribute('data-category');
-				note.hidden = !(activeCategories.length === 0 || activeCategories.includes(noteCategory));
-			});
+				const activeCategories = [];
+				filterTags.forEach(function (tag) {
+					const cb = tag.querySelector('input[type="checkbox"]');
+					if (cb && cb.checked) {
+						activeCategories.push(tag.getAttribute('data-category'));
+					}
+				});
 
-			tocHeadingNotes.forEach(function (heading) {
-				heading.style.display =
-					activeCategories.length === 0 ||
-					activeCategories.some(function (category) {
-						return heading.textContent.startsWith(category);
-					})
-						? 'flex'
-						: 'none';
-			});
-		},
-		true,
-	);
+				releaseNotes.forEach(function (note) {
+					const noteCategory = note.getAttribute('data-category');
+					note.hidden = !(activeCategories.length === 0 || activeCategories.includes(noteCategory));
+				});
+
+				tocHeadingNotes.forEach(function (heading) {
+					heading.style.display =
+						activeCategories.length === 0 ||
+						activeCategories.some(function (category) {
+							return heading.textContent.startsWith(category);
+						})
+							? 'flex'
+							: 'none';
+				});
+			},
+			true,
+		);
+	})();
 </script>
