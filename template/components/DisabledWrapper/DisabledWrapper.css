@@ -2,11 +2,13 @@
 .disabled-wrapper {
 	position: relative;
 	display: block;
+	block-size: 100%;
 }
 
 /* Content wrapper: styles applied via aria-disabled selector below */
 .disabled-wrapper[aria-disabled='true'] .disabled-wrapper-content {
 	opacity: var(--db-opacity-md);
+	block-size: 100%;
 }
 
 .disabled-wrapper-overlay {
