@@ -19,23 +19,12 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { selectConfig } from '@template/configs/select.config.js';
 
 - Choose one value from a known set (e.g., country, category, priority)
 - Save space compared to showing all options as radios
 - Provide a controlled input when free text is not allowed
-
-<DBSection spacing="small" width="auto">
-
-## Playground
-
-Experiment with the Select component and its properties.
-
-<ComponentPlayground config={selectConfig} component={DBSelect} />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
