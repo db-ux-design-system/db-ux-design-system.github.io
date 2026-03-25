@@ -42,7 +42,7 @@ export const handleSimplePlaygrounds = ({
 	) as HTMLSelectElement | null;
 	const box = document.getElementById(`box`);
 	const popover = document.querySelector('.db-popover-content');
-	const styles = getComputedStyle(document.documentElement);
+	const styles = getComputedStyle(box);
 
 	if (!select || !box || !popover || !styles) return false;
 
@@ -84,7 +84,7 @@ export const handleSimplePlaygrounds = ({
 				),
 			);
 		} else {
-			const token = `--db-${dataAttributeName}-${select.value}`;
+			const token = `--db-${tokenPrefix}-${select.value}`;
 			// Read token value directly from CSS custom property to avoid transition mid-values
 			const tokenValue = styles.getPropertyValue(token).trim();
 			if (remPx) {
