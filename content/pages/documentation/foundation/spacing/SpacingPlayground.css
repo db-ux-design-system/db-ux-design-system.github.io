@@ -33,6 +33,7 @@
 		inset-block: 0;
 		inset-inline-start: 50%;
 		transform: translateX(-50%);
+		/* stylelint-disable-next-line db-ux/use-sizing */
 		inline-size: var(--playground-spacing);
 		background-color: var(--db-pink-bg-basic-transparent-semi-default);
 		opacity: 0;
