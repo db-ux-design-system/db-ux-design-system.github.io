@@ -89,13 +89,12 @@ export function TableOfContents(props: Props): ReactElement | null {
 						currentH2 = slug;
 						const showChildren = hasChildren(index);
 						return (
-							<li
-								key={slug}
-								className="dba-toc-heading"
-								data-depth={depth}
-								data-slug={slug}
-							>
-								<a href={`${currentPath}#${slug}`} onClick={handleLinkClick} aria-current={activeIDs.includes(slug) ? 'location' : undefined}>
+							<li key={slug} className="dba-toc-heading" data-depth={depth} data-slug={slug}>
+								<a
+									href={`${currentPath}#${slug}`}
+									onClick={handleLinkClick}
+									aria-current={activeIDs.includes(slug) ? 'location' : undefined}
+								>
 									{text}
 								</a>
 								{showChildren && (
@@ -127,7 +126,11 @@ export function TableOfContents(props: Props): ReactElement | null {
 								data-depth={depth}
 								data-slug={slug}
 							>
-								<a href={`${currentPath}#${slug}`} onClick={handleLinkClick} aria-current={activeIDs.includes(slug) ? 'location' : undefined}>
+								<a
+									href={`${currentPath}#${slug}`}
+									onClick={handleLinkClick}
+									aria-current={activeIDs.includes(slug) ? 'location' : undefined}
+								>
 									{text}
 								</a>
 							</li>

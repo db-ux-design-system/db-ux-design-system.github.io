@@ -70,12 +70,12 @@ const setupPage = async (page: Page, path: string) => {
 	await page.goto(`/${path}`);
 	await page.waitForLoadState('domcontentloaded');
 	await waitForDBShell(page);
-	
+
 	// Wait for icons to render before measuring viewport
 	if (path === 'documentation/icons') {
 		await page.waitForTimeout(10000);
 	}
-	
+
 	await setScrollViewport(page);
 };
 
