@@ -13,24 +13,23 @@ const subject = componentName
 
 const encodedSubject = encodeURIComponent(subject);
 const mailTo = 'db-ux-designsystem@deutschebahn.com';
+const fieldId = `question-form-${(componentName ?? 'general')
+	.toLowerCase()
+	.replace(/[^a-z0-9]+/g, '-')
+	.replace(/^-|-$/g, '')}`;
 ---
 
 <section class="question-form" aria-label="Question contact">
 	<div class="db-textarea" data-variant="above">
-		<label for={`question-form-${componentName?.replace(/\s+/g, '-').toLowerCase() ?? 'general'}`}>
-			Your question
-		</label>
-		<textarea
-			id={`question-form-${componentName?.replace(/\s+/g, '-').toLowerCase() ?? 'general'}`}
-			rows="4"
-			placeholder="Type your question here…"></textarea>
+		<label for={fieldId}> Your question </label>
+		<textarea id={fieldId} rows="4" placeholder="Type your question here…"></textarea>
 	</div>
 	<button
 		class="db-button"
 		data-variant="brand"
 		type="button"
 		onclick={`
-			const textarea = this.previousElementSibling.querySelector('textarea');
+			const textarea = document.getElementById('${fieldId}');
 			const body = encodeURIComponent(textarea.value);
 			window.location.href = 'mailto:${mailTo}?subject=${encodedSubject}&body=' + body;
 		`}
