@@ -1,8 +1,27 @@
 .typography-box {
 	text-align: center;
-	inline-size: var(--db-sizing-3xl);
-	max-inline-size: 100%;
+	inline-size: auto;
+	block-size: auto;
+	max-inline-size: 70%;
 	overflow-wrap: break-word;
+	margin: 0 auto;
+}
+
+.typography-box .db-card {
+	inline-size: auto;
+	block-size: auto;
+}
+
+.typography-box .typo-headline-text {
+	display: none;
+}
+
+.typography-box[data-type^='headline'] .typo-headline-text {
+	display: inline;
+}
+
+.typography-box[data-type^='headline'] .typo-body-text {
+	display: none;
 }
 
 .typography-box[data-type='headline-3xl'] {
@@ -41,6 +60,14 @@
 	font: var(--db-type-headline-3xs);
 }
 
+.typography-box[data-type='body-3xl'] {
+	font: var(--db-type-body-3xl);
+}
+
+.typography-box[data-type='body-2xl'] {
+	font: var(--db-type-body-2xl);
+}
+
 .typography-box[data-type='body-xl'] {
 	font: var(--db-type-body-xl);
 }
@@ -59,4 +86,12 @@
 
 .typography-box[data-type='body-xs'] {
 	font: var(--db-type-body-xs);
+}
+
+.typography-box[data-type='body-2xs'] {
+	font: var(--db-type-body-2xs);
+}
+
+.typography-box[data-type='body-3xs'] {
+	font: var(--db-type-body-3xs);
 }
