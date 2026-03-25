@@ -42,9 +42,10 @@ export const handleSimplePlaygrounds = ({
 	) as HTMLSelectElement | null;
 	const box = document.getElementById(`box`);
 	const popover = document.querySelector('.db-popover-content');
-	const styles = getComputedStyle(box);
 
-	if (!select || !box || !popover || !styles) return false;
+	if (!select || !box || !popover) return false;
+
+	const styles = getComputedStyle(box);
 
 	let densitySelect: HTMLSelectElement | null;
 	if (withDensity) {
