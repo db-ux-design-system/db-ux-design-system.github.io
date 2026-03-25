@@ -11,13 +11,7 @@ status: 'stable'
 toc: true
 ---
 
-import {
-	DBNotification,
-	DBSection,
-	DBAccordion,
-	DBAccordionItem,
-	DBLink,
-} from '@db-ux/react-core-components';
+import { DBSection } from '@db-ux/react-core-components';
 
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
@@ -26,22 +20,12 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { notificationConfig } from '@template/configs/notification.config.js';
 
 - Confirm an action or state change (e.g., "Saved", "Filter applied")
 - Inform about a non-blocking system event (e.g., "Sync in progress", "New version available")
 - Warn or report an issue that needs attention without requiring an immediate modal decision
-
-<DBSection spacing="small" width="auto">
-
-    ## Playground
-    Experiment with the Notification component and its properties.
-
-    <ComponentPlayground config={notificationConfig} component={DBNotification} />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 

@@ -11,13 +11,7 @@ status: 'stable'
 toc: true
 ---
 
-import {
-	DBNavigation,
-	DBNavigationItem,
-	DBSection,
-	DBAccordion,
-	DBAccordionItem,
-} from '@db-ux/react-core-components';
+import { DBSection } from '@db-ux/react-core-components';
 
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
@@ -26,23 +20,12 @@ import CollapseButton from '@template/components/CollapseButton/CollapseButton.a
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { navigationItemConfig } from '@template/configs/navigation-item.config.js';
 
 - Always wrap content in an anchor element for proper navigation semantics
 - Use the active property or aria-current="page" to indicate the current location
 - Add icons to improve scannability and recognition
-
-<DBSection spacing="small" width="auto">
-
-## Playground
-
-Experiment with the Navigation Item component and its properties.
-
-<ComponentPlayground config={navigationItemConfig} component={DBNavigationItem} />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
