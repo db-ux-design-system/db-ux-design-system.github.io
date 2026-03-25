@@ -1,5 +1,4 @@
 ---
-order: 5
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -20,7 +19,6 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { linkConfig } from '@template/configs/link.config.js';
 
 - Navigate to another page within the application
@@ -44,21 +42,6 @@ import { linkConfig } from '@template/configs/link.config.js';
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the link through its properties and slots.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={linkConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 

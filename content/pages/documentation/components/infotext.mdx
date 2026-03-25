@@ -1,5 +1,4 @@
 ---
-order: 9
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -17,7 +16,6 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { infotextConfig } from '@template/configs/infotext.config.js';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 
@@ -70,24 +68,6 @@ Experiment with the Infotext component and its properties.
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the infotext through its properties, slots and events.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={infotextConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties, Slots & Events"
-	expandedText="Hide some Properties, Slots & Events"
-/>
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 

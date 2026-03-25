@@ -1,7 +1,7 @@
 export const selectConfig = {
 	elementId: 'playground-select',
 	defaultProps: {
-		label: 'Country',
+		label: 'Label',
 		placeholder: 'Choose an option',
 	},
 	slots: [
@@ -33,24 +33,6 @@ export const selectConfig = {
 		},
 	],
 	properties: [
-		// Label
-		{
-			name: 'label',
-			label: 'Label',
-			type: 'text',
-			defaultValue: 'Country',
-			description: 'The label attribute specifies the caption of the form element.',
-			showInPlayground: true,
-		},
-		{
-			name: 'showLabel',
-			alternativeName: 'show-label',
-			label: 'Show Label',
-			type: 'checkbox',
-			defaultValue: true,
-			description: 'Enables/disables the visibility of the label',
-			showInPlayground: true,
-		},
 		{
 			name: 'variant',
 			label: 'Variant',
@@ -62,6 +44,25 @@ export const selectConfig = {
 			],
 			showInPlayground: true,
 		},
+		{
+			name: 'show-label',
+			alternativeName: 'showLabel',
+			label: 'Show Label',
+			type: 'checkbox',
+			defaultValue: true,
+			description: 'Enables/disables the visibility of the label',
+			showInPlayground: true,
+			dependsOn: { prop: 'variant', value: 'above' },
+		},
+		{
+			name: 'label',
+			label: 'Label',
+			type: 'text',
+			defaultValue: 'Label',
+			description: 'The label attribute specifies the caption of the form element.',
+			showInPlayground: true,
+		},
+
 		// Placeholder
 		{
 			name: 'placeholder',
@@ -71,16 +72,36 @@ export const selectConfig = {
 			description: 'Text that appears in the form control when it has no value set',
 			showInPlayground: true,
 		},
+		// States
+		{
+			name: 'disabled',
+			label: 'Disabled',
+			type: 'checkbox',
+			defaultValue: false,
+			description:
+				'The disabled attribute can be set to keep a user from clicking on the form element.',
+			showInPlayground: true,
+		},
+		{
+			name: 'required',
+			label: 'Required',
+			type: 'checkbox',
+			defaultValue: false,
+			description:
+				"When the required attribute specified, the user will be required to fill the form element before submitting the form. The form element will be marked semantically as required and by default also visually with an asterisk '*' next to the label (unless the property showRequiredAsterisk is also set with the value false).",
+			showInPlayground: true,
+		},
 		// Validation
 		{
 			name: 'validation',
 			label: 'Validation',
 			type: 'select',
-			description: "Marks an input element as invalid (red) / valid (green) / no-validation (grey). Overwrites the :user-valid selector.",
+			description:
+				'Marks an input element as invalid (red) / valid (green) / no-validation (grey). Overwrites the :user-valid selector.',
 			options: [
+				{ value: 'no-validation', label: 'No Validation', default: true },
 				{ value: 'invalid', label: 'Invalid' },
 				{ value: 'valid', label: 'Valid' },
-				{ value: 'no-validation', label: 'No Validation', default: true },
 			],
 			showInPlayground: true,
 		},
@@ -92,6 +113,7 @@ export const selectConfig = {
 			defaultValue: 'Please select a valid option',
 			description: 'Helper message for invalid form components',
 			showInPlayground: true,
+			dependsOn: { prop: 'validation', value: 'invalid' },
 		},
 		{
 			name: 'validMessage',
@@ -101,48 +123,56 @@ export const selectConfig = {
 			defaultValue: 'Valid selection',
 			description: 'Helper message for valid form components',
 			showInPlayground: true,
+			dependsOn: { prop: 'validation', value: 'valid' },
 		},
 		// Message
 		{
-			name: 'showMessage',
-			alternativeName: 'show-message',
+			name: 'show-message',
+			alternativeName: 'showMessage',
 			label: 'Show Message',
 			type: 'checkbox',
 			defaultValue: false,
 			description: 'Enables or disables the visibility of the message.',
 			showInPlayground: true,
+			dependsOn: { prop: 'validation', value: 'no-validation' },
 		},
 		{
 			name: 'message',
 			label: 'Message',
 			type: 'text',
-			defaultValue: 'Please choose your country',
+			defaultValue: 'Message',
 			description: 'Optional helper message for form components',
 			showInPlayground: true,
+			dependsOn: 'show-message',
 		},
-		// States
+		// Icon
 		{
-			name: 'required',
-			label: 'Required',
+			name: 'show-icon',
+			alternativeName: 'showIcon',
+			label: 'Show Icon',
 			type: 'checkbox',
 			defaultValue: false,
-			description: "When the required attribute specified, the user will be required to fill the form element before submitting the form. The form element will be marked semantically as required and by default also visually with an asterisk '*' next to the label (unless the property showRequiredAsterisk is also set with the value false).",
+			description:
+				'Enables or disables the visibility of the icon. The default value depends on the component. For many components this property is optional to reflect Figma properties.',
 			showInPlayground: true,
 		},
 		{
-			name: 'disabled',
-			label: 'Disabled',
-			type: 'checkbox',
-			defaultValue: false,
-			description: 'The disabled attribute can be set to keep a user from clicking on the form element.',
+			name: 'icon',
+			label: 'Icon',
+			type: 'text',
+			defaultValue: 'x_placeholder',
+			description:
+				'Define an icon by its identifier to get displayed in front of the elements content.',
 			showInPlayground: true,
+			dependsOn: 'show-icon',
 		},
 		// Hidden properties
 		{
 			name: 'id',
 			type: 'text',
 			label: 'ID',
-			description: 'ID of the component, generated automatically for some components as a fallback if unset.',
+			description:
+				'ID of the component, generated automatically for some components as a fallback if unset.',
 			defaultValue: '',
 			showInPlayground: false,
 		},
@@ -160,7 +190,8 @@ export const selectConfig = {
 			label: 'Show Empty Option',
 			type: 'checkbox',
 			defaultValue: false,
-			description: "Controls whether the empty placeholder option is shown in the dropdown after the user's selection of another option. By default, it is shown for non-required selects and hidden for required selects. Set to true to always show or false to always hide the empty option. Note: The empty option is only rendered when variant === 'floating' or a placeholder is set. Setting showEmptyOption alone has no effect if neither of these conditions is met.",
+			description:
+				"Controls whether the empty placeholder option is shown in the dropdown after the user's selection of another option. By default, it is shown for non-required selects and hidden for required selects. Set to true to always show or false to always hide the empty option. Note: The empty option is only rendered when variant === 'floating' or a placeholder is set. Setting showEmptyOption alone has no effect if neither of these conditions is met.",
 			showInPlayground: false,
 		},
 		{
@@ -177,31 +208,16 @@ export const selectConfig = {
 			label: 'Show Required Asterisk',
 			type: 'checkbox',
 			defaultValue: false,
-			description: "This attribute allows to specify whether a form field which is marked as required will show a visual indicator (an asterisk '*'). It allows to prevent adding the visual indicator but still keep the field semantically required by setting its value to false. By default, its value is true, so the asterisk is shown when required is set.",
-			showInPlayground: false,
-		},
-		{
-			name: 'icon',
-			label: 'Icon',
-			type: 'text',
-			defaultValue: '',
-			description: 'Define an icon by its identifier (like e.g. user, compare to Icons) to get displayed in front of the elements content.',
-			showInPlayground: false,
-		},
-		{
-			name: 'show-icon',
-			alternativeName: 'showIcon',
-			label: 'Show Icon',
-			type: 'checkbox',
-			defaultValue: false,
-			description: 'Enables or disables the visibility of the icon. The default value depends on the component. For many components this property is optional to reflect Figma properties.',
+			description:
+				"This attribute allows to specify whether a form field which is marked as required will show a visual indicator (an asterisk '*'). It allows to prevent adding the visual indicator but still keep the field semantically required by setting its value to false. By default, its value is true, so the asterisk is shown when required is set.",
 			showInPlayground: false,
 		},
 		{
 			name: 'name',
 			type: 'text',
 			label: 'Name',
-			description: "The name attribute gives the name of the form control, as used in form submission and in the form element's elements object.",
+			description:
+				"The name attribute gives the name of the form control, as used in form submission and in the form element's elements object.",
 			defaultValue: '',
 			showInPlayground: false,
 		},
@@ -244,6 +260,18 @@ export const selectConfig = {
 			label: 'Options',
 			description: "If you don't/can't use children/slots you can pass in the options as an array.",
 			defaultValue: '',
+			showInPlayground: false,
+		},
+		{
+			name: 'field-sizing',
+			alternativeName: 'fieldSizing',
+			label: 'Field Sizing',
+			type: 'select',
+			description: 'Adds shrinkwrap for input and textarea',
+			options: [
+				{ value: 'fixed', label: 'Fixed', default: true },
+				{ value: 'content', label: 'Content' },
+			],
 			showInPlayground: false,
 		},
 		{

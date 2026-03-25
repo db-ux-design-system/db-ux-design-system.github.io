@@ -5,7 +5,7 @@ export const badgeConfig = {
 		placement: 'inline',
 		semantic: 'adaptive',
 		size: 'medium',
-		emphasis: 'strong',
+		emphasis: 'weak',
 	},
 	slots: [
 		{
@@ -45,8 +45,8 @@ export const badgeConfig = {
 			type: 'select',
 			description: 'The emphasis attribute divides in between a weak or strong importance.',
 			options: [
-				{ value: 'weak', label: 'Weak' },
-				{ value: 'strong', label: 'Strong', default: true },
+				{ value: 'weak', label: 'Weak', default: true },
+				{ value: 'strong', label: 'Strong' },
 			],
 			showInPlayground: true,
 		},

@@ -4,9 +4,9 @@ export const notificationConfig = {
 	textElementId: 'notification-text',
 	defaultText: 'Your changes have been saved successfully.',
 	defaultProps: {
-		semantic: 'successful',
+		semantic: 'adaptive',
 		variant: 'standalone',
-		headline: 'Success',
+		headline: 'Headline',
 	},
 	slots: [
 		{ name: 'children', description: 'Default slot for notification text content' },
@@ -23,7 +23,7 @@ export const notificationConfig = {
 			type: 'text',
 			label: 'Headline',
 			description: 'The headline attribute changes the text of the bold headline.',
-			defaultValue: 'Success',
+			defaultValue: 'Headline',
 			showInPlayground: true,
 		},
 		{
@@ -40,7 +40,16 @@ export const notificationConfig = {
 			type: 'text',
 			label: 'Text',
 			description: 'Alternative for default slot/children.',
-			defaultValue: 'Your changes have been saved successfully.',
+			defaultValue: 'Text',
+			showInPlayground: true,
+		},
+		{
+			name: 'link-text',
+			alternativeName: 'linkText',
+			type: 'text',
+			label: 'Link Text',
+			description: 'Text content of the notification link.',
+			defaultValue: 'Link',
 			showInPlayground: true,
 		},
 
@@ -50,15 +59,15 @@ export const notificationConfig = {
 			type: 'select',
 			label: 'Semantic',
 			description: 'The semantic defines the default variants for most components.',
-			defaultValue: 'successful',
+			defaultValue: 'adaptive',
 			showInPlayground: true,
 			options: [
-				{ value: 'adaptive', label: 'Adaptive' },
+				{ value: 'adaptive', label: 'Adaptive', default: true },
 				{ value: 'neutral', label: 'Neutral' },
 				{ value: 'critical', label: 'Critical' },
 				{ value: 'informational', label: 'Informational' },
 				{ value: 'warning', label: 'Warning' },
-				{ value: 'successful', label: 'Successful', default: true },
+				{ value: 'successful', label: 'Successful' },
 			],
 		},
 		{
@@ -85,43 +94,8 @@ export const notificationConfig = {
 			options: [
 				{ value: 'block', label: 'Block', default: true },
 				{ value: 'inline', label: 'Inline' },
+				{ value: 'none', label: 'None' },
 			],
-		},
-		{
-			name: 'closeable',
-			type: 'checkbox',
-			label: 'Closeable',
-			description: 'The closeable attribute shows/hides the close button on the top right.',
-			defaultValue: true,
-			showInPlayground: true,
-		},
-
-		// Hidden properties
-		{
-			name: 'timestamp',
-			type: 'text',
-			label: 'Timestamp',
-			description: 'The timestamp attribute can be set for overlay notifications',
-			defaultValue: '',
-			showInPlayground: false,
-		},
-		{
-			name: 'show-timestamp',
-			alternativeName: 'showTimestamp',
-			type: 'checkbox',
-			label: 'Show Timestamp',
-			description: 'Enables or disables the visibility of the timestamp.',
-			defaultValue: false,
-			showInPlayground: false,
-		},
-		{
-			name: 'icon',
-			type: 'text',
-			label: 'Icon',
-			description:
-				'Define an icon by its identifier to get displayed in front of the elements content.',
-			defaultValue: '',
-			showInPlayground: false,
 		},
 		{
 			name: 'show-icon',
@@ -131,19 +105,45 @@ export const notificationConfig = {
 			description:
 				'Enables or disables the visibility of the icon. The default value depends on the component.',
 			defaultValue: true,
-			showInPlayground: false,
+			showInPlayground: true,
 		},
 		{
-			name: 'link-variant',
-			type: 'select',
-			label: 'Link Variant',
-			description: 'The linkVariant will be used if slotLink is set.',
-			defaultValue: 'inline',
+			name: 'closeable',
+			type: 'checkbox',
+			label: 'Closeable',
+			description: 'The closeable attribute shows/hides the close button on the top right.',
+			defaultValue: true,
+			showInPlayground: true,
+		},
+		{
+			name: 'show-timestamp',
+			alternativeName: 'showTimestamp',
+			type: 'checkbox',
+			label: 'Show Timestamp',
+			description: 'Enables or disables the visibility of the timestamp.',
+			defaultValue: false,
+			showInPlayground: true,
+			dependsOn: { prop: 'variant', value: 'overlay' },
+		},
+		{
+			name: 'timestamp',
+			type: 'text',
+			label: 'Timestamp',
+			description: 'The timestamp attribute can be set for overlay notifications.',
+			defaultValue: '10 min. ago',
+			showInPlayground: true,
+			dependsOn: 'show-timestamp',
+		},
+
+		// Hidden properties
+		{
+			name: 'icon',
+			type: 'text',
+			label: 'Icon',
+			description:
+				'Define an icon by its identifier to get displayed in front of the elements content.',
+			defaultValue: '',
 			showInPlayground: false,
-			options: [
-				{ value: 'block', label: 'Block' },
-				{ value: 'inline', label: 'Inline', default: true },
-			],
 		},
 		{
 			name: 'close-button-id',

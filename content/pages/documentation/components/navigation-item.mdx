@@ -1,5 +1,4 @@
 ---
-order: 7
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -22,12 +21,9 @@ import {
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { navigationItemConfig } from '@template/configs/navigation-item.config.js';
 
 - Always wrap content in an anchor element for proper navigation semantics
@@ -79,24 +75,6 @@ Experiment with the Navigation Item component and its properties.
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the navigation item through its properties, slots and events.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={navigationItemConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties, Slots & Events"
-	expandedText="Hide some Properties, Slots & Events"
-/>
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 

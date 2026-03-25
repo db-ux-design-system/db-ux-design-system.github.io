@@ -45,6 +45,17 @@ export const switchConfig = {
 
 		// Appearance
 		{
+			name: 'variant',
+			label: 'Variant',
+			type: 'select',
+			description: 'Change the position of the label (leading or trailing)',
+			options: [
+				{ value: 'trailing', label: 'Trailing', default: true },
+				{ value: 'leading', label: 'Leading' },
+			],
+			showInPlayground: true,
+		},
+		{
 			name: 'size',
 			label: 'Size',
 			type: 'select',
@@ -65,6 +76,27 @@ export const switchConfig = {
 			description: 'Add additional icons to indicate active/inactive state.',
 			showInPlayground: true,
 		},
+		{
+			name: 'icon-leading',
+			alternativeName: 'iconLeading',
+			type: 'text',
+			label: 'Icon Leading',
+			description:
+				'Define an icon by its identifier to get displayed in front of the elements content.',
+			defaultValue: 'check',
+			showInPlayground: true,
+			dependsOn: 'visual-aid',
+		},
+		{
+			name: 'icon-trailing',
+			alternativeName: 'iconTrailing',
+			type: 'text',
+			label: 'Icon Trailing',
+			description: 'Define an icon by its identifier to get displayed after the elements content.',
+			defaultValue: 'cross',
+			showInPlayground: true,
+			dependsOn: 'visual-aid',
+		},
 
 		// States
 		{
@@ -84,32 +116,6 @@ export const switchConfig = {
 				'The disabled attribute can be set to keep a user from clicking on the form element.',
 			showInPlayground: true,
 		},
-
-		// Hidden properties
-		{
-			name: 'variant',
-			label: 'Variant',
-			type: 'select',
-			description: 'Change the variant of the label to float or hidden',
-			options: [
-				{ value: 'above', label: 'Above', default: true },
-				{ value: 'floating', label: 'Floating' },
-			],
-			showInPlayground: false,
-		},
-		{
-			name: 'validation',
-			label: 'Validation',
-			type: 'select',
-			description:
-				'Marks an input element as invalid (red) / valid (green) / no-validation (grey).',
-			options: [
-				{ value: 'invalid', label: 'Invalid' },
-				{ value: 'valid', label: 'Valid' },
-				{ value: 'no-validation', label: 'No Validation', default: true },
-			],
-			showInPlayground: false,
-		},
 		{
 			name: 'required',
 			label: 'Required',
@@ -117,8 +123,65 @@ export const switchConfig = {
 			defaultValue: false,
 			description:
 				'When the required attribute specified, the user will be required to fill the form element before submitting the form.',
-			showInPlayground: false,
+			showInPlayground: true,
 		},
+
+		// Validation
+		{
+			name: 'validation',
+			label: 'Validation',
+			type: 'select',
+			description: 'Marks an input element as invalid (red) / valid (green) / no-validation (grey)',
+			options: [
+				{ value: 'no-validation', label: 'No Validation', default: true },
+				{ value: 'invalid', label: 'Invalid' },
+				{ value: 'valid', label: 'Valid' },
+			],
+			showInPlayground: true,
+		},
+		{
+			name: 'invalidMessage',
+			alternativeName: 'invalid-message',
+			label: 'Invalid Message',
+			type: 'text',
+			defaultValue: 'Please accept the terms',
+			description: 'Helper message for invalid form components',
+			showInPlayground: true,
+			dependsOn: { prop: 'validation', value: 'invalid' },
+		},
+		{
+			name: 'validMessage',
+			alternativeName: 'valid-message',
+			label: 'Valid Message',
+			type: 'text',
+			defaultValue: 'Terms accepted',
+			description: 'Helper message for valid form components',
+			showInPlayground: true,
+			dependsOn: { prop: 'validation', value: 'valid' },
+		},
+
+		// Message
+		{
+			name: 'show-message',
+			alternativeName: 'showMessage',
+			label: 'Show Message',
+			type: 'checkbox',
+			defaultValue: false,
+			description: 'Enables or disables the visibility of the message.',
+			showInPlayground: true,
+			dependsOn: { prop: 'validation', value: 'no-validation' },
+		},
+		{
+			name: 'message',
+			label: 'Message',
+			type: 'text',
+			defaultValue: 'Message',
+			description: 'Optional helper message for form components',
+			showInPlayground: true,
+			dependsOn: 'show-message',
+		},
+
+		// Hidden properties
 		{
 			name: 'show-required-asterisk',
 			alternativeName: 'showRequiredAsterisk',
@@ -127,41 +190,6 @@ export const switchConfig = {
 			defaultValue: false,
 			description:
 				"This attribute allows to specify whether a form field which is marked as required will show a visual indicator (an asterisk '*').",
-			showInPlayground: false,
-		},
-		{
-			name: 'message',
-			label: 'Message',
-			type: 'text',
-			defaultValue: '',
-			description: 'Optional helper message for form components',
-			showInPlayground: false,
-		},
-		{
-			name: 'invalidMessage',
-			alternativeName: 'invalid-message',
-			label: 'Invalid Message',
-			type: 'text',
-			defaultValue: '',
-			description: 'Helper message for invalid form components',
-			showInPlayground: false,
-		},
-		{
-			name: 'validMessage',
-			alternativeName: 'valid-message',
-			label: 'Valid Message',
-			type: 'text',
-			defaultValue: '',
-			description: 'Helper message for valid form components',
-			showInPlayground: false,
-		},
-		{
-			name: 'show-message',
-			alternativeName: 'showMessage',
-			label: 'Show Message',
-			type: 'checkbox',
-			defaultValue: false,
-			description: 'Enables or disables the visibility of the message.',
 			showInPlayground: false,
 		},
 		{
@@ -174,32 +202,12 @@ export const switchConfig = {
 			showInPlayground: false,
 		},
 		{
-			name: 'icon-leading',
-			alternativeName: 'iconLeading',
-			type: 'text',
-			label: 'Icon Leading',
-			description:
-				'Define an icon by its identifier to get displayed in front of the elements content.',
-			defaultValue: '',
-			showInPlayground: false,
-		},
-		{
 			name: 'icon',
 			label: 'Icon',
 			type: 'text',
 			defaultValue: '',
 			description:
 				'Define an icon by its identifier to get displayed in front of the elements content.',
-			showInPlayground: false,
-		},
-		{
-			name: 'icon-trailing',
-			alternativeName: 'iconTrailing',
-			type: 'text',
-			label: 'Icon Trailing',
-			description:
-				'Define an icon by its identifier to get displayed in front of the elements content.',
-			defaultValue: '',
 			showInPlayground: false,
 		},
 		{

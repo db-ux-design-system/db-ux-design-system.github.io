@@ -5,7 +5,8 @@ export const linkConfig = {
 	useAriaDisabled: true,
 	defaultProps: {
 		href: '#',
-		content: '',
+		content: 'internal',
+		'show-icon-trailing': 'false',
 	},
 	slots: [
 		{
@@ -34,7 +35,7 @@ export const linkConfig = {
 			options: [
 				{ value: 'adaptive', label: 'Adaptive', default: true },
 				{ value: 'brand', label: 'Brand' },
-				{ value: 'inline', label: 'Inline' },
+				// { value: 'inline', label: 'Inline' },
 			],
 			showInPlayground: true,
 		},
@@ -55,11 +56,11 @@ export const linkConfig = {
 			type: 'select',
 			description: 'Adds a different arrow after the link to indicate external or internal link',
 			options: [
-				{ value: '', label: 'None', default: true },
 				{ value: 'external', label: 'External' },
-				{ value: 'internal', label: 'Internal' },
+				{ value: 'internal', label: 'Internal', default: true },
 			],
 			showInPlayground: true,
+			dependsOn: { prop: 'variant', notValue: 'inline' },
 		},
 
 		// States
@@ -101,7 +102,8 @@ export const linkConfig = {
 			label: 'Show Icon',
 			description: 'Enables or disables the visibility of the icon.',
 			defaultValue: false,
-			showInPlayground: false,
+			showInPlayground: true,
+			dependsOn: { prop: 'variant', notValue: 'inline' },
 		},
 		{
 			name: 'wrap',
