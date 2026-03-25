@@ -90,28 +90,19 @@ const getIconPath = (icon: string): string => {
 					</div>
 				</>
 			);
-			const card = (
-				<DBCard behavior="interactive" className="resource-card-item">
-					{isDisabled ? (
-						cardContent
-					) : (
-						<>
-							{cardContent}
-							<a href={resource.url} target="_blank" rel="noopener noreferrer" class="db-link">
-								<strong class="resource-link-label" data-icon-trailing="arrow_up_right">
-									{resource.label || 'View Storybook'}
-								</strong>
-							</a>
-						</>
-					)}
-				</DBCard>
-			);
 			return isDisabled ? (
 				<DisabledWrapper label="Coming Soon" size="small">
-					{card}
+					<DBCard className="resource-card-item">{cardContent}</DBCard>
 				</DisabledWrapper>
 			) : (
-				card
+				<a href={resource.url} target="_blank" rel="noopener noreferrer" class="resource-card-link">
+					<DBCard behavior="interactive" className="resource-card-item">
+						{cardContent}
+						<strong class="resource-link-label" data-icon-trailing="arrow_up_right">
+							{resource.label || 'View Storybook'}
+						</strong>
+					</DBCard>
+				</a>
 			);
 		})
 	}
