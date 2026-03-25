@@ -11,8 +11,10 @@ table {
 
 table td,
 table th {
-	border-inline-end: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
-	border-block-end: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-inline-end: var(--db-border-width-3xs) solid
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-block-end: var(--db-border-width-3xs) solid
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
 	padding: var(--db-spacing-fixed-sm);
 	padding-inline: var(--db-spacing-fixed-lg);
 	text-align: start;

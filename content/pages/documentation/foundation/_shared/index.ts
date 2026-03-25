@@ -68,9 +68,21 @@ export const handleSimplePlaygrounds = ({
 
 		if (isColor) {
 			const computedStyles = getComputedStyle(box.querySelector('.db-card')!);
-			popover!.appendChild(createParagraph(`Background Color: --db-${select.value}-bg-basic-level-1-default (${computedStyles.backgroundColor})`));
-			popover!.appendChild(createParagraph(`Color: --db-${select.value}-on-bg-basic-emphasis-100-default (${computedStyles.color})`));
-			popover!.appendChild(createParagraph(`Border Color: --db-${select.value}-on-bg-basic-emphasis-60-default (${computedStyles.borderColor})`));
+			popover!.appendChild(
+				createParagraph(
+					`Background Color: --db-${select.value}-bg-basic-level-1-default (${computedStyles.backgroundColor})`,
+				),
+			);
+			popover!.appendChild(
+				createParagraph(
+					`Color: --db-${select.value}-on-bg-basic-emphasis-100-default (${computedStyles.color})`,
+				),
+			);
+			popover!.appendChild(
+				createParagraph(
+					`Border Color: --db-${select.value}-on-bg-basic-emphasis-60-default (${computedStyles.borderColor})`,
+				),
+			);
 		} else {
 			const token = `--db-${dataAttributeName}-${select.value}`;
 			const computed = (getComputedStyle(box!) as any)[computedStyle];
@@ -78,7 +90,9 @@ export const handleSimplePlaygrounds = ({
 				const rem = parseFloat(computed) / 16;
 				const radiusRem = rem === 1 ? rem : rem.toFixed(2);
 				const radiusPx = Math.round(parseFloat(computed));
-				popover!.appendChild(createParagraph(`${popoverLabel}: ${token} (${radiusRem}rem / ${radiusPx}px)`));
+				popover!.appendChild(
+					createParagraph(`${popoverLabel}: ${token} (${radiusRem}rem / ${radiusPx}px)`),
+				);
 			} else {
 				popover!.appendChild(createParagraph(`${popoverLabel}: ${token} (${computed})`));
 			}

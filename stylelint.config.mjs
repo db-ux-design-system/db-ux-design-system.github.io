@@ -21,10 +21,10 @@ export default {
 		'db-ux/use-border-width': [true], // border-width & border
 		'db-ux/use-border-radius': [true], // border-radius
 		'db-ux/use-border-color': [true], // border-color & border
-		"a11y/media-prefers-reduced-motion": true,
-		"a11y/no-outline-none": true,
-		"a11y/selector-pseudo-class-focus": true,
-		"csstools/use-logical": ["always", { "except": ["float"] }],
+		'a11y/media-prefers-reduced-motion': true,
+		'a11y/no-outline-none': true,
+		'a11y/selector-pseudo-class-focus': true,
+		'csstools/use-logical': ['always', { except: ['float'] }],
 		'no-descending-specificity': null,
 		'declaration-property-value-no-unknown': [
 			true,
