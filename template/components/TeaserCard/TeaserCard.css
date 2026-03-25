@@ -24,13 +24,15 @@
 	z-index: 1;
 }
 
-.teaser-cards .db-card .teaser-title-link:focus-visible {
-	outline: none;
-}
+@supports selector(:has(*)) {
+	.teaser-cards .db-card .teaser-title-link:focus-visible {
+		outline: none;
+	}
 
-.teaser-cards .db-card:has(.teaser-title-link:focus-visible) {
-	outline: var(--db-border-width-xs) solid var(--db-adaptive-on-bg-basic-emphasis-100-default);
-	outline-offset: calc(-1 * var(--db-border-width-3xs));
+	.teaser-cards .db-card:has(.teaser-title-link:focus-visible) {
+		outline: var(--db-border-width-xs) solid var(--db-adaptive-on-bg-basic-emphasis-100-default);
+		outline-offset: calc(-1 * var(--db-border-width-3xs));
+	}
 }
 
 .teaser-preview {
@@ -41,6 +43,8 @@
 	background: var(--db-adaptive-bg-basic-level-3-default);
 	flex-shrink: 0;
 	margin-block-start: auto;
+	position: relative;
+	z-index: 2;
 }
 
 .teaser-preview .db-link {
