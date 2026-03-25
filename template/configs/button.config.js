@@ -5,7 +5,7 @@ export const buttonConfig = {
 	defaultText: 'Button',
 	defaultProps: {
 		size: 'medium',
-		variant: 'outlined'
+		variant: 'outlined',
 	},
 	slots: [
 		{
@@ -27,7 +27,7 @@ export const buttonConfig = {
 			label: 'Text',
 			description: 'Alternative for default slot/children.',
 			defaultValue: 'Button',
-			showInPlayground: true
+			showInPlayground: true,
 		},
 
 		// Appearance
@@ -35,39 +35,42 @@ export const buttonConfig = {
 			name: 'variant',
 			type: 'select',
 			label: 'Variant',
-			description: 'Variant of the button. Use only 1 primary button on a page as CTA otherwise use one of the adaptive buttons.',
+			description:
+				'Variant of the button. Use only 1 primary button on a page as CTA otherwise use one of the adaptive buttons.',
 			defaultValue: 'outlined',
 			showInPlayground: true,
 			options: [
 				{ value: 'outlined', label: 'Outlined', default: true },
 				{ value: 'brand', label: 'Brand' },
 				{ value: 'filled', label: 'Filled' },
-				{ value: 'ghost', label: 'Ghost' }
-			]
+				{ value: 'ghost', label: 'Ghost' },
+			],
 		},
 		{
 			name: 'size',
 			type: 'select',
 			label: 'Size',
-			description: 'The size attribute changes the font-size and other related sizes of the component.',
+			description:
+				'The size attribute changes the font-size and other related sizes of the component.',
 			defaultValue: 'medium',
 			showInPlayground: true,
 			options: [
 				{ value: 'small', label: 'Small' },
-				{ value: 'medium', label: 'Medium', default: true }
-			]
+				{ value: 'medium', label: 'Medium', default: true },
+			],
 		},
 		{
 			name: 'width',
 			type: 'select',
 			label: 'Width',
-			description: 'Width of the component. Auto width based on children size, full width based on parent elements width.',
+			description:
+				'Width of the component. Auto width based on children size, full width based on parent elements width.',
 			defaultValue: 'auto',
 			showInPlayground: true,
 			options: [
 				{ value: 'auto', label: 'Auto', default: true },
-				{ value: 'full', label: 'Full' }
-			]
+				{ value: 'full', label: 'Full' },
+			],
 		},
 
 		// Icons
@@ -77,7 +80,7 @@ export const buttonConfig = {
 			label: 'Icon',
 			description: 'Define an icon by its identifier to get displayed in the button.',
 			defaultValue: '',
-			showInPlayground: true
+			showInPlayground: true,
 		},
 		{
 			name: 'icon-trailing',
@@ -86,16 +89,17 @@ export const buttonConfig = {
 			label: 'Icon Trailing',
 			description: 'Define an icon by its identifier to get displayed after the elements content.',
 			defaultValue: '',
-			showInPlayground: true
+			showInPlayground: true,
 		},
 		{
 			name: 'no-text',
 			alternativeName: 'noText',
 			type: 'checkbox',
 			label: 'No Text',
-			description: 'Define the text next to the icon specified via the icon Property to get hidden.',
+			description:
+				'Define the text next to the icon specified via the icon Property to get hidden.',
 			defaultValue: false,
-			showInPlayground: true
+			showInPlayground: true,
 		},
 
 		// States
@@ -105,7 +109,7 @@ export const buttonConfig = {
 			label: 'Disabled',
 			description: 'The disabled attribute can be set to keep a user from clicking on the button.',
 			defaultValue: false,
-			showInPlayground: true
+			showInPlayground: true,
 		},
 
 		// Hidden properties
@@ -119,16 +123,17 @@ export const buttonConfig = {
 			options: [
 				{ value: 'button', label: 'Button', default: true },
 				{ value: 'submit', label: 'Submit' },
-				{ value: 'reset', label: 'Reset' }
-			]
+				{ value: 'reset', label: 'Reset' },
+			],
 		},
 		{
 			name: 'id',
 			type: 'text',
 			label: 'ID',
-			description: 'ID of the component, generated automatically for some components as a fallback if unset.',
+			description:
+				'ID of the component, generated automatically for some components as a fallback if unset.',
 			defaultValue: '',
-			showInPlayground: false
+			showInPlayground: false,
 		},
 		{
 			name: 'className',
@@ -136,16 +141,17 @@ export const buttonConfig = {
 			label: 'Class Name',
 			description: 'React specific for adding className to the component.',
 			defaultValue: '',
-			showInPlayground: false
+			showInPlayground: false,
 		},
 		{
 			name: 'icon-leading',
 			alternativeName: 'iconLeading',
 			type: 'text',
 			label: 'Icon Leading',
-			description: 'Define an icon by its identifier to get displayed in front of the elements content.',
+			description:
+				'Define an icon by its identifier to get displayed in front of the elements content.',
 			defaultValue: '',
-			showInPlayground: false
+			showInPlayground: false,
 		},
 		{
 			name: 'show-icon-leading',
@@ -154,7 +160,7 @@ export const buttonConfig = {
 			label: 'Show Icon Leading',
 			description: 'Enables or disables the visibility of the leading icon.',
 			defaultValue: false,
-			showInPlayground: false
+			showInPlayground: false,
 		},
 		{
 			name: 'show-icon',
@@ -163,7 +169,7 @@ export const buttonConfig = {
 			label: 'Show Icon',
 			description: 'Enables or disables the visibility of the icon.',
 			defaultValue: false,
-			showInPlayground: false
+			showInPlayground: false,
 		},
 		{
 			name: 'show-icon-trailing',
@@ -172,7 +178,7 @@ export const buttonConfig = {
 			label: 'Show Icon Trailing',
 			description: 'Enables or disables the visibility of the trailing icon.',
 			defaultValue: false,
-			showInPlayground: false
+			showInPlayground: false,
 		},
 		{
 			name: 'name',
@@ -180,7 +186,7 @@ export const buttonConfig = {
 			label: 'Name',
 			description: 'The name attribute specifies a name attributes value for the button.',
 			defaultValue: '',
-			showInPlayground: false
+			showInPlayground: false,
 		},
 		{
 			name: 'form',
@@ -188,7 +194,7 @@ export const buttonConfig = {
 			label: 'Form',
 			description: 'Associates the control with a form element.',
 			defaultValue: '',
-			showInPlayground: false
+			showInPlayground: false,
 		},
 		{
 			name: 'value',
@@ -196,7 +202,7 @@ export const buttonConfig = {
 			label: 'Value',
 			description: 'The value attribute specifies an initial value for the button.',
 			defaultValue: '',
-			showInPlayground: false
-		}
-	]
+			showInPlayground: false,
+		},
+	],
 };
