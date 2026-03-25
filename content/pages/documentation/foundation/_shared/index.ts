@@ -24,14 +24,14 @@ export const handleTableCopy = (styles: CSSStyleDeclaration) => {
 
 export const handleSimplePlaygrounds = ({
 	dataAttributeName,
-	computedStyle,
+	tokenPrefix,
 	popoverLabel,
 	remPx,
 	withDensity,
 	isColor,
 }: {
 	dataAttributeName: string;
-	computedStyle: string;
+	tokenPrefix: string;
 	popoverLabel: string;
 	remPx?: boolean;
 	withDensity?: boolean;
