@@ -80,4 +80,3 @@ export function findSubNavigation(currentPathname: string): NavigationItem[] | u
 	for (const top of appNavigation) walk(top, 0);
 	return match?.node.children;
 }
-

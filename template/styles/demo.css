@@ -45,7 +45,8 @@
 	color: var(--db-brand-origin-default);
 }
 
-.cta-card .db-button.cta-button:hover, .cta-card .db-button.cta-button:focus {
+.cta-card .db-button.cta-button:hover,
+.cta-card .db-button.cta-button:focus {
 	background-color: var(--db-brand-on-origin-default);
 	opacity: var(--db-opacity-2xl);
 }
@@ -82,7 +83,8 @@ table {
 table td,
 table th {
 	border-inline-end: 0 solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
-	border-block-end: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-block-end: var(--db-border-width-3xs) solid
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
 	padding: var(--db-spacing-fixed-sm);
 	padding-inline: var(--db-spacing-fixed-lg);
 	text-align: start;

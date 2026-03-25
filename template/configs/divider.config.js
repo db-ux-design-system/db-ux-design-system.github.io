@@ -36,8 +36,7 @@ export const dividerConfig = {
 			label: 'Emphasis',
 			type: 'select',
 			defaultValue: 'weak',
-			description:
-				'The emphasis attribute divides in between a weak or strong importance.',
+			description: 'The emphasis attribute divides in between a weak or strong importance.',
 			options: [
 				{ value: 'weak', label: 'Weak', default: true },
 				{ value: 'strong', label: 'Strong' },

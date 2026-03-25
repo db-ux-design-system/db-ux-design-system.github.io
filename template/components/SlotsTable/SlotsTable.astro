@@ -7,21 +7,25 @@ const { config } = Astro.props;
 const slots = config.slots || [];
 ---
 
-{slots.length > 0 && (
-	<table>
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Description</th>
-			</tr>
-		</thead>
-		<tbody>
-			{slots.map((slot: { name: string; description: string }) => (
+{
+	slots.length > 0 && (
+		<table>
+			<thead>
 				<tr>
-					<td><code>{slot.name}</code></td>
-					<td>{slot.description}</td>
+					<th>Name</th>
+					<th>Description</th>
 				</tr>
-			))}
-		</tbody>
-	</table>
-)}
+			</thead>
+			<tbody>
+				{slots.map((slot: { name: string; description: string }) => (
+					<tr>
+						<td>
+							<code>{slot.name}</code>
+						</td>
+						<td>{slot.description}</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	)
+}

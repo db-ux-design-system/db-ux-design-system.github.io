@@ -5,13 +5,13 @@ export const stackConfig = {
 		gap: 'medium',
 		variant: 'simple',
 		direction: 'column',
-		alignment: 'stretch'
+		alignment: 'stretch',
 	},
 	slots: [
 		{
 			name: 'children',
 			description: 'default slot',
-		}
+		},
 	],
 	properties: [
 		{
@@ -23,8 +23,8 @@ export const stackConfig = {
 			showInPlayground: true,
 			options: [
 				{ value: 'column', label: 'Column', default: true },
-				{ value: 'row', label: 'Row' }
-			]
+				{ value: 'row', label: 'Row' },
+			],
 		},
 		{
 			name: 'gap',
@@ -43,20 +43,21 @@ export const stackConfig = {
 				{ value: 'large', label: 'Large' },
 				{ value: 'x-large', label: 'x-large' },
 				{ value: '2x-large', label: '2x-large' },
-				{ value: '3x-large', label: '3x-large' }
-			]
+				{ value: '3x-large', label: '3x-large' },
+			],
 		},
 		{
 			name: 'variant',
 			type: 'select',
 			label: 'Variant',
-			description: 'Change variant of stack. To use variant="divider" add a DBDivider after each element',
+			description:
+				'Change variant of stack. To use variant="divider" add a DBDivider after each element',
 			defaultValue: 'simple',
 			showInPlayground: true,
 			options: [
 				{ value: 'simple', label: 'Simple', default: true },
-				{ value: 'divider', label: 'Divider' }
-			]
+				{ value: 'divider', label: 'Divider' },
+			],
 		},
 		{
 			name: 'alignment',
@@ -69,8 +70,8 @@ export const stackConfig = {
 				{ value: 'stretch', label: 'Stretch', default: true },
 				{ value: 'start', label: 'Start' },
 				{ value: 'end', label: 'End' },
-				{ value: 'center', label: 'Center' }
-			]
+				{ value: 'center', label: 'Center' },
+			],
 		},
 		{
 			name: 'justify-content / justifyContent',
@@ -84,8 +85,8 @@ export const stackConfig = {
 				{ value: 'start', label: 'Start', default: true },
 				{ value: 'end', label: 'End' },
 				{ value: 'center', label: 'Center' },
-				{ value: 'space-between', label: 'Space Between' }
-			]
+				{ value: 'space-between', label: 'Space Between' },
+			],
 		},
 		{
 			name: 'wrap',
@@ -93,15 +94,16 @@ export const stackConfig = {
 			label: 'Wrap',
 			description: 'If the stack should wrap if parent is too small otherwise you get an overflow',
 			defaultValue: false,
-			showInPlayground: false
+			showInPlayground: false,
 		},
 		{
 			name: 'id',
 			type: 'text',
 			label: 'ID',
-			description: 'ID of the component, generated automatically for some components as a fallback if unset.',
+			description:
+				'ID of the component, generated automatically for some components as a fallback if unset.',
 			defaultValue: '',
-			showInPlayground: false
+			showInPlayground: false,
 		},
 		{
 			name: 'className',
@@ -109,7 +111,7 @@ export const stackConfig = {
 			label: 'Class Name',
 			description: 'React specific for adding className to the component.',
 			defaultValue: '',
-			showInPlayground: false
-		}
-	]
+			showInPlayground: false,
+		},
+	],
 };

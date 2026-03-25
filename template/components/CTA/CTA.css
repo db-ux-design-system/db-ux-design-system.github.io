@@ -2,6 +2,7 @@
 	background: var(--db-brand-origin-default) !important;
 	color: var(--db-brand-on-origin-default) !important;
 	border-radius: var(--db-border-radius-sm) !important;
+	border: 0;
 }
 
 .cta-content {
@@ -25,6 +26,7 @@
 	max-inline-size: var(--db-container-md);
 	text-align: center;
 	margin: 0 auto;
+	font: var(--db-type-headline-md);
 }
 
 .cta-text {
@@ -52,7 +54,8 @@
 	border-color: var(--db-brand-on-origin-default);
 }
 
-.cta .db-button[data-variant='brand']:hover, .cta .db-button[data-variant='brand']:focus {
+.cta .db-button[data-variant='brand']:hover,
+.cta .db-button[data-variant='brand']:focus {
 	opacity: 0.88;
 }
 
@@ -71,7 +74,8 @@
 	border-color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
 }
 
-.cta .db-button[data-variant='outlined']:hover, .cta .db-button[data-variant='outlined']:focus {
+.cta .db-button[data-variant='outlined']:hover,
+.cta .db-button[data-variant='outlined']:focus {
 	background: rgb(255 255 255 / 24%);
 }
 

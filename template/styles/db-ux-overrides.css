@@ -52,18 +52,22 @@
 }
 
 .cards-row-fixed > a {
-	display: block;
+	display: flex;
+	flex-direction: column;
 	inline-size: 100%;
 }
 
+.cards-row-fixed > a > .db-card,
 .cards-row-fixed > .db-card {
 	block-size: 100%;
+	flex: 1;
 	display: flex;
 	flex-direction: column;
+	box-sizing: border-box;
 }
 
 .cards-row-fixed .text-image {
-	flex: 1 1 auto;
+	flex: 0 1 auto;
 }
 
 .cards-row-fixed .text-image-content {
