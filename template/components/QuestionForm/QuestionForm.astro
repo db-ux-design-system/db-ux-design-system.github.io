@@ -7,9 +7,7 @@ interface Props {
 
 const { componentName } = Astro.props;
 
-const subject = componentName
-	? `Question: ${componentName} component`
-	: 'Question about DB UX Design System';
+const subject = componentName ? `Question: ${componentName}` : 'Question about DB UX Design System';
 
 const encodedSubject = encodeURIComponent(subject);
 const mailTo = 'db-ux-designsystem@deutschebahn.com';
