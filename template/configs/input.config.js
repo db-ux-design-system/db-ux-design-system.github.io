@@ -1,4 +1,5 @@
 export const inputConfig = {
+	component: 'DBInput',
 	elementId: 'playground-input',
 	defaultProps: {
 		label: 'Label',
@@ -61,6 +62,16 @@ export const inputConfig = {
 			showInPlayground: true,
 		},
 		{
+			name: 'show-label',
+			alternativeName: 'showLabel',
+			label: 'Show Label',
+			type: 'checkbox',
+			defaultValue: true,
+			description: 'Enables/disables the visibility of the label',
+			showInPlayground: true,
+			dependsOn: { prop: 'variant', value: 'above' },
+		},
+		{
 			name: 'type',
 			label: 'Type',
 			type: 'select',
@@ -96,7 +107,14 @@ export const inputConfig = {
 				'The disabled attribute can be set to keep a user from clicking on the form element.',
 			showInPlayground: true,
 		},
-
+		{
+			name: 'readonly',
+			label: 'Readonly',
+			type: 'checkbox',
+			defaultValue: false,
+			description: 'The disabled attribute can be set to keep a user from edit on the form element',
+			showInPlayground: true,
+		},
 		// Validation
 		{
 			name: 'validation',
@@ -104,9 +122,9 @@ export const inputConfig = {
 			type: 'select',
 			description: 'Marks an input element as invalid (red) / valid (green) / no-validation (grey)',
 			options: [
+				{ value: 'no-validation', label: 'No Validation', default: true },
 				{ value: 'invalid', label: 'Invalid' },
 				{ value: 'valid', label: 'Valid' },
-				{ value: 'no-validation', label: 'No Validation', default: true },
 			],
 			showInPlayground: true,
 		},
@@ -115,21 +133,21 @@ export const inputConfig = {
 			alternativeName: 'invalid-message',
 			label: 'Invalid Message',
 			type: 'text',
-			defaultValue: '',
+			defaultValue: 'Invalid message',
 			description: 'Helper message for invalid form components',
 			showInPlayground: true,
+			dependsOn: { prop: 'validation', value: 'invalid' },
 		},
 		{
 			name: 'validMessage',
 			alternativeName: 'valid-message',
 			label: 'Valid Message',
 			type: 'text',
-			defaultValue: '',
+			defaultValue: 'Valid message',
 			description: 'Helper message for valid form components',
 			showInPlayground: true,
+			dependsOn: { prop: 'validation', value: 'valid' },
 		},
-
-		// Hidden properties
 		{
 			name: 'required',
 			label: 'Required',
@@ -137,8 +155,74 @@ export const inputConfig = {
 			defaultValue: false,
 			description:
 				'When the required attribute specified, the user will be required to fill the form element before submitting the form.',
-			showInPlayground: false,
+			showInPlayground: true,
 		},
+
+		// Message
+		{
+			name: 'show-message',
+			alternativeName: 'showMessage',
+			label: 'Show Message',
+			type: 'checkbox',
+			defaultValue: false,
+			description: 'Enables or disables the visibility of the message.',
+			showInPlayground: true,
+			dependsOn: { prop: 'validation', value: 'no-validation' },
+		},
+		{
+			name: 'message',
+			label: 'Message',
+			type: 'text',
+			defaultValue: 'Helper message',
+			description: 'Optional helper message for form components',
+			showInPlayground: true,
+			dependsOn: 'show-message',
+		},
+
+		{
+			name: 'show-icon-leading',
+			alternativeName: 'showIconLeading',
+			label: 'Show Icon Leading',
+			type: 'checkbox',
+			defaultValue: false,
+			description: 'Enables or disables the visibility of the leading icon.',
+			showInPlayground: true,
+		},
+		{
+			name: 'icon-leading',
+			alternativeName: 'iconLeading',
+			label: 'Icon Leading',
+			type: 'text',
+			defaultValue: 'x_placeholder',
+			description:
+				'Define an icon by its identifier to get displayed in front of the elements content.',
+			showInPlayground: true,
+			dependsOn: 'show-icon-leading',
+		},
+		{
+			name: 'show-icon-trailing',
+			alternativeName: 'showIconTrailing',
+			label: 'Show Icon Trailing',
+			type: 'checkbox',
+			defaultValue: false,
+			description: 'Enables or disables the visibility of the trailing icon.',
+			showInPlayground: true,
+		},
+
+		{
+			name: 'icon-trailing',
+			alternativeName: 'iconTrailing',
+			label: 'Icon Trailing',
+			type: 'text',
+			defaultValue: 'x_placeholder',
+			description:
+				'Define an icon by its identifier to get displayed in front of the elements content.',
+			showInPlayground: true,
+			dependsOn: 'show-icon-trailing',
+		},
+
+		// Hidden properties
+
 		{
 			name: 'show-required-asterisk',
 			alternativeName: 'showRequiredAsterisk',
@@ -150,24 +234,8 @@ export const inputConfig = {
 			showInPlayground: false,
 		},
 		{
-			name: 'message',
-			label: 'Message',
-			type: 'text',
-			defaultValue: '',
-			description: 'Optional helper message for form components',
-			showInPlayground: false,
-		},
-		{
-			name: 'show-message',
-			alternativeName: 'showMessage',
-			label: 'Show Message',
-			type: 'checkbox',
-			defaultValue: false,
-			description: 'Enables or disables the visibility of the message.',
-			showInPlayground: false,
-		},
-		{
 			name: 'message-icon',
+			alternativeName: 'messageIcon',
 			label: 'Message Icon',
 			type: 'text',
 			defaultValue: '',
@@ -176,6 +244,7 @@ export const inputConfig = {
 		},
 		{
 			name: 'message-size',
+			alternativeName: 'messageSize',
 			label: 'Message Size',
 			type: 'select',
 			description: 'The size of the message infotext. Defaults to "small".',
@@ -187,6 +256,7 @@ export const inputConfig = {
 		},
 		{
 			name: 'valid-message-size',
+			alternativeName: 'validMessageSize',
 			label: 'Valid Message Size',
 			type: 'select',
 			description: 'The size of the valid message infotext. Defaults to "small".',
@@ -198,6 +268,7 @@ export const inputConfig = {
 		},
 		{
 			name: 'invalid-message-size',
+			alternativeName: 'invalidMessageSize',
 			label: 'Invalid Message Size',
 			type: 'select',
 			description: 'The size of the invalid message infotext. Defaults to "small".',
@@ -205,43 +276,6 @@ export const inputConfig = {
 				{ value: 'small', label: 'Small', default: true },
 				{ value: 'medium', label: 'Medium' },
 			],
-			showInPlayground: false,
-		},
-		{
-			name: 'show-label',
-			alternativeName: 'showLabel',
-			label: 'Show Label',
-			type: 'checkbox',
-			defaultValue: false,
-			description: 'Enables/disables the visibility of the label',
-			showInPlayground: false,
-		},
-		{
-			name: 'icon-leading',
-			alternativeName: 'iconLeading',
-			label: 'Icon Leading',
-			type: 'text',
-			defaultValue: '',
-			description:
-				'Define an icon by its identifier to get displayed in front of the elements content.',
-			showInPlayground: false,
-		},
-		{
-			name: 'show-icon-leading',
-			alternativeName: 'showIconLeading',
-			label: 'Show Icon Leading',
-			type: 'checkbox',
-			defaultValue: false,
-			description: 'Enables or disables the visibility of the leading icon.',
-			showInPlayground: false,
-		},
-		{
-			name: 'icon',
-			label: 'Icon',
-			type: 'text',
-			defaultValue: '',
-			description:
-				'Define an icon by its identifier to get displayed in front of the elements content.',
 			showInPlayground: false,
 		},
 		{
@@ -254,24 +288,16 @@ export const inputConfig = {
 			showInPlayground: false,
 		},
 		{
-			name: 'icon-trailing',
-			alternativeName: 'iconTrailing',
-			label: 'Icon Trailing',
+			name: 'icon',
+			label: 'Icon',
 			type: 'text',
 			defaultValue: '',
 			description:
 				'Define an icon by its identifier to get displayed in front of the elements content.',
 			showInPlayground: false,
+			dependsOn: 'show-icon',
 		},
-		{
-			name: 'show-icon-trailing',
-			alternativeName: 'showIconTrailing',
-			label: 'Show Icon Trailing',
-			type: 'checkbox',
-			defaultValue: false,
-			description: 'Enables or disables the visibility of the trailing icon.',
-			showInPlayground: false,
-		},
+
 		{
 			name: 'field-sizing',
 			alternativeName: 'fieldSizing',
@@ -384,14 +410,7 @@ export const inputConfig = {
 			description: 'The disabled attribute can be set to keep a user from edit on the form element',
 			showInPlayground: false,
 		},
-		{
-			name: 'readonly',
-			label: 'Readonly',
-			type: 'checkbox',
-			defaultValue: false,
-			description: 'The disabled attribute can be set to keep a user from edit on the form element',
-			showInPlayground: false,
-		},
+
 		{
 			name: 'autocomplete',
 			label: 'Autocomplete',

@@ -1,5 +1,4 @@
 ---
-order: 1
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -20,6 +19,7 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 import { badgeConfig } from '@template/configs/badge.config.js';
 
 - Indicate status or state of an item (e.g. new, error, success)
@@ -31,6 +31,14 @@ import { badgeConfig } from '@template/configs/badge.config.js';
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbbadge-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground config={badgeConfig} />
 
 </DBSection>
 

@@ -1,4 +1,5 @@
 export const checkboxConfig = {
+	component: 'DBCheckbox',
 	elementId: 'playground-checkbox',
 	defaultProps: {
 		checked: false,
@@ -29,7 +30,7 @@ export const checkboxConfig = {
 			name: 'label',
 			label: 'Label',
 			type: 'text',
-			defaultValue: 'Accept terms',
+			defaultValue: 'Label',
 			description: 'The label attribute specifies the caption of the form element.',
 			showInPlayground: true,
 		},
@@ -48,7 +49,8 @@ export const checkboxConfig = {
 			name: 'size',
 			label: 'Size',
 			type: 'select',
-			description: 'The size attribute changes the font-size and other related sizes of the component.',
+			description:
+				'The size attribute changes the font-size and other related sizes of the component.',
 			options: [
 				{ value: 'small', label: 'Small' },
 				{ value: 'medium', label: 'Medium', default: true },
@@ -78,66 +80,55 @@ export const checkboxConfig = {
 			label: 'Disabled',
 			type: 'checkbox',
 			defaultValue: false,
-			description: 'The disabled attribute can be set to keep a user from clicking on the form element.',
+			description:
+				'The disabled attribute can be set to keep a user from clicking on the form element.',
 			showInPlayground: true,
-		},
-
-		// Hidden properties
-		{
-			name: 'validation',
-			label: 'Validation',
-			type: 'select',
-			description: "Marks an input element as invalid (red) / valid (green) / no-validation (grey). Overwrites the :user-valid selector.",
-			options: [
-				{ value: 'invalid', label: 'Invalid' },
-				{ value: 'valid', label: 'Valid' },
-				{ value: 'no-validation', label: 'No Validation', default: true },
-			],
-			showInPlayground: false,
 		},
 		{
 			name: 'required',
 			label: 'Required',
 			type: 'checkbox',
 			defaultValue: false,
-			description: "When the required attribute specified, the user will be required to fill the form element before submitting the form. The form element will be marked semantically as required and by default also visually with an asterisk '*' next to the label (unless the property showRequiredAsterisk is also set with the value false).",
-			showInPlayground: false,
+			description:
+				'When the required attribute specified, the user will be required to fill the form element before submitting the form.',
+			showInPlayground: true,
 		},
+
+		// Validation
 		{
-			name: 'show-required-asterisk',
-			alternativeName: 'showRequiredAsterisk',
-			label: 'Show Required Asterisk',
-			type: 'checkbox',
-			defaultValue: false,
-			description: "This attribute allows to specify whether a form field which is marked as required will show a visual indicator (an asterisk '*'). It allows to prevent adding the visual indicator but still keep the field semantically required by setting its value to false. By default, its value is true, so the asterisk is shown when required is set.",
-			showInPlayground: false,
-		},
-		{
-			name: 'message',
-			label: 'Message',
-			type: 'text',
-			defaultValue: '',
-			description: 'Optional helper message for form components',
-			showInPlayground: false,
+			name: 'validation',
+			label: 'Validation',
+			type: 'select',
+			description: 'Marks an input element as invalid (red) / valid (green) / no-validation (grey)',
+			options: [
+				{ value: 'no-validation', label: 'No Validation', default: true },
+				{ value: 'invalid', label: 'Invalid' },
+				{ value: 'valid', label: 'Valid' },
+			],
+			showInPlayground: true,
 		},
 		{
 			name: 'invalidMessage',
 			alternativeName: 'invalid-message',
 			label: 'Invalid Message',
 			type: 'text',
-			defaultValue: '',
+			defaultValue: 'Invalid message',
 			description: 'Helper message for invalid form components',
-			showInPlayground: false,
+			showInPlayground: true,
+			dependsOn: { prop: 'validation', value: 'invalid' },
 		},
 		{
 			name: 'validMessage',
 			alternativeName: 'valid-message',
 			label: 'Valid Message',
 			type: 'text',
-			defaultValue: '',
+			defaultValue: 'Valid message',
 			description: 'Helper message for valid form components',
-			showInPlayground: false,
+			showInPlayground: true,
+			dependsOn: { prop: 'validation', value: 'valid' },
 		},
+
+		// Message
 		{
 			name: 'show-message',
 			alternativeName: 'showMessage',
@@ -145,6 +136,28 @@ export const checkboxConfig = {
 			type: 'checkbox',
 			defaultValue: false,
 			description: 'Enables or disables the visibility of the message.',
+			showInPlayground: true,
+			dependsOn: { prop: 'validation', value: 'no-validation' },
+		},
+		{
+			name: 'message',
+			label: 'Message',
+			type: 'text',
+			defaultValue: 'Message',
+			description: 'Optional helper message for form components',
+			showInPlayground: true,
+			dependsOn: 'show-message',
+		},
+
+		// Hidden properties
+		{
+			name: 'show-required-asterisk',
+			alternativeName: 'showRequiredAsterisk',
+			label: 'Show Required Asterisk',
+			type: 'checkbox',
+			defaultValue: false,
+			description:
+				"This attribute allows to specify whether a form field which is marked as required will show a visual indicator (an asterisk '*').",
 			showInPlayground: false,
 		},
 		{
@@ -160,7 +173,8 @@ export const checkboxConfig = {
 			name: 'id',
 			type: 'text',
 			label: 'ID',
-			description: 'ID of the component, generated automatically for some components as a fallback if unset.',
+			description:
+				'ID of the component, generated automatically for some components as a fallback if unset.',
 			defaultValue: '',
 			showInPlayground: false,
 		},
@@ -176,7 +190,8 @@ export const checkboxConfig = {
 			name: 'name',
 			type: 'text',
 			label: 'Name',
-			description: "The name attribute gives the name of the form control, as used in form submission and in the form element's elements object.",
+			description:
+				"The name attribute gives the name of the form control, as used in form submission and in the form element's elements object.",
 			defaultValue: '',
 			showInPlayground: false,
 		},

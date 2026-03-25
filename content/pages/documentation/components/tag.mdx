@@ -1,5 +1,4 @@
 ---
-order: 12
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -20,6 +19,7 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 import { tagConfig } from '@template/configs/tag.config.js';
 
 - Display short categories or attributes (e.g., "New", "Marketing", "Internal")
@@ -60,7 +60,16 @@ import { tagConfig } from '@template/configs/tag.config.js';
 />
 
 </DBSection>
+{/*
+TODO: playground not working
+<DBSection spacing="small" width="auto">
 
+## Playground
+
+<ComponentPlayground config={tagConfig} />
+
+</DBSection>
+*/}
 <DBSection spacing="small" width="auto">
 
 ## Properties, Slots & Events

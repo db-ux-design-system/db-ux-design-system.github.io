@@ -1,6 +1,7 @@
 export const tooltipConfig = {
+	component: 'DBTooltip',
 	elementId: 'demo-tooltip',
-	defaultText: 'Tooltip text',
+	defaultText: 'Text',
 	defaultProps: {
 		id: 'demo-tooltip',
 		placement: 'top',
@@ -20,7 +21,7 @@ export const tooltipConfig = {
 			name: 'text',
 			label: 'Text',
 			type: 'text',
-			defaultValue: 'Tooltip text',
+			defaultValue: 'Text',
 			description: 'The text content of the tooltip',
 			showInPlayground: true,
 		},
@@ -29,7 +30,8 @@ export const tooltipConfig = {
 			label: 'Placement',
 			type: 'select',
 			defaultValue: 'top',
-			description: 'The placement attributes values change the position to absolute and adds a transform based on the placement.',
+			description:
+				'The placement attributes values change the position to absolute and adds a transform based on the placement.',
 			options: [
 				{ value: 'top', label: 'Top', default: true },
 				{ value: 'bottom', label: 'Bottom' },
@@ -96,7 +98,8 @@ export const tooltipConfig = {
 			label: 'Variant',
 			type: 'select',
 			defaultValue: '',
-			description: 'Change the behavior of the tooltip: description (Adds aria-describedby to parent), label (Adds aria-labelledby to parent)',
+			description:
+				'Change the behavior of the tooltip: description (Adds aria-describedby to parent), label (Adds aria-labelledby to parent)',
 			options: [
 				{ value: '', label: 'None', default: true },
 				{ value: 'description', label: 'Description' },
@@ -109,7 +112,8 @@ export const tooltipConfig = {
 			label: 'ID',
 			type: 'text',
 			defaultValue: '',
-			description: 'ID of the component, generated automatically for some components as a fallback if unset.',
+			description:
+				'ID of the component, generated automatically for some components as a fallback if unset.',
 			showInPlayground: false,
 		},
 		{

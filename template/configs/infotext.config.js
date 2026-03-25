@@ -1,10 +1,11 @@
 export const infotextConfig = {
+	component: 'DBInfotext',
 	elementId: 'demo-infotext',
-	defaultText: 'This is helpful information',
+	defaultText: 'Text',
 	defaultProps: {
 		id: 'demo-infotext',
-		semantic: 'informational',
-		size: 'small',
+		semantic: 'adaptive',
+		size: 'medium',
 		showIcon: true,
 	},
 	slots: [
@@ -18,7 +19,7 @@ export const infotextConfig = {
 			name: 'text',
 			label: 'Text',
 			type: 'text',
-			defaultValue: 'This is helpful information',
+			defaultValue: 'Text',
 			description: 'Alternative for default slot/children',
 			showInPlayground: true,
 		},
@@ -29,10 +30,10 @@ export const infotextConfig = {
 			defaultValue: 'informational',
 			description: 'The semantic defines the default variants for most components',
 			options: [
-				{ value: 'adaptive', label: 'Adaptive' },
+				{ value: 'adaptive', label: 'Adaptive', default: true },
 				{ value: 'neutral', label: 'Neutral' },
 				{ value: 'critical', label: 'Critical' },
-				{ value: 'informational', label: 'Informational', default: true },
+				{ value: 'informational', label: 'Informational' },
 				{ value: 'warning', label: 'Warning' },
 				{ value: 'successful', label: 'Successful' },
 			],
@@ -43,27 +44,31 @@ export const infotextConfig = {
 			label: 'Size',
 			type: 'select',
 			defaultValue: 'small',
-			description: 'The size attribute changes the font-size and other related sizes of the component',
+			description:
+				'The size attribute changes the font-size and other related sizes of the component',
 			options: [
-				{ value: 'small', label: 'Small', default: true },
-				{ value: 'medium', label: 'Medium' },
+				{ value: 'medium', label: 'Medium', default: true },
+				{ value: 'small', label: 'Small' },
 			],
 			showInPlayground: true,
 		},
 		{
-			name: 'show-icon / showIcon',
+			name: 'show-icon',
+			alternativeName: 'showIcon',
 			label: 'Show Icon',
 			type: 'checkbox',
 			defaultValue: true,
 			description: 'Enables or disables the visibility of the icon',
 			showInPlayground: true,
+			dependsOn: { prop: 'semantic', value: 'adaptive' },
 		},
 		{
 			name: 'icon',
 			label: 'Icon',
 			type: 'text',
 			defaultValue: '',
-			description: 'Define an icon by its identifier to get displayed in front of the elements content',
+			description:
+				'Define an icon by its identifier to get displayed in front of the elements content',
 			showInPlayground: false,
 		},
 		{

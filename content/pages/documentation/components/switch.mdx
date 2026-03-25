@@ -1,5 +1,4 @@
 ---
-order: 11
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -20,6 +19,7 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 import { switchConfig } from '@template/configs/switch.config.js';
 
 - Turn a setting on or off with immediate effect (e.g., "Enable notifications")
@@ -33,7 +33,16 @@ import { switchConfig } from '@template/configs/switch.config.js';
 <ResourceCards path="?path=/docs/components-dbswitch-density--docs" />
 
 </DBSection>
+{/*
+TODO: playground not working, validation + messages
+<DBSection spacing="small" width="auto">
 
+## Playground
+
+<ComponentPlayground config={switchConfig} />
+
+</DBSection>
+*/}
 <DBSection spacing="small" width="auto">
 
 ## Properties, Slots & Events

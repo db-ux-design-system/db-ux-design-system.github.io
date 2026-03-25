@@ -1,4 +1,8 @@
+/*
+TODO: drawer playground not functioning
+*/
 export const drawerConfig = {
+	component: 'DBDrawer',
 	elementId: 'demo-drawer',
 	defaultText: 'Drawer content',
 	defaultProps: {

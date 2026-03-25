@@ -1,5 +1,4 @@
 ---
-order: 8
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -21,6 +20,7 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 import { notificationConfig } from '@template/configs/notification.config.js';
 
 - Confirm an action or state change (e.g., "Saved", "Filter applied")
@@ -61,7 +61,16 @@ import { notificationConfig } from '@template/configs/notification.config.js';
 />
 
 </DBSection>
+{/*
+TODO: fix playground
+<DBSection spacing="small" width="auto">
 
+## Playground
+
+<ComponentPlayground config={notificationConfig} />
+
+</DBSection>
+*/}
 <DBSection spacing="small" width="auto">
 
 ## Properties, Slots & Events

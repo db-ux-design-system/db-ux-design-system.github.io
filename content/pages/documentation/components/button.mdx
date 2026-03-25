@@ -1,5 +1,4 @@
 ---
-order: 2
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small' # none, small, medium, large
 sectionWidth: 'auto' # auto, full
@@ -20,6 +19,7 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 import { buttonConfig } from '@template/configs/button.config.js';
 
 - Trigger an action (e.g., Send, Save, Delete)
@@ -31,6 +31,14 @@ import { buttonConfig } from '@template/configs/button.config.js';
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbbutton-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground config={buttonConfig} />
 
 </DBSection>
 

@@ -1,5 +1,4 @@
 ---
-order: 9
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -20,6 +19,7 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 import { radioConfig } from '@template/configs/radio.config.js';
 
 - Select one option from a small set (e.g., language, delivery type)
@@ -31,6 +31,14 @@ import { radioConfig } from '@template/configs/radio.config.js';
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbradio-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground config={radioConfig} />
 
 </DBSection>
 

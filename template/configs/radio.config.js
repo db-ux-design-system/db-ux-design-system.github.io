@@ -1,4 +1,5 @@
 export const radioConfig = {
+	component: 'DBRadio',
 	elementId: 'playground-radio',
 	defaultProps: {
 		checked: false,
@@ -33,7 +34,7 @@ export const radioConfig = {
 			name: 'label',
 			label: 'Label',
 			type: 'text',
-			defaultValue: 'Option 1',
+			defaultValue: 'Label',
 			description: 'The label attribute specifies the caption of the form element.',
 			showInPlayground: true,
 		},
@@ -52,7 +53,8 @@ export const radioConfig = {
 			name: 'size',
 			label: 'Size',
 			type: 'select',
-			description: 'The size attribute changes the font-size and other related sizes of the component.',
+			description:
+				'The size attribute changes the font-size and other related sizes of the component.',
 			options: [
 				{ value: 'small', label: 'Small' },
 				{ value: 'medium', label: 'Medium', default: true },
@@ -74,7 +76,8 @@ export const radioConfig = {
 			label: 'Disabled',
 			type: 'checkbox',
 			defaultValue: false,
-			description: 'The disabled attribute can be set to keep a user from clicking on the form element.',
+			description:
+				'The disabled attribute can be set to keep a user from clicking on the form element.',
 			showInPlayground: true,
 		},
 
@@ -83,21 +86,23 @@ export const radioConfig = {
 			name: 'validation',
 			label: 'Validation',
 			type: 'select',
-			description: "Marks an input element as invalid (red) / valid (green) / no-validation (grey). Overwrites the :user-valid selector.",
+			description:
+				'Marks an input element as invalid (red) / valid (green) / no-validation (grey). Overwrites the :user-valid selector.',
 			options: [
+				{ value: 'no-validation', label: 'No Validation', default: true },
 				{ value: 'invalid', label: 'Invalid' },
 				{ value: 'valid', label: 'Valid' },
-				{ value: 'no-validation', label: 'No Validation', default: true },
 			],
-			showInPlayground: false,
+			showInPlayground: true,
 		},
 		{
 			name: 'required',
 			label: 'Required',
 			type: 'checkbox',
 			defaultValue: false,
-			description: "When the required attribute specified, the user will be required to fill the form element before submitting the form. The form element will be marked semantically as required and by default also visually with an asterisk '*' next to the label (unless the property showRequiredAsterisk is also set with the value false).",
-			showInPlayground: false,
+			description:
+				"When the required attribute specified, the user will be required to fill the form element before submitting the form. The form element will be marked semantically as required and by default also visually with an asterisk '*' next to the label (unless the property showRequiredAsterisk is also set with the value false).",
+			showInPlayground: true,
 		},
 		{
 			name: 'show-required-asterisk',
@@ -105,14 +110,16 @@ export const radioConfig = {
 			label: 'Show Required Asterisk',
 			type: 'checkbox',
 			defaultValue: false,
-			description: "This attribute allows to specify whether a form field which is marked as required will show a visual indicator (an asterisk '*'). It allows to prevent adding the visual indicator but still keep the field semantically required by setting its value to false. By default, its value is true, so the asterisk is shown when required is set.",
+			description:
+				"This attribute allows to specify whether a form field which is marked as required will show a visual indicator (an asterisk '*'). It allows to prevent adding the visual indicator but still keep the field semantically required by setting its value to false. By default, its value is true, so the asterisk is shown when required is set.",
 			showInPlayground: false,
 		},
 		{
 			name: 'id',
 			type: 'text',
 			label: 'ID',
-			description: 'ID of the component, generated automatically for some components as a fallback if unset.',
+			description:
+				'ID of the component, generated automatically for some components as a fallback if unset.',
 			defaultValue: '',
 			showInPlayground: false,
 		},
@@ -128,7 +135,8 @@ export const radioConfig = {
 			name: 'name',
 			type: 'text',
 			label: 'Name',
-			description: "The name attribute gives the name of the form control, as used in form submission and in the form element's elements object.",
+			description:
+				"The name attribute gives the name of the form control, as used in form submission and in the form element's elements object.",
 			defaultValue: '',
 			showInPlayground: false,
 		},

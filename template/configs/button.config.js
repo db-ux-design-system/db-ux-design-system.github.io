@@ -2,23 +2,13 @@ export const buttonConfig = {
 	component: 'DBButton',
 	elementId: 'demo-button',
 	textElementId: 'button-text',
-	defaultText: 'Button',
+	defaultText: 'Text',
 	defaultProps: {
 		size: 'medium',
-		variant: 'outlined'
+		variant: 'outlined',
 	},
-	slots: [
-		{
-			name: 'children',
-			description: 'default slot',
-		},
-	],
-	events: [
-		{
-			name: 'click / onClick',
-			type: '---',
-		},
-	],
+	slots: [{ name: 'children', description: 'default slot' }],
+	events: [{ name: 'click / onClick', type: '---' }],
 	properties: [
 		// Content
 		{
@@ -26,89 +16,122 @@ export const buttonConfig = {
 			type: 'text',
 			label: 'Text',
 			description: 'Alternative for default slot/children.',
-			defaultValue: 'Button',
-			showInPlayground: true
+			defaultValue: 'Text',
+			showInPlayground: true,
+			dependsOn: { prop: 'no-text', value: 'false' },
 		},
-
 		// Appearance
 		{
 			name: 'variant',
 			type: 'select',
 			label: 'Variant',
-			description: 'Variant of the button. Use only 1 primary button on a page as CTA otherwise use one of the adaptive buttons.',
+			description: 'Variant of the button.',
 			defaultValue: 'outlined',
 			showInPlayground: true,
 			options: [
 				{ value: 'outlined', label: 'Outlined', default: true },
 				{ value: 'brand', label: 'Brand' },
 				{ value: 'filled', label: 'Filled' },
-				{ value: 'ghost', label: 'Ghost' }
-			]
+				{ value: 'ghost', label: 'Ghost' },
+			],
 		},
 		{
 			name: 'size',
 			type: 'select',
 			label: 'Size',
-			description: 'The size attribute changes the font-size and other related sizes of the component.',
+			description: 'The size attribute changes the font-size and other related sizes.',
 			defaultValue: 'medium',
 			showInPlayground: true,
 			options: [
 				{ value: 'small', label: 'Small' },
-				{ value: 'medium', label: 'Medium', default: true }
-			]
+				{ value: 'medium', label: 'Medium', default: true },
+			],
 		},
 		{
 			name: 'width',
 			type: 'select',
 			label: 'Width',
-			description: 'Width of the component. Auto width based on children size, full width based on parent elements width.',
+			description: 'Width of the component.',
 			defaultValue: 'auto',
 			showInPlayground: true,
 			options: [
 				{ value: 'auto', label: 'Auto', default: true },
-				{ value: 'full', label: 'Full' }
-			]
+				{ value: 'full', label: 'Full' },
+			],
 		},
-
-		// Icons
+		// No Text toggle
 		{
-			name: 'icon',
+			name: 'no-text',
+			alternativeName: 'noText',
+			type: 'checkbox',
+			label: 'No Text',
+			description: 'Hide text, show icon only.',
+			defaultValue: false,
+			showInPlayground: true,
+		},
+		// Show Icon Leading toggle (text mode only)
+		{
+			name: 'show-icon',
+			alternativeName: 'showIcon',
+			type: 'checkbox',
+			label: 'Show Icon Leading',
+			description: 'Enables the leading icon.',
+			defaultValue: false,
+			showInPlayground: true,
+			dependsOn: { prop: 'no-text', value: 'false' },
+		},
+		// Icon Leading — visible when no-text OR show-icon is on
+		// Label changes to "Icon" when no-text is active
+		{
+			name: 'icon-leading',
+			alternativeName: 'iconLeading',
 			type: 'text',
-			label: 'Icon',
-			description: 'Define an icon by its identifier to get displayed in the button.',
-			defaultValue: '',
-			showInPlayground: true
+			label: 'Icon Leading',
+			description: 'Icon identifier for the leading icon.',
+			defaultValue: 'x_placeholder',
+			showInPlayground: true,
+			dependsOn: 'show-icon',
+			labelWhen: { condition: { prop: 'no-text', value: 'true' }, label: 'Icon' },
+		},
+		// Trailing icon (text mode only)
+		{
+			name: 'show-icon-trailing',
+			alternativeName: 'showIconTrailing',
+			type: 'checkbox',
+			label: 'Show Icon Trailing',
+			description: 'Enables the trailing icon.',
+			defaultValue: false,
+			showInPlayground: true,
+			dependsOn: { prop: 'no-text', value: 'false' },
 		},
 		{
 			name: 'icon-trailing',
 			alternativeName: 'iconTrailing',
 			type: 'text',
 			label: 'Icon Trailing',
-			description: 'Define an icon by its identifier to get displayed after the elements content.',
-			defaultValue: '',
-			showInPlayground: true
+			description: 'Icon identifier for the trailing icon.',
+			defaultValue: 'x_placeholder',
+			showInPlayground: true,
+			dependsOn: 'show-icon-trailing',
 		},
-		{
-			name: 'no-text',
-			alternativeName: 'noText',
-			type: 'checkbox',
-			label: 'No Text',
-			description: 'Define the text next to the icon specified via the icon Property to get hidden.',
-			defaultValue: false,
-			showInPlayground: true
-		},
-
 		// States
 		{
 			name: 'disabled',
 			type: 'checkbox',
 			label: 'Disabled',
-			description: 'The disabled attribute can be set to keep a user from clicking on the button.',
+			description: 'Disables the button.',
 			defaultValue: false,
-			showInPlayground: true
+			showInPlayground: true,
 		},
-
 		// Hidden properties
+		{
+			name: 'icon',
+			type: 'text',
+			label: 'Icon',
+			defaultValue: '',
+			showInPlayground: false,
+			description: 'Define an icon by its identifier.',
+		},
 		{
 			name: 'type',
 			type: 'select',
@@ -119,84 +142,57 @@ export const buttonConfig = {
 			options: [
 				{ value: 'button', label: 'Button', default: true },
 				{ value: 'submit', label: 'Submit' },
-				{ value: 'reset', label: 'Reset' }
-			]
-		},
-		{
-			name: 'id',
-			type: 'text',
-			label: 'ID',
-			description: 'ID of the component, generated automatically for some components as a fallback if unset.',
-			defaultValue: '',
-			showInPlayground: false
-		},
-		{
-			name: 'className',
-			type: 'text',
-			label: 'Class Name',
-			description: 'React specific for adding className to the component.',
-			defaultValue: '',
-			showInPlayground: false
-		},
-		{
-			name: 'icon-leading',
-			alternativeName: 'iconLeading',
-			type: 'text',
-			label: 'Icon Leading',
-			description: 'Define an icon by its identifier to get displayed in front of the elements content.',
-			defaultValue: '',
-			showInPlayground: false
+				{ value: 'reset', label: 'Reset' },
+			],
 		},
 		{
 			name: 'show-icon-leading',
 			alternativeName: 'showIconLeading',
 			type: 'checkbox',
 			label: 'Show Icon Leading',
+			defaultValue: false,
+			showInPlayground: false,
 			description: 'Enables or disables the visibility of the leading icon.',
-			defaultValue: false,
-			showInPlayground: false
 		},
 		{
-			name: 'show-icon',
-			alternativeName: 'showIcon',
-			type: 'checkbox',
-			label: 'Show Icon',
-			description: 'Enables or disables the visibility of the icon.',
-			defaultValue: false,
-			showInPlayground: false
+			name: 'id',
+			type: 'text',
+			label: 'ID',
+			defaultValue: '',
+			showInPlayground: false,
+			description: 'ID of the component.',
 		},
 		{
-			name: 'show-icon-trailing',
-			alternativeName: 'showIconTrailing',
-			type: 'checkbox',
-			label: 'Show Icon Trailing',
-			description: 'Enables or disables the visibility of the trailing icon.',
-			defaultValue: false,
-			showInPlayground: false
+			name: 'className',
+			type: 'text',
+			label: 'Class Name',
+			defaultValue: '',
+			showInPlayground: false,
+			description: 'React className.',
 		},
 		{
 			name: 'name',
 			type: 'text',
 			label: 'Name',
-			description: 'The name attribute specifies a name attributes value for the button.',
 			defaultValue: '',
-			showInPlayground: false
+			showInPlayground: false,
+			description: 'Name attribute.',
 		},
 		{
 			name: 'form',
 			type: 'text',
 			label: 'Form',
-			description: 'Associates the control with a form element.',
 			defaultValue: '',
-			showInPlayground: false
+			showInPlayground: false,
+			description: 'Associates with a form element.',
 		},
 		{
 			name: 'value',
 			type: 'text',
 			label: 'Value',
-			description: 'The value attribute specifies an initial value for the button.',
 			defaultValue: '',
-			showInPlayground: false
-		}
-	]
+			showInPlayground: false,
+			description: 'Initial value.',
+		},
+	],
 };

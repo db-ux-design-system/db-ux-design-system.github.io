@@ -1,5 +1,4 @@
 ---
-order: 3
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -20,6 +19,7 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 import { checkboxConfig } from '@template/configs/checkbox.config.js';
 
 - Select multiple options from a list (e.g., notification channels)
@@ -31,6 +31,14 @@ import { checkboxConfig } from '@template/configs/checkbox.config.js';
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbcheckbox-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground config={checkboxConfig} />
 
 </DBSection>
 

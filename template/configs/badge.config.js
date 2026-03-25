@@ -1,11 +1,12 @@
 export const badgeConfig = {
+	component: 'DBBadge',
 	elementId: 'playground-badge',
-	defaultText: 'Badge',
+	defaultText: 'Text',
 	defaultProps: {
 		placement: 'inline',
 		semantic: 'adaptive',
-		size: 'medium',
-		emphasis: 'strong',
+		size: 'small',
+		emphasis: 'weak',
 	},
 	slots: [
 		{
@@ -16,13 +17,37 @@ export const badgeConfig = {
 	properties: [
 		// Content
 		{
+			name: 'children',
+			label: 'Children',
+			type: 'select',
+			description: 'Alternative for default slot/children.',
+			showInPlayground: true,
+			options: [
+				{ value: 'text', label: 'Text', default: true },
+				{ value: 'icon', label: 'Icon' },
+				{ value: 'dot', label: 'Dot' },
+			],
+		},
+		// Content
+		{
 			name: 'text',
 			label: 'Text',
 			type: 'text',
-			defaultValue: 'Badge',
+			defaultValue: 'Text',
 			description: 'Alternative for default slot/children.',
 			showInPlayground: true,
+			dependsOn: { prop: 'children', value: 'text' },
 		},
+		{
+			name: 'icon',
+			label: 'Icon',
+			type: 'text',
+			defaultValue: 'x_placeholder',
+			description: 'Icon identifier to display inside the badge.',
+			showInPlayground: true,
+			dependsOn: { prop: 'children', value: 'icon' },
+		},
+
 		// Appearance
 		{
 			name: 'semantic',
@@ -45,8 +70,8 @@ export const badgeConfig = {
 			type: 'select',
 			description: 'The emphasis attribute divides in between a weak or strong importance.',
 			options: [
-				{ value: 'weak', label: 'Weak' },
-				{ value: 'strong', label: 'Strong', default: true },
+				{ value: 'weak', label: 'Weak', default: true },
+				{ value: 'strong', label: 'Strong' },
 			],
 			showInPlayground: true,
 		},
@@ -57,8 +82,8 @@ export const badgeConfig = {
 			description:
 				'The size attribute changes the font-size and other related sizes of the component.',
 			options: [
-				{ value: 'small', label: 'Small' },
-				{ value: 'medium', label: 'Medium', default: true },
+				{ value: 'small', label: 'Small', default: true },
+				{ value: 'medium', label: 'Medium' },
 			],
 			showInPlayground: true,
 		},

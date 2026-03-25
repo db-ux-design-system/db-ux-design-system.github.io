@@ -1,5 +1,4 @@
 ---
-order: 10
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -8,6 +7,7 @@ title: 'Drawer'
 description: 'Drawer is a sliding panel that appears from the side, top, or bottom to show supplemental content or lightweight interactions while keeping the user in context. It is ideal for optional details and simple tasks, and must always be easy to dismiss.'
 align: start
 toc: true
+status: 'stable'
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
@@ -18,6 +18,7 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 import { drawerConfig } from '@template/configs/drawer.config.js';
 
 - Show additional details or secondary information without leaving the current page
@@ -58,6 +59,16 @@ import { drawerConfig } from '@template/configs/drawer.config.js';
 />
 
 </DBSection>
+
+{/*
+TODO: fix playground
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground config={drawerConfig} />
+
+</DBSection> */}
 
 <DBSection spacing="small" width="auto">
 

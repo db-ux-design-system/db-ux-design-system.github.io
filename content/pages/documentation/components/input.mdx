@@ -1,5 +1,4 @@
 ---
-order: 4
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -20,6 +19,7 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 import { inputConfig } from '@template/configs/input.config.js';
 
 - Collect short text values (e.g., name, city, email, IBAN depending on product rules)
@@ -31,6 +31,14 @@ import { inputConfig } from '@template/configs/input.config.js';
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbinput-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground config={inputConfig} />
 
 </DBSection>
 
