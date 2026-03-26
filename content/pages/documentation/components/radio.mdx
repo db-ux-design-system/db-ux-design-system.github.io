@@ -11,7 +11,7 @@ status: 'stable'
 toc: true
 ---
 
-import { DBAccordion, DBAccordionItem, DBRadio, DBSection } from '@db-ux/react-core-components';
+import { DBAccordion, DBAccordionItem, DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
@@ -19,23 +19,12 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { radioConfig } from '@template/configs/radio.config.js';
 
 - Select one option from a small set (e.g., language, delivery type)
 - Configure a single preference in settings (e.g., "Light / Dark / System")
 - Choose one form option where only one is valid (e.g., contact method)
-
-<DBSection spacing="small" width="auto">
-
-## Playground
-
-Experiment with the Radio component and its properties.
-
-<ComponentPlayground config={radioConfig} component="radio" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 

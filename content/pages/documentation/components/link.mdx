@@ -11,7 +11,7 @@ status: 'stable'
 toc: true
 ---
 
-import { DBLink, DBSection } from '@db-ux/react-core-components';
+import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
@@ -19,22 +19,12 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { linkConfig } from '@template/configs/link.config.js';
 
 - Navigate to another page within the application
 - Navigate to an external website or document
 - Jump to a specific section within the same page
-
-<DBSection spacing="small" width="auto">
-
-    ## Playground
-    Experiment with the Link component and its properties.
-
-    <ComponentPlayground config={linkConfig} component={DBLink} />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 

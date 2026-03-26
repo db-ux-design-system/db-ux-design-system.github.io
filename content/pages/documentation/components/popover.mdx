@@ -9,32 +9,17 @@ status: 'beta'
 toc: true
 ---
 
-import { DBSection, DBPopover } from '@db-ux/react-core-components';
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import { DBSection } from '@db-ux/react-core-components';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
-import { popoverConfig } from '@template/configs/popover.config.js';
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 
 Popover is a floating container anchored to a trigger that reveals additional, contextual content on click or hover. It supports richer content than a tooltip and can include actions, but should remain lightweight and easy to dismiss.
 
 - Provide contextual actions or settings near a control (e.g., "More options", quick preferences)
 - Show short explanatory content with links or small controls (e.g., help + "Learn more")
 - Display compact, interactive content without navigating away (e.g., quick filters)
-
-<DBSection spacing="small" width="auto">
-
-## Playground
-
-Experiment with the popover component and its properties.
-
-<ComponentPlayground config={popoverConfig} component={DBPopover} />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
