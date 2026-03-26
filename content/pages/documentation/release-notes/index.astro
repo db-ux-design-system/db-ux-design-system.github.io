@@ -45,7 +45,24 @@ const releaseNotes: ReleaseNote[] = Object.values(releaseNoteFiles)
 	})
 	.sort((a: ReleaseNote, b: ReleaseNote) => b.date.getTime() - a.date.getTime());
 
-const categories = [...new Set(releaseNotes.map((note) => note.category))];
+const categoryOrder = ['Core', '🧪 Core Lab', 'DB Theme Icons', 'DB Theme Illustrative Icons'];
+const categories = categoryOrder.filter((cat) =>
+	releaseNotes.some((note) => note.category === cat),
+);
+
+function getRoadmapUrl(category: string, version: string): string | null {
+	const v = version.replace(/^v/, '');
+	switch (category) {
+		case 'Core':
+			return `https://github.com/orgs/db-ux-design-system/projects/4/views/12?filterQuery=has%3Amilestone+-label%3A%F0%9F%96%BC%EF%B8%8Ficons.+milestone%3A${v}`;
+		case 'DB Theme Icons':
+			return `https://github.com/orgs/db-ux-design-system/projects/4/views/15?filterQuery=has%3Amilestone+label%3A%F0%9F%96%BC%EF%B8%8Ficons%2C%F0%9F%9A%85DBTheme+milestone%3A%22${v}+%28functional+icons%29%22`;
+		case 'DB Theme Illustrative Icons':
+			return `https://github.com/orgs/db-ux-design-system/projects/4/views/15?filterQuery=has%3Amilestone+label%3A%F0%9F%96%BC%EF%B8%8Ficons%2C%F0%9F%9A%85DBTheme+milestone%3A%22${v}+%28illustrative+icons%29%22`;
+		default:
+			return null;
+	}
+}
 ---
 
 <DocumentationLayout
@@ -64,19 +81,33 @@ const categories = [...new Set(releaseNotes.map((note) => note.category))];
 			}
 		</DBStack>
 		{
-			releaseNotes.map((note) => (
-				<article class="release-note" data-category={note.category}>
-					<DBStack direction="row" justifyContent="space-between" alignment="center">
-						<h2 id={note.slug} class="release-note-version">
-							{note.heading}
-						</h2>
-						<time class="release-note-date">{note.date.toLocaleDateString()}</time>
-					</DBStack>
+			releaseNotes.map((note) => {
+				const roadmapUrl = getRoadmapUrl(note.category, note.version);
+				return (
+					<article class="release-note" data-category={note.category}>
+						<DBStack direction="row" justifyContent="space-between" alignment="center">
+							<h2 id={note.slug} class="release-note-version">
+								{note.heading}
+							</h2>
+							<time class="release-note-date">{note.date.toLocaleDateString()}</time>
+						</DBStack>
 
-					<note.Content />
-					<DBDivider />
-				</article>
-			))
+						<note.Content />
+						{roadmapUrl && (
+							<a
+								href={roadmapUrl}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="db-link roadmap-link"
+								data-content="external"
+							>
+								View on Roadmap
+							</a>
+						)}
+						<DBDivider />
+					</article>
+				);
+			})
 		}
 	</DBStack>
 </DocumentationLayout>
