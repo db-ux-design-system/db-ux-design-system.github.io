@@ -19,7 +19,7 @@ const THEME_LOGOS: Record<ThemeName, string> = {
 };
 
 const THEME_LOGO_SVGS: Record<ThemeName, string | null> = {
-	default: "/db_logo.svg",
+	default: '/db_logo.svg',
 	's-bahn': '/sbahn-logo.svg',
 	station: '/db_logo.svg',
 	neutral: '/neutral-logo.svg',

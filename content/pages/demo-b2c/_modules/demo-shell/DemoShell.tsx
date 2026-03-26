@@ -1,11 +1,7 @@
 import { type PropsWithChildren, type ReactElement } from 'react';
 import { ColorModeProvider } from '@template/context/color-mode-context';
 import { ThemeProvider } from '@template/context/theme-context';
-import {
-	DBShell,
-	DBControlPanelDesktop,
-	DBControlPanelMobile,
-} from '@db-ux/react-core-components';
+import { DBShell, DBControlPanelDesktop, DBControlPanelMobile } from '@db-ux/react-core-components';
 import DemoBrand from '@template/components/DemoBrand/DemoBrand';
 import DemoMetaNavigation from './control-panel/meta-navigation';
 import DemoNavigation from './control-panel/navigation';

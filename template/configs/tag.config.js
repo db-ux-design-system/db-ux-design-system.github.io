@@ -72,7 +72,8 @@ export const tagConfig = {
 			label: 'Icon',
 			type: 'text',
 			defaultValue: '',
-			description: 'Define an icon by its identifier to get displayed in front of the elements content.',
+			description:
+				'Define an icon by its identifier to get displayed in front of the elements content.',
 		},
 		// Hidden properties
 		{
@@ -112,7 +113,8 @@ export const tagConfig = {
 			label: 'ID',
 			type: 'text',
 			defaultValue: '',
-			description: 'ID of the component, generated automatically for some components as a fallback if unset.',
+			description:
+				'ID of the component, generated automatically for some components as a fallback if unset.',
 			showInPlayground: false,
 		},
 		{
