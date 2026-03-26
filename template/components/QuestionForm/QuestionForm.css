@@ -5,6 +5,7 @@
 	align-items: flex-start;
 }
 
-.question-form-text {
-	margin: 0;
+.question-form .db-textarea {
+	inline-size: 100%;
+	max-inline-size: var(--db-container-xl);
 }

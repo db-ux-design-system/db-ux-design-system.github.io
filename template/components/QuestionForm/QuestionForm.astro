@@ -7,14 +7,31 @@ interface Props {
 
 const { componentName } = Astro.props;
 
-const subject = componentName
-	? `Question: ${componentName} component`
-	: 'Question about DB UX Design System';
+const subject = componentName ? `Question: ${componentName}` : 'Question about DB UX Design System';
 
-const mailtoHref = `mailto:db-ux-designsystem@deutschebahn.com?subject=${encodeURIComponent(subject)}`;
+const encodedSubject = encodeURIComponent(subject);
+const mailTo = 'db-ux-designsystem@deutschebahn.com';
+const fieldId = `question-form-${(componentName ?? 'general')
+	.toLowerCase()
+	.replace(/[^a-z0-9]+/g, '-')
+	.replace(/^-|-$/g, '')}`;
 ---
 
 <section class="question-form" aria-label="Question contact">
-	<p class="question-form-text">Send us your question directly with your preferred email client.</p>
-	<a class="db-link" data-variant="brand" href={mailtoHref}>Email the DB UX team</a>
+	<div class="db-textarea" data-variant="above">
+		<label for={fieldId}> Your question </label>
+		<textarea id={fieldId} rows="4" placeholder="Type your question here…"></textarea>
+	</div>
+	<button
+		class="db-button"
+		data-variant="brand"
+		type="button"
+		onclick={`
+			const textarea = document.getElementById('${fieldId}');
+			const body = encodeURIComponent(textarea.value);
+			window.location.href = 'mailto:${mailTo}?subject=${encodedSubject}&body=' + body;
+		`}
+	>
+		Email the DB UX team
+	</button>
 </section>
