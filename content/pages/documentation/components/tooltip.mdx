@@ -1,5 +1,4 @@
 ---
-order: 7
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -7,6 +6,7 @@ headline: 'Tooltip'
 title: 'Tooltip'
 description: 'Tooltip provides brief, contextual information on hover or focus without interrupting the user flow. It is best for clarifying icons, truncated text, or unfamiliar UI controls, and should not contain critical or lengthy content.'
 align: start
+status: 'stable'
 toc: true
 ---
 
@@ -17,7 +17,6 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { tooltipConfig } from '@template/configs/tooltip.config.js';
 
 - Explain the meaning of an icon-only control (e.g., "Download", "Copy link")
@@ -28,55 +27,10 @@ import { tooltipConfig } from '@template/configs/tooltip.config.js';
 
 ## Resources
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'TBD',
-			url: '#',
-			icon: 'react',
-		},
-		{
-			title: 'Vue',
-			description: 'TBD',
-			url: '#',
-			icon: 'vue',
-		},
-		{
-			title: 'Angular',
-			description: 'TBD',
-			url: '#',
-			icon: 'angular',
-		},
-		{
-			title: 'Web Components',
-			description: 'TBD',
-			url: '#',
-			icon: 'html5',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbtooltip-density--docs" />
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the tooltip through its properties, slots and events.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={tooltipConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties, Slots & Events"
-	expandedText="Hide some Properties, Slots & Events"
-/>
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -161,8 +115,6 @@ Place tooltips close to the trigger and avoid covering what the user is trying t
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the Tooltip component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Tooltip" />
 

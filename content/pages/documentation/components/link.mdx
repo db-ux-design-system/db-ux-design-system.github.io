@@ -1,5 +1,4 @@
 ---
-order: 5
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -19,7 +18,6 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { linkConfig } from '@template/configs/link.config.js';
 
 - Navigate to another page within the application
@@ -34,21 +32,6 @@ import { linkConfig } from '@template/configs/link.config.js';
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the link through its properties and slots.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={linkConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -150,8 +133,6 @@ Links must be clearly identifiable, descriptive, and accessible via keyboard and
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the Link component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Link" />
 

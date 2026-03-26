@@ -1,5 +1,4 @@
 ---
-order: 8
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -7,6 +6,7 @@ headline: 'Textarea'
 title: 'Textarea'
 description: 'Textarea lets users enter and review longer, multi-line text in forms and dialogs. It should be clearly labeled, sized to the expected content, and provide helpful guidance and validation feedback when needed.'
 align: start
+status: 'stable'
 toc: true
 ---
 
@@ -17,7 +17,6 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { textareaConfig } from '@template/configs/textarea.config.js';
 
 - Capture longer free-text input (e.g., feedback, comments, descriptions)
@@ -28,55 +27,10 @@ import { textareaConfig } from '@template/configs/textarea.config.js';
 
 ## Resources
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'TBD',
-			url: '#',
-			icon: 'react',
-		},
-		{
-			title: 'Vue',
-			description: 'TBD',
-			url: '#',
-			icon: 'vue',
-		},
-		{
-			title: 'Angular',
-			description: 'TBD',
-			url: '#',
-			icon: 'angular',
-		},
-		{
-			title: 'Web Components',
-			description: 'TBD',
-			url: '#',
-			icon: 'html5',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbtextarea-density--docs" />
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the textarea through its properties, slots and events.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={textareaConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties, Slots & Events"
-	expandedText="Hide some Properties, Slots & Events"
-/>
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -161,8 +115,6 @@ Helper text prevents errors (format, tone, limits). Validation messages explain 
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the Textarea component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Textarea" />
 

@@ -1,5 +1,4 @@
 ---
-order: 6
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -7,7 +6,7 @@ headline: 'Header'
 title: 'Header'
 description: 'Header defines the top area of a page and provides consistent access to brand identity, primary navigation, and optional actions. It anchors orientation and supports navigation patterns across responsive layouts, with optional meta navigation above the main bar.'
 align: start
-status: 'deprecated'
+status: 'stable'
 toc: true
 ---
 
@@ -18,7 +17,6 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { headerConfig } from '@template/configs/header.config.js';
 
 - Provide global navigation entry points and current location context
@@ -60,24 +58,6 @@ import { headerConfig } from '@template/configs/header.config.js';
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the header through its properties, slots and events.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={headerConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties, Slots & Events"
-	expandedText="Hide some Properties, Slots & Events"
-/>
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -145,8 +125,6 @@ If the meta navigation contains external links, communicate that they leave the 
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the Header component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Header" />
 

@@ -1,5 +1,4 @@
 ---
-order: 10
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -7,6 +6,7 @@ headline: 'Drawer'
 title: 'Drawer'
 description: 'Drawer is a sliding panel that appears from the side, top, or bottom to show supplemental content or lightweight interactions while keeping the user in context. It is ideal for optional details and simple tasks, and must always be easy to dismiss.'
 align: start
+status: 'stable'
 toc: true
 ---
 
@@ -17,7 +17,6 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { drawerConfig } from '@template/configs/drawer.config.js';
 
 - Show additional details or secondary information without leaving the current page
@@ -28,55 +27,10 @@ import { drawerConfig } from '@template/configs/drawer.config.js';
 
 ## Resources
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'TBD',
-			url: '#',
-			icon: 'react',
-		},
-		{
-			title: 'Vue',
-			description: 'TBD',
-			url: '#',
-			icon: 'vue',
-		},
-		{
-			title: 'Angular',
-			description: 'TBD',
-			url: '#',
-			icon: 'angular',
-		},
-		{
-			title: 'Web Components',
-			description: 'TBD',
-			url: '#',
-			icon: 'html5',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbdrawer-density--docs" />
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the drawer through its properties, slots and events.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={drawerConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties, Slots & Events"
-	expandedText="Hide some Properties, Slots & Events"
-/>
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -161,8 +115,6 @@ Always provide a way to close the drawer, such as clicking outside the drawer ar
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the Drawer component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Drawer" />
 

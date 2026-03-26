@@ -1,5 +1,4 @@
 ---
-order: 1
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -19,7 +18,6 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { badgeConfig } from '@template/configs/badge.config.js';
 
 - Indicate status or state of an item (e.g. new, error, success)
@@ -34,21 +32,6 @@ import { badgeConfig } from '@template/configs/badge.config.js';
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the badge through its properties, such as semantic, size, and content.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={badgeConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -150,8 +133,6 @@ Ensure badge information is available to assistive technologies and not conveyed
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the Badge component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Badge" />
 

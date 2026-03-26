@@ -1,5 +1,4 @@
 ---
-order: 8
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -20,7 +19,6 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { notificationConfig } from '@template/configs/notification.config.js';
 
 - Confirm an action or state change (e.g., "Saved", "Filter applied")
@@ -31,55 +29,10 @@ import { notificationConfig } from '@template/configs/notification.config.js';
 
 ## Resources
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
-			icon: 'react',
-		},
-		{
-			title: 'Vue',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
-			icon: 'vue',
-		},
-		{
-			title: 'Angular',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
-			icon: 'angular',
-		},
-		{
-			title: 'Web Components',
-			description: 'Interactive examples and documentation.',
-			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
-			icon: 'html5',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbnotification-density--docs" />
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the notification through its properties, slots and events.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={notificationConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties, Slots & Events"
-	expandedText="Hide some Properties, Slots & Events"
-/>
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -181,8 +134,6 @@ Place notifications where they are noticeable but do not cover primary controls.
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the Notification component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Notification" />
 
