@@ -10,19 +10,35 @@ interface Props {
 }
 
 const { variant, figmaUrl, description, fullWidth = false } = Astro.props;
-const semantic = variant === 'do' ? 'successful' : variant === 'caution' ? 'warning' : variant === 'dont' ? 'critical' : undefined;
-const label = variant === 'do' ? 'Do' : variant === 'caution' ? 'Caution' : variant === 'dont' ? "Don't" : undefined;
+const semantic =
+	variant === 'do'
+		? 'successful'
+		: variant === 'caution'
+			? 'warning'
+			: variant === 'dont'
+				? 'critical'
+				: undefined;
+const label =
+	variant === 'do'
+		? 'Do'
+		: variant === 'caution'
+			? 'Caution'
+			: variant === 'dont'
+				? "Don't"
+				: undefined;
 const fullUrl = `${figmaUrl}&embed-host=share&footer=false&viewport-controls=false&page-selector=false&scaling=scale-down-width`;
 ---
 
 <div class="guideline-example-container" class:list={[fullWidth && 'full-width']}>
-	{variant && (
-		<div class="guideline-example-badge">
-			<DBBadge semantic={semantic} emphasis="strong" size="medium">
-				<span>{label}</span>
-			</DBBadge>
-		</div>
-	)}
+	{
+		variant && (
+			<div class="guideline-example-badge">
+				<DBBadge semantic={semantic} emphasis="strong" size="medium">
+					<span>{label}</span>
+				</DBBadge>
+			</div>
+		)
+	}
 	<iframe
 		class="guideline-example-iframe"
 		src={fullUrl}

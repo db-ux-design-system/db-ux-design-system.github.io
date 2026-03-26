@@ -40,10 +40,10 @@
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
-.viewer-base {
-	opacity: 1;
-	transition: none;
-}
+	.viewer-base {
+		opacity: 1;
+		transition: none;
+	}
 }
 
 .viewer-base {
@@ -52,10 +52,10 @@
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
-.viewer-hover {
-	opacity: 0;
-	transition: none;
-}
+	.viewer-hover {
+		opacity: 0;
+		transition: none;
+	}
 }
 
 .viewer-hover {
@@ -63,11 +63,13 @@
 	transition: opacity 10ms ease;
 }
 
-.avatar-viewer:hover .viewer-base, .avatar-viewer:focus .viewer-base {
+.avatar-viewer:hover .viewer-base,
+.avatar-viewer:focus .viewer-base {
 	opacity: 0;
 }
 
-.avatar-viewer:hover .viewer-hover, .avatar-viewer:focus .viewer-hover {
+.avatar-viewer:hover .viewer-hover,
+.avatar-viewer:focus .viewer-hover {
 	opacity: 1;
 }
 

@@ -2,32 +2,190 @@
 import TokenTable from '../_shared/TokenTable.astro';
 
 const headlineTokens = [
-	{ token: 'db-type-headline-3xl', size: { functional: '2.5rem (40px)', regular: '5rem (80px)', expressive: '6rem (96px)' }, lineHeight: { functional: '3rem (48px)', regular: '6rem (96px)', expressive: '7.5rem (120px)' }, weight: '700 (Bold)' },
-	{ token: 'db-type-headline-2xl', size: { functional: '2.5rem (40px)', regular: '4rem (64px)', expressive: '5rem (80px)' }, lineHeight: { functional: '3rem (48px)', regular: '5rem (80px)', expressive: '6rem (96px)' }, weight: '700 (Bold)' },
-	{ token: 'db-type-headline-xl', size: { functional: '2rem (32px)', regular: '3rem (48px)', expressive: '4rem (64px)' }, lineHeight: { functional: '2.5rem (40px)', regular: '4rem (64px)', expressive: '5rem (80px)' }, weight: '700 (Bold)' },
-	{ token: 'db-type-headline-lg', size: { functional: '1.75rem (28px)', regular: '2.5rem (40px)', expressive: '3rem (48px)' }, lineHeight: { functional: '2rem (32px)', regular: '3rem (48px)', expressive: '4rem (64px)' }, weight: '700 (Bold)' },
-	{ token: 'db-type-headline-md', size: { functional: '1.5rem (24px)', regular: '2rem (32px)', expressive: '2.5rem (40px)' }, lineHeight: { functional: '1.75rem (28px)', regular: '2.5rem (40px)', expressive: '3rem (48px)' }, weight: '700 (Bold)' },
-	{ token: 'db-type-headline-sm', size: { functional: '1.25rem (20px)', regular: '1.75rem (28px)', expressive: '2rem (32px)' }, lineHeight: { functional: '1.5rem (24px)', regular: '2rem (32px)', expressive: '2.5rem (40px)' }, weight: '700 (Bold)' },
-	{ token: 'db-type-headline-xs', size: { functional: '1rem (16px)', regular: '1.5rem (24px)', expressive: '1.75rem (28px)' }, lineHeight: { functional: '1.25rem (20px)', regular: '1.75rem (28px)', expressive: '2rem (32px)' }, weight: '700 (Bold)' },
-	{ token: 'db-type-headline-2xs', size: { functional: '0.875rem (14px)', regular: '1.25rem (20px)', expressive: '1.5rem (24px)' }, lineHeight: { functional: '1rem (16px)', regular: '1.5rem (24px)', expressive: '1.75rem (28px)' }, weight: '700 (Bold)' },
-	{ token: 'db-type-headline-3xs', size: { functional: '0.875rem (14px)', regular: '1rem (16px)', expressive: '1.25rem (20px)' }, lineHeight: { functional: '1rem (16px)', regular: '1.25rem (20px)', expressive: '1.5rem (24px)' }, weight: '700 (Bold)' },
+	{
+		token: 'db-type-headline-3xl',
+		size: { functional: '2.5rem (40px)', regular: '5rem (80px)', expressive: '6rem (96px)' },
+		lineHeight: { functional: '3rem (48px)', regular: '6rem (96px)', expressive: '7.5rem (120px)' },
+		weight: '700 (Bold)',
+	},
+	{
+		token: 'db-type-headline-2xl',
+		size: { functional: '2.5rem (40px)', regular: '4rem (64px)', expressive: '5rem (80px)' },
+		lineHeight: { functional: '3rem (48px)', regular: '5rem (80px)', expressive: '6rem (96px)' },
+		weight: '700 (Bold)',
+	},
+	{
+		token: 'db-type-headline-xl',
+		size: { functional: '2rem (32px)', regular: '3rem (48px)', expressive: '4rem (64px)' },
+		lineHeight: { functional: '2.5rem (40px)', regular: '4rem (64px)', expressive: '5rem (80px)' },
+		weight: '700 (Bold)',
+	},
+	{
+		token: 'db-type-headline-lg',
+		size: { functional: '1.75rem (28px)', regular: '2.5rem (40px)', expressive: '3rem (48px)' },
+		lineHeight: { functional: '2rem (32px)', regular: '3rem (48px)', expressive: '4rem (64px)' },
+		weight: '700 (Bold)',
+	},
+	{
+		token: 'db-type-headline-md',
+		size: { functional: '1.5rem (24px)', regular: '2rem (32px)', expressive: '2.5rem (40px)' },
+		lineHeight: {
+			functional: '1.75rem (28px)',
+			regular: '2.5rem (40px)',
+			expressive: '3rem (48px)',
+		},
+		weight: '700 (Bold)',
+	},
+	{
+		token: 'db-type-headline-sm',
+		size: { functional: '1.25rem (20px)', regular: '1.75rem (28px)', expressive: '2rem (32px)' },
+		lineHeight: {
+			functional: '1.5rem (24px)',
+			regular: '2rem (32px)',
+			expressive: '2.5rem (40px)',
+		},
+		weight: '700 (Bold)',
+	},
+	{
+		token: 'db-type-headline-xs',
+		size: { functional: '1rem (16px)', regular: '1.5rem (24px)', expressive: '1.75rem (28px)' },
+		lineHeight: {
+			functional: '1.25rem (20px)',
+			regular: '1.75rem (28px)',
+			expressive: '2rem (32px)',
+		},
+		weight: '700 (Bold)',
+	},
+	{
+		token: 'db-type-headline-2xs',
+		size: { functional: '0.875rem (14px)', regular: '1.25rem (20px)', expressive: '1.5rem (24px)' },
+		lineHeight: {
+			functional: '1rem (16px)',
+			regular: '1.5rem (24px)',
+			expressive: '1.75rem (28px)',
+		},
+		weight: '700 (Bold)',
+	},
+	{
+		token: 'db-type-headline-3xs',
+		size: { functional: '0.875rem (14px)', regular: '1rem (16px)', expressive: '1.25rem (20px)' },
+		lineHeight: {
+			functional: '1rem (16px)',
+			regular: '1.25rem (20px)',
+			expressive: '1.5rem (24px)',
+		},
+		weight: '700 (Bold)',
+	},
 ];
 
 const bodyTokens = [
-	{ token: 'db-type-body-3xl', size: { functional: '1.75rem (28px)', regular: '2rem (32px)', expressive: '2.5rem (40px)' }, lineHeight: { functional: '2.5rem (40px)', regular: '3rem (48px)', expressive: '4rem (64px)' }, weight: '400 (Regular)' },
-	{ token: 'db-type-body-2xl', size: { functional: '1.5rem (24px)', regular: '1.75rem (28px)', expressive: '2rem (32px)' }, lineHeight: { functional: '2rem (32px)', regular: '2.5rem (40px)', expressive: '3rem (48px)' }, weight: '400 (Regular)' },
-	{ token: 'db-type-body-xl', size: { functional: '1.25rem (20px)', regular: '1.5rem (24px)', expressive: '1.75rem (28px)' }, lineHeight: { functional: '1.75rem (28px)', regular: '2rem (32px)', expressive: '2.5rem (40px)' }, weight: '400 (Regular)' },
-	{ token: 'db-type-body-lg', size: { functional: '1rem (16px)', regular: '1.25rem (20px)', expressive: '1.5rem (24px)' }, lineHeight: { functional: '1.5rem (24px)', regular: '1.75rem (28px)', expressive: '2rem (32px)' }, weight: '400 (Regular)' },
-	{ token: 'db-type-body-md', size: { functional: '0.875rem (14px)', regular: '1rem (16px)', expressive: '1.25rem (20px)' }, lineHeight: { functional: '1.25rem (20px)', regular: '1.5rem (24px)', expressive: '1.75rem (28px)' }, weight: '400 (Regular)' },
-	{ token: 'db-type-body-sm', size: { functional: '0.75rem (12px)', regular: '0.875rem (14px)', expressive: '1rem (16px)' }, lineHeight: { functional: '1rem (16px)', regular: '1.25rem (20px)', expressive: '1.5rem (24px)' }, weight: '400 (Regular)' },
-	{ token: 'db-type-body-xs', size: { functional: '0.625rem (10px)', regular: '0.75rem (12px)', expressive: '0.875rem (14px)' }, lineHeight: { functional: '0.875rem (14px)', regular: '1rem (16px)', expressive: '1.25rem (20px)' }, weight: '400 (Regular)' },
-	{ token: 'db-type-body-2xs', size: { functional: '0.625rem (10px)', regular: '0.625rem (10px)', expressive: '0.75rem (12px)' }, lineHeight: { functional: '0.875rem (14px)', regular: '0.875rem (14px)', expressive: '1rem (16px)' }, weight: '400 (Regular)' },
-	{ token: 'db-type-body-3xs', size: { functional: '0.625rem (10px)', regular: '0.625rem (10px)', expressive: '0.625rem (10px)' }, lineHeight: { functional: '0.875rem (14px)', regular: '0.875rem (14px)', expressive: '0.875rem (14px)' }, weight: '400 (Regular)' },
+	{
+		token: 'db-type-body-3xl',
+		size: { functional: '1.75rem (28px)', regular: '2rem (32px)', expressive: '2.5rem (40px)' },
+		lineHeight: { functional: '2.5rem (40px)', regular: '3rem (48px)', expressive: '4rem (64px)' },
+		weight: '400 (Regular)',
+	},
+	{
+		token: 'db-type-body-2xl',
+		size: { functional: '1.5rem (24px)', regular: '1.75rem (28px)', expressive: '2rem (32px)' },
+		lineHeight: { functional: '2rem (32px)', regular: '2.5rem (40px)', expressive: '3rem (48px)' },
+		weight: '400 (Regular)',
+	},
+	{
+		token: 'db-type-body-xl',
+		size: { functional: '1.25rem (20px)', regular: '1.5rem (24px)', expressive: '1.75rem (28px)' },
+		lineHeight: {
+			functional: '1.75rem (28px)',
+			regular: '2rem (32px)',
+			expressive: '2.5rem (40px)',
+		},
+		weight: '400 (Regular)',
+	},
+	{
+		token: 'db-type-body-lg',
+		size: { functional: '1rem (16px)', regular: '1.25rem (20px)', expressive: '1.5rem (24px)' },
+		lineHeight: {
+			functional: '1.5rem (24px)',
+			regular: '1.75rem (28px)',
+			expressive: '2rem (32px)',
+		},
+		weight: '400 (Regular)',
+	},
+	{
+		token: 'db-type-body-md',
+		size: { functional: '0.875rem (14px)', regular: '1rem (16px)', expressive: '1.25rem (20px)' },
+		lineHeight: {
+			functional: '1.25rem (20px)',
+			regular: '1.5rem (24px)',
+			expressive: '1.75rem (28px)',
+		},
+		weight: '400 (Regular)',
+	},
+	{
+		token: 'db-type-body-sm',
+		size: { functional: '0.75rem (12px)', regular: '0.875rem (14px)', expressive: '1rem (16px)' },
+		lineHeight: {
+			functional: '1rem (16px)',
+			regular: '1.25rem (20px)',
+			expressive: '1.5rem (24px)',
+		},
+		weight: '400 (Regular)',
+	},
+	{
+		token: 'db-type-body-xs',
+		size: {
+			functional: '0.625rem (10px)',
+			regular: '0.75rem (12px)',
+			expressive: '0.875rem (14px)',
+		},
+		lineHeight: {
+			functional: '0.875rem (14px)',
+			regular: '1rem (16px)',
+			expressive: '1.25rem (20px)',
+		},
+		weight: '400 (Regular)',
+	},
+	{
+		token: 'db-type-body-2xs',
+		size: {
+			functional: '0.625rem (10px)',
+			regular: '0.625rem (10px)',
+			expressive: '0.75rem (12px)',
+		},
+		lineHeight: {
+			functional: '0.875rem (14px)',
+			regular: '0.875rem (14px)',
+			expressive: '1rem (16px)',
+		},
+		weight: '400 (Regular)',
+	},
+	{
+		token: 'db-type-body-3xs',
+		size: {
+			functional: '0.625rem (10px)',
+			regular: '0.625rem (10px)',
+			expressive: '0.625rem (10px)',
+		},
+		lineHeight: {
+			functional: '0.875rem (14px)',
+			regular: '0.875rem (14px)',
+			expressive: '0.875rem (14px)',
+		},
+		weight: '400 (Regular)',
+	},
 ];
 
 const fontFamilyTokens = [
-	{ token: 'db-font-family-sans', value: '"OpenSans", helvetica, arial, sans-serif', name: 'Sans (Body)' },
-	{ token: 'db-font-family-head', value: '"OpenSans Head", helvetica, arial, sans-serif', name: 'Head (Headlines)' },
+	{
+		token: 'db-font-family-sans',
+		value: '"OpenSans", helvetica, arial, sans-serif',
+		name: 'Sans (Body)',
+	},
+	{
+		token: 'db-font-family-head',
+		value: '"OpenSans Head", helvetica, arial, sans-serif',
+		name: 'Head (Headlines)',
+	},
 ];
 ---
 
@@ -35,6 +193,11 @@ const fontFamilyTokens = [
 	sections={[
 		{ headline: 'Headline', icon: 'pen', variant: 'typography-type', tokens: headlineTokens },
 		{ headline: 'Body', icon: 'pen', variant: 'typography-type', tokens: bodyTokens },
-		{ headline: 'Font Families', icon: 'pen', variant: 'typography-font', tokens: fontFamilyTokens },
+		{
+			headline: 'Font Families',
+			icon: 'pen',
+			variant: 'typography-font',
+			tokens: fontFamilyTokens,
+		},
 	]}
 />

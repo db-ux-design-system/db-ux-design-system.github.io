@@ -11,18 +11,18 @@
 
 ```astro
 <script define:vars={{ serverData }} is:inline slot="script">
-  function tryInit(attempts = 0) {
-    const element = document.getElementById('target');
-    if (!element && attempts < 10) {
-      setTimeout(() => tryInit(attempts + 1), 500);
-      return;
-    }
-    // initialization logic
-  }
+	function tryInit(attempts = 0) {
+		const element = document.getElementById('target');
+		if (!element && attempts < 10) {
+			setTimeout(() => tryInit(attempts + 1), 500);
+			return;
+		}
+		// initialization logic
+	}
 
-  window.addEventListener('load', () => {
-    setTimeout(() => tryInit(), 1000);
-  });
+	window.addEventListener('load', () => {
+		setTimeout(() => tryInit(), 1000);
+	});
 </script>
 ```
 
