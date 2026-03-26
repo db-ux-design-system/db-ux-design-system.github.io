@@ -1,5 +1,4 @@
 ---
-order: 10
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -11,7 +10,7 @@ status: 'stable'
 toc: true
 ---
 
-import { DBSelect, DBSection } from '@db-ux/react-core-components';
+import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
@@ -19,23 +18,11 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { selectConfig } from '@template/configs/select.config.js';
 
 - Choose one value from a known set (e.g., country, category, priority)
 - Save space compared to showing all options as radios
 - Provide a controlled input when free text is not allowed
-
-<DBSection spacing="small" width="auto">
-
-## Playground
-
-Experiment with the Select component and its properties.
-
-<ComponentPlayground config={selectConfig} component={DBSelect} />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -45,24 +32,6 @@ Experiment with the Select component and its properties.
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the select through its properties, slots and events.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={selectConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties, Slots & Events"
-	expandedText="Hide some Properties, Slots & Events"
-/>
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -181,8 +150,6 @@ Use helper text to prevent mistakes (format, constraints). Use validation to exp
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the select component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Select" />
 

@@ -1,5 +1,4 @@
 ---
-order: 4
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -11,7 +10,7 @@ status: 'stable'
 toc: true
 ---
 
-import { DBInput, DBSection } from '@db-ux/react-core-components';
+import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
@@ -19,23 +18,11 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { inputConfig } from '@template/configs/input.config.js';
 
 - Collect short text values (e.g., name, city, email, IBAN depending on product rules)
 - Support structured entry with formatting hints (e.g., "No spaces", "Use format DD.MM.YYYY")
 - Provide immediate or on-submit feedback for validity (success/error) with helper text
-
-<DBSection spacing="small" width="auto">
-
-## Playground
-
-Experiment with the Input component and its properties.
-
-<ComponentPlayground config={inputConfig} component="input" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -45,24 +32,6 @@ Experiment with the Input component and its properties.
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the input through its properties, slots and events.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={inputConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties, Slots & Events"
-	expandedText="Hide some Properties, Slots & Events"
-/>
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -181,8 +150,6 @@ Ensure every Input has an accessible name that matches the visible label. If a l
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the Input component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Input" />
 

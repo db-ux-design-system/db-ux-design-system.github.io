@@ -1,5 +1,4 @@
 ---
-order: 9
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -7,6 +6,7 @@ headline: 'Infotext'
 title: 'Infotext'
 description: 'Infotext provides a clear, compact way to communicate short supporting information or guidance directly in the interface. It helps users understand context, avoid errors, or interpret states without interrupting the flow.'
 align: start
+status: 'stable'
 toc: true
 ---
 
@@ -17,9 +17,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { infotextConfig } from '@template/configs/infotext.config.js';
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 
 - Give short hints or explanations near UI elements (e.g., what a setting changes)
 - Provide brief warnings or important notes in context (e.g., constraints or limitations)
@@ -27,67 +25,12 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 <DBSection spacing="small" width="auto">
 
-## Playground
-
-Experiment with the Infotext component and its properties.
-
-<ComponentPlayground config={infotextConfig} />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ## Resources
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'TBD',
-			url: '#',
-			icon: 'react',
-		},
-		{
-			title: 'Vue',
-			description: 'TBD',
-			url: '#',
-			icon: 'vue',
-		},
-		{
-			title: 'Angular',
-			description: 'TBD',
-			url: '#',
-			icon: 'angular',
-		},
-		{
-			title: 'Web Components',
-			description: 'TBD',
-			url: '#',
-			icon: 'html5',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbinfotext-density--docs" />
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the infotext through its properties, slots and events.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={infotextConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties, Slots & Events"
-	expandedText="Hide some Properties, Slots & Events"
-/>
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -189,8 +132,6 @@ In forms, Infotext can support understanding (format, constraints) and complemen
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the Infotext component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Infotext" />
 
