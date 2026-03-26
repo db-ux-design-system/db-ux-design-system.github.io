@@ -43,7 +43,8 @@ export const infotextConfig = {
 			label: 'Size',
 			type: 'select',
 			defaultValue: 'small',
-			description: 'The size attribute changes the font-size and other related sizes of the component',
+			description:
+				'The size attribute changes the font-size and other related sizes of the component',
 			options: [
 				{ value: 'small', label: 'Small', default: true },
 				{ value: 'medium', label: 'Medium' },
@@ -63,7 +64,8 @@ export const infotextConfig = {
 			label: 'Icon',
 			type: 'text',
 			defaultValue: '',
-			description: 'Define an icon by its identifier to get displayed in front of the elements content',
+			description:
+				'Define an icon by its identifier to get displayed in front of the elements content',
 			showInPlayground: false,
 		},
 		{

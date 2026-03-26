@@ -65,7 +65,8 @@
 	border-color: transparent;
 	color: var(--db-adaptive-on-bg-inverted-default);
 
-	&:hover, &:focus {
+	&:hover,
+	&:focus {
 		background-color: var(--db-adaptive-bg-inverted-contrast-max-hovered);
 		border-color: transparent;
 		color: var(--db-adaptive-on-bg-inverted-default);
@@ -119,7 +120,8 @@
 	background: var(--db-brand-on-origin-default);
 }
 
-.hero-section .db-card .db-button[data-variant='filled']:hover, .hero-section .db-card .db-button[data-variant='filled']:focus {
+.hero-section .db-card .db-button[data-variant='filled']:hover,
+.hero-section .db-card .db-button[data-variant='filled']:focus {
 	background: var(--db-brand-on-origin-default);
 	opacity: var(--db-opacity-2xl);
 }
@@ -144,8 +146,6 @@
 	z-index: 2;
 	margin-block-start: calc(-1 * var(--db-spacing-fixed-3xl));
 }
-
-
 
 h1 {
 	font-size: 0;
