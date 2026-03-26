@@ -6,5 +6,57 @@ headline: 'Foundation'
 title: 'Foundation'
 align: start
 toc: true
-order: 1
+description: 'Foundations are the building blocks of the Design System, including colors, typography, and spacing. They ensure brand-consistent and user-friendly UI components while supporting seamless team collaboration.'
+order: 2
 ---
+
+import { DBSection } from '@db-ux/react-core-components';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<DBSection spacing="small" width="auto">
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Border Radius',
+			description: 'Rounded corners for consistent shape language across components.',
+			url: '/documentation/foundation/border-radius',
+		},
+		{
+			title: 'Border Width',
+			description: 'Stroke widths for outlines, dividers, and interactive states.',
+			url: '/documentation/foundation/border-width',
+		},
+		{
+			title: 'Colors',
+			description: 'Adaptive color tokens for themes, semantics, and emphasis levels.',
+			url: '/documentation/foundation/colors',
+		},
+		{
+			title: 'Elevation',
+			description: 'Shadow and layering tokens for visual depth and hierarchy.',
+			url: '/documentation/foundation/elevation',
+		},
+		{
+			title: 'Opacity',
+			description: 'Transparency levels for disabled states and overlays.',
+			url: '/documentation/foundation/opacity',
+		},
+		{
+			title: 'Sizing',
+			description: 'Consistent dimensions for interactive elements and containers.',
+			url: '/documentation/foundation/sizing',
+		},
+		{
+			title: 'Spacing',
+			description: 'Rhythm and distance tokens for layout and component internals.',
+			url: '/documentation/foundation/spacing',
+		},
+		{
+			title: 'Typography',
+			description: 'Type scales, weights, and styles for readable, structured content.',
+			url: '/documentation/foundation/typography',
+		},
+	]}
+/>
+</DBSection>
