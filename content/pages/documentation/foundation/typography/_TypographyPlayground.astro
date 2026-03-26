@@ -4,20 +4,24 @@ import './TypographyPlayground.css';
 import { DBCard, DBPopover, type DBSelectOptionType } from '@db-ux/react-core-components';
 
 const types: DBSelectOptionType[] = [
-	{ value: 'headline-3xl', label: 'Headline 3XL' },
-	{ value: 'headline-2xl', label: 'Headline 2XL' },
-	{ value: 'headline-xl', label: 'Headline XL' },
-	{ value: 'headline-lg', label: 'Headline LG' },
-	{ value: 'headline-md', label: 'Headline MD' },
-	{ value: 'headline-sm', label: 'Headline SM' },
-	{ value: 'headline-xs', label: 'Headline XS' },
-	{ value: 'headline-2xs', label: 'Headline 2XS' },
-	{ value: 'headline-3xs', label: 'Headline 3XS' },
-	{ value: 'body-xl', label: 'Body XL' },
-	{ value: 'body-lg', label: 'Body LG' },
-	{ value: 'body-md', label: 'Body MD' },
-	{ value: 'body-sm', label: 'Body SM' },
-	{ value: 'body-xs', label: 'Body XS' },
+	{ value: 'headline-3xl', label: 'headline-3xl' },
+	{ value: 'headline-2xl', label: 'headline-2xl' },
+	{ value: 'headline-xl', label: 'headline-xl' },
+	{ value: 'headline-lg', label: 'headline-lg' },
+	{ value: 'headline-md', label: 'headline-md' },
+	{ value: 'headline-sm', label: 'headline-sm' },
+	{ value: 'headline-xs', label: 'headline-xs' },
+	{ value: 'headline-2xs', label: 'headline-2xs' },
+	{ value: 'headline-3xs', label: 'headline-3xs' },
+	{ value: 'body-3xl', label: 'body-3xl' },
+	{ value: 'body-2xl', label: 'body-2xl' },
+	{ value: 'body-xl', label: 'body-xl' },
+	{ value: 'body-lg', label: 'body-lg' },
+	{ value: 'body-md', label: 'body-md' },
+	{ value: 'body-sm', label: 'body-sm' },
+	{ value: 'body-xs', label: 'body-xs' },
+	{ value: 'body-2xs', label: 'body-2xs' },
+	{ value: 'body-3xs', label: 'body-3xs' },
 ];
 
 const densities: DBSelectOptionType[] = [
@@ -44,7 +48,8 @@ const densities: DBSelectOptionType[] = [
 			data-density="regular"
 		>
 			<DBCard behavior="interactive" spacing="small">
-				The quick brown fox jumps over the lazy dog
+				<span class="typo-headline-text">The quick brown fox</span>
+				<span class="typo-body-text">The quick brown fox jumps over the lazy dog</span>
 			</DBCard>
 		</button>
 	</DBPopover>

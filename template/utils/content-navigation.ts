@@ -106,7 +106,13 @@ function sortTree(node: NavigationItem) {
  */
 export function buildAppNavigationFromContent(): AppNavigation {
 	const mods = import.meta.glob<MdModule>(
-		['../../content/pages/**/*.{md,mdx,astro}', '!**/_*/**',  '!**/_*.astro', '!**/demo-b2b/**', '!**/demo-b2c/**'],
+		[
+			'../../content/pages/**/*.{md,mdx,astro}',
+			'!**/_*/**',
+			'!**/_*.astro',
+			'!**/demo-b2b/**',
+			'!**/demo-b2c/**',
+		],
 		{ eager: true },
 	) as Modules;
 	const nodes = new Map<string, NavigationItem>();

@@ -13,7 +13,8 @@ export const popoverConfig = {
 			label: 'Placement',
 			type: 'select',
 			defaultValue: 'top',
-			description: 'Controls the position of the popover via `data-placement` attribute on the `<article>` element.',
+			description:
+				'Controls the position of the popover via `data-placement` attribute on the `<article>` element.',
 			options: [
 				{ label: 'Top', value: 'top', default: true },
 				{ label: 'Bottom', value: 'bottom', default: false },
@@ -26,7 +27,8 @@ export const popoverConfig = {
 			label: 'Spacing',
 			type: 'select',
 			defaultValue: 'medium',
-			description: 'Controls the padding inside the popover via `data-spacing` attribute on the `<article>` element. Default is `var(--db-spacing-fixed-sm)` when `data-spacing` is not set.',
+			description:
+				'Controls the padding inside the popover via `data-spacing` attribute on the `<article>` element. Default is `var(--db-spacing-fixed-sm)` when `data-spacing` is not set.',
 			options: [
 				{ label: 'None', value: 'none', default: false },
 				{ label: 'Small', value: 'small', default: false },
@@ -39,7 +41,8 @@ export const popoverConfig = {
 			label: 'Width',
 			type: 'select',
 			defaultValue: 'auto',
-			description: 'Use fixed width for default max-width via `data-width` attribute on the `<article>` element.',
+			description:
+				'Use fixed width for default max-width via `data-width` attribute on the `<article>` element.',
 			options: [
 				{ label: 'Auto', value: 'auto', default: true },
 				{ label: 'Fixed', value: 'fixed', default: false },
@@ -65,7 +68,8 @@ export const popoverConfig = {
 			label: 'Open',
 			type: 'checkbox',
 			defaultValue: false,
-			description: 'Use open to disable the default hover/focus behavior to use it on click or other trigger.',
+			description:
+				'Use open to disable the default hover/focus behavior to use it on click or other trigger.',
 			showInPlayground: false,
 		},
 		{
@@ -86,7 +90,8 @@ export const popoverConfig = {
 			label: 'ID',
 			type: 'text',
 			defaultValue: '',
-			description: 'ID of the component, generated automatically for some components as a fallback if unset.',
+			description:
+				'ID of the component, generated automatically for some components as a fallback if unset.',
 			showInPlayground: false,
 		},
 		{

@@ -65,7 +65,6 @@
 	}
 }
 
-
 .token-cell {
 	display: flex;
 	align-items: center;
@@ -79,7 +78,8 @@
 			inset: 0;
 		}
 
-		&:hover, &:focus {
+		&:hover,
+		&:focus {
 			&::before {
 				background-color: var(--db-adaptive-bg-basic-transparent-semi-default);
 			}
