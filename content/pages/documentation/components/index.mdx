@@ -3,6 +3,237 @@ layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
 title: 'Components'
-order: 2
 headline: 'Components'
+description: 'Ready-to-use UI components for building consistent, accessible interfaces. Browse stable, beta, and upcoming components with usage guidance and code examples.'
+order: 3
 ---
+
+import { DBSection } from '@db-ux/react-core-components';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<DBSection spacing="small" width="auto">
+## Stable
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Badge',
+			description: 'Display short, contextual information such as status, category, or metadata.',
+			url: '/documentation/components/badge',
+		},
+		{
+			title: 'Button',
+			description: 'Initiate actions and confirm decisions to guide users through key tasks and flows.',
+			url: '/documentation/components/button',
+		},
+		{
+			title: 'Checkbox',
+			description: 'Select one or more independent options with clear selection state.',
+			url: '/documentation/components/checkbox',
+		},
+		{
+			title: 'Drawer',
+			description: 'Sliding panel for supplemental content or lightweight interactions while keeping context.',
+			url: '/documentation/components/drawer',
+		},
+		{
+			title: 'Header',
+			description: 'Top area of a page with brand identity, primary navigation, and optional actions.',
+			url: '/documentation/components/header',
+		},
+		{
+			title: 'Infotext',
+			description: 'Compact supporting information or guidance directly in the interface.',
+			url: '/documentation/components/infotext',
+		},
+		{
+			title: 'Input',
+			description: 'Capture short, single-line user text entries in forms and dialogs.',
+			url: '/documentation/components/input',
+		},
+		{
+			title: 'Link',
+			description: 'Navigate to other pages, sections, or external destinations.',
+			url: '/documentation/components/link',
+		},
+		{
+			title: 'Navigation',
+			description: 'Consistent destinations across desktop and mobile with responsive behaviors.',
+			url: '/documentation/components/navigation',
+		},
+		{
+			title: 'Navigation Item',
+			description: 'Individual destinations within Navigation with icons, active and disabled states.',
+			url: '/documentation/components/navigation-item',
+		},
+		{
+			title: 'Notification',
+			description: 'Brief messages about events, state changes, or system feedback without blocking the user.',
+			url: '/documentation/components/notification',
+		},
+		{
+			title: 'Radio',
+			description: 'Select exactly one option from a set of mutually exclusive choices.',
+			url: '/documentation/components/radio',
+		},
+		{
+			title: 'Select',
+			description: 'Choose one option from a predefined list via a dropdown.',
+			url: '/documentation/components/select',
+		},
+		{
+			title: 'Switch',
+			description: 'Toggle a setting between two states with immediate effect.',
+			url: '/documentation/components/switch',
+		},
+		{
+			title: 'Tag',
+			description: 'Compact label for categorization, attributes, or selections.',
+			url: '/documentation/components/tag',
+		},
+		{
+			title: 'Textarea',
+			description: 'Enter and review longer, multi-line text in forms and dialogs.',
+			url: '/documentation/components/textarea',
+		},
+		{
+			title: 'Tooltip',
+			description: 'Brief, contextual information on hover or focus without interrupting the flow.',
+			url: '/documentation/components/tooltip',
+		},
+	]}
+/>
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+## Beta
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Accordion',
+			description: 'Expandable sections to show and hide content.',
+			url: '/documentation/components/accordion',
+		},
+		{
+			title: 'Backdrop',
+			description: 'Overlay layer behind modal or drawer content.',
+			url: '/documentation/components/backdrop',
+		},
+		{
+			title: 'Card',
+			description: 'Contained surface for grouping related content and actions.',
+			url: '/documentation/components/card',
+		},
+		{
+			title: 'Custom Select',
+			description: 'Customizable dropdown for selecting from a list of options.',
+			url: '/documentation/components/custom-select',
+		},
+		{
+			title: 'Divider',
+			description: 'Visual separator between content sections.',
+			url: '/documentation/components/divider',
+		},
+		{
+			title: 'Popover',
+			description: 'Floating content triggered by user interaction.',
+			url: '/documentation/components/popover',
+		},
+		{
+			title: 'Section',
+			description: 'Layout container for grouping page content with consistent spacing.',
+			url: '/documentation/components/section',
+		},
+		{
+			title: 'Stack',
+			description: 'Layout component for arranging elements with consistent spacing.',
+			url: '/documentation/components/stack',
+		},
+	]}
+/>
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+## Concept
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Breadcrumb',
+			description: 'Show the current page location within a navigational hierarchy.',
+			disabled: true,
+		},
+		{
+			title: 'ButtonGroup',
+			description: 'Group related buttons together for combined actions.',
+			disabled: true,
+		},
+		{
+			title: 'Control Panel',
+			description: 'Configurable panel for managing settings and controls.',
+			disabled: true,
+		},
+		{
+			title: 'Footer',
+			description: 'Bottom area of a page for secondary navigation and legal links.',
+			disabled: true,
+		},
+		{
+			title: 'Heading',
+			description: 'Typographic element for structuring content hierarchy.',
+			disabled: true,
+		},
+		{
+			title: 'List',
+			description: 'Display a collection of related items in a structured format.',
+			disabled: true,
+		},
+		{
+			title: 'LoadingIndicator',
+			description: 'Visual feedback during asynchronous operations.',
+			disabled: true,
+		},
+		{
+			title: 'Logo',
+			description: 'Brand identity element for consistent visual recognition.',
+			disabled: true,
+		},
+		{
+			title: 'Menu',
+			description: 'List of actions or options triggered by user interaction.',
+			disabled: true,
+		},
+		{
+			title: 'Pulse',
+			description: 'Attention indicator for new or updated content.',
+			disabled: true,
+		},
+		{
+			title: 'Shell',
+			description: 'Application-level layout wrapper for consistent page structure.',
+			disabled: true,
+		},
+		{
+			title: 'Table',
+			description: 'Structured data display in rows and columns.',
+			disabled: true,
+		},
+		{
+			title: 'Tabs',
+			description: 'Switch between related content views within the same context.',
+			disabled: true,
+		},
+		{
+			title: 'Text',
+			description: 'Typographic element for body content and inline text.',
+			disabled: true,
+		},
+		{
+			title: 'ToggleButton',
+			description: 'Button that switches between two states on press.',
+			disabled: true,
+		},
+	]}
+/>
+</DBSection>
