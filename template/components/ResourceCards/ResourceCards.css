@@ -11,12 +11,11 @@
 	gap: 0;
 }
 
-.resource-cards .db-link {
-	min-block-size: min-content;
+.resource-cards .resource-card-link {
 	block-size: 100%;
 }
 
-.resource-cards .db-card:has(.db-link) {
+.resource-cards .db-card {
 	block-size: 100%;
 	inline-size: 100%;
 	box-sizing: border-box;
