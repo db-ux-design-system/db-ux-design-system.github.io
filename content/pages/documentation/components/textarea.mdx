@@ -1,5 +1,4 @@
 ---
-order: 8
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -18,9 +17,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { textareaConfig } from '@template/configs/textarea.config.js';
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 
 - Capture longer free-text input (e.g., feedback, comments, descriptions)
 - Support structured longer entries with hints (e.g., formatting expectations, character limits)
@@ -28,38 +25,9 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 <DBSection spacing="small" width="auto">
 
-## Playground
-
-Experiment with the Textarea component and its properties.
-
-<ComponentPlayground config={textareaConfig} />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbtextarea-density--docs" />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the textarea through its properties, slots and events.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={textareaConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties, Slots & Events"
-	expandedText="Hide some Properties, Slots & Events"
-/>
 
 </DBSection>
 
@@ -147,7 +115,7 @@ Helper text prevents errors (format, tone, limits). Validation messages explain 
 
 ## FAQ
 
-Have a question about the Textarea component? We'll answer it and add frequently asked questions to this page.
+Have a question about the textarea component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Textarea" />
 
