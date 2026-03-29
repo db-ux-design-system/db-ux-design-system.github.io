@@ -6,6 +6,7 @@ import ColorTable from './_ColorTable.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 const frontmatter: DocumentationFrontMatter = {
 	headline: 'Colors',
@@ -20,6 +21,7 @@ const headings = [
 	{ depth: 2, slug: 'playground', text: 'Playground' },
 	{ depth: 2, slug: 'guidelines', text: 'Guidelines' },
 	{ depth: 2, slug: 'tokens', text: 'Tokens' },
+	{ depth: 2, slug: 'faq', text: 'FAQ' },
 ];
 ---
 
@@ -106,6 +108,11 @@ const headings = [
 	<DBSection spacing="small">
 		<h2 id="tokens">Tokens</h2>
 		<ColorTable />
+	</DBSection>
+
+	<DBSection spacing="small">
+		<h2 id="faq">FAQ</h2>
+		<QuestionForm componentName="Colors" />
 	</DBSection>
 
 	<script>
