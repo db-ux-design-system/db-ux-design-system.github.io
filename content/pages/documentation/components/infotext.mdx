@@ -1,5 +1,4 @@
 ---
-order: 9
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -18,9 +17,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { infotextConfig } from '@template/configs/infotext.config.js';
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 
 - Give short hints or explanations near UI elements (e.g., what a setting changes)
 - Provide brief warnings or important notes in context (e.g., constraints or limitations)
@@ -28,38 +25,9 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 <DBSection spacing="small" width="auto">
 
-## Playground
-
-Experiment with the Infotext component and its properties.
-
-<ComponentPlayground config={infotextConfig} />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbinfotext-density--docs" />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the infotext through its properties, slots and events.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={infotextConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties, Slots & Events"
-	expandedText="Hide some Properties, Slots & Events"
-/>
 
 </DBSection>
 

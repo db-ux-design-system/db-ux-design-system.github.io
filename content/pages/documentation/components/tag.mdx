@@ -1,5 +1,4 @@
 ---
-order: 12
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -11,7 +10,7 @@ status: 'stable'
 toc: true
 ---
 
-import { DBTag, DBSection } from '@db-ux/react-core-components';
+import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
@@ -19,8 +18,6 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { tagConfig } from '@template/configs/tag.config.js';
 
 - Display short categories or attributes (e.g., "New", "Marketing", "Internal")
@@ -29,38 +26,9 @@ import { tagConfig } from '@template/configs/tag.config.js';
 
 <DBSection spacing="small" width="auto">
 
-## Playground
-
-Experiment with the Tag component and its properties.
-
-<ComponentPlayground config={tagConfig} component={DBTag} />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbtag-density--docs" />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the tag through its properties, slots and events.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={tagConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties, Slots & Events"
-	expandedText="Hide some Properties, Slots & Events"
-/>
 
 </DBSection>
 

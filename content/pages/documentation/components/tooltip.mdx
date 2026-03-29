@@ -1,5 +1,4 @@
 ---
-order: 7
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -18,9 +17,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { tooltipConfig } from '@template/configs/tooltip.config.js';
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 
 - Explain the meaning of an icon-only control (e.g., "Download", "Copy link")
 - Reveal truncated text or labels (e.g., full file name, full table header)
@@ -28,38 +25,9 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 <DBSection spacing="small" width="auto">
 
-## Playground
-
-Experiment with the Tooltip component and its properties.
-
-<ComponentPlayground config={tooltipConfig} />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbtooltip-density--docs" />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the tooltip through its properties, slots and events.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={tooltipConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties, Slots & Events"
-	expandedText="Hide some Properties, Slots & Events"
-/>
 
 </DBSection>
 

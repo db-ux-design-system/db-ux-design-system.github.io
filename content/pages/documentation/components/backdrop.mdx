@@ -16,24 +16,12 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import { backdropConfig } from '@template/configs/backdrop.config.js';
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 
 Backdrop is a helper component that dims content behind an overlay to direct attention to the foreground (e.g., modal, dialog, drawer). It separates active content from background content and can optionally block interaction with the background.
 
 - Highlight an open overlay (e.g., Dialog, Modal, Drawer)
 - Dim background during a blocking loading state or process
 - Visually separate focused content from the rest of the page
-
-<DBSection spacing="small" width="auto">
-
-## Playground
-
-Experiment with the backdrop and its properties.
-
-<ComponentPlayground config={backdropConfig} component={'div'} />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -161,8 +149,6 @@ Ensure foreground content has sufficient contrast against the dimmed background.
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the backdrop? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Backdrop" />
 

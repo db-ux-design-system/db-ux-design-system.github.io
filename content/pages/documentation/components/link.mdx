@@ -1,5 +1,4 @@
 ---
-order: 5
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -11,7 +10,7 @@ status: 'stable'
 toc: true
 ---
 
-import { DBLink, DBSection } from '@db-ux/react-core-components';
+import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
@@ -19,8 +18,6 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { linkConfig } from '@template/configs/link.config.js';
 
 - Navigate to another page within the application
@@ -29,37 +26,9 @@ import { linkConfig } from '@template/configs/link.config.js';
 
 <DBSection spacing="small" width="auto">
 
-    ## Playground
-    Experiment with the Link component and its properties.
-
-    <ComponentPlayground config={linkConfig} component={DBLink} />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dblink-density--docs" />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the link through its properties and slots.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={linkConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties, Slots & Events"
-	expandedText="Hide some Properties, Slots & Events"
-/>
 
 </DBSection>
 

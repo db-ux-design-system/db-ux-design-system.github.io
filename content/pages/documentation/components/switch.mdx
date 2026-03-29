@@ -1,5 +1,4 @@
 ---
-order: 11
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -11,7 +10,7 @@ status: 'stable'
 toc: true
 ---
 
-import { DBSwitch, DBSection } from '@db-ux/react-core-components';
+import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
@@ -19,8 +18,6 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { switchConfig } from '@template/configs/switch.config.js';
 
 - Turn a setting on or off with immediate effect (e.g., "Enable notifications")
@@ -29,38 +26,9 @@ import { switchConfig } from '@template/configs/switch.config.js';
 
 <DBSection spacing="small" width="auto">
 
-## Playground
-
-Experiment with the Switch component and its properties.
-
-<ComponentPlayground config={switchConfig} component="switch" />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbswitch-density--docs" />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the switch through its properties, slots and events.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={switchConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties, Slots & Events"
-	expandedText="Hide some Properties, Slots & Events"
-/>
 
 </DBSection>
 
