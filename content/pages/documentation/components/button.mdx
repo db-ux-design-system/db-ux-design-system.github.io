@@ -1,5 +1,4 @@
 ---
-order: 2
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small' # none, small, medium, large
 sectionWidth: 'auto' # auto, full
@@ -11,7 +10,7 @@ toc: true
 status: 'stable'
 ---
 
-import { DBAccordion, DBAccordionItem, DBButton, DBSection } from '@db-ux/react-core-components';
+import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
@@ -19,8 +18,6 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { buttonConfig } from '@template/configs/button.config.js';
 
 - Trigger an action (e.g., Send, Save, Delete)
@@ -29,37 +26,9 @@ import { buttonConfig } from '@template/configs/button.config.js';
 
 <DBSection spacing="small" width="auto">
 
-    ## Playground
-    Experiment with the Button component and its properties.
-
-    <ComponentPlayground config={buttonConfig} component={DBButton} />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbbutton-density--docs" />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the button through its properties, such as variant, size, icon, and disabled state.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={buttonConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties, Slots & Events"
-	expandedText="Hide some Properties, Slots & Events"
-/>
 
 </DBSection>
 
@@ -180,8 +149,6 @@ The small button in functional density has a height of 20 px. To meet accessibil
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the Button component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Button" />
 

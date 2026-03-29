@@ -9,16 +9,11 @@ status: 'beta'
 toc: true
 ---
 
-import { DBSection, DBCard } from '@db-ux/react-core-components';
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import { DBSection } from '@db-ux/react-core-components';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
-import { cardConfig } from '@template/configs/card.config.js';
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 
 Cards group related content into a contained surface to improve scanning and create clear visual structure. They can be static for content grouping or interactive as an entry point to deeper content, but should stay simple and consistent.
 
@@ -28,39 +23,11 @@ Cards group related content into a contained surface to improve scanning and cre
 
 <DBSection spacing="small" width="auto">
 
-## Playground
-
-Experiment with the card component and its properties.
-
-<ComponentPlayground config={cardConfig} component={DBCard} />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbcard-density--docs" />
 
 </DBSection>
-
-{/* <DBSection spacing="small" width="auto">
-
-## Properties & Slots
-Configure the card through its properties and slots.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={cardConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties & Slots"
-	expandedText="Hide some Properties & Slots"
-/>
-
-</DBSection> */}
 
 <DBSection spacing="small" width="auto">
 
@@ -156,8 +123,6 @@ If the card is interactive, it must be keyboard reachable and expose correct sem
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the card component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Card" />
 

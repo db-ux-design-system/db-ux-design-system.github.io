@@ -10,15 +10,10 @@ toc: true
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
-import { sectionConfig } from '@template/configs/section.config.js';
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 
 Section separates and structures content areas on a page by applying consistent spacing and optional width constraints. It helps create clear visual grouping and rhythm without manually managing margins for each block.
 
@@ -28,39 +23,11 @@ Section separates and structures content areas on a page by applying consistent 
 
 <DBSection spacing="small" width="auto">
 
-## Playground
-
-Experiment with the section component and its properties.
-
-<ComponentPlayground config={sectionConfig} component={DBSection} />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbsection-density--docs" />
 
 </DBSection>
-
-{/* <DBSection spacing="small" width="auto">
-
-## Properties & Slots
-Configure the section through its properties and slots.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={sectionConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties & Slots"
-	expandedText="Hide some Properties & Slots"
-/>
-
-</DBSection> */}
 
 <DBSection spacing="small" width="auto">
 
@@ -109,8 +76,6 @@ Section is a layout tool, not a semantic substitute. Ensure content inside is pr
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the section component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Section" />
 

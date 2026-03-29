@@ -1,5 +1,4 @@
 ---
-order: 10
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -18,9 +17,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { drawerConfig } from '@template/configs/drawer.config.js';
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 
 - Show additional details or secondary information without leaving the current page
 - Provide simple, optional form inputs or quick edits in context
@@ -28,38 +25,9 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 <DBSection spacing="small" width="auto">
 
-## Playground
-
-Experiment with the Drawer component and its properties.
-
-<ComponentPlayground config={drawerConfig} />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbdrawer-density--docs" />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the drawer through its properties, slots and events.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={drawerConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties, Slots & Events"
-	expandedText="Hide some Properties, Slots & Events"
-/>
 
 </DBSection>
 
@@ -146,8 +114,6 @@ Always provide a way to close the drawer, such as clicking outside the drawer ar
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the Drawer component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Drawer" />
 
