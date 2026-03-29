@@ -46,22 +46,36 @@ const releaseNotes: ReleaseNote[] = Object.values(releaseNoteFiles)
 	.sort((a: ReleaseNote, b: ReleaseNote) => b.date.getTime() - a.date.getTime());
 
 const categoryOrder = ['Core', '🧪 Core Lab', 'DB Theme Icons', 'DB Theme Illustrative Icons'];
-const categories = categoryOrder.filter((cat) =>
-	releaseNotes.some((note) => note.category === cat),
-);
+const categoriesFromData = Array.from(new Set(releaseNotes.map((note) => note.category)));
+const categories = [
+	...categoryOrder.filter((cat) => categoriesFromData.includes(cat)),
+	...categoriesFromData.filter((cat) => !categoryOrder.includes(cat)),
+];
 
 function getRoadmapUrl(category: string, version: string): string | null {
 	const v = version.replace(/^v/, '');
+	let baseUrl: string;
+	let filterQuery: string;
+
 	switch (category) {
 		case 'Core':
-			return `https://github.com/orgs/db-ux-design-system/projects/4/views/12?filterQuery=has%3Amilestone+-label%3A%F0%9F%96%BC%EF%B8%8Ficons.+milestone%3A${v}`;
+			baseUrl = 'https://github.com/orgs/db-ux-design-system/projects/4/views/12';
+			filterQuery = `has:milestone -label:🖼️icons milestone:${v}`;
+			break;
 		case 'DB Theme Icons':
-			return `https://github.com/orgs/db-ux-design-system/projects/4/views/15?filterQuery=has%3Amilestone+label%3A%F0%9F%96%BC%EF%B8%8Ficons%2C%F0%9F%9A%85DBTheme+milestone%3A%22${v}+%28functional+icons%29%22`;
+			baseUrl = 'https://github.com/orgs/db-ux-design-system/projects/4/views/15';
+			filterQuery = `has:milestone label:🖼️icons,🚅DBTheme milestone:"${v} (functional icons)"`;
+			break;
 		case 'DB Theme Illustrative Icons':
-			return `https://github.com/orgs/db-ux-design-system/projects/4/views/15?filterQuery=has%3Amilestone+label%3A%F0%9F%96%BC%EF%B8%8Ficons%2C%F0%9F%9A%85DBTheme+milestone%3A%22${v}+%28illustrative+icons%29%22`;
+			baseUrl = 'https://github.com/orgs/db-ux-design-system/projects/4/views/15';
+			filterQuery = `has:milestone label:🖼️icons,🚅DBTheme milestone:"${v} (illustrative icons)"`;
+			break;
 		default:
 			return null;
 	}
+
+	const params = new URLSearchParams({ filterQuery });
+	return `${baseUrl}?${params.toString()}`;
 }
 ---
 
