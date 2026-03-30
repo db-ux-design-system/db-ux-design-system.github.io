@@ -5,6 +5,12 @@
 	align-items: flex-start;
 }
 
-.question-form-text {
+.question-form .db-textarea {
+	inline-size: 100%;
+	max-inline-size: var(--db-container-xl);
+}
+
+.question-form-fallback {
 	margin: 0;
+	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
 }

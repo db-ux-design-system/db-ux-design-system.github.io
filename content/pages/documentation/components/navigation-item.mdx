@@ -1,5 +1,4 @@
 ---
-order: 7
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -11,38 +10,18 @@ status: 'stable'
 toc: true
 ---
 
-import {
-	DBNavigation,
-	DBNavigationItem,
-	DBSection,
-	DBAccordion,
-	DBAccordionItem,
-} from '@db-ux/react-core-components';
+import { DBSection } from '@db-ux/react-core-components';
 
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { navigationItemConfig } from '@template/configs/navigation-item.config.js';
 
 - Always wrap content in an anchor element for proper navigation semantics
 - Use the active property or aria-current="page" to indicate the current location
 - Add icons to improve scannability and recognition
-
-<DBSection spacing="small" width="auto">
-
-## Playground
-
-Experiment with the Navigation Item component and its properties.
-
-<ComponentPlayground config={navigationItemConfig} component={DBNavigationItem} />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -54,28 +33,7 @@ Experiment with the Navigation Item component and its properties.
 
 <DBSection spacing="small" width="auto">
 
-## Properties, Slots & Events
-
-Configure the navigation item through its properties, slots and events.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={navigationItemConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties, Slots & Events"
-	expandedText="Hide some Properties, Slots & Events"
-/>
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ## FAQ
-
-Have a question about the Navigation Item component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Navigation Item" />
 

@@ -9,16 +9,11 @@ status: 'beta'
 toc: true
 ---
 
-import { DBSection, DBPopover } from '@db-ux/react-core-components';
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import { DBSection } from '@db-ux/react-core-components';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
-import { popoverConfig } from '@template/configs/popover.config.js';
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 
 Popover is a floating container anchored to a trigger that reveals additional, contextual content on click or hover. It supports richer content than a tooltip and can include actions, but should remain lightweight and easy to dismiss.
 
@@ -28,39 +23,11 @@ Popover is a floating container anchored to a trigger that reveals additional, c
 
 <DBSection spacing="small" width="auto">
 
-## Playground
-
-Experiment with the popover component and its properties.
-
-<ComponentPlayground config={popoverConfig} component={DBPopover} />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbpopover-density--docs" />
 
 </DBSection>
-
-{/* <DBSection spacing="small" width="auto">
-
-## Properties & Slots
-Configure the popover through its properties and slots.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={popoverConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties & Slots"
-	expandedText="Hide some Properties & Slots"
-/>
-
-</DBSection> */}
 
 <DBSection spacing="small" width="auto">
 
@@ -122,8 +89,6 @@ Choose a placement that keeps the popover near its trigger and within the viewpo
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the popover component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Popover" />
 

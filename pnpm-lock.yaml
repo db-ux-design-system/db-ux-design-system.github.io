@@ -31,8 +31,8 @@ importers:
         specifier: 4.3.1
         version: 4.3.1(@types/node@25.3.1)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(yaml@2.8.3)
       '@astrojs/sitemap':
-        specifier: 3.7.1
-        version: 3.7.1
+        specifier: 3.7.2
+        version: 3.7.2
       '@axe-core/playwright':
         specifier: 4.11.1
         version: 4.11.1(playwright-core@1.58.2)
@@ -67,8 +67,8 @@ importers:
         specifier: 3.0.2-shell4-bdb351c
         version: 3.0.2-shell4-bdb351c
       '@double-great/stylelint-a11y':
-        specifier: 3.4.7
-        version: 3.4.7(stylelint@17.6.0(typescript@5.9.3))
+        specifier: 3.4.8
+        version: 3.4.8(stylelint@17.6.0(typescript@5.9.3))
       '@orama/orama':
         specifier: 3.1.18
         version: 3.1.18
@@ -179,8 +179,8 @@ packages:
       react: ^17.0.2 || ^18.0.0 || ^19.0.0
       react-dom: ^17.0.2 || ^18.0.0 || ^19.0.0
 
-  '@astrojs/sitemap@3.7.1':
-    resolution: {integrity: sha512-IzQqdTeskaMX+QDZCzMuJIp8A8C1vgzMBp/NmHNnadepHYNHcxQdGLQZYfkbd2EbRXUfOS+UDIKx8sKg0oWVdw==}
+  '@astrojs/sitemap@3.7.2':
+    resolution: {integrity: sha512-PqkzkcZTb5ICiyIR8VoKbIAP/laNRXi5tw616N1Ckk+40oNB8Can1AzVV56lrbC5GKSZFCyJYUVYqVivMisvpA==}
 
   '@astrojs/telemetry@3.3.0':
     resolution: {integrity: sha512-UFBgfeldP06qu6khs/yY+q1cDAaArM2/7AEIqQ9Cuvf7B1hNLq0xDrZkct+QoIGyjq56y8IaE2I3CTvG99mlhQ==}
@@ -370,8 +370,8 @@ packages:
   '@db-ux/react-core-components@3.0.2-shell4-bdb351c':
     resolution: {integrity: sha512-H4kka+9J9OFGXIPZa68jXxD7G9OT3EV7grRccWTM/ZXHYm/qNvPqjSJB3Bm6XWV3+cLR7cvgPTKj/g/PC+jRqQ==}
 
-  '@double-great/stylelint-a11y@3.4.7':
-    resolution: {integrity: sha512-H2nfhZ6Ugk1hqVxrdFLJftcAQVyRQzbmj2nQ1gGub75v3QcJgzcm/6wf7qWfKqacWigFrNxWTvjiXdOdiMXk1w==}
+  '@double-great/stylelint-a11y@3.4.8':
+    resolution: {integrity: sha512-HzIU65EHVK6YF3FtywmGG8ejsH91m5hoWwERunPxL/FqjfH9pUEVCsJcLajVcVW0AefSrb/nTpvsOnq93CsnrA==}
     engines: {node: '>=18.12.0'}
     peerDependencies:
       stylelint: '>=16.0.0'
@@ -1468,11 +1468,11 @@ packages:
     resolution: {integrity: sha512-F3PH5k5juxom4xktynS7MoFY+NUWH5LC4CnH11YB8NPew+HLpmBLCybSAEyb2F+4pRXhuhWqFesoQd6DAyc2hw==}
     engines: {node: '>=18'}
 
-  brace-expansion@2.0.2:
-    resolution: {integrity: sha512-Jt0vHyM+jmUBqojB7E1NIYadt0vI0Qxjxd2TErW94wDz+E2LAm5vKMXXwg6ZZBTHPuUlDgQHKXvjGBdfcF1ZDQ==}
+  brace-expansion@2.0.3:
+    resolution: {integrity: sha512-MCV/fYJEbqx68aE58kv2cA/kiky1G8vux3OR6/jbS+jIMe/6fJWa0DTzJU7dqijOWYwHi1t29FlfYI9uytqlpA==}
 
-  brace-expansion@5.0.4:
-    resolution: {integrity: sha512-h+DEnpVvxmfVefa4jFbCf5HdH5YMDXRsmKflpf1pILZWRFlTbJpxeU55nJl4Smt5HQaGzg1o6RHFPJaOqnmBDg==}
+  brace-expansion@5.0.5:
+    resolution: {integrity: sha512-VZznLgtwhn+Mact9tfiwx64fA9erHH/MCXEUfB/0bX/6Fz6ny5EGTXYltMocqg4xFAQZtnO3DHWWXi8RiuN7cQ==}
     engines: {node: 18 || 20 || >=22}
 
   braces@3.0.3:
@@ -3500,7 +3500,7 @@ snapshots:
       - tsx
       - yaml
 
-  '@astrojs/sitemap@3.7.1':
+  '@astrojs/sitemap@3.7.2':
     dependencies:
       sitemap: 9.0.1
       stream-replace-string: 2.0.0
@@ -3729,7 +3729,7 @@ snapshots:
       '@db-ux/core-components': 3.0.2-shell4-bdb351c
       '@db-ux/core-foundations': 3.0.2-shell4-bdb351c
 
-  '@double-great/stylelint-a11y@3.4.7(stylelint@17.6.0(typescript@5.9.3))':
+  '@double-great/stylelint-a11y@3.4.8(stylelint@17.6.0(typescript@5.9.3))':
     dependencies:
       postcss: 8.5.8
       stylelint: 17.6.0(typescript@5.9.3)
@@ -4736,11 +4736,11 @@ snapshots:
       widest-line: 5.0.0
       wrap-ansi: 9.0.2
 
-  brace-expansion@2.0.2:
+  brace-expansion@2.0.3:
     dependencies:
       balanced-match: 1.0.2
 
-  brace-expansion@5.0.4:
+  brace-expansion@5.0.5:
     dependencies:
       balanced-match: 4.0.4
 
@@ -6074,11 +6074,11 @@ snapshots:
 
   minimatch@10.2.4:
     dependencies:
-      brace-expansion: 5.0.4
+      brace-expansion: 5.0.5
 
   minimatch@9.0.9:
     dependencies:
-      brace-expansion: 2.0.2
+      brace-expansion: 2.0.3
 
   mrmime@2.0.1: {}
 

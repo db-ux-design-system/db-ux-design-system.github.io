@@ -9,16 +9,11 @@ status: 'beta'
 toc: true
 ---
 
-import { DBSection, DBAccordion, DBAccordionItem } from '@db-ux/react-core-components';
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import { DBSection } from '@db-ux/react-core-components';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
-import { accordionConfig } from '@template/configs/accordion.config.js';
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 
 Accordions group content into collapsible sections to save space and let users reveal details progressively. It is best for optional information and structured content where users do not need to see everything at once.
 
@@ -28,39 +23,11 @@ Accordions group content into collapsible sections to save space and let users r
 
 <DBSection spacing="small" width="auto">
 
-## Playground
-
-Experiment with the accordion component and its properties.
-
-<ComponentPlayground config={accordionConfig} component={DBAccordion} />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbaccordion-density--docs" />
 
 </DBSection>
-
-{/* <DBSection spacing="small" width="auto">
-
-## Properties & Slots
-Configure the accordion through its properties and slots.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={accordionConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties & Slots"
-	expandedText="Hide some Properties & Slots"
-/>
-
-</DBSection> */}
 
 <DBSection spacing="small" width="auto">
 
@@ -139,8 +106,6 @@ Nested accordions quickly become hard to understand and navigate. If nesting is 
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the accordion component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Accordion" />
 

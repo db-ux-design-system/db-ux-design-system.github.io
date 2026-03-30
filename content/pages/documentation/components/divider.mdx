@@ -9,16 +9,11 @@ status: 'beta'
 toc: true
 ---
 
-import { DBSection, DBDivider } from '@db-ux/react-core-components';
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import { DBSection } from '@db-ux/react-core-components';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
-import { dividerConfig } from '@template/configs/divider.config.js';
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 
 Divider is a thin horizontal or vertical line that separates UI elements into logical sections and improves layout clarity. It should be used sparingly and together with spacing and hierarchy to avoid visual clutter.
 
@@ -28,39 +23,11 @@ Divider is a thin horizontal or vertical line that separates UI elements into lo
 
 <DBSection spacing="small" width="auto">
 
-## Playground
-
-Experiment with the divider component and its properties.
-
-<ComponentPlayground config={dividerConfig} component={DBDivider} />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbdivider-density--docs" />
 
 </DBSection>
-
-{/* <DBSection spacing="small" width="auto">
-
-## Properties & Slots
-Configure the divider through its properties and slots.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={dividerConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties & Slots"
-	expandedText="Hide some Properties & Slots"
-/>
-
-</DBSection> */}
 
 <DBSection spacing="small" width="auto">
 
@@ -122,8 +89,6 @@ Align dividers to the content container and grid. Avoid partial or "floating" di
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the divider component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Divider" />
 
