@@ -1,5 +1,4 @@
 ---
-order: 6
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
@@ -11,7 +10,7 @@ status: 'stable'
 toc: true
 ---
 
-import { DBNavigation, DBNavigationItem, DBSection } from '@db-ux/react-core-components';
+import { DBSection } from '@db-ux/react-core-components';
 
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
@@ -20,8 +19,6 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { navigationConfig } from '@template/configs/navigation.config.js';
 
 - Offer primary destinations at the top level (global navigation)
@@ -30,28 +27,9 @@ import { navigationConfig } from '@template/configs/navigation.config.js';
 
 <DBSection spacing="small" width="auto">
 
-    ## Playground
-    Experiment with the Navigation component and its properties.
-
-    <ComponentPlayground config={navigationConfig} component={DBNavigation} />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbnavigation-density--docs" />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Properties
-
-Configure the navigation through its properties.
-
-<PropertiesTable config={navigationConfig} />
 
 </DBSection>
 
@@ -162,8 +140,6 @@ Keep hierarchy shallow and predictable. If there are too many items, use an over
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the Navigation component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Navigation" />
 

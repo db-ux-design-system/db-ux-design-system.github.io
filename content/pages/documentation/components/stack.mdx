@@ -9,16 +9,11 @@ toc: true
 status: 'beta'
 ---
 
-import { DBStack, DBSection, DBDivider } from '@db-ux/react-core-components';
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import { DBSection } from '@db-ux/react-core-components';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
-import { stackConfig } from '@template/configs/stack.config.js';
 
 Stack arranges child elements in a vertical or horizontal layout with consistent spacing. Use it to create structured layouts without writing custom CSS.
 
@@ -28,39 +23,11 @@ Stack arranges child elements in a vertical or horizontal layout with consistent
 
 <DBSection spacing="small" width="auto">
 
-## Playground
-
-Experiment with the stack component and its properties.
-
-<ComponentPlayground config={stackConfig} component={DBStack} />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbstack-density--docs" />
 
 </DBSection>
-
-{/* <DBSection spacing="small" width="auto">
-
-## Properties & Slots
-Configure the stack through its properties, such as gap, direction, alignment, and wrap behavior.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable config={stackConfig} />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties & Slots"
-	expandedText="Hide some Properties & Slots"
-/>
-
-</DBSection> */}
 
 <DBSection spacing="small" width="auto">
 
@@ -122,8 +89,6 @@ Enable wrap for stacks that should adapt to smaller screens.
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the stack component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Stack" />
 
