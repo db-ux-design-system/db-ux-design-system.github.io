@@ -3,6 +3,7 @@ import DocumentationLayout from '@template/layouts/documentation/DocumentationLa
 import { DBSection, DBStack } from '@db-ux/react-core-components';
 import BorderRadiusPlayground from './_BorderRadiusPlayground.astro';
 import BorderRadiusTable from './_BorderRadiusTable.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 const frontmatter: DocumentationFrontMatter = {
 	headline: 'Border Radius',
@@ -16,6 +17,7 @@ const frontmatter: DocumentationFrontMatter = {
 const headings = [
 	{ depth: 2, slug: 'playground', text: 'Playground' },
 	{ depth: 2, slug: 'tokens', text: 'Tokens' },
+	{ depth: 2, slug: 'faq', text: 'FAQ' },
 ];
 ---
 
@@ -40,6 +42,11 @@ const headings = [
 		<BorderRadiusTable />
 	</DBSection>
 
+	<DBSection spacing="small">
+		<h2 id="faq">FAQ</h2>
+		<QuestionForm componentName="Border Radius" />
+	</DBSection>
+
 	<script>
 		import { waitForElements } from '@template/utils/client.utils.ts';
 		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';
@@ -47,9 +54,9 @@ const headings = [
 		function initBorderRadius(): boolean {
 			return handleSimplePlaygrounds({
 				dataAttributeName: 'border-radius',
+				tokenPrefix: 'border-radius',
 				remPx: true,
 				popoverLabel: 'Border Radius',
-				computedStyle: 'borderRadius',
 			});
 		}
 

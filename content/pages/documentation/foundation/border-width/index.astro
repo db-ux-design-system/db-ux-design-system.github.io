@@ -3,6 +3,7 @@ import DocumentationLayout from '@template/layouts/documentation/DocumentationLa
 import { DBSection, DBStack } from '@db-ux/react-core-components';
 import BorderWidthPlayground from './_BorderWidthPlayground.astro';
 import BorderWidthTable from './_BorderWidthTable.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 const frontmatter: DocumentationFrontMatter = {
 	headline: 'Border Width',
@@ -16,6 +17,7 @@ const frontmatter: DocumentationFrontMatter = {
 const headings = [
 	{ depth: 2, slug: 'playground', text: 'Playground' },
 	{ depth: 2, slug: 'tokens', text: 'Tokens' },
+	{ depth: 2, slug: 'faq', text: 'FAQ' },
 ];
 ---
 
@@ -39,6 +41,11 @@ const headings = [
 		<BorderWidthTable />
 	</DBSection>
 
+	<DBSection spacing="small">
+		<h2 id="faq">FAQ</h2>
+		<QuestionForm componentName="Border Width" />
+	</DBSection>
+
 	<script>
 		import { waitForElements } from '@template/utils/client.utils.ts';
 		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';
@@ -46,9 +53,9 @@ const headings = [
 		function initBorderWidth(): boolean {
 			return handleSimplePlaygrounds({
 				dataAttributeName: 'border-width',
+				tokenPrefix: 'border-width',
 				remPx: true,
 				popoverLabel: 'Border Width',
-				computedStyle: 'borderWidth',
 			});
 		}
 

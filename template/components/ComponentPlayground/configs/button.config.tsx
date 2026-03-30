@@ -38,7 +38,8 @@ export const buttonConfig: PlaygroundConfig<DBButtonProps> = {
 			name: 'variant',
 			type: 'select',
 			label: 'Variant',
-			description: 'Variant of the button.',
+			description:
+				'Variant of the button.',
 			defaultValue: 'outlined',
 			showInPlayground: true,
 			options: [
@@ -52,7 +53,8 @@ export const buttonConfig: PlaygroundConfig<DBButtonProps> = {
 			name: 'size',
 			type: 'select',
 			label: 'Size',
-			description: 'The size attribute changes the font-size and other related sizes.',
+			description:
+				'The size attribute changes the font-size and other related sizes.',
 			defaultValue: 'medium',
 			showInPlayground: true,
 			options: [
@@ -64,7 +66,8 @@ export const buttonConfig: PlaygroundConfig<DBButtonProps> = {
 			name: 'width',
 			type: 'select',
 			label: 'Width',
-			description: 'Width of the component.',
+			description:
+				'Width of the component.',
 			defaultValue: 'auto',
 			showInPlayground: true,
 			options: [
@@ -106,7 +109,8 @@ export const buttonConfig: PlaygroundConfig<DBButtonProps> = {
 			alternativeName: 'noText',
 			type: 'checkbox',
 			label: 'No Text',
-			description: 'Hide text, show icon only.',
+			description:
+				'Hide text, show icon only.',
 			defaultValue: false,
 			showInPlayground: true,
 		},

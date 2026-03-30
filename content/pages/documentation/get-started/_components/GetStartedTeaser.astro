@@ -1,0 +1,85 @@
+---
+import { DBCard, DBStack } from '@db-ux/react-core-components';
+import TextImage from '@template/components/TextImage/TextImage.astro';
+---
+
+<DBStack gap="large">
+	<DBStack direction="row">
+		<a href="/documentation/foundation" style="flex:1">
+			<DBCard behavior="interactive" spacing="large" style={{ height: '100%' }}>
+				<TextImage
+					title="Foundation"
+					imagePosition="right"
+					imageWidth="33"
+					imageSrc="/assets/Foundations-Teaser--C.png"
+					imageAlt="Foundations"
+					mask="fade-bottom-right"
+				>
+					Shared base tokens and modes provide a stable foundation for clear and coherent
+					interfaces.
+				</TextImage>
+			</DBCard>
+		</a>
+		<a href="/documentation/components" style="flex:1">
+			<DBCard behavior="interactive" spacing="large" style={{ height: '100%' }}>
+				<TextImage
+					title="Components"
+					imagePosition="right"
+					imageWidth="33"
+					imageSrc="/assets/Components-Teaser--C.png"
+					imageAlt="Components"
+					mask="fade-bottom-right"
+				>
+					Core components ensure predictable interactions across products.
+				</TextImage>
+			</DBCard>
+		</a>
+	</DBStack>
+	<DBStack direction="row">
+		<a href="/documentation/icons" style="flex:1">
+			<DBCard behavior="interactive" spacing="large" style={{ height: '100%' }}>
+				<TextImage
+					title="Icons"
+					imagePosition="right"
+					imageWidth="33"
+					imageSrc="/assets/Extensions-Teaser--C.png"
+					imageAlt="Icons"
+					mask="fade-bottom-right"
+					headlineLevel={3}
+				>
+					Browse and copy all available DB UX icon names for usage in code.
+				</TextImage>
+			</DBCard>
+		</a>
+		<a href="/documentation/release-notes" style="flex:1">
+			<DBCard behavior="interactive" spacing="large" style={{ height: '100%' }}>
+				<TextImage
+					title="Release Notes"
+					imagePosition="right"
+					imageWidth="33"
+					imageSrc="/assets/Release-Notes-Teaser.png"
+					imageAlt="Release Notes"
+					mask="fade-bottom-right"
+					headlineLevel={3}
+				>
+					Stay up to date with the latest changes and improvements.
+				</TextImage>
+			</DBCard>
+		</a>
+		<a href="/documentation/resources" style="flex:1">
+			<DBCard behavior="interactive" spacing="large" style={{ height: '100%' }}>
+				<TextImage
+					title="Resources"
+					imagePosition="right"
+					imageWidth="33"
+					imageSrc="/assets/Resources-Teaser.png"
+					imageAlt="Resources"
+					mask="fade-bottom-right"
+					headlineLevel={3}
+				>
+					Figma libraries for designers and code packages for developers.
+				</TextImage>
+			</DBCard>
+		</a>
+	</DBStack>
+</DBStack>

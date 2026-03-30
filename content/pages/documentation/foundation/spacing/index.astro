@@ -6,6 +6,7 @@ import SpacingTable from './_SpacingTable.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 const frontmatter: DocumentationFrontMatter = {
 	headline: 'Spacing',
@@ -20,6 +21,7 @@ const headings = [
 	{ depth: 2, slug: 'playground', text: 'Playground' },
 	{ depth: 2, slug: 'guidelines', text: 'Guidelines' },
 	{ depth: 2, slug: 'tokens', text: 'Tokens' },
+	{ depth: 2, slug: 'faq', text: 'FAQ' },
 ];
 ---
 
@@ -44,7 +46,11 @@ const headings = [
 		<CollapsibleWrapper collapsedHeight="320px">
 			<h3>Fixed Spacing</h3>
 
-			<p>Fixed spacings are gaps that remain the same regardless of screen size. They are typically used within components and modules to ensure a uniform and clear structure across different devices.</p>
+			<p>
+				Fixed spacings are gaps that remain the same regardless of screen size. They are typically
+				used within components and modules to ensure a uniform and clear structure across different
+				devices.
+			</p>
 
 			<div class="guideline-examples">
 				<GuidelineExample
@@ -56,7 +62,11 @@ const headings = [
 
 			<h3>Responsive Spacing</h3>
 
-			<p>Responsive spacings are gaps that automatically adapt to the size of the device screen (desktop, tablet, mobile). They are ideal for separating different layout areas and ensure a consistent, user-friendly appearance across all devices.</p>
+			<p>
+				Responsive spacings are gaps that automatically adapt to the size of the device screen
+				(desktop, tablet, mobile). They are ideal for separating different layout areas and ensure a
+				consistent, user-friendly appearance across all devices.
+			</p>
 
 			<div class="guideline-examples">
 				<GuidelineExample
@@ -75,6 +85,11 @@ const headings = [
 		<SpacingTable />
 	</DBSection>
 
+	<DBSection spacing="small">
+		<h2 id="faq">FAQ</h2>
+		<QuestionForm componentName="Spacing" />
+	</DBSection>
+
 	<script>
 		import { waitForElements } from '@template/utils/client.utils.ts';
 		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';
@@ -82,8 +97,8 @@ const headings = [
 		function initSpacing(): boolean {
 			return handleSimplePlaygrounds({
 				dataAttributeName: 'spacing',
+				tokenPrefix: 'spacing-fixed',
 				popoverLabel: 'Spacing',
-				computedStyle: 'gap',
 				remPx: true,
 				withDensity: true,
 			});

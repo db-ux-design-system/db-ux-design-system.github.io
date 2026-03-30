@@ -4,6 +4,7 @@ import { DBSection, DBStack } from '@db-ux/react-core-components';
 import TypographyPlayground from './_TypographyPlayground.astro';
 import TypographyTable from './_TypographyTable.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 const frontmatter: DocumentationFrontMatter = {
 	headline: 'Typography',
@@ -18,6 +19,7 @@ const headings = [
 	{ depth: 2, slug: 'playground', text: 'Playground' },
 	{ depth: 2, slug: 'guidelines', text: 'Guidelines' },
 	{ depth: 2, slug: 'tokens', text: 'Tokens' },
+	{ depth: 2, slug: 'faq', text: 'FAQ' },
 ];
 ---
 
@@ -61,6 +63,11 @@ const headings = [
 		<TypographyTable />
 	</DBSection>
 
+	<DBSection spacing="small">
+		<h2 id="faq">FAQ</h2>
+		<QuestionForm componentName="Typography" />
+	</DBSection>
+
 	<script>
 		import { waitForElements } from '@template/utils/client.utils.ts';
 		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';
@@ -68,8 +75,8 @@ const headings = [
 		function initTypography(): boolean {
 			return handleSimplePlaygrounds({
 				dataAttributeName: 'type',
+				tokenPrefix: 'type',
 				popoverLabel: 'Font',
-				computedStyle: 'font',
 				withDensity: true,
 			});
 		}

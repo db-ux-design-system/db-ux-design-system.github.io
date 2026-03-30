@@ -45,7 +45,38 @@ const releaseNotes: ReleaseNote[] = Object.values(releaseNoteFiles)
 	})
 	.sort((a: ReleaseNote, b: ReleaseNote) => b.date.getTime() - a.date.getTime());
 
-const categories = [...new Set(releaseNotes.map((note) => note.category))];
+const categoryOrder = ['Core', '🧪 Core Lab', 'DB Theme Icons', 'DB Theme Illustrative Icons'];
+const categoriesFromData = Array.from(new Set(releaseNotes.map((note) => note.category)));
+const categories = [
+	...categoryOrder.filter((cat) => categoriesFromData.includes(cat)),
+	...categoriesFromData.filter((cat) => !categoryOrder.includes(cat)),
+];
+
+function getRoadmapUrl(category: string, version: string): string | null {
+	const v = version.replace(/^v/, '');
+	let baseUrl: string;
+	let filterQuery: string;
+
+	switch (category) {
+		case 'Core':
+			baseUrl = 'https://github.com/orgs/db-ux-design-system/projects/4/views/12';
+			filterQuery = `has:milestone -label:🖼️icons milestone:${v}`;
+			break;
+		case 'DB Theme Icons':
+			baseUrl = 'https://github.com/orgs/db-ux-design-system/projects/4/views/15';
+			filterQuery = `has:milestone label:🖼️icons,🚅DBTheme milestone:"${v} (functional icons)"`;
+			break;
+		case 'DB Theme Illustrative Icons':
+			baseUrl = 'https://github.com/orgs/db-ux-design-system/projects/4/views/15';
+			filterQuery = `has:milestone label:🖼️icons,🚅DBTheme milestone:"${v} (illustrative icons)"`;
+			break;
+		default:
+			return null;
+	}
+
+	const params = new URLSearchParams({ filterQuery });
+	return `${baseUrl}?${params.toString()}`;
+}
 ---
 
 <DocumentationLayout
@@ -64,64 +95,86 @@ const categories = [...new Set(releaseNotes.map((note) => note.category))];
 			}
 		</DBStack>
 		{
-			releaseNotes.map((note) => (
-				<article class="release-note" data-category={note.category}>
-					<DBStack direction="row" justifyContent="space-between" alignment="center">
-						<h2 id={note.slug} class="release-note-version">
-							{note.heading}
-						</h2>
-						<time class="release-note-date">{note.date.toLocaleDateString()}</time>
-					</DBStack>
+			releaseNotes.map((note) => {
+				const roadmapUrl = getRoadmapUrl(note.category, note.version);
+				return (
+					<article class="release-note" data-category={note.category}>
+						<DBStack direction="row" justifyContent="space-between" alignment="center">
+							<h2 id={note.slug} class="release-note-version">
+								{note.heading}
+							</h2>
+							<time class="release-note-date">{note.date.toLocaleDateString()}</time>
+						</DBStack>
 
-					<note.Content />
-					<DBDivider />
-				</article>
-			))
+						<note.Content />
+						{roadmapUrl && (
+							<a
+								href={roadmapUrl}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="db-link roadmap-link"
+								data-content="external"
+							>
+								View on Roadmap
+							</a>
+						)}
+						<DBDivider />
+					</article>
+				);
+			})
 		}
 	</DBStack>
 </DocumentationLayout>
 
 <script is:inline slot="script">
-	function tryInitFilter(attempts = 0) {
-		const filterContainer = document.getElementById('filter-tags');
+	(function () {
+		var filterContainer;
+		var filterTags;
+		var releaseNotes;
+		var tocHeadingNotes;
 
-		if (!filterContainer) {
-			if (attempts < 10) setTimeout(() => tryInitFilter(attempts + 1), 500);
-			return;
+		function ensureCached() {
+			if (filterContainer) return;
+			filterContainer = document.getElementById('filter-tags');
+			if (!filterContainer) return;
+			filterTags = filterContainer.querySelectorAll('[data-category]');
+			releaseNotes = document.querySelectorAll('.release-note');
+			tocHeadingNotes = document.querySelectorAll('.dba-toc-heading');
 		}
 
-		const releaseNotes = document.querySelectorAll('.release-note');
-		const tocHeadingNotes = document.querySelectorAll('.dba-toc-heading');
-		const filterTags = filterContainer.querySelectorAll('[data-category]');
+		document.addEventListener(
+			'change',
+			function (event) {
+				const checkbox = event.target;
+				if (!checkbox || checkbox.type !== 'checkbox') return;
 
-		filterTags.forEach((tag) => {
-			const checkbox = tag.querySelector('input[type="checkbox"]');
-			if (!checkbox) return;
+				ensureCached();
+				if (!filterContainer || !filterContainer.contains(checkbox)) return;
 
-			checkbox.addEventListener('change', () => {
 				const activeCategories = [];
-				filterTags.forEach((t) => {
-					const cb = t.querySelector('input[type="checkbox"]');
-					if (cb && cb.checked) activeCategories.push(t.getAttribute('data-category'));
+				filterTags.forEach(function (tag) {
+					const cb = tag.querySelector('input[type="checkbox"]');
+					if (cb && cb.checked) {
+						activeCategories.push(tag.getAttribute('data-category'));
+					}
 				});
 
-				releaseNotes.forEach((note) => {
+				releaseNotes.forEach(function (note) {
 					const noteCategory = note.getAttribute('data-category');
-					note.hidden = !(
-						activeCategories.length === 0 || activeCategories.includes(noteCategory)
-					);
+					note.hidden = !(activeCategories.length === 0 || activeCategories.includes(noteCategory));
 				});
 
-				tocHeadingNotes.forEach((heading) => {
+				tocHeadingNotes.forEach(function (heading) {
 					heading.style.display =
 						activeCategories.length === 0 ||
-						activeCategories.some((category) => heading.textContent.startsWith(category))
+						activeCategories.some(function (category) {
+							return heading.textContent.startsWith(category);
+						})
 							? 'flex'
 							: 'none';
 				});
-			});
-		});
-	}
-
-	window.addEventListener('load', () => tryInitFilter());
+			},
+			true,
+		);
+	})();
 </script>
