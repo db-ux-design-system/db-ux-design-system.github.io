@@ -25,11 +25,11 @@ const { teasers } = Astro.props;
 			const isLink = teaser.component === 'DBLink';
 			const isDisabled = teaser.disabled === true;
 			const card = (
-				<DBCard behavior={isDisabled ? undefined : 'interactive'} spacing="none">
+				<DBCard behavior={!isDisabled && !!teaser.url ? 'interactive' : undefined} spacing="none">
 					<div class="teaser-wrapper">
 						<div class="teaser-content">
 							<h2 class="teaser-title">
-								{teaser.url ? (
+								{!isDisabled && teaser.url ? (
 									<a class="teaser-title-link" href={teaser.url}>
 										{teaser.title}
 									</a>
