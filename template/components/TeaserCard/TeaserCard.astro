@@ -1,5 +1,6 @@
 ---
 import * as DBComponents from '@db-ux/react-core-components';
+import DisabledWrapper from '@template/components/DisabledWrapper/DisabledWrapper.astro';
 import './TeaserCard.css';
 
 const { DBCard } = DBComponents;
@@ -8,8 +9,9 @@ interface Props {
 	teasers: {
 		title: string;
 		description: string;
-		url: string;
+		url?: string;
 		component?: string;
+		disabled?: boolean;
 	}[];
 }
 
@@ -21,14 +23,19 @@ const { teasers } = Astro.props;
 		teasers.map((teaser) => {
 			const Component = teaser.component ? (DBComponents as any)[teaser.component] : null;
 			const isLink = teaser.component === 'DBLink';
-			return (
-				<DBCard behavior="interactive" spacing="none">
+			const isDisabled = teaser.disabled === true;
+			const card = (
+				<DBCard behavior={!isDisabled && !!teaser.url ? 'interactive' : undefined} spacing="none">
 					<div class="teaser-wrapper">
 						<div class="teaser-content">
 							<h2 class="teaser-title">
-								<a class="teaser-title-link" href={teaser.url}>
-									{teaser.title}
-								</a>
+								{!isDisabled && teaser.url ? (
+									<a class="teaser-title-link" href={teaser.url}>
+										{teaser.title}
+									</a>
+								) : (
+									teaser.title
+								)}
 							</h2>
 							<p class="teaser-description">{teaser.description}</p>
 						</div>
@@ -49,6 +56,13 @@ const { teasers } = Astro.props;
 						)}
 					</div>
 				</DBCard>
+			);
+			return isDisabled ? (
+				<DisabledWrapper label="Coming Soon" size="small">
+					{card}
+				</DisabledWrapper>
+			) : (
+				card
 			);
 		})
 	}
