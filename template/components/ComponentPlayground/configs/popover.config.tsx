@@ -1,0 +1,122 @@
+import type { PlaygroundConfig } from '../types';
+import { DBButton, DBPopover, type DBPopoverProps } from '@db-ux/react-core-components';
+
+export const popoverConfig: PlaygroundConfig<DBPopoverProps> = {
+	render: (props) => (
+		<DBPopover {...props} trigger={<DBButton type="button">Hover me</DBButton>}>
+			Popover
+		</DBPopover>
+	),
+	defaultProps: {
+		spacing: 'medium',
+		placement: 'top',
+		width: 'auto',
+		gap: false,
+	},
+	properties: [
+		{
+			name: 'placement',
+			label: 'Placement',
+			type: 'select',
+			defaultValue: 'top',
+			description:
+				'Controls the position of the popover via `data-placement` attribute on the `<article>` element.',
+			options: [
+				{ label: 'Top', value: 'top', default: true },
+				{ label: 'Bottom', value: 'bottom', default: false },
+				{ label: 'Left', value: 'left', default: false },
+				{ label: 'Right', value: 'right', default: false },
+			],
+		},
+		{
+			name: 'spacing',
+			label: 'Spacing',
+			type: 'select',
+			defaultValue: 'medium',
+			description:
+				'Controls the padding inside the popover via `data-spacing` attribute on the `<article>` element. Default is `var(--db-spacing-fixed-sm)` when `data-spacing` is not set.',
+			options: [
+				{ label: 'None', value: 'none', default: false },
+				{ label: 'Small', value: 'small', default: false },
+				{ label: 'Medium', value: 'medium', default: true },
+				{ label: 'Large', value: 'large', default: false },
+			],
+		},
+		{
+			name: 'width',
+			label: 'Width',
+			type: 'select',
+			defaultValue: 'auto',
+			description:
+				'Use fixed width for default max-width via `data-width` attribute on the `<article>` element.',
+			options: [
+				{ label: 'Auto', value: 'auto', default: true },
+				{ label: 'Fixed', value: 'fixed', default: false },
+			],
+		},
+		{
+			name: 'gap',
+			label: 'Gap',
+			type: 'checkbox',
+			defaultValue: false,
+			description: 'If the popover should have a gap between the trigger element.',
+		},
+		{
+			name: 'animation',
+			label: 'Animation',
+			type: 'checkbox',
+			defaultValue: true,
+			description: 'Enable or disable animation.',
+			showInPlayground: false,
+		},
+		{
+			name: 'open',
+			label: 'Open',
+			type: 'checkbox',
+			defaultValue: false,
+			description:
+				'Use open to disable the default hover/focus behavior to use it on click or other trigger.',
+			showInPlayground: false,
+		},
+		{
+			name: 'delay',
+			label: 'Delay',
+			type: 'select',
+			defaultValue: 'none',
+			description: 'Add a delay before showing the popover.',
+			options: [
+				{ label: 'None', value: 'none', default: true },
+				{ label: 'Fast', value: 'fast', default: false },
+				{ label: 'Slow', value: 'slow', default: false },
+			],
+			showInPlayground: false,
+		},
+		{
+			name: 'id',
+			label: 'ID',
+			type: 'text',
+			defaultValue: '',
+			description:
+				'ID of the component, generated automatically for some components as a fallback if unset.',
+			showInPlayground: false,
+		},
+		{
+			name: 'className',
+			label: 'Class Name',
+			type: 'text',
+			defaultValue: '',
+			description: 'React specific for adding className to the component.',
+			showInPlayground: false,
+		},
+	],
+	slots: [
+		{
+			name: 'trigger',
+			description: 'The trigger to open the popover e.g. a button',
+		},
+		{
+			name: 'children',
+			description: 'default slot',
+		},
+	],
+};

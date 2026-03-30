@@ -18,7 +18,8 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import { linkConfig } from '@template/configs/link.config.js';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 - Navigate to another page within the application
 - Navigate to an external website or document
@@ -29,6 +30,30 @@ import { linkConfig } from '@template/configs/link.config.js';
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dblink-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground component="link" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties, Slots & Events
+
+Configure the link through its properties and slots.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable component="link" />
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
 
 </DBSection>
 
@@ -132,6 +157,8 @@ Links must be clearly identifiable, descriptive, and accessible via keyboard and
 <DBSection spacing="small" width="auto">
 
 ## FAQ
+
+Have a question about the Link component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Link" />
 

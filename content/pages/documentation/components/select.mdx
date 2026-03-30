@@ -18,7 +18,8 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import { selectConfig } from '@template/configs/select.config.js';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 - Choose one value from a known set (e.g., country, category, priority)
 - Save space compared to showing all options as radios
@@ -29,6 +30,33 @@ import { selectConfig } from '@template/configs/select.config.js';
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbselect-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground component="select" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties, Slots & Events
+
+Configure the select through its properties, slots and events.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable component="select" />
+
+</CollapsibleWrapper>
+
+<CollapseButton
+	collapsedText="Show all Properties, Slots & Events"
+	expandedText="Hide some Properties, Slots & Events"
+/>
 
 </DBSection>
 
@@ -149,6 +177,8 @@ Use helper text to prevent mistakes (format, constraints). Use validation to exp
 <DBSection spacing="small" width="auto">
 
 ## FAQ
+
+Have a question about the select component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Select" />
 

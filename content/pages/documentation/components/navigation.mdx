@@ -6,7 +6,7 @@ headline: 'Navigation'
 title: 'Navigation'
 description: 'Navigation provides a set of destinations that help users move through an application consistently across desktop and mobile. It supports different orientations and responsive behaviors while clearly indicating the current location and available paths.'
 align: start
-status: 'stable'
+status: 'legacy'
 toc: true
 ---
 
@@ -19,7 +19,7 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import { navigationConfig } from '@template/configs/navigation.config.js';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 
 - Offer primary destinations at the top level (global navigation)
 - Support structured sub-navigation for deeper sections (nested levels)
@@ -29,7 +29,44 @@ import { navigationConfig } from '@template/configs/navigation.config.js';
 
 ## Resources
 
-<ResourceCards path="?path=/docs/components-dbnavigation-density--docs" />
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties
+
+Configure the navigation through its properties.
+
+<PropertiesTable component="navigation" />
 
 </DBSection>
 
@@ -140,6 +177,8 @@ Keep hierarchy shallow and predictable. If there are too many items, use an over
 <DBSection spacing="small" width="auto">
 
 ## FAQ
+
+Have a question about the Navigation component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Navigation" />
 

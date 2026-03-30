@@ -18,7 +18,8 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import { inputConfig } from '@template/configs/input.config.js';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 - Collect short text values (e.g., name, city, email, IBAN depending on product rules)
 - Support structured entry with formatting hints (e.g., "No spaces", "Use format DD.MM.YYYY")
@@ -29,6 +30,30 @@ import { inputConfig } from '@template/configs/input.config.js';
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbinput-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground component="input" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties, Slots & Events
+
+Configure the input through its properties, slots and events.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable component="input" />
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
 
 </DBSection>
 
@@ -150,6 +175,8 @@ Ensure every Input has an accessible name that matches the visible label. If a l
 
 ## FAQ
 
+Have a question about the Input component? We'll answer it and add frequently asked questions to this page.
+
 <QuestionForm componentName="Input" />
 
 </DBSection>
@@ -167,6 +194,11 @@ Ensure every Input has an accessible name that matches the visible label. If a l
 				title: 'Select',
 				description: 'Choose one option from a predefined list',
 				url: '/documentation/components/select',
+			},
+			{
+				title: 'Autocomplete',
+				description: 'Searchable selection for large option sets',
+				url: '/documentation/components/autocomplete',
 			},
 		]}
 	/>

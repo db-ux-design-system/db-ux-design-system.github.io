@@ -18,7 +18,8 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import { badgeConfig } from '@template/configs/badge.config.js';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 - Indicate status or state of an item (e.g. new, error, success)
 - Label or categorize content with a short descriptor
@@ -29,6 +30,30 @@ import { badgeConfig } from '@template/configs/badge.config.js';
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbbadge-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground component="badge" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties, Slots & Events
+
+Configure the badge through its properties, such as semantic, size, and content.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable component="badge" />
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
 
 </DBSection>
 

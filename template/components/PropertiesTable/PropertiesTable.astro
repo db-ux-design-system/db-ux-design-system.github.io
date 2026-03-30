@@ -1,22 +1,18 @@
 ---
 import './PropertiesTable.css';
+import { configRegistry } from '../ComponentPlayground/configs';
+import type { EventConfig, SlotConfig } from '@components/ComponentPlayground/types.ts';
 
 interface Props {
-	config: {
-		properties: Array<{
-			name: string;
-			alternativeName?: string;
-			type: string;
-			options?: Array<{ label: string; default?: boolean }>;
-			defaultValue?: any;
-			description: string;
-		}>;
-		slots?: Array<{ name: string; description: string }>;
-		events?: Array<{ name: string; type: string; description: string }>;
-	};
+	component: string;
 }
 
-const { config } = Astro.props;
+const { component } = Astro.props;
+const config = configRegistry[component];
+
+if (!config) {
+	throw new Error(`PropertiesTable: unknown component "${component}"`);
+}
 
 function getPropertyValues(property: {
 	type: string;
@@ -83,7 +79,7 @@ const events = config.events || [];
 					</tr>
 				</thead>
 				<tbody>
-					{slots.map((slot) => (
+					{slots.map((slot: SlotConfig) => (
 						<tr>
 							<th scope="row">
 								<code>{slot.name}</code>
@@ -109,7 +105,7 @@ const events = config.events || [];
 					</tr>
 				</thead>
 				<tbody>
-					{events.map((event) => (
+					{events.map((event: EventConfig) => (
 						<tr>
 							<th scope="row">
 								<code>{event.name}</code>

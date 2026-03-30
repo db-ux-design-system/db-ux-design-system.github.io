@@ -18,7 +18,8 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import { buttonConfig } from '@template/configs/button.config.js';
+import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 - Trigger an action (e.g., Send, Save, Delete)
 - Indicate that interaction or confirmation is expected
@@ -29,6 +30,30 @@ import { buttonConfig } from '@template/configs/button.config.js';
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbbutton-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground component="button" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Properties, Slots & Events
+
+Configure the button through its properties, such as variant, size, icon, and disabled state.
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+<PropertiesTable component="button" />
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
 
 </DBSection>
 
@@ -149,6 +174,8 @@ The small button in functional density has a height of 20 px. To meet accessibil
 <DBSection spacing="small" width="auto">
 
 ## FAQ
+
+Have a question about the Button component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Button" />
 
