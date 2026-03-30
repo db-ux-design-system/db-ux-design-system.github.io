@@ -1,4 +1,3 @@
-
 # design-system.deutschebahn.com (internal domain: db-ux-design-system.github.io)
 
 ![Apache 2.0 license badge](https://img.shields.io/badge/License-Apache_2.0-blue.svg)
