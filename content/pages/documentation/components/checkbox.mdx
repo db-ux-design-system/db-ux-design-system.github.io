@@ -20,7 +20,6 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
-import { checkboxConfig } from '@template/configs/checkbox.config.js';
 
 - Select multiple options from a list (e.g., notification channels)
 - Confirm consent or acknowledgment (e.g., accept terms)
@@ -38,7 +37,7 @@ import { checkboxConfig } from '@template/configs/checkbox.config.js';
 
 ## Playground
 
-<ComponentPlayground config={checkboxConfig} />
+<ComponentPlayground component="checkbox" />
 
 </DBSection>
 
@@ -50,7 +49,7 @@ Configure the checkbox through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-<PropertiesTable config={checkboxConfig} />
+<PropertiesTable component="checkbox" />
 
 </CollapsibleWrapper>
 

@@ -1,7 +1,36 @@
-export const tagConfig = {
-	component: 'DBTag',
-	elementId: 'playground-tag',
-	defaultText: 'Text',
+import type { PlaygroundConfig } from '../types';
+import { DBTag, type DBTagProps } from '@db-ux/react-core-components';
+import { IconOption } from '@components/ComponentPlayground/configs/_icon.option.tsx';
+
+export const tagConfig: PlaygroundConfig<
+	DBTagProps & { childrenType: 'button' | 'checkbox' | 'radio'; disabled: boolean }
+> = {
+	render: ({ childrenType, behavior, disabled, text, ...rest }) => {
+		if (behavior === 'static' || behavior === 'removable') {
+			return <DBTag behavior={behavior} {...rest} text={text} />;
+		}
+
+		if (childrenType === 'button') {
+			return (
+				<DBTag {...rest}>
+					<button disabled={disabled}>{text}</button>
+				</DBTag>
+			);
+		}
+
+		if (childrenType === 'checkbox' || childrenType === 'radio') {
+			return (
+				<DBTag {...rest}>
+					<label htmlFor="tag-checkbox">
+						<input disabled={disabled} id="tag-checkbox" type={childrenType} />
+						{text}
+					</label>
+				</DBTag>
+			);
+		}
+
+		return <></>;
+	},
 	defaultProps: {
 		behavior: 'static',
 		semantic: 'adaptive',
@@ -33,14 +62,6 @@ export const tagConfig = {
 			defaultValue: 'Text',
 			description: 'Alternative for children to set content as property.',
 		},
-		{
-			name: 'text-2',
-			label: 'Text (Tag 2)',
-			type: 'text',
-			defaultValue: 'Tag 2',
-			description: 'Text for the second tag (checkbox/radio).',
-			dependsOn: { prop: 'behavior', value: 'interactive' },
-		},
 		// Appearance
 		{
 			name: 'behavior',
@@ -54,12 +75,12 @@ export const tagConfig = {
 			],
 		},
 		{
-			name: 'children',
-			label: 'Children',
+			name: 'childrenType',
+			label: 'Children Type',
 			type: 'select',
 			description: 'Defines the interactive behavior of the component',
 			options: [
-				{ value: 'button-link', label: 'Button/Link', default: true },
+				{ value: 'button', label: 'Button', default: true },
 				{ value: 'checkbox', label: 'Checkbox' },
 				{ value: 'radio', label: 'Radio' },
 			],
@@ -72,6 +93,7 @@ export const tagConfig = {
 			defaultValue: false,
 			description: 'The disabled attribute can be set to keep a user from clicking on the tag.',
 			showInPlayground: true,
+			dependsOn: { prop: 'behavior', value: 'interactive' },
 		},
 		{
 			name: 'semantic',
@@ -111,7 +133,7 @@ export const tagConfig = {
 		{
 			name: 'icon',
 			label: 'Icon',
-			type: 'text',
+			...IconOption,
 			defaultValue: 'x_placeholder',
 			description:
 				'Define an icon by its identifier to get displayed in front of the elements content.',

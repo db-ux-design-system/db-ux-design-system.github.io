@@ -1,8 +1,8 @@
-import type { ControlsAreaProps } from './types';
-import { evaluateVisibility, evaluateOptions } from './dependency-engine';
-import SelectControl from './controls/SelectControl';
-import TextControl from './controls/TextControl';
-import CheckboxControl from './controls/CheckboxControl';
+import type { ControlsAreaProps } from '../types';
+import { evaluateVisibility, evaluateOptions } from '../dependency-engine';
+import SelectControl from './SelectControl';
+import TextControl from './TextControl';
+import CheckboxControl from './CheckboxControl';
 
 const ControlsArea = ({ config, currentProps, onPropChange }: ControlsAreaProps) => {
 	const playgroundProperties = config.properties.filter(
@@ -45,6 +45,7 @@ const ControlsArea = ({ config, currentProps, onPropChange }: ControlsAreaProps)
 									key={property.name}
 									property={resolvedProperty}
 									value={currentProps[property.name]}
+									defaultValue={(config.properties as any)[property.name]?.defaultValue}
 									onChange={(value) => onPropChange(property.name, value)}
 									availableOptions={availableOptions}
 								/>

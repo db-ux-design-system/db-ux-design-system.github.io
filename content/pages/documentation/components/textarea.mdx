@@ -19,7 +19,6 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
-import { textareaConfig } from '@template/configs/textarea.config.js';
 
 - Capture longer free-text input (e.g., feedback, comments, descriptions)
 - Support structured longer entries with hints (e.g., formatting expectations, character limits)
@@ -59,16 +58,16 @@ import { textareaConfig } from '@template/configs/textarea.config.js';
 />
 
 </DBSection>
-{/*
-TODO: playground with bugs
+
+
 <DBSection spacing="small" width="auto">
 
 ## Playground
 
-<ComponentPlayground config={textareaConfig} />
+<ComponentPlayground component="textarea" />
 
 </DBSection>
-*/}
+
 <DBSection spacing="small" width="auto">
 
 ## Properties, Slots & Events
@@ -77,7 +76,7 @@ Configure the textarea through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-<PropertiesTable config={textareaConfig} />
+<PropertiesTable component="textarea" />
 
 </CollapsibleWrapper>
 

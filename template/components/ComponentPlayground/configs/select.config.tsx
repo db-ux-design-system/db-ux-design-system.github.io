@@ -1,6 +1,18 @@
-export const selectConfig = {
-	component: 'DBSelect',
-	elementId: 'playground-select',
+import type { PlaygroundConfig } from '../types';
+import { DBSelect, type DBSelectProps } from '@db-ux/react-core-components';
+import {IconOption} from "@components/ComponentPlayground/configs/_icon.option.tsx";
+
+export const selectConfig: PlaygroundConfig<DBSelectProps> = {
+	render: (props) => {
+		return (
+			// eslint-disable-next-line db-ux/form-label-required
+			<DBSelect {...props}>
+				<option value="1">Option 1</option>
+				<option value="2">Option 2</option>
+				<option value="3">Option 3</option>
+			</DBSelect>
+		);
+	},
 	defaultProps: {
 		label: 'Label',
 		placeholder: 'Placeholder',
@@ -160,7 +172,7 @@ export const selectConfig = {
 		{
 			name: 'icon',
 			label: 'Icon',
-			type: 'text',
+			...IconOption,
 			defaultValue: 'x_placeholder',
 			description:
 				'Define an icon by its identifier to get displayed in front of the elements content.',

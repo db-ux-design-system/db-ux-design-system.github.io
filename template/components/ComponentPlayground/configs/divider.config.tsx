@@ -1,16 +1,11 @@
-export const dividerConfig = {
-	elementId: 'demo-divider',
-	defaultText: '',
+import type { PlaygroundConfig } from '../types';
+import type { DBDividerProps } from '@db-ux/react-core-components';
+
+export const dividerConfig: PlaygroundConfig<DBDividerProps> = {
 	defaultProps: {
 		id: 'demo-divider',
 		emphasis: 'weak',
 		variant: 'horizontal',
-	},
-	codeExamples: {
-		html: '<div class="db-divider" data-emphasis="weak" data-variant="horizontal"></div>',
-		react: '<DBDivider emphasis="weak" variant="horizontal" />',
-		angular: '<db-divider emphasis="weak" variant="horizontal"></db-divider>',
-		vue: '<DBDivider emphasis="weak" variant="horizontal" />',
 	},
 	slots: [
 		{

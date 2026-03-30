@@ -20,7 +20,6 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
-import { buttonConfig } from '@template/configs/button.config.js';
 
 - Trigger an action (e.g., Send, Save, Delete)
 - Indicate that interaction or confirmation is expected
@@ -38,7 +37,7 @@ import { buttonConfig } from '@template/configs/button.config.js';
 
 ## Playground
 
-<ComponentPlayground config={buttonConfig} />
+<ComponentPlayground component="button" />
 
 </DBSection>
 
@@ -50,7 +49,7 @@ Configure the button through its properties, such as variant, size, icon, and di
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-<PropertiesTable config={buttonConfig} />
+<PropertiesTable component="button" />
 
 </CollapsibleWrapper>
 

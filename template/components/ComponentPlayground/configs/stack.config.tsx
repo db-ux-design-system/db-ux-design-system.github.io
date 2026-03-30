@@ -1,6 +1,7 @@
-export const stackConfig = {
-	component: 'DBStack',
-	elementId: 'demo-stack',
+import type { PlaygroundConfig } from '../types';
+import { type DBStackProps } from '@db-ux/react-core-components';
+
+export const stackConfig: PlaygroundConfig<DBStackProps> = {
 	defaultProps: {
 		gap: 'medium',
 		variant: 'simple',

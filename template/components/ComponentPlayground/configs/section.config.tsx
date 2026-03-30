@@ -1,6 +1,7 @@
-export const sectionConfig = {
-	elementId: 'demo-section',
-	defaultText: 'Section content goes here',
+import type { PlaygroundConfig } from '../types';
+import type { DBSectionProps } from '@db-ux/react-core-components';
+
+export const sectionConfig: PlaygroundConfig<DBSectionProps> = {
 	defaultProps: {
 		spacing: 'medium',
 		width: 'full',

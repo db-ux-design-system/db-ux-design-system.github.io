@@ -1,7 +1,9 @@
-export const infotextConfig = {
-	component: 'DBInfotext',
-	elementId: 'demo-infotext',
-	defaultText: 'Text',
+import type { PlaygroundConfig } from '../types';
+import { DBInfotext, type DBInfotextProps } from '@db-ux/react-core-components';
+import { IconOption } from '@components/ComponentPlayground/configs/_icon.option.tsx';
+
+export const infotextConfig: PlaygroundConfig<DBInfotextProps> = {
+	render: (props) => <DBInfotext {...props} text={props.text} />,
 	defaultProps: {
 		id: 'demo-infotext',
 		semantic: 'adaptive',
@@ -65,7 +67,7 @@ export const infotextConfig = {
 		{
 			name: 'icon',
 			label: 'Icon',
-			type: 'text',
+			...IconOption,
 			defaultValue: '',
 			description:
 				'Define an icon by its identifier to get displayed in front of the elements content',

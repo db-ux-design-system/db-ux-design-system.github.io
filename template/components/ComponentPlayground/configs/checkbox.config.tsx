@@ -1,6 +1,14 @@
-export const switchConfig = {
-	component: 'DBSwitch',
-	elementId: 'playground-switch',
+import type { PlaygroundConfig } from '../types';
+import { DBCheckbox, type DBCheckboxProps } from '@db-ux/react-core-components';
+
+export const checkboxConfig: PlaygroundConfig<DBCheckboxProps> = {
+	render: (props, onPropChange) => (
+		<DBCheckbox
+			{...props}
+			label={props.label}
+			onChange={(event) => onPropChange?.('checked', event.target.checked)}
+		/>
+	),
 	defaultProps: {
 		checked: false,
 	},
@@ -11,21 +19,11 @@ export const switchConfig = {
 		},
 	],
 	events: [
-		{
-			name: 'change / onChange',
-			type: '---',
-		},
-		{
-			name: 'blur / onBlur',
-			type: '---',
-		},
-		{
-			name: 'focus / onFocus',
-			type: '---',
-		},
+		{ name: 'change / onChange', type: '---' },
+		{ name: 'blur / onBlur', type: '---' },
+		{ name: 'focus / onFocus', type: '---' },
 	],
 	properties: [
-		// Content
 		{
 			name: 'label',
 			label: 'Label',
@@ -43,19 +41,6 @@ export const switchConfig = {
 			description: 'Enables/disables the visibility of the label',
 			showInPlayground: true,
 		},
-
-		// Appearance
-		{
-			name: 'variant',
-			label: 'Variant',
-			type: 'select',
-			description: 'Change the position of the label (leading or trailing)',
-			options: [
-				{ value: 'trailing', label: 'Trailing', default: true },
-				{ value: 'leading', label: 'Leading' },
-			],
-			showInPlayground: true,
-		},
 		{
 			name: 'size',
 			label: 'Size',
@@ -69,43 +54,19 @@ export const switchConfig = {
 			showInPlayground: true,
 		},
 		{
-			name: 'visual-aid',
-			alternativeName: 'visualAid',
-			label: 'Visual Aid',
-			type: 'checkbox',
-			defaultValue: false,
-			description: 'Add additional icons to indicate active/inactive state.',
-			showInPlayground: true,
-		},
-		{
-			name: 'icon-leading',
-			alternativeName: 'iconLeading',
-			type: 'text',
-			label: 'Icon Leading',
-			description:
-				'Define an icon by its identifier to get displayed in front of the elements content.',
-			defaultValue: 'check',
-			showInPlayground: true,
-			dependsOn: 'visual-aid',
-		},
-		{
-			name: 'icon-trailing',
-			alternativeName: 'iconTrailing',
-			type: 'text',
-			label: 'Icon Trailing',
-			description: 'Define an icon by its identifier to get displayed after the elements content.',
-			defaultValue: 'cross',
-			showInPlayground: true,
-			dependsOn: 'visual-aid',
-		},
-
-		// States
-		{
 			name: 'checked',
 			label: 'Checked',
 			type: 'checkbox',
 			defaultValue: false,
 			description: 'Define the radio or checkbox elements checked state',
+			showInPlayground: true,
+		},
+		{
+			name: 'indeterminate',
+			label: 'Indeterminate',
+			type: 'checkbox',
+			defaultValue: false,
+			description: 'Define an indeterminate state of a checkbox',
 			showInPlayground: true,
 		},
 		{
@@ -126,8 +87,6 @@ export const switchConfig = {
 				'When the required attribute specified, the user will be required to fill the form element before submitting the form.',
 			showInPlayground: true,
 		},
-
-		// Validation
 		{
 			name: 'validation',
 			label: 'Validation',
@@ -145,7 +104,7 @@ export const switchConfig = {
 			alternativeName: 'invalid-message',
 			label: 'Invalid Message',
 			type: 'text',
-			defaultValue: 'Please enter an invalid message',
+			defaultValue: 'Invalid message',
 			description: 'Helper message for invalid form components',
 			showInPlayground: true,
 			dependsOn: { prop: 'validation', value: 'invalid' },
@@ -155,13 +114,11 @@ export const switchConfig = {
 			alternativeName: 'valid-message',
 			label: 'Valid Message',
 			type: 'text',
-			defaultValue: 'Please enter a valid message',
+			defaultValue: 'Valid message',
 			description: 'Helper message for valid form components',
 			showInPlayground: true,
 			dependsOn: { prop: 'validation', value: 'valid' },
 		},
-
-		// Message
 		{
 			name: 'show-message',
 			alternativeName: 'showMessage',
@@ -181,8 +138,6 @@ export const switchConfig = {
 			showInPlayground: true,
 			dependsOn: 'show-message',
 		},
-
-		// Hidden properties
 		{
 			name: 'show-required-asterisk',
 			alternativeName: 'showRequiredAsterisk',
@@ -194,21 +149,12 @@ export const switchConfig = {
 			showInPlayground: false,
 		},
 		{
-			name: 'message-icon',
-			alternativeName: 'messageIcon',
+			name: 'messageIcon',
+			alternativeName: 'message-icon',
 			type: 'text',
 			label: 'Message Icon',
 			description: 'Set/overwrite icon for helper message for form components',
 			defaultValue: '',
-			showInPlayground: false,
-		},
-		{
-			name: 'icon',
-			label: 'Icon',
-			type: 'text',
-			defaultValue: '',
-			description:
-				'Define an icon by its identifier to get displayed in front of the elements content.',
 			showInPlayground: false,
 		},
 		{
@@ -242,6 +188,15 @@ export const switchConfig = {
 			type: 'text',
 			label: 'Value',
 			description: 'The value property is to receive results from the native form element.',
+			defaultValue: '',
+			showInPlayground: false,
+		},
+		{
+			name: 'ariaDescribedBy',
+			alternativeName: 'aria-described-by',
+			type: 'text',
+			label: 'Aria Described By',
+			description: 'Overwrites auto handling for aria-describedby.',
 			defaultValue: '',
 			showInPlayground: false,
 		},

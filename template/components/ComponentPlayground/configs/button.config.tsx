@@ -1,8 +1,24 @@
-export const buttonConfig = {
-	component: 'DBButton',
-	elementId: 'demo-button',
-	textElementId: 'button-text',
-	defaultText: 'Text',
+import type { PlaygroundConfig } from '../types';
+import { DBButton, type DBButtonProps, DBTooltip } from '@db-ux/react-core-components';
+import { IconOption } from '@components/ComponentPlayground/configs/_icon.option.tsx';
+
+export const buttonConfig: PlaygroundConfig<DBButtonProps> = {
+	render: (props) => {
+		if (props.noText) {
+			const text = props.text;
+			props.showIcon = true;
+			props.showIconLeading = true;
+			props.text = undefined;
+			return (
+				<DBButton type="button" {...props}>
+					{text}
+					<DBTooltip>{text}</DBTooltip>
+				</DBButton>
+			);
+		}
+
+		return <DBButton type="button" text={props.text} {...props} />;
+	},
 	defaultProps: {
 		size: 'medium',
 		variant: 'outlined',
@@ -10,7 +26,6 @@ export const buttonConfig = {
 	slots: [{ name: 'children', description: 'default slot' }],
 	events: [{ name: 'click / onClick', type: '---' }],
 	properties: [
-		// Content
 		{
 			name: 'text',
 			type: 'text',
@@ -18,9 +33,7 @@ export const buttonConfig = {
 			description: 'Alternative for default slot/children.',
 			defaultValue: 'Text',
 			showInPlayground: true,
-			dependsOn: { prop: 'no-text', value: 'false' },
 		},
-		// Appearance
 		{
 			name: 'variant',
 			type: 'select',
@@ -59,7 +72,35 @@ export const buttonConfig = {
 				{ value: 'full', label: 'Full' },
 			],
 		},
-		// No Text toggle
+		{
+			name: 'icon-leading',
+			alternativeName: 'iconLeading',
+			...IconOption,
+			label: 'Icon Leading',
+			description: 'Icon identifier for the leading icon.',
+			defaultValue: 'x_placeholder',
+			showInPlayground: true,
+			dependsOn: 'show-icon-leading',
+		},
+		{
+			name: 'icon-trailing',
+			alternativeName: 'iconTrailing',
+			...IconOption,
+			label: 'Icon Trailing',
+			description: 'Icon identifier for the trailing icon.',
+			defaultValue: 'x_placeholder',
+			showInPlayground: true,
+			dependsOn: 'show-icon-trailing',
+		},
+		{
+			name: 'icon',
+			...IconOption,
+			label: 'Icon',
+			defaultValue: 'x_placeholder',
+			dependsOn: 'no-text',
+			showInPlayground: true,
+			description: 'Define an icon by its identifier.',
+		},
 		{
 			name: 'no-text',
 			alternativeName: 'noText',
@@ -69,31 +110,25 @@ export const buttonConfig = {
 			defaultValue: false,
 			showInPlayground: true,
 		},
-		// Show Icon Leading toggle (text mode only)
 		{
 			name: 'show-icon',
 			alternativeName: 'showIcon',
 			type: 'checkbox',
-			label: 'Show Icon Leading',
+			label: 'Show Icon',
 			description: 'Enables the leading icon.',
+			defaultValue: true,
+			showInPlayground: false,
+		},
+		{
+			name: 'show-icon-leading',
+			alternativeName: 'showIconLeading',
+			type: 'checkbox',
+			label: 'Show Icon Leading',
 			defaultValue: false,
 			showInPlayground: true,
+			description: 'Enables or disables the visibility of the leading icon.',
 			dependsOn: { prop: 'no-text', value: 'false' },
 		},
-		// Icon Leading — visible when no-text OR show-icon is on
-		// Label changes to "Icon" when no-text is active
-		{
-			name: 'icon-leading',
-			alternativeName: 'iconLeading',
-			type: 'text',
-			label: 'Icon Leading',
-			description: 'Icon identifier for the leading icon.',
-			defaultValue: 'x_placeholder',
-			showInPlayground: true,
-			dependsOn: 'show-icon',
-			labelWhen: { condition: { prop: 'no-text', value: 'true' }, label: 'Icon' },
-		},
-		// Trailing icon (text mode only)
 		{
 			name: 'show-icon-trailing',
 			alternativeName: 'showIconTrailing',
@@ -105,32 +140,12 @@ export const buttonConfig = {
 			dependsOn: { prop: 'no-text', value: 'false' },
 		},
 		{
-			name: 'icon-trailing',
-			alternativeName: 'iconTrailing',
-			type: 'text',
-			label: 'Icon Trailing',
-			description: 'Icon identifier for the trailing icon.',
-			defaultValue: 'x_placeholder',
-			showInPlayground: true,
-			dependsOn: 'show-icon-trailing',
-		},
-		// States
-		{
 			name: 'disabled',
 			type: 'checkbox',
 			label: 'Disabled',
 			description: 'Disables the button.',
 			defaultValue: false,
 			showInPlayground: true,
-		},
-		// Hidden properties
-		{
-			name: 'icon',
-			type: 'text',
-			label: 'Icon',
-			defaultValue: '',
-			showInPlayground: false,
-			description: 'Define an icon by its identifier.',
 		},
 		{
 			name: 'type',
@@ -144,15 +159,6 @@ export const buttonConfig = {
 				{ value: 'submit', label: 'Submit' },
 				{ value: 'reset', label: 'Reset' },
 			],
-		},
-		{
-			name: 'show-icon-leading',
-			alternativeName: 'showIconLeading',
-			type: 'checkbox',
-			label: 'Show Icon Leading',
-			defaultValue: false,
-			showInPlayground: false,
-			description: 'Enables or disables the visibility of the leading icon.',
 		},
 		{
 			name: 'id',

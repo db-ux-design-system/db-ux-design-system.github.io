@@ -2,12 +2,10 @@
 import './ComponentPlayground.css';
 
 interface Props {
-	config: any;
+	component: string;
 }
 
-const { config } = Astro.props;
-const configJson = JSON.stringify(config);
-const mountId = `pg-${config.elementId || 'default'}`;
+const { component } = Astro.props;
 ---
 
-<div class="component-playground-root" id={mountId} data-playground-config={configJson}></div>
+<div class="component-playground-root" data-component={component}></div>

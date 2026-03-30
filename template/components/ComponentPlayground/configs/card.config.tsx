@@ -1,6 +1,8 @@
-export const cardConfig = {
-	elementId: 'demo-card',
-	defaultText: 'Card',
+import type { PlaygroundConfig } from '../types';
+import { DBCard, type DBCardProps } from '@db-ux/react-core-components';
+
+export const cardConfig: PlaygroundConfig<DBCardProps> = {
+	render: (props) => <DBCard {...props}>Default text</DBCard>,
 	defaultProps: {
 		id: 'demo-card',
 		behavior: 'static',
@@ -40,8 +42,7 @@ export const cardConfig = {
 			label: 'Elevation Level',
 			type: 'select',
 			defaultValue: '1',
-			description:
-				'Changes the elevation of the card which is equal to basic-background-level',
+			description: 'Changes the elevation of the card which is equal to basic-background-level',
 			options: [
 				{ value: '1', label: '1', default: true },
 				{ value: '2', label: '2' },

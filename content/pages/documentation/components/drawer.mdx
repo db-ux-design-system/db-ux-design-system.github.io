@@ -19,7 +19,6 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
-import { drawerConfig } from '@template/configs/drawer.config.js';
 
 - Show additional details or secondary information without leaving the current page
 - Provide simple, optional form inputs or quick edits in context
@@ -60,15 +59,14 @@ import { drawerConfig } from '@template/configs/drawer.config.js';
 
 </DBSection>
 
-{/*
-TODO: fix playground
+
 <DBSection spacing="small" width="auto">
 
 ## Playground
 
-<ComponentPlayground config={drawerConfig} />
+<ComponentPlayground component="drawer" />
 
-</DBSection> */}
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -78,7 +76,7 @@ Configure the drawer through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-<PropertiesTable config={drawerConfig} />
+<PropertiesTable component="drawer" />
 
 </CollapsibleWrapper>
 

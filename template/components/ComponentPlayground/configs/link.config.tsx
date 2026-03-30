@@ -1,9 +1,8 @@
-export const linkConfig = {
-	component: 'DBLink',
-	elementId: 'playground-link',
-	textElementId: 'playground-link-text',
-	defaultText: 'Text',
-	useAriaDisabled: true,
+import type { PlaygroundConfig } from '../types';
+import { DBLink, type DBLinkProps } from '@db-ux/react-core-components';
+
+export const linkConfig: PlaygroundConfig<DBLinkProps> = {
+	render: (props) => <DBLink {...props}>{props.text}</DBLink>,
 	defaultProps: {
 		href: '#',
 		content: 'internal',

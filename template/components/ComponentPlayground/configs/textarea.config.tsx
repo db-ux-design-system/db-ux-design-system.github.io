@@ -1,7 +1,8 @@
-export const textareaConfig = {
-	component: 'DBTextarea',
-	elementId: 'playground-textarea',
-	defaultText: '',
+import type { PlaygroundConfig } from '../types';
+import { DBTextarea, type DBTextareaProps } from '@db-ux/react-core-components';
+
+export const textareaConfig: PlaygroundConfig<DBTextareaProps> = {
+	render: (props) => <DBTextarea {...props} label={props.label} />,
 	defaultProps: {
 		id: 'playground-textarea',
 		label: 'Label',
@@ -96,6 +97,7 @@ export const textareaConfig = {
 			defaultValue: 'Invalid message',
 			description: 'Helper message for invalid form components',
 			showInPlayground: true,
+			dependsOn: { prop: 'validation', value: 'invalid' },
 		},
 		{
 			name: 'validMessage',
@@ -105,6 +107,26 @@ export const textareaConfig = {
 			defaultValue: 'Valid message',
 			description: 'Helper message for valid form components',
 			showInPlayground: true,
+			dependsOn: { prop: 'validation', value: 'valid' },
+		},
+		{
+			name: 'show-message',
+			alternativeName: 'showMessage',
+			label: 'Show Message',
+			type: 'checkbox',
+			defaultValue: false,
+			description: 'Enables or disables the visibility of the message.',
+			showInPlayground: true,
+			dependsOn: { prop: 'validation', value: 'no-validation' },
+		},
+		{
+			name: 'message',
+			label: 'Message',
+			type: 'text',
+			defaultValue: 'Message',
+			description: 'Optional helper message for form components',
+			showInPlayground: true,
+			dependsOn: 'show-message',
 		},
 		{
 			name: 'disabled',
@@ -174,22 +196,6 @@ export const textareaConfig = {
 			type: 'text',
 			defaultValue: '',
 			description: 'The value property is to receive results from the native form element.',
-			showInPlayground: false,
-		},
-		{
-			name: 'message',
-			label: 'Message',
-			type: 'text',
-			defaultValue: '',
-			description: 'Optional helper message for form components',
-			showInPlayground: false,
-		},
-		{
-			name: 'show-message / showMessage',
-			label: 'Show Message',
-			type: 'checkbox',
-			defaultValue: false,
-			description: 'Enables or disables the visibility of the message.',
 			showInPlayground: false,
 		},
 		{

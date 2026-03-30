@@ -20,7 +20,6 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
-import { badgeConfig } from '@template/configs/badge.config.js';
 
 - Indicate status or state of an item (e.g. new, error, success)
 - Label or categorize content with a short descriptor
@@ -38,7 +37,7 @@ import { badgeConfig } from '@template/configs/badge.config.js';
 
 ## Playground
 
-<ComponentPlayground config={badgeConfig} />
+<ComponentPlayground component="badge" />
 
 </DBSection>
 
@@ -50,7 +49,7 @@ Configure the badge through its properties, such as semantic, size, and content.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-<PropertiesTable config={badgeConfig} />
+<PropertiesTable component="badge" />
 
 </CollapsibleWrapper>
 

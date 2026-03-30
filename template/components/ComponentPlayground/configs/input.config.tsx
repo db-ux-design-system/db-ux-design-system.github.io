@@ -1,6 +1,18 @@
-export const inputConfig = {
-	component: 'DBInput',
-	elementId: 'playground-input',
+import type { PlaygroundConfig } from '../types';
+import { DBInput, type DBInputProps } from '@db-ux/react-core-components';
+import { IconOption } from '@components/ComponentPlayground/configs/_icon.option.tsx';
+
+export const inputConfig: PlaygroundConfig<DBInputProps> = {
+	render: (props, onPropChange) => {
+		return (
+			<DBInput
+				{...props}
+				label={props.label}
+				type={props.type}
+				onInput={(e) => onPropChange('value', e.currentTarget.value)}
+			/>
+		);
+	},
 	defaultProps: {
 		label: 'Label',
 		placeholder: 'Placeholder',
@@ -192,7 +204,7 @@ export const inputConfig = {
 			name: 'icon-leading',
 			alternativeName: 'iconLeading',
 			label: 'Icon Leading',
-			type: 'text',
+			...IconOption,
 			defaultValue: 'x_placeholder',
 			description:
 				'Define an icon by its identifier to get displayed in front of the elements content.',
@@ -213,7 +225,7 @@ export const inputConfig = {
 			name: 'icon-trailing',
 			alternativeName: 'iconTrailing',
 			label: 'Icon Trailing',
-			type: 'text',
+			...IconOption,
 			defaultValue: 'x_placeholder',
 			description:
 				'Define an icon by its identifier to get displayed in front of the elements content.',

@@ -1,6 +1,15 @@
-export const checkboxConfig = {
-	component: 'DBCheckbox',
-	elementId: 'playground-checkbox',
+import type { PlaygroundConfig } from '../types';
+import { DBSwitch, type DBSwitchProps } from '@db-ux/react-core-components';
+import { IconOption } from '@components/ComponentPlayground/configs/_icon.option.tsx';
+
+export const switchConfig: PlaygroundConfig<DBSwitchProps> = {
+	render: (props, onPropChange) => (
+		<DBSwitch
+			{...props}
+			label={props.label}
+			onChange={(event) => onPropChange?.('checked', event.target.checked)}
+		/>
+	),
 	defaultProps: {
 		checked: false,
 	},
@@ -46,6 +55,17 @@ export const checkboxConfig = {
 
 		// Appearance
 		{
+			name: 'variant',
+			label: 'Variant',
+			type: 'select',
+			description: 'Change the position of the label (leading or trailing)',
+			options: [
+				{ value: 'trailing', label: 'Trailing', default: true },
+				{ value: 'leading', label: 'Leading' },
+			],
+			showInPlayground: false, // TODO: This feature is not included in the current shell branch
+		},
+		{
 			name: 'size',
 			label: 'Size',
 			type: 'select',
@@ -57,6 +77,36 @@ export const checkboxConfig = {
 			],
 			showInPlayground: true,
 		},
+		{
+			name: 'visual-aid',
+			alternativeName: 'visualAid',
+			label: 'Visual Aid',
+			type: 'checkbox',
+			defaultValue: false,
+			description: 'Add additional icons to indicate active/inactive state.',
+			showInPlayground: true,
+		},
+		{
+			name: 'icon-leading',
+			alternativeName: 'iconLeading',
+			...IconOption,
+			label: 'Icon Leading',
+			description:
+				'Define an icon by its identifier to get displayed in front of the elements content.',
+			defaultValue: 'check',
+			showInPlayground: true,
+			dependsOn: 'visual-aid',
+		},
+		{
+			name: 'icon-trailing',
+			alternativeName: 'iconTrailing',
+			...IconOption,
+			label: 'Icon Trailing',
+			description: 'Define an icon by its identifier to get displayed after the elements content.',
+			defaultValue: 'cross',
+			showInPlayground: true,
+			dependsOn: 'visual-aid',
+		},
 
 		// States
 		{
@@ -65,14 +115,6 @@ export const checkboxConfig = {
 			type: 'checkbox',
 			defaultValue: false,
 			description: 'Define the radio or checkbox elements checked state',
-			showInPlayground: true,
-		},
-		{
-			name: 'indeterminate',
-			label: 'Indeterminate',
-			type: 'checkbox',
-			defaultValue: false,
-			description: 'Define an indeterminate state of a checkbox',
 			showInPlayground: true,
 		},
 		{
@@ -105,14 +147,14 @@ export const checkboxConfig = {
 				{ value: 'invalid', label: 'Invalid' },
 				{ value: 'valid', label: 'Valid' },
 			],
-			showInPlayground: true,
+			showInPlayground: false, // TODO: This feature is not included in the current shell branch
 		},
 		{
 			name: 'invalidMessage',
 			alternativeName: 'invalid-message',
 			label: 'Invalid Message',
 			type: 'text',
-			defaultValue: 'Invalid message',
+			defaultValue: 'Please enter an invalid message',
 			description: 'Helper message for invalid form components',
 			showInPlayground: true,
 			dependsOn: { prop: 'validation', value: 'invalid' },
@@ -122,7 +164,7 @@ export const checkboxConfig = {
 			alternativeName: 'valid-message',
 			label: 'Valid Message',
 			type: 'text',
-			defaultValue: 'Valid message',
+			defaultValue: 'Please enter a valid message',
 			description: 'Helper message for valid form components',
 			showInPlayground: true,
 			dependsOn: { prop: 'validation', value: 'valid' },
@@ -161,12 +203,21 @@ export const checkboxConfig = {
 			showInPlayground: false,
 		},
 		{
-			name: 'messageIcon',
-			alternativeName: 'message-icon',
+			name: 'message-icon',
+			alternativeName: 'messageIcon',
 			type: 'text',
 			label: 'Message Icon',
 			description: 'Set/overwrite icon for helper message for form components',
 			defaultValue: '',
+			showInPlayground: false,
+		},
+		{
+			name: 'icon',
+			label: 'Icon',
+			type: 'text',
+			defaultValue: '',
+			description:
+				'Define an icon by its identifier to get displayed in front of the elements content.',
 			showInPlayground: false,
 		},
 		{
@@ -200,15 +251,6 @@ export const checkboxConfig = {
 			type: 'text',
 			label: 'Value',
 			description: 'The value property is to receive results from the native form element.',
-			defaultValue: '',
-			showInPlayground: false,
-		},
-		{
-			name: 'ariaDescribedBy',
-			alternativeName: 'aria-described-by',
-			type: 'text',
-			label: 'Aria Described By',
-			description: 'Overwrites auto handling for aria-describedby.',
 			defaultValue: '',
 			showInPlayground: false,
 		},

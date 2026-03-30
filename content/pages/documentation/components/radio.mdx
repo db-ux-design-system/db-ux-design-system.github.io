@@ -20,7 +20,6 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
-import { radioConfig } from '@template/configs/radio.config.js';
 
 - Select one option from a small set (e.g., language, delivery type)
 - Configure a single preference in settings (e.g., "Light / Dark / System")
@@ -38,7 +37,7 @@ import { radioConfig } from '@template/configs/radio.config.js';
 
 ## Playground
 
-<ComponentPlayground config={radioConfig} />
+<ComponentPlayground component="radio" />
 
 </DBSection>
 
@@ -50,7 +49,7 @@ Configure the radio through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-<PropertiesTable config={radioConfig} />
+<PropertiesTable component="radio" />
 
 </CollapsibleWrapper>
 

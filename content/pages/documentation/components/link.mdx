@@ -20,7 +20,6 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
-import { linkConfig } from '@template/configs/link.config.js';
 
 - Navigate to another page within the application
 - Navigate to an external website or document
@@ -38,7 +37,7 @@ import { linkConfig } from '@template/configs/link.config.js';
 
 ## Playground
 
-<ComponentPlayground config={linkConfig} />
+<ComponentPlayground component="link" />
 
 </DBSection>
 
@@ -50,7 +49,7 @@ Configure the link through its properties and slots.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-<PropertiesTable config={linkConfig} />
+<PropertiesTable component="link" />
 
 </CollapsibleWrapper>
 

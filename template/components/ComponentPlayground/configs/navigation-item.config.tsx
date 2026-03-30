@@ -1,8 +1,19 @@
-export const navigationItemConfig = {
-	component: 'DBNavigationItem',
-	elementId: 'demo-navigation-item',
-	defaultText: 'Navigation Item',
-	useAriaDisabled: true,
+import type { PlaygroundConfig } from '../types';
+import {
+	DBNavigation,
+	DBNavigationItem,
+	type DBNavigationItemProps,
+} from '@db-ux/react-core-components';
+
+export const navigationItemConfig: PlaygroundConfig<DBNavigationItemProps> = {
+	defaultProps: {},
+	render: ({ text, ...rest }) => (
+		<DBNavigation>
+			<DBNavigationItem {...rest}>
+				<a>{text}</a>
+			</DBNavigationItem>
+		</DBNavigation>
+	),
 	slots: [
 		{
 			name: 'children',
@@ -82,43 +93,6 @@ export const navigationItemConfig = {
 			defaultValue: false,
 			label: 'Disabled',
 			showInPlayground: true,
-		},
-		{
-			name: 'sub-navigation-expanded / subNavigationExpanded',
-			description:
-				'This is for mobile navigation only, if it is set the sub-navigation is a static overlay',
-			type: 'boolean | string',
-			defaultValue: undefined,
-			showInPlayground: false,
-		},
-		{
-			name: 'id',
-			description:
-				'ID of the component, generated automatically for some components as a fallback if unset.',
-			type: 'string',
-			defaultValue: undefined,
-			showInPlayground: false,
-		},
-		{
-			name: 'className',
-			description: 'React specific for adding className to the component.',
-			type: 'string',
-			defaultValue: undefined,
-			showInPlayground: false,
-		},
-		{
-			name: 'back-button-id / backButtonId',
-			description: 'The backButtonId attribute changes the id inside the back button.',
-			type: 'string',
-			defaultValue: undefined,
-			showInPlayground: false,
-		},
-		{
-			name: 'back-button-text / backButtonText',
-			description: 'The backButtonText attribute changes the text inside the back button.',
-			type: 'string',
-			defaultValue: undefined,
-			showInPlayground: false,
 		},
 	],
 };

@@ -1,6 +1,12 @@
-export const radioConfig = {
-	component: 'DBRadio',
-	elementId: 'playground-radio',
+import type { PlaygroundConfig } from '../types';
+import { DBRadio, type DBRadioProps } from '@db-ux/react-core-components';
+
+export const radioConfig: PlaygroundConfig<DBRadioProps> = {
+	render: (props) => (
+		<div role="radiogroup">
+			<DBRadio {...props} label={props.label} />
+		</div>
+	),
 	defaultProps: {
 		checked: false,
 	},

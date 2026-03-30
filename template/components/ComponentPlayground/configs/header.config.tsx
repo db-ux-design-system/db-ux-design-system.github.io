@@ -1,14 +1,12 @@
-export const headerConfig = {
-	elementId: 'playground-header',
-	defaultText: '',
+import type { PlaygroundConfig } from '../types';
+import type { DBShellProps } from '@db-ux/react-core-components';
+
+export const headerConfig: PlaygroundConfig<DBShellProps> = {
 	defaultProps: {
 		id: 'playground-header',
 	},
 	slots: [
-		{
-			name: 'children',
-			description: 'default slot',
-		},
+		{ name: 'children', description: 'default slot' },
 		{
 			name: 'metaNavigation',
 			description:
@@ -19,22 +17,14 @@ export const headerConfig = {
 			description:
 				'Slot to pass one or more elements like DBButton (e.g. profile, language, etc.) as secondary action. Desktop: Shown separated by divider at the end of the header. Mobile: Shown inside the drawer at the bottom.',
 		},
-		{
-			name: 'brand',
-			description: 'Slot to pass in the DBBrand component',
-		},
+		{ name: 'brand', description: 'Slot to pass in the DBBrand component' },
 		{
 			name: 'primaryAction',
 			description:
 				'Slot to pass one or more elements like DBButton (e.g. search) as primary action. Desktop: Shown next to the main-navigation. Mobile: Shown next to the brand',
 		},
 	],
-	events: [
-		{
-			name: 'toggle / onToggle',
-			type: '---',
-		},
-	],
+	events: [{ name: 'toggle / onToggle', type: '---' }],
 	properties: [
 		{
 			name: 'force-mobile / forceMobile',

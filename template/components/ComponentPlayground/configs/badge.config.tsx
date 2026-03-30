@@ -1,7 +1,39 @@
-export const badgeConfig = {
-	component: 'DBBadge',
-	elementId: 'playground-badge',
-	defaultText: 'Text',
+import type { PlaygroundConfig } from '../types';
+import { DBBadge, type DBBadgeProps, DBIcon, type IconProps } from '@db-ux/react-core-components';
+import { IconOption } from '@components/ComponentPlayground/configs/_icon.option.tsx';
+
+type Props = DBBadgeProps & IconProps & { childrenType: 'text' | 'icon' | 'dot' };
+
+const render = (props: Props) => {
+	if (props.placement?.startsWith('corner')) {
+		return (
+			<div className="playground-badge-corner-container">
+				<DBBadge {...props} label={props.placement}>
+					{props.children}
+				</DBBadge>
+			</div>
+		);
+	}
+
+	if (props.childrenType === 'icon') {
+		return (
+			<DBBadge {...props} text={undefined}>
+				<DBIcon icon={props.icon ?? 'x_placeholder'}>Icon</DBIcon>
+			</DBBadge>
+		);
+	} else if (props.childrenType === 'dot') {
+		return (
+			<DBBadge {...props} text={undefined}>
+				{props.children}
+			</DBBadge>
+		);
+	}
+
+	return <DBBadge {...props}>{props.children}</DBBadge>;
+};
+
+export const badgeConfig: PlaygroundConfig<Props> = {
+	render,
 	defaultProps: {
 		placement: 'inline',
 		semantic: 'adaptive',
@@ -15,10 +47,9 @@ export const badgeConfig = {
 		},
 	],
 	properties: [
-		// Content
 		{
-			name: 'children',
-			label: 'Children',
+			name: 'childrenType',
+			label: 'Children Type',
 			type: 'select',
 			description: 'Alternative for default slot/children.',
 			showInPlayground: true,
@@ -28,7 +59,6 @@ export const badgeConfig = {
 				{ value: 'dot', label: 'Dot' },
 			],
 		},
-		// Content
 		{
 			name: 'text',
 			label: 'Text',
@@ -36,19 +66,17 @@ export const badgeConfig = {
 			defaultValue: 'Text',
 			description: 'Alternative for default slot/children.',
 			showInPlayground: true,
-			dependsOn: { prop: 'children', value: 'text' },
+			dependsOn: { prop: 'childrenType', value: 'text' },
 		},
 		{
 			name: 'icon',
 			label: 'Icon',
-			type: 'text',
+			...IconOption,
 			defaultValue: 'x_placeholder',
 			description: 'Icon identifier to display inside the badge.',
 			showInPlayground: true,
-			dependsOn: { prop: 'children', value: 'icon' },
+			dependsOn: { prop: 'childrenType', value: 'icon' },
 		},
-
-		// Appearance
 		{
 			name: 'semantic',
 			label: 'Semantic',
@@ -104,7 +132,6 @@ export const badgeConfig = {
 			],
 			showInPlayground: true,
 		},
-		// Hidden properties
 		{
 			name: 'label',
 			label: 'Label',

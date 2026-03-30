@@ -1,7 +1,12 @@
-export const tooltipConfig = {
-	component: 'DBTooltip',
-	elementId: 'demo-tooltip',
-	defaultText: 'Text',
+import type { PlaygroundConfig } from '../types';
+import { DBButton, DBTooltip, type DBTooltipProps } from '@db-ux/react-core-components';
+
+export const tooltipConfig: PlaygroundConfig<DBTooltipProps & { text?: string }> = {
+	render: ({ text, ...rest }) => (
+		<DBButton type="button">
+			Hover me <DBTooltip {...rest}>{text}</DBTooltip>
+		</DBButton>
+	),
 	defaultProps: {
 		id: 'demo-tooltip',
 		placement: 'top',
@@ -78,7 +83,7 @@ export const tooltipConfig = {
 			showInPlayground: true,
 		},
 		{
-			name: 'animation / data-animation',
+			name: 'animation',
 			label: 'Animation',
 			type: 'checkbox',
 			defaultValue: true,
@@ -86,7 +91,8 @@ export const tooltipConfig = {
 			showInPlayground: true,
 		},
 		{
-			name: 'show-arrow / showArrow',
+			name: 'show-arrow',
+			alternativeName: 'showArrow',
 			label: 'Show Arrow',
 			type: 'checkbox',
 			defaultValue: true,

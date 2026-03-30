@@ -19,7 +19,6 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
-import { tooltipConfig } from '@template/configs/tooltip.config.js';
 
 - Explain the meaning of an icon-only control (e.g., "Download", "Copy link")
 - Reveal truncated text or labels (e.g., full file name, full table header)
@@ -59,16 +58,16 @@ import { tooltipConfig } from '@template/configs/tooltip.config.js';
 />
 
 </DBSection>
-{/*
-TODO: fix playground
+
+
 <DBSection spacing="small" width="auto">
 
 ## Playground
 
-<ComponentPlayground config={tooltipConfig} />
+<ComponentPlayground component="tooltip" />
 
 </DBSection>
-*/}
+
 <DBSection spacing="small" width="auto">
 
 ## Properties, Slots & Events
@@ -77,7 +76,7 @@ Configure the tooltip through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-<PropertiesTable config={tooltipConfig} />
+<PropertiesTable component="tooltip" />
 
 </CollapsibleWrapper>
 

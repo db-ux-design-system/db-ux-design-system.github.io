@@ -1,8 +1,15 @@
-export const notificationConfig = {
-	component: 'DBNotification',
-	elementId: 'demo-notification',
-	textElementId: 'notification-text',
-	defaultText: 'Text.',
+import type { PlaygroundConfig } from '../types';
+import { DBNotification, type DBNotificationProps } from '@db-ux/react-core-components';
+
+export const notificationConfig: PlaygroundConfig<DBNotificationProps & { linkText?: string }> = {
+	render: (props) => {
+		const link =
+			props.linkVariant !== 'inline' && props.linkVariant !== 'block' ? undefined : (
+				<a>{props.linkText}</a>
+			);
+
+		return <DBNotification {...props} text={props.text} link={link} />;
+	},
 	defaultProps: {
 		semantic: 'adaptive',
 		variant: 'standalone',
@@ -13,9 +20,7 @@ export const notificationConfig = {
 		{ name: 'image', description: 'The slotImage can be set instead of an icon' },
 		{ name: 'link', description: 'The slotLink can be set for non overlay-notifications' },
 	],
-	events: [
-		{ name: 'close / onClose', type: '---', description: 'Fired when the notification is closed' },
-	],
+	events: [{ name: 'close / onClose', type: '---' }],
 	properties: [
 		// Content
 		{
@@ -86,6 +91,7 @@ export const notificationConfig = {
 		},
 		{
 			name: 'link-variant',
+			alternativeName: 'linkVariant',
 			type: 'select',
 			label: 'Link Variant',
 			description: 'The linkVariant will be used if slotLink is set.',

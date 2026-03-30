@@ -20,7 +20,6 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
-import { switchConfig } from '@template/configs/switch.config.js';
 
 - Turn a setting on or off with immediate effect (e.g., "Enable notifications")
 - Activate/deactivate a feature in context without leaving the page
@@ -33,16 +32,15 @@ import { switchConfig } from '@template/configs/switch.config.js';
 <ResourceCards path="?path=/docs/components-dbswitch-density--docs" />
 
 </DBSection>
-{/*
-TODO: playground not working, validation + messages
+
 <DBSection spacing="small" width="auto">
 
 ## Playground
 
-<ComponentPlayground config={switchConfig} />
+<ComponentPlayground component="switch" />
 
 </DBSection>
-*/}
+
 <DBSection spacing="small" width="auto">
 
 ## Properties, Slots & Events
@@ -51,7 +49,7 @@ Configure the switch through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-<PropertiesTable config={switchConfig} />
+<PropertiesTable component="switch" />
 
 </CollapsibleWrapper>
 

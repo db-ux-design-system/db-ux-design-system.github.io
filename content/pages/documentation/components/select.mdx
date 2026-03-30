@@ -20,7 +20,6 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
-import { selectConfig } from '@template/configs/select.config.js';
 
 - Choose one value from a known set (e.g., country, category, priority)
 - Save space compared to showing all options as radios
@@ -38,7 +37,7 @@ import { selectConfig } from '@template/configs/select.config.js';
 
 ## Playground
 
-<ComponentPlayground config={selectConfig} />
+<ComponentPlayground component="select" />
 
 </DBSection>
 
@@ -50,7 +49,7 @@ Configure the select through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-<PropertiesTable config={selectConfig} />
+<PropertiesTable component="select" />
 
 </CollapsibleWrapper>
 

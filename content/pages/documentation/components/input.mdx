@@ -20,7 +20,6 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
-import { inputConfig } from '@template/configs/input.config.js';
 
 - Collect short text values (e.g., name, city, email, IBAN depending on product rules)
 - Support structured entry with formatting hints (e.g., "No spaces", "Use format DD.MM.YYYY")
@@ -38,7 +37,7 @@ import { inputConfig } from '@template/configs/input.config.js';
 
 ## Playground
 
-<ComponentPlayground config={inputConfig} />
+<ComponentPlayground component="input" />
 
 </DBSection>
 
@@ -50,7 +49,7 @@ Configure the input through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-<PropertiesTable config={inputConfig} />
+<PropertiesTable component="input" />
 
 </CollapsibleWrapper>
 

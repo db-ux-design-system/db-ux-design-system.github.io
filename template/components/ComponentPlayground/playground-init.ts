@@ -1,39 +1,30 @@
 import { createElement } from 'react';
 import { createRoot } from 'react-dom/client';
 import ComponentPlayground from './ComponentPlayground.tsx';
+import { waitForElements } from '@template/utils/client.utils.ts';
 
 const mountedRoots = new WeakSet<Element>();
 
 function mountPlaygrounds() {
-	document.querySelectorAll<HTMLElement>('[data-playground-config]').forEach((el) => {
-		if (mountedRoots.has(el)) return;
-		mountedRoots.add(el);
+	const dataComponents = document.querySelectorAll<HTMLElement>('[data-component]');
 
-		const configStr = el.getAttribute('data-playground-config');
-		if (!configStr) return;
+	if (dataComponents.length > 0) {
+		dataComponents.forEach((el) => {
+			if (mountedRoots.has(el)) return;
+			mountedRoots.add(el);
 
-		try {
-			const config = JSON.parse(configStr);
+			const component = el.getAttribute('data-component');
+			if (!component) return;
+
 			const root = createRoot(el);
-			root.render(createElement(ComponentPlayground, { config }));
-		} catch (e) {
-			console.error('Playground mount error:', e);
-		}
-	});
+			root.render(createElement(ComponentPlayground, { component }));
+		});
+	}
+
+	return false;
 }
 
-// MutationObserver to catch when Shell renders content into DOM
-const observer = new MutationObserver(() => {
-	mountPlaygrounds();
-});
-
-observer.observe(document.documentElement, {
-	childList: true,
-	subtree: true,
-});
-
-// Try immediately
 mountPlaygrounds();
-
-// Re-mount after Astro page transitions
-document.addEventListener('astro:page-load', mountPlaygrounds);
+document.addEventListener('astro:page-load', () => {
+	waitForElements(mountPlaygrounds);
+});

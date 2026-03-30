@@ -1,6 +1,6 @@
-export const backdropConfig = {
-	elementId: 'demo-backdrop',
-	defaultText: 'Backdrop',
+import type { PlaygroundConfig } from '../types';
+
+export const backdropConfig: PlaygroundConfig<any> = {
 	defaultProps: {
 		emphasis: 'strong',
 	},
@@ -10,6 +10,7 @@ export const backdropConfig = {
 			label: 'Emphasis',
 			type: 'select',
 			defaultValue: 'strong',
+			description: 'The emphasis attribute divides in between a weak or strong importance.',
 			options: [
 				{ label: 'Strong', value: 'strong', default: true },
 				{ label: 'Weak', value: 'weak', default: false },
@@ -20,6 +21,7 @@ export const backdropConfig = {
 			label: 'Show Backdrop',
 			type: 'checkbox',
 			defaultValue: false,
+			description: 'Shows or hides the backdrop.',
 		},
 	],
 };

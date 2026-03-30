@@ -1,4 +1,4 @@
-import type { ComponentType, ReactNode } from 'react';
+import type { PropsWithChildren, ReactElement } from 'react';
 
 // --- Config data types ---
 
@@ -38,6 +38,7 @@ export interface SlotConfig {
 export interface EventConfig {
 	name: string;
 	type: string;
+	description?: string;
 }
 
 // --- Dependency system ---
@@ -60,35 +61,28 @@ export interface DependencyRule {
 
 export type DependencyMap = Record<string, DependencyRule>;
 
-export interface PlaygroundConfig {
-	component?: string;
-	elementId: string;
-	textElementId?: string;
-	defaultText?: string;
+export interface PlaygroundConfig<T> {
+	render?: (
+		props: PropsWithChildren<T>,
+		onPropChange: (name: string, value: any) => void,
+	) => ReactElement;
 	defaultProps: Record<string, any>;
 	properties: PropertyConfig[];
 	slots?: SlotConfig[];
 	events?: EventConfig[];
 	dependencies?: DependencyMap;
-	renderPreview?: (props: Record<string, any>) => ReactNode;
 }
 
 // --- Component props ---
 
-export interface ComponentPlaygroundProps {
-	config: PlaygroundConfig;
-	component?: ComponentType<any>;
-}
-
 export interface PreviewAreaProps {
-	config: PlaygroundConfig;
-	component?: ComponentType<any>;
+	config: PlaygroundConfig<any>;
 	currentProps: Record<string, any>;
-	onPropChange?: (name: string, value: any) => void;
+	onPropChange: (name: string, value: any) => void;
 }
 
 export interface ControlsAreaProps {
-	config: PlaygroundConfig;
+	config: PlaygroundConfig<any>;
 	currentProps: Record<string, any>;
 	onPropChange: (name: string, value: any) => void;
 }
@@ -98,4 +92,5 @@ export interface ControlProps {
 	value: any;
 	onChange: (value: any) => void;
 	availableOptions?: Option[];
+	defaultValue?: any;
 }

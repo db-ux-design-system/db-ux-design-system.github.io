@@ -26,7 +26,7 @@ function evaluateCondition(condition: Condition, currentProps: Record<string, an
  */
 function getDependencyRule(
 	propertyName: string,
-	config: PlaygroundConfig,
+	config: PlaygroundConfig<any>,
 ): DependencyRule | undefined {
 	return config.dependencies?.[propertyName];
 }
@@ -39,7 +39,7 @@ function getDependencyRule(
 export function evaluateVisibility(
 	property: PropertyConfig,
 	currentProps: Record<string, any>,
-	config: PlaygroundConfig,
+	config: PlaygroundConfig<any>,
 ): boolean {
 	// Check global dependencies map first
 	const rule = getDependencyRule(property.name, config);
@@ -108,7 +108,7 @@ function evaluateDependsOn(
 export function evaluateOptions(
 	property: PropertyConfig,
 	currentProps: Record<string, any>,
-	config: PlaygroundConfig,
+	config: PlaygroundConfig<any>,
 ): Option[] | undefined {
 	const rule = getDependencyRule(property.name, config);
 	if (!rule?.optionsWhen) {
@@ -131,7 +131,7 @@ export function evaluateOptions(
  */
 export function resetInvalidValues(
 	currentProps: Record<string, any>,
-	config: PlaygroundConfig,
+	config: PlaygroundConfig<any>,
 ): Record<string, any> {
 	const result = { ...currentProps };
 
@@ -160,7 +160,7 @@ export function resetInvalidValues(
  * Derives the initial state from `defaultProps` and property `defaultValue` fields.
  * `defaultProps` values take precedence over property-level defaults.
  */
-export function initializeState(config: PlaygroundConfig): Record<string, any> {
+export function initializeState(config: PlaygroundConfig<any>): Record<string, any> {
 	const state: Record<string, any> = { ...config.defaultProps };
 
 	for (const prop of config.properties) {

@@ -20,7 +20,6 @@ import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleW
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
-import { navigationItemConfig } from '@template/configs/navigation-item.config.js';
 
 - Always wrap content in an anchor element for proper navigation semantics
 - Use the active property or aria-current="page" to indicate the current location
@@ -69,7 +68,7 @@ Configure the navigation item through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-<PropertiesTable config={navigationItemConfig} />
+<PropertiesTable component="navigationItem" />
 
 </CollapsibleWrapper>
 

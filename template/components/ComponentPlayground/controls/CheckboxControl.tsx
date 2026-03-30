@@ -1,16 +1,13 @@
 import type { ControlProps } from '../types';
+import { DBSwitch } from '@db-ux/react-core-components';
 
 const CheckboxControl = ({ property, value, onChange }: ControlProps) => {
 	return (
-		<label className="db-switch">
-			<input
-				type="checkbox"
-				role="switch"
-				checked={!!value}
-				onChange={(e) => onChange(e.target.checked)}
-			/>
-			<span>{property.label}</span>
-		</label>
+		<DBSwitch
+			label={property.label}
+			checked={!!value}
+			onChange={(e) => onChange(e.target.checked)}
+		/>
 	);
 };
 

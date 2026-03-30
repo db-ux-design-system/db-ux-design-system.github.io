@@ -1,10 +1,35 @@
-/*
-TODO: drawer playground not functioning
-*/
-export const drawerConfig = {
-	component: 'DBDrawer',
-	elementId: 'demo-drawer',
-	defaultText: 'Drawer content',
+import type { PlaygroundConfig } from '../types';
+import { DBButton, DBDrawer, type DBDrawerProps } from '@db-ux/react-core-components';
+import { useEffect, useState } from 'react';
+
+export const drawerConfig: PlaygroundConfig<DBDrawerProps> = {
+	render: ({ open, ...rest }, onPropChange) => {
+		const [innerOpen, setInnerOpen] = useState(open);
+
+		useEffect(() => {
+			setInnerOpen(open);
+		}, [open]);
+
+		useEffect(() => {
+			onPropChange('open', innerOpen);
+		}, [innerOpen]);
+
+		return (
+			<div style={{ position: 'relative' }}>
+				<DBButton
+					type="button"
+					onClick={() => {
+						setInnerOpen(true);
+					}}
+				>
+					Open
+				</DBButton>
+				<DBDrawer {...rest} variant="inside" open={innerOpen} onClose={() => setInnerOpen(false)}>
+					Drawer content
+				</DBDrawer>
+			</div>
+		);
+	},
 	defaultProps: {
 		id: 'demo-drawer',
 		open: false,
@@ -13,21 +38,10 @@ export const drawerConfig = {
 		position: 'fixed',
 	},
 	slots: [
-		{
-			name: 'children',
-			description: 'default slot',
-		},
-		{
-			name: 'drawerHeader',
-			description: 'Slot for changing the header of the drawer.',
-		},
+		{ name: 'children', description: 'default slot' },
+		{ name: 'drawerHeader', description: 'Slot for changing the header of the drawer.' },
 	],
-	events: [
-		{
-			name: 'close / onClose',
-			type: '---',
-		},
-	],
+	events: [{ name: 'close / onClose', type: '---' }],
 	properties: [
 		{
 			name: 'open',

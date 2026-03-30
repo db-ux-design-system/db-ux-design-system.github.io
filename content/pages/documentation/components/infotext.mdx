@@ -19,7 +19,6 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
-import { infotextConfig } from '@template/configs/infotext.config.js';
 
 - Give short hints or explanations near UI elements (e.g., what a setting changes)
 - Provide brief warnings or important notes in context (e.g., constraints or limitations)
@@ -64,7 +63,7 @@ import { infotextConfig } from '@template/configs/infotext.config.js';
 
 ## Playground
 
-<ComponentPlayground config={infotextConfig} />
+<ComponentPlayground component="infotext" />
 
 </DBSection>
 
@@ -76,7 +75,7 @@ Configure the infotext through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-<PropertiesTable config={infotextConfig} />
+<PropertiesTable component="infotext" />
 
 </CollapsibleWrapper>
 

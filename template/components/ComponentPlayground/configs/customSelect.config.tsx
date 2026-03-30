@@ -1,6 +1,7 @@
-export const customSelectConfig = {
-	elementId: 'demo-custom-select',
-	defaultText: 'Placeholder',
+import type { PlaygroundConfig } from '../types';
+import type { DBCustomSelectProps } from '@db-ux/react-core-components';
+
+export const customSelectConfig: PlaygroundConfig<DBCustomSelectProps> = {
 	defaultProps: {
 		id: 'demo-custom-select',
 		label: 'Label',

@@ -1,9 +1,9 @@
 import { Component, useState } from 'react';
 import type { PlaygroundConfig } from './types';
 import { initializeState, resetInvalidValues } from './dependency-engine';
-import { resolveComponent } from './component-registry';
 import PreviewArea from './PreviewArea';
-import ControlsArea from './ControlsArea';
+import ControlsArea from './controls/ControlsArea';
+import { resolveConfig } from '@components/ComponentPlayground/configs';
 
 interface ErrorBoundaryState {
 	hasError: boolean;
@@ -28,15 +28,28 @@ class ErrorBoundary extends Component<{ children: React.ReactNode }, ErrorBounda
 }
 
 interface ComponentPlaygroundProps {
-	config: PlaygroundConfig;
+	component: string;
 }
 
-const ComponentPlayground = ({ config }: ComponentPlaygroundProps) => {
+const ComponentPlayground = ({ component }: ComponentPlaygroundProps) => {
+	const config = resolveConfig(component);
+
+	if (!config) {
+		return <div className="preview-area">Unknown component: {component}</div>;
+	}
+
+	return (
+		<ErrorBoundary>
+			<PlaygroundInner config={config} />
+		</ErrorBoundary>
+	);
+};
+
+const PlaygroundInner = ({ config }: { config: PlaygroundConfig<any> }) => {
 	const [currentProps, setCurrentProps] = useState<Record<string, any>>(() =>
 		initializeState(config),
 	);
 
-	const ResolvedComponent = resolveComponent(config.component);
 
 	const handlePropChange = (name: string, value: any) => {
 		setCurrentProps((prev) => {
@@ -59,17 +72,14 @@ const ComponentPlayground = ({ config }: ComponentPlaygroundProps) => {
 	};
 
 	return (
-		<ErrorBoundary>
-			<div className="component-playground">
-				<PreviewArea
-					config={config}
-					component={ResolvedComponent}
-					currentProps={currentProps}
-					onPropChange={handlePropChange}
-				/>
-				<ControlsArea config={config} currentProps={currentProps} onPropChange={handlePropChange} />
-			</div>
-		</ErrorBoundary>
+		<div className="component-playground">
+			<PreviewArea
+				config={config}
+				currentProps={currentProps}
+				onPropChange={handlePropChange}
+			/>
+			<ControlsArea config={config} currentProps={currentProps} onPropChange={handlePropChange} />
+		</div>
 	);
 };
 

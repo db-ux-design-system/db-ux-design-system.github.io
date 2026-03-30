@@ -20,7 +20,6 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
-import { tagConfig } from '@template/configs/tag.config.js';
 
 - Display short categories or attributes (e.g., "New", "Marketing", "Internal")
 - Enable filtering/selection in lists or search results (interactive tags)
@@ -60,16 +59,15 @@ import { tagConfig } from '@template/configs/tag.config.js';
 />
 
 </DBSection>
-{/*
-TODO: playground not working
+
 <DBSection spacing="small" width="auto">
 
 ## Playground
 
-<ComponentPlayground config={tagConfig} />
+<ComponentPlayground component="tag" />
 
 </DBSection>
-*/}
+
 <DBSection spacing="small" width="auto">
 
 ## Properties, Slots & Events
@@ -78,7 +76,7 @@ Configure the tag through its properties, slots and events.
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-<PropertiesTable config={tagConfig} />
+<PropertiesTable component="tag" />
 
 </CollapsibleWrapper>
 
