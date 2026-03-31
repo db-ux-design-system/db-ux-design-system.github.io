@@ -14,6 +14,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 Stack arranges child elements in a vertical or horizontal layout with consistent spacing. Use it to create structured layouts without writing custom CSS.
 
@@ -26,6 +27,14 @@ Stack arranges child elements in a vertical or horizontal layout with consistent
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbstack-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+    ## Playground
+
+    <ComponentPlayground component="stack" />
 
 </DBSection>
 
@@ -89,6 +98,8 @@ Enable wrap for stacks that should adapt to smaller screens.
 <DBSection spacing="small" width="auto">
 
 ## FAQ
+
+Have a question about the stack component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Stack" />
 

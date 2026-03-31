@@ -17,7 +17,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import { infotextConfig } from '@template/configs/infotext.config.js';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 - Give short hints or explanations near UI elements (e.g., what a setting changes)
 - Provide brief warnings or important notes in context (e.g., constraints or limitations)
@@ -27,7 +27,42 @@ import { infotextConfig } from '@template/configs/infotext.config.js';
 
 ## Resources
 
-<ResourceCards path="?path=/docs/components-dbinfotext-density--docs" />
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'TBD',
+			url: '#',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'TBD',
+			url: '#',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground component="infotext" />
 
 </DBSection>
 
@@ -131,6 +166,8 @@ In forms, Infotext can support understanding (format, constraints) and complemen
 <DBSection spacing="small" width="auto">
 
 ## FAQ
+
+Have a question about the Infotext component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Infotext" />
 
