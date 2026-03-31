@@ -6,7 +6,7 @@ headline: 'Navigation'
 title: 'Navigation'
 description: 'Navigation provides a set of destinations that help users move through an application consistently across desktop and mobile. It supports different orientations and responsive behaviors while clearly indicating the current location and available paths.'
 align: start
-status: 'legacy'
+status: 'beta'
 toc: true
 ---
 
@@ -18,8 +18,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 - Offer primary destinations at the top level (global navigation)
 - Support structured sub-navigation for deeper sections (nested levels)
@@ -62,11 +61,9 @@ import PropertiesTable from '@template/components/PropertiesTable/PropertiesTabl
 
 <DBSection spacing="small" width="auto">
 
-## Properties
+    ## Playground
 
-Configure the navigation through its properties.
-
-<PropertiesTable component="navigation" />
+    <ComponentPlayground component="navigation" />
 
 </DBSection>
 

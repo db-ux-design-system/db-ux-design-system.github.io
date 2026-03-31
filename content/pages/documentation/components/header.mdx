@@ -17,7 +17,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 - Provide global navigation entry points and current location context
 - Offer quick access to common actions like search, menu, or profile
@@ -60,20 +60,9 @@ import PropertiesTable from '@template/components/PropertiesTable/PropertiesTabl
 
 <DBSection spacing="small" width="auto">
 
-## Properties, Slots & Events
+    ## Playground
 
-Configure the header through its properties, slots and events.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable component="header" />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties, Slots & Events"
-	expandedText="Hide some Properties, Slots & Events"
-/>
+    <ComponentPlayground component="header" />
 
 </DBSection>
 

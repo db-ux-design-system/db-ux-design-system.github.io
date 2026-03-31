@@ -14,6 +14,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 Divider is a thin horizontal or vertical line that separates UI elements into logical sections and improves layout clarity. It should be used sparingly and together with spacing and hierarchy to avoid visual clutter.
 
@@ -29,23 +30,13 @@ Divider is a thin horizontal or vertical line that separates UI elements into lo
 
 </DBSection>
 
-{/* <DBSection spacing="small" width="auto">
+<DBSection spacing="small" width="auto">
 
-## Properties & Slots
-Configure the divider through its properties and slots.
+    ## Playground
 
-<CollapsibleWrapper collapsedHeight="320px">
+    <ComponentPlayground component="divider" />
 
-<PropertiesTable component="divider" />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties & Slots"
-	expandedText="Hide some Properties & Slots"
-/>
-
-</DBSection> */}
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

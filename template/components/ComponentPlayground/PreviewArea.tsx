@@ -13,12 +13,7 @@ const PreviewArea = ({ config, currentProps, onPropChange }: PreviewAreaProps) =
 			// Skip empty strings — they add unwanted empty data-* attributes
 			if (value === '') continue;
 
-			// Determine the React prop key: prefer camelCase name
-			// Some configs have name='no-text' + alternativeName='noText' (use alternativeName)
-			// Others have name='invalidMessage' + alternativeName='invalid-message' (use name)
-			const reactKey = property.alternativeName ?? propName;
-			const key = reactKey.includes('-') ? propName : reactKey;
-			componentProps[key] = value;
+			componentProps[propName] = value;
 		}
 	}
 

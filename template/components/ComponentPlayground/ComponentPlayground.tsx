@@ -1,6 +1,6 @@
 import { Component, useState } from 'react';
 import type { PlaygroundConfig } from './types';
-import { initializeState, resetInvalidValues } from './dependency-engine';
+import { initializeState } from './dependency-engine';
 import PreviewArea from './PreviewArea';
 import ControlsArea from './controls/ControlsArea';
 import { resolveConfig } from '@components/ComponentPlayground/configs';
@@ -50,34 +50,13 @@ const PlaygroundInner = ({ config }: { config: PlaygroundConfig<any> }) => {
 		initializeState(config),
 	);
 
-
 	const handlePropChange = (name: string, value: any) => {
-		setCurrentProps((prev) => {
-			const next = { ...prev, [name]: value };
-
-			const prop = config.properties.find((p) => p.name === name);
-			if (prop?.setsOnTrue && value === true) {
-				for (const [key, val] of Object.entries(prop.setsOnTrue)) {
-					const isEmpty =
-						!prop.setsOnTrueOnlyIfEmpty ||
-						prop.setsOnTrueOnlyIfEmpty.every((field) => !next[field]);
-					if (isEmpty) {
-						next[key] = val;
-					}
-				}
-			}
-
-			return resetInvalidValues(next, config);
-		});
+		setCurrentProps((prev) => ({ ...prev, [name]: value }));
 	};
 
 	return (
 		<div className="component-playground">
-			<PreviewArea
-				config={config}
-				currentProps={currentProps}
-				onPropChange={handlePropChange}
-			/>
+			<PreviewArea config={config} currentProps={currentProps} onPropChange={handlePropChange} />
 			<ControlsArea config={config} currentProps={currentProps} onPropChange={handlePropChange} />
 		</div>
 	);

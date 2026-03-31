@@ -1,41 +1,21 @@
 import type { ControlsAreaProps } from '../types';
-import { evaluateVisibility, evaluateOptions } from '../dependency-engine';
+import { evaluateVisibility } from '../dependency-engine';
 import SelectControl from './SelectControl';
 import TextControl from './TextControl';
 import CheckboxControl from './CheckboxControl';
 
 const ControlsArea = ({ config, currentProps, onPropChange }: ControlsAreaProps) => {
-	const playgroundProperties = config.properties.filter(
-		(property) => property.showInPlayground !== false,
-	);
-
-	if (playgroundProperties.length === 0) {
+	if (config.properties.length === 0) {
 		return null;
 	}
 
 	return (
 		<div className="controls-area">
 			<div className="controls-area-content" data-density="functional">
-				{playgroundProperties.map((property) => {
+				{config.properties.map((property) => {
 					const isVisible = evaluateVisibility(property, currentProps, config);
 					if (!isVisible) {
 						return null;
-					}
-
-					const availableOptions = evaluateOptions(property, currentProps, config);
-
-					// Resolve dynamic label if labelWhen is defined
-					let resolvedProperty = property;
-					if (property.labelWhen) {
-						const { condition, label } = property.labelWhen;
-						const propValue = currentProps[condition.prop];
-						const matches =
-							condition.value !== undefined
-								? String(propValue) === String(condition.value)
-								: !!propValue;
-						if (matches) {
-							resolvedProperty = { ...property, label };
-						}
 					}
 
 					switch (property.type) {
@@ -43,18 +23,17 @@ const ControlsArea = ({ config, currentProps, onPropChange }: ControlsAreaProps)
 							return (
 								<SelectControl
 									key={property.name}
-									property={resolvedProperty}
+									property={property}
 									value={currentProps[property.name]}
 									defaultValue={(config.properties as any)[property.name]?.defaultValue}
 									onChange={(value) => onPropChange(property.name, value)}
-									availableOptions={availableOptions}
 								/>
 							);
 						case 'text':
 							return (
 								<TextControl
 									key={property.name}
-									property={resolvedProperty}
+									property={property}
 									value={currentProps[property.name]}
 									onChange={(value) => onPropChange(property.name, value)}
 								/>
@@ -63,7 +42,7 @@ const ControlsArea = ({ config, currentProps, onPropChange }: ControlsAreaProps)
 							return (
 								<CheckboxControl
 									key={property.name}
-									property={resolvedProperty}
+									property={property}
 									value={currentProps[property.name]}
 									onChange={(value) => onPropChange(property.name, value)}
 								/>

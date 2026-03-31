@@ -14,6 +14,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 Section separates and structures content areas on a page by applying consistent spacing and optional width constraints. It helps create clear visual grouping and rhythm without manually managing margins for each block.
 
@@ -29,23 +30,13 @@ Section separates and structures content areas on a page by applying consistent 
 
 </DBSection>
 
-{/* <DBSection spacing="small" width="auto">
+<DBSection spacing="small" width="auto">
 
-## Properties & Slots
-Configure the section through its properties and slots.
+    ## Playground
 
-<CollapsibleWrapper collapsedHeight="320px">
+    <ComponentPlayground component="section" />
 
-<PropertiesTable component="section" />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties & Slots"
-	expandedText="Hide some Properties & Slots"
-/>
-
-</DBSection> */}
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

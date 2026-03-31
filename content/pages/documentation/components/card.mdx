@@ -14,6 +14,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 Cards group related content into a contained surface to improve scanning and create clear visual structure. They can be static for content grouping or interactive as an entry point to deeper content, but should stay simple and consistent.
 
@@ -29,23 +30,13 @@ Cards group related content into a contained surface to improve scanning and cre
 
 </DBSection>
 
-{/* <DBSection spacing="small" width="auto">
+<DBSection spacing="small" width="auto">
 
-## Properties & Slots
-Configure the card through its properties and slots.
+    ## Playground
 
-<CollapsibleWrapper collapsedHeight="320px">
+    <ComponentPlayground component="card" />
 
-<PropertiesTable component="card" />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties & Slots"
-	expandedText="Hide some Properties & Slots"
-/>
-
-</DBSection> */}
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

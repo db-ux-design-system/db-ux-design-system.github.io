@@ -5,11 +5,10 @@ const SelectControl = ({
 	property,
 	value,
 	onChange,
-	availableOptions,
 	defaultValue,
 }: ControlProps) => {
 	const controlId = `control-${property.name}`;
-	const options = availableOptions ?? property.options ?? [];
+	const options =  property.options ?? [];
 
 	return (
 		// eslint-disable-next-line db-ux/select-requires-options

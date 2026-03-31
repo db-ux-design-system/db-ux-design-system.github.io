@@ -6,7 +6,7 @@ headline: 'Navigation Item'
 title: 'Navigation Item'
 description: 'Navigation Item is a subcomponent used within Navigation to represent individual destinations. It supports icons, active states, disabled states, and nested sub-navigation for hierarchical structures.'
 align: start
-status: 'legacy'
+status: 'beta'
 toc: true
 ---
 
@@ -14,12 +14,8 @@ import { DBSection } from '@db-ux/react-core-components';
 
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
-
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 
 - Always wrap content in an anchor element for proper navigation semantics
 - Use the active property or aria-current="page" to indicate the current location
@@ -62,20 +58,9 @@ import PropertiesTable from '@template/components/PropertiesTable/PropertiesTabl
 
 <DBSection spacing="small" width="auto">
 
-## Properties, Slots & Events
+    ## Playground
 
-Configure the navigation item through its properties, slots and events.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable component="navigationItem" />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties, Slots & Events"
-	expandedText="Hide some Properties, Slots & Events"
-/>
+    <ComponentPlayground component="navigationItem" />
 
 </DBSection>
 

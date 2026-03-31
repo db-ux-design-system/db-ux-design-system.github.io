@@ -10,7 +10,6 @@ export const backdropConfig: PlaygroundConfig<any> = {
 			label: 'Emphasis',
 			type: 'select',
 			defaultValue: 'strong',
-			description: 'The emphasis attribute divides in between a weak or strong importance.',
 			options: [
 				{ label: 'Strong', value: 'strong', default: true },
 				{ label: 'Weak', value: 'weak', default: false },
@@ -21,7 +20,6 @@ export const backdropConfig: PlaygroundConfig<any> = {
 			label: 'Show Backdrop',
 			type: 'checkbox',
 			defaultValue: false,
-			description: 'Shows or hides the backdrop.',
 		},
 	],
 };

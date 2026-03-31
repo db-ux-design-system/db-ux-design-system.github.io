@@ -18,7 +18,6 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 - Trigger an action (e.g., Send, Save, Delete)
@@ -38,22 +37,6 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 ## Playground
 
 <ComponentPlayground component="button" />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Properties, Slots & Events
-
-Configure the button through its properties, such as variant, size, icon, and disabled state.
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-<PropertiesTable component="button" />
-
-</CollapsibleWrapper>
-
-<CollapseButton collapsedText="Show all Properties, Slots & Events" expandedText="Hide some Properties, Slots & Events" />
 
 </DBSection>
 

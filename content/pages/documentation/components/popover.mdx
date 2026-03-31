@@ -14,6 +14,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 Popover is a floating container anchored to a trigger that reveals additional, contextual content on click or hover. It supports richer content than a tooltip and can include actions, but should remain lightweight and easy to dismiss.
 
@@ -29,23 +30,13 @@ Popover is a floating container anchored to a trigger that reveals additional, c
 
 </DBSection>
 
-{/* <DBSection spacing="small" width="auto">
+<DBSection spacing="small" width="auto">
 
-## Properties & Slots
-Configure the popover through its properties and slots.
+    ## Playground
 
-<CollapsibleWrapper collapsedHeight="320px">
+    <ComponentPlayground component="popover" />
 
-<PropertiesTable component="popover" />
-
-</CollapsibleWrapper>
-
-<CollapseButton
-	collapsedText="Show all Properties & Slots"
-	expandedText="Hide some Properties & Slots"
-/>
-
-</DBSection> */}
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

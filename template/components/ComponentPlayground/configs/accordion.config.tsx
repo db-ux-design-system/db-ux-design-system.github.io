@@ -1,7 +1,16 @@
 import type { PlaygroundConfig } from '../types';
-import type { DBAccordionProps } from '@db-ux/react-core-components';
+import { DBAccordion, DBAccordionItem, type DBAccordionProps } from '@db-ux/react-core-components';
 
 export const accordionConfig: PlaygroundConfig<DBAccordionProps> = {
+	render: (props) => {
+		return (
+			<DBAccordion {...props}>
+				<DBAccordionItem headline="Headline 1">Content 1</DBAccordionItem>
+				<DBAccordionItem headline="Headline 2">Content 2</DBAccordionItem>
+				<DBAccordionItem headline="Headline 3">Content 3</DBAccordionItem>
+			</DBAccordion>
+		);
+	},
 	defaultProps: {
 		behavior: 'multiple',
 		variant: 'divider',
@@ -12,7 +21,6 @@ export const accordionConfig: PlaygroundConfig<DBAccordionProps> = {
 			label: 'Behavior',
 			type: 'select',
 			defaultValue: 'multiple',
-			description: 'Controls whether multiple or single items can be open.',
 			options: [
 				{ label: 'Multiple', value: 'multiple', default: true },
 				{ label: 'Single', value: 'single', default: false },
@@ -23,17 +31,10 @@ export const accordionConfig: PlaygroundConfig<DBAccordionProps> = {
 			label: 'Variant',
 			type: 'select',
 			defaultValue: 'divider',
-			description: 'Visual variant of the accordion.',
 			options: [
 				{ label: 'Divider', value: 'divider', default: true },
 				{ label: 'Card', value: 'card', default: false },
 			],
-		},
-	],
-	slots: [
-		{
-			name: 'children',
-			description: 'default slot',
 		},
 	],
 };
