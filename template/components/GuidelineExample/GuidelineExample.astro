@@ -1,5 +1,7 @@
 ---
 import { DBBadge } from '@db-ux/react-core-components';
+import { readFileSync, existsSync } from 'fs';
+import { resolve } from 'path';
 import './GuidelineExample.css';
 
 interface Props {
@@ -27,6 +29,18 @@ const label =
 				? "Don't"
 				: undefined;
 const fullUrl = `${figmaUrl}&embed-host=share&footer=false&viewport-controls=false&page-selector=false&scaling=scale-down-width`;
+
+// Resolve cached image from manifest
+const manifestPath = resolve('static/assets/figma-cache/manifest.json');
+let cachedImageSrc: string | undefined;
+if (existsSync(manifestPath)) {
+	const manifest = JSON.parse(readFileSync(manifestPath, 'utf-8'));
+	// Normalize lookup key: strip extra embed params, keep node-id only
+	const base = figmaUrl.split('?')[0];
+	const nodeIdMatch = figmaUrl.match(/[?&]node-id=([^&]+)/);
+	const lookupKey = nodeIdMatch ? `${base}?node-id=${nodeIdMatch[1]}&embed-host=share` : figmaUrl;
+	cachedImageSrc = manifest[lookupKey];
+}
 ---
 
 <div class="guideline-example-container" class:list={[fullWidth && 'full-width']}>
@@ -39,11 +53,24 @@ const fullUrl = `${figmaUrl}&embed-host=share&footer=false&viewport-controls=fal
 			</div>
 		)
 	}
-	<iframe
-		class="guideline-example-iframe"
-		src={fullUrl}
-		title={`${label} example: ${description}`}
-		loading="eager"
-		allowfullscreen></iframe>
+	{
+		cachedImageSrc ? (
+			<img
+				class="guideline-example-iframe"
+				data-mode="light"
+				src={cachedImageSrc}
+				alt={`${label} example: ${description}`}
+				loading="lazy"
+			/>
+		) : (
+			<iframe
+				class="guideline-example-iframe"
+				src={fullUrl}
+				title={`${label} example: ${description}`}
+				loading="eager"
+				allowfullscreen
+			/>
+		)
+	}
 	<p>{description}</p>
 </div>
