@@ -35,7 +35,7 @@ importers:
         version: 3.7.2
       '@axe-core/playwright':
         specifier: 4.11.1
-        version: 4.11.1(playwright-core@1.58.2)
+        version: 4.11.1(playwright-core@1.59.1)
       '@db-ux/agent-cli':
         specifier: 4.5.0
         version: 4.5.0
@@ -67,8 +67,8 @@ importers:
         specifier: 3.0.2-shell4-bdb351c
         version: 3.0.2-shell4-bdb351c
       '@double-great/stylelint-a11y':
-        specifier: 3.4.8
-        version: 3.4.8(stylelint@17.6.0(typescript@5.9.3))
+        specifier: 3.4.9
+        version: 3.4.9(stylelint@17.6.0(typescript@5.9.3))
       '@orama/orama':
         specifier: 3.1.18
         version: 3.1.18
@@ -76,8 +76,8 @@ importers:
         specifier: 3.1.18
         version: 3.1.18(astro@5.18.1(@types/node@25.3.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.3))
       '@playwright/test':
-        specifier: 1.58.2
-        version: 1.58.2
+        specifier: 1.59.1
+        version: 1.59.1
       '@types/react':
         specifier: 19.2.14
         version: 19.2.14
@@ -373,8 +373,8 @@ packages:
   '@db-ux/react-core-components@3.0.2-shell4-bdb351c':
     resolution: {integrity: sha512-H4kka+9J9OFGXIPZa68jXxD7G9OT3EV7grRccWTM/ZXHYm/qNvPqjSJB3Bm6XWV3+cLR7cvgPTKj/g/PC+jRqQ==}
 
-  '@double-great/stylelint-a11y@3.4.8':
-    resolution: {integrity: sha512-HzIU65EHVK6YF3FtywmGG8ejsH91m5hoWwERunPxL/FqjfH9pUEVCsJcLajVcVW0AefSrb/nTpvsOnq93CsnrA==}
+  '@double-great/stylelint-a11y@3.4.9':
+    resolution: {integrity: sha512-qVY0XXJ6VxHnNDrKV7wCZnlHefKcNt9UI1fLHZ4lRZQGZbr1Nv7pg8N+OlLrf9GPumzuOju8Xgc+y/kC4tFqLg==}
     engines: {node: '>=18.12.0'}
     peerDependencies:
       stylelint: '>=16.0.0'
@@ -988,8 +988,8 @@ packages:
     resolution: {integrity: sha512-QNqXyfVS2wm9hweSYD2O7F0G06uurj9kZ96TRQE5Y9hU7+tgdZwIkbAKc5Ocy1HxEY2kuDQa6cQ1WRs/O5LFKA==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
 
-  '@playwright/test@1.58.2':
-    resolution: {integrity: sha512-akea+6bHYBBfA9uQqSYmlJXn61cTa+jbO87xVLCWbTqbWadRVmhxlXATaOjOgcBaWU4ePo0wB41KMFv3o35IXA==}
+  '@playwright/test@1.59.1':
+    resolution: {integrity: sha512-PG6q63nQg5c9rIi4/Z5lR5IVF7yU5MqmKaPOe0HSc0O2cX1fPi96sUQu5j7eo4gKCkB2AnNGoWt7y4/Xx3Kcqg==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -2573,13 +2573,13 @@ packages:
     resolution: {integrity: sha512-QP88BAKvMam/3NxH6vj2o21R6MjxZUAd6nlwAS/pnGvN9IVLocLHxGYIzFhg6fUQ+5th6P4dv4eW9jX3DSIj7A==}
     engines: {node: '>=12'}
 
-  playwright-core@1.58.2:
-    resolution: {integrity: sha512-yZkEtftgwS8CsfYo7nm0KE8jsvm6i/PTgVtB8DL726wNf6H2IMsDuxCpJj59KDaxCtSnrWan2AeDqM7JBaultg==}
+  playwright-core@1.59.1:
+    resolution: {integrity: sha512-HBV/RJg81z5BiiZ9yPzIiClYV/QMsDCKUyogwH9p3MCP6IYjUFu/MActgYAvK0oWyV9NlwM3GLBjADyWgydVyg==}
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright@1.58.2:
-    resolution: {integrity: sha512-vA30H8Nvkq/cPBnNw4Q8TWz1EJyqgpuinBcHET0YVJVFldr8JDNiU9LaWAE1KqSkRYazuaBhTpB5ZzShOezQ6A==}
+  playwright@1.59.1:
+    resolution: {integrity: sha512-C8oWjPR3F81yljW9o5OxcWzfh6avkVwDD2VYdwIGqTkl+OGFISgypqzfu7dOe4QNLL2aqcWBmI3PMtLIK233lw==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -3529,10 +3529,10 @@ snapshots:
     dependencies:
       yaml: 2.8.3
 
-  '@axe-core/playwright@4.11.1(playwright-core@1.58.2)':
+  '@axe-core/playwright@4.11.1(playwright-core@1.59.1)':
     dependencies:
       axe-core: 4.11.1
-      playwright-core: 1.58.2
+      playwright-core: 1.59.1
 
   '@babel/code-frame@7.28.6':
     dependencies:
@@ -3736,7 +3736,7 @@ snapshots:
       '@db-ux/core-components': 3.0.2-shell4-bdb351c
       '@db-ux/core-foundations': 3.0.2-shell4-bdb351c
 
-  '@double-great/stylelint-a11y@3.4.8(stylelint@17.6.0(typescript@5.9.3))':
+  '@double-great/stylelint-a11y@3.4.9(stylelint@17.6.0(typescript@5.9.3))':
     dependencies:
       postcss: 8.5.8
       stylelint: 17.6.0(typescript@5.9.3)
@@ -4160,9 +4160,9 @@ snapshots:
 
   '@pkgr/core@0.2.9': {}
 
-  '@playwright/test@1.58.2':
+  '@playwright/test@1.59.1':
     dependencies:
-      playwright: 1.58.2
+      playwright: 1.59.1
 
   '@rolldown/pluginutils@1.0.0-beta.27': {}
 
@@ -6222,11 +6222,11 @@ snapshots:
 
   picomatch@4.0.4: {}
 
-  playwright-core@1.58.2: {}
+  playwright-core@1.59.1: {}
 
-  playwright@1.58.2:
+  playwright@1.59.1:
     dependencies:
-      playwright-core: 1.58.2
+      playwright-core: 1.59.1
     optionalDependencies:
       fsevents: 2.3.2
 
