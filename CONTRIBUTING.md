@@ -6,7 +6,14 @@ We are committed to fostering a welcoming, respectful, and harassment-free envir
 
 ## Prepare
 
-_tbd_
+Get credentials for public usage from [Marketingportal](https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/db-ux-design-system/resources/db-theme) and add them to your [`.env` File](./.env) - see [`.env.template`](./.env.template).
+
+```shell
+pnpm install
+# it should run postinstall tasks from @db-ux/db-theme* by default, if not:
+# execute this tasks manually to decode the assets using the previously made setup:
+pnpm run decode-db-theme-assets
+```
 
 ## Start locally
 

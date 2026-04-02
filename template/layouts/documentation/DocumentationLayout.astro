@@ -32,5 +32,8 @@ const currentPath = Astro.url.pathname;
 			</div>
 		</Shell>
 		<slot name="script" />
+		<script>
+			import '@template/components/ComponentPlayground/playground-init';
+		</script>
 	</body>
 </html>
