@@ -3,8 +3,15 @@ import { DBDivider, type DBDividerProps } from '@db-ux/react-core-components';
 
 export const dividerConfig: PlaygroundConfig<DBDividerProps> = {
 	render: (props) => (
-		<div className="divider-container">
-			<DBDivider {...props} />
+		<div
+			className="divider-container"
+			style={
+				props.variant === 'vertical'
+					? { display: 'flex', justifyContent: 'center', height: '100px' }
+					: undefined
+			}
+		>
+			<DBDivider {...props} width="full" />
 		</div>
 	),
 	defaultProps: {
@@ -33,15 +40,15 @@ export const dividerConfig: PlaygroundConfig<DBDividerProps> = {
 				{ value: 'strong', label: 'Strong' },
 			],
 		},
-		{
-			name: 'margin',
-			label: 'Margin',
-			type: 'select',
-			defaultValue: '_',
-			options: [
-				{ value: '_', label: 'Default', default: true },
-				{ value: 'none', label: 'None' },
-			],
-		}
+		// {
+		// 	name: 'margin',
+		// 	label: 'Margin',
+		// 	type: 'select',
+		// 	defaultValue: '_',
+		// 	options: [
+		// 		{ value: '_', label: 'Default', default: true },
+		// 		{ value: 'none', label: 'None' },
+		// 	],
+		// },
 	],
 };
