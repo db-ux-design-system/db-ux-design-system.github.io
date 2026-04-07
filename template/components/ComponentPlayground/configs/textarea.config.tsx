@@ -23,6 +23,13 @@ export const textareaConfig: PlaygroundConfig<DBTextareaProps> = {
 			defaultValue: 'Placeholder',
 		},
 		{
+			name: 'showLabel',
+			label: 'Show Label',
+			type: 'checkbox',
+			defaultValue: true,
+			dependsOn: { prop: 'variant', value: 'above' },
+		},
+		{
 			name: 'variant',
 			label: 'Variant',
 			type: 'select',
