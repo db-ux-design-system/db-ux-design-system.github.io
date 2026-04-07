@@ -18,7 +18,7 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import { checkboxConfig } from '@template/configs/checkbox.config.js';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 - Select multiple options from a list (e.g., notification channels)
 - Confirm consent or acknowledgment (e.g., accept terms)
@@ -29,6 +29,14 @@ import { checkboxConfig } from '@template/configs/checkbox.config.js';
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbcheckbox-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground component="checkbox" />
 
 </DBSection>
 

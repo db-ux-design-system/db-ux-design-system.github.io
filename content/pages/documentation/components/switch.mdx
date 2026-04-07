@@ -18,7 +18,7 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-import { switchConfig } from '@template/configs/switch.config.js';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 - Turn a setting on or off with immediate effect (e.g., "Enable notifications")
 - Activate/deactivate a feature in context without leaving the page
@@ -29,6 +29,14 @@ import { switchConfig } from '@template/configs/switch.config.js';
 ## Resources
 
 <ResourceCards path="?path=/docs/components-dbswitch-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground component="switch" />
 
 </DBSection>
 
@@ -150,7 +158,9 @@ Every switch needs an accessible name. If the visible label is hidden, provide e
 
 ## FAQ
 
-<QuestionForm componentName="Switch" />
+Have a question about the uswitch component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="uswitch" />
 
 </DBSection>
 

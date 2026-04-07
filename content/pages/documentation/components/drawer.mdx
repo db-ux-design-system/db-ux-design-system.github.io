@@ -6,8 +6,8 @@ headline: 'Drawer'
 title: 'Drawer'
 description: 'Drawer is a sliding panel that appears from the side, top, or bottom to show supplemental content or lightweight interactions while keeping the user in context. It is ideal for optional details and simple tasks, and must always be easy to dismiss.'
 align: start
-status: 'stable'
 toc: true
+status: 'stable'
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
@@ -17,7 +17,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import { drawerConfig } from '@template/configs/drawer.config.js';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 - Show additional details or secondary information without leaving the current page
 - Provide simple, optional form inputs or quick edits in context
@@ -27,7 +27,42 @@ import { drawerConfig } from '@template/configs/drawer.config.js';
 
 ## Resources
 
-<ResourceCards path="?path=/docs/components-dbdrawer-density--docs" />
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'TBD',
+			url: '#',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'TBD',
+			url: '#',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground component="drawer" />
 
 </DBSection>
 
@@ -114,6 +149,8 @@ Always provide a way to close the drawer, such as clicking outside the drawer ar
 <DBSection spacing="small" width="auto">
 
 ## FAQ
+
+Have a question about the Drawer component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Drawer" />
 

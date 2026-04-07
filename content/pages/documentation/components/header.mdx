@@ -6,7 +6,7 @@ headline: 'Header'
 title: 'Header'
 description: 'Header defines the top area of a page and provides consistent access to brand identity, primary navigation, and optional actions. It anchors orientation and supports navigation patterns across responsive layouts, with optional meta navigation above the main bar.'
 align: start
-status: 'stable'
+status: 'legacy'
 toc: true
 ---
 
@@ -17,7 +17,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import { headerConfig } from '@template/configs/header.config.js';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 - Provide global navigation entry points and current location context
 - Offer quick access to common actions like search, menu, or profile
@@ -55,6 +55,14 @@ import { headerConfig } from '@template/configs/header.config.js';
 		},
 	]}
 />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+    ## Playground
+
+    <ComponentPlayground component="header" />
 
 </DBSection>
 
@@ -124,6 +132,8 @@ If the meta navigation contains external links, communicate that they leave the 
 <DBSection spacing="small" width="auto">
 
 ## FAQ
+
+Have a question about the Header component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Header" />
 
