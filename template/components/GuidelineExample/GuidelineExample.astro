@@ -1,5 +1,5 @@
 ---
-import { DBBadge } from '@db-ux/react-core-components';
+import { DBBadge, DBCard } from '@db-ux/react-core-components';
 import { readFileSync, existsSync } from 'fs';
 import { resolve } from 'path';
 import './GuidelineExample.css';
@@ -44,33 +44,34 @@ if (existsSync(manifestPath)) {
 ---
 
 <div class="guideline-example-container" class:list={[fullWidth && 'full-width']}>
-	{
-		variant && (
-			<div class="guideline-example-badge">
-				<DBBadge semantic={semantic} emphasis="strong" size="medium">
-					<span>{label}</span>
-				</DBBadge>
-			</div>
-		)
-	}
-	{
-		cachedImageSrc ? (
-			<img
-				class="guideline-example-iframe"
-				data-mode="light"
-				src={cachedImageSrc}
-				alt={`${label} example: ${description}`}
-				loading="lazy"
-			/>
-		) : (
-			<iframe
-				class="guideline-example-iframe"
-				src={fullUrl}
-				title={`${label} example: ${description}`}
-				loading="eager"
-				allowfullscreen
-			/>
-		)
-	}
+	<DBCard elevationLevel="2" data-mode="light">
+		{
+			variant && (
+				<div class="guideline-example-badge">
+					<DBBadge semantic={semantic} emphasis="strong" size="medium">
+						<span>{label}</span>
+					</DBBadge>
+				</div>
+			)
+		}
+		{
+			cachedImageSrc ? (
+				<img
+					class="guideline-example-iframe"
+					src={cachedImageSrc}
+					alt={`${label} example: ${description}`}
+					loading="lazy"
+				/>
+			) : (
+				<iframe
+					class="guideline-example-iframe"
+					src={fullUrl}
+					title={`${label} example: ${description}`}
+					loading="eager"
+					allowfullscreen
+				/>
+			)
+		}
+	</DBCard>
 	<p>{description}</p>
 </div>
