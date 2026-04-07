@@ -91,14 +91,14 @@ export const switchConfig: PlaygroundConfig<DBSwitchProps> = {
 			],
 		},
 		{
-			name: 'invalid-message',
+			name: 'invalidMessage',
 			label: 'Invalid Message',
 			type: 'text',
 			defaultValue: 'Please enter an invalid message',
 			dependsOn: { prop: 'validation', value: 'invalid' },
 		},
 		{
-			name: 'valid-message',
+			name: 'validMessage',
 			label: 'Valid Message',
 			type: 'text',
 			defaultValue: 'Please enter a valid message',
