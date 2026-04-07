@@ -1,8 +1,15 @@
-import type { ControlsAreaProps } from '../types';
+import type { ControlsAreaProps, PropertyConfig } from '../types';
 import { evaluateVisibility } from '../dependency-engine';
 import SelectControl from './SelectControl';
 import TextControl from './TextControl';
 import CheckboxControl from './CheckboxControl';
+
+function resolveLabel(property: PropertyConfig, currentProps: Record<string, any>): PropertyConfig {
+	if (typeof property.label === 'function') {
+		return { ...property, label: property.label(currentProps) };
+	}
+	return property;
+}
 
 const ControlsArea = ({ config, currentProps, onPropChange }: ControlsAreaProps) => {
 	if (config.properties.length === 0) {
@@ -18,12 +25,14 @@ const ControlsArea = ({ config, currentProps, onPropChange }: ControlsAreaProps)
 						return null;
 					}
 
+					const resolved = resolveLabel(property, currentProps);
+
 					switch (property.type) {
 						case 'select':
 							return (
 								<SelectControl
 									key={property.name}
-									property={property}
+									property={resolved}
 									value={currentProps[property.name]}
 									defaultValue={(config.properties as any)[property.name]?.defaultValue}
 									onChange={(value) => onPropChange(property.name, value)}
@@ -33,7 +42,7 @@ const ControlsArea = ({ config, currentProps, onPropChange }: ControlsAreaProps)
 							return (
 								<TextControl
 									key={property.name}
-									property={property}
+									property={resolved}
 									value={currentProps[property.name]}
 									onChange={(value) => onPropChange(property.name, value)}
 								/>
@@ -42,7 +51,7 @@ const ControlsArea = ({ config, currentProps, onPropChange }: ControlsAreaProps)
 							return (
 								<CheckboxControl
 									key={property.name}
-									property={property}
+									property={resolved}
 									value={currentProps[property.name]}
 									onChange={(value) => onPropChange(property.name, value)}
 								/>
