@@ -6,7 +6,7 @@ headline: 'Navigation Item'
 title: 'Navigation Item'
 description: 'Navigation Item is a subcomponent used within Navigation to represent individual destinations. It supports icons, active states, disabled states, and nested sub-navigation for hierarchical structures.'
 align: start
-status: 'stable'
+status: 'beta'
 toc: true
 ---
 
@@ -14,10 +14,8 @@ import { DBSection } from '@db-ux/react-core-components';
 
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
-
-import { navigationItemConfig } from '@template/configs/navigation-item.config.js';
 
 - Always wrap content in an anchor element for proper navigation semantics
 - Use the active property or aria-current="page" to indicate the current location
@@ -27,13 +25,50 @@ import { navigationItemConfig } from '@template/configs/navigation-item.config.j
 
 ## Resources
 
-<ResourceCards path="?path=/docs/components-dbnavigationitem-density--docs" />
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/react-storybook',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/vue-storybook',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'Interactive examples and documentation.',
+			url: 'https://design-system.deutschebahn.com/core-web/review/main/angular-storybook',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+    ## Playground
+
+    <ComponentPlayground component="navigationItem" />
 
 </DBSection>
 
 <DBSection spacing="small" width="auto">
 
 ## FAQ
+
+Have a question about the Navigation Item component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Navigation Item" />
 

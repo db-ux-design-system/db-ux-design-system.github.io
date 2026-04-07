@@ -1,0 +1,11 @@
+---
+import './ComponentPlayground.css';
+
+interface Props {
+	component: string;
+}
+
+const { component } = Astro.props;
+---
+
+<div class="component-playground-root" data-component={component}></div>
