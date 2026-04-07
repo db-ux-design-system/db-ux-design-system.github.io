@@ -9,21 +9,17 @@
 }
 
 .guideline-example-container {
-	position: relative;
-	display: inline-block;
 	inline-size: 50%;
-}
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-sm);
 
-.guideline-example-badge {
-	position: absolute;
-	inset-block-start: var(--db-spacing-fixed-md);
-	inset-inline-start: var(--db-spacing-fixed-md);
-	z-index: 1;
-}
+	.db-card {
+		gap: var(--db-spacing-fixed-xs);
 
-.guideline-example-iframe {
-	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
-	border-radius: var(--db-border-radius-md);
-	inline-size: 100%;
-	aspect-ratio: 16/9;
+		.guideline-example-iframe {
+			inline-size: 100%;
+			aspect-ratio: 16/9;
+		}
+	}
 }
