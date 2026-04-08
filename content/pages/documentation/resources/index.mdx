@@ -13,8 +13,32 @@ order: 5
 toc: true
 ---
 
-import { DBSection } from '@db-ux/react-core-components';
+import { DBSection, DBStack } from '@db-ux/react-core-components';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import ExternalTeaser from '@template/components/ExternalTeaser/ExternalTeaser';
+import ExternalTeaserRow from '@template/components/ExternalTeaser/ExternalTeaserRow';
+
+<ExternalTeaserRow
+	items={[
+		{
+			title: 'Figma Access for External Employees',
+			description: "Request access to the Figma libraries if you don't have a DB email address.",
+			url: 'https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/db-ux-design-system/support/freigabe-figma',
+			image: '/assets/teasers/figma.png',
+			imageAlt: 'Figma',
+			label: 'Open in Marketing Portal',
+		},
+		{
+			title: 'DB Theme',
+			description:
+				'Required for Deutsche Bahn websites and applications. Install via the @db-ux/db-theme package.',
+			url: 'https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/db-ux-design-system/resources/db-theme',
+			image: '/assets/teasers/db-theme.png',
+			imageAlt: 'DB Theme',
+			label: 'Open in Marketing Portal',
+		},
+	]}
+/>
 
 <DBSection spacing='small' width="auto">
 

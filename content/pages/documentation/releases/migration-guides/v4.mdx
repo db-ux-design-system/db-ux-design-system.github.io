@@ -12,7 +12,7 @@ toc: true
 
 import { DBSection } from '@db-ux/react-core-components';
 import YourAction from '@template/components/YourAction/YourAction';
-import FeedbackTeaser from '@template/components/FeedbackTeaser/FeedbackTeaser';
+import ExternalTeaserRow from '@template/components/ExternalTeaser/ExternalTeaserRow';
 
 <DBSection spacing="small" width="auto">
 
@@ -104,13 +104,26 @@ With this update, the behavior in design and development becomes identical.
 	]}
 />
 </DBSection>
+<DBSection spacing="small" width="auto">
 
-<FeedbackTeaser
-	releases={[
+<ExternalTeaserRow
+	items={[
 		{
 			title: 'Design + Code Issues v4.0.0',
 			description: 'All information about the latest Design System release on GitHub.',
 			url: 'https://github.com/orgs/db-ux-design-system/projects/4/views/12?filterQuery=has%3Amilestone+-label%3A%F0%9F%96%BC%EF%B8%8Ficons+milestone%3A4.0.0',
+			image: '/assets/teasers/github.png',
+			imageAlt: 'GitHub',
+			label: 'View on GitHub',
+		},
+		{
+			title: 'Feedback Welcome',
+			description: 'Let us know if you encounter unexpected issues or need support.',
+			url: 'https://github.com/db-ux-design-system/core/issues/new',
+			image: '/assets/teasers/github.png',
+			imageAlt: 'GitHub',
+			label: 'Create Issue on GitHub',
 		},
 	]}
 />
+</DBSection>
