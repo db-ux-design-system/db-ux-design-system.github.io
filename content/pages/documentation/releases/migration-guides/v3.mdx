@@ -12,7 +12,7 @@ toc: true
 
 import { DBSection } from '@db-ux/react-core-components';
 import YourAction from '@template/components/YourAction/YourAction';
-import ExternalTeaserRow from '@template/components/ExternalTeaser/ExternalTeaserRow';
+import CardTeaserRow from "@template/components/CardTeaser/CardTeaserRow";
 
 <DBSection spacing="small" width="auto">
 
@@ -199,7 +199,7 @@ Switch to the first level of the component and reset it.
 </DBSection>
 <DBSection spacing="small" width="auto">
 
-<ExternalTeaserRow
+<CardTeaserRow
 	items={[
 		{
 			title: 'Design + Code Issues v3.0.0',
@@ -207,15 +207,15 @@ Switch to the first level of the component and reset it.
 			url: 'https://github.com/orgs/db-ux-design-system/projects/4/views/12?filterQuery=has%3Amilestone+-label%3A%F0%9F%96%BC%EF%B8%8Ficons+milestone%3A3.0.0',
 			image: '/assets/teasers/github.png',
 			imageAlt: 'GitHub',
-			label: 'View on GitHub',
+			label: 'View on GitHub', external: true,
 		},
 		{
 			title: 'Feedback Welcome',
 			description: 'Let us know if you encounter unexpected issues or need support.',
-			url: 'https://github.com/db-ux-design-system/core/issues/new',
-			image: '/assets/teasers/github.png',
-			imageAlt: 'GitHub',
-			label: 'Create Issue on GitHub',
+			url: '/documentation/contribution',
+			image: '/assets/teasers/feedback.png',
+			imageAlt: 'Contribution',
+			label: 'Get in touch',
 		},
 	]}
 />

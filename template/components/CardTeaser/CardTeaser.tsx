@@ -1,30 +1,36 @@
 import { DBCard } from '@db-ux/react-core-components';
 
-interface ExternalTeaserProps {
+interface CardTeaserProps {
 	title: string;
 	description: string;
 	url: string;
 	image: string;
 	imageAlt: string;
 	label: string;
+	external?: boolean;
 }
 
-const ExternalTeaser = ({
+const CardTeaser = ({
 	title,
 	description,
 	url,
 	image,
 	imageAlt,
 	label,
-}: ExternalTeaserProps) => {
+	external = false,
+}: CardTeaserProps) => {
 	return (
 		<a
 			href={url}
-			target="_blank"
-			rel="noopener noreferrer"
-			style={{ flex: 1, textDecoration: 'none', color: 'inherit' }}
+			{...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+			style={{
+				flex: '1 1 calc(50% - var(--db-spacing-fixed-md))',
+				minInlineSize: '280px',
+				textDecoration: 'none',
+				color: 'inherit',
+			}}
 		>
-			<DBCard behavior="interactive" spacing="medium" style={{ height: '100%' }}>
+			<DBCard behavior="interactive" spacing="medium">
 				<div style={{ display: 'flex', alignItems: 'center', gap: 'var(--db-spacing-fixed-md)' }}>
 					<div style={{ flex: 1 }}>
 						<strong style={{ display: 'block', marginBlockEnd: 'var(--db-spacing-fixed-xs)' }}>
@@ -34,7 +40,7 @@ const ExternalTeaser = ({
 							{description}
 						</span>
 						<strong
-							data-icon-trailing="arrow_up_right"
+							data-icon-trailing={external ? 'arrow_up_right' : 'arrow_right'}
 							style={{ display: 'block', marginBlockStart: 'var(--db-spacing-fixed-sm)' }}
 						>
 							{label}
@@ -52,4 +58,4 @@ const ExternalTeaser = ({
 	);
 };
 
-export default ExternalTeaser;
+export default CardTeaser;

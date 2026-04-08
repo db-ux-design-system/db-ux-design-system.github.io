@@ -1,0 +1,13 @@
+.card-teaser-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--db-spacing-fixed-md);
+}
+
+.card-teaser-row > a {
+	display: flex;
+}
+
+.card-teaser-row > a > .db-card {
+	inline-size: 100%;
+}
