@@ -25,6 +25,7 @@ export const buttonConfig: PlaygroundConfig<DBButtonProps> = {
 		}
 
 		return (
+			// eslint-disable-next-line db-ux/button-single-icon-attribute
 			<DBButton
 				type="button"
 				text={text}
