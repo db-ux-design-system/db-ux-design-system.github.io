@@ -23,6 +23,13 @@ export const textareaConfig: PlaygroundConfig<DBTextareaProps> = {
 			defaultValue: 'Placeholder',
 		},
 		{
+			name: 'showLabel',
+			label: 'Show Label',
+			type: 'checkbox',
+			defaultValue: true,
+			dependsOn: { prop: 'variant', value: 'above' },
+		},
+		{
 			name: 'variant',
 			label: 'Variant',
 			type: 'select',
@@ -56,14 +63,14 @@ export const textareaConfig: PlaygroundConfig<DBTextareaProps> = {
 			],
 		},
 		{
-			name: 'invalid-message',
+			name: 'invalidMessage',
 			label: 'Invalid Message',
 			type: 'text',
 			defaultValue: 'Invalid message',
 			dependsOn: { prop: 'validation', value: 'invalid' },
 		},
 		{
-			name: 'valid-message',
+			name: 'validMessage',
 			label: 'Valid Message',
 			type: 'text',
 			defaultValue: 'Valid message',
@@ -94,6 +101,6 @@ export const textareaConfig: PlaygroundConfig<DBTextareaProps> = {
 			label: 'Required',
 			type: 'checkbox',
 			defaultValue: false,
-		}
+		},
 	],
 };

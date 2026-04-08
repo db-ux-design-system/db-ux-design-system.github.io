@@ -99,14 +99,14 @@ export const inputConfig: PlaygroundConfig<DBInputProps> = {
 			],
 		},
 		{
-			name: 'invalid-message',
+			name: 'invalidMessage',
 			label: 'Invalid Message',
 			type: 'text',
 			defaultValue: 'Invalid message',
 			dependsOn: { prop: 'validation', value: 'invalid' },
 		},
 		{
-			name: 'valid-message',
+			name: 'validMessage',
 			label: 'Valid Message',
 			type: 'text',
 			defaultValue: 'Valid message',
