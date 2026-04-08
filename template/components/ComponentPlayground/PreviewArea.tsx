@@ -4,16 +4,11 @@ const PreviewArea = ({ config, currentProps, onPropChange }: PreviewAreaProps) =
 	const componentProps: Record<string, any> = {};
 
 	if (config.render) {
-		for (const property of config.properties) {
-			const propName = property.name;
-
-			const value = currentProps[propName];
+		// Include values from defaultProps that aren't covered by properties
+		for (const [key, value] of Object.entries(currentProps)) {
 			if (value === undefined) continue;
-
-			// Skip empty strings — they add unwanted empty data-* attributes
 			if (value === '') continue;
-
-			componentProps[propName] = value;
+			componentProps[key] = value;
 		}
 	}
 

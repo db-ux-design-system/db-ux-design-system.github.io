@@ -10,6 +10,8 @@ status: 'beta'
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
@@ -40,7 +42,9 @@ Stack arranges child elements in a vertical or horizontal layout with consistent
 
 <DBSection spacing="small" width="auto">
 
-## Usage Hints
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
 
 ### Gap
 
@@ -92,6 +96,10 @@ Enable wrap for stacks that should adapt to smaller screens.
 		description="Don't use “No Wrap” when there's a risk of overflowing and the content should be easily accessible."
 	/>
 </div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
 
 </DBSection>
 

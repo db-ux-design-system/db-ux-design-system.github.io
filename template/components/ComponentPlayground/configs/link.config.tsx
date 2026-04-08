@@ -59,7 +59,7 @@ export const linkConfig: PlaygroundConfig<DBLinkProps> = {
 			name: 'showIcon',
 			type: 'checkbox',
 			label: 'Show Icon',
-			defaultValue: false,
+			defaultValue: true,
 			dependsOn: { prop: 'variant', notValue: 'inline' },
 		},
 	],

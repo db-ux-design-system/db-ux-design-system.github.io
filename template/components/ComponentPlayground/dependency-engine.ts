@@ -1,4 +1,4 @@
-import type { PlaygroundConfig, PropertyConfig } from './types';
+import type { DependsOnCondition, PlaygroundConfig, PropertyConfig } from './types';
 
 /**
  * Evaluates whether a property should be visible based on its `visibleWhen` condition
@@ -12,17 +12,33 @@ export function evaluateVisibility(
 ): boolean {
 	// Check inline dependsOn on the property itself
 	if (property.dependsOn !== undefined) {
-		const directResult = evaluateDependsOn(property.dependsOn, currentProps);
-		if (!directResult) return false;
-
-		// Transitive check: if dependsOn references another property by name,
-		// also check if that property itself is visible
-		const depPropName =
-			typeof property.dependsOn === 'string' ? property.dependsOn : property.dependsOn.prop;
-		const depProperty = config.properties.find((p) => p.name === depPropName);
-		if (depProperty?.dependsOn !== undefined) {
-			return evaluateDependsOn(depProperty.dependsOn, currentProps);
+		// Array = OR logic: visible if ANY condition is met
+		if (Array.isArray(property.dependsOn)) {
+			return property.dependsOn.some((condition) =>
+				evaluateSingleDependency(condition, currentProps, config),
+			);
 		}
+
+		return evaluateSingleDependency(property.dependsOn, currentProps, config);
+	}
+
+	return true;
+}
+
+function evaluateSingleDependency(
+	dependsOn: DependsOnCondition,
+	currentProps: Record<string, any>,
+	config: PlaygroundConfig<any>,
+): boolean {
+	const directResult = evaluateDependsOn(dependsOn, currentProps);
+	if (!directResult) return false;
+
+	// Transitive check: if dependsOn references another property by name,
+	// also check if that property itself is visible
+	const depPropName = typeof dependsOn === 'string' ? dependsOn : dependsOn.prop;
+	const depProperty = config.properties.find((p) => p.name === depPropName);
+	if (depProperty?.dependsOn !== undefined && !Array.isArray(depProperty.dependsOn)) {
+		return evaluateDependsOn(depProperty.dependsOn, currentProps);
 	}
 
 	return true;
@@ -35,7 +51,7 @@ export function evaluateVisibility(
  * - { prop, notValue }: prop must NOT equal value
  */
 function evaluateDependsOn(
-	dependsOn: NonNullable<PropertyConfig['dependsOn']>,
+	dependsOn: DependsOnCondition,
 	currentProps: Record<string, any>,
 ): boolean {
 	if (typeof dependsOn === 'string') {
