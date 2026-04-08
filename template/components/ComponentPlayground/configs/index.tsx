@@ -9,16 +9,12 @@ export { checkboxConfig } from './checkbox.config';
 export { customSelectConfig } from './customSelect.config';
 export { dividerConfig } from './divider.config';
 export { drawerConfig } from './drawer.config';
-export { headerConfig } from './header.config';
 export { infotextConfig } from './infotext.config';
 export { inputConfig } from './input.config';
 export { linkConfig } from './link.config';
-export { navigationItemConfig } from './navigation-item.config';
-export { navigationConfig } from './navigation.config';
 export { notificationConfig } from './notification.config';
 export { popoverConfig } from './popover.config';
 export { radioConfig } from './radio.config';
-export { sectionConfig } from './section.config';
 export { selectConfig } from './select.config';
 export { stackConfig } from './stack.config';
 export { switchConfig } from './switch.config';
@@ -35,16 +31,12 @@ import { checkboxConfig } from './checkbox.config';
 import { customSelectConfig } from './customSelect.config';
 import { dividerConfig } from './divider.config';
 import { drawerConfig } from './drawer.config';
-import { headerConfig } from './header.config';
 import { infotextConfig } from './infotext.config';
 import { inputConfig } from './input.config';
 import { linkConfig } from './link.config';
-import { navigationItemConfig } from './navigation-item.config';
-import { navigationConfig } from './navigation.config';
 import { notificationConfig } from './notification.config';
 import { popoverConfig } from './popover.config';
 import { radioConfig } from './radio.config';
-import { sectionConfig } from './section.config';
 import { selectConfig } from './select.config';
 import { stackConfig } from './stack.config';
 import { switchConfig } from './switch.config';
@@ -62,16 +54,12 @@ export const configRegistry: Record<string, PlaygroundConfig<any>> = {
 	customSelect: customSelectConfig,
 	divider: dividerConfig,
 	drawer: drawerConfig,
-	header: headerConfig,
 	infotext: infotextConfig,
 	input: inputConfig,
 	link: linkConfig,
-	navigationItem: navigationItemConfig,
-	navigation: navigationConfig,
 	notification: notificationConfig,
 	popover: popoverConfig,
 	radio: radioConfig,
-	section: sectionConfig,
 	select: selectConfig,
 	stack: stackConfig,
 	switch: switchConfig,

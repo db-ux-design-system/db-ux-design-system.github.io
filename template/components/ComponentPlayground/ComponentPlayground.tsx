@@ -51,7 +51,19 @@ const PlaygroundInner = ({ config }: { config: PlaygroundConfig<any> }) => {
 	);
 
 	const handlePropChange = (name: string, value: any) => {
-		setCurrentProps((prev) => ({ ...prev, [name]: value }));
+		setCurrentProps((prev) => {
+			const next = { ...prev, [name]: value };
+
+			// Mutual exclusion: if this property excludes another, set it to false
+			if (value) {
+				const property = config.properties.find((p) => p.name === name);
+				if (property?.excludes) {
+					next[property.excludes] = false;
+				}
+			}
+
+			return next;
+		});
 	};
 
 	return (

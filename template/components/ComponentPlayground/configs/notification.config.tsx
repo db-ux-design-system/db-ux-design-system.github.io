@@ -15,6 +15,7 @@ export const notificationConfig: PlaygroundConfig<DBNotificationProps & { linkTe
 		semantic: 'adaptive',
 		variant: 'standalone',
 		headline: 'Headline',
+		icon: 'information_circle',
 	},
 	properties: [
 		// Content
@@ -81,12 +82,13 @@ export const notificationConfig: PlaygroundConfig<DBNotificationProps & { linkTe
 				{ value: 'none', label: 'None' },
 			],
 		},
-		{
-			name: 'showIcon',
-			type: 'checkbox',
-			label: 'Show Icon',
-			defaultValue: true,
-		},
+		// TODO: showIcon temporarily disabled — not working correctly in pre-release version 3.0.2-shell4
+		// {
+		// 	name: 'showIcon',
+		// 	type: 'checkbox',
+		// 	label: 'Show Icon',
+		// 	defaultValue: true,
+		// },
 		{
 			name: 'closeable',
 			type: 'checkbox',

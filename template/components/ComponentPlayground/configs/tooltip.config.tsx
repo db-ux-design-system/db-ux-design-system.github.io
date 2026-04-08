@@ -12,7 +12,7 @@ export const tooltipConfig: PlaygroundConfig<DBTooltipProps & { text?: string }>
 		placement: 'top',
 		animation: true,
 		showArrow: true,
-		emphasis: 'strong',
+		emphasis: 'weak',
 		width: 'auto',
 	},
 	properties: [
@@ -40,8 +40,8 @@ export const tooltipConfig: PlaygroundConfig<DBTooltipProps & { text?: string }>
 			type: 'select',
 			defaultValue: 'strong',
 			options: [
-				{ value: 'weak', label: 'Weak' },
-				{ value: 'strong', label: 'Strong', default: true },
+				{ value: 'weak', label: 'Weak', default: true },
+				{ value: 'strong', label: 'Strong' },
 			],
 		},
 		{
