@@ -93,6 +93,9 @@ function compareNav(a: NavigationItem, b: NavigationItem) {
 function sortTree(node: NavigationItem) {
 	if (node.children?.length) {
 		node.children.sort(compareNav);
+		if (node.sortChildrenDescending) {
+			node.children.reverse();
+		}
 		node.children.forEach(sortTree);
 	}
 }
@@ -134,6 +137,7 @@ export function buildAppNavigationFromContent(): AppNavigation {
 		const disabled = fm.isMenuItemDisabled === true;
 		const order = getOrder(fm);
 		const status = fm.status;
+		const sortChildrenDescending = fm.sortChildrenDescending === true;
 
 		const node: NavigationItem = {
 			title,
@@ -144,6 +148,7 @@ export function buildAppNavigationFromContent(): AppNavigation {
 			disabled,
 			order,
 			status,
+			sortChildrenDescending,
 		};
 
 		// If a placeholder node already exists (created as intermediate directory),
@@ -157,6 +162,7 @@ export function buildAppNavigationFromContent(): AppNavigation {
 			existing.disabled = disabled;
 			existing.order = order;
 			existing.status = status;
+			existing.sortChildrenDescending = sortChildrenDescending;
 		} else {
 			nodes.set(rel, node);
 		}

@@ -1,0 +1,290 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'v1.0.0'
+headline: 'Migration to v1.0.0'
+description: 'The update to v1.0.0 introduces the first stable components, prepares additional components for stable status, and includes fundamental changes to content. This applies to both Foundation and Components.'
+align: start
+order: 0
+toc: true
+---
+
+import { DBSection, DBNotification } from '@db-ux/react-core-components';
+import StatusNotification from '@template/components/StatusNotification/StatusNotification';
+import YourAction from '@template/components/YourAction/YourAction';
+import FeedbackTeaser from '@template/components/FeedbackTeaser/FeedbackTeaser';
+
+<DBSection spacing="small" width="auto">
+
+## 💻 Development Release
+
+Please refer to the notes on [GitHub](https://github.com/db-ux-design-system/core-web/releases/tag/v1.0.0).
+
+## 🎨 Design Release
+
+The following migration guide primarily focuses on **Figma**. Some changes will be incorporated into Sketch where possible and practical (especially property alignment).
+The Sketch library update to v1.0.0 will follow.
+
+## GitHub Renaming
+
+Everything related to the DB UX Design System v3 has now been correctly renamed on GitHub:
+
+- From https://github.com/db-ui/design-feedback to https://github.com/db-ux-design-system/core
+- From https://github.com/db-ui/mono to https://github.com/db-ux-design-system/core-web
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## 🚀 From Beta to Stable!
+
+The following components receive "Stable" status with the v1.0.0 release, having completed the full component creation process including all tests for usability and accessibility.
+
+<StatusNotification status="stable" variant="long" />
+
+- Badge
+- Button
+- Checkbox
+- Drawer
+- Infotext
+- Input
+- Link
+- Notification
+- Radio
+- Select
+- Textarea
+
+</DBSection>
+
+<img
+	src="/assets/migration-guides/v1/migration-stable-components.png"
+	alt="Stable Components"
+	style={{ maxWidth: '100%' }}
+/>
+
+<DBSection spacing="small" width="auto">
+
+## Components: Bugfixes (Figma)
+
+The following bugfixes require special attention. All other resolved bugs can be found in the issue teaser at the bottom of the page.
+
+### Radio, Input and Textarea
+
+- The deprecated variants (❌ marked in pink) have been removed.
+
+</DBSection>
+<YourAction
+	actions={['Replace any remaining placed variants that were removed with the v1.0.0 release.']}
+/>
+<DBSection spacing="small" width="auto">
+
+## Components: Property Alignment
+
+### General
+
+The property alignment between design and code, started with v0.6.0, has been continued for additional components.
+
+- **Affected components:**
+  - Accordion
+  - Card
+  - Divider
+  - Navigation
+  - Popover
+  - Section
+  - Switch
+  - Tag
+  - Tooltip
+
+- **Consistency and new properties:**
+  All sub-components within a parent component have been unified.
+
+- **New development properties (💻)**
+  Properties introduced for development are marked with 💻 (e.g. Prefix, Component, No Text, Children, Placement).
+
+- **Design-specific properties (🎨)**
+  Properties relevant only to design are marked with 🎨.
+
+- **New variants and booleans:**
+  - **Disabled property (true/false):** Introduced as a dedicated variant, Interaction State = None
+  - **Readonly property (true/false):** Introduced as a dedicated variant, Interaction State = None
+  - **true/false** for various properties that indicate a state
+
+- **Improved accessibility:**
+  - **Text property for screen readers:** Components without visible text (e.g. Icon Button, Icon Tag, Badge without text) now include a hidden text property for screen readers.
+
+- **Minor property name adjustments**, e.g.:
+  - "Width: Auto Width/Full Width" → "Width: Auto/Full" (e.g. Button)
+  - "🎨 xxx" → "Show xxx" (various components)
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+### Components
+
+- **Popover**
+  - In addition to Auto Width, there is now a variant for Fixed Width behavior with a maximum width
+  - An additional spacing has been added (lg)
+
+- **Section**
+  - Existing widths have been renamed to t-shirt sizes and supplemented with a Small variant
+  - Size has been renamed to Spacing and supplemented with a None variant
+
+- **Tag**
+  - The additional **Emphasis "Origin" has been added.**
+    It enables accessible use of the tag with a more vibrant color level from the color palette.
+
+    <img
+    	src="/assets/migration-guides/v1/migration-tag-origin.png"
+    	alt="Tag Emphasis Origin"
+    	style={{ maxWidth: '100%' }}
+    />
+
+  - The **colors and color logic** across the different tag variants have been **adjusted and unified.** Thank you for your feedback on this! (see Rework Foundation → Color Variables)
+
+    <img
+    	src="/assets/migration-guides/v1/migration-tag-colors.png"
+    	alt="Tag Colors"
+    	style={{ maxWidth: '100%' }}
+    />
+
+  - A **slot has been added** to the content area of the tag to allow more flexible integration of custom content. **Please refer to the documentation for correct usage!**
+
+    <img
+    	src="/assets/migration-guides/v1/migration-tag-slot.png"
+    	alt="Tag Slot Content"
+    	style={{ maxWidth: '100%' }}
+    />
+
+  - The **Interactive variant** of the tag has been **structurally and content-wise reworked:** - **Split of the Interactive Tag into two variants** based on behavior: - **Interactive Toggle** (formerly Interactive): this variant represents the tag's behavior as Checkbox or Radio, displaying the states "Not selected" (checked = false) and "Selected" (checked = true) - **Interactive** (new): this variant represents the tag's behavior as Button or Link
+
+            - For **Interactive Toggle**, the two states "Not selected" (checked = false) and "Selected" (checked = true) have been combined for better usability of the component.
+
+            - An (optional) **Checked Status Icon has been added**. It enables better differentiation between the Interactive Toggle Tag and the Static Tag when used in parallel within an application.
+
+    <img
+    	src="/assets/migration-guides/v1/migration-tag-interactive.png"
+    	alt="Tag Interactive Variants"
+    	style={{ maxWidth: '100%' }}
+    />
+
+<YourAction
+	actions={[
+		'Review your layouts and update components that may no longer be correct due to the changes.',
+		'If you are using the Interactive Tag as Button or Link, replace it with the newly created Interactive Tag variant. The previous Interactive Tag variant has been converted to the Interactive Toggle Tag with this update.',
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Rework Foundations
+
+### Variable Modes (Figma)
+
+- Removal of deprecated "Density" modes such as ❌ **Tablet-XXX** and ❌ **Mobile-XXX.**
+- Renaming of "Display Mode" to "Mode"
+
+### Color Variables
+
+- The **selection of brand colors as origin colors** has been reworked and harmonized by choosing not just level 500, but various appropriate gradations. All origin colors have been adjusted to meet **accessibility requirements and component usage**, ensuring a **consistent color appearance of origin and on-origin colors**, particularly through the combination of dark colors on light backgrounds. This achieves a **consistent representation** for all semantic and additional colors and **improves differentiation from brand red.**
+
+<img
+	src="/assets/migration-guides/v1/migration-tag-origin-farben.png"
+	alt="Origin Colors Overview"
+	style={{ maxWidth: '100%' }}
+/>
+
+</DBSection>
+
+<YourAction
+	actions={[
+		'Review your layouts and update any missing settings to the new Variable Modes if you had not yet replaced removed modes.',
+	]}
+/>
+
+<DBSection spacing="small" width="auto">
+
+## Restructure Icon Libraries
+
+- **Merging of the existing functional icon libraries** "Core Icons" and "Extension PV Icons" into a single file for design and development
+  → **DB Theme Icons** including all Core Icons and PV Icons
+
+<img
+	src="/assets/migration-guides/v1/migration-icons.png"
+	alt="Icon Libraries Merge"
+	style={{ maxWidth: '100%' }}
+/>
+
+- ❗ **Note for Figma libraries:** there are icons in the PV Extension Library that are duplicates and already exist under different names in the Core Library (e.g. Ticket/Passenger → Human/Person, Transport/Walking → Transport/Pedestrian). These are now marked as deprecated and must be manually replaced with the corresponding icon from the new library. All marked icons should still be findable under their old name in the merged file. Libraries not included will be migrated and should remain linked.
+
+<img
+	src="/assets/migration-guides/v1/migration-icons-deprecated.png"
+	alt="Deprecated Icons"
+	style={{ maxWidth: '100%' }}
+/>
+
+- The following icons are deprecated and must be replaced:
+  - **Facilities → Human**
+    - Restricted Mobility Toilet, Shower, Shower Men, Shower Women, Sink, WC, WC Men, WC Sign, WC Women
+  - **Features**
+    - Medical → Medial/Medical Cross
+    - No Smoking → Human/Cigarette Disabled
+    - Person with Blind Cane, Person with Rollator → Accessibility/Person with Blind Cane, Accessibility/Person with Rollator
+    - Power Socket → Technology/Power Socket
+    - Restaurant → Food/Knife & Fork
+    - Stroller → Human/Stroller
+    - Support Dog → Accessibility/Support Dog
+  - **Journey**
+    - Journey Destination → Map/Map Pin
+  - **Seat → Compartment**
+    - Handicapped → Accessibility/Person with Wheelchair
+    - Infant Compartment → Human/Toys
+  - **Station → Buildings**
+    - Train Station, Market
+  - **Sustainability → Environment**
+    - Environmental Mobility Check → Environmental/Leaf
+  - **Ticket:**
+    - Best Price → Social/Crown
+    - Passenger, Passengers → Human/Person, Persons
+    - QR Code, QR Code Scan → Technology/QR Code, QR Code Scan
+    - Travel Insurance → Security/Shield Check
+  - **Transportation → Transportation** (exceptions: S-Bahn, Subway)
+    - Airplane
+    - Bicycle → Bike
+    - Bicycle Trailer → Bike Trailer
+    - Car
+    - Electric Car
+    - Electric Scooter
+    - Speedboat → Boat
+    - Handcart
+    - ICE → Train
+    - Local Bus → Bus
+    - S-Bahn → Logos/S-Bahn
+    - Scooter
+    - Subway → Logos/Subway
+    - Taxi
+    - Train and Car
+    - Walking → Pedestrian
+
+- The deprecated PV Icon Library will be deactivated with the next release v1.1.0.
+
+<YourAction
+	actions={[
+		'Review your layouts and replace any icons marked as deprecated from the PV Icon Library with the corresponding icons from the new DB Theme Icons file.',
+	]}
+/>
+
+</DBSection>
+
+<FeedbackTeaser
+	releases={[
+		{
+			title: 'Design + Code Issues v1.0.0',
+			description: 'All information about the latest Design System release on GitHub.',
+			url: 'https://github.com/orgs/db-ux-design-system/projects/4/views/12?filterQuery=has%3Amilestone+-label%3A%F0%9F%96%BC%EF%B8%8Ficons+milestone%3A%221.0.0+%28Stable+Release%29%22',
+		},
+	]}
+/>

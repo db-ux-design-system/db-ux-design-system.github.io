@@ -3,9 +3,207 @@ layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
 title: 'v3.0.0'
-headline: 'Migration Guide v3.0.0'
-description: 'Guide for migrating from v2 to v3.0.0 of the DB UX Design System.'
+headline: 'Migration to v3.0.0'
+description: 'The update to v3.0.0 introduces the Button with Trailing Icon, design bugfixes for Accordion and Navigation, and aligned ARIA properties for development.'
 align: start
 order: 2
 toc: true
 ---
+
+import { DBSection } from '@db-ux/react-core-components';
+import YourAction from '@template/components/YourAction/YourAction';
+import FeedbackTeaser from '@template/components/FeedbackTeaser/FeedbackTeaser';
+
+<DBSection spacing="small" width="auto">
+
+## 💻 Development Release
+
+Please refer to the notes on [GitHub](https://github.com/db-ux-design-system/core-web/releases/tag/v3.0.0).
+
+## 🎨 Design Release
+
+This release only applies to the Figma library.
+Sketch is deprecated and will no longer receive new features.
+
+**All issues included in this release are linked at the bottom of the page.**
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Components: Features
+
+### Button
+
+- The Button has been extended with a **Trailing Icon**.
+- Adjustment of Icon Properties (**no breaking change** in Figma)
+
+<img
+	src="/assets/migration-guides/v3/button-trailing-icon.png"
+	alt="Button Trailing Icon"
+	style={{ maxWidth: '100%' }}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Components: Bugfixes (Figma)
+
+The following fixes require special attention. An overview of all other resolved bugs can be found in the **Issue Teaser** at the bottom of the page.
+
+### Accordion
+
+- **The Accordion Item List behavior has been corrected:** Previously, the item list in the Accordion was implemented using a central helper component with slots. This caused errors due to a Figma bug when using the Accordion component. With this update, the item list is now implemented directly within the Accordion component with the Accordion Items.
+
+<img
+	src="/assets/migration-guides/v3/accordion-bug.png"
+	alt="Accordion Bug"
+	style={{ maxWidth: '100%' }}
+/>
+
+<img
+	src="/assets/migration-guides/v3/accordion-list.png"
+	alt="Accordion Item List as Subcomponent"
+	style={{ maxWidth: '100%' }}
+/>
+
+- Optimization of prototyping behavior.
+
+<YourAction
+	actions={[
+		'Review your deployed Navigation components.',
+		'Layout corrections: Adjust layouts if Accordion List changes cause issues with deployed Accordions.',
+	]}
+/>
+
+**❓ How do I identify the reworked component?**
+
+Switch to the second level of the component. If the right sidebar shows ".Slot 🟪 Vertical" or ".Slot 🟪 Horizontal", you are using the outdated component.
+
+<img
+	src="/assets/migration-guides/v3/accordion-slot.png"
+	alt="Outdated Accordion with Slot List"
+	style={{ maxWidth: '100%' }}
+/>
+
+**❓ How do I update an already deployed Accordion to the latest variant?**
+
+Switch to the first level of the component and reset it.
+
+⚠️ **Note:** Due to the **Breaking Changes**, you will unfortunately need to redo your settings and re-insert all content.
+
+<img
+	src="/assets/migration-guides/v3/accordion-reset.png"
+	alt="Reset Accordion Component"
+	style={{ maxWidth: '100%' }}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+### Navigation
+
+- **The Navigation Item List behavior has been corrected:** Previously, the item list in the Navigation was implemented using a central helper component with slots. This caused errors due to a Figma bug when using the Navigation component. With this update, the item list is now implemented directly within the Navigation component with the Navigation Items.
+
+<img
+	src="/assets/migration-guides/v3/navigation-bug.png"
+	alt="Navigation Bug"
+	style={{ maxWidth: '100%' }}
+/>
+
+<img
+	src="/assets/migration-guides/v3/navigation-list.png"
+	alt="Navigation Item List as Subcomponent"
+	style={{ maxWidth: '100%' }}
+/>
+
+<YourAction
+	actions={[
+		'Review your deployed components.',
+		'Layout corrections: Adjust layouts if Navigation List changes cause issues with deployed Navigations.',
+	]}
+/>
+
+**❓ How do I identify the reworked Navigation component?**
+
+Switch to the second level of the component. If the right sidebar shows ".Slot 🟪 Vertical" or ".Slot 🟪 Horizontal", you are using the outdated component.
+
+<img
+	src="/assets/migration-guides/v3/navigation-slot.png"
+	alt="Outdated Navigation with Slot List"
+	style={{ maxWidth: '100%' }}
+/>
+
+**❓ How do I update an already deployed Navigation to the latest variant?**
+
+Switch to the first level of the component and reset it.
+
+⚠️ **Note:** Due to the **Breaking Changes**, you will unfortunately need to redo your settings and re-insert all content.
+
+<img
+	src="/assets/migration-guides/v3/navigation-reset.png"
+	alt="Reset Navigation Component"
+	style={{ maxWidth: '100%' }}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+### Helper Component Slot List
+
+- Due to the Figma bug when using the Slot List, it will be **removed from the library**. If you have used the helper component in your own components, we strongly recommend implementing the solutions described above for the Accordion and Navigation components in your own components as well.
+
+<YourAction
+	actions={[
+		'Check if you have used the removed helper components ".Slot 🟪 Vertical" or ".Slot 🟪 Horizontal" in your components and replace them with a local list subcomponent.',
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## DB Theme Icons: Bugfixes
+
+- **Update** of Ear disabled (unification of the disabled stroke) and Electric Car (alignment with other Electric icons)
+- **Renaming of Capacity Indicator Booked** to **Capacity Indicator Fully Booked**
+- **Removal** of Capacity Indicator Booked Solid after deprecated marking in the previous version
+
+<img
+	src="/assets/migration-guides/v3/icons-functional.png"
+	alt="Functional Icons Changes"
+	style={{ maxWidth: '100%' }}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## DB Theme Illustrative Icons: Bugfixes
+
+- **Correction of swapped icons in Figma** "Car - Car Side View" and "Electric Car - Electric Scooter"
+- **Correction of names:**
+  - Children Traveling Alone → Ticket Children Traveling Alone
+  - Children Traveling With → Ticket Children Traveling With
+  - Ticket/Information → Ticket/Mobileticket Information (Figma)
+
+<img
+	src="/assets/migration-guides/v3/icons-illustrative.png"
+	alt="Illustrative Icons Changes"
+	style={{ maxWidth: '100%' }}
+/>
+
+</DBSection>
+
+<FeedbackTeaser
+	releases={[
+		{
+			title: 'Design + Code Issues v3.0.0',
+			description: 'All information about the latest Design System release on GitHub.',
+			url: 'https://github.com/orgs/db-ux-design-system/projects/4/views/12?filterQuery=has%3Amilestone+-label%3A%F0%9F%96%BC%EF%B8%8Ficons+milestone%3A3.0.0',
+		},
+	]}
+/>

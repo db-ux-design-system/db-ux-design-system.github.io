@@ -3,9 +3,172 @@ layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
 title: 'v2.0.0'
-headline: 'Migration Guide v2.0.0'
-description: 'Guide for migrating from v1 to v2.0.0 of the DB UX Design System.'
+headline: 'Migration to v2.0.0'
+description: 'The update to v2.0.0 introduces the long-awaited Custom Select component as well as fundamental changes to Foundation and Components.'
 align: start
 order: 1
 toc: true
 ---
+
+import { DBSection } from '@db-ux/react-core-components';
+import StatusNotification from '@template/components/StatusNotification/StatusNotification';
+import YourAction from '@template/components/YourAction/YourAction';
+import FeedbackTeaser from '@template/components/FeedbackTeaser/FeedbackTeaser';
+
+<DBSection spacing="small" width="auto">
+
+## 💻 Development Release
+
+Please refer to the notes on [GitHub](https://github.com/db-ux-design-system/core-web/releases/tag/v2.0.0).
+
+## 🎨 Design Release
+
+This release only applies to the Figma library.
+Sketch is deprecated and will no longer receive new features.
+
+**All issues included in this release are linked at the bottom of the page.**
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## New Beta Components
+
+With the v2.0.0 release, the following components receive "Beta" status. These components have passed the required tests for usability and accessibility.
+
+- Refer to the **respective documentation and usage guidelines in Figma**, especially when using the **Custom Select** component.
+
+<StatusNotification status="beta" variant="long" />
+
+- [Backdrop](/documentation/components/backdrop)
+- [Custom Select](/documentation/components/custom-select)
+
+<img
+	src="/assets/migration-guides/v2/beta-components.png"
+	alt="Custom Select Component"
+	style={{ maxWidth: '100%' }}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Rework Foundation
+
+### Typography (Typo Tokens / Styles)
+
+- **Unified font for code and design:** Replacing the previous fonts (DB Screen Sans in code / DB Screen Flex in Figma) with **DB Neo Screen Sans** and **DB Neo Head** in the provided typo tokens.
+- **Italic added:** Introduction of an _italic_ style for the body token.
+- ‼️ Note: the **DB Neo Screen Flex** font will be **removed from Figma by end of 2025**. Replace it in time to prevent future issues.
+
+<img
+	src="/assets/migration-guides/v2/typo.png"
+	alt="Typography Overview"
+	style={{ maxWidth: '100%' }}
+/>
+
+### Color Variables
+
+- **New color class:** Introduction of **vibrant** for more vivid color usage.
+
+<img
+	src="/assets/migration-guides/v2/colors-vibrant.png"
+	alt="Vibrant Colors"
+	style={{ maxWidth: '100%' }}
+/>
+
+- **Optimized dark color levels:** Improvements in darker shades for clearer gradations.
+- **Dark Mode optimized:** Improved consistency and harmony compared to Light Mode.
+
+<img
+	src="/assets/migration-guides/v2/colors-steps-backgrounds.png"
+	alt="Color Steps and Backgrounds"
+	style={{ maxWidth: '100%' }}
+/>
+
+- **Interactive Tokens:** Reworked for clearer differences between **default**, **hovered** and **pressed** states.
+
+<img
+	src="/assets/migration-guides/v2/colors-interactive-colors.png"
+	alt="Interactive Colors"
+	style={{ maxWidth: '100%' }}
+/>
+
+- **Removal of On-Origin colors:** The interactive colors ❌ **on-origin-hovered** and ❌ **on-origin-pressed** are removed as they do not ensure sufficient accessibility across the system.
+
+<YourAction
+	actions={[
+		'Replace any Origin Tokens you have used with the new Vibrant Tokens.',
+		'Note: Vibrant Tokens may have insufficient contrast in some cases. For custom usage outside of Core Components, ensure sufficient contrast independently.',
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Components: Bugfixes (Figma)
+
+The following fixes require special attention. An overview of all other resolved bugs can be found in the **Issue Teaser** at the bottom of the page.
+
+### Badge
+
+- **Emphasis Strong optimization:** Using **vibrant** instead of **contrast-high** as background color for a more vivid badge appearance.
+
+<img
+	src="/assets/migration-guides/v2/migration-badge-colors.png"
+	alt="Badge Colors"
+	style={{ maxWidth: '100%' }}
+/>
+
+### Tag
+
+- **Removal of Emphasis Origin:** This variant is being removed.
+- **Emphasis Strong optimization:** Using **vibrant** instead of **contrast-high** as background color for a more vivid tag appearance.
+- **Transition phase for design:**
+  - Removed variants are initially marked as **deprecated** ❌ to allow gradual replacement.
+- **Deletion with v2.1.0:** The complete removal of the Origin emphasis will happen with the next minor release.
+
+<img
+	src="/assets/migration-guides/v2/migration-tag-colors.png"
+	alt="Tag Colors"
+	style={{ maxWidth: '100%' }}
+/>
+
+### Form Fields (Input, Select, Textarea)
+
+- **Unified min-width:** Consistent minimum widths for all **data input components**.
+- Input specifications:
+  - No icon: **db-sizing-lg**
+  - 1 icon: **db-sizing-xl**
+  - 2 icons: **db-sizing-2xl**
+- Select specifications:
+  - No icon: **db-sizing-xl**
+  - 1 icon: **db-sizing-2xl**
+- Textarea: **db-sizing-lg**
+
+<img
+	src="/assets/migration-guides/v2/migration-data-input.png"
+	alt="Data Input Min Widths"
+	style={{ maxWidth: '100%' }}
+/>
+
+<YourAction
+	actions={[
+		'Review all layouts: Update layouts to fix any incompatibilities caused by the changes.',
+		'Perform replacements: Use the Emphasis Strong variant instead of Emphasis Origin in Tag where needed.',
+		'Layout corrections: Adjust layouts if min-width changes in Inputs or Textareas cause issues.',
+	]}
+/>
+
+</DBSection>
+
+<FeedbackTeaser
+	releases={[
+		{
+			title: 'Design + Code Issues v2.0.0',
+			description: 'All information about the latest Design System release on GitHub.',
+			url: 'https://github.com/orgs/db-ux-design-system/projects/4/views/12?filterQuery=has%3Amilestone+-label%3A%F0%9F%96%BC%EF%B8%8Ficons+milestone%3A2.0.0',
+		},
+	]}
+/>
