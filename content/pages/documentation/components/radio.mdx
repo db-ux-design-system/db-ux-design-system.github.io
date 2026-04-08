@@ -114,40 +114,6 @@ Prefer vertical stacking for readability and accessibility. Use horizontal layou
 	/>
 </div>
 
-### Set and communicate a sensible default
-
-If a safe default exists, preselect it to reduce effort. If no default is appropriate, start with no selection and validate on submit as needed.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1118&embed-host=share"
-		description="Preselect the most common/safest option when it does not create risk."
-	/>
-	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1119&embed-host=share"
-		description="Preselect an option that implies consent or a high-impact choice without user intent."
-	/>
-</div>
-
-### Accessibility and screenreader text
-
-Every radio must have an accessible name, and the group should have a clear group label. If the visible label is hidden, provide screenreader label text. Ensure keyboard navigation works as expected within the group.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1122&embed-host=share"
-		description="Provide a group label, support arrow-key navigation, and include screenreader text when labels are visually hidden."
-	/>
-	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1123&embed-host=share"
-		description="Ship radios without a group label or rely on visual context only."
-	/>
-</div>
-
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />

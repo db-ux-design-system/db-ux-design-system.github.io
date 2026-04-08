@@ -10,6 +10,8 @@ toc: true
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
@@ -40,7 +42,9 @@ Divider is a thin horizontal or vertical line that separates UI elements into lo
 
 <DBSection spacing="small" width="auto">
 
-## Usage Hints
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
 
 ### Emphasis
 
@@ -92,6 +96,10 @@ Align dividers to the content container and grid. Avoid partial or "floating" di
 		description="Don't use arbitrary divider lengths or misaligned dividers that don't follow the layout grid."
 	/>
 </div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
 
 </DBSection>
 

@@ -10,6 +10,8 @@ toc: true
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
@@ -40,7 +42,9 @@ Cards group related content into a contained surface to improve scanning and cre
 
 <DBSection spacing="small" width="auto">
 
-## Usage Hints
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
 
 ### Grouping
 
@@ -126,6 +130,10 @@ If the card is interactive, it must be keyboard reachable and expose correct sem
 		description="Don't make the entire card clickable while also placing multiple nested links/buttons that compete for clicks."
 	/>
 </div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
 
 </DBSection>
 

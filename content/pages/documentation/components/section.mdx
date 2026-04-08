@@ -10,6 +10,8 @@ toc: true
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
@@ -31,7 +33,9 @@ Section separates and structures content areas on a page by applying consistent 
 
 <DBSection spacing="small" width="auto">
 
-## Usage Hints
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
 
 ### Structuring
 
@@ -70,6 +74,10 @@ Try to choose the spacing and width options as consistent as possible and suitab
 ### Accessibility
 
 Section is a layout tool, not a semantic substitute. Ensure content inside is properly structured with headings and landmarks when appropriate (e.g., meaningful heading levels, ARIA landmarks only when needed).
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
 
 </DBSection>
 
