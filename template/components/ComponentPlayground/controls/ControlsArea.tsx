@@ -4,11 +4,14 @@ import SelectControl from './SelectControl';
 import TextControl from './TextControl';
 import CheckboxControl from './CheckboxControl';
 
-function resolveLabel(property: PropertyConfig, currentProps: Record<string, any>): PropertyConfig {
-	if (typeof property.label === 'function') {
-		return { ...property, label: property.label(currentProps) };
-	}
-	return property;
+function resolveLabel(
+	property: PropertyConfig,
+	currentProps: Record<string, any>,
+): Omit<PropertyConfig, 'label'> & { label: string } {
+	return {
+		...property,
+		label: typeof property.label === 'function' ? property.label(currentProps) : property.label,
+	};
 }
 
 const ControlsArea = ({ config, currentProps, onPropChange }: ControlsAreaProps) => {
