@@ -22,7 +22,7 @@ const { label, disabled = true, emphasis, size = 'medium', ariaLabel } = Astro.p
 			<div class="disabled-wrapper-overlay" aria-label={ariaLabel || label}>
 				<DBBadge
 					size={size}
-					semantic="informational"
+					semantic="warning"
 					emphasis={emphasis === 'default' ? undefined : emphasis}
 				>
 					{label}
