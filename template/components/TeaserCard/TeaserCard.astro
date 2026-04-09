@@ -24,45 +24,41 @@ const { teasers } = Astro.props;
 			const Component = teaser.component ? (DBComponents as any)[teaser.component] : null;
 			const isLink = teaser.component === 'DBLink';
 			const isDisabled = teaser.disabled === true;
-			const card = (
-				<DBCard behavior={!isDisabled && !!teaser.url ? 'interactive' : undefined} spacing="none">
-					<div class="teaser-wrapper">
-						<div class="teaser-content">
-							<h2 class="teaser-title">
-								{!isDisabled && teaser.url ? (
-									<a class="teaser-title-link" href={teaser.url}>
-										{teaser.title}
-									</a>
-								) : (
-									teaser.title
-								)}
-							</h2>
-							<p class="teaser-description">{teaser.description}</p>
-						</div>
-						{Component && (
-							<div class="teaser-preview">
-								{isLink ? (
-									<Component
-										href="#"
-										wrap={false}
-										onclick="event.preventDefault(); event.stopPropagation();"
-									>
-										{teaser.title}
-									</Component>
-								) : (
-									<Component>{teaser.title}</Component>
-								)}
-							</div>
-						)}
+			const cardContent = (
+				<div class="teaser-wrapper">
+					<div class="teaser-content">
+						<h2 class="teaser-title">{teaser.title}</h2>
+						<p class="teaser-description">{teaser.description}</p>
 					</div>
-				</DBCard>
+					{Component && (
+						<div class="teaser-preview">
+							{isLink ? (
+								<Component
+									href="#"
+									wrap={false}
+									onclick="event.preventDefault(); event.stopPropagation();"
+								>
+									{teaser.title}
+								</Component>
+							) : (
+								<Component>{teaser.title}</Component>
+							)}
+						</div>
+					)}
+				</div>
 			);
 			return isDisabled ? (
 				<DisabledWrapper label="Coming Soon" size="small">
-					{card}
+					<DBCard spacing="none">{cardContent}</DBCard>
 				</DisabledWrapper>
+			) : teaser.url ? (
+				<a href={teaser.url} class="teaser-card-link">
+					<DBCard behavior="interactive" spacing="none">
+						{cardContent}
+					</DBCard>
+				</a>
 			) : (
-				card
+				<DBCard spacing="none">{cardContent}</DBCard>
 			);
 		})
 	}
