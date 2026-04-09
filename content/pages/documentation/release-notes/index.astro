@@ -103,7 +103,13 @@ function getRoadmapUrl(category: string, version: string): string | null {
 							<h2 id={note.slug} class="release-note-version">
 								{note.heading}
 							</h2>
-							<time class="release-note-date">{note.date.toLocaleDateString()}</time>
+							<time class="release-note-date">
+								{note.date.toLocaleDateString('de-DE', {
+									day: '2-digit',
+									month: '2-digit',
+									year: 'numeric',
+								})}
+							</time>
 						</DBStack>
 
 						<note.Content />
