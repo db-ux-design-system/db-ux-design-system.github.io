@@ -5,6 +5,6 @@ version: 'v3.0.0'
 date: '2025-12-08'
 ---
 
-**Features für Design:**
+### Features Design
 
-- fix: Korrektur vertauschter Icons (Pork, Pork and Beef, Pork and Poultry)
+- fix: Corrected swapped icons (Pork, Pork and Beef, Pork and Poultry)
