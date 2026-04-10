@@ -10,7 +10,7 @@ order: 7
 toc: true
 ---
 
-import { DBSection, DBNotification } from '@db-ux/react-core-components';
+import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import CardTeaserRow from '@template/components/CardTeaser/CardTeaserRow';
 
@@ -89,100 +89,103 @@ A Patch release contains **bug fixes or very small improvements** with no impact
 	<tbody>
 		<tr>
 			<td>
-				<a
-					href="https://teams.microsoft.com/l/channel/19%3A7dd9929be1fe494c823b11e0e2d22341%40thread.skype/DB%20UX%20Design%20System?groupId=72c53609-2941-46dd-8be9-e4d1d2c45c77&tenantId=a1a72d9c-49e6-4f6d-9af6-5aafa1183bfd"
+			<DBLink href="https://teams.microsoft.com/l/channel/19%3A7dd9929be1fe494c823b11e0e2d22341%40thread.skype/DB%20UX%20Design%20System?groupId=72c53609-2941-46dd-8be9-e4d1d2c45c77&tenantId=a1a72d9c-49e6-4f6d-9af6-5aafa1183bfd"
 					target="_blank"
 					rel="noopener noreferrer"
-				>
-					Teams: DB UX Design System
-				</a>
-			</td>
-			<td>
-				<span data-icon="check" />
-			</td>
-			<td>
-				<span data-icon="check" />
-			</td>
-			<td></td>
-			<td>Announcements, monthly roundup</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="/documentation/releases/release-notes">Website (Release Notes)</a>
-			</td>
-			<td>
-				<span data-icon="check" />
-			</td>
-			<td>
-				<span data-icon="check" />
-			</td>
-			<td></td>
-			<td>Detailed changelog</td>
-		</tr>
-		<tr>
-			<td>
-				<a
-					href="https://github.com/orgs/db-ux-design-system/projects/4/views/12"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					GitHub (Roadmap)
-				</a>
-			</td>
-			<td>
-				<span data-icon="check" />
-			</td>
-			<td>
-				<span data-icon="check" />
-			</td>
-			<td>
-				<span data-icon="check" />
-			</td>
-			<td>Upcoming scope & planning</td>
-		</tr>
-		<tr>
-			<td>
-				<a
-					href="https://github.com/db-ux-design-system/core/milestones?state=closed"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					GitHub (Design Releases)
-				</a>
-			</td>
-			<td>
-				<span data-icon="check" />
-			</td>
-			<td>
-				<span data-icon="check" />
-			</td>
-			<td>
-				<span data-icon="check" />
-			</td>
-			<td>Design release history</td>
-		</tr>
-		<tr>
-			<td>
-				<a
-					href="https://github.com/db-ux-design-system/core-web/milestones?state=closed"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					GitHub (Dev Releases)
-				</a>
-			</td>
-			<td>
-				<span data-icon="check" />
-			</td>
-			<td>
-				<span data-icon="check" />
-			</td>
-			<td>
-				<span data-icon="check" />
-			</td>
-			<td>Dev release history</td>
-		</tr>
-	</tbody>
+					content="external"
+					text="Teams-Channel"/>
+
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td></td>
+    		<td>Announcements, monthly roundup</td>
+    	</tr>
+    	<tr>
+    		<td>
+    			<DBLink href="/documentation/releases/release-notes" text="Release Notes" />
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td></td>
+    		<td>Detailed changelog</td>
+    	</tr>
+    	<tr>
+    		<td>
+    			<DBLink
+    				href="https://github.com/orgs/db-ux-design-system/projects/4/views/12"
+    				target="_blank"
+    				rel="noopener noreferrer"
+    			text="GitHub (Roadmap)"
+    			content="external"
+    				/>
+
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td>Upcoming scope & planning</td>
+    	</tr>
+    	<tr>
+    		<td>
+    			<DBLink
+    				href="https://github.com/db-ux-design-system/core/milestones?state=closed"
+    				target="_blank"
+    				rel="noopener noreferrer"
+
+    				text="GitHub (Design Releases)"
+    				content="external"
+    			/>
+    			Figma version history
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td>Design release history</td>
+    	</tr>
+    	<tr>
+    		<td>
+    			<DBLink
+    				href="https://github.com/db-ux-design-system/core-web/milestones?state=closed"
+    				target="_blank"
+    				rel="noopener noreferrer"
+    				text="GitHub (Dev Releases)"
+    				content="external"
+    			/>
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td>Dev release history</td>
+    	</tr>
+    </tbody>
+
 </table>
 </DBSection>
 <DBSection spacing="small" width="auto">
