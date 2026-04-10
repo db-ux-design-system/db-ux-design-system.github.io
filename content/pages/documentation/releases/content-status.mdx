@@ -8,6 +8,7 @@ description: 'What Concept, Beta, Stable, Legacy, and Deprecated mean in the DB 
 align: start
 order: 6
 toc: true
+tocMaxDepth: 3
 ---
 
 import { DBSection, DBCard, DBBadge, DBStack } from '@db-ux/react-core-components';
@@ -52,7 +53,7 @@ Early visual and functional approaches for new content. At this stage, initial d
 You can use Concept content as a **design reference** for your own implementation. However, be prepared to **incorporate future changes** once the content matures. Design is always available; a development implementation **may not yet exist** and typically joins in the Beta phase.
 
 <DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }} data-color="warning">
-### What to expect
+#### What to expect
 
 - **Design available**, development implementation may follow later
 - **No stability guarantees** — API, design, and accessibility are not yet validated and may change at any time
@@ -68,7 +69,7 @@ Content is **functional and largely stable**, but minor visual or functional cha
 We recommend **testing Beta content thoroughly** in your projects and sharing feedback to help improve quality and reliability.
 
 <DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }} data-color="informational">
-### What to expect
+#### What to expect
 
 - **Aligned between Design and Development**
 - Suitable for project use, but **minor breaking changes are still possible**
@@ -84,7 +85,7 @@ Content is considered **mature and reliable** — accessible, brand-compliant, a
 We **continuously update and improve** Stable content to ensure it meets user needs and current standards.
 
 <DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }} data-color="successful">
-### What to expect
+#### What to expect
 
 - **Fully validated** for accessibility, cross-browser, and cross-framework compatibility
 - **Complete documentation**, usage guidelines, and design specs
@@ -98,7 +99,7 @@ We **continuously update and improve** Stable content to ensure it meets user ne
 Content is **outdated and no longer actively developed**. Only limited support in the form of **critical bug fixes** is provided. We recommend **migrating to current Design System content**.
 
 <DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }}data-color="critical">
-### What to expect
+#### What to expect
 
 - **No new features** or improvements
 - Only **critical bug fixes**
@@ -111,7 +112,7 @@ Content is **outdated and no longer actively developed**. Only limited support i
 Content is **marked for removal** and will be **fully removed in a future Major release**. In Design, deprecated content is visually marked first, giving you **time to migrate** before it is removed.
 
 <DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }}elevationLevel='2'>
-### What to expect
+#### What to expect
 
 - **Content will be removed** — plan your migration
 - **No bug fixes** or maintenance

@@ -37,6 +37,13 @@ h3 {
 	margin-block: 0;
 }
 
+h4,
+h5,
+h6 {
+	font: var(--db-type-headline-3xs);
+	margin-block: 0;
+}
+
 .db-card:has(iframe) {
 	overflow: hidden;
 }
