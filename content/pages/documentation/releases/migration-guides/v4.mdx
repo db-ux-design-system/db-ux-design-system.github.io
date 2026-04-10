@@ -1,0 +1,129 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'v4.0.0'
+headline: 'Migration to v4.0.0'
+description: 'The update to v4.0.0 introduces new Switch variants, removes the Emphasis property, and fixes a breaking change in the Notification component.'
+align: start
+order: 3
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import YourAction from '@template/components/YourAction/YourAction';
+import CardTeaserRow from "@template/components/CardTeaser/CardTeaserRow";
+
+<DBSection spacing="small" width="auto">
+
+## 💻 Development Release
+
+Please refer to the notes on [GitHub](https://github.com/db-ux-design-system/core-web/releases/tag/v4.0.0).
+
+## 🎨 Design Release
+
+This release only applies to the Figma library.
+Sketch is deprecated and will no longer receive new features.
+
+**All issues included in this release are linked at the bottom of the page.**
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Components
+
+### Switch
+
+- **Removal of the "Emphasis" property (Breaking Change)**
+  The "Emphasis" property is being removed as it can cause visual conflicts with the "Validation" property. **The default variant "Weak" remains, the Strong variant is marked as deprecated and will be removed from the system.**
+  In Figma, affected deprecated components are recognizable by a pink background and marked with **"❌ Switch → Strong [...] (Deprecated)"** in the name. **These components will be fully removed with the update on November 24, 2025.**
+
+<img
+	src="/assets/migration-guides/v4/switch-emphasis-fix.png"
+	alt="Switch Emphasis Fix"
+	style={{ maxWidth: '100%' }}
+/>
+
+<YourAction
+	actions={[
+		'Review your deployed Switch components.',
+		'Correction: Ensure all deprecated variants of Emphasis "Strong" (pink background) are replaced with the default variant.',
+	]}
+/>
+- The **"Validation"** property is now available for all states. You can directly map and use the
+statuses "No Validation" (default), "Invalid" and "Valid" as variants.
+
+<img
+	src="/assets/migration-guides/v4/switch-validation.png"
+	alt="Switch Validation"
+	style={{ maxWidth: '100%' }}
+/>
+
+- The new **"Label Position"** property supplements the existing Trailing Label (default) with the "Leading Label" variant.
+
+<img
+	src="/assets/migration-guides/v4/switch-label-leading.png"
+	alt="Switch Label Position"
+	style={{ maxWidth: '100%' }}
+/>
+
+- With the new **"Show Message"** property, it is now possible to display a helper message even for No Validation variants. This allows you to show helpful hints independent of the validation status.
+
+<img
+	src="/assets/migration-guides/v4/switch-show-message.png"
+	alt="Switch Show Message"
+	style={{ maxWidth: '100%' }}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+### Notification (Figma/breaking change)
+
+To ensure visual consistency between Figma and development, the "Show Headline" property is now represented as a **dedicated variant**. As a result, when updating the component, the headline will also appear in variants that previously had the headline hidden. It must be hidden again after the update.
+With this update, the behavior in design and development becomes identical.
+
+<img
+	src="/assets/migration-guides/v4/notification-headline.png"
+	alt="Notification Headline Change"
+	style={{ maxWidth: '100%' }}
+/>
+
+<img
+	src="/assets/migration-guides/v4/notification-headline-fix.png"
+	alt="Notification Headline Fix"
+	style={{ maxWidth: '100%' }}
+/>
+
+<YourAction
+	actions={[
+		'Review your deployed Notification components.',
+		'Correction: If you use the variant without headline, make sure the headline is hidden again in the updated component.',
+	]}
+/>
+</DBSection>
+<DBSection spacing="small" width="auto">
+
+<CardTeaserRow
+	items={[
+		{
+			title: 'Design + Code Issues v4.0.0',
+			description: 'All information about the latest Design System release on GitHub.',
+			url: 'https://github.com/orgs/db-ux-design-system/projects/4/views/12?filterQuery=has%3Amilestone+-label%3A%F0%9F%96%BC%EF%B8%8Ficons+milestone%3A4.0.0',
+			image: '/assets/teasers/github.png',
+			imageAlt: 'GitHub',
+			label: 'View on GitHub', external: true,
+		},
+		{
+			title: 'Feedback Welcome',
+			description: 'Let us know if you encounter unexpected issues or need support.',
+			url: '/documentation/contribution',
+			image: '/assets/teasers/feedback.png',
+			imageAlt: 'Contribution',
+			label: 'Get in touch',
+		},
+	]}
+/>
+</DBSection>

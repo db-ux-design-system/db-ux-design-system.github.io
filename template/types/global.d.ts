@@ -72,6 +72,16 @@ declare interface FrontMatter {
 	status?: 'concept' | 'beta' | 'stable' | 'deprecated' | 'legacy';
 
 	align?: 'start' | 'center' | 'end';
+
+	/**
+	 * Sort order for navigation items. Lower numbers appear first.
+	 */
+	order?: number;
+
+	/**
+	 * Sort children in descending order (e.g. for version lists).
+	 */
+	sortChildrenDescending?: boolean;
 }
 
 declare type DocumentationFrontMatter = {
@@ -126,6 +136,11 @@ declare interface NavigationItem {
 	 * Set a badge inside sub-navigation
 	 */
 	status?: 'concept' | 'beta' | 'stable' | 'deprecated' | 'legacy';
+
+	/**
+	 * If true, children will be sorted in descending order (e.g. for version lists).
+	 */
+	sortChildrenDescending?: boolean;
 }
 
 /**

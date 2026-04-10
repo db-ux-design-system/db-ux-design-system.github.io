@@ -93,6 +93,9 @@ function compareNav(a: NavigationItem, b: NavigationItem) {
 function sortTree(node: NavigationItem) {
 	if (node.children?.length) {
 		node.children.sort(compareNav);
+		if (node.sortChildrenDescending) {
+			node.children.reverse();
+		}
 		node.children.forEach(sortTree);
 	}
 }
@@ -120,7 +123,8 @@ export function buildAppNavigationFromContent(): AppNavigation {
 	for (const [key, mod] of Object.entries(mods)) {
 		const rel = strip(key);
 		const segments = rel.split('/').filter(Boolean);
-		const fm: NavigationFrontmatter = mod.frontmatter ?? ({} as NavigationFrontmatter);
+		const fm: NavigationFrontmatter =
+			mod.frontmatter ?? (mod as any)?.default?.frontmatter ?? ({} as NavigationFrontmatter);
 
 		if (rel === '') continue;
 		if (fm.nav === false) continue;
@@ -133,6 +137,7 @@ export function buildAppNavigationFromContent(): AppNavigation {
 		const disabled = fm.isMenuItemDisabled === true;
 		const order = getOrder(fm);
 		const status = fm.status;
+		const sortChildrenDescending = fm.sortChildrenDescending === true;
 
 		const node: NavigationItem = {
 			title,
@@ -143,9 +148,24 @@ export function buildAppNavigationFromContent(): AppNavigation {
 			disabled,
 			order,
 			status,
+			sortChildrenDescending,
 		};
 
-		nodes.set(rel, node);
+		// If a placeholder node already exists (created as intermediate directory),
+		// merge the file's metadata into it instead of replacing it
+		const existing = nodes.get(rel);
+		if (existing) {
+			existing.title = title;
+			existing.path = hidePage ? undefined : rel;
+			existing.isSubNavigation = isSubNavigation;
+			existing.iconTrailing = iconTrailing;
+			existing.disabled = disabled;
+			existing.order = order;
+			existing.status = status;
+			existing.sortChildrenDescending = sortChildrenDescending;
+		} else {
+			nodes.set(rel, node);
+		}
 
 		for (let i = 1; i < segments.length; i++) {
 			const parentKey = segments.slice(0, i).join('/');
