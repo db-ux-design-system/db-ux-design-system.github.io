@@ -38,9 +38,11 @@ type StatusType = keyof typeof statusConfig;
 const StatusNotification = ({
 	status,
 	variant = 'short',
+	showLink = true,
 }: {
 	status: StatusType;
 	variant?: 'short' | 'long';
+	showLink?: boolean;
 }) => {
 	const config = statusConfig[status];
 	return (
@@ -48,8 +50,8 @@ const StatusNotification = ({
 			semantic={config.semantic}
 			headline={config.headline}
 			variant="standalone"
-			linkVariant="block"
-			link={<a href="/documentation/releases/content-status">Learn more</a>}
+			linkVariant={showLink ? 'block' : undefined}
+			link={showLink ? <a href="/documentation/releases/content-status">Learn more</a> : undefined}
 		>
 			{variant === 'short' ? config.short : config.long}
 		</DBNotification>

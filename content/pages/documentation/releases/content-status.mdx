@@ -4,8 +4,144 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 title: 'Content Status'
 headline: 'Content Status'
-description: 'Overview of the current status of all components, foundations, and patterns in the DB UX Design System.'
+description: 'What Concept, Beta, Stable, Legacy, and Deprecated mean in the DB UX Design System and what to expect from each status.'
 align: start
 order: 6
 toc: true
 ---
+
+import { DBSection, DBCard, DBBadge, DBStack } from '@db-ux/react-core-components';
+import StatusNotification from '@template/components/StatusNotification/StatusNotification';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<DBSection spacing="small" width="auto">
+
+Every component, pattern, and template in the DB UX Design System has a status that tells you how mature and reliable it is — from early explorations to production-ready standards.
+
+<div style={{ display: 'grid', gridTemplateColumns: 'auto auto', columnGap: 'var(--db-spacing-fixed-lg)', rowGap: 'var(--db-spacing-fixed-xs)', width: 'fit-content' }}>
+
+<DBCard data-density="expressive" style={{ width: 'fit-content' }} spacing="large">
+	<DBStack direction="row" gap="small" alignment="center">
+		<DBBadge semantic="warning">Concept</DBBadge>
+		<span data-icon="arrow_right" />
+		<DBBadge semantic="informational">Beta</DBBadge>
+		<span data-icon="arrow_right" />
+		<DBBadge semantic="successful">Stable</DBBadge>
+	</DBStack>
+</DBCard>
+
+<DBCard data-density="expressive" style={{ width: 'fit-content' }} spacing="large">
+	<DBStack direction="row" gap="small" alignment="center">
+		<DBBadge semantic="critical">Legacy</DBBadge>
+		<DBBadge>Deprecated</DBBadge>
+	</DBStack>
+</DBCard>
+
+<small>Active development lifecycle.</small>
+<small>Superseded or being removed.</small>
+
+</div>
+
+</DBSection>
+<DBSection spacing="small" width="auto">
+
+## Concept
+
+Early visual and functional approaches for new content. At this stage, initial directions are being defined but **nothing is final**. Designs and implementations may **change substantially** as ideas are tested and refined.
+
+You can use Concept content as a **design reference** for your own implementation. However, be prepared to **incorporate future changes** once the content matures. Design is always available; a development implementation **may not yet exist** and typically joins in the Beta phase.
+
+<DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }} data-color="warning">
+### What to expect
+
+- **Design available**, development implementation may follow later
+- **No stability guarantees** — API, design, and accessibility are not yet validated and may change at any time
+- **Limited documentation** and usage guidelines
+- **Plan for rework** as the content matures toward Beta and Stable
+
+</DBCard>
+
+## Beta
+
+Content is **functional and largely stable**, but minor visual or functional changes may still occur. Design and Development have been **aligned**, and the content has undergone **initial user testing** — it addresses a **validated user need**.
+
+We recommend **testing Beta content thoroughly** in your projects and sharing feedback to help improve quality and reliability.
+
+<DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }} data-color="informational">
+### What to expect
+
+- **Aligned between Design and Development**
+- Suitable for project use, but **minor breaking changes are still possible**
+- Documentation and usage guidelines are available but may be incomplete
+- Accessibility and cross-browser testing is **underway but not fully validated**
+
+</DBCard>
+
+## Stable
+
+Content is considered **mature and reliable** — accessible, brand-compliant, and Design System conformant. Stable content is **mandatory to use** as the UX standard.
+
+We **continuously update and improve** Stable content to ensure it meets user needs and current standards.
+
+<DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }} data-color="successful">
+### What to expect
+
+- **Fully validated** for accessibility, cross-browser, and cross-framework compatibility
+- **Complete documentation**, usage guidelines, and design specs
+- **API stability** — breaking changes only happen in Major releases
+- **Ongoing maintenance** and regular improvements
+
+</DBCard>
+
+## Legacy
+
+Content is **outdated and no longer actively developed**. Only limited support in the form of **critical bug fixes** is provided. We recommend **migrating to current Design System content**.
+
+<DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }}data-color="critical">
+### What to expect
+
+- **No new features** or improvements
+- Only **critical bug fixes**
+- A **recommended alternative** is available in the Design System
+
+</DBCard>
+
+## Deprecated
+
+Content is **marked for removal** and will be **fully removed in a future Major release**. In Design, deprecated content is visually marked first, giving you **time to migrate** before it is removed.
+
+<DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }}elevationLevel='2'>
+### What to expect
+
+- **Content will be removed** — plan your migration
+- **No bug fixes** or maintenance
+- A **sufficient transition period** is provided before removal in a Major release
+
+</DBCard>
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Components',
+			description: 'Browse all components grouped by status: Stable, Beta, and Concept.',
+			url: '/documentation/components',
+		},
+		{
+			title: 'Versioning & Releases',
+			description: 'How we version and release updates across Design and Development.',
+			url: '/documentation/releases/versioning',
+		},
+		{
+			title: 'Contribution',
+			description: 'Share feedback, report issues, or contribute to the Design System.',
+			url: '/documentation/contribution',
+		},
+	]}
+/>
+
+</DBSection>
