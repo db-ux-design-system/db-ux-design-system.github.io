@@ -4,20 +4,37 @@ import { IconOption } from '@components/ComponentPlayground/configs/_icon.option
 
 export const buttonConfig: PlaygroundConfig<DBButtonProps> = {
 	render: (props) => {
-		if (props.noText) {
-			const text = props.text;
-			props.showIcon = true;
-			props.showIconLeading = true;
-			props.text = undefined;
+		const {
+			noText,
+			showIconLeading,
+			showIconTrailing,
+			text,
+			iconLeading,
+			iconTrailing,
+			width,
+			...rest
+		} = props;
+
+		if (noText) {
 			return (
-				<DBButton type="button" {...props}>
+				<DBButton type="button" noText iconLeading={iconLeading} {...rest}>
 					{text}
 					<DBTooltip>{text}</DBTooltip>
 				</DBButton>
 			);
 		}
 
-		return <DBButton type="button" text={props.text} {...props} />;
+		return (
+			// eslint-disable-next-line db-ux/button-single-icon-attribute
+			<DBButton
+				type="button"
+				text={text}
+				width={width}
+				iconLeading={showIconLeading ? iconLeading : undefined}
+				iconTrailing={showIconTrailing ? iconTrailing : undefined}
+				{...rest}
+			/>
+		);
 	},
 	defaultProps: {
 		size: 'medium',
@@ -65,9 +82,8 @@ export const buttonConfig: PlaygroundConfig<DBButtonProps> = {
 		{
 			name: 'iconLeading',
 			...IconOption,
-			label: 'Icon Leading',
-
-			dependsOn: 'showIconLeading',
+			label: (currentProps) => (currentProps.noText ? 'Icon' : 'Icon Leading'),
+			dependsOn: ['noText', 'showIconLeading'],
 		},
 		{
 			name: 'iconTrailing',
@@ -75,12 +91,6 @@ export const buttonConfig: PlaygroundConfig<DBButtonProps> = {
 			label: 'Icon Trailing',
 
 			dependsOn: 'showIconTrailing',
-		},
-		{
-			name: 'icon',
-			...IconOption,
-			label: 'Icon',
-			dependsOn: 'noText',
 		},
 		{
 			name: 'noText',
@@ -107,6 +117,6 @@ export const buttonConfig: PlaygroundConfig<DBButtonProps> = {
 			type: 'checkbox',
 			label: 'Disabled',
 			defaultValue: false,
-		}
+		},
 	],
 };

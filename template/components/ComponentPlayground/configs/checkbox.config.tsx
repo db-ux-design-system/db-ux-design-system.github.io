@@ -2,13 +2,22 @@ import type { PlaygroundConfig } from '../types';
 import { DBCheckbox, type DBCheckboxProps } from '@db-ux/react-core-components';
 
 export const checkboxConfig: PlaygroundConfig<DBCheckboxProps> = {
-	render: (props, onPropChange) => (
-		<DBCheckbox
-			{...props}
-			label={props.label}
-			onChange={(event) => onPropChange?.('checked', event.target.checked)}
-		/>
-	),
+	render: (props, onPropChange) => {
+		const { validation, ...rest } = props;
+		return (
+			<DBCheckbox
+				{...rest}
+				validation={validation !== 'no-validation' ? validation : undefined}
+				label={props.label}
+				onChange={(event) => {
+					onPropChange?.('checked', event.target.checked);
+					if (event.target.checked) {
+						onPropChange?.('indeterminate', false);
+					}
+				}}
+			/>
+		);
+	},
 	defaultProps: {
 		checked: false,
 	},
@@ -39,12 +48,14 @@ export const checkboxConfig: PlaygroundConfig<DBCheckboxProps> = {
 			label: 'Checked',
 			type: 'checkbox',
 			defaultValue: false,
+			excludes: 'indeterminate',
 		},
 		{
 			name: 'indeterminate',
 			label: 'Indeterminate',
 			type: 'checkbox',
 			defaultValue: false,
+			excludes: 'checked',
 		},
 		{
 			name: 'disabled',
@@ -69,14 +80,14 @@ export const checkboxConfig: PlaygroundConfig<DBCheckboxProps> = {
 			],
 		},
 		{
-			name: 'invalid-message',
+			name: 'invalidMessage',
 			label: 'Invalid Message',
 			type: 'text',
 			defaultValue: 'Invalid message',
 			dependsOn: { prop: 'validation', value: 'invalid' },
 		},
 		{
-			name: 'valid-message',
+			name: 'validMessage',
 			label: 'Valid Message',
 			type: 'text',
 			defaultValue: 'Valid message',

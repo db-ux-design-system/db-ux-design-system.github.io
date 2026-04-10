@@ -43,17 +43,17 @@ export const customSelectConfig: PlaygroundConfig<DBCustomSelectProps> = {
 			type: 'text',
 			defaultValue: 'Placeholder',
 		},
-		{
-			name: 'validation',
-			label: 'Validation',
-			type: 'select',
-			defaultValue: 'no-validation',
-			options: [
-				{ value: 'invalid', label: 'Invalid' },
-				{ value: 'valid', label: 'Valid' },
-				{ value: 'no-validation', label: 'No Validation', default: true },
-			],
-		},
+		// {
+		// 	name: 'validation',
+		// 	label: 'Validation',
+		// 	type: 'select',
+		// 	defaultValue: 'no-validation',
+		// 	options: [
+		// 		{ value: 'invalid', label: 'Invalid' },
+		// 		{ value: 'valid', label: 'Valid' },
+		// 		{ value: 'no-validation', label: 'No Validation', default: true },
+		// 	],
+		// },
 		{
 			name: 'disabled',
 			label: 'Disabled',

@@ -19,10 +19,35 @@ export const tagConfig: PlaygroundConfig<
 		}
 
 		if (childrenType === 'checkbox' || childrenType === 'radio') {
+			if (childrenType === 'radio') {
+				return (
+					<div style={{ display: 'flex', gap: 'var(--db-spacing-fixed-xs)' }}>
+						<DBTag {...rest}>
+							<label htmlFor="tag-radio-1">
+								<input
+									disabled={disabled}
+									id="tag-radio-1"
+									name="tag-radio-group"
+									type="radio"
+									defaultChecked
+								/>
+								{text} 1
+							</label>
+						</DBTag>
+						<DBTag {...rest}>
+							<label htmlFor="tag-radio-2">
+								<input disabled={disabled} id="tag-radio-2" name="tag-radio-group" type="radio" />
+								{text} 2
+							</label>
+						</DBTag>
+					</div>
+				);
+			}
+
 			return (
 				<DBTag {...rest}>
 					<label htmlFor="tag-checkbox">
-						<input disabled={disabled} id="tag-checkbox" type={childrenType} />
+						<input disabled={disabled} id="tag-checkbox" type="checkbox" />
 						{text}
 					</label>
 				</DBTag>

@@ -31,7 +31,8 @@ const MDX_DIR = join(ROOT, 'content', 'pages', 'documentation', 'components');
 const CACHE_DIR = join(ROOT, 'static', 'assets', 'figma-cache');
 const MANIFEST_PATH = join(ROOT, 'static', 'assets', 'figma-cache', 'manifest.json');
 
-loadEnvFile(join(ROOT, '.env'));
+const envPath = join(ROOT, '.env');
+if (existsSync(envPath)) loadEnvFile(envPath);
 const FIGMA_TOKEN = process.env.FIGMA_TOKEN;
 
 if (!FIGMA_TOKEN) {
