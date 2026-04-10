@@ -2,10 +2,211 @@
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
-title: 'Versioning'
-headline: 'Versioning'
-description: 'Learn how the DB UX Design System handles versioning across its packages and libraries.'
+title: 'Versioning & Releases'
+headline: 'Versioning & Releases'
+description: 'How the DB UX Design System uses Semantic Versioning to communicate the nature and scope of changes across Design and Development.'
 align: start
 order: 7
 toc: true
 ---
+
+import { DBSection, DBNotification } from '@db-ux/react-core-components';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import CardTeaserRow from '@template/components/CardTeaser/CardTeaserRow';
+
+<img
+	src="/assets/documentation/releases/release-types.png"
+	alt="Semantic Versioning overview: v1.2.3 — Major (breaking changes), Minor (new features, backward-compatible), Patch (bug fixes, no API changes)"
+	style={{ maxWidth: '100%' }}
+/>
+<DBSection spacing="small" width="auto">
+The DB UX Design System follows the principles of **Semantic Versioning** (SemVer): version numbers consist of three segments — `MAJOR.MINOR.PATCH` — and clearly communicate the nature and scope of a change.
+
+</DBSection>
+
+<DBNotification headline="Versioning across Design and Development" variant='standalone' semantic='informational'>
+
+Major and Minor version numbers are kept in sync across Design and Development. Patches are tracked separately. If only one side (Design or Dev) introduces a change, the shared version number is still incremented for both to maintain consistency.
+
+</DBNotification>
+
+<DBSection spacing="small" width="auto">
+
+## Major
+
+A Major release introduces **breaking changes** — changes to the API or Design Library that are not backward-compatible. Consumers should expect to adapt their implementations to the new API.
+
+<DBNotification headline="Cadence" variant='standalone' showIcon={false}>
+
+Major releases follow a planned schedule with at least 2–3 months between releases. The planned scope is announced in advance in the \*\*DB UX Design System Teams channel.
+
+</DBNotification>
+
+**Examples:**
+
+- Overhaul of the color structure or visual identity
+- Renaming of component settings
+- New components that alter existing behavior
+
+## Minor
+
+A Minor release introduces **new features and improvements** without changing the API or existing functionality — fully backward-compatible.
+
+<DBNotification headline="Cadence" variant='standalone' showIcon={false}>
+
+Minor releases align with the team's two-week sprint cycle but may be skipped if no relevant changes are ready. Once a month, a summary post is published in the Teams channel, covering all releases from the preceding weeks.
+
+</DBNotification>
+
+**Examples:**
+
+- Enhancements to existing components
+- New components without breaking changes
+
+## Patch
+
+A Patch release contains **bug fixes or very small improvements** with no impact on the API or functionality. Patches are published outside the regular cadence as needed.
+
+**Examples:**
+
+- A bug fix for a component that has no impact on other features
+
+</DBSection>
+<DBSection spacing="small" width="auto">
+
+## Communication channels
+
+<table>
+	<thead>
+		<tr>
+			<th>Channel</th>
+			<th>Major</th>
+			<th>Minor</th>
+			<th>Patch</th>
+			<th>Content</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<a
+					href="https://teams.microsoft.com/l/channel/19%3A7dd9929be1fe494c823b11e0e2d22341%40thread.skype/DB%20UX%20Design%20System?groupId=72c53609-2941-46dd-8be9-e4d1d2c45c77&tenantId=a1a72d9c-49e6-4f6d-9af6-5aafa1183bfd"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					Teams: DB UX Design System
+				</a>
+			</td>
+			<td>
+				<span data-icon="check" />
+			</td>
+			<td>
+				<span data-icon="check" />
+			</td>
+			<td></td>
+			<td>Announcements, monthly roundup</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="/documentation/releases/release-notes">Website (Release Notes)</a>
+			</td>
+			<td>
+				<span data-icon="check" />
+			</td>
+			<td>
+				<span data-icon="check" />
+			</td>
+			<td></td>
+			<td>Detailed changelog</td>
+		</tr>
+		<tr>
+			<td>
+				<a
+					href="https://github.com/orgs/db-ux-design-system/projects/4/views/12"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					GitHub (Roadmap)
+				</a>
+			</td>
+			<td>
+				<span data-icon="check" />
+			</td>
+			<td>
+				<span data-icon="check" />
+			</td>
+			<td>
+				<span data-icon="check" />
+			</td>
+			<td>Upcoming scope & planning</td>
+		</tr>
+		<tr>
+			<td>
+				<a
+					href="https://github.com/db-ux-design-system/core/milestones?state=closed"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					GitHub (Design Releases)
+				</a>
+			</td>
+			<td>
+				<span data-icon="check" />
+			</td>
+			<td>
+				<span data-icon="check" />
+			</td>
+			<td>
+				<span data-icon="check" />
+			</td>
+			<td>Design release history</td>
+		</tr>
+		<tr>
+			<td>
+				<a
+					href="https://github.com/db-ux-design-system/core-web/milestones?state=closed"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					GitHub (Dev Releases)
+				</a>
+			</td>
+			<td>
+				<span data-icon="check" />
+			</td>
+			<td>
+				<span data-icon="check" />
+			</td>
+			<td>
+				<span data-icon="check" />
+			</td>
+			<td>Dev release history</td>
+		</tr>
+	</tbody>
+</table>
+</DBSection>
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Release Notes',
+			description: 'Detailed changelog for all Major and Minor releases.',
+			url: '/documentation/releases/release-notes',
+		},
+		{
+			title: 'Migration Guides',
+			description: 'Step-by-step instructions for upgrading between Major versions.',
+			url: '/documentation/releases/migration-guides',
+		},
+		{
+			title: 'Contribution',
+			description: 'Get involved, share feedback, and help improve the Design System.',
+			url: '/documentation/contribution',
+		},
+	]}
+/>
+
+</DBSection>
