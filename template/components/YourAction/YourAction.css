@@ -1,7 +1,13 @@
-.your-action p {
-	white-space: pre-line;
-}
-
 .your-action {
 	margin: var(--db-spacing-fixed-xl) 0 var(--db-spacing-fixed-2xl);
 }
+
+.your-action ul {
+	margin: 0;
+	padding-inline-start: var(--db-spacing-fixed-md);
+}
+
+.your-action li + li {
+	margin-block-start: var(--db-spacing-fixed-xs);
+}
+

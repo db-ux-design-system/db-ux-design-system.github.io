@@ -8,8 +8,13 @@ const YourAction = ({ actions }: { actions: string[] }) => {
 			semantic="warning"
 			headline="Your Action"
 			variant="standalone"
-			text={actions.join('\n\n')}
-		/>
+		>
+			<ul>
+				{actions.map((action) => (
+					<li key={action}>{action}</li>
+				))}
+			</ul>
+		</DBNotification>
 	);
 };
 
