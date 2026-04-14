@@ -1,17 +1,7 @@
-import CardTeaser from './CardTeaser';
+import CardTeaser, { type CardTeaserProps } from './CardTeaser';
 import './CardTeaserRow.css';
 
-interface TeaserItem {
-	title: string;
-	description: string;
-	url: string;
-	image: string;
-	imageAlt: string;
-	label: string;
-	external?: boolean;
-}
-
-const CardTeaserRow = ({ items }: { items: TeaserItem[] }) => {
+const CardTeaserRow = ({ items }: { items: CardTeaserProps[] }) => {
 	return (
 		<div className="card-teaser-row">
 			{items.map((item) => (

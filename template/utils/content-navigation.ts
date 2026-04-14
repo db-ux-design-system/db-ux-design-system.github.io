@@ -7,7 +7,10 @@ type NavigationFrontmatter = FrontMatter & {
 	nav?: boolean | { order?: number };
 };
 
-type MdModule = { frontmatter: NavigationFrontmatter };
+type MdModule = {
+	frontmatter?: NavigationFrontmatter;
+	default?: { frontmatter?: NavigationFrontmatter };
+};
 type Modules = Record<string, MdModule>;
 
 /**
@@ -124,7 +127,7 @@ export function buildAppNavigationFromContent(): AppNavigation {
 		const rel = strip(key);
 		const segments = rel.split('/').filter(Boolean);
 		const fm: NavigationFrontmatter =
-			mod.frontmatter ?? (mod as any)?.default?.frontmatter ?? ({} as NavigationFrontmatter);
+			mod.frontmatter ?? mod.default?.frontmatter ?? ({} as NavigationFrontmatter);
 
 		if (rel === '') continue;
 		if (fm.nav === false) continue;

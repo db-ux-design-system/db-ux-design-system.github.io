@@ -1,6 +1,6 @@
 import { DBCard } from '@db-ux/react-core-components';
 
-interface CardTeaserProps {
+export interface CardTeaserProps {
 	title: string;
 	description: string;
 	url: string;
