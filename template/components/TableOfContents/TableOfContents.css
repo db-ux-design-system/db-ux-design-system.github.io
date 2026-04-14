@@ -100,10 +100,11 @@
 }
 
 .dba-toc-heading a {
-	display: inline-flex;
+	display: flex;
 	align-items: center;
 	gap: var(--db-spacing-fixed-2xs);
 	flex: 1;
+	min-inline-size: 0;
 	min-block-size: var(--db-sizing-md);
 	padding: var(--db-spacing-fixed-2xs) var(--db-spacing-fixed-2xs) var(--db-spacing-fixed-2xs)
 		var(--db-spacing-fixed-sm);
@@ -111,6 +112,12 @@
 	font: inherit;
 	color: inherit;
 	text-decoration: none;
+	overflow-wrap: break-word;
+	word-break: break-all;
+}
+
+.dba-toc-heading:has(.dba-toc-toggle) a {
+	padding-inline-end: var(--db-sizing-sm);
 }
 
 .dba-toc-toggle {
