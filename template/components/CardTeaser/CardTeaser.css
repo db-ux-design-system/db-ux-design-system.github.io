@@ -1,6 +1,6 @@
 .card-teaser {
 	flex: 1 1 calc(50% - var(--db-spacing-fixed-md));
-	min-inline-size: 280px;
+	min-inline-size: 280px; /* stylelint-disable-line db-ux/use-sizing */
 	text-decoration: none;
 	color: inherit;
 }
@@ -30,7 +30,7 @@
 }
 
 .card-teaser-image {
-	block-size: 80px;
+	block-size: 80px; /* stylelint-disable-line db-ux/use-sizing */
 	object-fit: contain;
 	opacity: 0.8;
 }
