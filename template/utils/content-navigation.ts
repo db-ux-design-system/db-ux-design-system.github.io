@@ -95,10 +95,9 @@ function compareNav(a: NavigationItem, b: NavigationItem) {
  */
 function sortTree(node: NavigationItem) {
 	if (node.children?.length) {
-		node.children.sort(compareNav);
-		if (node.sortChildrenDescending) {
-			node.children.reverse();
-		}
+		node.children.sort((a, b) =>
+			node.sortChildrenDescending ? compareNav(b, a) : compareNav(a, b),
+		);
 		node.children.forEach(sortTree);
 	}
 }
