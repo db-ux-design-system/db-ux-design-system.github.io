@@ -101,6 +101,7 @@ export function TableOfContents(props: Props): ReactElement | null {
 									<DBButton
 										className="dba-toc-toggle"
 										variant="ghost"
+										size="small"
 										noText
 										icon={expandedH2s.has(slug) ? 'chevron_up' : 'chevron_down'}
 										onClick={() => toggleH2(slug)}

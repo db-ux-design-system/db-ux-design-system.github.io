@@ -7,6 +7,9 @@
 @import url('../components/TableOfContents/TableOfContents.css');
 @import url('./table.css');
 @import url('../components/GuidelineExample/GuidelineExample.css');
+@import url('../components/YourAction/YourAction.css');
+@import url('../components/CardTeaser/CardTeaser.css');
+@import url('../components/CardTeaser/CardTeaserRow.css');
 @import url('./db-ux-overrides.css');
 
 :root {
@@ -32,6 +35,13 @@ html {
 
 h3 {
 	font: var(--db-type-headline-2xs);
+	margin-block: 0;
+}
+
+h4,
+h5,
+h6 {
+	font: var(--db-type-headline-3xs);
 	margin-block: 0;
 }
 
