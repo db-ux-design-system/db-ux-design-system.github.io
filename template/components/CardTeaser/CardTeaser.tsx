@@ -1,4 +1,5 @@
 import { DBCard } from '@db-ux/react-core-components';
+import './CardTeaser.css';
 
 export interface CardTeaserProps {
 	title: string;
@@ -23,25 +24,16 @@ const CardTeaser = ({
 		<a
 			href={url}
 			{...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-			style={{
-				flex: '1 1 calc(50% - var(--db-spacing-fixed-md))',
-				minInlineSize: '280px',
-				textDecoration: 'none',
-				color: 'inherit',
-			}}
+			className="card-teaser"
 		>
 			<DBCard behavior="interactive" spacing="medium">
-				<div style={{ display: 'flex', alignItems: 'center', gap: 'var(--db-spacing-fixed-md)' }}>
-					<div style={{ flex: 1 }}>
-						<strong style={{ display: 'block', marginBlockEnd: 'var(--db-spacing-fixed-xs)' }}>
-							{title}
-						</strong>
-						<span style={{ color: 'var(--db-adaptive-on-bg-basic-emphasis-70-default)' }}>
-							{description}
-						</span>
+				<div className="card-teaser-content">
+					<div className="card-teaser-body">
+						<strong className="card-teaser-title">{title}</strong>
+						<span className="card-teaser-description">{description}</span>
 						<strong
+							className="card-teaser-label"
 							data-icon-trailing={external ? 'arrow_up_right' : 'arrow_right'}
-							style={{ display: 'block', marginBlockStart: 'var(--db-spacing-fixed-sm)' }}
 						>
 							{label}
 						</strong>
@@ -49,7 +41,7 @@ const CardTeaser = ({
 					<img
 						src={image}
 						alt={imageAlt}
-						style={{ blockSize: '80px', objectFit: 'contain', opacity: 0.8 }}
+						className="card-teaser-image"
 						loading="lazy"
 					/>
 				</div>

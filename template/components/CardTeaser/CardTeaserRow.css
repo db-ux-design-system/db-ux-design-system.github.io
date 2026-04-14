@@ -4,10 +4,10 @@
 	gap: var(--db-spacing-fixed-md);
 }
 
-.card-teaser-row > a {
+.card-teaser-row > .card-teaser {
 	display: flex;
 }
 
-.card-teaser-row > a > .db-card {
+.card-teaser-row > .card-teaser > .db-card {
 	inline-size: 100%;
 }
