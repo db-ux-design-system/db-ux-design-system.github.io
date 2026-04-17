@@ -1,0 +1,186 @@
+---
+import DocumentationLayout from '@template/layouts/documentation';
+import { DBTag, DBStack, DBCheckbox, DBDivider } from '@db-ux/react-core-components';
+import './index.css';
+import type { MarkdownInstance } from 'astro';
+type ReleaseNote = {
+	slug: string;
+	heading: string;
+	category: string;
+	version: string;
+	date: Date;
+	Content: MarkdownInstance<any>['Content'];
+};
+
+export const frontmatter = {
+	order: 0,
+	layout: '@template/layouts/documentation',
+	headline: 'Release Notes',
+	title: 'Release Notes',
+	description:
+		'Stay up to date with the latest changes, improvements, fixes, and new features across the design system.',
+	align: 'start' as const,
+	toc: true,
+};
+const releaseNoteFiles = import.meta.glob<MarkdownInstance<any>>('./_content/*.md', {
+	eager: true,
+});
+const releaseNotes: ReleaseNote[] = Object.values(releaseNoteFiles)
+	.map(({ frontmatter, Content }) => {
+		const heading = `${frontmatter.category} – ${frontmatter.version}`;
+		const slug = heading
+			.normalize('NFD')
+			.replace(/[\u0300-\u036f]/g, '')
+			.toLowerCase()
+			.replace(/[^a-z0-9]+/g, '-')
+			.replace(/^-|-$/g, '');
+		return {
+			slug,
+			heading,
+			category: frontmatter.category,
+			date: new Date(frontmatter.date),
+			Content,
+			version: frontmatter.version,
+		} as ReleaseNote;
+	})
+	.sort((a: ReleaseNote, b: ReleaseNote) => b.date.getTime() - a.date.getTime());
+
+const categoryOrder = ['Core', '🧪 Core Lab', 'DB Theme Icons', 'DB Theme Illustrative Icons'];
+const categoriesFromData = Array.from(new Set(releaseNotes.map((note) => note.category)));
+const categories = [
+	...categoryOrder.filter((cat) => categoriesFromData.includes(cat)),
+	...categoriesFromData.filter((cat) => !categoryOrder.includes(cat)),
+];
+
+function getRoadmapUrl(category: string, version: string): string | null {
+	const v = version.replace(/^v/, '');
+	let baseUrl: string;
+	let filterQuery: string;
+
+	switch (category) {
+		case 'Core':
+			baseUrl = 'https://github.com/orgs/db-ux-design-system/projects/4/views/12';
+			filterQuery = `has:milestone -label:🖼️icons milestone:${v}`;
+			break;
+		case 'DB Theme Icons':
+			baseUrl = 'https://github.com/orgs/db-ux-design-system/projects/4/views/15';
+			filterQuery = `has:milestone label:🖼️icons,🚅DBTheme milestone:"${v} (functional icons)"`;
+			break;
+		case 'DB Theme Illustrative Icons':
+			baseUrl = 'https://github.com/orgs/db-ux-design-system/projects/4/views/15';
+			filterQuery = `has:milestone label:🖼️icons,🚅DBTheme milestone:"${v} (illustrative icons)"`;
+			break;
+		default:
+			return null;
+	}
+
+	const params = new URLSearchParams({ filterQuery });
+	return `${baseUrl}?${params.toString()}`;
+}
+---
+
+<DocumentationLayout
+	frontmatter={frontmatter}
+	headings={releaseNotes.map(({ heading, slug }) => ({ text: heading, depth: 2, slug }))}
+>
+	<DBStack>
+		<DBStack id="filter-tags" direction="row" alignment="center" wrap="true" role="group">
+			<small>Filter:</small>
+			{
+				categories.map((cat) => (
+					<DBTag data-category={cat} client:load showCheckState={false}>
+						<DBCheckbox>{cat}</DBCheckbox>
+					</DBTag>
+				))
+			}
+		</DBStack>
+		{
+			releaseNotes.map((note) => {
+				const roadmapUrl = getRoadmapUrl(note.category, note.version);
+				return (
+					<article class="release-note" data-category={note.category}>
+						<DBStack direction="row" justifyContent="space-between" alignment="center">
+							<h2 id={note.slug} class="release-note-version">
+								{note.heading}
+							</h2>
+							<time class="release-note-date">
+								{note.date.toLocaleDateString('de-DE', {
+									day: '2-digit',
+									month: '2-digit',
+									year: 'numeric',
+								})}
+							</time>
+						</DBStack>
+
+						<note.Content />
+						{roadmapUrl && (
+							<a
+								href={roadmapUrl}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="db-link roadmap-link"
+								data-content="external"
+							>
+								View on Roadmap
+							</a>
+						)}
+						<DBDivider />
+					</article>
+				);
+			})
+		}
+	</DBStack>
+</DocumentationLayout>
+
+<script is:inline slot="script">
+	(function () {
+		var filterContainer;
+		var filterTags;
+		var releaseNotes;
+		var tocHeadingNotes;
+
+		function ensureCached() {
+			if (filterContainer) return;
+			filterContainer = document.getElementById('filter-tags');
+			if (!filterContainer) return;
+			filterTags = filterContainer.querySelectorAll('[data-category]');
+			releaseNotes = document.querySelectorAll('.release-note');
+			tocHeadingNotes = document.querySelectorAll('.dba-toc-heading');
+		}
+
+		document.addEventListener(
+			'change',
+			function (event) {
+				const checkbox = event.target;
+				if (!checkbox || checkbox.type !== 'checkbox') return;
+
+				ensureCached();
+				if (!filterContainer || !filterContainer.contains(checkbox)) return;
+
+				const activeCategories = [];
+				filterTags.forEach(function (tag) {
+					const cb = tag.querySelector('input[type="checkbox"]');
+					if (cb && cb.checked) {
+						activeCategories.push(tag.getAttribute('data-category'));
+					}
+				});
+
+				releaseNotes.forEach(function (note) {
+					const noteCategory = note.getAttribute('data-category');
+					note.hidden = !(activeCategories.length === 0 || activeCategories.includes(noteCategory));
+				});
+
+				tocHeadingNotes.forEach(function (heading) {
+					heading.style.display =
+						activeCategories.length === 0 ||
+						activeCategories.some(function (category) {
+							return heading.textContent.startsWith(category);
+						})
+							? 'flex'
+							: 'none';
+				});
+			},
+			true,
+		);
+	})();
+</script>
