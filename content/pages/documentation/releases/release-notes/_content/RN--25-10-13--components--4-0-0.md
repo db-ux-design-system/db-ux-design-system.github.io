@@ -5,12 +5,12 @@ version: 'v4.0.0'
 date: '2025-10-13'
 ---
 
-**Features für Design + Code:**
+### Features Design + Code
 
-- feat: Refactoring Switch für Stable
-- 🔥 breaking: Entfernen der Property "Emphasis"
-- feat: Ergänzen der Properties "Validation", "Label Position", "Show Message"
+- feat: Refactored Switch for Stable
+- 🔥 breaking: Removed property "Emphasis"
+- feat: Added properties "Validation", "Label Position", "Show Message"
 
-**Features für UX Engineering:**
+### Features UX Engineering
 
-- feat: Update auf Angular Version 20 und Umbenennung einer Custom Select Property
+- feat: Updated to Angular version 20 and renamed a Custom Select property
