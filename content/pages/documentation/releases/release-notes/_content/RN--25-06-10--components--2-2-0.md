@@ -5,10 +5,10 @@ version: 'v2.2.0'
 date: '2025-06-10'
 ---
 
-**Features für Design + Code:**
+### Features Design + Code
 
-- feat: Neue Textarea Variante mit mitwachsender Höhe
+- feat: New Textarea variant with auto-growing height
 
-**Features für Design:**
+### Features Design
 
-- feat: Erweiterung der Card um unterschiedliche Verhaltensweisen der Slot-Inhalte
+- feat: Extended Card with different slot content behaviors

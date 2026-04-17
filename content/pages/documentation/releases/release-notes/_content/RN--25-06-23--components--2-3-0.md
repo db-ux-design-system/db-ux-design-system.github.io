@@ -5,10 +5,10 @@ version: 'v2.3.0'
 date: '2025-06-23'
 ---
 
-**Features für Design + Code:**
+### Features Design + Code
 
-- feat: Tag: aus Beta wird Stable
+- feat: Tag: promoted from Beta to Stable
 
-**Features für Design:**
+### Features Design
 
-- feat: Vereinheitlichung der Valid und Invalid States aller Data Input Komponenten
+- feat: Unified valid and invalid states across all data input components

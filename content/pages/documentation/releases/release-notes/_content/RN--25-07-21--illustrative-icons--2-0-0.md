@@ -5,7 +5,7 @@ version: 'v2.0.0'
 date: '2025-07-21'
 ---
 
-**Features für Design + Code:**
+### Features Design + Code
 
 - added: 7 icons
 - changed: 4 icons
