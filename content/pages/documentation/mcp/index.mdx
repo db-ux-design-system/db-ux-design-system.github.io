@@ -1,0 +1,299 @@
+---
+layout: '@template/layouts/documentation'
+order: 7
+title: 'MCP Server'
+headline: 'MCP Server'
+hidePage: false
+toc: false
+---
+
+## 1. Einführung & Voraussetzungen
+
+Der **DB UX MCP-Server** ist die Brücke zwischen KI-Coding-Agenten (GitHub Copilot, Amazon Q, Claude, Cursor) und dem DB UX Design System. Er liefert jedem Agenten eine einzige, autoritative Quelle für Komponenten-APIs, Framework-spezifische Code-Beispiele, Design Tokens und Icon-Namen – damit der Agent niemals raten oder halluzinieren muss.
+
+Ohne diesen Server erfinden KI-Agenten plausibel klingende, aber falsche Komponenten-Nutzung. Mit ihm ziehen sie den exakt generierten Quellcode, der in den npm-Paketen ausgeliefert wird.
+
+### Voraussetzungen
+
+| Anforderung | Details |
+| ----------- | ------- |
+| **Node.js** | **v22.0.0 oder höher** (zwingend erforderlich) |
+| **npm** | Mitgeliefert mit Node.js |
+| **MCP-fähige IDE** | VS Code, IntelliJ/JetBrains, Cursor, Amazon Q, Kiro |
+
+## 2. Quick Start & Installation
+
+### Schritt 1: Server registrieren
+
+Der Server wird über `npx` gestartet:
+
+```bash
+npx --yes @db-ux/mcp-server
+```
+
+> **Wichtig:** Diesen Befehl führst du **nicht** manuell im Terminal aus. Er wird von deiner IDE automatisch im Hintergrund gestartet. Wenn du ihn manuell ausführst, scheint das Terminal zu „hängen", weil der Server auf JSON-RPC-Nachrichten über `stdio` wartet.
+
+### Schritt 2: Projekt-Installation
+
+Installiere den Server:
+
+```bash
+npm i --save-dev @db-ux/mcp-server
+```
+
+### Schritt 3: Projekt-Regeln generieren
+
+Die `@db-ux/agent-cli` kopiert die offiziellen DB UX-Regeln (Komponenten-Nutzung, Design-Token-Referenzierung) in dein Repository:
+
+```bash
+npx --yes @db-ux/agent-cli
+```
+
+Das erzeugt eine `.github/copilot-instructions.md` im Projekt-Root. Diese Datei stellt sicher, dass der KI-Agent DB UX-Komponenten korrekt verwendet und keine falschen Nutzungsmuster erfindet.
+
+### Schritt 4: Verbindung prüfen
+
+- **Status prüfen:** Suche nach einem grünen Indikator oder „db-ux" in der MCP-Server-Liste deiner IDE.
+- **Logs prüfen:** Falls der Server nicht erscheint, prüfe die MCP-Output-Logs (z. B. in VS Code: _Output Panel_ → _MCP_ oder _MCP Servers_).
+
+## 3. IDE-Konfiguration
+
+Alle IDEs benötigen dieselbe Basis-Konfiguration:
+
+```json
+{
+  "mcpServers": {
+    "db-ux": {
+      "command": "npx",
+      "args": ["--yes", "@db-ux/mcp-server"]
+    }
+  }
+}
+```
+
+### VS Code
+
+Du hast zwei Optionen:
+
+#### Option A: Project-level (empfohlen)
+
+Erstelle `.vscode/mcp.json` im Projekt-Root. Diese Datei kann über Git geteilt werden:
+
+```json
+{
+  "mcp": {
+    "servers": {
+      "db-ux": {
+        "command": "npx",
+        "args": ["--yes", "@db-ux/mcp-server"]
+      }
+    }
+  }
+}
+```
+
+#### Option B: User-level
+
+Füge den Eintrag in deine globale `settings.json` ein (gleiches JSON wie oben).
+
+> **Hinweis:** Falls beide existieren, hat `.vscode/mcp.json` Vorrang.
+
+> **⚠️ „Unknown Configuration Setting"-Warnung:** Falls VS Code eine gelbe Warnung am `mcp`-Key anzeigt, ist das erwartetes Verhalten. Standard-VS Code erkennt den Key nicht nativ. Solange dein MCP-Client (z. B. Copilot Chat oder Cursor) aktiv ist, funktioniert der Server einwandfrei.
+
+### IntelliJ / JetBrains IDEs
+
+Navigiere zu _Settings → Tools → AI Assistant → Model Context Protocol (MCP)_ und klicke auf _Add (+)_. Trage folgende Werte ein:
+
+| Feld | Wert |
+| ---- | ---- |
+| **Name** | `db-ux` |
+| **Type** | `stdio` |
+| **Command** | `npx` |
+| **Arguments** | `--yes @db-ux/mcp-server` |
+
+### Amazon Q / Kiro
+
+Amazon Q kann die `CONTEXT.md` des Projekts automatisch als persistenten System-Prompt laden. Das bedeutet: Der Agent kennt **ab der ersten Nachricht** die gesamte MCP-Server-Architektur, alle Tools, Design Tokens, Migrations-Workflows und die v3-Komponenten-API.
+
+**Vorteile:**
+
+1. ✅ Eliminiert Halluzinationen über Komponenten-Namen, Prop-Signaturen und Token-Werte
+2. ✅ Der Agent befolgt den korrekten Migrations-Workflow ab der ersten Nachricht
+3. ✅ Neue Teammitglieder erhalten sofort einen voll kontextbewussten KI-Assistenten
+
+**Einrichtung:**
+
+1. Öffne (oder erstelle) `~/.aws/amazonq/agents/default.json`
+2. Füge folgende Konfiguration ein:
+
+```json
+{
+  "agentInstruction": {
+    "paths": ["CONTEXT.md"]
+  }
+}
+```
+
+3. Stelle sicher, dass die `CONTEXT.md` im Projekt-Root liegt (wird durch `npx @db-ux/agent-cli` kopiert)
+
+> **Hinweis:** Der Pfad wird relativ zum Workspace-Root aufgelöst. Amazon Q / Kiro liest diese Datei bei jedem Session-Start und injiziert sie als System-Level-Kontext.
+
+## 4. Verfügbare Tools (API-Referenz)
+
+### Discovery
+
+| Tool | Beschreibung |
+| ---- | ------------ |
+| `list_components` | Gibt alle verfügbaren DB UX-Komponentennamen zurück (z. B. `button`, `input`, `tag`).|
+| `get_component_props` | Gibt den rohen TypeScript `model.ts`-Inhalt zurück – alle Interfaces, Prop-Typen und JSDoc-Kommentare. |
+| `get_component_details` | Listet verfügbare Beispiel-Namen für eine Komponente (z. B. `"Variant"`, `"Show Icon Leading"`). |
+| `get_example_code` | Liefert den exakt generierten Quellcode eines Beispiels für ein Framework (`react`, `angular`, `vue`, `web-components`, `html`). |
+
+### Tokens & Assets
+
+| Tool | Beschreibung |
+| ---- | ------------ |
+| `get_design_tokens` | Gibt CSS Custom Properties (`--db-*`) für eine Token-Kategorie zurück. Spacing, Elevation und Density liefern kompilierte Werte. |
+| `list_design_token_categories` | Listet alle verfügbaren Token-Kategorien (z. B. `colors`, `spacing`, `typography`, `elevation`, `density`). |
+| `list_icons` | Gibt alle gültigen DB UX-Icon-Namen zurück. **Immer aufrufen, bevor ein `icon`-Prop gesetzt wird.** |
+| `get_component_visual` | Gibt einen heruntergerechneten Screenshot (max 800×800 px, JPEG q75) als Base64 zurück. Nur bei Bedarf nutzen. |
+| `docs_search` | Durchsucht die DB UX-Dokumentation (Richtlinien, A11y, Migrations-Docs). Fungiert als RAG-Engine. |
+
+### Migration & Scaffolding
+
+| Tool | Beschreibung |
+| ---- | ------------ |
+| `analyze_v2_migration` | **Zuerst aufrufen bei Migrationen.** Scannt eine Datei nach DB UI v2-Patterns (`<cmp-*>`, `<elm-*>`, `db-color-*`) und liefert einen JSON-Report. |
+| `list_migration_guides` | Gibt alle verfügbaren Migrations-Guides zurück (z. B. `color-migration`, `component-migration`). |
+| `get_migration_guide` | Gibt den vollständigen Markdown-Inhalt eines Migrations-Guides zurück. |
+| `verify_migrated_code` | Speichert generierten Code temporär und prüft ihn mit `tsc --noEmit`. Gibt Diagnostics bei Fehlern zurück (max 3 Versuche). |
+| `scaffold_component` | Generiert ein DB UX-konformes Komponenten-Skelett für ein Framework mit korrekten `@db-ux/*`-Imports und SCSS-`@use`-Direktiven. |
+
+### Beispiel-Workflow: React-Button
+
+```text
+list_components          → bestätigt, dass "button" existiert
+get_component_props      → zeigt DBButtonProps, Varianten, Typen
+get_component_details    → listet ["Density", "Variant", "Show Icon Leading", ...]
+get_example_code         → liefert show-icon-leading.example.tsx Quellcode
+list_icons               → bestätigt, dass "arrow_right" ein gültiger Icon-Name ist
+get_design_tokens        → liefert --db-spacing-fixed-md für Layout
+verify_migrated_code     → prüft generierten Code via tsc --noEmit
+```
+
+## 5. Workflows & Prompts nutzen
+
+Der Server stellt vordefinierte **Prompts** bereit, die komplexe KI-Workflows orchestrieren. Diese können über die Chat-UI deiner IDE (sofern unterstützt) oder über den MCP Inspector aufgerufen werden.
+
+### `scaffold_page` – Rapid Prototyping
+
+Generiert die initiale Struktur einer kompletten Webseite oder eines komplexen Moduls.
+
+| Parameter | Beschreibung |
+| --------- | ------------ |
+| `page_type` | Art der Seite (z. B. `dashboard`, `form`) |
+| `framework` | Ziel-Framework (`react`, `angular`, `vue`) |
+| `additional_requirements` | Optionale Zusatzanforderungen |
+
+### `migrate_component` – Legacy-Migration
+
+Transformiert Legacy-Code (Bootstrap, natives HTML, DB UI v1/v2) in die moderne DB UX v3-Architektur. Orchestriert **12 verschiedene MCP-Tools** in 5 Pflichtschritten mit Compiler-verifizierter Selbstkorrektur.
+
+| Parameter | Pflicht | Beschreibung |
+| --------- | ------- | ------------ |
+| `legacy_code` | Ja | Der zu migrierende Quellcode (max 10.000 Zeichen) |
+| `source_context` | Ja | Herkunft: `db-ui-v1`, `db-ui-v2`, `bootstrap-4`, `native-html`, etc. |
+| `target_framework` | Ja | Ziel: `react`, `angular`, `vue`, `web-components`, `html` |
+
+**Workflow-Schritte:**
+
+```text
+Step 0: analyze_v2_migration    → Datei-Scan (deterministisch, kein Raten)
+Step 1: Migration Analysis      → Mapping-Tabelle: Legacy → DB UX v3
+Step 2: Component Discovery     → Props, Beispiele, Tokens, Icons laden
+Step 3: Code Generation         → Vollständiger migrierter Code (intern)
+Step 4: verify_migrated_code    → Compiler-Prüfung + Selbstkorrektur (max 3×)
+Step 5: Final Output            → ✅ VERIFIED oder ⚠️ WARNING + Diagnostics
+```
+
+### `review_ui_code` – Quality Assurance & A11y
+
+Führt ein striktes QA-, Accessibility- und DB UX-Compliance-Audit auf einem Code-Snippet durch.
+
+| Parameter | Beschreibung |
+| --------- | ------------ |
+| `code_snippet` | Der zu prüfende Quellcode |
+| `framework` | Framework des Snippets |
+
+### `audit_accessibility` – Tiefen-A11y-Scan
+
+Spezialisierter Scan für WCAG 2.2 AA-Konformität. Evaluiert interaktive Patterns, Fokus-Reihenfolgen und generiert manuelle Test-Skripte für QA-Engineers.
+
+| Parameter | Beschreibung |
+| --------- | ------------ |
+| `code_snippet` | Der zu prüfende Quellcode |
+| `framework` | Framework des Snippets |
+
+## 6. Troubleshooting & Debugging
+
+### „Unknown Configuration Setting" in VS Code
+
+**Problem:** Gelbe Warnung am `mcp`-Key in `settings.json`.
+
+**Ursache:** Standard-VS Code erkennt den Key nicht nativ. Das ist erwartetes Verhalten.
+
+**Lösung:** Ignorieren. Solange dein MCP-Client (Copilot Chat, Cursor) aktiv ist, funktioniert der Server.
+
+### Server startet nicht aus dem Monorepo-Root
+
+**Problem:** `npx @db-ux/mcp-server` schlägt fehl wegen npm-Workspace-Auflösung.
+
+**Lösung:** Verwende `node` direkt mit dem lokalen Build-Pfad:
+
+```json
+{
+  "db-ux": {
+    "command": "node",
+    "args": ["packages/mcp-server/dist/index.js"]
+  }
+}
+```
+
+> Voraussetzung: `npm run build` im `mcp-server`-Verzeichnis ausgeführt.
+
+### MCP Inspector – Tools isoliert testen
+
+Der **MCP Inspector** ist das offizielle Tool, um MCP-Tools und Prompts unabhängig von der IDE zu validieren.
+
+**Server bauen (falls nötig):**
+
+```bash
+cd packages/mcp-server && npm run build
+```
+
+**Inspector starten:**
+
+```bash
+npx @modelcontextprotocol/inspector --transport stdio node dist/index.js
+```
+
+> **Hinweis:** Der Inspector nutzt Port **6274** (UI) und **6277** (Proxy). Falls belegt: `lsof -ti :6274 -ti :6277 | xargs kill -9`
+
+**Workflow:**
+
+1. Befehl ausführen – Inspector startet einen lokalen Webserver
+2. Volle URL **inkl. Token** im Browser öffnen (z. B. `http://localhost:6274/?MCP_PROXY_AUTH_TOKEN=...`)
+3. **„Connect"** klicken
+4. **„Tools"**-Tab → einzelne Tools aufrufen und Antworten inspizieren
+5. **„Prompts"**-Tab → interaktive Prompts wie `scaffold_page` testen
+
+
+## 7. Weiterführende Ressourcen
+
+| Ressource | Link |
+| --------- | ---- |
+| **GitHub Repository** | [db-ux-design-system/core-web](https://github.com/db-ux-design-system/core-web) |
+| **npm: MCP-Server** | [@db-ux/mcp-server](https://www.npmjs.com/package/@db-ux/mcp-server) |
+| **npm: Agent CLI** | [@db-ux/agent-cli](https://www.npmjs.com/package/@db-ux/agent-cli) |
+| **MCP-Spezifikation** | [modelcontextprotocol.io](https://modelcontextprotocol.io) |
+| **MCP Inspector** | [@modelcontextprotocol/inspector](https://www.npmjs.com/package/@modelcontextprotocol/inspector) |
