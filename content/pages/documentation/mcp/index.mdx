@@ -1,6 +1,6 @@
 ---
 layout: '@template/layouts/documentation'
-order: 7
+order: 9
 title: 'MCP Server'
 headline: 'MCP Server'
 description: 'Connect AI coding agents to the DB UX Design System via the Model Context Protocol. Get accurate component APIs, design tokens, and code examples — without hallucinations.'
@@ -21,10 +21,10 @@ Without this server, AI agents invent plausible-sounding but incorrect component
 
 ### Prerequisites
 
-| Requirement | Details |
-| ----------- | ------- |
-| **Node.js** | **v22.0.0 or higher** (required) |
-| **npm** | Bundled with Node.js |
+| Requirement         | Details                                             |
+| ------------------- | --------------------------------------------------- |
+| **Node.js**         | **v22.0.0 or higher** (required)                    |
+| **npm**             | Bundled with Node.js                                |
 | **MCP-capable IDE** | VS Code, IntelliJ/JetBrains, Cursor, Amazon Q, Kiro |
 
 </DBSection>
@@ -76,12 +76,12 @@ All IDEs require the same base configuration:
 
 ```json
 {
-  "mcpServers": {
-    "db-ux": {
-      "command": "npx",
-      "args": ["--yes", "@db-ux/mcp-server"]
-    }
-  }
+	"mcpServers": {
+		"db-ux": {
+			"command": "npx",
+			"args": ["--yes", "@db-ux/mcp-server"]
+		}
+	}
 }
 ```
 
@@ -95,14 +95,14 @@ Create `.vscode/mcp.json` in the project root. This file can be shared via Git:
 
 ```json
 {
-  "mcp": {
-    "servers": {
-      "db-ux": {
-        "command": "npx",
-        "args": ["--yes", "@db-ux/mcp-server"]
-      }
-    }
-  }
+	"mcp": {
+		"servers": {
+			"db-ux": {
+				"command": "npx",
+				"args": ["--yes", "@db-ux/mcp-server"]
+			}
+		}
+	}
 }
 ```
 
@@ -120,11 +120,11 @@ Add the entry to your global `settings.json` (same JSON as above).
 
 Navigate to _Settings → Tools → AI Assistant → Model Context Protocol (MCP)_ and click _Add (+)_. Enter the following values:
 
-| Field | Value |
-| ----- | ----- |
-| **Name** | `db-ux` |
-| **Type** | `stdio` |
-| **Command** | `npx` |
+| Field         | Value                     |
+| ------------- | ------------------------- |
+| **Name**      | `db-ux`                   |
+| **Type**      | `stdio`                   |
+| **Command**   | `npx`                     |
 | **Arguments** | `--yes @db-ux/mcp-server` |
 
 ### Amazon Q / Kiro
@@ -144,9 +144,9 @@ Amazon Q can automatically load the project's `CONTEXT.md` as a persistent syste
 
 ```json
 {
-  "agentInstruction": {
-    "paths": ["CONTEXT.md"]
-  }
+	"agentInstruction": {
+		"paths": ["CONTEXT.md"]
+	}
 }
 ```
 
@@ -162,32 +162,32 @@ Amazon Q can automatically load the project's `CONTEXT.md` as a persistent syste
 
 ### Discovery
 
-| Tool | Description |
-| ---- | ----------- |
-| `list_components` | Returns all available DB UX component names (e.g. `button`, `input`, `tag`). **Always call first.** |
-| `get_component_props` | Returns the raw TypeScript `model.ts` content — all interfaces, prop types, and JSDoc comments. |
-| `get_component_details` | Lists available example names for a component (e.g. `"Variant"`, `"Show Icon Leading"`). |
-| `get_example_code` | Returns the exact generated source code of an example for a framework (`react`, `angular`, `vue`, `web-components`, `html`). |
+| Tool                    | Description                                                                                                                  |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `list_components`       | Returns all available DB UX component names (e.g. `button`, `input`, `tag`). **Always call first.**                          |
+| `get_component_props`   | Returns the raw TypeScript `model.ts` content — all interfaces, prop types, and JSDoc comments.                              |
+| `get_component_details` | Lists available example names for a component (e.g. `"Variant"`, `"Show Icon Leading"`).                                     |
+| `get_example_code`      | Returns the exact generated source code of an example for a framework (`react`, `angular`, `vue`, `web-components`, `html`). |
 
 ### Tokens & Assets
 
-| Tool | Description |
-| ---- | ----------- |
-| `get_design_tokens` | Returns CSS custom properties (`--db-*`) for a token category. Spacing, elevation, and density return compiled values. |
-| `list_design_token_categories` | Lists all available token categories (e.g. `colors`, `spacing`, `typography`, `elevation`, `density`). |
-| `list_icons` | Returns all valid DB UX icon names. **Always call before setting an `icon` prop.** |
-| `get_component_visual` | Returns a downscaled screenshot (max 800×800 px, JPEG q75) as Base64. Use only when needed. |
-| `docs_search` | Searches the DB UX documentation (guidelines, A11y, migration docs). Acts as a RAG engine. |
+| Tool                           | Description                                                                                                            |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| `get_design_tokens`            | Returns CSS custom properties (`--db-*`) for a token category. Spacing, elevation, and density return compiled values. |
+| `list_design_token_categories` | Lists all available token categories (e.g. `colors`, `spacing`, `typography`, `elevation`, `density`).                 |
+| `list_icons`                   | Returns all valid DB UX icon names. **Always call before setting an `icon` prop.**                                     |
+| `get_component_visual`         | Returns a downscaled screenshot (max 800×800 px, JPEG q75) as Base64. Use only when needed.                            |
+| `docs_search`                  | Searches the DB UX documentation (guidelines, A11y, migration docs). Acts as a RAG engine.                             |
 
 ### Migration & Scaffolding
 
-| Tool | Description |
-| ---- | ----------- |
-| `analyze_v2_migration` | **Call first for migrations.** Scans a file for DB UI v2 patterns (`<cmp-*>`, `<elm-*>`, `db-color-*`) and returns a JSON report. |
-| `list_migration_guides` | Returns all available migration guides (e.g. `color-migration`, `component-migration`). |
-| `get_migration_guide` | Returns the full Markdown content of a migration guide. |
-| `verify_migrated_code` | Saves generated code temporarily and checks it with `tsc --noEmit`. Returns diagnostics on errors (max 3 attempts). |
-| `scaffold_component` | Generates a DB UX-compliant component skeleton for a framework with correct `@db-ux/*` imports and SCSS `@use` directives. |
+| Tool                    | Description                                                                                                                       |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `analyze_v2_migration`  | **Call first for migrations.** Scans a file for DB UI v2 patterns (`<cmp-*>`, `<elm-*>`, `db-color-*`) and returns a JSON report. |
+| `list_migration_guides` | Returns all available migration guides (e.g. `color-migration`, `component-migration`).                                           |
+| `get_migration_guide`   | Returns the full Markdown content of a migration guide.                                                                           |
+| `verify_migrated_code`  | Saves generated code temporarily and checks it with `tsc --noEmit`. Returns diagnostics on errors (max 3 attempts).               |
+| `scaffold_component`    | Generates a DB UX-compliant component skeleton for a framework with correct `@db-ux/*` imports and SCSS `@use` directives.        |
 
 ### Example Workflow: React Button
 
@@ -213,21 +213,21 @@ The server provides predefined **prompts** that orchestrate complex AI workflows
 
 Generates the initial structure of a complete web page or complex module.
 
-| Parameter | Description |
-| --------- | ----------- |
-| `page_type` | Type of page (e.g. `dashboard`, `form`) |
-| `framework` | Target framework (`react`, `angular`, `vue`) |
-| `additional_requirements` | Optional additional requirements |
+| Parameter                 | Description                                  |
+| ------------------------- | -------------------------------------------- |
+| `page_type`               | Type of page (e.g. `dashboard`, `form`)      |
+| `framework`               | Target framework (`react`, `angular`, `vue`) |
+| `additional_requirements` | Optional additional requirements             |
 
 ### `migrate_component` – Legacy Migration
 
 Transforms legacy code (Bootstrap, native HTML, DB UI v1/v2) into the modern DB UX v3 architecture. Orchestrates **12 different MCP tools** in 5 mandatory steps with compiler-verified self-correction.
 
-| Parameter | Required | Description |
-| --------- | -------- | ----------- |
-| `legacy_code` | Yes | The source code to migrate (max 10,000 characters) |
-| `source_context` | Yes | Origin: `db-ui-v1`, `db-ui-v2`, `bootstrap-4`, `native-html`, etc. |
-| `target_framework` | Yes | Target: `react`, `angular`, `vue`, `web-components`, `html` |
+| Parameter          | Required | Description                                                        |
+| ------------------ | -------- | ------------------------------------------------------------------ |
+| `legacy_code`      | Yes      | The source code to migrate (max 10,000 characters)                 |
+| `source_context`   | Yes      | Origin: `db-ui-v1`, `db-ui-v2`, `bootstrap-4`, `native-html`, etc. |
+| `target_framework` | Yes      | Target: `react`, `angular`, `vue`, `web-components`, `html`        |
 
 **Workflow steps:**
 
@@ -244,19 +244,19 @@ Step 5: Final Output            → ✅ VERIFIED or ⚠️ WARNING + diagnostics
 
 Runs a strict QA, accessibility, and DB UX compliance audit on a code snippet.
 
-| Parameter | Description |
-| --------- | ----------- |
+| Parameter      | Description               |
+| -------------- | ------------------------- |
 | `code_snippet` | The source code to review |
-| `framework` | Framework of the snippet |
+| `framework`    | Framework of the snippet  |
 
 ### `audit_accessibility` – Deep A11y Scan
 
 Specialized scan for WCAG 2.2 AA compliance. Evaluates interactive patterns, focus orders, and generates manual test scripts for QA engineers.
 
-| Parameter | Description |
-| --------- | ----------- |
+| Parameter      | Description              |
+| -------------- | ------------------------ |
 | `code_snippet` | The source code to audit |
-| `framework` | Framework of the snippet |
+| `framework`    | Framework of the snippet |
 
 </DBSection>
 
@@ -284,10 +284,10 @@ Specialized scan for WCAG 2.2 AA compliance. Evaluates interactive patterns, foc
 
 ```json
 {
-  "db-ux": {
-    "command": "node",
-    "args": ["packages/mcp-server/dist/index.js"]
-  }
+	"db-ux": {
+		"command": "node",
+		"args": ["packages/mcp-server/dist/index.js"]
+	}
 }
 ```
 
@@ -329,12 +329,12 @@ npx @modelcontextprotocol/inspector --transport stdio node dist/index.js
 
 ## Further Resources
 
-| Resource | Link |
-| -------- | ---- |
-| **GitHub Repository** | [db-ux-design-system/core-web](https://github.com/db-ux-design-system/core-web) |
-| **npm: MCP Server** | [@db-ux/mcp-server](https://www.npmjs.com/package/@db-ux/mcp-server) |
-| **npm: Agent CLI** | [@db-ux/agent-cli](https://www.npmjs.com/package/@db-ux/agent-cli) |
-| **MCP Specification** | [modelcontextprotocol.io](https://modelcontextprotocol.io) |
-| **MCP Inspector** | [@modelcontextprotocol/inspector](https://www.npmjs.com/package/@modelcontextprotocol/inspector) |
+| Resource              | Link                                                                                             |
+| --------------------- | ------------------------------------------------------------------------------------------------ |
+| **GitHub Repository** | [db-ux-design-system/core-web](https://github.com/db-ux-design-system/core-web)                  |
+| **npm: MCP Server**   | [@db-ux/mcp-server](https://www.npmjs.com/package/@db-ux/mcp-server)                             |
+| **npm: Agent CLI**    | [@db-ux/agent-cli](https://www.npmjs.com/package/@db-ux/agent-cli)                               |
+| **MCP Specification** | [modelcontextprotocol.io](https://modelcontextprotocol.io)                                       |
+| **MCP Inspector**     | [@modelcontextprotocol/inspector](https://www.npmjs.com/package/@modelcontextprotocol/inspector) |
 
 </DBSection>

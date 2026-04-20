@@ -2,7 +2,10 @@
  * Proper fix should be applied there or in the documentation layout,
  * scoped to prose/markdown content only. */
 .dba-main-content {
-	h3,
+	h3 {
+		margin-block-start: var(--db-spacing-fixed-2xl);
+		margin-block-end: var(--db-spacing-fixed-lg);
+	}
 	h4,
 	h5,
 	h6 {
