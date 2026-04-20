@@ -5,11 +5,11 @@ version: 'v2.4.0'
 date: '2025-07-07'
 ---
 
-**Features für Design:**
+### Features Design
 
-- feat: optimiertes Prototyping für Checkbox, Radio, Switch und Tag
+- feat: Optimized prototyping for Checkbox, Radio, Switch and Tag
 
-**Features für UX Engineering:**
+### Features UX Engineering
 
-- feat: Deaktivieren des \*-required-Sternchens möglich
-- feat: Optionale Property (position) für Drawer
+- feat: Option to disable the \*-required asterisk
+- feat: Optional property (position) for Drawer
