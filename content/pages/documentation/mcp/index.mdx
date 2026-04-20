@@ -3,9 +3,15 @@ layout: '@template/layouts/documentation'
 order: 7
 title: 'MCP Server'
 headline: 'MCP Server'
+description: 'Connect AI coding agents to the DB UX Design System via the Model Context Protocol. Get accurate component APIs, design tokens, and code examples — without hallucinations.'
 hidePage: false
+align: start
 toc: false
 ---
+
+import { DBSection } from '@db-ux/react-core-components';
+
+<DBSection spacing="small" width="auto">
 
 ## 1. Introduction & Prerequisites
 
@@ -21,7 +27,9 @@ Without this server, AI agents invent plausible-sounding but incorrect component
 | **npm** | Bundled with Node.js |
 | **MCP-capable IDE** | VS Code, IntelliJ/JetBrains, Cursor, Amazon Q, Kiro |
 
----
+</DBSection>
+
+<DBSection spacing="small" width="auto">
 
 ## 2. Quick Start & Installation
 
@@ -58,7 +66,9 @@ This generates a `.github/copilot-instructions.md` in the project root. This fil
 - **Check status:** Look for a green indicator or "db-ux" in your IDE's MCP server list.
 - **Check logs:** If the server does not appear, inspect the MCP output logs (e.g. in VS Code: _Output Panel_ → _MCP_ or _MCP Servers_).
 
----
+</DBSection>
+
+<DBSection spacing="small" width="auto">
 
 ## 3. IDE Configuration
 
@@ -102,7 +112,13 @@ Add the entry to your global `settings.json` (same JSON as above).
 
 > **Note:** If both exist, `.vscode/mcp.json` takes precedence.
 
+<br />
+
 > **⚠️ "Unknown Configuration Setting" warning:** If VS Code shows a yellow warning on the `mcp` key, this is expected behavior. Standard VS Code does not natively recognize the key. As long as your MCP client (e.g. Copilot Chat or Cursor) is active, the server works correctly.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
 
 ### IntelliJ / JetBrains IDEs
 
@@ -114,6 +130,10 @@ Navigate to _Settings → Tools → AI Assistant → Model Context Protocol (MCP
 | **Type** | `stdio` |
 | **Command** | `npx` |
 | **Arguments** | `--yes @db-ux/mcp-server` |
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
 
 ### Amazon Q / Kiro
 
@@ -142,7 +162,9 @@ Amazon Q can automatically load the project's `CONTEXT.md` as a persistent syste
 
 > **Note:** The path is resolved relative to the workspace root. Amazon Q / Kiro reads this file at the start of every session and injects it as system-level context.
 
----
+</DBSection>
+
+<DBSection spacing="small" width="auto">
 
 ## 4. Available Tools (API Reference)
 
@@ -187,7 +209,9 @@ get_design_tokens        → returns --db-spacing-fixed-md for layout
 verify_migrated_code     → checks generated code via tsc --noEmit
 ```
 
----
+</DBSection>
+
+<DBSection spacing="small" width="auto">
 
 ## 5. Using Workflows & Prompts
 
@@ -202,6 +226,10 @@ Generates the initial structure of a complete web page or complex module.
 | `page_type` | Type of page (e.g. `dashboard`, `form`) |
 | `framework` | Target framework (`react`, `angular`, `vue`) |
 | `additional_requirements` | Optional additional requirements |
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
 
 ### `migrate_component` – Legacy Migration
 
@@ -224,6 +252,10 @@ Step 4: verify_migrated_code    → compiler check + self-correction (max 3×)
 Step 5: Final Output            → ✅ VERIFIED or ⚠️ WARNING + diagnostics
 ```
 
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
 ### `review_ui_code` – Quality Assurance & A11y
 
 Runs a strict QA, accessibility, and DB UX compliance audit on a code snippet.
@@ -242,7 +274,9 @@ Specialized scan for WCAG 2.2 AA compliance. Evaluates interactive patterns, foc
 | `code_snippet` | The source code to audit |
 | `framework` | Framework of the snippet |
 
----
+</DBSection>
+
+<DBSection spacing="small" width="auto">
 
 ## 6. Troubleshooting & Debugging
 
@@ -253,6 +287,10 @@ Specialized scan for WCAG 2.2 AA compliance. Evaluates interactive patterns, foc
 **Cause:** Standard VS Code does not natively recognize the key. This is expected behavior.
 
 **Solution:** Ignore it. As long as your MCP client (Copilot Chat, Cursor) is active, the server works correctly.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
 
 ### Server fails to start from monorepo root
 
@@ -270,6 +308,10 @@ Specialized scan for WCAG 2.2 AA compliance. Evaluates interactive patterns, foc
 ```
 
 > Prerequisite: Run `npm run build` in the `mcp-server` directory first.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
 
 ### MCP Inspector – Testing tools in isolation
 
@@ -297,7 +339,9 @@ npx @modelcontextprotocol/inspector --transport stdio node dist/index.js
 4. **"Tools"** tab → invoke individual tools and inspect responses
 5. **"Prompts"** tab → test interactive prompts like `scaffold_page`
 
----
+</DBSection>
+
+<DBSection spacing="small" width="auto">
 
 ## 7. Further Resources
 
@@ -308,3 +352,5 @@ npx @modelcontextprotocol/inspector --transport stdio node dist/index.js
 | **npm: Agent CLI** | [@db-ux/agent-cli](https://www.npmjs.com/package/@db-ux/agent-cli) |
 | **MCP Specification** | [modelcontextprotocol.io](https://modelcontextprotocol.io) |
 | **MCP Inspector** | [@modelcontextprotocol/inspector](https://www.npmjs.com/package/@modelcontextprotocol/inspector) |
+
+</DBSection>
