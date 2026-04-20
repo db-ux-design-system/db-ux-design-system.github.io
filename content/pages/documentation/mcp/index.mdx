@@ -116,10 +116,6 @@ Add the entry to your global `settings.json` (same JSON as above).
 
 > **⚠️ "Unknown Configuration Setting" warning:** If VS Code shows a yellow warning on the `mcp` key, this is expected behavior. Standard VS Code does not natively recognize the key. As long as your MCP client (e.g. Copilot Chat or Cursor) is active, the server works correctly.
 
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ### IntelliJ / JetBrains IDEs
 
 Navigate to _Settings → Tools → AI Assistant → Model Context Protocol (MCP)_ and click _Add (+)_. Enter the following values:
@@ -130,10 +126,6 @@ Navigate to _Settings → Tools → AI Assistant → Model Context Protocol (MCP
 | **Type** | `stdio` |
 | **Command** | `npx` |
 | **Arguments** | `--yes @db-ux/mcp-server` |
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
 
 ### Amazon Q / Kiro
 
@@ -227,10 +219,6 @@ Generates the initial structure of a complete web page or complex module.
 | `framework` | Target framework (`react`, `angular`, `vue`) |
 | `additional_requirements` | Optional additional requirements |
 
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ### `migrate_component` – Legacy Migration
 
 Transforms legacy code (Bootstrap, native HTML, DB UI v1/v2) into the modern DB UX v3 architecture. Orchestrates **12 different MCP tools** in 5 mandatory steps with compiler-verified self-correction.
@@ -251,10 +239,6 @@ Step 3: Code Generation         → complete migrated code (internal)
 Step 4: verify_migrated_code    → compiler check + self-correction (max 3×)
 Step 5: Final Output            → ✅ VERIFIED or ⚠️ WARNING + diagnostics
 ```
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
 
 ### `review_ui_code` – Quality Assurance & A11y
 
