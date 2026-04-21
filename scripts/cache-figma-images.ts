@@ -1,7 +1,7 @@
 /**
  * Figma Image Cache Script
  *
- * Scans all MDX files for figmaUrl props, exports node images via the Figma API,
+ * Scans all MDX and Astro files for figmaUrl props, exports node images via the Figma API,
  * downloads them as PNG, and writes a manifest JSON for build-time lookup.
  *
  * Usage: node scripts/cache-figma-images.ts
@@ -27,7 +27,7 @@ interface CacheEntry {
 type Manifest = Record<string, string>;
 
 const ROOT = resolve(import.meta.dirname, '..');
-const MDX_DIR = join(ROOT, 'content', 'pages', 'documentation', 'components');
+const DOCS_DIR = join(ROOT, 'content', 'pages', 'documentation');
 const CACHE_DIR = join(ROOT, 'static', 'assets', 'figma-cache');
 const MANIFEST_PATH = join(ROOT, 'static', 'assets', 'figma-cache', 'manifest.json');
 
@@ -37,7 +37,7 @@ const FIGMA_TOKEN = process.env.FIGMA_TOKEN;
 
 if (!FIGMA_TOKEN) {
 	console.error('❌ FIGMA_TOKEN not found. Add it to .env or set it as an environment variable.');
-	process.exit(0);
+	process.exit(1);
 }
 
 mkdirSync(CACHE_DIR, { recursive: true });
@@ -54,17 +54,27 @@ function cacheFilename(fileKey: string, nodeId: string): string {
 }
 
 async function collectFigmaUrls(): Promise<string[]> {
-	const files = (await readdir(MDX_DIR)).filter((f) => f.endsWith('.mdx'));
 	const urlSet = new Set<string>();
-	for (const file of files) {
-		const content = readFileSync(join(MDX_DIR, file), 'utf-8');
-		const matches = content.matchAll(/figmaUrl="([^"]+)"/g);
-		for (const [, url] of matches) {
-			const base = url.split('?')[0];
-			const nodeIdMatch = url.match(/[?&]node-id=([^&]+)/);
-			if (nodeIdMatch) urlSet.add(`${base}?node-id=${nodeIdMatch[1]}&embed-host=share`);
+
+	async function scanDir(dir: string): Promise<void> {
+		const entries = await readdir(dir, { withFileTypes: true });
+		for (const entry of entries) {
+			const fullPath = join(dir, entry.name);
+			if (entry.isDirectory()) {
+				await scanDir(fullPath);
+			} else if (entry.name.endsWith('.mdx') || entry.name.endsWith('.astro')) {
+				const content = readFileSync(fullPath, 'utf-8');
+				const matches = content.matchAll(/figmaUrl="([^"]+)"/g);
+				for (const [, url] of matches) {
+					const base = url.split('?')[0];
+					const nodeIdMatch = url.match(/[?&]node-id=([^&]+)/);
+					if (nodeIdMatch) urlSet.add(`${base}?node-id=${nodeIdMatch[1]}&embed-host=share`);
+				}
+			}
 		}
 	}
+
+	await scanDir(DOCS_DIR);
 	return [...urlSet];
 }
 
@@ -126,7 +136,7 @@ async function main(): Promise<void> {
 		}
 
 		for (const { url, nodeId, filename } of entries) {
-				const imageUrl = images[nodeId.replace('-', ':')];
+			const imageUrl = images[nodeId.replace('-', ':')];
 			if (!imageUrl) {
 				console.warn(`  ⚠️  No image returned for node ${nodeId}`);
 				failed++;
