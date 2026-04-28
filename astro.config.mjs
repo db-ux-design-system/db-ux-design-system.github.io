@@ -5,7 +5,8 @@ import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { filterSitemapBlacklist } from './template/integrations/sitemap';
-import orama from '@orama/plugin-astro';
+// TODO: Re-enable once @orama/plugin-astro supports Astro 6 (currently only supports ^2.x)
+// import orama from '@orama/plugin-astro';
 
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import pngToWebpIntegration from './astro-integration-png-to-webp.mjs';
@@ -20,12 +21,12 @@ export default defineConfig({
 		sitemap({
 			filter: filterSitemapBlacklist,
 		}),
-		orama({
-			pages: {
-				pathMatcher: /\/.+\//,
-				language: 'english',
-			},
-		}),
+		// orama({
+		// 	pages: {
+		// 		pathMatcher: /\/.+\//,
+		// 		language: 'english',
+		// 	},
+		// }),
 		pngToWebpIntegration(),
 	],
 	srcDir: './content',
