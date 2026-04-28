@@ -9,6 +9,34 @@ updates:
     directory: '/' # Location of package manifests
     schedule:
       interval: 'daily'
+    groups:
+      react:
+        patterns:
+          - 'react'
+          - 'react-dom'
+          - '@types/react'
+          - '@types/react-dom'
+      astro:
+        patterns:
+          - 'astro'
+          - '@astrojs/*'
+      linting:
+        patterns:
+          - 'eslint'
+          - 'eslint-*'
+          - '@typescript-eslint/*'
+          - 'prettier'
+          - 'prettier-*'
+          - 'stylelint'
+          - 'stylelint-*'
+          - '@double-great/stylelint-*'
+      playwright:
+        patterns:
+          - '@playwright/*'
+          - '@axe-core/playwright'
+      orama:
+        patterns:
+          - '@orama/*'
     ignore:
       # We need to ignore db-ux packages for now because of shell
       - dependency-name: '@db-ux*'
