@@ -5,8 +5,8 @@ version: 'v3.1.0'
 date: '2025-09-01'
 ---
 
-### Features UX Engineering
+### Development
 
-- feat: Improved Select: deselect now possible
-- feat: Improved Custom Select: selecting entries via Enter key now possible
-- feat: Improved Input: added enterkeyhint and inputmode HTML attributes
+- refactor(select): not hiding the first `option` HTML element anymore
+- feat: Add Enter key support for Custom Select keyboard navigation
+- feat: add `enterkeyhint` and `inputmode` attributes to DBInput
