@@ -82,6 +82,11 @@ declare interface FrontMatter {
 	 * Sort children in descending order (e.g. for version lists).
 	 */
 	sortChildrenDescending?: boolean;
+
+	/**
+	 * An optional external URL. If set, the page redirects to this URL when accessed directly.
+	 */
+	externalUrl?: string;
 }
 
 declare type DocumentationFrontMatter = {

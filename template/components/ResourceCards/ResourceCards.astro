@@ -77,7 +77,14 @@ const getIconPath = (icon: string): string => {
 			const isDisabled = resource.disabled === true;
 			const cardContent = (
 				<>
-					{resource.protected && <span class="resource-protected-icon" data-icon="lock_closed" />}
+					{resource.protected && (
+						<span
+							class="resource-protected-icon"
+							data-icon="lock_closed"
+							aria-label="Protected content"
+							role="img"
+						/>
+					)}
 					{resource.icon && (
 						<img
 							src={getIconPath(resource.icon)}

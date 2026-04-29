@@ -34,7 +34,12 @@ const NavItem = ({
 	protected: isProtected,
 }: NavigationItem) => {
 	const lockIcon = isProtected ? (
-		<span data-icon="lock_closed" style={{ marginInlineStart: 'auto', fontSize: '0.75em' }} />
+		<span
+			data-icon="lock_closed"
+			aria-label="Protected content"
+			role="img"
+			style={{ marginInlineStart: 'auto', fontSize: '0.75em' }}
+		/>
 	) : null;
 
 	if (externalUrl) {

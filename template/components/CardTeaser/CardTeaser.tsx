@@ -29,7 +29,14 @@ const CardTeaser = ({
 			className="card-teaser"
 		>
 			<DBCard behavior="interactive" spacing="medium">
-				{isProtected && <span className="card-teaser-protected-icon" data-icon="lock_closed" />}
+				{isProtected && (
+					<span
+						className="card-teaser-protected-icon"
+						data-icon="lock_closed"
+						aria-label="Protected content"
+						role="img"
+					/>
+				)}
 				<div className="card-teaser-content">
 					<div className="card-teaser-body">
 						<strong className="card-teaser-title">{title}</strong>
