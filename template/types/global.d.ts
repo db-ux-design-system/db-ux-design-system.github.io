@@ -141,6 +141,18 @@ declare interface NavigationItem {
 	 * If true, children will be sorted in descending order (e.g. for version lists).
 	 */
 	sortChildrenDescending?: boolean;
+
+	/**
+	 * An optional external URL. If set, the navigation item links externally
+	 * and opens in a new tab.
+	 */
+	externalUrl?: string;
+
+	/**
+	 * If true, the navigation item is marked as protected (DB-internal only)
+	 * and displays a lock icon.
+	 */
+	protected?: boolean;
 }
 
 /**

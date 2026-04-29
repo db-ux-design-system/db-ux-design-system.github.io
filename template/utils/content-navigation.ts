@@ -5,6 +5,8 @@ type NavigationFrontmatter = FrontMatter & {
 	isMenuItemDisabled?: boolean;
 	order?: number;
 	nav?: boolean | { order?: number };
+	externalUrl?: string;
+	protected?: boolean;
 };
 
 type MdModule = {
@@ -140,6 +142,8 @@ export function buildAppNavigationFromContent(): AppNavigation {
 		const order = getOrder(fm);
 		const status = fm.status;
 		const sortChildrenDescending = fm.sortChildrenDescending === true;
+		const externalUrl = fm.externalUrl;
+		const isProtected = fm.protected === true;
 
 		const node: NavigationItem = {
 			title,
@@ -151,6 +155,8 @@ export function buildAppNavigationFromContent(): AppNavigation {
 			order,
 			status,
 			sortChildrenDescending,
+			externalUrl,
+			protected: isProtected,
 		};
 
 		// If a placeholder node already exists (created as intermediate directory),
@@ -165,6 +171,8 @@ export function buildAppNavigationFromContent(): AppNavigation {
 			existing.order = order;
 			existing.status = status;
 			existing.sortChildrenDescending = sortChildrenDescending;
+			existing.externalUrl = externalUrl;
+			existing.protected = isProtected;
 		} else {
 			nodes.set(rel, node);
 		}
