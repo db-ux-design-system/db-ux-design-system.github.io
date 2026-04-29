@@ -6,6 +6,7 @@ import DocumentationContent from './DocumentationContent.astro';
 import { appConfig } from '@root/app.config.ts';
 import { Shell } from '@template/components/Shell';
 import Footer from '@template/components/Footer/Footer.astro';
+import { appNavigation } from '@root/app.navigation.ts';
 
 interface Props {
 	headings: MarkdownHeading[];
@@ -13,27 +14,63 @@ interface Props {
 }
 const { headings, frontmatter } = Astro.props;
 const currentPath = Astro.url.pathname;
+
+// Determine redirect target for hidePage or externalUrl
+let redirectUrl: string | undefined;
+if (frontmatter.externalUrl) {
+	redirectUrl = frontmatter.externalUrl;
+} else if (frontmatter.hidePage) {
+	const norm = (p: string) => p.replace(/\/+$/, '');
+	const currentNorm = norm(currentPath);
+	const findNode = (items: NavigationItem[]): NavigationItem | undefined => {
+		for (const item of items) {
+			if (item.path && norm('/' + item.path) === currentNorm) return item;
+			if (item.children) {
+				const found = findNode(item.children);
+				if (found) return found;
+			}
+		}
+		return undefined;
+	};
+	const node = findNode(appNavigation);
+	const firstChild = node?.children?.[0]?.path;
+	if (firstChild) {
+		redirectUrl = '/' + firstChild;
+	}
+}
 ---
 
-<!doctype html>
-<html lang={appConfig.language || 'en'}>
-	<HtmlHead title={frontmatter.title} loadModelViewer={frontmatter.loadModelViewer} />
-	<body>
-		<Shell
-			client:only="react"
-			pathname={currentPath}
-			subNavigationVariant={frontmatter.subNavigationVariant}
-		>
-			<div class="dba-main-grid">
-				<DocumentationContent frontmatter={frontmatter} headings={headings}>
-					<slot />
-				</DocumentationContent>
-				<Footer />
-			</div>
-		</Shell>
-		<slot name="script" />
-		<script>
-			import '@template/components/ComponentPlayground/playground-init';
-		</script>
-	</body>
-</html>
+{
+	redirectUrl ? (
+		<html lang={appConfig.language || 'en'}>
+			<head>
+				<meta charset="utf-8" />
+				<title>{`Redirecting…`}</title>
+				<meta http-equiv="refresh" content={`0; url=${redirectUrl}`} />
+			</head>
+			<body>
+				<script define:vars={{ redirectUrl }}>window.location.replace(redirectUrl);</script>
+			</body>
+		</html>
+	) : (
+		<html lang={appConfig.language || 'en'}>
+			<HtmlHead title={frontmatter.title} loadModelViewer={frontmatter.loadModelViewer} />
+			<body>
+				<Shell
+					client:only="react"
+					pathname={currentPath}
+					subNavigationVariant={frontmatter.subNavigationVariant}
+				>
+					<div class="dba-main-grid">
+						<DocumentationContent frontmatter={frontmatter} headings={headings}>
+							<slot />
+						</DocumentationContent>
+						<Footer />
+					</div>
+				</Shell>
+				<slot name="script" />
+				<script>import '@template/components/ComponentPlayground/playground-init';</script>
+			</body>
+		</html>
+	)
+}
