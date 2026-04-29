@@ -5,10 +5,10 @@ version: 'v2.2.0'
 date: '2025-06-10'
 ---
 
-### Features Design + Code
+### Design + Development
 
 - feat: New Textarea variant with auto-growing height
 
-### Features Design
+### Design
 
 - feat: Extended Card with different slot content behaviors
