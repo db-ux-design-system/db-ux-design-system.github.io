@@ -5,6 +5,6 @@ version: 'v4.1.0'
 date: '2025-10-30'
 ---
 
-### Features Design + Code
+### Design + Development
 
-- feat: Notification overlay with block link
+- feat: notification overlay with block link

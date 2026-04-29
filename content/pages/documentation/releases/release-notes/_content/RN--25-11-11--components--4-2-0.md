@@ -5,6 +5,6 @@ version: 'v4.2.0'
 date: '2025-11-11'
 ---
 
-### Features Code
+### Development
 
-- feat: Added new Header property `closeButtonText`
+- feat(DBHeader): introduce new property `closeButtonText`
