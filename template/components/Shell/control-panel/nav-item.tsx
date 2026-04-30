@@ -30,7 +30,38 @@ const NavItem = ({
 	isSubNavigation,
 	disabled,
 	status,
+	externalUrl,
+	protected: isProtected,
 }: NavigationItem) => {
+	const lockIcon = isProtected ? (
+		<span
+			data-icon="lock_closed"
+			aria-label="Protected content"
+			role="img"
+			style={{ marginInlineStart: 'auto', fontSize: '0.75em' }}
+		/>
+	) : null;
+
+	if (externalUrl) {
+		return (
+			<DBNavigationItem
+				icon={icon}
+				key={`router-leaf-${externalUrl}`}
+				disabled={disabled ? true : undefined}
+			>
+				<a
+					href={externalUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					style={{ display: 'flex', alignItems: 'center', width: '100%' }}
+				>
+					{title}
+					{lockIcon}
+				</a>
+			</DBNavigationItem>
+		);
+	}
+
 	const isActive =
 		typeof window !== 'undefined' &&
 		covers(
@@ -48,7 +79,7 @@ const NavItem = ({
 					style={{ display: 'flex', alignItems: 'center', width: '100%' }}
 				>
 					{title}
-					{getStatusBadge(status)}
+					{lockIcon || getStatusBadge(status)}
 				</a>
 			</DBNavigationItem>
 		);
@@ -81,7 +112,7 @@ const NavItem = ({
 				style={{ display: 'flex', alignItems: 'center', width: '100%' }}
 			>
 				{title}
-				{getStatusBadge(status)}
+				{lockIcon || getStatusBadge(status)}
 			</a>
 		</DBNavigationItem>
 	);
