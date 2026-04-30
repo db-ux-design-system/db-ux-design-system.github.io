@@ -9,6 +9,7 @@ export interface CardTeaserProps {
 	imageAlt: string;
 	label: string;
 	external?: boolean;
+	protected?: boolean;
 }
 
 const CardTeaser = ({
@@ -19,6 +20,7 @@ const CardTeaser = ({
 	imageAlt,
 	label,
 	external = false,
+	protected: isProtected = false,
 }: CardTeaserProps) => {
 	return (
 		<a
@@ -27,6 +29,14 @@ const CardTeaser = ({
 			className="card-teaser"
 		>
 			<DBCard behavior="interactive" spacing="medium">
+				{isProtected && (
+					<span
+						className="card-teaser-protected-icon"
+						data-icon="lock_closed"
+						aria-label="Protected content"
+						role="img"
+					/>
+				)}
 				<div className="card-teaser-content">
 					<div className="card-teaser-body">
 						<strong className="card-teaser-title">{title}</strong>
@@ -38,12 +48,7 @@ const CardTeaser = ({
 							{label}
 						</strong>
 					</div>
-					<img
-						src={image}
-						alt={imageAlt}
-						className="card-teaser-image"
-						loading="lazy"
-					/>
+					<img src={image} alt={imageAlt} className="card-teaser-image" loading="lazy" />
 				</div>
 			</DBCard>
 		</a>
