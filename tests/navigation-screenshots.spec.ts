@@ -17,6 +17,7 @@ function collectAllPaths(items: NavigationItem[]): string[] {
 
 const response = await fetch('http://localhost:4321/api/app-navigation.json');
 const appNavigation = await response.json();
+// These are redirect path, that we don't want to collect in the allPaths object. In case that those become "real" pages, remove them from the `redirectPaths` array
 const redirectPaths = ['documentation/extensions', 'documentation/support'];
 const allPaths = [...collectAllPaths(appNavigation), 'demo-b2b', 'demo-b2c'].filter(
 	(path) => !redirectPaths.includes(path),
