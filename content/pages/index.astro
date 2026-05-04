@@ -62,7 +62,7 @@ import DefaultLayout from '@template/layouts/default';
 		});
 
 		document.addEventListener('click', (e) => {
-			const target = e.target as HTMLElement;
+			const target = (e.target as HTMLElement)?.closest<HTMLElement>('[data-action]');
 			if (!target) return;
 
 			const action = target.dataset.action;
