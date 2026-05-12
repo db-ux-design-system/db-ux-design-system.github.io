@@ -1,6 +1,6 @@
 ---
 hidePage: true
-category: 'S-Bahn-Theme'
+category: 'S-Bahn Theme'
 version: 'v1.0.0'
 date: '2026-05-12'
 ---
