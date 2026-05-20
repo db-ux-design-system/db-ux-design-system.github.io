@@ -5,10 +5,23 @@
 
 version: 2
 updates:
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+      time: '23:00'
+      timezone: 'Europe/Berlin'
+    pull-request-branch-name:
+      separator: '-'
+    cooldown:
+      default-days: 7
+
   - package-ecosystem: 'npm' # See documentation for possible values
     directory: '/' # Location of package manifests
     schedule:
       interval: 'daily'
+    cooldown:
+      default-days: 3
     groups:
       react:
         patterns:
