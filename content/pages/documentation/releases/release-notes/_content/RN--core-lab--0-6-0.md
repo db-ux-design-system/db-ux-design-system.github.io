@@ -14,7 +14,3 @@ date: '2026-05-20'
   - fix density behavior
   - integration of slots
   - alignment with dev (properties, behavior) → ready for beta
-
-### Development
-
--
