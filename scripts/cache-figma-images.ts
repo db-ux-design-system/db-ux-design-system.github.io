@@ -82,7 +82,7 @@ async function exportImages(fileKey: string, nodeIds: string[]): Promise<Record<
 	// Figma API expects node IDs with `:` (e.g. 3:852), but embed URLs use `-` (e.g. 3-852)
 	const ids = nodeIds.map((id) => id.replace('-', ':')).join(',');
 	const res = await fetch(
-		`https://api.figma.com/v1/images/${fileKey}?ids=${encodeURIComponent(ids)}&format=png&scale=2`,
+		`https://api.figma.com/v1/images/${fileKey}?ids=${encodeURIComponent(ids)}&format=png&scale=4`,
 		{ headers: { 'X-Figma-Token': FIGMA_TOKEN! } },
 	);
 	if (!res.ok) throw new Error(`Figma API error ${res.status}: ${await res.text()}`);
