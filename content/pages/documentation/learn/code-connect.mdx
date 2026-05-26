@@ -145,7 +145,7 @@ Code Connect maps Figma component properties to framework-specific code snippets
 
 <h3 style={{ marginTop: 'var(--db-spacing-fixed-lg)' }}>Using Code Connect in Dev Mode</h3>
 
-1. Open a Figma file and switch to **Dev Mode** (toggle in the top toolbar).
+1. Open a Figma file and switch to **Dev Mode** (toggle in the bottom toolbar).
 2. Select a component instance on the canvas.
 3. In the **Inspect panel** on the right, look for the **Code Connect** section (marked as "Connected").
 4. Select your target framework (e.g. React) from the dropdown.
@@ -186,77 +186,12 @@ Both types of properties are reflected in the generated code output. The distinc
 
 ⚙️ Code Connect properties have sensible defaults pre-configured. If a designer hasn't explicitly changed a value, the default is used in the code output. This means you can trust the generated snippet to be complete and accurate for the selected configuration.
 
-<h3 style={{ marginTop: 'var(--db-spacing-fixed-lg)' }}>Code Connect configuration</h3>
+<h3 style={{ marginTop: 'var(--db-spacing-fixed-lg)' }}>Connect own components</h3>
 
-Code Connect is configured via `.figma.ts` files in the component source code. These files define the mapping between Figma properties and code props using a custom abstraction layer.
-
-```ts
-// checkbox.figma.ts
-import { FigmaCodeConnect, FigmaProp } from '../../../shared/figma';
-
-export type FigmaCheckboxProps = {
-	label?: string;
-	size?: string;
-	required?: boolean;
-	showRequiredAsterisk?: boolean;
-	disabled?: boolean;
-	checked?: boolean;
-	indeterminate?: boolean;
-	validation?: string;
-	message?: string;
-};
-
-const checkboxProps: Record<string, FigmaProp> = {
-	label: { type: 'textContent', key: 'Label' },
-	size: {
-		type: 'enum',
-		key: 'Size',
-		value: { Medium: 'medium', Small: 'small' },
-	},
-	required: { type: 'boolean', key: 'Required' },
-	showRequiredAsterisk: { type: 'boolean', key: 'Show Required Asterisk' },
-	disabled: { type: 'boolean', key: 'Disabled' },
-	checked: { type: 'boolean', key: 'Checked' },
-	indeterminate: { type: 'boolean', key: 'Indeterminate' },
-	validation: {
-		type: 'enum',
-		key: 'Validation',
-		value: {
-			'(Def) No Validation': 'no-validation',
-			Valid: 'valid',
-			Invalid: 'invalid',
-		},
-	},
-	message: {
-		type: 'validationMessage',
-		key: 'Text',
-		conditionProp: 'validation',
-		map: {
-			invalid: 'invalidMessage',
-			valid: 'validMessage',
-			default: 'message',
-		},
-	},
-};
-
-export const checkboxes: FigmaCodeConnect = {
-	urls: [
-		'https://www.figma.com/design/FIGMA_FILE?node-id=2068:3423',
-		// ... more variant URLs
-	],
-	props: checkboxProps,
-};
-```
-
-Each `.figma.ts` file exports a `FigmaCodeConnect` object containing:
-
-- **urls**: Links to the Figma component variants this configuration applies to.
-- **props**: A mapping of code prop names to their Figma property definitions (type, key, value mappings).
-
-<DBInfotext
-	semantic="warning"
-	size="small"
-	text="The code example above is illustrative. Please refer to the actual .figma.ts files in the component packages for the real implementation."
-/>
+Follow the instructions from <a href="https://developers.figma.com/docs/code-connect/quickstart-guide/" target="_blank" referer="no-referer">Figma Code Connect</a> to
+connect your own components to Code Connect. You'll need a valid Figma Token with the permission to you component.
+To reuse DB UX Components you can use `instance.findInstance('DBButton').executeTemplate().example` to include the correct code.
+The "code" which is shown in Figma is just a string, you can manipulate it as you like. We generate everything inside CI/CD for all Framworks based on <a href="https://github.com/db-ux-design-system/core-web/blob/main/packages/components/configs/plugins/figma/index.cjs" target="_blank" referer="no-referer">this</a> script.
+You might use an AI and this string to adapt your own logic.
 
 </DBSection>
