@@ -1,7 +1,7 @@
 code {
 	border-radius: var(--db-border-radius-xs);
-	background-color: #24292e !important;
-	color: #e1e4e8 !important;
+	background-color: var(--db-adaptive-bg-basic-level-3-default) !important;
+	color: var(--db-adaptive-on-bg-basic-emphasis-90-default) !important;
 }
 
 pre {
@@ -20,5 +20,5 @@ pre > code {
 }
 
 pre[data-language='plaintext'] > code {
-	color: #e1e4e8;
+	color: var(--db-adaptive-on-bg-basic-emphasis-90-default);
 }

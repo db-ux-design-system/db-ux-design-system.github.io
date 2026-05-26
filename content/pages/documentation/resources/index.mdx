@@ -14,9 +14,11 @@ toc: true
 ---
 
 import { DBSection, DBStack } from '@db-ux/react-core-components';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
-import CardTeaser from '@template/components/CardTeaser/CardTeaser';
-import CardTeaserRow from '@template/components/CardTeaser/CardTeaserRow';
+import ResourceCards from '@template/components/content/ResourceCards/ResourceCards.astro';
+import CardTeaser from '@template/components/content/CardTeaser/CardTeaser';
+import CardTeaserRow from '@template/components/content/CardTeaser/CardTeaserRow';
+
+<DBSection id="resources--overview" spacing='small' width="large">
 
 <CardTeaserRow
 	items={[
@@ -44,7 +46,9 @@ import CardTeaserRow from '@template/components/CardTeaser/CardTeaserRow';
 	]}
 />
 
-<DBSection spacing='small' width="auto">
+</DBSection>
+
+<DBSection id="resources--core-foundation" spacing='small' width="large">
 
 ## Core Foundation
 
@@ -74,7 +78,7 @@ A library with the basic styles and tokens of the DB UX Design System.
 
 </DBSection>
 
-<DBSection spacing='small' width="auto">
+<DBSection id="resources--core-components" spacing='small' width="large">
 
 ## Core Components
 
@@ -125,7 +129,7 @@ A library with the core components of the DB UX Design System.
 
 </DBSection>
 
-<DBSection spacing='small' width="auto">
+<DBSection id="resources--core-lab" spacing='small' width="large">
 
 ## Core Lab
 
@@ -148,7 +152,7 @@ A library with concepts for future content of the DB UX Design System.
 
 </DBSection>
 
-<DBSection spacing='small' width="auto">
+<DBSection id="resources--extensions" spacing='small' width="large">
 
 ## Extensions
 
@@ -198,7 +202,7 @@ A library with concepts for future content of the DB UX Design System.
 />
 </DBSection>
 
-<DBSection spacing='small' width="auto">
+<DBSection id="resources--version-2-legacy" spacing='small' width="large">
 
 ## Version 2 (legacy)
 

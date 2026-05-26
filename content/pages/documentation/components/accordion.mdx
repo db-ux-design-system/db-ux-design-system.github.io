@@ -10,13 +10,15 @@ toc: true
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
-import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
-import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import CollapseButton from '@template/components/navigation/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/navigation/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/documentation/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/content/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/content/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/feedback/QuestionForm/QuestionForm.astro';
+import ComponentPlayground from '@template/components/documentation/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+<DBSection id="accordion--use-cases" spacing="none" width="large">
 
 Accordions group content into collapsible sections to save space and let users reveal details progressively. It is best for optional information and structured content where users do not need to see everything at once.
 
@@ -24,7 +26,10 @@ Accordions group content into collapsible sections to save space and let users r
 - Hide optional details behind clear section headlines (progressive disclosure)
 - Improve readability when a page contains many content sections
 
-<DBSection spacing="small" width="auto">
+
+</DBSection>
+
+<DBSection id="accordion--resources" spacing="small" width="large">
 
 ## Resources
 
@@ -32,7 +37,7 @@ Accordions group content into collapsible sections to save space and let users r
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="accordion--playground" spacing="small" width="large">
 
     ## Playground
 
@@ -40,7 +45,7 @@ Accordions group content into collapsible sections to save space and let users r
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="accordion--guidelines" spacing="small" width="large">
 
 ## Guidelines
 
@@ -76,7 +81,7 @@ Headlines must describe the content inside and remain short and scannable. Avoid
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion?node-id=3-1112&embed-host=share"
-		description="Avoid vague headlines like “Information 1/2/3” or “More details”."
+		description="Avoid vague headlines like â€œInformation 1/2/3â€ or â€œMore detailsâ€."
 	/>
 </div>
 
@@ -120,7 +125,7 @@ Nested accordions quickly become hard to understand and navigate. If nesting is 
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="accordion--faq" spacing="small" width="large">
 
 ## FAQ
 
@@ -128,7 +133,7 @@ Nested accordions quickly become hard to understand and navigate. If nesting is 
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="accordion--related-content" spacing="small" width="large">
 
 ## Related Content
 

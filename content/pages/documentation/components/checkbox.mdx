@@ -11,20 +11,25 @@ toc: true
 ---
 
 import { DBAccordion, DBAccordionItem, DBSection } from '@db-ux/react-core-components';
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
-import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
-import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import CollapseButton from '@template/components/navigation/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/navigation/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/documentation/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/content/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/content/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/feedback/QuestionForm/QuestionForm.astro';
 
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentPlayground from '@template/components/documentation/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+<DBSection id="checkbox--use-cases" spacing="none" width="large">
 
 - Select multiple options from a list (e.g., notification channels)
 - Confirm consent or acknowledgment (e.g., accept terms)
 - Apply filters that can be combined (e.g., categories, attributes)
 
-<DBSection spacing="small" width="auto">
+
+</DBSection>
+
+<DBSection id="checkbox--resources" spacing="small" width="large">
 
 ## Resources
 
@@ -32,7 +37,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="checkbox--playground" spacing="small" width="large">
 
 ## Playground
 
@@ -40,7 +45,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="checkbox--guidelines" spacing="small" width="large">
 
 ## Guidelines
 
@@ -103,7 +108,7 @@ In checkbox groups, keep options parallel in wording and length. If a group need
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="checkbox--faq" spacing="small" width="large">
 
 ## FAQ
 
@@ -132,7 +137,7 @@ In checkbox groups, keep options parallel in wording and length. If a group need
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="checkbox--related-content" spacing="small" width="large">
 	## Related Content
 	<TeaserCard
 		teasers={[

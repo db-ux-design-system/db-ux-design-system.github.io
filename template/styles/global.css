@@ -4,18 +4,21 @@
 @import url('@db-ux/db-theme/build/styles/rollup.css') layer(db-theme);
 @import url('./layout.css');
 @import url('./markdown.css');
-@import url('../components/TableOfContents/TableOfContents.css');
+@import url('../components/navigation/TableOfContents/TableOfContents.css');
 @import url('./table.css');
-@import url('../components/GuidelineExample/GuidelineExample.css');
-@import url('../components/YourAction/YourAction.css');
-@import url('../components/CardTeaser/CardTeaser.css');
-@import url('../components/CardTeaser/CardTeaserRow.css');
+@import url('../components/documentation/GuidelineExample/GuidelineExample.css');
+@import url('../components/content/YourAction/YourAction.css');
+@import url('../components/content/CardTeaser/CardTeaser.css');
+@import url('../components/content/CardTeaser/CardTeaserRow.css');
 @import url('./db-ux-overrides.css');
 
 :root {
 	--header-height: var(--db-sizing-lg);
 	--footer-height: var(--db-sizing-xl);
-	--content-width: min(1440px, 100svw);
+	--content-width: min(
+		1440px,
+		100svw
+	); /* no-token: max content width has no sizing token equivalent */
 
 	@media screen and (width >= 1024px) {
 		--footer-height: var(--db-sizing-lg);

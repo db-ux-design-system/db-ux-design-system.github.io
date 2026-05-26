@@ -11,20 +11,24 @@ toc: true
 ---
 
 import { DBAccordion, DBAccordionItem, DBSection } from '@db-ux/react-core-components';
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
-import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
-import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import CollapseButton from '@template/components/navigation/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/navigation/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/documentation/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/content/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/content/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/feedback/QuestionForm/QuestionForm.astro';
 
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentPlayground from '@template/components/documentation/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+<DBSection id="radio--use-cases" spacing="none" width="large">
 
 - Select one option from a small set (e.g., language, delivery type)
 - Configure a single preference in settings (e.g., "Light / Dark / System")
 - Choose one form option where only one is valid (e.g., contact method)
 
-<DBSection spacing="small" width="auto">
+</DBSection>
+
+<DBSection id="radio--resources" spacing="small" width="large">
 
 ## Resources
 
@@ -32,7 +36,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="radio--playground" spacing="small" width="large">
 
 ## Playground
 
@@ -40,7 +44,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="radio--guidelines" spacing="small" width="large">
 
 ## Guidelines
 
@@ -71,7 +75,7 @@ Use Radio when the number of options is small and users benefit from seeing all 
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1110&embed-host=share"
-		description="Use radio buttons for 2–6 options that users should compare quickly."
+		description="Use radio buttons for 2â€“6 options that users should compare quickly."
 	/>
 	<GuidelineExample
 		variant="dont"
@@ -120,7 +124,7 @@ Prefer vertical stacking for readability and accessibility. Use horizontal layou
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="radio--faq" spacing="small" width="large">
 
 ## FAQ
 
@@ -153,7 +157,7 @@ Have a question about the radio component? We'll answer it and add frequently as
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="radio--related-content" spacing="small" width="large">
 	## Related Content
 	<TeaserCard
 		teasers={[

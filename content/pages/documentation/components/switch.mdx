@@ -11,20 +11,25 @@ toc: true
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
-import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
-import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import CollapseButton from '@template/components/navigation/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/navigation/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/documentation/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/content/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/content/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/feedback/QuestionForm/QuestionForm.astro';
 
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentPlayground from '@template/components/documentation/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+<DBSection id="switch--use-cases" spacing="none" width="large">
 
 - Turn a setting on or off with immediate effect (e.g., "Enable notifications")
 - Activate/deactivate a feature in context without leaving the page
 - Control availability of an option that updates the UI instantly
 
-<DBSection spacing="small" width="auto">
+
+</DBSection>
+
+<DBSection id="switch--resources" spacing="small" width="large">
 
 ## Resources
 
@@ -32,7 +37,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="switch--playground" spacing="small" width="large">
 
 ## Playground
 
@@ -40,7 +45,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="switch--guidelines" spacing="small" width="large">
 
 ## Guidelines
 
@@ -103,7 +108,7 @@ Keep labels concise and avoid negative wording that can create confusion ("Don't
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="switch--faq" spacing="small" width="large">
 
 ## FAQ
 
@@ -113,7 +118,7 @@ Have a question about the uswitch component? We'll answer it and add frequently 
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="switch--related-content" spacing="small" width="large">
 	## Related Content
 	<TeaserCard
 		teasers={[

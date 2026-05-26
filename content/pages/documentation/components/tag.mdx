@@ -11,20 +11,25 @@ toc: true
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
-import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
-import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import CollapseButton from '@template/components/navigation/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/navigation/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/documentation/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/content/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/content/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/feedback/QuestionForm/QuestionForm.astro';
 
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentPlayground from '@template/components/documentation/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+<DBSection id="tag--use-cases" spacing="none" width="large">
 
 - Display short categories or attributes (e.g., "New", "Marketing", "Internal")
 - Enable filtering/selection in lists or search results (interactive tags)
 - Represent selected items that can be removed (e.g., applied filters)
 
-<DBSection spacing="small" width="auto">
+
+</DBSection>
+
+<DBSection id="tag--resources" spacing="small" width="large">
 
 ## Resources
 
@@ -59,7 +64,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="tag--playground" spacing="small" width="large">
 
 ## Playground
 
@@ -67,7 +72,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="tag--guidelines" spacing="small" width="large">
 
 ## Guidelines
 
@@ -160,12 +165,12 @@ The interactive Tag in "Functional" density has a height of 20 px. To meet acces
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=3-1118&embed-host=share"
-		description="Provide a 24×24 px clickable area via surrounding spacing."
+		description="Provide a 24Ã—24 px clickable area via surrounding spacing."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=3-1119&embed-host=share"
-		description="Allow adjacent controls to intrude into the required 24×24 px area."
+		description="Allow adjacent controls to intrude into the required 24Ã—24 px area."
 	/>
 </div>
 
@@ -175,7 +180,7 @@ The interactive Tag in "Functional" density has a height of 20 px. To meet acces
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="tag--faq" spacing="small" width="large">
 
 ## FAQ
 
@@ -185,7 +190,7 @@ Have a question about the Tag component? We'll answer it and add frequently aske
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="tag--related-content" spacing="small" width="large">
 	## Related Content
 	<TeaserCard
 		teasers={[

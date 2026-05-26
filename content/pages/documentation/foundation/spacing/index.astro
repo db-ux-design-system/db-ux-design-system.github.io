@@ -1,12 +1,12 @@
 ---
 import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
 import { DBSection, DBStack } from '@db-ux/react-core-components';
-import SpacingPlayground from './_SpacingPlayground.astro';
-import SpacingTable from './_SpacingTable.astro';
-import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
-import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import SpacingPlayground from '@template/components/documentation/SpacingPlayground/SpacingPlayground.astro';
+import SpacingTable from '@template/components/documentation/SpacingTable/SpacingTable.astro';
+import GuidelineExample from '@template/components/documentation/GuidelineExample/GuidelineExample.astro';
+import CollapseButton from '@template/components/navigation/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/navigation/CollapseButton/CollapsibleWrapper.astro';
+import QuestionForm from '@template/components/feedback/QuestionForm/QuestionForm.astro';
 
 const frontmatter: DocumentationFrontMatter = {
 	headline: 'Spacing',
@@ -29,7 +29,7 @@ const headings = [
 	Spacing is a key element of our design system and defines the gaps between different components.
 	Consistent use of spacing ensures a harmonious, clear, and user-friendly appearance.
 
-	<DBSection spacing="small">
+	<DBSection id="spacing--playground" spacing="small" width="large">
 		<DBStack gap="x-large">
 			<DBStack gap="none">
 				<h2 id="playground">Playground</h2>
@@ -40,7 +40,7 @@ const headings = [
 		</DBStack>
 	</DBSection>
 
-	<DBSection spacing="small">
+	<DBSection id="spacing--guidelines" spacing="small" width="large">
 		<h2 id="guidelines">Guidelines</h2>
 
 		<CollapsibleWrapper collapsedHeight="320px">
@@ -80,19 +80,19 @@ const headings = [
 		<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
 	</DBSection>
 
-	<DBSection spacing="small">
+	<DBSection id="spacing--tokens" spacing="small" width="large">
 		<h2 id="tokens">Tokens</h2>
 		<SpacingTable />
 	</DBSection>
 
-	<DBSection spacing="small">
+	<DBSection id="spacing--faq" spacing="small" width="large">
 		<h2 id="faq">FAQ</h2>
 		<QuestionForm componentName="Spacing" />
 	</DBSection>
 
 	<script>
 		import { waitForElements } from '@template/utils/client.utils.ts';
-		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';
+		import { handleSimplePlaygrounds } from '@template/components/documentation/FoundationPlayground';
 
 		function initSpacing(): boolean {
 			return handleSimplePlaygrounds({

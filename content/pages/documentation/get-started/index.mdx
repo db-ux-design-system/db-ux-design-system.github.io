@@ -8,6 +8,90 @@ headline: 'Get Started'
 description: 'Everything you need to build consistent and accessible digital experiences with the DB UX Design System. Start with the Foundations or explore ready-to-use components for design and code.'
 ---
 
-import GetStartedTeaser from './_components/GetStartedTeaser.astro';
+import { DBCard, DBStack, DBSection } from '@db-ux/react-core-components';
+import TextImage from '@template/components/content/TextImage/TextImage.astro';
 
-<GetStartedTeaser />
+<DBSection id="get-started--teaser" spacing="small" width="large">
+
+<DBStack gap="large">
+	<DBStack direction="row">
+		<a href="/documentation/foundation" class="get-started-card-link">
+			<DBCard behavior="interactive" spacing="large" className="get-started-card">
+				<TextImage
+					title="Foundation"
+					imagePosition="right"
+					imageWidth="33"
+					imageSrc="/assets/Foundations-Teaser--C.png"
+					imageAlt="Foundations"
+					mask="fade-bottom-right"
+				>
+					Shared base tokens and modes provide a stable foundation for clear and coherent
+					interfaces.
+				</TextImage>
+			</DBCard>
+		</a>
+		<a href="/documentation/components" class="get-started-card-link">
+			<DBCard behavior="interactive" spacing="large" className="get-started-card">
+				<TextImage
+					title="Components"
+					imagePosition="right"
+					imageWidth="33"
+					imageSrc="/assets/Components-Teaser--C.png"
+					imageAlt="Components"
+					mask="fade-bottom-right"
+				>
+					Core components ensure predictable interactions across products.
+				</TextImage>
+			</DBCard>
+		</a>
+	</DBStack>
+	<DBStack direction="row">
+		<a href="/documentation/icons" class="get-started-card-link">
+			<DBCard behavior="interactive" spacing="large" className="get-started-card">
+				<TextImage
+					title="Icons"
+					imagePosition="right"
+					imageWidth="33"
+					imageSrc="/assets/Extensions-Teaser--C.png"
+					imageAlt="Icons"
+					mask="fade-bottom-right"
+					headlineLevel={3}
+				>
+					Browse and copy all available DB UX icon names for usage in code.
+				</TextImage>
+			</DBCard>
+		</a>
+		<a href="/documentation/release-notes" class="get-started-card-link">
+			<DBCard behavior="interactive" spacing="large" className="get-started-card">
+				<TextImage
+					title="Release Notes"
+					imagePosition="right"
+					imageWidth="33"
+					imageSrc="/assets/Release-Notes-Teaser.png"
+					imageAlt="Release Notes"
+					mask="fade-bottom-right"
+					headlineLevel={3}
+				>
+					Stay up to date with the latest changes and improvements.
+				</TextImage>
+			</DBCard>
+		</a>
+		<a href="/documentation/resources" class="get-started-card-link">
+			<DBCard behavior="interactive" spacing="large" className="get-started-card">
+				<TextImage
+					title="Resources"
+					imagePosition="right"
+					imageWidth="33"
+					imageSrc="/assets/Resources-Teaser.png"
+					imageAlt="Resources"
+					mask="fade-bottom-right"
+					headlineLevel={3}
+				>
+					Figma libraries for designers and code packages for developers.
+				</TextImage>
+			</DBCard>
+		</a>
+	</DBStack>
+</DBStack>
+
+</DBSection>
