@@ -1,8 +1,8 @@
 ---
 hidePage: true
 category: 'Core'
-version: 'v4.10.0'
-date: '2026-05-26'
+version: 'v4.11.0'
+date: '2026-06-08'
 ---
 
 ### Design
