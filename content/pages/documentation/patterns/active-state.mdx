@@ -1,0 +1,108 @@
+---
+order: 1
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Active State'
+title: 'Active State'
+align: start
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+Active describes an element that is currently checked, selected or highlighted in the interface. This state is typically created by giving the element a higher visual hierarchy than its default enabled state. This pattern does not prescribe a single fixed style, but describes a set of methods that can be used individually or in combination.
+
+Depending on context, hierarchy, and interface density, the active state can be expressed via the container (surface, color, border) or via the content (typography, icon). The following variants illustrate common approaches that can be combined consistently and adapted across different components.
+
+<DBSection spacing="small" width="auto">
+
+## Container
+
+### Surface
+
+The first option is to increase the visual emphasis of the container. This can be achieved through stronger contrast or even inverted foreground and background, making the active state stand out immediately.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/gByxIUPZEtbCaNRHEjP304/Pattern--Active-State?node-id=46-350&embed-host=share"
+		fullWidth={true}
+	/>
+</div>
+
+### Color
+
+Another option is an adjustment of the container color. A shifted or tinted background distinguishes the active state from inactive elements without dominating the overall layout. This can be easily applied by changing the data-color.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/gByxIUPZEtbCaNRHEjP304/Pattern--Active-State?node-id=46-351&embed-host=share"
+		fullWidth={true}
+	/>
+</div>
+
+### Border
+
+The active state can also be shown through a more prominent border, for example with increased stroke width or change of color. The changed outline makes the active element clearly recognizable, even when surfaces remain visually restrained.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/gByxIUPZEtbCaNRHEjP304/Pattern--Active-State?node-id=46-352&embed-host=share"
+		fullWidth={true}
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Content
+
+### Typography
+
+Instead of changing the container, the active state can also be highlighted through typography. A higher font weight or other typographic accents ensure that the label of the active element appears clearly more dominant in direct comparison.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/gByxIUPZEtbCaNRHEjP304/Pattern--Active-State?node-id=46-353&embed-host=share"
+		fullWidth={true}
+	/>
+</div>
+
+### Content
+
+Finally, the active state can be expressed by changing or extending the content. An additional icon, such as a checkmark, or a modified label makes the selection semantically clear and reinforces the visual emphasis.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/gByxIUPZEtbCaNRHEjP304/Pattern--Active-State?node-id=46-354&embed-host=share"
+		fullWidth={true}
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+The various options can be combined in any way depending on your needs and the context. Here are a few examples of how the active state is implemented in components within the design system.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/gByxIUPZEtbCaNRHEjP304/Pattern--Active-State?node-id=58-503&embed-host=share"
+		fullWidth={true}
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Active State" />
+
+</DBSection>
