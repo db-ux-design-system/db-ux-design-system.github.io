@@ -12,3 +12,5 @@ date: '2025-06-10'
 ### Features Design
 
 - feat: Extended Card with different slot content behaviors
+
+aasdasd
