@@ -1,4 +1,10 @@
 # Global Repository owners
 # see https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners for details of syntax
-# * @mfranzke @nmerget @michaelmkraus
-# *.md @leape @sissihamel @sissihamel @Janafreund @LSchroff @jessi-eff @KatrinSchusterFoelsing
+
+# Default for all files
+* @nmerget @michaelmkraus @mfranzke
+
+# Documentation markdown files and their potential screenshots
+/content/pages/documentation/**/*.md @db-ux-design-system/core-team
+/tests/**/*.png @db-ux-design-system/core-team
+/static/assets/ @db-ux-design-system/core-team
