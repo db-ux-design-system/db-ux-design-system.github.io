@@ -1,0 +1,27 @@
+---
+import FoundationTokenTable from '@template/components/documentation/FoundationTokenTable/FoundationTokenTable.astro';
+
+const tokens = [
+	'db-opacity-full',
+	'db-opacity-3xl',
+	'db-opacity-2xl',
+	'db-opacity-xl',
+	'db-opacity-lg',
+	'db-opacity-md',
+	'db-opacity-sm',
+	'db-opacity-xs',
+	'db-opacity-2xs',
+	'db-opacity-3xs',
+];
+---
+
+<FoundationTokenTable
+	sections={[
+		{
+			headline: 'Opacity',
+			tokens,
+			previewClass: 'opacity-preview',
+			previewAttribute: 'opacity',
+		},
+	]}
+/>

@@ -11,10 +11,10 @@ toc: true
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
-import YourAction from '@template/components/YourAction/YourAction';
-import CardTeaserRow from "@template/components/CardTeaser/CardTeaserRow";
+import YourAction from '@template/components/content/YourAction/YourAction';
+import CardTeaserRow from "@template/components/content/CardTeaser/CardTeaserRow";
 
-<DBSection spacing="small" width="auto">
+<DBSection id="v3--development-release" spacing="small" width="large">
 
 ## üíª Development Release
 
@@ -29,7 +29,7 @@ Sketch is deprecated and will no longer receive new features.
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="v3--components-features" spacing="small" width="large">
 
 ## Components: Features
 
@@ -41,12 +41,12 @@ Sketch is deprecated and will no longer receive new features.
 <img
 	src="/assets/migration-guides/v3/button-trailing-icon.png"
 	alt="Button Trailing Icon"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="v3--components-bugfixes-figma" spacing="small" width="large">
 
 ## Components: Bugfixes (Figma)
 
@@ -59,13 +59,13 @@ The following fixes require special attention. An overview of all other resolved
 <img
 	src="/assets/migration-guides/v3/accordion-bug.png"
 	alt="Accordion Bug"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 <img
 	src="/assets/migration-guides/v3/accordion-list.png"
 	alt="Accordion Item List as Subcomponent"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 - Optimization of prototyping behavior.
@@ -84,7 +84,7 @@ Switch to the second level of the component. If the right sidebar shows ".Slot 
 <img
 	src="/assets/migration-guides/v3/accordion-slot.png"
 	alt="Outdated Accordion with Slot List"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 **‚ùì How do I update an already deployed Accordion to the latest variant?**
@@ -96,12 +96,12 @@ Switch to the first level of the component and reset it.
 <img
 	src="/assets/migration-guides/v3/accordion-reset.png"
 	alt="Reset Accordion Component"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="v3--navigation" spacing="small" width="large">
 
 ### Navigation
 
@@ -110,13 +110,13 @@ Switch to the first level of the component and reset it.
 <img
 	src="/assets/migration-guides/v3/navigation-bug.png"
 	alt="Navigation Bug"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 <img
 	src="/assets/migration-guides/v3/navigation-list.png"
 	alt="Navigation Item List as Subcomponent"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 <YourAction
@@ -133,7 +133,7 @@ Switch to the second level of the component. If the right sidebar shows ".Slot 
 <img
 	src="/assets/migration-guides/v3/navigation-slot.png"
 	alt="Outdated Navigation with Slot List"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 **‚ùì How do I update an already deployed Navigation to the latest variant?**
@@ -145,12 +145,12 @@ Switch to the first level of the component and reset it.
 <img
 	src="/assets/migration-guides/v3/navigation-reset.png"
 	alt="Reset Navigation Component"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="v3--helper-component-slot-list" spacing="small" width="large">
 
 ### Helper Component Slot List
 
@@ -164,7 +164,7 @@ Switch to the first level of the component and reset it.
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="v3--db-theme-icons-bugfixes" spacing="small" width="large">
 
 ## DB Theme Icons: Bugfixes
 
@@ -175,12 +175,12 @@ Switch to the first level of the component and reset it.
 <img
 	src="/assets/migration-guides/v3/icons-functional.png"
 	alt="Functional Icons Changes"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="v3--db-theme-illustrative-icons-bugfixes" spacing="small" width="large">
 
 ## DB Theme Illustrative Icons: Bugfixes
 
@@ -193,11 +193,11 @@ Switch to the first level of the component and reset it.
 <img
 	src="/assets/migration-guides/v3/icons-illustrative.png"
 	alt="Illustrative Icons Changes"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 </DBSection>
-<DBSection spacing="small" width="auto">
+<DBSection id="v3--related-content" spacing="small" width="large">
 
 <CardTeaserRow
 	items={[

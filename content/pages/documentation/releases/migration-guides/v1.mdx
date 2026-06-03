@@ -11,17 +11,17 @@ toc: true
 ---
 
 import { DBSection, DBNotification } from '@db-ux/react-core-components';
-import StatusNotification from '@template/components/StatusNotification/StatusNotification';
-import YourAction from '@template/components/YourAction/YourAction';
-import CardTeaserRow from "@template/components/CardTeaser/CardTeaserRow";
+import StatusNotification from '@template/components/feedback/StatusNotification/StatusNotification';
+import YourAction from '@template/components/content/YourAction/YourAction';
+import CardTeaserRow from '@template/components/content/CardTeaser/CardTeaserRow';
 
-<DBSection spacing="small" width="auto">
+<DBSection id="v1--development-release" spacing="small" width="large">
 
-## 💻 Development Release
+## ðŸ’» Development Release
 
 Please refer to the notes on [GitHub](https://github.com/db-ux-design-system/core-web/releases/tag/v1.0.0).
 
-## 🎨 Design Release
+## ðŸŽ¨ Design Release
 
 The following migration guide primarily focuses on **Figma**. Some changes will be incorporated into Sketch where possible and practical (especially property alignment).
 The Sketch library update to v1.0.0 will follow.
@@ -35,9 +35,9 @@ Everything related to the DB UX Design System v3 has now been correctly renamed 
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="v1--from-beta-to-stable" spacing="small" width="large">
 
-## 🚀 From Beta to Stable!
+## ðŸš€ From Beta to Stable!
 
 The following components receive "Stable" status with the v1.0.0 release, having completed the full component creation process including all tests for usability and accessibility.
 
@@ -55,15 +55,15 @@ The following components receive "Stable" status with the v1.0.0 release, having
 - Select
 - Textarea
 
-</DBSection>
-
 <img
 	src="/assets/migration-guides/v1/migration-stable-components.png"
 	alt="Stable Components"
 	style={{ maxWidth: '100%' }}
 />
 
-<DBSection spacing="small" width="auto">
+</DBSection>
+
+<DBSection id="v1--components-bugfixes-figma" spacing="small" width="large">
 
 ## Components: Bugfixes (Figma)
 
@@ -71,13 +71,15 @@ The following bugfixes require special attention. All other resolved bugs can be
 
 ### Radio, Input and Textarea
 
-- The deprecated variants (❌ marked in pink) have been removed.
+- The deprecated variants (âŒ marked in pink) have been removed.
 
-</DBSection>
 <YourAction
 	actions={['Replace any remaining placed variants that were removed with the v1.0.0 release.']}
 />
-<DBSection spacing="small" width="auto">
+
+</DBSection>
+
+<DBSection id="v1--components-property-alignment" spacing="small" width="large">
 
 ## Components: Property Alignment
 
@@ -99,11 +101,11 @@ The property alignment between design and code, started with v0.6.0, has been co
 - **Consistency and new properties:**
   All sub-components within a parent component have been unified.
 
-- **New development properties (💻)**
-  Properties introduced for development are marked with 💻 (e.g. Prefix, Component, No Text, Children, Placement).
+- **New development properties (ðŸ’»)**
+  Properties introduced for development are marked with ðŸ’» (e.g. Prefix, Component, No Text, Children, Placement).
 
-- **Design-specific properties (🎨)**
-  Properties relevant only to design are marked with 🎨.
+- **Design-specific properties (ðŸŽ¨)**
+  Properties relevant only to design are marked with ðŸŽ¨.
 
 - **New variants and booleans:**
   - **Disabled property (true/false):** Introduced as a dedicated variant, Interaction State = None
@@ -114,12 +116,12 @@ The property alignment between design and code, started with v0.6.0, has been co
   - **Text property for screen readers:** Components without visible text (e.g. Icon Button, Icon Tag, Badge without text) now include a hidden text property for screen readers.
 
 - **Minor property name adjustments**, e.g.:
-  - "Width: Auto Width/Full Width" → "Width: Auto/Full" (e.g. Button)
-  - "🎨 xxx" → "Show xxx" (various components)
+  - "Width: Auto Width/Full Width" â†’ "Width: Auto/Full" (e.g. Button)
+  - "ðŸŽ¨ xxx" â†’ "Show xxx" (various components)
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="v1--components" spacing="small" width="large">
 
 ### Components
 
@@ -141,7 +143,7 @@ The property alignment between design and code, started with v0.6.0, has been co
     	style={{ maxWidth: '100%' }}
     />
 
-  - The **colors and color logic** across the different tag variants have been **adjusted and unified.** Thank you for your feedback on this! (see Rework Foundation → Color Variables)
+  - The **colors and color logic** across the different tag variants have been **adjusted and unified.** Thank you for your feedback on this! (see Rework Foundation â†’ Color Variables)
 
     <img
     	src="/assets/migration-guides/v1/migration-tag-colors.png"
@@ -178,13 +180,13 @@ The property alignment between design and code, started with v0.6.0, has been co
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="v1--rework-foundations" spacing="small" width="large">
 
 ## Rework Foundations
 
 ### Variable Modes (Figma)
 
-- Removal of deprecated "Density" modes such as ❌ **Tablet-XXX** and ❌ **Mobile-XXX.**
+- Removal of deprecated "Density" modes such as âŒ **Tablet-XXX** and âŒ **Mobile-XXX.**
 - Renaming of "Display Mode" to "Mode"
 
 ### Color Variables
@@ -197,20 +199,20 @@ The property alignment between design and code, started with v0.6.0, has been co
 	style={{ maxWidth: '100%' }}
 />
 
-</DBSection>
-
 <YourAction
 	actions={[
 		'Review your layouts and update any missing settings to the new Variable Modes if you had not yet replaced removed modes.',
 	]}
 />
 
-<DBSection spacing="small" width="auto">
+</DBSection>
+
+<DBSection id="v1--restructure-icon-libraries" spacing="small" width="large">
 
 ## Restructure Icon Libraries
 
 - **Merging of the existing functional icon libraries** "Core Icons" and "Extension PV Icons" into a single file for design and development
-  → **DB Theme Icons** including all Core Icons and PV Icons
+  â†’ **DB Theme Icons** including all Core Icons and PV Icons
 
 <img
 	src="/assets/migration-guides/v1/migration-icons.png"
@@ -218,7 +220,7 @@ The property alignment between design and code, started with v0.6.0, has been co
 	style={{ maxWidth: '100%' }}
 />
 
-- ❗ **Note for Figma libraries:** there are icons in the PV Extension Library that are duplicates and already exist under different names in the Core Library (e.g. Ticket/Passenger → Human/Person, Transport/Walking → Transport/Pedestrian). These are now marked as deprecated and must be manually replaced with the corresponding icon from the new library. All marked icons should still be findable under their old name in the merged file. Libraries not included will be migrated and should remain linked.
+- â— **Note for Figma libraries:** there are icons in the PV Extension Library that are duplicates and already exist under different names in the Core Library (e.g. Ticket/Passenger â†’ Human/Person, Transport/Walking â†’ Transport/Pedestrian). These are now marked as deprecated and must be manually replaced with the corresponding icon from the new library. All marked icons should still be findable under their old name in the merged file. Libraries not included will be migrated and should remain linked.
 
 <img
 	src="/assets/migration-guides/v1/migration-icons-deprecated.png"
@@ -227,47 +229,47 @@ The property alignment between design and code, started with v0.6.0, has been co
 />
 
 - The following icons are deprecated and must be replaced:
-  - **Facilities → Human**
+  - **Facilities â†’ Human**
     - Restricted Mobility Toilet, Shower, Shower Men, Shower Women, Sink, WC, WC Men, WC Sign, WC Women
   - **Features**
-    - Medical → Medial/Medical Cross
-    - No Smoking → Human/Cigarette Disabled
-    - Person with Blind Cane, Person with Rollator → Accessibility/Person with Blind Cane, Accessibility/Person with Rollator
-    - Power Socket → Technology/Power Socket
-    - Restaurant → Food/Knife & Fork
-    - Stroller → Human/Stroller
-    - Support Dog → Accessibility/Support Dog
+    - Medical â†’ Medial/Medical Cross
+    - No Smoking â†’ Human/Cigarette Disabled
+    - Person with Blind Cane, Person with Rollator â†’ Accessibility/Person with Blind Cane, Accessibility/Person with Rollator
+    - Power Socket â†’ Technology/Power Socket
+    - Restaurant â†’ Food/Knife & Fork
+    - Stroller â†’ Human/Stroller
+    - Support Dog â†’ Accessibility/Support Dog
   - **Journey**
-    - Journey Destination → Map/Map Pin
-  - **Seat → Compartment**
-    - Handicapped → Accessibility/Person with Wheelchair
-    - Infant Compartment → Human/Toys
-  - **Station → Buildings**
+    - Journey Destination â†’ Map/Map Pin
+  - **Seat â†’ Compartment**
+    - Handicapped â†’ Accessibility/Person with Wheelchair
+    - Infant Compartment â†’ Human/Toys
+  - **Station â†’ Buildings**
     - Train Station, Market
-  - **Sustainability → Environment**
-    - Environmental Mobility Check → Environmental/Leaf
+  - **Sustainability â†’ Environment**
+    - Environmental Mobility Check â†’ Environmental/Leaf
   - **Ticket:**
-    - Best Price → Social/Crown
-    - Passenger, Passengers → Human/Person, Persons
-    - QR Code, QR Code Scan → Technology/QR Code, QR Code Scan
-    - Travel Insurance → Security/Shield Check
-  - **Transportation → Transportation** (exceptions: S-Bahn, Subway)
+    - Best Price â†’ Social/Crown
+    - Passenger, Passengers â†’ Human/Person, Persons
+    - QR Code, QR Code Scan â†’ Technology/QR Code, QR Code Scan
+    - Travel Insurance â†’ Security/Shield Check
+  - **Transportation â†’ Transportation** (exceptions: S-Bahn, Subway)
     - Airplane
-    - Bicycle → Bike
-    - Bicycle Trailer → Bike Trailer
+    - Bicycle â†’ Bike
+    - Bicycle Trailer â†’ Bike Trailer
     - Car
     - Electric Car
     - Electric Scooter
-    - Speedboat → Boat
+    - Speedboat â†’ Boat
     - Handcart
-    - ICE → Train
-    - Local Bus → Bus
-    - S-Bahn → Logos/S-Bahn
+    - ICE â†’ Train
+    - Local Bus â†’ Bus
+    - S-Bahn â†’ Logos/S-Bahn
     - Scooter
-    - Subway → Logos/Subway
+    - Subway â†’ Logos/Subway
     - Taxi
     - Train and Car
-    - Walking → Pedestrian
+    - Walking â†’ Pedestrian
 
 - The deprecated PV Icon Library will be deactivated with the next release v1.1.0.
 
@@ -278,7 +280,7 @@ The property alignment between design and code, started with v0.6.0, has been co
 />
 
 </DBSection>
-<DBSection spacing="small" width="auto">
+<DBSection id="v1--related-content" spacing="small" width="large">
 <CardTeaserRow
 	items={[
 		{

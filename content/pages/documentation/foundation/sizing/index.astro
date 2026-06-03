@@ -1,9 +1,9 @@
 ---
 import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
 import { DBSection, DBStack } from '@db-ux/react-core-components';
-import SizingPlayground from './_SizingPlayground.astro';
-import SizingTable from './_SizingTable.astro';
-import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import SizingPlayground from '@template/components/documentation/SizingPlayground/SizingPlayground.astro';
+import SizingTable from '@template/components/documentation/SizingTable/SizingTable.astro';
+import QuestionForm from '@template/components/feedback/QuestionForm/QuestionForm.astro';
 
 const frontmatter: DocumentationFrontMatter = {
 	headline: 'Sizing',
@@ -26,7 +26,7 @@ const headings = [
 	screen. Fixed sizings ensure that layouts remain balanced and components are easily recognizable
 	across desktop, tablet, and mobile devices.
 
-	<DBSection spacing="small">
+	<DBSection id="sizing--playground" spacing="small" width="large">
 		<DBStack gap="x-large">
 			<DBStack gap="none">
 				<h2 id="playground">Playground</h2>
@@ -37,19 +37,19 @@ const headings = [
 		</DBStack>
 	</DBSection>
 
-	<DBSection spacing="small">
+	<DBSection id="sizing--tokens" spacing="small" width="large">
 		<h2 id="tokens">Tokens</h2>
 		<SizingTable />
 	</DBSection>
 
-	<DBSection spacing="small">
+	<DBSection id="sizing--faq" spacing="small" width="large">
 		<h2 id="faq">FAQ</h2>
 		<QuestionForm componentName="Sizing" />
 	</DBSection>
 
 	<script>
 		import { waitForElements } from '@template/utils/client.utils.ts';
-		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';
+		import { handleSimplePlaygrounds } from '@template/components/documentation/FoundationPlayground';
 
 		function initSizing(): boolean {
 			return handleSimplePlaygrounds({

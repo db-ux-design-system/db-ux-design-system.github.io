@@ -10,13 +10,15 @@ toc: true
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
-import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
-import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import CollapseButton from '@template/components/navigation/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/navigation/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/documentation/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/content/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/content/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/feedback/QuestionForm/QuestionForm.astro';
+import ComponentPlayground from '@template/components/documentation/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+<DBSection id="custom-select--use-cases" spacing="none" width="large">
 
 Custom Select is an advanced dropdown for choosing one or multiple predefined options with support for search, grouping, and showing selected values. Use it when a basic select is not sufficient due to option volume, selection complexity, or the need for better scanning and management of chosen items.
 
@@ -24,7 +26,10 @@ Custom Select is an advanced dropdown for choosing one or multiple predefined op
 - Search and filter within options to quickly find values
 - Manage selected options clearly (e.g., chips/tags or selected list)
 
-<DBSection spacing="small" width="auto">
+
+</DBSection>
+
+<DBSection id="custom-select--resources" spacing="small" width="large">
 
 ## Resources
 
@@ -32,7 +37,7 @@ Custom Select is an advanced dropdown for choosing one or multiple predefined op
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="custom-select--playground" spacing="small" width="large">
 
     ## Playground
 
@@ -40,7 +45,7 @@ Custom Select is an advanced dropdown for choosing one or multiple predefined op
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="custom-select--guidelines" spacing="small" width="large">
 
 ## Guidelines
 
@@ -65,7 +70,7 @@ Prefer select for simple single-choice lists. Use custom select when you need mu
 
 ### Custom Select vs Radio / Checkbox
 
-Use custom select when the list contains more options than can be shown clearly on screen—typically five or more. For fewer options, use radios (single selection) or checkboxes (multiple selection) so users can see and choose all options at once without opening a dropdown.
+Use custom select when the list contains more options than can be shown clearly on screenâ€”typically five or more. For fewer options, use radios (single selection) or checkboxes (multiple selection) so users can see and choose all options at once without opening a dropdown.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -137,7 +142,7 @@ Enable search when the list is long or users know what they want. Use grouping o
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="custom-select--faq" spacing="small" width="large">
 
 ## FAQ
 
@@ -147,7 +152,7 @@ Have a question about the custom select component? We'll answer it and add frequ
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="custom-select--related-content" spacing="small" width="large">
 
 ## Related Content
 

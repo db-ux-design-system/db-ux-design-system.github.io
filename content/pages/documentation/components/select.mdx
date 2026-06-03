@@ -11,20 +11,25 @@ toc: true
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
-import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
-import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import CollapseButton from '@template/components/navigation/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/navigation/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/documentation/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/content/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/content/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/feedback/QuestionForm/QuestionForm.astro';
 
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentPlayground from '@template/components/documentation/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+<DBSection id="select--use-cases" spacing="none" width="large">
 
 - Choose one value from a known set (e.g., country, category, priority)
 - Save space compared to showing all options as radios
 - Provide a controlled input when free text is not allowed
 
-<DBSection spacing="small" width="auto">
+
+</DBSection>
+
+<DBSection id="select--resources" spacing="small" width="large">
 
 ## Resources
 
@@ -32,7 +37,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="select--playground" spacing="small" width="large">
 
 ## Playground
 
@@ -40,7 +45,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="select--guidelines" spacing="small" width="large">
 
 ## Guidelines
 
@@ -137,7 +142,7 @@ Select should align with surrounding inputs and respect container widths. Avoid 
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="select--faq" spacing="small" width="large">
 
 ## FAQ
 
@@ -147,7 +152,7 @@ Have a question about the select component? We'll answer it and add frequently a
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="select--related-content" spacing="small" width="large">
 	## Related Content
 	<TeaserCard
 		teasers={[

@@ -12,15 +12,15 @@ tocMaxDepth: 3
 ---
 
 import { DBSection, DBCard, DBBadge, DBStack } from '@db-ux/react-core-components';
-import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import TeaserCard from '@template/components/content/TeaserCard/TeaserCard.astro';
 
-<DBSection spacing="small" width="auto">
+<DBSection id="content-status--overview" spacing="small" width="large">
 
 Every component, pattern, and template in the DB UX Design System has a status that tells you how mature and reliable it is — from early explorations to production-ready standards.
 
-<div style={{ display: 'grid', gridTemplateColumns: 'auto auto', columnGap: 'var(--db-spacing-fixed-lg)', rowGap: 'var(--db-spacing-fixed-xs)', width: 'fit-content' }}>
+<div className="content-status-grid">
 
-<DBCard data-density="expressive" style={{ width: 'fit-content' }} spacing="large">
+<DBCard data-density="expressive" className="content-status-card" spacing="large">
 	<DBStack direction="row" gap="small" alignment="center">
 		<DBBadge semantic="warning">Concept</DBBadge>
 		<span data-icon="arrow_right" />
@@ -30,7 +30,7 @@ Every component, pattern, and template in the DB UX Design System has a status t
 	</DBStack>
 </DBCard>
 
-<DBCard data-density="expressive" style={{ width: 'fit-content' }} spacing="large">
+<DBCard data-density="expressive" className="content-status-card" spacing="large">
 	<DBStack direction="row" gap="small" alignment="center">
 		<DBBadge semantic="critical">Legacy</DBBadge>
 		<DBBadge>Deprecated</DBBadge>
@@ -43,7 +43,7 @@ Every component, pattern, and template in the DB UX Design System has a status t
 </div>
 
 </DBSection>
-<DBSection spacing="small" width="auto">
+<DBSection id="content-status--concept" spacing="small" width="large">
 
 ## Concept
 
@@ -51,7 +51,7 @@ Early visual and functional approaches for new content. At this stage, initial d
 
 You can use concept content as a **design reference** for your own implementation. However, be prepared to **incorporate future changes** once the content matures. Design is always available; a development implementation **may not yet exist** and typically joins in the beta phase.
 
-<DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }} data-color="warning">
+<DBCard spacing='large' className="content-status-section-card" data-color="warning">
 ### What to expect
 
 - **Design available**, development implementation may follow later
@@ -67,7 +67,7 @@ Content is **functional and largely stable**, but minor visual or functional cha
 
 We recommend **testing Beta content thoroughly** in your projects and sharing feedback to help improve quality and reliability.
 
-<DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }} data-color="informational">
+<DBCard spacing='large' className="content-status-section-card" data-color="informational">
 ### What to expect
 
 - **Aligned between design and development**
@@ -83,7 +83,7 @@ Content is considered **mature and reliable** — accessible, brand-compliant, a
 
 We **continuously update and improve** stable content to ensure it meets user needs and current standards.
 
-<DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }} data-color="successful">
+<DBCard spacing='large' className="content-status-section-card" data-color="successful">
 ### What to expect
 
 - **Fully validated** for accessibility, cross-browser, and cross-framework compatibility
@@ -97,7 +97,7 @@ We **continuously update and improve** stable content to ensure it meets user ne
 
 Content is **outdated and no longer actively developed**. Only limited support in the form of **critical bug fixes** is provided. We recommend **migrating to current Design System content**.
 
-<DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }}data-color="critical">
+<DBCard spacing='large' className="content-status-section-card" data-color="critical">
 ### What to expect
 
 - **No new features** or improvements
@@ -110,7 +110,7 @@ Content is **outdated and no longer actively developed**. Only limited support i
 
 Content is **marked for removal** and will be **fully removed in a future Major release**. In design, deprecated content is visually marked first, giving you **time to migrate** before it is removed.
 
-<DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }}elevationLevel='2'>
+<DBCard spacing='large' className="content-status-section-card" elevationLevel='2'>
 ### What to expect
 
 - **Content will be removed** — plan your migration
@@ -120,7 +120,7 @@ Content is **marked for removal** and will be **fully removed in a future Major 
 </DBCard>
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="content-status--related-content" spacing="small" width="large">
 
 ## Related Content
 

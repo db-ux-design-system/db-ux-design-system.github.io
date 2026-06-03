@@ -1,0 +1,47 @@
+---
+import { DBCard, DBPopover, type DBSelectOptionType } from '@db-ux/react-core-components';
+import FoundationPlayground from '@template/components/documentation/FoundationPlayground/FoundationPlayground.astro';
+import './SizingPlayground.css';
+
+const sizes: DBSelectOptionType[] = [
+	{ value: '3xl', label: '3xl' },
+	{ value: '2xl', label: '2xl' },
+	{ value: 'xl', label: 'xl' },
+	{ value: 'lg', label: 'lg' },
+	{ value: 'md', label: 'md' },
+	{ value: 'sm', label: 'sm' },
+	{ value: 'xs', label: 'xs' },
+	{ value: '2xs', label: '2xs' },
+	{ value: '3xs', label: '3xs' },
+];
+
+const densities: DBSelectOptionType[] = [
+	{ value: 'functional', label: 'Functional' },
+	{ value: 'regular', label: 'Regular' },
+	{ value: 'expressive', label: 'Expressive' },
+];
+---
+
+<FoundationPlayground
+	selects={[
+		{ id: 'select', label: 'Size', defaultValue: 'md', options: sizes },
+		{ id: 'density-select', label: 'Density', defaultValue: 'regular', options: densities },
+	]}
+	previewId="sizing-preview"
+	previewDataDensity="regular"
+>
+	<DBPopover width="fixed" gap="true">
+		<button
+			slot="trigger"
+			id="box"
+			class="sizing-box interactive-box"
+			data-size="md"
+			data-density="regular"
+		>
+			<span class="sizing-label">Focus Me ➔</span>
+			<DBCard behavior="interactive" spacing="none">
+				<span class="sizing-card-label">Focus Me</span>
+			</DBCard>
+		</button>
+	</DBPopover>
+</FoundationPlayground>

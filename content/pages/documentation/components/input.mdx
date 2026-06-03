@@ -11,20 +11,25 @@ toc: true
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
-import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
-import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import CollapseButton from '@template/components/navigation/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/navigation/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/documentation/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/content/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/content/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/feedback/QuestionForm/QuestionForm.astro';
 
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentPlayground from '@template/components/documentation/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+<DBSection id="input--use-cases" spacing="none" width="large">
 
 - Collect short text values (e.g., name, city, email, IBAN depending on product rules)
 - Support structured entry with formatting hints (e.g., "No spaces", "Use format DD.MM.YYYY")
 - Provide immediate or on-submit feedback for validity (success/error) with helper text
 
-<DBSection spacing="small" width="auto">
+
+</DBSection>
+
+<DBSection id="input--resources" spacing="small" width="large">
 
 ## Resources
 
@@ -32,7 +37,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="input--playground" spacing="small" width="large">
 
 ## Playground
 
@@ -40,7 +45,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="input--guidelines" spacing="small" width="large">
 
 ## Guidelines
 
@@ -154,7 +159,7 @@ Ensure every Input has an accessible name that matches the visible label. If a l
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="input--faq" spacing="small" width="large">
 
 ## FAQ
 
@@ -164,7 +169,7 @@ Have a question about the Input component? We'll answer it and add frequently as
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="input--related-content" spacing="small" width="large">
 	## Related Content
 	<TeaserCard
 		teasers={[

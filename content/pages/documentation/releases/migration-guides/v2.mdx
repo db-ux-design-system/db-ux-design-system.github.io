@@ -11,11 +11,11 @@ toc: true
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
-import StatusNotification from '@template/components/StatusNotification/StatusNotification';
-import YourAction from '@template/components/YourAction/YourAction';
-import CardTeaserRow from "@template/components/CardTeaser/CardTeaserRow";
+import StatusNotification from '@template/components/feedback/StatusNotification/StatusNotification';
+import YourAction from '@template/components/content/YourAction/YourAction';
+import CardTeaserRow from "@template/components/content/CardTeaser/CardTeaserRow";
 
-<DBSection spacing="small" width="auto">
+<DBSection id="v2--development-release" spacing="small" width="large">
 
 ## 💻 Development Release
 
@@ -30,7 +30,7 @@ Sketch is deprecated and will no longer receive new features.
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="v2--new-beta-components" spacing="small" width="large">
 
 ## New Beta Components
 
@@ -46,12 +46,12 @@ With the v2.0.0 release, the following components receive "Beta" status. These c
 <img
 	src="/assets/migration-guides/v2/beta-components.png"
 	alt="Custom Select Component"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="v2--rework-foundation" spacing="small" width="large">
 
 ## Rework Foundation
 
@@ -64,7 +64,7 @@ With the v2.0.0 release, the following components receive "Beta" status. These c
 <img
 	src="/assets/migration-guides/v2/typo.png"
 	alt="Typography Overview"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 ### Color Variables
@@ -74,7 +74,7 @@ With the v2.0.0 release, the following components receive "Beta" status. These c
 <img
 	src="/assets/migration-guides/v2/colors-vibrant.png"
 	alt="Vibrant Colors"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 - **Optimized dark color levels:** Improvements in darker shades for clearer gradations.
@@ -83,7 +83,7 @@ With the v2.0.0 release, the following components receive "Beta" status. These c
 <img
 	src="/assets/migration-guides/v2/colors-steps-backgrounds.png"
 	alt="Color Steps and Backgrounds"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 - **Interactive Tokens:** Reworked for clearer differences between **default**, **hovered** and **pressed** states.
@@ -91,7 +91,7 @@ With the v2.0.0 release, the following components receive "Beta" status. These c
 <img
 	src="/assets/migration-guides/v2/colors-interactive-colors.png"
 	alt="Interactive Colors"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 - **Removal of On-Origin colors:** The interactive colors ❌ **on-origin-hovered** and ❌ **on-origin-pressed** are removed as they do not ensure sufficient accessibility across the system.
@@ -105,7 +105,7 @@ With the v2.0.0 release, the following components receive "Beta" status. These c
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="v2--components-bugfixes-figma" spacing="small" width="large">
 
 ## Components: Bugfixes (Figma)
 
@@ -118,7 +118,7 @@ The following fixes require special attention. An overview of all other resolved
 <img
 	src="/assets/migration-guides/v2/migration-badge-colors.png"
 	alt="Badge Colors"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 ### Tag
@@ -132,7 +132,7 @@ The following fixes require special attention. An overview of all other resolved
 <img
 	src="/assets/migration-guides/v2/migration-tag-colors.png"
 	alt="Tag Colors"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 ### Form Fields (Input, Select, Textarea)
@@ -150,7 +150,7 @@ The following fixes require special attention. An overview of all other resolved
 <img
 	src="/assets/migration-guides/v2/migration-data-input.png"
 	alt="Data Input Min Widths"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 <YourAction
@@ -162,7 +162,7 @@ The following fixes require special attention. An overview of all other resolved
 />
 
 </DBSection>
-<DBSection spacing="small" width="auto">
+<DBSection id="v2--related-content" spacing="small" width="large">
 
 <CardTeaserRow
 	items={[

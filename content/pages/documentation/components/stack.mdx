@@ -10,13 +10,15 @@ status: 'beta'
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
-import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
-import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import CollapseButton from '@template/components/navigation/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/navigation/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/documentation/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/content/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/content/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/feedback/QuestionForm/QuestionForm.astro';
+import ComponentPlayground from '@template/components/documentation/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+<DBSection id="stack--use-cases" spacing="none" width="large">
 
 Stack arranges child elements in a vertical or horizontal layout with consistent spacing. Use it to create structured layouts without writing custom CSS.
 
@@ -24,7 +26,10 @@ Stack arranges child elements in a vertical or horizontal layout with consistent
 - Create vertical or horizontal layouts without custom CSS
 - Build responsive layouts that adapt to different screen sizes
 
-<DBSection spacing="small" width="auto">
+
+</DBSection>
+
+<DBSection id="stack--resources" spacing="small" width="large">
 
 ## Resources
 
@@ -32,7 +37,7 @@ Stack arranges child elements in a vertical or horizontal layout with consistent
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="stack--playground" spacing="small" width="large">
 
     ## Playground
 
@@ -40,7 +45,7 @@ Stack arranges child elements in a vertical or horizontal layout with consistent
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="stack--guidelines" spacing="small" width="large">
 
 ## Guidelines
 
@@ -93,7 +98,7 @@ Enable wrap for stacks that should adapt to smaller screens.
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/uBCf96A16t1871VinjYHHV/Doku--Stack?node-id=3-1114&embed-host=share"
-		description="Don't use “No Wrap” when there's a risk of overflowing and the content should be easily accessible."
+		description={"Don't use \"No Wrap\" when there's a risk of overflowing and the content should be easily accessible."}
 	/>
 </div>
 
@@ -103,7 +108,7 @@ Enable wrap for stacks that should adapt to smaller screens.
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="stack--faq" spacing="small" width="large">
 
 ## FAQ
 
@@ -113,7 +118,7 @@ Have a question about the stack component? We'll answer it and add frequently as
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="stack--related-content" spacing="small" width="large">
 
 ## Related Content
 

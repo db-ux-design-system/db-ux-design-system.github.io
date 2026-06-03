@@ -1,12 +1,12 @@
 ---
 import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
 import { DBSection, DBStack } from '@db-ux/react-core-components';
-import ColorPlayground from './_ColorPlayground.astro';
-import ColorTable from './_ColorTable.astro';
-import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
-import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ColorPlayground from '@template/components/documentation/ColorPlayground/ColorPlayground.astro';
+import ColorTable from '@template/components/documentation/ColorTable/ColorTable.astro';
+import GuidelineExample from '@template/components/documentation/GuidelineExample/GuidelineExample.astro';
+import CollapseButton from '@template/components/navigation/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/navigation/CollapseButton/CollapsibleWrapper.astro';
+import QuestionForm from '@template/components/feedback/QuestionForm/QuestionForm.astro';
 
 const frontmatter: DocumentationFrontMatter = {
 	headline: 'Colors',
@@ -29,7 +29,7 @@ const headings = [
 	Colors play a central role in the design of user interfaces. They can reinforce messages and help
 	communicate meanings, as well as enable targeted user guidance.
 
-	<DBSection spacing="small">
+	<DBSection id="colors--playground" spacing="small" width="large">
 		<DBStack gap="x-large">
 			<DBStack gap="none">
 				<h2 id="playground">Playground</h2>
@@ -41,7 +41,7 @@ const headings = [
 		</DBStack>
 	</DBSection>
 
-	<DBSection spacing="small">
+	<DBSection id="colors--guidelines" spacing="small" width="large">
 		<h2 id="guidelines">Guidelines</h2>
 
 		<CollapsibleWrapper collapsedHeight="320px">
@@ -105,19 +105,19 @@ const headings = [
 		<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
 	</DBSection>
 
-	<DBSection spacing="small">
+	<DBSection id="colors--tokens" spacing="small" width="large">
 		<h2 id="tokens">Tokens</h2>
 		<ColorTable />
 	</DBSection>
 
-	<DBSection spacing="small">
+	<DBSection id="colors--faq" spacing="small" width="large">
 		<h2 id="faq">FAQ</h2>
 		<QuestionForm componentName="Colors" />
 	</DBSection>
 
 	<script>
 		import { waitForElements } from '@template/utils/client.utils.ts';
-		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';
+		import { handleSimplePlaygrounds } from '@template/components/documentation/FoundationPlayground';
 
 		function initColors(): boolean {
 			return handleSimplePlaygrounds({

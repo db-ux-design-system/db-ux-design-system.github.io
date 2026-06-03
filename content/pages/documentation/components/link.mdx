@@ -11,20 +11,25 @@ toc: true
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
-import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
-import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import CollapseButton from '@template/components/navigation/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/navigation/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/documentation/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/content/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/content/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/feedback/QuestionForm/QuestionForm.astro';
 
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentPlayground from '@template/components/documentation/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+<DBSection id="link--use-cases" spacing="none" width="large">
 
 - Navigate to another page within the application
 - Navigate to an external website or document
 - Jump to a specific section within the same page
 
-<DBSection spacing="small" width="auto">
+
+</DBSection>
+
+<DBSection id="link--resources" spacing="small" width="large">
 
 ## Resources
 
@@ -32,7 +37,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="link--playground" spacing="small" width="large">
 
 ## Playground
 
@@ -40,7 +45,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="link--guidelines" spacing="small" width="large">
 
 ## Guidelines
 
@@ -115,7 +120,7 @@ Use the brand variant sparingly to highlight particularly important navigational
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="link--faq" spacing="small" width="large">
 
 ## FAQ
 
@@ -125,7 +130,7 @@ Have a question about the Link component? We'll answer it and add frequently ask
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="link--related-content" spacing="small" width="large">
 	## Related Content
 	<TeaserCard
 		teasers={[

@@ -1,0 +1,27 @@
+@media screen and (prefers-reduced-motion: reduce) {
+	table tbody tr {
+		cursor: pointer;
+		transition: none;
+	}
+}
+
+.selectable-table-wrapper {
+	overflow-x: auto;
+	inline-size: 100%;
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-md);
+}
+
+table tbody tr {
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+table tbody tr.selected {
+	background-color: var(--db-adaptive-bg-basic-level-3-default) !important;
+}
+
+table tbody tr:hover,
+table tbody tr:focus {
+	background-color: var(--db-adaptive-bg-basic-level-2-default) !important;
+}

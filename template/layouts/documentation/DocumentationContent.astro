@@ -1,6 +1,6 @@
 ---
 import type { MarkdownHeading } from 'astro';
-import { TableOfContents } from '@template/components/TableOfContents';
+import { TableOfContents } from '@template/components/navigation/TableOfContents';
 import { DBSection, type SemanticType } from '@db-ux/react-core-components';
 import { PageHero } from '@components';
 
@@ -51,8 +51,6 @@ const badge = frontmatter.status ? badgeMap[frontmatter.status] : undefined;
 				</DBSection>
 			)
 		}
-		<DBSection id="main-content-section" width="large" spacing="none">
-			<slot />
-		</DBSection>
+		<slot />
 	</div>
 </>

@@ -11,19 +11,24 @@ status: 'stable'
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
-import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
-import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import CollapseButton from '@template/components/navigation/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/navigation/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/documentation/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/content/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/content/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/feedback/QuestionForm/QuestionForm.astro';
+import ComponentPlayground from '@template/components/documentation/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+<DBSection id="textarea--use-cases" spacing="none" width="large">
 
 - Capture longer free-text input (e.g., feedback, comments, descriptions)
 - Support structured longer entries with hints (e.g., formatting expectations, character limits)
 - Allow users to review and edit multi-line content comfortably before submitting
 
-<DBSection spacing="small" width="auto">
+
+</DBSection>
+
+<DBSection id="textarea--resources" spacing="small" width="large">
 
 ## Resources
 
@@ -58,7 +63,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="textarea--playground" spacing="small" width="large">
 
 ## Playground
 
@@ -66,7 +71,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="textarea--guidelines" spacing="small" width="large">
 
 ## Guidelines
 
@@ -146,7 +151,7 @@ Helper text prevents errors (format, tone, limits). Validation messages explain 
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="textarea--faq" spacing="small" width="large">
 
 ## FAQ
 
@@ -156,7 +161,7 @@ Have a question about the Textarea component? We'll answer it and add frequently
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="textarea--related-content" spacing="small" width="large">
 
 ## Related Content
 

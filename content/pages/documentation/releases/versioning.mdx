@@ -11,17 +11,17 @@ toc: true
 ---
 
 import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
-import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import TeaserCard from '@template/components/content/TeaserCard/TeaserCard.astro';
+
+<DBSection id="versioning--overview" spacing="small" width="large">
 
 <img
 	src="/assets/documentation/releases/release-types.png"
 	alt="Semantic Versioning overview: v1.2.3 — Major (breaking changes), Minor (new features, backward-compatible), Patch (bug fixes, no API changes)"
 	style={{ maxWidth: '100%' }}
 />
-<DBSection spacing="small" width="auto">
-The DB UX Design System follows the principles of **Semantic Versioning** (SemVer): version numbers consist of three segments — `MAJOR.MINOR.PATCH` — and clearly communicate the nature and scope of a change.
 
-</DBSection>
+The DB UX Design System follows the principles of **Semantic Versioning** (SemVer): version numbers consist of three segments — `MAJOR.MINOR.PATCH` — and clearly communicate the nature and scope of a change.
 
 <DBNotification headline="Versioning across design and development" variant='standalone' semantic='informational'>
 
@@ -29,7 +29,9 @@ Major and minor version numbers are kept in sync across design and development. 
 
 </DBNotification>
 
-<DBSection spacing="small" width="auto">
+</DBSection>
+
+<DBSection id="versioning--major" spacing="small" width="large">
 
 ## Major
 
@@ -71,7 +73,7 @@ A patch release contains **bug fixes or very small improvements** with no impact
 - A bug fix for a component that has no impact on other features
 
 </DBSection>
-<DBSection spacing="small" width="auto">
+<DBSection id="versioning--communication-channels" spacing="small" width="large">
 
 ## Communication channels
 
@@ -187,7 +189,7 @@ A patch release contains **bug fixes or very small improvements** with no impact
 
 </table>
 </DBSection>
-<DBSection spacing="small" width="auto">
+<DBSection id="versioning--related-content" spacing="small" width="large">
 
 ## Related Content
 

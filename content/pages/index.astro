@@ -1,15 +1,23 @@
 ---
-import PageHeroSection from './home/_components/PageHeroSection.astro';
-import InteractiveDemoSection from './home/_components/InteractiveDemoSection.astro';
-import PackagesSection from './home/_components/PackagesSection.astro';
-import DesignedForSection from './home/_components/DesignedForSection.astro';
-import TestimonialsSection from './home/_components/TestimonialsSection.astro';
-import SharedStandardsSection from './home/_components/SharedStandardsSection.astro';
+import { DBSection } from '@db-ux/react-core-components';
+import PageHero from '@template/components/content/PageHero/PageHero.astro';
+import InteractiveDemoSection from '@components/content/InteractiveDemoSection/InteractiveDemoSection.astro';
+import PackagesSection from '@components/content/PackagesSection/PackagesSection.astro';
+import DesignedForSection from '@components/content/DesignedForSection/DesignedForSection.astro';
+import TestimonialsSection from '@components/content/TestimonialsSection/TestimonialsSection.astro';
+import SharedStandardsSection from '@components/content/SharedStandardsSection/SharedStandardsSection.astro';
 import DefaultLayout from '@template/layouts/default';
 ---
 
 <DefaultLayout frontmatter={{}}>
-	<PageHeroSection />
+	<DBSection width="medium" spacing="medium" id="home--page-hero-section">
+		<PageHero
+			title="DB UX Design System"
+			headlineLevel={1}
+			headline="A Design System designed to align teams and streamline product delivery."
+			description="Brings clarity to design and implementation through shared standards and reusable components."
+		/>
+	</DBSection>
 
 	<InteractiveDemoSection />
 

@@ -15,6 +15,11 @@ import pngToWebpIntegration from './astro-integration-png-to-webp.mjs';
 export default defineConfig({
 	site: appConfig.hostname,
 	base: appConfig.basePath,
+	markdown: {
+		shikiConfig: {
+			theme: 'github-light-high-contrast',
+		},
+	},
 	integrations: [
 		react({}),
 		mdx(),

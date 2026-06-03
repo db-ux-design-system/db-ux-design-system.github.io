@@ -12,15 +12,20 @@ toc: true
 
 import { DBSection } from '@db-ux/react-core-components';
 
-import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/content/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/feedback/QuestionForm/QuestionForm.astro';
+import ResourceCards from '@template/components/content/ResourceCards/ResourceCards.astro';
+
+<DBSection id="navigation-item--use-cases" spacing="none" width="large">
 
 - Always wrap content in an anchor element for proper navigation semantics
 - Use the active property or aria-current="page" to indicate the current location
 - Add icons to improve scannability and recognition
 
-<DBSection spacing="small" width="auto">
+
+</DBSection>
+
+<DBSection id="navigation-item--resources" spacing="small" width="large">
 
 ## Resources
 
@@ -55,7 +60,7 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="navigation-item--faq" spacing="small" width="large">
 
 ## FAQ
 
@@ -65,7 +70,7 @@ Have a question about the Navigation Item component? We'll answer it and add fre
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="navigation-item--related-content" spacing="small" width="large">
 
 ## Related Content
 

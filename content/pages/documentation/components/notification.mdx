@@ -12,20 +12,24 @@ toc: true
 
 import { DBSection } from '@db-ux/react-core-components';
 
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
-import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
-import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import CollapseButton from '@template/components/navigation/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/navigation/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/documentation/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/content/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/content/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/feedback/QuestionForm/QuestionForm.astro';
+import ComponentPlayground from '@template/components/documentation/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+<DBSection id="notification--use-cases" spacing="none" width="large">
 
 - Confirm an action or state change (e.g., "Saved", "Filter applied")
 - Inform about a non-blocking system event (e.g., "Sync in progress", "New version available")
 - Warn or report an issue that needs attention without requiring an immediate modal decision
 
-<DBSection spacing="small" width="auto">
+
+</DBSection>
+
+<DBSection id="notification--resources" spacing="small" width="large">
 
 ## Resources
 
@@ -60,7 +64,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="notification--playground" spacing="small" width="large">
 
 ## Playground
 
@@ -68,7 +72,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="notification--guidelines" spacing="small" width="large">
 
 ## Guidelines
 
@@ -165,7 +169,7 @@ Place notifications where they are noticeable but do not cover primary controls.
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="notification--faq" spacing="small" width="large">
 
 ## FAQ
 
@@ -175,7 +179,7 @@ Have a question about the Notification component? We'll answer it and add freque
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="notification--related-content" spacing="small" width="large">
 	## Related Content
 	<TeaserCard
 		teasers={[
