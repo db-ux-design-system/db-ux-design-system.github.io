@@ -1,4 +1,10 @@
 # Global Repository owners
 # see https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners for details of syntax
-# * @mfranzke @nmerget @michaelmkraus
-*.md @leape @sissihamel @sissihamel @Janafreund @LSchroff @jessi-eff @KatrinSchusterFoelsing
+
+# Default for all files
+* @nmerget @michaelmkraus @mfranzke
+
+# Documentation markdown files and their potential screenshots
+/content/pages/documentation/**/*.md @leape @sissihamel @sissihamel @Janafreund @LSchroff @jessi-eff @KatrinSchusterFoelsing
+/tests/**/*.png @leape @sissihamel @sissihamel @Janafreund @LSchroff @jessi-eff @KatrinSchusterFoelsing
+/static/assets/ @leape @sissihamel @sissihamel @Janafreund @LSchroff @jessi-eff @KatrinSchusterFoelsing
