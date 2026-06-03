@@ -11,10 +11,10 @@ toc: true
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
-import YourAction from '@template/components/YourAction/YourAction';
-import CardTeaserRow from "@template/components/CardTeaser/CardTeaserRow";
+import YourAction from '@template/components/content/YourAction/YourAction';
+import CardTeaserRow from "@template/components/content/CardTeaser/CardTeaserRow";
 
-<DBSection spacing="small" width="auto">
+<DBSection id="v4--development-release" spacing="small" width="large">
 
 ## 💻 Development Release
 
@@ -29,7 +29,7 @@ Sketch is deprecated and will no longer receive new features.
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="v4--components" spacing="small" width="large">
 
 ## Components
 
@@ -42,7 +42,7 @@ Sketch is deprecated and will no longer receive new features.
 <img
 	src="/assets/migration-guides/v4/switch-emphasis-fix.png"
 	alt="Switch Emphasis Fix"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 <YourAction
@@ -57,7 +57,7 @@ statuses "No Validation" (default), "Invalid" and "Valid" as variants.
 <img
 	src="/assets/migration-guides/v4/switch-validation.png"
 	alt="Switch Validation"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 - The new **"Label Position"** property supplements the existing Trailing Label (default) with the "Leading Label" variant.
@@ -65,7 +65,7 @@ statuses "No Validation" (default), "Invalid" and "Valid" as variants.
 <img
 	src="/assets/migration-guides/v4/switch-label-leading.png"
 	alt="Switch Label Position"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 - With the new **"Show Message"** property, it is now possible to display a helper message even for No Validation variants. This allows you to show helpful hints independent of the validation status.
@@ -73,12 +73,12 @@ statuses "No Validation" (default), "Invalid" and "Valid" as variants.
 <img
 	src="/assets/migration-guides/v4/switch-show-message.png"
 	alt="Switch Show Message"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="v4--notification-breaking-change" spacing="small" width="large">
 
 ### Notification (Figma/breaking change)
 
@@ -88,13 +88,13 @@ With this update, the behavior in design and development becomes identical.
 <img
 	src="/assets/migration-guides/v4/notification-headline.png"
 	alt="Notification Headline Change"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 <img
 	src="/assets/migration-guides/v4/notification-headline-fix.png"
 	alt="Notification Headline Fix"
-	style={{ maxWidth: '100%' }}
+	className="full-width-image"
 />
 
 <YourAction
@@ -104,7 +104,7 @@ With this update, the behavior in design and development becomes identical.
 	]}
 />
 </DBSection>
-<DBSection spacing="small" width="auto">
+<DBSection id="v4--related-content" spacing="small" width="large">
 
 <CardTeaserRow
 	items={[

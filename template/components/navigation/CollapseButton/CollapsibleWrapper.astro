@@ -1,0 +1,16 @@
+---
+interface Props {
+	collapsedHeight?: string;
+}
+
+const { collapsedHeight = '320px' } = Astro.props;
+---
+
+<!-- dynamic: CSS custom property set from prop -->
+<div
+	class="collapsible-wrapper"
+	data-collapsed="true"
+	style={`--collapsed-height: ${collapsedHeight};`}
+>
+	<slot />
+</div>

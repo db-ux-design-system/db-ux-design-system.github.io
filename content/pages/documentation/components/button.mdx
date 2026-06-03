@@ -11,20 +11,25 @@ status: 'stable'
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
-import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
-import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import CollapseButton from '@template/components/navigation/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/navigation/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/documentation/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/content/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/content/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/feedback/QuestionForm/QuestionForm.astro';
 
-import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentPlayground from '@template/components/documentation/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+<DBSection id="button--use-cases" spacing="none" width="large">
 
 - Trigger an action (e.g., Send, Save, Delete)
 - Indicate that interaction or confirmation is expected
 - Highlight a primary or secondary action
 
-<DBSection spacing="small" width="auto">
+
+</DBSection>
+
+<DBSection id="button--resources" spacing="small" width="large">
 
 ## Resources
 
@@ -32,7 +37,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="button--playground" spacing="small" width="large">
 
 ## Playground
 
@@ -40,7 +45,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="button--guidelines" spacing="small" width="large">
 
 ## Guidelines
 
@@ -65,13 +70,13 @@ Establish a clear hierarchy so users can see which actions matter most. Use the 
 
 ### Labels
 
-Keep labels short, specific, and action‑oriented. Auto‑width buttons are single‑line by default; do not insert manual line breaks. Full‑width buttons may wrap only in edge cases (e.g., localization or narrow screens).
+Keep labels short, specific, and actionâ€‘oriented. Autoâ€‘width buttons are singleâ€‘line by default; do not insert manual line breaks. Fullâ€‘width buttons may wrap only in edge cases (e.g., localization or narrow screens).
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-1125&embed-host=share"
-		description="Use concise, single‑line labels."
+		description="Use concise, singleâ€‘line labels."
 	/>
 	<GuidelineExample
 		variant="dont"
@@ -82,13 +87,13 @@ Keep labels short, specific, and action‑oriented. Auto‑width buttons are sin
 
 ### Icons
 
-Use intuitive, universally understood icons. Add at most one icon inside a button and choose a suitable position (leading or trailing). Icon‑only buttons suit toolbars, navigation, and mobile; always show a tooltip on hover.
+Use intuitive, universally understood icons. Add at most one icon inside a button and choose a suitable position (leading or trailing). Iconâ€‘only buttons suit toolbars, navigation, and mobile; always show a tooltip on hover.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-1152&embed-host=share"
-		description="Use clear icons with a hover tooltip for icon‑only buttons"
+		description="Use clear icons with a hover tooltip for iconâ€‘only buttons"
 	/>
 	<GuidelineExample
 		variant="dont"
@@ -122,7 +127,7 @@ Use buttons to trigger actions that change state. Use links to navigate to other
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-3649&embed-host=share"
-		description="Use a button to perform an in‑app action that changes state and a link to navigate to another page or view"
+		description="Use a button to perform an inâ€‘app action that changes state and a link to navigate to another page or view"
 	/>
 	<GuidelineExample
 		variant="dont"
@@ -133,18 +138,18 @@ Use buttons to trigger actions that change state. Use links to navigate to other
 
 ### Accessibility
 
-The small button in functional density has a height of 20 px. To meet accessibility requirements, its interactive target must be at least 24×24 px in size. You can achieve this by ensuring there is sufficient space around the button. No other interactive elements may occupy or overlap this target area.
+The small button in functional density has a height of 20 px. To meet accessibility requirements, its interactive target must be at least 24Ã—24 px in size. You can achieve this by ensuring there is sufficient space around the button. No other interactive elements may occupy or overlap this target area.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-3342&embed-host=share"
-		description="Provide a 24×24 px clickable area via surrounding spacing."
+		description="Provide a 24Ã—24 px clickable area via surrounding spacing."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-3600&embed-host=share"
-		description="Don't allow adjacent controls to intrude into the required 24×24 px area."
+		description="Don't allow adjacent controls to intrude into the required 24Ã—24 px area."
 	/>
 </div>
 
@@ -154,7 +159,7 @@ The small button in functional density has a height of 20 px. To meet accessibil
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="button--faq" spacing="small" width="large">
 
 ## FAQ
 
@@ -164,7 +169,7 @@ Have a question about the Button component? We'll answer it and add frequently a
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="button--related-content" spacing="small" width="large">
 	## Related Content
 	<TeaserCard
 		teasers={[

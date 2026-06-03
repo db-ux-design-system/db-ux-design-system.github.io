@@ -12,18 +12,23 @@ toc: true
 
 import { DBSection } from '@db-ux/react-core-components';
 
-import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
-import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
-import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
-import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import CollapseButton from '@template/components/navigation/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/navigation/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/documentation/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/content/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/content/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/feedback/QuestionForm/QuestionForm.astro';
+
+<DBSection id="navigation--use-cases" spacing="none" width="large">
 
 - Offer primary destinations at the top level (global navigation)
 - Support structured sub-navigation for deeper sections (nested levels)
 - Adapt navigation patterns to mobile with compact, touch-friendly behavior
 
-<DBSection spacing="small" width="auto">
+
+</DBSection>
+
+<DBSection id="navigation--resources" spacing="small" width="large">
 
 ## Resources
 
@@ -58,7 +63,7 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="navigation--guidelines" spacing="small" width="large">
 
 ## Guidelines
 
@@ -162,7 +167,7 @@ Keep hierarchy shallow and predictable. If there are too many items, use an over
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="navigation--faq" spacing="small" width="large">
 
 ## FAQ
 
@@ -172,7 +177,7 @@ Have a question about the Navigation component? We'll answer it and add frequent
 
 </DBSection>
 
-<DBSection spacing="small" width="auto">
+<DBSection id="navigation--related-content" spacing="small" width="large">
 	## Related Content
 	<TeaserCard
 		teasers={[

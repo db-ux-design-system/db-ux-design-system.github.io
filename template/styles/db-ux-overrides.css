@@ -116,3 +116,12 @@
 .db-stack {
 	overflow: visible;
 }
+
+/* Get Started teaser cards */
+.get-started-card-link {
+	flex: 1; /* no-token: layout-structural flex shorthand */
+}
+
+.get-started-card {
+	block-size: 100%; /* no-token: layout-structural full-height fill */
+}

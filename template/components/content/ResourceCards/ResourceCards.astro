@@ -1,0 +1,118 @@
+---
+import { DBCard } from '@db-ux/react-core-components';
+import DisabledWrapper from '@template/components/layout/DisabledWrapper/DisabledWrapper.astro';
+import './ResourceCards.css';
+
+interface Resource {
+	title: string;
+	description: string;
+	url: string;
+	icon?: string;
+	label?: string;
+	disabled?: boolean;
+	protected?: boolean;
+}
+
+interface Props {
+	path?: string;
+	resources?: Resource[];
+}
+
+const { path = '', resources: customResources } = Astro.props;
+
+const baseUrl = 'https://design-system.deutschebahn.com/core-web/review/main';
+
+const defaultResources: Resource[] = [
+	{
+		title: 'React',
+		description: 'Interactive examples and documentation.',
+		url: `${baseUrl}/react-storybook${path}`,
+		icon: 'react',
+	},
+	{
+		title: 'Vue',
+		description: 'Interactive examples and documentation.',
+		url: `${baseUrl}/vue-storybook${path}`,
+		icon: 'vue',
+	},
+	{
+		title: 'Angular',
+		description: 'Interactive examples and documentation.',
+		url: `${baseUrl}/angular-storybook${path}`,
+		icon: 'angular',
+	},
+	{
+		title: 'Web Components',
+		description: 'Interactive examples and documentation.',
+		url: `${baseUrl}/web-components-storybook${path}`,
+		icon: 'web-components',
+		disabled: true,
+	},
+];
+
+const resources = customResources || defaultResources;
+
+// Map icon names to local paths
+const iconMap: Record<string, string> = {
+	react: '/assets/framework-icons/react.svg',
+	vue: '/assets/framework-icons/vue.svg',
+	angular: '/assets/framework-icons/angular.svg',
+	html5: '/assets/framework-icons/html5.svg',
+	'web-components': '/assets/framework-icons/html5.svg',
+};
+
+const getIconPath = (icon: string): string => {
+	// If it's already a full path/URL, return as is (backwards compatibility)
+	if (icon.startsWith('/') || icon.startsWith('http')) {
+		return icon;
+	}
+	// Otherwise map the icon name
+	return iconMap[icon] || icon;
+};
+---
+
+<div class="resource-cards">
+	{
+		resources.map((resource) => {
+			const isDisabled = resource.disabled === true;
+			const cardContent = (
+				<>
+					{resource.protected && (
+						<span
+							class="resource-protected-icon"
+							data-icon="lock_closed"
+							aria-label="Protected content"
+							role="img"
+						/>
+					)}
+					{resource.icon && (
+						<img
+							src={getIconPath(resource.icon)}
+							alt={`Image for ${resource.title}, ${resource.description}`}
+							width="32"
+							height="32"
+						/>
+					)}
+					<div class="resource-text">
+						<strong class="resource-title">{resource.title}</strong>
+						<p>{resource.description}</p>
+					</div>
+				</>
+			);
+			return isDisabled ? (
+				<DisabledWrapper label="Coming Soon" size="small">
+					<DBCard className="resource-card-item">{cardContent}</DBCard>
+				</DisabledWrapper>
+			) : (
+				<a href={resource.url} target="_blank" rel="noopener noreferrer" class="resource-card-link">
+					<DBCard behavior="interactive" className="resource-card-item">
+						{cardContent}
+						<strong class="resource-link-label" data-icon-trailing="arrow_up_right">
+							{resource.label || 'View Storybook'}
+						</strong>
+					</DBCard>
+				</a>
+			);
+		})
+	}
+</div>

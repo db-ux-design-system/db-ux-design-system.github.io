@@ -1,10 +1,10 @@
 ---
 import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
 import { DBSection, DBStack } from '@db-ux/react-core-components';
-import TypographyPlayground from './_TypographyPlayground.astro';
-import TypographyTable from './_TypographyTable.astro';
-import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import TypographyPlayground from '@template/components/documentation/TypographyPlayground/TypographyPlayground.astro';
+import TypographyTable from '@template/components/documentation/TypographyTable/TypographyTable.astro';
+import GuidelineExample from '@template/components/documentation/GuidelineExample/GuidelineExample.astro';
+import QuestionForm from '@template/components/feedback/QuestionForm/QuestionForm.astro';
 
 const frontmatter: DocumentationFrontMatter = {
 	headline: 'Typography',
@@ -27,7 +27,7 @@ const headings = [
 	Typography helps establish hierarchy and communicate key content through clear visual patterns.
 	Well-designed typography improves readability and directly enhances the user experience.
 
-	<DBSection spacing="small">
+	<DBSection id="typography--playground" spacing="small" width="large">
 		<DBStack gap="x-large">
 			<DBStack gap="none">
 				<h2 id="playground">Playground</h2>
@@ -38,7 +38,7 @@ const headings = [
 		</DBStack>
 	</DBSection>
 
-	<DBSection spacing="small">
+	<DBSection id="typography--guidelines" spacing="small" width="large">
 		<h2 id="guidelines">Guidelines</h2>
 
 		<h3>Code Mapping</h3>
@@ -58,19 +58,19 @@ const headings = [
 		</div>
 	</DBSection>
 
-	<DBSection spacing="small">
+	<DBSection id="typography--tokens" spacing="small" width="large">
 		<h2 id="tokens">Tokens</h2>
 		<TypographyTable />
 	</DBSection>
 
-	<DBSection spacing="small">
+	<DBSection id="typography--faq" spacing="small" width="large">
 		<h2 id="faq">FAQ</h2>
 		<QuestionForm componentName="Typography" />
 	</DBSection>
 
 	<script>
 		import { waitForElements } from '@template/utils/client.utils.ts';
-		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';
+		import { handleSimplePlaygrounds } from '@template/components/documentation/FoundationPlayground';
 
 		function initTypography(): boolean {
 			return handleSimplePlaygrounds({

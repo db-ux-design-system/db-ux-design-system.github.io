@@ -1,11 +1,11 @@
 ---
 import type { MarkdownHeading } from 'astro';
 import '../../styles/global.css';
-import HtmlHead from '@template/components/HtmlHead';
+import HtmlHead from '@template/components/theming/HtmlHead';
 import MainContent from './main-content';
 import { appConfig } from '@root/app.config.ts';
-import { Shell } from '@template/components/Shell';
-import Footer from '@template/components/Footer/Footer.astro';
+import { Shell } from '@template/components/layout/Shell';
+import Footer from '@template/components/layout/Footer/Footer.astro';
 
 interface Props {
 	headings?: MarkdownHeading[];

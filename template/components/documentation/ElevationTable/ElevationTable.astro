@@ -1,0 +1,16 @@
+---
+import FoundationTokenTable from '@template/components/documentation/FoundationTokenTable/FoundationTokenTable.astro';
+
+const tokens = ['db-elevation-sm', 'db-elevation-md', 'db-elevation-lg'];
+---
+
+<FoundationTokenTable
+	sections={[
+		{
+			headline: 'Elevation',
+			tokens,
+			previewClass: 'elevation-preview',
+			previewAttribute: 'elevation',
+		},
+	]}
+/>

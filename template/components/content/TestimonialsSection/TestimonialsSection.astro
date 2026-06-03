@@ -1,0 +1,60 @@
+---
+import { appConfig } from '@config';
+import { DBSection, DBCard } from '@db-ux/react-core-components';
+import { TextImage, Carousel } from '@components';
+---
+
+<DBSection
+	width="large"
+	spacing="medium"
+	aria-label="Unified model section"
+	id="home--testimonials-section"
+>
+	<Carousel>
+		<DBCard spacing="medium">
+			<TextImage
+				title={'\u201CSince adopting the system, our teams spend less time aligning on UI details and more time solving real product problems.\u201D'}
+				headlineLevel={2}
+				imagePosition="left"
+				imageWidth="33"
+				rounded={true}
+				imageSrc={`${appConfig.basePath}assets/people/Finn-Hoffmeister--C.jpg`}
+				imageAlt="Finn Hoffmeister"
+				textGap="2xl"
+			>
+				Finn Hoffmeister <br />
+				Product Owner @ DB Systel
+			</TextImage>
+		</DBCard>
+		<DBCard spacing="medium">
+			<TextImage
+				title={'\u201CNew team members ramp up faster because the system explains how we design and build our products.\u201D'}
+				headlineLevel={2}
+				imagePosition="left"
+				imageWidth="33"
+				rounded={true}
+				imageSrc={`${appConfig.basePath}assets/people/Patrick-Weber--C.jpg`}
+				imageAlt="Tobias Oberpaul"
+				textGap="2xl"
+			>
+				Patrick Weber <br />
+				Design Lead @ DB Fernverkehr
+			</TextImage>
+		</DBCard>
+		<DBCard spacing="medium">
+			<TextImage
+				title={'\u201CDesign and development finally speak the same language \u2014 handoff feels predictable instead of repetitive.\u201D'}
+				headlineLevel={2}
+				imagePosition="left"
+				imageWidth="33"
+				rounded={true}
+				imageSrc={`${appConfig.basePath}assets/people/Danny-Koppenhagen--C.jpg`}
+				imageAlt="Danny Koppenhagen"
+				textGap="2xl"
+			>
+				Danny Koppenhagen <br />
+				Frontend Architect @ DB Systel
+			</TextImage>
+		</DBCard>
+	</Carousel>
+</DBSection>
