@@ -1,0 +1,197 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Code Connect'
+headline: 'Code Connect'
+description: 'How Figma Code Connect bridges the gap between design and development by linking component properties directly to code.'
+align: start
+order: 1
+toc: true
+tocMaxDepth: 2
+---
+
+import { DBSection, DBInfotext, DBCheckbox, DBButton } from '@db-ux/react-core-components';
+
+<DBSection spacing="small" width="auto">
+
+## How does Code Connect work?
+
+Code Connect is a Figma feature that links design components directly to their code implementations. Developers see the exact code snippet for a selected component configuration right inside Figma's Dev Mode.
+
+In the DB UX Design System, component properties in Figma drive the Code Connect output. There are two categories:
+
+1. **Design properties:** affect the visual appearance and are always visible on the first level (e.g. Size, Label, Disabled).
+2. **⚙️ Code Connect properties:** only relevant for code generation, not for the visual design. If configurable, they appear on the first level marked with a ⚙️ icon. If not configurable, they are handled in the background.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## For Designers
+
+As a designer, you work with both types of properties when configuring a component instance.
+
+### Design-relevant properties
+
+These are the properties you see directly when selecting a component instance in Figma. They affect the visual appearance of the component.
+
+You configure these as usual. They influence both the design and the generated code output.
+
+<h3 style={{ marginTop: 'var(--db-spacing-fixed-lg)' }}>⚙️ Code Connect properties</h3>
+
+Code Connect properties are marked with a **⚙️** icon and are only relevant for code generation. They do not change the visual design.
+
+If a component has configurable Code Connect properties, they appear directly on the first level at the end of the properties list. You can recognize them by the ⚙️ prefix.
+
+However, not all components have configurable Code Connect properties. Some components (like the Outline Button) contain a **⚙️ Code Connect** layer internally that passes "blind" properties to the code output (e.g. `variant="outlined"`). Since there is nothing to adjust, no ⚙️ properties are shown on the first level.
+
+<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--db-spacing-fixed-md)' }}>
+	<div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--db-spacing-fixed-sm)' }}>
+		<DBCheckbox
+			required
+			showRequiredAsterisk
+			message="Read the full Terms of Service before submitting."
+			label="I agree to the terms and conditions"
+		/>
+
+    	Examples: `Checked`, `Indeterminate`, `Disabled`, `Validation`, `Show Required Asterisk`, `Show Label`, `Label`, `Show Message`
+
+    	<img
+    		src="/assets/learn/code-connect/design-properties.png"
+    		alt="Checkbox properties on first level — design properties and configurable ⚙️ Code Connect property (Required) visible"
+    		style={{ maxWidth: '70%' }}
+    	/>
+
+<DBInfotext
+	semantic="informational"
+	size="medium"
+	text="Configurable Code Connect properties are visible on the first level. Default values are pre-selected."
+/>
+
+    </div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--db-spacing-fixed-sm)' }}>
+    	<DBButton variant="outlined" showIcon icon="person">
+    		Login
+    	</DBButton>
+
+    	Examples: `Disabled`, `Size`, `Width`, `Show Icon Leading`, `Show Icon Trailing`, `Icon Leading`, `Text`
+
+    	<img
+    		src="/assets/learn/code-connect/design-properties2.png"
+    		alt="Button properties on first level. Only design properties visible, no ⚙️ Code Connect properties"
+    		style={{ maxWidth: '70%' }}
+    	/>
+
+<DBInfotext
+	semantic="informational"
+	size="medium"
+	text="No Code Connect properties visible. The variant is determined automatically."
+/>
+
+    </div>
+
+</div>
+
+<h3 style={{ margin: 'var(--db-spacing-fixed-lg) 0' }}>⚙️ Code Connect layer</h3>
+
+<img
+	src="/assets/learn/code-connect/code-connect-layer.png"
+	alt="The ⚙️ Code Connect sub-layer inside a component in the Figma layers panel"
+	style={{ maxWidth: '40%' }}
+/>
+
+Some components contain an internal **⚙️ Code Connect** layer. This layer exists when there are properties that are relevant for development but cannot be represented in the design. When you select it, you'll see one of two states:
+
+<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--db-spacing-fixed-md)' }}>
+	<div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--db-spacing-fixed-sm)' }}>
+**➡️ Set properties**: The component has configurable Code Connect properties. They appear on the first level and can be adjusted there.
+
+<img
+	src="/assets/learn/code-connect/set-properties.png"
+	alt="Code Connect layer with configurable properties for the Checkbox component"
+	style={{ maxWidth: '50%' }}
+/>
+
+<DBInfotext
+	semantic="informational"
+	size="medium"
+	text="Default values are pre-selected."
+/>
+</div>
+	<div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--db-spacing-fixed-sm)' }}>
+**❌ No property to set**: The component passes properties automatically (e.g. `variant="outlined"`). There is nothing for you to configure.
+
+<img
+	src="/assets/learn/code-connect/no-property.png"
+	alt="Code Connect layer showing 'No property to set' message for the Outline Button"
+	style={{ maxWidth: '50%' }}
+/>
+
+</div></div>
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## For Developers
+
+{/* TODO: This section needs review by a developer familiar with the Code Connect implementation. */}
+
+As a developer, Code Connect gives you direct access to the correct code snippet for any component configuration, right inside Figma's Dev Mode.
+
+<h3 style={{ marginTop: 'var(--db-spacing-fixed-lg)' }}>How it works</h3>
+
+Code Connect maps Figma component properties to framework-specific code snippets. When a designer configures a component (both design-relevant and Code Connect properties), the Dev Mode panel shows the corresponding code that matches that exact configuration.
+
+<h3 style={{ marginTop: 'var(--db-spacing-fixed-lg)' }}>Using Code Connect in Dev Mode</h3>
+
+1. Open a Figma file and switch to **Dev Mode** (toggle in the bottom toolbar).
+2. Select a component instance on the canvas.
+3. In the **Inspect panel** on the right, look for the **Code Connect** section (marked as "Connected").
+4. Select your target framework (e.g. React) from the dropdown.
+5. The generated code snippet reflects the current property configuration, including values set via ⚙️ Code Connect properties.
+
+<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--db-spacing-fixed-md)' }}>
+	<div>
+		<img
+			src="/assets/learn/code-connect/code-connect-dev.png"
+			alt="Code Connect output in Figma Dev Mode showing a React code snippet for DBCheckbox"
+			style={{ maxWidth: '100%' }}
+		/>
+	</div>
+	<div>
+		<img
+			src="/assets/learn/code-connect/code-connect-dev2.png"
+			alt="Code Connect output in Figma Dev Mode showing a React code snippet for DBButton with variant outline"
+			style={{ maxWidth: '100%' }}
+		/>
+	</div>
+</div>
+
+<h3 style={{ marginTop: 'var(--db-spacing-fixed-lg)' }}>Property mapping</h3>
+
+<div style={{ marginTop: 'var(--db-spacing-fixed-sm)' }}>
+
+| Property type            | Configured by                    | Example properties                     | Reflected in code  |
+| ------------------------ | -------------------------------- | -------------------------------------- | ------------------ |
+| Design-relevant          | Designer (component first level) | `size`, `label`, `disabled`            | ✅ Yes             |
+| Code-only (configurable) | Designer (⚙️ on first level)     | `required`, `checked`, `indeterminate` | ✅ Yes             |
+| Code-only (automatic)    | Determined by variant            | `variant`, `noText`                    | ✅ Yes (automatic) |
+
+</div>
+
+Both types of properties are reflected in the generated code output. The distinction only matters for the design workflow. In code, all properties are treated equally.
+
+<h3 style={{ marginTop: 'var(--db-spacing-fixed-lg)' }}>Default values</h3>
+
+⚙️ Code Connect properties have sensible defaults pre-configured. If a designer hasn't explicitly changed a value, the default is used in the code output. This means you can trust the generated snippet to be complete and accurate for the selected configuration.
+
+<h3 style={{ marginTop: 'var(--db-spacing-fixed-lg)' }}>Connect own components</h3>
+
+Follow the instructions from <a href="https://developers.figma.com/docs/code-connect/quickstart-guide/" target="_blank" referer="no-referer">Figma Code Connect</a> to
+connect your own components to Code Connect. You'll need a valid Figma Token with the permission to you component.
+To reuse DB UX Components you can use `instance.findInstance('DBButton').executeTemplate().example` to include the correct code.
+The "code" which is shown in Figma is just a string, you can manipulate it as you like. We generate everything inside CI/CD for all Framworks based on <a href="https://github.com/db-ux-design-system/core-web/blob/main/packages/components/configs/plugins/figma/index.cjs" target="_blank" referer="no-referer">this</a> script.
+You might use an AI and this string to adapt your own logic.
+
+</DBSection>
