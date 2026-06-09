@@ -8,7 +8,8 @@ date: '2026-06-08'
 ### Design
 
 - feat: add Code Connect to core components
-  - Accordion, Badge, Button, Card, Checkbox, Infotext, Input, Link, Popover, Radio, Section, Switch, Tag, Textarea, Tooltip
-  - prepared but not yet connected: CustomSelect, Drawer, Header, Navigation, Notification, Select
 
 ### Development
+
+- feat: table
+- feat(agent-cli): introduce standardized db-ux-powers AI bundle
