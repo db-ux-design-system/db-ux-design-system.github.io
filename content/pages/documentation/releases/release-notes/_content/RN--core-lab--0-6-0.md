@@ -1,7 +1,7 @@
 ---
 hidePage: true
 category: '🧪 Core Lab'
-version: 'lab0.5.0'
+version: 'lab0.6.0'
 date: '2026-05-20'
 ---
 
