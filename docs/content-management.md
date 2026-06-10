@@ -145,8 +145,8 @@ A pull request can be approved only if:
 - the implementation or content matches the requested outcome;
 - the change can be reviewed using a URL, preview, screenshot, or clear reproduction steps;
 - required checks have passed;
-- generated files and snapshots are up to date (this is checked by the pipeline itself, it would fail accordingly);
-- no unresolved review comments remain (this is checked by the GitHub itself, it would fail accordingly);
+- generated files and snapshots are up to date – this is checked (and if necessary updated) by the pipeline itself, it would fail accordingly;
+- no unresolved review comments remain – this is checked by the GitHub itself, it would fail accordingly;
 - the change follows agreed repository conventions.
 
 ### Additional criteria for functional or design changes
