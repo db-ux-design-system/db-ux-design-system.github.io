@@ -122,6 +122,7 @@ A pull request should include:
 - information about local checks that were executed;
 - any known limitations or open questions.
 For functional or design pull requests, the pull request should also be added to the [UX Engineering Team Backlog project board](https://github.com/orgs/db-ux-design-system/projects/6). This ensures visibility and allows the team to discuss ownership, prioritization, and review allocation.
+- If you feel confident enough and the content could get merged after a review right away and doesn't have any timing constraints, you could already choose the "Enable auto-merge (squash)" button, that would auto-merge the PR after the approval has been done.
 
 7. Run automated checks
 After the pull request is opened, automated checks should run in the pipeline.
