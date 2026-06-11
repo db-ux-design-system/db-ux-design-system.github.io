@@ -107,7 +107,6 @@ Our [Git Commit conventions](conventions.md) are based on Conventional Commits, 
 - `fix: correct broken changelog link`
 - `docs: update release note structure or update product description`
 - `style: adjust spacing in article layout`
-- `content: update product description`
 In this commit message, focus on describing the "why" behind the change, and not the "what", as this clear by having a look at the changes themselves. The description could include further and longer texts.
 
 6. Create the pull request
