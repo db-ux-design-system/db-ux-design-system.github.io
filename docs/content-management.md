@@ -105,7 +105,7 @@ Commit messages should follow a defined convention. If changes are made via an I
 Our [Git Commit conventions](conventions.md) are based on Conventional Commits, for example:
 - `feat: add new content teaser component`
 - `fix: correct broken changelog link`
-- `docs: update release note structure`
+- `docs: update release note structure or update product description`
 - `style: adjust spacing in article layout`
 - `content: update product description`
 In this commit message, focus on describing the "why" behind the change, and not the "what", as this clear by having a look at the changes themselves. The description could include further and longer texts.
