@@ -32,3 +32,7 @@ Moreover, you need to duplicate [`.env.template`](./.env.template) as [`.env`](.
 ### Conventions
 
 Please note that we have established [code and git commit (message and branch naming) conventions](docs/conventions.md), which are enforced using various linting tools.
+
+### Change Processes
+
+Please note that we have established [changes process (both code and content)](docs/content-management.md), which ensure common contributions to all parts of the codebase as well as a clear review process.
