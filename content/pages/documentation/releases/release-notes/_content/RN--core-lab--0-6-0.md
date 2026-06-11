@@ -1,7 +1,7 @@
 ---
 hidePage: true
 category: '🧪 Core Lab'
-version: 'lab0.5.0'
+version: 'lab0.6.0'
 date: '2026-05-20'
 ---
 
@@ -14,7 +14,3 @@ date: '2026-05-20'
   - fix density behavior
   - integration of slots
   - alignment with dev (properties, behavior) → ready for beta
-
-### Development
-
--
