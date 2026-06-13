@@ -27,7 +27,9 @@ const releaseNoteFiles = import.meta.glob<MarkdownInstance<any>>('./_content/*.m
 });
 const releaseNotes: ReleaseNote[] = Object.values(releaseNoteFiles)
 	.map(({ frontmatter, Content }) => {
-		const heading = `${frontmatter.category} – ${frontmatter.version}`;
+		const heading = frontmatter.version
+			? `${frontmatter.category} – ${frontmatter.version}`
+			: frontmatter.category;
 		const slug = heading
 			.normalize('NFD')
 			.replace(/[\u0300-\u036f]/g, '')
