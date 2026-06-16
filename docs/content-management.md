@@ -71,7 +71,8 @@ The issue should include:
 - an indication whether the change is **content-only or functional/design-related**
 - optional: the URL to a **Story** out of the backlog
 
-If the change is urgent, the issue alone is not sufficient. Urgent topics should be communicated directly to the team, because issues may otherwise only be reviewed during the daily or regular alignment and could be missed.
+⚠️ Urgent changes:
+Don't rely on the issue alone. Communicate directly to the team, as issues may only be picked up during the daily or regular alignment.
 
 ### 2. Classify the type of change
 
