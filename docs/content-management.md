@@ -2,7 +2,12 @@
 
 ## Purpose
 
-This process describes how content-related and functional/design-related changes are initiated, developed, reviewed, approved, and merged. It is intended to make work traceable, improve review quality, prevent avoidable pipeline failures, and ensure that both developers and content contributors can collaborate reliably.
+This process describes how changes are initiated, developed, reviewed, and merged. It helps to:
+
+- make work **traceable**
+- improve **review quality**
+- prevent avoidable **pipeline failures**
+- ensure **reliable collaboration** between developers and content contributors
 
 ## Scope
 
