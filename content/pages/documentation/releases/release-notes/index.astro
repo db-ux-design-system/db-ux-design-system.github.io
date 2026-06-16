@@ -30,7 +30,12 @@ const releaseNotes: ReleaseNote[] = Object.values(releaseNoteFiles)
 		const heading = frontmatter.version
 			? `${frontmatter.category} – ${frontmatter.version}`
 			: frontmatter.category;
-		const slug = heading
+		const date = new Date(frontmatter.date);
+		// For Core Lab entries (no version), use the date as identifier to ensure unique slugs
+		const slugSource = frontmatter.version
+			? heading
+			: `${heading}-${date.toISOString().slice(0, 10)}`;
+		const slug = slugSource
 			.normalize('NFD')
 			.replace(/[\u0300-\u036f]/g, '')
 			.toLowerCase()
@@ -40,7 +45,7 @@ const releaseNotes: ReleaseNote[] = Object.values(releaseNoteFiles)
 			slug,
 			heading,
 			category: frontmatter.category,
-			date: new Date(frontmatter.date),
+			date,
 			Content,
 			version: frontmatter.version,
 		} as ReleaseNote;
