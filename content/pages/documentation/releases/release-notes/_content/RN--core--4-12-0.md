@@ -13,6 +13,7 @@ date: '2026-06-18'
   - radio
   - switch
   - tooltip
+- feat: improved slot settings for several components
 - fix(tag): removable tag size bug
 
 ### Development
