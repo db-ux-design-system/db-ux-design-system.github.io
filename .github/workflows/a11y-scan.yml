@@ -14,7 +14,7 @@ jobs:
           # Generate a cache key using the branch name, replacing characters (e.g. `/`) which would create unexpected paths.
           CACHE_KEY=$(printf 'cached_results-%s.json' "${{ github.ref_name }}" | tr -cs 'A-Za-z0-9._-' '_')
           echo "cache_key=$CACHE_KEY" >> $GITHUB_OUTPUT
-      - uses: github/accessibility-scanner@7866232dda98e447fed8ec0d7798b322d888fd27 # v2.12.0
+      - uses: github/accessibility-scanner@1b9502344c5fa3ecc95e88c5d97da9e498a73ef4 # v3.2.0
         with:
           urls: | # Provide a newline-delimited list of URLs to scan; more information below.
             https://design-system.deutschebahn.com/
