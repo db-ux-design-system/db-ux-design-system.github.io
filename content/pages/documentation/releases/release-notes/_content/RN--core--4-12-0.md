@@ -18,7 +18,7 @@ date: '2026-06-18'
 ### Development
 
 - feat: add `--db-logo-short` variable for new db-shell
-- feat: emit spec-compliant ESM with explicit import extensions - see commit 73808d6:
+- feat: emit spec-compliant ESM with explicit import extensions
   - The generated React, Vue and Web Component outputs now produce standards-compliant
   - ESM: every relative import/export carries an explicit .js / /index.js (or .vue)
   - extension, added during Mitosis generation. This resolves ERR_UNSUPPORTED_DIR_IMPORT
