@@ -1,0 +1,180 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Figma'
+headline: 'Figma'
+description: 'Practical tips, workarounds, and how-tos for working with the DB UX Design System in Figma.'
+align: start
+order: 2
+toc: true
+tocMaxDepth: 3
+---
+
+import { DBSection, DBInfotext, DBNotification, DBStack } from '@db-ux/react-core-components';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+
+<DBSection spacing="small" width="auto">
+
+## General
+
+{/* Cross-cutting topics: library setup, workarounds, helper components, density, theming, etc. */}
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### Scrollbar
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/Dr7QvFYRn5AwyQVOto4pEz/Doku--Scrollbar?node-id=7001-470&embed-host=share"
+	layout="side"
+>
+The Scrollbar helper component is used within various components (e.g. Custom Select Dropdown, Shell, …). It supports 2 orientations (Vertical, Horizontal) and multiple positions (Start, Center, End, Free).
+
+Use the Resizer layers to control thumb size and position via the Auto Layout gap value.
+</GuidelineExample>
+
+#### Set Handle size & Free Handle position
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/Dr7QvFYRn5AwyQVOto4pEz/Doku--Scrollbar?node-id=5277-7&embed-host=share"
+	description='Select "Thumb Resizer" and set the gap value to control handle size'
+/>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/Dr7QvFYRn5AwyQVOto4pEz/Doku--Scrollbar?node-id=5277-8&embed-host=share"
+	description='Select "Spacer Resizer" and set the gap value to control free position'
+/>
+</div>
+
+</DBStack>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Component-specific
+
+{/* Tips and how-tos for individual components */}
+
+
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### Accordion
+
+#### Resizing behavior after editing
+
+<DBNotification variant="standalone" semantic="informational">
+Known Figma bug: changing the item count or item state (open/collapsed) can reset the resizing behavior of accordion items. Re-apply "Fill" or "Hug" after editing.
+</DBNotification>
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion-%E2%9C%85?node-id=5277-7&embed-host=share"
+	description="Place the component and set properties for component and instances"
+/>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion-%E2%9C%85?node-id=5277-8&embed-host=share"
+	description="Set the auto layout behavior of the affected items to hug to fix the bug"
+/>
+</div>
+
+</DBStack>
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### Button
+#### Multi-line text within Full Width Buttons
+
+<DBNotification variant="standalone" semantic="informational">
+Only use multi-line text in exceptional cases, such as when the text is extended due to translation.
+</DBNotification>
+
+
+To enable automatic line breaks in a full-width button, select the "Text" layer inside the button and set the width resizing behavior from "Hug" to "Fill".
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button-%E2%9C%85?node-id=4627-34&embed-host=share"
+	description='Select the "Text" layer inside the button component'
+/>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button-%E2%9C%85?node-id=4627-834&embed-host=share"
+	description='Set the width resizing behavior from "Hug" to "Fill"'
+/>
+</div>
+
+</DBStack>
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### Checkbox
+
+#### Full Width – Attribute Requirement
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=5608-40&embed-host=share"
+	layout="side"
+>
+Checkboxes have a toggle property for the requirement asterisk.
+
+For Full Width checkboxes you have to add the asterisk * manually in the label field.
+
+Set Required Toggle = true for correct Dev Properties.
+</GuidelineExample>
+
+</DBStack>
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### Radio
+
+#### Full Width – Attribute Requirement
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--Radio-%E2%9C%85?node-id=4721-38&embed-host=share"
+	layout="side"
+>
+Radio buttons have a toggle property for the requirement asterisk.
+
+For Full Width radio buttons you have to add the asterisk * manually in the label field.
+
+Set Required Toggle = true for correct Dev Properties.
+</GuidelineExample>
+
+</DBStack>
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### Switch
+
+#### Full Width – Attribute Requirement
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=5430-39&embed-host=share"
+	layout="side"
+>
+Switches have a toggle property for the requirement asterisk.
+
+For Full Width switches you have to add the asterisk * manually in the label field.
+
+Set Required Toggle = true for correct Dev Properties.
+</GuidelineExample>
+
+</DBStack>
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### Textarea
+
+#### Vertical resizing
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea-%E2%9C%85?node-id=4884-2&embed-host=share"
+	layout="side"
+>
+After placing the component and setting properties, adjust the size and set vertical resizing to "Fill Container" for:
+
+- Container
+- Textarea Container
+</GuidelineExample>
+
+</DBStack>
+
+</DBSection>
