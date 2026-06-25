@@ -5,7 +5,7 @@ version: 'v3.1.0'
 date: '2025-09-01'
 ---
 
-### Features UX Engineering
+### Development
 
 - feat: Improved Select: deselect now possible
 - feat: Improved Custom Select: selecting entries via Enter key now possible

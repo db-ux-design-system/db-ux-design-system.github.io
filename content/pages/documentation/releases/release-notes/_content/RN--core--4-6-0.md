@@ -5,7 +5,7 @@ version: 'v4.6.0'
 date: '2026-04-09'
 ---
 
-### Features Design
+### Design
 
 **feat: new component variants with Figma slot feature for Card, Popover and Section**
 
@@ -15,7 +15,7 @@ date: '2026-04-09'
 
   Replace all ❌ deprecated variants of Card, Popover and Section with the new component and place your content inside the slot.
 
-### Features Development
+### Development
 
 **MCP Server**
 
@@ -33,8 +33,6 @@ date: '2026-04-09'
 
 - **Especially important:**
   - PostCSS: We released a new package <a href="https://www.npmjs.com/package/@db-ux/core-postcss-plugin" target="_blank" rel="noopener noreferrer">@db-ux/core-postcss-plugin</a>. It resolves all `--db-` variables and properties as much as possible. For example, color hex values are written directly into `--db-neutral-bg-basic-level-1-default`. This means almost no variables or properties are referenced anymore. **Note:** We can't test every setup, so please give us early feedback. **You need to install and integrate the plugin; other package versions don't need to be < 4.6.0.**
-
-### Bugfixes Development
 
 - DBInput/DBTextarea: `undefined` as `value` is now correctly supported. Additionally, numeric input values are no longer cleared when entering a decimal separator.
 - DBDrawer: Custom `max-width`/`max-height` values were being overridden by internal `min-width` rules — fixed. A positioning issue with nested fixed elements (e.g. DBCustomSelect dropdowns) inside the Drawer has also been corrected.
