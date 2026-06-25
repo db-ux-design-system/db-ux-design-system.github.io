@@ -4,10 +4,78 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Shell Mobile'
 title: 'Shell Mobile'
+description: 'The Shell Mobile component provides the layout structure for mobile applications. It supports different ControlPanel positions and uses a Drawer for main navigation access.'
 align: start
 status: 'beta'
 toc: true
 order: 2
 ---
 
-Shell Mobile documentation.
+import { DBSection } from '@db-ux/react-core-components';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Provide consistent page structure for mobile web applications
+- Support ControlPanel positions: Top, Bottom, and FlatIcon
+- Manage main navigation via a Drawer (Right or Bottom) triggered by a burger menu
+- Place SubNavigation at Top or Bottom within the content area
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the Shell Mobile component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Shell Mobile" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Shell Desktop',
+			description: 'Desktop variant of the Shell with persistent navigation.',
+			url: '/documentation/components/shell/desktop',
+		},
+		{
+			title: 'Shell SubNavigation',
+			description: 'Secondary navigation within the Shell for sub-level page structure.',
+			url: '/documentation/components/shell/subnavigation',
+		},
+		{
+			title: 'Drawer',
+			description: 'Sliding panel used for mobile navigation access.',
+			url: '/documentation/components/drawer',
+		},
+	]}
+/>
+
+</DBSection>

@@ -4,10 +4,78 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Shell SubNavigation'
 title: 'Shell SubNavigation'
+description: 'The Shell SubNavigation provides a secondary navigation level within the Shell. It supports horizontal and vertical orientations with Popover and Tree navigation variants.'
 align: start
 status: 'beta'
 toc: true
-order: 4
+order: 3
 ---
 
-Shell SubNavigation Subcomponent.
+import { DBSection } from '@db-ux/react-core-components';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Provide a second level of navigation below the main ControlPanel
+- Support horizontal placement (Top) for breadth-first navigation
+- Support vertical placement (Left) with Popover or Tree navigation variants
+- Allow collapsing/expanding the vertical SubNavigation via a slide button
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the Shell SubNavigation component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Shell SubNavigation" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Shell Desktop',
+			description: 'The desktop Shell that hosts the SubNavigation.',
+			url: '/documentation/components/shell/desktop',
+		},
+		{
+			title: 'Shell Mobile',
+			description: 'Mobile Shell where SubNavigation appears as a horizontal bar.',
+			url: '/documentation/components/shell/mobile',
+		},
+		{
+			title: 'Navigation',
+			description: 'The underlying navigation component used within SubNavigation.',
+			url: '/documentation/components/navigation',
+		},
+	]}
+/>
+
+</DBSection>

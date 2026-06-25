@@ -4,10 +4,77 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Shell Content'
 title: 'Shell Content'
+description: 'The Shell Content component is the scrollable main content area of the Shell. It provides slots for persistent content (Start, Children, End) and supports Auto and Fixed scroll variants.'
 align: start
 status: 'beta'
 toc: true
-order: 3
+order: 4
 ---
 
-Shell Content Subcomponent.
+import { DBSection } from '@db-ux/react-core-components';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Hold the main page content within the Shell layout
+- Support three content slots: Start (e.g. notifications), Children (main content), End (e.g. footer)
+- Provide Auto variant (scrollbar on full content) and Fixed variant (scrollbar only on Children slot)
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the Shell Content component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Shell Content" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Shell Desktop',
+			description: 'The desktop Shell that contains the Content area.',
+			url: '/documentation/components/shell/desktop',
+		},
+		{
+			title: 'Shell Mobile',
+			description: 'The mobile Shell that contains the Content area.',
+			url: '/documentation/components/shell/mobile',
+		},
+		{
+			title: 'Shell SubNavigation',
+			description: 'Secondary navigation that sits alongside the Content area.',
+			url: '/documentation/components/shell/subnavigation',
+		},
+	]}
+/>
+
+</DBSection>
