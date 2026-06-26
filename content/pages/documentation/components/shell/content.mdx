@@ -6,12 +6,15 @@ headline: 'Shell Content'
 title: 'Shell Content'
 description: 'The Shell Content component is the scrollable main content area of the Shell. It provides slots for persistent content (Start, Children, End) and supports Auto and Fixed scroll variants.'
 align: start
-status: 'beta'
 toc: true
-order: 4
+status: 'sub'
+order: 3
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
@@ -40,6 +43,69 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 		},
 	]}
 />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Variant (Auto vs. Fixed)
+
+Use Auto when the entire content area (including Start and End slots) should scroll together. Use Fixed when Start (e.g. notifications) or End (e.g. footer) should remain persistently visible.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-3&embed-host=share"
+		description="Use Fixed when docked notifications or a persistent footer must stay visible while scrolling."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-4&embed-host=share"
+		description="Do not fill the Start or End slot with large amounts of content, especially in Fixed mode. This reduces the scrollable Children area to an unusable size."
+	/>
+</div>
+
+### Start Slot
+
+The Start slot is intended for persistent, system-level UI elements such as docked notifications that must remain visible above the main content.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-6&embed-host=share"
+		description="Place docked notifications or system banners in the Start slot."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-7&embed-host=share"
+		description="Do not place regular page content in the Start slot. It is reserved for persistent UI elements."
+	/>
+</div>
+
+### End Slot
+
+The End slot holds meta-level content like a footer with legal links. In Auto layout, the footer scrolls with the content and may be outside the visible area on longer pages. Use Fixed layout if the footer must remain persistently visible.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-9&embed-host=share"
+		description="Use the End slot for a meta footer with links such as Imprint or Privacy."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-10&embed-host=share"
+		description="Do not place important actions like submit buttons in the End slot when using Auto layout. Users may not scroll far enough to reach them."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
 
 </DBSection>
 
