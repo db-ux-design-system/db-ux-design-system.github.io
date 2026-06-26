@@ -5,14 +5,14 @@ version: 'v3.0.0'
 date: '2025-07-21'
 ---
 
-### Features
+### Design + Development
 
 - feat: Button with trailing icon
 
-### Features Design
+### Design
 
 - feat: Optimization of Accordion and Navigation
 
-### Features UX Engineering
+### Development
 
 - feat: ARIA Properties aligned
