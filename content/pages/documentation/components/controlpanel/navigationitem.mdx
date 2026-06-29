@@ -1,0 +1,148 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'CP NavigationItem'
+title: 'CP NavigationItem'
+description: 'The CP NavigationItem is the individual navigation entry within ControlPanel navigation containers. It supports three variants — Popover, Tree, and FlatIcon — each with specific interaction states and behaviors.'
+align: start
+toc: true
+status: 'sub'
+order: 8
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Popover Item: Flat navigation link. Popover Group opens a flyout (Desktop) or navigates to a sublevel (Mobile)
+- Tree Item: Navigation link within a tree structure. Icons are overridable for Items only — not for Groups
+- FlatIcon Item: Icon-based navigation destination. Tooltip text equals the Text Screenreader value
+- All variants support interaction states: Enabled, Hovered, Pressed, Focused, Disabled
+- All variants support an Active state indicating the current page/section
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Slots
+
+Slot availability varies by variant. The FloatingContainer (for tooltips, popovers, badges) is available on all NavigationItem variants. The End Slot for inline content is only available on vertical Popover and Tree Items. FlatIcon Items and horizontal Popover Items have no content slots.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do&embed-host=share"
+		description="Use vertical Popover or Tree NavigationItems when an End Slot is needed for inline content like badges or status icons."
+	/>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do2&embed-host=share"
+		description="Use the FloatingContainer for tooltips or badges on any NavigationItem variant — including FlatIcon and horizontal Popover."
+	/>
+</div>
+
+### Tree Icons
+
+Tree NavigationItems allow overriding the default tree-line icon with a custom icon. This applies to Items only — Groups always keep the expand/collapse chevron.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do&embed-host=share"
+		description="Override icons on Tree NavigationItems when custom icons improve scannability and help distinguish item types."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-dont&embed-host=share"
+		description="Do not override icons on NavigationItemGroups in Tree navigation. Groups need the chevron to communicate expand/collapse behavior."
+	/>
+</div>
+
+### FlatIcon Tooltip
+
+FlatIcon NavigationItems display a tooltip on hover that matches the Text Screenreader value. This ensures consistency between the visual tooltip and what assistive technologies announce.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do&embed-host=share"
+		description="Provide a clear, descriptive Text Screenreader value for each FlatIcon item — it serves as both tooltip and accessible label."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-dont&embed-host=share"
+		description="Do not leave the Text Screenreader value empty or use a different text than the tooltip. This creates inconsistency between visual and accessible labels."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the CP NavigationItem component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="CP NavigationItem" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'CP Navigation',
+			description: 'Parent navigation containers (Popover, Tree, FlatIcon) hosting the items.',
+			url: '/documentation/components/controlpanel/navigation',
+		},
+		{
+			title: 'ControlPanel Desktop',
+			description: 'Desktop ControlPanel where NavigationItems appear.',
+			url: '/documentation/components/controlpanel/desktop',
+		},
+		{
+			title: 'ControlPanel Mobile',
+			description: 'Mobile ControlPanel where Popover and FlatIcon items appear.',
+			url: '/documentation/components/controlpanel/mobile',
+		},
+	]}
+/>
+
+</DBSection>

@@ -92,16 +92,10 @@ const NavItem = ({
 			typeof window !== 'undefined' &&
 			(isActive || covers({ path, title, icon, iconTrailing, children, isSubNavigation }, currentPathname));
 
-		const groupLabel = status && status !== 'stable' ? (
-			<span style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-				{title}
-				{getStatusBadge(status)}
-			</span>
-		) : title;
-
 		return (
 			<DBNavigationItemGroup
-				text={groupLabel}
+				text={title}
+				additionalInformation={status && status !== 'stable' ? getStatusBadge(status) : undefined}
 				key={`router-group-${path ?? title}`}
 				aria-disabled={disabled ? 'true' : undefined}
 				expanded={isGroupActive}
