@@ -48,7 +48,7 @@ function toTitleFromSegment(segment: string): string {
  */
 function ensureChild(parent: NavigationItem, child: NavigationItem) {
 	parent.children = parent.children ?? [];
-	const exists = parent.children.find((c) => c.path === child.path);
+	const exists = parent.children.find((c) => c.path === child.path && c.title === child.title);
 	if (!exists) parent.children.push(child);
 }
 

@@ -1,0 +1,113 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'CP SecondaryActions'
+title: 'CP SecondaryActions'
+description: 'The CP SecondaryActions subcomponent is a slot for secondary action buttons at the end of the ControlPanel (e.g. user profile, settings, help).'
+align: start
+toc: true
+status: 'sub'
+order: 5
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Positioned at the end of the ControlPanel, separated from the navigation by a divider
+- Available in Desktop Top and Left positions
+- Not directly visible on Mobile — accessible within the Drawer behind the burger menu
+- Contains a Children slot that accepts Icon Buttons or similar action elements
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Action Placement
+
+SecondaryActions hold supporting utility actions that are relevant across all pages but are not the user's primary task. Keep them visually subordinate to the navigation and PrimaryActions.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do&embed-host=share"
+		description="Place utility actions (e.g. user profile, settings, help) in SecondaryActions that users may need occasionally."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-dont&embed-host=share"
+		description="Do not place frequently used actions (e.g. search, notifications) in SecondaryActions. These belong in PrimaryActions where they are immediately visible."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the CP SecondaryActions component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="CP SecondaryActions" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'CP PrimaryActions',
+			description: 'Primary actions slot for high-priority, high-frequency actions.',
+			url: '/documentation/components/controlpanel/primaryactions',
+		},
+		{
+			title: 'ControlPanel Desktop',
+			description: 'Desktop parent hosting SecondaryActions at the end.',
+			url: '/documentation/components/controlpanel/desktop',
+		},
+		{
+			title: 'ControlPanel Mobile',
+			description: 'Mobile parent where SecondaryActions are accessible via the Drawer.',
+			url: '/documentation/components/controlpanel/mobile',
+		},
+	]}
+/>
+
+</DBSection>

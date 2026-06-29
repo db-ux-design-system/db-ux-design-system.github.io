@@ -1,0 +1,108 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'CP Meta'
+title: 'CP Meta'
+description: 'The CP Meta subcomponent provides a flexible meta area within the ControlPanel for supplementary content such as meta navigation links, environment indicators, or other contextual information.'
+align: start
+toc: true
+status: 'sub'
+order: 6
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Horizontal orientation: Used in Desktop Top position, displayed above the main navigation bar
+- Vertical orientation: Used in Desktop Left position, displayed below the navigation in the sidebar
+- Contains a Children slot for custom meta content
+- On Mobile, Meta appears inside the Drawer (Level 1 only)
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Content Type
+
+Use Meta for supplementary, low-priority content that applies globally — such as meta navigation links, environment labels, or legal references. Keep it lightweight to not compete with the main navigation.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do&embed-host=share"
+		description="Use Meta for supplementary content like meta navigation links, environment indicators, or legal references."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-dont&embed-host=share"
+		description="Do not place primary navigation items or high-priority actions in Meta. It is reserved for supplementary content that complements the main ControlPanel areas."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the CP Meta component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="CP Meta" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'ControlPanel Desktop',
+			description: 'Desktop parent where Meta appears in Top and Left positions.',
+			url: '/documentation/components/controlpanel/desktop',
+		},
+		{
+			title: 'ControlPanel Mobile',
+			description: 'Mobile parent where Meta appears in the Drawer (Level 1 only).',
+			url: '/documentation/components/controlpanel/mobile',
+		},
+	]}
+/>
+
+</DBSection>

@@ -1,0 +1,185 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'CP Navigation'
+title: 'CP Navigation'
+description: 'The CP Navigation subcomponent is the navigation container within the ControlPanel. It holds NavigationItems and supports three variants — Popover, Tree, and FlatIcon — each suited to different content structures and ControlPanel positions.'
+align: start
+toc: true
+status: 'sub'
+order: 7
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Popover: Flat-to-medium navigation with flyout submenus. Available in Desktop Horizontal, Desktop Vertical, and Mobile (Drawer with level-based back-button navigation)
+- Tree: Deep hierarchical navigation with expand/collapse behavior. Available in Desktop Left only. Supports Single (accordion) or Multiple expand behavior
+- FlatIcon: Icon-based tab navigation for 2–5 top-level destinations. Available in Desktop Left (vertical) and Mobile (horizontal bottom bar)
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Variant Selection
+
+Choose the navigation variant based on your information architecture depth and the ControlPanel position. Popover works for flat-to-medium structures, Tree for deep hierarchies, FlatIcon for quick icon-based access.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do&embed-host=share"
+		description="Use Popover for navigation with fewer items and shallow hierarchy (up to 2 levels) and Tree for structures with 3+ levels of nesting."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-dont&embed-host=share"
+		description="Do not use Popover for navigation with 3+ levels of nesting. Users lose orientation in deeply nested flyout menus — use Tree instead."
+	/>
+</div>
+
+### Multi-Level Rule
+
+Multi-level navigation can exist in either the ControlPanel or the SubNavigation. Applying multi-level in both creates conflicting navigation patterns and disorients users.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do&embed-host=share"
+		description="Use multi-level navigation (Popover or Tree) in the ControlPanel only when the SubNavigation has a single-level or flat structure."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-dont&embed-host=share"
+		description="Do not use multi-level navigation in both the ControlPanel and the SubNavigation simultaneously."
+	/>
+</div>
+
+### Tree Expand Behavior
+
+Tree navigation supports Single (accordion-style, one group open at a time) or Multiple (several groups open simultaneously) expand behavior. Choose based on the number of groups and screen space.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do&embed-host=share"
+		description="Use Single expand when the navigation has many groups and vertical space is limited — keeps the tree compact and focused."
+	/>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do2&embed-host=share"
+		description="Use Multiple expand when the navigation has few groups and users need to see items across groups simultaneously."
+	/>
+</div>
+
+### FlatIcon Capacity
+
+Keep the number of FlatIcon items manageable. On Mobile, the slot is technically limited (2–4 with text, 2–6 without text). On Desktop there is no hard limit, but too many items reduce clarity.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do&embed-host=share"
+		description="Use a focused set of equally weighted top-level destinations in FlatIcon navigation."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-dont&embed-host=share"
+		description="Do not overload the Desktop FlatIcon sidebar with too many items. A long list of icons without clear priority defeats the purpose of quick access."
+	/>
+</div>
+
+### Popover Horizontal Overflow
+
+The horizontal Popover navigation in Desktop Top has limited space. Too many items require scroll chevrons which reduce discoverability of hidden items.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do&embed-host=share"
+		description="Keep the number of top-level Popover items in Desktop Top manageable so all items are visible without scrolling."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-dont&embed-host=share"
+		description="Do not place too many items in the horizontal Popover navigation. Items hidden behind scroll chevrons are easily overlooked by users."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the CP Navigation component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="CP Navigation" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'CP NavigationItem',
+			description: 'Navigation items and groups used within the navigation containers.',
+			url: '/documentation/components/controlpanel/navigationitem',
+		},
+		{
+			title: 'ControlPanel Desktop',
+			description: 'Desktop parent providing Top and Left positions for Navigation.',
+			url: '/documentation/components/controlpanel/desktop',
+		},
+		{
+			title: 'ControlPanel Mobile',
+			description: 'Mobile parent where Popover Navigation appears in the Drawer.',
+			url: '/documentation/components/controlpanel/mobile',
+		},
+		{
+			title: 'Shell SubNavigation',
+			description: 'Secondary navigation level that complements the ControlPanel Navigation.',
+			url: '/documentation/components/shell/subnavigation',
+		},
+	]}
+/>
+
+</DBSection>

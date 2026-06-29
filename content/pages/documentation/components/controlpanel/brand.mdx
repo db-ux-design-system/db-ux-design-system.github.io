@@ -1,0 +1,125 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'CP Brand'
+title: 'CP Brand'
+description: 'The CP Brand subcomponent displays the application brand or logo within the ControlPanel. It provides a Custom variant that users can override with their own logo, and a Short variant that is automatically applied in collapsed Left and Mobile Bottom positions.'
+align: start
+toc: true
+status: 'sub'
+order: 3
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Display the brand/logo in the start area of the ControlPanel
+- Custom variant: User-overridable slot for the full brand (e.g. logo + wordmark)
+- Short variant: Automatically used in collapsed Left ControlPanel and Mobile Bottom — not user-configurable
+- Contains a Children slot for custom brand content (only in Custom variant)
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Custom Brand Override
+
+The Custom variant allows placing your own brand/logo via the Children slot. The Short variant is system-controlled and shows the default compact brand mark in constrained contexts.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do&embed-host=share"
+		description="Override the Custom variant with your application logo for expanded ControlPanel states (Top, Left expanded, Mobile Top)."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-dont&embed-host=share"
+		description="Do not attempt to override the Short variant. It is automatically applied in collapsed Left and Mobile Bottom positions and is not user-configurable."
+	/>
+</div>
+
+### Brand with FlatIcon
+
+The FlatIcon ControlPanel has no dedicated Brand area. If brand visibility is required, place the logo in the Shell Content area instead.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do&embed-host=share"
+		description="Place the brand/logo in the Shell Content area (e.g. as a header) when using FlatIcon and brand presence is needed."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-dont&embed-host=share"
+		description="Do not place a brand/logo as a FlatIcon NavigationItem. The tab bar is reserved for navigation destinations only."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the CP Brand component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="CP Brand" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'ControlPanel Desktop',
+			description: 'Desktop parent hosting the Brand in the Start Container.',
+			url: '/documentation/components/controlpanel/desktop',
+		},
+		{
+			title: 'ControlPanel Mobile',
+			description: 'Mobile parent where Brand appears in the navigation bar.',
+			url: '/documentation/components/controlpanel/mobile',
+		},
+	]}
+/>
+
+</DBSection>
