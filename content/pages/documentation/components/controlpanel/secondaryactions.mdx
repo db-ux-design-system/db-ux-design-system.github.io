@@ -53,20 +53,54 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-### Action Placement
+### Action Type
 
 SecondaryActions hold supporting utility actions that are relevant across all pages but are not the user's primary task. Keep them visually subordinate to the navigation and PrimaryActions.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do&embed-host=share"
-		description="Place utility actions (e.g. user profile, settings, help) in SecondaryActions that users may need occasionally."
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-2&embed-host=share"
+		description="Place utility actions (e.g. user profile, settings, help) that users may need occasionally."
 	/>
 	<GuidelineExample
 		variant="dont"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-dont&embed-host=share"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-4&embed-host=share"
 		description="Do not place frequently used actions (e.g. search, notifications) in SecondaryActions. These belong in PrimaryActions where they are immediately visible."
+	/>
+</div>
+
+### Count
+
+Keep SecondaryActions minimal. Too many icons at the end of the ControlPanel create visual noise and compete with the navigation.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-6&embed-host=share"
+		description="Use 1–3 utility actions that support the user without cluttering the navigation bar."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-8&embed-host=share"
+		description="Do not overload SecondaryActions with too many icons. A crowded end area makes the ControlPanel feel heavy and unfocused."
+	/>
+</div>
+
+### FlatIcon Limitation
+
+The FlatIcon ControlPanel does not support SecondaryActions. Utility actions like profile or settings should be placed as FlatIcon NavigationItems or moved into a dedicated page.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-10&embed-host=share"
+		description="Use Top or Bottom ControlPanel when secondary utility actions need a dedicated slot separated from navigation."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-12&embed-host=share"
+		description="Do not mix utility actions with navigation destinations in FlatIcon. Account or Settings can be a NavigationItem, but not an action button."
 	/>
 </div>
 

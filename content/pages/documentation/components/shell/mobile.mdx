@@ -52,23 +52,6 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-### ControlPanel Position
-
-Select the ControlPanel position based on the app type. Top is the default. Bottom supports thumb-reachable navigation for app-like experiences. Both use a Drawer for full navigation access.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1116&embed-host=share"
-		description="Use Top or Bottom with a Drawer for applications that need a full navigation structure accessible on demand."
-	/>
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1117&embed-host=share"
-		description="Use Bottom for app-like experiences where primary actions need to be within thumb reach."
-	/>
-</div>
-
 ### Responsive Differences
 
 The mobile Shell can differ from its desktop counterpart. Adapt navigation structure to mobile constraints rather than mirroring desktop 1:1.
@@ -123,6 +106,33 @@ The mobile SubNavigation supports only one navigation level. Keep the structure 
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### ControlPanel Position
+
+Select the ControlPanel position based on the app type. Top is the default. Bottom supports thumb-reachable navigation for app-like experiences. Both use a Drawer for full navigation access.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1116&embed-host=share"
+		description="Top position with a Drawer for applications that need a full navigation structure accessible on demand."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1117&embed-host=share"
+		description="Bottom position for app-like experiences where primary actions need to be within thumb reach."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Examples" expandedText="Hide some Examples" />
 
 </DBSection>
 

@@ -7,6 +7,7 @@ title: 'Shell Desktop'
 description: 'The Shell Desktop component provides the outermost layout structure for desktop applications. It combines the ControlPanel with optional SubNavigation and a content area.'
 align: start
 toc: true
+tocMaxDepth: 3
 order: 1
 ---
 
@@ -97,26 +98,51 @@ Choose a SubNavigation position that fits your information architecture and keep
 	/>
 </div>
 
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+<CollapsibleWrapper collapsedHeight="320px">
+
 ### Navigation Depth
 
-Multi-level navigation helps users find deeply nested content. Apply multi-level in either the ControlPanel or the SubNavigation – never in both.
+The Shell Desktop supports combining ControlPanel Navigation and SubNavigation in various ways. Both can have multiple levels independently. You can mirror the same structure in both, show only a subset, or distribute pages across the two navigation areas.
+
+#### Sub-pages in one navigation area only
 
 <div className="guideline-examples">
 	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1113&embed-host=share"
-		description="Use multi-level navigation in one area only, and keep the other flat."
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4132-2&embed-host=share"
+		description="Some items use the ControlPanel Popover to show their sub-pages directly."
 	/>
 	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1114&embed-host=share"
-		description="Do not use multi-level navigation in both ControlPanel and SubNavigation at the same time. This makes orientation harder for users."
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4132-4&embed-host=share"
+		description="Other items place their sub-pages in the SubNavigation Tree instead."
+	/>
+</div>
+
+#### Sub-pages distributed across both navigation areas
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4132-6&embed-host=share"
+		description="Top-level sub-pages are accessible via Popover in the ControlPanel as quick entry points."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4132-8&embed-host=share"
+		description="The same entries plus additional deeper pages are available in the SubNavigation Tree for full navigation."
 	/>
 </div>
 
 </CollapsibleWrapper>
 
-<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+<CollapseButton collapsedText="Show all Examples" expandedText="Hide some Examples" />
 
 </DBSection>
 
