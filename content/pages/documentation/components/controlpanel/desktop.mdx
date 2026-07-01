@@ -1,0 +1,164 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'ControlPanel Desktop'
+title: 'ControlPanel Desktop'
+description: 'The ControlPanel Desktop is the primary navigation bar for desktop applications within the Shell. It provides two position variants — Top (horizontal) and Left (vertical sidebar) — each supporting different navigation patterns and layout behaviors.'
+align: start
+toc: true
+order: 1
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Position Top: Horizontal navigation bar with Popover navigation, Brand, Actions, and optional Meta bar
+- Position Left: Vertical sidebar with Popover, Tree, or FlatIcon navigation and expand/collapse behavior
+- Width property (Top only): Full, Small, Medium, Large — controls the max-width of the content area
+- Supports Brand, PrimaryActions, SecondaryActions, Meta, and Navigation subcomponents
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Position (Top vs. Left)
+
+Choose the ControlPanel position based on your application's navigation complexity. Top works for apps with few top-level items; Left suits applications with many items or deep hierarchies.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-2&embed-host=share"
+		description="Use Top for applications with a small number of top-level navigation items that fit comfortably in a horizontal bar."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-4&embed-host=share"
+		description="Do not use Top when the number of navigation items exceeds the available horizontal space, causing items to overflow or require excessive scrolling."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Navigation Variant (Left)
+
+The Left position supports three navigation variants: Popover for flat-to-medium hierarchies, Tree for deep structures with 3+ levels, and FlatIcon for quick icon-based access to a small set of destinations.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-6&embed-host=share"
+		description="Popover for navigation with fewer items and shallow hierarchy (up to 2 levels), or Tree for larger structures with 3+ levels of nesting."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-8&embed-host=share"
+		description="FlatIcon for a small number of equally weighted top-level destinations with clear, recognizable icons."
+	/>
+</div>
+
+### Expand/Collapse (Left)
+
+The Left ControlPanel can be collapsed via a slide button to save screen space. It is always initially expanded. In the collapsed state, the navigation content is hidden and only the Brand and slide button remain visible.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-10&embed-host=share"
+		description="Collapsed Left with Popover navigation — icons are sufficient for orientation and screen space is needed for content."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-12&embed-host=share"
+		description="Collapsed Left with Tree navigation — the full tree is only occasionally needed and content space is the priority."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Examples" expandedText="Hide some Examples" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the ControlPanel Desktop component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="ControlPanel Desktop" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'ControlPanel Mobile',
+			description: 'Mobile variant with Top, Bottom, and FlatIcon positions.',
+			url: '/documentation/components/controlpanel/mobile',
+		},
+		{
+			title: 'Shell Desktop',
+			description: 'The desktop Shell layout that hosts the ControlPanel.',
+			url: '/documentation/components/shell/desktop',
+		},
+		{
+			title: 'Shell SubNavigation',
+			description: 'Secondary navigation that complements the ControlPanel.',
+			url: '/documentation/components/shell/subnavigation',
+		},
+		{
+			title: 'CP Navigation',
+			description: 'Navigation containers (Popover, Tree, FlatIcon) within the ControlPanel.',
+			url: '/documentation/components/controlpanel/navigation',
+		},
+		{
+			title: 'CP NavigationItem',
+			description: 'Navigation items and groups within the ControlPanel navigation.',
+			url: '/documentation/components/controlpanel/navigationitem',
+		},
+	]}
+/>
+
+</DBSection>
