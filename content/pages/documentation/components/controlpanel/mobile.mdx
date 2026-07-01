@@ -1,0 +1,161 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'ControlPanel Mobile'
+title: 'ControlPanel Mobile'
+description: 'The ControlPanel Mobile provides the primary navigation bar for mobile applications within the Shell. It supports three position variants — Top (default), Bottom (thumb-reachable), and FlatIcon (tab bar). Top and Bottom use a Drawer for expanded navigation access; FlatIcon provides direct navigation without a Drawer.'
+align: start
+toc: true
+order: 2
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Position Top: Default horizontal bar with Brand and burger menu triggering a Right Drawer
+- Position Bottom: Thumb-reachable bar with Brand, burger menu, and optional Primary Actions triggering a Bottom Drawer
+- Position FlatIcon: Tab bar with 2–5 icon-based navigation destinations for direct access without a menu
+- Drawer navigation uses the same Popover pattern with level-based navigation and back buttons
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Density
+
+The mobile ControlPanel only supports Regular density. Touch targets need sufficient size for reliable finger interaction on mobile devices.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-6&embed-host=share"
+		description="Use Regular density for the mobile ControlPanel to ensure comfortable touch targets."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-8&embed-host=share"
+		description="Do not apply Functional or Expressive density to the mobile ControlPanel. Only Regular is supported on mobile."
+	/>
+</div>
+
+### FlatIcon Usage
+
+FlatIcon (tab bar) works best for apps with a small set of equally important top-level destinations. It provides instant access without opening a Drawer but has limited capacity.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-2&embed-host=share"
+		description="Use FlatIcon when the application has 2–5 equally weighted top-level sections that users switch between frequently."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-4&embed-host=share"
+		description="Do not use FlatIcon with labels that are too long. Labels get truncated and users cannot distinguish destinations without reading the full text."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Position
+
+Select the ControlPanel position based on the app type and primary interaction pattern. Top is the default for content-focused apps. Bottom works for app-like experiences where navigation actions need to be within thumb reach.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-10&embed-host=share"
+		description="Top position for content-focused applications where navigation is secondary to reading or consuming content."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-12&embed-host=share"
+		description="Bottom position for app-like experiences where primary actions and navigation need to be within thumb reach."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Examples" expandedText="Hide some Examples" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the ControlPanel Mobile component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="ControlPanel Mobile" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'ControlPanel Desktop',
+			description: 'Desktop variant with Top and Left positions.',
+			url: '/documentation/components/controlpanel/desktop',
+		},
+		{
+			title: 'Shell Mobile',
+			description: 'The mobile Shell layout that hosts the ControlPanel.',
+			url: '/documentation/components/shell/mobile',
+		},
+		{
+			title: 'CP Navigation',
+			description: 'Navigation containers used within the Drawer.',
+			url: '/documentation/components/controlpanel/navigation',
+		},
+		{
+			title: 'CP NavigationItem',
+			description: 'Navigation items used within the Drawer navigation.',
+			url: '/documentation/components/controlpanel/navigationitem',
+		},
+	]}
+/>
+
+</DBSection>

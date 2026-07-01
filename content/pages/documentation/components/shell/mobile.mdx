@@ -1,0 +1,173 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Shell Mobile'
+title: 'Shell Mobile'
+description: 'The Shell Mobile component provides the layout structure for mobile applications. It supports different ControlPanel positions and uses a Drawer for main navigation access.'
+align: start
+toc: true
+order: 2
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Provide consistent page structure for mobile web applications
+- Support ControlPanel positions: Top, Bottom, and FlatIcon
+- Manage main navigation via a Drawer (Right or Bottom) triggered by a burger menu
+- Place SubNavigation at Top or Bottom within the content area
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Responsive Differences
+
+The mobile Shell can differ from its desktop counterpart. Adapt navigation structure to mobile constraints rather than mirroring desktop 1:1.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1118&embed-host=share"
+		description="Simplify navigation for mobile by reducing depth and grouping content differently if needed."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1119&embed-host=share"
+		description="Do not mirror the full desktop navigation hierarchy on mobile when it results in too many levels or small touch targets."
+	/>
+</div>
+
+### FlatIcon Navigation
+
+FlatIcon (bottom tab bar) works best for apps with a small set of equally important top-level destinations. It provides instant access without opening a menu but has limited capacity.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1122&embed-host=share"
+		description="Use FlatIcon when the application has 2–5 equally weighted top-level sections that users switch between frequently."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1123&embed-host=share"
+		description="Do not place primary or secondary actions in the FlatIcon bar. It is reserved for navigation destinations only."
+	/>
+</div>
+
+### SubNavigation (Single Level)
+
+The mobile SubNavigation supports only one navigation level. Keep the structure flat and the number of items manageable for horizontal scrolling.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4049-3&embed-host=share"
+		description="Use a single level of navigation items in the mobile SubNavigation with clear, short labels."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4049-4&embed-host=share"
+		description="Do not overload the horizontal SubNavigation with too many items or nested levels. It supports only one navigation level and users lose overview when excessive scrolling is required."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### ControlPanel Position
+
+Select the ControlPanel position based on the app type. Top is the default. Bottom supports thumb-reachable navigation for app-like experiences. Both use a Drawer for full navigation access.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1116&embed-host=share"
+		description="Top position with a Drawer for applications that need a full navigation structure accessible on demand."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1117&embed-host=share"
+		description="Bottom position for app-like experiences where primary actions need to be within thumb reach."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Examples" expandedText="Hide some Examples" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+Have a question about the Shell Mobile component? We'll answer it and add frequently asked questions to this page.
+
+<QuestionForm componentName="Shell Mobile" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Shell Desktop',
+			description: 'Desktop variant of the Shell with persistent navigation.',
+			url: '/documentation/components/shell/desktop',
+		},
+		{
+			title: 'Shell SubNavigation',
+			description: 'Secondary navigation within the Shell for sub-level page structure.',
+			url: '/documentation/components/shell/subnavigation',
+		},
+		{
+			title: 'Drawer',
+			description: 'Sliding panel used for mobile navigation access.',
+			url: '/documentation/components/drawer',
+		},
+	]}
+/>
+
+</DBSection>
