@@ -125,6 +125,46 @@ Set Required Toggle = true for correct Dev Properties.
 </DBStack>
 
 <DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### Custom Select
+
+#### Set Dropdown width for Auto/fix
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select-%E2%9C%85?node-id=5320-2&embed-host=share"
+	fullWidth
+/>
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select-%E2%9C%85?node-id=5315-5&embed-host=share"
+	description='Select "📏 Dropdown Resizer"'
+/>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select-%E2%9C%85?node-id=5320-3&embed-host=share"
+	description='Set gap value in Auto Layout panel'
+/>
+</div>
+
+#### Edge Case Mobile Landscape
+
+Set "Dropdown Height" from "(Def) Auto" to "Fill" to constrain the dropdown height in limited viewport scenarios like mobile landscape.
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select-%E2%9C%85?node-id=5315-6&embed-host=share"
+	description='Default: Dropdown Height set to "(Def) Auto"'
+/>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select-%E2%9C%85?node-id=5320-4&embed-host=share"
+	description='Set "Dropdown Height" to "Fill" for constrained viewports'
+/>
+</div>
+
+</DBStack>
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
 ### Radio
 
 #### Full Width – Attribute Requirement
@@ -174,6 +214,34 @@ After placing the component and setting properties, adjust the size and set vert
 - Container
 - Textarea Container
 </GuidelineExample>
+
+</DBStack>
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### Tooltip
+
+#### Change the Tooltip arrow to a flexible position
+
+<DBNotification variant="standalone" semantic="informational">
+The arrow for tooltip left/right should only be positioned with width: fixed
+</DBNotification>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%9C%85?node-id=5371-5&embed-host=share"
+	fullWidth
+/>
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%9C%85?node-id=5371-6&embed-host=share"
+	description='Select layer "📐 Arrow Container" and choose Alignment: "top left / top right" or "top left / bottom left" instead of "top center" or "center left"'
+/>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%9C%85?node-id=5371-7&embed-host=share"
+	description='Set Padding to position the arrow'
+/>
+</div>
 
 </DBStack>
 
