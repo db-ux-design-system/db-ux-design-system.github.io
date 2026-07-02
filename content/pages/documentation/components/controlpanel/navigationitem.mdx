@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'CP NavigationItem'
 title: 'CP NavigationItem'
-description: 'The CP NavigationItem is the individual navigation entry within ControlPanel navigation containers. It supports three variants — Popover, Tree, and FlatIcon — each with specific interaction states and behaviors.'
+description: 'The CP NavigationItem is the individual navigation entry within ControlPanel navigation containers. NavigationItemGroup is included as a grouping variant for items with sub-navigation.'
 align: start
 toc: true
 status: 'sub'
@@ -18,12 +18,6 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-
-- Popover Item: Flat navigation link. Popover Group opens a flyout (Desktop) or navigates to a sublevel (Mobile)
-- Tree Item: Navigation link within a tree structure. Icons are overridable for Items only — not for Groups
-- FlatIcon Item: Icon-based navigation destination. Tooltip text equals the Text Screenreader value
-- All variants support interaction states: Enabled, Hovered, Pressed, Focused, Disabled
-- All variants support an Active state indicating the current page/section
 
 <DBSection spacing="small" width="auto">
 
@@ -54,60 +48,63 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-### Slots
+### Icon Consistency per Level
 
-Slot availability varies by variant. The FloatingContainer (for tooltips, popovers, badges) is available on all NavigationItem variants. The End Slot for inline content is only available on vertical Popover and Tree Items. FlatIcon Items and horizontal Popover Items have no content slots.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do&embed-host=share"
-		description="Use vertical Popover or Tree NavigationItems when an End Slot is needed for inline content like badges or status icons."
-	/>
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do2&embed-host=share"
-		description="Use the FloatingContainer for tooltips or badges on any NavigationItem variant — including FlatIcon and horizontal Popover."
-	/>
-</div>
-
-### Tree Icons
-
-Tree NavigationItems allow overriding the default tree-line icon with a custom icon. This applies to Items only — Groups always keep the expand/collapse chevron.
+Tree NavigationItems allow overriding the default tree-line marker with a custom icon (Items only – Groups always keep the expand/collapse chevron). Keep icons consistent within a level: either all sibling items on a level get a custom icon or none. Levels may differ from each other.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do&embed-host=share"
-		description="Override icons on Tree NavigationItems when custom icons improve scannability and help distinguish item types."
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-6&embed-host=share"
+		description="Apply custom icons consistently within a level – either all sibling items get a custom icon or none. Levels may differ from each other."
 	/>
 	<GuidelineExample
 		variant="dont"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-dont&embed-host=share"
-		description="Do not override icons on NavigationItemGroups in Tree navigation. Groups need the chevron to communicate expand/collapse behavior."
-	/>
-</div>
-
-### FlatIcon Tooltip
-
-FlatIcon NavigationItems display a tooltip on hover that matches the Text Screenreader value. This ensures consistency between the visual tooltip and what assistive technologies announce.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do&embed-host=share"
-		description="Provide a clear, descriptive Text Screenreader value for each FlatIcon item — it serves as both tooltip and accessible label."
-	/>
-	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-dont&embed-host=share"
-		description="Do not leave the Text Screenreader value empty or use a different text than the tooltip. This creates inconsistency between visual and accessible labels."
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-8&embed-host=share"
+		description="Do not mix custom icons and default markers within the same level. A single circle among custom icons looks like an oversight and breaks scannability."
 	/>
 </div>
 
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Slots
+
+Slot availability varies by variant. The FloatingContainer (for tooltips, popovers, badges) is available on all NavigationItem variants. The End Slot for inline content is only available on vertical Popover and Tree Items. FlatIcon Items and horizontal Popover Items have no content slots.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-11&embed-host=share"
+		description="Vertical Popover or Tree NavigationItems with an End Slot for inline content like badges or status icons."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-13&embed-host=share"
+		description="FloatingContainer for tooltips or badges on any variant – including FlatIcon and horizontal Popover."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Examples" expandedText="Hide some Examples" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Accessibility
+
+### FlatIcon Tooltip
+
+FlatIcon NavigationItems display a tooltip on hover that matches the Text Screenreader value. This ensures consistency between the visual tooltip and what assistive technologies announce. Provide a clear, descriptive text for each FlatIcon item – it serves as both tooltip and accessible label. Do not leave it empty or use a different text than the tooltip.
 
 </DBSection>
 

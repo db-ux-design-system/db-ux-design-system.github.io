@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'ControlPanel Mobile'
 title: 'ControlPanel Mobile'
-description: 'The ControlPanel Mobile provides the primary navigation bar for mobile applications within the Shell. It supports three position variants — Top (default), Bottom (thumb-reachable), and FlatIcon (tab bar). Top and Bottom use a Drawer for expanded navigation access; FlatIcon provides direct navigation without a Drawer.'
+description: 'The ControlPanel Mobile provides the primary navigation bar for mobile applications within the Shell. It supports three position variants and uses a Drawer for expanded navigation access.'
 align: start
 toc: true
 order: 2
@@ -18,10 +18,10 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Position Top: Default horizontal bar with Brand and burger menu triggering a Right Drawer
-- Position Bottom: Thumb-reachable bar with Brand, burger menu, and optional Primary Actions triggering a Bottom Drawer
-- Position FlatIcon: Tab bar with 2–5 icon-based navigation destinations for direct access without a menu
-- Drawer navigation uses the same Popover pattern with level-based navigation and back buttons
+- **Position Top:** Default horizontal bar with Brand and burger menu triggering a Right Drawer
+- **Position Bottom:** Thumb-reachable bar with Brand, burger menu, and optional PrimaryActions triggering a Bottom Drawer
+- **Position FlatIcon:** Tab bar with 2–6 icon-based navigation destinations for direct access without a menu
+- Drawer navigation uses Popover pattern with level-based navigation and back buttons
 
 <DBSection spacing="small" width="auto">
 
@@ -59,12 +59,12 @@ The mobile ControlPanel only supports Regular density. Touch targets need suffic
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-6&embed-host=share"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-2&embed-host=share"
 		description="Use Regular density for the mobile ControlPanel to ensure comfortable touch targets."
 	/>
 	<GuidelineExample
 		variant="dont"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-8&embed-host=share"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-4&embed-host=share"
 		description="Do not apply Functional or Expressive density to the mobile ControlPanel. Only Regular is supported on mobile."
 	/>
 </div>
@@ -76,12 +76,12 @@ FlatIcon (tab bar) works best for apps with a small set of equally important top
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-2&embed-host=share"
-		description="Use FlatIcon when the application has 2–5 equally weighted top-level sections that users switch between frequently."
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-6&embed-host=share"
+		description="Use FlatIcon when the application has 2–6 equally weighted top-level sections that users switch between frequently."
 	/>
 	<GuidelineExample
 		variant="dont"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-4&embed-host=share"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-8&embed-host=share"
 		description="Do not use FlatIcon with labels that are too long. Labels get truncated and users cannot distinguish destinations without reading the full text."
 	/>
 </div>
@@ -154,6 +154,11 @@ Have a question about the ControlPanel Mobile component? We'll answer it and add
 			title: 'CP NavigationItem',
 			description: 'Navigation items used within the Drawer navigation.',
 			url: '/documentation/components/controlpanel/navigationitem',
+		},
+		{
+			title: 'CP Brand',
+			description: 'Brand/logo subcomponent within the mobile ControlPanel.',
+			url: '/documentation/components/controlpanel/brand',
 		},
 	]}
 />

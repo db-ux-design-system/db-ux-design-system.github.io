@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'ControlPanel Desktop'
 title: 'ControlPanel Desktop'
-description: 'The ControlPanel Desktop is the primary navigation bar for desktop applications within the Shell. It provides two position variants — Top (horizontal) and Left (vertical sidebar) — each supporting different navigation patterns and layout behaviors.'
+description: 'The ControlPanel Desktop is the primary navigation bar for desktop applications within the Shell. It provides two position variants – Top (horizontal) and Left (vertical sidebar) – each supporting different navigation patterns and layout behaviors.'
 align: start
 toc: true
 order: 1
@@ -18,9 +18,8 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Position Top: Horizontal navigation bar with Popover navigation, Brand, Actions, and optional Meta bar
-- Position Left: Vertical sidebar with Popover, Tree, or FlatIcon navigation and expand/collapse behavior
-- Width property (Top only): Full, Small, Medium, Large — controls the max-width of the content area
+- **Position Top:** Horizontal bar with Popover navigation, Brand, Actions, and optional Meta bar. Width property controls max-width of the content area
+- **Position Left:** Vertical sidebar with Popover, Tree, DrillDown, or FlatIcon navigation. Can be collapsed via a slide button to save screen space
 - Supports Brand, PrimaryActions, SecondaryActions, Meta, and Navigation subcomponents
 
 <DBSection spacing="small" width="auto">
@@ -83,7 +82,7 @@ Choose the ControlPanel position based on your application's navigation complexi
 
 ### Navigation Variant (Left)
 
-The Left position supports three navigation variants: Popover for flat-to-medium hierarchies, Tree for deep structures with 3+ levels, and FlatIcon for quick icon-based access to a small set of destinations.
+The Left position supports four navigation variants: Popover for flat-to-medium hierarchies, Tree for deep structures with 3+ levels, DrillDown for less complex structures with many items, and FlatIcon for quick icon-based access to a small set of destinations.
 
 <div className="guideline-examples">
 	<GuidelineExample

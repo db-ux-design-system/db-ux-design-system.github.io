@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'CP PrimaryActions'
 title: 'CP PrimaryActions'
-description: 'The CP PrimaryActions subcomponent is a slot for primary action buttons within the ControlPanel. These are high-priority actions that should be directly accessible without opening a menu.'
+description: 'The CP PrimaryActions subcomponent is a slot for primary action buttons within the ControlPanel. These are high-priority, global actions that should be directly accessible without opening a menu.'
 align: start
 toc: true
 status: 'sub'
@@ -19,9 +19,8 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Positioned in the center/action area of the ControlPanel (Desktop Top and Left)
-- Available in Mobile Top and Bottom positions
-- Contains a Children slot that accepts Icon Buttons or similar action elements
+- Available in Desktop Top, Desktop Left, Mobile Top, and Mobile Bottom
+- Contains a Children slot that accepts Icon Buttons
 - Separated from the navigation area by a divider
 
 <DBSection spacing="small" width="auto">
@@ -72,7 +71,7 @@ Keep PrimaryActions minimal. Only place 1–3 high-frequency actions that users 
 
 ### Action Type
 
-PrimaryActions should only contain global actions that apply to every page — not content-specific actions that belong on the page itself.
+PrimaryActions should only contain global actions that apply to every page – not content-specific actions that belong on the page itself.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -100,7 +99,7 @@ The FlatIcon ControlPanel does not support PrimaryActions. If your application r
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4338-12&embed-host=share"
-		description="Do not place actions like Search as FlatIcon NavigationItems. FlatIcon is reserved for navigation destinations — use Top or Bottom if actions are needed."
+		description="Do not place actions like Search as FlatIcon NavigationItems. FlatIcon is reserved for navigation destinations – use Top or Bottom if actions are needed."
 	/>
 </div>
 

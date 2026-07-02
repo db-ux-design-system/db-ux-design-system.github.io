@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Shell SubNavigation'
 title: 'Shell SubNavigation'
-description: 'The Shell SubNavigation provides a secondary navigation level within the Shell. It supports horizontal and vertical orientations with Popover and Tree navigation variants.'
+description: 'The Shell SubNavigation provides a secondary navigation level within the Shell. It supports horizontal (Top) and vertical (Left) orientations. The vertical SubNavigation can be collapsed via a slide button. On Mobile, only one flat navigation level is supported.'
 align: start
 toc: true
 status: 'sub'
@@ -19,10 +19,9 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Provide a second level of navigation below the main ControlPanel
-- Support horizontal placement (Top) for breadth-first navigation
-- Support vertical placement (Left) with Popover or Tree navigation variants
-- Allow collapsing/expanding the vertical SubNavigation via a slide button
+- **Popover:** Few items or flat structures. Also suited for quick single-click access to deeper levels
+- **Tree:** Complex hierarchies with 3+ levels where a permanent overview across all levels is needed
+- **DrillDown:** Many items with shallow depth (1–2 levels). Focused view per level with back-button navigation
 
 <DBSection spacing="small" width="auto">
 
@@ -53,23 +52,6 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-### Multi-Level Rule
-
-Multi-level navigation (Popover or Tree) can exist in either the ControlPanel or the SubNavigation. Applying them in both creates conflicting navigation patterns.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4093-2&embed-host=share"
-		description="Use multi-level navigation (Popover or Tree) in the SubNavigation only when the ControlPanel has a single-level structure."
-	/>
-	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4093-5&embed-host=share"
-		description="Do not use multi-level navigation in both the ControlPanel and the SubNavigation simultaneously."
-	/>
-</div>
-
 ### Mobile Limitation
 
 The mobile SubNavigation supports only one navigation level. Keep the structure flat for touch-friendly access.
@@ -83,24 +65,7 @@ The mobile SubNavigation supports only one navigation level. Keep the structure 
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4093-11&embed-host=share"
-		description="Do not overload the mobile SubNavigation with too many items or nested levels. Only one navigation level is supported and excessive horizontal scrolling reduces discoverability."
-	/>
-</div>
-
-### Variant (Popover vs. Tree)
-
-Choose the navigation variant based on your content hierarchy. Popover works for flat structures; Tree works for deep, expandable page trees.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4093-14&embed-host=share"
-		description="Use Popover for flat navigation with few items and Tree for hierarchical structures with nested pages."
-	/>
-	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4093-17&embed-host=share"
-		description="Do not use Popover for deeply nested page structures. Users lose their position in the hierarchy when the Popover closes after each interaction."
+		description="Do not overload the horizontal SubNavigation with too many items. Only one level is supported and excessive scrolling reduces discoverability."
 	/>
 </div>
 

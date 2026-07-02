@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'CP Navigation'
 title: 'CP Navigation'
-description: 'The CP Navigation subcomponent is the navigation container within the ControlPanel. It holds NavigationItems and supports three variants — Popover, Tree, and FlatIcon — each suited to different content structures and ControlPanel positions.'
+description: 'The CP Navigation subcomponent is the navigation container within the ControlPanel. It holds NavigationItems and supports different variants suited to different content structures and ControlPanel positions.'
 align: start
 toc: true
 status: 'sub'
@@ -19,10 +19,10 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Popover: Flat-to-medium navigation with flyout submenus. Available in Desktop Horizontal, Desktop Vertical, and Mobile (Drawer with level-based back-button navigation)
-- Tree: Deep hierarchical navigation with expand/collapse behavior. Available in Desktop Left only. Supports Single (accordion) or Multiple expand behavior
-- FlatIcon: Icon-based tab navigation for 2–5 top-level destinations. Available in Desktop Left (vertical) and Mobile (horizontal bottom bar)
-- DrillDown: Level-based navigation with back-button pattern. Shows one level at a time and allows drilling into deeper levels. Available in Desktop Left and Mobile (Drawer). Formerly known as "Popover Mobile".
+- **Popover:** Flat-to-medium structures. Enables reaching deeper navigation points with a single click. Available in Desktop Top and Left
+- **Tree:** Complex hierarchies with 3+ levels. Keeps the full hierarchy visible with expand/collapse. Supports single or multiple expand behavior. Available in Desktop Left and Mobile (drawer)
+- **DrillDown:** Many items with shallow depth. Shows one level at a time with back-button navigation. Available in Desktop Left and Mobile (drawer)
+- **FlatIcon:** 2–6 equally weighted top-level destinations accessed via icons. Available in Desktop Left and Mobile (bottom bar)
 
 <DBSection spacing="small" width="auto">
 
@@ -53,54 +53,54 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-### Variant Selection
+### Popover Horizontal Overflow
 
-Choose the navigation variant based on your information architecture depth and the ControlPanel position. Popover works for flat-to-medium structures, Tree for deep hierarchies, FlatIcon for quick icon-based access.
+The horizontal Popover navigation in Desktop Top has limited space. Too many items require scroll chevrons which reduce discoverability of hidden items.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do&embed-host=share"
-		description="Use Popover for navigation with fewer items and shallow hierarchy (up to 2 levels) and Tree for structures with 3+ levels of nesting."
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-2&embed-host=share"
+		description="Keep the number of top-level Popover items in Desktop Top reasonable. Scroll chevrons are supported but reduce discoverability of hidden items."
 	/>
 	<GuidelineExample
 		variant="dont"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-dont&embed-host=share"
-		description="Do not use Popover for navigation with 3+ levels of nesting. Users lose orientation in deeply nested flyout menus — use Tree instead."
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-4&embed-host=share"
+		description="Do not place too many items in the horizontal Popover navigation. Items hidden behind scroll chevrons are easily overlooked by users."
 	/>
 </div>
 
-### Multi-Level Rule
+### Tree Item Overload
 
-Multi-level navigation can exist in either the ControlPanel or the SubNavigation. Applying multi-level in both creates conflicting navigation patterns and disorients users.
+Tree navigation is designed for complex hierarchical structures. When the navigation has many items but a flat or shallow structure, DrillDown is more effective because it shows one level at a time and avoids overwhelming the user with a long expanded list.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do&embed-host=share"
-		description="Use multi-level navigation (Popover or Tree) in the ControlPanel only when the SubNavigation has a single-level or flat structure."
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-6&embed-host=share"
+		description="Use DrillDown when the navigation has many items with a shallow structure (1–2 levels). It keeps each view focused and scannable."
 	/>
 	<GuidelineExample
 		variant="dont"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-dont&embed-host=share"
-		description="Do not use multi-level navigation in both the ControlPanel and the SubNavigation simultaneously."
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-8&embed-host=share"
+		description="Do not use Tree for navigation with many items but only 1–2 levels of depth. A long flat list in Tree provides no structural benefit over DrillDown."
 	/>
 </div>
 
-### Tree Expand Behavior
+### DrillDown Depth Limit
 
-Tree navigation supports Single (accordion-style, one group open at a time) or Multiple (several groups open simultaneously) expand behavior. Choose based on the number of groups and screen space.
+DrillDown shows one level at a time with a back-button pattern. With 4 or more levels, users lose orientation because they cannot see the full hierarchy. Tree keeps all levels visible and is better suited for deeply nested structures.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do&embed-host=share"
-		description="Use Single expand when the navigation has many groups and vertical space is limited — keeps the tree compact and focused."
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-10&embed-host=share"
+		description="Use Tree when the navigation has 4 or more levels. It keeps the full hierarchy visible and allows direct access to any level."
 	/>
 	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do2&embed-host=share"
-		description="Use Multiple expand when the navigation has few groups and users need to see items across groups simultaneously."
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-12&embed-host=share"
+		description="Do not use DrillDown for navigation with 4 or more levels. Users lose their position in the hierarchy when they can only see one level at a time."
 	/>
 </div>
 
@@ -111,30 +111,13 @@ Keep the number of FlatIcon items manageable. On Mobile, the slot is technically
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do&embed-host=share"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-14&embed-host=share"
 		description="Use a focused set of equally weighted top-level destinations in FlatIcon navigation."
 	/>
 	<GuidelineExample
 		variant="dont"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-dont&embed-host=share"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-16&embed-host=share"
 		description="Do not overload the Desktop FlatIcon sidebar with too many items. A long list of icons without clear priority defeats the purpose of quick access."
-	/>
-</div>
-
-### Popover Horizontal Overflow
-
-The horizontal Popover navigation in Desktop Top has limited space. Too many items require scroll chevrons which reduce discoverability of hidden items.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-do&embed-host=share"
-		description="Keep the number of top-level Popover items in Desktop Top manageable so all items are visible without scrolling."
-	/>
-	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=TODO-dont&embed-host=share"
-		description="Do not place too many items in the horizontal Popover navigation. Items hidden behind scroll chevrons are easily overlooked by users."
 	/>
 </div>
 

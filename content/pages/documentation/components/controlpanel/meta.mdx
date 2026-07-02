@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'CP Meta'
 title: 'CP Meta'
-description: 'The CP Meta subcomponent provides a flexible meta area within the ControlPanel for supplementary content such as meta navigation links, environment indicators, or other contextual information.'
+description: 'The CP Meta subcomponent provides a flexible meta area within the ControlPanel for supplementary content such as meta navigation links, environment indicators, or legal references.'
 align: start
 toc: true
 status: 'sub'
@@ -19,9 +19,8 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Horizontal orientation: Used in Desktop Top position, displayed above the main navigation bar
-- Vertical orientation: Used in Desktop Left position, displayed below the navigation in the sidebar
-- Contains a Children slot for custom meta content
+- **Horizontal:** Displayed above the main navigation bar (Desktop Top)
+- **Vertical:** Displayed below the navigation in the sidebar (Desktop Left)
 - On Mobile, Meta appears inside the Drawer (Level 1 only)
 
 <DBSection spacing="small" width="auto">
@@ -55,7 +54,7 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ### Content Type
 
-Use Meta for supplementary, low-priority content that applies globally — such as meta navigation links, environment labels, or legal references. Keep it lightweight to not compete with the main navigation.
+Use Meta for supplementary, low-priority content that applies globally – such as meta navigation links, environment labels, or legal references. Keep it lightweight to not compete with the main navigation.
 
 <div className="guideline-examples">
 	<GuidelineExample
