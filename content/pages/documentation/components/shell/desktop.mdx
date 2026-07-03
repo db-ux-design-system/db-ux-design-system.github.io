@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Shell Desktop'
 title: 'Shell Desktop'
-description: 'The Shell Desktop component provides the outermost layout structure for desktop applications. It combines the ControlPanel with optional SubNavigation and a content area.'
+description: 'The Shell Desktop component provides the outermost layout structure for desktop web applications.'
 align: start
 toc: true
 tocMaxDepth: 3
@@ -19,9 +19,9 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Provide consistent page structure for desktop web applications
-- Combine navigation, branding, and content areas in a single layout component
-- Support different ControlPanel positions (Top, Left) and SubNavigation configurations
+- **ControlPanel Top + Left:** Supports both horizontal and vertical positions with optional SubNavigation
+- **SubNavigation Left or Top:** Secondary navigation level for sub-level page structure
+- Width property on ControlPanel Top controls max-width of the content area
 
 <DBSection spacing="small" width="auto">
 

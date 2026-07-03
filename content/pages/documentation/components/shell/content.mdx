@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Shell Content'
 title: 'Shell Content'
-description: 'The Shell Content subcomponent is the scrollable main content area of the Shell. It provides slots for persistent content (Start, Children, End) and supports Auto and Fixed scroll variants.'
+description: 'The Shell Content subcomponent is the scrollable main content area of the Shell.'
 align: start
 toc: true
 status: 'sub'
@@ -19,9 +19,9 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Hold the main page content within the Shell layout
-- Support three content slots: Start (e.g. notifications), Children (main content), End (e.g. footer)
-- Provide Auto variant (scrollbar on full content) and Fixed variant (scrollbar only on Children slot)
+- **Auto variant:** Scrollbar on the full content area (Start + Children + End scroll together)
+- **Fixed variant:** Only the Children slot scrolls; Start and End remain persistently visible
+- **Slots:** Start (e.g. docked notifications), Children (main page content), End (e.g. footer)
 
 <DBSection spacing="small" width="auto">
 
