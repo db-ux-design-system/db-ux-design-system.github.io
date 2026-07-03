@@ -11,7 +11,7 @@ toc: true
 tocMaxDepth: 3
 ---
 
-import { DBSection, DBInfotext, DBNotification, DBStack } from '@db-ux/react-core-components';
+import { DBSection, DBInfotext, DBNotification, DBLink, DBStack } from '@db-ux/react-core-components';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 
 <DBSection spacing="small" width="auto">
@@ -101,6 +101,38 @@ To enable automatic line breaks in a full-width button, select the "Text" layer 
 <GuidelineExample
 	figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button-%E2%9C%85?node-id=4627-834&embed-host=share"
 	description='Set the width resizing behavior from "Hug" to "Fill"'
+/>
+</div>
+
+</DBStack>
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### ControlPanel
+
+#### Add a custom logo with the DB Logo Importer
+
+<DBNotification variant="standalone" semantic="informational">
+
+Create your brand-compliant custom logo SVG via the marketing portal. The plugin import ensures system-conformant color variables and sizing.
+
+</DBNotification>
+
+In the Brand area of the ControlPanel, you can add a brand-compliant custom logo. Use the Figma plugin <DBLink href="https://www.figma.com/community/plugin/1590462040996560100/concept-db-logo-importer" target="_blank" rel="noopener noreferrer" variant="inline">DB Logo Importer</DBLink> to import an SVG from the <DBLink href="https://marketingportal.extranet.deutschebahn.com/marketingportal/Marke-und-Design/Basiselemente/Logo/Logozusatz-mit-Tool#unit=Regio&mode=unit&breaking=true" target="_blank" rel="noopener noreferrer" variant="inline">DB brand logo generator</DBLink>. The plugin assigns correct color variables and places the logo directly into the CP Brand slot.
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel-%E2%9C%85?node-id=4617-5&embed-host=share"
+	description="Generate your custom logo SVG via the DB brand logo generator on the Marketing Portal"
+/>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel-%E2%9C%85?node-id=4621-3&embed-host=share"
+	description="Select a Shell or ControlPanel instance in Figma, then run the DB Logo Importer plugin and import your SVG"
+/>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel-%E2%9C%85?node-id=4621-5&embed-host=share"
+	description="The plugin places the logo into the CP Brand Children slot with correct color variables, sizing, and locked aspect ratio"
 />
 </div>
 
