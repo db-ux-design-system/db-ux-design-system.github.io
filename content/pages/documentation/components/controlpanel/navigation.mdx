@@ -19,10 +19,9 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- **Popover:** Flat-to-medium structures. Enables reaching deeper navigation points with a single click. Available in Desktop Top and Left
-- **Tree:** Complex hierarchies with 3+ levels. Keeps the full hierarchy visible with expand/collapse. Supports single or multiple expand behavior. Available in Desktop Left and Mobile (drawer)
-- **DrillDown:** Many items with shallow depth. Shows one level at a time with back-button navigation. Available in Desktop Left and Mobile (drawer)
-- **FlatIcon:** 2–6 equally weighted top-level destinations accessed via icons. Available in Desktop Left and Mobile (bottom bar)
+- Organize an application's destinations into a browsable structure
+- Choose a pattern that fits the structure: flat lists, deep trees, step-by-step drill-down, or a few icon destinations
+- Keep the current location clear as users move through the hierarchy
 
 <DBSection spacing="small" width="auto">
 
@@ -50,6 +49,15 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 <DBSection spacing="small" width="auto">
 
 ## Guidelines
+
+Choose the variant that fits your navigation structure:
+
+- **Popover:** Flat to medium structures; reach deeper levels with a single click
+- **Tree:** Complex hierarchies (3+ levels) where the full structure stays visible
+- **DrillDown:** Many items with shallow depth (1–2 levels), shown one level at a time
+- **FlatIcon:** A few equally weighted top-level destinations (2–6), accessed via icons
+
+&nbsp;
 
 <CollapsibleWrapper collapsedHeight="320px">
 

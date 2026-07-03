@@ -19,9 +19,9 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- **Popover:** Few items or flat structures. Also suited for quick single-click access to deeper levels
-- **Tree:** Complex hierarchies with 3+ levels where a permanent overview across all levels is needed
-- **DrillDown:** Many items with shallow depth (1–2 levels). Focused view per level with back-button navigation
+- Move between the subpages of one section
+- Keep section navigation visible alongside the main ControlPanel navigation
+- Reclaim content space by collapsing the sidebar when it is not needed
 
 <DBSection spacing="small" width="auto">
 
@@ -50,22 +50,47 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ## Guidelines
 
+Choose the variant that fits your navigation structure:
+
+- **Popover:** Flat to medium structures; reach deeper levels with a single click
+- **Tree:** Complex hierarchies (3+ levels) where the full structure stays visible
+- **DrillDown:** Many items with shallow depth (1–2 levels), shown one level at a time
+
+&nbsp;
+
 <CollapsibleWrapper collapsedHeight="320px">
 
-### Mobile Limitation
+### Horizontal Overflow
 
-The mobile SubNavigation supports only one navigation level. Keep the structure flat for touch-friendly access.
+The horizontal SubNavigation has limited space. Too many items require scrolling which reduces discoverability – especially on mobile where no scroll indicators are shown.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4093-8&embed-host=share"
-		description="Use a single level of navigation items in the mobile SubNavigation."
+		description="Keep the number of items in the horizontal SubNavigation manageable so all destinations remain visible without scrolling."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4093-11&embed-host=share"
-		description="Do not overload the horizontal SubNavigation with too many items. Only one level is supported and excessive scrolling reduces discoverability."
+		description="Do not overload the horizontal SubNavigation with too many items. Excessive scrolling reduces discoverability, especially on mobile where hidden items have no visual indicator."
+	/>
+</div>
+
+### Mobile: Single Level
+
+The mobile SubNavigation supports only one flat navigation level. Nested groups are not rendered.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4049-3&embed-host=share"
+		description="Use a single level of navigation items in the mobile SubNavigation with clear, short labels."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4049-4&embed-host=share"
+		description="Do not use nested navigation levels in the mobile SubNavigation. Only one flat level is supported – item groups are hidden on mobile."
 	/>
 </div>
 

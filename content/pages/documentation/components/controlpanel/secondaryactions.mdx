@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'CP SecondaryActions'
 title: 'CP SecondaryActions'
-description: 'The CP SecondaryActions subcomponent is a slot for secondary action buttons at the end of the ControlPanel. These are supporting utility actions like user profile, settings, or help.'
+description: 'The CP SecondaryActions subcomponent is a slot for secondary action buttons at the end of the ControlPanel.'
 align: start
 toc: true
 status: 'sub'
@@ -19,9 +19,9 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Available in Desktop Top and Left positions
-- Not directly visible on Mobile – accessible within the Drawer
-- Contains a Children slot that accepts Icon Buttons
+- Hold supporting utility actions like user profile, settings, or help
+- Keep them separated from the primary navigation and actions
+- Use it for actions users reach occasionally rather than constantly
 
 <DBSection spacing="small" width="auto">
 

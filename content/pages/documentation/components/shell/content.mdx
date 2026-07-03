@@ -19,9 +19,9 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- **Auto variant:** Scrollbar on the full content area (Start Slot + Children + End Slot scroll together)
-- **Fixed variant:** Only the Children slot scrolls; Start Slot and End Slot remain persistently visible
-- **Slots:** Start Slot (e.g. for docked notifications), Children (main page content), End Slot (e.g. for footer)
+- Show the main, scrollable content of a page within the Shell
+- Keep system notifications pinned above the content when they must stay visible
+- Keep a Footer or persistent CTA reachable at the bottom while the content scrolls
 
 <DBSection spacing="small" width="auto">
 
@@ -54,18 +54,18 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ### Variant (Auto vs. Fixed)
 
-Use Auto when the entire content area (including Start Slot and End Slot) should scroll together. Use Fixed when Start Slot (e.g. notifications) or End Slot (e.g. footer) should remain persistently visible.
+Use Auto when the entire content area (Start Slot, Children and End Slot) should scroll together. Use Fixed when the Start Slot or End Slot must remain persistently visible while only the Children slot scrolls.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-3&embed-host=share"
-		description="Use Fixed when docked notifications or a persistent footer must stay visible while scrolling."
+		description="Use Fixed when docked notifications or a persistent Footer must stay visible while scrolling."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-4&embed-host=share"
-		description="Do not fill the Start Slot or End Slot with large amounts of content, especially in Fixed mode. This reduces the scrollable Children area to an unusable size."
+		description="Do not overfill the Start Slot or End Slot in Fixed. Large slots shrink the Children scroll area to an unusable size."
 	/>
 </div>
 
@@ -88,18 +88,18 @@ The Start Slot is intended for persistent, system-level UI elements such as dock
 
 ### End Slot
 
-The End Slot holds meta-level content like a footer with legal links. In Auto layout, the footer scrolls with the content and may be outside the visible area on longer pages. Use Fixed layout if the footer must remain persistently visible.
+The End Slot stays at the bottom of the content area. A Footer with legal links can scroll with the content in Auto. Important elements like a primary CTA must use Fixed, otherwise they scroll out of view and become unreachable.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-9&embed-host=share"
-		description="Use the End Slot for a meta footer with links such as Imprint or Privacy."
+		description="Keep a persistent CTA in the End Slot visible by using the Fixed variant."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-10&embed-host=share"
-		description="Do not place important actions like submit buttons in the End Slot when using Auto layout. Users may not scroll far enough to reach them."
+		description="Do not place important actions in an Auto End Slot. They scroll out of view before users reach them."
 	/>
 </div>
 

@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'CP PrimaryActions'
 title: 'CP PrimaryActions'
-description: 'The CP PrimaryActions subcomponent is a slot for primary action buttons within the ControlPanel. These are high-priority, global actions that should be directly accessible without opening a menu.'
+description: 'The CP PrimaryActions subcomponent is a slot for primary action buttons within the ControlPanel.'
 align: start
 toc: true
 status: 'sub'
@@ -19,8 +19,9 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Available in Desktop Top, Desktop Left, Mobile Top, and Mobile Bottom
-- Contains a Children slot that accepts Icon Buttons
+- Hold high-priority, global actions such as search or notifications
+- Keep them directly accessible without opening a menu
+- Limit the count to a small set so the bar stays focused
 
 <DBSection spacing="small" width="auto">
 

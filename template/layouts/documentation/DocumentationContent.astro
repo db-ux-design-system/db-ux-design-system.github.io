@@ -21,6 +21,7 @@ const badgeMap: Record<string, { text: string; semantic: SemanticType }> = {
 };
 const badge = frontmatter.status ? badgeMap[frontmatter.status] : undefined;
 const isSub = frontmatter.status === 'sub';
+const subParent = Astro.url.pathname.includes('/controlpanel/') ? 'ControlPanel' : 'Shell';
 ---
 
 <>
@@ -53,7 +54,7 @@ const isSub = frontmatter.status === 'sub';
 			isSub && (
 				
 					<DBNotification variant="standalone" semantic="informational" style={{maxInlineSize: 'var(--db-container-md)', marginBlockStart: 'var(--db-spacing-fixed-md)'}}>
-						This is a subcomponent of the Shell and cannot be used separately.
+						This is a subcomponent of the {subParent} and cannot be used separately.
 					</DBNotification>
 			
 			)
