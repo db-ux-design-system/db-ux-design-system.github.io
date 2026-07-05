@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@google/model-viewer':
-        specifier: 4.2.0
-        version: 4.2.0(three@0.172.0)
+        specifier: 4.3.1
+        version: 4.3.1(three@0.172.0)
       react:
         specifier: 19.2.7
         version: 19.2.7
@@ -604,11 +604,11 @@ packages:
     resolution: {integrity: sha512-+CNAzxglkrpNf/kKywqQfk74QjtceuOE7Qm+AF8miRvPF/wmmK5+OJOgVh3AVTT3RP2mH3+FOaxlE5v72owk0A==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
-  '@google/model-viewer@4.2.0':
-    resolution: {integrity: sha512-RjpAI5cLs9CdvPcMRsOs8Bea/lNmGTTyaPyl16o9Fv6Qn8VSpgBMmXFr/11yb0hTrsojp2dOACEcY77R8hVUVA==}
+  '@google/model-viewer@4.3.1':
+    resolution: {integrity: sha512-GP+inXhAtY31E8rILVmByA6z8CZZjdlNajddppyI1/j1eIaSQiZcMRaUqTFe7+jv4mzRzwKIOiKBud0apiv+WQ==}
     engines: {node: '>=6.0.0'}
     peerDependencies:
-      three: ^0.182.0
+      three: ^0.183.0
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -3754,7 +3754,7 @@ snapshots:
       '@eslint/core': 1.2.1
       levn: 0.4.1
 
-  '@google/model-viewer@4.2.0(three@0.172.0)':
+  '@google/model-viewer@4.3.1(three@0.172.0)':
     dependencies:
       '@monogrid/gainmap-js': 3.4.0(three@0.172.0)
       lit: 3.3.3
