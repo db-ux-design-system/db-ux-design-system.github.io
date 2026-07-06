@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 title: 'v5.0'
 headline: 'Migration to v5.0'
-description: 'The update to v5.0 introduces refactored Drawer and Accordion components, removes components deprecated in v4.6, deprecates Header and Navigation in favor of Shell and ControlPanel, refactors the Scrollbar resizer helper, and aligns default slot visibility in Card and Popover.'
+description: 'The update to v5.0 introduces refactored Drawer and Accordion components, removes components deprecated in v4.6, and aligns default slot visibility in Card and Popover.'
 align: start
 order: 4
 toc: true
@@ -55,13 +55,13 @@ The following refactoring requires special attention. Existing instances must be
 
 #### Accordion
 
-- **Children Slot replaces Accordion List:** The Accordion component has been rebuilt. The ❌🛟 Accordion List helper component is replaced by a native Children Slot. Existing Accordion instances are reset after updating and must be reconfigured.
+- **Children Slot replaces 🛟 Accordion List helper component:** The ❌🛟 Accordion List helpercomponent has been marked as deprecated and is replaced by a Children Slot. Accordion Items are now placed directly inside the Accordion via the slot.
 
 <YourAction
 	actions={[
 		'Review all Accordion instances in your designs.',
-		'Reconfigure reset instances by placing Accordion Items directly into the Children Slot.',
-		'The ❌🛟 Accordion List helper component is deprecated and will be removed in a future release.',
+		'Replace ❌🛟 Accordion List usage with the new Children Slot.',
+		'Place Accordion Items directly inside the Accordion component.',
 	]}
 />
 </DBSection>
@@ -72,17 +72,7 @@ The following refactoring requires special attention. Existing instances must be
 
 The following refinements require special attention. Existing instances must be reviewed after updating.
 
-#### Scrollbar
 
-- **Resizer helper component refactored:** The Scrollbar now uses the Resizer as a dedicated helper component. Components using the Scrollbar must be reviewed to verify that Handle Size and Free Position values are still correct after the update.
-
-<YourAction
-	actions={[
-		'Review all components that use the Scrollbar helper (e.g. Custom Select Dropdown, Shell, vertical navigations).',
-		'Verify that the "Thumb Resizer" gap value still produces the correct handle size.',
-		'Verify that the "Spacer Resizer" gap value still produces the correct free position.',
-	]}
-/>
 
 #### Card & Popover
 
@@ -121,35 +111,6 @@ The following components and subcomponents were deprecated in v4.6 and are now f
 	actions={[
 		'Identify any remaining instances using the deprecated slot helper in Accordion Item or Tag.',
 		'Replace them with the current component versions using native Figma slots.',
-	]}
-/>
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-### Deprecated
-
-<div style={{marginBlockEnd: 'var(--db-spacing-fixed-lg)'}} />
-
-<DBNotification variant="standalone" semantic="critical">
-Deprecated components from this release will be removed
-</DBNotification>
-
-<div style={{marginBlockEnd: 'var(--db-spacing-fixed-lg)'}} />
-
-#### Header & Navigation
-
-- **Replaced by ControlPanel + Shell:** The Header and Navigation components are deprecated. Use ControlPanel and Shell instead. Header and Navigation will be fully removed with v7.0.
-
-In Figma, affected deprecated components are marked with **"❌ ... (Deprecated)"** in the name.
-
-<YourAction
-	actions={[
-		'Identify all instances of Header and Navigation in your designs.',
-		'Replace Header with the appropriate Shell + ControlPanel combination (Desktop or Mobile).',
-		'Replace Navigation with ControlPanel Navigation or Shell SubNavigation.',
-		'Refer to the Shell Desktop and Shell Mobile documentation for configuration guidance.',
 	]}
 />
 
