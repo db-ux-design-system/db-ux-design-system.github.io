@@ -64,6 +64,10 @@ const subParent =
 						This is a subcomponent of the {subParent} and cannot be used separately.
 					</DBNotification>
 			
+			isSub && subParent && (
+					<DBNotification className="sub-component-notice" variant="standalone" semantic="informational">
+						This is a subcomponent of the {subParent} and cannot be used separately.
+					</DBNotification>
 			)
 		}
 				</DBSection>
