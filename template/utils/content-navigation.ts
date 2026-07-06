@@ -72,22 +72,16 @@ function getOrder(fm: NavigationFrontmatter): number | undefined {
  */
 function compareNav(a: NavigationItem, b: NavigationItem) {
 	// Status priority: stable > beta > concept > legacy > deprecated
+	// 'sub' shares the top band so subcomponent pages are ordered purely by `order`
+	// alongside their parent pages (which have no status).
 	const statusPriority: Record<string, number> = {
 		stable: 1,
+		sub: 1,
 		beta: 2,
 		concept: 3,
 		legacy: 4,
 		deprecated: 5,
-// 'sub' shares the top band so subcomponent pages are ordered purely by `order`
-// alongside their parent pages (which have no status).
-const statusPriority: Record<string, number> = {
-	stable: 1,
-	sub: 1,
-	beta: 2,
-	concept: 3,
-	legacy: 4,
-	deprecated: 5,
-};
+	};
 	const aStatus = statusPriority[a.status || 'stable'] ?? 6;
 	const bStatus = statusPriority[b.status || 'stable'] ?? 6;
 	if (aStatus !== bStatus) return aStatus - bStatus;

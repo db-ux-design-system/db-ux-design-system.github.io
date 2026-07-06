@@ -57,19 +57,11 @@ const subParent =
 						imageAlt={frontmatter.heroImageAlt}
 						align={frontmatter.align}
 					/>
-		{
-			isSub && (
-				
-					<DBNotification variant="standalone" semantic="informational" style={{maxInlineSize: 'var(--db-container-md)', marginBlockStart: 'var(--db-spacing-fixed-md)'}}>
-						This is a subcomponent of the {subParent} and cannot be used separately.
-					</DBNotification>
-			
-			isSub && subParent && (
-					<DBNotification className="sub-component-notice" variant="standalone" semantic="informational">
-						This is a subcomponent of the {subParent} and cannot be used separately.
-					</DBNotification>
-			)
-		}
+					{isSub && subParent && (
+						<DBNotification className="sub-component-notice" variant="standalone" semantic="informational" style={{maxInlineSize: 'var(--db-container-md)', marginBlockStart: 'var(--db-spacing-fixed-md)'}}>
+							This is a subcomponent of the {subParent} and cannot be used separately.
+						</DBNotification>
+					)}
 				</DBSection>
 			)
 		}
