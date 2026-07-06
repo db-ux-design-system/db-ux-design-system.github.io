@@ -6,19 +6,24 @@ date: ''
 draft: true
 ---
 
-### Design + Development
+#### Design & Development
 
-- feat(Shell): new component for page layouts
-  - desktop and mobile variants
-  - subcomponents: Shell Subnavigation, Shell Content
-- feat(ControlPanel): new component replacing deprecated Header + Navigation
-  - desktop (top/left), mobile (top/bottom)
-  - navigation types: Popover, Tree, Flat Icon
-  - subcomponents: ControlPanel Brand, ControlPanel PrimaryActions, ControlPanel SecondaryActions, ControlPanel MetaNavigation
-- deprecated(Header, Navigation): replaced by ControlPanel + Shell, will be removed
+##### Added
+- Shell: The new component for page layouts is now available with desktop and mobile variants.
+  - Subcomponents: Shell Subnavigation, Shell Content
+- Control Panel: The new component replaces the deprecated Header and Navigation.
+  - Desktop variants (top/left) and mobile variants (top/bottom)
+  - Navigation types: Popover, Tree, Flat Icon
+  - Subcomponents: ControlPanel Brand, ControlPanel PrimaryActions, ControlPanel SecondaryActions, ControlPanel MetaNavigation
 
-### Design
+##### Deprecated
+- Header, Navigation: These components have been replaced by Control Panel and Shell and will be removed in a future release.
 
-- feat(Button): FloatingContainer integrated
-- fix(Button): icon button fixed width
-- fix(Scrollbar): resizer helper component
+#### Design
+
+##### Changed
+- Button: FloatingContainer has been integrated.
+
+##### Fixed
+- Button: Icon button fixed width has been corrected.
+- Scrollbar: The resizer helper component has been fixed.

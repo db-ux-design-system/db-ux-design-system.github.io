@@ -5,8 +5,13 @@ version: 'v2.0.0'
 date: '2025-07-21'
 ---
 
-### Features Design + Code
+#### Design & Development
 
-- added: 7 icons
-- changed: 4 icons
-- fixed: 3 icons
+##### Added
+- Icons: 7 new illustrative icons have been added.
+
+##### Changed
+- Icons: 4 illustrative icons have been updated.
+
+##### Fixed
+- Icons: 3 illustrative icons have been corrected.

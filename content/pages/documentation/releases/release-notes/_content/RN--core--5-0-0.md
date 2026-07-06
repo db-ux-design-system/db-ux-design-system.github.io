@@ -5,25 +5,26 @@ version: 'v5.0.0'
 date: '2026-07-14'
 ---
 
-### Design + Development
+#### Design & Development
 
-- Tab: release beta
-- refactoring(Drawer): standardized layout structure
-  - unified subcomponents (DrawerHeader + DrawerFooter)
-  - standard container sizes (small, medium, large, full, custom)
+##### Added
+- Tab: The component is now available as a beta release.
 
-### Design
+##### Changed
+- Drawer: The layout structure has been standardized with unified subcomponents (DrawerHeader and DrawerFooter) and consistent container sizes (small, medium, large, full, custom).
 
-- refactoring(Accordion): Children Slot replaces ❌🛟 Accordion List helper component
-  - existing Accordion instances are reset after updating
-- removed(Card): deprecated component removed (deprecated since v4.6)
-- removed(Popover): deprecated component removed (deprecated since v4.6)
-- removed(Drawer): deprecated component variant removed (deprecated since v4.6)
-- removed(Section): deprecated component removed (deprecated since v4.6)
-- removed(Accordion Item): deprecated slot helper component removed (deprecated since v4.6)
-- removed(Tag): deprecated slot helper component removed (deprecated since v4.6)
-- fix(Card, Popover): show slot = false as default for "Start Slot" and "End Slot"
+#### Design
 
-### Development
+##### Changed
+- Accordion: The Accordion List helper component has been replaced by a Children Slot. Existing Accordion instances are reset after updating.
+
+##### Removed
+- Card, Popover, Section, Drawer: The deprecated components have been removed (deprecated since v4.6).
+- Accordion Item, Tag: The deprecated slot helper components have been removed (deprecated since v4.6).
+
+##### Fixed
+- Card, Popover: The "Start Slot" and "End Slot" now default to hidden (show slot = false).
+
+#### Development
 
 - TODO

@@ -5,10 +5,12 @@ version: 'v2.3.0'
 date: '2025-06-23'
 ---
 
-### Design + Development
+#### Design & Development
 
-- feat: Tag: promoted from Beta to Stable
+##### Changed
+- Tag: The component has been promoted from Beta to Stable.
 
-### Design
+#### Design
 
-- feat: Unified valid and invalid states across all data input components
+##### Changed
+- Data input components: Valid and invalid states have been unified across all data input components.

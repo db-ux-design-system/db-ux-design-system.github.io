@@ -5,6 +5,7 @@ version: 'v4.3.0'
 date: '2026-01-12'
 ---
 
-### Design
+#### Design
 
-- feat: Added paragraph spacing tokens for Headline and Text
+##### Added
+- Headline, Text: Paragraph spacing tokens have been added.

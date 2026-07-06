@@ -1,9 +1,10 @@
 .release-note .db-divider {
-	margin: var(--db-spacing-fixed-2xl) 0;
+	margin: var(--db-spacing-fixed-2xl) 0 var(--db-spacing-fixed-sm);
 }
 
 .release-note-version {
 	font: var(--db-type-headline-sm);
+	margin: var(--db-spacing-fixed-lg) 0 var(--db-spacing-fixed-sm);
 }
 
 .release-note-date {
@@ -13,4 +14,17 @@
 
 .roadmap-link {
 	margin-block-start: var(--db-spacing-fixed-sm);
+}
+
+.release-note h3 {
+	font: var(--db-type-headline-xs);
+}
+
+.release-note h4 {
+	font: var(--db-type-headline-2xs);	
+	margin: var(--db-spacing-fixed-sm) 0 var(--db-spacing-fixed-sm);
+}
+
+.release-note ul {
+	margin: var(--db-spacing-fixed-xs) 0 var(--db-spacing-fixed-md);
 }

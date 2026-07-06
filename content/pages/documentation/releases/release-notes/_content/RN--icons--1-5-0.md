@@ -5,8 +5,10 @@ version: 'v1.5.0'
 date: '2025-07-07'
 ---
 
-### Features Design + Code
+#### Design & Development
 
-- added: Audio/Video: AV Description
-- added: File: Bookmark, Receive Item, Share Item
-- added: Security: Shield
+##### Added
+- Icons: 5 new icons have been added.
+  - Audio/Video: AV Description
+  - File: Bookmark, Receive Item, Share Item
+  - Security: Shield

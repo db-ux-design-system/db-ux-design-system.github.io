@@ -5,11 +5,13 @@ version: 'v4.11.0'
 date: '2026-06-09'
 ---
 
-### Design
+#### Design & Development
 
-- feat: add Code Connect to core components
+##### Added
+- Code Connect: Figma Code Connect has been added to core components.
 
-### Development
+#### Development
 
-- feat: table
-- feat(agent-cli): introduce standardized db-ux-powers AI bundle
+##### Added
+- Table: The Table component is now available.
+- Agent CLI: A standardized `db-ux-powers` AI bundle has been introduced for automated code generation.

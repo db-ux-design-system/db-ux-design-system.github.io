@@ -5,12 +5,13 @@ version: ''
 date: '2026-04-28'
 ---
 
-### Features Design
+#### Design
 
-- update: Core Components v4.7.0
-- refactor(dialog): initial design
-- feat(calendar): initial design
-- feat(pagination): initial design
-- feat(segmentedButton): initial design
-- feat(splitButton): initial design
-- breaking: removed Menu (Concept)
+##### Added
+- Dialog, Calendar, Pagination, Segmented Button, Split Button: Initial design has been added.
+
+##### Changed
+- Core Components: Updated to v4.7.0.
+
+##### Removed
+- Menu: The concept component has been removed.

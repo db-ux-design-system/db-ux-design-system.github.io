@@ -5,9 +5,10 @@ version: ''
 date: '2026-06-09'
 ---
 
-### Design
+#### Design
 
-- feat(grid): initial design
-- feat(dynamicButton): initial design
-- feat(toggleButton): initial design
-- feat(table)!: remove table component
+##### Added
+- Grid, Dynamic Button, Toggle Button: Initial design has been added.
+
+##### Removed
+- Table: The component has been removed from Core Lab (moved to Core).

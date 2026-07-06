@@ -5,8 +5,9 @@ version: 'v3.1.0'
 date: '2025-09-01'
 ---
 
-### Development
+#### Development
 
-- feat: Improved Select: deselect now possible
-- feat: Improved Custom Select: selecting entries via Enter key now possible
-- feat: Improved Input: added enterkeyhint and inputmode HTML attributes
+##### Added
+- Select: Deselecting an option is now possible.
+- Custom Select: Selecting entries via the Enter key is now supported.
+- Input: The `enterkeyhint` and `inputmode` HTML attributes have been added.
