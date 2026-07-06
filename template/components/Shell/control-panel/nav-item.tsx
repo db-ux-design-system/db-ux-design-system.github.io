@@ -87,18 +87,13 @@ const NavItem = ({
 	}
 
 	if (children && children.length > 0) {
-		const currentPathname = typeof window !== 'undefined' ? window.location.pathname : '';
-		const isGroupActive =
-			typeof window !== 'undefined' &&
-			(isActive || covers({ path, title, icon, iconTrailing, children, isSubNavigation }, currentPathname));
-
 		return (
 			<DBNavigationItemGroup
 				text={title}
 				additionalInformation={status && status !== 'stable' ? getStatusBadge(status) : undefined}
 				key={`router-group-${path ?? title}`}
 				aria-disabled={disabled ? 'true' : undefined}
-				expanded={isGroupActive}
+				expanded={isActive}
 			>
 				{children.map((sub) => (
 					<NavItem key={`router-sub-${sub.path ?? sub.title}`} {...sub} />
