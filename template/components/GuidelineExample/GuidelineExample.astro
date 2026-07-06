@@ -29,7 +29,8 @@ const label =
 			: variant === 'dont'
 				? "Don't"
 				: undefined;
-const fullUrl = `${figmaUrl}&footer=false&viewport-controls=false&page-selector=false&scaling=scale-down-width`;
+const baseUrl = figmaUrl.replace(/[?&]embed-host=share/, '');
+const fullUrl = `${baseUrl}&footer=false&viewport-controls=false&page-selector=false&scaling=scale-down-width&embed-host=share`;
 
 // Resolve cached image from manifest
 const manifestPath = resolve('static/assets/figma-cache/manifest.json');
@@ -43,6 +44,7 @@ if (existsSync(manifestPath)) {
 	cachedImageSrc = manifest[lookupKey];
 }
 
+const altText = [label, description].filter(Boolean).join(' example: ');
 const hasSlot = Astro.slots.has('default');
 ---
 
@@ -62,14 +64,14 @@ const hasSlot = Astro.slots.has('default');
 				<img
 					class="guideline-example-iframe"
 					src={cachedImageSrc}
-					alt={`${label ?? ''} example: ${description ?? ''}`}
+					alt={altText}
 					loading="lazy"
 				/>
 			) : (
 				<iframe
 					class="guideline-example-iframe"
 					src={fullUrl}
-					title={`${label ?? ''} example: ${description ?? ''}`}
+					title={altText}
 					loading="eager"
 					allowfullscreen
 				/>

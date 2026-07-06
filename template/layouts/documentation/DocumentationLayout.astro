@@ -72,10 +72,10 @@ if (frontmatter.externalUrl) {
 				<script>import '@template/components/ComponentPlayground/playground-init';</script>
 				<script is:inline>
 					if (window.location.hash) {
-						var hash = window.location.hash;
+						var id = decodeURIComponent(window.location.hash.slice(1));
 						var attempts = 0;
 						var scrollToHash = function() {
-							var el = document.querySelector(hash);
+							var el = document.getElementById(id);
 							if (el) {
 								el.scrollIntoView();
 							} else if (attempts < 20) {
