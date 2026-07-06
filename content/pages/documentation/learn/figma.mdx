@@ -139,6 +139,31 @@ In the Brand area of the ControlPanel, you can add a brand-compliant custom logo
 </DBStack>
 
 <DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### ControlPanel & Shell
+
+#### Popover Navigation Horizontal: Overflow Buttons
+
+<DBNotification variant="standalone" semantic="informational">
+Desktop only – Mobile Popover Horizontal is limited to SubNavigation (Level 2) with a single level and does not display overflow buttons, an Active Indicator, or expanded Popover items.
+</DBNotification>
+
+The **Clip Content** setting required for correct horizontal overflow removes all elements outside the children container of Popover Navigation – including expanded Popover items and the Active Indicator (Level 1). Show either the overflow cropping or the expanded/active state, not both at the same time.
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell-%E2%9C%85?node-id=4236-4&embed-host=share"
+	description="To show overflow behavior, enable Clip Content on the CP Navigation Popover Children slot. Expanded items and the Active Indicator will not be visible."
+/>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell-%E2%9C%85?node-id=4236-11&embed-host=share"
+	description="To show an expanded Popover navigation item or the Active Indicator, disable Clip Content. The horizontal overflow will not crop correctly."
+/>
+</div>
+
+</DBStack>
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
 ### Checkbox
 
 #### Full Width – Attribute Requirement
