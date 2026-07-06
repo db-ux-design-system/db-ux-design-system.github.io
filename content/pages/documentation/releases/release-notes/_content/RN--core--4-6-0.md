@@ -10,8 +10,8 @@ date: '2026-04-09'
 **feat: new component variants with Figma slot feature for Card, Popover and Section**
 
 - This release introduces **new variants using the Figma slot feature** for the three components. The old component variants using the slot component have been marked as **❌ deprecated**.
-- All **❌ deprecated variants** will be removed in release **v6.0.0**.
-- **How to prepare for breaking changes in v6.0.0**:
+- All **❌ deprecated variants** will be removed in release **v5.0.0**.
+- **How to prepare for breaking changes in v5.0.0**:
 
   Replace all ❌ deprecated variants of Card, Popover and Section with the new component and place your content inside the slot.
 

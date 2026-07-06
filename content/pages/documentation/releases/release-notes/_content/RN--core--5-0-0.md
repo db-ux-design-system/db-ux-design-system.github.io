@@ -7,26 +7,23 @@ date: '2026-07-14'
 
 ### Design + Development
 
-- feat(ControlPanel): new component replacing deprecated Header + Navigation
-  - desktop (top/left), mobile (top/bottom)
-  - navigation types: Popover, Tree, Flat Icon
-  - subcomponents: ControlPanel Brand, ControlPanel PrimaryActions, ControlPanel SecondaryActions, ControlPanel MetaNavigation
-- feat(Shell): new component for page layouts
-  - desktop and mobile variants
-  - subcomponents: Shell Subnavigation, Shell Content
-- 🔥 refactoring(Drawer): standardized layout structure
+- Tab: release beta
+- refactoring(Drawer): standardized layout structure
   - unified subcomponents (DrawerHeader + DrawerFooter)
   - standard container sizes (small, medium, large, full, custom)
-- 🔥 deprecated: Header, Navigation (replaced by ControlPanel + Shell)
 
 ### Design
 
-- feat(Button): FloatingContainer integrated
-- feat(all components): icon prefix for properties (🔀, 👁️, 📦, ✏️, 🔄)
-- fix(Button): icon button fixed width
-- fix(Scrollbar): resizer helper component
+- refactoring(Accordion): Children Slot replaces ❌🛟 Accordion List helper component
+  - existing Accordion instances are reset after updating
+- removed(Card): deprecated component removed (deprecated since v4.6)
+- removed(Popover): deprecated component removed (deprecated since v4.6)
+- removed(Drawer): deprecated component variant removed (deprecated since v4.6)
+- removed(Section): deprecated component removed (deprecated since v4.6)
+- removed(Accordion Item): deprecated slot helper component removed (deprecated since v4.6)
+- removed(Tag): deprecated slot helper component removed (deprecated since v4.6)
 - fix(Card, Popover): show slot = false as default for "Start Slot" and "End Slot"
 
 ### Development
 
-- 🔥 breaking: TODO
+- TODO

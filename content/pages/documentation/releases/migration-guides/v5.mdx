@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 title: 'v5.0'
 headline: 'Migration to v5.0'
-description: 'The update to v5.0 introduces a refactored Drawer component, deprecates Header and Navigation in favor of Shell and ControlPanel, refactors the Scrollbar resizer helper, and aligns default slot visibility in Card and Popover.'
+description: 'The update to v5.0 introduces refactored Drawer and Accordion components, removes components deprecated in v4.6, deprecates Header and Navigation in favor of Shell and ControlPanel, refactors the Scrollbar resizer helper, and aligns default slot visibility in Card and Popover.'
 align: start
 order: 4
 toc: true
@@ -52,6 +52,18 @@ The following refactoring requires special attention. Existing instances must be
 		'Verify container size (small, medium, large, full, custom) matches your layout needs.',
 	]}
 />
+
+#### Accordion
+
+- **Children Slot replaces Accordion List:** The Accordion component has been rebuilt. The ❌🛟 Accordion List helper component is replaced by a native Children Slot. Existing Accordion instances are reset after updating and must be reconfigured.
+
+<YourAction
+	actions={[
+		'Review all Accordion instances in your designs.',
+		'Reconfigure reset instances by placing Accordion Items directly into the Children Slot.',
+		'The ❌🛟 Accordion List helper component is deprecated and will be removed in a future release.',
+	]}
+/>
 </DBSection>
 
 <DBSection spacing="small" width="auto">
@@ -86,12 +98,42 @@ The following refinements require special attention. Existing instances must be 
 
 <DBSection spacing="small" width="auto">
 
+### Removed
+
+The following components and subcomponents were deprecated in v4.6 and are now fully removed. If you have not migrated yet, immediate action is required.
+
+#### Card, Popover, Drawer & Section
+
+- **Deprecated component variants removed:** The old component variants (using the slot helper component) have been removed. Use the current versions with native Figma slots instead.
+
+<YourAction
+	actions={[
+		'Identify any remaining instances of ❌ Card, ❌ Popover, ❌ Drawer, or ❌ Section (Deprecated) in your designs.',
+		'Replace them with the current component versions using native Figma slots.',
+	]}
+/>
+
+#### Accordion Item & Tag – Slot Helper Components
+
+- **Deprecated slot helper subcomponents removed:** The dedicated slot helper components for Accordion Item and Tag have been removed. Use the native Figma slot mechanism directly.
+
+<YourAction
+	actions={[
+		'Identify any remaining instances using the deprecated slot helper in Accordion Item or Tag.',
+		'Replace them with the current component versions using native Figma slots.',
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
 ### Deprecated
 
 <div style={{marginBlockEnd: 'var(--db-spacing-fixed-lg)'}} />
 
 <DBNotification variant="standalone" semantic="critical">
-Deprecated components from this release will be removed with v7.0.
+Deprecated components from this release will be removed
 </DBNotification>
 
 <div style={{marginBlockEnd: 'var(--db-spacing-fixed-lg)'}} />
