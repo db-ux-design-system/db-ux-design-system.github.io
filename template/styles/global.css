@@ -45,6 +45,11 @@ h6 {
 	margin-block: var(--db-spacing-fixed-md) var(--db-spacing-fixed-sm);
 }
 
+.sub-component-notice {
+	max-inline-size: var(--db-container-md);
+	margin-block-start: var(--db-spacing-fixed-md);
+}
+
 .db-card:has(iframe) {
 	overflow: hidden;
 }
