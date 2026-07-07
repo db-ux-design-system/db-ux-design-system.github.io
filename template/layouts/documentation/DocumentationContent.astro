@@ -1,7 +1,7 @@
 ---
 import type { MarkdownHeading } from 'astro';
 import { TableOfContents } from '@template/components/TableOfContents';
-import { DBSection, type SemanticType } from '@db-ux/react-core-components';
+import { DBSection, DBNotification, type SemanticType } from '@db-ux/react-core-components';
 import { PageHero } from '@components';
 
 interface Props {
@@ -18,8 +18,10 @@ const badgeMap: Record<string, { text: string; semantic: SemanticType }> = {
 	stable: { text: 'Stable', semantic: 'successful' },
 	deprecated: { text: 'Deprecated', semantic: 'critical' },
 	legacy: { text: 'Legacy', semantic: 'warning' },
+	sub: { text: 'Sub', semantic: 'neutral' },
 };
 const badge = frontmatter.status ? badgeMap[frontmatter.status] : undefined;
+const isSub = frontmatter.status === 'sub';
 ---
 
 <>
@@ -48,6 +50,18 @@ const badge = frontmatter.status ? badgeMap[frontmatter.status] : undefined;
 						imageAlt={frontmatter.heroImageAlt}
 						align={frontmatter.align}
 					/>
+					{isSub && (
+						<DBNotification
+							variant="standalone"
+							semantic="informational"
+							style={{
+								maxInlineSize: 'var(--db-container-md)',
+								marginBlockStart: 'var(--db-spacing-fixed-md)',
+							}}
+						>
+							This is a subcomponent and cannot be used separately.
+						</DBNotification>
+					)}
 				</DBSection>
 			)
 		}
