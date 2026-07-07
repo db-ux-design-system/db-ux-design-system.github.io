@@ -48,7 +48,7 @@ function toTitleFromSegment(segment: string): string {
  */
 function ensureChild(parent: NavigationItem, child: NavigationItem) {
 	parent.children = parent.children ?? [];
-	const exists = parent.children.find((c) => c.path === child.path);
+	const exists = parent.children.find((c) => c.path === child.path && c.title === child.title);
 	if (!exists) parent.children.push(child);
 }
 
@@ -72,8 +72,11 @@ function getOrder(fm: NavigationFrontmatter): number | undefined {
  */
 function compareNav(a: NavigationItem, b: NavigationItem) {
 	// Status priority: stable > beta > concept > legacy > deprecated
+	// 'sub' shares the top band so subcomponent pages are ordered purely by `order`
+	// alongside their parent pages (which have no status).
 	const statusPriority: Record<string, number> = {
 		stable: 1,
+		sub: 1,
 		beta: 2,
 		concept: 3,
 		legacy: 4,

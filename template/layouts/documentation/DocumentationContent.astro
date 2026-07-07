@@ -1,7 +1,7 @@
 ---
 import type { MarkdownHeading } from 'astro';
 import { TableOfContents } from '@template/components/TableOfContents';
-import { DBSection, type SemanticType } from '@db-ux/react-core-components';
+import { DBSection, DBNotification, type SemanticType } from '@db-ux/react-core-components';
 import { PageHero } from '@components';
 
 interface Props {
@@ -18,8 +18,18 @@ const badgeMap: Record<string, { text: string; semantic: SemanticType }> = {
 	stable: { text: 'Stable', semantic: 'successful' },
 	deprecated: { text: 'Deprecated', semantic: 'critical' },
 	legacy: { text: 'Legacy', semantic: 'warning' },
+	sub: { text: 'Sub', semantic: 'neutral' },
 };
 const badge = frontmatter.status ? badgeMap[frontmatter.status] : undefined;
+const isSub = frontmatter.status === 'sub';
+const SUB_PARENT_LABELS: Record<string, string> = {
+	controlpanel: 'ControlPanel',
+	shell: 'Shell',
+};
+const parentSegment = Astro.url.pathname.split('/').filter(Boolean).at(-2);
+const subParent =
+	frontmatter.subParent ??
+	(parentSegment ? (SUB_PARENT_LABELS[parentSegment] ?? parentSegment) : undefined);
 ---
 
 <>
@@ -48,6 +58,11 @@ const badge = frontmatter.status ? badgeMap[frontmatter.status] : undefined;
 						imageAlt={frontmatter.heroImageAlt}
 						align={frontmatter.align}
 					/>
+					{isSub && subParent && (
+						<DBNotification className="sub-component-notice" variant="standalone" semantic="informational" style={{maxInlineSize: 'var(--db-container-md)', marginBlockStart: 'var(--db-spacing-fixed-md)'}}>
+							This is a subcomponent of the {subParent} and cannot be used separately.
+						</DBNotification>
+					)}
 				</DBSection>
 			)
 		}
