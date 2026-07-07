@@ -94,6 +94,7 @@ declare type DocumentationFrontMatter = {
 	heroWidth?: 'auto' | 'full';
 	sectionSpacing?: 'none' | 'small' | 'medium' | 'large';
 	sectionWidth?: 'auto' | 'full';
+	subParent?: string;
 } & FrontMatter;
 
 /**
