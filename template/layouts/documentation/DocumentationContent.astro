@@ -18,6 +18,7 @@ const badgeMap: Record<string, { text: string; semantic: SemanticType }> = {
 	stable: { text: 'Stable', semantic: 'successful' },
 	deprecated: { text: 'Deprecated', semantic: 'critical' },
 	legacy: { text: 'Legacy', semantic: 'warning' },
+	sub: { text: 'Sub', semantic: 'neutral' },
 };
 const badge = frontmatter.status ? badgeMap[frontmatter.status] : undefined;
 const isSub = frontmatter.status === 'sub';
