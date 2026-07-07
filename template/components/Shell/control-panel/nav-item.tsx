@@ -10,6 +10,7 @@ const getStatusBadge = (status?: string) => {
 		beta: { semantic: 'informational', label: 'Beta' },
 		deprecated: { semantic: 'critical', label: 'Deprecated' },
 		legacy: { semantic: 'warning', label: 'Legacy' },
+		sub: { semantic: 'neutral', label: 'Sub' },
 	}[status];
 
 	if (!config) return null;
@@ -89,6 +90,7 @@ const NavItem = ({
 		return (
 			<DBNavigationItemGroup
 				text={title}
+				additionalInformation={status && status !== 'stable' ? getStatusBadge(status) : undefined}
 				key={`router-group-${path ?? title}`}
 				aria-disabled={disabled ? 'true' : undefined}
 				expanded={isActive}
