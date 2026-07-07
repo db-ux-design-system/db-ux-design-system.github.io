@@ -29,7 +29,10 @@ const SUB_PARENT_LABELS: Record<string, string> = {
 const parentSegment = Astro.url.pathname.split('/').filter(Boolean).at(-2);
 const subParent =
 	frontmatter.subParent ??
-	(parentSegment ? (SUB_PARENT_LABELS[parentSegment] ?? parentSegment) : undefined);
+	(parentSegment
+		? (SUB_PARENT_LABELS[parentSegment] ??
+			parentSegment.charAt(0).toUpperCase() + parentSegment.slice(1))
+		: undefined);
 ---
 
 <>

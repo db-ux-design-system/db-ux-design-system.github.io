@@ -90,7 +90,7 @@ const NavItem = ({
 		return (
 			<DBNavigationItemGroup
 				text={title}
-				additionalInformation={status && status !== 'stable' ? getStatusBadge(status) : undefined}
+				additionalInformation={getStatusBadge(status)}
 				key={`router-group-${path ?? title}`}
 				aria-disabled={disabled ? 'true' : undefined}
 				expanded={isActive}

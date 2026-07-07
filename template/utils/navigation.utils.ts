@@ -51,7 +51,7 @@ export function getFirstChildPath(children?: NavigationItem[]): string | undefin
  */
 export function covers(item: NavigationItem, currentPath: string): boolean {
 	if (item.path) {
-		const full = norm(withBase(item.path).replace(/\.[^/.]+$/, ''));
+		const full = norm(trimExtension(withBase(item.path)) ?? '');
 		if (currentPath === full || currentPath.startsWith(full + '/')) return true;
 	}
 	for (const child of item.children ?? []) {
