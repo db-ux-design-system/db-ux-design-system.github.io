@@ -70,6 +70,22 @@ if (frontmatter.externalUrl) {
 				</Shell>
 				<slot name="script" />
 				<script>import '@template/components/ComponentPlayground/playground-init';</script>
+				<script is:inline>
+					if (window.location.hash) {
+						var id = decodeURIComponent(window.location.hash.slice(1));
+						var attempts = 0;
+						var scrollToHash = function() {
+							var el = document.getElementById(id);
+							if (el) {
+								el.scrollIntoView();
+							} else if (attempts < 20) {
+								attempts++;
+								setTimeout(scrollToHash, 150);
+							}
+						};
+						setTimeout(scrollToHash, 300);
+					}
+				</script>
 			</body>
 		</html>
 	)
