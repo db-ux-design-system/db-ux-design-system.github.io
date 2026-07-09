@@ -105,6 +105,7 @@ Structure and tone for release notes, based on [Keep a Changelog](https://keepac
 - Avoid commit prefixes like `feat:`, `fix:`, `chore:` – these belong in git history, not user-facing notes
 - Be specific: name the component, the variant, or the property that changed
 - Keep each entry to 1–2 sentences maximum; use sub-bullets for lists of affected items
+- An exception might be simple entries, like e.g. Icons – do not added redundancy by sentences like "New icons for social media platforms have been added.", as this is even already in the `##### Added` section, but list the new icons instead.
 - End every bullet point with a period – release notes entries are full sentences
 
 ### Links & References

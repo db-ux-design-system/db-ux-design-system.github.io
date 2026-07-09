@@ -9,4 +9,13 @@ date: '2026-07-09'
 
 ##### Added
 
-- Social Media Icons: New icons for social media platforms have been added.
+- Social Media Icons:
+  - facebook
+  - instagram
+  - linkedin
+  - pinterest
+  - snapchat
+  - spotify
+  - tiktok
+  - whatsapp
+  - youtube
