@@ -5,9 +5,9 @@ version: 'v3.10.0'
 date: '2026-07-09'
 ---
 
-#### Design & Development
+### Design & Development
 
-##### Added
+#### Added
 
 - Social Media Icons:
   - facebook
