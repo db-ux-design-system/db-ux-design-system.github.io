@@ -15,7 +15,7 @@ date: '2026-07-09'
 
 #### Added
 
-- Angular Signal Forms support for reactive form components. Adds validation bridge, version detection utilities, and post-build script updates for Angular signal model/output generation. Updates Angular showcase form components to demonstrate signal forms usage. Includes ADR-06 documenting the technical decision and comprehensive tests.
+- Angular Signal Forms support for reactive form components. Adds validation bridge, version detection utilities, and post-build script updates for Angular signal model/output generation. Updates Angular showcase form components to demonstrate signal forms usage.
 
 #### Changed
 
