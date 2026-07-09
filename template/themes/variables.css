@@ -24,6 +24,9 @@
 		--db-brand-origin-dark-pressed: #316828;
 		--db-brand-on-origin-light-default: #f7fef6;
 		--db-brand-on-origin-dark-default: #f7fef6;
+
+		--db-logo-url: url('/sbahn-logo.svg');
+		--db-logo-aspect-ratio: 1;
 	}
 
 	[data-theme='neutral'] {
@@ -51,6 +54,9 @@
 		--db-brand-origin-dark-pressed: #1b1b1b;
 		--db-brand-on-origin-light-default: #f9f9f9;
 		--db-brand-on-origin-dark-default: #f9f9f9;
+
+		--db-logo-url: url('/neutral-logo.svg');
+		--db-logo-aspect-ratio: 1;
 	}
 
 	[data-theme='station'] {

@@ -1,7 +1,12 @@
 import { type PropsWithChildren, type ReactElement } from 'react';
 import { ColorModeProvider } from '@template/context/color-mode-context';
 import { ThemeProvider } from '@template/context/theme-context';
-import { DBShell, DBControlPanelDesktop, DBControlPanelMobile } from '@db-ux/react-core-components';
+import {
+	DBShell,
+	DBControlPanelDesktop,
+	DBControlPanelMobile,
+	DBShellContent,
+} from '@db-ux/react-core-components';
 import DemoBrand from '@template/components/DemoBrand/DemoBrand';
 import DemoMetaNavigation from './control-panel/meta-navigation';
 import DemoNavigation from './control-panel/navigation';
@@ -13,32 +18,25 @@ function DemoShellContent({ children }: PropsWithChildren): ReactElement {
 	useDemoUrlParams();
 
 	return (
-		<DBShell
-			fadeIn
-			controlPanelDesktopPosition="top"
-			subNavigationDesktopPosition="top"
-			controlPanelDesktop={
-				<DBControlPanelDesktop
-					brand={<DemoBrand />}
-					metaNavigation={<DemoMetaNavigation />}
-					primaryActions={<DemoPrimaryActions />}
-					secondaryActions={<DemoSecondaryActions />}
-				>
-					<DemoNavigation />
-				</DBControlPanelDesktop>
-			}
-			controlPanelMobile={
-				<DBControlPanelMobile
-					brand={<DemoBrand />}
-					metaNavigation={<DemoMetaNavigation />}
-					primaryActions={<DemoPrimaryActions />}
-					secondaryActions={<DemoSecondaryActions />}
-				>
-					<DemoNavigation />
-				</DBControlPanelMobile>
-			}
-		>
-			{children}
+		<DBShell fadeIn controlPanelDesktopPosition="top" subNavigationDesktopPosition="top">
+			<DBControlPanelDesktop
+				brand={<DemoBrand />}
+				metaNavigation={<DemoMetaNavigation />}
+				primaryActions={<DemoPrimaryActions />}
+				secondaryActions={<DemoSecondaryActions />}
+			>
+				<DemoNavigation />
+			</DBControlPanelDesktop>
+			<DBControlPanelMobile
+				burgerMenuLabel="Menu"
+				brand={<DemoBrand />}
+				metaNavigation={<DemoMetaNavigation />}
+				primaryActions={<DemoPrimaryActions />}
+				secondaryActions={<DemoSecondaryActions />}
+			>
+				<DemoNavigation />
+			</DBControlPanelMobile>
+			<DBShellContent>{children}</DBShellContent>
 		</DBShell>
 	);
 }
