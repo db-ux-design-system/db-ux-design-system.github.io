@@ -1,10 +1,12 @@
 /* Shared demo shell styles */
 
+/* stylelint-disable db-ux/use-border-width, db-ux/use-border-color */
 .db-notification {
 	border-block-start: none;
 	border-inline-end: none;
 	border-inline-start: none;
 }
+/* stylelint-enable db-ux/use-border-width, db-ux/use-border-color */
 
 .db-shell-sub-navigation {
 	padding: var(--db-spacing-fixed-sm);
@@ -89,6 +91,7 @@ table th {
 	text-align: start;
 }
 
+/* stylelint-disable db-ux/use-border-width, db-ux/use-border-color */
 table td:last-child,
 table th:last-child {
 	border-inline-end: none;
@@ -97,6 +100,7 @@ table th:last-child {
 table tr:last-child td {
 	border-block-end: none;
 }
+/* stylelint-enable db-ux/use-border-width, db-ux/use-border-color */
 
 table thead {
 	background-color: var(--db-adaptive-bg-basic-level-1-default);
