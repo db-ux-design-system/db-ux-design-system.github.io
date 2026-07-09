@@ -124,24 +124,24 @@ version: 'v5.0.0'
 date: '2026-07-14'
 ---
 
-#### Design & Development
+### Design & Development
 
-##### Added
+#### Added
 
 - Tab: The component is now available as a beta release.
 
-##### Changed
+#### Changed
 
 - Drawer: The layout structure has been standardized with unified subcomponents (DrawerHeader and DrawerFooter) and consistent container sizes (small, medium, large, full, custom).
 
-#### Design
+### Design
 
-##### Removed
+#### Removed
 
 - Card: The deprecated component has been removed (deprecated since v4.6).
 - Popover: The deprecated component has been removed (deprecated since v4.6).
 
-##### Fixed
+#### Fixed
 
 - Card, Popover: The "Start Slot" and "End Slot" now default to hidden (show slot = false).
 ```
