@@ -23,7 +23,7 @@ date: '2026-07-09'
 
 ##### Fixed
 
-- tailwind: The text-body-* and text-head-* Tailwind typography utilities now allow font-weight overrides (such as font-bold) without losing their default token weight. This fixes an issue where the font shorthand reset font-weight, preventing Tailwind font-weight utilities from working.
+- tailwind: The `text-body-*` and `text-head-*` Tailwind typography utilities now allow `font-weight` overrides (such as font-bold) without losing their default token weight. This fixes an issue where the font shorthand reset `font-weight`, preventing Tailwind font-weight utilities from working.
 - Accordion: correct variant backgrounds to match design (divider is transparent, card is level-1 including the open content area)
 - Use `inline-flex` with `align-items: center` for link components to vertically center text with fixed height across densities
 - Ensure that the `key`/`track` special attributes within our components are unique
