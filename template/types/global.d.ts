@@ -69,7 +69,7 @@ declare interface FrontMatter {
 	/**
 	 * Set a badge inside sub-navigation
 	 */
-	status?: 'concept' | 'beta' | 'stable' | 'deprecated' | 'legacy';
+	status?: 'concept' | 'beta' | 'stable' | 'deprecated' | 'legacy' | 'sub';
 
 	align?: 'start' | 'center' | 'end';
 
@@ -94,6 +94,7 @@ declare type DocumentationFrontMatter = {
 	heroWidth?: 'auto' | 'full';
 	sectionSpacing?: 'none' | 'small' | 'medium' | 'large';
 	sectionWidth?: 'auto' | 'full';
+	subParent?: string;
 } & FrontMatter;
 
 /**
@@ -140,7 +141,7 @@ declare interface NavigationItem {
 	/**
 	 * Set a badge inside sub-navigation
 	 */
-	status?: 'concept' | 'beta' | 'stable' | 'deprecated' | 'legacy';
+	status?: 'concept' | 'beta' | 'stable' | 'deprecated' | 'legacy' | 'sub';
 
 	/**
 	 * If true, children will be sorted in descending order (e.g. for version lists).
