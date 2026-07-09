@@ -75,5 +75,9 @@ import DefaultLayout from '@template/layouts/default';
 		return true;
 	}
 
+	document.addEventListener('astro:page-load', () => {
+		waitForElements(initDemo);
+	});
+
 	waitForElements(initDemo);
 </script>
