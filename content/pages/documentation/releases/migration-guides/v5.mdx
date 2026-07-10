@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 title: 'v5.0'
 headline: 'Migration to v5.0'
-description: 'The update to v5.0 introduces refactored Drawer and Accordion components, removes components deprecated in v4.6, and aligns default slot visibility in Card and Popover.'
+description: 'The update to v5.0 introduces refactored Drawer, Accordion, and CustomSelect components, removes components deprecated in v4.6, and aligns default slot visibility in Card and Popover.'
 align: start
 order: 4
 toc: true
@@ -13,10 +13,10 @@ tocMaxDepth: 3
 
 import { DBSection, DBNotification } from '@db-ux/react-core-components';
 import YourAction from '@template/components/YourAction/YourAction';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import CardTeaserRow from "@template/components/CardTeaser/CardTeaserRow";
 
 {/* TODO: GitHub Link für Dev Release ergänzen */}
-{/* TODO: Bilder ergänzen (unter /static/assets/migration-guides/v5/) */}
 
 <DBSection spacing="small" width="auto">
 
@@ -40,30 +40,106 @@ All issues included in this release are linked at the bottom of the page.
 
 The following refactoring requires special attention. Existing instances must be reviewed after updating.
 
-#### Drawer
-
-- **Standardized layout structure:** The Drawer component has been refactored with unified subcomponents (DrawerHeader + DrawerFooter) and standard container sizes (small, medium, large, full, custom). Previous Drawer components are replaced by the new version.
+<DBNotification semantic="critical" variant="standalone" headline="Important">
+Copy all contents from your instances **before updating the components** – updates may reset existing content.
+</DBNotification>
 
 <YourAction
 	actions={[
-		'Review all deployed Drawer instances in your designs.',
-		'Replace deprecated Drawer variants with the new standardized structure.',
-		'Ensure DrawerHeader and DrawerFooter subcomponents are used correctly.',
-		'Verify container size (small, medium, large, full, custom) matches your layout needs.',
+		'Review all instances of Accordion, Drawer and CustomSelect in your designs.',
+		'Copy all contents',
+		'Update the component instances',
+		'Paste the copied content into the new Children Slot.',
 	]}
 />
 
 #### Accordion
 
-- **Children Slot replaces 🛟 Accordion List helper component:** The ❌🛟 Accordion List helpercomponent has been marked as deprecated and is replaced by a Children Slot. Accordion Items are now placed directly inside the Accordion via the slot.
+- **Children Slot replaces 🛟 Accordion List helper component:** Accordion Items are now placed directly inside the Accordion via the slot.
 
-<YourAction
-	actions={[
-		'Review all Accordion instances in your designs.',
-		'Replace ❌🛟 Accordion List usage with the new Children Slot.',
-		'Place Accordion Items directly inside the Accordion component.',
-	]}
-/>
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=175-129&embed-host=share"
+		description="Step 1: Copy the content from the Accordion List before updating."
+		fullWidth
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=45-3159&embed-host=share"
+		description="Step 2: Update the component and delete the default Children content."
+		fullWidth
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=175-132&embed-host=share"
+		description="Step 3: Paste the copied Accordion Items into the Children Slot."
+		fullWidth
+	/>
+</div>
+
+#### CustomSelect
+
+- **Children Slots replace _🛟 CustomSelect List_ and _🛟 CustomSelect Tag List_ helper components:** List items and tag items are now placed directly inside the CustomSelect via the respective slots.
+
+**🛟 CustomSelect List**
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=45-62&embed-host=share"
+		description="Step 1: Copy the content from the CustomSelect List before updating."
+		fullWidth
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=45-78&embed-host=share"
+		description="Step 2: Update the component and delete the default Children content."
+		fullWidth
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=45-87&embed-host=share"
+		description="Step 3: Paste the copied list items into the Children Slot."
+		fullWidth
+	/>
+</div>
+
+**🛟 CustomSelect Tag List**
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=38-3466&embed-host=share"
+		description="Step 1: Copy the content from the CustomSelect Tag List before updating."
+		fullWidth
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=45-53&embed-host=share"
+		description="Step 2: Update the component and delete the default Children content."
+		fullWidth
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=45-56&embed-host=share"
+		description="Step 3: Paste the copied tag items into the Children Slot."
+		fullWidth
+	/>
+</div>
+
+#### Drawer
+
+- **Standardized layout structure:** The Drawer component has been refactored with unified subcomponents (DrawerHeader + DrawerFooter) and standard container sizes (small, medium, large, full, custom). Previous Drawer components are replaced by the new version.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=38-3254&embed-host=share"
+		description="Step 1: Copy the content from the Drawer Children before updating."
+		fullWidth
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=45-92&embed-host=share"
+		description="Step 2: Update the component and delete the default Children content."
+		fullWidth
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=45-101&embed-host=share"
+		description="Step 3: Paste the copied content into the new Children Slot."
+		fullWidth
+	/>
+</div>
 </DBSection>
 
 <DBSection spacing="small" width="auto">
@@ -92,6 +168,17 @@ The following refinements require special attention. Existing instances must be 
 
 The following components and subcomponents were deprecated in v4.6 and are now fully removed. If you have not migrated yet, immediate action is required.
 
+#### Slot Helper Components (Accordion Item & Tag)
+
+- **Deprecated slot helper subcomponents removed:** The dedicated slot helper components for Accordion Item and Tag have been removed. Use the native Figma slot mechanism directly.
+
+<YourAction
+	actions={[
+		'Identify any remaining instances using the deprecated slot helper in Accordion Item or Tag.',
+		'Replace them with the current component versions using native Figma slots.',
+	]}
+/>
+
 #### Card, Popover, Drawer & Section
 
 - **Deprecated component variants removed:** The old component variants (using the slot helper component) have been removed. Use the current versions with native Figma slots instead.
@@ -99,17 +186,6 @@ The following components and subcomponents were deprecated in v4.6 and are now f
 <YourAction
 	actions={[
 		'Identify any remaining instances of ❌ Card, ❌ Popover, ❌ Drawer, or ❌ Section (Deprecated) in your designs.',
-		'Replace them with the current component versions using native Figma slots.',
-	]}
-/>
-
-#### Accordion Item & Tag – Slot Helper Components
-
-- **Deprecated slot helper subcomponents removed:** The dedicated slot helper components for Accordion Item and Tag have been removed. Use the native Figma slot mechanism directly.
-
-<YourAction
-	actions={[
-		'Identify any remaining instances using the deprecated slot helper in Accordion Item or Tag.',
 		'Replace them with the current component versions using native Figma slots.',
 	]}
 />
