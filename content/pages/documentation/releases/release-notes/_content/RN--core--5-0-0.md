@@ -8,13 +8,15 @@ date: '2026-07-14'
 #### Design & Development
 
 ##### Added
-- Resizer: A dedicated helper component for resizing has been added.
 - Tab: The component is now available as a beta release.
 
 ##### Changed
 - Drawer: The layout structure has been standardized with unified subcomponents (DrawerHeader and DrawerFooter) and consistent container sizes (small, medium, large, full, custom). Existing Drawer instances are reset after updating in Design.
 
 #### Design
+
+##### Added
+- Resizer: A dedicated helper component for resizing has been added.
 
 ##### Changed
 - Accordion: The Accordion List helper component has been replaced by a Children Slot. Existing Accordion instances are reset after updating.
