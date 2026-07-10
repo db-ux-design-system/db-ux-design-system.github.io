@@ -11,12 +11,13 @@ date: '2026-07-14'
 - Tab: The component is now available as a beta release.
 
 ##### Changed
-- Drawer: The layout structure has been standardized with unified subcomponents (DrawerHeader and DrawerFooter) and consistent container sizes (small, medium, large, full, custom).
+- Drawer: The layout structure has been standardized with unified subcomponents (DrawerHeader and DrawerFooter) and consistent container sizes (small, medium, large, full, custom). Existing Drawer instances are reset after updating in Design.
 
 #### Design
 
 ##### Changed
 - Accordion: The Accordion List helper component has been replaced by a Children Slot. Existing Accordion instances are reset after updating.
+- CustomSelect: The CustomSelect List and CustomSelect Tab List helper component has been replaced by a Children Slot. Existing CustomSelect instances with open dropdowns and filled fields with tabs are reset after updating.
 
 ##### Removed
 - Card, Popover, Section, Drawer: The deprecated components have been removed (deprecated since v4.6).
