@@ -160,6 +160,17 @@ The following refinements require special attention. Existing instances must be 
 		'Re-enable slot visibility (Show Slot = true) where Start or End content is needed.',
 	]}
 />
+
+#### Scrollbar
+
+- **Scrollbar now uses the Resizer component:** The Scrollbar internally uses the new Resizer helper component. If you have modified the Scrollbar handle size or free position (e.g. in a CustomSelect dropdown), those changes are reset after updating.
+
+<YourAction
+	actions={[
+		'Review all instances where the Scrollbar was customized (handle size, free position), e.g. in CustomSelect dropdowns.',
+		'Reapply custom Scrollbar modifications after updating.',
+	]}
+/>
 </DBSection>
 
 <DBSection spacing="small" width="auto">

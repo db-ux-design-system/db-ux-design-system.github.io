@@ -8,6 +8,7 @@ date: '2026-07-14'
 #### Design & Development
 
 ##### Added
+- Resizer: A dedicated helper component for resizing has been added.
 - Tab: The component is now available as a beta release.
 
 ##### Changed
@@ -18,6 +19,8 @@ date: '2026-07-14'
 ##### Changed
 - Accordion: The Accordion List helper component has been replaced by a Children Slot. Existing Accordion instances are reset after updating.
 - CustomSelect: The CustomSelect List and CustomSelect Tab List helper component has been replaced by a Children Slot. Existing CustomSelect instances with open dropdowns and filled fields with tabs are reset after updating.
+- Properties: Property categories now use icon prefixes for better usability (🔀 variant selection, 👁️ show/hide booleans, 📦 slots, ✏️ text layers, 🔄 swaps). No action required.
+- Scrollbar: The Scrollbar now uses the new Resizer component internally. Custom modifications to handle size or free position (e.g. in CustomSelect dropdowns) need to be reapplied after updating.
 
 ##### Removed
 - Card, Popover, Section, Drawer: The deprecated components have been removed (deprecated since v4.6).
