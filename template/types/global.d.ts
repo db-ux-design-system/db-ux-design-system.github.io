@@ -87,6 +87,11 @@ declare interface FrontMatter {
 	 * An optional external URL. If set, the page redirects to this URL when accessed directly.
 	 */
 	externalUrl?: string;
+
+	/**
+	 * Explicit redirect target when hidePage is true. Overrides the automatic first-child detection.
+	 */
+	redirectTo?: string;
 }
 
 declare type DocumentationFrontMatter = {

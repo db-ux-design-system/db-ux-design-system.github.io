@@ -1,0 +1,133 @@
+---
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+interface Props {
+	/** Relative path prefix to filter child pages (e.g. "documentation/releases") */
+	parentPath: string;
+	/** Sort direction: ascending (default) or descending */
+	sortDescending?: boolean;
+	/** Fixed number of columns for the teaser grid */
+	columns?: number;
+	/** Filter by status (e.g. "stable", "beta", "concept"). Shows all when omitted. */
+	status?: string;
+	/** Mark all teasers as disabled (no link, shows "Coming Soon") */
+	disabled?: boolean;
+}
+
+type FrontMatter = {
+	title?: string;
+	description?: string;
+	teaserDescription?: string;
+	order?: number;
+	hidePage?: boolean;
+	nav?: boolean;
+	externalUrl?: string;
+	status?: string;
+};
+
+type MdModule = {
+	frontmatter?: FrontMatter;
+	default?: { frontmatter?: FrontMatter };
+};
+
+const { parentPath, sortDescending = false, columns = 3, status, disabled = false } = Astro.props;
+
+// Glob all content pages eagerly (path relative to this file's location)
+const modules = import.meta.glob<MdModule>(
+	[
+		'../../../content/pages/**/*.{md,mdx,astro}',
+		'!**/_*/**',
+		'!**/_*.astro',
+		'!**/demo-b2b/**',
+		'!**/demo-b2c/**',
+	],
+	{ eager: true },
+);
+
+/**
+ * Converts an absolute file path into a relative route path.
+ */
+function toRoutePath(filePath: string): string {
+	const unix = filePath.replace(/\\/g, '/');
+	const withoutPrefix = unix.replace(/^.*content\/pages\//, '');
+	// Remove index file names and file extensions
+	return withoutPrefix
+		.replace(/(?:\/index\.(md|mdx|astro)|^index\.(md|mdx|astro))$/, '')
+		.replace(/\.(md|mdx|astro)$/, '');
+}
+
+/**
+ * Converts a URL segment into a readable title.
+ */
+function toTitle(segment: string): string {
+	return segment
+		.split('-')
+		.map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+		.join(' ');
+}
+
+// Collect direct children of the given parentPath
+const children: {
+	title: string;
+	description: string;
+	url: string;
+	order: number;
+	status?: string;
+}[] = [];
+
+for (const [filePath, mod] of Object.entries(modules)) {
+	const routePath = toRoutePath(filePath);
+
+	// Skip pages that are not direct children of the parentPath
+	if (!routePath.startsWith(parentPath + '/')) continue;
+
+	const relativePart = routePath.slice(parentPath.length + 1);
+
+	// Only include direct children (no nested sub-paths)
+	if (relativePart.includes('/')) continue;
+
+	// Skip empty segments (this would be the index page itself)
+	if (!relativePart) continue;
+
+	const fm: FrontMatter = mod.frontmatter ?? mod.default?.frontmatter ?? {};
+
+	// Skip hidden pages or pages with nav: false
+	if (fm.hidePage || fm.nav === false) continue;
+
+	// Skip external redirects
+	if (fm.externalUrl) continue;
+
+	// Filter by status when specified
+	if (status && fm.status !== status) continue;
+
+	const title = fm.title || toTitle(relativePart);
+	const description = fm.teaserDescription || fm.description || '';
+	const order = typeof fm.order === 'number' ? fm.order : Number.MAX_SAFE_INTEGER;
+
+	children.push({
+		title,
+		description,
+		url: `/${routePath}`,
+		order,
+		status: fm.status,
+	});
+}
+
+// Sort by order, then alphabetically
+children.sort((a, b) => {
+	if (sortDescending) {
+		if (a.order !== b.order) return b.order - a.order;
+		return b.title.localeCompare(a.title);
+	}
+	if (a.order !== b.order) return a.order - b.order;
+	return a.title.localeCompare(b.title);
+});
+
+const teasers = children.map(({ title, description, url }) => ({
+	title,
+	description,
+	...(disabled ? { disabled: true } : { url }),
+}));
+---
+
+{teasers.length > 0 && <TeaserCard teasers={teasers} columns={columns} />}
