@@ -24,6 +24,40 @@
 		}
 	}
 
+	&[data-layout='side'] {
+		inline-size: 100%;
+		flex-direction: row;
+		align-items: start;
+		gap: var(--db-spacing-fixed-xl);
+
+		.db-card {
+			flex: 1 1 0;
+			min-inline-size: 0;
+		}
+
+		.guideline-example-side-content {
+			flex: 1 1 0;
+			min-inline-size: 0;
+			display: flex;
+			flex-direction: column;
+			gap: var(--db-spacing-fixed-xs);
+
+			> p {
+				margin: 0;
+			}
+		}
+
+		@media (width <= 767px) {
+			flex-direction: column;
+
+			.db-card,
+			.guideline-example-side-content {
+				flex: unset;
+				inline-size: 100%;
+			}
+		}
+	}
+
 	.db-card {
 		gap: var(--db-spacing-fixed-xs);
 

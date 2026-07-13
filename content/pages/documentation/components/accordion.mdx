@@ -16,6 +16,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 Accordions group content into collapsible sections to save space and let users reveal details progressively. It is best for optional information and structured content where users do not need to see everything at once.
@@ -119,6 +120,8 @@ Nested accordions quickly become hard to understand and navigate. If nesting is 
 <CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
 
 </DBSection>
+
+<FigmaLearnTeaser componentName="Accordion" />
 
 <DBSection spacing="small" width="auto">
 

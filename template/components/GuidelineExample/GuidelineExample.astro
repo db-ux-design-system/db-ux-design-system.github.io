@@ -7,11 +7,12 @@ import './GuidelineExample.css';
 interface Props {
 	variant?: 'do' | 'dont' | 'caution';
 	figmaUrl: string;
-	description: string;
+	description?: string;
 	fullWidth?: boolean;
+	layout?: 'default' | 'side';
 }
 
-const { variant, figmaUrl, description, fullWidth = false } = Astro.props;
+const { variant, figmaUrl, description, fullWidth = false, layout = 'default' } = Astro.props;
 const semantic =
 	variant === 'do'
 		? 'successful'
@@ -28,7 +29,8 @@ const label =
 			: variant === 'dont'
 				? "Don't"
 				: undefined;
-const fullUrl = `${figmaUrl}&embed-host=share&footer=false&viewport-controls=false&page-selector=false&scaling=scale-down-width`;
+const baseUrl = figmaUrl.replace(/[?&]embed-host=share/, '');
+const fullUrl = `${baseUrl}&footer=false&viewport-controls=false&page-selector=false&scaling=scale-down-width&embed-host=share`;
 
 // Resolve cached image from manifest
 const manifestPath = resolve('static/assets/figma-cache/manifest.json');
@@ -41,9 +43,12 @@ if (existsSync(manifestPath)) {
 	const lookupKey = nodeIdMatch ? `${base}?node-id=${nodeIdMatch[1]}&embed-host=share` : figmaUrl;
 	cachedImageSrc = manifest[lookupKey];
 }
+
+const altText = [label, description].filter(Boolean).join(' example: ');
+const hasSlot = Astro.slots.has('default');
 ---
 
-<div class="guideline-example-container" data-full-width={fullWidth}>
+<div class="guideline-example-container" data-full-width={fullWidth} data-layout={layout}>
 	<DBCard elevationLevel="2" data-mode="light">
 		{
 			variant && (
@@ -59,19 +64,25 @@ if (existsSync(manifestPath)) {
 				<img
 					class="guideline-example-iframe"
 					src={cachedImageSrc}
-					alt={`${label} example: ${description}`}
+					alt={altText}
 					loading="lazy"
 				/>
 			) : (
 				<iframe
 					class="guideline-example-iframe"
 					src={fullUrl}
-					title={`${label} example: ${description}`}
+					title={altText}
 					loading="eager"
 					allowfullscreen
 				/>
 			)
 		}
 	</DBCard>
-	<p>{description}</p>
+	{layout === 'side' && hasSlot ? (
+		<div class="guideline-example-side-content">
+			<slot />
+		</div>
+	) : description ? (
+		<p>{description}</p>
+	) : null}
 </div>
