@@ -5,6 +5,7 @@ import {
 } from '@db-ux/react-core-components';
 import { getAriaCurrent } from '@template/utils/client.utils.ts';
 import { covers, getFirstChildPath, trimExtension } from '@template/utils/navigation.utils.ts';
+import { useLanguage } from '@template/context/language-context';
 
 const getStatusBadge = (status?: string) => {
 	if (!status || status === 'stable') return null;
@@ -28,6 +29,7 @@ const getStatusBadge = (status?: string) => {
 const NavItem = ({
 	path,
 	title,
+	titleDe,
 	icon,
 	iconTrailing,
 	children,
@@ -37,6 +39,8 @@ const NavItem = ({
 	externalUrl,
 	protected: isProtected,
 }: NavigationItem) => {
+	const { language } = useLanguage();
+	const displayTitle = (language === 'de' && titleDe) ? titleDe : title;
 	const lockIcon = isProtected ? (
 		<span
 			data-icon="lock_closed"
@@ -59,7 +63,7 @@ const NavItem = ({
 					rel="noopener noreferrer"
 					style={{ display: 'flex', alignItems: 'center', width: '100%' }}
 				>
-					{title}
+					{displayTitle}
 					{lockIcon}
 				</a>
 			</DBControlPanelNavigationItem>
@@ -86,7 +90,7 @@ const NavItem = ({
 					aria-current={isActive ? 'page' : undefined}
 					style={{ display: 'flex', alignItems: 'center', width: '100%' }}
 				>
-					{title}
+					{displayTitle}
 					{lockIcon || getStatusBadge(status)}
 				</a>
 			</DBControlPanelNavigationItem>
@@ -96,7 +100,7 @@ const NavItem = ({
 	if (children && children.length > 0) {
 		return (
 			<DBControlPanelNavigationItemGroup
-				text={title}
+				text={displayTitle}
 				key={`router-group-${path ?? title}`}
 				aria-disabled={disabled ? 'true' : undefined}
 				expanded={isActive}
@@ -119,7 +123,7 @@ const NavItem = ({
 				aria-current={getAriaCurrent(trimExtension(path))}
 				style={{ display: 'flex', alignItems: 'center', width: '100%' }}
 			>
-				{title}
+				{displayTitle}
 				{lockIcon || getStatusBadge(status)}
 			</a>
 		</DBControlPanelNavigationItem>
