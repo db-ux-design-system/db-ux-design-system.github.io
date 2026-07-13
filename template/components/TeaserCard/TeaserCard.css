@@ -1,18 +1,7 @@
 .teaser-cards {
 	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(var(--db-container-2xs), 1fr));
 	gap: var(--db-spacing-fixed-md);
-}
-
-@media (max-width: 768px) {
-	.teaser-cards {
-		grid-template-columns: repeat(2, 1fr) !important;
-	}
-}
-
-@media (max-width: 480px) {
-	.teaser-cards {
-		grid-template-columns: 1fr !important;
-	}
 }
 
 .teaser-cards > * {

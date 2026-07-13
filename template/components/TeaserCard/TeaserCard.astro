@@ -20,7 +20,7 @@ interface Props {
 const { teasers, columns } = Astro.props;
 ---
 
-<div class="teaser-cards" style={`grid-template-columns: repeat(${columns || 3}, 1fr)`}>
+<div class="teaser-cards" style={columns ? `grid-template-columns: repeat(${columns}, 1fr)` : undefined}>
 	{
 		teasers.map((teaser) => {
 			const Component = teaser.component ? (DBComponents as any)[teaser.component] : null;
