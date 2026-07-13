@@ -21,5 +21,4 @@ const SubNavigation = ({
 		</DBNavigation>
 	</DBShellSubNavigation>
 );
-
 export default SubNavigation;

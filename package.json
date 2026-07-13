@@ -16,6 +16,9 @@
     "lint:eslint": "eslint \"**/*.{js,ts,tsx,astro}\"",
     "lint:stylelint": "stylelint \"**/*.css\" --ignore-path .stylelintignore",
     "cache:figma": "node scripts/cache-figma-images.ts",
+    "engines": {
+	    "node": ">=22.18.0"
+    },
     "decode-db-theme-assets": "node decode-db-assets.js",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
