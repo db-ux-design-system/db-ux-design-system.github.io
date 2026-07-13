@@ -29,8 +29,7 @@ const label =
 			: variant === 'dont'
 				? "Don't"
 				: undefined;
-const baseUrl = figmaUrl.replace(/[?&]embed-host=share/, '');
-const fullUrl = `${baseUrl}&footer=false&viewport-controls=false&page-selector=false&scaling=scale-down-width&embed-host=share`;
+const fullUrl = `${figmaUrl}&embed-host=share&footer=false&viewport-controls=false&page-selector=false&scaling=scale-down-width`;
 
 // Resolve cached image from manifest
 const manifestPath = resolve('static/assets/figma-cache/manifest.json');
@@ -44,11 +43,10 @@ if (existsSync(manifestPath)) {
 	cachedImageSrc = manifest[lookupKey];
 }
 
-const altText = [label, description].filter(Boolean).join(' example: ');
 const hasSlot = Astro.slots.has('default');
 ---
 
-<div class="guideline-example-container" data-full-width={fullWidth} data-layout={layout}>
+<figure class="guideline-example-container" data-full-width={fullWidth} data-layout={layout}>
 	<DBCard elevationLevel="2" data-mode="light">
 		{
 			variant && (
@@ -64,14 +62,14 @@ const hasSlot = Astro.slots.has('default');
 				<img
 					class="guideline-example-iframe"
 					src={cachedImageSrc}
-					alt={altText}
+					alt=""
 					loading="lazy"
 				/>
 			) : (
 				<iframe
 					class="guideline-example-iframe"
 					src={fullUrl}
-					title={altText}
+					title={description ?? ''}
 					loading="eager"
 					allowfullscreen
 				/>
@@ -79,10 +77,10 @@ const hasSlot = Astro.slots.has('default');
 		}
 	</DBCard>
 	{layout === 'side' && hasSlot ? (
-		<div class="guideline-example-side-content">
+		<figcaption class="guideline-example-side-content">
 			<slot />
-		</div>
+		</figcaption>
 	) : description ? (
-		<p>{description}</p>
+		<figcaption>{description}</figcaption>
 	) : null}
-</div>
+</figure>
