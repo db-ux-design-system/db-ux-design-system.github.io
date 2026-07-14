@@ -1,0 +1,44 @@
+---
+order: 1
+layout: '@template/layouts/default'
+title: 'Foundation'
+headline: 'Start with clarity'
+description: 'Shared base tokens and modes provide a stable foundation for clear and coherent interfaces.'
+heroImage: '/assets/foundations/Foundations--C.png'
+heroImageAlt: 'Foundations Visual'
+sections:
+  - id: 'foundations--base-tokens-section'
+    title: 'Base-Tokens'
+    text: 'Define reusable design values applied consistently across the system.'
+    imageSrc: 'assets/foundations/Base-Tokens--Lightmode--C.png'
+    imageSrcDark: 'assets/foundations/Base-Tokens--Darkmode--C.png'
+    imageAlt: 'Diagram showing base token categories (colors, spacing, typography)'
+    imagePosition: 'right'
+  - id: 'foundations--adaptive-colors-section'
+    title: 'Adaptive Colors'
+    text: 'Maintain consistent contrast and tone across different color modes and contexts.'
+    imageSrc: 'assets/foundations/Adaptive-Colors--Lightmode--C.png'
+    imageSrcDark: 'assets/foundations/Adaptive-Colors--Darkmode--C.png'
+    imageAlt: 'Palette illustrating adaptive color shifts between light and dark mode'
+    imagePosition: 'left'
+  - id: 'foundations--materials-section'
+    title: 'Materials'
+    text: 'Create visual hierarchy through variations in borders, opacity, and fill.'
+    imageSrc: 'assets/foundations/Materials--Lightmode--C.png'
+    imageSrcDark: 'assets/foundations/Materials--Darkmode--C.png'
+    imageAlt: 'Layered panels showing elevation, border and opacity material styles'
+    imagePosition: 'right'
+  - id: 'foundations--darkmode-section'
+    title: 'Darkmode'
+    text: 'Support comfortable and readable interfaces across different luminance environments.'
+    imageSrc: 'assets/foundations/Darkmode--Lightmode--C.png'
+    imageSrcDark: 'assets/foundations/Darkmode--Darkmode--C.png'
+    imageAlt: 'Comparison of interface elements in light versus dark mode'
+    imagePosition: 'left'
+---
+
+import { ContentSections, ContactUsSection } from '@components';
+
+<ContentSections sections={frontmatter.sections} />
+
+<ContactUsSection />
