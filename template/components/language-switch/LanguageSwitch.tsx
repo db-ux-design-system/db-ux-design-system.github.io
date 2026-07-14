@@ -1,17 +1,35 @@
-import { DBButton, DBTooltip } from '@db-ux/react-core-components';
+import {
+	DBButton,
+	DBPopover,
+	DBControlPanelNavigationItem,
+} from '@db-ux/react-core-components';
 import { useLanguage } from '@template/context/language-context';
-import { useTranslation } from '@template/i18n';
 
 const LanguageSwitch = () => {
-	const { language, toggleLanguage } = useLanguage();
-	const { t } = useTranslation();
-	const targetLanguage = language === 'en' ? 'DE' : 'EN';
+	const { language } = useLanguage();
+	const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/';
+	const enPath = currentPath.replace(/^\/de/, '') || '/';
+	const dePath = currentPath.startsWith('/de') ? currentPath : `/de${currentPath}`;
 
 	return (
-		<DBButton variant="ghost" icon="translation" onClick={toggleLanguage}>
-			<DBTooltip>{t('shell.languageSwitch.label')}</DBTooltip>
-			{targetLanguage}
-		</DBButton>
+		<DBPopover
+			trigger={
+				<DBButton variant="ghost" icon="globe">
+					{language.toUpperCase()}
+				</DBButton>
+			}
+		>
+			<nav aria-label="Language selection">
+				<ul>
+					<DBControlPanelNavigationItem active={language === 'en'}>
+						<a href={enPath}>English</a>
+					</DBControlPanelNavigationItem>
+					<DBControlPanelNavigationItem active={language === 'de'}>
+						<a href={dePath}>Deutsch</a>
+					</DBControlPanelNavigationItem>
+				</ul>
+			</nav>
+		</DBPopover>
 	);
 };
 
