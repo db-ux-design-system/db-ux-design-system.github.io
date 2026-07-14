@@ -1,7 +1,13 @@
 .guideline-examples {
 	display: flex;
+	align-items: start;
 	gap: var(--db-spacing-fixed-md);
 	margin-block-end: var(--db-spacing-fixed-2xl);
+
+	> * {
+		flex: 1 1 0;
+		min-inline-size: 0;
+	}
 
 	&:last-child {
 		margin-block-end: 0;
@@ -9,6 +15,7 @@
 }
 
 .guideline-example-container {
+	margin: 0;
 	inline-size: 50%;
 	display: flex;
 	flex-direction: column;
@@ -24,12 +31,56 @@
 		}
 	}
 
+	&[data-layout='side'] {
+		inline-size: 100%;
+		flex-direction: row;
+		align-items: start;
+		gap: var(--db-spacing-fixed-xl);
+
+		.db-card {
+			flex: 1 1 0;
+			min-inline-size: 0;
+		}
+
+		.guideline-example-side-content {
+			flex: 1 1 0;
+			min-inline-size: 0;
+			display: flex;
+			flex-direction: column;
+			gap: var(--db-spacing-fixed-xs);
+
+			> p {
+				margin: 0;
+			}
+		}
+	}
+
 	.db-card {
 		gap: var(--db-spacing-fixed-xs);
 
 		.guideline-example-iframe {
 			inline-size: 100%;
 			aspect-ratio: 16/9;
+		}
+	}
+}
+
+@media (width <= 767px) {
+	.guideline-examples {
+		flex-direction: column;
+
+		.guideline-example-container {
+			inline-size: 100%;
+		}
+	}
+
+	.guideline-example-container[data-layout='side'] {
+		flex-direction: column;
+
+		.db-card,
+		.guideline-example-side-content {
+			flex: unset;
+			inline-size: 100%;
 		}
 	}
 }
