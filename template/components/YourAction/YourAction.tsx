@@ -7,9 +7,13 @@ const YourAction = ({ actions }: { actions: string[] }) => {
 			className="your-action"
 			semantic="warning"
 			headline="Your Action"
-			variant="standalone"
-			text={actions.join('\n\n')}
-		/>
+			variant="standalone">
+			<ol>
+				{actions.map((action, index) => (
+					<li key={index}>{action.replace(/^\d+\.\s*/, '')}</li>
+				))}
+			</ol>
+		</DBNotification>
 	);
 };
 
