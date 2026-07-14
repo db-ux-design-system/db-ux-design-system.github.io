@@ -8,3 +8,10 @@ description: 'Practical guides and tutorials for working with the DB UX Design S
 align: start
 order: 6
 ---
+
+import { DBSection } from '@db-ux/react-core-components';
+import ChildPageOverview from '@template/components/ChildPageOverview/ChildPageOverview.astro';
+
+<DBSection spacing="small" width="auto">
+<ChildPageOverview parentPath="documentation/learn" columns={1}/>
+</DBSection>
