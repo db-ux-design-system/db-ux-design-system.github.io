@@ -61,12 +61,9 @@ if (frontmatter.externalUrl) {
 					pathname={currentPath}
 					subNavigationVariant={frontmatter.subNavigationVariant}
 				>
-					<div class="dba-main-grid">
 						<DocumentationContent frontmatter={frontmatter} headings={headings}>
 							<slot />
 						</DocumentationContent>
-						<Footer />
-					</div>
 				</Shell>
 				<slot name="script" />
 				<script>import '@template/components/ComponentPlayground/playground-init';</script>

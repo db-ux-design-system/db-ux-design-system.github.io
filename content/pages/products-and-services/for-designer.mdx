@@ -1,0 +1,45 @@
+---
+order: 6
+layout: '@template/layouts/default'
+title: 'For Designer'
+headline: 'Design with confidence'
+description: 'A shared system that supports clear decisions and consistent interfaces across teams.'
+heroImage: '/assets/for-designer/For-Designer--C.png'
+heroImageAlt: 'For Designer Visual'
+sections:
+  - id: 'for-designer--consistent-results-section'
+    title: 'Consistent Results'
+    text: 'Ensure a shared visual language and predictable outcomes across products and devices.'
+    imageSrc: 'assets/for-designer/Consistent-Results--Lightmode--C.png'
+    imageSrcDark: 'assets/for-designer/Consistent-Results--Darkmode--C.png'
+    imageAlt: 'Screens showing unified interface layouts across devices'
+    imagePosition: 'right'
+    ariaLabel: 'For Designer section'
+  - id: 'for-designer--flexible-choices-section'
+    title: 'Flexible Choices'
+    text: 'Adapt components and tokens to fit context without losing alignment.'
+    imageSrc: 'assets/for-designer/Flexible-Choices--Lightmode--C.png'
+    imageSrcDark: 'assets/for-designer/Flexible-Choices--Darkmode--C.png'
+    imageAlt: 'Component variants demonstrating adaptable design options'
+    imagePosition: 'left'
+  - id: 'for-designer--reliable-quality-section'
+    title: 'Reliable Quality'
+    text: 'Use tested patterns that reduce errors and rework.'
+    imageSrc: 'assets/for-designer/Reliable-Quality--Lightmode--C.png'
+    imageSrcDark: 'assets/for-designer/Reliable-Quality--Darkmode--C.png'
+    imageAlt: 'Checklist and UI examples indicating quality assurance'
+    imagePosition: 'right'
+  - id: 'for-designer--smooth-handoff-section'
+    title: 'Smooth Handoff'
+    text: 'Rely on clear specs and shared foundations for efficient collaboration with developers.'
+    imageSrc: 'assets/for-designer/Smooth-Handoff--Lightmode--C.png'
+    imageSrcDark: 'assets/for-designer/Smooth-Handoff--Darkmode--C.png'
+    imageAlt: 'Design-to-code handoff illustration with specs and components'
+    imagePosition: 'left'
+---
+
+import { ContentSections, ContactUsSection } from '@components';
+
+<ContentSections sections={frontmatter.sections} />
+
+<ContactUsSection />

@@ -1,0 +1,39 @@
+---
+order: 8
+layout: '@template/layouts/default'
+title: 'For Product Management'
+headline: 'Align for impact'
+description: 'A shared system that supports consistent decision-making and efficient product delivery across teams.'
+heroImage: '/assets/for-productmanagement/For-Productmanagement--C.png'
+heroImageAlt: 'For Product Management Visual'
+sections:
+  - id: 'for-productmanagement--efficient-delivery-section'
+    title: 'Efficient Delivery'
+    text: 'Reduce time spent on repeated design and implementation decisions.'
+    imageSrc: 'assets/for-productmanagement/Efficient-Delivery--Lightmode--C.png'
+    imageSrcDark: 'assets/for-productmanagement/Efficient-Delivery--Darkmode--C.png'
+    imageAlt: 'Timeline compression illustrating faster delivery cycles'
+    imagePosition: 'right'
+    ariaLabel: 'For Product Management section'
+  - id: 'for-productmanagement--lower-risk-section'
+    title: 'Lower Risk'
+    text: 'Rely on accessible, brand-aligned, and tested patterns to prevent avoidable rework.'
+    imageSrc: 'assets/for-productmanagement/Lower-Risk--Lightmode--C.png'
+    imageSrcDark: 'assets/for-productmanagement/Lower-Risk--Darkmode--C.png'
+    imageAlt: 'Shield and compliant UI elements symbolizing reduced product risk'
+    imagePosition: 'left'
+  - id: 'for-productmanagement--scalable-approach-section'
+    title: 'Scalable Approach'
+    text: 'Support multiple teams and products with standards that grow over time.'
+    imageSrc: 'assets/for-productmanagement/Scalable-Approach--Lightmode--C.png'
+    imageSrcDark: 'assets/for-productmanagement/Scalable-Approach--Darkmode--C.png'
+    imageAlt: 'Expanding grid of product modules showing scalable standards'
+    imagePosition: 'right'
+    mask: 'fade-right'
+---
+
+import { ContentSections, ContactUsSection } from '@components';
+
+<ContentSections sections={frontmatter.sections} />
+
+<ContactUsSection />
