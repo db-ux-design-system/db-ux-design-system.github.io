@@ -1,8 +1,9 @@
 ---
 import type { MarkdownHeading } from 'astro';
 import { TableOfContents } from '@template/components/TableOfContents';
-import { DBSection, type SemanticType } from '@db-ux/react-core-components';
+import { DBSection, DBShellContent, type SemanticType } from '@db-ux/react-core-components';
 import { PageHero } from '@components';
+import Footer from '@components/Footer/Footer.astro';
 
 interface Props {
 	headings: MarkdownHeading[];
@@ -22,7 +23,7 @@ const badgeMap: Record<string, { text: string; semantic: SemanticType }> = {
 const badge = frontmatter.status ? badgeMap[frontmatter.status] : undefined;
 ---
 
-<>
+<DBShellContent>
 	{
 		toc && (
 			<TableOfContents
@@ -33,7 +34,6 @@ const badge = frontmatter.status ? badgeMap[frontmatter.status] : undefined;
 			/>
 		)
 	}
-
 	<div class="dba-main-content">
 		{
 			(frontmatter.headline || frontmatter.description) && (
@@ -55,4 +55,6 @@ const badge = frontmatter.status ? badgeMap[frontmatter.status] : undefined;
 			<slot />
 		</DBSection>
 	</div>
-</>
+
+	<Footer slot="endSlot" />
+</DBShellContent>
