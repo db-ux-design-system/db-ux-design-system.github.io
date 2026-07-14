@@ -1,7 +1,7 @@
 ---
 import DrawerExampleReact from './DrawerExample.tsx';
 
-type DrawerDirection = 'left' | 'right' | 'up' | 'down' | 'custom';
+type DrawerDirection = 'to-left' | 'to-right' | 'up' | 'down';
 type DrawerBackdrop = 'none' | 'strong' | 'weak' | 'invisible';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 	backdrop?: DrawerBackdrop;
 }
 
-const { direction = 'right', backdrop = 'strong' } = Astro.props;
+const { direction = 'to-right', backdrop = 'strong' } = Astro.props;
 ---
 
 <DrawerExampleReact direction={direction} backdrop={backdrop} client:load />
