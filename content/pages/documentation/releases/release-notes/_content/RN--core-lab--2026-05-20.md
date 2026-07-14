@@ -1,0 +1,16 @@
+---
+hidePage: true
+category: '🧪 Core Lab'
+version: ''
+date: '2026-05-20'
+---
+
+### Design
+
+- feat: add "Children" slots to components
+  - Breadcrumb, ButtonGroup, Dialog, Footer, Heading, Pagination, SegmentedButton, SplitButton
+- feat(upload): initial design
+- refactor(tabs): alignment with Development (slots integration, properties)
+  - fix density behavior
+  - integration of slots
+  - alignment with dev (properties, behavior) → ready for beta

@@ -1,8 +1,9 @@
 ---
 import type { MarkdownHeading } from 'astro';
 import { TableOfContents } from '@template/components/TableOfContents';
-import { DBSection, DBNotification, type SemanticType } from '@db-ux/react-core-components';
+import { DBSection, DBShellContent, DBNotification, type SemanticType } from '@db-ux/react-core-components';
 import { PageHero } from '@components';
+import Footer from '@components/Footer/Footer.astro';
 
 interface Props {
 	headings: MarkdownHeading[];
@@ -35,7 +36,7 @@ const subParent =
 		: undefined);
 ---
 
-<>
+<DBShellContent>
 	{
 		toc && (
 			<TableOfContents
@@ -46,7 +47,6 @@ const subParent =
 			/>
 		)
 	}
-
 	<div class="dba-main-content">
 		{
 			(frontmatter.headline || frontmatter.description) && (
@@ -73,4 +73,6 @@ const subParent =
 			<slot />
 		</DBSection>
 	</div>
-</>
+
+	<Footer slot="endSlot" />
+</DBShellContent>
