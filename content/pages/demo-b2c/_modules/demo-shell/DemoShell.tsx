@@ -21,7 +21,7 @@ function DemoShellContent({ children }: PropsWithChildren): ReactElement {
 		<DBShell fadeIn controlPanelDesktopPosition="top" subNavigationDesktopPosition="top">
 			<DBControlPanelDesktop
 				brand={<DemoBrand />}
-				metaNavigation={<DemoMetaNavigation />}
+				meta={<DemoMetaNavigation />}
 				primaryActions={<DemoPrimaryActions />}
 				secondaryActions={<DemoSecondaryActions />}
 			>
@@ -30,7 +30,7 @@ function DemoShellContent({ children }: PropsWithChildren): ReactElement {
 			<DBControlPanelMobile
 				burgerMenuLabel="Menu"
 				brand={<DemoBrand />}
-				metaNavigation={<DemoMetaNavigation />}
+				meta={<DemoMetaNavigation />}
 				primaryActions={<DemoPrimaryActions />}
 				secondaryActions={<DemoSecondaryActions />}
 			>
