@@ -34,20 +34,20 @@ importers:
         specifier: 4.11.3
         version: 4.11.3(playwright-core@1.60.0)
       '@db-ux/agent-cli':
-        specifier: 4.13.0-shell-f221975
-        version: 4.13.0-shell-f221975
+        specifier: 4.14.0-shell-52d18db
+        version: 4.14.0-shell-52d18db
       '@db-ux/core-components':
-        specifier: 4.13.0-shell-f221975
-        version: 4.13.0-shell-f221975
+        specifier: 4.14.0-shell-52d18db
+        version: 4.14.0-shell-52d18db
       '@db-ux/core-eslint-plugin':
-        specifier: 4.13.0-shell-f221975
-        version: 4.13.0-shell-f221975(eslint@10.5.0)(typescript@5.9.3)
+        specifier: 4.14.0-shell-52d18db
+        version: 4.14.0-shell-52d18db(eslint@10.5.0)(typescript@5.9.3)
       '@db-ux/core-foundations':
-        specifier: 4.13.0-shell-f221975
-        version: 4.13.0-shell-f221975
+        specifier: 4.14.0-shell-52d18db
+        version: 4.14.0-shell-52d18db
       '@db-ux/core-stylelint':
-        specifier: 4.13.0-shell-f221975
-        version: 4.13.0-shell-f221975(stylelint@17.13.0(typescript@5.9.3))
+        specifier: 4.14.0-shell-52d18db
+        version: 4.14.0-shell-52d18db(stylelint@17.13.0(typescript@5.9.3))
       '@db-ux/db-theme':
         specifier: 5.8.0
         version: 5.8.0
@@ -61,8 +61,8 @@ importers:
         specifier: 3.3.0
         version: 3.3.0
       '@db-ux/react-core-components':
-        specifier: 4.13.0-shell-f221975
-        version: 4.13.0-shell-f221975
+        specifier: 4.14.0-shell-52d18db
+        version: 4.14.0-shell-52d18db
       '@double-great/stylelint-a11y':
         specifier: 3.4.15
         version: 3.4.15(stylelint@17.13.0(typescript@5.9.3))
@@ -343,23 +343,23 @@ packages:
     peerDependencies:
       postcss-selector-parser: ^7.1.1
 
-  '@db-ux/agent-cli@4.13.0-shell-f221975':
-    resolution: {integrity: sha512-m2OuCPoBQPqNL6LmbpaI6fg1lkr9gW9z2xuXIDD+drq6+zEsn96hKRxcr/L3TIveb9zGUoQDNaqcM7Fy21qKQQ==}
+  '@db-ux/agent-cli@4.14.0-shell-52d18db':
+    resolution: {integrity: sha512-d0SZKILOplGCPJwrWKdQtbRlZH+uUBiJkL0KbMv5LDLPb1d/8RKy24WWRRFyUrrP9pqrxc3j4uIHEntBtuZBHA==}
     hasBin: true
 
-  '@db-ux/core-components@4.13.0-shell-f221975':
-    resolution: {integrity: sha512-llxkkxNsB9qa0qw4gVZVw2PKFGbdGkRQMS4Q4kCU1yNPkVEUsWLBUkp9pavXMYTJNElcROnzpcTppXorulRfxQ==}
+  '@db-ux/core-components@4.14.0-shell-52d18db':
+    resolution: {integrity: sha512-gxwlfKYOkVWC7dRVtXn8SMKQzr0j4s5r6DMRedT+adrwb4zDqL8QyIYN88pz2aFp4eYj6Ds1TxniyeImSKlluA==}
 
-  '@db-ux/core-eslint-plugin@4.13.0-shell-f221975':
-    resolution: {integrity: sha512-WmUGZOgExvEMwl5DbIephoQ41C7SU4i39TtBK1YlMqnpTxNPBcCqYVaurVg2uv0hh7hWwY8/mqPiViAWbJRiJw==}
+  '@db-ux/core-eslint-plugin@4.14.0-shell-52d18db':
+    resolution: {integrity: sha512-SebRfflDs/xwa/lLxF7ylsnXVKESxCqv3DHNE+rnUM87BTneg2aZg0S0RiXXOSUaOyDIQoCqi0YxqQZoDhnB/A==}
     peerDependencies:
       eslint: '>=9.0.0'
 
-  '@db-ux/core-foundations@4.13.0-shell-f221975':
-    resolution: {integrity: sha512-YIS56hlxBbiIaeP3A2j1qGLDRNuzuoPZEKJgQQdg+2qBEug6/FVqZkubnhzsHpbSd39ls+scM/npamrP8mnd1w==}
+  '@db-ux/core-foundations@4.14.0-shell-52d18db':
+    resolution: {integrity: sha512-6ou/vNwfhlqsk+ZCnPek9pGuBUuIHlaGJhy4YA1cL6klgoiaLOW8j+9ZrYBrIgGJgL0B+K52MXazL5Ytt2FzMA==}
 
-  '@db-ux/core-stylelint@4.13.0-shell-f221975':
-    resolution: {integrity: sha512-gso4bpyeyaHQju1ARQWmnZY+/RQrZMKAu0iU2FN+rRxMtjZp790YK155/9JzHwx69XCMAJQN7so8pD6+zqYi7w==}
+  '@db-ux/core-stylelint@4.14.0-shell-52d18db':
+    resolution: {integrity: sha512-lulkzKVNNYXDAKxpgu4jJEXHdvNsEuOzmaeu63ZzabmdMmeYrHOgtqLJ3lIkC41wkg3BdQI1+pgxwPXHt3G/Ew==}
     peerDependencies:
       stylelint: '>=14.0.0'
 
@@ -375,8 +375,8 @@ packages:
   '@db-ux/db-theme@5.8.0':
     resolution: {integrity: sha512-aRdn1emVUxNylnp9CA67hPoX91ZyeeJD6sjfehtKXyzW/HuGK9OLAye8WmFnpjjWYiv8+E3C+tBI2WVp06c6uQ==}
 
-  '@db-ux/react-core-components@4.13.0-shell-f221975':
-    resolution: {integrity: sha512-f/G4+0yxHMr906sfaH/AiCGyZnMtNYEA+uknjXdu2jGoEAG2oLyBZSW9Dfs6b8wGQtfejWC4kj5EDg7PuK1OUA==}
+  '@db-ux/react-core-components@4.14.0-shell-52d18db':
+    resolution: {integrity: sha512-ILTpOF0Hk9ec479Vz12hE0X949v+pqcZIDnktbWtkc26gH2mobFcxf7L2FvywM8EvOdGJ0Nlno1xlft3fGitKw==}
 
   '@double-great/stylelint-a11y@3.4.15':
     resolution: {integrity: sha512-yMpE5UpdXt4ezKv7fxf69k61ycOrJ7xa+Wt6p1XuV8r1y2PKWyVGp1qxFcc4BMEpptOA0XhWPhKHrpbP3+tmuw==}
@@ -3544,15 +3544,15 @@ snapshots:
     dependencies:
       postcss-selector-parser: 7.1.4
 
-  '@db-ux/agent-cli@4.13.0-shell-f221975':
+  '@db-ux/agent-cli@4.14.0-shell-52d18db':
     dependencies:
       commander: 15.0.0
 
-  '@db-ux/core-components@4.13.0-shell-f221975':
+  '@db-ux/core-components@4.14.0-shell-52d18db':
     dependencies:
-      '@db-ux/core-foundations': 4.13.0-shell-f221975
+      '@db-ux/core-foundations': 4.14.0-shell-52d18db
 
-  '@db-ux/core-eslint-plugin@4.13.0-shell-f221975(eslint@10.5.0)(typescript@5.9.3)':
+  '@db-ux/core-eslint-plugin@4.14.0-shell-52d18db(eslint@10.5.0)(typescript@5.9.3)':
     dependencies:
       '@typescript-eslint/utils': 8.63.0(eslint@10.5.0)(typescript@5.9.3)
       eslint: 10.5.0
@@ -3560,9 +3560,9 @@ snapshots:
       - supports-color
       - typescript
 
-  '@db-ux/core-foundations@4.13.0-shell-f221975': {}
+  '@db-ux/core-foundations@4.14.0-shell-52d18db': {}
 
-  '@db-ux/core-stylelint@4.13.0-shell-f221975(stylelint@17.13.0(typescript@5.9.3))':
+  '@db-ux/core-stylelint@4.14.0-shell-52d18db(stylelint@17.13.0(typescript@5.9.3))':
     dependencies:
       stylelint: 17.13.0(typescript@5.9.3)
 
@@ -3578,10 +3578,10 @@ snapshots:
       '@db-ux/db-theme-icons': 3.9.0
       '@db-ux/db-theme-illustrative-icons': 3.3.0
 
-  '@db-ux/react-core-components@4.13.0-shell-f221975':
+  '@db-ux/react-core-components@4.14.0-shell-52d18db':
     dependencies:
-      '@db-ux/core-components': 4.13.0-shell-f221975
-      '@db-ux/core-foundations': 4.13.0-shell-f221975
+      '@db-ux/core-components': 4.14.0-shell-52d18db
+      '@db-ux/core-foundations': 4.14.0-shell-52d18db
 
   '@double-great/stylelint-a11y@3.4.15(stylelint@17.13.0(typescript@5.9.3))':
     dependencies:
@@ -4164,7 +4164,7 @@ snapshots:
   '@typescript-eslint/project-service@8.61.0(typescript@5.9.3)':
     dependencies:
       '@typescript-eslint/tsconfig-utils': 8.61.0(typescript@5.9.3)
-      '@typescript-eslint/types': 8.61.1
+      '@typescript-eslint/types': 8.63.0
       debug: 4.4.3
       typescript: 5.9.3
     transitivePeerDependencies:
