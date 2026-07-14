@@ -9,6 +9,7 @@ const PrimaryActions = () => (
 			className="db-button"
 			href={`mailto:db-ux-designsystem@deutschebahn.com`}
 			data-variant="brand"
+			data-wrap="false"
 		>
 			Contact Us
 		</a>

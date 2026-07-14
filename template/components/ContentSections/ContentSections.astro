@@ -1,0 +1,45 @@
+---
+import { DBSection } from '@db-ux/react-core-components';
+import { TextImage } from '@components';
+import { appConfig } from '@config';
+
+export interface SectionData {
+	id: string;
+	title: string;
+	text: string;
+	imageSrc: string;
+	imageSrcDark?: string;
+	imageAlt: string;
+	imagePosition?: 'left' | 'right';
+	mask?: 'fade-right' | 'fade-bottom-right';
+	ariaLabel?: string;
+}
+
+interface Props {
+	sections: SectionData[];
+}
+
+const { sections } = Astro.props;
+---
+
+{
+	sections.map((section) => (
+		<DBSection
+			width="medium"
+			spacing="medium"
+			aria-label={section.ariaLabel}
+			id={section.id}
+		>
+			<TextImage
+				title={section.title}
+				imageSrc={`${appConfig.basePath}${section.imageSrc}`}
+				imageSrcDark={section.imageSrcDark ? `${appConfig.basePath}${section.imageSrcDark}` : undefined}
+				imageAlt={section.imageAlt}
+				imagePosition={section.imagePosition ?? 'right'}
+				mask={section.mask ?? 'fade-bottom-right'}
+			>
+				{section.text}
+			</TextImage>
+		</DBSection>
+	))
+}

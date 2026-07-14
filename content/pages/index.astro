@@ -1,10 +1,10 @@
 ---
-import PageHeroSection from './home/_components/PageHeroSection.astro';
-import InteractiveDemoSection from './home/_components/InteractiveDemoSection.astro';
-import PackagesSection from './home/_components/PackagesSection.astro';
-import DesignedForSection from './home/_components/DesignedForSection.astro';
-import TestimonialsSection from './home/_components/TestimonialsSection.astro';
-import SharedStandardsSection from './home/_components/SharedStandardsSection.astro';
+import PageHeroSection from '@components/home/PageHeroSection.astro';
+import InteractiveDemoSection from '@components/home/InteractiveDemoSection.astro';
+import PackagesSection from '@components/home/PackagesSection.astro';
+import DesignedForSection from '@components/home/DesignedForSection.astro';
+import TestimonialsSection from '@components/home/TestimonialsSection.astro';
+import { ContactUsSection } from '@components';
 import DefaultLayout from '@template/layouts/default';
 ---
 
@@ -19,7 +19,7 @@ import DefaultLayout from '@template/layouts/default';
 
 	<TestimonialsSection />
 
-	<SharedStandardsSection />
+	<ContactUsSection />
 </DefaultLayout>
 
 <script>
@@ -74,6 +74,10 @@ import DefaultLayout from '@template/layouts/default';
 
 		return true;
 	}
+
+	document.addEventListener('astro:page-load', () => {
+		waitForElements(initDemo);
+	});
 
 	waitForElements(initDemo);
 </script>
