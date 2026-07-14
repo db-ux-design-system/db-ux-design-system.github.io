@@ -1,7 +1,4 @@
-import {
-	DBControlPanelNavigation,
-	DBShellSubNavigation,
-} from '@db-ux/react-core-components';
+import { DBControlPanelNavigation, DBShellSubNavigation } from '@db-ux/react-core-components';
 import NavItem from './nav-item.tsx';
 import type { NavigationItemGroupVariantType } from '@db-ux/react-core-components/dist/shared/model';
 
@@ -12,7 +9,7 @@ const SubNavigation = ({
 	navigationItems: NavigationItem[];
 	variant?: NavigationItemGroupVariantType;
 }) => (
-	<DBShellSubNavigation>
+	<DBShellSubNavigation aria-label="Sub navigation">
 		<DBControlPanelNavigation aria-label="sub navigation" variant={variant ?? 'tree'}>
 			{navigationItems.map((navigationItem: NavigationItem) => (
 				<NavItem
