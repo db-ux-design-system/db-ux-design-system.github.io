@@ -31,6 +31,7 @@ date: '2026-07-14'
 
 ##### Fixed
 - Card, Popover: The "Start Slot" and "End Slot" now default to hidden (show slot = false).
+- Tooltip: The border radius is now consistent with the code implementation (strong) and has been added to the weak variant where it was missing.
 
 #### Development
 
