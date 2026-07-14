@@ -49,18 +49,21 @@ export const waitForDBShell = async (page: Page) => {
 		element.style.transition = 'none';
 	});
 	await expect(dbPage).toHaveCSS('opacity', '1');
+	await expect(dbPage).not.toHaveAttribute('data-fonts-loaded', 'false');
 };
 
 export const setScrollViewport = async (page: Page) => {
 	const header = await page.waitForSelector('.db-control-panel-desktop');
 
 	const headerHeight: number = await header.evaluate((node) => Number(node?.scrollHeight ?? 72));
-	const main = await page.waitForSelector('.db-main');
+	const shellContent = await page.waitForSelector('.db-shell-content');
 
-	const mainHeight: number = await main.evaluate((node) => Number(node?.scrollHeight ?? 2500));
+	const shellContentHeight: number = await shellContent.evaluate((node) =>
+		Number(node?.scrollHeight ?? 2500),
+	);
 
 	const width = page.viewportSize()?.width ?? 0;
-	const height = headerHeight + mainHeight;
+	const height = headerHeight + shellContentHeight;
 
 	await page.setViewportSize({
 		width,

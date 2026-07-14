@@ -2,19 +2,37 @@
 import { appConfig } from '@config';
 import { DBCard, DBSection, DBStack } from '@db-ux/react-core-components';
 import { DisabledWrapper, TextImage } from '@components';
+
+interface Props {
+	riText?: string;
+	dataVizText?: string;
+	tableText?: string;
+	contentText?: string;
+	comingSoonLabel?: string;
+	ariaLabel?: string;
+}
+
+const {
+	riText = 'Deliver reliable traveler information.',
+	dataVizText = 'Enable clear visualization of complex data.',
+	tableText = 'Display large datasets in a consistent format.',
+	contentText = 'Support consistent communication across channels.',
+	comingSoonLabel = 'Coming Soon',
+	ariaLabel = 'Extensions section',
+} = Astro.props;
 ---
 
 <DBSection
 	width="medium"
 	spacing="medium"
-	aria-label="Unified model section"
+	aria-label={ariaLabel}
 	id="extensions--extensions-section"
 >
 	<DBStack gap="large">
 		<DBStack gap="large" direction="row">
 			<a
 				href={`https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/Reisendeninformation/UX-Standards`}
-				aria-label="Open Foundations page"
+				aria-label="Open RI Extension"
 				target="_blank"
 				referrerpolicy="no-referrer"
 			>
@@ -27,13 +45,13 @@ import { DisabledWrapper, TextImage } from '@components';
 						imageAlt="RI Extension Visual"
 						mask="fade-bottom-right"
 					>
-						Deliver reliable traveler information.
+						{riText}
 					</TextImage>
 				</DBCard>
 			</a>
 			<a
 				href={`https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/db-ux-design-system/extensions/dataviz`}
-				aria-label="Open Components page"
+				aria-label="Open DataViz Extension"
 				target="_blank"
 				referrerpolicy="no-referrer"
 			>
@@ -43,10 +61,10 @@ import { DisabledWrapper, TextImage } from '@components';
 						imagePosition="bottom"
 						imageSrc={`${appConfig.basePath}assets/extensions/DataViz--Lightmode--C.png`}
 						imageSrcDark={`${appConfig.basePath}assets/extensions/DataViz--Darkmode--C.png`}
-						imageAlt="Foundations Extension Visual"
+						imageAlt="DataViz Extension Visual"
 						mask="fade-bottom-right"
 					>
-						Enable clear visualization of complex data.
+						{dataVizText}
 					</TextImage>
 				</DBCard>
 			</a>
@@ -54,7 +72,7 @@ import { DisabledWrapper, TextImage } from '@components';
 		<DBStack gap="large" direction="row">
 			<a
 				href={`https://www.figma.com/design/b7rNEK9wu6TpvNDfqT3ob5/DB-UX-DS---Extension-Table-Documentation?node-id=4928-58111&t=xmhoTIY8ciMrKlhQ-1`}
-				aria-label="Open Table Extension page"
+				aria-label="Open Table Extension"
 				target="_blank"
 				referrerpolicy="no-referrer"
 			>
@@ -67,11 +85,11 @@ import { DisabledWrapper, TextImage } from '@components';
 						imageAlt="Table Extension Visual"
 						mask="fade-bottom-right"
 					>
-						Display large datasets in a consistent format.
+						{tableText}
 					</TextImage>
 				</DBCard>
 			</a>
-			<DisabledWrapper label="Coming Soon" size="medium">
+			<DisabledWrapper label={comingSoonLabel} size="medium">
 				<DBCard spacing="large">
 					<TextImage
 						title="Content Extension"
@@ -81,7 +99,7 @@ import { DisabledWrapper, TextImage } from '@components';
 						imageAlt="Content Extension Visual"
 						mask="fade-bottom-right"
 					>
-						Support consistent communication across channels.
+						{contentText}
 					</TextImage>
 				</DBCard>
 			</DisabledWrapper>

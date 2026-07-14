@@ -18,6 +18,7 @@
 		grid-template-columns: 1fr;
 
 		& .controls-area {
+			/* stylelint-disable-next-line db-ux/use-border-width, db-ux/use-border-color */
 			border-inline-start: none;
 			border-block-start: var(--db-border-width-3xs) solid
 				var(--db-adaptive-on-bg-basic-emphasis-60-default);

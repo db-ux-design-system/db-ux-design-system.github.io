@@ -26,23 +26,21 @@ export function Shell({ children, pathname = '/', subNavigationVariant }: Props)
 		<ColorModeProvider>
 			<DBShell
 				subNavigationDesktopPosition="left"
-				subNavigation={
-					subNavigation ? (
-						<SubNavigation navigationItems={subNavigation} variant={subNavigationVariant} />
-					) : null
-				}
 				subNavigationMobilePosition="none"
-				controlPanelDesktop={
-					<DBControlPanelDesktop brand={<Brand />} primaryActions={<PrimaryActions />}>
-						<MainNavigation />
-					</DBControlPanelDesktop>
-				}
-				controlPanelMobile={
-					<DBControlPanelMobile brand={<Brand />} primaryActions={<PrimaryActions />}>
-						<MainNavigation mobile />
-					</DBControlPanelMobile>
-				}
 			>
+				<DBControlPanelDesktop brand={<Brand />} primaryActions={<PrimaryActions />}>
+					<MainNavigation />
+				</DBControlPanelDesktop>
+				<DBControlPanelMobile
+					burgerMenuLabel="Menu"
+					brand={<Brand />}
+					primaryActions={<PrimaryActions />}
+				>
+					<MainNavigation mobile />
+				</DBControlPanelMobile>
+				{subNavigation ? (
+					<SubNavigation navigationItems={subNavigation} variant={subNavigationVariant} />
+				) : null}
 				{children}
 			</DBShell>
 		</ColorModeProvider>

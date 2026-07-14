@@ -1,4 +1,8 @@
-import { DBBadge, DBNavigationItem, DBNavigationItemGroup } from '@db-ux/react-core-components';
+import {
+	DBBadge,
+	DBControlPanelNavigationItem,
+	DBControlPanelNavigationItemGroup,
+} from '@db-ux/react-core-components';
 import { getAriaCurrent } from '@template/utils/client.utils.ts';
 import { covers, getFirstChildPath, trimExtension } from '@template/utils/navigation.utils.ts';
 
@@ -45,7 +49,7 @@ const NavItem = ({
 
 	if (externalUrl) {
 		return (
-			<DBNavigationItem
+			<DBControlPanelNavigationItem
 				icon={icon}
 				key={`router-leaf-${externalUrl}`}
 				disabled={disabled ? true : undefined}
@@ -59,7 +63,7 @@ const NavItem = ({
 					{title}
 					{lockIcon}
 				</a>
-			</DBNavigationItem>
+			</DBControlPanelNavigationItem>
 		);
 	}
 
@@ -73,7 +77,11 @@ const NavItem = ({
 		const target = path ?? getFirstChildPath(children);
 
 		return (
-			<DBNavigationItem icon={icon} key={`router-leaf-${target ?? title}`} disabled={disabled}>
+			<DBControlPanelNavigationItem
+				icon={icon}
+				key={`router-leaf-${target ?? title}`}
+				disabled={disabled}
+			>
 				<a
 					href={trimExtension(target)}
 					aria-current={isActive ? 'page' : undefined}
@@ -82,13 +90,13 @@ const NavItem = ({
 					{title}
 					{lockIcon || getStatusBadge(status)}
 				</a>
-			</DBNavigationItem>
+			</DBControlPanelNavigationItem>
 		);
 	}
 
 	if (children && children.length > 0) {
 		return (
-			<DBNavigationItemGroup
+			<DBControlPanelNavigationItemGroup
 				text={title}
 				additionalInformation={getStatusBadge(status)}
 				key={`router-group-${path ?? title}`}
@@ -98,12 +106,12 @@ const NavItem = ({
 				{children.map((sub) => (
 					<NavItem key={`router-sub-${sub.path ?? sub.title}`} {...sub} />
 				))}
-			</DBNavigationItemGroup>
+			</DBControlPanelNavigationItemGroup>
 		);
 	}
 
 	return (
-		<DBNavigationItem
+		<DBControlPanelNavigationItem
 			icon={icon}
 			key={`router-leaf-${path ?? title}`}
 			disabled={disabled ? true : undefined}
@@ -116,7 +124,7 @@ const NavItem = ({
 				{title}
 				{lockIcon || getStatusBadge(status)}
 			</a>
-		</DBNavigationItem>
+		</DBControlPanelNavigationItem>
 	);
 };
 
