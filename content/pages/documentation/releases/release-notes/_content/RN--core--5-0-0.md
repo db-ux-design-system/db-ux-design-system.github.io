@@ -27,6 +27,7 @@ date: '2026-07-14'
 ##### Removed
 - Card, Popover, Section, Drawer: The deprecated components have been removed (deprecated since v4.6).
 - Accordion Item, Tag: The deprecated slot helper components have been removed (deprecated since v4.6).
+- Tooltip: The deprecated resizer has been removed
 
 ##### Fixed
 - Card, Popover: The "Start Slot" and "End Slot" now default to hidden (show slot = false).

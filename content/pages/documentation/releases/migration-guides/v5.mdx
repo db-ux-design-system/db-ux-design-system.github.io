@@ -171,6 +171,17 @@ The following refinements require special attention. Existing instances must be 
 		'2. Reapply custom Scrollbar modifications after updating.',
 	]}
 />
+
+#### Tooltip
+
+- **Resizer layer removed:** The Resizer layer has been removed from the Tooltip component. If the Arrow was positioned off-center, the position may need to be set again after updating.
+
+<YourAction
+	actions={[
+		'1. Review all Tooltip instances where the Arrow is not centered.',
+		'2. Re-adjust the Arrow position after updating if needed.',
+	]}
+/>
 </DBSection>
 
 <DBSection spacing="small" width="auto">
