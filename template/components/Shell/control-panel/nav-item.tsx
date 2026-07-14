@@ -41,6 +41,11 @@ const NavItem = ({
 }: NavigationItem) => {
 	const { language } = useLanguage();
 	const displayTitle = (language === 'de' && titleDe) ? titleDe : title;
+	const localePath = (p: string | undefined) => {
+		if (!p) return p;
+		const trimmed = trimExtension(p);
+		return language === 'de' ? `/de/${trimmed}` : trimmed;
+	};
 	const lockIcon = isProtected ? (
 		<span
 			data-icon="lock_closed"
@@ -74,7 +79,7 @@ const NavItem = ({
 		typeof window !== 'undefined' &&
 		covers(
 			{ path, title, icon, iconTrailing, children, isSubNavigation },
-			window.location.pathname,
+			window.location.pathname.replace(/^\/de/, ''),
 		);
 	if (isSubNavigation) {
 		const target = path ?? getFirstChildPath(children);
@@ -86,7 +91,7 @@ const NavItem = ({
 				disabled={disabled}
 			>
 				<a
-					href={trimExtension(target)}
+					href={localePath(target)}
 					aria-current={isActive ? 'page' : undefined}
 					style={{ display: 'flex', alignItems: 'center', width: '100%' }}
 				>
@@ -119,8 +124,8 @@ const NavItem = ({
 			disabled={disabled ? true : undefined}
 		>
 			<a
-				href={trimExtension(path)}
-				aria-current={getAriaCurrent(trimExtension(path))}
+				href={localePath(path)}
+				aria-current={getAriaCurrent(localePath(path))}
 				style={{ display: 'flex', alignItems: 'center', width: '100%' }}
 			>
 				{displayTitle}

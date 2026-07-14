@@ -14,6 +14,7 @@ interface Props {
 }
 const { headings, frontmatter } = Astro.props;
 const currentPath = Astro.url.pathname;
+const lang = currentPath.startsWith('/de/') || currentPath === '/de' ? 'de' : 'en';
 
 // Determine redirect target for hidePage or externalUrl
 let redirectUrl: string | undefined;
@@ -42,7 +43,7 @@ if (frontmatter.externalUrl) {
 
 {
 	redirectUrl ? (
-		<html lang={appConfig.language || 'en'}>
+		<html lang={lang}>
 			<head>
 				<meta charset="utf-8" />
 				<title>{`Redirecting…`}</title>
@@ -53,7 +54,7 @@ if (frontmatter.externalUrl) {
 			</body>
 		</html>
 	) : (
-		<html lang={appConfig.language || 'en'}>
+		<html lang={lang}>
 			<HtmlHead title={frontmatter.title} loadModelViewer={frontmatter.loadModelViewer} />
 			<body>
 				<Shell

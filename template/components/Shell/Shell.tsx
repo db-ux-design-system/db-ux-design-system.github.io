@@ -17,9 +17,10 @@ type Props = PropsWithChildren & {
 };
 
 export function Shell({ children, pathname = '/', subNavigationVariant }: Props): ReactElement {
+	const normalizedPathname = pathname.replace(/^\/de/, '') || '/';
 	const subNavigation = useMemo(() => {
-		return findSubNavigation(pathname);
-	}, [pathname]);
+		return findSubNavigation(normalizedPathname);
+	}, [normalizedPathname]);
 
 	/*
 	 * TODO: We need to get the subNavigation if we are inside a subNavigation Item as well

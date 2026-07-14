@@ -1,0 +1,119 @@
+---
+import PageHeroSection from '@components/home/PageHeroSection.astro';
+import InteractiveDemoSection from '@components/home/InteractiveDemoSection.astro';
+import PackagesSection from '@components/home/PackagesSection.astro';
+import DesignedForSection from '@components/home/DesignedForSection.astro';
+import TestimonialsSection from '@components/home/TestimonialsSection.astro';
+import { ContactUsSection } from '@components';
+import DefaultLayout from '@template/layouts/default';
+---
+
+<DefaultLayout frontmatter={{}}>
+	<PageHeroSection
+		title="DB UX Design System"
+		headline="Ein Design System, das Teams verbindet und Produktentwicklung beschleunigt."
+		description="Schafft Klarheit in Design und Umsetzung durch gemeinsame Standards und wiederverwendbare Komponenten."
+	/>
+
+	<InteractiveDemoSection />
+
+	<PackagesSection
+		sectionTitle="Ein einheitliches Modell für Produktteams"
+		sectionDescription="Gemeinsame Grundlagen, Komponenten und fachspezifische Erweiterungen für Klarheit und Abstimmung."
+		foundationTitle="Foundation"
+		foundationText="Gemeinsame Basis-Tokens und Modi schaffen ein stabiles Fundament für klare und konsistente Interfaces."
+		componentsTitle="Komponenten"
+		componentsText="Kern-Komponenten sorgen für vorhersagbare Interaktionen über alle Produkte hinweg."
+		extensionsTitle="Erweiterungen"
+		extensionsText="Kontextspezifische Standards, die auf dem Kernsystem aufbauen und fachliche Anforderungen abdecken."
+		patternsTitle="Pattern"
+		patternsText="Wiederverwendbare Interaktionsmodelle für konsistentes Verhalten über alle Produkte."
+		templatesTitle="Templates"
+		templatesText="Strukturierte Ausgangspunkte, die Seitenerstellung beschleunigen und konsistente Layouts gewährleisten."
+		comingSoonLabel="Demnächst verfügbar"
+		linkPrefix="de/"
+	/>
+
+	<DesignedForSection
+		sectionTitle="So unterstützt das System eure Arbeit"
+		sectionDescription="Ein gemeinsames System, das Zusammenarbeit und Entscheidungsfindung für Produkt, Entwicklung und Design verbessert."
+		pmTitle="Effiziente Bereitstellung"
+		pmText="Weniger Zeitaufwand für wiederkehrende Design- und Umsetzungsentscheidungen."
+		pmTag="Für Produktmanagement"
+		devTitle="Planbare Wartung"
+		devText="Geplante Updates und stabile Versionierung ermöglichen vorausschauende Planung."
+		devTag="Für Entwickler:innen"
+		designTitle="Flexible Gestaltung"
+		designText="Komponenten und Tokens kontextgerecht anpassen, ohne die Konsistenz zu verlieren."
+		designTag="Für Designer:innen"
+		linkPrefix="de/"
+	/>
+
+	<TestimonialsSection
+		quote1={`„Seit wir das System nutzen, verbringen unsere Teams weniger Zeit mit UI-Abstimmungen und mehr mit echten Produktproblemen."`}
+		quote2={`„Neue Teammitglieder werden schneller produktiv, weil das System erklärt, wie wir unsere Produkte gestalten und bauen."`}
+		quote3={`„Design und Entwicklung sprechen endlich die gleiche Sprache – die Übergabe ist planbar statt repetitiv."`}
+	/>
+
+	<ContactUsSection />
+</DefaultLayout>
+
+<script>
+	import { waitForElements } from '@template/utils/client.utils.ts';
+
+	function initDemo(): boolean {
+		const iframe = document.querySelector<HTMLIFrameElement>('[id="demo-iframe"]');
+		const toggle = document.getElementById('toggle-demo');
+		const toggleMode = document.getElementById('toggle-mode');
+		const fullscreenAnchor: HTMLAnchorElement | null = document.querySelector<HTMLAnchorElement>(
+			'[id="fullscreen-anchor"]',
+		);
+
+		if (!iframe || !toggle || !toggleMode || !fullscreenAnchor) return false;
+
+		let currentDemo = 'b2b';
+		let currentMode = 'light';
+
+		fullscreenAnchor.href = iframe.src;
+
+		toggle.addEventListener('click', () => {
+			currentDemo = currentDemo === 'b2b' ? 'b2c' : 'b2b';
+			const href = `/demo-${currentDemo}`;
+			iframe.src = href;
+			fullscreenAnchor.href = href;
+			toggle.textContent = currentDemo === 'b2b' ? 'B2C Beispiel' : 'B2B Beispiel';
+		});
+
+		toggleMode.addEventListener('click', () => {
+			currentMode = currentMode === 'light' ? 'dark' : 'light';
+			iframe.src = `/demo-${currentDemo}?mode=${currentMode}`;
+			toggleMode.setAttribute('data-icon', currentMode === 'light' ? 'moon' : 'sun');
+			toggleMode.setAttribute(
+				'title',
+				currentMode === 'light' ? 'Dunkelmodus aktivieren' : 'Hellmodus aktivieren',
+			);
+			const tooltip = toggleMode.querySelector('.db-tooltip');
+			if (tooltip)
+				tooltip.textContent = currentMode === 'light' ? 'Dunkelmodus aktivieren' : 'Hellmodus aktivieren';
+		});
+
+		document.addEventListener('click', (e) => {
+			const target = (e.target as HTMLElement)?.closest<HTMLElement>('[data-action]');
+			if (!target) return;
+
+			const action = target.dataset.action;
+			const value = target.dataset.value;
+			if (action && value) {
+				iframe.src = `/demo-${currentDemo}?${action}=${value}`;
+			}
+		});
+
+		return true;
+	}
+
+	document.addEventListener('astro:page-load', () => {
+		waitForElements(initDemo);
+	});
+
+	waitForElements(initDemo);
+</script>
