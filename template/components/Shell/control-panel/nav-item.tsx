@@ -14,6 +14,7 @@ const getStatusBadge = (status?: string) => {
 		beta: { semantic: 'informational', label: 'Beta' },
 		deprecated: { semantic: 'critical', label: 'Deprecated' },
 		legacy: { semantic: 'warning', label: 'Legacy' },
+		sub: { semantic: 'neutral', label: 'Sub' },
 	}[status];
 
 	if (!config) return null;
@@ -36,7 +37,8 @@ const NavItem = ({
 	status,
 	externalUrl,
 	protected: isProtected,
-}: NavigationItem) => {
+	parentStatus,
+}: NavigationItem & { parentStatus?: string }) => {
 	const lockIcon = isProtected ? (
 		<span
 			data-icon="lock_closed"
@@ -97,16 +99,20 @@ const NavItem = ({
 		return (
 			<DBControlPanelNavigationItemGroup
 				text={title}
+				endSlot={getStatusBadge(status)}
 				key={`router-group-${path ?? title}`}
 				aria-disabled={disabled ? 'true' : undefined}
 				expanded={isActive}
 			>
 				{children.map((sub) => (
-					<NavItem key={`router-sub-${sub.path ?? sub.title}`} {...sub} />
+					<NavItem key={`router-sub-${sub.path ?? sub.title}`} {...sub} parentStatus={status} />
 				))}
 			</DBControlPanelNavigationItemGroup>
 		);
 	}
+
+	// For leaf items inside a group: only show badge if it differs from parent
+	const effectiveStatus = parentStatus && status === parentStatus ? undefined : status;
 
 	return (
 		<DBControlPanelNavigationItem
@@ -120,7 +126,7 @@ const NavItem = ({
 				style={{ display: 'flex', alignItems: 'center', width: '100%' }}
 			>
 				{title}
-				{lockIcon || getStatusBadge(status)}
+				{lockIcon || getStatusBadge(effectiveStatus)}
 			</a>
 		</DBControlPanelNavigationItem>
 	);
