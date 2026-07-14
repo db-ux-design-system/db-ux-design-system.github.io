@@ -35,9 +35,7 @@ const fieldId = `question-form-${(componentName ?? 'general')
 			const body = encodeURIComponent(textarea.value);
 			window.location.href = 'mailto:${mailTo}?subject=${encodedSubject}&body=' + body;
 		`}
-	>
-		Email the DB UX team
-	</button>
+	>Email the DB UX team</button>
 	<p class="question-form-fallback">
 		Or write directly to <a href={`mailto:${mailTo}`}>{mailTo}</a>
 	</p>

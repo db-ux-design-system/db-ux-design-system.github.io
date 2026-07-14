@@ -49,7 +49,7 @@
 /* Brand variant (inverted on red background) */
 .cta .db-button[data-variant='brand'] {
 	background: var(--db-brand-on-origin-default);
-	color: var(--db-brand-origin-default);
+	color: var(--db-brand-on-bg-basic-emphasis-90-default);
 	/* stylelint-disable-next-line db-ux/use-border-color */
 	border-color: var(--db-brand-on-origin-default);
 }
