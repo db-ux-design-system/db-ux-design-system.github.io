@@ -21,6 +21,21 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 {/* Cross-cutting topics: library setup, workarounds, helper components, density, theming, etc. */}
 
 <DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### Property Icons
+
+Component properties in the Figma library use emoji prefixes to indicate their type and purpose at a glance.
+
+| Icon | Purpose | Example |
+|------|---------|---------|
+| 👁️ | Show/Hide toggle (toggles visibility) | `👁️ Show Label` |
+| 🔀 | Variant selection | `🔀 Variant` |
+| 📦 | Slot (content area) | `📦 Children` |
+| 🔄 | Icon swap (instance swap for icons) | `🔄 Icon` |
+| ✏️ | Text override | `✏️ Label` |
+
+</DBStack>
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
 ### 📏 Resizer
 
 The 📏 Resizer helper component can be used in other components to make fixed widths or heights of instances or containers overridable.
