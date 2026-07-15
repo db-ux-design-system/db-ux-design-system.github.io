@@ -35,4 +35,10 @@ date: '2026-07-14'
 
 #### Development
 
-- TODO
+##### Changed
+
+- **BREAKING CHANGE:** The Tabs component has undergone significant changes, including larger HTML adaptations to accessibility tool feedback within the component, as well as the renaming and restructuring of properties.
+- **BREAKING CHANGE:** Add a drawer header/footer to the drawer component, change some of its properties, and provide support for safe areas.
+- Visual **BREAKING CHANGE:** Remove the default `margin-inline` from the `[data-icon]` pseudo-elements in favour of a `gap`.
+- We're no longer defining CSS Custom Properties on the `:host` selector as a complement to `:root`, as this shouldn't be necessary. There shouldn't be any problems with this change. If you experience any issues, please let us know.
+- The deprecated node package `@db-ux/core-migration` is no longer supported, as its "search and replace" operations were too basic. You should use AI and/or manual migration work instead, which is expected to work much better.
