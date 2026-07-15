@@ -4,6 +4,33 @@
 	gap: var(--db-spacing-fixed-md);
 }
 
+
+/* Fixed column variants – breakpoints use $db-breakpoint-sm (48em) / $db-breakpoint-xs (20em) */
+@media (width >= 48em) {
+	.teaser-cards-cols-2 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.teaser-cards-cols-3 {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.teaser-cards-cols-4 {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+@media (20em <= width < 48em) {
+	.teaser-cards-cols-3,
+	.teaser-cards-cols-4 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+.teaser-cards-cols-1 {
+	grid-template-columns: 1fr;
+}
+
 .teaser-cards > * {
 	block-size: 100%;
 }
