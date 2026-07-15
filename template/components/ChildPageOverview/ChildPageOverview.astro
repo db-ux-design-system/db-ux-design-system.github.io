@@ -30,7 +30,7 @@ type MdModule = {
 	default?: { frontmatter?: FrontMatter };
 };
 
-const { parentPath, sortDescending = false, columns = 3, status, disabled = false } = Astro.props;
+const { parentPath, sortDescending = false, columns, status, disabled = false } = Astro.props;
 
 // Glob all content pages eagerly (path relative to this file's location)
 const modules = import.meta.glob<MdModule>(
