@@ -41,14 +41,30 @@ html {
 }
 
 h3 {
-	font: var(--db-type-headline-2xs);
+	font: var(--db-type-headline-md);
 	margin-block: 0;
 }
 
-h4,
+h4 {
+	font: var(--db-type-headline-xs);
+	margin-block: 0;
+}
+
 h5,
 h6 {
 	font: var(--db-type-headline-3xs);
+	margin-block: 0;
+}
+
+/* Cards/Teasers: keep headings at teaser size regardless of level */
+.db-card h2 {
+	font: var(--db-type-headline-sm);
+	margin-block: 0;
+}
+
+.db-card h3,
+.db-card h4 {
+	font: var(--db-type-headline-2xs);
 	margin-block: 0;
 }
 
