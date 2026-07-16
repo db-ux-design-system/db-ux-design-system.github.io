@@ -134,6 +134,14 @@
 .db-control-panel-navigation-item-group:has(
 		> .db-control-panel-navigation-item-group-menu :hover
 	)
+	> .db-control-panel-navigation-item-group-expand-button,
+.db-control-panel-navigation-item-group:has(
+		> .db-control-panel-navigation-item-group-menu :focus
+	)
+	> .db-control-panel-navigation-item-group-expand-button,
+.db-control-panel-navigation-item-group:has(
+		> .db-control-panel-navigation-item-group-menu :focus-visible
+	)
 	> .db-control-panel-navigation-item-group-expand-button {
 	background-color: var(--db-adaptive-bg-basic-transparent-full-default) !important;
 	cursor: default;
