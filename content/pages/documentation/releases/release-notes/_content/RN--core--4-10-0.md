@@ -11,6 +11,9 @@ _version bump_
 
 ### Development
 
-- refactor(form components): replace hard `25ch` label width limit with customizable CSS variable
-- feat(`@db-ux/wc-core-components`): add bundled output (`bundle/`) so the web-components package can be consumed directly via a single script import without a bundler
-- feat(`DBAccordionItem`): add `open` prop to control the expanded state of an accordion item programmatically
+#### Added
+- Web Components: A bundled output (`bundle/`) is now available so `@db-ux/wc-core-components` can be consumed directly via a single script import without a bundler.
+- Accordion Item: The `open` prop has been added to control the expanded state programmatically.
+
+#### Changed
+- Form components: The hard `25ch` label width limit has been replaced with a customizable CSS variable.

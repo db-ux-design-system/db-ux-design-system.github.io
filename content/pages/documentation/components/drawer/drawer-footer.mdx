@@ -1,0 +1,106 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Drawer Footer'
+title: 'Drawer Footer'
+description: 'The drawer footer subcomponent provides the bottom section of the drawer for primary actions, confirmations, or supplementary controls.'
+align: start
+toc: true
+status: 'sub'
+subParent: 'Drawer'
+order: 3
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Stays persistently visible at the bottom while the drawer content scrolls
+- Can include secondary actions
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'TBD',
+			url: '#',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'TBD',
+			url: '#',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+### Usage
+
+The drawer footer can remain sticky to keep important actions visible while the drawer body scrolls behind it.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4924-11&embed-host=share"
+		description="Use a footer when users need continuous access to actions such as applying changes, saving progress, or cancelling a task."
+		fullWidth={true}
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Drawer Footer" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Drawer',
+			description: 'Parent component that hosts the drawer footer',
+			url: '/documentation/components/drawer/drawer',
+		},
+		{
+			title: 'Drawer Header',
+			description: 'Top section of the drawer with title and close button',
+			url: '/documentation/components/drawer/drawer-header',
+		},
+	]}
+/>
+
+</DBSection>

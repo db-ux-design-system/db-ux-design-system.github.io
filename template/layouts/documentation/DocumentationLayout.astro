@@ -25,18 +25,19 @@ if (frontmatter.externalUrl) {
 	} else {
 		const norm = (p: string) => p.replace(/\/+$/, '');
 		const currentNorm = norm(currentPath);
-		const findNode = (items: NavigationItem[]): NavigationItem | undefined => {
+		const findNode = (items: NavigationItem[], parentPath = ''): NavigationItem | undefined => {
 			for (const item of items) {
-				if (item.path && norm('/' + item.path) === currentNorm) return item;
-				// For hidePage nodes: check if children live under the current path
-				if (!item.path && item.children?.length) {
+				const itemPath = item.path ? norm('/' + item.path) : null;
+				if (itemPath === currentNorm) return item;
+				// For hidePage nodes: check if a child path starts with currentNorm
+				if (!itemPath && item.children?.length) {
 					const firstChildPath = item.children[0]?.path;
 					if (firstChildPath && norm('/' + firstChildPath).startsWith(currentNorm + '/')) {
 						return item;
 					}
 				}
 				if (item.children) {
-					const found = findNode(item.children);
+					const found = findNode(item.children, item.path || parentPath);
 					if (found) return found;
 				}
 			}
@@ -45,7 +46,7 @@ if (frontmatter.externalUrl) {
 		const node = findNode(appNavigation);
 		const firstChild = node?.children?.[0]?.path;
 		if (firstChild) {
-			redirectUrl = '/' + firstChild;
+			redirectUrl = '/' + firstChild.replace(/\.(md|mdx|astro)$/, '');
 		}
 	}
 }
