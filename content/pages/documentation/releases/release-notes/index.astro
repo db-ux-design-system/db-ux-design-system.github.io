@@ -26,6 +26,7 @@ const releaseNoteFiles = import.meta.glob<MarkdownInstance<any>>('./_content/*.m
 	eager: true,
 });
 const releaseNotes: ReleaseNote[] = Object.values(releaseNoteFiles)
+	.filter(({ frontmatter }) => !frontmatter.draft)
 	.map(({ frontmatter, Content }) => {
 		const heading = frontmatter.version
 			? `${frontmatter.category} – ${frontmatter.version}`
