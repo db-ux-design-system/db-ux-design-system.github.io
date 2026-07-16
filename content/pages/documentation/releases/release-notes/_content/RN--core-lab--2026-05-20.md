@@ -5,13 +5,13 @@ version: ''
 date: '2026-05-20'
 ---
 
-#### Design
+### Design
 
-##### Added
+#### Added
 - Multiple components: "Children" slots have been added to Breadcrumb, ButtonGroup, Dialog, Footer, Heading, Pagination, SegmentedButton, and SplitButton.
 - Upload: Initial design has been added.
 
-##### Changed
+#### Changed
 - Tabs: The component has been aligned with Development (slots integration, properties).
   - Density behavior has been fixed.
   - Slots have been integrated.

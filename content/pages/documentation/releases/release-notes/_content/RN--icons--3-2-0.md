@@ -5,7 +5,7 @@ version: 'v3.2.0'
 date: '2025-09-29'
 ---
 
-#### Design & Development
+### Design & Development
 
-##### Added
+#### Added
 - Icons: 4 new icons have been added.

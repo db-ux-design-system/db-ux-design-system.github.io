@@ -5,7 +5,7 @@ version: 'v4.1.0'
 date: '2025-10-30'
 ---
 
-#### Design & Development
+### Design & Development
 
-##### Added
+#### Added
 - Notification: The overlay variant now supports a block link.

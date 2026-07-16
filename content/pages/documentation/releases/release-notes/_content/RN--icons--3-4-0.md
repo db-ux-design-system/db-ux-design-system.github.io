@@ -5,7 +5,7 @@ version: 'v3.4.0'
 date: '2025-12-08'
 ---
 
-#### Design & Development
+### Design & Development
 
-##### Changed
+#### Changed
 - Icons: The "Replacement Service" icon has been replaced.

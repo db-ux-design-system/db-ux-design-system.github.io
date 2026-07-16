@@ -5,7 +5,7 @@ version: 'v3.9.0'
 date: '2026-04-28'
 ---
 
-#### Design & Development
+### Design & Development
 
-##### Added
+#### Added
 - Icons: The new icon "bordlift" has been added.

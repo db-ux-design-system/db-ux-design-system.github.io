@@ -5,9 +5,9 @@ version: 'v1.5.0'
 date: '2025-07-07'
 ---
 
-#### Design & Development
+### Design & Development
 
-##### Added
+#### Added
 - Icons: 5 new icons have been added.
   - Audio/Video: AV Description
   - File: Bookmark, Receive Item, Share Item

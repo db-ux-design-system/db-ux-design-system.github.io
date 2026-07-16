@@ -5,10 +5,10 @@ version: ''
 date: '2026-06-09'
 ---
 
-#### Design
+### Design
 
-##### Added
+#### Added
 - Grid, Dynamic Button, Toggle Button: Initial design has been added.
 
-##### Removed
+#### Removed
 - Table: The component has been removed from Core Lab (moved to Core).

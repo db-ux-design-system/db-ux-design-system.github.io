@@ -5,7 +5,7 @@ version: 'v3.0.0'
 date: '2025-12-08'
 ---
 
-#### Design
+### Design
 
-##### Fixed
+#### Fixed
 - Icons: Swapped icons have been corrected (Pork, Pork and Beef, Pork and Poultry).

@@ -5,13 +5,13 @@ version: ''
 date: '2026-04-28'
 ---
 
-#### Design
+### Design
 
-##### Added
+#### Added
 - Dialog, Calendar, Pagination, Segmented Button, Split Button: Initial design has been added.
 
-##### Changed
+#### Changed
 - Core Components: Updated to v4.7.0.
 
-##### Removed
+#### Removed
 - Menu: The concept component has been removed.

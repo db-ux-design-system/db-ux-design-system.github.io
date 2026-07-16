@@ -5,13 +5,13 @@ version: 'v2.4.0'
 date: '2025-07-07'
 ---
 
-#### Design
+### Design
 
-##### Changed
+#### Changed
 - Checkbox, Radio, Switch, Tag: Prototyping has been optimized.
 
-#### Development
+### Development
 
-##### Added
+#### Added
 - Form components: An option to disable the *-required asterisk has been added.
 - Drawer: The optional `position` property is now available.
