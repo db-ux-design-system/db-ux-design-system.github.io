@@ -17,7 +17,7 @@ interface Props {
 type FrontMatter = {
 	title?: string;
 	description?: string;
-	teaserDescription?: string;
+	shortDescription?: string;
 	order?: number;
 	hidePage?: boolean;
 	nav?: boolean;
@@ -101,7 +101,7 @@ for (const [filePath, mod] of Object.entries(modules)) {
 	if (status && fm.status !== status) continue;
 
 	const title = fm.title || toTitle(relativePart);
-	const description = fm.teaserDescription || fm.description || '';
+	const description = fm.shortDescription || fm.description || '';
 	const order = typeof fm.order === 'number' ? fm.order : Number.MAX_SAFE_INTEGER;
 
 	children.push({

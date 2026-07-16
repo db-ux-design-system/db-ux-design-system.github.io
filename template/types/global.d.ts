@@ -13,7 +13,7 @@ declare interface FrontMatter {
 	/**
 	 * Short description used in teaser cards on overview pages. Falls back to description if not set.
 	 */
-	teaserDescription?: string;
+	shortDescription?: string;
 	/**
 	 * Main headline for hero section.
 	 */
