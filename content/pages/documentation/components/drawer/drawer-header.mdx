@@ -1,0 +1,110 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Drawer Header'
+title: 'Drawer Header'
+description: 'The drawer header subcomponent provides the top section of the drawer with a optional title, close button, and supplementary content.'
+align: start
+toc: true
+status: 'sub'
+subParent: 'Drawer'
+order: 2
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Displays a title to give users context about the drawer content
+- Contains the close button for keyboard-accessible dismissal
+- Can include supplementary content like subtitles or action elements
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'TBD',
+			url: '#',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'TBD',
+			url: '#',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+### Content
+
+The drawer header should clearly describe the purpose of the drawer and provide enough context for users to understand what they are editing, viewing, or selecting. It can hold supplementary actions.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4924-13&embed-host=share"
+		description="Use a clear object-related title when the drawer shows contextual information."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4924-10448&embed-host=share"
+		description="Action elements can be placed in the drawer header when they are directly related to the drawer context and help users act on the displayed content."
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Drawer Header" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Drawer',
+			description: 'Parent component that hosts the drawer header',
+			url: '/documentation/components/drawer/drawer',
+		},
+		{
+			title: 'Drawer Footer',
+			description: 'Bottom section of the drawer for actions and confirmations',
+			url: '/documentation/components/drawer/drawer-footer',
+		},
+	]}
+/>
+
+</DBSection>
