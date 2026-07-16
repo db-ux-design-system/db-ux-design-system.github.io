@@ -13,12 +13,14 @@ interface Props {
 		component?: string;
 		disabled?: boolean;
 	}[];
+	/** Fixed number of columns (e.g. 2 or 3). Uses auto-fit when omitted. */
+	columns?: number;
 }
 
-const { teasers } = Astro.props;
+const { teasers, columns } = Astro.props;
 ---
 
-<div class="teaser-cards">
+<div class={`teaser-cards${columns ? ` teaser-cards-cols-${columns}` : ''}`}>
 	{
 		teasers.map((teaser) => {
 			const Component = teaser.component ? (DBComponents as any)[teaser.component] : null;
