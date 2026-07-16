@@ -8,3 +8,10 @@ description: 'Everything about releases, versioning, content status, and migrati
 align: start
 order: 7
 ---
+
+import { DBSection } from '@db-ux/react-core-components';
+import ChildPageOverview from '@template/components/ChildPageOverview/ChildPageOverview.astro';
+
+<DBSection spacing="small" width="auto">
+<ChildPageOverview parentPath="documentation/releases" columns={2} />
+</DBSection>

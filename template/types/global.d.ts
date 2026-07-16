@@ -11,6 +11,10 @@ declare interface FrontMatter {
 	 */
 	description?: string;
 	/**
+	 * Short description used in teaser cards on overview pages. Falls back to description if not set.
+	 */
+	shortDescription?: string;
+	/**
 	 * Main headline for hero section.
 	 */
 	headline?: string;
@@ -87,6 +91,11 @@ declare interface FrontMatter {
 	 * An optional external URL. If set, the page redirects to this URL when accessed directly.
 	 */
 	externalUrl?: string;
+
+	/**
+	 * Explicit redirect target when hidePage is true. Overrides the automatic first-child detection.
+	 */
+	redirectTo?: string;
 }
 
 declare type DocumentationFrontMatter = {
