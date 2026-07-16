@@ -11,7 +11,7 @@ const FigmaLearnTeaser = ({ componentName }: FigmaLearnTeaserProps) => {
 			description={`Find Figma-specific workarounds and tips for using the ${componentName} component in your designs.`}
 			url="/documentation/learn/figma"
 			image="/assets/teasers/figma.png"
-			imageAlt="Figma"
+			imageAlt=""
 		/>
 	);
 };

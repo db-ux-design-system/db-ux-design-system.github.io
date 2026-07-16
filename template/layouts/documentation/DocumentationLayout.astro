@@ -67,6 +67,10 @@ if (frontmatter.externalUrl) {
 				</Shell>
 				<slot name="script" />
 				<script>import '@template/components/ComponentPlayground/playground-init';</script>
+				<!-- Deep-link scroll fix: The Shell renders client-side (client:only="react"),
+				     so anchor targets don't exist yet when the browser performs its native
+				     hash scroll. This script retries scrolling until the target element
+				     appears in the DOM (up to ~3 s after page load). -->
 				<script is:inline>
 					if (window.location.hash) {
 						var id = decodeURIComponent(window.location.hash.slice(1));
