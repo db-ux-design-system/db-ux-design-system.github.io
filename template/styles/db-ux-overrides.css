@@ -123,3 +123,18 @@
 .db-shell-content {
 	gap: var(--db-spacing-responsive-sm);
 }
+
+/* Fix: Prevent parent expand-buttons from showing hover when child items are hovered.
+   The db-control-panel-navigation-item-group uses flex-direction:column in tree mode,
+   but the expand-button still receives :hover when the mouse is over sibling menu items
+   due to the button stretching across the cross-axis.
+   This uses :has() to detect when the menu contains a hovered element and resets
+   the button's hover background.
+   TODO: Move this fix into core-web (control-panel-navigation-item-group component). */
+.db-control-panel-navigation-item-group:has(
+		> .db-control-panel-navigation-item-group-menu :hover
+	)
+	> .db-control-panel-navigation-item-group-expand-button {
+	background-color: var(--db-adaptive-bg-basic-transparent-full-default) !important;
+	cursor: default;
+}
