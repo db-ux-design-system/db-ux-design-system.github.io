@@ -29,7 +29,7 @@ Guidelines for writing documentation content consistently.
 ## Do/Dont Texts
 
 - Do: Formulate positively, state what to do
-- Dont: Start with "Do not...", include a concrete reason
+- Dont: Start with "Don't...", include a concrete reason
 - Caution: Use instead of Dont when the usage is suboptimal but not a hard error. Formulate as a neutral observation with a recommendation
 - Always provide the "why" or the consequence
 - Soft wording when there is no hard error, restrictive when technically limited
@@ -47,7 +47,7 @@ Guidelines for writing documentation content consistently.
 ## Phrasing Patterns
 
 - Soft rules: "Keep ... reasonable", "... is supported but reduces..."
-- Hard rules: "Do not use ... for ...", state technical limits clearly
+- Hard rules: "Don't use ... for ...", state technical limits clearly
 - Recommendations: "Use ... when ...", "... is better suited for..."
 
 ## Description Structure
