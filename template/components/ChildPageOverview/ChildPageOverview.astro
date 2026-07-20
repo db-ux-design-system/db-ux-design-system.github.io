@@ -22,6 +22,7 @@ type FrontMatter = {
 	hidePage?: boolean;
 	nav?: boolean;
 	externalUrl?: string;
+	redirectTo?: string;
 	status?: string;
 };
 
@@ -107,7 +108,7 @@ for (const [filePath, mod] of Object.entries(modules)) {
 	children.push({
 		title,
 		description,
-		url: `/${routePath}`,
+		url: fm.redirectTo || `/${routePath}`,
 		order,
 		status: fm.status,
 	});
