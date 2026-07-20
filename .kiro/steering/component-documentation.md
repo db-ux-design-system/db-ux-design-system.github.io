@@ -217,7 +217,7 @@ Where `PAGE_NODE_ID` is the canvas/page ID (e.g. `1-1132`, `3-1110`).
 | Guideline Headline | Short, descriptive title (e.g. "ControlPanel Position", "Navigation Depth") |
 | Guideline Text | Explain the rationale / when to apply this pattern. Keep concise (1–2 sentences) |
 | Do Caption | Describe what the correct example shows – phrased as instruction ("Use X for Y") |
-| Dont Caption | Describe what's wrong – phrased as prohibition ("Do not use X when Y") |
+| Dont Caption | Describe what's wrong – phrased as prohibition ("Don't use X when Y") |
 | Related entries | List components that are commonly used together or are variants of the documented component |
 
 ---
@@ -282,7 +282,7 @@ GUIDELINE:
 Headline: ControlPanel Position
 Text: Choose the ControlPanel position based on navigation complexity. Top works for simple apps; Left suits applications with many navigation items or deep structures.
 Do: https://www.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=1-1132 | Use the Top position for applications with few top-level navigation entries.
-Dont: https://www.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=1-1133 | Do not use the Left position when only 2–3 navigation items exist. The vertical panel takes up space without benefit.
+Dont: https://www.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=1-1133 | Don't use the Left position when only 2–3 navigation items exist. The vertical panel takes up space without benefit.
 
 ===
 
@@ -290,7 +290,7 @@ GUIDELINE:
 Headline: SubNavigation Placement
 Text: Combine the ControlPanel and SubNavigation positions to support your information architecture. ControlPanel Top + SubNavigation Left works well for complex B2B applications.
 Do: https://www.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1110 | Use SubNavigation Left for pages with many sub-level entries that benefit from a persistent vertical overview.
-Dont: https://www.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1112 | Do not switch SubNavigation position when navigating between top-level sections. Users expect the navigation layout to stay stable.
+Dont: https://www.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1112 | Don't switch SubNavigation position when navigating between top-level sections. Users expect the navigation layout to stay stable.
 
 ===
 
@@ -298,7 +298,7 @@ GUIDELINE:
 Headline: Navigation Depth
 Text: Multi-level navigation (Popover with nested levels) helps users find deeply nested content. Apply multi-level in either the ControlPanel or the SubNavigation – never in both.
 Do: https://www.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1113 | Use multi-level navigation in one area only, and keep the other flat.
-Dont: https://www.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1114 | Do not use multi-level Popovers in both ControlPanel and SubNavigation at the same time. This makes orientation harder for users.
+Dont: https://www.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1114 | Don't use multi-level Popovers in both ControlPanel and SubNavigation at the same time. This makes orientation harder for users.
 
 ===
 
