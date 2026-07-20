@@ -313,7 +313,7 @@ Shell Content | The scrollable content area of the Shell with slot-based layout.
 ## Notes
 
 - Documentation files are **separate from the component library** – they live in their own project folder
-- The platform reads these files automatically – changes in Figma propagate to the live documentation
+- The platform references these files during build – after changing content in Figma, the corresponding MDX pages in this repository must be regenerated or updated manually
 - Guideline images should be **clear and minimal** – show only what's needed to illustrate the point
 - Container sizes for guidelines can vary but should use consistent dimensions within a file
 - When referencing guideline pages, always use the **page-level node-id** (canvas node), not a frame inside it
