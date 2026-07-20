@@ -10,6 +10,9 @@ interface Props {
 	contentText?: string;
 	comingSoonLabel?: string;
 	ariaLabel?: string;
+	width?: 'small' | 'medium' | 'large' | 'full';
+	/** When true, omits the wrapping DBSection (use when already inside a layout section) */
+	noSection?: boolean;
 }
 
 const {
@@ -19,90 +22,174 @@ const {
 	contentText = 'Support consistent communication across channels.',
 	comingSoonLabel = 'Coming Soon',
 	ariaLabel = 'Extensions section',
+	width = 'medium',
+	noSection = false,
 } = Astro.props;
 ---
 
-<DBSection
-	width="medium"
-	spacing="medium"
-	aria-label={ariaLabel}
-	id="extensions--extensions-section"
->
-	<DBStack gap="large">
-		<DBStack gap="large" direction="row">
-			<a
-				href={`https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/Reisendeninformation/UX-Standards`}
-				aria-label="Open RI Extension"
-				target="_blank"
-				referrerpolicy="no-referrer"
-			>
-				<DBCard behavior="interactive" spacing="large">
-					<TextImage
-						title="RI Extension"
-						imagePosition="bottom"
-						imageSrc={`${appConfig.basePath}assets/extensions/RI--Lightmode--C.png`}
-						imageSrcDark={`${appConfig.basePath}assets/extensions/RI--Darkmode--C.png`}
-						imageAlt="RI Extension Visual"
-						mask="fade-bottom-right"
-					>
-						{riText}
-					</TextImage>
-				</DBCard>
-			</a>
-			<a
-				href={`https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/db-ux-design-system/extensions/dataviz`}
-				aria-label="Open DataViz Extension"
-				target="_blank"
-				referrerpolicy="no-referrer"
-			>
-				<DBCard behavior="interactive" spacing="large">
-					<TextImage
-						title="DataViz Extension"
-						imagePosition="bottom"
-						imageSrc={`${appConfig.basePath}assets/extensions/DataViz--Lightmode--C.png`}
-						imageSrcDark={`${appConfig.basePath}assets/extensions/DataViz--Darkmode--C.png`}
-						imageAlt="DataViz Extension Visual"
-						mask="fade-bottom-right"
-					>
-						{dataVizText}
-					</TextImage>
-				</DBCard>
-			</a>
+{
+	noSection ? (
+		<DBStack gap="large" aria-label={ariaLabel} id="extensions--extensions-section">
+			<DBStack gap="large" direction="row">
+				<a
+					href={`https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/Reisendeninformation/UX-Standards`}
+					aria-label="Open RI Extension"
+					target="_blank"
+					referrerpolicy="no-referrer"
+				>
+					<DBCard behavior="interactive" spacing="large">
+						<TextImage
+							title="RI Extension"
+							imagePosition="bottom"
+							imageSrc={`${appConfig.basePath}assets/extensions/RI--Lightmode--C.png`}
+							imageSrcDark={`${appConfig.basePath}assets/extensions/RI--Darkmode--C.png`}
+							imageAlt="RI Extension Visual"
+							mask="fade-bottom-right"
+						>
+							{riText}
+						</TextImage>
+					</DBCard>
+				</a>
+				<a
+					href={`https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/db-ux-design-system/extensions/dataviz`}
+					aria-label="Open DataViz Extension"
+					target="_blank"
+					referrerpolicy="no-referrer"
+				>
+					<DBCard behavior="interactive" spacing="large">
+						<TextImage
+							title="DataViz Extension"
+							imagePosition="bottom"
+							imageSrc={`${appConfig.basePath}assets/extensions/DataViz--Lightmode--C.png`}
+							imageSrcDark={`${appConfig.basePath}assets/extensions/DataViz--Darkmode--C.png`}
+							imageAlt="DataViz Extension Visual"
+							mask="fade-bottom-right"
+						>
+							{dataVizText}
+						</TextImage>
+					</DBCard>
+				</a>
+			</DBStack>
+			<DBStack gap="large" direction="row">
+				<a
+					href={`https://www.figma.com/design/b7rNEK9wu6TpvNDfqT3ob5/DB-UX-DS---Extension-Table-Documentation?node-id=4928-58111&t=xmhoTIY8ciMrKlhQ-1`}
+					aria-label="Open Table Extension"
+					target="_blank"
+					referrerpolicy="no-referrer"
+				>
+					<DBCard behavior="interactive" spacing="large">
+						<TextImage
+							title="Table Extension"
+							imagePosition="bottom"
+							imageSrc={`${appConfig.basePath}assets/extensions/Table--Lightmode--C.png`}
+							imageSrcDark={`${appConfig.basePath}assets/extensions/Table--Darkmode--C.png`}
+							imageAlt="Table Extension Visual"
+							mask="fade-bottom-right"
+						>
+							{tableText}
+						</TextImage>
+					</DBCard>
+				</a>
+				<DisabledWrapper label={comingSoonLabel} size="medium">
+					<DBCard spacing="large">
+						<TextImage
+							title="Content Extension"
+							imagePosition="bottom"
+							imageSrc={`${appConfig.basePath}assets/extensions/Content--Lightmode--C.png`}
+							imageSrcDark={`${appConfig.basePath}assets/extensions/Content--Darkmode--C.png`}
+							imageAlt="Content Extension Visual"
+							mask="fade-bottom-right"
+						>
+							{contentText}
+						</TextImage>
+					</DBCard>
+				</DisabledWrapper>
+			</DBStack>
 		</DBStack>
-		<DBStack gap="large" direction="row">
-			<a
-				href={`https://www.figma.com/design/b7rNEK9wu6TpvNDfqT3ob5/DB-UX-DS---Extension-Table-Documentation?node-id=4928-58111&t=xmhoTIY8ciMrKlhQ-1`}
-				aria-label="Open Table Extension"
-				target="_blank"
-				referrerpolicy="no-referrer"
-			>
-				<DBCard behavior="interactive" spacing="large">
-					<TextImage
-						title="Table Extension"
-						imagePosition="bottom"
-						imageSrc={`${appConfig.basePath}assets/extensions/Table--Lightmode--C.png`}
-						imageSrcDark={`${appConfig.basePath}assets/extensions/Table--Darkmode--C.png`}
-						imageAlt="Table Extension Visual"
-						mask="fade-bottom-right"
+	) : (
+		<DBSection
+			width={width}
+			spacing="medium"
+			aria-label={ariaLabel}
+			id="extensions--extensions-section"
+		>
+			<DBStack gap="large">
+				<DBStack gap="large" direction="row">
+					<a
+						href={`https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/Reisendeninformation/UX-Standards`}
+						aria-label="Open RI Extension"
+						target="_blank"
+						referrerpolicy="no-referrer"
 					>
-						{tableText}
-					</TextImage>
-				</DBCard>
-			</a>
-			<DisabledWrapper label={comingSoonLabel} size="medium">
-				<DBCard spacing="large">
-					<TextImage
-						title="Content Extension"
-						imagePosition="bottom"
-						imageSrc={`${appConfig.basePath}assets/extensions/Content--Lightmode--C.png`}
-						imageSrcDark={`${appConfig.basePath}assets/extensions/Content--Darkmode--C.png`}
-						imageAlt="Content Extension Visual"
-						mask="fade-bottom-right"
+						<DBCard behavior="interactive" spacing="large">
+							<TextImage
+								title="RI Extension"
+								imagePosition="bottom"
+								imageSrc={`${appConfig.basePath}assets/extensions/RI--Lightmode--C.png`}
+								imageSrcDark={`${appConfig.basePath}assets/extensions/RI--Darkmode--C.png`}
+								imageAlt="RI Extension Visual"
+								mask="fade-bottom-right"
+							>
+								{riText}
+							</TextImage>
+						</DBCard>
+					</a>
+					<a
+						href={`https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/db-ux-design-system/extensions/dataviz`}
+						aria-label="Open DataViz Extension"
+						target="_blank"
+						referrerpolicy="no-referrer"
 					>
-						{contentText}
-					</TextImage>
-				</DBCard>
-			</DisabledWrapper>
-		</DBStack>
-	</DBStack>
-</DBSection>
+						<DBCard behavior="interactive" spacing="large">
+							<TextImage
+								title="DataViz Extension"
+								imagePosition="bottom"
+								imageSrc={`${appConfig.basePath}assets/extensions/DataViz--Lightmode--C.png`}
+								imageSrcDark={`${appConfig.basePath}assets/extensions/DataViz--Darkmode--C.png`}
+								imageAlt="DataViz Extension Visual"
+								mask="fade-bottom-right"
+							>
+								{dataVizText}
+							</TextImage>
+						</DBCard>
+					</a>
+				</DBStack>
+				<DBStack gap="large" direction="row">
+					<a
+						href={`https://www.figma.com/design/b7rNEK9wu6TpvNDfqT3ob5/DB-UX-DS---Extension-Table-Documentation?node-id=4928-58111&t=xmhoTIY8ciMrKlhQ-1`}
+						aria-label="Open Table Extension"
+						target="_blank"
+						referrerpolicy="no-referrer"
+					>
+						<DBCard behavior="interactive" spacing="large">
+							<TextImage
+								title="Table Extension"
+								imagePosition="bottom"
+								imageSrc={`${appConfig.basePath}assets/extensions/Table--Lightmode--C.png`}
+								imageSrcDark={`${appConfig.basePath}assets/extensions/Table--Darkmode--C.png`}
+								imageAlt="Table Extension Visual"
+								mask="fade-bottom-right"
+							>
+								{tableText}
+							</TextImage>
+						</DBCard>
+					</a>
+					<DisabledWrapper label={comingSoonLabel} size="medium">
+						<DBCard spacing="large">
+							<TextImage
+								title="Content Extension"
+								imagePosition="bottom"
+								imageSrc={`${appConfig.basePath}assets/extensions/Content--Lightmode--C.png`}
+								imageSrcDark={`${appConfig.basePath}assets/extensions/Content--Darkmode--C.png`}
+								imageAlt="Content Extension Visual"
+								mask="fade-bottom-right"
+							>
+								{contentText}
+							</TextImage>
+						</DBCard>
+					</DisabledWrapper>
+				</DBStack>
+			</DBStack>
+		</DBSection>
+	)
+}
