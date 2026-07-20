@@ -10,6 +10,7 @@ interface Props {
 	contentText?: string;
 	comingSoonLabel?: string;
 	ariaLabel?: string;
+	width?: 'small' | 'medium' | 'large' | 'full';
 }
 
 const {
@@ -19,11 +20,12 @@ const {
 	contentText = 'Support consistent communication across channels.',
 	comingSoonLabel = 'Coming Soon',
 	ariaLabel = 'Extensions section',
+	width = 'medium',
 } = Astro.props;
 ---
 
 <DBSection
-	width="medium"
+	width={width}
 	spacing="medium"
 	aria-label={ariaLabel}
 	id="extensions--extensions-section"
