@@ -1,0 +1,66 @@
+---
+import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
+import { DBSection, DBStack } from '@db-ux/react-core-components';
+import BorderWidthPlayground from '../../../../documentation/foundation/border-width/_BorderWidthPlayground.astro';
+import BorderWidthTable from '../../../../documentation/foundation/border-width/_BorderWidthTable.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+// eslint-disable-next-line astro/no-exports-from-components -- Exported for ChildPageOverview glob
+export const frontmatter: DocumentationFrontMatter = {
+	headline: 'Border Width',
+	title: 'Border Width',
+	shortDescription: 'Strichstärken für Umrisse, Trennlinien und interaktive Zustände.',
+	align: 'start',
+	toc: true,
+	sectionSpacing: 'small',
+	sectionWidth: 'auto',
+};
+
+const headings = [
+	{ depth: 2, slug: 'playground', text: 'Playground' },
+	{ depth: 2, slug: 'tokens', text: 'Tokens' },
+	{ depth: 2, slug: 'faq', text: 'FAQ' },
+];
+---
+
+<DocumentationLayout frontmatter={frontmatter} headings={headings}>
+	Die Border Width definiert die Strichstärken innerhalb des Design Systems und sorgt für ein
+	konsistentes visuelles Erscheinungsbild und eine klare Struktur der Benutzeroberfläche.
+
+	<DBSection spacing="small">
+		<DBStack gap="x-large">
+			<DBStack gap="none">
+				<h2 id="playground">Playground</h2>
+				<br />
+				Experimentiere mit Border-Width-Tokens, um zu sehen, wie sie die Rahmenstärke beeinflussen.
+			</DBStack>
+			<BorderWidthPlayground layout="horizontal" />
+		</DBStack>
+	</DBSection>
+
+	<DBSection spacing="small">
+		<h2 id="tokens">Tokens</h2>
+		<BorderWidthTable />
+	</DBSection>
+
+	<DBSection spacing="small">
+		<h2 id="faq">FAQ</h2>
+		<QuestionForm componentName="Border Width" />
+	</DBSection>
+
+	<script>
+		import { waitForElements } from '@template/utils/client.utils.ts';
+		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';
+
+		function initBorderWidth(): boolean {
+			return handleSimplePlaygrounds({
+				dataAttributeName: 'border-width',
+				tokenPrefix: 'border-width',
+				remPx: true,
+				popoverLabel: 'Border Width',
+			});
+		}
+
+		waitForElements(initBorderWidth);
+	</script>
+</DocumentationLayout>

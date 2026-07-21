@@ -1,0 +1,113 @@
+---
+import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
+import { DBSection, DBStack } from '@db-ux/react-core-components';
+import SpacingPlayground from '../../../../documentation/foundation/spacing/_SpacingPlayground.astro';
+import SpacingTable from '../../../../documentation/foundation/spacing/_SpacingTable.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+// eslint-disable-next-line astro/no-exports-from-components -- Exported for ChildPageOverview glob
+export const frontmatter: DocumentationFrontMatter = {
+	headline: 'Spacing',
+	title: 'Spacing',
+	shortDescription: 'Rhythmus- und Abstands-Tokens für Layout und Komponenteninterna.',
+	align: 'start',
+	toc: true,
+	sectionSpacing: 'small',
+	sectionWidth: 'auto',
+};
+
+const headings = [
+	{ depth: 2, slug: 'playground', text: 'Playground' },
+	{ depth: 2, slug: 'richtlinien', text: 'Richtlinien' },
+	{ depth: 2, slug: 'tokens', text: 'Tokens' },
+	{ depth: 2, slug: 'faq', text: 'FAQ' },
+];
+---
+
+<DocumentationLayout frontmatter={frontmatter} headings={headings}>
+	Spacing ist ein Schlüsselelement unseres Design Systems und definiert die Abstände zwischen
+	verschiedenen Komponenten. Die konsistente Verwendung von Spacing sorgt für ein harmonisches,
+	übersichtliches und nutzer:innenfreundliches Erscheinungsbild.
+
+	<DBSection spacing="small">
+		<DBStack gap="x-large">
+			<DBStack gap="none">
+				<h2 id="playground">Playground</h2>
+				<br />
+				Experimentiere mit Spacing-Tokens, um zu sehen, wie Gap und Padding das Layout beeinflussen.
+			</DBStack>
+			<SpacingPlayground layout="horizontal" />
+		</DBStack>
+	</DBSection>
+
+	<DBSection spacing="small">
+		<h2 id="richtlinien">Richtlinien</h2>
+
+		<CollapsibleWrapper collapsedHeight="320px">
+			<h3>Feste Abstände</h3>
+
+			<p>
+				Feste Abstände sind Lücken, die unabhängig von der Bildschirmgröße gleich bleiben. Sie
+				werden typischerweise innerhalb von Komponenten und Modulen verwendet, um eine einheitliche
+				und klare Struktur auf verschiedenen Geräten sicherzustellen.
+			</p>
+
+			<div class="guideline-examples">
+				<GuidelineExample
+					figmaUrl="https://embed.figma.com/design/Ji70muzdgUXAcN0Qs8eSY2/Doku--Spacing?node-id=1-1132&embed-host=share"
+					fullWidth={true}
+					description="Feste Abstände"
+				/>
+			</div>
+
+			<h3>Responsive Abstände</h3>
+
+			<p>
+				Responsive Abstände sind Lücken, die sich automatisch an die Größe des Gerätebildschirms
+				anpassen (Desktop, Tablet, Mobile). Sie eignen sich ideal zur Trennung verschiedener
+				Layoutbereiche und sorgen für ein konsistentes, nutzer:innenfreundliches Erscheinungsbild
+				auf allen Geräten.
+			</p>
+
+			<div class="guideline-examples">
+				<GuidelineExample
+					figmaUrl="https://embed.figma.com/design/Ji70muzdgUXAcN0Qs8eSY2/Doku--Spacing?node-id=1-1133&embed-host=share"
+					fullWidth={true}
+					description="Responsive Abstände"
+				/>
+			</div>
+		</CollapsibleWrapper>
+
+		<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+	</DBSection>
+
+	<DBSection spacing="small">
+		<h2 id="tokens">Tokens</h2>
+		<SpacingTable />
+	</DBSection>
+
+	<DBSection spacing="small">
+		<h2 id="faq">FAQ</h2>
+		<QuestionForm componentName="Spacing" />
+	</DBSection>
+
+	<script>
+		import { waitForElements } from '@template/utils/client.utils.ts';
+		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';
+
+		function initSpacing(): boolean {
+			return handleSimplePlaygrounds({
+				dataAttributeName: 'spacing',
+				tokenPrefix: 'spacing-fixed',
+				popoverLabel: 'Spacing',
+				remPx: true,
+				withDensity: true,
+			});
+		}
+
+		waitForElements(initSpacing);
+	</script>
+</DocumentationLayout>

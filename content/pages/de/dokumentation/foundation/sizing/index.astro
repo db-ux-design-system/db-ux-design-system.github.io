@@ -1,0 +1,68 @@
+---
+import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
+import { DBSection, DBStack } from '@db-ux/react-core-components';
+import SizingPlayground from '../../../../documentation/foundation/sizing/_SizingPlayground.astro';
+import SizingTable from '../../../../documentation/foundation/sizing/_SizingTable.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+// eslint-disable-next-line astro/no-exports-from-components -- Exported for ChildPageOverview glob
+export const frontmatter: DocumentationFrontMatter = {
+	headline: 'Sizing',
+	title: 'Sizing',
+	shortDescription: 'Konsistente Abmessungen für interaktive Elemente und Container.',
+	align: 'start',
+	toc: true,
+	sectionSpacing: 'small',
+	sectionWidth: 'auto',
+};
+
+const headings = [
+	{ depth: 2, slug: 'playground', text: 'Playground' },
+	{ depth: 2, slug: 'tokens', text: 'Tokens' },
+	{ depth: 2, slug: 'faq', text: 'FAQ' },
+];
+---
+
+<DocumentationLayout frontmatter={frontmatter} headings={headings}>
+	Sizing bezeichnet die konsistente Verwendung festgelegter Größen für Elemente und Komponenten,
+	unabhängig vom Gerätebildschirm. Feste Größen stellen sicher, dass Layouts ausgewogen bleiben und
+	Komponenten auf Desktop, Tablet und mobilen Geräten leicht wiedererkennbar sind.
+
+	<DBSection spacing="small">
+		<DBStack gap="x-large">
+			<DBStack gap="none">
+				<h2 id="playground">Playground</h2>
+				<br />
+				Experimentiere mit Sizing-Tokens, um zu sehen, wie sie über verschiedene Dichten skalieren.
+			</DBStack>
+			<SizingPlayground layout="horizontal" />
+		</DBStack>
+	</DBSection>
+
+	<DBSection spacing="small">
+		<h2 id="tokens">Tokens</h2>
+		<SizingTable />
+	</DBSection>
+
+	<DBSection spacing="small">
+		<h2 id="faq">FAQ</h2>
+		<QuestionForm componentName="Sizing" />
+	</DBSection>
+
+	<script>
+		import { waitForElements } from '@template/utils/client.utils.ts';
+		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';
+
+		function initSizing(): boolean {
+			return handleSimplePlaygrounds({
+				dataAttributeName: 'size',
+				tokenPrefix: 'sizing',
+				popoverLabel: 'Size',
+				remPx: true,
+				withDensity: true,
+			});
+		}
+
+		waitForElements(initSizing);
+	</script>
+</DocumentationLayout>
