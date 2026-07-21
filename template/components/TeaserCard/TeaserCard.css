@@ -4,6 +4,9 @@
 	gap: var(--db-spacing-fixed-md);
 }
 
+.teaser-cards + .teaser-cards {
+	margin-block-start: var(--db-spacing-fixed-md);
+}
 
 /* Fixed column variants – breakpoints use $db-breakpoint-sm (48em) / $db-breakpoint-xs (20em) */
 @media (width >= 48em) {
@@ -43,48 +46,24 @@
 	block-size: 100%;
 }
 
-.teaser-cards .db-card > .teaser-wrapper {
-	display: flex;
-	flex-direction: column;
-	block-size: 100%;
-}
-
-.teaser-preview {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	min-block-size: var(--db-sizing-2xl);
-	background: var(--db-adaptive-bg-basic-level-3-default);
-	flex-shrink: 0;
-	margin-block-start: auto;
-}
-
-.teaser-preview .db-link {
-	inline-size: auto;
-	display: inline-flex !important;
-	flex-direction: row !important;
-	text-decoration: none !important;
-}
-
-.teaser-preview .db-link::after {
-	text-decoration: none !important;
-}
-
 .teaser-content {
 	display: flex;
 	flex-direction: column;
 	gap: var(--db-spacing-fixed-xs);
-	padding: var(--db-spacing-fixed-md);
 }
 
-.teaser-cards .db-card h2 {
+.teaser-cards .db-card h2, .teaser-cards .db-card h3 {
 	margin: 0;
 	font: var(--db-type-headline-3xs);
 }
 
-.teaser-cards .db-card h3 {
-	margin: 0;
-	font: var(--db-type-headline-3xs);
+.teaser-cards-medium .db-card h2, .teaser-cards-medium .db-card h3 {
+	font: var(--db-type-headline-2xs);
+}
+
+
+.teaser-cards-large .db-card h2, .teaser-cards-large .db-card h3 {
+	font: var(--db-type-headline-sm);
 }
 
 .teaser-cards .db-card p {

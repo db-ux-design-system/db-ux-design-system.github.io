@@ -11,7 +11,7 @@ status: 'stable'
 toc: true
 ---
 
-import { DBAccordion, DBAccordionItem, DBSection } from '@db-ux/react-core-components';
+import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
@@ -48,7 +48,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-### Use Checkbox for multi-select, not single-choice
+### Checkbox vs. Radio
 
 Use checkboxes when users can select any number of options (including none). If the user must pick exactly one option, use Radio instead.
 
@@ -56,16 +56,16 @@ Use checkboxes when users can select any number of options (including none). If 
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=1-1132&embed-host=share"
-		description='Use a checkbox group for "Email", "SMS", "Post" where multiple selections are allowed.'
+		description="Use checkboxes where multiple selections are allowed."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=1-1133&embed-host=share"
-		description='Use checkboxes for mutually exclusive choices like "German / English / Spanish".'
+		description="Don’t use checkboxes for mutually exclusive choices like."
 	/>
 </div>
 
-### Write short, positive labels
+### Labels
 
 Labels must be clear and concise. Prefer positive phrasing to reduce cognitive load and avoid double negatives.
 
@@ -73,16 +73,16 @@ Labels must be clear and concise. Prefer positive phrasing to reduce cognitive l
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1110&embed-host=share"
-		description='Use "Subscribe to newsletter" instead of negative constructions.'
+		description="Use clear and concise labels."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1112&embed-host=share"
-		description='Use labels like "Do not subscribe" or "Not signed in" that can confuse when checked.'
+		description="Avoid double negatives that can confuse when checked."
 	/>
 </div>
 
-### Make groups easy to scan
+### Grouping
 
 In checkbox groups, keep options parallel in wording and length. If a group needs context, add a group label or short description above it.
 
@@ -90,12 +90,12 @@ In checkbox groups, keep options parallel in wording and length. If a group need
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1113&embed-host=share"
-		description='Use a clear group label (e.g., "Notification channels") and consistent option phrasing.'
+		description="Use a clear group label and consistent option phrasing."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1114&embed-host=share"
-		description="Mix unrelated options or inconsistent wording that makes scanning harder."
+		description="Don't mix unrelated options or inconsistent wording that makes scanning harder."
 	/>
 </div>
 
@@ -111,28 +111,7 @@ In checkbox groups, keep options parallel in wording and length. If a group need
 
 ## FAQ
 
-<DBAccordion>
-	<DBAccordionItem headlinePlain="When should I use Checkbox vs Switch?">
-		Use Checkbox for selections in forms, lists, and filters (often multiple at once). Use Switch
-		for a single on/off setting that takes effect immediately.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="When should I use Checkbox vs Radio?">
-		Use Checkbox when multiple options can be selected. Use Radio when exactly one option must be
-		chosen within a set.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="Can I hide the visible label?">
-		Only if you provide equivalent screenreader text and the meaning is still clear in context.
-		Prefer visible labels whenever possible.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain="How should I validate checkbox groups?">
-		If at least one option is required, validate the group (not each item) and show a clear error
-		message that explains what is missing.
-	</DBAccordionItem>
-	<DBAccordionItem headlinePlain='Do I need a "Select all" option?'>
-		Only when it saves effort for large groups and users commonly select most options. Keep the
-		state accurate and support indeterminate for partial selection.
-	</DBAccordionItem>
-</DBAccordion>
+<QuestionForm componentName="Checkbox" />
 
 </DBSection>
 
