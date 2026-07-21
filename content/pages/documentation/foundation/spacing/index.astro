@@ -8,9 +8,11 @@ import CollapseButton from '@template/components/CollapseButton/CollapseButton.a
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-const frontmatter: DocumentationFrontMatter = {
+// eslint-disable-next-line astro/no-exports-from-components -- Exported for ChildPageOverview glob
+export const frontmatter: DocumentationFrontMatter = {
 	headline: 'Spacing',
 	title: 'Spacing',
+	shortDescription: 'Rhythm and distance tokens for layout and component internals.',
 	align: 'start',
 	toc: true,
 	sectionSpacing: 'small',

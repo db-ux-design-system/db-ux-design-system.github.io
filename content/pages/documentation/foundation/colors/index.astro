@@ -8,9 +8,11 @@ import CollapseButton from '@template/components/CollapseButton/CollapseButton.a
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-const frontmatter: DocumentationFrontMatter = {
+// eslint-disable-next-line astro/no-exports-from-components -- Exported for ChildPageOverview glob
+export const frontmatter: DocumentationFrontMatter = {
 	headline: 'Colors',
 	title: 'Colors',
+	shortDescription: 'Adaptive color tokens for themes, semantics, and emphasis levels.',
 	align: 'start',
 	toc: true,
 	sectionSpacing: 'small',

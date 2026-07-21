@@ -8,6 +8,75 @@ headline: 'Get Started'
 description: 'Everything you need to build consistent and accessible digital experiences with the DB UX Design System. Start with the Foundations or explore ready-to-use components for design and code.'
 ---
 
-import GetStartedTeaser from './_components/GetStartedTeaser.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import { DBStack } from '@db-ux/react-core-components';
 
-<GetStartedTeaser />
+<DBStack gap="medium">
+<TeaserCard
+	columns={2}
+	spacing="large"
+    headlineSize="large"
+	headlineLevel={2}
+	teasers={[
+		{
+			title: 'Foundation',
+			description: 'Shared base tokens and modes provide a stable foundation for clear and coherent interfaces.',
+			url: '/documentation/foundation',
+			imageSrc: '/assets/Foundations-Teaser--C.png',
+			imageAlt: 'Foundations',
+			imagePosition: 'right',
+			imageWidth: '33',
+			mask: 'fade-bottom-right',
+		},
+		{
+			title: 'Components',
+			description: 'Core components ensure predictable interactions across products.',
+			url: '/documentation/components',
+			imageSrc: '/assets/Components-Teaser--C.png',
+			imageAlt: 'Components',
+			imagePosition: 'right',
+			imageWidth: '33',
+			mask: 'fade-bottom-right',
+		},
+	]}
+/>
+
+<TeaserCard
+	columns={3}
+	spacing="large"
+	headlineSize="medium"
+	headlineLevel={2}
+	teasers={[
+		{
+			title: 'Icons',
+			description: 'Browse and copy all available DB UX icon names for usage in code.',
+			url: '/documentation/icons',
+			imageSrc: '/assets/Extensions-Teaser--C.png',
+			imageAlt: 'Icons',
+			imagePosition: 'right',
+			imageWidth: '33',
+			mask: 'fade-bottom-right',
+		},
+		{
+			title: 'Release Notes',
+			description: 'Stay up to date with the latest changes and improvements.',
+			url: '/documentation/releases/release-notes',
+			imageSrc: '/assets/Release-Notes-Teaser.png',
+			imageAlt: 'Release Notes',
+			imagePosition: 'right',
+			imageWidth: '33',
+			mask: 'fade-bottom-right',
+		},
+		{
+			title: 'Resources',
+			description: 'Figma libraries for designers and code packages for developers.',
+			url: '/documentation/resources',
+			imageSrc: '/assets/Resources-Teaser.png',
+			imageAlt: 'Resources',
+			imagePosition: 'right',
+			imageWidth: '33',
+			mask: 'fade-bottom-right',
+		},
+	]}
+/>
+</DBStack>

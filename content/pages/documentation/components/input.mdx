@@ -60,13 +60,13 @@ Use Input for free text entry. If users must choose from predefined options, use
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1133&embed-host=share&scaling=scale-down-width"
-		description="Use Input for choosing from a fixed list (forces typing, increases errors)."
+		description="Don't use Input for choosing from a fixed list (forces typing, increases errors)."
 	/>
 </div>
 
 ### Label text
 
-Every Input must have a clear, descriptive label that explains what to enter. Keep labels short and specific; avoid vague labels. Do not replace the label with a placeholder.
+Every Input must have a clear, descriptive label that explains what to enter. Keep labels short and specific; avoid vague labels. Don't replace the label with a placeholder.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -94,7 +94,9 @@ Placeholder text is optional and should provide an example format/value, not ins
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1114&embed-host=share&scaling=scale-down-width"
-		description='Put requirements or help text only in the placeholder (e.g., "Enter your email to receive updates").'
+		description={
+			'Don\'t put requirements or help text only in the placeholder (e.g., "Enter your email to receive updates").'
+		}
 	/>
 </div>
 
@@ -111,7 +113,9 @@ Use helper text to prevent errors (format, constraints, expectations). Use valid
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1117&embed-host=share&scaling=scale-down-width"
-		description='Show long paragraphs, duplicate the label as helper/error text, or use unclear errors (e.g., "Invalid input").'
+		description={
+			'Don\'t show long paragraphs, duplicate the label as helper/error text, or use unclear errors (e.g., "Invalid input").'
+		}
 	/>
 </div>
 
@@ -128,7 +132,7 @@ Inputs must align to the layout grid and maintain consistent spacing between lab
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1118&embed-host=share&scaling=scale-down-width"
-		description="Let label/field/helper drift out of alignment or create uneven spacing compared to other fields."
+		description="Don't let label/field/helper drift out of alignment or create uneven spacing compared to other fields."
 	/>
 </div>
 
@@ -145,8 +149,6 @@ Ensure every Input has an accessible name that matches the visible label. If a l
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the Input component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Input" />
 

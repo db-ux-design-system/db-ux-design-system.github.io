@@ -12,6 +12,8 @@ interface Props {
 	status?: string;
 	/** Mark all teasers as disabled (no link, shows "Coming Soon") */
 	disabled?: boolean;
+	/** Heading level for card titles (1–6). Defaults to 2. */
+	headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 type FrontMatter = {
@@ -22,6 +24,7 @@ type FrontMatter = {
 	hidePage?: boolean;
 	nav?: boolean;
 	externalUrl?: string;
+	redirectTo?: string;
 	status?: string;
 };
 
@@ -30,7 +33,7 @@ type MdModule = {
 	default?: { frontmatter?: FrontMatter };
 };
 
-const { parentPath, sortDescending = false, columns, status, disabled = false } = Astro.props;
+const { parentPath, sortDescending = false, columns, status, disabled = false, headlineLevel } = Astro.props;
 
 // Glob all content pages eagerly (path relative to this file's location)
 const modules = import.meta.glob<MdModule>(
@@ -107,7 +110,7 @@ for (const [filePath, mod] of Object.entries(modules)) {
 	children.push({
 		title,
 		description,
-		url: `/${routePath}`,
+		url: fm.redirectTo || `/${routePath}`,
 		order,
 		status: fm.status,
 	});
@@ -130,4 +133,4 @@ const teasers = children.map(({ title, description, url }) => ({
 }));
 ---
 
-{teasers.length > 0 && <TeaserCard teasers={teasers} columns={columns} />}
+{teasers.length > 0 && <TeaserCard teasers={teasers} columns={columns} headlineSize="medium" headlineLevel={headlineLevel} />}
