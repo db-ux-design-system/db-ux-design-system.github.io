@@ -2,6 +2,16 @@
 import { DBSection, DBStack, DBCard, DBButton, DBTooltip } from '@db-ux/react-core-components';
 import './InteractiveDemoSection.css';
 import '@template/themes/variables.css';
+
+interface Props {
+	toggleLabel?: string;
+	darkModeLabel?: string;
+}
+
+const {
+	toggleLabel = 'Show B2C Example',
+	darkModeLabel = 'Toggle dark mode',
+} = Astro.props;
 ---
 
 <DBSection width="medium" spacing="medium" id="home--interactive-demo-section">
@@ -9,7 +19,7 @@ import '@template/themes/variables.css';
 		<DBCard spacing="small" className="actionbar">
 			<DBStack direction="row" gap="2x-small">
 				<div class="actionbar-group">
-					<DBButton variant="filled" id="toggle-demo">Show B2C Example</DBButton>
+					<DBButton variant="filled" id="toggle-demo">{toggleLabel}</DBButton>
 				</div>
 				<div class="actionbar-group">
 					<DBButton variant="brand" data-action="theme" data-value="default">
@@ -27,13 +37,13 @@ import '@template/themes/variables.css';
 				</div>
 				<div class="actionbar-group">
 					<DBButton
-						title="Toggle dark mode"
+						title={darkModeLabel}
 						variant="filled"
 						noText="true"
 						icon="moon"
 						id="toggle-mode"
 					>
-						<DBTooltip>Toggle dark mode</DBTooltip>
+						<DBTooltip>{darkModeLabel}</DBTooltip>
 					</DBButton>
 					<a
 						title="Fullscreen"
