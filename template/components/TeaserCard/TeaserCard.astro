@@ -15,6 +15,7 @@ import './TeaserCard.css';
  * | `columns`      | `number`                              | auto-fit  | Fixed column count (1–4). Uses responsive auto-fit when omitted    |
  * | `spacing`      | `'none' \| 'small' \| 'medium' \| 'large'` | `'small'` | Card padding passed to DBCard                                 |
  * | `headlineSize` | `'small' \| 'medium' \| 'large'`      | `'small'` | Headline font size (3xs / 2xs / sm)                                |
+ * | `headlineLevel`| `1 \| 2 \| 3 \| 4 \| 5 \| 6`         | `3`       | Heading level for card titles                                      |
  *
  * ## Teaser Item Props
  *
@@ -62,9 +63,11 @@ interface Props {
 	spacing?: 'none' | 'small' | 'medium' | 'large';
 	/** Headline size inside cards. Defaults to 'small' (headline-3xs). */
 	headlineSize?: 'small' | 'medium' | 'large';
+	/** Heading level for card titles (1–6). Defaults to 3. */
+	headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
-const { teasers, columns, spacing = 'small', headlineSize = 'small' } = Astro.props;
+const { teasers, columns, spacing = 'small', headlineSize = 'small', headlineLevel = 3 } = Astro.props;
 ---
 
 <div class={`teaser-cards${columns ? ` teaser-cards-cols-${columns}` : ''}${headlineSize === 'large' ? ' teaser-cards-large' : headlineSize === 'medium' ? ' teaser-cards-medium' : ''}`}>
@@ -82,13 +85,25 @@ const { teasers, columns, spacing = 'small', headlineSize = 'small' } = Astro.pr
 					imageSrcDark={teaser.imageSrcDark}
 					imageAlt={teaser.imageAlt ?? teaser.title}
 					mask={teaser.mask}
-					headlineLevel={3}
+					headlineLevel={headlineLevel}
 				>
 					{teaser.description}
 				</TextImage>
 			) : (
 				<div class="teaser-content">
-					<h3 class="teaser-title">{teaser.title}</h3>
+					{headlineLevel === 1 ? (
+						<h1 class="teaser-title">{teaser.title}</h1>
+					) : headlineLevel === 2 ? (
+						<h2 class="teaser-title">{teaser.title}</h2>
+					) : headlineLevel === 3 ? (
+						<h3 class="teaser-title">{teaser.title}</h3>
+					) : headlineLevel === 4 ? (
+						<h4 class="teaser-title">{teaser.title}</h4>
+					) : headlineLevel === 5 ? (
+						<h5 class="teaser-title">{teaser.title}</h5>
+					) : (
+						<h6 class="teaser-title">{teaser.title}</h6>
+					)}
 					<p class="teaser-description">{teaser.description}</p>
 				</div>
 			);

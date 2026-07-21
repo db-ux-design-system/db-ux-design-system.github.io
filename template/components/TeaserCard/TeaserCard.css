@@ -52,17 +52,17 @@
 	gap: var(--db-spacing-fixed-xs);
 }
 
-.teaser-cards .db-card h3 {
+.teaser-cards .db-card h2, .teaser-cards .db-card h3 {
 	margin: 0;
 	font: var(--db-type-headline-3xs);
 }
 
-.teaser-cards-medium .db-card h3 {
+.teaser-cards-medium .db-card h2, .teaser-cards-medium .db-card h3 {
 	font: var(--db-type-headline-2xs);
 }
 
 
-.teaser-cards-large .db-card h3 {
+.teaser-cards-large .db-card h2, .teaser-cards-large .db-card h3 {
 	font: var(--db-type-headline-sm);
 }
 

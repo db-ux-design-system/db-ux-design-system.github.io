@@ -74,7 +74,7 @@ const teasers = [
 {
 	noSection ? (
 		<section aria-label={ariaLabel} id="extensions--extensions-section">
-			<TeaserCard teasers={teasers} columns={2} spacing="large" headlineSize="large" />
+			<TeaserCard teasers={teasers} columns={2} spacing="large" headlineSize="large" headlineLevel={2} />
 		</section>
 	) : (
 		<DBSection
@@ -83,7 +83,7 @@ const teasers = [
 			aria-label={ariaLabel}
 			id="extensions--extensions-section"
 		>
-			<TeaserCard teasers={teasers} columns={2} spacing="large" headlineSize="large" />
+			<TeaserCard teasers={teasers} columns={2} spacing="large" headlineSize="large" headlineLevel={2} />
 		</DBSection>
 	)
 }
