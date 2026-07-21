@@ -1,0 +1,214 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Versionierung & Releases'
+headline: 'Versionierung & Releases'
+description: 'Wie das DB UX Design System Semantic Versioning nutzt, um Art und Umfang von Änderungen über Design und Entwicklung hinweg zu kommunizieren.'
+align: start
+order: 7
+toc: true
+---
+
+import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<img
+	src="/assets/documentation/releases/release-types.png"
+	alt="Semantic Versioning Übersicht: v1.2.3 – Major (Breaking Changes), Minor (neue Features, abwärtskompatibel), Patch (Bugfixes, keine API-Änderungen)"
+	style={{ maxWidth: '100%' }}
+/>
+<DBSection spacing="small" width="auto">
+Das DB UX Design System folgt den Prinzipien des **Semantic Versioning** (SemVer): Versionsnummern bestehen aus drei Segmenten – `MAJOR.MINOR.PATCH` – und kommunizieren klar Art und Umfang einer Änderung.
+
+</DBSection>
+
+<DBNotification headline="Versionierung über Design und Entwicklung hinweg" variant='standalone' semantic='informational'>
+
+Major- und Minor-Versionsnummern werden zwischen Design und Entwicklung synchron gehalten. Patches werden separat geführt. Wenn nur eine Seite (Design oder Entwicklung) eine Änderung einführt, wird die gemeinsame Versionsnummer trotzdem für beide erhöht, um Konsistenz zu gewährleisten.
+
+</DBNotification>
+
+<DBSection spacing="small" width="auto">
+
+## Major
+
+Ein Major Release führt **Breaking Changes** ein – Änderungen an der API oder Design-Library, die nicht abwärtskompatibel sind. Nutzer:innen sollten damit rechnen, ihre Implementierungen an die neue API anzupassen.
+
+<DBNotification headline="Kadenz" variant='standalone' showIcon={false}>
+
+Major Releases folgen einem geplanten Zeitplan mit mindestens 2–3 Monaten zwischen den Releases. Der geplante Umfang wird vorab im DB UX Design System Teams-Kanal angekündigt.
+
+</DBNotification>
+
+**Beispiele:**
+
+- Überarbeitung der Farbstruktur oder visuellen Identität
+- Umbenennung von Komponenten-Einstellungen
+- Neue Komponenten, die bestehendes Verhalten verändern
+
+## Minor
+
+Ein Minor Release führt **neue Features und Verbesserungen** ein, ohne die API oder bestehende Funktionalität zu ändern – vollständig abwärtskompatibel.
+
+<DBNotification headline="Kadenz" variant='standalone' showIcon={false}>
+
+Minor Releases orientieren sich am zweiwöchigen Sprint-Zyklus des Teams, können aber übersprungen werden, wenn keine relevanten Änderungen bereitstehen. Einmal im Monat wird ein Zusammenfassungspost im Teams-Kanal veröffentlicht, der alle Releases der vorangegangenen Wochen abdeckt.
+
+</DBNotification>
+
+**Beispiele:**
+
+- Erweiterungen bestehender Komponenten
+- Neue Komponenten ohne Breaking Changes
+
+## Patch
+
+Ein Patch Release enthält **Bugfixes oder sehr kleine Verbesserungen** ohne Auswirkungen auf API oder Funktionalität. Patches werden bei Bedarf außerhalb der regulären Kadenz veröffentlicht.
+
+**Beispiele:**
+
+- Ein Bugfix für eine Komponente ohne Auswirkungen auf andere Features
+
+</DBSection>
+<DBSection spacing="small" width="auto">
+
+## Kommunikationskanäle
+
+<table>
+	<thead>
+		<tr>
+			<th>Kanal</th>
+			<th>Major</th>
+			<th>Minor</th>
+			<th>Patch</th>
+			<th>Inhalt</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+			<DBLink href="https://teams.microsoft.com/l/channel/19%3A7dd9929be1fe494c823b11e0e2d22341%40thread.skype/DB%20UX%20Design%20System?groupId=72c53609-2941-46dd-8be9-e4d1d2c45c77&tenantId=a1a72d9c-49e6-4f6d-9af6-5aafa1183bfd"
+					target="_blank"
+					rel="noopener noreferrer"
+					content="external"
+					text="Teams-Kanal"/>
+
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td></td>
+    		<td>Ankündigungen, monatliche Zusammenfassung</td>
+    	</tr>
+    	<tr>
+    		<td>
+    			<DBLink href="/de/dokumentation/releases/release-notes" text="Release Notes" />
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td></td>
+    		<td>Detailliertes Changelog</td>
+    	</tr>
+    	<tr>
+    		<td>
+    			<DBLink
+    				href="https://github.com/orgs/db-ux-design-system/projects/4/views/12"
+    				target="_blank"
+    				rel="noopener noreferrer"
+    			text="GitHub (Roadmap)"
+    			content="external"
+    				/>
+
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td>Geplanter Umfang & Planung</td>
+    	</tr>
+    	<tr>
+    		<td>
+    			<DBLink
+    				href="https://github.com/db-ux-design-system/core/milestones?state=closed"
+    				target="_blank"
+    				rel="noopener noreferrer"
+
+    				text="GitHub (Design Releases)"
+    				content="external"
+    			/>
+    			Figma-Versionshistorie
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td>Design-Release-Historie</td>
+    	</tr>
+    	<tr>
+    		<td>
+    			<DBLink
+    				href="https://github.com/db-ux-design-system/core-web/milestones?state=closed"
+    				target="_blank"
+    				rel="noopener noreferrer"
+    				text="GitHub (Dev Releases)"
+    				content="external"
+    			/>
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td>
+    			<span data-icon="check" />
+    		</td>
+    		<td>Dev-Release-Historie</td>
+    	</tr>
+    </tbody>
+
+</table>
+</DBSection>
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Release Notes',
+			description: 'Detailliertes Changelog für alle Major und Minor Releases.',
+			url: '/de/dokumentation/releases/release-notes',
+		},
+		{
+			title: 'Migrationsleitfäden',
+			description: 'Schritt-für-Schritt-Anleitungen für das Upgrade zwischen Major-Versionen.',
+			url: '/de/dokumentation/releases/migrationsleitfaeden',
+		},
+		{
+			title: 'Mitwirken',
+			description: 'Beteiligen, Feedback teilen und das Design System verbessern.',
+			url: '/de/dokumentation/mitwirken',
+		},
+	]}
+/>
+
+</DBSection>
