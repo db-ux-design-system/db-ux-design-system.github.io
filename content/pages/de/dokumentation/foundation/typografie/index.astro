@@ -8,8 +8,8 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 // eslint-disable-next-line astro/no-exports-from-components -- Exported for ChildPageOverview glob
 export const frontmatter: DocumentationFrontMatter = {
-	headline: 'Typography',
-	title: 'Typography',
+	headline: 'Typografie',
+	title: 'Typografie',
 	shortDescription: 'Schriftskalen, -stärken und -stile für lesbaren, strukturierten Inhalt.',
 	align: 'start',
 	toc: true,
@@ -30,7 +30,7 @@ const headings = [
 	kommunizieren. Gut gestaltete Typografie verbessert die Lesbarkeit und steigert direkt die
 	Nutzer:innenerfahrung.
 
-	<DBSection spacing="small">
+	<DBSection spacing="small" width="auto">
 		<DBStack gap="x-large">
 			<DBStack gap="none">
 				<h2 id="playground">Playground</h2>
@@ -42,7 +42,7 @@ const headings = [
 		</DBStack>
 	</DBSection>
 
-	<DBSection spacing="small">
+	<DBSection spacing="small" width="auto">
 		<h2 id="richtlinien">Richtlinien</h2>
 
 		<h3>Code Mapping</h3>
@@ -63,12 +63,12 @@ const headings = [
 		</div>
 	</DBSection>
 
-	<DBSection spacing="small">
+	<DBSection spacing="small" width="auto">
 		<h2 id="tokens">Tokens</h2>
 		<TypographyTable />
 	</DBSection>
 
-	<DBSection spacing="small">
+	<DBSection spacing="small" width="auto">
 		<h2 id="faq">FAQ</h2>
 		<QuestionForm componentName="Typography" />
 	</DBSection>

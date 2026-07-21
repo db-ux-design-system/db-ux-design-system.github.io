@@ -1,15 +1,15 @@
 ---
 import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
 import { DBSection, DBStack } from '@db-ux/react-core-components';
-import BorderWidthPlayground from '../../../../documentation/foundation/border-width/_BorderWidthPlayground.astro';
-import BorderWidthTable from '../../../../documentation/foundation/border-width/_BorderWidthTable.astro';
+import SizingPlayground from '../../../../documentation/foundation/sizing/_SizingPlayground.astro';
+import SizingTable from '../../../../documentation/foundation/sizing/_SizingTable.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 // eslint-disable-next-line astro/no-exports-from-components -- Exported for ChildPageOverview glob
 export const frontmatter: DocumentationFrontMatter = {
-	headline: 'Border Width',
-	title: 'Border Width',
-	shortDescription: 'Strichstärken für Umrisse, Trennlinien und interaktive Zustände.',
+	headline: 'Größen',
+	title: 'Größen',
+	shortDescription: 'Konsistente Abmessungen für interaktive Elemente und Container.',
 	align: 'start',
 	toc: true,
 	sectionSpacing: 'small',
@@ -24,43 +24,45 @@ const headings = [
 ---
 
 <DocumentationLayout frontmatter={frontmatter} headings={headings}>
-	Die Border Width definiert die Strichstärken innerhalb des Design Systems und sorgt für ein
-	konsistentes visuelles Erscheinungsbild und eine klare Struktur der Benutzeroberfläche.
+	Sizing bezeichnet die konsistente Verwendung festgelegter Größen für Elemente und Komponenten,
+	unabhängig vom Gerätebildschirm. Feste Größen stellen sicher, dass Layouts ausgewogen bleiben und
+	Komponenten auf Desktop, Tablet und mobilen Geräten leicht wiedererkennbar sind.
 
-	<DBSection spacing="small">
+	<DBSection spacing="small" width="auto">
 		<DBStack gap="x-large">
 			<DBStack gap="none">
 				<h2 id="playground">Playground</h2>
 				<br />
-				Experimentiere mit Border-Width-Tokens, um zu sehen, wie sie die Rahmenstärke beeinflussen.
+				Experimentiere mit Sizing-Tokens, um zu sehen, wie sie über verschiedene Dichten skalieren.
 			</DBStack>
-			<BorderWidthPlayground layout="horizontal" />
+			<SizingPlayground layout="horizontal" />
 		</DBStack>
 	</DBSection>
 
-	<DBSection spacing="small">
+	<DBSection spacing="small" width="auto">
 		<h2 id="tokens">Tokens</h2>
-		<BorderWidthTable />
+		<SizingTable />
 	</DBSection>
 
-	<DBSection spacing="small">
+	<DBSection spacing="small" width="auto">
 		<h2 id="faq">FAQ</h2>
-		<QuestionForm componentName="Border Width" />
+		<QuestionForm componentName="Sizing" />
 	</DBSection>
 
 	<script>
 		import { waitForElements } from '@template/utils/client.utils.ts';
 		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';
 
-		function initBorderWidth(): boolean {
+		function initSizing(): boolean {
 			return handleSimplePlaygrounds({
-				dataAttributeName: 'border-width',
-				tokenPrefix: 'border-width',
+				dataAttributeName: 'size',
+				tokenPrefix: 'sizing',
+				popoverLabel: 'Size',
 				remPx: true,
-				popoverLabel: 'Border Width',
+				withDensity: true,
 			});
 		}
 
-		waitForElements(initBorderWidth);
+		waitForElements(initSizing);
 	</script>
 </DocumentationLayout>

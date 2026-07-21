@@ -31,6 +31,16 @@ const segmentMap: Record<string, string> = {
 	'versioning': 'versionierung',
 	'extensions': 'erweiterungen',
 	'patterns': 'pattern',
+
+	// foundation children
+	'colors': 'farben',
+	'typography': 'typografie',
+	'spacing': 'abstaende',
+	'opacity': 'transparenz',
+	'elevation': 'schattierung',
+	'sizing': 'groessen',
+	'border-radius': 'eckenradius',
+	'border-width': 'strichstaerke',
 };
 
 // Reverse map (DE → EN)

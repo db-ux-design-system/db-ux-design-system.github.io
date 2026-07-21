@@ -10,8 +10,8 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 // eslint-disable-next-line astro/no-exports-from-components -- Exported for ChildPageOverview glob
 export const frontmatter: DocumentationFrontMatter = {
-	headline: 'Spacing',
-	title: 'Spacing',
+	headline: 'Abstände',
+	title: 'Abstände',
 	shortDescription: 'Rhythmus- und Abstands-Tokens für Layout und Komponenteninterna.',
 	align: 'start',
 	toc: true,
@@ -32,7 +32,7 @@ const headings = [
 	verschiedenen Komponenten. Die konsistente Verwendung von Spacing sorgt für ein harmonisches,
 	übersichtliches und nutzer:innenfreundliches Erscheinungsbild.
 
-	<DBSection spacing="small">
+	<DBSection spacing="small" width="auto">
 		<DBStack gap="x-large">
 			<DBStack gap="none">
 				<h2 id="playground">Playground</h2>
@@ -43,7 +43,7 @@ const headings = [
 		</DBStack>
 	</DBSection>
 
-	<DBSection spacing="small">
+	<DBSection spacing="small" width="auto">
 		<h2 id="richtlinien">Richtlinien</h2>
 
 		<CollapsibleWrapper collapsedHeight="320px">
@@ -84,12 +84,12 @@ const headings = [
 		<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
 	</DBSection>
 
-	<DBSection spacing="small">
+	<DBSection spacing="small" width="auto">
 		<h2 id="tokens">Tokens</h2>
 		<SpacingTable />
 	</DBSection>
 
-	<DBSection spacing="small">
+	<DBSection spacing="small" width="auto">
 		<h2 id="faq">FAQ</h2>
 		<QuestionForm componentName="Spacing" />
 	</DBSection>

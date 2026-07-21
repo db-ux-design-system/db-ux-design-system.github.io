@@ -144,14 +144,31 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 		const unix = key.replace(/\\/g, '/');
 		const stripped = unix.replace(/^.*content\/pages\/de\//, '');
 		const deRel = stripped
-			.replace(/(?:\/index\.(md|mdx)|^index\.(md|mdx))$/, '')
-			.replace(/\.(md|mdx)$/, '');
+			.replace(/(?:\/index\.(md|mdx|astro)|^index\.(md|mdx|astro))$/, '')
+			.replace(/\.(md|mdx|astro)$/, '');
 		// Translate DE slug back to EN so it matches the EN navigation keys
 		const rel = toEnSlug(deRel);
 		const fm = mod.frontmatter ?? mod.default?.frontmatter ?? ({} as NavigationFrontmatter);
 		if (fm.title) {
 			deTitles.set(rel, fm.title);
 		}
+	}
+
+	// Fallback: DE titles for .astro pages (not available in client bundle via glob)
+	const astroTitlesFallback: Record<string, string> = {
+		'documentation/foundation/colors': 'Farben',
+		'documentation/foundation/typography': 'Typografie',
+		'documentation/foundation/spacing': 'Abstände',
+		'documentation/foundation/opacity': 'Transparenz',
+		'documentation/foundation/elevation': 'Schattierung',
+		'documentation/foundation/sizing': 'Größen',
+		'documentation/foundation/border-radius': 'Eckenradius',
+		'documentation/foundation/border-width': 'Strichstärke',
+		'documentation/icons': 'Icons',
+		'documentation/releases/release-notes': 'Release Notes',
+	};
+	for (const [key, title] of Object.entries(astroTitlesFallback)) {
+		if (!deTitles.has(key)) deTitles.set(key, title);
 	}
 
 	const nodes = new Map<string, NavigationItem>();

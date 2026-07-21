@@ -1,15 +1,15 @@
 ---
 import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
 import { DBSection, DBStack } from '@db-ux/react-core-components';
-import OpacityPlayground from '../../../../documentation/foundation/opacity/_OpacityPlayground.astro';
-import OpacityTable from '../../../../documentation/foundation/opacity/_OpacityTable.astro';
+import ElevationPlayground from '../../../../documentation/foundation/elevation/_ElevationPlayground.astro';
+import ElevationTable from '../../../../documentation/foundation/elevation/_ElevationTable.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 // eslint-disable-next-line astro/no-exports-from-components -- Exported for ChildPageOverview glob
 export const frontmatter: DocumentationFrontMatter = {
-	headline: 'Opacity',
-	title: 'Opacity',
-	shortDescription: 'Transparenzstufen für deaktivierte Zustände und Overlays.',
+	headline: 'Schattierung',
+	title: 'Schattierung',
+	shortDescription: 'Schatten- und Ebenen-Tokens für visuelle Tiefe und Hierarchie.',
 	align: 'start',
 	toc: true,
 	sectionSpacing: 'small',
@@ -24,44 +24,44 @@ const headings = [
 ---
 
 <DocumentationLayout frontmatter={frontmatter} headings={headings}>
-	Opacity-Tokens bestimmen die Transparenz von Elementen in unserem Design System und beeinflussen
-	visuelle Tiefe und Lesbarkeit. Durch sorgfältige Abstufungen der Transparenz können wesentliche
-	Informationen hervorgehoben und sekundäre Inhalte abgeschwächt werden.
+	Elevations sind ein wichtiges Werkzeug in unserem Design System, um visuelle Hierarchie und Tiefe
+	zu erzeugen. Durch die Schaffung visueller Ebenen helfen wir Nutzer:innen, schnell und einfach zu
+	verstehen, welche Elemente wichtiger sind als andere.
 
-	<DBSection spacing="small">
+	<DBSection spacing="small" width="auto">
 		<DBStack gap="x-large">
 			<DBStack gap="none">
 				<h2 id="playground">Playground</h2>
 				<br />
-				Experimentiere mit Opacity-Tokens, um zu sehen, wie Transparenz visuelle Elemente
-				beeinflusst.
+				Experimentiere mit Elevation-Tokens, um zu sehen, wie die Schattentiefe die visuelle
+				Hierarchie beeinflusst.
 			</DBStack>
-			<OpacityPlayground layout="horizontal" />
+			<ElevationPlayground layout="horizontal" />
 		</DBStack>
 	</DBSection>
 
-	<DBSection spacing="small">
+	<DBSection spacing="small" width="auto">
 		<h2 id="tokens">Tokens</h2>
-		<OpacityTable />
+		<ElevationTable />
 	</DBSection>
 
-	<DBSection spacing="small">
+	<DBSection spacing="small" width="auto">
 		<h2 id="faq">FAQ</h2>
-		<QuestionForm componentName="Opacity" />
+		<QuestionForm componentName="Elevation" />
 	</DBSection>
 
 	<script>
 		import { waitForElements } from '@template/utils/client.utils.ts';
 		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';
 
-		function initOpacity(): boolean {
+		function initElevation(): boolean {
 			return handleSimplePlaygrounds({
-				dataAttributeName: 'opacity',
-				tokenPrefix: 'opacity',
-				popoverLabel: 'Opacity',
+				dataAttributeName: 'elevation',
+				tokenPrefix: 'elevation',
+				popoverLabel: 'Elevation',
 			});
 		}
 
-		waitForElements(initOpacity);
+		waitForElements(initElevation);
 	</script>
 </DocumentationLayout>
