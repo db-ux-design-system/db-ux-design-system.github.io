@@ -5,9 +5,11 @@ import SizingPlayground from './_SizingPlayground.astro';
 import SizingTable from './_SizingTable.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-const frontmatter: DocumentationFrontMatter = {
+// eslint-disable-next-line astro/no-exports-from-components -- Exported for ChildPageOverview glob
+export const frontmatter: DocumentationFrontMatter = {
 	headline: 'Sizing',
 	title: 'Sizing',
+	shortDescription: 'Consistent dimensions for interactive elements and containers.',
 	align: 'start',
 	toc: true,
 	sectionSpacing: 'small',

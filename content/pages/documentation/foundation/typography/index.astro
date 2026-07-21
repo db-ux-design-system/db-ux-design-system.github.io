@@ -6,9 +6,11 @@ import TypographyTable from './_TypographyTable.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-const frontmatter: DocumentationFrontMatter = {
+// eslint-disable-next-line astro/no-exports-from-components -- Exported for ChildPageOverview glob
+export const frontmatter: DocumentationFrontMatter = {
 	headline: 'Typography',
 	title: 'Typography',
+	shortDescription: 'Type scales, weights, and styles for readable, structured content.',
 	align: 'start',
 	toc: true,
 	sectionSpacing: 'small',
