@@ -15,7 +15,7 @@ const LanguageSwitch = () => {
 	return (
 		<DBPopover
 			trigger={
-				<DBButton variant="ghost" icon="globe">
+				<DBButton type="button" variant="ghost" icon="globe">
 					{language.toUpperCase()}
 				</DBButton>
 			}

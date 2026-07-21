@@ -56,6 +56,7 @@ function ShellContent({
 			<DBControlPanelDesktop brand={<Brand />} primaryActions={<PrimaryActions />} secondaryActions={<SecondaryActions />}>
 				<MainNavigation />
 			</DBControlPanelDesktop>
+			{/* eslint-disable-next-line db-ux/control-panel-mobile-burger-menu-label-required */}
 			<DBControlPanelMobile
 				burgerMenuLabel={t('shell.menu')}
 				brand={<Brand />}

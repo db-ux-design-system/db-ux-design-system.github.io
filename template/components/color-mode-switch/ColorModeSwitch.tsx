@@ -9,6 +9,7 @@ const ColorModeSwitch = () => {
 
 	return (
 		<DBSwitch
+			label={t('shell.colorModeToggle')}
 			checked={isDark}
 			visualAid
 			icon="sun"
