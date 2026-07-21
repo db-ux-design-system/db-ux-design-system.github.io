@@ -20,15 +20,13 @@ const LanguageSwitch = () => {
 				</DBButton>
 			}
 		>
-			<nav aria-label="Language selection">
-				<ul>
-					<DBControlPanelNavigationItem active={language === 'en'}>
-						<a href={enPath}>English</a>
-					</DBControlPanelNavigationItem>
-					<DBControlPanelNavigationItem active={language === 'de'}>
-						<a href={dePath}>Deutsch</a>
-					</DBControlPanelNavigationItem>
-				</ul>
+			<nav aria-label="Language selection" style={{ width: '100%' }}>
+				<DBControlPanelNavigationItem active={language === 'en'} style={{ width: '100%' }}>
+					<a href={enPath}>English</a>
+				</DBControlPanelNavigationItem>
+				<DBControlPanelNavigationItem active={language === 'de'} style={{ width: '100%' }}>
+					<a href={dePath}>Deutsch</a>
+				</DBControlPanelNavigationItem>
 			</nav>
 		</DBPopover>
 	);
