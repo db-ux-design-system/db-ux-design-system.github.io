@@ -1,0 +1,302 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'v1.0'
+headline: 'Migration zu v1.0'
+description: 'Das Update auf v1.0 führt die ersten stabilen Komponenten ein, bereitet weitere Komponenten auf den stabilen Status vor und enthält grundlegende Änderungen an Inhalten. Dies betrifft sowohl Foundation als auch Components.'
+align: start
+order: 0
+toc: true
+---
+
+import { DBSection, DBNotification } from '@db-ux/react-core-components';
+import StatusNotification from '@template/components/StatusNotification/StatusNotification';
+import YourAction from '@template/components/YourAction/YourAction';
+import CardTeaserRow from "@template/components/CardTeaser/CardTeaserRow";
+
+<DBSection spacing="small" width="auto">
+
+## 💻 Development Release
+
+Bitte beachte die Hinweise auf [GitHub](https://github.com/db-ux-design-system/core-web/releases/tag/v1.0.0).
+
+## 🎨 Design Release
+
+Der folgende Migrations-Leitfaden konzentriert sich primär auf **Figma**. Einige Änderungen werden, wo möglich und sinnvoll, auch in Sketch übernommen (insbesondere Property Alignment).
+Das Sketch-Library-Update auf v1.0.0 folgt.
+
+## GitHub-Umbenennung
+
+Alles rund um das DB UX Design System v3 wurde auf GitHub korrekt umbenannt:
+
+- Von https://github.com/db-ui/design-feedback zu https://github.com/db-ux-design-system/core
+- Von https://github.com/db-ui/mono zu https://github.com/db-ux-design-system/core-web
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## 🚀 Von Beta zu Stable!
+
+Die folgenden Komponenten erhalten mit dem v1.0.0 Release den Status „Stable" und haben den vollständigen Komponentenerstellungsprozess inklusive aller Tests für Usability und Barrierefreiheit durchlaufen.
+
+<StatusNotification status="stable" variant="long" />
+
+- Badge
+- Button
+- Checkbox
+- Drawer
+- Infotext
+- Input
+- Link
+- Notification
+- Radio
+- Select
+- Textarea
+
+</DBSection>
+
+<img
+	src="/assets/migration-guides/v1/migration-stable-components.png"
+	alt="Stabile Komponenten"
+	style={{ maxWidth: '100%' }}
+/>
+
+<DBSection spacing="small" width="auto">
+
+## Komponenten: Bugfixes (Figma)
+
+Die folgenden Bugfixes erfordern besondere Aufmerksamkeit. Alle weiteren behobenen Bugs findest du im Issue-Teaser am Ende der Seite.
+
+### Radio, Input und Textarea
+
+- Die veralteten Varianten (❌ pink markiert) wurden entfernt.
+
+</DBSection>
+<YourAction
+	actions={['Ersetze alle noch platzierten Varianten, die mit dem v1.0.0 Release entfernt wurden.']}
+/>
+<DBSection spacing="small" width="auto">
+
+## Komponenten: Property Alignment
+
+### Allgemein
+
+Das mit v0.6.0 begonnene Property Alignment zwischen Design und Code wurde für weitere Komponenten fortgeführt.
+
+- **Betroffene Komponenten:**
+  - Accordion
+  - Card
+  - Divider
+  - Navigation
+  - Popover
+  - Section
+  - Switch
+  - Tag
+  - Tooltip
+
+- **Konsistenz und neue Properties:**
+  Alle Subkomponenten innerhalb einer übergeordneten Komponente wurden vereinheitlicht.
+
+- **Neue Development Properties (💻)**
+  Properties, die für die Entwicklung eingeführt wurden, sind mit 💻 markiert (z. B. Prefix, Component, No Text, Children, Placement).
+
+- **Design-spezifische Properties (🎨)**
+  Properties, die nur für das Design relevant sind, sind mit 🎨 markiert.
+
+- **Neue Varianten und Booleans:**
+  - **Disabled Property (true/false):** Als dedizierte Variante eingeführt, Interaction State = None
+  - **Readonly Property (true/false):** Als dedizierte Variante eingeführt, Interaction State = None
+  - **true/false** für verschiedene Properties, die einen Zustand anzeigen
+
+- **Verbesserte Barrierefreiheit:**
+  - **Text Property für Screenreader:** Komponenten ohne sichtbaren Text (z. B. Icon Button, Icon Tag, Badge ohne Text) enthalten nun eine versteckte Text-Property für Screenreader.
+
+- **Kleinere Anpassungen bei Property-Namen**, z. B.:
+  - „Width: Auto Width/Full Width" → „Width: Auto/Full" (z. B. Button)
+  - „🎨 xxx" → „Show xxx" (verschiedene Komponenten)
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+### Komponenten
+
+- **Popover**
+  - Neben Auto Width gibt es nun eine Variante für Fixed Width-Verhalten mit einer maximalen Breite
+  - Ein zusätzliches Spacing wurde ergänzt (lg)
+
+- **Section**
+  - Bestehende Breiten wurden in T-Shirt-Größen umbenannt und durch eine Small-Variante ergänzt
+  - Size wurde in Spacing umbenannt und durch eine None-Variante ergänzt
+
+- **Tag**
+  - Die zusätzliche **Emphasis „Origin" wurde hinzugefügt.**
+    Sie ermöglicht eine barrierefreie Verwendung des Tags mit einer lebendigeren Farbstufe aus der Farbpalette.
+
+    <img
+    	src="/assets/migration-guides/v1/migration-tag-origin.png"
+    	alt="Tag Emphasis Origin"
+    	style={{ maxWidth: '100%' }}
+    />
+
+  - Die **Farben und Farblogik** über die verschiedenen Tag-Varianten wurden **angepasst und vereinheitlicht.** Vielen Dank für euer Feedback dazu! (siehe Rework Foundation → Color Variables)
+
+    <img
+    	src="/assets/migration-guides/v1/migration-tag-colors.png"
+    	alt="Tag-Farben"
+    	style={{ maxWidth: '100%' }}
+    />
+
+  - Ein **Slot wurde im Inhaltsbereich** des Tags hinzugefügt, um eine flexiblere Integration von eigenen Inhalten zu ermöglichen. **Bitte beachte die Dokumentation zur korrekten Verwendung!**
+
+    <img
+    	src="/assets/migration-guides/v1/migration-tag-slot.png"
+    	alt="Tag Slot-Inhalt"
+    	style={{ maxWidth: '100%' }}
+    />
+
+  - Die **Interactive-Variante** des Tags wurde **strukturell und inhaltlich überarbeitet:** - **Aufteilung des Interactive Tags in zwei Varianten** basierend auf dem Verhalten: - **Interactive Toggle** (ehemals Interactive): Diese Variante bildet das Verhalten des Tags als Checkbox oder Radio ab und zeigt die Zustände „Not selected" (checked = false) und „Selected" (checked = true) - **Interactive** (neu): Diese Variante bildet das Verhalten des Tags als Button oder Link ab
+
+            - Für **Interactive Toggle** wurden die beiden Zustände „Not selected" (checked = false) und „Selected" (checked = true) für eine bessere Usability der Komponente zusammengeführt.
+
+            - Ein (optionales) **Checked Status Icon wurde hinzugefügt**. Es ermöglicht eine bessere Unterscheidung zwischen dem Interactive Toggle Tag und dem Static Tag bei paralleler Verwendung innerhalb einer Anwendung.
+
+    <img
+    	src="/assets/migration-guides/v1/migration-tag-interactive.png"
+    	alt="Tag Interactive-Varianten"
+    	style={{ maxWidth: '100%' }}
+    />
+
+<YourAction
+	actions={[
+		'Überprüfe deine Layouts und aktualisiere Komponenten, die durch die Änderungen möglicherweise nicht mehr korrekt sind.',
+		'Wenn du den Interactive Tag als Button oder Link verwendest, ersetze ihn durch die neu erstellte Interactive Tag-Variante. Die bisherige Interactive Tag-Variante wurde mit diesem Update in den Interactive Toggle Tag umgewandelt.',
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Rework Foundations
+
+### Variable Modes (Figma)
+
+- Entfernung veralteter „Density"-Modi wie ❌ **Tablet-XXX** und ❌ **Mobile-XXX.**
+- Umbenennung von „Display Mode" zu „Mode"
+
+### Color Variables
+
+- Die **Auswahl der Markenfarben als Origin-Farben** wurde überarbeitet und harmonisiert, indem nicht nur Level 500, sondern verschiedene passende Abstufungen gewählt wurden. Alle Origin-Farben wurden angepasst, um **Barrierefreiheitsanforderungen und Komponentenverwendung** zu erfüllen und eine **konsistente Farbdarstellung von Origin- und On-Origin-Farben** sicherzustellen, insbesondere durch die Kombination dunkler Farben auf hellen Hintergründen. Dies erreicht eine **konsistente Darstellung** für alle semantischen und zusätzlichen Farben und **verbessert die Unterscheidbarkeit von Brand Red.**
+
+<img
+	src="/assets/migration-guides/v1/migration-tag-origin-farben.png"
+	alt="Origin-Farben Übersicht"
+	style={{ maxWidth: '100%' }}
+/>
+
+</DBSection>
+
+<YourAction
+	actions={[
+		'Überprüfe deine Layouts und aktualisiere fehlende Einstellungen auf die neuen Variable Modes, falls du entfernte Modi noch nicht ersetzt hattest.',
+	]}
+/>
+
+<DBSection spacing="small" width="auto">
+
+## Umstrukturierung der Icon Libraries
+
+- **Zusammenführung der bestehenden funktionalen Icon Libraries** „Core Icons" und „Extension PV Icons" in eine einzige Datei für Design und Entwicklung
+  → **DB Theme Icons** inklusive aller Core Icons und PV Icons
+
+<img
+	src="/assets/migration-guides/v1/migration-icons.png"
+	alt="Zusammenführung der Icon Libraries"
+	style={{ maxWidth: '100%' }}
+/>
+
+- ❗ **Hinweis für Figma Libraries:** Es gibt Icons in der PV Extension Library, die Duplikate sind und bereits unter anderen Namen in der Core Library existieren (z. B. Ticket/Passenger → Human/Person, Transport/Walking → Transport/Pedestrian). Diese sind nun als deprecated markiert und müssen manuell durch das entsprechende Icon aus der neuen Library ersetzt werden. Alle markierten Icons sollten unter ihrem alten Namen in der zusammengeführten Datei noch auffindbar sein. Nicht enthaltene Libraries werden migriert und sollten verlinkt bleiben.
+
+<img
+	src="/assets/migration-guides/v1/migration-icons-deprecated.png"
+	alt="Veraltete Icons"
+	style={{ maxWidth: '100%' }}
+/>
+
+- Die folgenden Icons sind deprecated und müssen ersetzt werden:
+  - **Facilities → Human**
+    - Restricted Mobility Toilet, Shower, Shower Men, Shower Women, Sink, WC, WC Men, WC Sign, WC Women
+  - **Features**
+    - Medical → Medial/Medical Cross
+    - No Smoking → Human/Cigarette Disabled
+    - Person with Blind Cane, Person with Rollator → Accessibility/Person with Blind Cane, Accessibility/Person with Rollator
+    - Power Socket → Technology/Power Socket
+    - Restaurant → Food/Knife & Fork
+    - Stroller → Human/Stroller
+    - Support Dog → Accessibility/Support Dog
+  - **Journey**
+    - Journey Destination → Map/Map Pin
+  - **Seat → Compartment**
+    - Handicapped → Accessibility/Person with Wheelchair
+    - Infant Compartment → Human/Toys
+  - **Station → Buildings**
+    - Train Station, Market
+  - **Sustainability → Environment**
+    - Environmental Mobility Check → Environmental/Leaf
+  - **Ticket:**
+    - Best Price → Social/Crown
+    - Passenger, Passengers → Human/Person, Persons
+    - QR Code, QR Code Scan → Technology/QR Code, QR Code Scan
+    - Travel Insurance → Security/Shield Check
+  - **Transportation → Transportation** (Ausnahmen: S-Bahn, Subway)
+    - Airplane
+    - Bicycle → Bike
+    - Bicycle Trailer → Bike Trailer
+    - Car
+    - Electric Car
+    - Electric Scooter
+    - Speedboat → Boat
+    - Handcart
+    - ICE → Train
+    - Local Bus → Bus
+    - S-Bahn → Logos/S-Bahn
+    - Scooter
+    - Subway → Logos/Subway
+    - Taxi
+    - Train and Car
+    - Walking → Pedestrian
+
+- Die veraltete PV Icon Library wird mit dem nächsten Release v1.1.0 deaktiviert.
+
+<YourAction
+	actions={[
+		'Überprüfe deine Layouts und ersetze alle als deprecated markierten Icons aus der PV Icon Library durch die entsprechenden Icons aus der neuen DB Theme Icons-Datei.',
+	]}
+/>
+
+</DBSection>
+<DBSection spacing="small" width="auto">
+<CardTeaserRow
+	items={[
+		{
+			title: 'Design + Code Issues v1.0.0',
+			description: 'Alle Informationen zum aktuellen Design System Release auf GitHub.',
+			url: 'https://github.com/orgs/db-ux-design-system/projects/4/views/12?filterQuery=has%3Amilestone+-label%3A%F0%9F%96%BC%EF%B8%8Ficons+milestone%3A%221.0.0+%28Stable+Release%29%22',
+			image: '/assets/teasers/github.png',
+			imageAlt: 'GitHub',
+			label: 'Auf GitHub ansehen', external: true,
+		},
+		{
+			title: 'Feedback willkommen',
+			description: 'Melde dich, wenn du auf unerwartete Probleme stößt oder Unterstützung benötigst.',
+			url: '/de/dokumentation/contribution',
+			image: '/assets/teasers/feedback.png',
+			imageAlt: 'Contribution',
+			label: 'Kontakt aufnehmen',
+		},
+	]}
+/>
+</DBSection>

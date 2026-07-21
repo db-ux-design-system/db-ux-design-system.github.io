@@ -1,0 +1,238 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'v5.0'
+headline: 'Migration zu v5.0'
+description: 'Das Update auf v5.0 führt überarbeitete Drawer-, Accordion- und CustomSelect-Komponenten ein, entfernt in v4.6 als deprecated markierte Komponenten und vereinheitlicht die Standard-Slot-Sichtbarkeit in Card und Popover.'
+align: start
+order: 4
+toc: true
+tocMaxDepth: 3
+---
+
+import { DBSection, DBNotification } from '@db-ux/react-core-components';
+import YourAction from '@template/components/YourAction/YourAction';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import CardTeaserRow from "@template/components/CardTeaser/CardTeaserRow";
+
+<DBSection spacing="small" width="auto">
+
+## 💻 Development Release
+
+Bitte beachte die Hinweise auf <a href="https://github.com/db-ux-design-system/core-web/releases/tag/v5.0.0" target="_blank" rel="noopener noreferrer">GitHub</a>.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## 🎨 Design Release
+
+Alle in diesem Release enthaltenen Issues sind am Ende der Seite verlinkt.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+### Refactoring
+
+Das folgende Refactoring erfordert besondere Aufmerksamkeit. Bestehende Instanzen müssen nach dem Update überprüft werden.
+
+<DBNotification semantic="critical" variant="standalone" headline="Wichtig">
+Kopiere alle Inhalte aus deinen Instanzen **bevor du die Komponenten aktualisierst** – Updates können bestehende Inhalte zurücksetzen.
+</DBNotification>
+
+<YourAction
+	actions={[
+		'1. Überprüfe alle Instanzen von Accordion, Drawer und CustomSelect in deinen Designs.',
+		'2. Kopiere alle Inhalte, die zuvor als Helfer-Komponenten eingefügt waren.',
+		'3. Aktualisiere die Komponenten-Instanzen.',
+		'4. Füge die kopierten Inhalte in den neuen Children Slot ein.',
+	]}
+/>
+
+#### Accordion
+
+- **Children Slot ersetzt _🛟 Accordion List_ Helfer-Komponente:** Accordion Items werden nun direkt über den Slot im Accordion platziert.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=175-129&embed-host=share"
+		description="Schritt 1: Kopiere den Inhalt aus der Accordion List vor dem Update."
+		fullWidth
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=45-3159&embed-host=share"
+		description="Schritt 2: Aktualisiere die Komponente und lösche den Standard-Children-Inhalt."
+		fullWidth
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=175-132&embed-host=share"
+		description="Schritt 3: Füge die kopierten Accordion Items in den Children Slot ein."
+		fullWidth
+	/>
+</div>
+
+#### CustomSelect
+
+- **Children Slots ersetzen _🛟 CustomSelect List_ und _🛟 CustomSelect Tag List_ Helfer-Komponenten:** List Items und Tag Items werden nun direkt über die jeweiligen Slots im CustomSelect platziert.
+
+**🛟 CustomSelect List**
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=45-62&embed-host=share"
+		description="Schritt 1: Kopiere den Inhalt aus der CustomSelect List vor dem Update."
+		fullWidth
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=45-78&embed-host=share"
+		description="Schritt 2: Aktualisiere die Komponente und lösche den Standard-Children-Inhalt."
+		fullWidth
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=45-87&embed-host=share"
+		description="Schritt 3: Füge die kopierten List Items in den Children Slot ein."
+		fullWidth
+	/>
+</div>
+
+**🛟 CustomSelect Tag List**
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=38-3466&embed-host=share"
+		description="Schritt 1: Kopiere den Inhalt aus der CustomSelect Tag List vor dem Update."
+		fullWidth
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=45-53&embed-host=share"
+		description="Schritt 2: Aktualisiere die Komponente und lösche den Standard-Children-Inhalt."
+		fullWidth
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=45-56&embed-host=share"
+		description="Schritt 3: Füge die kopierten Tag Items in den Children Slot ein."
+		fullWidth
+	/>
+</div>
+
+#### Drawer
+
+- **Standardisierte Layout-Struktur:** Die Drawer-Komponente wurde mit vereinheitlichten Subkomponenten (DrawerHeader + DrawerFooter) und Standard-Containergrößen (small, medium, large, full, custom) überarbeitet. Bisherige Drawer-Komponenten werden durch die neue Version ersetzt.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=38-3254&embed-host=share"
+		description="Schritt 1: Kopiere den Inhalt aus den Drawer Children vor dem Update."
+		fullWidth
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=45-92&embed-host=share"
+		description="Schritt 2: Aktualisiere die Komponente und lösche den Standard-Children-Inhalt."
+		fullWidth
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=45-101&embed-host=share"
+		description="Schritt 3: Füge die kopierten Inhalte in den neuen Children Slot ein."
+		fullWidth
+	/>
+</div>
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+### Verfeinerungen
+
+Die folgenden Verfeinerungen erfordern besondere Aufmerksamkeit. Bestehende Instanzen müssen nach dem Update überprüft werden.
+
+
+
+#### Card & Popover
+
+- **Standard-Slot-Sichtbarkeit an Systemstandard angeglichen:** Der „Start Slot" und „End Slot" sind nun standardmäßig ausgeblendet (Show Slot = false), wenn sie leer sind – entsprechend dem Standardverhalten aller Komponenten. Wenn deine Designs auf sichtbare Start- oder End-Slots mit Inhalt angewiesen sind, müssen diese nach dem Update wieder aktiviert werden.
+
+<YourAction
+	actions={[
+		'1. Überprüfe alle Card- und Popover-Instanzen, die Start Slot- oder End Slot-Inhalte verwenden.',
+		'2. Aktiviere die Slot-Sichtbarkeit (Show Slot = true) erneut, wo Start- oder End-Inhalte benötigt werden.',
+	]}
+/>
+
+#### Scrollbar
+
+- **Scrollbar verwendet nun die Resizer-Komponente:** Die Scrollbar verwendet intern die neue Resizer Helfer-Komponente. Wenn du die Scrollbar-Griffgröße oder freie Position angepasst hast (z. B. in einem CustomSelect Dropdown), werden diese Änderungen nach dem Update zurückgesetzt.
+
+<YourAction
+	actions={[
+		'1. Überprüfe alle Instanzen, in denen die Scrollbar angepasst wurde (Griffgröße, freie Position), z. B. in CustomSelect Dropdowns.',
+		'2. Wende individuelle Scrollbar-Anpassungen nach dem Update erneut an.',
+	]}
+/>
+
+#### Tooltip
+
+- **Resizer-Ebene entfernt:** Die Resizer-Ebene wurde aus der Tooltip-Komponente entfernt. Wenn der Arrow außermittig positioniert war, muss die Position nach dem Update ggf. erneut gesetzt werden.
+
+<YourAction
+	actions={[
+		'1. Überprüfe alle Tooltip-Instanzen, bei denen der Arrow nicht zentriert ist.',
+		'2. Passe die Arrow-Position nach dem Update bei Bedarf erneut an.',
+	]}
+/>
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+### Entfernt
+
+Die folgenden Komponenten und Subkomponenten wurden in v4.6 als deprecated markiert und sind nun vollständig entfernt. Falls du noch nicht migriert hast, ist sofortiges Handeln erforderlich.
+
+#### Slot Helfer-Komponenten (Accordion Item & Tag)
+
+- **Veraltete Slot-Helfer-Subkomponenten entfernt:** Die dedizierten Slot-Helfer-Komponenten für Accordion Item und Tag wurden entfernt. Verwende stattdessen den nativen Figma-Slot-Mechanismus direkt.
+
+<YourAction
+	actions={[
+		'1. Identifiziere alle verbleibenden Instanzen, die den veralteten Slot-Helfer in Accordion Item oder Tag verwenden.',
+		'2. Ersetze sie durch die aktuellen Komponentenversionen mit nativen Figma-Slots.',
+		'3. In den meisten Fällen kannst du den Inhalt, der zuvor in einer lokalen Komponente war, direkt in den Slot platzieren, ohne die lokale Komponente zu verwenden.',
+	]}
+/>
+
+#### Card, Popover, Drawer & Section
+
+- **Veraltete Komponentenvarianten entfernt:** Die alten Komponentenvarianten (mit Slot-Helfer-Komponente) wurden entfernt. Verwende stattdessen die aktuellen Versionen mit nativen Figma-Slots.
+
+<YourAction
+	actions={[
+		'1. Identifiziere alle verbleibenden Instanzen von ❌ Card, ❌ Popover, ❌ Drawer oder ❌ Section (Deprecated) in deinen Designs.',
+		'2. Ersetze sie durch die aktuellen Komponentenversionen mit nativen Figma-Slots.',
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+<CardTeaserRow
+	items={[
+		{
+			title: 'Design + Code Issues v5.0.0',
+			description: 'Alle Informationen zum aktuellen Design System Release auf GitHub.',
+			url: 'https://github.com/orgs/db-ux-design-system/projects/4/views/12?filterQuery=has%3Amilestone+-label%3A%F0%9F%96%BC%EF%B8%8Ficons+milestone%3A5.0.0',
+			image: '/assets/teasers/github.png',
+			imageAlt: 'GitHub',
+			label: 'Auf GitHub ansehen', external: true,
+		},
+		{
+			title: 'Feedback willkommen',
+			description: 'Melde dich, wenn du auf unerwartete Probleme stößt oder Unterstützung benötigst.',
+			url: '/de/dokumentation/contribution',
+			image: '/assets/teasers/feedback.png',
+			imageAlt: 'Contribution',
+			label: 'Kontakt aufnehmen',
+		},
+	]}
+/>
+</DBSection>
