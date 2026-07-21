@@ -4,11 +4,12 @@
 # Default for all files
 * @nmerget @michaelmkraus @mfranzke
 
-# Documentation markdown files and their potential screenshots
+# Documentation & Steering markdown files and their potential screenshots
 /content/pages/documentation/**/*.md @leape @sissihamel @TOberpaul @LSchroff @nmerget @michaelmkraus @mfranzke
 /content/pages/documentation/**/*.mdx @leape @sissihamel @TOberpaul @LSchroff @nmerget @michaelmkraus @mfranzke
 /tests/**/*.png @leape @sissihamel @TOberpaul @LSchroff @nmerget @michaelmkraus @mfranzke
 /static/assets/ @leape @sissihamel @TOberpaul @LSchroff @nmerget @michaelmkraus @mfranzke
+/.kiro/steering/*.md @leape @sissihamel @TOberpaul @LSchroff @nmerget @michaelmkraus @mfranzke
 # The following two settings allow auto approvals by the bot for dependabot patch dependency updates
 package.json
 pnpm-lock.yaml

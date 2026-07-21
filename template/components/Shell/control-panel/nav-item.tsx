@@ -16,6 +16,7 @@ const getStatusBadge = (status?: string) => {
 		beta: { semantic: 'informational', label: 'Beta' },
 		deprecated: { semantic: 'critical', label: 'Deprecated' },
 		legacy: { semantic: 'warning', label: 'Legacy' },
+		sub: { semantic: 'neutral', label: 'Sub' },
 	}[status];
 
 	if (!config) return null;
@@ -39,7 +40,8 @@ const NavItem = ({
 	status,
 	externalUrl,
 	protected: isProtected,
-}: NavigationItem) => {
+	parentStatus,
+}: NavigationItem & { parentStatus?: string }) => {
 	const { language } = useLanguage();
 	const displayTitle = (language === 'de' && titleDe) ? titleDe : title;
 	const localePath = (p: string | undefined) => {
@@ -82,6 +84,7 @@ const NavItem = ({
 			{ path, title, icon, iconTrailing, children, isSubNavigation },
 			toEnSlug(window.location.pathname.replace(/^\/de\//, '').replace(/^\/de$/, '')),
 		);
+
 	if (isSubNavigation) {
 		const target = path ?? getFirstChildPath(children);
 
@@ -107,16 +110,20 @@ const NavItem = ({
 		return (
 			<DBControlPanelNavigationItemGroup
 				text={displayTitle}
+				endSlot={getStatusBadge(status)}
 				key={`router-group-${path ?? title}`}
 				aria-disabled={disabled ? 'true' : undefined}
 				expanded={isActive}
 			>
 				{children.map((sub) => (
-					<NavItem key={`router-sub-${sub.path ?? sub.title}`} {...sub} />
+					<NavItem key={`router-sub-${sub.path ?? sub.title}`} {...sub} parentStatus={status} />
 				))}
 			</DBControlPanelNavigationItemGroup>
 		);
 	}
+
+	// For leaf items inside a group: only show badge if it differs from parent
+	const effectiveStatus = parentStatus && status === parentStatus ? undefined : status;
 
 	return (
 		<DBControlPanelNavigationItem
@@ -130,7 +137,7 @@ const NavItem = ({
 				style={{ display: 'flex', alignItems: 'center', width: '100%' }}
 			>
 				{displayTitle}
-				{lockIcon || getStatusBadge(status)}
+				{lockIcon || getStatusBadge(effectiveStatus)}
 			</a>
 		</DBControlPanelNavigationItem>
 	);

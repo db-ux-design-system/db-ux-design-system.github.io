@@ -1,0 +1,96 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Tab Panel'
+title: 'Tab Panel'
+description: 'The Tab Panel subcomponent provides the content area that displays when a corresponding tab is selected. Only one panel is visible at a time.'
+align: start
+toc: true
+status: 'sub'
+subParent: 'Tabs'
+order: 3
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Displays content associated with the currently active Tab Item
+- Positioned below the Tab List (horizontal) or beside it (vertical)
+- Can hold any type of content including text, forms, tables, or other components
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards path="?path=/docs/components-dbtabs-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Tab-in-Tab
+
+Nesting a Tab component inside a Tab Panel creates orientation problems and increases complexity. Keep the content hierarchy flat within panels.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=4025-6&embed-host=share"
+		description="Use a single Tab level and organize panel content with headings or sections instead of nested Tabs."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=4025-8&embed-host=share"
+		description="Do not place another Tab component inside a Tab Panel – users lose track of which level they are navigating."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Tab Panel" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Tabs',
+			description: 'Parent component that hosts the Tab Panel',
+			url: '/documentation/components/tabs/tabs',
+		},
+		{
+			title: 'Tab List',
+			description: 'Container that holds all Tab Items',
+			url: '/documentation/components/tabs/tab-list',
+		},
+		{
+			title: 'Tab Item',
+			description: 'Individual clickable tab that activates this panel',
+			url: '/documentation/components/tabs/tab-item',
+		},
+	]}
+/>
+
+</DBSection>

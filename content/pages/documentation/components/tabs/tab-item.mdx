@@ -1,0 +1,113 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Tab Item'
+title: 'Tab Item'
+description: 'The Tab Item subcomponent represents a single clickable tab within the Tab List. It displays a label and optionally additional content through the Children slot.'
+align: start
+toc: true
+status: 'sub'
+subParent: 'Tabs'
+order: 4
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Displays a text label identifying the associated panel content
+- Supports a Children slot for additional elements like a Badge
+- Shows the active indicator (horizontal or vertical) depending on orientation
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards path="?path=/docs/components-dbtabs-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Labels
+
+Use short, descriptive labels that clearly name the tab content. Long or vague labels reduce scannability and cause truncation issues in overflow scenarios.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=1-1132&embed-host=share"
+		description='Use concise labels like "Overview", "Settings", "Activity" that fit on a single line.'
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=1-1133&embed-host=share"
+		description="Do not use full sentences or vague terms as labels – they truncate unpredictably and slow down scanning."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=4025-20&embed-host=share"
+		description="Slot Content: The Children slot supports additional elements like a Badge to show item counts or status indicators alongside the label."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=4025-16&embed-host=share"
+		description="Truncation: In vertical orientation, long labels are truncated when they exceed the available width. A Tooltip shows the full label on hover."
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Tab Item" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Tabs',
+			description: 'Parent component that hosts all tab-related subcomponents',
+			url: '/documentation/components/tabs/tabs',
+		},
+		{
+			title: 'Tab List',
+			description: 'Container that holds all Tab Items',
+			url: '/documentation/components/tabs/tab-list',
+		},
+		{
+			title: 'Badge',
+			description: 'Used within the Children slot to show counts or status',
+			url: '/documentation/components/badge',
+		},
+	]}
+/>
+
+</DBSection>

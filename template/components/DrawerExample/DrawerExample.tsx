@@ -1,11 +1,11 @@
 import { DBDrawer } from '@db-ux/react-core-components';
 import { useState, useEffect } from 'react';
 
-type DrawerDirection = 'left' | 'right' | 'up' | 'down' | 'custom';
+type DrawerDirection = 'to-left' | 'to-right' | 'up' | 'down';
 type DrawerBackdrop = 'none' | 'strong' | 'weak' | 'invisible';
 
 export default function DrawerExample({
-	direction = 'right',
+	direction = 'to-right',
 	backdrop = 'strong',
 }: {
 	direction?: DrawerDirection;
@@ -58,7 +58,7 @@ export default function DrawerExample({
 			direction={currentDirection}
 			backdrop={currentBackdrop}
 			onClose={() => setOpen(false)}
-			drawerHeader={<header>Drawer Title</header>}
+			header={<header>Drawer Title</header>}
 		>
 			<p>This is the drawer content. You can add any content here.</p>
 		</DBDrawer>

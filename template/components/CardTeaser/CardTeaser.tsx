@@ -7,7 +7,7 @@ export interface CardTeaserProps {
 	url: string;
 	image: string;
 	imageAlt: string;
-	label: string;
+	label?: string;
 	external?: boolean;
 	protected?: boolean;
 }
@@ -41,12 +41,14 @@ const CardTeaser = ({
 					<div className="card-teaser-body">
 						<strong className="card-teaser-title">{title}</strong>
 						<span className="card-teaser-description">{description}</span>
+						{label && (
 						<strong
 							className="card-teaser-label"
 							data-icon-trailing={external ? 'arrow_up_right' : 'arrow_right'}
 						>
 							{label}
 						</strong>
+					)}
 					</div>
 					<img src={image} alt={imageAlt} className="card-teaser-image" loading="lazy" />
 				</div>

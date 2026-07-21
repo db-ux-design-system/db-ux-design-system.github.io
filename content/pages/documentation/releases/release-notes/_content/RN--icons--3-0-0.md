@@ -5,10 +5,16 @@ version: 'v3.0.0'
 date: '2025-09-01'
 ---
 
-### Features Design + Code
+### Design & Development
 
-- Consolidation of code and design library
-- added: 10 icons (GitLab) and 4 icons (Figma)
-- changed: 3 icons
-- fixed: 1 icon
-- removed: 2 icons (GitLab)
+#### Changed
+- Icons: Code and design library have been consolidated.
+
+#### Added
+- Icons: 10 new icons have been added (GitLab) and 4 new icons (Figma).
+
+#### Fixed
+- Icons: 1 icon has been corrected.
+
+#### Removed
+- Icons: 2 icons have been removed (GitLab).

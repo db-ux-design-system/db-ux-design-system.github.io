@@ -5,6 +5,7 @@ sectionWidth: 'auto'
 headline: 'Tooltip'
 title: 'Tooltip'
 description: 'Tooltip provides brief, contextual information on hover or focus without interrupting the user flow. It is best for clarifying icons, truncated text, or unfamiliar UI controls, and should not contain critical or lengthy content.'
+shortDescription: 'Brief, contextual information on hover or focus without interrupting flow.'
 align: start
 toc: true
 status: 'stable'
@@ -17,6 +18,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 - Explain the meaning of an icon-only control (e.g., "Download", "Copy link")
@@ -27,34 +29,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 ## Resources
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'TBD',
-			url: '#',
-			icon: 'react',
-		},
-		{
-			title: 'Vue',
-			description: 'TBD',
-			url: '#',
-			icon: 'vue',
-		},
-		{
-			title: 'Angular',
-			description: 'TBD',
-			url: '#',
-			icon: 'angular',
-		},
-		{
-			title: 'Web Components',
-			description: 'TBD',
-			url: '#',
-			icon: 'html5',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbtooltip-density--docs" />
 
 </DBSection>
 
@@ -145,6 +120,8 @@ Place tooltips close to the trigger and avoid covering what the user is trying t
 <CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
 
 </DBSection>
+
+<FigmaLearnTeaser componentName="Tooltip" />
 
 <DBSection spacing="small" width="auto">
 

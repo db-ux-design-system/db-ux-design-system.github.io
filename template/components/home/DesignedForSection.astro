@@ -40,25 +40,71 @@ const {
 	aria-label="How the system supports your work section"
 	id="home--designed-for-section"
 >
-	<SectionTitle title={sectionTitle} description={sectionDescription} />
+	<SectionTitle
+		title={sectionTitle}
+		description={sectionDescription}
+	/>
 	<div class="cards-row-fixed">
-		<a href={`${appConfig.basePath}${linkPrefix}products-and-services/for-productmanagement`} aria-label={pmTag}>
+		<a
+			href={`${appConfig.basePath}${linkPrefix}products-and-services/for-productmanagement`}
+			aria-label="Open for productmanagement page"
+		>
 			<DBCard behavior="interactive" data-color="violet" spacing="large">
-				<TextImage imagePosition="top" contentAlign="end" imageWidth="33" title={pmTitle} imageSrc={`${appConfig.basePath}assets/for-productmanagement/Efficient-Delivery--Lightmode--C.png`} imageSrcDark={`${appConfig.basePath}assets/for-productmanagement/Efficient-Delivery--Darkmode--C.png`} imageAlt={pmTitle} mask="fade-bottom-right" headlineLevel={3} tag={{ label: pmTag, emphasis: 'strong' }}>
+				<TextImage
+					imagePosition="top"
+					contentAlign="end"
+					imageWidth="33"
+					title={pmTitle}
+					imageSrc={`${appConfig.basePath}assets/for-productmanagement/Efficient-Delivery--Lightmode--C.png`}
+					imageSrcDark={`${appConfig.basePath}assets/for-productmanagement/Efficient-Delivery--Darkmode--C.png`}
+					imageAlt="Efficient Delivery"
+					mask="fade-bottom-right"
+					headlineLevel={3}
+					tag={{ label: pmTag, emphasis: 'strong' }}
+				>
 					{pmText}
 				</TextImage>
 			</DBCard>
 		</a>
-		<a href={`${appConfig.basePath}${linkPrefix}products-and-services/for-developer`} aria-label={devTag}>
+		<a
+			href={`${appConfig.basePath}${linkPrefix}products-and-services/for-developer`}
+			aria-label="Open for developer page"
+		>
 			<DBCard behavior="interactive" data-color="green" spacing="large">
-				<TextImage imagePosition="top" contentAlign="end" imageWidth="33" title={devTitle} imageSrc={`${appConfig.basePath}assets/for-developer/Predictable-Maintenance--Lightmode--C.png`} imageSrcDark={`${appConfig.basePath}assets/for-developer/Predictable-Maintenance--Darkmode--C.png`} imageAlt={devTitle} mask="fade-bottom-right" headlineLevel={3} tag={{ label: devTag, emphasis: 'strong' }}>
+				<TextImage
+					imagePosition="top"
+					contentAlign="end"
+					imageWidth="33"
+					title={devTitle}
+					imageSrc={`${appConfig.basePath}assets/for-developer/Predictable-Maintenance--Lightmode--C.png`}
+					imageSrcDark={`${appConfig.basePath}assets/for-developer/Predictable-Maintenance--Darkmode--C.png`}
+					imageAlt="Predictable Maintenance"
+					mask="fade-bottom-right"
+					headlineLevel={3}
+					tag={{ label: devTag, emphasis: 'strong' }}
+				>
 					{devText}
 				</TextImage>
 			</DBCard>
 		</a>
-		<a href={`${appConfig.basePath}${linkPrefix}products-and-services/for-designer`} aria-label={designTag}>
+
+		<a
+			href={`${appConfig.basePath}${linkPrefix}products-and-services/for-designer`}
+			aria-label="Open for designer page"
+		>
 			<DBCard behavior="interactive" data-color="blue" spacing="large">
-				<TextImage imagePosition="top" contentAlign="end" imageWidth="33" title={designTitle} imageSrc={`${appConfig.basePath}assets/for-designer/Flexible-Choices--Lightmode--C.png`} imageSrcDark={`${appConfig.basePath}assets/for-designer/Flexible-Choices--Darkmode--C.png`} imageAlt={designTitle} mask="fade-bottom-right" headlineLevel={3} tag={{ label: designTag, emphasis: 'strong' }}>
+				<TextImage
+					imagePosition="top"
+					contentAlign="end"
+					imageWidth="33"
+					title={designTitle}
+					imageSrc={`${appConfig.basePath}assets/for-designer/Flexible-Choices--Lightmode--C.png`}
+					imageSrcDark={`${appConfig.basePath}assets/for-designer/Flexible-Choices--Darkmode--C.png`}
+					imageAlt="Flexible Choices"
+					mask="fade-bottom-right"
+					headlineLevel={3}
+					tag={{ label: designTag, emphasis: 'strong' }}
+				>
 					{designText}
 				</TextImage>
 			</DBCard>

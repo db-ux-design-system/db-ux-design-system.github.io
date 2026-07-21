@@ -5,36 +5,26 @@ version: 'v4.6.0'
 date: '2026-04-09'
 ---
 
-### Features Design
+### Design
 
-**feat: new component variants with Figma slot feature for Card, Popover and Section**
+#### Added
+- Card, Popover, Section: New component variants using the Figma slot feature have been introduced. Place your content directly inside the slot instead of using the separate slot component.
 
-- This release introduces **new variants using the Figma slot feature** for the three components. The old component variants using the slot component have been marked as **❌ deprecated**.
-- All **❌ deprecated variants** will be removed in release **v6.0.0**.
-- **How to prepare for breaking changes in v6.0.0**:
+#### Deprecated
+- Card, Popover, Section: The old variants using the slot component have been marked as deprecated and will be removed in v5.0.0.
+  - Migration: Replace all deprecated variants with the new component and place your content inside the slot.
 
-  Replace all ❌ deprecated variants of Card, Popover and Section with the new component and place your content inside the slot.
+### Development
 
-### Features Development
+#### Added
+- MCP Server: The new package [`@db-ux/mcp-server`](https://www.npmjs.com/@db-ux/mcp-server) connects AI coding assistants (e.g. Amazon Q, GitHub Copilot, Claude) directly with the DB UX Design System. It provides component APIs, framework-specific code examples, design tokens, and icon names as a single source of truth. Pre-built AI workflows for scaffolding, code reviews, migration, and accessibility audits are included.
+- Vite Plugin: The new package [`@db-ux/core-vite-plugin`](https://www.npmjs.com/package/@db-ux/core-vite-plugin) ensures only the styles actually used in your app are included. Requires `@db-ux/core-foundations` >= 4.6.0.
+- PostCSS Plugin: The new package [`@db-ux/core-postcss-plugin`](https://www.npmjs.com/package/@db-ux/core-postcss-plugin) resolves all `--db-` variables and properties as much as possible, writing e.g. color hex values directly into custom properties. This eliminates most variable references and mitigates dev tools issues with newer Chromium browsers. Works independently of other package versions.
 
-**MCP Server**
+#### Changed
+- Foundations: The whitelabel theme fallback has been removed – modern bundlers don't include it in the output, so no action is required if you're using the DB Theme.
+- Tailwind v4: Variables now use <a href="https://tailwindcss.com/docs/theme#referencing-other-variables" target="_blank" rel="noopener noreferrer">@theme inline</a>, which significantly reduces the number of additional variables. No action required.
 
-- New package `@db-ux/mcp-server`: A Model Context Protocol (MCP) server that connects AI coding assistants (e.g. Amazon Q, GitHub Copilot, Claude) directly with the DB UX Design System.
-- The server provides component APIs, framework-specific code examples, design tokens and icon names as a single source of truth — so AI agents don't hallucinate component names, props or color values.
-- It also offers pre-built AI workflows for scaffolding, code reviews, migration and accessibility audits.
-
-**Dev tools issues in the browser**
-
-- There are currently issues with newer Chromium browsers resolving CSS variables/properties in the dev tools.
-- We provide several solutions to address this:
-  - We removed the whitelabel theme as a fallback — this should only have been present during development anyway, since modern bundlers don't include it in the output. **No action required if you're using the db-theme.**
-  - Tailwind v4: We use <a href="https://tailwindcss.com/docs/theme#referencing-other-variables" target="_blank" rel="noopener noreferrer">@theme inline</a>, which saves a significant number of additional variables. **No action required.**
-  - Vite: We released a new package <a href="https://www.npmjs.com/package/@db-ux/core-vite-plugin" target="_blank" rel="noopener noreferrer">@db-ux/core-vite-plugin</a>. It ensures only the styles actually used in your app are included. **Note:** We can't test every setup, so please give us early feedback. **You need to install and integrate the plugin; @db-ux/core-foundations > 4.6.0 is required.**
-
-- **Especially important:**
-  - PostCSS: We released a new package <a href="https://www.npmjs.com/package/@db-ux/core-postcss-plugin" target="_blank" rel="noopener noreferrer">@db-ux/core-postcss-plugin</a>. It resolves all `--db-` variables and properties as much as possible. For example, color hex values are written directly into `--db-neutral-bg-basic-level-1-default`. This means almost no variables or properties are referenced anymore. **Note:** We can't test every setup, so please give us early feedback. **You need to install and integrate the plugin; other package versions don't need to be < 4.6.0.**
-
-### Bugfixes Development
-
-- DBInput/DBTextarea: `undefined` as `value` is now correctly supported. Additionally, numeric input values are no longer cleared when entering a decimal separator.
-- DBDrawer: Custom `max-width`/`max-height` values were being overridden by internal `min-width` rules — fixed. A positioning issue with nested fixed elements (e.g. DBCustomSelect dropdowns) inside the Drawer has also been corrected.
+#### Fixed
+- Input, Textarea: `undefined` as `value` is now correctly supported. Numeric input values are no longer cleared when entering a decimal separator.
+- Drawer: Custom `max-width`/`max-height` values are no longer overridden by internal `min-width` rules. A positioning issue with nested fixed elements (e.g. Custom Select dropdowns) inside the Drawer has also been corrected.

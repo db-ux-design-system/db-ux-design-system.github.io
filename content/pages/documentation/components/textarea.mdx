@@ -5,6 +5,7 @@ sectionWidth: 'auto'
 headline: 'Textarea'
 title: 'Textarea'
 description: 'Textarea lets users enter and review longer, multi-line text in forms and dialogs. It should be clearly labeled, sized to the expected content, and provide helpful guidance and validation feedback when needed.'
+shortDescription: 'Lets users enter and review longer, multi-line text.'
 align: start
 toc: true
 status: 'stable'
@@ -17,6 +18,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 - Capture longer free-text input (e.g., feedback, comments, descriptions)
@@ -27,34 +29,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 ## Resources
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'TBD',
-			url: '#',
-			icon: 'react',
-		},
-		{
-			title: 'Vue',
-			description: 'TBD',
-			url: '#',
-			icon: 'vue',
-		},
-		{
-			title: 'Angular',
-			description: 'TBD',
-			url: '#',
-			icon: 'angular',
-		},
-		{
-			title: 'Web Components',
-			description: 'TBD',
-			url: '#',
-			icon: 'html5',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbtextarea-density--docs" />
 
 </DBSection>
 
@@ -145,6 +120,8 @@ Helper text prevents errors (format, tone, limits). Validation messages explain 
 <CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
 
 </DBSection>
+
+<FigmaLearnTeaser componentName="Textarea" />
 
 <DBSection spacing="small" width="auto">
 

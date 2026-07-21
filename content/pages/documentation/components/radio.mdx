@@ -5,6 +5,7 @@ sectionWidth: 'auto'
 headline: 'Radio'
 title: 'Radio'
 description: 'Radio lets users select exactly one option from a set of mutually exclusive choices. It supports clear comparison between options and should be used when seeing all choices at once helps users decide.'
+shortDescription: 'Lets users select exactly one option from a set of mutually exclusive choices.'
 align: start
 status: 'stable'
 toc: true
@@ -17,6 +18,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
@@ -119,6 +121,8 @@ Prefer vertical stacking for readability and accessibility. Use horizontal layou
 <CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
 
 </DBSection>
+
+<FigmaLearnTeaser componentName="Radio" />
 
 <DBSection spacing="small" width="auto">
 
