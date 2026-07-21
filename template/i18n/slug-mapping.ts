@@ -10,6 +10,7 @@ const segmentMap: Record<string, string> = {
 	'products-and-services': 'produkte-und-services',
 	'about-us': 'ueber-uns',
 	'legal': 'rechtliches',
+	'documentation': 'dokumentation',
 
 	// products-and-services children
 	'components': 'komponenten',
@@ -21,6 +22,13 @@ const segmentMap: Record<string, string> = {
 	// legal children
 	'imprint': 'impressum',
 	'privacy': 'datenschutz',
+
+	// documentation children
+	'get-started': 'erste-schritte',
+	'learn': 'lernen',
+	'contribution': 'mitwirken',
+	'resources': 'ressourcen',
+	'versioning': 'versionierung',
 };
 
 // Reverse map (DE → EN)

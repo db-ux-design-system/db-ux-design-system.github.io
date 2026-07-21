@@ -81,7 +81,7 @@ import DefaultLayout from '@template/layouts/default';
 			const href = `/demo-${currentDemo}`;
 			iframe.src = href;
 			fullscreenAnchor.href = href;
-			toggle.textContent = currentDemo === 'b2b' ? 'B2C Beispiel' : 'B2B Beispiel';
+			toggle.textContent = currentDemo === 'b2b' ? 'B2C' : 'B2B';
 		});
 
 		toggleMode.addEventListener('click', () => {
