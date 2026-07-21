@@ -1,0 +1,113 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Tab Item'
+title: 'Tab Item'
+description: 'Die Tab-Item-Subkomponente repräsentiert einen einzelnen klickbaren Tab innerhalb der Tab List. Sie zeigt ein Label und optional zusätzliche Inhalte über den Children-Slot an.'
+align: start
+toc: true
+status: 'sub'
+subParent: 'Tabs'
+order: 4
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Zeigt ein Text-Label an, das den zugehörigen Panel-Inhalt identifiziert
+- Unterstützt einen Children-Slot für zusätzliche Elemente wie ein Badge
+- Zeigt den aktiven Indikator (horizontal oder vertikal) abhängig von der Ausrichtung
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbtabs-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Labels
+
+Verwende kurze, aussagekräftige Labels, die den Tab-Inhalt klar benennen. Lange oder vage Labels verringern die Übersichtlichkeit und verursachen Abschneide-Probleme bei Overflow-Szenarien.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=1-1132&embed-host=share"
+		description="Verwende prägnante Labels wie Overview, Settings, Activity, die in eine einzelne Zeile passen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=1-1133&embed-host=share"
+		description="Keine ganzen Sätze oder vagen Begriffe als Labels verwenden – sie werden unvorhersehbar abgeschnitten und verlangsamen das Scannen."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Beispiele
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=4025-20&embed-host=share"
+		description="Slot-Inhalt: Der Children-Slot unterstützt zusätzliche Elemente wie ein Badge, um Anzahlen oder Status-Indikatoren neben dem Label anzuzeigen."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=4025-16&embed-host=share"
+		description="Abschneiden: Bei vertikaler Ausrichtung werden lange Labels abgeschnitten, wenn sie die verfügbare Breite überschreiten. Ein Tooltip zeigt das vollständige Label bei Hover."
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Tab Item" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Tabs',
+			description: 'Übergeordnete Komponente, die alle Tab-Subkomponenten enthält',
+			url: '/de/dokumentation/komponenten/tabs/tabs',
+		},
+		{
+			title: 'Tab List',
+			description: 'Container, der alle Tab Items enthält',
+			url: '/de/dokumentation/komponenten/tabs/tab-list',
+		},
+		{
+			title: 'Badge',
+			description: 'Wird im Children-Slot verwendet, um Anzahlen oder Status anzuzeigen',
+			url: '/de/dokumentation/komponenten/badge',
+		},
+	]}
+/>
+
+</DBSection>
