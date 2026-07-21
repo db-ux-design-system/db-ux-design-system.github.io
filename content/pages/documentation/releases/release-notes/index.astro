@@ -12,6 +12,7 @@ type ReleaseNote = {
 	Content: MarkdownInstance<any>['Content'];
 };
 
+// eslint-disable-next-line astro/no-exports-from-components -- Exported for ChildPageOverview glob
 export const frontmatter = {
 	order: 0,
 	layout: '@template/layouts/documentation',
