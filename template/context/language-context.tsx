@@ -9,19 +9,21 @@ interface LanguageContextValue {
 
 const LanguageContext = createContext<LanguageContextValue | undefined>(undefined);
 
-function getLanguageFromUrl(): Language {
-	if (typeof window === 'undefined') return 'en';
-	if (window.location.pathname.startsWith('/de/') || window.location.pathname === '/de') {
-		return 'de';
-	}
-	return 'en';
+function deriveLanguage(pathname?: string): Language {
+	const path = pathname ?? (typeof window !== 'undefined' ? window.location.pathname : '/');
+	return path.startsWith('/de/') || path === '/de' ? 'de' : 'en';
 }
 
-export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-	const language = useMemo(getLanguageFromUrl, []);
+interface LanguageProviderProps {
+	pathname?: string;
+	children: ReactNode;
+}
+
+export const LanguageProvider = ({ pathname, children }: LanguageProviderProps) => {
+	const language = useMemo(() => deriveLanguage(pathname), [pathname]);
 
 	const toggleLanguage = () => {
-		const currentPath = window.location.pathname;
+		const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/';
 
 		if (language === 'en') {
 			window.location.href = '/de' + currentPath;

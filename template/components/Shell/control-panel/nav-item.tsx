@@ -6,6 +6,7 @@ import {
 import { getAriaCurrent } from '@template/utils/client.utils.ts';
 import { covers, getFirstChildPath, trimExtension } from '@template/utils/navigation.utils.ts';
 import { useLanguage } from '@template/context/language-context';
+import { toDeSlug, toEnSlug } from '@template/i18n/slug-mapping';
 
 const getStatusBadge = (status?: string) => {
 	if (!status || status === 'stable') return null;
@@ -44,7 +45,7 @@ const NavItem = ({
 	const localePath = (p: string | undefined) => {
 		if (!p) return p;
 		const trimmed = trimExtension(p);
-		return language === 'de' ? `/de/${trimmed}` : trimmed;
+		return language === 'de' ? `/de/${toDeSlug(trimmed)}` : trimmed;
 	};
 	const lockIcon = isProtected ? (
 		<span
@@ -79,7 +80,7 @@ const NavItem = ({
 		typeof window !== 'undefined' &&
 		covers(
 			{ path, title, icon, iconTrailing, children, isSubNavigation },
-			window.location.pathname.replace(/^\/de/, ''),
+			toEnSlug(window.location.pathname.replace(/^\/de\//, '').replace(/^\/de$/, '')),
 		);
 	if (isSubNavigation) {
 		const target = path ?? getFirstChildPath(children);

@@ -1,3 +1,5 @@
+import { toEnSlug } from '@template/i18n/slug-mapping';
+
 type NavigationFrontmatter = FrontMatter & {
 	hidePage?: boolean;
 	isSubNavigation?: boolean;
@@ -141,9 +143,11 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 	for (const [key, mod] of Object.entries(deModules)) {
 		const unix = key.replace(/\\/g, '/');
 		const stripped = unix.replace(/^.*content\/pages\/de\//, '');
-		const rel = stripped
+		const deRel = stripped
 			.replace(/(?:\/index\.(md|mdx)|^index\.(md|mdx))$/, '')
 			.replace(/\.(md|mdx)$/, '');
+		// Translate DE slug back to EN so it matches the EN navigation keys
+		const rel = toEnSlug(deRel);
 		const fm = mod.frontmatter ?? mod.default?.frontmatter ?? ({} as NavigationFrontmatter);
 		if (fm.title) {
 			deTitles.set(rel, fm.title);

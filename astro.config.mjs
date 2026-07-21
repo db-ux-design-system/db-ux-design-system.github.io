@@ -21,9 +21,6 @@ export default defineConfig({
 		routing: {
 			prefixDefaultLocale: false,
 		},
-		fallback: {
-			de: 'en',
-		},
 	},
 	integrations: [
 		react({}),

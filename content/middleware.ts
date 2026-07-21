@@ -1,17 +1,23 @@
 import { defineMiddleware } from 'astro:middleware';
+import { toEnSlug } from '@template/i18n/slug-mapping';
 
 /**
- * Middleware that handles i18n fallback in dev mode.
- * When a /de/... page doesn't exist, redirects to the EN version.
- * In production builds, Astro's built-in fallback config handles this.
+ * i18n fallback middleware.
+ *
+ * When a /de/... page doesn't exist (404), rewrites to the EN version
+ * by translating the DE slug back to EN.
+ * The user stays on the /de/ URL and sees the English content as fallback.
+ *
+ * In production (static build), fallback is handled by the catch-all route
+ * at content/pages/de/[...slug].astro which generates redirect pages.
  */
 export const onRequest = defineMiddleware(async (context, next) => {
 	const response = await next();
 
-	// Only intercept 404s on /de/ routes
 	if (response.status === 404 && context.url.pathname.startsWith('/de/')) {
-		const enPath = context.url.pathname.replace(/^\/de/, '') || '/';
-		return context.redirect(enPath, 302);
+		const dePath = context.url.pathname.replace(/^\/de\//, '');
+		const enPath = '/' + toEnSlug(dePath);
+		return context.rewrite(enPath);
 	}
 
 	return response;

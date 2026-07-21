@@ -6,12 +6,13 @@ const currentPath = Astro.url?.pathname ?? '';
 const isDE = currentPath.startsWith('/de/') || currentPath === '/de';
 const imprintLabel = isDE ? 'Impressum' : 'Imprint';
 const privacyLabel = isDE ? 'Datenschutz' : 'Privacy';
-const linkPrefix = isDE ? '/de' : '';
+const imprintHref = isDE ? '/de/rechtliches/impressum' : '/legal/imprint';
+const privacyHref = isDE ? '/de/rechtliches/datenschutz' : '/legal/privacy';
 ---
 
 <footer class="footer">
 	<DBStack direction="row" gap="medium">
-		<DBLink variant="inline" href={`${linkPrefix}/legal/imprint`}> {imprintLabel} </DBLink>
-		<DBLink variant="inline" href={`${linkPrefix}/legal/privacy`}> {privacyLabel} </DBLink>
+		<DBLink variant="inline" href={imprintHref}> {imprintLabel} </DBLink>
+		<DBLink variant="inline" href={privacyHref}> {privacyLabel} </DBLink>
 	</DBStack>
 </footer>

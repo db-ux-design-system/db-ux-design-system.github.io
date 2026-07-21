@@ -27,7 +27,7 @@ export function Shell({ children, pathname = '/', subNavigationVariant }: Props)
 	 * */
 
 	return (
-		<LanguageProvider>
+		<LanguageProvider pathname={pathname}>
 		<ColorModeProvider>
 			<ShellContent subNavigationVariant={subNavigationVariant} subNavigation={subNavigation}>
 				{children}
