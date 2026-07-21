@@ -109,7 +109,7 @@ const { teasers, columns, spacing = 'small', headlineSize = 'small' } = Astro.pr
 						{cardContent}
 					</DBCard>
 					{teaser.external && (
-						<span class="visually-hidden">(opens in new tab)</span>
+						<span data-visually-hidden="true">(opens in new tab)</span>
 					)}
 				</a>
 			) : (
