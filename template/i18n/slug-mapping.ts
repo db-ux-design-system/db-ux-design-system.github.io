@@ -29,6 +29,8 @@ const segmentMap: Record<string, string> = {
 	'contribution': 'mitwirken',
 	'resources': 'ressourcen',
 	'versioning': 'versionierung',
+	'extensions': 'erweiterungen',
+	'patterns': 'pattern',
 };
 
 // Reverse map (DE → EN)
