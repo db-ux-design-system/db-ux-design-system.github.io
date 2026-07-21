@@ -41,7 +41,8 @@ export const LanguageProvider = ({ pathname, children }: LanguageProviderProps) 
 export const useLanguage = (): LanguageContextValue => {
 	const ctx = useContext(LanguageContext);
 	if (!ctx) {
-		throw new Error('useLanguage must be used inside a LanguageProvider');
+		// Fallback for components used outside LanguageProvider (e.g. in DemoShell)
+		return { language: 'en', toggleLanguage: () => {} };
 	}
 	return ctx;
 };

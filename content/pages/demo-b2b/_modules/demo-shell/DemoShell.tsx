@@ -1,6 +1,5 @@
 import { type PropsWithChildren, type ReactElement } from 'react';
 import { ColorModeProvider } from '@template/context/color-mode-context';
-import { LanguageProvider } from '@template/context/language-context';
 import { ThemeProvider } from '@template/context/theme-context';
 import {
 	DBShell,
@@ -39,12 +38,10 @@ function DemoShellContent({ children }: PropsWithChildren): ReactElement {
 
 export function DemoShell({ children }: PropsWithChildren): ReactElement {
 	return (
-		<LanguageProvider>
 		<ThemeProvider>
 			<ColorModeProvider>
 				<DemoShellContent>{children}</DemoShellContent>
 			</ColorModeProvider>
 		</ThemeProvider>
-		</LanguageProvider>
 	);
 }
