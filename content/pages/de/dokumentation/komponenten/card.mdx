@@ -1,0 +1,177 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Card'
+title: 'Card'
+description: 'Cards gruppieren zusammengehoerige Inhalte auf einer abgegrenzten Flaeche, um das Scannen zu verbessern und eine klare visuelle Struktur zu schaffen. Sie koennen statisch zur Inhaltsgruppierung oder interaktiv als Einstiegspunkt zu tieferen Inhalten verwendet werden, sollten aber einfach und konsistent bleiben.'
+shortDescription: 'Gruppiert zusammengehoerige Inhalte auf einer abgegrenzten Flaeche fuer visuelle Struktur.'
+align: start
+status: 'beta'
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+- Zusammengehoerige Informationen und Aktionen in einem einzelnen, scannbaren Block gruppieren
+- Mehrere Items in einem Grid/einer Liste konsistenter Flaechen darstellen (Card-Gruppen)
+- Eine interaktive Vorschau bereitstellen, die zu Details verlinkt (interaktive Card)
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbcard-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+    ## Playground
+
+    <ComponentPlayground component="card" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Gruppierung
+
+Cards verwenden, wenn Inhalte zusammengehoeren und von einer eigenen Flaeche profitieren. Nicht alles in Cards verpacken – zu viele Cards reduzieren Hierarchie und Lesbarkeit.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/2mqTMWDvKZPz91u1XrztAA/Doku--Card?node-id=1-1132&embed-host=share"
+		description="Cards verwenden, um eine kleine Gruppe zusammengehoeriger Aktionen zu buendeln."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/2mqTMWDvKZPz91u1XrztAA/Doku--Card?node-id=1-1133&embed-host=share"
+		description="Nicht jedes einzelne UI-Element in eine Card verpacken – das erzeugt unnoetige visuelle Unruhe."
+	/>
+</div>
+
+### Statisch oder interaktiv
+
+Statische Cards dienen der Gruppierung, interaktive Cards der Navigation oder Auswahl. Wenn eine Card interaktiv ist, muss das gesamte Muster konsistent sein und klickbar wirken.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/2mqTMWDvKZPz91u1XrztAA/Doku--Card?node-id=3-1110&embed-host=share"
+		description="Interaktive Cards deutlich klickbar gestalten und ein konsistentes Interaktionsmuster pro Liste/Grid anwenden."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/2mqTMWDvKZPz91u1XrztAA/Doku--Card?node-id=3-1112&embed-host=share"
+		description="Klickbare und nicht-klickbare Cards in derselben Gruppe nicht ohne klare Unterscheidung mischen."
+	/>
+</div>
+
+### Inhalt-Ausrichtung
+
+In Card-Gruppen Inhalte konsistent ausrichten (Ueberschriften, Medien, Aktionen), um das Scannen zu unterstuetzen. Gleiche Hoehen nur erzwingen, wenn es die Vergleichbarkeit verbessert – ansonsten den Inhalt natuerlich wachsen lassen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/2mqTMWDvKZPz91u1XrztAA/Doku--Card?node-id=3-1113&embed-host=share"
+		description="Titel und primaere Aktionen konsistent ueber alle Cards im selben Grid ausrichten."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/2mqTMWDvKZPz91u1XrztAA/Doku--Card?node-id=3-1114&embed-host=share"
+		description="Nicht jede Card ein anderes internes Layout verwenden lassen – das erschwert das Scannen des Grids."
+	/>
+</div>
+
+### Card vs. Liste
+
+Listen fuer dichte, vergleichbare Zeilen und schnelles Scannen verwenden. Cards einsetzen, wenn Inhalte Gruppierung, Hierarchie oder reichhaltigere Darstellung benoetigen (Medien, Metadaten, Aktionen).
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/2mqTMWDvKZPz91u1XrztAA/Doku--Card?node-id=3-1116&embed-host=share"
+		description="Listen fuer viele aehnliche Items verwenden; Cards fuer reichhaltigere Vorschauen und gemischte Inhalte."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/2mqTMWDvKZPz91u1XrztAA/Doku--Card?node-id=3-1117&embed-host=share"
+		description="Cards nicht fuer sehr dichte Datensaetze verwenden, bei denen eine Liste/Tabelle effizienter waere."
+	/>
+</div>
+
+### Barrierefreiheit
+
+Wenn die Card interaktiv ist, muss sie per Tastatur erreichbar sein und korrekte Semantik aufweisen (Link oder Button). Der Fokus muss sichtbar sein, und verschachtelte interaktive Elemente duerfen keine konkurrierenden Klickziele erzeugen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/2mqTMWDvKZPz91u1XrztAA/Doku--Card?node-id=3-1118&embed-host=share"
+		description="Ein klares interaktives Ziel (oder klar getrennte Ziele) mit sichtbarem Fokus und korrekten Rollen sicherstellen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/2mqTMWDvKZPz91u1XrztAA/Doku--Card?node-id=3-1119&embed-host=share"
+		description="Nicht die gesamte Card klickbar machen und gleichzeitig mehrere verschachtelte Links/Buttons platzieren, die um Klicks konkurrieren."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Card" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Section',
+			description: 'Strukturiert Seitenbereiche und Abstaende um gruppierte Inhalte',
+			url: '/de/dokumentation/komponenten/section',
+		},
+		{
+			title: 'Divider',
+			description: 'Trennt Inhalte innerhalb oder zwischen Flaechen bei Bedarf',
+			url: '/de/dokumentation/komponenten/divider',
+		},
+		{
+			title: 'Accordion',
+			description: 'Klappt optionale Inhalte innerhalb eines strukturierten Bereichs ein',
+			url: '/de/dokumentation/komponenten/accordion',
+		},
+		{
+			title: 'Popover',
+			description: 'Bietet leichtgewichtige kontextuelle Aktionen ohne Seitenwechsel',
+			url: '/de/dokumentation/komponenten/popover',
+		},
+	]}
+/>
+
+</DBSection>

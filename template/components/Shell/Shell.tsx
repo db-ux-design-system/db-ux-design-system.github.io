@@ -1,6 +1,7 @@
 import { type PropsWithChildren, type ReactElement, useMemo } from 'react';
 import { ColorModeProvider } from '@template/context/color-mode-context.tsx';
 import { LanguageProvider } from '@template/context/language-context.tsx';
+import { toEnSlug } from '@template/i18n/slug-mapping';
 import { DBControlPanelDesktop, DBControlPanelMobile, DBShell } from '@db-ux/react-core-components';
 import PrimaryActions from './control-panel/primary-actions.tsx';
 import SecondaryActions from './control-panel/secondary-actions.tsx';
@@ -17,9 +18,9 @@ type Props = PropsWithChildren & {
 };
 
 export function Shell({ children, pathname = '/', subNavigationVariant }: Props): ReactElement {
-	const normalizedPathname = pathname.replace(/^\/de/, '') || '/';
+	const normalizedPathname = toEnSlug(pathname.replace(/^\/de\//, '').replace(/^\/de$/, '')) || pathname.replace(/^\/de/, '') || '/';
 	const subNavigation = useMemo(() => {
-		return findSubNavigation(normalizedPathname);
+		return findSubNavigation(normalizedPathname.startsWith('/') ? normalizedPathname : `/${normalizedPathname}`);
 	}, [normalizedPathname]);
 
 	/*

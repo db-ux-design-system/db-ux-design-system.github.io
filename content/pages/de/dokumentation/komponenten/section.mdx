@@ -1,0 +1,111 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Section'
+title: 'Section'
+description: 'Section trennt und strukturiert Inhaltsbereiche auf einer Seite durch konsistente Abstaende und optionale Breitenbeschraenkungen. Sie hilft, klare visuelle Gruppierung und Rhythmus zu schaffen, ohne Abstände fuer jeden Block manuell verwalten zu muessen.'
+shortDescription: 'Struktureller Container zur Gruppierung von Seiteninhalten mit konsistenten Abstaenden.'
+align: start
+status: 'beta'
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Zusammengehoerige Inhalte in einen eigenstaendigen Seitenbereich gruppieren (z. B. 'Uebersicht', 'Details', 'Naechste Schritte')
+- Konsistente vertikale Abstaende zwischen grossen Inhaltsbloecken erzeugen
+- Inhaltsbreite fuer Lesbarkeit beschraenken und gleichzeitig Full-Bleed-Hintergruende ermoeglichen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbsection-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Strukturierung
+
+Sections fuer die uebergeordnete Gruppierung von Inhaltsbloecken verwenden. Sie sollten konsistente Abstaende zwischen grossen Bereichen definieren, nicht Mikro-Abstaende zwischen einzelnen Elementen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/YER9qlSt9hGtlnFAqe2s7s/Doku--Section-%E2%80%BC%EF%B8%8F?node-id=1-1132&embed-host=share"
+		description="Einen logischen Seitenblock in eine Section einbetten, um Abstaende zu standardisieren."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/YER9qlSt9hGtlnFAqe2s7s/Doku--Section-%E2%80%BC%EF%B8%8F?node-id=1-1133&embed-host=share"
+		description="Sections nicht als Ersatz fuer kleine Margins/Paddings zwischen zusammengehoerigen Elementen verwenden."
+	/>
+</div>
+
+### Abstaende und Breite
+
+Spacing- und Width-Optionen so konsistent wie moeglich und passend zum jeweiligen Kontext waehlen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/YER9qlSt9hGtlnFAqe2s7s/Doku--Section-%E2%80%BC%EF%B8%8F?node-id=3-1110&embed-host=share"
+		description="Aus den bereitgestellten Spacing-Presets waehlen, passend zu anderen Seiten und Templates."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/YER9qlSt9hGtlnFAqe2s7s/Doku--Section-%E2%80%BC%EF%B8%8F?node-id=3-1112&embed-host=share"
+		description="Visuelle Unruhe durch viele verschiedene Breiten und Abstaende vermeiden."
+	/>
+</div>
+
+### Barrierefreiheit
+
+Section ist ein Layout-Werkzeug, kein semantischer Ersatz. Sicherstellen, dass Inhalte innerhalb korrekt mit Ueberschriften und Landmarks strukturiert sind, wenn angemessen (z. B. sinnvolle Ueberschriftebenen, ARIA-Landmarks nur bei Bedarf).
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Section" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Divider',
+			description: 'Visueller Trenner fuer benachbarte Inhaltsbloecke',
+			url: '/de/dokumentation/komponenten/divider',
+		},
+		{
+			title: 'Card',
+			description: 'Flaechencontainer mit Abstand und optionalem Hintergrund/Rahmen',
+			url: '/de/dokumentation/komponenten/card',
+		},
+	]}
+/>
+
+</DBSection>

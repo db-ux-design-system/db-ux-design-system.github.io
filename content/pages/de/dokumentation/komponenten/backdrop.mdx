@@ -1,0 +1,187 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Backdrop'
+title: 'Backdrop'
+description: 'Backdrop ist eine Hilfskomponente, die Inhalte hinter einem Overlay abdunkelt, um die Aufmerksamkeit auf den Vordergrund zu lenken (z. B. Modal, Dialog, Drawer). Es trennt aktive Inhalte vom Hintergrund und kann optional die Interaktion mit dem Hintergrund blockieren.'
+shortDescription: 'Overlay-Ebene hinter modale Inhalte zur Fokussierung und Interaktionsblockierung.'
+align: start
+status: 'beta'
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+
+- Ein geöffnetes Overlay hervorheben (z. B. Dialog, Modal, Drawer)
+- Hintergrund während eines blockierenden Ladezustands oder Prozesses abdunkeln
+- Fokussierten Inhalt visuell vom Rest der Seite trennen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbbackdrop-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Implementierung
+
+Es gibt keine eigenständige Backdrop-Komponente. Wenn ein Backdrop wie im DBDrawer benötigt wird, können folgende Styles angewendet werden:
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### CSS
+
+```css
+.my-backdrop {
+	background-color: color(
+		from var(--db-adaptive-on-bg-basic-emphasis-100-default) srgb r g b / var(--db-opacity-lg)
+	);
+}
+
+dialog::backdrop {
+	background-color: color(
+		from var(--db-adaptive-on-bg-basic-emphasis-100-default) srgb r g b / var(--db-opacity-lg)
+	);
+}
+```
+
+### SCSS
+
+```scss
+@use '@db-ux/core-foundations/build/styles/colors';
+@use '@db-ux/core-foundations/build/styles/variables';
+
+.my-backdrop {
+	background-color: color(
+		from #{colors.$db-adaptive-on-bg-basic-emphasis-100-default} srgb r g b /
+			#{variables.$db-opacity-lg}
+	);
+}
+
+/* OR */
+
+dialog::backdrop {
+	background-color: color(
+		from #{colors.$db-adaptive-on-bg-basic-emphasis-100-default} srgb r g b /
+			#{variables.$db-opacity-lg}
+	);
+}
+```
+
+**Hinweis:** Für die schwache Variante die Variable `db-opacity-sm` verwenden.
+
+</CollapsibleWrapper>
+
+<CollapseButton
+	collapsedText="Alle Implementierungsdetails anzeigen"
+	expandedText="Implementierungsdetails ausblenden"
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+### Aufmerksamkeit lenken
+
+Backdrop verwenden, wenn Nutzer:innen sich auf eine einzelne aktive UI-Ebene konzentrieren und die Aufgabe im Overlay abschliessen muessen, um auf der Hauptseite fortzufahren. Wenn Nutzer:innen weiterhin mit dem Hintergrund arbeiten muessen, kein Backdrop verwenden und stattdessen ein nicht-blockierendes Muster einsetzen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/tREBXQmJlK75D2ZBjtuBx9/Doku--Backdrop?node-id=1-1132&embed-host=share"
+		description="Backdrop hinter einem Dialog oder Drawer verwenden, um eine aktive Overlay-Ebene klar anzuzeigen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/tREBXQmJlK75D2ZBjtuBx9/Doku--Backdrop?node-id=1-1133&embed-host=share"
+		description="Backdrop nicht zur dekorativen Hervorhebung verwenden, wenn kein Overlay vorhanden ist."
+	/>
+</div>
+
+### Kontext
+
+Backdrop soll Ablenkung reduzieren, nicht notwendigen Kontext entfernen. Wenn Nutzer:innen Hintergrundinformationen benoetigen, eine Alternative in Betracht ziehen (Seitenpanel, Inline-Erweiterung oder nicht-modales Popover).
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/tREBXQmJlK75D2ZBjtuBx9/Doku--Backdrop?node-id=3-1110&embed-host=share"
+		description="Backdrop nur verwenden, wenn Nutzer:innen die Aufgabe ohne Hintergrundinhalte abschliessen koennen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/tREBXQmJlK75D2ZBjtuBx9/Doku--Backdrop?node-id=3-1112&embed-host=share"
+		description="Unnoetige Schichtung vermeiden, es sei denn, es gibt einen klaren Grund den Hintergrund abzudunkeln."
+	/>
+</div>
+
+### Barrierefreiheit
+
+Sicherstellen, dass Vordergrundinhalte ausreichend Kontrast zum abgedunkelten Hintergrund haben. Wenn der Backdrop einen modalen Zustand anzeigt, den Fokus innerhalb des aktiven Overlays halten und verhindern, dass assistive Technologien Hintergrundinhalte erreichen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/tREBXQmJlK75D2ZBjtuBx9/Doku--Backdrop?node-id=3-1113&embed-host=share"
+		description="Interaktivitaet nur im Vordergrund ermoeglichen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/tREBXQmJlK75D2ZBjtuBx9/Doku--Backdrop?node-id=3-1114&embed-host=share"
+		description="Hintergrund nicht verwenden, ohne den Inhalt auf einem Element mit ausreichendem Kontrast zu platzieren."
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Backdrop" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Drawer',
+			description: 'Seitliches Overlay-Panel, das oft mit einem Backdrop kombiniert wird',
+			url: '/de/dokumentation/komponenten/drawer',
+		},
+		{
+			title: 'Popover',
+			description: 'Nicht-modale verankerte Flaeche, die normalerweise keinen Backdrop benoetigt',
+			url: '/de/dokumentation/komponenten/popover',
+		},
+		{
+			title: 'Notification',
+			description: 'Nicht-blockierendes Feedback, das keinen Backdrop erfordert',
+			url: '/de/dokumentation/komponenten/notification',
+		},
+		{
+			title: 'Tooltip',
+			description: 'Kurzer Hinweis, niemals mit Backdrop verwenden',
+			url: '/de/dokumentation/komponenten/tooltip',
+		},
+	]}
+/>
+
+</DBSection>
