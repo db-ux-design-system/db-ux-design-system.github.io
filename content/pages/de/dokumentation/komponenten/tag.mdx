@@ -1,0 +1,182 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Tag'
+title: 'Tag'
+description: 'Tag ist ein kompaktes Label zur Kategorisierung, Hervorhebung von Attributen oder Darstellung von Auswahlen. Es kann statisch zur Anzeige oder interaktiv zum Filtern und Auswählen sein, mit optionaler Entfernbarkeit wo passend.'
+shortDescription: 'Kompaktes Label zur Kategorisierung, Hervorhebung von Attributen oder Darstellung von Auswahlen.'
+align: start
+status: 'stable'
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+- Kurze Kategorien oder Attribute anzeigen (z.B. „Neu", „Marketing", „Intern")
+- Filterung/Auswahl in Listen oder Suchergebnissen ermöglichen (interaktive Tags)
+- Ausgewählte Elemente darstellen, die entfernt werden können (z.B. angewendete Filter)
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbtag-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground component="tag" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Verhalten
+
+Tags sollten entsprechend ihrem Verhalten eingesetzt werden: Statisch für nicht-interaktive Kategorisierung, Interaktiv (Button / Link) für kontextbezogene Aktionen, Interaktiv (Checkbox / Radio) für Filterung oder Auswahl und Entfernbar, um Nutzer:innen das Löschen von Auswahlen zu ermöglichen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=1-1132&embed-host=share"
+		description="Den passenden Tag-Typ für das beabsichtigte Verhalten verwenden."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=1-1133&embed-host=share"
+		description="Tags nicht als Ersatz für primäre Navigation oder Hauptaktionen verwenden."
+	/>
+</div>
+
+### Labels
+
+Den Inhalt des Tags so kurz und knapp wie möglich halten. Tags sollten immer einzeilig bleiben.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=3-1110&embed-host=share"
+		description="In Ausnahmefällen kann ein langes Label mit Auslassungspunkten verkürzt werden. In diesem Fall sollte ein Tooltip den vollständigen Text anzeigen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=3-1112&embed-host=share"
+		description="Den Text nicht umbrechen und mehrzeilig machen."
+	/>
+</div>
+
+### Hierarchie
+
+Die Kombination verschiedener Betonungen des Tags erzeugt eine klare visuelle Hierarchie, die wichtige Informationen mit starker Betonung hervorhebt, während die schwache Betonung dezent sekundäre Daten kennzeichnet.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=3-1113&embed-host=share"
+		description="Strong verwenden, um bestimmte Informationen hervorzuheben."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=3-1114&embed-host=share"
+		description="Nicht verschiedene Betonungen innerhalb eines Kontexts ohne triftigen Grund verwenden."
+	/>
+</div>
+
+### Tag vs. Badge
+
+Tag zur Kategorisierung, Filterung oder Darstellung auswählbarer Elemente verwenden. Badge für Zähler oder kleine numerische/Status-Indikatoren, die an ein anderes Element angehängt sind (z.B. Benachrichtigungen an einem Icon).
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=3-1116&embed-host=share"
+		description="Tag verwenden, um Inhalte auf einer Seite zu filtern."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=3-1117&embed-host=share"
+		description="Tag nicht zur Statusanzeige verwenden. (Stattdessen Badge verwenden)"
+	/>
+</div>
+
+### Farbgebung
+
+Der adaptive Tag kann eingefärbt werden, um beispielsweise verschiedene Kategorien zu kennzeichnen. Dazu wird der Tag im jeweiligen Farbkontext platziert.
+
+<GuidelineExample
+	variant="do"
+	figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=4014-7&embed-host=share"
+	description="Die zusätzlich im System verfügbaren Farbpaletten nutzen, um Kategorien hervorzuheben."
+	fullWidth
+/>
+
+### Barrierefreiheit
+
+Der interaktive Tag in „funktionaler" Dichte hat eine Höhe von 20 px. Um die Anforderungen an Barrierefreiheit zu erfüllen, muss sein klickbarer Bereich mindestens 24 px hoch sein, ohne andere interaktive Elemente zu überlappen. Dies kann entweder durch die Größe des Tags oder durch ausreichenden Abstand um ihn herum erreicht werden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=3-1118&embed-host=share"
+		description="Einen klickbaren Bereich von 24×24 px durch umgebenden Abstand sicherstellen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/fe8rzhY6WM0eDNDATXcaU2/Doku--Tag?node-id=3-1119&embed-host=share"
+		description="Nicht zulassen, dass benachbarte Steuerelemente in den erforderlichen 24×24 px Bereich eindringen."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Tag" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+	## Verwandte Inhalte
+	<TeaserCard
+		teasers={[
+			{
+				title: 'Badge',
+				description: 'Kleiner Indikator für Zähler oder Status an einem anderen Element',
+				url: '/de/dokumentation/komponenten/badge',
+			},
+			{
+				title: 'Button',
+				description:
+					'Primäres Aktions-Steuerelement; statt interaktiver Tags für prominente Aktionen verwenden',
+				url: '/de/dokumentation/komponenten/button',
+			},
+			{
+				title: 'Checkbox',
+				description: 'Mehrfachauswahl-Steuerelement; Alternative zu ausgewählten Tags in Formularen',
+				url: '/de/dokumentation/komponenten/checkbox',
+			},
+		]}
+	/>
+</DBSection>

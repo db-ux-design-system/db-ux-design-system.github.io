@@ -1,0 +1,178 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Input'
+title: 'Input'
+description: 'Input erfasst kurze, einzeilige Texteingaben in Formularen und Dialogen. Es sollte vorhersehbar sein, klar beschriftet und bei Bedarf Hinweise sowie Validierungsfeedback liefern.'
+shortDescription: 'Erfasst kurze, einzeilige Texteingaben in Formularen und Dialogen.'
+align: start
+status: 'stable'
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+- Kurze Textwerte erfassen (z.B. Name, Stadt, E-Mail, IBAN je nach Produktregeln)
+- Strukturierte Eingabe mit Formatierungshinweisen unterstützen (z.B. „Keine Leerzeichen", „Format TT.MM.JJJJ verwenden")
+- Sofortiges oder bei Absendung ausgelöstes Feedback zur Gültigkeit (Erfolg/Fehler) mit Hilfstext anzeigen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbinput-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground component="input" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Eingabetyp
+
+Input für Freitext-Eingabe verwenden. Wenn Nutzer:innen aus vordefinierten Optionen wählen müssen, stattdessen eine Auswahlkomponente verwenden (z.B. Select, Autocomplete, Radio/Checkbox je nach Anwendungsfall).
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1132&embed-host=share&scaling=scale-down-width"
+		description="Input verwenden, wenn Nutzer:innen einen beliebigen Wert eingeben können und die erwartete Eingabe kurz ist."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=1-1133&embed-host=share&scaling=scale-down-width"
+		description="Input nicht für die Auswahl aus einer festen Liste verwenden (erzwingt Tippen, erhöht Fehler)."
+	/>
+</div>
+
+### Label-Text
+
+Jedes Input muss ein klares, beschreibendes Label haben, das erklärt, was eingegeben werden soll. Labels kurz und spezifisch halten; vage Labels vermeiden. Das Label nicht durch einen Platzhalter ersetzen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1110&embed-host=share&scaling=scale-down-width"
+		description="Ein sichtbares Label direkt dem Feld zuordnen (darüber oder konsistent ausgerichtet)."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1112&embed-host=share&scaling=scale-down-width"
+		description="Keine langen, beschreibenden Labels verwenden."
+	/>
+</div>
+
+### Platzhalter
+
+Platzhaltertext ist optional und sollte ein Beispielformat/-wert liefern, keine Anweisungen oder erforderlichen Kontext. Platzhalter dürfen keine kritischen Informationen enthalten, da sie beim Tippen verschwinden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1113&embed-host=share&scaling=scale-down-width"
+		description='Platzhalter für ein Beispiel verwenden (z.B. "name@firma.de"), während das Label die Bedeutung trägt.'
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1114&embed-host=share&scaling=scale-down-width"
+		description={
+			'Anforderungen oder Hilfetexte nicht ausschließlich im Platzhalter platzieren (z.B. "E-Mail eingeben, um Updates zu erhalten").'
+		}
+	/>
+</div>
+
+### Nachricht
+
+Hilfstext verwenden, um Fehler zu vermeiden (Format, Einschränkungen, Erwartungen). Validierungsmeldungen verwenden, um zu erklären, was falsch ist und wie es behoben werden kann. Nachrichten knapp und handlungsorientiert halten.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1116&embed-host=share&scaling=scale-down-width"
+		description="Eine kurze Hilfsmeldung für Format-Hinweise und eine explizite Fehlermeldung bei ungültiger Eingabe anzeigen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1117&embed-host=share&scaling=scale-down-width"
+		description={
+			'Keine langen Absätze anzeigen, das Label als Hilfs-/Fehlertext duplizieren oder unklare Fehler verwenden (z.B. "Ungültige Eingabe").'
+		}
+	/>
+</div>
+
+### Feldbreite
+
+Inputs müssen am Layout-Grid ausgerichtet sein und einheitliche Abstände zwischen Label, Feld, Hilfs-/Validierungstext und benachbarten Feldern einhalten. Labels nicht strecken oder Felder in responsiven Layouts fehlausrichten.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1119&embed-host=share&scaling=scale-down-width"
+		description="Label, Input und Hilfs-/Validierungstext ausgerichtet und über Breakpoints hinweg konsistent beabstandet halten."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1118&embed-host=share&scaling=scale-down-width"
+		description="Label/Feld/Hilfstext nicht aus der Ausrichtung driften lassen oder ungleichmäßige Abstände im Vergleich zu anderen Feldern erzeugen."
+	/>
+</div>
+
+### Barrierefreiheit
+
+Sicherstellen, dass jedes Input einen barrierefreien Namen hat, der mit dem sichtbaren Label übereinstimmt. Wenn ein Label visuell versteckt ist, ein gleichwertiges Screenreader-Label bereitstellen. Pflicht-/Optional-Kennzeichnungen müssen aussagekräftig kommuniziert werden.
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Input" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+	## Verwandte Inhalte
+	<TeaserCard
+		teasers={[
+			{
+				title: 'Textarea',
+				description: 'Mehrzeilige Texteingabe für längere Inhalte',
+				url: '/de/dokumentation/komponenten/textarea',
+			},
+			{
+				title: 'Select',
+				description: 'Eine Option aus einer vordefinierten Liste wählen',
+				url: '/de/dokumentation/komponenten/select',
+			},
+			{
+				title: 'Autocomplete',
+				description: 'Durchsuchbare Auswahl für große Optionsmengen',
+				url: '/documentation/components/autocomplete',
+			},
+		]}
+	/>
+</DBSection>

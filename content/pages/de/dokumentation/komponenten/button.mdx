@@ -1,0 +1,185 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Button'
+title: 'Button'
+description: 'Buttons lösen Aktionen aus und bestätigen Entscheidungen. Sie leiten Nutzer:innen durch wichtige Aufgaben und Abläufe.'
+shortDescription: 'Löst Aktionen aus und bestätigt Entscheidungen, um Nutzer:innen durch Aufgaben zu leiten.'
+align: start
+toc: true
+status: 'stable'
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+- Eine Aktion auslösen (z.B. Senden, Speichern, Löschen)
+- Signalisieren, dass eine Interaktion oder Bestätigung erwartet wird
+- Eine primäre oder sekundäre Aktion hervorheben
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbbutton-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground component="button" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Hierarchie und primärer CTA
+
+Eine klare Hierarchie schaffen, damit Nutzer:innen erkennen, welche Aktionen am wichtigsten sind. Den Brand-Button als stärksten CTA zur Conversion nutzen und nur einmal pro Viewport einsetzen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-852&embed-host=share"
+		description="Einen primären Button verwenden, um die Hauptaktion hervorzuheben. Sekundäre Aktionen daneben mit geringerer Betonung platzieren."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-863&embed-host=share"
+		description="Nicht zwei primäre Buttons nebeneinander oder im selben Viewport platzieren. Konkurrierende primäre Aktionen erschweren die Entscheidung."
+	/>
+</div>
+
+### Labels
+
+Labels kurz, spezifisch und handlungsorientiert halten. Buttons mit automatischer Breite sind standardmäßig einzeilig – keine manuellen Zeilenumbrüche einfügen. Buttons in voller Breite dürfen nur in Ausnahmefällen umbrechen (z.B. bei Lokalisierung oder schmalen Bildschirmen).
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-1125&embed-host=share"
+		description="Knappe, einzeilige Labels verwenden."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-1137&embed-host=share"
+		description="Keine manuellen Zeilenumbrüche oder langen, komplexen Label-Texte verwenden."
+	/>
+</div>
+
+### Icons
+
+Intuitive, allgemein verständliche Icons verwenden. Maximal ein Icon innerhalb eines Buttons platzieren und eine passende Position wählen (leading oder trailing). Icon-Only-Buttons eignen sich für Toolbars, Navigation und Mobile – immer einen Tooltip bei Hover anzeigen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-1152&embed-host=share"
+		description="Klare Icons mit einem Hover-Tooltip für Icon-Only-Buttons verwenden."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-1460&embed-host=share"
+		description="Nicht zwei Icons in einem Button platzieren."
+	/>
+</div>
+
+### Layout und Responsivität
+
+Zusammengehörige Buttons bei ausreichendem Platz horizontal anordnen. Standardmäßig automatische Breite verwenden; bei responsiven/mobilen Layouts auf volle Breite wechseln. Der Button darf nie schmaler als sein Inhalt sein.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-1594&embed-host=share"
+		description="Buttons vorzugsweise nebeneinander ausrichten, wenn der Platz ausreicht."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-3298&embed-host=share"
+		description="Buttons nicht vertikal stapeln, wenn horizontaler Platz vorhanden ist, oder Inhalte über den Button hinausragen lassen."
+	/>
+</div>
+
+### Button vs. Link
+
+Buttons verwenden, um Aktionen auszulösen, die den Zustand ändern. Links verwenden, um zu anderen Seiten oder Ansichten zu navigieren.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-3649&embed-host=share"
+		description="Einen Button für eine In-App-Aktion verwenden, die den Zustand ändert, und einen Link für die Navigation zu einer anderen Seite oder Ansicht."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-3823&embed-host=share"
+		description="Keinen Button für die Seitennavigation verwenden."
+	/>
+</div>
+
+### Barrierefreiheit
+
+Der kleine Button in funktionaler Dichte hat eine Höhe von 20 px. Um die Anforderungen an Barrierefreiheit zu erfüllen, muss sein interaktiver Zielbereich mindestens 24×24 px groß sein. Dies kann durch ausreichenden Abstand um den Button erreicht werden. Keine anderen interaktiven Elemente dürfen diesen Zielbereich belegen oder überlappen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-3342&embed-host=share"
+		description="Einen klickbaren Bereich von 24×24 px durch umgebenden Abstand sicherstellen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-3600&embed-host=share"
+		description="Nicht zulassen, dass benachbarte Steuerelemente in den erforderlichen 24×24 px Bereich eindringen."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<FigmaLearnTeaser componentName="Button" />
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Button" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+	## Verwandte Inhalte
+	<TeaserCard
+		teasers={[
+			{
+				title: 'Link',
+				description: 'Navigation zwischen Seiten und externen Ressourcen.',
+				url: '/de/dokumentation/komponenten/link',
+			},
+			{
+				title: 'Badge',
+				description: 'Status, Labels und Benachrichtigungen mit Badges anzeigen.',
+				url: '/de/dokumentation/komponenten/badge',
+			},
+		]}
+	/>
+</DBSection>

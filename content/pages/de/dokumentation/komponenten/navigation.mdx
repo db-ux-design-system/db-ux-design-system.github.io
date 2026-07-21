@@ -1,0 +1,178 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Navigation'
+title: 'Navigation'
+description: 'Navigation bietet eine Reihe von Zielen, die Nutzer:innen konsistent durch eine Anwendung auf Desktop und Mobile führen. Sie unterstützt verschiedene Ausrichtungen und responsives Verhalten und zeigt dabei klar den aktuellen Standort und verfügbare Pfade an.'
+shortDescription: 'Ziele für eine konsistente Bewegung durch eine Anwendung.'
+align: start
+status: 'beta'
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Primäre Ziele auf oberster Ebene anbieten (globale Navigation)
+- Strukturierte Unternavigation für tiefere Bereiche unterstützen (verschachtelte Ebenen)
+- Navigationsmuster für Mobile mit kompaktem, touch-freundlichem Verhalten anpassen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbnavigation-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Ziele
+
+Navigationselemente verwenden, um Nutzer:innen zu Seiten oder Ansichten zu führen. Für Operationen (erstellen, speichern, exportieren) Buttons oder Menüs verwenden, keine Navigationselemente.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/lDMxw7YqQoJaWQdBlG7kwB/Doku--Navigation?node-id=1-1132&embed-host=share"
+		description="Navigationselemente für stabile Ziele wie 'Übersicht', 'Berichte', 'Einstellungen' verwenden, dargestellt als konsistente Liste/Tab-Gruppe mit klarem aktivem Element."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/lDMxw7YqQoJaWQdBlG7kwB/Doku--Navigation?node-id=1-1133&embed-host=share"
+		description="Navigationselemente nicht für einmalige Aktionen wie 'Jetzt herunterladen' oder 'Absenden' verwenden, die als Ziele statt als Aktionssteuerung dargestellt werden."
+	/>
+</div>
+
+### Variante
+
+Horizontale Navigation für flache Strukturen mit ausreichend Platz wählen. Vertikale Navigation für Sidebars, längere Listen oder tiefere Hierarchien verwenden, die sichtbar bleiben müssen.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/lDMxw7YqQoJaWQdBlG7kwB/Doku--Navigation?node-id=3-1110&embed-host=share"
+		description="Horizontale Navigation für Top-Level-Ziele und vertikale Navigation für Bereichsnavigation verwenden, mit vollständig sichtbaren und gut scanbaren Labels."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/lDMxw7YqQoJaWQdBlG7kwB/Doku--Navigation?node-id=3-1112&embed-host=share"
+		description="Horizontale Navigation nicht in enge Räume zwängen, in denen Labels abgeschnitten werden, unvorhersehbar umbrechen oder die Scannbarkeit verringern."
+	/>
+</div>
+
+### Labels
+
+Labels kurz, klar und in der Formulierung einheitlich halten. Denselben Präfix nicht über alle Elemente wiederholen und die Struktur über die Zeit stabil halten.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/lDMxw7YqQoJaWQdBlG7kwB/Doku--Navigation?node-id=3-1113&embed-host=share"
+		description="Knappe, beschreibende Labels verwenden, die in gängige Viewports passen, ohne abgeschnitten zu werden, mit konsistentem Textstil und Schreibweise."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/lDMxw7YqQoJaWQdBlG7kwB/Doku--Navigation?node-id=3-1114&embed-host=share"
+		description="Keine langen Phrasen, gemischte Grammatik/Schreibweisen verwenden oder häufig Elementnamen/-reihenfolge ändern, die die Wiedererkennung stören."
+	/>
+</div>
+
+### Hierarchie
+
+Hierarchie flach und vorhersehbar halten. Bei zu vielen Elementen ein Overflow-Pattern verwenden (z.B. 'Mehr') oder eine menübasierte Erweiterung.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBottom: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/lDMxw7YqQoJaWQdBlG7kwB/Doku--Navigation?node-id=3-1116&embed-host=share"
+		description="Sichtbare Top-Level-Elemente begrenzen und den Rest in einen Overflow-Eintrag verschieben, visuell gruppiert und klar beschriftet."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/lDMxw7YqQoJaWQdBlG7kwB/Doku--Navigation?node-id=3-1117&embed-host=share"
+		description="Keine tiefen, mehrstufigen Bäume erstellen, die exzessives Navigieren erfordern, ohne klare Gruppierung, Hinweise oder stabile Struktur."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Navigation" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+	## Verwandte Inhalte
+	<TeaserCard
+		teasers={[
+			{
+				title: 'Header',
+				description: 'Beherbergt primäre Navigation und globale Aktionen am oberen Seitenrand',
+				url: '/documentation/components/header',
+			},
+			{
+				title: 'Drawer',
+				description: 'Gängiger Container für mobile oder Overflow-Navigation',
+				url: '/documentation/components/drawer',
+			},
+			{
+				title: 'Link',
+				description: 'Navigationselement in Inhalten und sekundären Menüs',
+				url: '/de/dokumentation/komponenten/link',
+			},
+			{
+				title: 'Popover',
+				description: 'Wird häufig für sekundäre Menüs oder Overflow-Navigation verwendet',
+				url: '/documentation/components/popover',
+			},
+			{
+				title: 'Divider',
+				description: 'Trennt Navigationsgruppen in Sidebars oder Menüs',
+				url: '/documentation/components/divider',
+			},
+		]}
+	/>
+</DBSection>

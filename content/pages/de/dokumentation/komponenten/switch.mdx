@@ -1,0 +1,139 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Switch'
+title: 'Switch'
+description: 'Switch schaltet eine Einstellung zwischen zwei Zuständen (ein/aus) um und wendet die Änderung sofort an. Ideal zum Aktivieren oder Deaktivieren von Funktionen, Präferenzen oder Verhaltensweisen, bei denen Nutzer:innen sofortiges Feedback erwarten.'
+shortDescription: 'Schaltet eine Einstellung zwischen zwei Zuständen mit sofortiger Wirkung um.'
+align: start
+status: 'stable'
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+- Eine Einstellung sofort ein- oder ausschalten (z.B. „Benachrichtigungen aktivieren")
+- Eine Funktion im Kontext aktivieren/deaktivieren, ohne die Seite zu verlassen
+- Verfügbarkeit einer Option steuern, die die UI sofort aktualisiert
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbswitch-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground component="switch" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Switch für sofortige Zustandsänderungen verwenden
+
+Switch nur verwenden, wenn das Umschalten sofort wirksam werden soll. Wenn Nutzer:innen Optionen auswählen, die erst später angewendet werden (z.B. bei Absenden), stattdessen Checkbox verwenden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=1-1132&embed-host=share&scaling=scale-down-width"
+		description='Einen Switch für "Automatische Updates aktivieren" verwenden, wenn die Änderung sofort greift.'
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=1-1133&embed-host=share&scaling=scale-down-width"
+		description="Keinen Switch in einem Formular verwenden, in dem Änderungen erst nach Klick auf 'Speichern' angewendet werden."
+	/>
+</div>
+
+### Zustandsänderung klar und erkennbar machen
+
+Nutzer:innen müssen sofort erkennen können, ob der Switch ein- oder ausgeschaltet ist, und die Auswirkung der Änderung sehen (UI-Update, aktivierte Funktion oder Bestätigungs-Feedback).
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=3-1110&embed-host=share&scaling=scale-down-width"
+		description="Den neuen Zustand visuell widerspiegeln und bei Bedarf leichtgewichtiges Feedback geben (z.B. Infotext/Notification)."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=3-1112&embed-host=share&scaling=scale-down-width"
+		description="Einen Switch nicht umschalten, ohne visuelle Zustandsklarheit oder ohne erkennbare Auswirkung."
+	/>
+</div>
+
+### Kurzen, positiven Label-Text schreiben
+
+Labels knapp halten und negative Formulierungen vermeiden, die Verwirrung stiften können („Nicht", doppelte Verneinungen). Bei Bedarf dynamische Labels verwenden, die den aktuellen Zustand in einfacher Sprache beschreiben.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=3-1113&embed-host=share&scaling=scale-down-width"
+		description="'Benachrichtigungen aktivieren' statt negativer Formulierung verwenden."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=3-1114&embed-host=share&scaling=scale-down-width"
+		description="Labels wie 'Nicht benachrichtigen' oder Formulierungen verwenden, die beim Umschalten mehrdeutig werden."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<FigmaLearnTeaser componentName="Switch" />
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Switch" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+	## Verwandte Inhalte
+	<TeaserCard
+		teasers={[
+			{
+				title: 'Checkbox',
+				description: 'Mehrfachauswahl-Steuerelement und Formularauswahl-Pattern',
+				url: '/de/dokumentation/komponenten/checkbox',
+			},
+			{
+				title: 'Radio',
+				description: 'Einzelauswahl innerhalb einer sich gegenseitig ausschließenden Gruppe',
+				url: '/de/dokumentation/komponenten/radio',
+			},
+			{
+				title: 'Input',
+				description: 'Formularfeld, das häufig zusammen mit Einstellungs-Steuerelementen verwendet wird',
+				url: '/de/dokumentation/komponenten/input',
+			},
+		]}
+	/>
+</DBSection>

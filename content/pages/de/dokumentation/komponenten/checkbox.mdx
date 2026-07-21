@@ -1,0 +1,139 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Checkbox'
+title: 'Checkbox'
+description: 'Checkbox ermöglicht die Auswahl einer oder mehrerer unabhängiger Optionen und zeigt den aktuellen Auswahlzustand klar an. Einsatz in Formularen, Filtern und Einstellungen, in denen mehrere Auswahlmöglichkeiten gleichzeitig gelten können.'
+shortDescription: 'Ermöglicht die Auswahl einer oder mehrerer unabhängiger Optionen mit klarem Auswahlzustand.'
+align: start
+status: 'stable'
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+- Mehrere Optionen aus einer Liste auswählen (z.B. Benachrichtigungskanäle)
+- Zustimmung oder Bestätigung einholen (z.B. Nutzungsbedingungen akzeptieren)
+- Filter anwenden, die kombiniert werden können (z.B. Kategorien, Attribute)
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbcheckbox-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground component="checkbox" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Checkbox vs. Radio
+
+Checkboxen verwenden, wenn Nutzer:innen eine beliebige Anzahl von Optionen auswählen können (einschließlich keine). Wenn genau eine Option gewählt werden muss, stattdessen Radio verwenden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=1-1132&embed-host=share"
+		description="Checkboxen verwenden, wenn Mehrfachauswahl erlaubt ist."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=1-1133&embed-host=share"
+		description="Checkboxen nicht für sich gegenseitig ausschließende Optionen verwenden."
+	/>
+</div>
+
+### Labels
+
+Labels müssen klar und prägnant sein. Positive Formulierungen bevorzugen, um die kognitive Belastung zu reduzieren und doppelte Verneinungen zu vermeiden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1110&embed-host=share"
+		description="Klare und knappe Labels verwenden."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1112&embed-host=share"
+		description="Keine doppelten Verneinungen verwenden, die bei aktiviertem Zustand verwirren können."
+	/>
+</div>
+
+### Gruppierung
+
+In Checkbox-Gruppen die Optionen in Wortwahl und Länge einheitlich halten. Wenn eine Gruppe Kontext benötigt, ein Gruppen-Label oder eine kurze Beschreibung darüber hinzufügen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1113&embed-host=share"
+		description="Ein klares Gruppen-Label und einheitliche Formulierung der Optionen verwenden."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=3-1114&embed-host=share"
+		description="Keine unzusammenhängenden Optionen oder inkonsistente Formulierungen mischen, die das Scannen erschweren."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<FigmaLearnTeaser componentName="Checkbox" />
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Checkbox" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+	## Verwandte Inhalte
+	<TeaserCard
+		teasers={[
+			{
+				title: 'Radio',
+				description: 'Einzelauswahl innerhalb einer sich gegenseitig ausschließenden Gruppe',
+				url: '/de/dokumentation/komponenten/radio',
+			},
+			{
+				title: 'Switch',
+				description: 'Sofortiger Ein/Aus-Schalter für Einstellungen',
+				url: '/de/dokumentation/komponenten/switch',
+			},
+			{
+				title: 'Select',
+				description: 'Einzelauswahl aus einer Dropdown-Liste',
+				url: '/de/dokumentation/komponenten/select',
+			},
+		]}
+	/>
+</DBSection>

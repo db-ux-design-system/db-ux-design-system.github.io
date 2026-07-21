@@ -1,0 +1,153 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Textarea'
+title: 'Textarea'
+description: 'Textarea ermöglicht die Eingabe und Überprüfung längerer, mehrzeiliger Texte in Formularen und Dialogen. Sie sollte klar beschriftet sein, zur erwarteten Inhaltsmenge passen und bei Bedarf hilfreiche Hinweise und Validierungsfeedback liefern.'
+shortDescription: 'Ermöglicht die Eingabe und Überprüfung längerer, mehrzeiliger Texte.'
+align: start
+toc: true
+status: 'stable'
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+- Längere Freitext-Eingaben erfassen (z.B. Feedback, Kommentare, Beschreibungen)
+- Strukturierte längere Eingaben mit Hinweisen unterstützen (z.B. Formatierungserwartungen, Zeichenlimits)
+- Nutzer:innen mehrzeilige Inhalte vor dem Absenden komfortabel überprüfen und bearbeiten lassen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbtextarea-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground component="textarea" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Textarea vs. Input
+
+Eine Textarea verwenden, wenn Nutzer:innen mehrere Zeilen oder eine längere Nachricht eingeben sollen. Für kurze, einzeilige Werte Input verwenden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=1-1132&embed-host=share"
+		description="Die Textarea für Kommentare, Nachrichten, Beschreibungen und Feedback verwenden."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=1-1133&embed-host=share"
+		description="Die Textarea nicht für kurze Werte wie Name, E-Mail oder Stadt verwenden (stattdessen Input nutzen)."
+	/>
+</div>
+
+### Labels
+
+Ein klares Label bereitstellen, das beschreibt, was geschrieben werden soll. Das Label nicht durch Platzhaltertext ersetzen; Platzhalter verschwinden beim Tippen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=3-1110&embed-host=share"
+		description="Ein kurzes, spezifisches Label verwenden, konsistent darüber oder schwebend platziert. Auch umliegende Formular-Komponenten berücksichtigen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=3-1112&embed-host=share"
+		description="Keine mehrzeiligen Labels verwenden oder diese mit Satzzeichen versehen."
+	/>
+</div>
+
+### Höhe
+
+Eine Höhe wählen, die zur erwarteten Textmenge passt. Sehr kleine Textareas vermeiden, die sofortiges Scrollen erfordern, und sehr große, die die Seite dominieren. Eine „Fixed"-Feldgröße verwenden (Standard: 4 Zeilen, anpassbar) oder die „Content"-Variante, die mit einer Zeile startet und mit der Eingabe wächst.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=3-1113&embed-host=share"
+		description="Mit einer angemessenen Höhe starten, die zur erwarteten Eingabe und zum Nutzungskontext passt."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=3-1114&embed-host=share"
+		description="Keine kleine Textarea verwenden, wenn viel Eingabe erwartet wird und ausreichend Platz vorhanden ist."
+	/>
+</div>
+
+### Nachricht
+
+Hilfstext beugt Fehlern vor (Format, Ton, Limits). Validierungsmeldungen erklären, was falsch ist und wie es behoben werden kann. Beides knapp und handlungsorientiert halten; das Label nicht duplizieren.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=3-1116&embed-host=share"
+		description="Einen kurzen Hilfshinweis und eine klare Fehlermeldung bei ungültiger Eingabe bereitstellen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=3-1117&embed-host=share"
+		description="Keine langen Absätze, vagen Fehler ('Ungültig') verwenden oder essenzielle Anforderungen nur in den Platzhaltertext setzen."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<FigmaLearnTeaser componentName="Textarea" />
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Textarea" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Input',
+			description: 'Einzeilige Texteingabe für kurze Werte',
+			url: '/de/dokumentation/komponenten/input',
+		},
+		{
+			title: 'Select',
+			description: 'Dropdown zur Auswahl aus vordefinierten Optionen',
+			url: '/de/dokumentation/komponenten/select',
+		},
+	]}
+/>
+
+</DBSection>

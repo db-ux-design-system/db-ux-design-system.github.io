@@ -1,0 +1,170 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Select'
+title: 'Select'
+description: 'Select ermöglicht die Auswahl einer Option aus einer vordefinierten Liste über ein Dropdown. Es eignet sich am besten, wenn Optionen sich gegenseitig ausschließen und Nutzer:innen nicht alle Auswahlmöglichkeiten gleichzeitig sehen müssen, bei klarer Beschriftung, Anleitung und Validierung.'
+shortDescription: 'Ermöglicht die Auswahl einer Option aus einer vordefinierten Liste über ein Dropdown.'
+align: start
+status: 'stable'
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+- Einen Wert aus einer bekannten Menge wählen (z.B. Land, Kategorie, Priorität)
+- Platz sparen im Vergleich zur Anzeige aller Optionen als Radios
+- Eine kontrollierte Eingabe bieten, wenn Freitext nicht erlaubt ist
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbselect-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground component="select" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Select für Einzelauswahl aus vordefinierten Optionen
+
+Select verwenden, wenn Nutzer:innen genau eine Option aus einer Liste wählen müssen. Wenn mehrere Optionen ausgewählt werden sollen, Checkbox oder ein Multi-Select-Pattern verwenden. Wenn Nutzer:innen alle Optionen sehen müssen, Radio in Betracht ziehen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=1-1132&embed-host=share"
+		description="Select für eine Auswahl aus einer vordefinierten Menge verwenden, wenn der Platz begrenzt oder die Optionenzahl moderat ist."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=1-1133&embed-host=share"
+		description="Select nicht für Mehrfachauswahl oder wenn Nutzer:innen alle Optionen gleichzeitig vergleichen müssen verwenden."
+	/>
+</div>
+
+### Dropdown-Optionen klar und überschaubar halten
+
+Optionen müssen einfach zu scannen und zu verstehen sein. Knappe Labels, einheitliche Großschreibung und keine Duplikate verwenden. Wenn die Liste lang wird oder eine Suche benötigt, stattdessen ein Autocomplete-Pattern verwenden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1110&embed-host=share"
+		description="Kurze, eindeutige Options-Labels und eine logische Sortierung (alphabetisch oder nach Häufigkeit) verwenden."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1112&embed-host=share"
+		description="Keine sehr langen Listen in ein einfaches Select ohne Suche oder Gruppierungsunterstützung packen."
+	/>
+</div>
+
+### Immer ein sichtbares Label bereitstellen
+
+Jedes Select benötigt ein klares Label, das beschreibt, was die Auswahl steuert. Sich nicht auf Platzhaltertext als Label verlassen, da dieser missverstanden werden kann und nicht allen Nutzer:innen zugänglich ist.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1113&embed-host=share"
+		description="Ein kurzes, spezifisches Label bereitstellen, das konsistent mit anderen Formularfeldern ausgerichtet ist."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1114&embed-host=share"
+		description="Das Label nicht weglassen oder nur Platzhalter-Beschriftung zur Felderklärung verwenden."
+	/>
+</div>
+
+### Leere, Standard- und deaktivierte Zustände bewusst handhaben
+
+Festlegen, ob ein Standardwert sinnvoll ist. Wenn eine Auswahl erforderlich ist, den leeren Zustand explizit machen (z.B. „Option wählen") und entsprechend validieren. Das Steuerelement nur deaktivieren, wenn es nicht verwendet werden kann, und bei Bedarf erklären warum.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1116&embed-host=share"
+		description="Eine klare leere Option/Platzhalter verwenden und bei Pflichtfeldern validieren; nur mit klarem Grund deaktivieren."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1117&embed-host=share"
+		description="Keinen riskanten Standard vorauswählen, der eine Zustimmung impliziert oder verbirgt, dass eine Auswahl getroffen werden muss."
+	/>
+</div>
+
+### Breite und Ausrichtung am Layout-Grid orientieren
+
+Select sollte sich an umgebenden Inputs orientieren und Container-Breiten einhalten. Willkürliche Breiten vermeiden, die den Formular-Rhythmus stören; das Dropdown am Feld ausrichten.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1118&embed-host=share"
+		description="Select-Breite an das Formular-Layout anpassen und die Ausrichtung über die Seite hinweg konsistent halten."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/HmUqDoWeEMtoZSpw6r8O0r/Doku--Select-%E2%9C%85?node-id=3-1119&embed-host=share"
+		description="Keine inkonsistenten Breiten verwenden, die Labels/Felder fehlausrichten oder ungleichmäßige Abstände in Formularen verursachen."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Select" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+	## Verwandte Inhalte
+	<TeaserCard
+		teasers={[
+			{
+				title: 'Input',
+				description: 'Freitext-Eingabe, wenn Nutzer:innen einen Wert eintippen müssen',
+				url: '/de/dokumentation/komponenten/input',
+			},
+			{
+				title: 'Radio',
+				description: 'Einzelauswahl-Gruppe, offen dargestellt für schnellen Vergleich',
+				url: '/de/dokumentation/komponenten/radio',
+			},
+			{
+				title: 'Checkbox',
+				description: 'Mehrfachauswahl-Steuerelement für unabhängige Optionen',
+				url: '/de/dokumentation/komponenten/checkbox',
+			},
+		]}
+	/>
+</DBSection>

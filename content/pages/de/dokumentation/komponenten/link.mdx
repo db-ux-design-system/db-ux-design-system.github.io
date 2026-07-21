@@ -1,0 +1,143 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Link'
+title: 'Link'
+description: 'Die Link-Komponente dient der Navigation zu anderen Seiten, Abschnitten oder externen Zielen und zeigt visuell eine Navigationsmöglichkeit innerhalb der Oberfläche an.'
+shortDescription: 'Navigation zu anderen Seiten, Abschnitten oder externen Zielen.'
+align: start
+status: 'stable'
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+- Zu einer anderen Seite innerhalb der Anwendung navigieren
+- Zu einer externen Website oder einem Dokument navigieren
+- Zu einem bestimmten Abschnitt auf derselben Seite springen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dblink-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground component="link" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Zweck
+
+Die Link-Komponente ausschließlich verwenden, wenn der primäre Zweck die Navigation zu einem anderen Ort oder einer anderen Ressource ist.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBlockEnd: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/3HjaNLCvfdsdoRZKbFnV3s/Doku--Link?node-id=1-1132&embed-host=share"
+		description="Einen Link verwenden, um zu einer anderen Seite oder einem Abschnitt zu navigieren."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/3HjaNLCvfdsdoRZKbFnV3s/Doku--Link?node-id=1-1133&embed-host=share"
+		description="Keinen Link verwenden, um eine Aktion auszulösen oder Daten zu ändern."
+	/>
+</div>
+
+### Inline
+
+Für Links im Fließtext Text-Link-Styles statt der eigenständigen Link-Komponente verwenden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/3HjaNLCvfdsdoRZKbFnV3s/Doku--Link?node-id=3-1110&embed-host=share"
+		description="Text-Links innerhalb von Absätzen für Inline-Navigation verwenden."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/3HjaNLCvfdsdoRZKbFnV3s/Doku--Link?node-id=3-1112&embed-host=share"
+		description="Die Link-Komponente nicht innerhalb von fortlaufendem Fließtext platzieren."
+	/>
+</div>
+
+### Betonung
+
+Die Brand-Variante sparsam einsetzen, um besonders wichtige Navigationslinks hervorzuheben.
+
+<div
+	style={{
+		display: 'flex',
+		gap: 'var(--db-spacing-fixed-md)',
+		marginBlockEnd: 'var(--db-spacing-fixed-2xl)',
+	}}
+>
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/3HjaNLCvfdsdoRZKbFnV3s/Doku--Link?node-id=3-1113&embed-host=share"
+		description="Einen wichtigen Navigationslink mit der Brand-Variante hervorheben."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/3HjaNLCvfdsdoRZKbFnV3s/Doku--Link?node-id=3-1114&embed-host=share"
+		description="Nicht alle Links auf einer Seite mit betonten Link-Styles versehen."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Link" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+	## Verwandte Inhalte
+	<TeaserCard
+		teasers={[
+			{
+				title: 'Button',
+				description: 'Löst eine Aktion oder Zustandsänderung aus',
+				url: '/de/dokumentation/komponenten/button',
+			},
+			{
+				title: 'Navigation',
+				description: 'Gruppiert mehrere Navigationsziele',
+				url: '/de/dokumentation/komponenten/navigation',
+			},
+		]}
+	/>
+</DBSection>

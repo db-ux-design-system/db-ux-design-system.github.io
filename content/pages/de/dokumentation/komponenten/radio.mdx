@@ -1,0 +1,174 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Radio'
+title: 'Radio'
+description: 'Radio ermöglicht die Auswahl genau einer Option aus einer Gruppe sich gegenseitig ausschließender Auswahlmöglichkeiten. Es unterstützt den klaren Vergleich zwischen Optionen und sollte eingesetzt werden, wenn das gleichzeitige Sehen aller Auswahlmöglichkeiten die Entscheidung erleichtert.'
+shortDescription: 'Ermöglicht die Auswahl genau einer Option aus sich gegenseitig ausschließenden Alternativen.'
+align: start
+status: 'stable'
+toc: true
+---
+
+import { DBAccordion, DBAccordionItem, DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+- Eine Option aus einer kleinen Gruppe auswählen (z.B. Sprache, Lieferart)
+- Eine einzelne Präferenz in den Einstellungen konfigurieren (z.B. „Hell / Dunkel / System")
+- Eine Formularoption wählen, bei der nur eine gültig ist (z.B. Kontaktmethode)
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbradio-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground component="radio" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Radio für Einzelauswahl verwenden
+
+Radio-Buttons verwenden, wenn Nutzer:innen genau eine Option aus einer Gruppe wählen müssen. Wenn Mehrfachauswahl erlaubt ist, stattdessen Checkbox verwenden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=1-1132&embed-host=share"
+		description='Eine Radio-Gruppe für sich gegenseitig ausschließende Optionen wie "Deutsch / Englisch / Spanisch" verwenden.'
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=1-1133&embed-host=share"
+		description={'Radio-Buttons nicht für Mehrfachauswahl-Szenarien wie "E-Mail + SMS + Post" verwenden.'}
+	/>
+</div>
+
+### Radio statt Select bevorzugen, wenn Vergleich wichtig ist
+
+Radio verwenden, wenn die Anzahl der Optionen klein ist und Nutzer:innen davon profitieren, alle Optionen gleichzeitig zu sehen. Select verwenden, wenn die Optionen zahlreich sind oder der Bildschirmplatz begrenzt ist.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1110&embed-host=share"
+		description="Radio-Buttons für 2–6 Optionen verwenden, die Nutzer:innen schnell vergleichen sollen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1112&embed-host=share"
+		description="Radio-Buttons nicht für lange Listen verwenden, bei denen Scrollen und Scannen schwierig wird."
+	/>
+</div>
+
+### Kurze, eindeutige Labels schreiben
+
+Labels müssen knapp und klar voneinander unterscheidbar sein. Formulierung einheitlich halten und vage oder sich überschneidende Begriffe vermeiden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1113&embed-host=share"
+		description='Klare Labels wie "Privat", "Geschäftlich", "Beides" verwenden.'
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1114&embed-host=share"
+		description={'Keine unklaren Labels wie "Standard", "Erweitert", "Sonstiges" ohne Kontext verwenden.'}
+	/>
+</div>
+
+### Optionen für einfaches Scannen anordnen
+
+Vertikale Stapelung für Lesbarkeit und Barrierefreiheit bevorzugen. Horizontale Anordnung nur verwenden, wenn es wenige, kurze Optionen gibt und ausreichend Platz vorhanden ist.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1116&embed-host=share"
+		description="Optionen vertikal stapeln und einheitliche Abstände innerhalb der Gruppe einhalten."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1117&embed-host=share"
+		description="Nicht viele Optionen in einer einzelnen horizontalen Reihe platzieren, in der Labels umbrechen oder die Ausrichtung bricht."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<FigmaLearnTeaser componentName="Radio" />
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<DBAccordion>
+	<DBAccordionItem headlinePlain="Wann sollte ich Radio statt Checkbox verwenden?">
+		Radio verwenden, wenn genau eine Option in einer Gruppe ausgewählt werden kann. Checkbox verwenden, wenn Nutzer:innen mehrere unabhängige Optionen auswählen können.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="Wann sollte ich Radio statt Select verwenden?">
+		Radio verwenden, wenn es wenige Optionen gibt und der Vergleich wichtig ist. Select verwenden, wenn es viele Optionen gibt oder der Platz begrenzt ist.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="Sollten Radio-Gruppen immer eine Standardauswahl haben?">
+		Nur wenn es einen sicheren, erwartbaren Standard gibt. Keine Standardauswahl setzen bei Optionen, die eine Zustimmung implizieren oder erhebliche Konsequenzen haben.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="Wie sollte ich Radio-Gruppen validieren?">
+		Auf Gruppenebene validieren. Wenn eine Auswahl erforderlich ist, eine klare Fehlermeldung in der Nähe des Gruppen-Labels anzeigen, die erklärt, was gewählt werden muss.
+	</DBAccordionItem>
+	<DBAccordionItem headlinePlain="Kann ich Radio-Buttons horizontal anordnen?">
+		Ja, aber nur bei einer kleinen Anzahl kurzer Labels. Vertikale Anordnung für Lesbarkeit, Scannbarkeit und responsives Verhalten bevorzugen.
+	</DBAccordionItem>
+</DBAccordion>
+
+<QuestionForm componentName="Radio" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+	## Verwandte Inhalte
+	<TeaserCard
+		teasers={[
+			{
+				title: 'Checkbox',
+				description: 'Mehrfachauswahl-Steuerelement für unabhängige Optionen',
+				url: '/de/dokumentation/komponenten/checkbox',
+			},
+			{
+				title: 'Select',
+				description: 'Dropdown-Steuerelement zur Auswahl einer Option aus vielen',
+				url: '/de/dokumentation/komponenten/select',
+			},
+			{
+				title: 'Switch',
+				description: 'Ein/Aus-Schalter für sofortige Einstellungsänderung',
+				url: '/de/dokumentation/komponenten/switch',
+			},
+		]}
+	/>
+</DBSection>
