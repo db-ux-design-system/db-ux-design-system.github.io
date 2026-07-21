@@ -19,6 +19,9 @@ interface Props {
 
 const { selects, playgroundClass = '', previewId, previewDataDensity } = Astro.props;
 
+const isDE = Astro.url.pathname.startsWith('/de/') || Astro.url.pathname === '/de';
+const tokenHint = isDE ? 'Element fokussieren, um die Tokens zu sehen' : 'Focus the element/elements to see the tokens';
+
 const classes = ['playground', playgroundClass].filter(Boolean).join(' ');
 ---
 
@@ -51,6 +54,6 @@ const classes = ['playground', playgroundClass].filter(Boolean).join(' ');
 		semantic="informational"
 		headline="Token"
 	>
-		Focus the element/elements to see the tokens
+		{tokenHint}
 	</DBNotification>
 </div>

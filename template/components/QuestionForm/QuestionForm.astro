@@ -7,6 +7,8 @@ interface Props {
 
 const { componentName } = Astro.props;
 
+const isDE = Astro.url.pathname.startsWith('/de/') || Astro.url.pathname === '/de';
+
 const subject = componentName ? `Question: ${componentName}` : 'Question about DB UX Design System';
 
 const encodedSubject = encodeURIComponent(subject);
@@ -15,16 +17,21 @@ const fieldId = `question-form-${(componentName ?? 'general')
 	.toLowerCase()
 	.replace(/[^a-z0-9]+/g, '-')
 	.replace(/^-|-$/g, '')}`;
+
+const introText = isDE
+	? `Du hast eine Frage zu ${componentName}? Wir beantworten sie und ergänzen häufig gestellte Fragen auf dieser Seite.`
+	: `Have a question about ${componentName}? We'll answer it and add frequently asked questions to this page.`;
+const labelText = isDE ? 'Deine Frage' : 'Your question';
+const placeholderText = isDE ? 'Frage hier eingeben…' : 'Type your question here…';
+const buttonText = isDE ? 'Dem DB UX Team schreiben' : 'Email the DB UX team';
+const fallbackText = isDE ? 'Oder direkt an' : 'Or write directly to';
 ---
 
-<section class="question-form" aria-label="Question contact">
-	<p>
-		Have a question about {componentName}? We'll answer it and add frequently asked questions to
-		this page.
-	</p>
+<section class="question-form" aria-label={isDE ? 'Fragen-Kontakt' : 'Question contact'}>
+	<p>{introText}</p>
 	<div class="db-textarea" data-variant="above">
-		<label for={fieldId}> Your question </label>
-		<textarea id={fieldId} rows="4" placeholder="Type your question here…"></textarea>
+		<label for={fieldId}>{labelText}</label>
+		<textarea id={fieldId} rows="4" placeholder={placeholderText}></textarea>
 	</div>
 	<button
 		class="db-button"
@@ -35,8 +42,8 @@ const fieldId = `question-form-${(componentName ?? 'general')
 			const body = encodeURIComponent(textarea.value);
 			window.location.href = 'mailto:${mailTo}?subject=${encodedSubject}&body=' + body;
 		`}
-	>Email the DB UX team</button>
+	>{buttonText}</button>
 	<p class="question-form-fallback">
-		Or write directly to <a href={`mailto:${mailTo}`}>{mailTo}</a>
+		{fallbackText} <a href={`mailto:${mailTo}`}>{mailTo}</a>
 	</p>
 </section>

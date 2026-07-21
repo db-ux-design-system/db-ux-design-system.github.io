@@ -82,7 +82,7 @@ const NavItem = ({
 		typeof window !== 'undefined' &&
 		covers(
 			{ path, title, icon, iconTrailing, children, isSubNavigation },
-			toEnSlug(window.location.pathname.replace(/^\/de\//, '').replace(/^\/de$/, '')),
+			'/' + toEnSlug(window.location.pathname.replace(/^\/de\//, '').replace(/^\/de$/, '').replace(/\/+$/, '')),
 		);
 
 	if (isSubNavigation) {
