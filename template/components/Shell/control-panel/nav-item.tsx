@@ -46,7 +46,7 @@ const NavItem = ({
 	const displayTitle = (language === 'de' && titleDe) ? titleDe : title;
 	const localePath = (p: string | undefined) => {
 		if (!p) return p;
-		const trimmed = trimExtension(p);
+		const trimmed = trimExtension(p) ?? p;
 		return language === 'de' ? `/de/${toDeSlug(trimmed)}` : trimmed;
 	};
 	const lockIcon = isProtected ? (
