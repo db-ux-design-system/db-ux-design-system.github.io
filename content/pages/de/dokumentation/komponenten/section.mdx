@@ -4,8 +4,8 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Section'
 title: 'Section'
-description: 'Section trennt und strukturiert Inhaltsbereiche auf einer Seite durch konsistente Abstaende und optionale Breitenbeschraenkungen. Sie hilft, klare visuelle Gruppierung und Rhythmus zu schaffen, ohne Abstände fuer jeden Block manuell verwalten zu muessen.'
-shortDescription: 'Struktureller Container zur Gruppierung von Seiteninhalten mit konsistenten Abstaenden.'
+description: 'Section trennt und strukturiert Inhaltsbereiche auf einer Seite durch konsistente Abstände und optionale Breitenbeschraenkungen. Sie hilft, klare visuelle Gruppierung und Rhythmus zu schaffen, ohne Abstände für jeden Block manuell verwalten zu müssen.'
+shortDescription: 'Struktureller Container zur Gruppierung von Seiteninhalten mit konsistenten Abständen.'
 align: start
 status: 'beta'
 toc: true
@@ -19,9 +19,9 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Zusammengehoerige Inhalte in einen eigenstaendigen Seitenbereich gruppieren (z. B. 'Uebersicht', 'Details', 'Naechste Schritte')
-- Konsistente vertikale Abstaende zwischen grossen Inhaltsbloecken erzeugen
-- Inhaltsbreite fuer Lesbarkeit beschraenken und gleichzeitig Full-Bleed-Hintergruende ermoeglichen
+- Zusammengehoerige Inhalte in einen eigenständigen Seitenbereich gruppieren (z. B. 'Übersicht', 'Details', 'Naechste Schritte')
+- Konsistente vertikale Abstände zwischen grossen Inhaltsbloecken erzeugen
+- Inhaltsbreite für Lesbarkeit beschraenken und gleichzeitig Full-Bleed-Hintergruende ermöglichen
 
 <DBSection spacing="small" width="auto">
 
@@ -39,41 +39,41 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ### Strukturierung
 
-Sections fuer die uebergeordnete Gruppierung von Inhaltsbloecken verwenden. Sie sollten konsistente Abstaende zwischen grossen Bereichen definieren, nicht Mikro-Abstaende zwischen einzelnen Elementen.
+Sections für die übergeordnete Gruppierung von Inhaltsbloecken verwenden. Sie sollten konsistente Abstände zwischen grossen Bereichen definieren, nicht Mikro-Abstände zwischen einzelnen Elementen.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/YER9qlSt9hGtlnFAqe2s7s/Doku--Section-%E2%80%BC%EF%B8%8F?node-id=1-1132&embed-host=share"
-		description="Einen logischen Seitenblock in eine Section einbetten, um Abstaende zu standardisieren."
+		description="Einen logischen Seitenblock in eine Section einbetten, um Abstände zu standardisieren."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/YER9qlSt9hGtlnFAqe2s7s/Doku--Section-%E2%80%BC%EF%B8%8F?node-id=1-1133&embed-host=share"
-		description="Sections nicht als Ersatz fuer kleine Margins/Paddings zwischen zusammengehoerigen Elementen verwenden."
+		description="Sections nicht als Ersatz für kleine Margins/Paddings zwischen zusammengehörigen Elementen verwenden."
 	/>
 </div>
 
-### Abstaende und Breite
+### Abstände und Breite
 
-Spacing- und Width-Optionen so konsistent wie moeglich und passend zum jeweiligen Kontext waehlen.
+Spacing- und Width-Optionen so konsistent wie möglich und passend zum jeweiligen Kontext wählen.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/YER9qlSt9hGtlnFAqe2s7s/Doku--Section-%E2%80%BC%EF%B8%8F?node-id=3-1110&embed-host=share"
-		description="Aus den bereitgestellten Spacing-Presets waehlen, passend zu anderen Seiten und Templates."
+		description="Aus den bereitgestellten Spacing-Presets wählen, passend zu anderen Seiten und Templates."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/YER9qlSt9hGtlnFAqe2s7s/Doku--Section-%E2%80%BC%EF%B8%8F?node-id=3-1112&embed-host=share"
-		description="Visuelle Unruhe durch viele verschiedene Breiten und Abstaende vermeiden."
+		description="Visuelle Unruhe durch viele verschiedene Breiten und Abstände vermeiden."
 	/>
 </div>
 
 ### Barrierefreiheit
 
-Section ist ein Layout-Werkzeug, kein semantischer Ersatz. Sicherstellen, dass Inhalte innerhalb korrekt mit Ueberschriften und Landmarks strukturiert sind, wenn angemessen (z. B. sinnvolle Ueberschriftebenen, ARIA-Landmarks nur bei Bedarf).
+Section ist ein Layout-Werkzeug, kein semantischer Ersatz. Sicherstellen, dass Inhalte innerhalb korrekt mit Überschriften und Landmarks strukturiert sind, wenn angemessen (z. B. sinnvolle Überschriftebenen, ARIA-Landmarks nur bei Bedarf).
 
 </CollapsibleWrapper>
 
@@ -97,12 +97,12 @@ Section ist ein Layout-Werkzeug, kein semantischer Ersatz. Sicherstellen, dass I
 	teasers={[
 		{
 			title: 'Divider',
-			description: 'Visueller Trenner fuer benachbarte Inhaltsbloecke',
+			description: 'Visueller Trenner für benachbarte Inhaltsbloecke',
 			url: '/de/dokumentation/komponenten/divider',
 		},
 		{
 			title: 'Card',
-			description: 'Flaechencontainer mit Abstand und optionalem Hintergrund/Rahmen',
+			description: 'Flächencontainer mit Abstand und optionalem Hintergrund/Rahmen',
 			url: '/de/dokumentation/komponenten/card',
 		},
 	]}
