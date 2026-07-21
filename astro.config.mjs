@@ -15,6 +15,13 @@ import pngToWebpIntegration from './astro-integration-png-to-webp.mjs';
 export default defineConfig({
 	site: appConfig.hostname,
 	base: appConfig.basePath,
+	i18n: {
+		defaultLocale: 'en',
+		locales: ['en', 'de'],
+		routing: {
+			prefixDefaultLocale: false,
+		},
+	},
 	integrations: [
 		react({}),
 		mdx(),

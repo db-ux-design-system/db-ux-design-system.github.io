@@ -5,6 +5,8 @@ import {
 } from '@db-ux/react-core-components';
 import { getAriaCurrent } from '@template/utils/client.utils.ts';
 import { covers, getFirstChildPath, trimExtension } from '@template/utils/navigation.utils.ts';
+import { useLanguage } from '@template/context/language-context';
+import { toDeSlug, toEnSlug } from '@template/i18n/slug-mapping';
 
 const getStatusBadge = (status?: string) => {
 	if (!status || status === 'stable') return null;
@@ -29,6 +31,7 @@ const getStatusBadge = (status?: string) => {
 const NavItem = ({
 	path,
 	title,
+	titleDe,
 	icon,
 	iconTrailing,
 	children,
@@ -39,6 +42,13 @@ const NavItem = ({
 	protected: isProtected,
 	parentStatus,
 }: NavigationItem & { parentStatus?: string }) => {
+	const { language } = useLanguage();
+	const displayTitle = (language === 'de' && titleDe) ? titleDe : title;
+	const localePath = (p: string | undefined) => {
+		if (!p) return p;
+		const trimmed = trimExtension(p) ?? p;
+		return language === 'de' ? `/de/${toDeSlug(trimmed)}` : trimmed;
+	};
 	const lockIcon = isProtected ? (
 		<span
 			data-icon="lock_closed"
@@ -61,7 +71,7 @@ const NavItem = ({
 					rel="noopener noreferrer"
 					style={{ display: 'flex', alignItems: 'center', width: '100%' }}
 				>
-					{title}
+					{displayTitle}
 					{lockIcon}
 				</a>
 			</DBControlPanelNavigationItem>
@@ -72,8 +82,9 @@ const NavItem = ({
 		typeof window !== 'undefined' &&
 		covers(
 			{ path, title, icon, iconTrailing, children, isSubNavigation },
-			window.location.pathname,
+			'/' + toEnSlug(window.location.pathname.replace(/^\/de\//, '').replace(/^\/de$/, '').replace(/\/+$/, '')),
 		);
+
 	if (isSubNavigation) {
 		const target = path ?? getFirstChildPath(children);
 
@@ -84,11 +95,11 @@ const NavItem = ({
 				disabled={disabled}
 			>
 				<a
-					href={trimExtension(target)}
+					href={localePath(target)}
 					aria-current={isActive ? 'page' : undefined}
 					style={{ display: 'flex', alignItems: 'center', width: '100%' }}
 				>
-					{title}
+					{displayTitle}
 					{lockIcon || getStatusBadge(status)}
 				</a>
 			</DBControlPanelNavigationItem>
@@ -98,7 +109,7 @@ const NavItem = ({
 	if (children && children.length > 0) {
 		return (
 			<DBControlPanelNavigationItemGroup
-				text={title}
+				text={displayTitle}
 				endSlot={getStatusBadge(status)}
 				key={`router-group-${path ?? title}`}
 				aria-disabled={disabled ? 'true' : undefined}
@@ -121,11 +132,11 @@ const NavItem = ({
 			disabled={disabled ? true : undefined}
 		>
 			<a
-				href={trimExtension(path)}
-				aria-current={getAriaCurrent(trimExtension(path))}
+				href={localePath(path)}
+				aria-current={getAriaCurrent(localePath(path))}
 				style={{ display: 'flex', alignItems: 'center', width: '100%' }}
 			>
-				{title}
+				{displayTitle}
 				{lockIcon || getStatusBadge(effectiveStatus)}
 			</a>
 		</DBControlPanelNavigationItem>

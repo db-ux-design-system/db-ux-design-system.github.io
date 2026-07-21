@@ -168,6 +168,11 @@ declare interface NavigationItem {
 	 * and displays a lock icon.
 	 */
 	protected?: boolean;
+
+	/**
+	 * Optional German translation of the title, populated from .de.md(x) frontmatter.
+	 */
+	titleDe?: string;
 }
 
 /**

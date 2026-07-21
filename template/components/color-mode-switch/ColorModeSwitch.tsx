@@ -1,12 +1,15 @@
 import { DBSwitch, DBTooltip } from '@db-ux/react-core-components';
 import { useColorMode } from '@template/context/color-mode-context.tsx';
+import { useTranslation } from '@template/i18n';
 
 const ColorModeSwitch = () => {
 	const { colorMode, toggleColorMode } = useColorMode();
+	const { t } = useTranslation();
 	const isDark = colorMode === 'dark';
 
 	return (
 		<DBSwitch
+			label={t('shell.colorModeToggle')}
 			checked={isDark}
 			visualAid
 			icon="sun"
@@ -14,8 +17,8 @@ const ColorModeSwitch = () => {
 			showLabel={false}
 			onChange={toggleColorMode}
 		>
-			<DBTooltip>Switch color scheme (light/dark)</DBTooltip>
-			Switch color scheme (light/dark)
+			<DBTooltip>{t('shell.colorModeToggle')}</DBTooltip>
+			{t('shell.colorModeToggle')}
 		</DBSwitch>
 	);
 };

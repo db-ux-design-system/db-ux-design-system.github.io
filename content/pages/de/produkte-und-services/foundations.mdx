@@ -1,0 +1,44 @@
+---
+order: 1
+layout: '@template/layouts/default'
+title: 'Foundation'
+headline: 'Klarheit von Anfang an'
+description: 'Gemeinsame Basis-Tokens und Modi schaffen ein stabiles Fundament für klare und konsistente Interfaces.'
+heroImage: '/assets/foundations/Foundations--C.png'
+heroImageAlt: 'Foundations Visual'
+sections:
+  - id: 'foundations--base-tokens-section'
+    title: 'Basis-Tokens'
+    text: 'Wiederverwendbare Design-Werte, die systemweit konsistent angewendet werden.'
+    imageSrc: 'assets/foundations/Base-Tokens--Lightmode--C.png'
+    imageSrcDark: 'assets/foundations/Base-Tokens--Darkmode--C.png'
+    imageAlt: 'Diagramm mit Base-Token-Kategorien (Farben, Abstände, Typografie)'
+    imagePosition: 'right'
+  - id: 'foundations--adaptive-colors-section'
+    title: 'Adaptive Farben'
+    text: 'Konsistenter Kontrast und Farbton über verschiedene Farbmodi und Kontexte hinweg.'
+    imageSrc: 'assets/foundations/Adaptive-Colors--Lightmode--C.png'
+    imageSrcDark: 'assets/foundations/Adaptive-Colors--Darkmode--C.png'
+    imageAlt: 'Farbpalette mit adaptiven Farbwechseln zwischen Hell- und Dunkelmodus'
+    imagePosition: 'left'
+  - id: 'foundations--materials-section'
+    title: 'Materialitäten'
+    text: 'Visuelle Hierarchie durch Variationen in Rahmen, Transparenz und Füllung.'
+    imageSrc: 'assets/foundations/Materials--Lightmode--C.png'
+    imageSrcDark: 'assets/foundations/Materials--Darkmode--C.png'
+    imageAlt: 'Geschichtete Flächen mit Elevation, Rahmen und Transparenz-Stilen'
+    imagePosition: 'right'
+  - id: 'foundations--darkmode-section'
+    title: 'Darkmode'
+    text: 'Komfortable und gut lesbare Interfaces in unterschiedlichen Lichtumgebungen.'
+    imageSrc: 'assets/foundations/Darkmode--Lightmode--C.png'
+    imageSrcDark: 'assets/foundations/Darkmode--Darkmode--C.png'
+    imageAlt: 'Vergleich von Interface-Elementen in Hell- und Dunkelmodus'
+    imagePosition: 'left'
+---
+
+import { ContentSections, ContactUsSection } from '@components';
+
+<ContentSections sections={frontmatter.sections} />
+
+<ContactUsSection />

@@ -1,0 +1,181 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Notification'
+title: 'Notification'
+description: 'Notification kommuniziert eine kurze Nachricht über ein Ereignis, eine Zustandsänderung oder System-Feedback, ohne Nutzer:innen zu blockieren. Sie sollte zeitnah, knapp und klar in ihrer Absicht (Info, Erfolg, Warnung, Fehler) mit vorhersehbarem Schließverhalten sein.'
+shortDescription: 'Kurze Nachricht über ein Ereignis, eine Zustandsänderung oder System-Feedback.'
+align: start
+status: 'stable'
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+- Eine Aktion oder Zustandsänderung bestätigen (z.B. „Gespeichert", „Filter angewendet")
+- Über ein nicht-blockierendes Systemereignis informieren (z.B. „Synchronisation läuft", „Neue Version verfügbar")
+- Warnen oder ein Problem melden, das Aufmerksamkeit erfordert, ohne eine sofortige modale Entscheidung zu erzwingen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbnotification-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground component="notification" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Verwendung
+
+Notification für Feedback verwenden, das Nutzer:innen ihre Aufgabe fortsetzen lässt. Wenn die Nachricht eine sofortige Entscheidung erfordert, eine Bestätigung benötigt oder einen kritischen Ablauf blockiert, stattdessen einen Dialog verwenden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=1-1132&embed-host=share"
+		description="Eine Notification nach erfolgreichem Speichern oder Hintergrund-Ergebnis anzeigen, die im Standard-Eck-Stapel mit ruhigem Erfolgs-/Info-Stil erscheint."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=1-1133&embed-host=share"
+		description="Notification nicht zur Bestätigung irreversibler Aktionen oder zum Erzwingen einer Entscheidung verwenden, insbesondere wenn Nutzer:innen antworten müssen, um fortzufahren."
+	/>
+</div>
+
+### Semantik
+
+Semantische Varianten konsistent verwenden: Success für Abschluss, Info für neutrale Updates, Warning für Risiko/Aufmerksamkeit, Error für Fehler, die korrigiert werden müssen. Die Nachricht muss auch ohne Farbe verständlich sein.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=3-1110&embed-host=share"
+		description="Eine Error-Notification für fehlgeschlagene Aktionen verwenden, die erklärt, was passiert ist und was als nächstes zu tun ist, mit einem Error-Icon und klarem Label-Text."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=3-1112&embed-host=share"
+		description="Success-Styling nicht für neutrale Updates verwenden oder sich allein auf Farbe verlassen, um Dringlichkeit oder Bedeutung zu kommunizieren."
+	/>
+</div>
+
+### Inhalt
+
+Nachrichten kurz und handlungsorientiert halten. Angeben, was passiert ist und, falls relevant, den nächsten Schritt. Wenn Details benötigt werden, auf eine dedizierte Oberfläche verlinken (Seite, Panel, Popover).
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=3-1113&embed-host=share"
+		description="Einen optionalen kurzen Titel + einen knappen Satz verwenden und bei Bedarf einen klaren Aktions-Link/Button, in einer einzigen sauberen Zeile."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=3-1114&embed-host=share"
+		description="Keine mehrabsätzigen Erklärungen oder mehrere zusammenhangslose Nachrichten in einem Notification-Block kombinieren."
+	/>
+</div>
+
+### Timing
+
+Schließverhalten an die Dringlichkeit anpassen. Automatisch schließen nur für informelle oder Erfolgs-Nachrichten. Warnungen und Fehler sollten bestehen bleiben, bis sie geschlossen oder behoben werden. Die Schließ-Steuerung konsistent platzieren, wenn sie angezeigt wird.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=3-1116&embed-host=share"
+		description="Success/Info nach der Standarddauer automatisch schließen; Warning/Error persistent mit sichtbarem Schließen-Button halten."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=3-1117&embed-host=share"
+		description="Warnings/Errors nicht automatisch schließen, bevor Nutzer:innen sie lesen oder darauf reagieren können, oder die Position des Schließen-Buttons zwischen Varianten variieren."
+	/>
+</div>
+
+### Platzierung
+
+Notifications dort platzieren, wo sie wahrnehmbar sind, aber keine primären Steuerelemente verdecken. Wenn mehrere Notifications erscheinen, sie konsistent stapeln und die Anzahl der gleichzeitig angezeigten begrenzen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=3-1118&embed-host=share"
+		description="Notifications im Standard-Eck/Bereich mit gleichmäßigem Abstand stapeln und sicherstellen, dass sie Navigation, Formulare oder primäre CTAs nicht überlagern."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=3-1119&embed-host=share"
+		description="Wichtige Aktionen, Formularfelder oder Navigation nicht mit persistenten Stapeln verdecken oder mehrere Nachrichten den Bildschirm gleichzeitig überfluten lassen."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Notification" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+	## Verwandte Inhalte
+	<TeaserCard
+		teasers={[
+			{
+				title: 'Tooltip',
+				description: 'Kurzer kontextueller Hinweis bei Hover oder Fokus',
+				url: '/de/dokumentation/komponenten/tooltip',
+			},
+			{
+				title: 'Popover',
+				description: 'Verankerte Oberfläche für reichhaltigere kontextuelle Inhalte und Aktionen',
+				url: '/documentation/components/popover',
+			},
+			{
+				title: 'Infotext',
+				description: 'Inline-Erklärungstext, der im Layout verbleibt',
+				url: '/de/dokumentation/komponenten/infotext',
+			},
+			{
+				title: 'Dialog',
+				description: 'Modale Oberfläche für kritische Entscheidungen oder blockierende Abläufe',
+				url: '/documentation/components/dialog',
+			},
+			{
+				title: 'Badge',
+				description: 'Kleiner Indikator für Zähler oder Status an einem anderen Element',
+				url: '/de/dokumentation/komponenten/badge',
+			},
+		]}
+	/>
+</DBSection>

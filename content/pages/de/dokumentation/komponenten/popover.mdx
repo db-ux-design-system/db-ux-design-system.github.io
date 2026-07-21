@@ -1,0 +1,133 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Popover'
+title: 'Popover'
+description: 'Popover ist ein schwebendes Element, das an einem Trigger verankert ist und bei Klick oder Hover zusaetzliche, kontextbezogene Inhalte anzeigt. Es unterstützt reichhaltigere Inhalte als ein Tooltip und kann Aktionen enthalten, sollte aber leichtgewichtig und einfach zu schliessen bleiben.'
+shortDescription: 'Schwebendes Overlay für kontextbezogene Inhalte, ausgeloest durch Nutzer:innen-Interaktion.'
+align: start
+status: 'beta'
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+- Kontextbezogene Aktionen oder Einstellungen in der Nähe eines Steuerelements bereitstellen (z. B. 'Weitere Optionen', Schnelleinstellungen)
+- Kurze erklaerende Inhalte mit Links oder kleinen Steuerelementen anzeigen (z. B. Hilfe + 'Mehr erfahren')
+- Kompakte, interaktive Inhalte ohne Seitenwechsel darstellen (z. B. Schnellfilter)
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbpopover-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+    ## Playground
+
+    <ComponentPlayground component="popover" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Popover vs. Tooltip
+
+Popover verwenden, wenn Inhalte zu einem bestimmten Trigger gehoeren und Nutzer:innen möglicherweise damit interagieren müssen. Tooltip für kurze, nicht-interaktive Hinweise bei Hover/Fokus verwenden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/JNtTZmwnMHbHVeh0FhcO1c/Doku--Popover-%E2%80%BC%EF%B8%8F?node-id=1-1132&embed-host=share"
+		description="Ein Popover für eine Reihe zusammengehöriger Optionen verwenden, die an einem Objekt verankert sind."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/JNtTZmwnMHbHVeh0FhcO1c/Doku--Popover-%E2%80%BC%EF%B8%8F?node-id=1-1133&embed-host=share"
+		description="Kein Popover für die Anzeige des Labels eines Icon-Buttons verwenden (stattdessen Tooltip nutzen)."
+	/>
+</div>
+
+### Inhalt
+
+Popover-Inhalte sollten praegnant und scannbar sein. Einen klaren Titel (falls nötig), kurzen Text und eine kleine Anzahl von Aktionen bevorzugen. Dichte Layouts vermeiden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/JNtTZmwnMHbHVeh0FhcO1c/Doku--Popover-%E2%80%BC%EF%B8%8F?node-id=3-1110&embed-host=share"
+		description="Ein Thema mit klarer Hierarchie und einer begrenzten Anzahl von Steuerelementen praesentieren."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/JNtTZmwnMHbHVeh0FhcO1c/Doku--Popover-%E2%80%BC%EF%B8%8F?node-id=3-1112&embed-host=share"
+		description="Nicht mehrere unzusammenhaengende Abschnitte oder grosse, scrolllastige Inhalte in ein Popover packen."
+	/>
+</div>
+
+### Positionierung
+
+Eine Platzierung wählen, die das Popover nah am Trigger und innerhalb des Viewports haelt. Auto-Flip an Raendern ermöglichen und das Verdecken des Triggers oder wichtiger Inhalte vermeiden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/JNtTZmwnMHbHVeh0FhcO1c/Doku--Popover-%E2%80%BC%EF%B8%8F?node-id=3-1113&embed-host=share"
+		description="Standard-Platzierung verwenden und Flipping aktivieren, um das Popover vollstaendig sichtbar zu halten."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/JNtTZmwnMHbHVeh0FhcO1c/Doku--Popover-%E2%80%BC%EF%B8%8F?node-id=3-1114&embed-host=share"
+		description="Keine Platzierung erzwingen, die Clipping verursacht, kritische UI überlappt oder den Trigger verbirgt."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Popover" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Tooltip',
+			description: 'Kurzer, nicht-interaktiver Hinweis bei Hover oder Fokus',
+			url: '/de/dokumentation/komponenten/tooltip',
+		},
+		{
+			title: 'Card',
+			description: 'Strukturierter Container zur Gruppierung zusammengehöriger Inhalte oder Aktionen',
+			url: '/de/dokumentation/komponenten/card',
+		},
+	]}
+/>
+
+</DBSection>

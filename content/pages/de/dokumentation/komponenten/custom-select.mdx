@@ -1,0 +1,175 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Custom Select'
+title: 'Custom Select'
+description: 'Custom Select ist ein erweitertes Dropdown zur Auswahl einer oder mehrerer vordefinierter Optionen mit Unterstuetzung für Suche, Gruppierung und Anzeige ausgewaehlter Werte. Einsetzen, wenn ein einfaches Select aufgrund der Optionsanzahl, Auswahlkomplexitaet oder der besseren Übersicht nicht ausreicht.'
+shortDescription: 'Erweitertes Dropdown mit Suche, Gruppierung und Mehrfachauswahl.'
+align: start
+status: 'beta'
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+- Mehrere Items aus einer laengeren Liste mit optionalem 'Alle auswählen' selektieren
+- Innerhalb der Optionen suchen und filtern, um Werte schnell zu finden
+- Ausgewaehlte Optionen klar verwalten (z. B. Chips/Tags oder Auswahlliste)
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbcustomselect-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+    ## Playground
+
+    <ComponentPlayground component="customSelect" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Custom Select vs. Select
+
+Select für einfache Einzelauswahl-Listen bevorzugen. Custom Select verwenden, wenn Mehrfachauswahl, Suche, Gruppierung oder eine klarere Darstellung mehrerer ausgewaehlter Werte benötigt wird.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select?node-id=1-1132&embed-host=share"
+		description="Custom Select für Mehrfachauswahl mit vielen Optionen oder bei Bedarf von Suche/Gruppierung verwenden."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select?node-id=1-1133&embed-host=share"
+		description="Custom Select nicht für kurze, einfache Einzelauswahl-Listen verwenden, bei denen ein einfaches Select oder Radio klarer ist."
+	/>
+</div>
+
+### Custom Select vs. Radio / Checkbox
+
+Custom Select verwenden, wenn die Liste mehr Optionen enthaelt als klar auf dem Bildschirm darstellbar sind – typischerweise 5 oder mehr. Bei weniger Optionen Radios (Einzelauswahl) oder Checkboxes (Mehrfachauswahl) verwenden, damit Nutzer:innen alle Optionen gleichzeitig sehen und wählen können, ohne ein Dropdown zu oeffnen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select?node-id=4016-10306&embed-host=share"
+		description="Custom Select für 5 oder mehr Auswahloptionen verwenden."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select?node-id=4016-10307&embed-host=share"
+		description="Custom Select nicht für weniger als 5 Auswahloptionen verwenden (in diesem Fall Radios/Checkboxes nutzen)."
+	/>
+</div>
+
+### Einzel- oder Mehrfachauswahl
+
+Frueh entscheiden, ob das Steuerelement Einzelauswahl oder Mehrfachauswahl ist. Wenn Mehrfachauswahl erlaubt ist, dies deutlich machen und das Auswahlverhalten konsistent halten.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select?node-id=3-1110&embed-host=share"
+		description="Mehrfachauswahl verwenden, wenn Nutzer:innen mehrere Filter/Attribute anwenden können; 'Auswahl loeschen'/Reset-Verhalten bereitstellen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select?node-id=3-1112&embed-host=share"
+		description="Mehrfachauswahl nicht verwenden, wenn nur eine Auswahl getroffen werden soll. Einzelauswahl für diesen Fall nutzen."
+	/>
+</div>
+
+### Ausgewaehlte Optionen
+
+Sicherstellen, dass ausgewaehlte Optionen immer leicht überpruefbar sind, ohne die Liste erneut zu oeffnen. Tags mit Entfernen-Buttons für häufige Aenderungen, Anzahl in engen Bereichen (z. B. Tabellen) oder Text für Einzelauswahl verwenden. Dabei die Darstellung immer dem Kontext anpassen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select?node-id=3-1113&embed-host=share"
+		description="Tags verwenden, wenn mehrere Auswahlen später häufig bearbeitet werden."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select?node-id=3-1114&embed-host=share"
+		description="Nicht den Anzahl-Typ für eine Einzelauswahl verwenden; Text oder Tags sind hier besser geeignet."
+	/>
+</div>
+
+### Suche und Gruppierung
+
+Suche aktivieren, wenn die Liste lang ist oder Nutzer:innen wissen, was sie suchen. Gruppierung nur verwenden, wenn sie sinnvolle Kategorien abbildet; Gruppen-Bezeichnungen klar und konsistent halten.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select?node-id=3-1116&embed-host=share"
+		description="Suche für lange Listen bereitstellen und Gruppentitel für eine klare Übersicht verwenden."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select?node-id=3-1117&embed-host=share"
+		description="Die Suchfunktion bei langen Listen nicht verbergen."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<FigmaLearnTeaser componentName="Custom Select" />
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Custom Select" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Select',
+			description: 'Einfaches Einzelauswahl-Dropdown für übersichtliche Optionslisten',
+			url: '/de/dokumentation/komponenten/select',
+		},
+		{
+			title: 'Checkbox',
+			description: 'Mehrfachauswahl-Steuerelement für kurze, sichtbare Optionslisten',
+			url: '/de/dokumentation/komponenten/checkbox',
+		},
+		{
+			title: 'Radio',
+			description: 'Einzelauswahl, wenn Vergleich wichtig ist',
+			url: '/de/dokumentation/komponenten/radio',
+		},
+	]}
+/>
+
+</DBSection>

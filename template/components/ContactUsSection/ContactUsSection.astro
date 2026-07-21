@@ -1,13 +1,19 @@
 ---
 import { DBSection } from '@db-ux/react-core-components';
 import { CTA } from '@components';
+
+const currentPath = Astro.url?.pathname ?? '';
+const isDE = currentPath.startsWith('/de/') || currentPath === '/de';
+
+const title = isDE ? 'Schneller vorankommen mit gemeinsamen Standards.' : 'Move faster with shared standards.';
+const label = isDE ? 'Kontakt aufnehmen' : 'Contact Us';
 ---
 
 <DBSection width="medium" spacing="medium" id="contact-us-section">
 	<CTA
-		title="Move faster with shared standards."
+		title={title}
 		primaryAction={{
-			label: 'Contact Us',
+			label,
 			href: `mailto:db-ux-designsystem@deutschebahn.com`,
 			variant: 'brand',
 		}}

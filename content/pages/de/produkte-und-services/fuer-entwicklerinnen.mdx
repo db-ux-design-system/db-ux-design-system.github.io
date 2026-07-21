@@ -1,0 +1,46 @@
+---
+order: 7
+layout: '@template/layouts/default'
+title: 'Für Entwickler:innen'
+headline: 'Konsistent implementieren'
+description: 'Ein gemeinsames Komponentensystem, das die Umsetzung beschleunigt und Entscheidungsaufwand reduziert.'
+heroImage: '/assets/for-developer/For-Developer--C.png'
+heroImageAlt: 'Für Entwickler:innen Visual'
+sections:
+  - id: 'for-developer--efficient-workflows-section'
+    title: 'Effiziente Workflows'
+    text: 'Stabile Komponenten wiederverwenden und repetitiven Implementierungsaufwand reduzieren.'
+    imageSrc: 'assets/for-developer/Efficient-Workflows--Lightmode--C.png'
+    imageSrcDark: 'assets/for-developer/Efficient-Workflows--Darkmode--C.png'
+    imageAlt: 'Code-Editor und Komponentenbibliothek für schnelleres Arbeiten'
+    imagePosition: 'right'
+    mask: 'fade-right'
+    ariaLabel: 'Für Entwickler:innen Bereich'
+  - id: 'for-developer--flexible-integration-section'
+    title: 'Flexible Integration'
+    text: 'Varianten und Tokens für Produktanforderungen anpassen, ohne vom System abzuweichen.'
+    imageSrc: 'assets/for-developer/Flexible-Integration--Lightmode--C.png'
+    imageSrcDark: 'assets/for-developer/Flexible-Integration--Darkmode--C.png'
+    imageAlt: 'Konfigurationspanel mit Integrations- und Anpassungsoptionen'
+    imagePosition: 'left'
+  - id: 'for-developer--predictable-maintenance-section'
+    title: 'Planbare Wartung'
+    text: 'Geplante Updates und stabile Versionierung ermöglichen vorausschauende Planung.'
+    imageSrc: 'assets/for-developer/Predictable-Maintenance--Lightmode--C.png'
+    imageSrcDark: 'assets/for-developer/Predictable-Maintenance--Darkmode--C.png'
+    imageAlt: 'Versions-Timeline und Update-Badges für planbare Wartung'
+    imagePosition: 'right'
+  - id: 'for-developer--smooth-handoff-section'
+    title: 'Reibungslose Übergabe'
+    text: 'Abgestimmte Spezifikationen und gemeinsame Modelle reduzieren Unklarheiten zwischen Design und Entwicklung.'
+    imageSrc: 'assets/for-developer/Smooth-Handoff--Lightmode--C.png'
+    imageSrcDark: 'assets/for-developer/Smooth-Handoff--Darkmode--C.png'
+    imageAlt: 'Gemeinsame Spezifikation als Brücke zwischen Design und Entwicklung'
+    imagePosition: 'left'
+---
+
+import { ContentSections, ContactUsSection } from '@components';
+
+<ContentSections sections={frontmatter.sections} />
+
+<ContactUsSection />

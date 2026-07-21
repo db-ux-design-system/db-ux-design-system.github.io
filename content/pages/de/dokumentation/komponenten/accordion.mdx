@@ -1,0 +1,153 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Accordion'
+title: 'Accordion'
+description: 'Accordions gruppieren Inhalte in ausklappbare Abschnitte, um Platz zu sparen und Nutzer:innen Details schrittweise anzeigen zu lassen. Sie eignen sich für optionale Informationen und strukturierte Inhalte, bei denen nicht alles gleichzeitig sichtbar sein muss.'
+shortDescription: 'Ausklappbare Abschnitte zum Platzsparen und schrittweisen Anzeigen von Details.'
+align: start
+status: 'beta'
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+- FAQs oder Hilfeinhalte darstellen, bei denen Nutzer:innen nur das Relevante öffnen
+- Optionale Details hinter klaren Überschriften verbergen (Progressive Disclosure)
+- Lesbarkeit verbessern, wenn eine Seite viele Inhaltsabschnitte enthält
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbaccordion-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+    ## Playground
+
+    <ComponentPlayground component="accordion" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Ausklappbare Inhalte
+
+Accordions eignen sich für optionale, erweiterbare Inhalte. Wenn Nutzer:innen mehrere Abschnitte vergleichen oder alles gleichzeitig sehen müssen, sind sichtbare Listen, Sections oder Cards besser geeignet.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion?node-id=1-1132&embed-host=share"
+		description="Accordions für FAQs oder Detail-Inhalte verwenden, die Nutzer:innen bei Bedarf oeffnen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion?node-id=1-1133&embed-host=share"
+		description="Accordions nicht verwenden, wenn Nutzer:innen alle Abschnitte gleichzeitig scannen oder vergleichen müssen."
+	/>
+</div>
+
+### Formulierung der Überschriften
+
+Überschriften müssen den Inhalt beschreiben und kurz sowie scannbar bleiben. Generische Bezeichnungen und das Wiederholen desselben Wortes in allen Items vermeiden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion?node-id=3-1110&embed-host=share"
+		description="Beschreibende Überschriften verwenden und scannbar halten."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion?node-id=3-1112&embed-host=share"
+		description="Vage Überschriften wie 'Information 1/2/3' oder 'Mehr Details' vermeiden."
+	/>
+</div>
+
+### Varianten-Verwendung
+
+Eine Accordion-Variante pro Seite/Bereich wählen und konsistent anwenden. Das Mischen von Varianten erschwert das Scannen und schwächt die Hierarchie.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion?node-id=3-1113&embed-host=share"
+		description="Einen einheitlichen visuellen Stil für alle Accordion-Items im selben Container verwenden."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion?node-id=3-1114&embed-host=share"
+		description="Verschiedene Accordion-Varianten innerhalb derselben Liste nicht ohne klaren Grund mischen."
+	/>
+</div>
+
+### Verschachtelung
+
+Verschachtelte Accordions werden schnell schwer verständlich und navigierbar. Falls Verschachtelung unvermeidbar ist, flach halten und auf klare Hierarchie und Abstände achten.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion?node-id=3-1116&embed-host=share"
+		description="Eine flache und einfache Struktur bereitstellen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion?node-id=3-1117&embed-host=share"
+		description="Keine mehrstufigen Accordion-Baeume bauen, die wichtige Informationen verbergen und Nutzer:innen verwirren."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<FigmaLearnTeaser componentName="Accordion" />
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Accordion" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Card',
+			description: 'Gruppiert zusammengehörige Inhalte auf einer Fläche mit Abstand und optionalem Header',
+			url: '/de/dokumentation/komponenten/card',
+		},
+		{
+			title: 'Divider',
+			description: 'Trennt benachbarte Inhaltsbloecke visuell ohne sie zu reduzieren',
+			url: '/de/dokumentation/komponenten/divider',
+		},
+	]}
+/>
+
+</DBSection>

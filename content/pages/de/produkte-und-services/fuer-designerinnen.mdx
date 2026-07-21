@@ -1,0 +1,45 @@
+---
+order: 6
+layout: '@template/layouts/default'
+title: 'Für Designer:innen'
+headline: 'Sicher gestalten'
+description: 'Ein gemeinsames System, das klare Entscheidungen und konsistente Interfaces teamübergreifend unterstützt.'
+heroImage: '/assets/for-designer/For-Designer--C.png'
+heroImageAlt: 'Für Designer:innen Visual'
+sections:
+  - id: 'for-designer--consistent-results-section'
+    title: 'Konsistente Ergebnisse'
+    text: 'Eine gemeinsame Designsprache und vorhersagbare Ergebnisse über alle Produkte und Geräte.'
+    imageSrc: 'assets/for-designer/Consistent-Results--Lightmode--C.png'
+    imageSrcDark: 'assets/for-designer/Consistent-Results--Darkmode--C.png'
+    imageAlt: 'Screens mit einheitlichen Interface-Layouts über verschiedene Geräte'
+    imagePosition: 'right'
+    ariaLabel: 'Für Designer:innen Bereich'
+  - id: 'for-designer--flexible-choices-section'
+    title: 'Flexible Gestaltung'
+    text: 'Komponenten und Tokens kontextgerecht anpassen, ohne die Konsistenz zu verlieren.'
+    imageSrc: 'assets/for-designer/Flexible-Choices--Lightmode--C.png'
+    imageSrcDark: 'assets/for-designer/Flexible-Choices--Darkmode--C.png'
+    imageAlt: 'Komponentenvarianten mit anpassbaren Design-Optionen'
+    imagePosition: 'left'
+  - id: 'for-designer--reliable-quality-section'
+    title: 'Verlässliche Qualität'
+    text: 'Geprüfte Patterns reduzieren Fehler und Nacharbeit.'
+    imageSrc: 'assets/for-designer/Reliable-Quality--Lightmode--C.png'
+    imageSrcDark: 'assets/for-designer/Reliable-Quality--Darkmode--C.png'
+    imageAlt: 'Checkliste und UI-Beispiele für Qualitätssicherung'
+    imagePosition: 'right'
+  - id: 'for-designer--smooth-handoff-section'
+    title: 'Reibungslose Übergabe'
+    text: 'Klare Spezifikationen und gemeinsame Grundlagen für effiziente Zusammenarbeit mit Entwickler:innen.'
+    imageSrc: 'assets/for-designer/Smooth-Handoff--Lightmode--C.png'
+    imageSrcDark: 'assets/for-designer/Smooth-Handoff--Darkmode--C.png'
+    imageAlt: 'Design-to-Code-Übergabe mit Spezifikationen und Komponenten'
+    imagePosition: 'left'
+---
+
+import { ContentSections, ContactUsSection } from '@components';
+
+<ContentSections sections={frontmatter.sections} />
+
+<ContactUsSection />

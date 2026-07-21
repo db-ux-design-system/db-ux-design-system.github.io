@@ -1,0 +1,124 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Header'
+title: 'Header'
+description: 'Header definiert den oberen Bereich einer Seite und bietet konsistenten Zugang zu Markenidentitaet, primärer Navigation und optionalen Aktionen. Er verankert die Orientierung und unterstützt Navigationsmuster über responsive Layouts hinweg, mit optionaler Meta-Navigation oberhalb der Hauptleiste.'
+shortDescription: 'Oberer Bereich mit Markenidentitaet, primärer Navigation und optionalen Aktionen.'
+align: start
+status: 'beta'
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Globale Navigationseinstiegspunkte und Kontext zum aktuellen Standort bieten
+- Schnellen Zugriff auf häufige Aktionen wie Suche, Menue oder Profil ermöglichen
+- Markenpraesenz konsistent über Seiten und Breakpoints hinweg verstaerken
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbheader-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Konsistente Struktur
+
+Die Standardreihenfolge verwenden: Markenbereich mit Logo und Name, primäre Navigation, dann Aktionen. Meta-Navigation nur hinzufuegen, wenn sie einem eigenständigen, sekundaeren Zweck dient und nicht mit der primären Navigation konkurriert.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/SAbMEPHY6sZfqYvL2OPuk9/Doku--Header-%E2%80%BC%EF%B8%8F?node-id=1-1132&embed-host=share"
+		description="Logo links, primäre Navigation mittig oder rechts, Aktionen gruppiert ganz rechts platzieren."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/SAbMEPHY6sZfqYvL2OPuk9/Doku--Header-%E2%80%BC%EF%B8%8F?node-id=1-1133&embed-host=share"
+		description="Logo, Navigation und Aktionen nicht willkuerlich verteilen oder Meta-Navigation prominenter als primäre Navigation platzieren."
+	/>
+</div>
+
+### Navigation vs. Aktionen
+
+Primäre Navigation ist für Ziele; Aktionen sind für sofortige Operationen wie Suche, Benutzermenü oder Einstellungen. Aktionen visuell gruppieren und Ziele nicht als Aktionen duplizieren.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/SAbMEPHY6sZfqYvL2OPuk9/Doku--Header-%E2%80%BC%EF%B8%8F?node-id=3-1113&embed-host=share"
+		description="Icon-Buttons für Aktionen verwenden und Ziel-Links im Navigationsbereich belassen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/SAbMEPHY6sZfqYvL2OPuk9/Doku--Header-%E2%80%BC%EF%B8%8F?node-id=3-1114&embed-host=share"
+		description="Navigationsziele nicht in den Aktionsbereich setzen oder Aktionen in die Navigationsliste mischen."
+	/>
+</div>
+
+### Externe Links kennzeichnen
+
+Wenn die Meta-Navigation externe Links enthaelt, klar kommunizieren, dass sie die Anwendung verlassen – mit Label oder Icon wie definiert – und konsistentes Verhalten sicherstellen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/SAbMEPHY6sZfqYvL2OPuk9/Doku--Header-%E2%80%BC%EF%B8%8F?node-id=3-1110&embed-host=share"
+		description="Externe Ziele klar kennzeichnen und die Interaktion konsistent über den Header halten."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/SAbMEPHY6sZfqYvL2OPuk9/Doku--Header-%E2%80%BC%EF%B8%8F?node-id=3-1112&embed-host=share"
+		description="Externes Verhalten nicht verbergen oder externe und interne Links ohne klare Kennzeichnung mischen."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Header" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Navigation',
+			description: 'Primäres Muster für die Bewegung zwischen Zielen',
+			url: '/de/dokumentation/komponenten/navigation',
+		},
+		{
+			title: 'Link',
+			description: 'Inline-Navigationselement, das innerhalb von Header-Items verwendet wird',
+			url: '/de/dokumentation/komponenten/link',
+		},
+	]}
+/>
+
+</DBSection>

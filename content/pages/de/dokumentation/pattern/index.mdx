@@ -1,0 +1,17 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Patterns'
+headline: 'Patterns'
+order: 4
+align: start
+toc: true
+description: 'Eine Übersicht aller verfügbaren Patterns im Design System.'
+---
+import { DBSection } from '@db-ux/react-core-components';
+import ChildPageOverview from '@template/components/ChildPageOverview/ChildPageOverview.astro';
+
+<DBSection spacing="small" width="auto">
+<ChildPageOverview parentPath="de/dokumentation/pattern" headlineLevel={2} />
+</DBSection>

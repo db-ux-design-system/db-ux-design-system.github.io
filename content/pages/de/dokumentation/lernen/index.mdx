@@ -1,0 +1,17 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Lernen'
+headline: 'Lernen'
+description: 'Praktische Anleitungen und Tutorials für die Arbeit mit dem DB UX Design System.'
+align: start
+order: 6
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import ChildPageOverview from '@template/components/ChildPageOverview/ChildPageOverview.astro';
+
+<DBSection spacing="small" width="auto">
+<ChildPageOverview parentPath="de/dokumentation/lernen" columns={1} headlineLevel={2} />
+</DBSection>
