@@ -108,6 +108,19 @@ Structure and tone for release notes, based on [Keep a Changelog](https://keepac
 - An exception might be simple entries, like e.g. Icons – do not added redundancy by sentences like "New icons for social media platforms have been added.", as this is even already in the `##### Added` section, but list the new icons instead.
 - End every bullet point with a period – release notes entries are full sentences
 
+### Breaking Changes
+
+- Mark breaking changes with `**BREAKING CHANGE**` at the start of the entry, before the component name
+- Format: `- **BREAKING CHANGE** ComponentName: Description of the change.`
+- For visual-only breaking changes, use: `- **BREAKING CHANGE** (visual) ComponentName: Description.`
+- When a change affects both Design and Development, place it under "Design & Development" with sub-bullets for discipline-specific details:
+  ```
+  - **BREAKING CHANGE** Drawer: The layout structure has been standardized.
+    - Design: Existing instances are reset after updating.
+    - Development: Some properties have changed.
+  ```
+- Do not repeat the same component under a discipline-specific section if it is already covered under "Design & Development"
+
 ### Links & References
 
 - Commit or PR links are optional and only useful for development entries with technical depth
