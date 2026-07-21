@@ -4,7 +4,8 @@ import { DBButton, DBInput, DBTooltip } from '@db-ux/react-core-components';
 import iconDescriptions from '@db-ux/db-theme-icons/build/assets/descriptions.json';
 import './icons.css';
 
-const frontmatter: DocumentationFrontMatter = {
+// eslint-disable-next-line astro/no-exports-from-components -- Exported for ChildPageOverview glob
+export const frontmatter: DocumentationFrontMatter = {
 	layout: '@template/layouts/documentation',
 	sectionSpacing: 'small',
 	sectionWidth: 'auto',
