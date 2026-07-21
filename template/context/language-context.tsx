@@ -4,7 +4,6 @@ export type Language = 'en' | 'de';
 
 interface LanguageContextValue {
 	language: Language;
-	toggleLanguage: () => void;
 }
 
 const LanguageContext = createContext<LanguageContextValue | undefined>(undefined);
@@ -22,18 +21,7 @@ interface LanguageProviderProps {
 export const LanguageProvider = ({ pathname, children }: LanguageProviderProps) => {
 	const language = useMemo(() => deriveLanguage(pathname), [pathname]);
 
-	const toggleLanguage = () => {
-		const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/';
-
-		if (language === 'en') {
-			window.location.href = '/de' + currentPath;
-		} else {
-			const enPath = currentPath.replace(/^\/de/, '') || '/';
-			window.location.href = enPath;
-		}
-	};
-
-	const value: LanguageContextValue = { language, toggleLanguage };
+	const value: LanguageContextValue = { language };
 
 	return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 };
@@ -42,7 +30,7 @@ export const useLanguage = (): LanguageContextValue => {
 	const ctx = useContext(LanguageContext);
 	if (!ctx) {
 		// Fallback for components used outside LanguageProvider (e.g. in DemoShell)
-		return { language: 'en', toggleLanguage: () => {} };
+		return { language: 'en' };
 	}
 	return ctx;
 };

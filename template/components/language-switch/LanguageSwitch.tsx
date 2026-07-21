@@ -20,7 +20,7 @@ const LanguageSwitch = () => {
 				</DBButton>
 			}
 		>
-			<nav aria-label="Language selection" style={{ width: '100%' }}>
+			<nav aria-label={language === 'de' ? 'Sprachauswahl' : 'Language selection'} style={{ width: '100%' }}>
 				<DBControlPanelNavigationItem active={language === 'en'} style={{ width: '100%' }}>
 					<a href={enPath}>English</a>
 				</DBControlPanelNavigationItem>

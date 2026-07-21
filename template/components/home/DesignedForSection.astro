@@ -2,6 +2,10 @@
 import { appConfig } from '@config';
 import { DBCard, DBSection } from '@db-ux/react-core-components';
 import { SectionTitle, TextImage } from '@components';
+import { toDeSlug } from '@template/i18n/slug-mapping';
+
+const isDE = Astro.url.pathname.startsWith('/de/') || Astro.url.pathname === '/de';
+const localizeHref = (enPath: string) => isDE ? `/de/${toDeSlug(enPath)}` : `${appConfig.basePath}${enPath}`;
 
 interface Props {
 	sectionTitle?: string;
@@ -46,7 +50,7 @@ const {
 	/>
 	<div class="cards-row-fixed">
 		<a
-			href={`${appConfig.basePath}${linkPrefix}products-and-services/for-productmanagement`}
+			href={localizeHref("products-and-services/for-productmanagement")}
 			aria-label="Open for productmanagement page"
 		>
 			<DBCard behavior="interactive" data-color="violet" spacing="large">
@@ -67,7 +71,7 @@ const {
 			</DBCard>
 		</a>
 		<a
-			href={`${appConfig.basePath}${linkPrefix}products-and-services/for-developer`}
+			href={localizeHref("products-and-services/for-developer")}
 			aria-label="Open for developer page"
 		>
 			<DBCard behavior="interactive" data-color="green" spacing="large">
@@ -89,7 +93,7 @@ const {
 		</a>
 
 		<a
-			href={`${appConfig.basePath}${linkPrefix}products-and-services/for-designer`}
+			href={localizeHref("products-and-services/for-designer")}
 			aria-label="Open for designer page"
 		>
 			<DBCard behavior="interactive" data-color="blue" spacing="large">

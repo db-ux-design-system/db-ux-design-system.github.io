@@ -2,6 +2,7 @@
 import { appConfig } from '@config';
 import { DBCard, DBSection, DBStack } from '@db-ux/react-core-components';
 import { SectionTitle, TextImage, DisabledWrapper } from '@components';
+import { toDeSlug } from '@template/i18n/slug-mapping';
 
 interface Props {
 	sectionTitle?: string;
@@ -19,6 +20,9 @@ interface Props {
 	comingSoonLabel?: string;
 	linkPrefix?: string;
 }
+
+const isDE = Astro.url.pathname.startsWith('/de/') || Astro.url.pathname === '/de';
+const localizeHref = (enPath: string) => isDE ? `/de/${toDeSlug(enPath)}` : `${appConfig.basePath}${enPath}`;
 
 const {
 	sectionTitle = 'A unified model for product teams',
@@ -50,7 +54,7 @@ const {
 	/>
 	<DBStack gap="large">
 		<a
-			href={`${appConfig.basePath}${linkPrefix}products-and-services/foundations`}
+			href={localizeHref("products-and-services/foundations")}
 			aria-label="Open Foundations page"
 		>
 			<DBCard behavior="interactive" spacing="large">
@@ -67,7 +71,7 @@ const {
 			</DBCard>
 		</a>
 		<a
-			href={`${appConfig.basePath}${linkPrefix}products-and-services/components`}
+			href={localizeHref("products-and-services/components")}
 			aria-label="Open Components page"
 		>
 			<DBCard behavior="interactive" spacing="large">
@@ -84,7 +88,7 @@ const {
 			</DBCard>
 		</a>
 		<a
-			href={`${appConfig.basePath}${linkPrefix}products-and-services/extensions`}
+			href={localizeHref("products-and-services/extensions")}
 			aria-label="Open Extensions page"
 		>
 			<DBCard behavior="interactive" spacing="large">
