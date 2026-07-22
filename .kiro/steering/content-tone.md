@@ -45,7 +45,17 @@ Both Do and Dont use imperative (direct address):
 - **Do:** "Verwende eine Badge, um Status neben einem Listenelement anzuzeigen."
 - **Dont:** "Setze eine Badge nicht als einzigen Hinweis für kritische Informationen ein."
 
-Structure: Verb (Imperativ) + Objekt + "nicht" + Rest. The negation sits naturally after the object, not at the start of the sentence.
+Structure: Verb (Imperativ) + Objekt + "nicht" + Rest. The negation sits naturally after the object, not at the start of the sentence. Never start with "Nicht..." — always lead with the verb.
+
+### German Guideline Intro Texts
+
+The short paragraph above Do/Dont images must read as a natural German sentence. Never use bare infinitive constructions without a subject — these read like bullet-point fragments, not prose.
+
+- **Bad:** "Für Links im Fließtext Text-Link-Styles statt der eigenständigen Link-Komponente verwenden."
+- **Good:** "Verwende für Links im Fließtext Text-Link-Styles statt der eigenständigen Link-Komponente."
+- **Also good:** "Für Links im Fließtext eignen sich Text-Link-Styles besser als die eigenständige Link-Komponente."
+
+Rule: Every guideline intro paragraph must have a clear subject or start with an imperative verb. No dangling infinitives at the end of a sentence.
 
 ## Release Notes Tone
 

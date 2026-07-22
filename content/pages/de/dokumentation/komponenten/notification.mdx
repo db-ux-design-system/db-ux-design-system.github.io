@@ -50,7 +50,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 ### Verwendung
 
-Notification für Feedback verwenden, das Nutzer:innen ihre Aufgabe fortsetzen lässt. Wenn die Nachricht eine sofortige Entscheidung erfordert, eine Bestätigung benötigt oder einen kritischen Ablauf blockiert, stattdessen einen Dialog verwenden.
+Verwende Notification für Feedback, das Nutzer:innen ihre Aufgabe fortsetzen lässt. Wenn die Nachricht eine sofortige Entscheidung erfordert, eine Bestätigung benötigt oder einen kritischen Ablauf blockiert, verwende stattdessen einen Dialog.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -67,7 +67,7 @@ Notification für Feedback verwenden, das Nutzer:innen ihre Aufgabe fortsetzen l
 
 ### Semantik
 
-Semantische Varianten konsistent verwenden: Success für Abschluss, Info für neutrale Updates, Warning für Risiko/Aufmerksamkeit, Error für Fehler, die korrigiert werden müssen. Die Nachricht muss auch ohne Farbe verständlich sein.
+Verwende semantische Varianten konsistent: Success für Abschluss, Info für neutrale Updates, Warning für Risiko/Aufmerksamkeit, Error für Fehler, die korrigiert werden müssen. Die Nachricht muss auch ohne Farbe verständlich sein.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -84,7 +84,7 @@ Semantische Varianten konsistent verwenden: Success für Abschluss, Info für ne
 
 ### Inhalt
 
-Nachrichten kurz und handlungsorientiert halten. Angeben, was passiert ist und, falls relevant, den nächsten Schritt. Wenn Details benötigt werden, auf ein dediziertes Interface verlinken (Seite, Panel, Popover).
+Halte Nachrichten kurz und handlungsorientiert. Gib an, was passiert ist und, falls relevant, den nächsten Schritt. Wenn Details benötigt werden, verlinke auf ein dediziertes Interface (Seite, Panel, Popover).
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -101,7 +101,7 @@ Nachrichten kurz und handlungsorientiert halten. Angeben, was passiert ist und, 
 
 ### Timing
 
-Schließverhalten an die Dringlichkeit anpassen. Automatisch schließen nur für informelle oder Erfolgs-Nachrichten. Warnungen und Fehler sollten bestehen bleiben, bis sie geschlossen oder behoben werden. Die Schließ-Steuerung konsistent platzieren, wenn sie angezeigt wird.
+Passe das Schließverhalten an die Dringlichkeit an. Schließe automatisch nur informelle oder Erfolgs-Nachrichten. Warnungen und Fehler sollten bestehen bleiben, bis sie geschlossen oder behoben werden. Platziere die Schließ-Steuerung konsistent, wenn sie angezeigt wird.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -112,13 +112,13 @@ Schließverhalten an die Dringlichkeit anpassen. Automatisch schließen nur für
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/CI4pJdjNIxXeNS5RFUqjpK/Doku--Notification?node-id=3-1117&embed-host=share"
-		description="Schließe Warnings/Errors nicht automatisch, bevor Nutzer:innen sie lesen oder darauf reagieren können, oder variiere die Position des Schließen-Buttons zwischen Varianten."
+		description="Schließe Warnings und Errors nicht automatisch, bevor Nutzer:innen sie lesen können, und variiere die Position des Schließen-Buttons nicht zwischen Varianten."
 	/>
 </div>
 
 ### Platzierung
 
-Notifications dort platzieren, wo sie wahrnehmbar sind, aber keine primären Steuerelemente verdecken. Wenn mehrere Notifications erscheinen, sie konsistent stapeln und die Anzahl der gleichzeitig angezeigten begrenzen.
+Platziere Notifications dort, wo sie wahrnehmbar sind, aber keine primären Steuerelemente verdecken. Wenn mehrere Notifications erscheinen, staple sie konsistent und begrenze die Anzahl der gleichzeitig angezeigten.
 
 <div className="guideline-examples">
 	<GuidelineExample
