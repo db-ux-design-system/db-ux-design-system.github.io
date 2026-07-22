@@ -3,14 +3,13 @@
  * scoped to prose/markdown content only. */
 .dba-main-content {
 	h3 {
-		margin-block-start: var(--db-spacing-fixed-2xl);
-		margin-block-end: var(--db-spacing-fixed-lg);
+		margin-block: var(--db-spacing-fixed-2xl) var(--db-spacing-fixed-lg);
 	}
+
 	h4,
 	h5,
 	h6 {
-		margin-block-start: var(--db-spacing-fixed-lg);
-		margin-block-end: var(--db-spacing-fixed-sm);
+		margin-block: var(--db-spacing-fixed-lg) var(--db-spacing-fixed-sm);
 	}
 }
 
