@@ -79,7 +79,7 @@ export function TableOfContents(props: Props): ReactElement | null {
 	};
 
 	return (
-		<aside className="dba-toc">
+		<aside className="dba-toc" aria-label="Table of contents">
 			<div ref={indicatorRef} className="dba-toc-indicator" />
 			<ul ref={listRef}>
 				{filteredHeadings.map(({ depth, slug, text }, index) => {

@@ -4,6 +4,8 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Custom Select'
 title: 'Custom Select'
+description: 'Custom Select is an advanced dropdown for choosing one or multiple predefined options with support for search, grouping, and showing selected values. Use it when a basic select is not sufficient due to option volume, selection complexity, or the need for better scanning and management of chosen items.'
+shortDescription: 'Advanced dropdown with search, grouping, and multi-selection support.'
 align: start
 status: 'beta'
 toc: true
@@ -16,9 +18,8 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
-
-Custom Select is an advanced dropdown for choosing one or multiple predefined options with support for search, grouping, and showing selected values. Use it when a basic select is not sufficient due to option volume, selection complexity, or the need for better scanning and management of chosen items.
 
 - Select multiple items from a longer list with optional "Select all"
 - Search and filter within options to quickly find values
@@ -46,7 +47,7 @@ Custom Select is an advanced dropdown for choosing one or multiple predefined op
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-### Custom Select vs Select
+### Custom Select vs. Select
 
 Prefer select for simple single-choice lists. Use custom select when you need multi-select, search, grouping, or a clearer representation of multiple selected values.
 
@@ -63,7 +64,7 @@ Prefer select for simple single-choice lists. Use custom select when you need mu
 	/>
 </div>
 
-### Custom Select vs Radio / Checkbox
+### Custom Select vs. Radio / Checkbox
 
 Use custom select when the list contains more options than can be shown clearly on screen—typically five or more. For fewer options, use radios (single selection) or checkboxes (multiple selection) so users can see and choose all options at once without opening a dropdown.
 
@@ -137,11 +138,11 @@ Enable search when the list is long or users know what they want. Use grouping o
 
 </DBSection>
 
+<FigmaLearnTeaser componentName="Custom Select" />
+
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the custom select component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Custom Select" />
 

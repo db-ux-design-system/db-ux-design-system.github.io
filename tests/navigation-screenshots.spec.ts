@@ -17,7 +17,11 @@ function collectAllPaths(items: NavigationItem[]): string[] {
 
 const response = await fetch('http://localhost:4321/api/app-navigation.json');
 const appNavigation = await response.json();
-const allPaths = [...collectAllPaths(appNavigation), 'demo-b2b', 'demo-b2c'];
+// These are redirect path, that we don't want to collect in the allPaths object. In case that those become "real" pages, remove them from the `redirectPaths` array
+const redirectPaths = ['documentation/extensions', 'documentation/support'];
+const allPaths = [...collectAllPaths(appNavigation), 'demo-b2b', 'demo-b2c'].filter(
+	(path) => !redirectPaths.includes(path),
+);
 
 const pageMasks: Record<string, string> = {
 	'about-us': '.avatar-viewer',
@@ -45,18 +49,21 @@ export const waitForDBShell = async (page: Page) => {
 		element.style.transition = 'none';
 	});
 	await expect(dbPage).toHaveCSS('opacity', '1');
+	await expect(dbPage).not.toHaveAttribute('data-fonts-loaded', 'false');
 };
 
 export const setScrollViewport = async (page: Page) => {
 	const header = await page.waitForSelector('.db-control-panel-desktop');
 
 	const headerHeight: number = await header.evaluate((node) => Number(node?.scrollHeight ?? 72));
-	const main = await page.waitForSelector('.db-main');
+	const shellContent = await page.waitForSelector('.db-shell-content');
 
-	const mainHeight: number = await main.evaluate((node) => Number(node?.scrollHeight ?? 2500));
+	const shellContentHeight: number = await shellContent.evaluate((node) =>
+		Number(node?.scrollHeight ?? 2500),
+	);
 
 	const width = page.viewportSize()?.width ?? 0;
-	const height = headerHeight + mainHeight;
+	const height = headerHeight + shellContentHeight;
 
 	await page.setViewportSize({
 		width,

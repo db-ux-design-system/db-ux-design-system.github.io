@@ -6,5 +6,12 @@ title: 'Releases'
 headline: 'Releases'
 description: 'Everything about releases, versioning, content status, and migration guides for the DB UX Design System.'
 align: start
-order: 6
+order: 7
 ---
+
+import { DBSection } from '@db-ux/react-core-components';
+import ChildPageOverview from '@template/components/ChildPageOverview/ChildPageOverview.astro';
+
+<DBSection spacing="small" width="auto">
+<ChildPageOverview parentPath="documentation/releases" columns={2} headlineLevel={2} />
+</DBSection>

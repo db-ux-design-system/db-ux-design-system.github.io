@@ -1,4 +1,3 @@
-.db-sub-navigation,
 .dba-side-nav {
 	.db-navigation-item {
 		a[aria-current='page'] {
@@ -115,4 +114,35 @@
 
 .db-stack {
 	overflow: visible;
+}
+
+.db-notification p {
+	margin: 0;
+}
+
+.db-shell-content {
+	gap: var(--db-spacing-responsive-sm);
+}
+
+/* Fix: Prevent parent expand-buttons from showing hover when child items are hovered.
+   In tree mode, the library rule :has(> menu:hover) triggers on any descendant hover
+   inside the menu, causing all ancestor group buttons to appear hovered.
+   This rule should only apply in popover mode (safe triangle hover).
+   TODO: Move this fix into core-web (control-panel-navigation-item-group component)
+   by scoping the :has(menu:hover) rule to .db-control-panel-navigation:not([data-variant='tree']).
+   See: https://github.com/db-ux-design-system/core-web/pull/4639/changes#r3595283584 */
+.db-control-panel-navigation-item-group:has(
+		> .db-control-panel-navigation-item-group-menu :hover
+	)
+	> .db-control-panel-navigation-item-group-expand-button,
+.db-control-panel-navigation-item-group:has(
+		> .db-control-panel-navigation-item-group-menu :focus
+	)
+	> .db-control-panel-navigation-item-group-expand-button,
+.db-control-panel-navigation-item-group:has(
+		> .db-control-panel-navigation-item-group-menu :focus-visible
+	)
+	> .db-control-panel-navigation-item-group-expand-button {
+	background-color: var(--db-adaptive-bg-basic-transparent-full-default) !important;
+	cursor: default;
 }

@@ -5,6 +5,7 @@ sectionWidth: 'auto'
 headline: 'Radio'
 title: 'Radio'
 description: 'Radio lets users select exactly one option from a set of mutually exclusive choices. It supports clear comparison between options and should be used when seeing all choices at once helps users decide.'
+shortDescription: 'Lets users select exactly one option from a set of mutually exclusive choices.'
 align: start
 status: 'stable'
 toc: true
@@ -17,6 +18,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
@@ -59,7 +61,7 @@ Use radio buttons when users must choose exactly one option from a group. If mul
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=1-1133&embed-host=share"
-		description='Use radio buttons for multi-select scenarios like "Email + SMS + Post".'
+		description={'Don\'t use radio buttons for multi-select scenarios like "Email + SMS + Post".'}
 	/>
 </div>
 
@@ -76,7 +78,7 @@ Use Radio when the number of options is small and users benefit from seeing all 
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1112&embed-host=share"
-		description="Use radio buttons for long lists where scrolling and scanning becomes hard."
+		description="Don't use radio buttons for long lists where scrolling and scanning becomes hard."
 	/>
 </div>
 
@@ -93,7 +95,7 @@ Labels must be concise and clearly distinct from each other. Keep wording parall
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1114&embed-host=share"
-		description='Use unclear labels like "Standard", "Advanced", "Other" without context.'
+		description={'Don\'t use unclear labels like "Standard", "Advanced", "Other" without context.'}
 	/>
 </div>
 
@@ -110,7 +112,7 @@ Prefer vertical stacking for readability and accessibility. Use horizontal layou
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--RadioRadio-%E2%9C%85?node-id=3-1117&embed-host=share"
-		description="Place many options in a single horizontal row where labels wrap or alignment breaks."
+		description="Don't place many options in a single horizontal row where labels wrap or alignment breaks."
 	/>
 </div>
 
@@ -120,11 +122,11 @@ Prefer vertical stacking for readability and accessibility. Use horizontal layou
 
 </DBSection>
 
+<FigmaLearnTeaser componentName="Radio" />
+
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the radio component? We'll answer it and add frequently asked questions to this page.
 
 <DBAccordion>
 	<DBAccordionItem headlinePlain="When should I use Radio vs Checkbox?">

@@ -1,4 +1,8 @@
-import { DBBadge, DBNavigationItem, DBNavigationItemGroup } from '@db-ux/react-core-components';
+import {
+	DBBadge,
+	DBControlPanelNavigationItem,
+	DBControlPanelNavigationItemGroup,
+} from '@db-ux/react-core-components';
 import { getAriaCurrent } from '@template/utils/client.utils.ts';
 import { covers, getFirstChildPath, trimExtension } from '@template/utils/navigation.utils.ts';
 
@@ -10,6 +14,7 @@ const getStatusBadge = (status?: string) => {
 		beta: { semantic: 'informational', label: 'Beta' },
 		deprecated: { semantic: 'critical', label: 'Deprecated' },
 		legacy: { semantic: 'warning', label: 'Legacy' },
+		sub: { semantic: 'neutral', label: 'Sub' },
 	}[status];
 
 	if (!config) return null;
@@ -30,7 +35,39 @@ const NavItem = ({
 	isSubNavigation,
 	disabled,
 	status,
-}: NavigationItem) => {
+	externalUrl,
+	protected: isProtected,
+	parentStatus,
+}: NavigationItem & { parentStatus?: string }) => {
+	const lockIcon = isProtected ? (
+		<span
+			data-icon="lock_closed"
+			aria-label="Protected content"
+			role="img"
+			style={{ marginInlineStart: 'auto', fontSize: '0.75em' }}
+		/>
+	) : null;
+
+	if (externalUrl) {
+		return (
+			<DBControlPanelNavigationItem
+				icon={icon}
+				key={`router-leaf-${externalUrl}`}
+				disabled={disabled ? true : undefined}
+			>
+				<a
+					href={externalUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					style={{ display: 'flex', alignItems: 'center', width: '100%' }}
+				>
+					{title}
+					{lockIcon}
+				</a>
+			</DBControlPanelNavigationItem>
+		);
+	}
+
 	const isActive =
 		typeof window !== 'undefined' &&
 		covers(
@@ -41,36 +78,44 @@ const NavItem = ({
 		const target = path ?? getFirstChildPath(children);
 
 		return (
-			<DBNavigationItem icon={icon} key={`router-leaf-${target ?? title}`} disabled={disabled}>
+			<DBControlPanelNavigationItem
+				icon={icon}
+				key={`router-leaf-${target ?? title}`}
+				disabled={disabled}
+			>
 				<a
 					href={trimExtension(target)}
 					aria-current={isActive ? 'page' : undefined}
 					style={{ display: 'flex', alignItems: 'center', width: '100%' }}
 				>
 					{title}
-					{getStatusBadge(status)}
+					{lockIcon || getStatusBadge(status)}
 				</a>
-			</DBNavigationItem>
+			</DBControlPanelNavigationItem>
 		);
 	}
 
 	if (children && children.length > 0) {
 		return (
-			<DBNavigationItemGroup
+			<DBControlPanelNavigationItemGroup
 				text={title}
+				endSlot={getStatusBadge(status)}
 				key={`router-group-${path ?? title}`}
 				aria-disabled={disabled ? 'true' : undefined}
 				expanded={isActive}
 			>
 				{children.map((sub) => (
-					<NavItem key={`router-sub-${sub.path ?? sub.title}`} {...sub} />
+					<NavItem key={`router-sub-${sub.path ?? sub.title}`} {...sub} parentStatus={status} />
 				))}
-			</DBNavigationItemGroup>
+			</DBControlPanelNavigationItemGroup>
 		);
 	}
 
+	// For leaf items inside a group: only show badge if it differs from parent
+	const effectiveStatus = parentStatus && status === parentStatus ? undefined : status;
+
 	return (
-		<DBNavigationItem
+		<DBControlPanelNavigationItem
 			icon={icon}
 			key={`router-leaf-${path ?? title}`}
 			disabled={disabled ? true : undefined}
@@ -81,9 +126,9 @@ const NavItem = ({
 				style={{ display: 'flex', alignItems: 'center', width: '100%' }}
 			>
 				{title}
-				{getStatusBadge(status)}
+				{lockIcon || getStatusBadge(effectiveStatus)}
 			</a>
-		</DBNavigationItem>
+		</DBControlPanelNavigationItem>
 	);
 };
 

@@ -5,6 +5,7 @@ sectionWidth: 'auto'
 headline: 'Textarea'
 title: 'Textarea'
 description: 'Textarea lets users enter and review longer, multi-line text in forms and dialogs. It should be clearly labeled, sized to the expected content, and provide helpful guidance and validation feedback when needed.'
+shortDescription: 'Lets users enter and review longer, multi-line text.'
 align: start
 toc: true
 status: 'stable'
@@ -17,6 +18,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 - Capture longer free-text input (e.g., feedback, comments, descriptions)
@@ -27,34 +29,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 ## Resources
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'TBD',
-			url: '#',
-			icon: 'react',
-		},
-		{
-			title: 'Vue',
-			description: 'TBD',
-			url: '#',
-			icon: 'vue',
-		},
-		{
-			title: 'Angular',
-			description: 'TBD',
-			url: '#',
-			icon: 'angular',
-		},
-		{
-			title: 'Web Components',
-			description: 'TBD',
-			url: '#',
-			icon: 'html5',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbtextarea-density--docs" />
 
 </DBSection>
 
@@ -74,24 +49,24 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 ### Textarea vs Input
 
-Use Textarea when users are expected to enter multiple lines or a longer message. For short, single-line values, use Input.
+Use a textarea when users are expected to enter multiple lines or a longer message. For short, single-line values, use Input.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=1-1132&embed-host=share"
-		description="Use Textarea for comments, messages, descriptions, and feedback."
+		description="Use the textarea for comments, messages, descriptions, and feedback."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=1-1133&embed-host=share"
-		description="Use Textarea for short values like name, email, or city (use Input instead)."
+		description="Don't use the textarea for short values like name, email, or city (use input instead)."
 	/>
 </div>
 
 ### Labels
 
-Provide a clear label that describes what to write. Do not replace the label with placeholder text; placeholders disappear when typing.
+Provide a clear label that describes what to write. Don't replace the label with placeholder text; placeholders disappear when typing.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -102,7 +77,7 @@ Provide a clear label that describes what to write. Do not replace the label wit
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=3-1112&embed-host=share"
-		description="Use multi-line labels or punctuate them."
+		description="Don't use multi-line labels or punctuate them."
 	/>
 </div>
 
@@ -119,13 +94,13 @@ Choose a height that matches the expected amount of text input. Avoid very small
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=3-1114&embed-host=share"
-		description="Use a small Textarea if a lot of input is expected and there is sufficient space."
+		description="Don't use a small textarea if a lot of input is expected and there is sufficient space."
 	/>
 </div>
 
 ### Message
 
-Helper text prevents errors (format, tone, limits). Validation messages explain what's wrong and how to fix it. Keep both concise and actionable; do not duplicate the label.
+Helper text prevents errors (format, tone, limits). Validation messages explain what's wrong and how to fix it. Keep both concise and actionable; don't duplicate the label.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -136,7 +111,7 @@ Helper text prevents errors (format, tone, limits). Validation messages explain 
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=3-1117&embed-host=share"
-		description="Use long paragraphs, vague errors ('Invalid'), or put essential requirements only in placeholder text."
+		description="Don't use long paragraphs, vague errors ('Invalid'), or put essential requirements only in placeholder text."
 	/>
 </div>
 
@@ -146,11 +121,11 @@ Helper text prevents errors (format, tone, limits). Validation messages explain 
 
 </DBSection>
 
+<FigmaLearnTeaser componentName="Textarea" />
+
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the Textarea component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Textarea" />
 

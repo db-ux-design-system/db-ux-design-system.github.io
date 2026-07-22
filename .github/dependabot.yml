@@ -5,10 +5,53 @@
 
 version: 2
 updates:
+  - package-ecosystem: 'github-actions'
+    directories:
+      - '/'
+      - '/.github/actions/*'
+    schedule:
+      interval: 'daily'
+      time: '23:00'
+      timezone: 'Europe/Berlin'
+    pull-request-branch-name:
+      separator: '-'
+    cooldown:
+      default-days: 7
+
   - package-ecosystem: 'npm' # See documentation for possible values
     directory: '/' # Location of package manifests
     schedule:
       interval: 'daily'
+    cooldown:
+      default-days: 3
+    groups:
+      react:
+        patterns:
+          - 'react'
+          - 'react-dom'
+          - '@types/react'
+          - '@types/react-dom'
+      astro:
+        patterns:
+          - 'astro'
+          - '@astrojs/*'
+      linting:
+        patterns:
+          - 'eslint'
+          - 'eslint-*'
+          - '@typescript-eslint/*'
+          - 'prettier'
+          - 'prettier-*'
+          - 'stylelint'
+          - 'stylelint-*'
+          - '@double-great/stylelint-*'
+      playwright:
+        patterns:
+          - '@playwright/*'
+          - '@axe-core/playwright'
+      orama:
+        patterns:
+          - '@orama/*'
     ignore:
       # We need to ignore db-ux packages for now because of shell
       - dependency-name: '@db-ux*'

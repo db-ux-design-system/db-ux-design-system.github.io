@@ -5,6 +5,8 @@ type NavigationFrontmatter = FrontMatter & {
 	isMenuItemDisabled?: boolean;
 	order?: number;
 	nav?: boolean | { order?: number };
+	externalUrl?: string;
+	protected?: boolean;
 };
 
 type MdModule = {
@@ -107,9 +109,10 @@ function sortTree(node: NavigationItem) {
  * Scans all markdown files, skips the root homepage, reads the frontmatter, creates intermediate nodes for
  * directories without their own index file and recursively sorts all items by order and title.
  *
+ * @param mobile - If true, sub-navigation items are flattened so their children appear as normal ordered items.
  * @returns A fully structured and sorted `AppNavigation` tree.
  */
-export function buildAppNavigationFromContent(): AppNavigation {
+export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 	const mods = import.meta.glob<MdModule>(
 		[
 			'../../content/pages/**/*.{md,mdx,astro}',
@@ -134,12 +137,14 @@ export function buildAppNavigationFromContent(): AppNavigation {
 		const title =
 			fm.title || (segments.length ? toTitleFromSegment(segments[segments.length - 1]) : 'Home');
 		const hidePage = fm.hidePage === true;
-		const isSubNavigation = fm.isSubNavigation ?? false;
+		const isSubNavigation = mobile ? false : (fm.isSubNavigation ?? false);
 		const iconTrailing = fm.iconTrailing;
 		const disabled = fm.isMenuItemDisabled === true;
 		const order = getOrder(fm);
 		const status = fm.status;
 		const sortChildrenDescending = fm.sortChildrenDescending === true;
+		const externalUrl = fm.externalUrl;
+		const isProtected = fm.protected === true;
 
 		const node: NavigationItem = {
 			title,
@@ -151,6 +156,8 @@ export function buildAppNavigationFromContent(): AppNavigation {
 			order,
 			status,
 			sortChildrenDescending,
+			externalUrl,
+			protected: isProtected,
 		};
 
 		// If a placeholder node already exists (created as intermediate directory),
@@ -159,12 +166,14 @@ export function buildAppNavigationFromContent(): AppNavigation {
 		if (existing) {
 			existing.title = title;
 			existing.path = hidePage ? undefined : rel;
-			existing.isSubNavigation = isSubNavigation;
+			existing.isSubNavigation = mobile ? false : isSubNavigation;
 			existing.iconTrailing = iconTrailing;
 			existing.disabled = disabled;
 			existing.order = order;
 			existing.status = status;
 			existing.sortChildrenDescending = sortChildrenDescending;
+			existing.externalUrl = externalUrl;
+			existing.protected = isProtected;
 		} else {
 			nodes.set(rel, node);
 		}

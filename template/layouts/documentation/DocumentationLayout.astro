@@ -6,6 +6,7 @@ import DocumentationContent from './DocumentationContent.astro';
 import { appConfig } from '@root/app.config.ts';
 import { Shell } from '@template/components/Shell';
 import Footer from '@template/components/Footer/Footer.astro';
+import { appNavigation } from '@root/app.navigation.ts';
 
 interface Props {
 	headings: MarkdownHeading[];
@@ -13,27 +14,92 @@ interface Props {
 }
 const { headings, frontmatter } = Astro.props;
 const currentPath = Astro.url.pathname;
+
+// Determine redirect target for hidePage or externalUrl
+let redirectUrl: string | undefined;
+if (frontmatter.externalUrl) {
+	redirectUrl = frontmatter.externalUrl;
+} else if (frontmatter.hidePage) {
+	if (frontmatter.redirectTo) {
+		redirectUrl = frontmatter.redirectTo;
+	} else {
+		const norm = (p: string) => p.replace(/\/+$/, '');
+		const currentNorm = norm(currentPath);
+		const findNode = (items: NavigationItem[], parentPath = ''): NavigationItem | undefined => {
+			for (const item of items) {
+				const itemPath = item.path ? norm('/' + item.path) : null;
+				if (itemPath === currentNorm) return item;
+				// For hidePage nodes: check if a child path starts with currentNorm
+				if (!itemPath && item.children?.length) {
+					const firstChildPath = item.children[0]?.path;
+					if (firstChildPath && norm('/' + firstChildPath).startsWith(currentNorm + '/')) {
+						return item;
+					}
+				}
+				if (item.children) {
+					const found = findNode(item.children, item.path || parentPath);
+					if (found) return found;
+				}
+			}
+			return undefined;
+		};
+		const node = findNode(appNavigation);
+		const firstChild = node?.children?.[0]?.path;
+		if (firstChild) {
+			redirectUrl = '/' + firstChild.replace(/\.(md|mdx|astro)$/, '');
+		}
+	}
+}
 ---
 
-<!doctype html>
-<html lang={appConfig.language || 'en'}>
-	<HtmlHead title={frontmatter.title} loadModelViewer={frontmatter.loadModelViewer} />
-	<body>
-		<Shell
-			client:only="react"
-			pathname={currentPath}
-			subNavigationVariant={frontmatter.subNavigationVariant}
-		>
-			<div class="dba-main-grid">
-				<DocumentationContent frontmatter={frontmatter} headings={headings}>
-					<slot />
-				</DocumentationContent>
-				<Footer />
-			</div>
-		</Shell>
-		<slot name="script" />
-		<script>
-			import '@template/components/ComponentPlayground/playground-init';
-		</script>
-	</body>
-</html>
+{
+	redirectUrl ? (
+		<html lang={appConfig.language || 'en'}>
+			<head>
+				<meta charset="utf-8" />
+				<title>{`Redirecting…`}</title>
+				<meta http-equiv="refresh" content={`0; url=${redirectUrl}`} />
+			</head>
+			<body>
+				<script define:vars={{ redirectUrl }}>window.location.replace(redirectUrl);</script>
+			</body>
+		</html>
+	) : (
+		<html lang={appConfig.language || 'en'}>
+			<HtmlHead title={frontmatter.title} loadModelViewer={frontmatter.loadModelViewer} />
+			<body>
+				<Shell
+					client:only="react"
+					pathname={currentPath}
+					subNavigationVariant={frontmatter.subNavigationVariant}
+				>
+						<DocumentationContent frontmatter={frontmatter} headings={headings}>
+							<slot />
+						</DocumentationContent>
+				</Shell>
+				<slot name="script" />
+				<script>import '@template/components/ComponentPlayground/playground-init';</script>
+				<!-- Deep-link scroll fix: The Shell renders client-side (client:only="react"),
+				     so anchor targets don't exist yet when the browser performs its native
+				     hash scroll. This script retries scrolling until the target element
+				     appears in the DOM (up to ~3 s after page load). -->
+				<script is:inline>
+					if (window.location.hash) {
+						var id = decodeURIComponent(window.location.hash.slice(1));
+						var attempts = 0;
+						var scrollToHash = function() {
+							var el = document.getElementById(id);
+							if (el) {
+								el.scrollIntoView();
+							} else if (attempts < 20) {
+								attempts++;
+								setTimeout(scrollToHash, 150);
+							}
+						};
+						setTimeout(scrollToHash, 300);
+					}
+				</script>
+			</body>
+		</html>
+	)
+}

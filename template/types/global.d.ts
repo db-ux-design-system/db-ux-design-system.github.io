@@ -11,6 +11,10 @@ declare interface FrontMatter {
 	 */
 	description?: string;
 	/**
+	 * Short description used in teaser cards on overview pages. Falls back to description if not set.
+	 */
+	shortDescription?: string;
+	/**
 	 * Main headline for hero section.
 	 */
 	headline?: string;
@@ -69,7 +73,7 @@ declare interface FrontMatter {
 	/**
 	 * Set a badge inside sub-navigation
 	 */
-	status?: 'concept' | 'beta' | 'stable' | 'deprecated' | 'legacy';
+	status?: 'concept' | 'beta' | 'stable' | 'deprecated' | 'legacy' | 'sub';
 
 	align?: 'start' | 'center' | 'end';
 
@@ -82,6 +86,16 @@ declare interface FrontMatter {
 	 * Sort children in descending order (e.g. for version lists).
 	 */
 	sortChildrenDescending?: boolean;
+
+	/**
+	 * An optional external URL. If set, the page redirects to this URL when accessed directly.
+	 */
+	externalUrl?: string;
+
+	/**
+	 * Explicit redirect target when hidePage is true. Overrides the automatic first-child detection.
+	 */
+	redirectTo?: string;
 }
 
 declare type DocumentationFrontMatter = {
@@ -89,6 +103,7 @@ declare type DocumentationFrontMatter = {
 	heroWidth?: 'auto' | 'full';
 	sectionSpacing?: 'none' | 'small' | 'medium' | 'large';
 	sectionWidth?: 'auto' | 'full';
+	subParent?: string;
 } & FrontMatter;
 
 /**
@@ -135,12 +150,24 @@ declare interface NavigationItem {
 	/**
 	 * Set a badge inside sub-navigation
 	 */
-	status?: 'concept' | 'beta' | 'stable' | 'deprecated' | 'legacy';
+	status?: 'concept' | 'beta' | 'stable' | 'deprecated' | 'legacy' | 'sub';
 
 	/**
 	 * If true, children will be sorted in descending order (e.g. for version lists).
 	 */
 	sortChildrenDescending?: boolean;
+
+	/**
+	 * An optional external URL. If set, the navigation item links externally
+	 * and opens in a new tab.
+	 */
+	externalUrl?: string;
+
+	/**
+	 * If true, the navigation item is marked as protected (DB-internal only)
+	 * and displays a lock icon.
+	 */
+	protected?: boolean;
 }
 
 /**

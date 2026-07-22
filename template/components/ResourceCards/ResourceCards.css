@@ -16,10 +16,19 @@
 }
 
 .resource-cards .db-card {
+	position: relative;
 	block-size: 100%;
 	inline-size: 100%;
 	box-sizing: border-box;
 	gap: var(--db-spacing-fixed-md);
+}
+
+.resource-cards .resource-protected-icon {
+	position: absolute;
+	inset-block-start: var(--db-spacing-fixed-sm);
+	inset-inline-end: 0;
+	font-size: var(--db-sizing-md);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
 }
 
 .resource-text .resource-title {
