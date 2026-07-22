@@ -38,6 +38,15 @@ Rules for guideline Do/Dont descriptions:
 - Always provide the "why" or the consequence
 - Soft wording when there is no hard error, restrictive when technically limited
 
+### German Do/Dont Pattern
+
+Both Do and Dont use imperative (direct address):
+
+- **Do:** "Verwende eine Badge, um Status neben einem Listenelement anzuzeigen."
+- **Dont:** "Setze eine Badge nicht als einzigen Hinweis für kritische Informationen ein."
+
+Structure: Verb (Imperativ) + Objekt + "nicht" + Rest. The negation sits naturally after the object, not at the start of the sentence.
+
 ## Release Notes Tone
 
 - Write for humans, not machines – release notes are read by designers and developers
