@@ -13,9 +13,7 @@ interface Props {
 
 export function TableOfContents(props: Props): ReactElement | null {
 	const { headings = [] } = props;
-	const filteredHeadings = headings.filter(
-		({ depth }) => !props.tocMaxDepth || props.tocMaxDepth >= depth,
-	);
+	const filteredHeadings = headings.filter(({ depth }) => (props.tocMaxDepth ?? 3) >= depth);
 	const slugs = filteredHeadings.map((h) => h.slug);
 	const currentPath = getCurrentPathname(props.astro);
 	const { activeIDs, setCurrentID } = useActiveHeading({
