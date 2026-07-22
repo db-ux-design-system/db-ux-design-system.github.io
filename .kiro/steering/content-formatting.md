@@ -29,6 +29,34 @@ Rules for consistent formatting, structure, and typography across documentation 
 - Documentation language: English
 - Consistent terminology: "items" (not "entries"), "levels" (not "depths"), "destinations" (not "targets")
 
+## Terminology (DE)
+
+Terms that stay English or follow a fixed translation in German content:
+
+| EN term | DE usage | Note |
+|---------|----------|------|
+| Interface | Interface | not "Benutzeroberfläche" or "Oberfläche" |
+| Core Components | Core Components | not "Kern-Komponenten" |
+| Core Foundation | Core Foundation | not "Kern-Grundlagen" |
+| Design System | Design System | never translated |
+| Tokens | Tokens | not "Variablen" or "Werte" |
+| Pattern | Pattern | not "Muster" |
+| Templates | Templates | not "Vorlagen" |
+| Foundation | Foundation | not "Grundlagen" or "Basis" |
+| Playground | Playground | not "Spielplatz" or "Experimentierfeld" |
+| Storybook | Storybook | product name, never translated |
+| Release Notes | Release Notes | not "Versionshinweise" |
+| Breaking Change | Breaking Change | not "Bruch-Änderung" |
+| Density | Density | not "Dichte" |
+| Slot | Slot | not "Platzhalter" |
+| Figma | Figma | product name |
+| Dev Mode | Dev Mode | not "Entwicklermodus" |
+| Component | Komponente | translated when referring to a UI component generically |
+| Extensions | Erweiterungen | translated in navigation/headings |
+| Resources | Ressourcen | translated in navigation/headings |
+| Accessibility | Barrierefreiheit | translated in headings and body text |
+| Guidelines | Richtlinien | translated in headings |
+
 ## Description Structure
 
 - Frontmatter `description`: Short general explanation of what the component does (1–2 sentences, no redundancy with bullets)
