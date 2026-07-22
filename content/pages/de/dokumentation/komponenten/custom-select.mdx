@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Custom Select'
 title: 'Custom Select'
-description: 'Custom Select ist ein erweitertes Dropdown zur Auswahl einer oder mehrerer vordefinierter Optionen mit Unterstuetzung für Suche, Gruppierung und Anzeige ausgewaehlter Werte. Einsetzen, wenn ein einfaches Select aufgrund der Optionsanzahl, Auswahlkomplexitaet oder der besseren Übersicht nicht ausreicht.'
+description: 'Custom Select ist ein erweitertes Dropdown zur Auswahl einer oder mehrerer vordefinierter Optionen mit Unterstuetzung für Suche, Gruppierung und Anzeige ausgewählter Werte. Einsetzen, wenn ein einfaches Select aufgrund der Optionsanzahl, Auswahlkomplexitaet oder der besseren Übersicht nicht ausreicht.'
 shortDescription: 'Erweitertes Dropdown mit Suche, Gruppierung und Mehrfachauswahl.'
 align: start
 status: 'beta'
@@ -21,7 +21,7 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
-- Mehrere Items aus einer laengeren Liste mit optionalem 'Alle auswählen' selektieren
+- Mehrere Items aus einer längeren Liste mit optionalem 'Alle auswählen' selektieren
 - Innerhalb der Optionen suchen und filtern, um Werte schnell zu finden
 - Ausgewaehlte Optionen klar verwalten (z. B. Chips/Tags oder Auswahlliste)
 
@@ -49,13 +49,13 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 ### Custom Select vs. Select
 
-Select für einfache Einzelauswahl-Listen bevorzugen. Custom Select verwenden, wenn Mehrfachauswahl, Suche, Gruppierung oder eine klarere Darstellung mehrerer ausgewaehlter Werte benötigt wird.
+Select für einfache Einzelauswahl-Listen bevorzugen. Custom Select verwenden, wenn Mehrfachauswahl, Suche, Gruppierung oder eine klarere Darstellung mehrerer ausgewählter Werte benötigt wird.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select?node-id=1-1132&embed-host=share"
-		description="Custom Select für Mehrfachauswahl mit vielen Optionen oder bei Bedarf von Suche/Gruppierung verwenden."
+		description="Verwende Custom Select für Mehrfachauswahl mit vielen Optionen oder bei Bedarf von Suche/Gruppierung."
 	/>
 	<GuidelineExample
 		variant="dont"
@@ -66,13 +66,13 @@ Select für einfache Einzelauswahl-Listen bevorzugen. Custom Select verwenden, w
 
 ### Custom Select vs. Radio / Checkbox
 
-Custom Select verwenden, wenn die Liste mehr Optionen enthaelt als klar auf dem Bildschirm darstellbar sind – typischerweise 5 oder mehr. Bei weniger Optionen Radios (Einzelauswahl) oder Checkboxes (Mehrfachauswahl) verwenden, damit Nutzer:innen alle Optionen gleichzeitig sehen und wählen können, ohne ein Dropdown zu oeffnen.
+Custom Select verwenden, wenn die Liste mehr Optionen enthält als klar auf dem Bildschirm darstellbar sind – typischerweise 5 oder mehr. Bei weniger Optionen Radios (Einzelauswahl) oder Checkboxes (Mehrfachauswahl) verwenden, damit Nutzer:innen alle Optionen gleichzeitig sehen und wählen können, ohne ein Dropdown zu öffnen.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select?node-id=4016-10306&embed-host=share"
-		description="Custom Select für 5 oder mehr Auswahloptionen verwenden."
+		description="Verwende Custom Select für 5 oder mehr Auswahloptionen."
 	/>
 	<GuidelineExample
 		variant="dont"
@@ -89,7 +89,7 @@ Frueh entscheiden, ob das Steuerelement Einzelauswahl oder Mehrfachauswahl ist. 
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select?node-id=3-1110&embed-host=share"
-		description="Mehrfachauswahl verwenden, wenn Nutzer:innen mehrere Filter/Attribute anwenden können; 'Auswahl loeschen'/Reset-Verhalten bereitstellen."
+		description="Verwende Mehrfachauswahl, wenn Nutzer:innen mehrere Filter/Attribute anwenden können; stelle 'Auswahl löschen'/Reset-Verhalten bereit."
 	/>
 	<GuidelineExample
 		variant="dont"
@@ -100,13 +100,13 @@ Frueh entscheiden, ob das Steuerelement Einzelauswahl oder Mehrfachauswahl ist. 
 
 ### Ausgewaehlte Optionen
 
-Sicherstellen, dass ausgewaehlte Optionen immer leicht überpruefbar sind, ohne die Liste erneut zu oeffnen. Tags mit Entfernen-Buttons für häufige Aenderungen, Anzahl in engen Bereichen (z. B. Tabellen) oder Text für Einzelauswahl verwenden. Dabei die Darstellung immer dem Kontext anpassen.
+Sicherstellen, dass ausgewählte Optionen immer leicht überpruefbar sind, ohne die Liste erneut zu öffnen. Tags mit Entfernen-Buttons für häufige Änderungen, Anzahl in engen Bereichen (z. B. Tabellen) oder Text für Einzelauswahl verwenden. Dabei die Darstellung immer dem Kontext anpassen.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select?node-id=3-1113&embed-host=share"
-		description="Tags verwenden, wenn mehrere Auswahlen später häufig bearbeitet werden."
+		description="Verwende Tags, wenn mehrere Auswahlen später häufig bearbeitet werden."
 	/>
 	<GuidelineExample
 		variant="dont"
@@ -123,7 +123,7 @@ Suche aktivieren, wenn die Liste lang ist oder Nutzer:innen wissen, was sie such
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select?node-id=3-1116&embed-host=share"
-		description="Suche für lange Listen bereitstellen und Gruppentitel für eine klare Übersicht verwenden."
+		description="Stelle Suche für lange Listen bereit und verwende Gruppentitel für eine klare Übersicht."
 	/>
 	<GuidelineExample
 		variant="dont"
