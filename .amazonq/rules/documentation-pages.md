@@ -140,7 +140,9 @@ Configure the [component] through its properties, such as [property examples].
 <DBSection spacing="small" width="auto">
 	## Guidelines
 	<CollapsibleWrapper collapsedHeight="320px">
-		###### [Guideline Title] [Guideline description text]
+		###### [Guideline Title]
+		
+		[Guideline description text]
 		<div className="guideline-examples">
 			<GuidelineExample
 				variant="do"
