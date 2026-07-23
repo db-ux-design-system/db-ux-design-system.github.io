@@ -1,0 +1,16 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Releases'
+headline: 'Releases'
+description: 'Alles zu Releases, Versionierung, Content-Status und Migrations-Leitfäden für das DB UX Design System.'
+align: start
+order: 7
+---
+import { DBSection } from '@db-ux/react-core-components';
+import ChildPageOverview from '@template/components/ChildPageOverview/ChildPageOverview.astro';
+
+<DBSection spacing="small" width="auto">
+<ChildPageOverview parentPath="de/dokumentation/releases" columns={2} headlineLevel={2} />
+</DBSection>

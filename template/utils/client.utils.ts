@@ -10,7 +10,8 @@ export function getAriaCurrent(path?: string): 'page' | undefined {
 
 	const { basePath } = appConfig;
 	const pathname = window.location.pathname.replace(/\/+$/, '');
-	const fullPath = `${basePath}${path}`.replace(/\/+$/, '');
+	// If path already starts with /, treat as absolute; otherwise prepend basePath
+	const fullPath = path.startsWith('/') ? path.replace(/\/+$/, '') : `${basePath}${path}`.replace(/\/+$/, '');
 	return pathname === fullPath ? 'page' : undefined;
 }
 

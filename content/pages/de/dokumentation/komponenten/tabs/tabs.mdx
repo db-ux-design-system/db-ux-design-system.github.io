@@ -1,0 +1,121 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Tabs'
+title: 'Tabs'
+description: 'Tabs organisieren zusammengehörige Inhalte in separate Ansichten innerhalb desselben Kontexts und ermöglichen Nutzer:innen, zwischen Abschnitten zu wechseln, ohne die Seite zu verlassen.'
+align: start
+status: 'beta'
+toc: true
+order: 1
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Zwischen verschiedenen Ansichten zusammengehöriger Inhalte auf derselben Hierarchieebene wechseln
+- Einstellungen, Datenansichten oder Inhaltskategorien innerhalb einer Seite gruppieren
+- Horizontale und vertikale Ausrichtung unterstützen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbtabs-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Inhalt
+
+Tabs repräsentieren verschiedene Aspekte desselben Themas auf derselben Hierarchieebene. Sie sind kein Ersatz für seitenübergreifende Navigation zwischen unzusammenhängenden Zielen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=3-1113&embed-host=share"
+		description="Verwende Tabs, um zusammengehörige Abschnitte zu organisieren, die Nutzer:innen in beliebiger Reihenfolge innerhalb desselben Kontexts erreichen können."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=3-1114&embed-host=share"
+		description="Verwende Tabs nicht als Ersatz für Navigation zwischen unzusammenhängenden Seiten oder App-Bereichen."
+	/>
+</div>
+
+### Aktiver Zustand
+
+Nur ein Tab ist gleichzeitig aktiv. Der aktive Tab zeigt sein zugehöriges Panel an, während alle anderen Panels ausgeblendet sind.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=3-1116&embed-host=share"
+		description="Stelle sicher, dass nur ein Tab-Panel gleichzeitig sichtbar ist – der aktive Indikator zeigt an, welcher Abschnitt gerade dargestellt wird."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=4025-2&embed-host=share"
+		description="Verwende Tabs nicht, wenn Nutzer:innen mehrere Abschnitte gleichzeitig sehen müssen – nutze stattdessen Accordion."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Beispiele
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=4025-18&embed-host=share"
+		description="Horizontal vs. Vertikal: Verwende die horizontale Ausrichtung für wenige Tabs mit dem Panel darunter. Verwende die vertikale Ausrichtung für mehr Items – sie vermeidet Overflow und platziert das Panel rechts daneben."
+		fullWidth={true}
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Tabs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Navigation',
+			description: 'Bietet Ziele für die Bewegung zwischen Seiten oder Hauptbereichen der App',
+			url: '/de/dokumentation/komponenten/navigation',
+		},
+		{
+			title: 'Accordion',
+			description: 'Zeigt mehrere Inhaltsabschnitte, die gleichzeitig aufgeklappt werden können',
+			url: '/de/dokumentation/komponenten/accordion',
+		},
+	]}
+/>
+
+</DBSection>

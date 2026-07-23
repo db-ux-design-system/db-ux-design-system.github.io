@@ -1,0 +1,128 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'v4.0'
+headline: 'Migration zu v4.0'
+description: 'Das Update auf v4.0 führt neue Switch-Varianten ein, entfernt die Emphasis-Property und behebt einen Breaking Change in der Notification-Komponente.'
+align: start
+order: 3
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import YourAction from '@template/components/YourAction/YourAction';
+import CardTeaserRow from "@template/components/CardTeaser/CardTeaserRow";
+
+<DBSection spacing="small" width="auto">
+
+## 💻 Development Release
+
+Bitte beachte die Hinweise auf [GitHub](https://github.com/db-ux-design-system/core-web/releases/tag/v4.0.0).
+
+## 🎨 Design Release
+
+Dieses Release gilt nur für die Figma-Library.
+Sketch ist deprecated und erhält keine neuen Features mehr.
+
+**Alle in diesem Release enthaltenen Issues sind am Ende der Seite verlinkt.**
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Komponenten
+
+### Switch
+
+- **Entfernung der „Emphasis"-Property (Breaking Change)**
+  Die „Emphasis"-Property wird entfernt, da sie visuelle Konflikte mit der „Validation"-Property verursachen kann. **Die Standard-Variante „Weak" bleibt erhalten, die Strong-Variante ist als deprecated markiert und wird aus dem System entfernt.**
+  In Figma sind betroffene veraltete Komponenten an einem pinken Hintergrund erkennbar und mit **"❌ Switch → Strong [...] (Deprecated)"** im Namen markiert. **Diese Komponenten werden mit dem Update am 24. November 2025 vollständig entfernt.**
+
+<img
+	src="/assets/migration-guides/v4/switch-emphasis-fix.png"
+	alt="Switch Emphasis Fix"
+	style={{ maxWidth: '100%' }}
+/>
+
+<YourAction
+	actions={[
+		'Überprüfe deine eingesetzten Switch-Komponenten.',
+		'Korrektur: Stelle sicher, dass alle veralteten Varianten von Emphasis „Strong" (pinker Hintergrund) durch die Standard-Variante ersetzt werden.',
+	]}
+/>
+- Die **„Validation"**-Property ist nun für alle Zustände verfügbar. Du kannst die Status „No Validation" (Standard), „Invalid" und „Valid" direkt als Varianten verwenden.
+
+<img
+	src="/assets/migration-guides/v4/switch-validation.png"
+	alt="Switch Validation"
+	style={{ maxWidth: '100%' }}
+/>
+
+- Die neue **„Label Position"**-Property ergänzt das bestehende Trailing Label (Standard) um die „Leading Label"-Variante.
+
+<img
+	src="/assets/migration-guides/v4/switch-label-leading.png"
+	alt="Switch Label Position"
+	style={{ maxWidth: '100%' }}
+/>
+
+- Mit der neuen **„Show Message"**-Property ist es nun möglich, eine Hilfsnachricht auch für No Validation-Varianten anzuzeigen. Damit kannst du hilfreiche Hinweise unabhängig vom Validierungsstatus anzeigen.
+
+<img
+	src="/assets/migration-guides/v4/switch-show-message.png"
+	alt="Switch Show Message"
+	style={{ maxWidth: '100%' }}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+### Notification (Figma/Breaking Change)
+
+Um die visuelle Konsistenz zwischen Figma und Entwicklung sicherzustellen, wird die „Show Headline"-Property nun als **dedizierte Variante** abgebildet. Beim Update der Komponente erscheint die Headline daher auch in Varianten, in denen sie zuvor ausgeblendet war. Sie muss nach dem Update erneut ausgeblendet werden.
+Mit diesem Update wird das Verhalten in Design und Entwicklung identisch.
+
+<img
+	src="/assets/migration-guides/v4/notification-headline.png"
+	alt="Notification Headline-Änderung"
+	style={{ maxWidth: '100%' }}
+/>
+
+<img
+	src="/assets/migration-guides/v4/notification-headline-fix.png"
+	alt="Notification Headline Fix"
+	style={{ maxWidth: '100%' }}
+/>
+
+<YourAction
+	actions={[
+		'Überprüfe deine eingesetzten Notification-Komponenten.',
+		'Korrektur: Wenn du die Variante ohne Headline verwendest, stelle sicher, dass die Headline in der aktualisierten Komponente wieder ausgeblendet ist.',
+	]}
+/>
+</DBSection>
+<DBSection spacing="small" width="auto">
+
+<CardTeaserRow
+	items={[
+		{
+			title: 'Design + Code Issues v4.0.0',
+			description: 'Alle Informationen zum aktuellen Design System Release auf GitHub.',
+			url: 'https://github.com/orgs/db-ux-design-system/projects/4/views/12?filterQuery=has%3Amilestone+-label%3A%F0%9F%96%BC%EF%B8%8Ficons+milestone%3A4.0.0',
+			image: '/assets/teasers/github.png',
+			imageAlt: 'GitHub',
+			label: 'Auf GitHub ansehen', external: true,
+		},
+		{
+			title: 'Feedback willkommen',
+			description: 'Melde dich, wenn du auf unerwartete Probleme stößt oder Unterstützung benötigst.',
+			url: '/de/dokumentation/contribution',
+			image: '/assets/teasers/feedback.png',
+			imageAlt: 'Contribution',
+			label: 'Kontakt aufnehmen',
+		},
+	]}
+/>
+</DBSection>

@@ -1,0 +1,258 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Figma'
+headline: 'Figma'
+description: 'Praktische Tipps, Workarounds und Anleitungen für die Arbeit mit dem DB UX Design System in Figma.'
+align: start
+order: 2
+toc: true
+tocMaxDepth: 3
+---
+
+import { DBSection, DBNotification, DBStack } from '@db-ux/react-core-components';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+
+<DBSection spacing="small" width="auto">
+
+## Allgemein
+
+{/* Übergreifende Themen: Library-Setup, Workarounds, Helper-Komponenten, Density, Theming usw. */}
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### Property Icons
+
+Komponenteneigenschaften in der Figma-Bibliothek verwenden Emoji-Präfixe, um Typ und Zweck auf einen Blick erkennbar zu machen.
+
+| Icon | Zweck | Beispiel |
+|------|-------|----------|
+| 👁️ | Anzeigen/Ausblenden (schaltet Sichtbarkeit um) | `👁️ Show Label` |
+| 🔀 | Variantenauswahl | `🔀 Variant` |
+| 📦 | Slot (Inhaltsbereich) | `📦 Children` |
+| 🔄 | Icon-Swap (Instance Swap für Icons) | `🔄 Icon` |
+| ✏️ | Text-Override | `✏️ Label` |
+
+</DBStack>
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### 📏 Resizer
+
+Die 📏 Resizer Helper-Komponente kann in anderen Komponenten verwendet werden, um feste Breiten oder Höhen von Instanzen oder Containern überschreibbar zu machen.
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/Dr7QvFYRn5AwyQVOto4pEz/Doku--Helper-components-%E2%9C%85?node-id=7055-57&embed-host=share"
+	fullWidth
+	description="Den Resizer-Layer auswählen und den Gap-Wert setzen, um die Größe zu steuern"
+/>
+
+<DBNotification variant="standalone" semantic="informational" headline="Verwendet in:">
+Custom Select (Dropdown, Mobile), Tab List Vertical, Scrollbar (Thumb, Free Position)
+</DBNotification>
+</div>
+</DBStack>
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### 🛟 Scrollbar
+
+Die 🛟 Scrollbar Helper-Komponente stellt einen dekorativen Scrollbar-Indikator für Figma-Komponenten bereit. Sie unterstützt 2 Orientierungen (Vertical, Horizontal) und mehrere Positionen (Start, Center, End, Free).
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/Dr7QvFYRn5AwyQVOto4pEz/Doku--Scrollbar?node-id=7001-470&embed-host=share"
+	fullWidth
+/>
+
+<div>
+<DBNotification variant="standalone" semantic="informational" headline="Verwendet in:" style={{marginBlockEnd: 'var(--db-spacing-fixed-xl)'}}>
+Custom Select Dropdown
+</DBNotification>
+
+- **Thumb-Größe setzen**: 📏 Resizer Gap-Wert
+- **Freie Position setzen**: Thumb Container Padding-Wert
+</div>
+</div>
+
+
+</DBStack>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Komponentenspezifisch
+
+{/* Tipps und Anleitungen für einzelne Komponenten */}
+
+
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### Accordion
+
+#### Resize-Verhalten nach dem Bearbeiten
+
+<DBNotification variant="standalone" semantic="informational">
+Bekannter Figma-Bug: Das Ändern der Item-Anzahl oder des Item-Zustands (offen/eingeklappt) kann das Resize-Verhalten von Accordion-Items zurücksetzen. Nach dem Bearbeiten Fill oder Hug erneut anwenden.
+</DBNotification>
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion-%E2%9C%85?node-id=5277-7&embed-host=share"
+	description="Die Komponente platzieren und Eigenschaften für Komponente und Instanzen setzen"
+/>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion-%E2%9C%85?node-id=5277-8&embed-host=share"
+	description="Das Auto-Layout-Verhalten der betroffenen Items auf Hug setzen, um den Bug zu beheben"
+/>
+</div>
+
+</DBStack>
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### Button
+#### Mehrzeiliger Text in Full-Width-Buttons
+
+<DBNotification variant="standalone" semantic="informational">
+Mehrzeiligen Text nur in Ausnahmefällen verwenden, z. B. wenn der Text durch Übersetzung verlängert wird.
+</DBNotification>
+
+
+Um automatische Zeilenumbrüche in einem Full-Width-Button zu aktivieren, den Text-Layer innerhalb des Buttons auswählen und das Breiten-Resize-Verhalten von Hug auf Fill ändern.
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button-%E2%9C%85?node-id=4627-34&embed-host=share"
+	description="Den Text-Layer innerhalb der Button-Komponente auswählen"
+/>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button-%E2%9C%85?node-id=4627-834&embed-host=share"
+	description="Das Breiten-Resize-Verhalten von Hug auf Fill ändern"
+/>
+</div>
+
+</DBStack>
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### Checkbox
+
+#### Full Width – Pflichtfeld-Kennzeichnung
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=5608-40&embed-host=share"
+	layout="side"
+>
+Checkboxen haben eine Toggle-Eigenschaft für das Pflichtfeld-Sternchen.
+
+Bei Full-Width-Checkboxen muss das Sternchen * manuell im Label-Feld ergänzt werden.
+
+Required Toggle = true setzen für korrekte Dev Properties.
+</GuidelineExample>
+
+</DBStack>
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### Custom Select
+
+#### Sonderfall Mobile Landscape
+
+Dropdown Height von (Def) Auto auf Fill setzen, um die Dropdown-Höhe in begrenzten Viewport-Szenarien wie Mobile Landscape einzuschränken.
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select-%E2%9C%85?node-id=5315-6&embed-host=share"
+	description="Standard: Dropdown Height auf (Def) Auto gesetzt"
+/>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select-%E2%9C%85?node-id=5320-4&embed-host=share"
+	description="Dropdown Height auf Fill setzen für eingeschränkte Viewports"
+/>
+</div>
+
+</DBStack>
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### Radio
+
+#### Full Width – Pflichtfeld-Kennzeichnung
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--Radio-%E2%9C%85?node-id=4721-38&embed-host=share"
+	layout="side"
+>
+Radio Buttons haben eine Toggle-Eigenschaft für das Pflichtfeld-Sternchen.
+
+Bei Full-Width-Radio-Buttons muss das Sternchen * manuell im Label-Feld ergänzt werden.
+
+Required Toggle = true setzen für korrekte Dev Properties.
+</GuidelineExample>
+
+</DBStack>
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### Switch
+
+#### Full Width – Pflichtfeld-Kennzeichnung
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=5430-39&embed-host=share"
+	layout="side"
+>
+Switches haben eine Toggle-Eigenschaft für das Pflichtfeld-Sternchen.
+
+Bei Full-Width-Switches muss das Sternchen * manuell im Label-Feld ergänzt werden.
+
+Required Toggle = true setzen für korrekte Dev Properties.
+</GuidelineExample>
+
+</DBStack>
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### Textarea
+
+#### Vertikales Resize-Verhalten
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea-%E2%9C%85?node-id=4884-2&embed-host=share"
+	layout="side"
+>
+Nach dem Platzieren der Komponente und dem Setzen der Eigenschaften die Größe anpassen und das vertikale Resize-Verhalten auf Fill Container setzen für:
+
+- Container
+- Textarea Container
+</GuidelineExample>
+
+</DBStack>
+
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+### Tooltip
+
+#### Den Tooltip-Pfeil auf eine flexible Position ändern
+
+<DBNotification variant="standalone" semantic="informational">
+Der Pfeil für Tooltip links/rechts sollte nur mit width: fixed positioniert werden.
+</DBNotification>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%9C%85?node-id=5371-5&embed-host=share"
+	fullWidth
+/>
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%9C%85?node-id=5371-6&embed-host=share"
+	description="Den Layer Arrow Container auswählen und Alignment auf top left / top right oder top left / bottom left statt top center oder center left setzen"
+/>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%9C%85?node-id=5371-7&embed-host=share"
+	description="Padding setzen, um den Pfeil zu positionieren"
+/>
+</div>
+
+</DBStack>
+
+</DBSection>

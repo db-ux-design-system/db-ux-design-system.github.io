@@ -1,0 +1,153 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Tooltip'
+title: 'Tooltip'
+description: 'Tooltip liefert kurze, kontextuelle Informationen bei Hover oder Fokus, ohne den Nutzerfluss zu unterbrechen. Ideal zur Erklärung von Icons, abgeschnittenem Text oder unbekannten UI-Steuerelementen – sollte keine kritischen oder umfangreichen Inhalte enthalten.'
+shortDescription: 'Kurze, kontextuelle Information bei Hover oder Fokus ohne Unterbrechung des Ablaufs.'
+align: start
+toc: true
+status: 'stable'
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+- Die Bedeutung eines Icon-Only-Steuerelements erklären (z.B. „Herunterladen", „Link kopieren")
+- Abgeschnittenen Text oder Labels anzeigen (z.B. vollständiger Dateiname, voller Tabellen-Header)
+- Kurze Hinweise für optionale Eingaben oder ungewöhnliche Begriffe hinzufügen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbtooltip-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground component="tooltip" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Verwendung
+
+Tooltips zeigen kontextuelle Informationen an und dürfen keine erforderlichen Anweisungen oder kritischen Informationen enthalten, die zum Abschluss einer Aufgabe nötig sind. Wenn Nutzer:innen den Inhalt lesen müssen, um fortzufahren, verwende stattdessen Infotext, Inline-Anleitung oder ein Popover.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%80%BC%EF%B8%8F?node-id=1-1132&embed-host=share"
+		description="Verwende einen Tooltip, um einen Icon-Button zu erklären."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%80%BC%EF%B8%8F?node-id=1-1133&embed-host=share"
+		description="Setze keine Pflicht-Formularanweisungen oder wichtigen Richtlinientexte in einen Tooltip."
+	/>
+</div>
+
+### Inhalt
+
+Tooltip-Inhalt sollte ein kurzer Satz oder eine Phrase sein. Vermeide Links, mehrere Aktionen oder lange Absätze. Wenn der Inhalt Struktur oder Interaktion benötigt, verwende ein Popover/Dialog.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%80%BC%EF%B8%8F?node-id=3-1110&embed-host=share"
+		description="Verwende knappe Formulierung und einfache Sprache."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%80%BC%EF%B8%8F?node-id=3-1112&embed-host=share"
+		description="Verwende keine mehrzeiligen Erklärungen, Listen oder interaktiven Inhalte in einem Tooltip."
+	/>
+</div>
+
+### Auslöser
+
+Zeige den Tooltip bei Hover und Tastatur-Fokus an. Verwende eine kurze Verzögerung, um Flackern zu vermeiden, und blende ihn bei Blur, Mouse-Leave, Scroll oder Escape aus. Erfordere kein präzises Hovern.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%80%BC%EF%B8%8F?node-id=3-1113&embed-host=share"
+		description="Löse bei Hover/Fokus aus und blende bei Blur/Leave/Escape aus."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%80%BC%EF%B8%8F?node-id=3-1114&embed-host=share"
+		description="Zeige Tooltips nicht nur bei Hover an (Tastatur-Nutzer:innen verpassen sie)."
+	/>
+</div>
+
+### Platzierung
+
+Platziere Tooltips nah am Auslöser und vermeide, dass sie verdecken, was Nutzer:innen lesen oder anklicken möchten. Klappe automatisch um, wenn der Viewport-Rand nahe ist, und halte einen angemessenen Abstand ein.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%80%BC%EF%B8%8F?node-id=3-1116&embed-host=share"
+		description="Zeige die Zugehörigkeit des Tooltips zum Auslöser klar und überlagere keine relevanten Informationen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%80%BC%EF%B8%8F?node-id=3-1117&embed-host=share"
+		description="Verdecke nicht das auslösende Steuerelement oder wichtige Inhalte und erzeuge keine abgeschnittenen Tooltips außerhalb des Bildschirms."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<FigmaLearnTeaser componentName="Tooltip" />
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Tooltip" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Popover',
+			description: 'Schwebender Container für reichhaltigere, interaktive Inhalte, verankert an einem Auslöser',
+			url: '/documentation/components/popover',
+		},
+		{
+			title: 'Button',
+			description: 'Häufiger Tooltip-Auslöser bei Icon-Only-Steuerelementen',
+			url: '/de/dokumentation/komponenten/button',
+		},
+	]}
+/>
+
+</DBSection>

@@ -1,0 +1,82 @@
+---
+order: 1
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Erste Schritte'
+headline: 'Erste Schritte'
+description: 'Alles, was du brauchst, um konsistente und barrierefreie digitale Erlebnisse mit dem DB UX Design System zu gestalten. Starte mit den Foundations oder entdecke fertige Komponenten für Design und Code.'
+---
+
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import { DBStack } from '@db-ux/react-core-components';
+
+<DBStack gap="medium">
+<TeaserCard
+	columns={2}
+	spacing="large"
+    headlineSize="large"
+	headlineLevel={2}
+	teasers={[
+		{
+			title: 'Foundation',
+			description: 'Gemeinsame Basis-Tokens und Modi bilden ein stabiles Fundament für klare und einheitliche Interfaces.',
+			url: '/de/dokumentation/foundation',
+			imageSrc: '/assets/Foundations-Teaser--C.png',
+			imageAlt: 'Foundations',
+			imagePosition: 'right',
+			imageWidth: '33',
+			mask: 'fade-bottom-right',
+		},
+		{
+			title: 'Komponenten',
+			description: 'Core Components sorgen für vorhersehbare Interaktionen über alle Produkte hinweg.',
+			url: '/de/dokumentation/komponenten',
+			imageSrc: '/assets/Components-Teaser--C.png',
+			imageAlt: 'Komponenten',
+			imagePosition: 'right',
+			imageWidth: '33',
+			mask: 'fade-bottom-right',
+		},
+	]}
+/>
+
+<TeaserCard
+	columns={3}
+	spacing="large"
+	headlineSize="medium"
+	headlineLevel={2}
+	teasers={[
+		{
+			title: 'Icons',
+			description: 'Alle verfügbaren DB UX Icon-Namen durchsuchen und für die Verwendung im Code kopieren.',
+			url: '/de/dokumentation/icons',
+			imageSrc: '/assets/Extensions-Teaser--C.png',
+			imageAlt: 'Icons',
+			imagePosition: 'right',
+			imageWidth: '33',
+			mask: 'fade-bottom-right',
+		},
+		{
+			title: 'Release Notes',
+			description: 'Bleib auf dem Laufenden über die neuesten Änderungen und Verbesserungen.',
+			url: '/de/dokumentation/releases/release-notes',
+			imageSrc: '/assets/Release-Notes-Teaser.png',
+			imageAlt: 'Release Notes',
+			imagePosition: 'right',
+			imageWidth: '33',
+			mask: 'fade-bottom-right',
+		},
+		{
+			title: 'Ressourcen',
+			description: 'Figma-Bibliotheken für Designer:innen und Code-Pakete für Entwickler:innen.',
+			url: '/de/dokumentation/ressourcen',
+			imageSrc: '/assets/Resources-Teaser.png',
+			imageAlt: 'Ressourcen',
+			imagePosition: 'right',
+			imageWidth: '33',
+			mask: 'fade-bottom-right',
+		},
+	]}
+/>
+</DBStack>

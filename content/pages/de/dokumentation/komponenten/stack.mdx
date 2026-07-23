@@ -1,0 +1,133 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Stack'
+title: 'Stack'
+description: 'Stack ordnet Kindelemente in einem vertikalen oder horizontalen Layout mit konsistenten Abständen an. Geeignet für strukturierte Layouts ohne eigenes CSS.'
+shortDescription: 'Layout-Komponente zur Anordnung von Elementen in vertikalem oder horizontalem Fluss.'
+align: start
+toc: true
+status: 'beta'
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+- Formularelemente, Buttons oder Inhaltsblöcke mit konsistenten Abständen anordnen
+- Vertikale oder horizontale Layouts ohne eigenes CSS erstellen
+- Responsive Layouts bauen, die sich an verschiedene Bildschirmgrößen anpassen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbstack-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+    ## Playground
+
+    <ComponentPlayground component="stack" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Gap
+
+Verwende die gap-Property, um konsistente Abstände zwischen Items in einem Stack bereitzustellen und Lesbarkeit sowie visuelle Struktur zu verbessern.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/uBCf96A16t1871VinjYHHV/Doku--Stack?node-id=1-1132&embed-host=share"
+		description="Verwende einen definierten Gap, um Items gleichmäßig zu verteilen und ein sauberes, organisiertes Layout zu schaffen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/uBCf96A16t1871VinjYHHV/Doku--Stack?node-id=1-1133&embed-host=share"
+		description="Setze nicht manuell Margins an einzelne Items statt Gap zu verwenden – das führt zu inkonsistenten Abständen und erschwerter Wartung."
+	/>
+</div>
+
+### Richtung und Ausrichtung
+
+Wähle die passende Richtung (Column oder Row) und Ausrichtung basierend auf Layout und Inhaltsanforderungen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/uBCf96A16t1871VinjYHHV/Doku--Stack?node-id=3-1110&embed-host=share"
+		description="Verwende horizontale (Row) Richtung, um zusammengehörige Aktionen schnell zugaenglich und visuell gruppiert anzuordnen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/uBCf96A16t1871VinjYHHV/Doku--Stack?node-id=3-1112&embed-host=share"
+		description="Keine zentrierte Ausrichtung in Spalten verwenden, wenn die Inhalte unterschiedliche Längen haben und schnell gescannt werden sollen."
+	/>
+</div>
+
+### Umbruch
+
+Aktiviere Wrap für Stacks, die sich an kleinere Bildschirme anpassen sollen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/uBCf96A16t1871VinjYHHV/Doku--Stack?node-id=3-1113&embed-host=share"
+		description="Verwende Wrap, wenn viele Items vorhanden sind oder die Nutzung auf verschiedenen Bildschirmgrößen erwartet wird."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/uBCf96A16t1871VinjYHHV/Doku--Stack?node-id=3-1114&embed-host=share"
+		description="'No Wrap' nicht verwenden, wenn Overflow-Risiko besteht und die Inhalte leicht zugaenglich sein sollen."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Stack" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Section',
+			description: 'Container-Komponente für Seitenabschnitte mit Spacing- und Width-Steuerung',
+			url: '/de/dokumentation/komponenten/section',
+		},
+		{
+			title: 'Divider',
+			description: 'Visueller Trenner für Inhaltsabschnitte',
+			url: '/de/dokumentation/komponenten/divider',
+		},
+	]}
+/>
+
+</DBSection>

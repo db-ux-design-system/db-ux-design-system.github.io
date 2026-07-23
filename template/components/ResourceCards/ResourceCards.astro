@@ -20,35 +20,40 @@ interface Props {
 
 const { path = '', resources: customResources } = Astro.props;
 
+const isDE = Astro.url.pathname.startsWith('/de/') || Astro.url.pathname === '/de';
+
 const baseUrl = 'https://design-system.deutschebahn.com/core-web/review/main';
 
 const defaultResources: Resource[] = [
 	{
 		title: 'React',
-		description: 'Interactive examples and documentation.',
+		description: isDE ? 'Interaktive Beispiele und Dokumentation.' : 'Interactive examples and documentation.',
 		url: `${baseUrl}/react-storybook${path}`,
 		icon: 'react',
 	},
 	{
 		title: 'Vue',
-		description: 'Interactive examples and documentation.',
+		description: isDE ? 'Interaktive Beispiele und Dokumentation.' : 'Interactive examples and documentation.',
 		url: `${baseUrl}/vue-storybook${path}`,
 		icon: 'vue',
 	},
 	{
 		title: 'Angular',
-		description: 'Interactive examples and documentation.',
+		description: isDE ? 'Interaktive Beispiele und Dokumentation.' : 'Interactive examples and documentation.',
 		url: `${baseUrl}/angular-storybook${path}`,
 		icon: 'angular',
 	},
 	{
 		title: 'Web Components',
-		description: 'Interactive examples and documentation.',
+		description: isDE ? 'Interaktive Beispiele und Dokumentation.' : 'Interactive examples and documentation.',
 		url: `${baseUrl}/web-components-storybook${path}`,
 		icon: 'web-components',
 		disabled: true,
 	},
 ];
+
+const defaultLabel = isDE ? 'Storybook öffnen' : 'View Storybook';
+const comingSoonLabel = isDE ? 'Demnächst verfügbar' : 'Coming Soon';
 
 const resources = customResources || defaultResources;
 
@@ -100,7 +105,7 @@ const getIconPath = (icon: string): string => {
 				</>
 			);
 			return isDisabled ? (
-				<DisabledWrapper label="Coming Soon" size="small">
+				<DisabledWrapper label={comingSoonLabel} size="small">
 					<DBCard className="resource-card-item">{cardContent}</DBCard>
 				</DisabledWrapper>
 			) : (
@@ -108,7 +113,7 @@ const getIconPath = (icon: string): string => {
 					<DBCard behavior="interactive" className="resource-card-item">
 						{cardContent}
 						<strong class="resource-link-label" data-icon-trailing="arrow_up_right">
-							{resource.label || 'View Storybook'}
+							{resource.label || defaultLabel}
 						</strong>
 					</DBCard>
 				</a>

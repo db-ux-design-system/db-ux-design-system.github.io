@@ -1,0 +1,83 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Drawer Header'
+title: 'Drawer Header'
+description: 'Die Drawer-Header-Subkomponente stellt den oberen Bereich des Drawers bereit – mit optionalem Titel, Schließen-Button und ergänzenden Inhalten.'
+align: start
+toc: true
+status: 'sub'
+subParent: 'Drawer'
+order: 2
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Zeigt einen Titel an, der Nutzer:innen Kontext über den Drawer-Inhalt gibt
+- Enthält den Schließen-Button für tastaturzugängliches Schließen
+- Kann ergänzende Inhalte wie Untertitel oder Aktionselemente enthalten
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbdrawer-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Beispiele
+
+### Inhalt
+
+Der Drawer-Header sollte den Zweck des Drawers klar beschreiben und genug Kontext bieten, damit Nutzer:innen verstehen, was sie bearbeiten, ansehen oder auswählen. Er kann ergänzende Aktionen enthalten.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4924-13&embed-host=share"
+		description="Verwende einen klaren objektbezogenen Titel, wenn der Drawer kontextbezogene Informationen zeigt."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4924-10448&embed-host=share"
+		description="Aktionselemente können im Drawer-Header platziert werden, wenn sie direkt mit dem Drawer-Kontext zusammenhängen und Nutzer:innen helfen, auf die angezeigten Inhalte zu reagieren."
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Drawer Header" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Drawer',
+			description: 'Übergeordnete Komponente, die den Drawer-Header enthält',
+			url: '/de/dokumentation/komponenten/drawer/drawer',
+		},
+		{
+			title: 'Drawer Footer',
+			description: 'Unterer Bereich des Drawers für Aktionen und Bestätigungen',
+			url: '/de/dokumentation/komponenten/drawer/drawer-footer',
+		},
+	]}
+/>
+
+</DBSection>

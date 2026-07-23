@@ -1,0 +1,187 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'v2.0'
+headline: 'Migration zu v2.0'
+description: 'Das Update auf v2.0 führt die lang erwartete Custom Select-Komponente ein sowie grundlegende Änderungen an Foundation und Components.'
+align: start
+order: 1
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import StatusNotification from '@template/components/StatusNotification/StatusNotification';
+import YourAction from '@template/components/YourAction/YourAction';
+import CardTeaserRow from "@template/components/CardTeaser/CardTeaserRow";
+
+<DBSection spacing="small" width="auto">
+
+## 💻 Development Release
+
+Bitte beachte die Hinweise auf [GitHub](https://github.com/db-ux-design-system/core-web/releases/tag/v2.0.0).
+
+## 🎨 Design Release
+
+Dieses Release gilt nur für die Figma-Library.
+Sketch ist deprecated und erhält keine neuen Features mehr.
+
+**Alle in diesem Release enthaltenen Issues sind am Ende der Seite verlinkt.**
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Neue Beta-Komponenten
+
+Mit dem v2.0.0 Release erhalten die folgenden Komponenten den Status „Beta". Diese Komponenten haben die erforderlichen Tests für Usability und Barrierefreiheit bestanden.
+
+- Beachte die **jeweilige Dokumentation und Nutzungsrichtlinien in Figma**, insbesondere bei der Verwendung der **Custom Select**-Komponente.
+
+<StatusNotification status="beta" variant="long" />
+
+- [Backdrop](/de/dokumentation/components/backdrop)
+- [Custom Select](/de/dokumentation/components/custom-select)
+
+<img
+	src="/assets/migration-guides/v2/beta-components.png"
+	alt="Custom Select-Komponente"
+	style={{ maxWidth: '100%' }}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Rework Foundation
+
+### Typografie (Typo Tokens / Styles)
+
+- **Einheitliche Schrift für Code und Design:** Ersetzung der bisherigen Schriften (DB Screen Sans im Code / DB Screen Flex in Figma) durch **DB Neo Screen Sans** und **DB Neo Head** in den bereitgestellten Typo Tokens.
+- **Italic ergänzt:** Einführung eines _italic_ Styles für den Body Token.
+- ‼️ Hinweis: Die **DB Neo Screen Flex** Schrift wird **bis Ende 2025 aus Figma entfernt**. Ersetze sie rechtzeitig, um zukünftige Probleme zu vermeiden.
+
+<img
+	src="/assets/migration-guides/v2/typo.png"
+	alt="Typografie-Übersicht"
+	style={{ maxWidth: '100%' }}
+/>
+
+### Color Variables
+
+- **Neue Farbklasse:** Einführung von **vibrant** für eine lebendigere Farbverwendung.
+
+<img
+	src="/assets/migration-guides/v2/colors-vibrant.png"
+	alt="Vibrant-Farben"
+	style={{ maxWidth: '100%' }}
+/>
+
+- **Optimierte dunkle Farbstufen:** Verbesserungen bei dunkleren Abstufungen für klarere Gradationen.
+- **Dark Mode optimiert:** Verbesserte Konsistenz und Harmonie im Vergleich zum Light Mode.
+
+<img
+	src="/assets/migration-guides/v2/colors-steps-backgrounds.png"
+	alt="Farbstufen und Hintergründe"
+	style={{ maxWidth: '100%' }}
+/>
+
+- **Interactive Tokens:** Überarbeitet für deutlichere Unterschiede zwischen **default**, **hovered** und **pressed** Zuständen.
+
+<img
+	src="/assets/migration-guides/v2/colors-interactive-colors.png"
+	alt="Interaktive Farben"
+	style={{ maxWidth: '100%' }}
+/>
+
+- **Entfernung der On-Origin-Farben:** Die interaktiven Farben ❌ **on-origin-hovered** und ❌ **on-origin-pressed** werden entfernt, da sie keine ausreichende Barrierefreiheit im gesamten System gewährleisten können.
+
+<YourAction
+	actions={[
+		'Ersetze alle Origin Tokens, die du verwendet hast, durch die neuen Vibrant Tokens.',
+		'Hinweis: Vibrant Tokens können in einigen Fällen unzureichenden Kontrast aufweisen. Stelle bei eigener Verwendung außerhalb der Core Components selbstständig ausreichenden Kontrast sicher.',
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Komponenten: Bugfixes (Figma)
+
+Die folgenden Fixes erfordern besondere Aufmerksamkeit. Eine Übersicht aller weiteren behobenen Bugs findest du im **Issue-Teaser** am Ende der Seite.
+
+### Badge
+
+- **Emphasis Strong-Optimierung:** Verwendung von **vibrant** anstelle von **contrast-high** als Hintergrundfarbe für ein lebendigeres Badge-Erscheinungsbild.
+
+<img
+	src="/assets/migration-guides/v2/migration-badge-colors.png"
+	alt="Badge-Farben"
+	style={{ maxWidth: '100%' }}
+/>
+
+### Tag
+
+- **Entfernung von Emphasis Origin:** Diese Variante wird entfernt.
+- **Emphasis Strong-Optimierung:** Verwendung von **vibrant** anstelle von **contrast-high** als Hintergrundfarbe für ein lebendigeres Tag-Erscheinungsbild.
+- **Übergangsphase für Design:**
+  - Entfernte Varianten werden zunächst als **deprecated** ❌ markiert, um einen schrittweisen Ersatz zu ermöglichen.
+- **Löschung mit v2.1.0:** Die vollständige Entfernung der Origin-Emphasis erfolgt mit dem nächsten Minor Release.
+
+<img
+	src="/assets/migration-guides/v2/migration-tag-colors.png"
+	alt="Tag-Farben"
+	style={{ maxWidth: '100%' }}
+/>
+
+### Formularfelder (Input, Select, Textarea)
+
+- **Einheitliche Mindestbreite:** Konsistente Mindestbreiten für alle **Dateneingabe-Komponenten**.
+- Input-Spezifikationen:
+  - Ohne Icon: **db-sizing-lg**
+  - 1 Icon: **db-sizing-xl**
+  - 2 Icons: **db-sizing-2xl**
+- Select-Spezifikationen:
+  - Ohne Icon: **db-sizing-xl**
+  - 1 Icon: **db-sizing-2xl**
+- Textarea: **db-sizing-lg**
+
+<img
+	src="/assets/migration-guides/v2/migration-data-input.png"
+	alt="Dateneingabe-Mindestbreiten"
+	style={{ maxWidth: '100%' }}
+/>
+
+<YourAction
+	actions={[
+		'Überprüfe alle Layouts: Aktualisiere Layouts, um Inkompatibilitäten durch die Änderungen zu beheben.',
+		'Ersetzungen durchführen: Verwende die Emphasis Strong-Variante anstelle von Emphasis Origin im Tag, wo nötig.',
+		'Layout-Korrekturen: Passe Layouts an, wenn Änderungen der Mindestbreite bei Inputs oder Textareas Probleme verursachen.',
+	]}
+/>
+
+</DBSection>
+<DBSection spacing="small" width="auto">
+
+<CardTeaserRow
+	items={[
+		{
+			title: 'Design + Code Issues v2.0.0',
+			description: 'Alle Informationen zum aktuellen Design System Release auf GitHub.',
+			url: 'https://github.com/orgs/db-ux-design-system/projects/4/views/12?filterQuery=has%3Amilestone+-label%3A%F0%9F%96%BC%EF%B8%8Ficons+milestone%3A2.0.0',
+			image: '/assets/teasers/github.png',
+			imageAlt: 'GitHub',
+			label: 'Auf GitHub ansehen', external: true,
+		},
+		{
+			title: 'Feedback willkommen',
+			description: 'Melde dich, wenn du auf unerwartete Probleme stößt oder Unterstützung benötigst.',
+			url: '/de/dokumentation/contribution',
+			image: '/assets/teasers/feedback.png',
+			imageAlt: 'Contribution',
+			label: 'Kontakt aufnehmen',
+		},
+	]}
+/>
+</DBSection>
