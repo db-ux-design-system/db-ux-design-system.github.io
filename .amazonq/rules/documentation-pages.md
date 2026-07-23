@@ -24,7 +24,7 @@ status: 'stable' # optional
 
 ---
 
-````
+```
 
 ## Required Imports
 ```jsx
@@ -38,7 +38,7 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { [component]Config } from '@template/configs/[component].config.js';
-````
+```
 
 ## Page Structure (in order)
 
