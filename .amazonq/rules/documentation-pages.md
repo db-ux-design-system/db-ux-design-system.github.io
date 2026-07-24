@@ -168,9 +168,9 @@ Configure the [component] through its properties, such as [property examples].
 ```jsx
 <DBSection spacing="small" width="auto">
 
-	## FAQ Have a question about the [Component] component? We'll answer it and add frequently asked
+	## FAQ Have a question about the [Component] component?
 
-	questions to this page.
+	We'll answer it and add frequently asked questions to this page.
 	<QuestionForm componentName="[ComponentName]" />
 </DBSection>
 ```
