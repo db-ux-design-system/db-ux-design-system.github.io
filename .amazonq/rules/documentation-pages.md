@@ -67,7 +67,9 @@ Experiment with the [Component] component and its properties.
 
 ```jsx
 <DBSection spacing="small" width="auto">
+
 	## Resources
+
 	<ResourceCards
 		resources={[
 			{
@@ -165,7 +167,9 @@ Configure the [component] through its properties, such as [property examples].
 
 ```jsx
 <DBSection spacing="small" width="auto">
+
 	## FAQ Have a question about the [Component] component? We'll answer it and add frequently asked
+
 	questions to this page.
 	<QuestionForm componentName="[ComponentName]" />
 </DBSection>
@@ -175,7 +179,9 @@ Configure the [component] through its properties, such as [property examples].
 
 ```jsx
 <DBSection spacing="small" width="auto">
+
 	## Related Content
+
 	<TeaserCard
 		teasers={[
 			{
