@@ -18,7 +18,7 @@ import { DBSection } from '@db-ux/react-core-components';
 
 The **DB UX MCP Server** is the bridge between AI coding agents (GitHub Copilot, Amazon Q, Claude, Cursor) and the DB UX Design System. It provides every agent with a single, authoritative source for component APIs, framework-specific code examples, design tokens, and icon names — so the agent never has to guess or hallucinate.
 
-Without this server, AI agents invent plausible-sounding but incorrect component usage. With it, they pull the exact generated source code shipped in the npm packages.
+Without this server, AI agents invent plausible-sounding but incorrect component usage. With it, they pull the exact generated source code shipped in the node packages (npm).
 
 ### Prerequisites
 
@@ -36,7 +36,7 @@ Without this server, AI agents invent plausible-sounding but incorrect component
 
 ### Step 1: Register the server
 
-The server is started via `npx`:
+The server is integrated into your IDE via `npx`:
 
 ```bash
 npx --yes @db-ux/mcp-server
