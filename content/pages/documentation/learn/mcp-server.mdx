@@ -107,7 +107,20 @@ Create `.vscode/mcp.json` in the project root. This file can be shared via Git:
 
 #### Option B: User-level
 
-Add the entry to your global `settings.json` (same JSON as above).
+Add the entry to your global `settings.json` (same JSON as above underneath `mcp` at the root level):
+
+```json
+{
+	"mcp": {
+		"servers": {
+			"db-ux": {
+				"command": "npx",
+				"args": ["--yes", "@db-ux/mcp-server"]
+			}
+		}
+	}
+}
+```
 
 > **Note:** If both exist, `.vscode/mcp.json` takes precedence.
 
