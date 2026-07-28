@@ -27,6 +27,12 @@ date: '2026-07-30'
 #### Added
 - Icon search: FigmaKeywords and tags have been added for better findability.
 
+#### Fixed
+- Construction Sign: Missing sizes have been added.
+
+#### Fixed
+- 
+
 ### Development
 
 #### Added
