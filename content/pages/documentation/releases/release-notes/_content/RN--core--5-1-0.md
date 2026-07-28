@@ -11,4 +11,10 @@ _version bump_
 
 ### Development
 
-<!-- TODO: Release note must be filled in. -->
+### Added
+
+- Form components: accept `autoComplete` (camelCase) as alias for `autocomplete`
+
+### Changed
+
+- Drawer: replace JS transition workaround with CSS native functionality
