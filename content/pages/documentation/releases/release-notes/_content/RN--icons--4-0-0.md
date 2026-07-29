@@ -11,7 +11,7 @@ date: '2026-07-30'
 - Buildings: elevator, escalator, stairs
 
 #### Changed
-- **BREAKING CHANGE** Social logos: The icons have been moved from the Social category to Logos.
+- **BREAKING CHANGE** Social logos: The icons have been moved from the `social` category to Logos.
   - facebook
   - instagram
   - linkedin
@@ -42,7 +42,7 @@ date: '2026-07-30'
 - **BREAKING CHANGE** Folder structure: `infrago/assets/features` has been renamed to `feature`.
 
 #### Removed
-- **BREAKING CHANGE** Duplicates: Three icons that are already available in the infrago Feature category have been removed from core.
+- **BREAKING CHANGE** Duplicates: Three icons that are already available in the 'infrago/feature' category have been removed from core.
   - db-wheelchair
   - mobility-service-meeting-point
   - special-bike
