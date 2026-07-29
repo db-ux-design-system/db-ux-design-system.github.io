@@ -14,6 +14,7 @@ _version bump_
 #### Added
 
 - Form components: accept `autoComplete` (camelCase) as alias for `autocomplete`
+- Drawer: provide `closedby` property
 
 #### Changed
 
