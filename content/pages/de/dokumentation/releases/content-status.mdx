@@ -1,0 +1,147 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Content Status'
+headline: 'Content Status'
+description: 'Was Concept, Beta, Stable, Legacy und Deprecated im DB UX Design System bedeuten und was von jedem Status zu erwarten ist.'
+align: start
+order: 6
+toc: true
+tocMaxDepth: 3
+---
+
+import { DBSection, DBCard, DBBadge, DBStack } from '@db-ux/react-core-components';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<DBSection spacing="small" width="auto">
+
+Jede Komponente, jedes Pattern und jedes Template im DB UX Design System hat einen Status, der angibt, wie ausgereift und zuverlässig der Inhalt ist – von frühen Explorationen bis hin zu produktionsreifen Standards.
+
+<div style={{ display: 'grid', gridTemplateColumns: 'auto auto', columnGap: 'var(--db-spacing-fixed-lg)', rowGap: 'var(--db-spacing-fixed-xs)', width: 'fit-content' }}>
+
+<DBCard data-density="expressive" style={{ width: 'fit-content' }} spacing="large">
+	<DBStack direction="row" gap="small" alignment="center">
+		<DBBadge semantic="warning">Concept</DBBadge>
+		<span data-icon="arrow_right" />
+		<DBBadge semantic="informational">Beta</DBBadge>
+		<span data-icon="arrow_right" />
+		<DBBadge semantic="successful">Stable</DBBadge>
+	</DBStack>
+</DBCard>
+
+<DBCard data-density="expressive" style={{ width: 'fit-content' }} spacing="large">
+	<DBStack direction="row" gap="small" alignment="center">
+		<DBBadge semantic="critical">Legacy</DBBadge>
+		<DBBadge>Deprecated</DBBadge>
+	</DBStack>
+</DBCard>
+
+<small>Aktiver Entwicklungszyklus.</small>
+<small>Abgelöst oder in Entfernung.</small>
+
+</div>
+
+</DBSection>
+<DBSection spacing="small" width="auto">
+
+## Concept
+
+Frühe visuelle und funktionale Ansätze für neue Inhalte. In dieser Phase werden erste Richtungen definiert, aber **nichts ist final**. Designs und Implementierungen können sich **wesentlich ändern**, während Ideen getestet und verfeinert werden.
+
+Concept-Inhalte können als **Design-Referenz** für die eigene Implementierung genutzt werden. Es sollte jedoch damit gerechnet werden, **künftige Änderungen zu übernehmen**, sobald der Inhalt ausgereift ist. Design ist immer verfügbar; eine Entwicklungsimplementierung **existiert möglicherweise noch nicht** und kommt typischerweise in der Beta-Phase hinzu.
+
+<DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }} data-color="warning">
+### Was zu erwarten ist
+
+- **Design verfügbar**, Entwicklungsimplementierung kann später folgen
+- **Keine Stabilitätsgarantien** – API, Design und Barrierefreiheit sind noch nicht validiert und können sich jederzeit ändern
+- **Eingeschränkte Dokumentation** und Nutzungsrichtlinien
+- **Nacharbeit einplanen**, wenn der Inhalt Richtung Beta und Stable reift
+
+</DBCard>
+
+## Beta
+
+Der Inhalt ist **funktional und weitgehend stabil**, jedoch können noch kleinere visuelle oder funktionale Änderungen auftreten. Design und Entwicklung sind **abgestimmt**, und der Inhalt hat **erste Nutzertests** durchlaufen – er adressiert ein **validiertes User Need**.
+
+Wir empfehlen, **Beta-Inhalte gründlich zu testen** und Feedback zu teilen, um Qualität und Zuverlässigkeit zu verbessern.
+
+<DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }} data-color="informational">
+### Was zu erwarten ist
+
+- **Zwischen Design und Entwicklung abgestimmt**
+- Geeignet für den Projekteinsatz, aber **kleinere Breaking Changes sind noch möglich**
+- Dokumentation und Nutzungsrichtlinien sind verfügbar, aber möglicherweise unvollständig
+- Barrierefreiheits- und Cross-Browser-Tests sind **in Arbeit, aber noch nicht vollständig validiert**
+
+</DBCard>
+
+## Stable
+
+Der Inhalt gilt als **ausgereift und zuverlässig** – barrierefrei, markenkonform und Design-System-konform. Stable-Inhalte sind **verpflichtend als UX-Standard zu verwenden**.
+
+Wir **aktualisieren und verbessern** stabile Inhalte kontinuierlich, um sicherzustellen, dass sie den User Needs und aktuellen Standards entsprechen.
+
+<DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }} data-color="successful">
+### Was zu erwarten ist
+
+- **Vollständig validiert** für Barrierefreiheit, Cross-Browser- und Cross-Framework-Kompatibilität
+- **Vollständige Dokumentation**, Nutzungsrichtlinien und Design-Spezifikationen
+- **API-Stabilität** – Breaking Changes nur in Major Releases
+- **Laufende Wartung** und regelmäßige Verbesserungen
+
+</DBCard>
+
+## Legacy
+
+Der Inhalt ist **veraltet und wird nicht mehr aktiv weiterentwickelt**. Es wird nur noch eingeschränkter Support in Form von **kritischen Bugfixes** bereitgestellt. Wir empfehlen die **Migration auf aktuelle Design-System-Inhalte**.
+
+<DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }}data-color="critical">
+### Was zu erwarten ist
+
+- **Keine neuen Features** oder Verbesserungen
+- Nur **kritische Bugfixes**
+- Eine **empfohlene Alternative** ist im Design System verfügbar
+
+</DBCard>
+
+## Deprecated
+
+Der Inhalt ist **zur Entfernung markiert** und wird in einem **zukünftigen Major Release vollständig entfernt**. Im Design wird Deprecated-Inhalt zunächst visuell gekennzeichnet, um **Zeit für die Migration** zu geben, bevor er entfernt wird.
+
+<DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }}elevationLevel='2'>
+### Was zu erwarten ist
+
+- **Inhalt wird entfernt** – Migration planen
+- **Keine Bugfixes** oder Wartung
+- Eine **ausreichende Übergangszeit** wird vor der Entfernung in einem Major Release bereitgestellt
+
+</DBCard>
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Komponenten',
+			description: 'Alle Komponenten gruppiert nach Status: Stable, Beta und Concept.',
+			url: '/de/dokumentation/komponenten',
+		},
+		{
+			title: 'Versionierung & Releases',
+			description: 'Wie wir Updates über Design und Entwicklung hinweg versionieren und veröffentlichen.',
+			url: '/de/dokumentation/releases/versionierung',
+		},
+		{
+			title: 'Mitwirken',
+			description: 'Feedback teilen, Issues melden oder zum Design System beitragen.',
+			url: '/de/dokumentation/mitwirken',
+		},
+	]}
+/>
+
+</DBSection>

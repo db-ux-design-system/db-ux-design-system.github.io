@@ -1,0 +1,17 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Migrations-Leitfäden'
+headline: 'Migrations-Leitfäden'
+description: 'Schritt-für-Schritt-Anleitungen für die Migration zwischen Hauptversionen des DB UX Design Systems.'
+align: start
+order: 1
+sortChildrenDescending: true
+---
+import { DBSection } from '@db-ux/react-core-components';
+import ChildPageOverview from '@template/components/ChildPageOverview/ChildPageOverview.astro';
+
+<DBSection spacing="small" width="auto">
+<ChildPageOverview parentPath="de/dokumentation/releases/migration-guides" sortDescending columns={2} headlineLevel={2} />
+</DBSection>

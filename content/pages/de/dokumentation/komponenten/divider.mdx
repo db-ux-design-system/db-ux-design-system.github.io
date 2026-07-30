@@ -1,0 +1,133 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Divider'
+title: 'Divider'
+description: 'Divider ist eine dünne horizontale oder vertikale Linie, die UI-Elemente in logische Abschnitte trennt und die Übersichtlichkeit des Layouts verbessert. Sparsam einsetzen – zusammen mit Abständen und Hierarchie, um visuelle Unruhe zu vermeiden.'
+shortDescription: 'Visueller Trenner zur Strukturierung und Gruppierung von Inhaltsbereichen.'
+align: start
+status: 'beta'
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+- Inhaltsblöcke innerhalb einer Seite oder Card trennen (horizontaler Divider)
+- Spalten oder nebeneinanderliegende Bereiche in einem Layout aufteilen (vertikaler Divider)
+- Eine dezente Grenze zwischen Gruppen zusammengehöriger Items setzen (z. B. Listenabschnitte)
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbdivider-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+    ## Playground
+
+    <ComponentPlayground component="divider" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Betonung
+
+Verwende Weak für dezente Trennung. Setze Strong nur ein, wenn eine stärkere Grenze zwischen großen Abschnitten nötig ist und das Layout allein mit Abständen unklar wäre.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/gdUAKTrAb1eXjhYDGpzUUZ/Doku--Divider?node-id=1-1132&embed-host=share"
+		description="Verwende schwache Betonung für dezente Trennung, ohne den Lesefluss zu stören."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/gdUAKTrAb1eXjhYDGpzUUZ/Doku--Divider?node-id=1-1133&embed-host=share"
+		description="Setze starke Divider nicht überall oder zum Ausgleich fehlender Layoutstruktur ein."
+	/>
+</div>
+
+### Verwendung
+
+Divider unterstützen die Gruppierung, aber Abstände und Überschriften bilden die primäre Struktur. Füge einen Divider nur hinzu, wenn Abstand allein nicht genügend Trennung oder Scan-Unterstützung bietet.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/gdUAKTrAb1eXjhYDGpzUUZ/Doku--Divider?node-id=3-1110&embed-host=share"
+		description="Verwende konsistente Spacing-Tokens und füge einen Divider nur hinzu, wo er das Verstaendnis verbessert."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/gdUAKTrAb1eXjhYDGpzUUZ/Doku--Divider?node-id=3-1112&embed-host=share"
+		description="Setze nicht zwischen jedem Element Divider ein – das erzeugt visuelle Unruhe und reduziert die Hierarchie."
+	/>
+</div>
+
+### Ausrichtung
+
+Richte Divider am Inhaltscontainer und Grid aus. Vermeide partielle oder 'schwebende' Divider, die nicht zur Inhaltsbreite/-höhe passen und versehentliche Ausrichtungsbrüche erzeugen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/gdUAKTrAb1eXjhYDGpzUUZ/Doku--Divider?node-id=3-1113&embed-host=share"
+		description="Passe die Divider-Länge an den Inhaltsbereich an und halte die Ausrichtung konsistent über eine Seite/Section."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/gdUAKTrAb1eXjhYDGpzUUZ/Doku--Divider?node-id=3-1114&embed-host=share"
+		description="Verwende keine willkürlichen Divider-Längen oder falsch ausgerichtete Divider, die nicht dem Layout-Grid folgen."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Divider" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Section',
+			description: 'Layout-Gruppierung und konsistente Abstände zwischen Inhaltsbereichen',
+			url: '/de/dokumentation/komponenten/section',
+		},
+		{
+			title: 'Card',
+			description: 'Flächencontainer, der interne Divider zur Bereichstrennung nutzen kann',
+			url: '/de/dokumentation/komponenten/card',
+		},
+	]}
+/>
+
+</DBSection>
