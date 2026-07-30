@@ -2,28 +2,19 @@
 hidePage: true
 category: 'Core'
 version: 'v5.1.0'
-date: ''
-draft: true
+date: '2026-07-30'
 ---
-
-### Design & Entwicklung
-
-#### Hinzugefügt
-- Shell: Die neue Komponente für Seitenlayouts ist jetzt mit Desktop- und Mobile-Varianten verfügbar.
-  - Subkomponenten: Shell Subnavigation, Shell Content
-- Control Panel: Die neue Komponente ersetzt die deprecated Header und Navigation.
-  - Desktop-Varianten (top/left) und Mobile-Varianten (top/bottom)
-  - Navigationstypen: Popover, Tree, Flat Icon
-  - Subkomponenten: ControlPanel Brand, ControlPanel PrimaryActions, ControlPanel SecondaryActions, ControlPanel MetaNavigation
-
-#### Deprecated
-- Header, Navigation: Diese Komponenten wurden durch Control Panel und Shell ersetzt und werden in einem zukünftigen Release entfernt.
 
 ### Design
 
-#### Geändert
-- Button: FloatingContainer wurde integriert.
+_version bump_
 
-#### Behoben
-- Button: Die feste Breite des Icon-Buttons wurde korrigiert.
-- Scrollbar: Die Resizer-Hilfskomponente wurde behoben.
+### Entwicklung
+
+#### Hinzugefügt
+
+- Formular-Komponenten: `autoComplete` (camelCase) wird jetzt als Alias für `autocomplete` akzeptiert.
+
+#### Geändert
+
+- Drawer: Der JS-Transitions-Workaround wurde durch native CSS-Funktionalität ersetzt.
