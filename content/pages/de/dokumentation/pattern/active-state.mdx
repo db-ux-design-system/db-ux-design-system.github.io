@@ -1,0 +1,109 @@
+---
+order: 1
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Active State'
+title: 'Active State'
+description: 'Visuelle Methoden zur Darstellung von markierten, ausgewählten oder hervorgehobenen Elementen in der Interface.'
+align: start
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+Active beschreibt ein Element, das aktuell in der Interface markiert, ausgewählt oder hervorgehoben ist. Dieser Zustand wird typischerweise erzeugt, indem dem Element eine höhere visuelle Hierarchie als seinem Standard-Enabled-Zustand gegeben wird. Dieses Pattern schreibt keinen einzelnen festen Stil vor, sondern beschreibt eine Reihe von Methoden, die einzeln oder in Kombination verwendet werden können.
+
+Je nach Kontext, Hierarchie und Interface-Dichte kann der Active State über den Container (Fläche, Farbe, Rahmen) oder über den Inhalt (Typografie, Icon) ausgedrückt werden. Die folgenden Varianten zeigen gängige Ansätze, die konsistent kombiniert und über verschiedene Komponenten hinweg angepasst werden können.
+
+<DBSection spacing="small" width="auto">
+
+## Container
+
+### Fläche
+
+Die erste Möglichkeit besteht darin, die visuelle Betonung des Containers zu erhöhen. Dies kann durch stärkeren Kontrast oder sogar invertierte Vorder- und Hintergrundfarben erreicht werden, sodass der Active State sofort hervorsticht.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/gByxIUPZEtbCaNRHEjP304/Pattern--Active-State?node-id=46-350&embed-host=share"
+		fullWidth={true}
+	/>
+</div>
+
+### Farbe
+
+Eine weitere Option ist die Anpassung der Container-Farbe. Ein verschobener oder getönter Hintergrund unterscheidet den Active State von inaktiven Elementen, ohne das Gesamtlayout zu dominieren. Dies kann einfach durch Änderung des data-color angewendet werden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/gByxIUPZEtbCaNRHEjP304/Pattern--Active-State?node-id=46-351&embed-host=share"
+		fullWidth={true}
+	/>
+</div>
+
+### Rahmen
+
+Der Active State kann auch durch einen prominenteren Rahmen dargestellt werden, beispielsweise mit erhöhter Strichstärke oder Farbwechsel. Die veränderte Kontur macht das aktive Element klar erkennbar, selbst wenn die Flächen visuell zurückhaltend bleiben.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/gByxIUPZEtbCaNRHEjP304/Pattern--Active-State?node-id=46-352&embed-host=share"
+		fullWidth={true}
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Inhalt
+
+### Typografie
+
+Anstatt den Container zu verändern, kann der Active State auch durch Typografie hervorgehoben werden. Ein höheres Schriftgewicht oder andere typografische Akzente sorgen dafür, dass das Label des aktiven Elements im direkten Vergleich deutlich dominanter erscheint.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/gByxIUPZEtbCaNRHEjP304/Pattern--Active-State?node-id=46-353&embed-host=share"
+		fullWidth={true}
+	/>
+</div>
+
+### Inhalt
+
+Der Active State kann auch durch Änderung oder Erweiterung des Inhalts ausgedrückt werden. Ein zusätzliches Icon, wie ein Häkchen, oder ein verändertes Label macht die Auswahl semantisch klar und verstärkt die visuelle Betonung.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/gByxIUPZEtbCaNRHEjP304/Pattern--Active-State?node-id=46-354&embed-host=share"
+		fullWidth={true}
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Beispiele
+
+Die verschiedenen Optionen können je nach Bedarf und Kontext beliebig kombiniert werden. Hier sind einige Beispiele, wie der Active State in Komponenten des Design Systems umgesetzt wird.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/gByxIUPZEtbCaNRHEjP304/Pattern--Active-State?node-id=58-503&embed-host=share"
+		fullWidth={true}
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Active State" />
+
+</DBSection>

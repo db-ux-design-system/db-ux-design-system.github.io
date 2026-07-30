@@ -1,0 +1,52 @@
+---
+order: 2
+layout: '@template/layouts/default'
+title: 'Komponenten'
+headline: 'Konsistente Interfaces bauen'
+description: 'Core Components sorgen für vorhersagbare Interaktionen über alle Produkte hinweg.'
+heroImage: '/assets/components/Components--C.png'
+heroImageAlt: 'Components Visual'
+sections:
+  - id: 'components--tested-and-verified-section'
+    title: 'Getestet & geprüft'
+    text: 'Komponenten erfüllen Anforderungen an Barrierefreiheit und Zuverlässigkeit.'
+    imageSrc: 'assets/components/Tested--Lightmode--C.png'
+    imageSrcDark: 'assets/components/Tested--Darkmode--C.png'
+    imageAlt: 'Barrierefreiheits- und Teststatus-Badges einer UI-Komponente'
+    imagePosition: 'right'
+    ariaLabel: 'Komponenten-Bereich'
+  - id: 'components--configurable-section'
+    title: 'Konfigurierbar'
+    text: 'Varianten, Größen und Inhalte passen sich Produktanforderungen an, ohne die Struktur zu verändern.'
+    imageSrc: 'assets/components/Configurable--Lightmode--C.png'
+    imageSrcDark: 'assets/components/Configurable--Darkmode--C.png'
+    imageAlt: 'Komponenten-Panel mit anpassbaren Varianten und Größenoptionen'
+    imagePosition: 'left'
+  - id: 'components--maintenance-section'
+    title: 'Kontinuierliche Pflege'
+    text: 'Regelmäßige Updates verbessern die Stabilität und sichern die langfristige Nutzung.'
+    imageSrc: 'assets/components/Ongoing-Maintenance--Lightmode--C.png'
+    imageSrcDark: 'assets/components/Ongoing-Maintenance--Darkmode--C.png'
+    imageAlt: 'Roadmap- und Update-Indikatoren für kontinuierliche Wartung'
+    imagePosition: 'right'
+  - id: 'components--shared-source-section'
+    title: 'Gemeinsame Quelle'
+    text: 'Design und Code basieren auf derselben Logik für eine abgestimmte Umsetzung.'
+    imageSrc: 'assets/components/Shared-Source--Lightmode--C.png'
+    imageSrcDark: 'assets/components/Shared-Source--Darkmode--C.png'
+    imageAlt: 'Design- und Code-Ansichten nebeneinander'
+    imagePosition: 'left'
+  - id: 'components--practical-guidance-section'
+    title: 'Praxisnahe Empfehlungen'
+    text: 'Nutzungsempfehlungen unterstützen klare Entscheidungen und konsistente Nutzererlebnisse.'
+    imageSrc: 'assets/components/Practical-Guidance--Lightmode--C.png'
+    imageSrcDark: 'assets/components/Practical-Guidance--Darkmode--C.png'
+    imageAlt: 'Nutzungsrichtlinien und Do/Dont-Beispiele einer Komponente'
+    imagePosition: 'right'
+---
+
+import { ContentSections, ContactUsSection } from '@components';
+
+<ContentSections sections={frontmatter.sections} />
+
+<ContactUsSection />

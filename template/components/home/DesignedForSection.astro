@@ -2,6 +2,40 @@
 import { appConfig } from '@config';
 import { DBCard, DBSection } from '@db-ux/react-core-components';
 import { SectionTitle, TextImage } from '@components';
+import { toDeSlug } from '@template/i18n/slug-mapping';
+
+const isDE = Astro.url.pathname.startsWith('/de/') || Astro.url.pathname === '/de';
+const localizeHref = (enPath: string) => isDE ? `/de/${toDeSlug(enPath)}` : `${appConfig.basePath}${enPath}`;
+
+interface Props {
+	sectionTitle?: string;
+	sectionDescription?: string;
+	pmTitle?: string;
+	pmText?: string;
+	pmTag?: string;
+	devTitle?: string;
+	devText?: string;
+	devTag?: string;
+	designTitle?: string;
+	designText?: string;
+	designTag?: string;
+	linkPrefix?: string;
+}
+
+const {
+	sectionTitle = 'How the system supports your work',
+	sectionDescription = 'A shared system that improves collaboration and decision-making for product, development, and design.',
+	pmTitle = 'Efficient Delivery',
+	pmText = 'Reduce time spent on repeated design and implementation decisions.',
+	pmTag = 'For Product Management',
+	devTitle = 'Predictable Maintenance',
+	devText = 'Rely on scheduled updates and stable versioning to plan changes confidently.',
+	devTag = 'For Developer',
+	designTitle = 'Flexible Choices',
+	designText = 'Adapt components and tokens to fit context without losing alignment.',
+	designTag = 'For Designer',
+	linkPrefix = '',
+} = Astro.props;
 ---
 
 <DBSection
@@ -11,12 +45,12 @@ import { SectionTitle, TextImage } from '@components';
 	id="home--designed-for-section"
 >
 	<SectionTitle
-		title="How the system supports your work"
-		description="A shared system that improves collaboration and decision-making for product, development, and design."
+		title={sectionTitle}
+		description={sectionDescription}
 	/>
 	<div class="cards-row-fixed">
 		<a
-			href={`${appConfig.basePath}products-and-services/for-productmanagement`}
+			href={localizeHref("products-and-services/for-productmanagement")}
 			aria-label="Open for productmanagement page"
 		>
 			<DBCard behavior="interactive" data-color="violet" spacing="large">
@@ -24,20 +58,20 @@ import { SectionTitle, TextImage } from '@components';
 					imagePosition="top"
 					contentAlign="end"
 					imageWidth="33"
-					title="Efficient Delivery"
+					title={pmTitle}
 					imageSrc={`${appConfig.basePath}assets/for-productmanagement/Efficient-Delivery--Lightmode--C.png`}
 					imageSrcDark={`${appConfig.basePath}assets/for-productmanagement/Efficient-Delivery--Darkmode--C.png`}
 					imageAlt="Efficient Delivery"
 					mask="fade-bottom-right"
 					headlineLevel={3}
-					tag={{ label: 'For Product Management', emphasis: 'strong' }}
+					tag={{ label: pmTag, emphasis: 'strong' }}
 				>
-					Reduce time spent on repeated design and implementation decisions.
+					{pmText}
 				</TextImage>
 			</DBCard>
 		</a>
 		<a
-			href={`${appConfig.basePath}products-and-services/for-developer`}
+			href={localizeHref("products-and-services/for-developer")}
 			aria-label="Open for developer page"
 		>
 			<DBCard behavior="interactive" data-color="green" spacing="large">
@@ -45,21 +79,21 @@ import { SectionTitle, TextImage } from '@components';
 					imagePosition="top"
 					contentAlign="end"
 					imageWidth="33"
-					title="Predictable Maintenance"
+					title={devTitle}
 					imageSrc={`${appConfig.basePath}assets/for-developer/Predictable-Maintenance--Lightmode--C.png`}
 					imageSrcDark={`${appConfig.basePath}assets/for-developer/Predictable-Maintenance--Darkmode--C.png`}
 					imageAlt="Predictable Maintenance"
 					mask="fade-bottom-right"
 					headlineLevel={3}
-					tag={{ label: 'For Developer', emphasis: 'strong' }}
+					tag={{ label: devTag, emphasis: 'strong' }}
 				>
-					Rely on scheduled updates and stable versioning to plan changes confidently.
+					{devText}
 				</TextImage>
 			</DBCard>
 		</a>
 
 		<a
-			href={`${appConfig.basePath}products-and-services/for-designer`}
+			href={localizeHref("products-and-services/for-designer")}
 			aria-label="Open for designer page"
 		>
 			<DBCard behavior="interactive" data-color="blue" spacing="large">
@@ -67,15 +101,15 @@ import { SectionTitle, TextImage } from '@components';
 					imagePosition="top"
 					contentAlign="end"
 					imageWidth="33"
-					title="Flexible Choices"
+					title={designTitle}
 					imageSrc={`${appConfig.basePath}assets/for-designer/Flexible-Choices--Lightmode--C.png`}
 					imageSrcDark={`${appConfig.basePath}assets/for-designer/Flexible-Choices--Darkmode--C.png`}
 					imageAlt="Flexible Choices"
 					mask="fade-bottom-right"
 					headlineLevel={3}
-					tag={{ label: 'For Designer', emphasis: 'strong' }}
+					tag={{ label: designTag, emphasis: 'strong' }}
 				>
-					Adapt components and tokens to fit context without losing alignment.
+					{designText}
 				</TextImage>
 			</DBCard>
 		</a>
