@@ -29,7 +29,9 @@ const segmentMap: Record<string, string> = {
 	'contribution': 'mitwirken',
 	'resources': 'ressourcen',
 	'versioning': 'versionierung',
-	'patterns': 'pattern',
+	// Note: 'patterns' (documentation) and 'pattern' (products) share the same
+	// DE slug 'pattern'. Mapping them globally would cause collisions in the
+	// reverse map. Both routes already use correct slugs in their content dirs.
 
 	// foundation children
 	'colors': 'farben',
@@ -86,15 +88,20 @@ export function toEnSlug(dePath: string): string {
  * @example getLocalizedPath('/de/produkte-und-services/komponenten', 'en') → '/products-and-services/components'
  */
 export function getLocalizedPath(pathname: string, targetLocale: 'en' | 'de'): string {
+	// Strip existing /de/ prefix to get the locale-neutral path
+	const isCurrentlyDe = /^\/de(\/|$)/.test(pathname);
+	const neutralPath = isCurrentlyDe
+		? pathname.replace(/^\/de\/?/, '')
+		: pathname.replace(/^\//, '').replace(/\/$/, '');
+
 	if (targetLocale === 'de') {
-		// EN → DE: add /de/ prefix and translate segments
-		const cleanPath = pathname.replace(/^\//, '').replace(/\/$/, '');
-		const translated = toDeSlug(cleanPath);
+		// Translate EN segments → DE, add /de/ prefix
+		const enPath = isCurrentlyDe ? toEnSlug(neutralPath) : neutralPath;
+		const translated = toDeSlug(enPath);
 		return `/de/${translated}`;
 	}
 
-	// DE → EN: strip /de/ prefix and translate segments back
-	const withoutPrefix = pathname.replace(/^\/de\/?/, '');
-	const translated = toEnSlug(withoutPrefix);
+	// Translate DE segments → EN
+	const translated = isCurrentlyDe ? toEnSlug(neutralPath) : neutralPath;
 	return `/${translated}` || '/';
 }

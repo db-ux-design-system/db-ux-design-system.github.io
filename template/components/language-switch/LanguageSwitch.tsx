@@ -5,9 +5,11 @@ import {
 } from '@db-ux/react-core-components';
 import { useLanguage } from '@template/context/language-context';
 import { getLocalizedPath } from '@template/i18n/slug-mapping';
+import { useTranslation } from '@template/i18n/useTranslation';
 
 const LanguageSwitch = () => {
 	const { language } = useLanguage();
+	const { t } = useTranslation();
 	const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/';
 	const enPath = getLocalizedPath(currentPath, 'en');
 	const dePath = getLocalizedPath(currentPath, 'de');
@@ -15,7 +17,7 @@ const LanguageSwitch = () => {
 	return (
 		<DBPopover
 			trigger={
-				<DBButton type="button" variant="ghost" icon="globe">
+				<DBButton type="button" variant="ghost" icon="globe" aria-label={t('shell.languageSwitch.label')}>
 					{language.toUpperCase()}
 				</DBButton>
 			}
