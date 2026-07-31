@@ -1,19 +1,22 @@
 import { DBControlPanelPrimaryActions } from '@db-ux/react-core-components';
-import ColorModeSwitch from '@template/components/color-mode-switch/ColorModeSwitch.tsx';
+import { useTranslation } from '@template/i18n';
 
-const PrimaryActions = () => (
-	<DBControlPanelPrimaryActions>
-		<ColorModeSwitch />
-		{/* <Search /> */}
-		<a
-			className="db-button"
-			href={`mailto:db-ux-designsystem@deutschebahn.com`}
-			data-variant="brand"
-			data-wrap="false"
-		>
-			Contact Us
-		</a>
-	</DBControlPanelPrimaryActions>
-);
+const PrimaryActions = () => {
+	const { t } = useTranslation();
+
+	return (
+		<DBControlPanelPrimaryActions>
+			{/* <Search /> */}
+			<a
+				className="db-button"
+				href={`mailto:db-ux-designsystem@deutschebahn.com`}
+				data-variant="brand"
+				data-wrap="false"
+			>
+				{t('shell.contactUs')}
+			</a>
+		</DBControlPanelPrimaryActions>
+	);
+};
 
 export default PrimaryActions;

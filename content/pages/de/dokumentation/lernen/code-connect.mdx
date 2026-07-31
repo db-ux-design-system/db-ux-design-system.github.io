@@ -1,0 +1,194 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Code Connect'
+headline: 'Code Connect'
+description: 'Wie Figma Code Connect die Lücke zwischen Design und Entwicklung schließt, indem Komponenteneigenschaften direkt mit Code verknüpft werden.'
+align: start
+order: 1
+toc: true
+tocMaxDepth: 2
+---
+
+import { DBSection, DBInfotext, DBCheckbox, DBButton } from '@db-ux/react-core-components';
+
+<DBSection spacing="small" width="auto">
+
+## Wie funktioniert Code Connect?
+
+Code Connect ist ein Figma-Feature, das Design-Komponenten direkt mit ihren Code-Implementierungen verknüpft. Entwickler:innen sehen das exakte Code-Snippet für eine ausgewählte Komponentenkonfiguration direkt in Figmas Dev Mode.
+
+Im DB UX Design System steuern die Komponenteneigenschaften in Figma die Code-Connect-Ausgabe. Es gibt zwei Kategorien:
+
+1. **Design-Eigenschaften:** beeinflussen das visuelle Erscheinungsbild und sind immer auf der ersten Ebene sichtbar (z. B. Size, Label, Disabled).
+2. **⚙️ Code-Connect-Eigenschaften:** nur für die Code-Generierung relevant, nicht für das visuelle Design. Wenn konfigurierbar, erscheinen sie auf der ersten Ebene mit einem ⚙️-Icon. Wenn nicht konfigurierbar, werden sie im Hintergrund verarbeitet.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Für Designer:innen
+
+Als Designer:in arbeitest du mit beiden Arten von Eigenschaften, wenn du eine Komponenteninstanz konfigurierst.
+
+### Design-relevante Eigenschaften
+
+Das sind die Eigenschaften, die du direkt siehst, wenn du eine Komponenteninstanz in Figma auswählst. Sie beeinflussen das visuelle Erscheinungsbild der Komponente.
+
+Du konfigurierst diese wie gewohnt. Sie beeinflussen sowohl das Design als auch die generierte Code-Ausgabe.
+
+<h3 style={{ marginTop: 'var(--db-spacing-fixed-lg)' }}>⚙️ Code-Connect-Eigenschaften</h3>
+
+Code-Connect-Eigenschaften sind mit einem **⚙️**-Icon gekennzeichnet und nur für die Code-Generierung relevant. Sie ändern nicht das visuelle Design.
+
+Wenn eine Komponente konfigurierbare Code-Connect-Eigenschaften hat, erscheinen sie direkt auf der ersten Ebene am Ende der Eigenschaftsliste. Du erkennst sie am ⚙️-Präfix.
+
+Allerdings haben nicht alle Komponenten konfigurierbare Code-Connect-Eigenschaften. Einige Komponenten (wie der Outline Button) enthalten intern einen **⚙️ Code Connect**-Layer, der „blinde" Eigenschaften an die Code-Ausgabe weitergibt (z. B. `variant="outlined"`). Da es nichts anzupassen gibt, werden keine ⚙️-Eigenschaften auf der ersten Ebene angezeigt.
+
+<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--db-spacing-fixed-md)' }}>
+	<div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--db-spacing-fixed-sm)' }}>
+		<DBCheckbox
+			required
+			showRequiredAsterisk
+			message="Read the full Terms of Service before submitting."
+			label="I agree to the terms and conditions"
+		/>
+
+    	Beispiele: `Checked`, `Indeterminate`, `Disabled`, `Validation`, `Show Required Asterisk`, `Show Label`, `Label`, `Show Message`
+
+    	<img
+    		src="/assets/learn/code-connect/design-properties.png"
+    		alt="Checkbox-Eigenschaften auf der ersten Ebene – Design-Eigenschaften und konfigurierbare ⚙️ Code-Connect-Eigenschaft (Required) sichtbar"
+    		style={{ maxWidth: '70%' }}
+    	/>
+
+<DBInfotext
+	semantic="informational"
+	size="medium"
+	text="Konfigurierbare Code-Connect-Eigenschaften sind auf der ersten Ebene sichtbar. Standardwerte sind vorausgewählt."
+/>
+
+    </div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--db-spacing-fixed-sm)' }}>
+    	<DBButton variant="outlined" showIcon icon="person">Login</DBButton>
+
+    	Beispiele: `Disabled`, `Size`, `Width`, `Show Icon Leading`, `Show Icon Trailing`, `Icon Leading`, `Text`
+
+    	<img
+    		src="/assets/learn/code-connect/design-properties2.png"
+    		alt="Button-Eigenschaften auf der ersten Ebene. Nur Design-Eigenschaften sichtbar, keine ⚙️ Code-Connect-Eigenschaften"
+    		style={{ maxWidth: '70%' }}
+    	/>
+
+<DBInfotext
+	semantic="informational"
+	size="medium"
+	text="Keine Code-Connect-Eigenschaften sichtbar. Die Variante wird automatisch bestimmt."
+/>
+
+    </div>
+
+</div>
+
+<h3 style={{ margin: 'var(--db-spacing-fixed-lg) 0' }}>⚙️ Code-Connect-Layer</h3>
+
+<img
+	src="/assets/learn/code-connect/code-connect-layer.png"
+	alt="Der ⚙️ Code Connect Sub-Layer innerhalb einer Komponente im Figma-Layer-Panel"
+	style={{ maxWidth: '40%' }}
+/>
+
+Einige Komponenten enthalten einen internen **⚙️ Code Connect**-Layer. Dieser Layer existiert, wenn es Eigenschaften gibt, die für die Entwicklung relevant sind, aber nicht im Design dargestellt werden können. Wenn du ihn auswählst, siehst du einen von zwei Zuständen:
+
+<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--db-spacing-fixed-md)' }}>
+	<div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--db-spacing-fixed-sm)' }}>
+**➡️ Eigenschaften setzen**: Die Komponente hat konfigurierbare Code-Connect-Eigenschaften. Sie erscheinen auf der ersten Ebene und können dort angepasst werden.
+
+<img
+	src="/assets/learn/code-connect/set-properties.png"
+	alt="Code-Connect-Layer mit konfigurierbaren Eigenschaften für die Checkbox-Komponente"
+	style={{ maxWidth: '50%' }}
+/>
+
+<DBInfotext
+	semantic="informational"
+	size="medium"
+	text="Standardwerte sind vorausgewählt."
+/>
+</div>
+	<div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--db-spacing-fixed-sm)' }}>
+**❌ Keine Eigenschaft zu setzen**: Die Komponente übergibt Eigenschaften automatisch (z. B. `variant="outlined"`). Es gibt nichts zu konfigurieren.
+
+<img
+	src="/assets/learn/code-connect/no-property.png"
+	alt="Code-Connect-Layer zeigt 'No property to set'-Nachricht für den Outline Button"
+	style={{ maxWidth: '50%' }}
+/>
+
+</div></div>
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Für Entwickler:innen
+
+{/* TODO: This section needs review by a developer familiar with the Code Connect implementation. */}
+
+Als Entwickler:in bietet dir Code Connect direkten Zugriff auf das korrekte Code-Snippet für jede Komponentenkonfiguration, direkt in Figmas Dev Mode.
+
+<h3 style={{ marginTop: 'var(--db-spacing-fixed-lg)' }}>So funktioniert es</h3>
+
+Code Connect bildet Figma-Komponenteneigenschaften auf framework-spezifische Code-Snippets ab. Wenn Designer:innen eine Komponente konfigurieren (sowohl design-relevante als auch Code-Connect-Eigenschaften), zeigt das Dev-Mode-Panel das entsprechende Code-Snippet, das exakt dieser Konfiguration entspricht.
+
+<h3 style={{ marginTop: 'var(--db-spacing-fixed-lg)' }}>Code Connect im Dev Mode verwenden</h3>
+
+1. Öffne eine Figma-Datei und wechsle in den **Dev Mode** (Umschalter in der unteren Toolbar).
+2. Wähle eine Komponenteninstanz auf der Canvas aus.
+3. Im **Inspect-Panel** auf der rechten Seite findest du den **Code Connect**-Bereich (markiert als „Connected").
+4. Wähle dein Ziel-Framework (z. B. React) aus dem Dropdown.
+5. Das generierte Code-Snippet spiegelt die aktuelle Eigenschaftskonfiguration wider, einschließlich der über ⚙️ Code-Connect-Eigenschaften gesetzten Werte.
+
+<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--db-spacing-fixed-md)' }}>
+	<div>
+		<img
+			src="/assets/learn/code-connect/code-connect-dev.png"
+			alt="Code-Connect-Ausgabe in Figma Dev Mode mit einem React-Code-Snippet für DBCheckbox"
+			style={{ maxWidth: '100%' }}
+		/>
+	</div>
+	<div>
+		<img
+			src="/assets/learn/code-connect/code-connect-dev2.png"
+			alt="Code-Connect-Ausgabe in Figma Dev Mode mit einem React-Code-Snippet für DBButton mit Variante outlined"
+			style={{ maxWidth: '100%' }}
+		/>
+	</div>
+</div>
+
+<h3 style={{ marginTop: 'var(--db-spacing-fixed-lg)' }}>Eigenschafts-Mapping</h3>
+
+<div style={{ marginTop: 'var(--db-spacing-fixed-sm)' }}>
+
+| Eigenschaftstyp          | Konfiguriert durch               | Beispiel-Eigenschaften                 | Im Code widergespiegelt |
+| ------------------------ | -------------------------------- | -------------------------------------- | ----------------------- |
+| Design-relevant          | Designer:in (erste Komponentenebene) | `size`, `label`, `disabled`       | ✅ Ja                   |
+| Nur Code (konfigurierbar) | Designer:in (⚙️ auf erster Ebene)   | `required`, `checked`, `indeterminate` | ✅ Ja            |
+| Nur Code (automatisch)   | Durch Variante bestimmt          | `variant`, `noText`                    | ✅ Ja (automatisch)     |
+
+</div>
+
+Beide Eigenschaftstypen werden in der generierten Code-Ausgabe berücksichtigt. Die Unterscheidung ist nur für den Design-Workflow relevant. Im Code werden alle Eigenschaften gleich behandelt.
+
+<h3 style={{ marginTop: 'var(--db-spacing-fixed-lg)' }}>Standardwerte</h3>
+
+⚙️ Code-Connect-Eigenschaften haben sinnvolle Standardwerte vorkonfiguriert. Wenn Designer:innen einen Wert nicht explizit geändert haben, wird der Standardwert in der Code-Ausgabe verwendet. Das bedeutet, dass du dich darauf verlassen kannst, dass das generierte Snippet für die ausgewählte Konfiguration vollständig und korrekt ist.
+
+<h3 style={{ marginTop: 'var(--db-spacing-fixed-lg)' }}>Eigene Komponenten verbinden</h3>
+
+Folge den Anweisungen von <a href="https://developers.figma.com/docs/code-connect/quickstart-guide/" target="_blank" referer="no-referer">Figma Code Connect</a>, um eigene Komponenten mit Code Connect zu verknüpfen. Du benötigst einen gültigen Figma-Token mit Zugriffsrechten auf deine Komponente.
+Um DB-UX-Komponenten wiederzuverwenden, kannst du `instance.findInstance('DBButton').executeTemplate().example` nutzen, um den korrekten Code einzubinden.
+Der „Code", der in Figma angezeigt wird, ist nur ein String – du kannst ihn beliebig anpassen. Wir generieren alles innerhalb der CI/CD für alle Frameworks basierend auf <a href="https://github.com/db-ux-design-system/core-web/blob/main/packages/components/configs/plugins/figma/index.cjs" target="_blank" referer="no-referer">diesem</a> Skript.
+Du kannst eine KI und diesen String verwenden, um deine eigene Logik anzupassen.
+
+</DBSection>

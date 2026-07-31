@@ -41,7 +41,8 @@ export const handleSimplePlaygrounds = ({
 		`[id="select"]`,
 	) as HTMLSelectElement | null;
 	const box = document.getElementById(`box`);
-	const popover = document.querySelector('.db-popover-content');
+	const playgroundContainer = box?.closest('.playground');
+	const popover = playgroundContainer?.querySelector('.db-popover-content') ?? null;
 
 	if (!select || !box || !popover) return false;
 

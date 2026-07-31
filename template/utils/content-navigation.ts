@@ -1,3 +1,5 @@
+import { toEnSlug } from '@template/i18n/slug-mapping';
+
 type NavigationFrontmatter = FrontMatter & {
 	hidePage?: boolean;
 	isSubNavigation?: boolean;
@@ -24,7 +26,10 @@ type Modules = Record<string, MdModule>;
 function strip(path: string): string {
 	const unix = path.replace(/\\/g, '/');
 	const withoutPrefix = unix.replace(/^.*content\/pages\//, '');
-	return withoutPrefix.replace(/(?:\/index\.(md|mdx|astro)|^index\.(md|mdx|astro))$/, '');
+	// Remove /index.{ext} for directory-style routes, or .{ext} for flat file routes
+	return withoutPrefix
+		.replace(/(?:\/index\.(md|mdx|astro)|^index\.(md|mdx|astro))$/, '')
+		.replace(/\.(md|mdx|astro)$/, '');
 }
 
 /**
@@ -120,9 +125,52 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 			'!**/_*.astro',
 			'!**/demo-b2b/**',
 			'!**/demo-b2c/**',
+			'!**/de/**',
 		],
 		{ eager: true },
 	) as Modules;
+
+	// Build DE title map from de/ pages frontmatter
+	const deModules = import.meta.glob<MdModule>(
+		[
+			'../../content/pages/de/**/*.{md,mdx}',
+			'!**/_*/**',
+		],
+		{ eager: true },
+	) as Modules;
+
+	const deTitles = new Map<string, string>();
+	for (const [key, mod] of Object.entries(deModules)) {
+		const unix = key.replace(/\\/g, '/');
+		const stripped = unix.replace(/^.*content\/pages\/de\//, '');
+		const deRel = stripped
+			.replace(/(?:\/index\.(md|mdx|astro)|^index\.(md|mdx|astro))$/, '')
+			.replace(/\.(md|mdx|astro)$/, '');
+		// Translate DE slug back to EN so it matches the EN navigation keys
+		const rel = toEnSlug(deRel);
+		const fm = mod.frontmatter ?? mod.default?.frontmatter ?? ({} as NavigationFrontmatter);
+		if (fm.title) {
+			deTitles.set(rel, fm.title);
+		}
+	}
+
+	// Fallback: DE titles for .astro pages (not available in client bundle via glob)
+	const astroTitlesFallback: Record<string, string> = {
+		'documentation/foundation/colors': 'Farben',
+		'documentation/foundation/typography': 'Typografie',
+		'documentation/foundation/spacing': 'Abstände',
+		'documentation/foundation/opacity': 'Transparenz',
+		'documentation/foundation/elevation': 'Schattierung',
+		'documentation/foundation/sizing': 'Größen',
+		'documentation/foundation/border-radius': 'Eckenradius',
+		'documentation/foundation/border-width': 'Strichstärke',
+		'documentation/icons': 'Icons',
+		'documentation/releases/release-notes': 'Release Notes',
+	};
+	for (const [key, title] of Object.entries(astroTitlesFallback)) {
+		if (!deTitles.has(key)) deTitles.set(key, title);
+	}
+
 	const nodes = new Map<string, NavigationItem>();
 
 	for (const [key, mod] of Object.entries(mods)) {
@@ -148,6 +196,7 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 
 		const node: NavigationItem = {
 			title,
+			titleDe: deTitles.get(rel),
 			path: hidePage ? undefined : rel,
 			isSubNavigation,
 			iconTrailing,
@@ -165,6 +214,7 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 		const existing = nodes.get(rel);
 		if (existing) {
 			existing.title = title;
+			existing.titleDe = deTitles.get(rel);
 			existing.path = hidePage ? undefined : rel;
 			existing.isSubNavigation = mobile ? false : isSubNavigation;
 			existing.iconTrailing = iconTrailing;
