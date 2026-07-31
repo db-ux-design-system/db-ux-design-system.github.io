@@ -1,0 +1,96 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Tab Panel'
+title: 'Tab Panel'
+description: 'Die Tab-Panel-Subkomponente stellt den Inhaltsbereich bereit, der angezeigt wird, wenn ein zugehöriger Tab ausgewählt ist. Es ist jeweils nur ein Panel sichtbar.'
+align: start
+toc: true
+status: 'sub'
+subParent: 'Tabs'
+order: 3
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Zeigt den Inhalt an, der mit dem aktuell aktiven Tab Item verknüpft ist
+- Wird unterhalb der Tab List (horizontal) oder daneben (vertikal) positioniert
+- Kann beliebige Inhalte enthalten, darunter Text, Formulare, Tabellen oder andere Komponenten
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbtabs-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Tab-in-Tab
+
+Das Verschachteln einer Tab-Komponente innerhalb eines Tab Panels erzeugt Orientierungsprobleme und erhöht die Komplexität. Halte die Inhaltshierarchie innerhalb von Panels flach.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=4025-6&embed-host=share"
+		description="Verwende eine einzelne Tab-Ebene und organisiere Panel-Inhalte mit Überschriften oder Sections statt verschachtelter Tabs."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=4025-8&embed-host=share"
+		description="Platziere keine weitere Tab-Komponente innerhalb eines Tab Panels – Nutzer:innen verlieren den Überblick, auf welcher Ebene sie navigieren."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Tab Panel" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Tabs',
+			description: 'Übergeordnete Komponente, die das Tab Panel enthält',
+			url: '/de/dokumentation/komponenten/tabs/tabs',
+		},
+		{
+			title: 'Tab List',
+			description: 'Container, der alle Tab Items enthält',
+			url: '/de/dokumentation/komponenten/tabs/tab-list',
+		},
+		{
+			title: 'Tab Item',
+			description: 'Einzelner klickbarer Tab, der dieses Panel aktiviert',
+			url: '/de/dokumentation/komponenten/tabs/tab-item',
+		},
+	]}
+/>
+
+</DBSection>

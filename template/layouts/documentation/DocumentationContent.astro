@@ -28,6 +28,7 @@ const SUB_PARENT_LABELS: Record<string, string> = {
 	shell: 'Shell',
 };
 const parentSegment = Astro.url.pathname.split('/').filter(Boolean).at(-2);
+const isDE = Astro.url.pathname.startsWith('/de/');
 const subParent =
 	frontmatter.subParent ??
 	(parentSegment
@@ -63,7 +64,9 @@ const subParent =
 					/>
 					{isSub && subParent && (
 						<DBNotification className="sub-component-notice" variant="standalone" semantic="informational" style={{maxInlineSize: 'var(--db-container-md)', marginBlockStart: 'var(--db-spacing-fixed-md)'}}>
-							This is a subcomponent of the {subParent} and cannot be used separately.
+							{isDE
+								? `Dies ist eine Subkomponente von ${subParent} und kann nicht eigenständig verwendet werden.`
+								: `This is a subcomponent of the ${subParent} and cannot be used separately.`}
 						</DBNotification>
 					)}
 				</DBSection>

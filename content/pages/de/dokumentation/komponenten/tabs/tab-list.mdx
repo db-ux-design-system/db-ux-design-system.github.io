@@ -1,0 +1,110 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Tab List'
+title: 'Tab List'
+description: 'Die Tab-List-Subkomponente stellt den Container bereit, der alle Tab Items enthält und deren Layout, Overflow-Verhalten und Ausrichtung verwaltet.'
+align: start
+toc: true
+status: 'sub'
+subParent: 'Tabs'
+order: 2
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Ordnet Tab Items horizontal oder vertikal an
+- Behandelt Overflow mit Scroll-Pfeilen, wenn Items den verfügbaren Platz überschreiten
+- Unterstützt Ausrichtungsoptionen (Start, Center, End) im Full-Width-Modus
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbtabs-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Anzahl der Items
+
+Halte die Anzahl sichtbarer Tabs überschaubar. Wenn zu viele Items horizontales Scrollen verursachen, ziehe vertikale Tabs in Betracht – sie unterstützen mehr Items ohne Overflow-Steuerelemente.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=3-1110&embed-host=share"
+		description="Verwende vertikale Tabs, wenn die Anzahl der Items das überschreitet, was bequem in eine horizontale Zeile passt."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=3-1112&embed-host=share"
+		description="Verwende keine horizontale Scroll-Navigation, um zu viele Items zu kompensieren – sie verbirgt verfügbare Optionen vor Nutzer:innen."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Beispiele
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=4025-10&embed-host=share"
+		description="Horizontaler Overflow: Wenn Items die Container-Breite überschreiten, erscheinen Scroll-Pfeile automatisch im Code. In Figma die Overflow-Position-Property setzen, um sie anzuzeigen."
+		fullWidth={true}
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Tab List" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Tabs',
+			description: 'Übergeordnete Komponente, die die Tab List enthält',
+			url: '/de/dokumentation/komponenten/tabs/tabs',
+		},
+		{
+			title: 'Tab Item',
+			description: 'Einzelner klickbarer Tab innerhalb der Tab List',
+			url: '/de/dokumentation/komponenten/tabs/tab-item',
+		},
+		{
+			title: 'Tab Panel',
+			description: 'Inhaltsbereich, der mit einem ausgewählten Tab verknüpft ist',
+			url: '/de/dokumentation/komponenten/tabs/tab-panel',
+		},
+	]}
+/>
+
+</DBSection>

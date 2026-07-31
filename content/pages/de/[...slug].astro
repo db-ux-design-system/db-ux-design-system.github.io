@@ -1,0 +1,30 @@
+---
+/**
+ * Catch-all fallback for /de/ routes without a dedicated DE page.
+ *
+ * At build time, generates a lightweight redirect page for each EN route
+ * that has no DE equivalent. The URL uses translated DE slugs (e.g.
+ * /de/produkte-und-services/komponenten) and redirects to the EN version.
+ *
+ * In dev mode, the middleware handles this via rewrite (no redirect needed),
+ * but this file ensures the production build has working /de/... URLs.
+ */
+import { getI18nFallbackPaths } from '@template/utils/i18n-fallback-paths';
+
+export const getStaticPaths = getI18nFallbackPaths;
+
+const { enSlug } = Astro.props;
+const enUrl = `/${enSlug}`;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="refresh" content={`0; url=${enUrl}`} />
+		<link rel="canonical" href={enUrl} />
+		<title>Redirecting…</title>
+	</head>
+	<body>
+		<script define:vars={{ enUrl }}>window.location.replace(enUrl);</script>
+	</body>
+</html>

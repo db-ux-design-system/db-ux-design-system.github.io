@@ -1,0 +1,39 @@
+---
+order: 8
+layout: '@template/layouts/default'
+title: 'Für Produktmanagement'
+headline: 'Wirkung durch Ausrichtung'
+description: 'Ein gemeinsames System, das konsistente Entscheidungsfindung und effiziente Produktentwicklung teamübergreifend ermöglicht.'
+heroImage: '/assets/for-productmanagement/For-Productmanagement--C.png'
+heroImageAlt: 'Für Produktmanagement Visual'
+sections:
+  - id: 'for-productmanagement--efficient-delivery-section'
+    title: 'Effiziente Bereitstellung'
+    text: 'Weniger Zeitaufwand für wiederkehrende Design- und Umsetzungsentscheidungen.'
+    imageSrc: 'assets/for-productmanagement/Efficient-Delivery--Lightmode--C.png'
+    imageSrcDark: 'assets/for-productmanagement/Efficient-Delivery--Darkmode--C.png'
+    imageAlt: 'Timeline-Komprimierung für schnellere Delivery-Zyklen'
+    imagePosition: 'right'
+    ariaLabel: 'Für Produktmanagement Bereich'
+  - id: 'for-productmanagement--lower-risk-section'
+    title: 'Geringeres Risiko'
+    text: 'Barrierefreie, markengerechte und geprüfte Patterns verhindern vermeidbare Nacharbeit.'
+    imageSrc: 'assets/for-productmanagement/Lower-Risk--Lightmode--C.png'
+    imageSrcDark: 'assets/for-productmanagement/Lower-Risk--Darkmode--C.png'
+    imageAlt: 'Schild und konforme UI-Elemente für reduziertes Produktrisiko'
+    imagePosition: 'left'
+  - id: 'for-productmanagement--scalable-approach-section'
+    title: 'Skalierbarer Ansatz'
+    text: 'Mehrere Teams und Produkte mit Standards unterstützen, die mitwachsen.'
+    imageSrc: 'assets/for-productmanagement/Scalable-Approach--Lightmode--C.png'
+    imageSrcDark: 'assets/for-productmanagement/Scalable-Approach--Darkmode--C.png'
+    imageAlt: 'Wachsendes Raster an Produktmodulen für skalierbare Standards'
+    imagePosition: 'right'
+    mask: 'fade-right'
+---
+
+import { ContentSections, ContactUsSection } from '@components';
+
+<ContentSections sections={frontmatter.sections} />
+
+<ContactUsSection />

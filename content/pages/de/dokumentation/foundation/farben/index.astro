@@ -1,0 +1,139 @@
+---
+import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
+import { DBSection, DBStack } from '@db-ux/react-core-components';
+import ColorPlayground from '../../../../documentation/foundation/colors/_ColorPlayground.astro';
+import ColorTable from '../../../../documentation/foundation/colors/_ColorTable.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+// eslint-disable-next-line astro/no-exports-from-components -- Exported for ChildPageOverview glob
+export const frontmatter: DocumentationFrontMatter = {
+	headline: 'Farben',
+	title: 'Farben',
+	shortDescription: 'Adaptive Farb-Tokens für Themes, Semantik und Betonungsstufen.',
+	align: 'start',
+	toc: true,
+	sectionSpacing: 'small',
+	sectionWidth: 'auto',
+};
+
+const headings = [
+	{ depth: 2, slug: 'playground', text: 'Playground' },
+	{ depth: 2, slug: 'richtlinien', text: 'Richtlinien' },
+	{ depth: 2, slug: 'tokens', text: 'Tokens' },
+	{ depth: 2, slug: 'faq', text: 'FAQ' },
+];
+---
+
+<DocumentationLayout frontmatter={frontmatter} headings={headings}>
+	Farben spielen eine zentrale Rolle bei der Gestaltung von Interfaces. Sie können
+	Botschaften verstärken, Bedeutungen kommunizieren und eine gezielte Nutzer:innenführung
+	ermöglichen.
+
+	<DBSection spacing="small">
+		<DBStack gap="x-large">
+			<DBStack gap="none">
+				<h2 id="playground">Playground</h2>
+				<br />
+				Erlebe, wie adaptive Farb-Tokens funktionieren. Wähle eine andere data-color, um zu sehen,
+				wie sich die Beispielkarte automatisch anpasst.
+			</DBStack>
+			<ColorPlayground layout="horizontal" />
+		</DBStack>
+	</DBSection>
+
+	<DBSection spacing="small">
+		<h2 id="richtlinien">Richtlinien</h2>
+
+		<CollapsibleWrapper collapsedHeight="320px">
+			<h3>Background & On-Background</h3>
+
+			<p>
+				Das gesamte Farbsystem basiert auf dem Prinzip, dass es definierte Hintergründe (bg) mit
+				passenden Inhaltsfarben (on-bg) gibt. Es gibt vier verschiedene Gruppen: Basic, Inverted,
+				Vibrant & Origin. Die zugehörigen bg- und on-bg-Tokens gehören immer zusammen und sollten
+				nicht gemischt werden. Dies stellt Kontrast, Lesbarkeit und Konsistenz sicher.
+			</p>
+
+			<div class="guideline-examples">
+				<GuidelineExample
+					figmaUrl="https://embed.figma.com/design/2eiyzoohpAvz4zw8wWSBqu/Doku--Color?node-id=1-1132&embed-host=share"
+					fullWidth={true}
+					description="Kombiniere immer das passende on-bg-Token mit dem jeweiligen bg-Token."
+				/>
+			</div>
+
+			<h3>Barrierefreiheit</h3>
+
+			<p>
+				Für barrierefreies Design benötigt Text ein Kontrastverhältnis von 4,5:1, während Icons ein
+				Kontrastverhältnis von 3:1 haben können. Für einfache Hintergründe sollte nur
+				on-bg-basic-emphasis-100, -90 oder -80 für Text verwendet werden. Für Icons ist auch -70
+				zulässig. In der Inverted-Gruppe sollte Text nur auf bg-inverted-contrast-max oder
+				-contrast-high platziert werden. Icons können auch auf -contrast-low platziert werden. In
+				Figma ist die Verwendung von Farbe in der Typografie eingeschränkt, was die Einhaltung
+				dieser Regel sicherstellt. Bei der Überlagerung mehrerer Hintergründe kann das System die
+				Barrierefreiheit nicht garantieren. In diesem Fall muss jeder Einzelfall geprüft und
+				gegebenenfalls der Kontrast durch Verwendung eines Rahmens sichergestellt werden (z.B.
+				bg-vibrant auf bg-basic).
+			</p>
+
+			<div class="guideline-examples">
+				<GuidelineExample
+					figmaUrl="https://embed.figma.com/design/2eiyzoohpAvz4zw8wWSBqu/Doku--Color?node-id=1-1133&embed-host=share"
+					fullWidth={true}
+					description="Befolge die Regel, um Barrierefreiheit sicherzustellen."
+				/>
+			</div>
+
+			<h3>Adaptive Farbgebung</h3>
+
+			<p>
+				Verwende standardmäßig adaptive Tokens. Durch die identische Struktur der einzelnen
+				Farbpaletten können Elemente einfach in einen anderen Farbkontext gesetzt werden. Wenn einem
+				Container eine data-color zugewiesen wird, werden alle darin enthaltenen Elemente im
+				gewählten Farbkontext umgefärbt. Explizit gefärbte Elemente, die keine adaptiven Farb-Tokens
+				verwenden, werden von der data-color nicht beeinflusst. Schau dir den Playground an, um ein
+				besseres Verständnis zu bekommen.
+			</p>
+
+			<div class="guideline-examples">
+				<GuidelineExample
+					figmaUrl="https://embed.figma.com/design/2eiyzoohpAvz4zw8wWSBqu/Doku--Color?node-id=7011-10&embed-host=share"
+					fullWidth={true}
+					description="Elemente mit adaptiven Farb-Tokens ändern ihre Farbe passend zum Kontext. Explizite Farben bleiben unverändert."
+				/>
+			</div>
+		</CollapsibleWrapper>
+
+		<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+	</DBSection>
+
+	<DBSection spacing="small">
+		<h2 id="tokens">Tokens</h2>
+		<ColorTable />
+	</DBSection>
+
+	<DBSection spacing="small">
+		<h2 id="faq">FAQ</h2>
+		<QuestionForm componentName="Colors" />
+	</DBSection>
+
+	<script>
+		import { waitForElements } from '@template/utils/client.utils.ts';
+		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';
+
+		function initColors(): boolean {
+			return handleSimplePlaygrounds({
+				dataAttributeName: 'color',
+				tokenPrefix: 'color',
+				popoverLabel: 'Color',
+				isColor: true,
+			});
+		}
+
+		waitForElements(initColors);
+	</script>
+</DocumentationLayout>

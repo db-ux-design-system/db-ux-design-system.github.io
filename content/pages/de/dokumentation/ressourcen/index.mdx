@@ -1,0 +1,218 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Ressourcen'
+headline: 'Ressourcen'
+description: >
+  Hol das Beste aus unserem Design System heraus!
+  Wir bieten Figma-Bibliotheken für Designer:innen und Code-Pakete für Entwickler:innen.
+  Unsere Ressourcen vereinfachen deinen Workflow und sorgen für eine konsistente, reibungslose Umsetzung.
+align: start
+order: 5
+toc: true
+---
+
+import { DBSection, DBStack } from '@db-ux/react-core-components';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import CardTeaser from '@template/components/CardTeaser/CardTeaser';
+import CardTeaserRow from '@template/components/CardTeaser/CardTeaserRow';
+
+<CardTeaserRow
+	items={[
+		{
+			title: 'Figma-Zugang für externe Mitarbeitende',
+			description: 'Zugang zu den Figma-Bibliotheken beantragen, wenn keine DB-E-Mail-Adresse vorhanden ist.',
+			url: 'https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/db-ux-design-system/support/freigabe-figma',
+			image: '/assets/teasers/figma.png',
+			imageAlt: 'Figma',
+			label: 'Im Marketingportal öffnen',
+			external: true,
+			protected: true,
+		},
+		{
+			title: 'DB Theme',
+			description:
+				'Erforderlich für Websites und Anwendungen der Deutschen Bahn. Installation über das @db-ux/db-theme Paket.',
+			url: 'https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/db-ux-design-system/resources/db-theme',
+			image: '/assets/teasers/db-theme.png',
+			imageAlt: 'DB Theme',
+			label: 'Im Marketingportal öffnen',
+			external: true,
+			protected: true,
+		},
+	]}
+/>
+
+<DBSection spacing='small' width="auto">
+
+## Core Foundation
+
+Eine Bibliothek mit den grundlegenden Styles und Tokens des DB UX Design Systems.
+
+<br />
+
+<ResourceCards
+	resources={[
+		{
+			title: 'Figma-Bibliothek',
+			description: 'Design Tokens, Farben, Typografie und Abstände.',
+			url: 'https://www.figma.com/design/HiaxnfH92ilbE4gfboFMA0/DB-UX-DS-v3---Core-Foundation---v4.5.1?node-id=543-682&p=f&t=Aaf8IF4jaCaVK7iz-0',
+			icon: '/assets/icons/figma.svg',
+			label: 'In Figma öffnen',
+			protected: true,
+		},
+		{
+			title: 'NPM-Paket',
+			description: 'CSS-Variablen, SCSS-Mixins und Tailwind-Konfiguration.',
+			url: 'https://www.npmjs.com/package/@db-ux/core-foundations',
+			icon: '/assets/icons/npm.svg',
+			label: 'Auf NPM ansehen',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing='small' width="auto">
+
+## Core Components
+
+Eine Bibliothek mit den Core Components des DB UX Design Systems.
+
+<br />
+
+<ResourceCards
+	resources={[
+		{
+			title: 'Figma-Bibliothek',
+			description: 'Alle Core Components für Design und Prototyping.',
+			url: 'https://www.figma.com/design/mlJ6R0GkfR15a93KSlqXtB/DB-UX-DS-v3---Core-Components---v4.5.1?node-id=18920-4578&p=f&t=JQAdgjZbiWJ8AglT-0',
+			icon: '/assets/icons/figma.svg',
+			label: 'In Figma öffnen',
+			protected: true,
+		},
+		{
+			title: 'Web Components',
+			description: 'Framework-unabhängige Web Components.',
+			url: 'https://www.npmjs.com/package/@db-ux/core-components',
+			icon: '/assets/icons/html5.svg',
+			label: 'Auf NPM ansehen',
+		},
+		{
+			title: 'React',
+			description: 'React-Wrapper-Komponenten.',
+			url: 'https://www.npmjs.com/package/@db-ux/react-core-components',
+			icon: '/assets/icons/react.svg',
+			label: 'Auf NPM ansehen',
+		},
+		{
+			title: 'Angular',
+			description: 'Angular-Wrapper-Komponenten.',
+			url: 'https://www.npmjs.com/package/@db-ux/ngx-core-components',
+			icon: '/assets/icons/angular.svg',
+			label: 'Auf NPM ansehen',
+		},
+		{
+			title: 'Vue',
+			description: 'Vue-Wrapper-Komponenten.',
+			url: 'https://www.npmjs.com/package/@db-ux/v-core-components',
+			icon: '/assets/icons/vue.svg',
+			label: 'Auf NPM ansehen',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing='small' width="auto">
+
+## Core Lab
+
+Eine Bibliothek mit Konzepten für zukünftige Inhalte des DB UX Design Systems.
+
+<br />
+
+<ResourceCards
+	resources={[
+		{
+			title: 'Figma-Bibliothek',
+			description: 'Experimentelle Komponenten und Patterns.',
+			url: 'https://www.figma.com/design/jS7unqZw51v07eYyXR6qP0/DB-UX-DS-v3---%F0%9F%A7%AA-Core-Lab---lab.0.4.2?node-id=3-24741&p=f&t=ldDLOlLcLADz0C8h-0',
+			icon: '/assets/icons/figma.svg',
+			label: 'In Figma öffnen',
+			protected: true,
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing='small' width="auto">
+
+## Erweiterungen
+
+### Reisendeninformation
+
+<br />
+
+<ResourceCards
+	resources={[
+		{
+			title: 'Figma-Bibliothek',
+			description:
+				'Gestaltung konsistenter Informationsstandards für Reisende über alle digitalen DB-Produkte und -Services hinweg.',
+			url: 'https://www.figma.com/design/PPqZMaoZAwCHG2pyD9wNCP/DB-UX-DS---Extension-Reisendeninformation---v0.9.4',
+			icon: '/assets/icons/figma.svg',
+			label: 'In Figma öffnen',
+			protected: true,
+		},
+		{
+			title: 'Web Components',
+			description: 'Framework-unabhängige Web Components.',
+			url: 'https://db.de/p1zabu',
+			icon: '/assets/icons/html5.svg',
+			label: 'In GitLab ansehen',
+			protected: true,
+		},
+	]}
+/>
+
+<br />
+
+### DataViz
+
+<br />
+
+<ResourceCards
+	resources={[
+		{
+			title: 'Figma-Bibliothek',
+			description: 'Chart-Komponenten und Datenvisualisierungs-Patterns.',
+			url: 'https://www.figma.com/design/AemgPcGQ5uMX5bMek0K64i/DB-UX-DS-v3---Extension-DataViz--Beta----v0.1.0',
+			icon: '/assets/icons/figma.svg',
+			label: 'In Figma öffnen',
+			protected: true,
+		},
+	]}
+/>
+</DBSection>
+
+<DBSection spacing='small' width="auto">
+
+## Version 2 (Legacy)
+
+<ResourceCards
+	resources={[
+		{
+			title: 'Dokumentation und Ressourcen',
+			description:
+				'Noch auf einer älteren Version? Die vollständige Dokumentation für Design System v2 findest du hier.',
+			url: 'https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/User-Experience/DB-UX-Design-System/version-2',
+			label: 'Im Marketingportal öffnen',
+			protected: true,
+		},
+	]}
+/>
+
+</DBSection>

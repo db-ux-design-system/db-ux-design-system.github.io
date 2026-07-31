@@ -1,0 +1,162 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Badge'
+title: 'Badge'
+description: 'Die Badge-Komponente zeigt kurze, kontextbezogene Informationen wie Status, Kategorie oder Metadaten in direkter Nähe zu einem anderen Element an.'
+shortDescription: 'Kurze, kontextbezogene Information wie Status, Kategorie oder Metadaten.'
+align: start
+status: 'stable'
+toc: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+
+- Status oder Zustand eines Elements anzeigen (z.B. neu, Fehler, Erfolg)
+- Inhalte mit einem kurzen Deskriptor kennzeichnen oder kategorisieren
+- Ergänzende Information neben UI-Elementen hervorheben
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbbadge-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Playground
+
+<ComponentPlayground component="badge" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Inhalt
+
+Badges sollten zusätzlichen Kontext liefern und dürfen keine essenziellen Informationen allein transportieren.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=1-1132&embed-host=share"
+		description="Verwende eine Badge, um einen Status neben einem Listenelement oder Titel anzuzeigen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=1-1133&embed-host=share"
+		description="Setze eine Badge nicht als einzigen Hinweis für kritische Informationen ein."
+	/>
+</div>
+
+### Labels
+
+Badge-Labels müssen kurz und schnell erfassbar sein, damit sie sofort erkannt werden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1110&embed-host=share"
+		description="Verwende ein oder zwei kurze Wörter wie 'Neu' oder 'Entwurf'."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1112&embed-host=share"
+		description="Verwende keine langen Sätze oder detaillierte Erklärungen in einer Badge."
+	/>
+</div>
+
+### Positionierung
+
+Platziere Badges nah am beschriebenen Element, ohne das Layout oder die Ausrichtung zu stören.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1113&embed-host=share"
+		description="Richte die Badge konsistent neben dem zugehörigen Label oder der Komponente aus."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1114&embed-host=share"
+		description="Platziere Badges nicht weit entfernt oder losgelöst vom Bezugselement."
+	/>
+</div>
+
+### Badge vs. Tag
+
+Verwende Badges für Status oder Metadaten, Tags für Filterung, Gruppierung oder interaktive Kategorisierung.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1116&embed-host=share"
+		description="Verwende eine Badge, um Status wie 'Aktiv' oder 'Archiviert' anzuzeigen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1117&embed-host=share"
+		description="Verwende keine Badge, wenn das Element klickbar oder entfernbar sein soll."
+	/>
+</div>
+
+### Barrierefreiheit
+
+Stelle sicher, dass Badge-Informationen für assistive Technologien verfügbar sind und nicht allein durch Farbe vermittelt werden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1118&embed-host=share"
+		description="Stelle klare Textlabels und ausreichenden Farbkontrast sicher."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/NRWHlLmwkLxnAqE5XSQlkV/Doku--Badge?node-id=3-1119&embed-host=share"
+		description="Verlasse dich nicht allein auf Farbe oder Position, um Bedeutung zu vermitteln."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Badge" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+	## Verwandte Inhalte
+	<TeaserCard
+		teasers={[
+			{
+				title: 'Tag',
+				description: 'Interaktives Element für Kategorisierung und Filterung',
+				url: '/de/dokumentation/komponenten/tag',
+			},
+
+    	]}
+    />
+
+</DBSection>
