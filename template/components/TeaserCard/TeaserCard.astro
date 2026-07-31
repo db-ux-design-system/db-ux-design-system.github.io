@@ -68,6 +68,8 @@ interface Props {
 }
 
 const { teasers, columns, spacing = 'small', headlineSize = 'small', headlineLevel = 3 } = Astro.props;
+const isDE = Astro.url.pathname.startsWith('/de/');
+const disabledLabel = isDE ? 'Demnächst verfügbar' : 'Coming Soon';
 ---
 
 <div class={`teaser-cards${columns ? ` teaser-cards-cols-${columns}` : ''}${headlineSize === 'large' ? ' teaser-cards-large' : headlineSize === 'medium' ? ' teaser-cards-medium' : ''}`}>
@@ -109,7 +111,7 @@ const { teasers, columns, spacing = 'small', headlineSize = 'small', headlineLev
 			);
 
 			return isDisabled ? (
-				<DisabledWrapper label="Coming Soon" size={hasImage ? 'medium' : 'small'}>
+				<DisabledWrapper label={disabledLabel} size={hasImage ? 'medium' : 'small'}>
 					<DBCard spacing={spacing}>{cardContent}</DBCard>
 				</DisabledWrapper>
 			) : teaser.url ? (

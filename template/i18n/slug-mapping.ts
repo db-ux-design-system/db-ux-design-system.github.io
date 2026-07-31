@@ -29,9 +29,9 @@ const segmentMap: Record<string, string> = {
 	'contribution': 'mitwirken',
 	'resources': 'ressourcen',
 	'versioning': 'versionierung',
-	// Note: 'patterns' (documentation) and 'pattern' (products) share the same
-	// DE slug 'pattern'. Mapping them globally would cause collisions in the
-	// reverse map. Both routes already use correct slugs in their content dirs.
+	// Note: 'patterns' → 'pattern' mapping is handled via fullPathMap below
+	// because both 'documentation/patterns' and 'products-and-services/pattern'
+	// need distinct handling that a global segment map cannot provide.
 
 	// foundation children
 	'colors': 'farben',
@@ -44,7 +44,17 @@ const segmentMap: Record<string, string> = {
 	'border-width': 'strichstaerke',
 };
 
-// Reverse map (DE → EN)
+// Full-path overrides for cases where segment-level mapping causes collisions
+const fullPathMap: Record<string, string> = {
+	'documentation/patterns': 'dokumentation/pattern',
+};
+
+// Reverse full-path map (DE → EN)
+const reverseFullPathMap: Record<string, string> = Object.fromEntries(
+	Object.entries(fullPathMap).map(([en, de]) => [de, en]),
+);
+
+// Reverse segment map (DE → EN)
 const reverseSegmentMap: Record<string, string> = Object.fromEntries(
 	Object.entries(segmentMap).map(([en, de]) => [de, en]),
 );
@@ -58,6 +68,15 @@ const reverseSegmentMap: Record<string, string> = Object.fromEntries(
 export function toDeSlug(enPath: string): string {
 	const normalized = enPath.replace(/^\//, '').replace(/\/$/, '');
 	if (!normalized) return '';
+
+	// Check full-path overrides first
+	if (fullPathMap[normalized]) return fullPathMap[normalized];
+	// Check if the path starts with a full-path override key
+	for (const [enFull, deFull] of Object.entries(fullPathMap)) {
+		if (normalized.startsWith(enFull + '/')) {
+			return deFull + '/' + normalized.slice(enFull.length + 1);
+		}
+	}
 
 	return normalized
 		.split('/')
@@ -74,6 +93,15 @@ export function toDeSlug(enPath: string): string {
 export function toEnSlug(dePath: string): string {
 	const normalized = dePath.replace(/^\//, '').replace(/\/$/, '');
 	if (!normalized) return '';
+
+	// Check full-path overrides first
+	if (reverseFullPathMap[normalized]) return reverseFullPathMap[normalized];
+	// Check if the path starts with a reverse full-path override key
+	for (const [deFull, enFull] of Object.entries(reverseFullPathMap)) {
+		if (normalized.startsWith(deFull + '/')) {
+			return enFull + '/' + normalized.slice(deFull.length + 1);
+		}
+	}
 
 	return normalized
 		.split('/')
