@@ -48,7 +48,9 @@
 .dba-main-content [style*="flex"] > :is(h2, h3, h4, h5, h6, p, ul, ol, pre, table, div, img, .db-notification, .guideline-examples, .db-stack, .question-form, .card-teaser, .card-teaser-row, .component-playground-root, astro-island) + :is(p, ul, ol, pre, table, div, img, .db-notification, .guideline-examples, .db-stack, .question-form, .card-teaser, .card-teaser-row, .component-playground-root, astro-island),
 .dba-main-content .content-flex > :is(h2, h3, h4, h5, h6, p, ul, ol, pre, table, div, img, .db-notification, .guideline-examples, .db-stack, .question-form, .card-teaser, .card-teaser-row, .component-playground-root, astro-island) + :is(p, ul, ol, pre, table, div, img, .db-notification, .guideline-examples, .db-stack, .question-form, .card-teaser, .card-teaser-row, .component-playground-root, astro-island),
 .dba-main-content .card-teaser-row > .card-teaser + .card-teaser,
-.dba-main-content .actionbar .actionbar-group + .actionbar-group {
+.dba-main-content .actionbar .actionbar-group + .actionbar-group,
+.dba-main-content .db-stack[data-direction="row"] > * + *,
+.dba-main-content .component-playground.component-playground * + * {
 	margin-block-start: 0;
 }
 
