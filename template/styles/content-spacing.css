@@ -74,3 +74,8 @@
 .dba-main-content .content-gap-plus.content-gap-plus {
 	margin-block-start: var(--db-spacing-fixed-2xl);
 }
+
+/* Release Notes: divider between notes needs more space than the lib default */
+.release-note .db-divider:is(:not([data-margin]), [data-margin='small']) {
+	margin: var(--db-spacing-fixed-3xl) 0;
+}
