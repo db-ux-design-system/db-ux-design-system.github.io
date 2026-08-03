@@ -44,7 +44,7 @@ Code-Connect-Eigenschaften sind mit einem **⚙️**-Icon gekennzeichnet und nur
 
 Wenn eine Komponente konfigurierbare Code-Connect-Eigenschaften hat, erscheinen sie direkt auf der ersten Ebene am Ende der Eigenschaftsliste. Du erkennst sie am ⚙️-Präfix.
 
-Allerdings haben nicht alle Komponenten konfigurierbare Code-Connect-Eigenschaften. Einige Komponenten (wie der Outline Button) enthalten intern einen **⚙️ Code Connect**-Layer, der „blinde" Eigenschaften an die Code-Ausgabe weitergibt (z. B. `variant="outlined"`). Da es nichts anzupassen gibt, werden keine ⚙️-Eigenschaften auf der ersten Ebene angezeigt.
+Allerdings haben nicht alle Komponenten konfigurierbare Code-Connect-Eigenschaften. Einige Komponenten (wie der Outline Button) enthalten intern einen **⚙️ Code Connect**-Layer, der „blinde“ Eigenschaften an die Code-Ausgabe weitergibt (z. B. `variant="outlined"`). Da es nichts anzupassen gibt, werden keine ⚙️-Eigenschaften auf der ersten Ebene angezeigt.
 
 <div className="content-gap-plus content-grid">
 	<div className="content-flex">
@@ -145,9 +145,9 @@ Code Connect bildet Figma-Komponenteneigenschaften auf framework-spezifische Cod
 
 1. Öffne eine Figma-Datei und wechsle in den **Dev Mode** (Umschalter in der unteren Toolbar).
 2. Wähle eine Komponenteninstanz auf der Canvas aus.
-3. Im **Inspect-Panel** auf der rechten Seite findest du den **Code Connect**-Bereich (markiert als „Connected").
+3. Im **Inspect-Panel** auf der rechten Seite findest du den **Code Connect**-Bereich (markiert als „Connected“).
 4. Wähle dein Ziel-Framework (z. B. React) aus dem Dropdown.
-5. Das generierte Code-Snippet spiegelt die aktuelle Eigenschaftskonfiguration wider, einschließlich der über ⚙️ Code-Connect-Eigenschaften gesetzten Werte.
+5. Das generierte Code-Snippet spiegelt die aktuell gesetzten Eigenschaften wider, einschließlich der über ⚙️ Code-Connect-Eigenschaften gesetzten Werte.
 
 <div className="content-grid">
 	<div>
@@ -188,7 +188,7 @@ Beide Eigenschaftstypen werden in der generierten Code-Ausgabe berücksichtigt. 
 
 Folge den Anweisungen von <a href="https://developers.figma.com/docs/code-connect/quickstart-guide/" target="_blank" referer="no-referer">Figma Code Connect</a>, um eigene Komponenten mit Code Connect zu verknüpfen. Du benötigst einen gültigen Figma-Token mit Zugriffsrechten auf deine Komponente.
 Um DB-UX-Komponenten wiederzuverwenden, kannst du `instance.findInstance('DBButton').executeTemplate().example` nutzen, um den korrekten Code einzubinden.
-Der „Code", der in Figma angezeigt wird, ist nur ein String – du kannst ihn beliebig anpassen. Wir generieren alles innerhalb der CI/CD für alle Frameworks basierend auf <a href="https://github.com/db-ux-design-system/core-web/blob/main/packages/components/configs/plugins/figma/index.cjs" target="_blank" referer="no-referer">diesem</a> Skript.
+Der „Code“, der in Figma angezeigt wird, ist nur ein String – du kannst ihn beliebig anpassen. Wir generieren alles innerhalb der CI/CD für alle Frameworks basierend auf <a href="https://github.com/db-ux-design-system/core-web/blob/main/packages/components/configs/plugins/figma/index.cjs" target="_blank" referer="no-referer">diesem</a> Skript.
 Du kannst eine KI und diesen String verwenden, um deine eigene Logik anzupassen.
 
 </DBSection>
