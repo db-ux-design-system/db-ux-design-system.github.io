@@ -10,9 +10,9 @@ date: '2026-07-14'
 #### Geändert
 - **BREAKING CHANGE** Drawer: Die Layout-Struktur wurde mit einheitlichen Subkomponenten (DrawerHeader und DrawerFooter) und neuen konsistenten Containergrößen (small, medium, large, full, custom) standardisiert.
   - Design: Bestehende Instanzen werden nach dem Update zurückgesetzt.
-  - Development: Einige Properties haben sich geändert und Unterstützung für Safe Areas wurde hinzugefügt.
+  - Entwicklung: Einige Properties haben sich geändert und Unterstützung für Safe Areas wurde hinzugefügt.
 - Tab: Die Komponente ist jetzt als Beta-Release verfügbar.
-  - Development: **BREAKING CHANGE** – Signifikante HTML-Anpassungen aufgrund von Accessibility-Tool-Feedback sowie Umbenennung und Umstrukturierung von Properties.
+  - Entwicklung: **BREAKING CHANGE** – Signifikante HTML-Anpassungen aufgrund von Accessibility-Tool-Feedback sowie Umbenennung und Umstrukturierung von Properties.
 
 ### Design
 
