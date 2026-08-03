@@ -10,7 +10,7 @@ toc: true
 tocMaxDepth: 2
 ---
 
-import { DBSection } from '@db-ux/react-core-components';
+import { DBSection, DBNotification } from '@db-ux/react-core-components';
 
 <DBSection spacing="small" width="auto">
 
@@ -22,7 +22,7 @@ Without this server, AI agents invent plausible-sounding but incorrect component
 
 ### Prerequisites
 
-| Requirement         | Details                                             |
+| Requirement         | Details                                            |
 | ------------------- | --------------------------------------------------- |
 | **Node.js**         | **v22.0.0 or higher** (required)                    |
 | **npm**             | Bundled with Node.js                                |
@@ -42,7 +42,9 @@ The server is integrated into your IDE via `npx`:
 npx --yes @db-ux/mcp-server
 ```
 
-> **Important:** Do **not** run this command manually in your terminal. Your IDE starts it automatically in the background. If you run it manually, the terminal appears to "hang" because the server is waiting for JSON-RPC messages over `stdio`.
+<DBNotification variant="standalone" semantic="warning" headline="Important">
+Do **not** run this command manually in your terminal. Your IDE starts it automatically in the background. If you run it manually, the terminal appears to "hang" because the server is waiting for JSON-RPC messages over `stdio`.
+</DBNotification>
 
 ### Step 2: Project installation
 
@@ -122,11 +124,15 @@ Add the entry to your global `settings.json` (same JSON as above underneath `mcp
 }
 ```
 
-> **Note:** If both exist, `.vscode/mcp.json` takes precedence.
+<DBNotification variant="standalone" semantic="informational" headline="Note">
+If both exist, `.vscode/mcp.json` takes precedence.
+</DBNotification>
 
 <br />
 
-> **⚠️ "Unknown Configuration Setting" warning:** If VS Code shows a yellow warning on the `mcp` key, this is expected behavior. Standard VS Code does not natively recognize the key. As long as your MCP client (e.g. Copilot Chat or Cursor) is active, the server works correctly.
+<DBNotification variant="standalone" semantic="warning" headline="Unknown Configuration Setting">
+If VS Code shows a yellow warning on the `mcp` key, this is expected behavior. Standard VS Code does not natively recognize the key. As long as your MCP client (e.g. Copilot Chat or Cursor) is active, the server works correctly.
+</DBNotification>
 
 ### IntelliJ / JetBrains IDEs
 
@@ -164,7 +170,9 @@ Amazon Q can automatically load the project's `CONTEXT.md` as a persistent syste
 
 3. Make sure `CONTEXT.md` is in the project root (copied by `npx @db-ux/agent-cli`)
 
-> **Note:** The path is resolved relative to the workspace root. Amazon Q / Kiro reads this file at the start of every session and injects it as system-level context.
+<DBNotification variant="standalone" semantic="informational" headline="Note">
+The path is resolved relative to the workspace root. Amazon Q / Kiro reads this file at the start of every session and injects it as system-level context.
+</DBNotification>
 
 </DBSection>
 
@@ -303,7 +311,9 @@ Specialized scan for WCAG 2.2 AA compliance. Evaluates interactive patterns, foc
 }
 ```
 
-> Prerequisite: Run `npm run build` in the `mcp-server` directory first.
+<DBNotification variant="standalone" semantic="informational" headline="Prerequisite">
+Run `npm run build` in the `mcp-server` directory first.
+</DBNotification>
 
 </DBSection>
 
@@ -325,7 +335,9 @@ cd packages/mcp-server && npm run build
 npx @modelcontextprotocol/inspector --transport stdio node dist/index.js
 ```
 
-> **Note:** The inspector uses port **6274** (UI) and **6277** (proxy). If occupied: `lsof -ti :6274 -ti :6277 | xargs kill -9`
+<DBNotification variant="standalone" semantic="informational" headline="Note">
+The inspector uses port **6274** (UI) and **6277** (proxy). If occupied: `lsof -ti :6274 -ti :6277 | xargs kill -9`
+</DBNotification>
 
 **Workflow:**
 
