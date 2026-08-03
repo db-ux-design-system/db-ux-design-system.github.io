@@ -1,10 +1,15 @@
-.release-note .db-divider {
-	margin: var(--db-spacing-fixed-2xl) 0 var(--db-spacing-fixed-sm);
+#filter-tags {
+	margin-block-end: var(--db-spacing-fixed-lg);
 }
+
+/* Divider needs more space than the lib's "large" provides */
+.release-note .db-divider[data-margin='large'] {
+	margin: var(--db-spacing-fixed-2xl) 0;
+}
+
 
 .release-note-version {
 	font: var(--db-type-headline-sm);
-	margin: var(--db-spacing-fixed-lg) 0 var(--db-spacing-fixed-sm);
 }
 
 .release-note-date {
@@ -21,10 +26,22 @@
 }
 
 .release-note h4 {
-	font: var(--db-type-headline-3xs);	
-	margin: var(--db-spacing-fixed-sm) 0 var(--db-spacing-fixed-sm);
+	font: var(--db-type-headline-3xs);
 }
 
-.release-note ul {
-	margin: var(--db-spacing-fixed-xs) 0 var(--db-spacing-fixed-md);
+/* Spacing within a release note block */
+.dba-main-content .release-note > * + * {
+	margin-block-start: var(--db-spacing-fixed-xs);
+}
+
+.dba-main-content .release-note > * + h3 {
+	margin-block-start: var(--db-spacing-fixed-sm);
+}
+
+.dba-main-content .release-note > * + h4 {
+	margin-block-start: var(--db-spacing-fixed-2xs);
+}
+
+.dba-main-content .release-note > :first-child {
+	margin-block-start: 0;
 }
