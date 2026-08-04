@@ -99,6 +99,12 @@
 	margin-block-start: 0;
 }
 
+/* Exclude: don't bleed into custom component internals that use flex gap */
+.dba-main-content .text-image > div + div,
+.dba-main-content .text-image-content > * + * {
+	margin-block-start: 0;
+}
+
 /* Exclude: don't add margins inside grid or flex containers (spacing via gap) */
 .dba-main-content
 	[style*='grid']
