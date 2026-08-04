@@ -1,0 +1,31 @@
+/**
+ * Typography Overrides
+ *
+ * Custom headline sizes for the documentation platform.
+ * DB UX lib sets h1/h2 via component styles; h3–h6 need explicit overrides.
+ */
+
+h3 {
+	font: var(--db-type-headline-md);
+}
+
+h4 {
+	font: var(--db-type-headline-xs);
+}
+
+h5,
+h6 {
+	font: var(--db-type-headline-3xs);
+}
+
+/* Cards/Teasers: keep headings at teaser size regardless of level */
+.db-card h2 {
+	font: var(--db-type-headline-sm);
+	margin-block: 0;
+}
+
+.db-card h3,
+.db-card h4 {
+	font: var(--db-type-headline-2xs);
+	margin-block: 0;
+}

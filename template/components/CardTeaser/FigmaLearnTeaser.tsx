@@ -1,13 +1,14 @@
 import CardTeaser from './CardTeaser';
-import { useLanguage } from '@template/context/language-context';
 
 interface FigmaLearnTeaserProps {
 	componentName: string;
+	locale?: 'en' | 'de';
 }
 
-const FigmaLearnTeaser = ({ componentName }: FigmaLearnTeaserProps) => {
-	const { language } = useLanguage();
-	const isDE = language === 'de';
+const FigmaLearnTeaser = ({ componentName, locale }: FigmaLearnTeaserProps) => {
+	const isDE =
+		locale === 'de' ||
+		(typeof window !== 'undefined' && window.location.pathname.startsWith('/de/'));
 
 	return (
 		<CardTeaser
