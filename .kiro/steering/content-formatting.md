@@ -41,6 +41,7 @@ EN convention follows the [Microsoft](https://learn.microsoft.com/en-us/style-gu
 
 - Guidelines: Name the core problem or aspect (e.g. "Horizontal Overflow", not "Popover Guideline")
 - Examples: Name the use case (e.g. "Variant Selection")
+- Keep headings short enough to fit in the Table of Contents without truncation (aim for two lines max at TOC width)
 
 ## Language
 
