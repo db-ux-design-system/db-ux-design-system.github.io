@@ -10,9 +10,27 @@ Rules for consistent formatting, structure, and typography across documentation 
 ## Typography & Punctuation
 
 - Dashes: En Dash with spaces ( – ), not Em Dash (—)
-- Numbers: Use digits, not words (e.g. "2–6" not "two to six")
+- Numbers: Use digits for ranges, measurements, and values (e.g. "2–6", "20 px")
 - Number ranges: En Dash without spaces (e.g. "2–6", "1–2 levels")
 - Lists: No period at the end of bullet points, period for full sentences
+
+### Single numbers in running text
+
+The threshold differs per language. Both rules yield the same result up to nine — they only diverge from 10 to 12, so never carry a digit over 1:1 when translating.
+
+| Language | Rule                                                                     | Examples                                                                     |
+| -------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| DE       | Spell out one- and two-syllable numerals, digits from three syllables up | "zwei Kategorien", "drei Segmente", "zwölf Varianten" — but "17 Komponenten" |
+| EN       | Spell out zero through nine, digits from 10 up                           | "two categories", "three segments" — but "12 variants", "17 components"      |
+
+Exceptions in both languages:
+
+- Measurements, values, and version numbers always use digits ("20 px", "2 s", "v5.0.0")
+- Ranges always use digits, even below the threshold ("2–6 options", "2–3 months")
+- If one number in a sentence is below and another above the threshold, treat both the same way
+- Digits are acceptable below the threshold where space is tight (tables, UI labels)
+
+EN convention follows the [Microsoft](https://learn.microsoft.com/en-us/style-guide/numbers) and [Google](https://developers.google.com/style/numbers) style guides.
 
 ## Emphasis
 
@@ -35,36 +53,61 @@ Terms not listed here follow natural translation. This table only documents non-
 
 ### Stays English (never translate)
 
-| Term | Note |
-|------|------|
-| Interface | not "Benutzeroberfläche" or "Oberfläche" |
-| Core Components | not "Kern-Komponenten" |
-| Core Foundation | not "Kern-Grundlagen" |
-| Design System | never translated |
-| Tokens | not "Variablen" or "Werte" |
-| Pattern | not "Muster" |
-| Templates | not "Vorlagen" |
-| Foundation | not "Grundlagen" or "Basis" |
-| Playground | not "Spielplatz" or "Experimentierfeld" |
-| Storybook | product name |
-| Release Notes | not "Versionshinweise" |
-| Breaking Change | not "Bruch-Änderung" |
-| Density | not "Dichte" |
-| Slot | not "Platzhalter" |
-| Figma | product name |
-| Dev Mode | not "Entwicklermodus" |
-| User Experience | not "Nutzererfahrung" or "Nutzungserlebnis" |
-| User Needs | not "Nutzerbedürfnisse" |
+| Term                  | Note                                                                                                                                                                 |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Interface             | not "Benutzeroberfläche" or "Oberfläche"                                                                                                                             |
+| Core Components       | not "Kern-Komponenten"                                                                                                                                               |
+| Core Foundation       | not "Kern-Grundlagen"                                                                                                                                                |
+| Design System         | never translated                                                                                                                                                     |
+| Tokens                | not "Variablen" or "Werte"                                                                                                                                           |
+| Pattern               | not "Muster"                                                                                                                                                         |
+| Templates             | not "Vorlagen"                                                                                                                                                       |
+| Foundation            | not "Grundlagen" or "Basis"                                                                                                                                          |
+| Playground            | not "Spielplatz" or "Experimentierfeld"                                                                                                                              |
+| Storybook             | product name                                                                                                                                                         |
+| Release Notes         | not "Versionshinweise"                                                                                                                                               |
+| Migration Guides      | not "Migrations-Leitfäden" – sibling section to Release Notes, matches the URL slug                                                                                  |
+| Major, Minor, Patch   | not "Hauptversion" – established terms for the target audience ("Major-Versionen")                                                                                   |
+| Breaking Change       | not "Bruch-Änderung"                                                                                                                                                 |
+| Density               | not "Dichte"                                                                                                                                                         |
+| Light Mode, Dark Mode | two words, capitalized, in DE and EN – not "Hellmodus"/"Dunkelmodus", not lowercase "dark mode". Asset file names keep the existing `Lightmode`/`Darkmode` spelling. |
+| Slot                  | not "Platzhalter"                                                                                                                                                    |
+| Figma                 | product name                                                                                                                                                         |
+| Dev Mode              | not "Entwicklermodus"                                                                                                                                                |
+| User Experience       | not "Nutzererfahrung" or "Nutzungserlebnis"                                                                                                                          |
+| User Needs            | not "Nutzerbedürfnisse"                                                                                                                                              |
 
 ### Fixed German translation (don't vary)
 
-| EN term | DE translation | Context |
-|---------|---------------|---------|
-| Component | Komponente | when referring to a UI component generically |
-| Extensions | Erweiterungen | in navigation/headings |
-| Resources | Ressourcen | in navigation/headings |
-| Accessibility | Barrierefreiheit | in headings and body text |
-| Guidelines | Richtlinien | in headings |
+| EN term       | DE translation   | Context                                      |
+| ------------- | ---------------- | -------------------------------------------- |
+| Component     | Komponente       | when referring to a UI component generically |
+| Extensions    | Erweiterungen    | in navigation/headings                       |
+| Resources     | Ressourcen       | in navigation/headings                       |
+| Accessibility | Barrierefreiheit | in headings and body text                    |
+| Guidelines    | Richtlinien      | in headings                                  |
+| contextual    | kontextbezogen   | never "kontextuell" – calque of _contextual_ |
+
+### Deliberately kept (don't "correct" these)
+
+German terms that a review is likely to flag, but that were assessed and kept on purpose. Listed here so the reasoning is findable instead of being re-litigated.
+
+| DE term          | Why it stays                                                                                      |
+| ---------------- | ------------------------------------------------------------------------------------------------- |
+| Modi             | Not "Farbmodi". _Modes_ is a Figma term and covers more than colors.                              |
+| Basis-Tokens     | The German-English compound is accepted here, even though `Tokens` alone stays English elsewhere. |
+| Materialität(en) | Not "Materialien". The term refers to more than a surface style.                                  |
+
+### Abbreviations (DE)
+
+- `z. B.` with a space, per Duden. Never `z.B.`
+
+### Form of address (DE)
+
+- Address the reader with **"du"** everywhere — documentation as well as Product & Services. Never "ihr/euch", never "Sie".
+- Rationale: the platform is used by individuals, not by teams as a unit, and the shared `QuestionForm` component ("Deine Frage") appears on every component page. A plural address would clash with it on the same screen.
+- English `your` is number-neutral — do not resolve it to a German plural.
+- Prefer direct address over impersonal passive: "Rechne damit, …" instead of "Es sollte damit gerechnet werden, …".
 
 ## German Writing Rules
 
@@ -75,6 +118,8 @@ Write natural German sentences. Avoid English sentence patterns translated 1:1. 
 - **Bad:** "Für Links im Fließtext Text-Link-Styles statt der eigenständigen Link-Komponente verwenden."
 - **Good:** "Verwende für Links im Fließtext Text-Link-Styles statt der eigenständigen Link-Komponente."
 
+**Exception – use case bullets:** The bullet lists at the top of component pages ("- Längere Freitext-Eingaben erfassen") stay in the infinitive. They are a list of use cases, not instructions, and the form is consistent across all ~30 component pages. Changing them would be a separate decision for every page at once, not a fix.
+
 ### Compound words
 
 Avoid overly long compound words. If a compound exceeds 3 parts or feels unnatural, split it or use the English term.
@@ -84,7 +129,14 @@ Avoid overly long compound words. If a compound exceeds 3 parts or feels unnatur
 
 ### Umlauts in JSX props
 
-German umlauts (ä, ö, ü, ß) work fine in JSX description props. Never use ASCII replacements (ae, oe, ue). Only typographic quotes („") cause parser errors — use straight quotes only.
+German umlauts (ä, ö, ü, ß) work fine in JSX description props. Never use ASCII replacements (ae, oe, ue).
+
+### Quotation marks (DE)
+
+- Use German quotes `„…"` (U+201E opening, U+201C closing) everywhere: running text, single-quoted JS strings, and double-quoted JSX props. They are ordinary characters and do not affect parsing.
+- Never close with a straight `"` and never use the English closing mark `”` (U+201D).
+- A straight `"` (U+0022) inside a double-quoted JSX prop terminates the attribute — that is the only real constraint.
+- Do not rely on a straight `"` in German markdown prose: the build converts it to English curly quotes (`“…”`) via smartypants.
 
 ## Description Structure
 
