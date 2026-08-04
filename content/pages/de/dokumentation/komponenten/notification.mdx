@@ -22,8 +22,8 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
-- Eine Aktion oder Zustandsänderung bestätigen (z.B. „Gespeichert", „Filter angewendet")
-- Über ein nicht-blockierendes Systemereignis informieren (z.B. „Synchronisation läuft", „Neue Version verfügbar")
+- Eine Aktion oder Zustandsänderung bestätigen (z. B. „Gespeichert“, „Filter angewendet“)
+- Über ein nicht-blockierendes Systemereignis informieren (z. B. „Synchronisation läuft“, „Neue Version verfügbar“)
 - Warnen oder ein Problem melden, das Aufmerksamkeit erfordert, ohne eine sofortige modale Entscheidung zu erzwingen
 
 <DBSection spacing="small" width="auto">
@@ -153,12 +153,13 @@ Platziere Notifications dort, wo sie wahrnehmbar sind, aber keine primären Steu
 		teasers={[
 			{
 				title: 'Tooltip',
-				description: 'Kurzer kontextueller Hinweis bei Hover oder Fokus',
+				description: 'Kurzer kontextbezogener Hinweis bei Hover oder Fokus',
 				url: '/de/dokumentation/komponenten/tooltip',
 			},
 			{
 				title: 'Popover',
-				description: 'Verankertes Interface für reichhaltigere kontextuelle Inhalte und Aktionen',
+				description:
+					'Verankertes Interface für reichhaltigere kontextbezogene Inhalte und Aktionen',
 				url: '/de/dokumentation/komponenten/popover',
 			},
 			{
@@ -168,7 +169,7 @@ Platziere Notifications dort, wo sie wahrnehmbar sind, aber keine primären Steu
 			},
 			{
 				title: 'Dialog',
-				description: 'Modale Oberfläche für kritische Entscheidungen oder blockierende Abläufe',
+				description: 'Modales Interface für kritische Entscheidungen oder blockierende Abläufe',
 				url: '/de/dokumentation/komponenten/dialog',
 			},
 			{

@@ -34,18 +34,22 @@ const {
 	extensionsTitle = 'Extensions',
 	extensionsText = 'Contextual standards that build on the core system to support domain-specific needs.',
 	patternsTitle = 'Patterns',
-	patternsText = 'Provide reusable interaction models that guide consistent behavior across products.',
+	patternsText = 'Reusable interaction models that guide consistent behavior across products.',
 	templatesTitle = 'Templates',
-	templatesText = 'Offer structured starting points that speed up page creation and enforce coherent layouts.',
+	templatesText = 'Structured starting points that speed up page creation and enforce coherent layouts.',
 	comingSoonLabel = 'Coming Soon',
 	linkPrefix = '',
 } = Astro.props;
+
+// Link labels mirror the destination page title, so screen reader users hear
+// the same name they land on. Localised here because the labels are not props.
+const openPageLabel = (title: string) => (isDE ? `Seite ${title} öffnen` : `Open ${title} page`);
 ---
 
 <DBSection
 	width="medium"
 	spacing="medium"
-	aria-label="Unified model section"
+	aria-label={sectionTitle}
 	id="home--unified-model-section"
 >
 	<SectionTitle
@@ -55,7 +59,7 @@ const {
 	<DBStack gap="large">
 		<a
 			href={localizeHref("products-and-services/foundations")}
-			aria-label="Open Foundations page"
+			aria-label={openPageLabel(foundationTitle)}
 		>
 			<DBCard behavior="interactive" spacing="large">
 				<TextImage
@@ -63,7 +67,7 @@ const {
 					imagePosition="right"
 					imageWidth="33"
 					imageSrc={`${appConfig.basePath}assets/Foundations-Teaser--C.png`}
-					imageAlt="Foundations Visual"
+					imageAlt=""
 					mask="fade-bottom-right"
 				>
 					{foundationText}
@@ -72,7 +76,7 @@ const {
 		</a>
 		<a
 			href={localizeHref("products-and-services/components")}
-			aria-label="Open Components page"
+			aria-label={openPageLabel(componentsTitle)}
 		>
 			<DBCard behavior="interactive" spacing="large">
 				<TextImage
@@ -80,7 +84,7 @@ const {
 					imagePosition="right"
 					imageWidth="33"
 					imageSrc={`${appConfig.basePath}assets/Components-Teaser--C.png`}
-					imageAlt="Foundations Visual"
+					imageAlt=""
 					mask="fade-bottom-right"
 				>
 					{componentsText}
@@ -89,7 +93,7 @@ const {
 		</a>
 		<a
 			href={localizeHref("products-and-services/extensions")}
-			aria-label="Open Extensions page"
+			aria-label={openPageLabel(extensionsTitle)}
 		>
 			<DBCard behavior="interactive" spacing="large">
 				<TextImage
@@ -97,7 +101,7 @@ const {
 					imageWidth="33"
 					title={extensionsTitle}
 					imageSrc={`${appConfig.basePath}assets/Extensions-Teaser--C.png`}
-					imageAlt="Foundations Visual"
+					imageAlt=""
 					mask="fade-bottom-right"
 				>
 					{extensionsText}
@@ -105,28 +109,36 @@ const {
 			</DBCard>
 		</a>
 		<DBStack direction="row">
-			<DisabledWrapper label={comingSoonLabel} size="medium">
+			<DisabledWrapper
+				label={comingSoonLabel}
+				ariaLabel={`${patternsTitle} – ${comingSoonLabel}`}
+				size="medium"
+			>
 				<DBCard spacing="large">
 					<TextImage
 						imagePosition="right"
 						imageWidth="33"
 						title={patternsTitle}
 						imageSrc={`${appConfig.basePath}assets/Patterns-Teaser--C.png`}
-						imageAlt="Patterns Visual"
+						imageAlt=""
 						mask="fade-bottom-right"
 					>
 						{patternsText}
 					</TextImage>
 				</DBCard>
 			</DisabledWrapper>
-			<DisabledWrapper label={comingSoonLabel} size="medium">
+			<DisabledWrapper
+				label={comingSoonLabel}
+				ariaLabel={`${templatesTitle} – ${comingSoonLabel}`}
+				size="medium"
+			>
 				<DBCard spacing="large">
 					<TextImage
 						imagePosition="right"
 						imageWidth="33"
 						title={templatesTitle}
 						imageSrc={`${appConfig.basePath}assets/Templates-Teaser--C.png`}
-						imageAlt="Templates Visual"
+						imageAlt=""
 						mask="fade-bottom-right"
 					>
 						{templatesText}

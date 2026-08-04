@@ -36,12 +36,18 @@ const {
 	designTag = 'For Designer',
 	linkPrefix = '',
 } = Astro.props;
+
+// The tag props ("For Developer" / "Für Entwickler:innen") match the destination
+// page titles, so the link label names the page the user lands on. In German the
+// preposition belongs inside the sentence, so it is stripped from the tag.
+const audiencePageLabel = (tag: string) =>
+	isDE ? `Seite für ${tag.replace(/^Für\s+/i, '')} öffnen` : `Open ${tag} page`;
 ---
 
 <DBSection
 	width="medium"
 	spacing="medium"
-	aria-label="How the system supports your work section"
+	aria-label={sectionTitle}
 	id="home--designed-for-section"
 >
 	<SectionTitle
@@ -51,7 +57,7 @@ const {
 	<div class="cards-row-fixed">
 		<a
 			href={localizeHref("products-and-services/for-productmanagement")}
-			aria-label="Open for productmanagement page"
+			aria-label={audiencePageLabel(pmTag)}
 		>
 			<DBCard behavior="interactive" data-color="violet" spacing="large">
 				<TextImage
@@ -61,7 +67,7 @@ const {
 					title={pmTitle}
 					imageSrc={`${appConfig.basePath}assets/for-productmanagement/Efficient-Delivery--Lightmode--C.png`}
 					imageSrcDark={`${appConfig.basePath}assets/for-productmanagement/Efficient-Delivery--Darkmode--C.png`}
-					imageAlt="Efficient Delivery"
+					imageAlt=""
 					mask="fade-bottom-right"
 					headlineLevel={3}
 					tag={{ label: pmTag, emphasis: 'strong' }}
@@ -72,7 +78,7 @@ const {
 		</a>
 		<a
 			href={localizeHref("products-and-services/for-developer")}
-			aria-label="Open for developer page"
+			aria-label={audiencePageLabel(devTag)}
 		>
 			<DBCard behavior="interactive" data-color="green" spacing="large">
 				<TextImage
@@ -82,7 +88,7 @@ const {
 					title={devTitle}
 					imageSrc={`${appConfig.basePath}assets/for-developer/Predictable-Maintenance--Lightmode--C.png`}
 					imageSrcDark={`${appConfig.basePath}assets/for-developer/Predictable-Maintenance--Darkmode--C.png`}
-					imageAlt="Predictable Maintenance"
+					imageAlt=""
 					mask="fade-bottom-right"
 					headlineLevel={3}
 					tag={{ label: devTag, emphasis: 'strong' }}
@@ -94,7 +100,7 @@ const {
 
 		<a
 			href={localizeHref("products-and-services/for-designer")}
-			aria-label="Open for designer page"
+			aria-label={audiencePageLabel(designTag)}
 		>
 			<DBCard behavior="interactive" data-color="blue" spacing="large">
 				<TextImage
@@ -104,7 +110,7 @@ const {
 					title={designTitle}
 					imageSrc={`${appConfig.basePath}assets/for-designer/Flexible-Choices--Lightmode--C.png`}
 					imageSrcDark={`${appConfig.basePath}assets/for-designer/Flexible-Choices--Darkmode--C.png`}
-					imageAlt="Flexible Choices"
+					imageAlt=""
 					mask="fade-bottom-right"
 					headlineLevel={3}
 					tag={{ label: designTag, emphasis: 'strong' }}

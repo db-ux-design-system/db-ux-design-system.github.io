@@ -10,6 +10,9 @@ export interface CardTeaserProps {
 	label?: string;
 	external?: boolean;
 	protected?: boolean;
+	/** Accessible name of the lock icon. Pass a translated value on German pages –
+	 * the component renders statically from MDX and has no language context. */
+	protectedLabel?: string;
 }
 
 const CardTeaser = ({
@@ -21,6 +24,7 @@ const CardTeaser = ({
 	label,
 	external = false,
 	protected: isProtected = false,
+	protectedLabel = 'Protected content',
 }: CardTeaserProps) => {
 	return (
 		<a
@@ -33,7 +37,7 @@ const CardTeaser = ({
 					<span
 						className="card-teaser-protected-icon"
 						data-icon="lock_closed"
-						aria-label="Protected content"
+						aria-label={protectedLabel}
 						role="img"
 					/>
 				)}
