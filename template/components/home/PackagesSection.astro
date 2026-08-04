@@ -40,12 +40,16 @@ const {
 	comingSoonLabel = 'Coming Soon',
 	linkPrefix = '',
 } = Astro.props;
+
+// Link labels mirror the destination page title, so screen reader users hear
+// the same name they land on. Localised here because the labels are not props.
+const openPageLabel = (title: string) => (isDE ? `Seite ${title} öffnen` : `Open ${title} page`);
 ---
 
 <DBSection
 	width="medium"
 	spacing="medium"
-	aria-label="Unified model section"
+	aria-label={sectionTitle}
 	id="home--unified-model-section"
 >
 	<SectionTitle
@@ -55,7 +59,7 @@ const {
 	<DBStack gap="large">
 		<a
 			href={localizeHref("products-and-services/foundations")}
-			aria-label="Open Foundations page"
+			aria-label={openPageLabel(foundationTitle)}
 		>
 			<DBCard behavior="interactive" spacing="large">
 				<TextImage
@@ -72,7 +76,7 @@ const {
 		</a>
 		<a
 			href={localizeHref("products-and-services/components")}
-			aria-label="Open Components page"
+			aria-label={openPageLabel(componentsTitle)}
 		>
 			<DBCard behavior="interactive" spacing="large">
 				<TextImage
@@ -89,7 +93,7 @@ const {
 		</a>
 		<a
 			href={localizeHref("products-and-services/extensions")}
-			aria-label="Open Extensions page"
+			aria-label={openPageLabel(extensionsTitle)}
 		>
 			<DBCard behavior="interactive" spacing="large">
 				<TextImage
