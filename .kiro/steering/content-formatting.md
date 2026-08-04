@@ -88,6 +88,16 @@ Terms not listed here follow natural translation. This table only documents non-
 | Guidelines    | Richtlinien      | in headings                                  |
 | contextual    | kontextbezogen   | never "kontextuell" – calque of _contextual_ |
 
+### Deliberately kept (don't "correct" these)
+
+German terms that a review is likely to flag, but that were assessed and kept on purpose. Listed here so the reasoning is findable instead of being re-litigated.
+
+| DE term          | Why it stays                                                                                      |
+| ---------------- | ------------------------------------------------------------------------------------------------- |
+| Modi             | Not "Farbmodi". _Modes_ is a Figma term and covers more than colors.                              |
+| Basis-Tokens     | The German-English compound is accepted here, even though `Tokens` alone stays English elsewhere. |
+| Materialität(en) | Not "Materialien". The term refers to more than a surface style.                                  |
+
 ### Abbreviations (DE)
 
 - `z. B.` with a space, per Duden. Never `z.B.`
@@ -107,6 +117,8 @@ Write natural German sentences. Avoid English sentence patterns translated 1:1. 
 
 - **Bad:** "Für Links im Fließtext Text-Link-Styles statt der eigenständigen Link-Komponente verwenden."
 - **Good:** "Verwende für Links im Fließtext Text-Link-Styles statt der eigenständigen Link-Komponente."
+
+**Exception – use case bullets:** The bullet lists at the top of component pages ("- Längere Freitext-Eingaben erfassen") stay in the infinitive. They are a list of use cases, not instructions, and the form is consistent across all ~30 component pages. Changing them would be a separate decision for every page at once, not a fix.
 
 ### Compound words
 

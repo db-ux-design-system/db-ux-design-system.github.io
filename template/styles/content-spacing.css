@@ -17,12 +17,69 @@
 }
 
 /* Base rule: content element preceded by another content element gets md spacing */
-.dba-main-content :is(h2, h3, h4, h5, h6, p, ul, ol, pre, table, div, img, .db-notification, .guideline-examples, .db-stack, .question-form, .card-teaser, .card-teaser-row, .component-playground-root, astro-island) + :is(p, ul, ol, pre, table, div, img, .db-notification, .guideline-examples, .db-stack, .question-form, .card-teaser, .card-teaser-row, .component-playground-root, astro-island) {
+.dba-main-content
+	:is(
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		p,
+		ul,
+		ol,
+		pre,
+		table,
+		div,
+		img,
+		.db-notification,
+		.guideline-examples,
+		.db-stack,
+		.question-form,
+		.card-teaser,
+		.card-teaser-row,
+		.component-playground-root,
+		astro-island
+	)
+	+ :is(
+		p,
+		ul,
+		ol,
+		pre,
+		table,
+		div,
+		img,
+		.db-notification,
+		.guideline-examples,
+		.db-stack,
+		.question-form,
+		.card-teaser,
+		.card-teaser-row,
+		.component-playground-root,
+		astro-island
+	) {
 	margin-block-start: var(--db-spacing-fixed-md);
 }
 
 /* Headlines after content get large spacing to separate sections */
-.dba-main-content :is(p, ul, ol, pre, table, div, img, .db-notification, .guideline-examples, .db-stack, .question-form, .card-teaser, .card-teaser-row, .component-playground-root, astro-island) + :is(h2, h3, h4, h5, h6) {
+.dba-main-content
+	:is(
+		p,
+		ul,
+		ol,
+		pre,
+		table,
+		div,
+		img,
+		.db-notification,
+		.guideline-examples,
+		.db-stack,
+		.question-form,
+		.card-teaser,
+		.card-teaser-row,
+		.component-playground-root,
+		astro-island
+	)
+	+ :is(h2, h3, h4, h5, h6) {
 	margin-block-start: var(--db-spacing-fixed-2xl);
 }
 
@@ -43,13 +100,173 @@
 }
 
 /* Exclude: don't add margins inside grid or flex containers (spacing via gap) */
-.dba-main-content [style*="grid"] > :is(h2, h3, h4, h5, h6, p, ul, ol, pre, table, div, img, .db-notification, .guideline-examples, .db-stack, .question-form, .card-teaser, .card-teaser-row, .component-playground-root, astro-island) + :is(p, ul, ol, pre, table, div, img, .db-notification, .guideline-examples, .db-stack, .question-form, .card-teaser, .card-teaser-row, .component-playground-root, astro-island),
-.dba-main-content .content-grid > :is(h2, h3, h4, h5, h6, p, ul, ol, pre, table, div, img, .db-notification, .guideline-examples, .db-stack, .question-form, .card-teaser, .card-teaser-row, .component-playground-root, astro-island) + :is(p, ul, ol, pre, table, div, img, .db-notification, .guideline-examples, .db-stack, .question-form, .card-teaser, .card-teaser-row, .component-playground-root, astro-island),
-.dba-main-content [style*="flex"] > :is(h2, h3, h4, h5, h6, p, ul, ol, pre, table, div, img, .db-notification, .guideline-examples, .db-stack, .question-form, .card-teaser, .card-teaser-row, .component-playground-root, astro-island) + :is(p, ul, ol, pre, table, div, img, .db-notification, .guideline-examples, .db-stack, .question-form, .card-teaser, .card-teaser-row, .component-playground-root, astro-island),
-.dba-main-content .content-flex > :is(h2, h3, h4, h5, h6, p, ul, ol, pre, table, div, img, .db-notification, .guideline-examples, .db-stack, .question-form, .card-teaser, .card-teaser-row, .component-playground-root, astro-island) + :is(p, ul, ol, pre, table, div, img, .db-notification, .guideline-examples, .db-stack, .question-form, .card-teaser, .card-teaser-row, .component-playground-root, astro-island),
+.dba-main-content
+	[style*='grid']
+	> :is(
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		p,
+		ul,
+		ol,
+		pre,
+		table,
+		div,
+		img,
+		.db-notification,
+		.guideline-examples,
+		.db-stack,
+		.question-form,
+		.card-teaser,
+		.card-teaser-row,
+		.component-playground-root,
+		astro-island
+	)
+	+ :is(
+		p,
+		ul,
+		ol,
+		pre,
+		table,
+		div,
+		img,
+		.db-notification,
+		.guideline-examples,
+		.db-stack,
+		.question-form,
+		.card-teaser,
+		.card-teaser-row,
+		.component-playground-root,
+		astro-island
+	),
+.dba-main-content
+	.content-grid
+	> :is(
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		p,
+		ul,
+		ol,
+		pre,
+		table,
+		div,
+		img,
+		.db-notification,
+		.guideline-examples,
+		.db-stack,
+		.question-form,
+		.card-teaser,
+		.card-teaser-row,
+		.component-playground-root,
+		astro-island
+	)
+	+ :is(
+		p,
+		ul,
+		ol,
+		pre,
+		table,
+		div,
+		img,
+		.db-notification,
+		.guideline-examples,
+		.db-stack,
+		.question-form,
+		.card-teaser,
+		.card-teaser-row,
+		.component-playground-root,
+		astro-island
+	),
+.dba-main-content
+	[style*='flex']
+	> :is(
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		p,
+		ul,
+		ol,
+		pre,
+		table,
+		div,
+		img,
+		.db-notification,
+		.guideline-examples,
+		.db-stack,
+		.question-form,
+		.card-teaser,
+		.card-teaser-row,
+		.component-playground-root,
+		astro-island
+	)
+	+ :is(
+		p,
+		ul,
+		ol,
+		pre,
+		table,
+		div,
+		img,
+		.db-notification,
+		.guideline-examples,
+		.db-stack,
+		.question-form,
+		.card-teaser,
+		.card-teaser-row,
+		.component-playground-root,
+		astro-island
+	),
+.dba-main-content
+	.content-flex
+	> :is(
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		p,
+		ul,
+		ol,
+		pre,
+		table,
+		div,
+		img,
+		.db-notification,
+		.guideline-examples,
+		.db-stack,
+		.question-form,
+		.card-teaser,
+		.card-teaser-row,
+		.component-playground-root,
+		astro-island
+	)
+	+ :is(
+		p,
+		ul,
+		ol,
+		pre,
+		table,
+		div,
+		img,
+		.db-notification,
+		.guideline-examples,
+		.db-stack,
+		.question-form,
+		.card-teaser,
+		.card-teaser-row,
+		.component-playground-root,
+		astro-island
+	),
 .dba-main-content .card-teaser-row > .card-teaser + .card-teaser,
 .dba-main-content .actionbar .actionbar-group + .actionbar-group,
-.dba-main-content .db-stack[data-direction="row"] > * + *,
+.dba-main-content .db-stack[data-direction='row'] > * + *,
 .dba-main-content .component-playground.component-playground * + * {
 	margin-block-start: 0;
 }

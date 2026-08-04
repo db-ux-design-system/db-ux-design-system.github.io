@@ -6,7 +6,9 @@ interface FigmaLearnTeaserProps {
 }
 
 const FigmaLearnTeaser = ({ componentName, locale }: FigmaLearnTeaserProps) => {
-	const isDE = locale === 'de' || (typeof window !== 'undefined' && window.location.pathname.startsWith('/de/'));
+	const isDE =
+		locale === 'de' ||
+		(typeof window !== 'undefined' && window.location.pathname.startsWith('/de/'));
 
 	return (
 		<CardTeaser
