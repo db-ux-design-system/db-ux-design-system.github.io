@@ -33,4 +33,4 @@ jobs:
           # password: ${{ secrets.PASSWORD }} # Optional: Password for authentication (use secrets!)
           # auth_context: # Optional: Stringified JSON object for complex authentication
           skip_copilot_assignment: true # Optional: Set to true to skip assigning issues to GitHub Copilot (or if you don't have GitHub Copilot)
-          scans: '["axe","accesslint",
+          scans: '["axe","accesslint"]'
