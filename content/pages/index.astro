@@ -48,17 +48,19 @@ import DefaultLayout from '@template/layouts/default';
 			toggle.textContent = currentDemo === 'b2b' ? 'B2C' : 'B2B';
 		});
 
+		// Labels come from the component's data attributes so they exist only once
+		// and stay localized on the German page.
+		const labelDark = toggleMode.dataset.labelDark ?? '';
+		const labelLight = toggleMode.dataset.labelLight ?? '';
+
 		toggleMode.addEventListener('click', () => {
 			currentMode = currentMode === 'light' ? 'dark' : 'light';
 			iframe.src = `/demo-${currentDemo}?mode=${currentMode}`;
 			toggleMode.setAttribute('data-icon', currentMode === 'light' ? 'moon' : 'sun');
-			toggleMode.setAttribute(
-				'title',
-				currentMode === 'light' ? 'Toggle Dark Mode' : 'Toggle Light Mode',
-			);
+			const label = currentMode === 'light' ? labelDark : labelLight;
+			toggleMode.setAttribute('title', label);
 			const tooltip = toggleMode.querySelector('.db-tooltip');
-			if (tooltip)
-				tooltip.textContent = currentMode === 'light' ? 'Toggle Dark Mode' : 'Toggle Light Mode';
+			if (tooltip) tooltip.textContent = label;
 		});
 
 		document.addEventListener('click', (e) => {

@@ -15,7 +15,12 @@ import DefaultLayout from '@template/layouts/default';
 		description="Gemeinsame Standards und wiederverwendbare Komponenten schaffen Klarheit in Design und Umsetzung."
 	/>
 
-	<InteractiveDemoSection />
+	<InteractiveDemoSection
+		darkModeLabel="Dark Mode aktivieren"
+		lightModeLabel="Light Mode aktivieren"
+		fullscreenLabel="Vollbild"
+		demoTitle="Interaktive Demo"
+	/>
 
 	<PackagesSection
 		sectionTitle="Ein einheitliches Modell für Produktteams"
@@ -82,17 +87,19 @@ import DefaultLayout from '@template/layouts/default';
 			toggle.textContent = currentDemo === 'b2b' ? 'B2C' : 'B2B';
 		});
 
+		// Labels come from the component's data attributes so they exist only once
+		// and stay localized on the German page.
+		const labelDark = toggleMode.dataset.labelDark ?? '';
+		const labelLight = toggleMode.dataset.labelLight ?? '';
+
 		toggleMode.addEventListener('click', () => {
 			currentMode = currentMode === 'light' ? 'dark' : 'light';
 			iframe.src = `/demo-${currentDemo}?mode=${currentMode}`;
 			toggleMode.setAttribute('data-icon', currentMode === 'light' ? 'moon' : 'sun');
-			toggleMode.setAttribute(
-				'title',
-				currentMode === 'light' ? 'Dark Mode aktivieren' : 'Light Mode aktivieren',
-			);
+			const label = currentMode === 'light' ? labelDark : labelLight;
+			toggleMode.setAttribute('title', label);
 			const tooltip = toggleMode.querySelector('.db-tooltip');
-			if (tooltip)
-				tooltip.textContent = currentMode === 'light' ? 'Dark Mode aktivieren' : 'Light Mode aktivieren';
+			if (tooltip) tooltip.textContent = label;
 		});
 
 		document.addEventListener('click', (e) => {
