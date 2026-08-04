@@ -54,11 +54,11 @@ import DefaultLayout from '@template/layouts/default';
 			toggleMode.setAttribute('data-icon', currentMode === 'light' ? 'moon' : 'sun');
 			toggleMode.setAttribute(
 				'title',
-				currentMode === 'light' ? 'Toggle dark mode' : 'Toggle light mode',
+				currentMode === 'light' ? 'Toggle Dark Mode' : 'Toggle Light Mode',
 			);
 			const tooltip = toggleMode.querySelector('.db-tooltip');
 			if (tooltip)
-				tooltip.textContent = currentMode === 'light' ? 'Toggle dark mode' : 'Toggle light mode';
+				tooltip.textContent = currentMode === 'light' ? 'Toggle Dark Mode' : 'Toggle Light Mode';
 		});
 
 		document.addEventListener('click', (e) => {

@@ -88,11 +88,11 @@ import DefaultLayout from '@template/layouts/default';
 			toggleMode.setAttribute('data-icon', currentMode === 'light' ? 'moon' : 'sun');
 			toggleMode.setAttribute(
 				'title',
-				currentMode === 'light' ? 'Dunkelmodus aktivieren' : 'Hellmodus aktivieren',
+				currentMode === 'light' ? 'Dark Mode aktivieren' : 'Light Mode aktivieren',
 			);
 			const tooltip = toggleMode.querySelector('.db-tooltip');
 			if (tooltip)
-				tooltip.textContent = currentMode === 'light' ? 'Dunkelmodus aktivieren' : 'Hellmodus aktivieren';
+				tooltip.textContent = currentMode === 'light' ? 'Dark Mode aktivieren' : 'Light Mode aktivieren';
 		});
 
 		document.addEventListener('click', (e) => {
