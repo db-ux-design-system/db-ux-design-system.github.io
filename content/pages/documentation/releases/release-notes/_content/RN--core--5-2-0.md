@@ -2,12 +2,12 @@
 hidePage: true
 category: 'Core'
 version: 'v5.2.0'
-date: '2026-08-06'
+date: '2026-08-13'
 ---
 
 ### Design
 
-_version bump_
+<!-- TO DO: Add design entries here. Check wording with Kiro before publishing. -->
 
 ### Development
 
