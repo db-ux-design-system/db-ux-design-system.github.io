@@ -23,7 +23,7 @@ Bitte beachte die Hinweise auf [GitHub](https://github.com/db-ux-design-system/c
 
 ## 🎨 Design Release
 
-Der folgende Migrations-Leitfaden konzentriert sich primär auf **Figma**. Einige Änderungen werden, wo möglich und sinnvoll, auch in Sketch übernommen (insbesondere Property Alignment).
+Der folgende Migration Guide konzentriert sich primär auf **Figma**. Einige Änderungen werden, wo möglich und sinnvoll, auch in Sketch übernommen (insbesondere Property Alignment).
 Das Sketch-Library-Update auf v1.0.0 folgt.
 
 ## GitHub-Umbenennung
@@ -39,7 +39,7 @@ Alles rund um das DB UX Design System v3 wurde auf GitHub korrekt umbenannt:
 
 ## 🚀 Von Beta zu Stable!
 
-Die folgenden Komponenten erhalten mit dem v1.0.0 Release den Status „Stable" und haben den vollständigen Komponentenerstellungsprozess inklusive aller Tests für Usability und Barrierefreiheit durchlaufen.
+Die folgenden Komponenten erhalten mit dem v1.0.0 Release den Status „Stable“ und haben den vollständigen Prozess der Komponentenerstellung inklusive aller Tests für Usability und Barrierefreiheit durchlaufen.
 
 <StatusNotification status="stable" variant="long" />
 
@@ -114,8 +114,8 @@ Das mit v0.6.0 begonnene Property Alignment zwischen Design und Code wurde für 
   - **Text Property für Screenreader:** Komponenten ohne sichtbaren Text (z. B. Icon Button, Icon Tag, Badge ohne Text) enthalten nun eine versteckte Text-Property für Screenreader.
 
 - **Kleinere Anpassungen bei Property-Namen**, z. B.:
-  - „Width: Auto Width/Full Width" → „Width: Auto/Full" (z. B. Button)
-  - „🎨 xxx" → „Show xxx" (verschiedene Komponenten)
+  - „Width: Auto Width/Full Width“ → „Width: Auto/Full“ (z. B. Button)
+  - „🎨 xxx“ → „Show xxx“ (verschiedene Komponenten)
 
 </DBSection>
 
@@ -132,7 +132,7 @@ Das mit v0.6.0 begonnene Property Alignment zwischen Design und Code wurde für 
   - Size wurde in Spacing umbenannt und durch eine None-Variante ergänzt
 
 - **Tag**
-  - Die zusätzliche **Emphasis „Origin" wurde hinzugefügt.**
+  - Die zusätzliche **Emphasis „Origin“ wurde hinzugefügt.**
     Sie ermöglicht eine barrierefreie Verwendung des Tags mit einer lebendigeren Farbstufe aus der Farbpalette.
 
     <img
@@ -141,7 +141,7 @@ Das mit v0.6.0 begonnene Property Alignment zwischen Design und Code wurde für 
     	style={{ maxWidth: '100%' }}
     />
 
-  - Die **Farben und Farblogik** über die verschiedenen Tag-Varianten wurden **angepasst und vereinheitlicht.** Vielen Dank für euer Feedback dazu! (siehe Rework Foundation → Color Variables)
+  - Die **Farben und Farblogik** über die verschiedenen Tag-Varianten wurden **angepasst und vereinheitlicht.** Vielen Dank für dein Feedback dazu! (siehe Rework Foundation → Color Variables)
 
     <img
     	src="/assets/migration-guides/v1/migration-tag-colors.png"
@@ -157,9 +157,9 @@ Das mit v0.6.0 begonnene Property Alignment zwischen Design und Code wurde für 
     	style={{ maxWidth: '100%' }}
     />
 
-  - Die **Interactive-Variante** des Tags wurde **strukturell und inhaltlich überarbeitet:** - **Aufteilung des Interactive Tags in zwei Varianten** basierend auf dem Verhalten: - **Interactive Toggle** (ehemals Interactive): Diese Variante bildet das Verhalten des Tags als Checkbox oder Radio ab und zeigt die Zustände „Not selected" (checked = false) und „Selected" (checked = true) - **Interactive** (neu): Diese Variante bildet das Verhalten des Tags als Button oder Link ab
+  - Die **Interactive-Variante** des Tags wurde **strukturell und inhaltlich überarbeitet:** - **Aufteilung des Interactive Tags in zwei Varianten** basierend auf dem Verhalten: - **Interactive Toggle** (ehemals Interactive): Diese Variante bildet das Verhalten des Tags als Checkbox oder Radio ab und zeigt die Zustände „Not selected“ (checked = false) und „Selected“ (checked = true) - **Interactive** (neu): Diese Variante bildet das Verhalten des Tags als Button oder Link ab
 
-            - Für **Interactive Toggle** wurden die beiden Zustände „Not selected" (checked = false) und „Selected" (checked = true) für eine bessere Usability der Komponente zusammengeführt.
+            - Für **Interactive Toggle** wurden die beiden Zustände „Not selected“ (checked = false) und „Selected“ (checked = true) für eine bessere Usability der Komponente zusammengeführt.
 
             - Ein (optionales) **Checked Status Icon wurde hinzugefügt**. Es ermöglicht eine bessere Unterscheidung zwischen dem Interactive Toggle Tag und dem Static Tag bei paralleler Verwendung innerhalb einer Anwendung.
 
@@ -184,12 +184,12 @@ Das mit v0.6.0 begonnene Property Alignment zwischen Design und Code wurde für 
 
 ### Variable Modes (Figma)
 
-- Entfernung veralteter „Density"-Modi wie ❌ **Tablet-XXX** und ❌ **Mobile-XXX.**
-- Umbenennung von „Display Mode" zu „Mode"
+- Entfernung veralteter „Density“-Modi wie ❌ **Tablet-XXX** und ❌ **Mobile-XXX.**
+- Umbenennung von „Display Mode“ zu „Mode“
 
 ### Color Variables
 
-- Die **Auswahl der Markenfarben als Origin-Farben** wurde überarbeitet und harmonisiert, indem nicht nur Level 500, sondern verschiedene passende Abstufungen gewählt wurden. Alle Origin-Farben wurden angepasst, um **Barrierefreiheitsanforderungen und Komponentenverwendung** zu erfüllen und eine **konsistente Farbdarstellung von Origin- und On-Origin-Farben** sicherzustellen, insbesondere durch die Kombination dunkler Farben auf hellen Hintergründen. Dies erreicht eine **konsistente Darstellung** für alle semantischen und zusätzlichen Farben und **verbessert die Unterscheidbarkeit von Brand Red.**
+- Die **Auswahl der Markenfarben als Origin-Farben** wurde überarbeitet und harmonisiert, indem nicht nur Level 500, sondern verschiedene passende Abstufungen gewählt wurden. Alle Origin-Farben wurden angepasst, um die **Anforderungen an Barrierefreiheit und Komponentenverwendung** zu erfüllen und eine **konsistente Farbdarstellung von Origin- und On-Origin-Farben** sicherzustellen, insbesondere durch die Kombination dunkler Farben auf hellen Hintergründen. Dies erreicht eine **konsistente Darstellung** für alle semantischen und zusätzlichen Farben und **verbessert die Unterscheidbarkeit von Brand Red.**
 
 <img
 	src="/assets/migration-guides/v1/migration-tag-origin-farben.png"
@@ -209,7 +209,7 @@ Das mit v0.6.0 begonnene Property Alignment zwischen Design und Code wurde für 
 
 ## Umstrukturierung der Icon Libraries
 
-- **Zusammenführung der bestehenden funktionalen Icon Libraries** „Core Icons" und „Extension PV Icons" in eine einzige Datei für Design und Entwicklung
+- **Zusammenführung der bestehenden funktionalen Icon Libraries** „Core Icons“ und „Extension PV Icons“ in eine einzige Datei für Design und Entwicklung
   → **DB Theme Icons** inklusive aller Core Icons und PV Icons
 
 <img

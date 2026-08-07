@@ -35,9 +35,9 @@ Sketch ist deprecated und erhält keine neuen Features mehr.
 
 ### Switch
 
-- **Entfernung der „Emphasis"-Property (Breaking Change)**
-  Die „Emphasis"-Property wird entfernt, da sie visuelle Konflikte mit der „Validation"-Property verursachen kann. **Die Standard-Variante „Weak" bleibt erhalten, die Strong-Variante ist als deprecated markiert und wird aus dem System entfernt.**
-  In Figma sind betroffene veraltete Komponenten an einem pinken Hintergrund erkennbar und mit **"❌ Switch → Strong [...] (Deprecated)"** im Namen markiert. **Diese Komponenten werden mit dem Update am 24. November 2025 vollständig entfernt.**
+- **Entfernung der „Emphasis“-Property (Breaking Change)**
+  Die „Emphasis“-Property wird entfernt, da sie visuelle Konflikte mit der „Validation“-Property verursachen kann. **Die Standard-Variante „Weak“ bleibt erhalten, die Strong-Variante ist als deprecated markiert und wird aus dem System entfernt.**
+  In Figma sind betroffene veraltete Komponenten an einem pinken Hintergrund erkennbar und mit **„❌ Switch → Strong [...] (Deprecated)“** im Namen markiert. **Diese Komponenten werden mit dem Update am 24. November 2025 vollständig entfernt.**
 
 <img
 	src="/assets/migration-guides/v4/switch-emphasis-fix.png"
@@ -48,10 +48,10 @@ Sketch ist deprecated und erhält keine neuen Features mehr.
 <YourAction
 	actions={[
 		'Überprüfe deine eingesetzten Switch-Komponenten.',
-		'Korrektur: Stelle sicher, dass alle veralteten Varianten von Emphasis „Strong" (pinker Hintergrund) durch die Standard-Variante ersetzt werden.',
+		'Korrektur: Stelle sicher, dass alle veralteten Varianten von Emphasis „Strong“ (pinker Hintergrund) durch die Standard-Variante ersetzt werden.',
 	]}
 />
-- Die **„Validation"**-Property ist nun für alle Zustände verfügbar. Du kannst die Status „No Validation" (Standard), „Invalid" und „Valid" direkt als Varianten verwenden.
+- Die **„Validation“**-Property ist nun für alle Zustände verfügbar. Du kannst die Status „No Validation“ (Standard), „Invalid“ und „Valid“ direkt als Varianten verwenden.
 
 <img
 	src="/assets/migration-guides/v4/switch-validation.png"
@@ -59,7 +59,7 @@ Sketch ist deprecated und erhält keine neuen Features mehr.
 	style={{ maxWidth: '100%' }}
 />
 
-- Die neue **„Label Position"**-Property ergänzt das bestehende Trailing Label (Standard) um die „Leading Label"-Variante.
+- Die neue **„Label Position“**-Property ergänzt das bestehende Trailing Label (Standard) um die „Leading Label“-Variante.
 
 <img
 	src="/assets/migration-guides/v4/switch-label-leading.png"
@@ -67,7 +67,7 @@ Sketch ist deprecated und erhält keine neuen Features mehr.
 	style={{ maxWidth: '100%' }}
 />
 
-- Mit der neuen **„Show Message"**-Property ist es nun möglich, eine Hilfsnachricht auch für No Validation-Varianten anzuzeigen. Damit kannst du hilfreiche Hinweise unabhängig vom Validierungsstatus anzeigen.
+- Mit der neuen **„Show Message“**-Property ist es nun möglich, eine Hilfsnachricht auch für No Validation-Varianten anzuzeigen. Damit kannst du hilfreiche Hinweise unabhängig vom Validierungsstatus anzeigen.
 
 <img
 	src="/assets/migration-guides/v4/switch-show-message.png"
@@ -81,7 +81,7 @@ Sketch ist deprecated und erhält keine neuen Features mehr.
 
 ### Notification (Figma/Breaking Change)
 
-Um die visuelle Konsistenz zwischen Figma und Entwicklung sicherzustellen, wird die „Show Headline"-Property nun als **dedizierte Variante** abgebildet. Beim Update der Komponente erscheint die Headline daher auch in Varianten, in denen sie zuvor ausgeblendet war. Sie muss nach dem Update erneut ausgeblendet werden.
+Um die visuelle Konsistenz zwischen Figma und Entwicklung sicherzustellen, wird die „Show Headline“-Property nun als **dedizierte Variante** abgebildet. Beim Update der Komponente erscheint die Headline daher auch in Varianten, in denen sie zuvor ausgeblendet war. Sie muss nach dem Update erneut ausgeblendet werden.
 Mit diesem Update wird das Verhalten in Design und Entwicklung identisch.
 
 <img

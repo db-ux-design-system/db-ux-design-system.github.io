@@ -39,7 +39,7 @@ date: '2026-07-30'
 - **BREAKING CHANGE** Ordnerstruktur: `infrago/assets/features` wurde in `feature` umbenannt.
 
 #### Entfernt
-- **BREAKING CHANGE** Duplikate: Drei Icons, die bereits in der Kategorie 'infrago/feature' verfügbar sind, wurden aus Core entfernt.
+- **BREAKING CHANGE** Duplikate: Drei Icons, die bereits in der Kategorie `infrago/feature` verfügbar sind, wurden aus Core entfernt.
   - db-wheelchair
   - mobility-service-meeting-point
   - special-bike
