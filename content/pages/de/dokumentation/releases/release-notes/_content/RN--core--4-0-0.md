@@ -11,10 +11,10 @@ date: '2025-10-13'
 - Switch: Die Komponente wurde refactored und zu Stable hochgestuft.
 
 #### Hinzugefügt
-- Switch: Die Properties "Validation", "Label Position" und "Show Message" wurden hinzugefügt.
+- Switch: Die Properties `Validation`, `Label Position` und `Show Message` wurden hinzugefügt.
 
 #### Entfernt
-- Switch: Die "Emphasis"-Property wurde entfernt.
+- Switch: Die `Emphasis`-Property wurde entfernt.
 
 ### Entwicklung
 

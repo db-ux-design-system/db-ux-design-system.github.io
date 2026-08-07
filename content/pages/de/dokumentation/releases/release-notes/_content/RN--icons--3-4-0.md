@@ -8,4 +8,4 @@ date: '2025-12-08'
 ### Design & Entwicklung
 
 #### Geändert
-- Icons: Das "Replacement Service"-Icon wurde ersetzt.
+- Icons: Das `Replacement Service`-Icon wurde ersetzt.

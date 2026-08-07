@@ -16,7 +16,7 @@ date: '2026-04-28'
 ### Entwicklung
 
 #### Behoben
-- Select: Das leere `option`-Element (gerendert bei Select-Elementen mit Placeholder oder "Floating Label"-Variante) wird jetzt ausgeblendet, sobald das `select` geöffnet wird, anstatt erst nach Auswahl einer anderen Option.
+- Select: Das leere `option`-Element (gerendert bei Select-Elementen mit Placeholder oder `Floating Label`-Variante) wird jetzt ausgeblendet, sobald das `select` geöffnet wird, anstatt erst nach Auswahl einer anderen Option.
 
 #### Geändert
 - Notification: Der Inhaltsbereich unterstützt jetzt beliebige Block-Level-Elemente, nicht nur reinen Text.
