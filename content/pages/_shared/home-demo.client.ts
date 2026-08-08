@@ -46,8 +46,11 @@ function initDemo(): boolean {
 
 		const action = target.dataset.action;
 		const value = target.dataset.value;
-		if (action && value) {
-			iframe.src = `/demo-${currentDemo}?${action}=${value}`;
+		const allowedActions = new Set(['mode', 'theme', 'view']);
+		if (action && value && allowedActions.has(action)) {
+			const params = new URLSearchParams();
+			params.set(action, value);
+			iframe.src = `/demo-${currentDemo}?${params.toString()}`;
 		}
 	});
 
