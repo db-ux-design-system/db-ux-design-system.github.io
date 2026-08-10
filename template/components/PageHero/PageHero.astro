@@ -39,13 +39,7 @@ const HeadingTag = `h${safeHeadlineLevel}` as HeadingTagName;
 
 {
 	(title || headline || description || imageSrc) && (
-		<div
-			class="page-hero"
-			data-align={align}
-			data-layout={layout}
-			data-image-side={imageSide}
-			aria-label="Page introduction"
-		>
+		<div class="page-hero" data-align={align} data-layout={layout} data-image-side={imageSide}>
 			{layout === 'split' && imageSrc && imageSide === 'left' && (
 				<div class="page-hero-media">
 					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />

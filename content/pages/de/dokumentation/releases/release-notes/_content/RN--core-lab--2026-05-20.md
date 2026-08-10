@@ -8,7 +8,7 @@ date: '2026-05-20'
 ### Design
 
 #### Hinzugefügt
-- Mehrere Komponenten: "Children"-Slots wurden zu Breadcrumb, ButtonGroup, Dialog, Footer, Heading, Pagination, SegmentedButton und SplitButton hinzugefügt.
+- Mehrere Komponenten: `Children`-Slots wurden zu Breadcrumb, ButtonGroup, Dialog, Footer, Heading, Pagination, SegmentedButton und SplitButton hinzugefügt.
 - Upload: Initiales Design wurde hinzugefügt.
 
 #### Geändert

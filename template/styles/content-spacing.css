@@ -1,0 +1,310 @@
+/**
+ * Content Spacing
+ *
+ * Unified vertical rhythm for documentation content.
+ * Scoped to .dba-main-content, excludes component internals.
+ *
+ * Strategy: Target content-level elements (headings, paragraphs, lists,
+ * code blocks, notifications, guidelines) wherever they appear in the
+ * content tree, using adjacent sibling selectors for spacing.
+ *
+ * Excluded: .db-card internals, .db-notification internals, table cells.
+ */
+
+/* Reset browser default margins on all content elements */
+.dba-main-content :is(h1, h2, h3, h4, h5, h6, p, ul, ol, pre, table) {
+	margin-block: 0;
+}
+
+/* Base rule: content element preceded by another content element gets md spacing */
+.dba-main-content
+	:is(
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		p,
+		ul,
+		ol,
+		pre,
+		table,
+		div,
+		img,
+		.db-notification,
+		.guideline-examples,
+		.db-stack,
+		.question-form,
+		.card-teaser,
+		.card-teaser-row,
+		.component-playground-root,
+		astro-island
+	)
+	+ :is(
+		p,
+		ul,
+		ol,
+		pre,
+		table,
+		div,
+		img,
+		.db-notification,
+		.guideline-examples,
+		.db-stack,
+		.question-form,
+		.card-teaser,
+		.card-teaser-row,
+		.component-playground-root,
+		astro-island
+	) {
+	margin-block-start: var(--db-spacing-fixed-md);
+}
+
+/* Headlines after content get large spacing to separate sections */
+.dba-main-content
+	:is(
+		p,
+		ul,
+		ol,
+		pre,
+		table,
+		div,
+		img,
+		.db-notification,
+		.guideline-examples,
+		.db-stack,
+		.question-form,
+		.card-teaser,
+		.card-teaser-row,
+		.component-playground-root,
+		astro-island
+	)
+	+ :is(h2, h3, h4, h5, h6) {
+	margin-block-start: var(--db-spacing-fixed-2xl);
+}
+
+/* Stacks after other stacks get section-like spacing (each stack = distinct topic) */
+.dba-main-content .db-section .db-stack + .db-stack {
+	margin-block-start: var(--db-spacing-fixed-2xl);
+}
+
+/* Headlines after headlines get tighter spacing (sub-section) */
+.dba-main-content :is(h2, h3, h4, h5, h6) + :is(h2, h3, h4, h5, h6) {
+	margin-block-start: var(--db-spacing-fixed-md);
+}
+
+/* Exclude: don't bleed into card or notification internals */
+.dba-main-content .db-card :is(h2, h3, h4, h5, h6, p),
+.dba-main-content .db-notification :is(h2, h3, h4, h5, h6, p) {
+	margin-block-start: 0;
+}
+
+/* Exclude: don't bleed into custom component internals that use flex gap */
+.dba-main-content .text-image > div + div,
+.dba-main-content .text-image-content > * + * {
+	margin-block-start: 0;
+}
+
+/* Exclude: don't add margins inside grid or flex containers (spacing via gap) */
+.dba-main-content
+	[style*='grid']
+	> :is(
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		p,
+		ul,
+		ol,
+		pre,
+		table,
+		div,
+		img,
+		.db-notification,
+		.guideline-examples,
+		.db-stack,
+		.question-form,
+		.card-teaser,
+		.card-teaser-row,
+		.component-playground-root,
+		astro-island
+	)
+	+ :is(
+		p,
+		ul,
+		ol,
+		pre,
+		table,
+		div,
+		img,
+		.db-notification,
+		.guideline-examples,
+		.db-stack,
+		.question-form,
+		.card-teaser,
+		.card-teaser-row,
+		.component-playground-root,
+		astro-island
+	),
+.dba-main-content
+	.content-grid
+	> :is(
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		p,
+		ul,
+		ol,
+		pre,
+		table,
+		div,
+		img,
+		.db-notification,
+		.guideline-examples,
+		.db-stack,
+		.question-form,
+		.card-teaser,
+		.card-teaser-row,
+		.component-playground-root,
+		astro-island
+	)
+	+ :is(
+		p,
+		ul,
+		ol,
+		pre,
+		table,
+		div,
+		img,
+		.db-notification,
+		.guideline-examples,
+		.db-stack,
+		.question-form,
+		.card-teaser,
+		.card-teaser-row,
+		.component-playground-root,
+		astro-island
+	),
+.dba-main-content
+	[style*='flex']
+	> :is(
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		p,
+		ul,
+		ol,
+		pre,
+		table,
+		div,
+		img,
+		.db-notification,
+		.guideline-examples,
+		.db-stack,
+		.question-form,
+		.card-teaser,
+		.card-teaser-row,
+		.component-playground-root,
+		astro-island
+	)
+	+ :is(
+		p,
+		ul,
+		ol,
+		pre,
+		table,
+		div,
+		img,
+		.db-notification,
+		.guideline-examples,
+		.db-stack,
+		.question-form,
+		.card-teaser,
+		.card-teaser-row,
+		.component-playground-root,
+		astro-island
+	),
+.dba-main-content
+	.content-flex
+	> :is(
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		p,
+		ul,
+		ol,
+		pre,
+		table,
+		div,
+		img,
+		.db-notification,
+		.guideline-examples,
+		.db-stack,
+		.question-form,
+		.card-teaser,
+		.card-teaser-row,
+		.component-playground-root,
+		astro-island
+	)
+	+ :is(
+		p,
+		ul,
+		ol,
+		pre,
+		table,
+		div,
+		img,
+		.db-notification,
+		.guideline-examples,
+		.db-stack,
+		.question-form,
+		.card-teaser,
+		.card-teaser-row,
+		.component-playground-root,
+		astro-island
+	),
+.dba-main-content .card-teaser-row > .card-teaser + .card-teaser,
+.dba-main-content .actionbar .actionbar-group + .actionbar-group,
+.dba-main-content .db-stack[data-direction='row'] > * + *,
+.dba-main-content .component-playground.component-playground * + * {
+	margin-block-start: 0;
+}
+
+/* Utility: 2-column grid for side-by-side content */
+.content-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--db-spacing-fixed-md);
+}
+
+/* Utility: vertical flex stack for grouped content */
+.content-flex {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-sm);
+}
+
+@media (width <= 767px) {
+	.content-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* Utility: one step more spacing than default content gap */
+.dba-main-content .content-gap-plus.content-gap-plus {
+	margin-block-start: var(--db-spacing-fixed-2xl);
+}
+
+/*
+ * Release Notes dividers are styled in
+ * content/pages/documentation/releases/release-notes/index.css
+ * (page-specific, shared by the DE page). Deliberately not handled here so
+ * there is only one rule for that element.
+ */

@@ -1,7 +1,8 @@
 ---
 import DocumentationLayout from '@template/layouts/documentation';
 import { DBTag, DBStack, DBCheckbox, DBDivider } from '@db-ux/react-core-components';
-import './index.css';
+// Shared with the EN page – keep a single stylesheet to avoid drift between locales
+import '../../../../documentation/releases/release-notes/index.css';
 import type { MarkdownInstance } from 'astro';
 type ReleaseNote = {
 	slug: string;
