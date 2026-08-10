@@ -50,7 +50,11 @@ function initDemo(): boolean {
 		const action = target.dataset.action;
 		const value = target.dataset.value;
 		if (action && value) {
-			iframe.src = `/demo-${currentDemo}?${action}=${value}`;
+			// Only allow safe query parameter keys and encode key/value for URL context.
+			if (!/^[a-zA-Z0-9_-]+$/.test(action)) return;
+			const encodedAction = encodeURIComponent(action);
+			const encodedValue = encodeURIComponent(value);
+			iframe.src = `/demo-${currentDemo}?${encodedAction}=${encodedValue}`;
 		}
 	});
 
