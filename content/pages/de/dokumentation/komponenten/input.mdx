@@ -21,8 +21,8 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
-- Kurze Textwerte erfassen (z.B. Name, Stadt, E-Mail, IBAN je nach Produktregeln)
-- Strukturierte Eingabe mit Formatierungshinweisen unterstützen (z.B. „Keine Leerzeichen", „Format TT.MM.JJJJ verwenden")
+- Kurze Textwerte erfassen (z. B. Name, Stadt, E-Mail, IBAN je nach Produktregeln)
+- Strukturierte Eingabe mit Formatierungshinweisen unterstützen (z. B. „Keine Leerzeichen“, „Format TT.MM.JJJJ verwenden“)
 - Sofortiges oder bei Absendung ausgelöstes Feedback zur Gültigkeit (Erfolg/Fehler) mit Hilfstext anzeigen
 
 <DBSection spacing="small" width="auto">
@@ -49,7 +49,7 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 ### Eingabetyp
 
-Verwende Input für Freitext-Eingabe. Wenn Nutzer:innen aus vordefinierten Optionen wählen müssen, verwende stattdessen eine Auswahlkomponente (z.B. Select, Autocomplete, Radio/Checkbox je nach Anwendungsfall).
+Verwende Input für Freitext-Eingabe. Wenn Nutzer:innen aus vordefinierten Optionen wählen müssen, verwende stattdessen eine Auswahlkomponente (z. B. Select, Autocomplete, Radio/Checkbox je nach Anwendungsfall).
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -89,13 +89,13 @@ Platzhaltertext ist optional und sollte ein Beispielformat/-wert liefern, keine 
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1113&embed-host=share&scaling=scale-down-width"
-		description='Verwende Platzhalter für ein Beispiel (z.B. "name@firma.de"), während das Label die Bedeutung trägt.'
+		description='Verwende Platzhalter für ein Beispiel (z. B. „name@firma.de“), während das Label die Bedeutung trägt.'
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1114&embed-host=share&scaling=scale-down-width"
 		description={
-			'Anforderungen oder Hilfetexte nicht ausschließlich im Platzhalter platzieren (z.B. "E-Mail eingeben, um Updates zu erhalten").'
+			'Platziere Anforderungen oder Hilfetexte nicht ausschließlich im Platzhalter (z. B. „E-Mail eingeben, um Updates zu erhalten“) – Platzhalter verschwinden beim Tippen.'
 		}
 	/>
 </div>
@@ -114,7 +114,7 @@ Verwende Hilfstext, um Fehler zu vermeiden (Format, Einschränkungen, Erwartunge
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/zJPzoYQJB2bFhAnceth2dm/Doku--Input?node-id=3-1117&embed-host=share&scaling=scale-down-width"
 		description={
-			'Keine langen Absätze anzeigen, das Label als Hilfs-/Fehlertext duplizieren oder unklare Fehler verwenden (z.B. "Ungültige Eingabe").'
+			'Zeige keine langen Absätze, dupliziere das Label nicht als Hilfs- oder Fehlertext und verwende keine unklaren Fehlermeldungen (z. B. „Ungültige Eingabe“).'
 		}
 	/>
 </div>

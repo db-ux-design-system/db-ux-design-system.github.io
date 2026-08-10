@@ -6,9 +6,16 @@ import '@template/themes/variables.css';
 interface Props {
 	darkModeLabel?: string;
 	lightModeLabel?: string;
+	fullscreenLabel?: string;
+	demoTitle?: string;
 }
 
-const { darkModeLabel = 'Toggle dark mode', lightModeLabel = 'Toggle light mode' } = Astro.props;
+const {
+	darkModeLabel = 'Activate Dark Mode',
+	lightModeLabel = 'Activate Light Mode',
+	fullscreenLabel = 'Fullscreen',
+	demoTitle = 'Interactive demo',
+} = Astro.props;
 ---
 
 <DBSection width="medium" spacing="medium" id="home--interactive-demo-section">
@@ -45,20 +52,20 @@ const { darkModeLabel = 'Toggle dark mode', lightModeLabel = 'Toggle light mode'
 						<DBTooltip>{darkModeLabel}</DBTooltip>
 					</DBButton>
 					<a
-						title="Fullscreen"
+						title={fullscreenLabel}
 						class="db-button"
 						target="_blank"
 						referrerpolicy="no-referrer"
 						data-variant="filled"
 						data-no-text="true"
 						data-icon="fullscreen"
-						id="fullscreen-anchor">Fullscreen</a
+						id="fullscreen-anchor">{fullscreenLabel}</a
 					>
 				</div>
 			</DBStack>
 		</DBCard>
 		<DBCard spacing="none">
-			<iframe id="demo-iframe" src="/demo-b2b" title="Interactive demo"></iframe>
+			<iframe id="demo-iframe" src="/demo-b2b" title={demoTitle}></iframe>
 		</DBCard>
 	</DBStack>
 </DBSection>

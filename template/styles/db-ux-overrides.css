@@ -120,6 +120,16 @@
 	margin: 0;
 }
 
+.db-card .db-link {
+	inline-size: auto;
+	display: inline-flex !important;
+	flex-direction: row !important;
+}
+
+.db-card:has(iframe) {
+	overflow: hidden;
+}
+
 .db-shell-content {
 	gap: var(--db-spacing-responsive-sm);
 }

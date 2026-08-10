@@ -29,9 +29,9 @@ const segmentMap: Record<string, string> = {
 	'contribution': 'mitwirken',
 	'resources': 'ressourcen',
 	'versioning': 'versionierung',
-	// Note: 'patterns' → 'pattern' mapping is handled via fullPathMap below
-	// because both 'documentation/patterns' and 'products-and-services/pattern'
-	// need distinct handling that a global segment map cannot provide.
+	// Note: 'patterns' is identical in both languages under products-and-services,
+	// so no segment entry is needed. Only 'documentation/patterns' still differs
+	// (DE uses the singular folder) and is handled via fullPathMap below.
 
 	// foundation children
 	'colors': 'farben',

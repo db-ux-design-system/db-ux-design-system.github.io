@@ -20,7 +20,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 
 {/* Übergreifende Themen: Library-Setup, Workarounds, Helper-Komponenten, Density, Theming usw. */}
 
-<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+<DBStack gap="medium">
 ### Property Icons
 
 Komponenteneigenschaften in der Figma-Bibliothek verwenden Emoji-Präfixe, um Typ und Zweck auf einen Blick erkennbar zu machen.
@@ -35,7 +35,7 @@ Komponenteneigenschaften in der Figma-Bibliothek verwenden Emoji-Präfixe, um Ty
 
 </DBStack>
 
-<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+<DBStack gap="medium">
 ### 📏 Resizer
 
 Die 📏 Resizer Helper-Komponente kann in anderen Komponenten verwendet werden, um feste Breiten oder Höhen von Instanzen oder Containern überschreibbar zu machen.
@@ -53,10 +53,10 @@ Custom Select (Dropdown, Mobile), Tab List Vertical, Scrollbar (Thumb, Free Posi
 </div>
 </DBStack>
 
-<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+<DBStack gap="medium">
 ### 🛟 Scrollbar
 
-Die 🛟 Scrollbar Helper-Komponente stellt einen dekorativen Scrollbar-Indikator für Figma-Komponenten bereit. Sie unterstützt 2 Orientierungen (Vertical, Horizontal) und mehrere Positionen (Start, Center, End, Free).
+Die 🛟 Scrollbar Helper-Komponente stellt einen dekorativen Scrollbar-Indikator für Figma-Komponenten bereit. Sie unterstützt zwei Orientierungen (Vertical, Horizontal) und mehrere Positionen (Start, Center, End, Free).
 
 <div className="guideline-examples">
 <GuidelineExample
@@ -87,13 +87,13 @@ Custom Select Dropdown
 
 
 
-<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+<DBStack gap="medium">
 ### Accordion
 
 #### Resize-Verhalten nach dem Bearbeiten
 
 <DBNotification variant="standalone" semantic="informational">
-Bekannter Figma-Bug: Das Ändern der Item-Anzahl oder des Item-Zustands (offen/eingeklappt) kann das Resize-Verhalten von Accordion-Items zurücksetzen. Nach dem Bearbeiten Fill oder Hug erneut anwenden.
+Bekannter Figma-Bug: Das Ändern der Item-Anzahl oder des Item-Zustands (offen/eingeklappt) kann das Resize-Verhalten von Accordion-Items zurücksetzen. Wende Fill oder Hug nach dem Bearbeiten erneut an.
 </DBNotification>
 
 <div className="guideline-examples">
@@ -110,7 +110,7 @@ Bekannter Figma-Bug: Das Ändern der Item-Anzahl oder des Item-Zustands (offen/e
 
 </DBStack>
 
-<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+<DBStack gap="medium">
 ### Button
 #### Mehrzeiliger Text in Full-Width-Buttons
 
@@ -135,7 +135,7 @@ Um automatische Zeilenumbrüche in einem Full-Width-Button zu aktivieren, den Te
 
 </DBStack>
 
-<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+<DBStack gap="medium">
 ### Checkbox
 
 #### Full Width – Pflichtfeld-Kennzeichnung
@@ -153,12 +153,12 @@ Required Toggle = true setzen für korrekte Dev Properties.
 
 </DBStack>
 
-<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+<DBStack gap="medium">
 ### Custom Select
 
 #### Sonderfall Mobile Landscape
 
-Dropdown Height von (Def) Auto auf Fill setzen, um die Dropdown-Höhe in begrenzten Viewport-Szenarien wie Mobile Landscape einzuschränken.
+Setze die Dropdown Height von (Def) Auto auf Fill, um die Dropdown-Höhe in begrenzten Viewport-Szenarien wie Mobile Landscape einzuschränken.
 
 <div className="guideline-examples">
 <GuidelineExample
@@ -174,7 +174,7 @@ Dropdown Height von (Def) Auto auf Fill setzen, um die Dropdown-Höhe in begrenz
 
 </DBStack>
 
-<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+<DBStack gap="medium">
 ### Radio
 
 #### Full Width – Pflichtfeld-Kennzeichnung
@@ -192,7 +192,7 @@ Required Toggle = true setzen für korrekte Dev Properties.
 
 </DBStack>
 
-<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+<DBStack gap="medium">
 ### Switch
 
 #### Full Width – Pflichtfeld-Kennzeichnung
@@ -210,7 +210,7 @@ Required Toggle = true setzen für korrekte Dev Properties.
 
 </DBStack>
 
-<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+<DBStack gap="medium">
 ### Textarea
 
 #### Vertikales Resize-Verhalten
@@ -227,7 +227,7 @@ Nach dem Platzieren der Komponente und dem Setzen der Eigenschaften die Größe 
 
 </DBStack>
 
-<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
+<DBStack gap="medium">
 ### Tooltip
 
 #### Den Tooltip-Pfeil auf eine flexible Position ändern

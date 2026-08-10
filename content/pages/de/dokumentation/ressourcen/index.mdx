@@ -5,9 +5,8 @@ sectionWidth: 'auto'
 title: 'Ressourcen'
 headline: 'Ressourcen'
 description: >
-  Hol das Beste aus unserem Design System heraus!
-  Wir bieten Figma-Bibliotheken für Designer:innen und Code-Pakete für Entwickler:innen.
-  Unsere Ressourcen vereinfachen deinen Workflow und sorgen für eine konsistente, reibungslose Umsetzung.
+  Figma-Bibliotheken für Designer:innen und Code-Pakete für Entwickler:innen.
+  Die Ressourcen vereinfachen deinen Workflow und sorgen für eine konsistente Umsetzung.
 align: start
 order: 5
 toc: true
@@ -18,17 +17,20 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import CardTeaser from '@template/components/CardTeaser/CardTeaser';
 import CardTeaserRow from '@template/components/CardTeaser/CardTeaserRow';
 
+<DBSection spacing='small' width="auto">
+
 <CardTeaserRow
 	items={[
 		{
 			title: 'Figma-Zugang für externe Mitarbeitende',
-			description: 'Zugang zu den Figma-Bibliotheken beantragen, wenn keine DB-E-Mail-Adresse vorhanden ist.',
+			description: 'Beantrage Zugang zu den Figma-Bibliotheken, wenn du keine DB-E-Mail-Adresse hast.',
 			url: 'https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/db-ux-design-system/support/freigabe-figma',
 			image: '/assets/teasers/figma.png',
 			imageAlt: 'Figma',
 			label: 'Im Marketingportal öffnen',
 			external: true,
 			protected: true,
+			protectedLabel: 'Geschützter Inhalt',
 		},
 		{
 			title: 'DB Theme',
@@ -40,9 +42,12 @@ import CardTeaserRow from '@template/components/CardTeaser/CardTeaserRow';
 			label: 'Im Marketingportal öffnen',
 			external: true,
 			protected: true,
+			protectedLabel: 'Geschützter Inhalt',
 		},
 	]}
 />
+
+</DBSection>
 
 <DBSection spacing='small' width="auto">
 
@@ -67,7 +72,7 @@ Eine Bibliothek mit den grundlegenden Styles und Tokens des DB UX Design Systems
 			description: 'CSS-Variablen, SCSS-Mixins und Tailwind-Konfiguration.',
 			url: 'https://www.npmjs.com/package/@db-ux/core-foundations',
 			icon: '/assets/icons/npm.svg',
-			label: 'Auf NPM ansehen',
+			label: 'NPM öffnen',
 		},
 	]}
 />
@@ -97,28 +102,28 @@ Eine Bibliothek mit den Core Components des DB UX Design Systems.
 			description: 'Framework-unabhängige Web Components.',
 			url: 'https://www.npmjs.com/package/@db-ux/core-components',
 			icon: '/assets/icons/html5.svg',
-			label: 'Auf NPM ansehen',
+			label: 'NPM öffnen',
 		},
 		{
 			title: 'React',
 			description: 'React-Wrapper-Komponenten.',
 			url: 'https://www.npmjs.com/package/@db-ux/react-core-components',
 			icon: '/assets/icons/react.svg',
-			label: 'Auf NPM ansehen',
+			label: 'NPM öffnen',
 		},
 		{
 			title: 'Angular',
 			description: 'Angular-Wrapper-Komponenten.',
 			url: 'https://www.npmjs.com/package/@db-ux/ngx-core-components',
 			icon: '/assets/icons/angular.svg',
-			label: 'Auf NPM ansehen',
+			label: 'NPM öffnen',
 		},
 		{
 			title: 'Vue',
 			description: 'Vue-Wrapper-Komponenten.',
 			url: 'https://www.npmjs.com/package/@db-ux/v-core-components',
 			icon: '/assets/icons/vue.svg',
-			label: 'Auf NPM ansehen',
+			label: 'NPM öffnen',
 		},
 	]}
 />

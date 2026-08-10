@@ -29,8 +29,8 @@ export const LanguageProvider = ({ pathname, children }: LanguageProviderProps) 
 export const useLanguage = (): LanguageContextValue => {
 	const ctx = useContext(LanguageContext);
 	if (!ctx) {
-		// Fallback for components used outside LanguageProvider (e.g. in DemoShell)
-		return { language: 'en' };
+		// Fallback for components used outside LanguageProvider
+		return { language: deriveLanguage() };
 	}
 	return ctx;
 };
