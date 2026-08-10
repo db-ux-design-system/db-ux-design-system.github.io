@@ -2,12 +2,15 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: var(--db-spacing-fixed-md);
+	align-items: stretch;
 }
 
 .card-teaser-row > .card-teaser {
 	display: flex;
+	flex-direction: column;
 }
 
 .card-teaser-row > .card-teaser > .db-card {
 	inline-size: 100%;
+	flex: 1;
 }

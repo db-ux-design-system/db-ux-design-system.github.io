@@ -52,7 +52,7 @@ const NavItem = ({
 	const lockIcon = isProtected ? (
 		<span
 			data-icon="lock_closed"
-			aria-label="Protected content"
+			aria-label={language === 'de' ? 'Geschützter Inhalt' : 'Protected content'}
 			role="img"
 			style={{ marginInlineStart: 'auto', fontSize: '0.75em' }}
 		/>
