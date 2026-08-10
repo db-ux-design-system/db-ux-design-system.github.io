@@ -15,9 +15,6 @@ function initDemo(): boolean {
 
 	if (!iframe || !toggle || !toggleMode || !fullscreenAnchor) return false;
 
-	const darkLabel = toggleMode.getAttribute('data-label-dark') || 'Toggle dark mode';
-	const lightLabel = toggleMode.getAttribute('data-label-light') || 'Toggle light mode';
-
 	let currentDemo = 'b2b';
 	let currentMode = 'light';
 
@@ -31,13 +28,19 @@ function initDemo(): boolean {
 		toggle.textContent = currentDemo === 'b2b' ? 'B2C' : 'B2B';
 	});
 
+	// Labels come from the component's data attributes so they exist only once
+	// and stay localized on the German page.
+	const labelDark = toggleMode.dataset.labelDark ?? '';
+	const labelLight = toggleMode.dataset.labelLight ?? '';
+
 	toggleMode.addEventListener('click', () => {
 		currentMode = currentMode === 'light' ? 'dark' : 'light';
 		iframe.src = `/demo-${currentDemo}?mode=${currentMode}`;
 		toggleMode.setAttribute('data-icon', currentMode === 'light' ? 'moon' : 'sun');
-		toggleMode.setAttribute('title', currentMode === 'light' ? darkLabel : lightLabel);
+		const label = currentMode === 'light' ? labelDark : labelLight;
+		toggleMode.setAttribute('title', label);
 		const tooltip = toggleMode.querySelector('.db-tooltip');
-		if (tooltip) tooltip.textContent = currentMode === 'light' ? darkLabel : lightLabel;
+		if (tooltip) tooltip.textContent = label;
 	});
 
 	document.addEventListener('click', (e) => {
@@ -46,11 +49,8 @@ function initDemo(): boolean {
 
 		const action = target.dataset.action;
 		const value = target.dataset.value;
-		const allowedActions = new Set(['mode', 'theme', 'view']);
-		if (action && value && allowedActions.has(action)) {
-			const params = new URLSearchParams();
-			params.set(action, value);
-			iframe.src = `/demo-${currentDemo}?${params.toString()}`;
+		if (action && value) {
+			iframe.src = `/demo-${currentDemo}?${action}=${value}`;
 		}
 	});
 
