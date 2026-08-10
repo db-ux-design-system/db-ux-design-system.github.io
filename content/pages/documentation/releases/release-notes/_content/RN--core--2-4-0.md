@@ -5,11 +5,13 @@ version: 'v2.4.0'
 date: '2025-07-07'
 ---
 
-### Features Design
+### Design
 
-- feat: Optimized prototyping for Checkbox, Radio, Switch and Tag
+#### Changed
+- Checkbox, Radio, Switch, Tag: Prototyping has been optimized.
 
-### Features UX Engineering
+### Development
 
-- feat: Option to disable the \*-required asterisk
-- feat: Optional property (position) for Drawer
+#### Added
+- Form components: An option to disable the *-required asterisk has been added.
+- Drawer: The optional `position` property is now available.

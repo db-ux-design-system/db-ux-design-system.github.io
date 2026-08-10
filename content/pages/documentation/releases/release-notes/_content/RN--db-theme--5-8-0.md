@@ -7,4 +7,5 @@ date: '2026-06-18'
 
 ### Development
 
-- feat: add `--db-logo-short` variable for new db-shell
+#### Added
+- Shell: A new `--db-logo-short` CSS variable is available for the new DB Shell.

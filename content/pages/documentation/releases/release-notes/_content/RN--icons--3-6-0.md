@@ -5,10 +5,11 @@ version: 'v3.6.0'
 date: '2026-02-09'
 ---
 
-### Features Design + Code
+### Design & Development
 
-- feat: New icons
-  - accessibility: detachable-wheelchair, electric-wheelchair, reha-buggy
-  - devices: computer, devices, laptop, monitor, tablet
-  - human: head, suitcase
-  - ticket: remove-option
+#### Added
+- Icons: 11 new icons have been added.
+  - Accessibility: detachable-wheelchair, electric-wheelchair, reha-buggy
+  - Devices: computer, devices, laptop, monitor, tablet
+  - Human: head, suitcase
+  - Ticket: remove-option

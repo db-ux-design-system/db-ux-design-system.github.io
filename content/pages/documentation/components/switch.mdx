@@ -5,6 +5,7 @@ sectionWidth: 'auto'
 headline: 'Switch'
 title: 'Switch'
 description: 'Switch toggles a setting between two states (on/off) and applies the change immediately. It is best for enabling or disabling features, preferences, or behaviors where users expect instant feedback.'
+shortDescription: 'Toggles a setting between two states with immediate effect.'
 align: start
 status: 'stable'
 toc: true
@@ -17,6 +18,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
@@ -59,7 +61,7 @@ Use Switch only when toggling should take effect right away. If users are select
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=1-1133&embed-host=share&scaling=scale-down-width"
-		description='Use a switch inside a form where changes only apply after pressing "Save".'
+		description="Don't use a switch inside a form where changes only apply after pressing 'Save'."
 	/>
 </div>
 
@@ -76,7 +78,7 @@ Users must be able to immediately understand whether the switch is on or off and
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=3-1112&embed-host=share&scaling=scale-down-width"
-		description="Toggle a switch without visible state clarity or without any observable outcome."
+		description="Don't toggle a switch without visible state clarity or without any observable outcome."
 	/>
 </div>
 
@@ -88,12 +90,12 @@ Keep labels concise and avoid negative wording that can create confusion ("Don't
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=3-1113&embed-host=share&scaling=scale-down-width"
-		description='Use "Enable notifications" instead of negative phrasing.'
+		description="Use 'Enable notifications' instead of negative phrasing."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=3-1114&embed-host=share&scaling=scale-down-width"
-		description='Use labels like "Do not notify" or wording that becomes ambiguous when toggled.'
+		description="Use labels like 'Do not notify or wording that becomes ambiguous when toggled."
 	/>
 </div>
 
@@ -103,13 +105,13 @@ Keep labels concise and avoid negative wording that can create confusion ("Don't
 
 </DBSection>
 
+<FigmaLearnTeaser componentName="Switch" />
+
 <DBSection spacing="small" width="auto">
 
 ## FAQ
 
-Have a question about the uswitch component? We'll answer it and add frequently asked questions to this page.
-
-<QuestionForm componentName="uswitch" />
+<QuestionForm componentName="Switch" />
 
 </DBSection>
 

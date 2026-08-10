@@ -1,0 +1,79 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Drawer Footer'
+title: 'Drawer Footer'
+description: 'Die Drawer-Footer-Subkomponente stellt den unteren Bereich des Drawers bereit – für primäre Aktionen, Bestätigungen oder ergänzende Steuerelemente.'
+align: start
+toc: true
+status: 'sub'
+subParent: 'Drawer'
+order: 3
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Bleibt am unteren Rand dauerhaft sichtbar, während der Drawer-Inhalt scrollt
+- Kann sekundäre Aktionen enthalten
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbdrawer-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Beispiele
+
+### Verwendung
+
+Der Drawer-Footer kann sticky bleiben, um wichtige Aktionen sichtbar zu halten, während der Drawer-Body dahinter scrollt.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4924-11&embed-host=share"
+		description="Verwende einen Footer, wenn Nutzer:innen dauerhaften Zugriff auf Aktionen wie Änderungen anwenden, Fortschritt speichern oder Abbrechen benötigen."
+		fullWidth={true}
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Drawer Footer" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Drawer',
+			description: 'Übergeordnete Komponente, die den Drawer-Footer enthält',
+			url: '/de/dokumentation/komponenten/drawer/drawer',
+		},
+		{
+			title: 'Drawer Header',
+			description: 'Oberer Bereich des Drawers mit Titel und Schließen-Button',
+			url: '/de/dokumentation/komponenten/drawer/drawer-header',
+		},
+	]}
+/>
+
+</DBSection>

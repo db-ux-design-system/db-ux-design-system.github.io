@@ -5,6 +5,7 @@ sectionWidth: 'auto' # auto, full
 headline: 'Button'
 title: 'Button'
 description: 'Buttons initiate actions and confirm decisions. Use them to guide users through key tasks and flows.'
+shortDescription: 'Initiates actions and confirms decisions to guide users through key tasks.'
 align: start
 toc: true
 status: 'stable'
@@ -17,6 +18,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
@@ -59,13 +61,13 @@ Establish a clear hierarchy so users can see which actions matter most. Use the 
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-863&embed-host=share"
-		description="Do not place two primary buttons next to each other or in the same viewport. Competing primary actions make it harder to decide what to do."
+		description="Don't place two primary buttons next to each other or in the same viewport. Competing primary actions make it harder to decide what to do."
 	/>
 </div>
 
 ### Labels
 
-Keep labels short, specific, and action‑oriented. Auto‑width buttons are single‑line by default; do not insert manual line breaks. Full‑width buttons may wrap only in edge cases (e.g., localization or narrow screens).
+Keep labels short, specific, and action‑oriented. Auto‑width buttons are single‑line by default; don't insert manual line breaks. Full‑width buttons may wrap only in edge cases (e.g., localization or narrow screens).
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -76,7 +78,7 @@ Keep labels short, specific, and action‑oriented. Auto‑width buttons are sin
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button?node-id=3-1137&embed-host=share"
-		description="Manually break lines or use long, complex label text."
+		description="Don't manually break lines or use long, complex label text."
 	/>
 </div>
 
@@ -114,7 +116,7 @@ Place related buttons horizontally if space allows. Use auto width by default; s
 	/>
 </div>
 
-### Button vs Link
+### Button vs. Link
 
 Use buttons to trigger actions that change state. Use links to navigate to other pages or views.
 
@@ -154,11 +156,11 @@ The small button in functional density has a height of 20 px. To meet accessibil
 
 </DBSection>
 
+<FigmaLearnTeaser componentName="Button" />
+
 <DBSection spacing="small" width="auto">
 
 ## FAQ
-
-Have a question about the Button component? We'll answer it and add frequently asked questions to this page.
 
 <QuestionForm componentName="Button" />
 

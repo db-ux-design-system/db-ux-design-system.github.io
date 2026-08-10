@@ -17,3 +17,6 @@ jobs:
 
   dependency-review:
     uses: ./.github/workflows/99-dependency-review.yml
+
+  dependabot-review:
+    uses: ./.github/workflows/99-dependabot-review.yml

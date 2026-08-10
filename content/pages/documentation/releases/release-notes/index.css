@@ -1,6 +1,7 @@
-.release-note .db-divider {
-	margin: var(--db-spacing-fixed-2xl) 0;
+#filter-tags {
+	margin-block-end: var(--db-spacing-fixed-lg);
 }
+
 
 .release-note-version {
 	font: var(--db-type-headline-sm);
@@ -11,6 +12,62 @@
 	color: var(--db-adaptive-on-bg-basic-emphasis-90-default);
 }
 
-.roadmap-link {
+.release-note h3 {
+	font: var(--db-type-headline-2xs);
+}
+
+.release-note h4 {
+	font: var(--db-type-headline-3xs);
+}
+
+/*
+ * Spacing within a release note block.
+ *
+ * Specificity note: content-spacing.css scopes its base rules with :is() lists
+ * that contain class selectors (.db-notification, .db-stack, ...). Each :is()
+ * therefore counts as a class, putting those rules at 0,3,0. The .release-note
+ * class is repeated below to reach the same weight — without it the global
+ * rhythm overrides these values.
+ *
+ * Rhythm: a heading binds to the content it introduces, so the gap below a
+ * heading is smaller than the gap above it.
+ */
+
+/* Default between sibling blocks */
+.dba-main-content .release-note.release-note > * + * {
+	margin-block-start: var(--db-spacing-fixed-xs);
+}
+
+/* Scope heading (Design / Development) opens a new section */
+.dba-main-content .release-note.release-note > * + h3 {
+	margin-block-start: var(--db-spacing-fixed-md);
+}
+
+/* Category heading (Added / Changed / ...) after a previous category's content */
+.dba-main-content .release-note.release-note > * + h4 {
 	margin-block-start: var(--db-spacing-fixed-sm);
+}
+
+/* Scope and category heading form a pair and stay close */
+.dba-main-content .release-note.release-note > h3 + h4 {
+	margin-block-start: var(--db-spacing-fixed-xs);
+}
+
+/* Content belongs to the category heading above it */
+.dba-main-content .release-note.release-note > h4 + * {
+	margin-block-start: var(--db-spacing-fixed-2xs);
+}
+
+/* Roadmap link closes the note's content and is set off from the last category */
+.dba-main-content .release-note.release-note > .roadmap-link {
+	margin-block-start: var(--db-spacing-fixed-lg);
+}
+
+.dba-main-content .release-note.release-note > :first-child {
+	margin-block-start: 0;
+}
+
+/* Divider closes a release note. Defined last so it wins over the rules above. */
+.dba-main-content .release-note.release-note > .db-divider {
+	margin-block: var(--db-spacing-fixed-2xl);
 }

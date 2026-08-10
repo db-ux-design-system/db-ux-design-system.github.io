@@ -1,8 +1,9 @@
 ---
 import type { MarkdownHeading } from 'astro';
 import { TableOfContents } from '@template/components/TableOfContents';
-import { DBSection } from '@db-ux/react-core-components';
+import { DBSection, DBShellContent } from '@db-ux/react-core-components';
 import { PageHero } from '@components';
+import Footer from '@template/components/Footer/Footer.astro';
 
 const { headings, frontmatter } = Astro.props as {
 	headings: MarkdownHeading[];
@@ -11,7 +12,7 @@ const { headings, frontmatter } = Astro.props as {
 const toc = (headings?.length ?? 0) > 0 && frontmatter.toc === true;
 ---
 
-<>
+<DBShellContent>
 	{
 		toc && (
 			<TableOfContents
@@ -22,7 +23,6 @@ const toc = (headings?.length ?? 0) > 0 && frontmatter.toc === true;
 			/>
 		)
 	}
-
 	<div class="dba-main-content">
 		{
 			(frontmatter.title || frontmatter.headline || frontmatter.description) && (
@@ -43,4 +43,6 @@ const toc = (headings?.length ?? 0) > 0 && frontmatter.toc === true;
 			<slot />
 		</DBSection>
 	</div>
-</>
+
+	<Footer slot="endSlot" />
+</DBShellContent>

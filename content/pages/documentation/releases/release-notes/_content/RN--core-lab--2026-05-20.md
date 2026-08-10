@@ -7,10 +7,12 @@ date: '2026-05-20'
 
 ### Design
 
-- feat: add "Children" slots to components
-  - Breadcrumb, ButtonGroup, Dialog, Footer, Heading, Pagination, SegmentedButton, SplitButton
-- feat(upload): initial design
-- refactor(tabs): alignment with Development (slots integration, properties)
-  - fix density behavior
-  - integration of slots
-  - alignment with dev (properties, behavior) → ready for beta
+#### Added
+- Multiple components: "Children" slots have been added to Breadcrumb, ButtonGroup, Dialog, Footer, Heading, Pagination, SegmentedButton, and SplitButton.
+- Upload: Initial design has been added.
+
+#### Changed
+- Tabs: The component has been aligned with Development (slots integration, properties).
+  - Density behavior has been fixed.
+  - Slots have been integrated.
+  - Properties and behavior now match the dev implementation – ready for beta.

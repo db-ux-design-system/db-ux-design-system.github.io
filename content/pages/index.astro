@@ -1,10 +1,10 @@
 ---
-import PageHeroSection from './home/_components/PageHeroSection.astro';
-import InteractiveDemoSection from './home/_components/InteractiveDemoSection.astro';
-import PackagesSection from './home/_components/PackagesSection.astro';
-import DesignedForSection from './home/_components/DesignedForSection.astro';
-import TestimonialsSection from './home/_components/TestimonialsSection.astro';
-import SharedStandardsSection from './home/_components/SharedStandardsSection.astro';
+import PageHeroSection from '@components/home/PageHeroSection.astro';
+import InteractiveDemoSection from '@components/home/InteractiveDemoSection.astro';
+import PackagesSection from '@components/home/PackagesSection.astro';
+import DesignedForSection from '@components/home/DesignedForSection.astro';
+import TestimonialsSection from '@components/home/TestimonialsSection.astro';
+import { ContactUsSection } from '@components';
 import DefaultLayout from '@template/layouts/default';
 ---
 
@@ -19,7 +19,7 @@ import DefaultLayout from '@template/layouts/default';
 
 	<TestimonialsSection />
 
-	<SharedStandardsSection />
+	<ContactUsSection />
 </DefaultLayout>
 
 <script>
@@ -45,20 +45,22 @@ import DefaultLayout from '@template/layouts/default';
 			const href = `/demo-${currentDemo}`;
 			iframe.src = href;
 			fullscreenAnchor.href = href;
-			toggle.textContent = currentDemo === 'b2b' ? 'Show B2C Example' : 'Show B2B Example';
+			toggle.textContent = currentDemo === 'b2b' ? 'B2C' : 'B2B';
 		});
+
+		// Labels come from the component's data attributes so they exist only once
+		// and stay localized on the German page.
+		const labelDark = toggleMode.dataset.labelDark ?? '';
+		const labelLight = toggleMode.dataset.labelLight ?? '';
 
 		toggleMode.addEventListener('click', () => {
 			currentMode = currentMode === 'light' ? 'dark' : 'light';
 			iframe.src = `/demo-${currentDemo}?mode=${currentMode}`;
 			toggleMode.setAttribute('data-icon', currentMode === 'light' ? 'moon' : 'sun');
-			toggleMode.setAttribute(
-				'title',
-				currentMode === 'light' ? 'Toggle dark mode' : 'Toggle light mode',
-			);
+			const label = currentMode === 'light' ? labelDark : labelLight;
+			toggleMode.setAttribute('title', label);
 			const tooltip = toggleMode.querySelector('.db-tooltip');
-			if (tooltip)
-				tooltip.textContent = currentMode === 'light' ? 'Toggle dark mode' : 'Toggle light mode';
+			if (tooltip) tooltip.textContent = label;
 		});
 
 		document.addEventListener('click', (e) => {
@@ -74,6 +76,10 @@ import DefaultLayout from '@template/layouts/default';
 
 		return true;
 	}
+
+	document.addEventListener('astro:page-load', () => {
+		waitForElements(initDemo);
+	});
 
 	waitForElements(initDemo);
 </script>

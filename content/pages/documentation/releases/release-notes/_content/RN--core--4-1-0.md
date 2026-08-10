@@ -5,6 +5,7 @@ version: 'v4.1.0'
 date: '2025-10-30'
 ---
 
-### Features Design + Code
+### Design & Development
 
-- feat: Notification overlay with block link
+#### Added
+- Notification: The overlay variant now supports a block link.
