@@ -16,7 +16,7 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 
 <DBSection spacing="small" width="auto">
 
-Jede Komponente, jedes Pattern und jedes Template im DB UX Design System hat einen Status, der angibt, wie ausgereift und zuverlässig der Inhalt ist – von frühen Explorationen bis hin zu produktionsreifen Standards.
+Jede Komponente, jedes Pattern und jedes Template im DB UX Design System hat einen Status, der angibt, wie ausgereift und zuverlässig der Inhalt ist – von ersten Entwürfen bis hin zu produktionsreifen Standards.
 
 <div style={{ display: 'grid', gridTemplateColumns: 'auto auto', columnGap: 'var(--db-spacing-fixed-lg)', rowGap: 'var(--db-spacing-fixed-xs)', width: 'fit-content' }}>
 
@@ -38,7 +38,7 @@ Jede Komponente, jedes Pattern und jedes Template im DB UX Design System hat ein
 </DBCard>
 
 <small>Aktiver Entwicklungszyklus.</small>
-<small>Abgelöst oder in Entfernung.</small>
+<small>Abgelöst oder wird entfernt.</small>
 
 </div>
 
@@ -49,12 +49,12 @@ Jede Komponente, jedes Pattern und jedes Template im DB UX Design System hat ein
 
 Frühe visuelle und funktionale Ansätze für neue Inhalte. In dieser Phase werden erste Richtungen definiert, aber **nichts ist final**. Designs und Implementierungen können sich **wesentlich ändern**, während Ideen getestet und verfeinert werden.
 
-Concept-Inhalte können als **Design-Referenz** für die eigene Implementierung genutzt werden. Es sollte jedoch damit gerechnet werden, **künftige Änderungen zu übernehmen**, sobald der Inhalt ausgereift ist. Design ist immer verfügbar; eine Entwicklungsimplementierung **existiert möglicherweise noch nicht** und kommt typischerweise in der Beta-Phase hinzu.
+Du kannst Concept-Inhalte als **Design-Referenz** für die eigene Implementierung nutzen. Rechne jedoch damit, **künftige Änderungen zu übernehmen**, sobald der Inhalt ausgereift ist. Design ist immer verfügbar; die Umsetzung in Code **existiert möglicherweise noch nicht** und kommt typischerweise in der Beta-Phase hinzu.
 
 <DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }} data-color="warning">
-### Was zu erwarten ist
+### Was du erwarten kannst
 
-- **Design verfügbar**, Entwicklungsimplementierung kann später folgen
+- **Design verfügbar**, die Umsetzung in Code kann später folgen
 - **Keine Stabilitätsgarantien** – API, Design und Barrierefreiheit sind noch nicht validiert und können sich jederzeit ändern
 - **Eingeschränkte Dokumentation** und Nutzungsrichtlinien
 - **Nacharbeit einplanen**, wenn der Inhalt Richtung Beta und Stable reift
@@ -63,12 +63,12 @@ Concept-Inhalte können als **Design-Referenz** für die eigene Implementierung 
 
 ## Beta
 
-Der Inhalt ist **funktional und weitgehend stabil**, jedoch können noch kleinere visuelle oder funktionale Änderungen auftreten. Design und Entwicklung sind **abgestimmt**, und der Inhalt hat **erste Nutzertests** durchlaufen – er adressiert ein **validiertes User Need**.
+Der Inhalt ist **funktional und weitgehend stabil**, jedoch können noch kleinere visuelle oder funktionale Änderungen auftreten. Design und Entwicklung sind **abgestimmt**, und der Inhalt wurde **erstmals mit Nutzer:innen getestet** – er erfüllt ein **validiertes User Need**.
 
 Wir empfehlen, **Beta-Inhalte gründlich zu testen** und Feedback zu teilen, um Qualität und Zuverlässigkeit zu verbessern.
 
 <DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }} data-color="informational">
-### Was zu erwarten ist
+### Was du erwarten kannst
 
 - **Zwischen Design und Entwicklung abgestimmt**
 - Geeignet für den Projekteinsatz, aber **kleinere Breaking Changes sind noch möglich**
@@ -84,7 +84,7 @@ Der Inhalt gilt als **ausgereift und zuverlässig** – barrierefrei, markenkonf
 Wir **aktualisieren und verbessern** stabile Inhalte kontinuierlich, um sicherzustellen, dass sie den User Needs und aktuellen Standards entsprechen.
 
 <DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }} data-color="successful">
-### Was zu erwarten ist
+### Was du erwarten kannst
 
 - **Vollständig validiert** für Barrierefreiheit, Cross-Browser- und Cross-Framework-Kompatibilität
 - **Vollständige Dokumentation**, Nutzungsrichtlinien und Design-Spezifikationen
@@ -98,7 +98,7 @@ Wir **aktualisieren und verbessern** stabile Inhalte kontinuierlich, um sicherzu
 Der Inhalt ist **veraltet und wird nicht mehr aktiv weiterentwickelt**. Es wird nur noch eingeschränkter Support in Form von **kritischen Bugfixes** bereitgestellt. Wir empfehlen die **Migration auf aktuelle Design-System-Inhalte**.
 
 <DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }}data-color="critical">
-### Was zu erwarten ist
+### Was du erwarten kannst
 
 - **Keine neuen Features** oder Verbesserungen
 - Nur **kritische Bugfixes**
@@ -108,10 +108,10 @@ Der Inhalt ist **veraltet und wird nicht mehr aktiv weiterentwickelt**. Es wird 
 
 ## Deprecated
 
-Der Inhalt ist **zur Entfernung markiert** und wird in einem **zukünftigen Major Release vollständig entfernt**. Im Design wird Deprecated-Inhalt zunächst visuell gekennzeichnet, um **Zeit für die Migration** zu geben, bevor er entfernt wird.
+Der Inhalt ist **zur Entfernung vorgemerkt** und wird in einem **zukünftigen Major Release vollständig entfernt**. Im Design wird Deprecated-Inhalt zunächst visuell gekennzeichnet, um **Zeit für die Migration** zu geben, bevor er entfernt wird.
 
 <DBCard spacing='large' style={{ marginBlockEnd: 'var(--db-spacing-fixed-2xl)' }}elevationLevel='2'>
-### Was zu erwarten ist
+### Was du erwarten kannst
 
 - **Inhalt wird entfernt** – Migration planen
 - **Keine Bugfixes** oder Wartung

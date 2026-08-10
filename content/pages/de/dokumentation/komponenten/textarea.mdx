@@ -21,8 +21,8 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
-- Längere Freitext-Eingaben erfassen (z.B. Feedback, Kommentare, Beschreibungen)
-- Strukturierte längere Eingaben mit Hinweisen unterstützen (z.B. Formatierungserwartungen, Zeichenlimits)
+- Längere Freitext-Eingaben erfassen (z. B. Feedback, Kommentare, Beschreibungen)
+- Strukturierte längere Eingaben mit Hinweisen unterstützen (z. B. Formatierungserwartungen, Zeichenlimits)
 - Nutzer:innen mehrzeilige Inhalte vor dem Absenden komfortabel überprüfen und bearbeiten lassen
 
 <DBSection spacing="small" width="auto">
@@ -60,7 +60,7 @@ Verwende eine Textarea, wenn Nutzer:innen mehrere Zeilen oder eine längere Nach
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=1-1133&embed-host=share"
-		description="Die Textarea nicht für kurze Werte wie Name, E-Mail oder Stadt verwenden (stattdessen Input nutzen)."
+		description="Verwende die Textarea nicht für kurze Werte wie Name, E-Mail oder Stadt – dafür ist das Input gedacht."
 	/>
 </div>
 
@@ -77,13 +77,13 @@ Stelle ein klares Label bereit, das beschreibt, was geschrieben werden soll. Ers
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=3-1112&embed-host=share"
-		description="Keine mehrzeiligen Labels verwenden oder diese mit Satzzeichen versehen."
+		description="Verwende keine mehrzeiligen Labels und setze keine Satzzeichen ans Ende – das erschwert das Scannen des Formulars."
 	/>
 </div>
 
 ### Höhe
 
-Wähle eine Höhe, die zur erwarteten Textmenge passt. Vermeide sehr kleine Textareas, die sofortiges Scrollen erfordern, und sehr große, die die Seite dominieren. Verwende eine „Fixed"-Feldgröße (Standard: 4 Zeilen, anpassbar) oder die „Content"-Variante, die mit einer Zeile startet und mit der Eingabe wächst.
+Wähle eine Höhe, die zur erwarteten Textmenge passt. Vermeide sehr kleine Textareas, die sofortiges Scrollen erfordern, und sehr große, die die Seite dominieren. Verwende eine „Fixed“-Feldgröße (Standard: 4 Zeilen, anpassbar) oder die „Content“-Variante, die mit einer Zeile startet und mit der Eingabe wächst.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -94,7 +94,7 @@ Wähle eine Höhe, die zur erwarteten Textmenge passt. Vermeide sehr kleine Text
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=3-1114&embed-host=share"
-		description="Keine kleine Textarea verwenden, wenn viel Eingabe erwartet wird und ausreichend Platz vorhanden ist."
+		description="Verwende keine kleine Textarea, wenn viel Eingabe erwartet wird und ausreichend Platz vorhanden ist – Nutzer:innen müssen sonst sofort scrollen."
 	/>
 </div>
 
@@ -111,7 +111,7 @@ Hilfstext beugt Fehlern vor (Format, Ton, Limits). Validierungsmeldungen erklär
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea?node-id=3-1117&embed-host=share"
-		description="Keine langen Absätze, vagen Fehler ('Ungültig') verwenden oder essenzielle Anforderungen nur in den Platzhaltertext setzen."
+		description="Verwende keine langen Absätze oder vagen Fehlermeldungen wie 'Ungültig' und setze essenzielle Anforderungen nicht nur in den Platzhaltertext – Platzhalter verschwinden beim Tippen."
 	/>
 </div>
 
@@ -121,7 +121,7 @@ Hilfstext beugt Fehlern vor (Format, Ton, Limits). Validierungsmeldungen erklär
 
 </DBSection>
 
-<FigmaLearnTeaser componentName="Textarea" />
+<FigmaLearnTeaser componentName="Textarea" locale="de" />
 
 <DBSection spacing="small" width="auto">
 

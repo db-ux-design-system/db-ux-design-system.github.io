@@ -1,6 +1,6 @@
 [id='demo-iframe'] {
 	inline-size: 100%;
-	block-size: 76vh;
+	block-size: 98vh;
 	zoom: 0.6;
 }
 
@@ -16,11 +16,13 @@
 .db-card.actionbar .db-stack {
 	flex-wrap: wrap;
 	justify-content: center;
+	align-items: center;
 }
 
 .actionbar-group {
 	display: flex;
 	gap: var(--db-spacing-fixed-2xs);
+	align-items: center;
 }
 
 .label-short {
