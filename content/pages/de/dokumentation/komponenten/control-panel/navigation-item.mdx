@@ -1,0 +1,149 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'CP Navigation Item'
+title: 'CP Navigation Item'
+description: 'Das CP Navigation Item ist das einzelne Navigation Item innerhalb der Navigations-Container des Control Panels. Navigation Item Group ist als Gruppierungs-Variante für Navigation Items mit Unternavigation enthalten.'
+align: start
+toc: true
+status: 'sub'
+order: 8
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Nutzer:innen auf eine bestimmte Seite oder Ansicht verlinken
+- Anzeigen, ob ein Navigation Item die aktuelle, aktive Position ist
+- Icon und Label nutzen, damit Ziele leicht zu erfassen sind
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Icon-Konsistenz pro Ebene
+
+Navigation Items im Tree erlauben es, den Standard-Marker der Baumlinie durch ein eigenes Icon zu ersetzen (nur Navigation Items – Navigation Item Groups behalten immer das Chevron zum Auf- und Zuklappen). Halte Icons innerhalb einer Ebene konsistent: Entweder erhalten alle benachbarten Navigation Items einer Ebene ein eigenes Icon oder keines. Zwischen den Ebenen darf es Unterschiede geben.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-6&embed-host=share"
+		description="Setze eigene Icons innerhalb einer Ebene konsistent ein – entweder erhalten alle benachbarten Navigation Items ein eigenes Icon oder keines. Zwischen den Ebenen darf es Unterschiede geben."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-8&embed-host=share"
+		description="Mische innerhalb derselben Ebene keine eigenen Icons und Standard-Marker. Ein einzelner Kreis zwischen eigenen Icons wirkt wie ein Versehen und erschwert das Erfassen."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Beispiele
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Slots
+
+Die verfügbaren Slots unterscheiden sich je Variante. Der Floating Container (für Tooltips, Popover, Badges) steht bei allen Varianten des Navigation Items zur Verfügung. Der End Slot für Inline-Inhalte ist nur bei vertikalen Popover- und Tree-Items verfügbar. Flat Icon Navigation Items und horizontale Popover-Items haben keine Inhalts-Slots.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-11&embed-host=share"
+		description="Vertikale Popover- oder Navigation Items im Tree mit End Slot für Inline-Inhalte wie Badges oder Status-Icons."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-13&embed-host=share"
+		description="Floating Container für Tooltips oder Badges bei jeder Variante – auch bei Flat Icon und horizontalem Popover."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Beispiele anzeigen" expandedText="Beispiele ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Barrierefreiheit
+
+### Tooltip bei Flat Icon
+
+Flat Icon Navigation Items zeigen beim Hover einen Tooltip, der dem Wert von Text Screenreader entspricht. Das sorgt für Übereinstimmung zwischen dem sichtbaren Tooltip und der Ausgabe assistiver Technologien. Gib für jeden Flat Icon Navigation Item einen klaren, beschreibenden Text an – er dient gleichzeitig als Tooltip und als zugängliches Label. Lass ihn nicht leer und verwende keinen anderen Text als im Tooltip.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="CP Navigation Item" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'CP Navigation',
+			description:
+				'Übergeordnete Navigations-Container (Popover, Tree, Flat Icon), die die Navigation Items enthalten.',
+			url: '/de/dokumentation/komponenten/control-panel/navigation',
+		},
+		{
+			title: 'Control Panel Desktop',
+			description: 'Control Panel Desktop, in dem Navigation Items erscheinen.',
+			url: '/de/dokumentation/komponenten/control-panel/desktop',
+		},
+		{
+			title: 'Control Panel Mobile',
+			description:
+				'Control Panel Mobile, in dem Navigation Items in Drill Down und Flat Icon erscheinen.',
+			url: '/de/dokumentation/komponenten/control-panel/mobile',
+		},
+	]}
+/>
+
+</DBSection>

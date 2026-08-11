@@ -1,0 +1,144 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Shell Content'
+title: 'Shell Content'
+description: 'Die Subkomponente Shell Content ist der scrollbare Hauptinhaltsbereich der Shell.'
+align: start
+toc: true
+status: 'sub'
+order: 3
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Den scrollbaren Hauptinhalt einer Seite innerhalb der Shell anzeigen
+- Systembenachrichtigungen über dem Inhalt fixieren, wenn sie sichtbar bleiben müssen
+- Einen Footer oder dauerhaften CTA am unteren Rand erreichbar halten, während der Inhalt scrollt
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Variante (Auto vs. Fixed)
+
+Verwende Auto, wenn der gesamte Inhaltsbereich (Start Slot, Children Slot und End Slot) gemeinsam scrollen soll. Verwende Fixed, wenn Start Slot oder End Slot dauerhaft sichtbar bleiben müssen und nur der Children Slot scrollt.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-3&embed-host=share"
+		description="Verwende Fixed, wenn angedockte Benachrichtigungen oder ein dauerhafter Footer beim Scrollen sichtbar bleiben müssen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-4&embed-host=share"
+		description="Überfülle Start Slot und End Slot in Fixed nicht. Große Slots schrumpfen den scrollbaren Children Slot auf eine unbrauchbare Größe."
+	/>
+</div>
+
+### Start Slot
+
+Der Start Slot ist für dauerhafte UI-Elemente auf Systemebene gedacht, etwa angedockte Benachrichtigungen, die über dem Hauptinhalt sichtbar bleiben müssen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-6&embed-host=share"
+		description="Platziere angedockte Benachrichtigungen oder System-Banner im Start Slot."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-7&embed-host=share"
+		description="Platziere keinen regulären Seiteninhalt im Start Slot. Er ist dauerhaften UI-Elementen vorbehalten."
+	/>
+</div>
+
+### End Slot
+
+Der End Slot bleibt am unteren Rand des Inhaltsbereichs. Ein Footer mit rechtlichen Links kann in Auto mit dem Inhalt scrollen. Wichtige Elemente wie ein primärer CTA müssen Fixed nutzen, sonst scrollen sie aus dem Blickfeld und werden unerreichbar.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-9&embed-host=share"
+		description="Halte einen dauerhaften CTA im End Slot sichtbar, indem du die Variante Fixed verwendest."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-10&embed-host=share"
+		description="Platziere wichtige Aktionen nicht in einem End Slot mit Auto. Sie scrollen aus dem Blickfeld, bevor Nutzer:innen sie erreichen."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Shell Content" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Shell Desktop',
+			description: 'Shell Desktop, die den Content-Bereich enthält.',
+			url: '/de/dokumentation/komponenten/shell/desktop',
+		},
+		{
+			title: 'Shell Mobile',
+			description: 'Shell Mobile, die den Content-Bereich enthält.',
+			url: '/de/dokumentation/komponenten/shell/mobile',
+		},
+		{
+			title: 'Shell Sub Navigation',
+			description: 'Sekundäre Navigation, die neben dem Content-Bereich liegt.',
+			url: '/de/dokumentation/komponenten/shell/sub-navigation',
+		},
+	]}
+/>
+
+</DBSection>

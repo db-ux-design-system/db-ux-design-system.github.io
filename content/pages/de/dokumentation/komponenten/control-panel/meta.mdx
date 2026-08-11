@@ -1,0 +1,107 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'CP Meta'
+title: 'CP Meta'
+description: 'Die Subkomponente CP Meta bietet innerhalb des Control Panels einen flexiblen Bereich für ergänzende, global relevante Inhalte.'
+align: start
+toc: true
+status: 'sub'
+order: 6
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Meta-Navigationslinks, Umgebungsanzeigen oder rechtliche Verweise aufnehmen
+- Den Bereich leicht halten, damit er nicht mit der primären Navigation konkurriert
+- Für Inhalte nutzen, die überall gelten, nicht für seitenspezifische Informationen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Art des Inhalts
+
+Verwende Meta für ergänzende, niedrig priorisierte Inhalte, die global gelten – etwa Meta-Navigationslinks, Umgebungs-Labels oder rechtliche Verweise. Halte den Bereich leicht, damit er nicht mit der Hauptnavigation konkurriert.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4358-2&embed-host=share"
+		description="Verwende Meta für ergänzende Inhalte wie Meta-Navigationslinks, Umgebungsanzeigen oder rechtliche Verweise."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4358-4&embed-host=share"
+		description="Platziere keine primären Navigation Items oder hoch priorisierten Aktionen in Meta. Der Bereich ist ergänzenden Inhalten vorbehalten, die die übrigen Bereiche des Control Panels flankieren."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="CP Meta" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Control Panel Desktop',
+			description:
+				'Übergeordnete Desktop-Komponente, in der Meta in den Positionen Top und Left erscheint.',
+			url: '/de/dokumentation/komponenten/control-panel/desktop',
+		},
+		{
+			title: 'Control Panel Mobile',
+			description:
+				'Übergeordnete Mobile-Komponente, in der Meta im Drawer erscheint (nur Ebene 1).',
+			url: '/de/dokumentation/komponenten/control-panel/mobile',
+		},
+	]}
+/>
+
+</DBSection>

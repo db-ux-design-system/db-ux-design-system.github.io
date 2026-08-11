@@ -1,0 +1,145 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Shell Sub Navigation'
+title: 'Shell Sub Navigation'
+description: 'The Shell Sub Navigation provides a secondary navigation level within the Shell. It supports horizontal (Top) and vertical (Left) orientations.'
+align: start
+toc: true
+status: 'sub'
+order: 4
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Move between the sub-pages of one section
+- Keep section navigation visible alongside the main Control Panel navigation
+- Reclaim content space by collapsing the sidebar when it is not needed
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+On Desktop, choose the variant that fits your navigation structure. On Mobile only one flat level is supported, so the variants do not apply there:
+
+- **Popover:** Flat to medium structures; reach deeper levels with a single click
+- **Tree:** Complex hierarchies (3+ levels) where the full structure stays visible
+- **Drill Down:** Many Navigation Items with shallow depth (1–2 levels), shown one level at a time
+
+&nbsp;
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Horizontal Overflow
+
+The horizontal Sub Navigation has limited space. Too many Navigation Items require scrolling which reduces discoverability – especially on mobile where no scroll indicators are shown.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4093-8&embed-host=share"
+		description="Keep the number of Navigation Items in the horizontal Sub Navigation manageable so all destinations remain visible without scrolling."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4093-11&embed-host=share"
+		description="Do not overload the horizontal Sub Navigation with too many Navigation Items. Excessive scrolling reduces discoverability, especially on mobile where hidden Navigation Items have no visual indicator."
+	/>
+</div>
+
+### Mobile: Single Level
+
+The mobile Sub Navigation supports only one flat navigation level. Nested groups are not rendered.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4049-3&embed-host=share"
+		description="Use a single level of Navigation Items in the mobile Sub Navigation with clear, short labels."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4049-4&embed-host=share"
+		description="Do not use nested navigation levels in the mobile Sub Navigation. Only one flat level is supported – Navigation Item Groups are hidden on mobile."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Shell Sub Navigation" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Shell Desktop',
+			description: 'Shell Desktop, which hosts the Sub Navigation.',
+			url: '/documentation/components/shell/desktop',
+		},
+		{
+			title: 'Shell Mobile',
+			description: 'Shell Mobile, where Sub Navigation appears as a horizontal bar.',
+			url: '/documentation/components/shell/mobile',
+		},
+		{
+			title: 'Control Panel Navigation',
+			description: 'The main navigation level that Sub Navigation complements.',
+			url: '/documentation/components/control-panel/navigation',
+		},
+		{
+			title: 'Shell Content',
+			description: 'The content area that Sub Navigation sits alongside.',
+			url: '/documentation/components/shell/content',
+		},
+		{
+			title: 'Navigation',
+			description: 'The underlying navigation component used within Sub Navigation.',
+			url: '/documentation/components/navigation',
+		},
+	]}
+/>
+
+</DBSection>
