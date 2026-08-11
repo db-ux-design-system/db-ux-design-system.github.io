@@ -1,7 +1,7 @@
-import { DBControlPanelMetaNavigation, DBLink, DBStack } from '@db-ux/react-core-components';
+import { DBControlPanelMeta, DBLink, DBStack } from '@db-ux/react-core-components';
 
 const DemoMetaNavigation = () => (
-	<DBControlPanelMetaNavigation>
+	<DBControlPanelMeta>
 		<DBStack direction="row" justifyContent="space-between">
 			<DBStack direction="row">
 				<DBLink size="small" variant="inline" href="#">
@@ -26,7 +26,7 @@ const DemoMetaNavigation = () => (
 				</DBLink>
 			</DBStack>
 		</DBStack>
-	</DBControlPanelMetaNavigation>
+	</DBControlPanelMeta>
 );
 
 export default DemoMetaNavigation;

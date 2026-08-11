@@ -1,0 +1,109 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'v6.0'
+headline: 'Migration to v6.0'
+description: ''
+align: start
+order: 5
+toc: true
+tocMaxDepth: 3
+nav: false
+---
+
+import { DBSection, DBNotification } from '@db-ux/react-core-components';
+import YourAction from '@template/components/YourAction/YourAction';
+import CardTeaserRow from "@template/components/CardTeaser/CardTeaserRow";
+
+{/* TODO: GitHub Link für Dev Release ergänzen */}
+{/* TODO: Description im Frontmatter ergänzen */}
+
+<DBSection spacing="small" width="auto">
+
+## Development Release
+
+Please refer to the notes on <a href="https://github.com/db-ux-design-system/core-web/releases/tag/v6.0.0" target="_blank" rel="noopener noreferrer">GitHub</a>.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Design Release
+
+All issues included in this release are linked at the bottom of the page.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+### Refinements
+
+The following refinements require special attention. Existing instances must be reviewed after updating.
+
+#### Scrollbar
+
+- **Resizer helper component refactored:** The Scrollbar now uses the Resizer as a dedicated helper component. Components using the Scrollbar must be reviewed to verify that Handle Size and Free Position values are still correct after the update.
+
+<YourAction
+	actions={[
+		'Review all components that use the Scrollbar helper (e.g. Custom Select Dropdown, Shell, vertical navigations).',
+		'Verify that the "Thumb Resizer" gap value still produces the correct handle size.',
+		'Verify that the "Spacer Resizer" gap value still produces the correct free position.',
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+### Deprecated
+
+<div style={{marginBlockEnd: 'var(--db-spacing-fixed-lg)'}} />
+
+<DBNotification variant="standalone" semantic="critical">
+Deprecated components from this release will be removed
+</DBNotification>
+
+<div style={{marginBlockEnd: 'var(--db-spacing-fixed-lg)'}} />
+
+#### Header & Navigation
+
+- **Replaced by ControlPanel + Shell:** The Header and Navigation components are deprecated. Use ControlPanel and Shell instead. Header and Navigation will be fully removed with v7.0.
+
+In Figma, affected deprecated components are marked with **"❌ ... (Deprecated)"** in the name.
+
+<YourAction
+	actions={[
+		'Identify all instances of Header and Navigation in your designs.',
+		'Replace Header with the appropriate Shell + ControlPanel combination (Desktop or Mobile).',
+		'Replace Navigation with ControlPanel Navigation or Shell SubNavigation.',
+		'Refer to the Shell Desktop and Shell Mobile documentation for configuration guidance.',
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+<CardTeaserRow
+	items={[
+		{
+			title: 'Design + Code Issues v6.0.0',
+			description: 'All information about the latest Design System release on GitHub.',
+			url: 'https://github.com/orgs/db-ux-design-system/projects/4/views/12?filterQuery=has%3Amilestone+-label%3A%F0%9F%96%BC%EF%B8%8Ficons+milestone%3A6.0.0',
+			image: '/assets/teasers/github.png',
+			imageAlt: 'GitHub',
+			label: 'View on GitHub', external: true,
+		},
+		{
+			title: 'Feedback Welcome',
+			description: 'Let us know if you encounter unexpected issues or need support.',
+			url: '/documentation/contribution',
+			image: '/assets/teasers/feedback.png',
+			imageAlt: 'Contribution',
+			label: 'Get in touch',
+		},
+	]}
+/>
+</DBSection>

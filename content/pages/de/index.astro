@@ -1,0 +1,124 @@
+---
+import PageHeroSection from '@components/home/PageHeroSection.astro';
+import InteractiveDemoSection from '@components/home/InteractiveDemoSection.astro';
+import PackagesSection from '@components/home/PackagesSection.astro';
+import DesignedForSection from '@components/home/DesignedForSection.astro';
+import TestimonialsSection from '@components/home/TestimonialsSection.astro';
+import { ContactUsSection } from '@components';
+import DefaultLayout from '@template/layouts/default';
+---
+
+<DefaultLayout frontmatter={{}}>
+	<PageHeroSection
+		title="DB UX Design System"
+		headline="Ein Design System, das Teams aufeinander abstimmt und die Umsetzung von Produkten beschleunigt."
+		description="Gemeinsame Standards und wiederverwendbare Komponenten schaffen Klarheit in Design und Umsetzung."
+	/>
+
+	<InteractiveDemoSection
+		darkModeLabel="Dark Mode aktivieren"
+		lightModeLabel="Light Mode aktivieren"
+		fullscreenLabel="Vollbild"
+		demoTitle="Interaktive Demo"
+	/>
+
+	<PackagesSection
+		sectionTitle="Ein einheitliches Modell für Produktteams"
+		sectionDescription="Eine gemeinsame Foundation, Komponenten und fachspezifische Erweiterungen sorgen für Klarheit und Abstimmung."
+		foundationTitle="Foundation"
+		foundationText="Gemeinsame Basis-Tokens und Modi schaffen ein stabiles Fundament für klare und konsistente Interfaces."
+		componentsTitle="Komponenten"
+		componentsText="Core Components sorgen für vorhersagbare Interaktionen über alle Produkte hinweg."
+		extensionsTitle="Erweiterungen"
+		extensionsText="Kontextspezifische Standards, die auf dem Kernsystem aufbauen und fachliche Anforderungen abdecken."
+		patternsTitle="Patterns"
+		patternsText="Wiederverwendbare Interaktionsmodelle für konsistentes Verhalten über alle Produkte hinweg."
+		templatesTitle="Templates"
+		templatesText="Strukturierte Ausgangspunkte beschleunigen die Seitenerstellung und sorgen für konsistente Layouts."
+		comingSoonLabel="Demnächst verfügbar"
+	/>
+
+	<DesignedForSection
+		sectionTitle="So unterstützt das System deine Arbeit"
+		sectionDescription="Ein gemeinsames System, das Zusammenarbeit und Entscheidungen für Produkt, Entwicklung und Design verbessert."
+		pmTitle="Effiziente Umsetzung"
+		pmText="Weniger Zeitaufwand für wiederkehrende Design- und Umsetzungsentscheidungen."
+		pmTag="Für Produktmanagement"
+		devTitle="Planbare Wartung"
+		devText="Geplante Updates und stabile Versionierung geben Planungssicherheit."
+		devTag="Für Entwickler:innen"
+		designTitle="Flexible Konfiguration"
+		designText="Komponenten und Tokens kontextgerecht anpassen, ohne die Konsistenz zu verlieren."
+		designTag="Für Designer:innen"
+	/>
+
+	<TestimonialsSection
+		quote1={`„Seit wir das System nutzen, verbringen unsere Teams weniger Zeit mit UI-Abstimmungen und mehr mit echten Produktproblemen.“`}
+		quote2={`„Neue Teammitglieder werden schneller produktiv, weil das System erklärt, wie wir unsere Produkte gestalten und entwickeln.“`}
+		quote3={`„Design und Entwicklung sprechen endlich die gleiche Sprache – die Übergabe ist planbar statt jedes Mal neu.“`}
+	/>
+
+	<ContactUsSection />
+</DefaultLayout>
+
+<script>
+	import { waitForElements } from '@template/utils/client.utils.ts';
+
+	function initDemo(): boolean {
+		const iframe = document.querySelector<HTMLIFrameElement>('[id="demo-iframe"]');
+		const toggle = document.getElementById('toggle-demo');
+		const toggleMode = document.getElementById('toggle-mode');
+		const fullscreenAnchor: HTMLAnchorElement | null = document.querySelector<HTMLAnchorElement>(
+			'[id="fullscreen-anchor"]',
+		);
+
+		if (!iframe || !toggle || !toggleMode || !fullscreenAnchor) return false;
+
+		let currentDemo = 'b2b';
+		let currentMode = 'light';
+
+		fullscreenAnchor.href = iframe.src;
+
+		toggle.addEventListener('click', () => {
+			currentDemo = currentDemo === 'b2b' ? 'b2c' : 'b2b';
+			const href = `/demo-${currentDemo}`;
+			iframe.src = href;
+			fullscreenAnchor.href = href;
+			toggle.textContent = currentDemo === 'b2b' ? 'B2C' : 'B2B';
+		});
+
+		// Labels come from the component's data attributes so they exist only once
+		// and stay localized on the German page.
+		const labelDark = toggleMode.dataset.labelDark ?? '';
+		const labelLight = toggleMode.dataset.labelLight ?? '';
+
+		toggleMode.addEventListener('click', () => {
+			currentMode = currentMode === 'light' ? 'dark' : 'light';
+			iframe.src = `/demo-${currentDemo}?mode=${currentMode}`;
+			toggleMode.setAttribute('data-icon', currentMode === 'light' ? 'moon' : 'sun');
+			const label = currentMode === 'light' ? labelDark : labelLight;
+			toggleMode.setAttribute('title', label);
+			const tooltip = toggleMode.querySelector('.db-tooltip');
+			if (tooltip) tooltip.textContent = label;
+		});
+
+		document.addEventListener('click', (e) => {
+			const target = (e.target as HTMLElement)?.closest<HTMLElement>('[data-action]');
+			if (!target) return;
+
+			const action = target.dataset.action;
+			const value = target.dataset.value;
+			if (action && value) {
+				iframe.src = `/demo-${currentDemo}?${action}=${value}`;
+			}
+		});
+
+		return true;
+	}
+
+	document.addEventListener('astro:page-load', () => {
+		waitForElements(initDemo);
+	});
+
+	waitForElements(initDemo);
+</script>

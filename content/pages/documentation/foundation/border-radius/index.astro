@@ -5,9 +5,11 @@ import BorderRadiusPlayground from './_BorderRadiusPlayground.astro';
 import BorderRadiusTable from './_BorderRadiusTable.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-const frontmatter: DocumentationFrontMatter = {
+// eslint-disable-next-line astro/no-exports-from-components -- Exported for ChildPageOverview glob
+export const frontmatter: DocumentationFrontMatter = {
 	headline: 'Border Radius',
 	title: 'Border Radius',
+	shortDescription: 'Rounded corners for consistent shape language across components.',
 	align: 'start',
 	toc: true,
 	sectionSpacing: 'small',

@@ -5,6 +5,7 @@ version: ''
 date: '2025-11-11'
 ---
 
-### Features Design
+### Design
 
-- feat: New Breadcrumb component
+#### Added
+- Breadcrumb: Initial design has been added.

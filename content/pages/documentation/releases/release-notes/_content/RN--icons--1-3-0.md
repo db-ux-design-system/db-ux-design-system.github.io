@@ -5,6 +5,7 @@ version: 'v1.3.0'
 date: '2025-06-23'
 ---
 
-### Features Design + Code
+### Design & Development
 
-- added: 1 new functional icon: Journey/Mixed Class Reversed
+#### Added
+- Icons: 1 new functional icon has been added (Journey/Mixed Class Reversed).

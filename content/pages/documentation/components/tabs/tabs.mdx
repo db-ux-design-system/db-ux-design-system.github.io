@@ -1,0 +1,121 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Tabs'
+title: 'Tabs'
+description: 'Tabs organize related content into separate views within the same context, allowing users to switch between sections without leaving the page.'
+align: start
+status: 'beta'
+toc: true
+order: 1
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Switch between different views of related content on the same hierarchy level
+- Group settings, data views, or content categories within a single page
+- Support horizontal and vertical orientation
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards path="?path=/docs/components-dbtabs-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Content
+
+Tabs represent different aspects of the same subject at the same hierarchy level. They are not a substitute for page-level navigation between unrelated destinations.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=3-1113&embed-host=share"
+		description="Use Tabs to organize related sections that users can reach in any order within the same context."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=3-1114&embed-host=share"
+		description="Don't use Tabs as a replacement for Navigation between unrelated pages or app areas."
+	/>
+</div>
+
+### Active State
+
+Only one tab is active at a time. The active tab displays its corresponding panel while all other panels are hidden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=3-1116&embed-host=share"
+		description="Only one tab panel is visible at a time – the active indicator shows which section is currently displayed."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=4025-2&embed-host=share"
+		description="Don't use Tabs when users need to see multiple sections simultaneously – use Accordion instead."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/M9AfqFvyJVNlzWtinHH4tH/Doku--Tabs-%E2%9C%85?node-id=4025-18&embed-host=share"
+		description="Horizontal vs Vertical: Use horizontal orientation for few tabs with the panel below. Use vertical orientation for more items – it avoids overflow and places the panel to the right."
+		fullWidth={true}
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Tabs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Navigation',
+			description: 'Provides destinations for moving between pages or major app areas.',
+			url: '/documentation/components/navigation',
+		},
+		{
+			title: 'Accordion',
+			description: 'Reveals multiple content sections that can be expanded simultaneously.',
+			url: '/documentation/components/accordion',
+		},
+	]}
+/>
+
+</DBSection>

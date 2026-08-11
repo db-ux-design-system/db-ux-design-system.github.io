@@ -1,8 +1,9 @@
 ---
 import type { MarkdownHeading } from 'astro';
 import { TableOfContents } from '@template/components/TableOfContents';
-import { DBSection, DBNotification, type SemanticType } from '@db-ux/react-core-components';
+import { DBSection, DBShellContent, DBNotification, type SemanticType } from '@db-ux/react-core-components';
 import { PageHero } from '@components';
+import Footer from '@components/Footer/Footer.astro';
 
 interface Props {
 	headings: MarkdownHeading[];
@@ -27,12 +28,16 @@ const SUB_PARENT_LABELS: Record<string, string> = {
 	shell: 'Shell',
 };
 const parentSegment = Astro.url.pathname.split('/').filter(Boolean).at(-2);
+const isDE = Astro.url.pathname.startsWith('/de/');
 const subParent =
 	frontmatter.subParent ??
-	(parentSegment ? (SUB_PARENT_LABELS[parentSegment] ?? parentSegment) : undefined);
+	(parentSegment
+		? (SUB_PARENT_LABELS[parentSegment] ??
+			parentSegment.charAt(0).toUpperCase() + parentSegment.slice(1))
+		: undefined);
 ---
 
-<>
+<DBShellContent>
 	{
 		toc && (
 			<TableOfContents
@@ -43,7 +48,6 @@ const subParent =
 			/>
 		)
 	}
-
 	<div class="dba-main-content">
 		{
 			(frontmatter.headline || frontmatter.description) && (
@@ -60,7 +64,9 @@ const subParent =
 					/>
 					{isSub && subParent && (
 						<DBNotification className="sub-component-notice" variant="standalone" semantic="informational" style={{maxInlineSize: 'var(--db-container-md)', marginBlockStart: 'var(--db-spacing-fixed-md)'}}>
-							This is a subcomponent of the {subParent} and cannot be used separately.
+							{isDE
+								? `Dies ist eine Subkomponente von ${subParent} und kann nicht eigenständig verwendet werden.`
+								: `This is a subcomponent of the ${subParent} and cannot be used separately.`}
 						</DBNotification>
 					)}
 				</DBSection>
@@ -70,4 +76,6 @@ const subParent =
 			<slot />
 		</DBSection>
 	</div>
-</>
+
+	<Footer slot="endSlot" />
+</DBShellContent>

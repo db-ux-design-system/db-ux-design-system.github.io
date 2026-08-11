@@ -1,18 +1,31 @@
-@layer db-ux,themes, db-theme;
+@layer db-ux, db-theme, themes;
 
+/* External libraries */
 @import url('@db-ux/core-components/build/styles/rollup.css') layer(db-ux);
 @import url('@db-ux/db-theme/build/styles/rollup.css') layer(db-theme);
+
+/* Theme & variables */
+@import url('../themes/variables.css');
+
+/* Global styles */
 @import url('./layout.css');
+@import url('./typography.css');
+@import url('./content-spacing.css');
 @import url('./markdown.css');
-@import url('../components/TableOfContents/TableOfContents.css');
 @import url('./table.css');
+@import url('./db-ux-overrides.css');
+
+/* Component styles (co-located but globally needed) */
+@import url('../components/TableOfContents/TableOfContents.css');
 @import url('../components/GuidelineExample/GuidelineExample.css');
 @import url('../components/YourAction/YourAction.css');
 @import url('../components/CardTeaser/CardTeaser.css');
 @import url('../components/CardTeaser/CardTeaserRow.css');
-@import url('./db-ux-overrides.css');
 
+/* App-level custom properties */
 :root {
+	--db-logo-url: url('/db_logo_designsystem.svg');
+	--db-logo-aspect-ratio: 487 / 70;
 	--header-height: var(--db-sizing-lg);
 	--footer-height: var(--db-sizing-xl);
 	--content-width: min(1440px, 100svw);
@@ -20,6 +33,10 @@
 	@media screen and (width >= 1024px) {
 		--footer-height: var(--db-sizing-lg);
 	}
+}
+
+[data-mode='dark'] {
+	--db-logo-url: url('/db_logo_designsystem_dark.svg');
 }
 
 html {

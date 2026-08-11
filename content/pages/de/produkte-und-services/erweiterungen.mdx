@@ -1,0 +1,22 @@
+---
+order: 5
+layout: '@template/layouts/default'
+title: 'Erweiterungen'
+headline: 'Gezielt erweitern'
+description: 'Kontextspezifische Standards, die auf dem Kernsystem aufbauen und fachliche Anforderungen abdecken.'
+heroImage: '/assets/extensions/Extensions--C.png'
+heroImageAlt: 'Extensions Visual'
+---
+import ExtensionsSection from '@template/components/ExtensionsSection/ExtensionsSection.astro';
+import { ContactUsSection } from '@components';
+
+<ExtensionsSection
+	riText="Zuverlässige Reisendeninformation."
+	dataVizText="Klare Visualisierung komplexer Daten."
+	tableText="Große Datenmengen in konsistentem Format."
+	contentText="Konsistente Kommunikation über alle Kanäle hinweg."
+	comingSoonLabel="Demnächst verfügbar"
+	ariaLabel="Bereich Erweiterungen"
+/>
+
+<ContactUsSection />

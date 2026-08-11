@@ -11,5 +11,9 @@ _version bump_
 
 ### Development
 
-- With the new Node package [`@db-ux/mcp-server`](https://www.npmjs.com/@db-ux/mcp-server), you can now use AI to migrate from the DB UX Design System Generation 2 (aka DB UI) to the DB UX Design System Generation 3.
-- Notification content now supports additional inline elements like `span` without styling collisions. And added the possibility to set the duration as a machine-readable value via the new `timestampDatetime` property.
+#### Added
+- MCP Server: The new Node package [`@db-ux/mcp-server`](https://www.npmjs.com/@db-ux/mcp-server) enables AI-assisted migration from DB UX Design System Generation 2 (DB UI) to Generation 3.
+- Notification: The `timestampDatetime` property has been added to set the duration as a machine-readable value.
+
+#### Fixed
+- Notification: Content now supports additional inline elements like `span` without styling collisions.
