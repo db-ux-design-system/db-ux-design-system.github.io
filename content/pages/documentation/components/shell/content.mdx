@@ -54,7 +54,7 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ### Variant (Auto vs. Fixed)
 
-Use Auto when the entire content area (Start Slot, Children and End Slot) should scroll together. Use Fixed when the Start Slot or End Slot must remain persistently visible while only the Children slot scrolls.
+Use Auto when the entire content area (Start Slot, Children Slot and End Slot) should scroll together. Use Fixed when the Start Slot or End Slot must remain persistently visible while only the Children Slot scrolls.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -65,7 +65,7 @@ Use Auto when the entire content area (Start Slot, Children and End Slot) should
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-4&embed-host=share"
-		description="Do not overfill the Start Slot or End Slot in Fixed. Large slots shrink the Children scroll area to an unusable size."
+		description="Do not overfill the Start Slot or End Slot in Fixed. Large slots shrink the Children Slot scroll area to an unusable size."
 	/>
 </div>
 
@@ -113,8 +113,6 @@ The End Slot stays at the bottom of the content area. A Footer with legal links 
 
 ## FAQ
 
-Have a question about the Shell Content component? We'll answer it and add frequently asked questions to this page.
-
 <QuestionForm componentName="Shell Content" />
 
 </DBSection>
@@ -127,18 +125,18 @@ Have a question about the Shell Content component? We'll answer it and add frequ
 	teasers={[
 		{
 			title: 'Shell Desktop',
-			description: 'The desktop Shell that contains the Content area.',
+			description: 'Shell Desktop, which contains the Content area.',
 			url: '/documentation/components/shell/desktop',
 		},
 		{
 			title: 'Shell Mobile',
-			description: 'The mobile Shell that contains the Content area.',
+			description: 'Shell Mobile, which contains the Content area.',
 			url: '/documentation/components/shell/mobile',
 		},
 		{
-			title: 'Shell SubNavigation',
+			title: 'Shell Sub Navigation',
 			description: 'Secondary navigation that sits alongside the Content area.',
-			url: '/documentation/components/shell/subnavigation',
+			url: '/documentation/components/shell/sub-navigation',
 		},
 	]}
 />

@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'CP Navigation'
 title: 'CP Navigation'
-description: 'The CP Navigation subcomponent is the navigation container within the ControlPanel. It holds NavigationItems and supports different variants suited to different content structures and ControlPanel positions.'
+description: 'The CP Navigation subcomponent is the navigation container within the Control Panel. It holds Navigation Items and supports different variants suited to different content structures and Control Panel positions.'
 align: start
 toc: true
 status: 'sub'
@@ -50,12 +50,12 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ## Guidelines
 
-Choose the variant that fits your navigation structure:
+On Desktop, choose the variant that fits your navigation structure. On Mobile the Navigation in the Drawer is always Drill Down:
 
 - **Popover:** Flat to medium structures; reach deeper levels with a single click
 - **Tree:** Complex hierarchies (3+ levels) where the full structure stays visible
-- **DrillDown:** Many items with shallow depth (1–2 levels), shown one level at a time
-- **FlatIcon:** A few equally weighted top-level destinations (2–6), accessed via icons
+- **Drill Down:** Many Navigation Items with shallow depth (1–2 levels), shown one level at a time
+- **Flat Icon:** A few equally weighted top-level destinations (2–6), accessed via icons
 
 &nbsp;
 
@@ -63,41 +63,41 @@ Choose the variant that fits your navigation structure:
 
 ### Popover Horizontal Overflow
 
-The horizontal Popover navigation in Desktop Top has limited space. Too many items require scroll chevrons which reduce discoverability of hidden items.
+The horizontal Popover navigation in Desktop Top has limited space. Too many Navigation Items require scroll chevrons, which reduces the discoverability of the hidden ones.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-2&embed-host=share"
-		description="Keep the number of top-level Popover items in Desktop Top reasonable. Scroll chevrons are supported but reduce discoverability of hidden items."
+		description="Keep the number of top-level Navigation Items in Desktop Top reasonable. Scroll chevrons are supported but reduce the discoverability of hidden ones."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-4&embed-host=share"
-		description="Do not place too many items in the horizontal Popover navigation. Items hidden behind scroll chevrons are easily overlooked by users."
+		description="Do not place too many Navigation Items in the horizontal Popover navigation. Navigation Items hidden behind scroll chevrons are easily overlooked by users."
 	/>
 </div>
 
 ### Tree Item Overload
 
-Tree navigation is designed for complex hierarchical structures. When the navigation has many items but a flat or shallow structure, DrillDown is more effective because it shows one level at a time and avoids overwhelming the user with a long expanded list.
+Tree navigation is designed for complex hierarchical structures. When the navigation has many Navigation Items but a flat or shallow structure, Drill Down is more effective because it shows one level at a time and avoids overwhelming the user with a long expanded list.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-6&embed-host=share"
-		description="Use DrillDown when the navigation has many items with a shallow structure (1–2 levels). It keeps each view focused and scannable."
+		description="Use Drill Down when the navigation has many Navigation Items with a shallow structure (1–2 levels). It keeps each view focused and scannable."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-8&embed-host=share"
-		description="Do not use Tree for navigation with many items but only 1–2 levels of depth. A long flat list in Tree provides no structural benefit over DrillDown."
+		description="Do not use Tree for navigation with many Navigation Items but only 1–2 levels of depth. A long flat list in Tree provides no structural benefit over Drill Down."
 	/>
 </div>
 
-### DrillDown Depth Limit
+### Drill Down Depth Limit
 
-DrillDown shows one level at a time with a back-button pattern. With 4 or more levels, users lose orientation because they cannot see the full hierarchy. Tree keeps all levels visible and is better suited for deeply nested structures.
+Drill Down shows one level at a time with a back-button pattern. With 4 or more levels, users lose orientation because they cannot see the full hierarchy. Tree keeps all levels visible and is better suited for deeply nested structures.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -108,24 +108,24 @@ DrillDown shows one level at a time with a back-button pattern. With 4 or more l
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-12&embed-host=share"
-		description="Do not use DrillDown for navigation with 4 or more levels. Users lose their position in the hierarchy when they can only see one level at a time."
+		description="Do not use Drill Down for navigation with 4 or more levels. Users lose their position in the hierarchy when they can only see one level at a time."
 	/>
 </div>
 
-### FlatIcon Capacity
+### Flat Icon Capacity
 
-Keep the number of FlatIcon items manageable. On Mobile, the slot is technically limited (2–4 with text, 2–6 without text). On Desktop there is no hard limit, but too many items reduce clarity.
+Keep the number of Flat Icon Navigation Items manageable. On Mobile, the slot is technically limited (2–4 with text, 2–6 without text). On Desktop there is no hard limit, but too many Navigation Items reduce clarity.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-14&embed-host=share"
-		description="Use a focused set of equally weighted top-level destinations in FlatIcon navigation."
+		description="Use a focused set of equally weighted top-level destinations in Flat Icon navigation."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-16&embed-host=share"
-		description="Do not overload the Desktop FlatIcon sidebar with too many items. A long list of icons without clear priority defeats the purpose of quick access."
+		description="Do not overload the Desktop Flat Icon sidebar with too many Navigation Items. A long list of icons without clear priority defeats the purpose of quick access."
 	/>
 </div>
 
@@ -139,8 +139,6 @@ Keep the number of FlatIcon items manageable. On Mobile, the slot is technically
 
 ## FAQ
 
-Have a question about the CP Navigation component? We'll answer it and add frequently asked questions to this page.
-
 <QuestionForm componentName="CP Navigation" />
 
 </DBSection>
@@ -152,24 +150,25 @@ Have a question about the CP Navigation component? We'll answer it and add frequ
 <TeaserCard
 	teasers={[
 		{
-			title: 'CP NavigationItem',
-			description: 'Navigation items and groups used within the navigation containers.',
-			url: '/documentation/components/controlpanel/navigationitem',
+			title: 'CP Navigation Item',
+			description:
+				'Navigation Items and Navigation Item Groups used within the navigation containers.',
+			url: '/documentation/components/control-panel/navigation-item',
 		},
 		{
-			title: 'ControlPanel Desktop',
+			title: 'Control Panel Desktop',
 			description: 'Desktop parent providing Top and Left positions for Navigation.',
-			url: '/documentation/components/controlpanel/desktop',
+			url: '/documentation/components/control-panel/desktop',
 		},
 		{
-			title: 'ControlPanel Mobile',
-			description: 'Mobile parent where Popover Navigation appears in the Drawer.',
-			url: '/documentation/components/controlpanel/mobile',
+			title: 'Control Panel Mobile',
+			description: 'Mobile parent where the Drill Down Navigation appears in the Drawer.',
+			url: '/documentation/components/control-panel/mobile',
 		},
 		{
-			title: 'Shell SubNavigation',
-			description: 'Secondary navigation level that complements the ControlPanel Navigation.',
-			url: '/documentation/components/shell/subnavigation',
+			title: 'Shell Sub Navigation',
+			description: 'Secondary navigation level that complements the Control Panel Navigation.',
+			url: '/documentation/components/shell/sub-navigation',
 		},
 	]}
 />

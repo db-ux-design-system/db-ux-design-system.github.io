@@ -2,9 +2,9 @@
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
-headline: 'CP SecondaryActions'
-title: 'CP SecondaryActions'
-description: 'The CP SecondaryActions subcomponent is a slot for secondary action buttons at the end of the ControlPanel.'
+headline: 'CP Secondary Actions'
+title: 'CP Secondary Actions'
+description: 'The CP Secondary Actions subcomponent is a slot for secondary action buttons at the end of the Control Panel.'
 align: start
 toc: true
 status: 'sub'
@@ -54,7 +54,7 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ### Action Type
 
-SecondaryActions hold supporting utility actions that are relevant across all pages but are not the user's primary task. Keep them visually subordinate to the navigation and PrimaryActions.
+Secondary Actions hold supporting utility actions that are relevant across all pages but are not the user's primary task. Keep them visually subordinate to the navigation and Primary Actions.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -65,13 +65,13 @@ SecondaryActions hold supporting utility actions that are relevant across all pa
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-4&embed-host=share"
-		description="Do not place frequently used actions (e.g. search, notifications) in SecondaryActions. These belong in PrimaryActions where they are immediately visible."
+		description="Do not place frequently used actions (e.g. search, notifications) in Secondary Actions. These belong in Primary Actions where they are immediately visible."
 	/>
 </div>
 
 ### Count
 
-Keep SecondaryActions minimal. Too many icons at the end of the ControlPanel create visual noise and compete with the navigation.
+Keep Secondary Actions minimal. Too many icons at the end of the Control Panel create visual noise and compete with the navigation.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -82,24 +82,24 @@ Keep SecondaryActions minimal. Too many icons at the end of the ControlPanel cre
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-8&embed-host=share"
-		description="Do not overload SecondaryActions with too many icons. A crowded end area makes the ControlPanel feel heavy and unfocused."
+		description="Do not overload Secondary Actions with too many icons. A crowded end area makes the Control Panel feel heavy and unfocused."
 	/>
 </div>
 
-### FlatIcon Limitation
+### Flat Icon Limitation
 
-The FlatIcon ControlPanel does not support SecondaryActions. Utility actions like profile or settings should be placed as FlatIcon NavigationItems or moved into a dedicated page.
+The Flat Icon Control Panel does not support Secondary Actions. Utility actions like profile or settings should be placed as Flat Icon Navigation Items or moved into a dedicated page.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-10&embed-host=share"
-		description="Use Top or Bottom ControlPanel when secondary utility actions need a dedicated slot separated from navigation."
+		description="Use Top or Bottom Control Panel when secondary utility actions need a dedicated slot separated from navigation."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-12&embed-host=share"
-		description="Do not mix utility actions with navigation destinations in FlatIcon. Account or Settings can be a NavigationItem, but not an action button."
+		description="Do not mix utility actions with navigation destinations in Flat Icon. Account or Settings can be a Navigation Item, but not an action button."
 	/>
 </div>
 
@@ -113,9 +113,7 @@ The FlatIcon ControlPanel does not support SecondaryActions. Utility actions lik
 
 ## FAQ
 
-Have a question about the CP SecondaryActions component? We'll answer it and add frequently asked questions to this page.
-
-<QuestionForm componentName="CP SecondaryActions" />
+<QuestionForm componentName="CP Secondary Actions" />
 
 </DBSection>
 
@@ -126,19 +124,19 @@ Have a question about the CP SecondaryActions component? We'll answer it and add
 <TeaserCard
 	teasers={[
 		{
-			title: 'CP PrimaryActions',
+			title: 'CP Primary Actions',
 			description: 'Primary actions slot for high-priority, high-frequency actions.',
-			url: '/documentation/components/controlpanel/primaryactions',
+			url: '/documentation/components/control-panel/primary-actions',
 		},
 		{
-			title: 'ControlPanel Desktop',
-			description: 'Desktop parent hosting SecondaryActions at the end.',
-			url: '/documentation/components/controlpanel/desktop',
+			title: 'Control Panel Desktop',
+			description: 'Desktop parent hosting Secondary Actions at the end.',
+			url: '/documentation/components/control-panel/desktop',
 		},
 		{
-			title: 'ControlPanel Mobile',
-			description: 'Mobile parent where SecondaryActions are accessible via the Drawer.',
-			url: '/documentation/components/controlpanel/mobile',
+			title: 'Control Panel Mobile',
+			description: 'Mobile parent where Secondary Actions are accessible via the Drawer.',
+			url: '/documentation/components/control-panel/mobile',
 		},
 	]}
 />

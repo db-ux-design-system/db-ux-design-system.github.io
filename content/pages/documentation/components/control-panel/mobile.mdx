@@ -2,9 +2,9 @@
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
-headline: 'ControlPanel Mobile'
-title: 'ControlPanel Mobile'
-description: 'The ControlPanel Mobile provides the primary navigation bar for mobile applications within the Shell. It supports three position variants and uses a Drawer for expanded navigation access.'
+headline: 'Control Panel Mobile'
+title: 'Control Panel Mobile'
+description: 'The Control Panel Mobile provides the primary navigation bar for mobile applications within the Shell. It supports three position variants and uses a Drawer for expanded navigation access.'
 align: start
 toc: true
 order: 2
@@ -53,35 +53,35 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ### Density
 
-The mobile ControlPanel only supports Regular density. Touch targets need sufficient size for reliable finger interaction on mobile devices.
+The mobile Control Panel only supports Regular density. Touch targets need sufficient size for reliable finger interaction on mobile devices.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-2&embed-host=share"
-		description="Use Regular density for the mobile ControlPanel to ensure comfortable touch targets."
+		description="Use Regular density for the mobile Control Panel to ensure comfortable touch targets."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-4&embed-host=share"
-		description="Do not apply Functional or Expressive density to the mobile ControlPanel. Only Regular is supported on mobile."
+		description="Do not apply Functional or Expressive density to the mobile Control Panel. Only Regular is supported on mobile."
 	/>
 </div>
 
-### FlatIcon Usage
+### Flat Icon Usage
 
-FlatIcon (tab bar) works best for apps with a small set of equally important top-level destinations. It provides instant access without opening a Drawer but has limited capacity.
+Flat Icon shows the destinations as icons only. It works best for apps with a small set of equally important top-level destinations, providing instant access without opening a Drawer, but has limited capacity.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-6&embed-host=share"
-		description="Use FlatIcon when the application has 2–6 equally weighted top-level sections that users switch between frequently."
+		description="Use Flat Icon when the application has 2–6 equally weighted top-level sections that users switch between frequently."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-8&embed-host=share"
-		description="Do not use FlatIcon with labels that are too long. Labels get truncated and users cannot distinguish destinations without reading the full text."
+		description="Do not use Flat Icon with labels that are too long. Labels get truncated and users cannot distinguish destinations without reading the full text."
 	/>
 </div>
 
@@ -99,7 +99,7 @@ FlatIcon (tab bar) works best for apps with a small set of equally important top
 
 ### Position
 
-Select the ControlPanel position based on the app type and primary interaction pattern. Top is the default for content-focused apps. Bottom works for app-like experiences where navigation actions need to be within thumb reach.
+Select the Control Panel position based on the app type and primary interaction pattern. Top is the default for content-focused apps. Bottom works for app-like experiences where navigation actions need to be within thumb reach.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -122,9 +122,7 @@ Select the ControlPanel position based on the app type and primary interaction p
 
 ## FAQ
 
-Have a question about the ControlPanel Mobile component? We'll answer it and add frequently asked questions to this page.
-
-<QuestionForm componentName="ControlPanel Mobile" />
+<QuestionForm componentName="Control Panel Mobile" />
 
 </DBSection>
 
@@ -135,29 +133,29 @@ Have a question about the ControlPanel Mobile component? We'll answer it and add
 <TeaserCard
 	teasers={[
 		{
-			title: 'ControlPanel Desktop',
+			title: 'Control Panel Desktop',
 			description: 'Desktop variant with Top and Left positions.',
-			url: '/documentation/components/controlpanel/desktop',
+			url: '/documentation/components/control-panel/desktop',
 		},
 		{
 			title: 'Shell Mobile',
-			description: 'The mobile Shell layout that hosts the ControlPanel.',
+			description: 'The mobile Shell layout that hosts the Control Panel.',
 			url: '/documentation/components/shell/mobile',
 		},
 		{
 			title: 'CP Navigation',
 			description: 'Navigation containers used within the Drawer.',
-			url: '/documentation/components/controlpanel/navigation',
+			url: '/documentation/components/control-panel/navigation',
 		},
 		{
-			title: 'CP NavigationItem',
-			description: 'Navigation items used within the Drawer navigation.',
-			url: '/documentation/components/controlpanel/navigationitem',
+			title: 'CP Navigation Item',
+			description: 'Navigation Items used within the Drawer navigation.',
+			url: '/documentation/components/control-panel/navigation-item',
 		},
 		{
 			title: 'CP Brand',
-			description: 'Brand/logo subcomponent within the mobile ControlPanel.',
-			url: '/documentation/components/controlpanel/brand',
+			description: 'Brand/logo subcomponent within the mobile Control Panel.',
+			url: '/documentation/components/control-panel/brand',
 		},
 	]}
 />

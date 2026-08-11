@@ -19,9 +19,9 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Frame a desktop app with a persistent ControlPanel and a scrollable content area
-- Position the ControlPanel horizontally (Top) or as a vertical sidebar (Left)
-- Add a SubNavigation level for sections that need sub-pages
+- Frame a desktop app with a persistent Control Panel and a scrollable content area
+- Position the Control Panel horizontally (Top) or as a vertical sidebar (Left)
+- Add a Sub Navigation level for sections that need sub-pages
 
 <DBSection spacing="small" width="auto">
 
@@ -64,37 +64,37 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-### ControlPanel Position
+### Control Panel Position
 
-Choose the ControlPanel position based on navigation complexity. Top works for simple apps; Left suits applications with many navigation items or deep structures.
+Choose the Control Panel position based on navigation complexity. Top works for simple apps; Left suits applications with many Navigation Items or deep structures.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=1-1132&embed-host=share"
-		description="Use the Top position for applications with few top-level navigation entries."
+		description="Use the Top position for applications with few top-level Navigation Items."
 	/>
 	<GuidelineExample
 		variant="caution"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=1-1133&embed-host=share"
-		description="The Left position with only 2–3 navigation items takes up space without adding structural benefit. Consider Top instead."
+		description="The Left position with only 2–3 Navigation Items takes up space without adding structural benefit. Consider Top instead."
 	/>
 </div>
 
-### SubNavigation Placement
+### Sub Navigation Placement
 
-Choose a SubNavigation position that fits your information architecture and keep it consistent across all pages of your application.
+Choose a Sub Navigation position that fits your information architecture and keep it consistent across all pages of your application.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1110&embed-host=share"
-		description="Use SubNavigation Left for pages with many sub-level entries that benefit from a persistent vertical overview."
+		description="Use Sub Navigation Left for pages with many sub-level Navigation Items that benefit from a persistent vertical overview."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1112&embed-host=share"
-		description="Do not switch SubNavigation position when navigating between top-level sections. Users expect the navigation layout to stay stable."
+		description="Do not switch Sub Navigation position when navigating between top-level sections. Users expect the navigation layout to stay stable."
 	/>
 </div>
 
@@ -112,18 +112,18 @@ Choose a SubNavigation position that fits your information architecture and keep
 
 ### Navigation Depth
 
-The Shell Desktop supports combining ControlPanel Navigation and SubNavigation in various ways. Both can have multiple levels independently. You can mirror the same structure in both, show only a subset, or distribute pages across the two navigation areas.
+Shell Desktop supports combining Control Panel Navigation and Sub Navigation in various ways. Both can have multiple levels independently. You can mirror the same structure in both, show only a subset, or distribute pages across the two navigation areas.
 
 #### Sub-pages in one navigation area only
 
 <div className="guideline-examples">
 	<GuidelineExample
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4132-2&embed-host=share"
-		description="Some items use the ControlPanel Popover to show their sub-pages directly."
+		description="Some Navigation Items use the Control Panel Popover to show their sub-pages directly."
 	/>
 	<GuidelineExample
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4132-4&embed-host=share"
-		description="Other items place their sub-pages in the SubNavigation Tree instead."
+		description="Other Navigation Items place their sub-pages in the Sub Navigation Tree instead."
 	/>
 </div>
 
@@ -132,11 +132,11 @@ The Shell Desktop supports combining ControlPanel Navigation and SubNavigation i
 <div className="guideline-examples">
 	<GuidelineExample
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4132-6&embed-host=share"
-		description="Top-level sub-pages are accessible via Popover in the ControlPanel as quick entry points."
+		description="Top-level sub-pages are accessible via Popover in the Control Panel as quick entry points."
 	/>
 	<GuidelineExample
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4132-8&embed-host=share"
-		description="The same entries plus additional deeper pages are available in the SubNavigation Tree for full navigation."
+		description="The same Navigation Items plus additional deeper pages are available in the Sub Navigation Tree for full navigation."
 	/>
 </div>
 
@@ -150,8 +150,6 @@ The Shell Desktop supports combining ControlPanel Navigation and SubNavigation i
 
 ## FAQ
 
-Have a question about the Shell Desktop component? We'll answer it and add frequently asked questions to this page.
-
 <QuestionForm componentName="Shell Desktop" />
 
 </DBSection>
@@ -164,13 +162,18 @@ Have a question about the Shell Desktop component? We'll answer it and add frequ
 	teasers={[
 		{
 			title: 'Shell Mobile',
-			description: 'Mobile variant of the Shell with responsive navigation patterns.',
+			description: 'Shell Mobile with responsive navigation patterns for small screens.',
 			url: '/documentation/components/shell/mobile',
 		},
 		{
-			title: 'Shell SubNavigation',
+			title: 'Control Panel Desktop',
+			description: 'The Control Panel hosted by Shell Desktop.',
+			url: '/documentation/components/control-panel/desktop',
+		},
+		{
+			title: 'Shell Sub Navigation',
 			description: 'Secondary navigation within the Shell for sub-level page structure.',
-			url: '/documentation/components/shell/subnavigation',
+			url: '/documentation/components/shell/sub-navigation',
 		},
 		{
 			title: 'Shell Content',

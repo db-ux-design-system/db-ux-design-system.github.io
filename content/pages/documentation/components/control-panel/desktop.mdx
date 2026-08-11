@@ -2,9 +2,9 @@
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
-headline: 'ControlPanel Desktop'
-title: 'ControlPanel Desktop'
-description: 'The ControlPanel Desktop is the primary navigation bar for desktop applications within the Shell. It provides two position variants: Top (horizontal) and Left (vertical sidebar).'
+headline: 'Control Panel Desktop'
+title: 'Control Panel Desktop'
+description: 'The Control Panel Desktop is the primary navigation bar for desktop applications within the Shell. It provides two position variants: Top (horizontal) and Left (vertical sidebar).'
 align: start
 toc: true
 order: 1
@@ -53,18 +53,18 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ### Position (Top vs. Left)
 
-Choose the ControlPanel position based on your application's navigation complexity. Top works for apps with few top-level items; Left suits applications with many items or deep hierarchies.
+Choose the Control Panel position based on your application's navigation complexity. Top works for apps with few top-level Navigation Items; Left suits applications with many Navigation Items or deep hierarchies.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-2&embed-host=share"
-		description="Use Top for applications with a small number of top-level navigation items that fit comfortably in a horizontal bar."
+		description="Use Top for applications with a small number of top-level Navigation Items that fit comfortably in a horizontal bar."
 	/>
 	<GuidelineExample
 		variant="caution"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-4&embed-host=share"
-		description="The Left position with only 2–3 navigation items takes up space without adding structural benefit. Consider Top instead."
+		description="The Left position with only 2–3 Navigation Items takes up space without adding structural benefit. Consider Top instead."
 	/>
 </div>
 
@@ -82,7 +82,7 @@ Choose the ControlPanel position based on your application's navigation complexi
 
 ### Navigation Variant (Left)
 
-The Left position supports four navigation variants: Popover for flat-to-medium hierarchies, Tree for deep structures with 3+ levels, DrillDown for less complex structures with many items, and FlatIcon for quick icon-based access to a small set of destinations.
+The Left position supports four navigation variants: Popover for flat-to-medium hierarchies, Tree for deep structures with 3+ levels, Drill Down for less complex structures with many Navigation Items, and Flat Icon for quick icon-based access to a small set of destinations.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -91,7 +91,7 @@ The Left position supports four navigation variants: Popover for flat-to-medium 
 	/>
 	<GuidelineExample
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4585-18&embed-host=share"
-		description="DrillDown for many items with shallow depth. Shows one level at a time with back-button navigation."
+		description="Drill Down for many Navigation Items with shallow depth. Shows one level at a time with back-button navigation."
 	/>
 	<GuidelineExample
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-6&embed-host=share"
@@ -99,18 +99,18 @@ The Left position supports four navigation variants: Popover for flat-to-medium 
 	/>
 	<GuidelineExample
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-8&embed-host=share"
-		description="FlatIcon for 2–6 equally weighted top-level destinations accessed via icons."
+		description="Flat Icon for 2–6 equally weighted top-level destinations accessed via icons."
 	/>
 </div>
 
 ### Expand/Collapse (Left)
 
-The Left ControlPanel can be collapsed via a slide button to save screen space. It is always initially expanded. In the collapsed state, the navigation content is hidden and only the Brand and slide button remain visible.
+The Left Control Panel can be collapsed via a slide button to save screen space. It is always initially expanded. In the collapsed state, the navigation content is hidden and only the Brand and slide button remain visible.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-10&embed-host=share"
-		description="Collapsed Left ControlPanel (applies to Popover, Tree, and DrillDown). The slide button toggles between expanded and collapsed state."
+		description="Collapsed Left Control Panel (applies to Popover, Tree, and Drill Down). The slide button toggles between expanded and collapsed state."
 	/>
 </div>
 
@@ -124,9 +124,7 @@ The Left ControlPanel can be collapsed via a slide button to save screen space. 
 
 ## FAQ
 
-Have a question about the ControlPanel Desktop component? We'll answer it and add frequently asked questions to this page.
-
-<QuestionForm componentName="ControlPanel Desktop" />
+<QuestionForm componentName="Control Panel Desktop" />
 
 </DBSection>
 
@@ -137,29 +135,30 @@ Have a question about the ControlPanel Desktop component? We'll answer it and ad
 <TeaserCard
 	teasers={[
 		{
-			title: 'ControlPanel Mobile',
-			description: 'Mobile variant with Top, Bottom, and FlatIcon positions.',
-			url: '/documentation/components/controlpanel/mobile',
+			title: 'Control Panel Mobile',
+			description: 'Mobile variant with Top, Bottom, and Flat Icon positions.',
+			url: '/documentation/components/control-panel/mobile',
 		},
 		{
 			title: 'Shell Desktop',
-			description: 'The desktop Shell layout that hosts the ControlPanel.',
+			description: 'The desktop Shell layout that hosts the Control Panel.',
 			url: '/documentation/components/shell/desktop',
 		},
 		{
-			title: 'Shell SubNavigation',
-			description: 'Secondary navigation that complements the ControlPanel.',
-			url: '/documentation/components/shell/subnavigation',
+			title: 'Shell Sub Navigation',
+			description: 'Secondary navigation that complements the Control Panel.',
+			url: '/documentation/components/shell/sub-navigation',
 		},
 		{
 			title: 'CP Navigation',
-			description: 'Navigation containers (Popover, Tree, FlatIcon) within the ControlPanel.',
-			url: '/documentation/components/controlpanel/navigation',
+			description: 'Navigation containers (Popover, Tree, Flat Icon) within the Control Panel.',
+			url: '/documentation/components/control-panel/navigation',
 		},
 		{
-			title: 'CP NavigationItem',
-			description: 'Navigation items and groups within the ControlPanel navigation.',
-			url: '/documentation/components/controlpanel/navigationitem',
+			title: 'CP Navigation Item',
+			description:
+				'Navigation Items and Navigation Item Groups within the Control Panel Navigation.',
+			url: '/documentation/components/control-panel/navigation-item',
 		},
 	]}
 />
