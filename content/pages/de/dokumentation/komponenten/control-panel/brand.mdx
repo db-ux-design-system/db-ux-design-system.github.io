@@ -1,0 +1,169 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'CP Brand'
+title: 'CP Brand'
+description: 'Die Subkomponente CP Brand zeigt die Marke oder das Logo der Anwendung innerhalb des Control Panels an.'
+align: start
+toc: true
+status: 'sub'
+order: 3
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import MdxNotification from '@template/components/MdxNotification/MdxNotification.tsx';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Die Identität der Anwendung an einer festen Stelle in der Navigation verankern
+- Bei begrenztem Platz zwischen vollem Logo und kompakter Bildmarke wechseln
+- Eigene Brand-Inhalte ergänzen (z. B. Logo plus Wortmarke), wenn ein reines Logo nicht ausreicht
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<MdxNotification linkHref="/de/dokumentation/lernen/figma#logo" linkText="Mehr erfahren">
+	Für markenkonforme Verwendung nutze den offiziellen{' '}
+	<a
+		href="https://marketingportal.extranet.deutschebahn.com/marketingportal/Marke-und-Design/Basiselemente/Logo/Logozusatz-mit-Tool"
+		target="_blank"
+	>
+		Logozusatz
+	</a>
+	aus dem Marketingportal.
+</MdxNotification>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Eigene Brand überschreiben
+
+Die Variante Custom erlaubt es, über den Children-Slot eine eigene Brand bzw. ein eigenes Logo zu platzieren. Die Variante Short wird vom System gesteuert und zeigt in beengten Kontexten die kompakte Standard-Bildmarke.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4185-2&embed-host=share"
+		description="Überschreibe die Variante Custom mit dem Logo deiner Anwendung für ausgeklappte Zustände des Control Panels (Top, Left ausgeklappt, Mobile Top)."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4185-4&embed-host=share"
+		description="Versuche nicht, die Variante Short zu überschreiben. Sie wird in den Positionen Left eingeklappt und Mobile Bottom automatisch angewendet und ist nicht konfigurierbar."
+	/>
+</div>
+
+### Logozusatz
+
+Der Anwendungsname neben dem Logo muss ein offizieller Logozusatz sein, der als freigegebenes SVG (vektorisierte Pfade) über das Marketingportal angefordert wird. Das sichert Markenkonsistenz bei Schrift, Abständen und Darstellung.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4252-87&embed-host=share"
+		description="Verwende ein freigegebenes SVG, in dem Logo und Textzusatz ein einzelnes vektorisiertes Asset bilden."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4252-97&embed-host=share"
+		description="Kombiniere das Standard-Logo nicht mit einem eigenen Textelement. Eigener Text weicht bei Schrift, Abständen und Darstellung von der Marke ab."
+	/>
+</div>
+
+### Brand mit Flat Icon
+
+Das Control Panel in Flat Icon hat keinen eigenen Brand-Bereich. Wenn die Marke sichtbar sein muss, platziere das Logo stattdessen im Bereich Shell Content.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4185-6&embed-host=share"
+		description="Platziere Brand bzw. Logo im Bereich Shell Content (z. B. als Header), wenn du Flat Icon verwendest und Markenpräsenz brauchst."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4185-8&embed-host=share"
+		description="Platziere Brand bzw. Logo nicht als Flat Icon Navigation Item. Flat Icon ist ausschließlich für Navigationsziele vorgesehen."
+	/>
+</div>
+
+### Inhalt des Brand-Slots
+
+Der Brand-Slot dient der Identifikation und dem Kontext. Platziere dort keine interaktiven Elemente – Aktionen und Eingaben gehören in Primary Actions oder Secondary Actions.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4185-10&embed-host=share"
+		description="Verwende den Brand-Slot für ergänzenden Kontext wie eine Umgebungs-Badge (z. B. Staging, Beta) neben dem Logo."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4185-12&embed-host=share"
+		description="Platziere keine interaktiven Elemente wie Suchfelder oder Aktions-Buttons im Brand-Slot. Nutze stattdessen Primary Actions oder Secondary Actions."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="CP Brand" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Control Panel Desktop',
+			description: 'Übergeordnete Desktop-Komponente, die Brand im Start-Container enthält.',
+			url: '/de/dokumentation/komponenten/control-panel/desktop',
+		},
+		{
+			title: 'Control Panel Mobile',
+			description:
+				'Übergeordnete Mobile-Komponente, in der Brand in der Navigationsleiste erscheint.',
+			url: '/de/dokumentation/komponenten/control-panel/mobile',
+		},
+	]}
+/>
+
+</DBSection>
