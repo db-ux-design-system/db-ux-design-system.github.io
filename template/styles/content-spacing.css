@@ -88,6 +88,13 @@
 	margin-block-start: var(--db-spacing-fixed-2xl);
 }
 
+/* Exclude: direct children of a row-direction stack (e.g. avatar cards side
+   by side) are aligned via flex gap, not vertical margin. Needs higher
+   specificity than the rule above to win. */
+.dba-main-content .db-section .db-stack[data-direction='row'] > .db-stack + .db-stack {
+	margin-block-start: 0;
+}
+
 /* Headlines after headlines get tighter spacing (sub-section) */
 .dba-main-content :is(h2, h3, h4, h5, h6) + :is(h2, h3, h4, h5, h6) {
 	margin-block-start: var(--db-spacing-fixed-md);
