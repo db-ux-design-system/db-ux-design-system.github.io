@@ -61,16 +61,5 @@
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@db-ux/db-theme",
-      "@db-ux/db-theme-fonts",
-      "@db-ux/db-theme-icons",
-      "@db-ux/db-theme-illustrative-icons"
-    ],
-    "overrides": {
-      "lodash@>=4.0.0 <=4.17.22": ">=4.17.23"
-    }
-  },
   "packageManager": "pnpm@11.21.0+sha512.521705bce689924eac72f5a3587122f362689ef6571e55ba80076fd637c11132ecffada26fad4ea79c485bfddbfd3d5a2a5b05805a77e893de71ec8a6cca3bb1"
 }
