@@ -1,8 +1,10 @@
 ---
 # Renovate (self-hosted)
 #
-# Covers the one thing Dependabot cannot handle for us:
+# Covers the two things Dependabot cannot handle for us:
 #   1. pnpm itself (the `packageManager` field including its integrity hash)
+#   2. the `@db-ux/db-theme*` packages (manually triggered, w/o the need to
+#      check for all other dependencies)
 # Everything else stays with Dependabot, see `.github/dependabot.yml`.
 # Scope and grouping live in `.github/renovate.json`.
 #
