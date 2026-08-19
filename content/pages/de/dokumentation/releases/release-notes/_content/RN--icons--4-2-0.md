@@ -2,7 +2,7 @@
 hidePage: true
 category: 'DB Theme Icons'
 version: 'v4.2.0'
-date: '2026-08-19'
+date: '2026-08-20'
 ---
 
 ### Design & Entwicklung
