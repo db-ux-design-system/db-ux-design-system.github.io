@@ -1,0 +1,186 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Shell Desktop'
+title: 'Shell Desktop'
+description: 'Die Komponente Shell Desktop stellt die äußerste Layout-Struktur für Desktop-Webanwendungen bereit.'
+align: start
+toc: true
+tocMaxDepth: 3
+order: 1
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Eine Desktop-Anwendung mit dauerhaftem Control Panel und scrollbarem Inhaltsbereich rahmen
+- Das Control Panel horizontal (Top) oder als vertikale Sidebar (Left) positionieren
+- Eine Ebene der Sub Navigation für Bereiche ergänzen, die Unterseiten brauchen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Vue',
+			description: 'TBD',
+			url: '#',
+			icon: 'vue',
+		},
+		{
+			title: 'Angular',
+			description: 'TBD',
+			url: '#',
+			icon: 'angular',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Position des Control Panels
+
+Wähle die Position des Control Panels nach der Navigationskomplexität. Top eignet sich für einfache Anwendungen, Left für Anwendungen mit vielen Navigation Items oder tiefen Strukturen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=1-1132&embed-host=share"
+		description="Verwende die Position Top für Anwendungen mit wenigen Navigation Items auf oberster Ebene."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=1-1133&embed-host=share"
+		description="Die Position Left mit nur 2–3 Navigation Items belegt Platz, ohne strukturellen Mehrwert zu bieten. Prüfe stattdessen Top."
+	/>
+</div>
+
+### Platzierung der Sub Navigation
+
+Wähle eine Position der Sub Navigation, die zu deiner Informationsarchitektur passt, und halte sie über alle Seiten deiner Anwendung konsistent.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1110&embed-host=share"
+		description="Verwende Sub Navigation Left für Seiten mit vielen Navigation Items auf Unterebene, die von einer dauerhaften vertikalen Übersicht profitieren."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1112&embed-host=share"
+		description="Wechsle die Position der Sub Navigation nicht beim Navigieren zwischen Bereichen der obersten Ebene. Nutzer:innen erwarten ein stabiles Navigations-Layout."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Beispiele
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Navigationstiefe
+
+Shell Desktop unterstützt verschiedene Kombinationen aus Control Panel Navigation und Sub Navigation. Beide können unabhängig voneinander mehrere Ebenen haben. Du kannst dieselbe Struktur in beiden spiegeln, nur einen Teil zeigen oder Seiten auf die zwei Navigationsbereiche verteilen.
+
+#### Unterseiten in nur einem Navigationsbereich
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4132-2&embed-host=share"
+		description="Einige Navigation Items nutzen das Popover des Control Panels, um ihre Unterseiten direkt zu zeigen."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4132-4&embed-host=share"
+		description="Andere Navigation Items platzieren ihre Unterseiten stattdessen im Tree der Sub Navigation."
+	/>
+</div>
+
+#### Unterseiten auf beide Navigationsbereiche verteilt
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4132-6&embed-host=share"
+		description="Unterseiten der obersten Ebene sind über das Popover im Control Panel als schnelle Einstiegspunkte erreichbar."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4132-8&embed-host=share"
+		description="Dieselben Navigation Items plus zusätzliche tiefere Seiten stehen im Tree der Sub Navigation für die vollständige Navigation zur Verfügung."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Beispiele anzeigen" expandedText="Beispiele ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Shell Desktop" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Shell Mobile',
+			description: 'Shell Mobile mit responsiven Navigationsmustern für kleine Bildschirme.',
+			url: '/de/dokumentation/komponenten/shell/mobile',
+		},
+		{
+			title: 'Control Panel Desktop',
+			description: 'Das Control Panel, das Shell Desktop enthält.',
+			url: '/de/dokumentation/komponenten/control-panel/desktop',
+		},
+		{
+			title: 'Shell Sub Navigation',
+			description: 'Sekundäre Navigation innerhalb der Shell für die Struktur auf Unterebene.',
+			url: '/de/dokumentation/komponenten/shell/sub-navigation',
+		},
+		{
+			title: 'Shell Content',
+			description: 'Der scrollbare Inhaltsbereich der Shell mit slot-basiertem Layout.',
+			url: '/de/dokumentation/komponenten/shell/content',
+		},
+	]}
+/>
+
+</DBSection>

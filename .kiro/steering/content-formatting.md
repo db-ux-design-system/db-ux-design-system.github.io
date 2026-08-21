@@ -47,6 +47,54 @@ EN convention follows the [Microsoft](https://learn.microsoft.com/en-us/style-gu
 
 - Documentation language: English
 - Consistent terminology: "items" (not "entries"), "levels" (not "depths"), "destinations" (not "targets")
+- These generic terms are the fallback. When a component name exists for the thing you are describing, use the component name instead — "Navigation Items", not "items". Only fall back to the generic term when no component name fits, and keep the choice identical in EN and DE.
+
+## Component and property names
+
+Documentation and Figma spell component and property names **with spaces**, not in the CamelCase form used in code. This applies to both languages and to prose, headings, frontmatter `title`/`headline`, and `componentName` props.
+
+| Write | Not |
+| --- | --- |
+| Control Panel | ControlPanel |
+| Control Panel Navigation | ControlPanel Navigation, CP Navigation |
+| Sub Navigation | SubNavigation |
+| Navigation Item | NavigationItem |
+| Primary Actions, Secondary Actions | PrimaryActions, SecondaryActions |
+| Flat Icon, Drill Down | FlatIcon, DrillDown |
+| Button Group, Toggle Button, Split Button | ButtonGroup, ToggleButton, SplitButton |
+| Custom Select, Loading Indicator | CustomSelect, LoadingIndicator |
+| Drawer Header, Drawer Footer | DrawerHeader, DrawerFooter |
+| Start Slot, End Slot | StartSlot, EndSlot |
+
+### Never rewrite these
+
+The rule covers display text only. Leave the following untouched, even though they contain the same names:
+
+- **Figma URLs.** `Doku--ControlPanel` is part of the key in `static/assets/figma-cache/manifest.json`. Inserting a space breaks the image cache silently — the page still builds.
+- **React identifiers.** `DBControlPanelNavigation`, `DBShellContent` and every other `DB*` name.
+- **Template components and JSX tags.** `GuidelineExample`, `TeaserCard`, `QuestionForm`, `CollapsibleWrapper`, `ResourceCards`, `ComponentPlayground`, `ChildPageOverview`, `StatusNotification` and similar. These are code, not documentation text.
+- **Frontmatter keys**, for example `isSubNavigation: true`.
+- **Proper nouns and standards**: GitHub, GitLab, JetBrains, SemVer, DataViz.
+
+### German compounds
+
+A spaced name cannot take a hyphen from a following German noun — `Control Panel-Navigation` is wrong. Resolve it one of two ways:
+
+- If the whole term is an actual component name, keep it spaced without a hyphen: `Control Panel Navigation`, `Flat Icon Navigation Items`.
+- Otherwise dissolve the compound with a genitive or preposition instead of hyphenating:
+
+| Write | Not |
+| --- | --- |
+| Ebene der Sub Navigation | Sub Navigation-Ebene |
+| Zustände des Control Panels | Control Panel-Zustände |
+| Bereiche des Control Panels | Control Panel-Bereiche |
+| Tree der Sub Navigation | Sub Navigation-Tree |
+| Control Panel in Flat Icon | Flat Icon-Control Panel |
+| Bereich Shell Content | Shell-Content-Bereich |
+
+### Reserved names
+
+Do not use a component name as a generic description for something else. `Tab Bar` is its own component, so it must not describe the Flat Icon navigation — describe the behaviour instead ("shows the destinations as icons along the bottom edge").
 
 ## Terminology (DE)
 
