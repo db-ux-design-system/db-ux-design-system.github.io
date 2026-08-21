@@ -25,27 +25,27 @@
     "test:regenerate": "playwright test --update-snapshots"
   },
   "devDependencies": {
-    "@astrojs/check": "0.9.9",
+    "@astrojs/check": "0.9.10",
     "@astrojs/mdx": "5.0.6",
     "@astrojs/react": "5.0.5",
-    "@astrojs/sitemap": "3.7.2",
+    "@astrojs/sitemap": "3.7.3",
     "@axe-core/playwright": "4.12.1",
     "@db-ux/agent-cli": "4.14.0-shell-52d18db",
     "@db-ux/core-components": "4.14.0-shell-52d18db",
     "@db-ux/core-eslint-plugin": "4.14.0-shell-52d18db",
     "@db-ux/core-foundations": "4.14.0-shell-52d18db",
     "@db-ux/core-stylelint": "4.14.0-shell-52d18db",
-    "@db-ux/db-theme": "5.8.0",
+    "@db-ux/db-theme": "6.1.0",
     "@db-ux/db-theme-fonts": "2.0.5",
-    "@db-ux/db-theme-icons": "3.9.0",
-    "@db-ux/db-theme-illustrative-icons": "3.3.0",
+    "@db-ux/db-theme-icons": "4.1.0",
+    "@db-ux/db-theme-illustrative-icons": "3.3.1",
     "@db-ux/react-core-components": "4.14.0-shell-52d18db",
     "@double-great/stylelint-a11y": "3.5.0",
     "@orama/orama": "3.1.18",
     "@orama/plugin-astro": "3.1.18",
     "@playwright/test": "1.61.1",
-    "@types/react": "19.2.17",
-    "@types/react-dom": "19.2.3",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4",
     "@typescript-eslint/parser": "8.65.0",
     "astro": "6.3.7",
     "eslint": "10.8.0",
@@ -64,16 +64,5 @@
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@db-ux/db-theme",
-      "@db-ux/db-theme-fonts",
-      "@db-ux/db-theme-icons",
-      "@db-ux/db-theme-illustrative-icons"
-    ],
-    "overrides": {
-      "lodash@>=4.0.0 <=4.17.22": ">=4.17.23"
-    }
-  },
-  "packageManager": "pnpm@11.1.2+sha512.415a1cc25974731e75455c1468371be74c5aa5fb7621b50d4056d222451609f11412f23fd602e6169f1e060466641f798597e1be961a10688836a67b16569499"
+  "packageManager": "pnpm@11.21.0+sha512.521705bce689924eac72f5a3587122f362689ef6571e55ba80076fd637c11132ecffada26fad4ea79c485bfddbfd3d5a2a5b05805a77e893de71ec8a6cca3bb1"
 }

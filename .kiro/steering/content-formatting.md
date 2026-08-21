@@ -285,3 +285,115 @@ date: '2026-07-14'
 
 - Card, Popover: The "Start Slot" and "End Slot" now default to hidden (show slot = false).
 ```
+
+## Teams Posting Structure
+
+Structure for the announcement comment posted in the Teams channel for minor releases (see [Kommunikationskanäle](https://db-ux-design-system.github.io/de/dokumentation/releases/versionierung#kommunikationskanäle)). One posting summarizes all libraries released in that cycle, derived from their release notes.
+
+- Language: German – the Teams channel primarily serves the German-speaking community
+- Anyone announcing a release can write this posting – not only contributors using Figma-specific tooling
+
+### Per-library block
+
+- Title on its own line, no bullet: `{Library}: v{X.Y.Z}` (e.g. `Core: v5.1.0`)
+- Scope heading with emoji, matching the release note's `###` grouping:
+  - `🎨 DESIGN`
+  - `💻 DEVELOPMENT`
+  - `🎨 DESIGN & 💻 DEVELOPMENT`
+- Category subheading, always prefixed with `✨` regardless of type:
+
+  | Release note heading | Teams posting |
+  | --------------------- | --------------- |
+  | Added                  | `✨ Hinzugefügt` |
+  | Changed                | `✨ Geändert`    |
+  | Deprecated             | `✨ Deprecated`  |
+  | Removed                | `✨ Entfernt`    |
+  | Fixed                  | `✨ Behoben`     |
+  | Security               | `✨ Security`    |
+
+- Only include categories that have entries – omit empty ones
+- Entry format: `- **Component**: Description`, translated to German, following the same content as the release note entry
+- Multiple libraries in the same cycle: one block per library, separated by a blank line, ordered by `categoryOrder` (Core → 🧪 Core Lab → DB Theme Icons → DB Theme Illustrative Icons)
+
+### Breaking changes
+
+- Mixed-scope entry where only one discipline has a breaking change – indented sub-bullet:
+  ```
+  - **Social Media Icons** wurden von `social` nach Logos verschoben (facebook, instagram, linkedin, pinterest, snapchat, spotify, tiktok, whatsapp, youtube)
+    - Development: **BREAKING CHANGE**
+  ```
+- Entry that is entirely a breaking change – prefix directly on the entry:
+  ```
+  - **BREAKING CHANGE**: Folder structure infrago/assets/features umbenannt zu feature
+  ```
+
+### Closing
+
+Appears once at the very end of the whole posting, not per library:
+
+```
+Danke für eure Unterstützung, liebe [DB UX Community](<Teams-Link>) 💕
+Viel Freude beim Entdecken des neuen Updates.
+```
+
+### Version bumps
+
+- Pure version bumps without user-facing changes (`_version bump_` in the release note) are not listed in the posting
+- Library-dependency updates (e.g. Core references an Icons update) get a short entry without further detail, since the detail already lives in that library's own block: `Update auf DB Theme Icons v4.0.0`
+
+### Example
+
+```
+Core: v5.1.0
+
+🎨 DESIGN
+
+✨ Hinzugefügt
+
+- Update auf DB Theme Icons v4.0.0
+
+💻 DEVELOPMENT
+
+✨ Hinzugefügt
+
+- **Form Components**: `autoComplete` (camelCase) wird jetzt als Alias für `autocomplete` akzeptiert
+
+✨ Geändert
+
+- **Drawer**: JS-Transition-Workaround durch native CSS-Funktionalität ersetzt
+
+
+DB Theme Icons: v4.0.0
+
+🎨 DESIGN & 💻 DEVELOPMENT
+
+✨ Hinzugefügt
+
+- **Buildings**: Neue Icons elevator, escalator, stairs
+- **Social Media Icons** wurden von `social` nach Logos verschoben (facebook, instagram, linkedin, pinterest, snapchat, spotify, tiktok, whatsapp, youtube)
+  - Development: **BREAKING CHANGE**
+
+🎨 DESIGN
+
+✨ Hinzugefügt
+
+- **Icon Search**: FigmaKeywords und Tags für bessere Auffindbarkeit hinzugefügt
+
+✨ Behoben
+
+- **Construction Sign**: Fehlende Größen ergänzt
+
+💻 DEVELOPMENT
+
+✨ Geändert
+
+- **BREAKING CHANGE**: Folder structure infrago/assets/features umbenannt zu feature
+
+✨ Entfernt
+
+- **BREAKING CHANGE**: Drei Duplikat-Icons entfernt (db-wheelchair, mobility-service-meeting-point, special-bike)
+
+
+Danke für eure Unterstützung, liebe [DB UX Community](<Teams-Link>) 💕
+Viel Freude beim Entdecken des neuen Updates.
+```
