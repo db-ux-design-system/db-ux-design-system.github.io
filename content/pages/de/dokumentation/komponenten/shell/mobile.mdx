@@ -1,0 +1,163 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Shell Mobile'
+title: 'Shell Mobile'
+description: 'Die Komponente Shell Mobile stellt die äußerste Layout-Struktur für mobile Webanwendungen bereit. Sie unterstützt verschiedene Positionen des Control Panels und nutzt einen Drawer als standardmäßige Hauptnavigation.'
+align: start
+toc: true
+order: 2
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Eine mobile Anwendung mit kompaktem Control Panel und scrollbarem Inhaltsbereich rahmen
+- Das Control Panel am oberen Rand (Top), am unteren Rand (Bottom) oder als Flat Icon positionieren
+- Die standardmäßige Hauptnavigation über einen Drawer zugänglich machen, der über das Burger-Menü geöffnet wird
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Unterschiede im Responsive-Verhalten
+
+Die mobile Shell darf von ihrem Desktop-Gegenstück abweichen. Passe die Navigationsstruktur an die mobilen Rahmenbedingungen an, statt Desktop 1:1 zu spiegeln.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1118&embed-host=share"
+		description="Vereinfache die Navigation für Mobile, indem du die Tiefe reduzierst und Inhalte bei Bedarf anders gruppierst."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1119&embed-host=share"
+		description="Spiegle die vollständige Desktop-Navigationshierarchie nicht auf Mobile, wenn daraus zu viele Ebenen oder zu kleine Touch-Ziele entstehen."
+	/>
+</div>
+
+### Flat Icon Navigation
+
+Flat Icon zeigt die Ziele als Icons am unteren Rand. Es eignet sich am besten für Anwendungen mit wenigen, gleich wichtigen Zielen auf oberster Ebene. Der Zugriff erfolgt sofort, ohne ein Menü zu öffnen, die Kapazität ist jedoch begrenzt.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1122&embed-host=share"
+		description="Verwende Flat Icon, wenn die Anwendung 2–6 gleichwertige Hauptbereiche hat, zwischen denen Nutzer:innen häufig wechseln."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1123&embed-host=share"
+		description="Platziere keine primären oder sekundären Aktionen in der Flat Icon Navigation. Sie ist ausschließlich für Navigationsziele vorgesehen."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Beispiele
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Position des Control Panels
+
+Wähle die Position des Control Panels nach App-Typ. Top ist der Standard. Bottom unterstützt eine in Daumenreichweite liegende Navigation für app-artige Erlebnisse. Beide nutzen einen Drawer für den Zugriff auf die vollständige Navigation.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1116&embed-host=share"
+		description="Position Top mit Drawer für Anwendungen, die eine vollständige Navigationsstruktur bei Bedarf zugänglich machen müssen."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1117&embed-host=share"
+		description="Position Bottom für app-artige Erlebnisse, bei denen primäre Aktionen in Daumenreichweite liegen müssen."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Beispiele anzeigen" expandedText="Beispiele ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Shell Mobile" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Shell Desktop',
+			description: 'Shell Desktop mit dauerhafter Navigation für größere Bildschirme.',
+			url: '/de/dokumentation/komponenten/shell/desktop',
+		},
+		{
+			title: 'Control Panel Mobile',
+			description: 'Das Control Panel, das Shell Mobile enthält.',
+			url: '/de/dokumentation/komponenten/control-panel/mobile',
+		},
+		{
+			title: 'Shell Sub Navigation',
+			description: 'Sekundäre Navigation innerhalb der Shell für die Struktur auf Unterebene.',
+			url: '/de/dokumentation/komponenten/shell/sub-navigation',
+		},
+		{
+			title: 'Shell Content',
+			description: 'Der scrollbare Inhaltsbereich innerhalb von Shell Mobile.',
+			url: '/de/dokumentation/komponenten/shell/content',
+		},
+		{
+			title: 'Drawer',
+			description: 'Herausfahrendes Panel für den Zugriff auf die mobile Navigation.',
+			url: '/de/dokumentation/komponenten/drawer/drawer',
+		},
+	]}
+/>
+
+</DBSection>

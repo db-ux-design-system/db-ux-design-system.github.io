@@ -1,0 +1,148 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'CP Navigation Item'
+title: 'CP Navigation Item'
+description: 'The CP Navigation Item is the individual navigation entry within Control Panel navigation containers. Navigation Item Group is included as a grouping variant for Navigation Items with sub-navigation.'
+align: start
+toc: true
+status: 'sub'
+order: 8
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Link users to a specific page or view
+- Show whether a Navigation Item is the current, active location
+- Use an icon and label to make destinations easy to scan
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Icon Consistency per Level
+
+Tree Navigation Items allow overriding the default tree-line marker with a custom icon (Navigation Items only – Navigation Item Groups always keep the expand/collapse chevron). Keep icons consistent within a level: either all sibling Navigation Items on a level get a custom icon or none. Levels may differ from each other.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-6&embed-host=share"
+		description="Apply custom icons consistently within a level – either all sibling Navigation Items get a custom icon or none. Levels may differ from each other."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-8&embed-host=share"
+		description="Do not mix custom icons and default markers within the same level. A single circle among custom icons looks like an oversight and breaks scannability."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Slots
+
+Slot availability varies by variant. The Floating Container (for tooltips, popovers, badges) is available on all Navigation Item variants. The End Slot for inline content is only available on vertical Popover and Tree Navigation Items. Flat Icon Navigation Items and horizontal Popover Navigation Items have no content slots.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-11&embed-host=share"
+		description="Vertical Popover or Tree Navigation Items with an End Slot for inline content like badges or status icons."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-13&embed-host=share"
+		description="Floating Container for tooltips or badges on any variant – including Flat Icon and horizontal Popover."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Examples" expandedText="Hide some Examples" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Accessibility
+
+### Flat Icon Tooltip
+
+Flat Icon Navigation Items display a tooltip on hover that matches the Text Screenreader value. This ensures consistency between the visual tooltip and what assistive technologies announce. Provide a clear, descriptive text for each Flat Icon Navigation Item – it serves as both tooltip and accessible label. Do not leave it empty or use a different text than the tooltip.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="CP Navigation Item" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'CP Navigation',
+			description:
+				'Parent navigation containers (Popover, Tree, Flat Icon) hosting the Navigation Items.',
+			url: '/documentation/components/control-panel/navigation',
+		},
+		{
+			title: 'Control Panel Desktop',
+			description: 'Desktop Control Panel where Navigation Items appear.',
+			url: '/documentation/components/control-panel/desktop',
+		},
+		{
+			title: 'Control Panel Mobile',
+			description: 'Control Panel Mobile, where Drill Down and Flat Icon Navigation Items appear.',
+			url: '/documentation/components/control-panel/mobile',
+		},
+	]}
+/>
+
+</DBSection>

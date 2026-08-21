@@ -1,0 +1,145 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'CP Secondary Actions'
+title: 'CP Secondary Actions'
+description: 'Die Subkomponente CP Secondary Actions ist ein Slot für sekundäre Aktions-Buttons am Ende des Control Panels.'
+align: start
+toc: true
+status: 'sub'
+order: 5
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Unterstützende Utility-Aktionen wie Nutzerprofil, Einstellungen oder Hilfe aufnehmen
+- Diese von der primären Navigation und den primären Aktionen getrennt halten
+- Für Aktionen nutzen, die Nutzer:innen gelegentlich statt ständig aufrufen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Art der Aktion
+
+Secondary Actions nehmen unterstützende Utility-Aktionen auf, die auf allen Seiten relevant sind, aber nicht zur primären Aufgabe der Nutzer:innen gehören. Halte sie visuell der Navigation und den Primary Actions untergeordnet.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-2&embed-host=share"
+		description="Platziere Utility-Aktionen (z. B. Nutzerprofil, Einstellungen, Hilfe), die Nutzer:innen gelegentlich brauchen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-4&embed-host=share"
+		description="Platziere häufig genutzte Aktionen (z. B. Suche, Benachrichtigungen) nicht in Secondary Actions. Diese gehören in Primary Actions, wo sie sofort sichtbar sind."
+	/>
+</div>
+
+### Anzahl
+
+Halte Secondary Actions minimal. Zu viele Icons am Ende des Control Panels erzeugen visuelles Rauschen und konkurrieren mit der Navigation.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-6&embed-host=share"
+		description="Verwende 1–3 Utility-Aktionen, die Nutzer:innen unterstützen, ohne die Navigationsleiste zu überfrachten."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-8&embed-host=share"
+		description="Überlade Secondary Actions nicht mit zu vielen Icons. Ein überfüllter Endbereich lässt das Control Panel schwer und unfokussiert wirken."
+	/>
+</div>
+
+### Einschränkung bei Flat Icon
+
+Das Control Panel in Flat Icon unterstützt keine Secondary Actions. Utility-Aktionen wie Profil oder Einstellungen sollten als Flat Icon Navigation Items platziert oder auf eine eigene Seite verschoben werden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-10&embed-host=share"
+		description="Verwende das Control Panel in Position Top oder Bottom, wenn sekundäre Utility-Aktionen einen eigenen, von der Navigation getrennten Slot brauchen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-12&embed-host=share"
+		description="Mische Utility-Aktionen in Flat Icon nicht mit Navigationszielen. Konto oder Einstellungen können ein Navigation Item sein, aber kein Aktions-Button."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="CP Secondary Actions" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'CP Primary Actions',
+			description: 'Slot für primäre Aktionen mit hoher Priorität und häufiger Nutzung.',
+			url: '/de/dokumentation/komponenten/control-panel/primary-actions',
+		},
+		{
+			title: 'Control Panel Desktop',
+			description: 'Übergeordnete Desktop-Komponente, die Secondary Actions am Ende enthält.',
+			url: '/de/dokumentation/komponenten/control-panel/desktop',
+		},
+		{
+			title: 'Control Panel Mobile',
+			description:
+				'Übergeordnete Mobile-Komponente, in der Secondary Actions über den Drawer erreichbar sind.',
+			url: '/de/dokumentation/komponenten/control-panel/mobile',
+		},
+	]}
+/>
+
+</DBSection>
