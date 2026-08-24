@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Control Panel Mobile'
 title: 'Control Panel Mobile'
-description: 'The Control Panel Mobile provides the primary navigation bar for mobile applications within the Shell. It supports three position variants and uses a Drawer for expanded navigation access.'
+description: 'The Control Panel Mobile provides the primary navigation bar for mobile applications within the Shell. It is available in the Top and Bottom positions and opens the full navigation in a Drawer. Choosing the position is covered by Shell Mobile, choosing the navigation variant by the Control Panel Navigation.'
 align: start
 toc: true
 order: 2
@@ -18,9 +18,9 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Give mobile users access to the app's main sections on small screens
-- Keep navigation and key actions within thumb reach
-- Match the navigation pattern to the app type, from content-focused to app-like experiences
+- Combine logo, primary actions, and access to the navigation in one mobile bar
+- Open the full navigation in a Drawer instead of showing it permanently
+- Position the bar at the top or bottom edge of the screen
 
 <DBSection spacing="small" width="auto">
 
@@ -53,35 +53,18 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ### Density
 
-The mobile Control Panel only supports Regular density. Touch targets need sufficient size for reliable finger interaction on mobile devices.
+Control Panel Mobile is designed for Regular density and sets the value itself. Setting a different density from the outside is not intended.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-2&embed-host=share"
-		description="Use Regular density for the mobile Control Panel to ensure comfortable touch targets."
+		description="Keep the Regular density that Control Panel Mobile sets itself."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-4&embed-host=share"
-		description="Do not apply Functional or Expressive density to the mobile Control Panel. Only Regular is supported on mobile."
-	/>
-</div>
-
-### Flat Icon Usage
-
-Flat Icon shows the destinations as icons only. It works best for apps with a small set of equally important top-level destinations, providing instant access without opening a Drawer, but has limited capacity.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-6&embed-host=share"
-		description="Use Flat Icon when the application has 2–6 equally weighted top-level sections that users switch between frequently."
-	/>
-	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-8&embed-host=share"
-		description="Do not use Flat Icon with labels that are too long. Labels get truncated and users cannot distinguish destinations without reading the full text."
+		description="Don't override the density of Control Panel Mobile. The component is designed for Regular, and a different value results in a presentation that is not intended."
 	/>
 </div>
 
@@ -97,18 +80,18 @@ Flat Icon shows the destinations as icons only. It works best for apps with a sm
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-### Position
+### First Level and Drawer
 
-Select the Control Panel position based on the app type and primary interaction pattern. Top is the default for content-focused apps. Bottom works for app-like experiences where navigation actions need to be within thumb reach.
+The first level holds the Brand, Primary Actions, and the menu button. Navigation, Meta, and Secondary Actions sit in the Drawer. A divider appears next to the menu button automatically as soon as Primary Actions are shown.
 
 <div className="guideline-examples">
 	<GuidelineExample
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-10&embed-host=share"
-		description="Top position for content-focused applications where navigation is secondary to reading or consuming content."
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4748-6&embed-host=share"
+		description="Reachable without opening the Drawer. Fill the Brand and Primary Actions slots here."
 	/>
 	<GuidelineExample
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-12&embed-host=share"
-		description="Bottom position for app-like experiences where primary actions and navigation need to be within thumb reach."
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4748-16&embed-host=share"
+		description="Opens via the menu button. Fill the Navigation, Meta, and Secondary Actions slots here."
 	/>
 </div>
 
@@ -133,29 +116,21 @@ Select the Control Panel position based on the app type and primary interaction 
 <TeaserCard
 	teasers={[
 		{
-			title: 'Control Panel Desktop',
-			description: 'Desktop variant with Top and Left positions.',
-			url: '/documentation/components/control-panel/desktop',
-		},
-		{
 			title: 'Shell Mobile',
-			description: 'The mobile Shell layout that hosts the Control Panel.',
+			description:
+				'Outer layout structure for mobile web applications with a Drawer as main navigation.',
 			url: '/documentation/components/shell/mobile',
 		},
 		{
-			title: 'CP Navigation',
-			description: 'Navigation containers used within the Drawer.',
+			title: 'Control Panel Desktop',
+			description: 'Primary navigation bar for desktop applications in the Top and Left positions.',
+			url: '/documentation/components/control-panel/desktop',
+		},
+		{
+			title: 'Control Panel Navigation',
+			description:
+				'Navigation container with the Popover, Tree, Drill Down, and Flat Icon variants.',
 			url: '/documentation/components/control-panel/navigation',
-		},
-		{
-			title: 'CP Navigation Item',
-			description: 'Navigation Items used within the Drawer navigation.',
-			url: '/documentation/components/control-panel/navigation-item',
-		},
-		{
-			title: 'CP Brand',
-			description: 'Brand/logo subcomponent within the mobile Control Panel.',
-			url: '/documentation/components/control-panel/brand',
 		},
 	]}
 />

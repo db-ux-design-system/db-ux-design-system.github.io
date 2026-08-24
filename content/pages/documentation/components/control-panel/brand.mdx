@@ -2,9 +2,9 @@
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
-headline: 'CP Brand'
-title: 'CP Brand'
-description: 'The CP Brand subcomponent displays the application brand or logo within the Control Panel.'
+headline: 'Control Panel Brand'
+title: 'Control Panel Brand'
+description: 'Control Panel Brand displays the logo and an optional application name within the Control Panel. The design provides three variants: Custom, Logozusatz, and Short.'
 align: start
 toc: true
 status: 'sub'
@@ -15,14 +15,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import MdxNotification from '@template/components/MdxNotification/MdxNotification.tsx';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Anchor the application's identity at a consistent spot in the navigation
-- Adapt between full logo and a compact mark when space is limited
-- Add custom brand content (e.g. logo plus wordmark) where a plain logo is not enough
+- Display the application's logo within the Control Panel
+- Add an optional application name in one or two lines
+- Hold environment information in the End slot
 
 <DBSection spacing="small" width="auto">
 
@@ -47,88 +46,94 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 </DBSection>
 
-<MdxNotification linkHref="/documentation/learn/figma#logo" linkText="Learn more">
-	For brand-compliant usage, use the official logo extension (
-	<a
-		href="https://marketingportal.extranet.deutschebahn.com/marketingportal/Marke-und-Design/Basiselemente/Logo/Logozusatz-mit-Tool"
-		target="_blank"
-	>
-		Logozusatz
-	</a>
-	) from the marketing portal.
-</MdxNotification>
-
 <DBSection spacing="small" width="auto">
 
 ## Guidelines
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-### Custom Brand Override
+### End Slot
 
-The Custom variant allows placing your own brand/logo via the Children slot. The Short variant is system-controlled and shows the default compact brand mark in constrained contexts.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4185-2&embed-host=share"
-		description="Override the Custom variant with your application logo for expanded Control Panel states (Top, Left expanded, Mobile Top)."
-	/>
-	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4185-4&embed-host=share"
-		description="Do not attempt to override the Short variant. It is automatically applied in collapsed Left and Mobile Bottom positions and is not user-configurable."
-	/>
-</div>
-
-### Logo Addition
-
-The application name next to the logo must be an official logo addition provided as an approved SVG (vectorized paths), requested via the marketing portal. This ensures brand consistency in font, spacing, and rendering.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4252-87&embed-host=share"
-		description="Use an approved SVG where logo and text addition form a single vectorized asset."
-	/>
-	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4252-97&embed-host=share"
-		description="Do not combine the default logo with your own text element. Custom text deviates from the brand in font, spacing, and rendering."
-	/>
-</div>
-
-### Brand with Flat Icon
-
-The Flat Icon Control Panel has no dedicated Brand area. If brand visibility is required, place the logo in the Shell Content area instead.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4185-6&embed-host=share"
-		description="Place the brand/logo in the Shell Content area (e.g. as a header) when using Flat Icon and brand presence is needed."
-	/>
-	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4185-8&embed-host=share"
-		description="Do not place a brand/logo as a Flat Icon Navigation Item. Flat Icon is reserved for navigation destinations only."
-	/>
-</div>
-
-### Brand Slot Content
-
-The Brand slot is for identification and context. Do not place interactive elements in it – actions and inputs belong in Primary Actions or Secondary Actions.
+All variants except Short have an End slot. It is intended for environment information.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4185-10&embed-host=share"
-		description="Use the Brand slot for supplementary context like an environment badge (e.g. Staging, Beta) alongside the logo."
+		description="Only place environment information in the End slot."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4185-12&embed-host=share"
-		description="Do not place interactive elements like search fields or action buttons in the Brand slot. Use Primary Actions or Secondary Actions instead."
+		description="Don't place an application name or interactive elements in the End slot. Actions belong in Primary Actions or Secondary Actions."
+	/>
+</div>
+
+### Text Hierarchy
+
+By default, both text parts are Regular. If the text shows a hierarchy, only the first part is set to bold.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4782-8&embed-host=share"
+		description="For a desired hierarchy, set only the first text part to bold."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4782-18&embed-host=share"
+		description="Don't set the second text part to bold, and don't set both. Bold on the second part inverts the hierarchy, bold on both cancels it."
+	/>
+</div>
+
+### Default Logo in Short
+
+The Short variant shows the default logo. It appears in the collapsed Left variants and with Control Panel Bottom.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4185-2&embed-host=share"
+		description="Keep the default logo in the Short variant."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4185-4&embed-host=share"
+		description="Don't override the default logo in Short. The positions of this variant offer no room for a logo addition or an application name."
+	/>
+</div>
+
+### Logo Addition
+
+The Logo slot of the Logozusatz variant only takes the approved SVG from the marketing portal.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4252-87&embed-host=share"
+		description="In the Logo slot of the Logozusatz variant, only use the approved SVG from the marketing portal."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4252-97&embed-host=share"
+		description="Don't recreate the logo addition as your own text. Only the approved SVG matches the brand specification."
+	/>
+</div>
+
+### Logo with Flat Icon
+
+The Flat Icon Navigation on mobile has no area for Brand. The logo is then placed in the Shell Content.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4185-6&embed-host=share"
+		description="With Flat Icon on mobile, place the logo in the Shell Content."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4185-8&embed-host=share"
+		description="Don't place the logo in the Flat Icon Navigation slot. The slot only takes navigation destinations."
 	/>
 </div>
 
@@ -142,7 +147,7 @@ The Brand slot is for identification and context. Do not place interactive eleme
 
 ## FAQ
 
-<QuestionForm componentName="CP Brand" />
+<QuestionForm componentName="Control Panel Brand" />
 
 </DBSection>
 
@@ -153,13 +158,29 @@ The Brand slot is for identification and context. Do not place interactive eleme
 <TeaserCard
 	teasers={[
 		{
+			title: 'Shell Content',
+			description: 'Scrollable main content area of the Shell with a slot-based layout.',
+			url: '/documentation/components/shell/content',
+		},
+		{
+			title: 'Control Panel Primary Actions',
+			description: 'Area within the Control Panel for frequently used global actions.',
+			url: '/documentation/components/control-panel/primary-actions',
+		},
+		{
+			title: 'Control Panel Secondary Actions',
+			description: 'Area within the Control Panel for supporting global actions.',
+			url: '/documentation/components/control-panel/secondary-actions',
+		},
+		{
 			title: 'Control Panel Desktop',
-			description: 'Desktop parent hosting the Brand in the Start Container.',
+			description: 'Primary navigation bar for desktop applications in the Top and Left positions.',
 			url: '/documentation/components/control-panel/desktop',
 		},
 		{
 			title: 'Control Panel Mobile',
-			description: 'Mobile parent where Brand appears in the navigation bar.',
+			description:
+				'Primary navigation bar for mobile applications with a Drawer for the full navigation.',
 			url: '/documentation/components/control-panel/mobile',
 		},
 	]}

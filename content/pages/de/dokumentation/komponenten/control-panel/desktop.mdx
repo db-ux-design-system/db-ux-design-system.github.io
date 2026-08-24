@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Control Panel Desktop'
 title: 'Control Panel Desktop'
-description: 'Das Control Panel Desktop ist die primäre Navigationsleiste für Desktop-Anwendungen innerhalb der Shell. Es bietet zwei Positions-Varianten: Top (horizontal) und Left (vertikale Sidebar).'
+description: 'Das Control Panel Desktop stellt die primäre Navigationsleiste für Desktop-Anwendungen innerhalb der Shell bereit. Es steht in zwei Positionen zur Verfügung: Top als horizontale Leiste und Left als vertikale Sidebar. Die Wahl zwischen beiden Positionen ist bei Shell Desktop geregelt.'
 align: start
 toc: true
 order: 1
@@ -18,9 +18,9 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Desktop-Nutzer:innen einen dauerhaften Einstieg in die Hauptbereiche der Anwendung geben
-- Brand, Navigation und globale Aktionen in einem konsistenten Rahmen zusammenführen
-- Sowohl inhaltsorientierte Anwendungen (Top) als auch navigationslastige Anwendungen (Left) unterstützen
+- Logo, Navigation und globale Aktionen in einem dauerhaft sichtbaren Rahmen bündeln
+- Das Control Panel oben als horizontale Leiste oder links als vertikale Sidebar positionieren
+- Nutzer:innen können das Control Panel Left einklappen und so dem Seiteninhalt mehr Breite geben
 
 <DBSection spacing="small" width="auto">
 
@@ -47,76 +47,25 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 <DBSection spacing="small" width="auto">
 
-## Richtlinien
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-### Position (Top vs. Left)
-
-Wähle die Position des Control Panels nach der Navigationskomplexität deiner Anwendung. Top eignet sich für Anwendungen mit wenigen Navigation Items auf oberster Ebene, Left für Anwendungen mit vielen Navigation Items oder tiefen Hierarchien.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-2&embed-host=share"
-		description="Verwende Top für Anwendungen mit wenigen Navigation Items auf oberster Ebene, die bequem in eine horizontale Leiste passen."
-	/>
-	<GuidelineExample
-		variant="caution"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-4&embed-host=share"
-		description="Die Position Left mit nur 2–3 Navigation Items belegt Platz, ohne strukturellen Mehrwert zu bieten. Prüfe stattdessen Top."
-	/>
-</div>
-
-</CollapsibleWrapper>
-
-<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ## Beispiele
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-### Navigations-Variante (Left)
+### Einklappbares Control Panel Left
 
-Die Position Left unterstützt vier Navigations-Varianten: Popover für flache bis mittlere Hierarchien, Tree für tiefe Strukturen mit 3 oder mehr Ebenen, Drill Down für weniger komplexe Strukturen mit vielen Navigation Items und Flat Icon für den schnellen icon-basierten Zugriff auf wenige Ziele.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4584-14&embed-host=share"
-		description="Popover für flache bis mittlere Strukturen. Ermöglicht das Erreichen tieferer Navigationspunkte mit einem Klick."
-	/>
-	<GuidelineExample
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4585-18&embed-host=share"
-		description="Drill Down für viele Navigation Items bei geringer Tiefe. Zeigt eine Ebene zur Zeit mit Navigation über einen Zurück-Button."
-	/>
-	<GuidelineExample
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-6&embed-host=share"
-		description="Tree für komplexe Hierarchien mit 3 oder mehr Ebenen. Hält die vollständige Hierarchie mit Auf- und Zuklappen sichtbar."
-	/>
-	<GuidelineExample
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-8&embed-host=share"
-		description="Flat Icon für 2–6 gleichwertige Ziele auf oberster Ebene, die über Icons erreicht werden."
-	/>
-</div>
-
-### Auf- und Zuklappen (Left)
-
-Das linke Control Panel kann über einen Slide-Button eingeklappt werden, um Bildschirmfläche zu sparen. Es ist initial immer ausgeklappt. Im eingeklappten Zustand ist der Navigationsinhalt verborgen und nur Brand und Slide-Button bleiben sichtbar.
+Auf Desktop können Nutzer:innen das Control Panel Left in den Varianten Drill Down und Tree einklappen; initial ist es immer ausgeklappt. Im eingeklappten Zustand bleiben nur Brand und der Button zum Ausklappen sichtbar. In der Variante Flat Icon steht diese Funktion nicht zur Verfügung, da das Control Panel bereits die minimale Breite hat.
 
 <div className="guideline-examples">
 	<GuidelineExample
+		fullWidth
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-10&embed-host=share"
-		description="Eingeklapptes linkes Control Panel (gilt für Popover, Tree und Drill Down). Der Slide-Button wechselt zwischen aus- und eingeklapptem Zustand."
+		description="Nutzer:innen können das Control Panel Left einklappen, um dem Seiteninhalt mehr Breite zu geben. Brand und der Button zum Ausklappen bleiben sichtbar."
 	/>
 </div>
 
 </CollapsibleWrapper>
 
-<CollapseButton collapsedText="Alle Beispiele anzeigen" expandedText="Beispiele ausblenden" />
+<CollapseButton collapsedText="Alle Beispiele anzeigen" expandedText="Weniger Beispiele anzeigen" />
 
 </DBSection>
 
@@ -135,30 +84,22 @@ Das linke Control Panel kann über einen Slide-Button eingeklappt werden, um Bil
 <TeaserCard
 	teasers={[
 		{
-			title: 'Control Panel Mobile',
-			description: 'Mobile Variante mit den Positionen Top, Bottom und Flat Icon.',
-			url: '/de/dokumentation/komponenten/control-panel/mobile',
-		},
-		{
 			title: 'Shell Desktop',
-			description: 'Das Layout der Shell Desktop, das das Control Panel enthält.',
+			description:
+				'Äußere Layout-Struktur für Desktop-Webanwendungen mit dauerhaftem Control Panel.',
 			url: '/de/dokumentation/komponenten/shell/desktop',
 		},
 		{
-			title: 'Shell Sub Navigation',
-			description: 'Sekundäre Navigation, die das Control Panel ergänzt.',
-			url: '/de/dokumentation/komponenten/shell/sub-navigation',
-		},
-		{
-			title: 'CP Navigation',
-			description: 'Navigations-Container (Popover, Tree, Flat Icon) innerhalb des Control Panels.',
-			url: '/de/dokumentation/komponenten/control-panel/navigation',
-		},
-		{
-			title: 'CP Navigation Item',
+			title: 'Control Panel Mobile',
 			description:
-				'Navigation Items und Navigation Item Groups innerhalb der Control Panel Navigation.',
-			url: '/de/dokumentation/komponenten/control-panel/navigation-item',
+				'Primäre Navigationsleiste für mobile Anwendungen mit Drawer für die vollständige Navigation.',
+			url: '/de/dokumentation/komponenten/control-panel/mobile',
+		},
+		{
+			title: 'Control Panel Navigation',
+			description:
+				'Navigations-Container mit den Varianten Popover, Tree, Drill Down und Flat Icon.',
+			url: '/de/dokumentation/komponenten/control-panel/navigation',
 		},
 	]}
 />

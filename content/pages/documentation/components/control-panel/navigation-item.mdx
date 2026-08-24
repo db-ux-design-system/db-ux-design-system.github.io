@@ -2,9 +2,9 @@
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
-headline: 'CP Navigation Item'
-title: 'CP Navigation Item'
-description: 'The CP Navigation Item is the individual navigation entry within Control Panel navigation containers. Navigation Item Group is included as a grouping variant for Navigation Items with sub-navigation.'
+headline: 'Control Panel Navigation Item'
+title: 'Control Panel Navigation Item'
+description: 'Control Panel Navigation Item is the individual navigation entry within the Control Panel Navigation. Navigation Item Groups are available for sub-navigation.'
 align: start
 toc: true
 status: 'sub'
@@ -19,9 +19,9 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Link users to a specific page or view
-- Show whether a Navigation Item is the current, active location
-- Use an icon and label to make destinations easy to scan
+- Offer a navigation destination within the Control Panel Navigation
+- Make the current path traceable through Active
+- Group sub-navigation through Navigation Item Groups
 
 <DBSection spacing="small" width="auto">
 
@@ -52,20 +52,88 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-### Icon Consistency per Level
+### Active Path
 
-Tree Navigation Items allow overriding the default tree-line marker with a custom icon (Navigation Items only – Navigation Item Groups always keep the expand/collapse chevron). Keep icons consistent within a level: either all sibling Navigation Items on a level get a custom icon or none. Levels may differ from each other.
+Active marks the current path, not just the destination. Every Navigation Item from the first level down to the current destination is set to Active.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-64&embed-host=share"
+		description="Set Active on all Navigation Items of the current path, from the first level down to the current destination."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-71&embed-host=share"
+		description="Don't set Active on the current destination only. Without the parent Navigation Items, the path is not traceable."
+	/>
+</div>
+
+### Indicator
+
+The Indicator complements Active on the first navigation level. It is not available on deeper levels.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-83&embed-host=share"
+		description="Only use the Indicator on the first navigation level, in addition to Active there."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-77&embed-host=share"
+		description="Don't place the Indicator on deeper levels. Dev does not support it."
+	/>
+</div>
+
+### Label Length
+
+Short labels are quick to grasp when scanning the navigation. Long labels also change the layout, differently per variant: in Drill Down and Tree they wrap to several lines, in Popover the Navigation Item grows with them, in Flat Icon they are truncated.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-87&embed-host=share"
+		description="Keep labels short."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4810-97&embed-host=share"
+		description="Shorten long labels to improve readability."
+	/>
+</div>
+
+### Tooltip and Label
+
+The tooltip appears on interaction with the Navigation Item and names the same destination as the label.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4812-122&embed-host=share"
+		description="Keep the tooltip text and the label text identical."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4812-130&embed-host=share"
+		description="Don't leave a text in the tooltip that differs from the label, otherwise one destination has two names."
+	/>
+</div>
+
+### Icons in Tree
+
+In Tree, Navigation Items show a small circle by default, which can be replaced with a custom icon. Within one level, that choice applies to all Navigation Items alike.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-6&embed-host=share"
-		description="Apply custom icons consistently within a level – either all sibling Navigation Items get a custom icon or none. Levels may differ from each other."
+		description="Apply custom icons consistently within a level: either all Navigation Items on a level or none."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-8&embed-host=share"
-		description="Do not mix custom icons and default markers within the same level. A single circle among custom icons looks like an oversight and breaks scannability."
+		description="Don't mix custom icons with the default circle icon within one level. A single circle among custom icons looks like an oversight."
 	/>
 </div>
 
@@ -77,46 +145,9 @@ Tree Navigation Items allow overriding the default tree-line marker with a custo
 
 <DBSection spacing="small" width="auto">
 
-## Examples
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-### Slots
-
-Slot availability varies by variant. The Floating Container (for tooltips, popovers, badges) is available on all Navigation Item variants. The End Slot for inline content is only available on vertical Popover and Tree Navigation Items. Flat Icon Navigation Items and horizontal Popover Navigation Items have no content slots.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-11&embed-host=share"
-		description="Vertical Popover or Tree Navigation Items with an End Slot for inline content like badges or status icons."
-	/>
-	<GuidelineExample
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-13&embed-host=share"
-		description="Floating Container for tooltips or badges on any variant – including Flat Icon and horizontal Popover."
-	/>
-</div>
-
-</CollapsibleWrapper>
-
-<CollapseButton collapsedText="Show all Examples" expandedText="Hide some Examples" />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Accessibility
-
-### Flat Icon Tooltip
-
-Flat Icon Navigation Items display a tooltip on hover that matches the Text Screenreader value. This ensures consistency between the visual tooltip and what assistive technologies announce. Provide a clear, descriptive text for each Flat Icon Navigation Item – it serves as both tooltip and accessible label. Do not leave it empty or use a different text than the tooltip.
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ## FAQ
 
-<QuestionForm componentName="CP Navigation Item" />
+<QuestionForm componentName="Control Panel Navigation Item" />
 
 </DBSection>
 
@@ -127,19 +158,20 @@ Flat Icon Navigation Items display a tooltip on hover that matches the Text Scre
 <TeaserCard
 	teasers={[
 		{
-			title: 'CP Navigation',
+			title: 'Control Panel Navigation',
 			description:
-				'Parent navigation containers (Popover, Tree, Flat Icon) hosting the Navigation Items.',
+				'Navigation container with the Popover, Tree, Drill Down, and Flat Icon variants.',
 			url: '/documentation/components/control-panel/navigation',
 		},
 		{
 			title: 'Control Panel Desktop',
-			description: 'Desktop Control Panel where Navigation Items appear.',
+			description: 'Primary navigation bar for desktop applications in the Top and Left positions.',
 			url: '/documentation/components/control-panel/desktop',
 		},
 		{
 			title: 'Control Panel Mobile',
-			description: 'Control Panel Mobile, where Drill Down and Flat Icon Navigation Items appear.',
+			description:
+				'Primary navigation bar for mobile applications with a Drawer for the full navigation.',
 			url: '/documentation/components/control-panel/mobile',
 		},
 	]}

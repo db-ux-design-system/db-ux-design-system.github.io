@@ -9,10 +9,19 @@ interface Props {
 	figmaUrl: string;
 	description?: string;
 	fullWidth?: boolean;
+	halfWidth?: boolean;
 	layout?: 'default' | 'side';
 }
 
-const { variant, figmaUrl, description, fullWidth = false, layout = 'default' } = Astro.props;
+const {
+	variant,
+	figmaUrl,
+	description,
+	fullWidth = false,
+	halfWidth = false,
+	layout = 'default',
+} = Astro.props;
+const isHalfWidth = halfWidth && !fullWidth && layout === 'default';
 const semantic =
 	variant === 'do'
 		? 'successful'
@@ -46,7 +55,12 @@ if (existsSync(manifestPath)) {
 const hasSlot = Astro.slots.has('default');
 ---
 
-<figure class="guideline-example-container" data-full-width={fullWidth} data-layout={layout}>
+<figure
+	class="guideline-example-container"
+	data-full-width={fullWidth}
+	data-half-width={isHalfWidth}
+	data-layout={layout}
+>
 	<DBCard elevationLevel="2" data-mode="light">
 		{
 			variant && (

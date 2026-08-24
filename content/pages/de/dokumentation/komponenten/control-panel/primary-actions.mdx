@@ -2,9 +2,9 @@
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
-headline: 'CP Primary Actions'
-title: 'CP Primary Actions'
-description: 'Die Subkomponente CP Primary Actions ist ein Slot für primäre Aktions-Buttons innerhalb des Control Panels.'
+headline: 'Control Panel Primary Actions'
+title: 'Control Panel Primary Actions'
+description: 'Control Panel Primary Actions ist der Bereich im Control Panel für häufig genutzte globale Aktionen.'
 align: start
 toc: true
 status: 'sub'
@@ -19,9 +19,9 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Hoch priorisierte, globale Aktionen wie Suche oder Benachrichtigungen aufnehmen
-- Diese direkt erreichbar halten, ohne ein Menü zu öffnen
-- Die Anzahl klein halten, damit die Leiste fokussiert bleibt
+- Eine Suche auf jeder Seite erreichbar halten
+- Häufig genutzte globale Aktionen ohne Umweg anbieten
+- Globale von seitenspezifischen Aktionen trennen
 
 <DBSection spacing="small" width="auto">
 
@@ -52,60 +52,90 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-### Anzahl
-
-Halte Primary Actions minimal. Platziere dort nur 1–3 häufig genutzte Aktionen, die Nutzer:innen auf jeder Seite brauchen.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4338-2&embed-host=share"
-		description="Verwende 1–2 fokussierte globale Aktionen wie Suche, die Nutzer:innen auf jeder Seite brauchen."
-	/>
-	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4338-4&embed-host=share"
-		description="Überlade Primary Actions nicht mit zu vielen Buttons. Zu viele Aktionen verwässern die Priorität und überfrachten das Control Panel."
-	/>
-</div>
-
 ### Art der Aktion
 
-Primary Actions sollten nur globale Aktionen enthalten, die für jede Seite gelten – keine inhaltsbezogenen Aktionen, die auf die Seite selbst gehören.
+Primary Actions nehmen globale Aktionen auf, die unabhängig von der aktuellen Seite relevant sind, etwa eine Suche.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4338-6&embed-host=share"
-		description="Verwende globale Aktionen wie Suche, die unabhängig von der aktuellen Seite relevant sind."
+		description="Verwende nur globale Aktionen wie Suche, die unabhängig von der aktuellen Seite relevant sind."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4338-8&embed-host=share"
-		description="Platziere inhaltsbezogene Aktionen wie Speichern nicht in Primary Actions. Diese gehören auf Seitenebene, nicht in die globale Navigationsleiste."
+		description="Platziere inhaltsspezifische Aktionen nicht in Primary Actions. Sie gehören auf die Seitenebene."
+	/>
+</div>
+
+### Anzahl
+
+Primary Actions wirken über ihre Priorität. Je mehr Aktionen dort liegen, desto weniger hebt sich eine einzelne hervor.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4338-2&embed-host=share"
+		description="Platziere höchstens zwei Aktionen in Primary Actions."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4338-4&embed-host=share"
+		description="Mehr als zwei Aktionen verwässern die Priorität. Verschiebe unterstützende Aktionen in die Secondary Actions."
 	/>
 </div>
 
 ### Einschränkung bei Flat Icon
 
-Das Control Panel in Flat Icon unterstützt keine Primary Actions. Wenn deine Anwendung dauerhaft sichtbare primäre Aktionen braucht, verwende stattdessen die Position Top oder Bottom.
+Die Variante Flat Icon hat keinen Bereich für Primary Actions.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4338-10&embed-host=share"
-		description="Verwende das Control Panel in Position Top oder Bottom, wenn primäre Aktionen direkt in der Navigationsleiste erreichbar sein müssen."
+		description="Wähle eine Variante mit Bereich für Primary Actions, wenn du globale Aktionen brauchst."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4338-12&embed-host=share"
-		description="Platziere Aktionen wie Suche nicht als Flat Icon Navigation Items. Flat Icon ist für Navigationsziele reserviert – nutze Top oder Bottom, wenn du Aktionen brauchst."
+		description="Verwende Flat Icon nicht, wenn Primary Actions benötigt werden. Die Variante hat dafür keinen Bereich."
 	/>
 </div>
 
 </CollapsibleWrapper>
 
-<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+<CollapseButton
+	collapsedText="Alle Richtlinien anzeigen"
+	expandedText="Weniger Richtlinien anzeigen"
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Beispiele
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Aufteilung auf Desktop und Mobile
+
+Auf Desktop sind Primary und Secondary Actions gleichzeitig sichtbar. Auf Mobile trennt sie der Drawer: Primary Actions liegen auf der ersten Ebene, Secondary Actions darin. Welche Aktionen wo liegen, kann sich je Device unterscheiden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4812-1247&embed-host=share"
+		description="Auf Desktop liegen Primary und Secondary Actions nebeneinander und sind gleichzeitig sichtbar."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4814-1263&embed-host=share"
+		description="Lege auf Mobile die häufig genutzte Aktion in die Primary Actions, damit sie ohne Öffnen des Drawers erreichbar bleibt."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Beispiele anzeigen" expandedText="Weniger Beispiele anzeigen" />
 
 </DBSection>
 
@@ -113,7 +143,7 @@ Das Control Panel in Flat Icon unterstützt keine Primary Actions. Wenn deine An
 
 ## FAQ
 
-<QuestionForm componentName="CP Primary Actions" />
+<QuestionForm componentName="Control Panel Primary Actions" />
 
 </DBSection>
 
@@ -124,19 +154,20 @@ Das Control Panel in Flat Icon unterstützt keine Primary Actions. Wenn deine An
 <TeaserCard
 	teasers={[
 		{
-			title: 'CP Secondary Actions',
-			description: 'Slot für sekundäre Aktionen am Ende des Control Panels.',
+			title: 'Control Panel Secondary Actions',
+			description: 'Bereich im Control Panel für unterstützende globale Aktionen.',
 			url: '/de/dokumentation/komponenten/control-panel/secondary-actions',
 		},
 		{
 			title: 'Control Panel Desktop',
-			description: 'Übergeordnete Desktop-Komponente, die Primary Actions enthält.',
+			description:
+				'Primäre Navigationsleiste für Desktop-Anwendungen in den Positionen Top und Left.',
 			url: '/de/dokumentation/komponenten/control-panel/desktop',
 		},
 		{
 			title: 'Control Panel Mobile',
 			description:
-				'Übergeordnete Mobile-Komponente, in der Primary Actions in den Positionen Top und Bottom erscheinen.',
+				'Primäre Navigationsleiste für mobile Anwendungen mit Drawer für die vollständige Navigation.',
 			url: '/de/dokumentation/komponenten/control-panel/mobile',
 		},
 	]}

@@ -2,9 +2,9 @@
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
-headline: 'CP Navigation Item'
-title: 'CP Navigation Item'
-description: 'Das CP Navigation Item ist das einzelne Navigation Item innerhalb der Navigations-Container des Control Panels. Navigation Item Group ist als Gruppierungs-Variante für Navigation Items mit Unternavigation enthalten.'
+headline: 'Control Panel Navigation Item'
+title: 'Control Panel Navigation Item'
+description: 'Control Panel Navigation Item ist das einzelne Navigation Item innerhalb der Control Panel Navigation. Für Unternavigation stehen Navigation Item Groups zur Verfügung.'
 align: start
 toc: true
 status: 'sub'
@@ -19,9 +19,9 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Nutzer:innen auf eine bestimmte Seite oder Ansicht verlinken
-- Anzeigen, ob ein Navigation Item die aktuelle, aktive Position ist
-- Icon und Label nutzen, damit Ziele leicht zu erfassen sind
+- Ein Navigationsziel innerhalb der Control Panel Navigation anbieten
+- Den aktuellen Pfad über Active nachvollziehbar machen
+- Unternavigation über Navigation Item Groups gruppieren
 
 <DBSection spacing="small" width="auto">
 
@@ -52,63 +52,97 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-### Icon-Konsistenz pro Ebene
+### Aktiver Pfad
 
-Navigation Items im Tree erlauben es, den Standard-Marker der Baumlinie durch ein eigenes Icon zu ersetzen (nur Navigation Items – Navigation Item Groups behalten immer das Chevron zum Auf- und Zuklappen). Halte Icons innerhalb einer Ebene konsistent: Entweder erhalten alle benachbarten Navigation Items einer Ebene ein eigenes Icon oder keines. Zwischen den Ebenen darf es Unterschiede geben.
+Active markiert den aktuellen Pfad, nicht nur das Ziel. Alle Navigation Items von der ersten Ebene bis zum aktuellen Ziel tragen Active.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-64&embed-host=share"
+		description="Setze Active auf allen Navigation Items des aktuellen Pfads, von der ersten Ebene bis zum aktuellen Ziel."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-71&embed-host=share"
+		description="Setze Active nicht nur auf dem aktuellen Ziel. Ohne die übergeordneten Navigation Items ist der Pfad nicht nachvollziehbar."
+	/>
+</div>
+
+### Indicator
+
+Der Indicator ergänzt Active auf der ersten Navigationsebene. Auf tieferen Ebenen steht er nicht zur Verfügung.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-83&embed-host=share"
+		description="Verwende den Indicator nur auf der ersten Navigationsebene, dort zusätzlich zu Active."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-77&embed-host=share"
+		description="Platziere den Indicator nicht auf tieferen Ebenen. Dev unterstützt das nicht."
+	/>
+</div>
+
+### Label-Länge
+
+Kurze Labels lassen sich beim Überfliegen der Navigation schnell erfassen. Lange Labels verändern zusätzlich das Layout, je Variante unterschiedlich: in Drill Down und Tree werden sie mehrzeilig, in Popover wächst das Navigation Item mit, in Flat Icon werden sie abgeschnitten.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-87&embed-host=share"
+		description="Halte Labels kurz."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4810-97&embed-host=share"
+		description="Kürze lange Labels, um die Lesbarkeit zu erhöhen."
+	/>
+</div>
+
+### Tooltip und Label
+
+Der Tooltip erscheint bei Interaktion mit dem Navigation Item und nennt dasselbe Ziel wie das Label.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4812-122&embed-host=share"
+		description="Halte Tooltip-Text und Label-Text identisch."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4812-130&embed-host=share"
+		description="Lasse im Tooltip keinen anderen Text stehen als im Label, sonst trägt ein Ziel zwei Namen."
+	/>
+</div>
+
+### Icons im Tree
+
+In Tree tragen Navigation Items standardmäßig einen kleinen Kreis, der sich durch ein eigenes Icon ersetzen lässt. Innerhalb einer Ebene gilt die Wahl für alle Navigation Items gleichermaßen.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-6&embed-host=share"
-		description="Setze eigene Icons innerhalb einer Ebene konsistent ein – entweder erhalten alle benachbarten Navigation Items ein eigenes Icon oder keines. Zwischen den Ebenen darf es Unterschiede geben."
+		description="Setze eigene Icons innerhalb einer Ebene konsistent ein: entweder alle Navigation Items einer Ebene oder keines."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-8&embed-host=share"
-		description="Mische innerhalb derselben Ebene keine eigenen Icons und Standard-Marker. Ein einzelner Kreis zwischen eigenen Icons wirkt wie ein Versehen und erschwert das Erfassen."
+		description="Mische innerhalb einer Ebene keine eigenen Icons mit dem Standard-Kreis-Icon. Ein einzelner Kreis zwischen eigenen Icons wirkt wie ein Versehen."
 	/>
 </div>
 
 </CollapsibleWrapper>
 
-<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Beispiele
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-### Slots
-
-Die verfügbaren Slots unterscheiden sich je Variante. Der Floating Container (für Tooltips, Popover, Badges) steht bei allen Varianten des Navigation Items zur Verfügung. Der End Slot für Inline-Inhalte ist nur bei vertikalen Popover- und Tree-Items verfügbar. Flat Icon Navigation Items und horizontale Popover-Items haben keine Inhalts-Slots.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-11&embed-host=share"
-		description="Vertikale Popover- oder Navigation Items im Tree mit End Slot für Inline-Inhalte wie Badges oder Status-Icons."
-	/>
-	<GuidelineExample
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-13&embed-host=share"
-		description="Floating Container für Tooltips oder Badges bei jeder Variante – auch bei Flat Icon und horizontalem Popover."
-	/>
-</div>
-
-</CollapsibleWrapper>
-
-<CollapseButton collapsedText="Alle Beispiele anzeigen" expandedText="Beispiele ausblenden" />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Barrierefreiheit
-
-### Tooltip bei Flat Icon
-
-Flat Icon Navigation Items zeigen beim Hover einen Tooltip, der dem Wert von Text Screenreader entspricht. Das sorgt für Übereinstimmung zwischen dem sichtbaren Tooltip und der Ausgabe assistiver Technologien. Gib für jeden Flat Icon Navigation Item einen klaren, beschreibenden Text an – er dient gleichzeitig als Tooltip und als zugängliches Label. Lass ihn nicht leer und verwende keinen anderen Text als im Tooltip.
+<CollapseButton
+	collapsedText="Alle Richtlinien anzeigen"
+	expandedText="Weniger Richtlinien anzeigen"
+/>
 
 </DBSection>
 
@@ -116,7 +150,7 @@ Flat Icon Navigation Items zeigen beim Hover einen Tooltip, der dem Wert von Tex
 
 ## FAQ
 
-<QuestionForm componentName="CP Navigation Item" />
+<QuestionForm componentName="Control Panel Navigation Item" />
 
 </DBSection>
 
@@ -127,20 +161,21 @@ Flat Icon Navigation Items zeigen beim Hover einen Tooltip, der dem Wert von Tex
 <TeaserCard
 	teasers={[
 		{
-			title: 'CP Navigation',
+			title: 'Control Panel Navigation',
 			description:
-				'Übergeordnete Navigations-Container (Popover, Tree, Flat Icon), die die Navigation Items enthalten.',
+				'Navigations-Container mit den Varianten Popover, Tree, Drill Down und Flat Icon.',
 			url: '/de/dokumentation/komponenten/control-panel/navigation',
 		},
 		{
 			title: 'Control Panel Desktop',
-			description: 'Control Panel Desktop, in dem Navigation Items erscheinen.',
+			description:
+				'Primäre Navigationsleiste für Desktop-Anwendungen in den Positionen Top und Left.',
 			url: '/de/dokumentation/komponenten/control-panel/desktop',
 		},
 		{
 			title: 'Control Panel Mobile',
 			description:
-				'Control Panel Mobile, in dem Navigation Items in Drill Down und Flat Icon erscheinen.',
+				'Primäre Navigationsleiste für mobile Anwendungen mit Drawer für die vollständige Navigation.',
 			url: '/de/dokumentation/komponenten/control-panel/mobile',
 		},
 	]}

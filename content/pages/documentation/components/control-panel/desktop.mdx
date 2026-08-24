@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Control Panel Desktop'
 title: 'Control Panel Desktop'
-description: 'The Control Panel Desktop is the primary navigation bar for desktop applications within the Shell. It provides two position variants: Top (horizontal) and Left (vertical sidebar).'
+description: 'The Control Panel Desktop provides the primary navigation bar for desktop applications within the Shell. It is available in two positions: Top as a horizontal bar and Left as a vertical sidebar. Choosing between the two positions is covered by Shell Desktop.'
 align: start
 toc: true
 order: 1
@@ -18,9 +18,9 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Give desktop users a persistent entry point to the app's main sections
-- Combine brand, navigation, and global actions in one consistent frame
-- Support both content-focused apps (Top) and navigation-heavy apps (Left)
+- Combine logo, navigation, and global actions in one permanently visible frame
+- Position the Control Panel at the top as a horizontal bar or on the left as a vertical sidebar
+- Users can collapse the Control Panel Left to give the page content more width
 
 <DBSection spacing="small" width="auto">
 
@@ -47,70 +47,19 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 <DBSection spacing="small" width="auto">
 
-## Guidelines
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-### Position (Top vs. Left)
-
-Choose the Control Panel position based on your application's navigation complexity. Top works for apps with few top-level Navigation Items; Left suits applications with many Navigation Items or deep hierarchies.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-2&embed-host=share"
-		description="Use Top for applications with a small number of top-level Navigation Items that fit comfortably in a horizontal bar."
-	/>
-	<GuidelineExample
-		variant="caution"
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-4&embed-host=share"
-		description="The Left position with only 2–3 Navigation Items takes up space without adding structural benefit. Consider Top instead."
-	/>
-</div>
-
-</CollapsibleWrapper>
-
-<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
 ## Examples
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-### Navigation Variant (Left)
+### Collapsible Control Panel Left
 
-The Left position supports four navigation variants: Popover for flat-to-medium hierarchies, Tree for deep structures with 3+ levels, Drill Down for less complex structures with many Navigation Items, and Flat Icon for quick icon-based access to a small set of destinations.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4584-14&embed-host=share"
-		description="Popover for flat-to-medium structures. Enables reaching deeper navigation points with a single click."
-	/>
-	<GuidelineExample
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4585-18&embed-host=share"
-		description="Drill Down for many Navigation Items with shallow depth. Shows one level at a time with back-button navigation."
-	/>
-	<GuidelineExample
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-6&embed-host=share"
-		description="Tree for complex hierarchies with 3+ levels. Keeps the full hierarchy visible with expand/collapse."
-	/>
-	<GuidelineExample
-		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-8&embed-host=share"
-		description="Flat Icon for 2–6 equally weighted top-level destinations accessed via icons."
-	/>
-</div>
-
-### Expand/Collapse (Left)
-
-The Left Control Panel can be collapsed via a slide button to save screen space. It is always initially expanded. In the collapsed state, the navigation content is hidden and only the Brand and slide button remain visible.
+On desktop, users can collapse the Control Panel Left in the Drill Down and Tree variants; it always starts expanded. In the collapsed state, only the Brand and the button to expand it remain visible. This functionality is not available in the Flat Icon variant because the Control Panel is already at its minimum width.
 
 <div className="guideline-examples">
 	<GuidelineExample
+		fullWidth
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-10&embed-host=share"
-		description="Collapsed Left Control Panel (applies to Popover, Tree, and Drill Down). The slide button toggles between expanded and collapsed state."
+		description="Users can collapse the Control Panel Left to give the page content more width. The Brand and the button to expand it remain visible."
 	/>
 </div>
 
@@ -135,30 +84,22 @@ The Left Control Panel can be collapsed via a slide button to save screen space.
 <TeaserCard
 	teasers={[
 		{
-			title: 'Control Panel Mobile',
-			description: 'Mobile variant with Top, Bottom, and Flat Icon positions.',
-			url: '/documentation/components/control-panel/mobile',
-		},
-		{
 			title: 'Shell Desktop',
-			description: 'The desktop Shell layout that hosts the Control Panel.',
+			description:
+				'Outer layout structure for desktop web applications with a persistent Control Panel.',
 			url: '/documentation/components/shell/desktop',
 		},
 		{
-			title: 'Shell Sub Navigation',
-			description: 'Secondary navigation that complements the Control Panel.',
-			url: '/documentation/components/shell/sub-navigation',
-		},
-		{
-			title: 'CP Navigation',
-			description: 'Navigation containers (Popover, Tree, Flat Icon) within the Control Panel.',
-			url: '/documentation/components/control-panel/navigation',
-		},
-		{
-			title: 'CP Navigation Item',
+			title: 'Control Panel Mobile',
 			description:
-				'Navigation Items and Navigation Item Groups within the Control Panel Navigation.',
-			url: '/documentation/components/control-panel/navigation-item',
+				'Primary navigation bar for mobile applications with a Drawer for the full navigation.',
+			url: '/documentation/components/control-panel/mobile',
+		},
+		{
+			title: 'Control Panel Navigation',
+			description:
+				'Navigation container with the Popover, Tree, Drill Down, and Flat Icon variants.',
+			url: '/documentation/components/control-panel/navigation',
 		},
 	]}
 />

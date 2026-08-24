@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Shell Desktop'
 title: 'Shell Desktop'
-description: 'Die Komponente Shell Desktop stellt die äußerste Layout-Struktur für Desktop-Webanwendungen bereit.'
+description: 'Die Komponente Shell Desktop stellt die äußere Layout-Struktur für Desktop-Webanwendungen bereit. Sie hält das Control Panel dauerhaft sichtbar und scrollt nur den Inhaltsbereich.'
 align: start
 toc: true
 tocMaxDepth: 3
@@ -19,9 +19,9 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Eine Desktop-Anwendung mit dauerhaftem Control Panel und scrollbarem Inhaltsbereich rahmen
-- Das Control Panel horizontal (Top) oder als vertikale Sidebar (Left) positionieren
-- Eine Ebene der Sub Navigation für Bereiche ergänzen, die Unterseiten brauchen
+- Layout einer Desktop-Anwendung aufbauen: nur der Inhaltsbereich scrollt
+- Control Panel oben oder links positionieren
+- Sub Navigation für Unterseiten ergänzen
 
 <DBSection spacing="small" width="auto">
 
@@ -64,85 +64,63 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-### Position des Control Panels
+### Control Panel Position
 
-Wähle die Position des Control Panels nach der Navigationskomplexität. Top eignet sich für einfache Anwendungen, Left für Anwendungen mit vielen Navigation Items oder tiefen Strukturen.
+Die Anzahl der Navigation Items auf oberster Ebene entscheidet über die Position des Control Panels. Ab vier Items gibt Left ihnen eine dauerhafte vertikale Übersicht.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=1-1132&embed-host=share"
-		description="Verwende die Position Top für Anwendungen mit wenigen Navigation Items auf oberster Ebene."
+		description="Setze Control Panel Left ab vier Navigation Items auf oberster Ebene ein."
 	/>
 	<GuidelineExample
 		variant="caution"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=1-1133&embed-host=share"
-		description="Die Position Left mit nur 2–3 Navigation Items belegt Platz, ohne strukturellen Mehrwert zu bieten. Prüfe stattdessen Top."
+		description="Unter vier Navigation Items belegt Left Platz ohne strukturellen Nutzen. Prüfe in diesem Fall Top."
 	/>
 </div>
 
-### Platzierung der Sub Navigation
+### Sub Navigation Position
 
-Wähle eine Position der Sub Navigation, die zu deiner Informationsarchitektur passt, und halte sie über alle Seiten deiner Anwendung konsistent.
+Die Anzahl der Navigation Items auf Unterebene entscheidet über die Position der Sub Navigation. Ab sechs Items hält Left sie dauerhaft im Blick.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1110&embed-host=share"
-		description="Verwende Sub Navigation Left für Seiten mit vielen Navigation Items auf Unterebene, die von einer dauerhaften vertikalen Übersicht profitieren."
+		description="Setze Sub Navigation Left ab sechs Navigation Items auf Unterebene ein."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1112&embed-host=share"
+		description="Unter sechs Navigation Items genügt Sub Navigation Top. Left belegt dann Breite, die dem Seitencontent fehlt."
+	/>
+</div>
+
+### Konsistente Position
+
+Die Position der Sub Navigation bleibt über alle Hauptbereiche der Anwendung gleich. Nutzer:innen erwarten ein stabiles Navigationslayout.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4277-3&embed-host=share"
+		description="Behalte die einmal gewählte Position der Sub Navigation in allen Hauptbereichen bei."
 	/>
 	<GuidelineExample
 		variant="dont"
-		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1112&embed-host=share"
-		description="Wechsle die Position der Sub Navigation nicht beim Navigieren zwischen Bereichen der obersten Ebene. Nutzer:innen erwarten ein stabiles Navigations-Layout."
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4277-5&embed-host=share"
+		description="Wechsle die Position der Sub Navigation nicht, wenn Nutzer:innen zwischen Hauptbereichen navigieren. Sie müssen sich sonst bei jedem Wechsel neu orientieren."
 	/>
 </div>
 
 </CollapsibleWrapper>
 
-<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Beispiele
-
-<CollapsibleWrapper collapsedHeight="320px">
-
-### Navigationstiefe
-
-Shell Desktop unterstützt verschiedene Kombinationen aus Control Panel Navigation und Sub Navigation. Beide können unabhängig voneinander mehrere Ebenen haben. Du kannst dieselbe Struktur in beiden spiegeln, nur einen Teil zeigen oder Seiten auf die zwei Navigationsbereiche verteilen.
-
-#### Unterseiten in nur einem Navigationsbereich
-
-<div className="guideline-examples">
-	<GuidelineExample
-		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4132-2&embed-host=share"
-		description="Einige Navigation Items nutzen das Popover des Control Panels, um ihre Unterseiten direkt zu zeigen."
-	/>
-	<GuidelineExample
-		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4132-4&embed-host=share"
-		description="Andere Navigation Items platzieren ihre Unterseiten stattdessen im Tree der Sub Navigation."
-	/>
-</div>
-
-#### Unterseiten auf beide Navigationsbereiche verteilt
-
-<div className="guideline-examples">
-	<GuidelineExample
-		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4132-6&embed-host=share"
-		description="Unterseiten der obersten Ebene sind über das Popover im Control Panel als schnelle Einstiegspunkte erreichbar."
-	/>
-	<GuidelineExample
-		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4132-8&embed-host=share"
-		description="Dieselben Navigation Items plus zusätzliche tiefere Seiten stehen im Tree der Sub Navigation für die vollständige Navigation zur Verfügung."
-	/>
-</div>
-
-</CollapsibleWrapper>
-
-<CollapseButton collapsedText="Alle Beispiele anzeigen" expandedText="Beispiele ausblenden" />
+<CollapseButton
+	collapsedText="Alle Richtlinien anzeigen"
+	expandedText="Weniger Richtlinien anzeigen"
+/>
 
 </DBSection>
 
@@ -161,24 +139,31 @@ Shell Desktop unterstützt verschiedene Kombinationen aus Control Panel Navigati
 <TeaserCard
 	teasers={[
 		{
-			title: 'Shell Mobile',
-			description: 'Shell Mobile mit responsiven Navigationsmustern für kleine Bildschirme.',
-			url: '/de/dokumentation/komponenten/shell/mobile',
-		},
-		{
 			title: 'Control Panel Desktop',
-			description: 'Das Control Panel, das Shell Desktop enthält.',
+			description:
+				'Primäre Navigationsleiste für Desktop-Anwendungen in den Positionen Top und Left.',
 			url: '/de/dokumentation/komponenten/control-panel/desktop',
 		},
 		{
 			title: 'Shell Sub Navigation',
-			description: 'Sekundäre Navigation innerhalb der Shell für die Struktur auf Unterebene.',
+			description:
+				'Untergeordnete Navigation innerhalb der Shell, horizontal oder vertikal ausgerichtet.',
 			url: '/de/dokumentation/komponenten/shell/sub-navigation',
 		},
 		{
-			title: 'Shell Content',
-			description: 'Der scrollbare Inhaltsbereich der Shell mit slot-basiertem Layout.',
-			url: '/de/dokumentation/komponenten/shell/content',
+			title: 'Control Panel Brand',
+			description: 'Logo und optionaler Anwendungsname im Control Panel.',
+			url: '/de/dokumentation/komponenten/control-panel/brand',
+		},
+		{
+			title: 'Control Panel Primary Actions',
+			description: 'Bereich im Control Panel für häufig genutzte globale Aktionen.',
+			url: '/de/dokumentation/komponenten/control-panel/primary-actions',
+		},
+		{
+			title: 'Control Panel Secondary Actions',
+			description: 'Bereich im Control Panel für unterstützende globale Aktionen.',
+			url: '/de/dokumentation/komponenten/control-panel/secondary-actions',
 		},
 	]}
 />

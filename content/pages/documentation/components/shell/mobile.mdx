@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Shell Mobile'
 title: 'Shell Mobile'
-description: 'The Shell Mobile component provides the outermost layout structure for mobile web applications. It supports different Control Panel positions and uses a Drawer as the default main navigation.'
+description: 'The Shell Mobile component provides the outer layout structure for mobile web applications. It supports different Control Panel positions and uses a Drawer as the default main navigation.'
 align: start
 toc: true
 order: 2
@@ -18,9 +18,9 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Frame a mobile app with a compact Control Panel and a scrollable content area
-- Position the Control Panel at the Top, at the Bottom, or as Flat Icon
-- Reveal the default main navigation through a Drawer opened from the burger menu
+- Set up a mobile application layout
+- Position the Control Panel at the top or at the bottom
+- Make main navigation accessible through a Drawer
 
 <DBSection spacing="small" width="auto">
 
@@ -51,37 +51,20 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-### Responsive Differences
+### Navigation Structure
 
-The mobile Shell can differ from its desktop counterpart. Adapt navigation structure to mobile constraints rather than mirroring desktop 1:1.
+On mobile, the Sub Navigation only supports a single flat level. If the Sub Navigation has more than one level on desktop, the navigation is restructured for mobile.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1118&embed-host=share"
-		description="Simplify navigation for mobile by reducing depth and grouping content differently if needed."
+		description="Restructure the navigation for mobile when the Sub Navigation has more than one level on desktop."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1119&embed-host=share"
-		description="Do not mirror the full desktop navigation hierarchy on mobile when it results in too many levels or small touch targets."
-	/>
-</div>
-
-### Flat Icon Navigation
-
-Flat Icon shows the destinations as icons along the bottom edge. It works best for apps with a small set of equally important top-level destinations, providing instant access without opening a menu, but has limited capacity.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1122&embed-host=share"
-		description="Use Flat Icon when the application has 2–6 equally weighted top-level sections that users switch between frequently."
-	/>
-	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1123&embed-host=share"
-		description="Do not place primary or secondary actions in the Flat Icon Navigation. It is reserved for navigation destinations only."
+		description="Don't mirror a multi-level Sub Navigation on mobile. Only a single flat level is possible there."
 	/>
 </div>
 
@@ -97,18 +80,33 @@ Flat Icon shows the destinations as icons along the bottom edge. It works best f
 
 <CollapsibleWrapper collapsedHeight="320px">
 
+### Desktop and Mobile Differences
+
+Shell Mobile and Shell Desktop can be built differently. The navigation structure does not have to be identical on both devices, it can be adapted per device.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4330-140&embed-host=share"
+		description="On desktop, use the structure that gives the best overview there."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4330-144&embed-host=share"
+		description="Adapt the structure on mobile instead of carrying over the desktop hierarchy."
+	/>
+</div>
+
 ### Control Panel Position
 
-Select the Control Panel position based on the app type. Top is the default. Bottom supports thumb-reachable navigation for app-like experiences. Both use a Drawer for full navigation access.
+The Control Panel can be positioned at the top or bottom. Both positions are valid design options.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1116&embed-host=share"
-		description="Top position with a Drawer for applications that need a full navigation structure accessible on demand."
+		description="Position the Control Panel at the top."
 	/>
 	<GuidelineExample
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1117&embed-host=share"
-		description="Bottom position for app-like experiences where primary actions need to be within thumb reach."
+		description="Position the Control Panel at the bottom."
 	/>
 </div>
 
@@ -134,27 +132,24 @@ Select the Control Panel position based on the app type. Top is the default. Bot
 	teasers={[
 		{
 			title: 'Shell Desktop',
-			description: 'Shell Desktop with persistent navigation for larger screens.',
+			description:
+				'Outer layout structure for desktop web applications with a persistent Control Panel.',
 			url: '/documentation/components/shell/desktop',
 		},
 		{
-			title: 'Control Panel Mobile',
-			description: 'The Control Panel hosted by Shell Mobile.',
-			url: '/documentation/components/control-panel/mobile',
-		},
-		{
 			title: 'Shell Sub Navigation',
-			description: 'Secondary navigation within the Shell for sub-level page structure.',
+			description: 'Sub-level navigation within the Shell, oriented horizontally or vertically.',
 			url: '/documentation/components/shell/sub-navigation',
 		},
 		{
-			title: 'Shell Content',
-			description: 'The scrollable content area within Shell Mobile.',
-			url: '/documentation/components/shell/content',
+			title: 'Control Panel Navigation',
+			description:
+				'Navigation container with the Popover, Tree, Drill Down, and Flat Icon variants.',
+			url: '/documentation/components/control-panel/navigation',
 		},
 		{
 			title: 'Drawer',
-			description: 'Sliding panel used for mobile navigation access.',
+			description: 'Sliding panel for supplemental content or lightweight interactions.',
 			url: '/documentation/components/drawer/drawer',
 		},
 	]}
