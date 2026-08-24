@@ -1,0 +1,180 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Control Panel Navigation Item'
+title: 'Control Panel Navigation Item'
+description: 'Control Panel Navigation Item is the individual navigation entry within the Control Panel Navigation. Navigation Item Groups are available for sub-navigation.'
+align: start
+toc: true
+status: 'sub'
+order: 8
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Offer a navigation destination within the Control Panel Navigation
+- Make the current path traceable through Active
+- Group sub-navigation through Navigation Item Groups
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Active Path
+
+Active marks the current path, not just the destination. Every Navigation Item from the first level down to the current destination is set to Active.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-64&embed-host=share"
+		description="Set Active on all Navigation Items of the current path, from the first level down to the current destination."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-71&embed-host=share"
+		description="Don't set Active on the current destination only. Without the parent Navigation Items, the path is not traceable."
+	/>
+</div>
+
+### Indicator
+
+The Indicator complements Active on the first navigation level. It is not available on deeper levels.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-83&embed-host=share"
+		description="Only use the Indicator on the first navigation level, in addition to Active there."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-77&embed-host=share"
+		description="Don't place the Indicator on deeper levels. Dev does not support it."
+	/>
+</div>
+
+### Label Length
+
+Short labels are quick to grasp when scanning the navigation. Long labels also change the layout, differently per variant: in Drill Down and Tree they wrap to several lines, in Popover the Navigation Item grows with them, in Flat Icon they are truncated.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-87&embed-host=share"
+		description="Keep labels short."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4810-97&embed-host=share"
+		description="Shorten long labels to improve readability."
+	/>
+</div>
+
+### Tooltip and Label
+
+The tooltip appears on interaction with the Navigation Item and names the same destination as the label.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4812-122&embed-host=share"
+		description="Keep the tooltip text and the label text identical."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4812-130&embed-host=share"
+		description="Don't leave a text in the tooltip that differs from the label, otherwise one destination has two names."
+	/>
+</div>
+
+### Icons in Tree
+
+In Tree, Navigation Items show a small circle by default, which can be replaced with a custom icon. Within one level, that choice applies to all Navigation Items alike.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-6&embed-host=share"
+		description="Apply custom icons consistently within a level: either all Navigation Items on a level or none."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-8&embed-host=share"
+		description="Don't mix custom icons with the default circle icon within one level. A single circle among custom icons looks like an oversight."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Control Panel Navigation Item" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Control Panel Navigation',
+			description:
+				'Navigation container with the Popover, Tree, Drill Down, and Flat Icon variants.',
+			url: '/documentation/components/control-panel/navigation',
+		},
+		{
+			title: 'Control Panel Desktop',
+			description: 'Primary navigation bar for desktop applications in the Top and Left positions.',
+			url: '/documentation/components/control-panel/desktop',
+		},
+		{
+			title: 'Control Panel Mobile',
+			description:
+				'Primary navigation bar for mobile applications with a Drawer for the full navigation.',
+			url: '/documentation/components/control-panel/mobile',
+		},
+	]}
+/>
+
+</DBSection>

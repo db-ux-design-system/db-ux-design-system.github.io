@@ -1,0 +1,138 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Control Panel Mobile'
+title: 'Control Panel Mobile'
+description: 'The Control Panel Mobile provides the primary navigation bar for mobile applications within the Shell. It is available in the Top and Bottom positions and opens the full navigation in a Drawer. Choosing the position is covered by Shell Mobile, choosing the navigation variant by the Control Panel Navigation.'
+align: start
+toc: true
+order: 2
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Combine logo, primary actions, and access to the navigation in one mobile bar
+- Open the full navigation in a Drawer instead of showing it permanently
+- Position the bar at the top or bottom edge of the screen
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Density
+
+Control Panel Mobile is designed for Regular density and sets the value itself. Setting a different density from the outside is not intended.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-2&embed-host=share"
+		description="Keep the Regular density that Control Panel Mobile sets itself."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-4&embed-host=share"
+		description="Don't override the density of Control Panel Mobile. The component is designed for Regular, and a different value results in a presentation that is not intended."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### First Level and Drawer
+
+The first level holds the Brand, Primary Actions, and the menu button. Navigation, Meta, and Secondary Actions sit in the Drawer. A divider appears next to the menu button automatically as soon as Primary Actions are shown.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4748-6&embed-host=share"
+		description="Reachable without opening the Drawer. Fill the Brand and Primary Actions slots here."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4748-16&embed-host=share"
+		description="Opens via the menu button. Fill the Navigation, Meta, and Secondary Actions slots here."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Examples" expandedText="Hide some Examples" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Control Panel Mobile" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Shell Mobile',
+			description:
+				'Outer layout structure for mobile web applications with a Drawer as main navigation.',
+			url: '/documentation/components/shell/mobile',
+		},
+		{
+			title: 'Control Panel Desktop',
+			description: 'Primary navigation bar for desktop applications in the Top and Left positions.',
+			url: '/documentation/components/control-panel/desktop',
+		},
+		{
+			title: 'Control Panel Navigation',
+			description:
+				'Navigation container with the Popover, Tree, Drill Down, and Flat Icon variants.',
+			url: '/documentation/components/control-panel/navigation',
+		},
+	]}
+/>
+
+</DBSection>

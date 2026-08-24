@@ -1,0 +1,226 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Control Panel Navigation'
+title: 'Control Panel Navigation'
+description: 'Control Panel Navigation is the navigation container within the Control Panel and the Shell Sub Navigation. It holds Navigation Items and is available in the Popover, Tree, Drill Down, and Flat Icon variants.'
+align: start
+toc: true
+status: 'sub'
+order: 7
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Present navigation destinations in the variant that fits the structure
+- Open up deeper levels through Popover, Tree, or Drill Down
+- Use Flat Icon for a flat hierarchy in which the icons are visually dominant
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Navigation Destinations Only
+
+The navigation only holds navigation destinations. Actions belong in Primary Actions or Secondary Actions.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4798-2&embed-host=share"
+		description="Only use Navigation Items for navigation destinations."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4798-6&embed-host=share"
+		description="Don't place actions such as search as a Navigation Item. A Navigation Item announces a page change, an action triggers something."
+	/>
+</div>
+
+### Drill Down for Many Entries
+
+The number of Navigation Items per level decides between Drill Down and Tree. Drill Down shows one level at a time and therefore stays clear even with many entries.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-10&embed-host=share"
+		description="Use Drill Down from eight Navigation Items per level onwards."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-12&embed-host=share"
+		description="With few entries per level, Drill Down still shows only one level: the overview of the hierarchy is missing even though there is space for it. Consider Tree in that case."
+	/>
+</div>
+
+### Tree for Few Entries
+
+Tree keeps the full hierarchy visible. Up to seven Navigation Items per level, it stays manageable.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-6&embed-host=share"
+		description="Use Tree for up to seven Navigation Items per level."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-8&embed-host=share"
+		description="Above seven entries per level, Tree loses its advantage of keeping the full hierarchy visible."
+	/>
+</div>
+
+### Flat Icon Usage
+
+Flat Icon presents all destinations with the same weight. The variant is therefore only suited to equally weighted destinations at the top level.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4799-40&embed-host=share"
+		description="Use Flat Icon for equally weighted destinations at the top level."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4799-44&embed-host=share"
+		description="Don't use Flat Icon when one destination sits above the others. Otherwise sub-destinations appear next to their parent as equals, and the structure is no longer recognizable."
+	/>
+</div>
+
+### Items in Flat Icon
+
+Flat Icon is designed for quick access. On desktop, the variant holds no more than ten Navigation Items, ideally seven.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-14&embed-host=share"
+		description="In Flat Icon on desktop, use at most ten Navigation Items, ideally up to seven."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-16&embed-host=share"
+		description="Longer icon lists work against the quick access Flat Icon is meant for. Reduce the number of destinations."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Hiding the Label
+
+In the Flat Icon Navigation, the label can be hidden so that only the icon remains visible.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4804-32&embed-host=share"
+		description="On mobile, hide the label when more than four destinations need to fit into the bar. Without labels the bar holds up to six items."
+	/>
+</div>
+
+### Popover Overflow
+
+On desktop, the Popover navigation can be scrolled via overflow chevrons when not all Navigation Items fit into the available width.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4806-49&embed-host=share"
+		description="When not all Navigation Items fit the width, overflow chevrons appear and the destinations behind them are not visible."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Examples" expandedText="Hide some Examples" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Control Panel Navigation" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Control Panel Navigation Item',
+			description: 'Individual navigation entry within the Control Panel Navigation.',
+			url: '/documentation/components/control-panel/navigation-item',
+		},
+		{
+			title: 'Control Panel Desktop',
+			description: 'Primary navigation bar for desktop applications in the Top and Left positions.',
+			url: '/documentation/components/control-panel/desktop',
+		},
+		{
+			title: 'Control Panel Mobile',
+			description:
+				'Primary navigation bar for mobile applications with a Drawer for the full navigation.',
+			url: '/documentation/components/control-panel/mobile',
+		},
+		{
+			title: 'Shell Sub Navigation',
+			description: 'Sub-level navigation within the Shell, oriented horizontally or vertically.',
+			url: '/documentation/components/shell/sub-navigation',
+		},
+		{
+			title: 'Shell Desktop',
+			description:
+				'Outer layout structure for desktop web applications with a persistent Control Panel.',
+			url: '/documentation/components/shell/desktop',
+		},
+	]}
+/>
+
+</DBSection>

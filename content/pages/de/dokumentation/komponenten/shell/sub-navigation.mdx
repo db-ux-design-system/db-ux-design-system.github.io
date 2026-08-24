@@ -1,0 +1,156 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Shell Sub Navigation'
+title: 'Shell Sub Navigation'
+description: 'Die Komponente Shell Sub Navigation stellt die untergeordnete Navigation innerhalb der Shell bereit, die zu einem Control Panel Navigation Item gehört. Sie unterstützt eine horizontale Ausrichtung (Top) und eine vertikale Ausrichtung (Left).'
+align: start
+toc: true
+status: 'sub'
+order: 4
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Unterseiten eines Hauptbereichs erreichbar machen
+- Tiefere Ebenen auf Desktop über Drill Down oder Tree erschließen
+- Bereichsnavigation neben der Hauptnavigation des Control Panels sichtbar halten
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards
+	resources={[
+		{
+			title: 'React',
+			description: 'TBD',
+			url: '#',
+			icon: 'react',
+		},
+		{
+			title: 'Web Components',
+			description: 'TBD',
+			url: '#',
+			icon: 'html5',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Mobile Navigationstiefe
+
+Auf Mobile trägt die Sub Navigation eine flache Ebene von Navigation Items. Navigation Item Groups können dort nicht eingesetzt werden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4049-3&embed-host=share"
+		description="Verwende auf Mobile eine flache Ebene von Navigation Items."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4049-4&embed-host=share"
+		description="Setze auf Mobile keine Navigation Item Groups ein. Sie können dort nicht verwendet werden."
+	/>
+</div>
+
+### Anzahl auf Mobile
+
+Die mobile Sub Navigation zeigt ihre Navigation Items in einer scrollbaren Zeile. Je mehr Items sie enthält, desto weniger davon sind gleichzeitig sichtbar.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4093-8&embed-host=share"
+		description="Setze in der mobilen Sub Navigation höchstens fünf Navigation Items ein."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4093-11&embed-host=share"
+		description="Bei mehr als fünf Navigation Items geht beim Scrollen der Überblick verloren. Reduziere die Anzahl oder verteile die Ziele anders."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton
+	collapsedText="Alle Richtlinien anzeigen"
+	expandedText="Weniger Richtlinien anzeigen"
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Beispiele
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Einklappbare Left-Navigation
+
+Auf Desktop können Nutzer:innen Sub Navigation Left einklappen; initial ist sie immer ausgeklappt. Im eingeklappten Zustand bleibt nur der Button zum Ausklappen sichtbar.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		halfWidth
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4331-158&embed-host=share"
+		description="Nutzer:innen können Sub Navigation Left einklappen, um dem Seiteninhalt mehr Breite zu geben."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Beispiele anzeigen" expandedText="Weniger Beispiele anzeigen" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Shell Sub Navigation" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Control Panel Navigation Item',
+			description: 'Einzelnes Navigation Item innerhalb der Control Panel Navigation.',
+			url: '/de/dokumentation/komponenten/control-panel/navigation-item',
+		},
+		{
+			title: 'Control Panel Navigation',
+			description:
+				'Navigations-Container mit den Varianten Popover, Tree, Drill Down und Flat Icon.',
+			url: '/de/dokumentation/komponenten/control-panel/navigation',
+		},
+		{
+			title: 'Shell Desktop',
+			description:
+				'Äußere Layout-Struktur für Desktop-Webanwendungen mit dauerhaftem Control Panel.',
+			url: '/de/dokumentation/komponenten/shell/desktop',
+		},
+	]}
+/>
+
+</DBSection>
