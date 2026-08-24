@@ -24,13 +24,13 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 
 Component properties in the Figma library use emoji prefixes to indicate their type and purpose at a glance.
 
-| Icon | Purpose | Example |
-|------|---------|---------|
-| 👁️ | Show/Hide toggle (toggles visibility) | `👁️ Show Label` |
-| 🔀 | Variant selection | `🔀 Variant` |
-| 📦 | Slot (content area) | `📦 Children` |
-| 🔄 | Icon swap (instance swap for icons) | `🔄 Icon` |
-| ✏️ | Text override | `✏️ Label` |
+| Icon | Purpose                               | Example         |
+| ---- | ------------------------------------- | --------------- |
+| 👁️   | Show/Hide toggle (toggles visibility) | `👁️ Show Label` |
+| 🔀   | Variant selection                     | `🔀 Variant`    |
+| 📦   | Slot (content area)                   | `📦 Children`   |
+| 🔄   | Icon swap (instance swap for icons)   | `🔄 Icon`       |
+| ✏️   | Text override                         | `✏️ Label`      |
 
 </DBStack>
 
@@ -70,9 +70,9 @@ Custom Select Dropdown
 
 - **Set thumb size**: 📏 Resizer gap value
 - **Set free position**: Thumb Container padding value
-</div>
-</div>
 
+</div>
+</div>
 
 </DBStack>
 
@@ -84,15 +84,14 @@ Custom Select Dropdown
 
 {/* Tips and how-tos for individual components */}
 
-
-
 <DBStack gap="medium">
 ### Accordion
 
 #### Resizing behavior after editing
 
 <DBNotification variant="standalone" semantic="informational">
-Known Figma bug: changing the item count or item state (open/collapsed) can reset the resizing behavior of accordion items. Re-apply "Fill" or "Hug" after editing.
+	Known Figma bug: changing the item count or item state (open/collapsed) can reset the resizing
+	behavior of accordion items. Re-apply "Fill" or "Hug" after editing.
 </DBNotification>
 
 <div className="guideline-examples">
@@ -114,9 +113,9 @@ Known Figma bug: changing the item count or item state (open/collapsed) can rese
 #### Multi-line text within Full Width Buttons
 
 <DBNotification variant="standalone" semantic="informational">
-Only use multi-line text in exceptional cases, such as when the text is extended due to translation.
+	Only use multi-line text in exceptional cases, such as when the text is extended due to
+	translation.
 </DBNotification>
-
 
 To enable automatic line breaks in a full-width button, select the "Text" layer inside the button and set the width resizing behavior from "Hug" to "Fill".
 
@@ -145,9 +144,10 @@ To enable automatic line breaks in a full-width button, select the "Text" layer 
 >
 Checkboxes have a toggle property for the requirement asterisk.
 
-For Full Width checkboxes you have to add the asterisk * manually in the label field.
+For Full Width checkboxes you have to add the asterisk \* manually in the label field.
 
 Set Required Toggle = true for correct Dev Properties.
+
 </GuidelineExample>
 
 </DBStack>
@@ -174,6 +174,26 @@ Set "Dropdown Height" from "(Def) Auto" to "Fill" to constrain the dropdown heig
 </DBStack>
 
 <DBStack gap="medium">
+### Heading
+#### Multi-line text within Custom Headings
+
+To enable automatic line breaks in a Custom Heading, select the "Heading" layer inside the component and set the width resizing behavior from "Hug" to "Fill".
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4118-2706&embed-host=share"
+	description='Select the "Text" layer inside the Custom Heading component'
+/>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4118-3117&embed-host=share"
+	description='Set the width resizing behavior from "Hug" to "Fill"'
+/>
+</div>
+
+</DBStack>
+
+<DBStack gap="medium">
 ### Radio
 
 #### Full Width – Attribute Requirement
@@ -184,9 +204,10 @@ Set "Dropdown Height" from "(Def) Auto" to "Fill" to constrain the dropdown heig
 >
 Radio buttons have a toggle property for the requirement asterisk.
 
-For Full Width radio buttons you have to add the asterisk * manually in the label field.
+For Full Width radio buttons you have to add the asterisk \* manually in the label field.
 
 Set Required Toggle = true for correct Dev Properties.
+
 </GuidelineExample>
 
 </DBStack>
@@ -202,9 +223,10 @@ Set Required Toggle = true for correct Dev Properties.
 >
 Switches have a toggle property for the requirement asterisk.
 
-For Full Width switches you have to add the asterisk * manually in the label field.
+For Full Width switches you have to add the asterisk \* manually in the label field.
 
 Set Required Toggle = true for correct Dev Properties.
+
 </GuidelineExample>
 
 </DBStack>
@@ -222,6 +244,7 @@ After placing the component and setting properties, adjust the size and set vert
 
 - Container
 - Textarea Container
+
 </GuidelineExample>
 
 </DBStack>
@@ -232,7 +255,7 @@ After placing the component and setting properties, adjust the size and set vert
 #### Change the Tooltip arrow to a flexible position
 
 <DBNotification variant="standalone" semantic="informational">
-The arrow for tooltip left/right should only be positioned with width: fixed
+	The arrow for tooltip left/right should only be positioned with width: fixed
 </DBNotification>
 
 <GuidelineExample
