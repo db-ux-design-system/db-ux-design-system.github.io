@@ -8,7 +8,7 @@ description: 'Control Panel Navigation Item is the individual navigation entry w
 align: start
 toc: true
 status: 'sub'
-order: 8
+order: 9
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
@@ -27,22 +27,7 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ## Resources
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'TBD',
-			url: '#',
-			icon: 'react',
-		},
-		{
-			title: 'Web Components',
-			description: 'TBD',
-			url: '#',
-			icon: 'html5',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbcontrolpaneldesktop-density--docs" />
 
 </DBSection>
 
@@ -59,11 +44,13 @@ Active marks the current path, not just the destination. Every Navigation Item f
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
+		imageRatio="portrait"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-64&embed-host=share"
 		description="Set Active on all Navigation Items of the current path, from the first level down to the current destination."
 	/>
 	<GuidelineExample
 		variant="dont"
+		imageRatio="portrait"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-71&embed-host=share"
 		description="Don't set Active on the current destination only. Without the parent Navigation Items, the path is not traceable."
 	/>
@@ -76,11 +63,13 @@ The Indicator complements Active on the first navigation level. It is not availa
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
+		imageRatio="portrait"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-83&embed-host=share"
 		description="Only use the Indicator on the first navigation level, in addition to Active there."
 	/>
 	<GuidelineExample
 		variant="dont"
+		imageRatio="portrait"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-77&embed-host=share"
 		description="Don't place the Indicator on deeper levels. Dev does not support it."
 	/>
@@ -88,15 +77,17 @@ The Indicator complements Active on the first navigation level. It is not availa
 
 ### Label Length
 
-Short labels are quick to grasp when scanning the navigation. Long labels also change the layout, differently per variant: in Drill Down and Tree they wrap to several lines, in Popover the Navigation Item grows with them, in Flat Icon they are truncated.
+Short labels are quick to grasp when scanning the navigation. Long labels also change the layout, differently per variant: in Drill Down and Tree they wrap to several lines, in Popover the Navigation Item grows with them.
 
 <div className="guideline-examples">
 	<GuidelineExample
+		imageRatio="portrait"
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-87&embed-host=share"
 		description="Keep labels short."
 	/>
 	<GuidelineExample
+		imageRatio="portrait"
 		variant="caution"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4810-97&embed-host=share"
 		description="Shorten long labels to improve readability."
@@ -127,11 +118,13 @@ In Tree, Navigation Items show a small circle by default, which can be replaced 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
+		imageRatio="portrait"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-6&embed-host=share"
 		description="Apply custom icons consistently within a level: either all Navigation Items on a level or none."
 	/>
 	<GuidelineExample
 		variant="dont"
+		imageRatio="portrait"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-8&embed-host=share"
 		description="Don't mix custom icons with the default circle icon within one level. A single circle among custom icons looks like an oversight."
 	/>
@@ -159,9 +152,13 @@ In Tree, Navigation Items show a small circle by default, which can be replaced 
 	teasers={[
 		{
 			title: 'Control Panel Navigation',
-			description:
-				'Navigation container with the Popover, Tree, Drill Down, and Flat Icon variants.',
+			description: 'Navigation container with the Popover, Tree, and Drill Down variants.',
 			url: '/documentation/components/control-panel/navigation',
+		},
+		{
+			title: 'Control Panel Flat Icon',
+			description: 'Flat icon navigation for equally weighted top-level destinations.',
+			url: '/documentation/components/control-panel/flat-icon',
 		},
 		{
 			title: 'Control Panel Desktop',

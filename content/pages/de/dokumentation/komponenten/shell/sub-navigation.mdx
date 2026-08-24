@@ -27,22 +27,7 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ## Ressourcen
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'TBD',
-			url: '#',
-			icon: 'react',
-		},
-		{
-			title: 'Web Components',
-			description: 'TBD',
-			url: '#',
-			icon: 'html5',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbshell-sub-navigation--docs" />
 
 </DBSection>
 
@@ -107,6 +92,7 @@ Auf Desktop können Nutzer:innen Sub Navigation Left einklappen; initial ist sie
 
 <div className="guideline-examples">
 	<GuidelineExample
+		imageRatio="portrait"
 		halfWidth
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4331-158&embed-host=share"
 		description="Nutzer:innen können Sub Navigation Left einklappen, um dem Seiteninhalt mehr Breite zu geben."
@@ -140,8 +126,7 @@ Auf Desktop können Nutzer:innen Sub Navigation Left einklappen; initial ist sie
 		},
 		{
 			title: 'Control Panel Navigation',
-			description:
-				'Navigations-Container mit den Varianten Popover, Tree, Drill Down und Flat Icon.',
+			description: 'Navigations-Container mit den Varianten Popover, Tree und Drill Down.',
 			url: '/de/dokumentation/komponenten/control-panel/navigation',
 		},
 		{

@@ -8,7 +8,7 @@ description: 'Control Panel Meta ist der Bereich im Control Panel für ergänzen
 align: start
 toc: true
 status: 'sub'
-order: 6
+order: 7
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
@@ -27,22 +27,7 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ## Ressourcen
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'TBD',
-			url: '#',
-			icon: 'react',
-		},
-		{
-			title: 'Web Components',
-			description: 'TBD',
-			url: '#',
-			icon: 'html5',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbcontrolpaneldesktop-density--docs" />
 
 </DBSection>
 
@@ -59,11 +44,13 @@ Meta nimmt global gültige Inhalte mit niedriger Priorität auf, etwa Meta-Navig
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
+		fullWidth
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4358-2&embed-host=share"
 		description="Verwende Meta für global gültige Inhalte mit niedriger Priorität."
 	/>
 	<GuidelineExample
 		variant="dont"
+		fullWidth
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4358-4&embed-host=share"
 		description="Platziere keine primären Navigation Items und keine hochpriorisierten Aktionen in Meta. Sie gehören in die Control Panel Navigation und in die Primary Actions."
 	/>
@@ -121,8 +108,7 @@ Die Position von Meta unterscheidet sich je Variante: bei Top über der Navigati
 	teasers={[
 		{
 			title: 'Control Panel Navigation',
-			description:
-				'Navigations-Container mit den Varianten Popover, Tree, Drill Down und Flat Icon.',
+			description: 'Navigations-Container mit den Varianten Popover, Tree und Drill Down.',
 			url: '/de/dokumentation/komponenten/control-panel/navigation',
 		},
 		{

@@ -26,22 +26,7 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ## Ressourcen
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'TBD',
-			url: '#',
-			icon: 'react',
-		},
-		{
-			title: 'Web Components',
-			description: 'TBD',
-			url: '#',
-			icon: 'html5',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbcontrolpaneldesktop-density--docs" />
 
 </DBSection>
 
@@ -53,11 +38,10 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ### Einklappbares Control Panel Left
 
-Auf Desktop können Nutzer:innen das Control Panel Left in den Varianten Drill Down und Tree einklappen; initial ist es immer ausgeklappt. Im eingeklappten Zustand bleiben nur Brand und der Button zum Ausklappen sichtbar. In der Variante Flat Icon steht diese Funktion nicht zur Verfügung, da das Control Panel bereits die minimale Breite hat.
+Auf Desktop können Nutzer:innen das Control Panel Left in den Varianten Drill Down und Tree einklappen; initial ist es immer ausgeklappt. Im eingeklappten Zustand bleiben nur Brand und der Button zum Ausklappen sichtbar.
 
 <div className="guideline-examples">
 	<GuidelineExample
-		fullWidth
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-10&embed-host=share"
 		description="Nutzer:innen können das Control Panel Left einklappen, um dem Seiteninhalt mehr Breite zu geben. Brand und der Button zum Ausklappen bleiben sichtbar."
 	/>
@@ -97,9 +81,13 @@ Auf Desktop können Nutzer:innen das Control Panel Left in den Varianten Drill D
 		},
 		{
 			title: 'Control Panel Navigation',
-			description:
-				'Navigations-Container mit den Varianten Popover, Tree, Drill Down und Flat Icon.',
+			description: 'Navigations-Container mit den Varianten Popover, Tree und Drill Down.',
 			url: '/de/dokumentation/komponenten/control-panel/navigation',
+		},
+		{
+			title: 'Control Panel Flat Icon',
+			description: 'Flache Icon-Navigation für gleichwertige Ziele auf oberster Ebene.',
+			url: '/de/dokumentation/komponenten/control-panel/flat-icon',
 		},
 	]}
 />

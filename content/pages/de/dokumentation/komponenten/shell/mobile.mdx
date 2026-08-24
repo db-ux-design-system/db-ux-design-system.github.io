@@ -26,22 +26,7 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ## Ressourcen
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'TBD',
-			url: '#',
-			icon: 'react',
-		},
-		{
-			title: 'Web Components',
-			description: 'TBD',
-			url: '#',
-			icon: 'html5',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbshell-position--docs" />
 
 </DBSection>
 
@@ -57,11 +42,13 @@ Auf Mobile trägt die Sub Navigation nur eine flache Ebene. Hat die Sub Navigati
 
 <div className="guideline-examples">
 	<GuidelineExample
+		fullWidth
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1118&embed-host=share"
 		description="Strukturiere die Navigation für Mobile um, wenn die Sub Navigation auf Desktop mehr als eine Ebene hat."
 	/>
 	<GuidelineExample
+		fullWidth
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1119&embed-host=share"
 		description="Spiegle eine mehrstufige Sub Navigation nicht auf Mobile. Dort ist nur eine flache Ebene möglich."
@@ -147,8 +134,7 @@ Das Control Panel kann oben oder unten positioniert werden. Beide Positionen sin
 		},
 		{
 			title: 'Control Panel Navigation',
-			description:
-				'Navigations-Container mit den Varianten Popover, Tree, Drill Down und Flat Icon.',
+			description: 'Navigations-Container mit den Varianten Popover, Tree und Drill Down.',
 			url: '/de/dokumentation/komponenten/control-panel/navigation',
 		},
 		{

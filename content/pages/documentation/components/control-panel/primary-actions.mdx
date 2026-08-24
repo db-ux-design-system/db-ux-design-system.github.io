@@ -8,7 +8,7 @@ description: 'Control Panel Primary Actions is the area within the Control Panel
 align: start
 toc: true
 status: 'sub'
-order: 4
+order: 5
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
@@ -27,22 +27,7 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ## Resources
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'TBD',
-			url: '#',
-			icon: 'react',
-		},
-		{
-			title: 'Web Components',
-			description: 'TBD',
-			url: '#',
-			icon: 'html5',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbcontrolpaneldesktop-density--docs" />
 
 </DBSection>
 
@@ -121,10 +106,12 @@ On desktop, Primary and Secondary Actions are visible at the same time. On mobil
 
 <div className="guideline-examples">
 	<GuidelineExample
+		fullWidth
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4812-1247&embed-host=share"
 		description="On desktop, Primary and Secondary Actions sit next to each other and are visible at the same time."
 	/>
 	<GuidelineExample
+		fullWidth
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4814-1263&embed-host=share"
 		description="On mobile, put the frequently used action into the Primary Actions so it stays reachable without opening the Drawer."
 	/>

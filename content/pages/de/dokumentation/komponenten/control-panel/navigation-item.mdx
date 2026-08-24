@@ -8,7 +8,7 @@ description: 'Control Panel Navigation Item ist das einzelne Navigation Item inn
 align: start
 toc: true
 status: 'sub'
-order: 8
+order: 9
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
@@ -27,22 +27,7 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ## Ressourcen
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'TBD',
-			url: '#',
-			icon: 'react',
-		},
-		{
-			title: 'Web Components',
-			description: 'TBD',
-			url: '#',
-			icon: 'html5',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbcontrolpaneldesktop-density--docs" />
 
 </DBSection>
 
@@ -58,11 +43,13 @@ Active markiert den aktuellen Pfad, nicht nur das Ziel. Alle Navigation Items vo
 
 <div className="guideline-examples">
 	<GuidelineExample
+		imageRatio="portrait"
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-64&embed-host=share"
 		description="Setze Active auf allen Navigation Items des aktuellen Pfads, von der ersten Ebene bis zum aktuellen Ziel."
 	/>
 	<GuidelineExample
+		imageRatio="portrait"
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-71&embed-host=share"
 		description="Setze Active nicht nur auf dem aktuellen Ziel. Ohne die übergeordneten Navigation Items ist der Pfad nicht nachvollziehbar."
@@ -75,11 +62,13 @@ Der Indicator ergänzt Active auf der ersten Navigationsebene. Auf tieferen Eben
 
 <div className="guideline-examples">
 	<GuidelineExample
+		imageRatio="portrait"
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-83&embed-host=share"
 		description="Verwende den Indicator nur auf der ersten Navigationsebene, dort zusätzlich zu Active."
 	/>
 	<GuidelineExample
+		imageRatio="portrait"
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-77&embed-host=share"
 		description="Platziere den Indicator nicht auf tieferen Ebenen. Dev unterstützt das nicht."
@@ -88,15 +77,17 @@ Der Indicator ergänzt Active auf der ersten Navigationsebene. Auf tieferen Eben
 
 ### Label-Länge
 
-Kurze Labels lassen sich beim Überfliegen der Navigation schnell erfassen. Lange Labels verändern zusätzlich das Layout, je Variante unterschiedlich: in Drill Down und Tree werden sie mehrzeilig, in Popover wächst das Navigation Item mit, in Flat Icon werden sie abgeschnitten.
+Kurze Labels lassen sich beim Überfliegen der Navigation schnell erfassen. Lange Labels verändern zusätzlich das Layout, je Variante unterschiedlich: in Drill Down und Tree werden sie mehrzeilig, in Popover wächst das Navigation Item mit.
 
 <div className="guideline-examples">
 	<GuidelineExample
+		imageRatio="portrait"
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4808-87&embed-host=share"
 		description="Halte Labels kurz."
 	/>
 	<GuidelineExample
+		imageRatio="portrait"
 		variant="caution"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4810-97&embed-host=share"
 		description="Kürze lange Labels, um die Lesbarkeit zu erhöhen."
@@ -126,11 +117,13 @@ In Tree tragen Navigation Items standardmäßig einen kleinen Kreis, der sich du
 
 <div className="guideline-examples">
 	<GuidelineExample
+		imageRatio="portrait"
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-6&embed-host=share"
 		description="Setze eigene Icons innerhalb einer Ebene konsistent ein: entweder alle Navigation Items einer Ebene oder keines."
 	/>
 	<GuidelineExample
+		imageRatio="portrait"
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4547-8&embed-host=share"
 		description="Mische innerhalb einer Ebene keine eigenen Icons mit dem Standard-Kreis-Icon. Ein einzelner Kreis zwischen eigenen Icons wirkt wie ein Versehen."
@@ -162,9 +155,13 @@ In Tree tragen Navigation Items standardmäßig einen kleinen Kreis, der sich du
 	teasers={[
 		{
 			title: 'Control Panel Navigation',
-			description:
-				'Navigations-Container mit den Varianten Popover, Tree, Drill Down und Flat Icon.',
+			description: 'Navigations-Container mit den Varianten Popover, Tree und Drill Down.',
 			url: '/de/dokumentation/komponenten/control-panel/navigation',
+		},
+		{
+			title: 'Control Panel Flat Icon',
+			description: 'Flache Icon-Navigation für gleichwertige Ziele auf oberster Ebene.',
+			url: '/de/dokumentation/komponenten/control-panel/flat-icon',
 		},
 		{
 			title: 'Control Panel Desktop',

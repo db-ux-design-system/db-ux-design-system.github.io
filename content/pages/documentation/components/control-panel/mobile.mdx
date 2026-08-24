@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Control Panel Mobile'
 title: 'Control Panel Mobile'
-description: 'The Control Panel Mobile provides the primary navigation bar for mobile applications within the Shell. It is available in the Top and Bottom positions and opens the full navigation in a Drawer. Choosing the position is covered by Shell Mobile, choosing the navigation variant by the Control Panel Navigation.'
+description: 'The Control Panel Mobile provides the primary navigation bar for mobile applications within the Shell. It is available in the Top and Bottom positions and opens the full navigation in a Drawer. Choosing the position is covered by Shell Mobile, choosing the navigation variant by the Control Panel Navigation; Flat Icon is documented as a separate Control Panel variant.'
 align: start
 toc: true
 order: 2
@@ -26,22 +26,7 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ## Resources
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'TBD',
-			url: '#',
-			icon: 'react',
-		},
-		{
-			title: 'Web Components',
-			description: 'TBD',
-			url: '#',
-			icon: 'html5',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbcontrolpanelmobile-position--docs" />
 
 </DBSection>
 
@@ -128,9 +113,13 @@ The first level holds the Brand, Primary Actions, and the menu button. Navigatio
 		},
 		{
 			title: 'Control Panel Navigation',
-			description:
-				'Navigation container with the Popover, Tree, Drill Down, and Flat Icon variants.',
+			description: 'Navigation container with the Popover, Tree, and Drill Down variants.',
 			url: '/documentation/components/control-panel/navigation',
+		},
+		{
+			title: 'Control Panel Flat Icon',
+			description: 'Flat icon navigation for equally weighted top-level destinations.',
+			url: '/documentation/components/control-panel/flat-icon',
 		},
 	]}
 />

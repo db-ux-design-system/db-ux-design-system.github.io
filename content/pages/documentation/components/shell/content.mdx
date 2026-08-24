@@ -26,22 +26,7 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ## Resources
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'TBD',
-			url: '#',
-			icon: 'react',
-		},
-		{
-			title: 'Web Components',
-			description: 'TBD',
-			url: '#',
-			icon: 'html5',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbshell-position--docs" />
 
 </DBSection>
 
@@ -57,11 +42,13 @@ Fixed keeps the Start Slot and End Slot visible while scrolling. Auto scrolls th
 
 <div className="guideline-examples">
 	<GuidelineExample
+		fullWidth
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-3&embed-host=share"
 		description="Use Fixed when the Start Slot or End Slot should stay visible while scrolling."
 	/>
 	<GuidelineExample
+		fullWidth
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-4&embed-host=share"
 		description="Don't use Auto when the Start Slot or End Slot should stay visible. They scroll out of the viewport along with the rest of the area."
@@ -74,11 +61,13 @@ The main content belongs in Children. With Fixed, content in the Start Slot and 
 
 <div className="guideline-examples">
 	<GuidelineExample
+		fullWidth
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-6&embed-host=share"
 		description="Place the main content in Children."
 	/>
 	<GuidelineExample
+		fullWidth
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-7&embed-host=share"
 		description="Don't place the main content in the Start Slot or End Slot. With Fixed it stays in place there instead of scrolling along."
@@ -91,11 +80,13 @@ In Fixed, the Start Slot and End Slot permanently take up space and reduce the s
 
 <div className="guideline-examples">
 	<GuidelineExample
+		fullWidth
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4298-13&embed-host=share"
 		description="Keep the Start Slot and End Slot compact in Fixed."
 	/>
 	<GuidelineExample
+		fullWidth
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4298-16&embed-host=share"
 		description="Don't overfill the Start Slot and End Slot in Fixed. Slots that are too large shrink the scrollable area for Children to an unusable size."
@@ -120,10 +111,12 @@ What sits in the End Slot determines the scroll behavior: a footer with legal li
 
 <div className="guideline-examples">
 	<GuidelineExample
+		fullWidth
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4301-131&embed-host=share"
 		description="Let a footer with legal links scroll along in the End Slot with Auto."
 	/>
 	<GuidelineExample
+		fullWidth
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-9&embed-host=share"
 		description="Use Fixed when a primary CTA in the End Slot should stay visible at all times."
 	/>

@@ -8,7 +8,7 @@ description: 'Control Panel Secondary Actions ist der Bereich im Control Panel f
 align: start
 toc: true
 status: 'sub'
-order: 5
+order: 6
 ---
 
 import { DBSection } from '@db-ux/react-core-components';
@@ -27,22 +27,7 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ## Ressourcen
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'TBD',
-			url: '#',
-			icon: 'react',
-		},
-		{
-			title: 'Web Components',
-			description: 'TBD',
-			url: '#',
-			icon: 'html5',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbcontrolpaneldesktop-density--docs" />
 
 </DBSection>
 
@@ -75,11 +60,13 @@ Werden beide Bereiche genutzt, nehmen Secondary Actions die Utility-Aktionen auf
 
 <div className="guideline-examples">
 	<GuidelineExample
+		fullWidth
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-2&embed-host=share"
 		description="Platziere Utility-Aktionen wie Nutzerprofil, Einstellungen oder Hilfe in Secondary Actions, wenn auch Primary Actions befüllt sind."
 	/>
 	<GuidelineExample
+		fullWidth
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-4&embed-host=share"
 		description="Platziere häufig genutzte Aktionen wie Suche nicht in Secondary Actions. Sie gehören in die Primary Actions."

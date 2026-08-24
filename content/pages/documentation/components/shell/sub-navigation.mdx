@@ -27,22 +27,7 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ## Resources
 
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'TBD',
-			url: '#',
-			icon: 'react',
-		},
-		{
-			title: 'Web Components',
-			description: 'TBD',
-			url: '#',
-			icon: 'html5',
-		},
-	]}
-/>
+<ResourceCards path="?path=/docs/components-dbshell-sub-navigation--docs" />
 
 </DBSection>
 
@@ -104,7 +89,8 @@ On desktop, users can collapse Sub Navigation Left; it always starts expanded. I
 
 <div className="guideline-examples">
 	<GuidelineExample
-		fullWidth
+		imageRatio="portrait"
+		halfWidth
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4331-158&embed-host=share"
 		description="Users can collapse Sub Navigation Left to give the page content more width."
 	/>
@@ -137,8 +123,7 @@ On desktop, users can collapse Sub Navigation Left; it always starts expanded. I
 		},
 		{
 			title: 'Control Panel Navigation',
-			description:
-				'Navigation container with the Popover, Tree, Drill Down, and Flat Icon variants.',
+			description: 'Navigation container with the Popover, Tree, and Drill Down variants.',
 			url: '/documentation/components/control-panel/navigation',
 		},
 		{
