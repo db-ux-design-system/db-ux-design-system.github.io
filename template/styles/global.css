@@ -38,8 +38,3 @@
 [data-mode='dark'] {
 	--db-logo-url: url('/db_logo_designsystem_dark.svg');
 }
-
-html {
-	/* stylelint-disable-next-line db-ux/use-spacings */
-	scroll-padding-block-start: var(--header-height);
-}
