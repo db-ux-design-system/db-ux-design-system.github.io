@@ -11,6 +11,7 @@ interface Props {
 	fullWidth?: boolean;
 	halfWidth?: boolean;
 	layout?: 'default' | 'side';
+	imageRatio?: 'landscape' | 'portrait' | 'square';
 }
 
 const {
@@ -20,6 +21,7 @@ const {
 	fullWidth = false,
 	halfWidth = false,
 	layout = 'default',
+	imageRatio = 'landscape',
 } = Astro.props;
 const isHalfWidth = halfWidth && !fullWidth && layout === 'default';
 const semantic =
@@ -60,6 +62,7 @@ const hasSlot = Astro.slots.has('default');
 	data-full-width={fullWidth}
 	data-half-width={isHalfWidth}
 	data-layout={layout}
+	data-image-ratio={imageRatio}
 >
 	<DBCard elevationLevel="2" data-mode="light">
 		{
