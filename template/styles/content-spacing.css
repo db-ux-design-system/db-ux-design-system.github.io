@@ -16,6 +16,12 @@
 	margin-block: 0;
 }
 
+/* Keep fragment targets visible below the shell header, including nested scroll containers. */
+.dba-main-content :is(h1, h2, h3, h4, h5, h6) {
+	/* stylelint-disable-next-line db-ux/use-spacings */
+	scroll-margin-block-start: var(--header-height);
+}
+
 /* Base rule: content element preceded by another content element gets md spacing */
 .dba-main-content
 	:is(
