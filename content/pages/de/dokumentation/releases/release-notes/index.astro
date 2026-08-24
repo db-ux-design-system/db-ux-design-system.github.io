@@ -34,7 +34,7 @@ const releaseNotes: ReleaseNote[] = Object.values(releaseNoteFiles)
 			? `${frontmatter.category} – ${frontmatter.version}`
 			: frontmatter.category;
 		const date = new Date(frontmatter.date);
-		// For Core Lab entries (no version), use the date as identifier to ensure unique slugs
+		// For entries without a version, use the date as identifier to ensure unique slugs
 		const slugSource = frontmatter.version
 			? heading
 			: `${heading}-${date.toISOString().slice(0, 10)}`;
@@ -55,7 +55,7 @@ const releaseNotes: ReleaseNote[] = Object.values(releaseNoteFiles)
 	})
 	.sort((a: ReleaseNote, b: ReleaseNote) => b.date.getTime() - a.date.getTime());
 
-const categoryOrder = ['Core', '🧪 Core Lab', 'DB Theme Icons', 'DB Theme Illustrative Icons'];
+const categoryOrder = ['Core', 'DB Theme Icons', 'DB Theme Illustrative Icons'];
 const categoriesFromData = Array.from(new Set(releaseNotes.map((note) => note.category)));
 const categories = [
 	...categoryOrder.filter((cat) => categoriesFromData.includes(cat)),
