@@ -10,9 +10,17 @@ interface Props {
 	description?: string;
 	fullWidth?: boolean;
 	layout?: 'default' | 'side';
+	imageRatio?: 'landscape' | 'portrait' | 'square';
 }
 
-const { variant, figmaUrl, description, fullWidth = false, layout = 'default' } = Astro.props;
+const {
+	variant,
+	figmaUrl,
+	description,
+	fullWidth = false,
+	layout = 'default',
+	imageRatio = 'landscape',
+} = Astro.props;
 const semantic =
 	variant === 'do'
 		? 'successful'
@@ -47,7 +55,12 @@ const hasSlot = Astro.slots.has('default');
 const accessibleDescription = `${label ?? ''} example${description ? `: ${description}` : ''}`;
 ---
 
-<figure class="guideline-example-container" data-full-width={fullWidth} data-layout={layout}>
+<figure
+	class="guideline-example-container"
+	data-full-width={fullWidth}
+	data-layout={layout}
+	data-image-ratio={imageRatio}
+>
 	<DBCard elevationLevel="2" data-mode="light">
 		{
 			variant && (

@@ -27,7 +27,10 @@ interface CacheEntry {
 type Manifest = Record<string, string>;
 
 const ROOT = resolve(import.meta.dirname, '..');
-const DOCS_DIR = join(ROOT, 'content', 'pages', 'documentation');
+const DOCS_DIRS = [
+	join(ROOT, 'content', 'pages', 'documentation'),
+	join(ROOT, 'content', 'pages', 'de', 'dokumentation'),
+];
 const CACHE_DIR = join(ROOT, 'static', 'assets', 'figma-cache');
 const MANIFEST_PATH = join(ROOT, 'static', 'assets', 'figma-cache', 'manifest.json');
 
@@ -74,7 +77,9 @@ async function collectFigmaUrls(): Promise<string[]> {
 		}
 	}
 
-	await scanDir(DOCS_DIR);
+	for (const docsDir of DOCS_DIRS) {
+		await scanDir(docsDir);
+	}
 	return [...urlSet];
 }
 

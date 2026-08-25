@@ -19,7 +19,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 
 {/* Cross-cutting topics: library setup, workarounds, helper components, density, theming, etc. */}
 
-<DBStack gap="medium">
+<DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
 ### Property Icons
 
 Component properties in the Figma library use emoji prefixes to indicate their type and purpose at a glance.
@@ -31,6 +31,43 @@ Component properties in the Figma library use emoji prefixes to indicate their t
 | 📦 | Slot (content area) | `📦 Children` |
 | 🔄 | Icon swap (instance swap for icons) | `🔄 Icon` |
 | ✏️ | Text override | `✏️ Label` |
+
+</DBStack>
+
+<DBStack gap="medium">
+### 🛟 Floating Container
+
+The 🛟 Floating Container makes it possible to place additional elements such as a badge, tooltip, or popover on a trigger/parent component.
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/Dr7QvFYRn5AwyQVOto4pEz/Doku--Scrollbar?node-id=7074-3625&embed-host=share"
+	imageRatio="portrait"
+/>
+
+<div>
+<DBNotification variant="standalone" semantic="informational" headline="Used in:" style={{marginBlockEnd: 'var(--db-spacing-fixed-xl)'}}>
+Buttons, Navigation Items
+</DBNotification>
+
+- Show the Floating Container
+- Add more Floating Items as needed – tip: duplicate the existing item
+	- Manual settings: `full width`, `full height`, `absolute position`, constraints `Left + Right`, `Top + Bottom`
+- Position property: `top-start`, `top-center`, `top-end`, `middle-start`, `middle-end`, `bottom-start`, `bottom-center`, or `bottom-end`.
+- Edge property: `outside` (grows away from the parent component), `center` (centered on the anchor), or `inside` (grows into the parent component)
+</div>
+</div>
+
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/Dr7QvFYRn5AwyQVOto4pEz/Doku--Helper-components-%E2%9C%85?node-id=7074-2974&embed-host=share"
+	description="Place the element that should sit on the parent component into the `Children Slot` of `↳ Floating Item`, such as a tooltip on hover of the icon button or a badge"
+	fullWidth
+/>
+
+</div>
+
 </DBStack>
 
 <DBStack gap="medium">
@@ -72,19 +109,7 @@ Custom Select Dropdown
 </div>
 </div>
 
-#### Set Handle size & Free Handle position
 
-<div className="guideline-examples">
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/Dr7QvFYRn5AwyQVOto4pEz/Doku--Scrollbar?node-id=5277-7&embed-host=share"
-	description='Select "Thumb Resizer" and set the gap value to control handle size'
-/>
-
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/Dr7QvFYRn5AwyQVOto4pEz/Doku--Scrollbar?node-id=5277-8&embed-host=share"
-	description='Select "Spacer Resizer" and set the gap value to control free position'
-/>
-</div>
 </DBStack>
 
 </DBSection>
@@ -94,6 +119,8 @@ Custom Select Dropdown
 ## Component-specific
 
 {/* Tips and how-tos for individual components */}
+
+
 
 <DBStack gap="medium">
 ### Accordion
@@ -115,6 +142,7 @@ Known Figma bug: changing the item count or item state (open/collapsed) can rese
 	description="Set the auto layout behavior of the affected items to hug to fix the bug"
 />
 </div>
+
 </DBStack>
 
 <DBStack gap="medium">
@@ -124,6 +152,7 @@ Known Figma bug: changing the item count or item state (open/collapsed) can rese
 <DBNotification variant="standalone" semantic="informational">
 Only use multi-line text in exceptional cases, such as when the text is extended due to translation.
 </DBNotification>
+
 
 To enable automatic line breaks in a full-width button, select the "Text" layer inside the button and set the width resizing behavior from "Hug" to "Fill".
 
@@ -138,6 +167,25 @@ To enable automatic line breaks in a full-width button, select the "Text" layer 
 	description='Set the width resizing behavior from "Hug" to "Fill"'
 />
 </div>
+
+</DBStack>
+
+<DBStack gap="medium">
+### Checkbox
+
+#### Full Width – Attribute Requirement
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=5608-40&embed-host=share"
+	layout="side"
+>
+Checkboxes have a toggle property for the requirement asterisk.
+
+For Full Width checkboxes you have to add the asterisk * manually in the label field.
+
+Set Required Toggle = true for correct Dev Properties.
+</GuidelineExample>
+
 </DBStack>
 
 <DBStack gap="medium">
@@ -149,7 +197,7 @@ To enable automatic line breaks in a full-width button, select the "Text" layer 
 Create your brand-compliant custom logo SVG via the marketing portal. The plugin import ensures system-conformant color variables and sizing.
 </DBNotification>
 
-In the Brand area of the ControlPanel, you can add a brand-compliant custom logo. Use the Figma plugin <DBLink href="https://www.figma.com/community/plugin/1590462040996560100/concept-db-logo-importer" target="_blank" rel="noopener noreferrer" variant="inline">DB Logo Importer</DBLink> to import an SVG from the <DBLink href="https://marketingportal.extranet.deutschebahn.com/marketingportal/Marke-und-Design/Basiselemente/Logo/Logozusatz-mit-Tool#unit=Regio&mode=unit&breaking=true" target="_blank" rel="noopener noreferrer" variant="inline">DB brand logo generator</DBLink>. The plugin assigns correct color variables and places the logo directly into the CP Brand slot.
+In the Brand area of the ControlPanel, you can add a brand-compliant custom logo with logo addition only in the **Brand → Logozusatz** variant. Use the Figma plugin <DBLink href="https://www.figma.com/community/plugin/1590462040996560100/concept-db-logo-importer" target="_blank" rel="noopener noreferrer" variant="inline">DB Logo Importer</DBLink> to import an SVG from the <DBLink href="https://marketingportal.extranet.deutschebahn.com/marketingportal/Marke-und-Design/Basiselemente/Logo/Logozusatz-mit-Tool#unit=Regio&mode=unit&breaking=true" target="_blank" rel="noopener noreferrer" variant="inline">DB brand logo generator</DBLink>. The plugin assigns correct color variables and places the logo directly into the **Logo Slot**.
 
 <div className="guideline-examples">
 <GuidelineExample
@@ -164,9 +212,10 @@ In the Brand area of the ControlPanel, you can add a brand-compliant custom logo
 
 <GuidelineExample
 	figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel-%E2%9C%85?node-id=4621-5&embed-host=share"
-	description="The plugin places the logo into the CP Brand Children slot with correct color variables, sizing, and locked aspect ratio"
+	description="The plugin places the logo into the Logo Slot with correct color variables, sizing, and locked aspect ratio"
 />
 </div>
+
 </DBStack>
 
 <DBStack gap="medium">
@@ -191,46 +240,31 @@ The **Clip Content** setting required for correct horizontal overflow removes al
 	description="To show an expanded Popover navigation item or the Active Indicator, disable Clip Content. The horizontal overflow will not crop correctly."
 />
 </div>
-</DBStack>
 
-<DBStack gap="medium">
-### Checkbox
+#### Scroll behavior of vertical navigation and Meta
 
-#### Full Width – Attribute Requirement
+In the vertical navigation, the Meta navigation docks to the bottom edge. This applies to the Drill Down and Tree variants.
+
+When many navigation items fill the available space, they run underneath the Meta navigation instead of pushing it away. In Figma, change the auto layout behavior of the navigation from Fill to Hug so the Meta navigation stays below all navigation items and is pushed out of the visible area by the navigation.
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel-%E2%9C%85?node-id=5533-28082&embed-host=share"
+	imageRatio="portrait"
+	description="With few items the Meta navigation stays visible – with many items the navigation items run underneath the Meta navigation"
+/>
 
 <GuidelineExample
-	figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=5608-40&embed-host=share"
-	layout="side"
->
-Checkboxes have a toggle property for the requirement asterisk.
+	figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel-%E2%9C%85?node-id=5534-31129&embed-host=share"
+	imageRatio="portrait"
+	description="Select the CP Navigation layer and change the vertical resizing from Fill container to Hug contents"
+/>
+</div>
 
-For Full Width checkboxes you have to add the asterisk * manually in the label field.
-
-Set Required Toggle = true for correct Dev Properties.
-</GuidelineExample>
 </DBStack>
 
 <DBStack gap="medium">
 ### Custom Select
-
-#### Set Dropdown width for Auto/fix
-
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select-%E2%9C%85?node-id=5320-2&embed-host=share"
-	fullWidth
-/>
-
-<div className="guideline-examples">
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select-%E2%9C%85?node-id=5315-5&embed-host=share"
-	description='Select "📏 Dropdown Resizer"'
-/>
-
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select-%E2%9C%85?node-id=5320-3&embed-host=share"
-	description='Set gap value in Auto Layout panel'
-/>
-</div>
 
 #### Edge Case Mobile Landscape
 
@@ -247,6 +281,7 @@ Set "Dropdown Height" from "(Def) Auto" to "Fill" to constrain the dropdown heig
 	description='Set "Dropdown Height" to "Fill" for constrained viewports'
 />
 </div>
+
 </DBStack>
 
 <DBStack gap="medium">
@@ -264,6 +299,7 @@ For Full Width radio buttons you have to add the asterisk * manually in the labe
 
 Set Required Toggle = true for correct Dev Properties.
 </GuidelineExample>
+
 </DBStack>
 
 <DBStack gap="medium">
@@ -281,6 +317,7 @@ For Full Width switches you have to add the asterisk * manually in the label fie
 
 Set Required Toggle = true for correct Dev Properties.
 </GuidelineExample>
+
 </DBStack>
 
 <DBStack gap="medium">
@@ -297,6 +334,7 @@ After placing the component and setting properties, adjust the size and set vert
 - Container
 - Textarea Container
 </GuidelineExample>
+
 </DBStack>
 
 <DBStack gap="medium">
@@ -324,6 +362,7 @@ The arrow for tooltip left/right should only be positioned with width: fixed
 	description='Set Padding to position the arrow'
 />
 </div>
+
 </DBStack>
 
 </DBSection>

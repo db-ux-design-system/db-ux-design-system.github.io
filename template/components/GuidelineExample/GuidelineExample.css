@@ -31,6 +31,23 @@
 		}
 	}
 
+	&[data-image-ratio='portrait']:not([data-full-width='true']) {
+		.db-card {
+			.guideline-example-iframe {
+				aspect-ratio: 4 / 5;
+			}
+		}
+	}
+
+	/* Not used by any content yet; added proactively so a 1:1 ratio is available when needed. */
+	&[data-image-ratio='square']:not([data-full-width='true']) {
+		.db-card {
+			.guideline-example-iframe {
+				aspect-ratio: 1 / 1;
+			}
+		}
+	}
+
 	&[data-layout='side'] {
 		inline-size: 100%;
 		flex-direction: row;
