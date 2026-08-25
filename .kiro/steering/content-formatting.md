@@ -302,18 +302,18 @@ Structure for the announcement comment posted in the Teams channel for minor rel
   - `🎨 DESIGN & 💻 DEVELOPMENT`
 - Category subheading, always prefixed with `✨` regardless of type:
 
-  | Release note heading | Teams posting |
-  | --------------------- | --------------- |
-  | Added                  | `✨ Hinzugefügt` |
-  | Changed                | `✨ Geändert`    |
-  | Deprecated             | `✨ Deprecated`  |
-  | Removed                | `✨ Entfernt`    |
-  | Fixed                  | `✨ Behoben`     |
-  | Security               | `✨ Security`    |
+  | Release note heading | Teams posting    |
+  | -------------------- | ---------------- |
+  | Added                | `✨ Hinzugefügt` |
+  | Changed              | `✨ Geändert`    |
+  | Deprecated           | `✨ Deprecated`  |
+  | Removed              | `✨ Entfernt`    |
+  | Fixed                | `✨ Behoben`     |
+  | Security             | `✨ Security`    |
 
 - Only include categories that have entries – omit empty ones
 - Entry format: `- **Component**: Description`, translated to German, following the same content as the release note entry
-- Multiple libraries in the same cycle: one block per library, separated by a blank line, ordered by `categoryOrder` (Core → 🧪 Core Lab → DB Theme Icons → DB Theme Illustrative Icons)
+- Multiple libraries in the same cycle: one block per library, separated by a blank line, ordered by `categoryOrder` (Core → DB Theme Icons → DB Theme Illustrative Icons)
 
 ### Breaking changes
 

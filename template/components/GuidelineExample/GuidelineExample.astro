@@ -55,6 +55,7 @@ if (existsSync(manifestPath)) {
 }
 
 const hasSlot = Astro.slots.has('default');
+const accessibleDescription = `${label ?? ''} example${description ? `: ${description}` : ''}`;
 ---
 
 <figure
@@ -79,14 +80,14 @@ const hasSlot = Astro.slots.has('default');
 				<img
 					class="guideline-example-iframe"
 					src={cachedImageSrc}
-					alt=""
+					alt={accessibleDescription}
 					loading="lazy"
 				/>
 			) : (
 				<iframe
 					class="guideline-example-iframe"
 					src={fullUrl}
-					title={description ?? ''}
+					title={accessibleDescription}
 					loading="eager"
 					allowfullscreen
 				/>
