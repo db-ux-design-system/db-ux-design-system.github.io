@@ -9,10 +9,21 @@ interface Props {
 	figmaUrl: string;
 	description?: string;
 	fullWidth?: boolean;
+	halfWidth?: boolean;
 	layout?: 'default' | 'side';
+	imageRatio?: 'landscape' | 'portrait' | 'square';
 }
 
-const { variant, figmaUrl, description, fullWidth = false, layout = 'default' } = Astro.props;
+const {
+	variant,
+	figmaUrl,
+	description,
+	fullWidth = false,
+	halfWidth = false,
+	layout = 'default',
+	imageRatio = 'landscape',
+} = Astro.props;
+const isHalfWidth = halfWidth && !fullWidth && layout === 'default';
 const semantic =
 	variant === 'do'
 		? 'successful'
@@ -44,9 +55,16 @@ if (existsSync(manifestPath)) {
 }
 
 const hasSlot = Astro.slots.has('default');
+const accessibleDescription = `${label ?? ''} example${description ? `: ${description}` : ''}`;
 ---
 
-<figure class="guideline-example-container" data-full-width={fullWidth} data-layout={layout}>
+<figure
+	class="guideline-example-container"
+	data-full-width={fullWidth}
+	data-half-width={isHalfWidth}
+	data-layout={layout}
+	data-image-ratio={imageRatio}
+>
 	<DBCard elevationLevel="2" data-mode="light">
 		{
 			variant && (
@@ -62,14 +80,14 @@ const hasSlot = Astro.slots.has('default');
 				<img
 					class="guideline-example-iframe"
 					src={cachedImageSrc}
-					alt=""
+					alt={accessibleDescription}
 					loading="lazy"
 				/>
 			) : (
 				<iframe
 					class="guideline-example-iframe"
 					src={fullUrl}
-					title={description ?? ''}
+					title={accessibleDescription}
 					loading="eager"
 					allowfullscreen
 				/>
