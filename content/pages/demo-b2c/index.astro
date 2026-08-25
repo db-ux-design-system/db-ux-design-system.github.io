@@ -1,6 +1,4 @@
 ---
-import '@db-ux/core-components/build/styles/rollup.css';
-import '@db-ux/db-theme/build/styles/rollup.css';
 import './index.css';
 import DemoLayout from '@template/layouts/demo.astro';
 import { DemoShell } from './_modules/demo-shell/DemoShell';
@@ -73,13 +71,12 @@ import {
 						<DBButton variant="brand"> Search </DBButton>
 					</DBStack>
 					<DBStack direction="row" gap="small" justifyContent="space-between" className="column">
-						<DBButton width="full" variant="filled" iconLeading="calendar">
-							Today, from 2:30 PM
-						</DBButton>
-						<DBButton width="full" variant="filled" iconLeading="calendar">
-							Add return trip
-						</DBButton>
-						<DBButton width="full" variant="filled" iconLeading="person"> Traveler info </DBButton>
+						<DBButton width="full" variant="filled" iconLeading="calendar" wrap="false"
+							>Today, from 2:30 PM</DBButton
+						>
+						<DBButton width="full" variant="filled" iconLeading="calendar" wrap="false">Add return trip</DBButton
+						>
+						<DBButton width="full" variant="filled" iconLeading="person" wrap="false"> Traveler info </DBButton>
 					</DBStack>
 				</DBStack>
 			</DBCard>

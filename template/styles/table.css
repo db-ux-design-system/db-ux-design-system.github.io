@@ -20,6 +20,7 @@ table th {
 	text-align: start;
 }
 
+/* stylelint-disable db-ux/use-border-width, db-ux/use-border-color */
 table td:last-child,
 table th:last-child {
 	border-inline-end: none;
@@ -28,6 +29,7 @@ table th:last-child {
 table tr:last-child td {
 	border-block-end: none;
 }
+/* stylelint-enable db-ux/use-border-width, db-ux/use-border-color */
 
 table thead {
 	background-color: var(--db-adaptive-on-bg-basic-emphasis-50-default);

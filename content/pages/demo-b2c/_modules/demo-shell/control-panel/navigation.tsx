@@ -1,19 +1,20 @@
-import { DBNavigation, DBNavigationItem } from '@db-ux/react-core-components';
+import {
+	DBControlPanelNavigation,
+	DBControlPanelNavigationItem,
+} from '@db-ux/react-core-components';
 
 const DemoNavigation = () => (
-	<DBNavigation variant="tree">
-		<DBNavigationItem>
-			<a href="#" aria-current="page">
-				Tickets &amp; Angebote
-			</a>
-		</DBNavigationItem>
-		<DBNavigationItem>
+	<DBControlPanelNavigation>
+		<DBControlPanelNavigationItem active>
+			<a href="#">Tickets &amp; Angebote</a>
+		</DBControlPanelNavigationItem>
+		<DBControlPanelNavigationItem>
 			<a href="#">Info & Services</a>
-		</DBNavigationItem>
-		<DBNavigationItem>
+		</DBControlPanelNavigationItem>
+		<DBControlPanelNavigationItem>
 			<a href="#">Meine Reisen</a>
-		</DBNavigationItem>
-	</DBNavigation>
+		</DBControlPanelNavigationItem>
+	</DBControlPanelNavigation>
 );
 
 export default DemoNavigation;

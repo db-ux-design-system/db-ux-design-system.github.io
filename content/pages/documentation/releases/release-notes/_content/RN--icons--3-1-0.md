@@ -5,9 +5,14 @@ version: 'v3.1.0'
 date: '2025-09-15'
 ---
 
-### Features Design + Code
+### Design & Development
 
-- changed: All icons with locked aspect ratio (Figma)
-- changed: 1 icon (visual update)
-- fixed: 3 icons
-- added: 9 icons
+#### Added
+- Icons: 9 new icons have been added.
+
+#### Changed
+- Icons: All icons now have a locked aspect ratio (Figma).
+- Icons: 1 icon has received a visual update.
+
+#### Fixed
+- Icons: 3 icons have been corrected.

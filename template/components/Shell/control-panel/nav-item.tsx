@@ -1,6 +1,12 @@
-import { DBBadge, DBNavigationItem, DBNavigationItemGroup } from '@db-ux/react-core-components';
+import {
+	DBBadge,
+	DBControlPanelNavigationItem,
+	DBControlPanelNavigationItemGroup,
+} from '@db-ux/react-core-components';
 import { getAriaCurrent } from '@template/utils/client.utils.ts';
 import { covers, getFirstChildPath, trimExtension } from '@template/utils/navigation.utils.ts';
+import { useLanguage } from '@template/context/language-context';
+import { toDeSlug, toEnSlug } from '@template/i18n/slug-mapping';
 
 const getStatusBadge = (status?: string) => {
 	if (!status || status === 'stable') return null;
@@ -10,6 +16,7 @@ const getStatusBadge = (status?: string) => {
 		beta: { semantic: 'informational', label: 'Beta' },
 		deprecated: { semantic: 'critical', label: 'Deprecated' },
 		legacy: { semantic: 'warning', label: 'Legacy' },
+		sub: { semantic: 'neutral', label: 'Sub' },
 	}[status];
 
 	if (!config) return null;
@@ -24,6 +31,7 @@ const getStatusBadge = (status?: string) => {
 const NavItem = ({
 	path,
 	title,
+	titleDe,
 	icon,
 	iconTrailing,
 	children,
@@ -32,11 +40,19 @@ const NavItem = ({
 	status,
 	externalUrl,
 	protected: isProtected,
-}: NavigationItem) => {
+	parentStatus,
+}: NavigationItem & { parentStatus?: string }) => {
+	const { language } = useLanguage();
+	const displayTitle = (language === 'de' && titleDe) ? titleDe : title;
+	const localePath = (p: string | undefined) => {
+		if (!p) return p;
+		const trimmed = trimExtension(p) ?? p;
+		return language === 'de' ? `/de/${toDeSlug(trimmed)}` : trimmed;
+	};
 	const lockIcon = isProtected ? (
 		<span
 			data-icon="lock_closed"
-			aria-label="Protected content"
+			aria-label={language === 'de' ? 'Geschützter Inhalt' : 'Protected content'}
 			role="img"
 			style={{ marginInlineStart: 'auto', fontSize: '0.75em' }}
 		/>
@@ -44,7 +60,7 @@ const NavItem = ({
 
 	if (externalUrl) {
 		return (
-			<DBNavigationItem
+			<DBControlPanelNavigationItem
 				icon={icon}
 				key={`router-leaf-${externalUrl}`}
 				disabled={disabled ? true : undefined}
@@ -55,10 +71,10 @@ const NavItem = ({
 					rel="noopener noreferrer"
 					style={{ display: 'flex', alignItems: 'center', width: '100%' }}
 				>
-					{title}
+					{displayTitle}
 					{lockIcon}
 				</a>
-			</DBNavigationItem>
+			</DBControlPanelNavigationItem>
 		);
 	}
 
@@ -66,55 +82,64 @@ const NavItem = ({
 		typeof window !== 'undefined' &&
 		covers(
 			{ path, title, icon, iconTrailing, children, isSubNavigation },
-			window.location.pathname,
+			'/' + toEnSlug(window.location.pathname.replace(/^\/de\//, '').replace(/^\/de$/, '').replace(/\/+$/, '')),
 		);
+
 	if (isSubNavigation) {
 		const target = path ?? getFirstChildPath(children);
 
 		return (
-			<DBNavigationItem icon={icon} key={`router-leaf-${target ?? title}`} disabled={disabled}>
+			<DBControlPanelNavigationItem
+				icon={icon}
+				key={`router-leaf-${target ?? title}`}
+				disabled={disabled}
+			>
 				<a
-					href={trimExtension(target)}
+					href={localePath(target)}
 					aria-current={isActive ? 'page' : undefined}
 					style={{ display: 'flex', alignItems: 'center', width: '100%' }}
 				>
-					{title}
+					{displayTitle}
 					{lockIcon || getStatusBadge(status)}
 				</a>
-			</DBNavigationItem>
+			</DBControlPanelNavigationItem>
 		);
 	}
 
 	if (children && children.length > 0) {
 		return (
-			<DBNavigationItemGroup
-				text={title}
+			<DBControlPanelNavigationItemGroup
+				text={displayTitle}
+				endSlot={getStatusBadge(status)}
 				key={`router-group-${path ?? title}`}
 				aria-disabled={disabled ? 'true' : undefined}
 				expanded={isActive}
 			>
 				{children.map((sub) => (
-					<NavItem key={`router-sub-${sub.path ?? sub.title}`} {...sub} />
+					<NavItem key={`router-sub-${sub.path ?? sub.title}`} {...sub} parentStatus={status} />
 				))}
-			</DBNavigationItemGroup>
+			</DBControlPanelNavigationItemGroup>
 		);
 	}
 
+	// For leaf items inside a group: only show badge if it differs from parent
+	const effectiveStatus = parentStatus && status === parentStatus ? undefined : status;
+
 	return (
-		<DBNavigationItem
+		<DBControlPanelNavigationItem
 			icon={icon}
 			key={`router-leaf-${path ?? title}`}
 			disabled={disabled ? true : undefined}
 		>
 			<a
-				href={trimExtension(path)}
-				aria-current={getAriaCurrent(trimExtension(path))}
+				href={localePath(path)}
+				aria-current={getAriaCurrent(localePath(path))}
 				style={{ display: 'flex', alignItems: 'center', width: '100%' }}
 			>
-				{title}
-				{lockIcon || getStatusBadge(status)}
+				{displayTitle}
+				{lockIcon || getStatusBadge(effectiveStatus)}
 			</a>
-		</DBNavigationItem>
+		</DBControlPanelNavigationItem>
 	);
 };
 

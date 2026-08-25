@@ -13,9 +13,7 @@ interface Props {
 
 export function TableOfContents(props: Props): ReactElement | null {
 	const { headings = [] } = props;
-	const filteredHeadings = headings.filter(
-		({ depth }) => !props.tocMaxDepth || props.tocMaxDepth >= depth,
-	);
+	const filteredHeadings = headings.filter(({ depth }) => (props.tocMaxDepth ?? 3) >= depth);
 	const slugs = filteredHeadings.map((h) => h.slug);
 	const currentPath = getCurrentPathname(props.astro);
 	const { activeIDs, setCurrentID } = useActiveHeading({
@@ -81,7 +79,7 @@ export function TableOfContents(props: Props): ReactElement | null {
 	};
 
 	return (
-		<aside className="dba-toc">
+		<aside className="dba-toc" aria-label="Table of contents">
 			<div ref={indicatorRef} className="dba-toc-indicator" />
 			<ul ref={listRef}>
 				{filteredHeadings.map(({ depth, slug, text }, index) => {
