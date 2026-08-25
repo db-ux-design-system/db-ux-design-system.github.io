@@ -17,6 +17,7 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 
 - Combine logo, navigation, and global actions in one permanently visible frame
 - Position the Control Panel at the top as a horizontal bar or on the left as a vertical sidebar
@@ -52,6 +53,8 @@ On desktop, users can collapse the Control Panel Left in the Drill Down and Tree
 <CollapseButton collapsedText="Show all Examples" expandedText="Hide some Examples" />
 
 </DBSection>
+
+<FigmaLearnTeaser componentName="Control Panel Desktop" anchor="control-panel--shell" />
 
 <DBSection spacing="small" width="auto">
 
