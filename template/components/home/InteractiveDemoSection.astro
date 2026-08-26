@@ -2,6 +2,20 @@
 import { DBSection, DBStack, DBCard, DBButton, DBTooltip } from '@db-ux/react-core-components';
 import './InteractiveDemoSection.css';
 import '@template/themes/variables.css';
+
+interface Props {
+	darkModeLabel?: string;
+	lightModeLabel?: string;
+	fullscreenLabel?: string;
+	demoTitle?: string;
+}
+
+const {
+	darkModeLabel = 'Activate Dark Mode',
+	lightModeLabel = 'Activate Light Mode',
+	fullscreenLabel = 'Fullscreen',
+	demoTitle = 'Interactive demo',
+} = Astro.props;
 ---
 
 <DBSection width="medium" spacing="medium" id="home--interactive-demo-section">
@@ -27,29 +41,31 @@ import '@template/themes/variables.css';
 				</div>
 				<div class="actionbar-group">
 					<DBButton
-						title="Toggle dark mode"
+						title={darkModeLabel}
 						variant="filled"
 						noText="true"
 						icon="moon"
 						id="toggle-mode"
+						data-label-dark={darkModeLabel}
+						data-label-light={lightModeLabel}
 					>
-						<DBTooltip>Toggle dark mode</DBTooltip>
+						<DBTooltip>{darkModeLabel}</DBTooltip>
 					</DBButton>
 					<a
-						title="Fullscreen"
+						title={fullscreenLabel}
 						class="db-button"
 						target="_blank"
 						referrerpolicy="no-referrer"
 						data-variant="filled"
 						data-no-text="true"
 						data-icon="fullscreen"
-						id="fullscreen-anchor">Fullscreen</a
+						id="fullscreen-anchor">{fullscreenLabel}</a
 					>
 				</div>
 			</DBStack>
 		</DBCard>
 		<DBCard spacing="none">
-			<iframe id="demo-iframe" src="/demo-b2b" title="Interactive demo"></iframe>
+			<iframe id="demo-iframe" src="/demo-b2b" title={demoTitle}></iframe>
 		</DBCard>
 	</DBStack>
 </DBSection>

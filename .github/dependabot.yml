@@ -53,5 +53,12 @@ updates:
         patterns:
           - '@orama/*'
     ignore:
+      # DB theme packages are handled by Renovate (see .github/renovate.json)
+      - dependency-name: "@db-ux/db-theme*"
       # We need to ignore db-ux packages for now because of shell
-      - dependency-name: '@db-ux*'
+      - dependency-name: '@db-ux/agent-cli'
+      - dependency-name: '@db-ux/core-components'
+      - dependency-name: '@db-ux/core-eslint-plugin'
+      - dependency-name: '@db-ux/core-foundations'
+      - dependency-name: '@db-ux/core-stylelint'
+      - dependency-name: '@db-ux/react-core-components'

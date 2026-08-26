@@ -5,9 +5,8 @@ sectionWidth: 'auto'
 title: 'Resources'
 headline: 'Resources'
 description: >
-  Get the most out of our Design System!
-  We provide Figma libraries for designers and code packages for developers.
-  Our resources simplify your workflow and ensure a consistent, smooth implementation.
+  Figma libraries for designers and code packages for developers.
+  The resources simplify your workflow and ensure a consistent implementation.
 align: start
 order: 5
 toc: true
@@ -17,6 +16,8 @@ import { DBSection, DBStack } from '@db-ux/react-core-components';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import CardTeaser from '@template/components/CardTeaser/CardTeaser';
 import CardTeaserRow from '@template/components/CardTeaser/CardTeaserRow';
+
+<DBSection spacing='small' width="auto">
 
 <CardTeaserRow
 	items={[
@@ -43,6 +44,8 @@ import CardTeaserRow from '@template/components/CardTeaser/CardTeaserRow';
 		},
 	]}
 />
+
+</DBSection>
 
 <DBSection spacing='small' width="auto">
 

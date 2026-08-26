@@ -33,7 +33,7 @@ const releaseNotes: ReleaseNote[] = Object.values(releaseNoteFiles)
 			? `${frontmatter.category} – ${frontmatter.version}`
 			: frontmatter.category;
 		const date = new Date(frontmatter.date);
-		// For Core Lab entries (no version), use the date as identifier to ensure unique slugs
+		// For entries without a version, use the date as identifier to ensure unique slugs
 		const slugSource = frontmatter.version
 			? heading
 			: `${heading}-${date.toISOString().slice(0, 10)}`;
@@ -54,7 +54,7 @@ const releaseNotes: ReleaseNote[] = Object.values(releaseNoteFiles)
 	})
 	.sort((a: ReleaseNote, b: ReleaseNote) => b.date.getTime() - a.date.getTime());
 
-const categoryOrder = ['Core', '🧪 Core Lab', 'DB Theme Icons', 'DB Theme Illustrative Icons'];
+const categoryOrder = ['Core', 'DB Theme Icons', 'DB Theme Illustrative Icons'];
 const categoriesFromData = Array.from(new Set(releaseNotes.map((note) => note.category)));
 const categories = [
 	...categoryOrder.filter((cat) => categoriesFromData.includes(cat)),
@@ -141,55 +141,6 @@ function getRoadmapUrl(category: string, version: string): string | null {
 	</DBStack>
 </DocumentationLayout>
 
-<script is:inline slot="script">
-	(function () {
-		var filterContainer;
-		var filterTags;
-		var releaseNotes;
-		var tocHeadingNotes;
-
-		function ensureCached() {
-			if (filterContainer) return;
-			filterContainer = document.getElementById('filter-tags');
-			if (!filterContainer) return;
-			filterTags = filterContainer.querySelectorAll('[data-category]');
-			releaseNotes = document.querySelectorAll('.release-note');
-			tocHeadingNotes = document.querySelectorAll('.dba-toc-heading');
-		}
-
-		document.addEventListener(
-			'change',
-			function (event) {
-				const checkbox = event.target;
-				if (!checkbox || checkbox.type !== 'checkbox') return;
-
-				ensureCached();
-				if (!filterContainer || !filterContainer.contains(checkbox)) return;
-
-				const activeCategories = [];
-				filterTags.forEach(function (tag) {
-					const cb = tag.querySelector('input[type="checkbox"]');
-					if (cb && cb.checked) {
-						activeCategories.push(tag.getAttribute('data-category'));
-					}
-				});
-
-				releaseNotes.forEach(function (note) {
-					const noteCategory = note.getAttribute('data-category');
-					note.hidden = !(activeCategories.length === 0 || activeCategories.includes(noteCategory));
-				});
-
-				tocHeadingNotes.forEach(function (heading) {
-					heading.style.display =
-						activeCategories.length === 0 ||
-						activeCategories.some(function (category) {
-							return heading.textContent.startsWith(category);
-						})
-							? 'flex'
-							: 'none';
-				});
-			},
-			true,
-		);
-	})();
+<script>
+	import '@template/utils/release-notes-filter.client.ts';
 </script>

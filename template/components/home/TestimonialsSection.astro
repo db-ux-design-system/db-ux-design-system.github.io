@@ -12,16 +12,11 @@ interface Props {
 const {
 	quote1 = '"Since adopting the system, our teams spend less time aligning on UI details and more time solving real product problems."',
 	quote2 = '"New team members ramp up faster because the system explains how we design and build our products."',
-	quote3 = '"Design and development finally speak the same language — handoff feels predictable instead of repetitive."',
+	quote3 = '"Design and development finally speak the same language – handoff feels predictable instead of repetitive."',
 } = Astro.props;
 ---
 
-<DBSection
-	width="large"
-	spacing="medium"
-	aria-label="Unified model section"
-	id="home--testimonials-section"
->
+<DBSection width="large" spacing="medium" aria-label="Testimonials" id="home--testimonials-section">
 	<Carousel>
 		<DBCard spacing="medium">
 			<TextImage
@@ -46,7 +41,7 @@ const {
 				imageWidth="33"
 				rounded={true}
 				imageSrc={`${appConfig.basePath}assets/people/Patrick-Weber--C.jpg`}
-				imageAlt="Tobias Oberpaul"
+				imageAlt="Patrick Weber"
 				textGap="2xl"
 			>
 				Patrick Weber <br />
