@@ -1,0 +1,173 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Control Panel Secondary Actions'
+title: 'Control Panel Secondary Actions'
+description: 'Control Panel Secondary Actions is the area within the Control Panel for supporting global actions.'
+align: start
+toc: true
+status: 'sub'
+order: 6
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Offer user profile, settings, or help across all pages
+- Separate supporting actions from frequently used ones
+- Keep the Control Panel lean without giving up utility actions
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards path="?path=/docs/components-dbcontrolpaneldesktop-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Order on Desktop
+
+On desktop, Primary and Secondary Actions sit next to each other, separated by a divider that appears together with the Secondary Actions. Without Primary Actions it separates an empty area.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4815-1398&embed-host=share"
+		description="On desktop, fill the Primary Actions first and only use Secondary Actions when there is a hierarchy."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4815-1402&embed-host=share"
+		description="Don't use Secondary Actions without Primary Actions on desktop. Otherwise the divider separates an empty area."
+	/>
+</div>
+
+### Action Type
+
+When both areas are used, Secondary Actions hold the utility actions that are relevant across pages but are not the users' main task, such as user profile, settings, or help.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-2&embed-host=share"
+		description="Place utility actions such as user profile, settings, or help in Secondary Actions when the Primary Actions are filled too."
+	/>
+	<GuidelineExample
+		fullWidth
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-4&embed-host=share"
+		description="Don't place frequently used actions such as search in Secondary Actions. They belong in the Primary Actions."
+	/>
+</div>
+
+### Count
+
+Secondary Actions sit at the end of the Control Panel. The more actions sit there, the more crowded the area appears.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-6&embed-host=share"
+		description="Place at most three actions in Secondary Actions."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-8&embed-host=share"
+		description="More than three actions overload the Control Panel. Check which actions are better placed on a dedicated page."
+	/>
+</div>
+
+### Flat Icon Limitation
+
+The Flat Icon variant has no area for Secondary Actions.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-10&embed-host=share"
+		description="Choose a variant with an area for Secondary Actions when you need utility actions."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4354-12&embed-host=share"
+		description="Don't use Flat Icon when Secondary Actions are needed. The variant has no area for them."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### In the Drawer on Mobile
+
+On mobile, Secondary Actions sit in the Drawer and are only reachable after opening it. Primary Actions stay visible on the first level.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4817-3065&embed-host=share"
+		description="Only put actions into the Secondary Actions that can afford one interaction step."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Examples" expandedText="Hide some Examples" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Control Panel Secondary Actions" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Control Panel Primary Actions',
+			description: 'Area within the Control Panel for frequently used global actions.',
+			url: '/documentation/components/control-panel/primary-actions',
+		},
+		{
+			title: 'Control Panel Desktop',
+			description: 'Primary navigation bar for desktop applications in the Top and Left positions.',
+			url: '/documentation/components/control-panel/desktop',
+		},
+		{
+			title: 'Control Panel Mobile',
+			description:
+				'Primary navigation bar for mobile applications with a Drawer for the full navigation.',
+			url: '/documentation/components/control-panel/mobile',
+		},
+	]}
+/>
+
+</DBSection>
