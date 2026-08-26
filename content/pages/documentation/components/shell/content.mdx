@@ -1,0 +1,137 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Shell Content'
+title: 'Shell Content'
+description: 'The Shell Content component forms the scrollable main content area of the Shell and divides it into a Start Slot, Children, and End Slot.'
+align: start
+toc: true
+status: 'sub'
+order: 3
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Divide content across the Start Slot, Children, and End Slot
+- Use Fixed to keep the Start Slot and End Slot visible while scrolling
+- Use Auto to scroll the entire area including the slots
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards path="?path=/docs/components-dbshell-position--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Scroll Behavior
+
+Fixed keeps the Start Slot and End Slot visible while scrolling. Auto scrolls the entire area including the slots.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-3&embed-host=share"
+		description="Use Fixed when the Start Slot or End Slot should stay visible while scrolling."
+	/>
+	<GuidelineExample
+		fullWidth
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-4&embed-host=share"
+		description="Don't use Auto when the Start Slot or End Slot should stay visible. They scroll out of the viewport along with the rest of the area."
+	/>
+</div>
+
+### Main Content Placement
+
+The main content belongs in Children. With Fixed, content in the Start Slot and End Slot stays in place instead of scrolling along.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-6&embed-host=share"
+		description="Place the main content in Children."
+	/>
+	<GuidelineExample
+		fullWidth
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-7&embed-host=share"
+		description="Don't place the main content in the Start Slot or End Slot. With Fixed it stays in place there instead of scrolling along."
+	/>
+</div>
+
+### Slot Size in Fixed
+
+In Fixed, the Start Slot and End Slot permanently take up space and reduce the scrollable area for Children.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4298-13&embed-host=share"
+		description="Keep the Start Slot and End Slot compact in Fixed."
+	/>
+	<GuidelineExample
+		fullWidth
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4298-16&embed-host=share"
+		description="Don't overfill the Start Slot and End Slot in Fixed. Slots that are too large shrink the scrollable area for Children to an unusable size."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### End Slot Content
+
+What sits in the End Slot determines the scroll behavior: a footer with legal links can scroll along with Auto, a primary CTA needs Fixed.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4301-131&embed-host=share"
+		description="Let a footer with legal links scroll along in the End Slot with Auto."
+	/>
+	<GuidelineExample
+		fullWidth
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4079-9&embed-host=share"
+		description="Use Fixed when a primary CTA in the End Slot should stay visible at all times."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Examples" expandedText="Hide some Examples" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Shell Content" />
+
+</DBSection>

@@ -1,0 +1,147 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Shell Mobile'
+title: 'Shell Mobile'
+description: 'The Shell Mobile component provides the outer layout structure for mobile web applications. It supports different Control Panel positions and uses a Drawer as the default main navigation.'
+align: start
+toc: true
+order: 2
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+
+- Set up a mobile application layout
+- Position the Control Panel at the top or at the bottom
+- Make main navigation accessible through a Drawer
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards path="?path=/docs/components-dbshell-position--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Navigation Structure
+
+On mobile, the Sub Navigation only supports a single flat level. If the Sub Navigation has more than one level on desktop, the navigation is restructured for mobile.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1118&embed-host=share"
+		description="Restructure the navigation for mobile when the Sub Navigation has more than one level on desktop."
+	/>
+	<GuidelineExample
+		fullWidth
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1119&embed-host=share"
+		description="Don't mirror a multi-level Sub Navigation on mobile. Only a single flat level is possible there."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Desktop and Mobile Differences
+
+Shell Mobile and Shell Desktop can be built differently. The navigation structure does not have to be identical on both devices, it can be adapted per device.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4330-140&embed-host=share"
+		description="On desktop, use the structure that gives the best overview there."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4330-144&embed-host=share"
+		description="Adapt the structure on mobile instead of carrying over the desktop hierarchy."
+	/>
+</div>
+
+### Control Panel Position
+
+The Control Panel can be positioned at the top or bottom. Both positions are valid design options.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1116&embed-host=share"
+		description="Position the Control Panel at the top."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1117&embed-host=share"
+		description="Position the Control Panel at the bottom."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Examples" expandedText="Hide some Examples" />
+
+</DBSection>
+
+<FigmaLearnTeaser componentName="Shell Mobile" anchor="controlpanel" />
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Shell Mobile" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Shell Desktop',
+			description:
+				'Outer layout structure for desktop web applications with a persistent Control Panel.',
+			url: '/documentation/components/shell/desktop',
+		},
+		{
+			title: 'Shell Sub Navigation',
+			description: 'Sub-level navigation within the Shell, oriented horizontally or vertically.',
+			url: '/documentation/components/shell/sub-navigation',
+		},
+		{
+			title: 'Control Panel Navigation',
+			description: 'Navigation container with the Popover, Tree, and Drill Down variants.',
+			url: '/documentation/components/control-panel/navigation',
+		},
+		{
+			title: 'Drawer',
+			description: 'Sliding panel for supplemental content or lightweight interactions.',
+			url: '/documentation/components/drawer/drawer',
+		},
+	]}
+/>
+
+</DBSection>
