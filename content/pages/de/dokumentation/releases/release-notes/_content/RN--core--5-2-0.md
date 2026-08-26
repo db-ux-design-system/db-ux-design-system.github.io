@@ -2,13 +2,11 @@
 hidePage: true
 category: 'Core'
 version: 'v5.2.0'
-date: '2026-08-13'
+date: '2026-08-27'
 ---
 
-### Design
+### Design & Entwicklung
 
-<!-- TO DO: Add design entries here. Check wording with Kiro before publishing. -->
+#### Geändert
 
-### Entwicklung
-
-<!-- TO DO: Entwicklungs-Einträge hier ergänzen. Formulierung vor Veröffentlichung mit Kiro prüfen. -->
+- Heading: Die Komponente wurde von Concept zu Beta hochgestuft. Sie umfasst Default Headings für die Level H1–H6 sowie eine Custom Heading mit Slots.

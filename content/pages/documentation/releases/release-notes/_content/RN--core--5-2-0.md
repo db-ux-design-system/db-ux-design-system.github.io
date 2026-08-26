@@ -2,13 +2,11 @@
 hidePage: true
 category: 'Core'
 version: 'v5.2.0'
-date: '2026-08-13'
+date: '2026-08-27'
 ---
 
-### Design
+### Design & Development
 
-<!-- TO DO: Add design entries here. Check wording with Kiro before publishing. -->
+#### Changed
 
-### Development
-
-<!-- TO DO: Add development entries here. Check wording with Kiro before publishing. -->
+- Heading: The component has been promoted from Concept to Beta. It includes default headings for levels H1–H6 and a Custom Heading with slots.
