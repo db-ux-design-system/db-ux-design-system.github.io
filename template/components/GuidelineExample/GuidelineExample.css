@@ -1,6 +1,7 @@
 .guideline-examples {
 	display: flex;
 	align-items: start;
+	flex-wrap: wrap;
 	gap: var(--db-spacing-fixed-md);
 	margin-block-end: var(--db-spacing-fixed-2xl);
 
@@ -9,9 +10,26 @@
 		min-inline-size: 0;
 	}
 
+	> .guideline-example-container[data-half-width='true']:only-child {
+		flex: 0 0 50%;
+		max-inline-size: 50%;
+	}
+
+	> .guideline-example-container[data-full-width='true']
+		+ .guideline-example-container[data-full-width='true'] {
+		margin-block-start: calc(
+			var(--db-spacing-fixed-xl) - var(--db-spacing-fixed-md)
+		);
+	}
+
 	&:last-child {
 		margin-block-end: 0;
 	}
+}
+
+.guideline-examples > .guideline-example-container[data-full-width='true'] {
+	flex: 0 0 100%;
+	inline-size: 100%;
 }
 
 .guideline-example-container {
@@ -27,6 +45,23 @@
 		.db-card {
 			.guideline-example-iframe {
 				aspect-ratio: unset;
+			}
+		}
+	}
+
+	&[data-image-ratio='portrait']:not([data-full-width='true']) {
+		.db-card {
+			.guideline-example-iframe {
+				aspect-ratio: 4 / 5;
+			}
+		}
+	}
+
+	/* Not used by any content yet; added proactively so a 1:1 ratio is available when needed. */
+	&[data-image-ratio='square']:not([data-full-width='true']) {
+		.db-card {
+			.guideline-example-iframe {
+				aspect-ratio: 1 / 1;
 			}
 		}
 	}
@@ -71,6 +106,11 @@
 
 		.guideline-example-container {
 			inline-size: 100%;
+		}
+
+		> .guideline-example-container[data-half-width='true']:only-child {
+			flex: 0 0 100%;
+			max-inline-size: 100%;
 		}
 	}
 
