@@ -72,23 +72,6 @@ Die Anzahl der Navigation Items auf Unterebene entscheidet über die Position de
 	/>
 </div>
 
-### Konsistente Position
-
-Die Position der Sub Navigation bleibt über alle Hauptbereiche der Anwendung gleich. Nutzer:innen erwarten ein stabiles Navigationslayout.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4277-3&embed-host=share"
-		description="Behalte die einmal gewählte Position der Sub Navigation in allen Hauptbereichen bei."
-	/>
-	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=4277-5&embed-host=share"
-		description="Wechsle die Position der Sub Navigation nicht, wenn Nutzer:innen zwischen Hauptbereichen navigieren. Sie müssen sich sonst bei jedem Wechsel neu orientieren."
-	/>
-</div>
-
 </CollapsibleWrapper>
 
 <CollapseButton
@@ -98,18 +81,20 @@ Die Position der Sub Navigation bleibt über alle Hauptbereiche der Anwendung gl
 
 ### Control Panel und Sub Navigation
 
-| Control Panel | Control Panel Position | Control Panel Navigation | Sub Navigation | Sub Navigation Position | Sub Navigation Variant |
-| ------------- | ---------------------- | ------------------------ | -------------- | ----------------------- | ---------------------- |
-| Desktop       | Top                    | Popover                  | ❌             | ❌                      | ❌                     |
-| Desktop       | Top                    | Popover                  | ✅             | Top                     | Popover                |
-| Desktop       | Top                    | Popover                  | ✅             | Left                    | Drill Down             |
-| Desktop       | Top                    | Popover                  | ✅             | Left                    | Tree                   |
-| Desktop       | Left                   | Drill Down               | ❌             | ❌                      | ❌                     |
-| Desktop       | Left                   | Tree                     | ❌             | ❌                      | ❌                     |
-| Desktop       | Left                   | Drill Down               | ✅             | Top                     | Popover                |
-| Desktop       | Left                   | Tree                     | ✅             | Top                     | Popover                |
-| Flat Icon     | Left                   | ❌                       | ❌             | ❌                      | ❌                     |
-| Flat Icon     | Left                   | ❌                       | ✅             | Top                     | Popover                |
+Die folgende Tabelle zeigt, welche Kombinationen aus Positionen und Navigationsvarianten des Control Panels und der Sub Navigation unterstützt werden.
+
+| Control Panel | Control Panel Position | Control Panel Navigation | Sub Navigation Position | Sub Navigation Variant |
+| ------------- | ---------------------- | ------------------------ | ----------------------- | ----------------------- |
+| Desktop       | Top                    | Popover                  | ❌                      | ❌                     |
+| Desktop       | Top                    | Popover                  | Top                     | Popover                |
+| Desktop       | Top                    | Popover                  | Left                    | Drill Down             |
+| Desktop       | Top                    | Popover                  | Left                    | Tree                   |
+| Desktop       | Left                   | Drill Down               | ❌                      | ❌                     |
+| Desktop       | Left                   | Tree                     | ❌                      | ❌                     |
+| Desktop       | Left                   | Drill Down               | Top                     | Popover                |
+| Desktop       | Left                   | Tree                     | Top                     | Popover                |
+| Flat Icon     | Left                   | ❌                       | ❌                      | ❌                     |
+| Flat Icon     | Left                   | ❌                       | Top                     | Popover                |
 
 </DBSection>
 
