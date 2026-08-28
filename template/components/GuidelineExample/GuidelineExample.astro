@@ -55,7 +55,10 @@ if (existsSync(manifestPath)) {
 }
 
 const hasSlot = Astro.slots.has('default');
-const accessibleDescription = `${label ?? ''} example${description ? `: ${description}` : ''}`;
+const isDE = Astro.url.pathname.startsWith('/de/') || Astro.url.pathname === '/de';
+// The figcaption describes what the image shows, so the image itself is decorative
+// and gets an empty alt. An iframe still needs an accessible name.
+const frameTitle = description ?? (isDE ? 'Figma-Beispiel' : 'Figma example');
 ---
 
 <figure
@@ -80,14 +83,14 @@ const accessibleDescription = `${label ?? ''} example${description ? `: ${descri
 				<img
 					class="guideline-example-iframe"
 					src={cachedImageSrc}
-					alt={accessibleDescription}
+					alt=""
 					loading="lazy"
 				/>
 			) : (
 				<iframe
 					class="guideline-example-iframe"
 					src={fullUrl}
-					title={accessibleDescription}
+					title={frameTitle}
 					loading="eager"
 					allowfullscreen
 				/>
