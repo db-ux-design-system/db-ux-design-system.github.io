@@ -94,8 +94,9 @@ for (const [filePath, mod] of Object.entries(modules)) {
 
 	const fm: FrontMatter = mod.frontmatter ?? mod.default?.frontmatter ?? {};
 
-	// Skip hidden pages or pages with nav: false
-	if (fm.hidePage || fm.nav === false) continue;
+	// Skip pages with nav: false, and hidden pages unless they redirect to a default
+	// subpage. Parent components like Shell stay in the overview and link to that subpage.
+	if ((fm.hidePage && !fm.redirectTo) || fm.nav === false) continue;
 
 	// Skip external redirects
 	if (fm.externalUrl) continue;

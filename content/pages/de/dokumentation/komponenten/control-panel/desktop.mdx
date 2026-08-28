@@ -1,0 +1,98 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Control Panel Desktop'
+title: 'Control Panel Desktop'
+description: 'Das Control Panel Desktop stellt die primäre Navigationsleiste für Desktop-Anwendungen innerhalb der Shell bereit. Es steht in zwei Positionen zur Verfügung: Top als horizontale Leiste und Left als vertikale Sidebar. Die Wahl zwischen beiden Positionen ist bei Shell Desktop geregelt.'
+align: start
+toc: true
+order: 1
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+
+- Logo, Navigation und globale Aktionen in einem dauerhaft sichtbaren Rahmen bündeln
+- Das Control Panel oben als horizontale Leiste oder links als vertikale Sidebar positionieren
+- Nutzer:innen können das Control Panel Left einklappen und so dem Seiteninhalt mehr Breite geben
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbcontrolpaneldesktop-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Beispiele
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Einklappbares Control Panel Left
+
+Auf Desktop können Nutzer:innen das Control Panel Left in den Varianten Drill Down und Tree einklappen; initial ist es immer ausgeklappt. Im eingeklappten Zustand bleiben nur Brand und der Button zum Ausklappen sichtbar.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4042-10&embed-host=share"
+		description="Nutzer:innen können das Control Panel Left einklappen, um dem Seiteninhalt mehr Breite zu geben. Brand und der Button zum Ausklappen bleiben sichtbar."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Beispiele anzeigen" expandedText="Weniger Beispiele anzeigen" />
+
+</DBSection>
+
+<FigmaLearnTeaser componentName="Control Panel Desktop" locale="de" anchor="control-panel--shell" />
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Control Panel Desktop" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Shell Desktop',
+			description:
+				'Äußere Layout-Struktur für Desktop-Webanwendungen mit dauerhaftem Control Panel.',
+			url: '/de/dokumentation/komponenten/shell/desktop',
+		},
+		{
+			title: 'Control Panel Mobile',
+			description:
+				'Primäre Navigationsleiste für mobile Anwendungen mit Drawer für die vollständige Navigation.',
+			url: '/de/dokumentation/komponenten/control-panel/mobile',
+		},
+		{
+			title: 'Control Panel Navigation',
+			description: 'Navigations-Container mit den Varianten Popover, Tree und Drill Down.',
+			url: '/de/dokumentation/komponenten/control-panel/navigation',
+		},
+		{
+			title: 'Control Panel Flat Icon',
+			description: 'Flache Icon-Navigation für gleichwertige Ziele auf oberster Ebene.',
+			url: '/de/dokumentation/komponenten/control-panel/flat-icon',
+		},
+	]}
+/>
+
+</DBSection>
