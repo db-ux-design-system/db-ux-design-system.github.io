@@ -25,13 +25,13 @@ import GuidelineExample from '@template/components/GuidelineExample/GuidelineExa
 
 Komponenteneigenschaften in der Figma-Bibliothek verwenden Emoji-Präfixe, um Typ und Zweck auf einen Blick erkennbar zu machen.
 
-| Icon | Zweck | Beispiel |
-|------|-------|----------|
-| 👁️ | Anzeigen/Ausblenden (schaltet Sichtbarkeit um) | `👁️ Show Label` |
-| 🔀 | Variantenauswahl | `🔀 Variant` |
-| 📦 | Slot (Inhaltsbereich) | `📦 Children` |
-| 🔄 | Icon-Swap (Instance Swap für Icons) | `🔄 Icon` |
-| ✏️ | Text-Override | `✏️ Label` |
+| Icon | Zweck                                          | Beispiel        |
+| ---- | ---------------------------------------------- | --------------- |
+| 👁️   | Anzeigen/Ausblenden (schaltet Sichtbarkeit um) | `👁️ Show Label` |
+| 🔀   | Variantenauswahl                               | `🔀 Variant`    |
+| 📦   | Slot (Inhaltsbereich)                          | `📦 Children`   |
+| 🔄   | Icon-Swap (Instance Swap für Icons)            | `🔄 Icon`       |
+| ✏️   | Text-Override                                  | `✏️ Label`      |
 
 </DBStack>
 
@@ -71,9 +71,9 @@ Custom Select Dropdown
 
 - **Thumb-Größe setzen**: 📏 Resizer Gap-Wert
 - **Freie Position setzen**: Thumb Container Padding-Wert
-</div>
-</div>
 
+</div>
+</div>
 
 </DBStack>
 
@@ -85,15 +85,15 @@ Custom Select Dropdown
 
 {/* Tipps und Anleitungen für einzelne Komponenten */}
 
-
-
 <DBStack gap="medium">
 ### Accordion
 
 #### Resize-Verhalten nach dem Bearbeiten
 
 <DBNotification variant="standalone" semantic="informational">
-Bekannter Figma-Bug: Das Ändern der Item-Anzahl oder des Item-Zustands (offen/eingeklappt) kann das Resize-Verhalten von Accordion-Items zurücksetzen. Wende Fill oder Hug nach dem Bearbeiten erneut an.
+	Bekannter Figma-Bug: Das Ändern der Item-Anzahl oder des Item-Zustands (offen/eingeklappt) kann
+	das Resize-Verhalten von Accordion-Items zurücksetzen. Wende Fill oder Hug nach dem Bearbeiten
+	erneut an.
 </DBNotification>
 
 <div className="guideline-examples">
@@ -115,9 +115,9 @@ Bekannter Figma-Bug: Das Ändern der Item-Anzahl oder des Item-Zustands (offen/e
 #### Mehrzeiliger Text in Full-Width-Buttons
 
 <DBNotification variant="standalone" semantic="informational">
-Mehrzeiligen Text nur in Ausnahmefällen verwenden, z. B. wenn der Text durch Übersetzung verlängert wird.
+	Mehrzeiligen Text nur in Ausnahmefällen verwenden, z. B. wenn der Text durch Übersetzung
+	verlängert wird.
 </DBNotification>
-
 
 Um automatische Zeilenumbrüche in einem Full-Width-Button zu aktivieren, den Text-Layer innerhalb des Buttons auswählen und das Breiten-Resize-Verhalten von Hug auf Fill ändern.
 
@@ -146,9 +146,10 @@ Um automatische Zeilenumbrüche in einem Full-Width-Button zu aktivieren, den Te
 >
 Checkboxen haben eine Toggle-Eigenschaft für das Pflichtfeld-Sternchen.
 
-Bei Full-Width-Checkboxen muss das Sternchen * manuell im Label-Feld ergänzt werden.
+Bei Full-Width-Checkboxen muss das Sternchen \* manuell im Label-Feld ergänzt werden.
 
 Required Toggle = true setzen für korrekte Dev Properties.
+
 </GuidelineExample>
 
 </DBStack>
@@ -175,6 +176,26 @@ Setze die Dropdown Height von (Def) Auto auf Fill, um die Dropdown-Höhe in begr
 </DBStack>
 
 <DBStack gap="medium">
+### Heading
+#### Mehrzeiliger Text bei Custom Headings
+
+Um automatische Zeilenumbrüche in einer Custom Heading zu ermöglichen, wähle die „Heading"-Ebene innerhalb der Komponente und ändere das Breitenverhalten von „Hug" auf „Fill".
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4118-2706&embed-host=share"
+	description='Wähle die „Text"-Ebene innerhalb der Custom-Heading-Komponente'
+/>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4118-3117&embed-host=share"
+	description='Ändere das Breitenverhalten von „Hug" auf „Fill"'
+/>
+</div>
+
+</DBStack>
+
+<DBStack gap="medium">
 ### Radio
 
 #### Full Width – Pflichtfeld-Kennzeichnung
@@ -185,9 +206,10 @@ Setze die Dropdown Height von (Def) Auto auf Fill, um die Dropdown-Höhe in begr
 >
 Radio Buttons haben eine Toggle-Eigenschaft für das Pflichtfeld-Sternchen.
 
-Bei Full-Width-Radio-Buttons muss das Sternchen * manuell im Label-Feld ergänzt werden.
+Bei Full-Width-Radio-Buttons muss das Sternchen \* manuell im Label-Feld ergänzt werden.
 
 Required Toggle = true setzen für korrekte Dev Properties.
+
 </GuidelineExample>
 
 </DBStack>
@@ -203,9 +225,10 @@ Required Toggle = true setzen für korrekte Dev Properties.
 >
 Switches haben eine Toggle-Eigenschaft für das Pflichtfeld-Sternchen.
 
-Bei Full-Width-Switches muss das Sternchen * manuell im Label-Feld ergänzt werden.
+Bei Full-Width-Switches muss das Sternchen \* manuell im Label-Feld ergänzt werden.
 
 Required Toggle = true setzen für korrekte Dev Properties.
+
 </GuidelineExample>
 
 </DBStack>
@@ -223,6 +246,7 @@ Nach dem Platzieren der Komponente und dem Setzen der Eigenschaften die Größe 
 
 - Container
 - Textarea Container
+
 </GuidelineExample>
 
 </DBStack>
@@ -233,7 +257,7 @@ Nach dem Platzieren der Komponente und dem Setzen der Eigenschaften die Größe 
 #### Den Tooltip-Pfeil auf eine flexible Position ändern
 
 <DBNotification variant="standalone" semantic="informational">
-Der Pfeil für Tooltip links/rechts sollte nur mit width: fixed positioniert werden.
+	Der Pfeil für Tooltip links/rechts sollte nur mit width: fixed positioniert werden.
 </DBNotification>
 
 <GuidelineExample

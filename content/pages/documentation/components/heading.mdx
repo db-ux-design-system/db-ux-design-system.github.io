@@ -4,9 +4,136 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Heading'
 title: 'Heading'
-shortDescription: 'Typographic element for structuring content with semantic hierarchy.'
+description: 'Heading structures content with six semantic levels (H1–H6). Custom Heading adds start and end slots for additional elements like links or badges alongside the text.'
+shortDescription: 'Structures content with six semantic heading levels, optionally with slots for additional elements.'
 align: start
-status: 'concept'
 toc: true
-isMenuItemDisabled: true
+status: 'beta'
 ---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+
+- Divide page content into logical sections with a clear hierarchy
+- Enable screen reader navigation through document structure
+- Place links or badges alongside a heading (Custom Heading)
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards path="?path=/docs/components-dbheading--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### One H1 per page
+
+Use exactly one H1 per page as the top level of the document structure. Multiple H1 elements break the hierarchy and impair screen reader navigation.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4117-2&embed-host=share"
+		description="Use exactly one H1 as the page title and H2–H6 for subsections."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4117-4&embed-host=share"
+		description="Don't use multiple H1 on the same page. Screen readers lose orientation in the document structure."
+	/>
+</div>
+
+### No skipping heading levels
+
+Maintain heading order (H1 → H2 → H3). Skipped levels create an incomplete outline and hinder navigation with assistive technologies.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4117-6&embed-host=share"
+		description="Build the heading hierarchy without gaps: H1, then H2, then H3."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4117-8&embed-host=share"
+		description="Don't jump from H1 directly to H3. The missing level creates an incomplete outline for screen readers."
+	/>
+</div>
+
+### Visual hierarchy with size
+
+When overriding size, maintain the visual hierarchy from H1 to H6. Each level must be equal to or smaller than the previous one.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4117-10&embed-host=share"
+		description="Ensure H1 remains visually larger than or equal to H2, even when overriding size."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4117-12&embed-host=share"
+		description="An inverted size order (H2 larger than H1) contradicts reading expectations and makes it harder to grasp page structure."
+	/>
+</div>
+
+### Custom Heading vs. Heading
+
+Use Custom Heading only when additional elements are needed in the start or end slot alongside the heading text. For plain text headings, Heading H1–H6 is the right choice.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4117-14&embed-host=share"
+		description="Use Custom Heading when links, icons, or badges need to appear alongside the heading text."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4117-16&embed-host=share"
+		description="Don't use Custom Heading for plain text headings. Heading H1–H6 is designed for that."
+	/>
+</div>
+
+### Limit slot elements
+
+Limit additional elements in the slots to what is necessary. Too many actions distract from the content and reduce clarity.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4117-18&embed-host=share"
+		description="Place only the most necessary elements (e.g., a single link or badge) in the slots."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4117-20&embed-host=share"
+		description="Too many actions alongside a heading distract from the actual content and make the area cluttered."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<FigmaLearnTeaser componentName="Heading" />
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Heading" />
+
+</DBSection>
