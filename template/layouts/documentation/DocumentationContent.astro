@@ -24,7 +24,7 @@ const badgeMap: Record<string, { text: string; semantic: SemanticType }> = {
 const badge = frontmatter.status ? badgeMap[frontmatter.status] : undefined;
 const isSub = frontmatter.status === 'sub';
 const SUB_PARENT_LABELS: Record<string, string> = {
-	controlpanel: 'ControlPanel',
+	'control-panel': 'Control Panel',
 	shell: 'Shell',
 };
 const parentSegment = Astro.url.pathname.split('/').filter(Boolean).at(-2);

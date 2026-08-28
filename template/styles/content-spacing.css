@@ -16,6 +16,12 @@
 	margin-block: 0;
 }
 
+/* Keep fragment targets visible below the shell header, including nested scroll containers. */
+.dba-main-content :is(h1, h2, h3, h4, h5, h6) {
+	/* stylelint-disable-next-line db-ux/use-spacings */
+	scroll-margin-block-start: var(--header-height);
+}
+
 /* Base rule: content element preceded by another content element gets md spacing */
 .dba-main-content
 	:is(
@@ -58,6 +64,15 @@
 		astro-island
 	) {
 	margin-block-start: var(--db-spacing-fixed-md);
+}
+
+/* Content following a collapse control needs spacing only when it exists. */
+.dba-main-content .collapse-button + * {
+	margin-block-start: var(--db-spacing-fixed-md);
+}
+
+.dba-main-content .collapse-button + :is(h2, h3, h4, h5, h6) {
+	margin-block-start: var(--db-spacing-fixed-2xl);
 }
 
 /* Headlines after content get large spacing to separate sections */
