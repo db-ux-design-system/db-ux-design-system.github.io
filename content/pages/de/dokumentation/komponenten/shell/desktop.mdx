@@ -1,0 +1,147 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Shell Desktop'
+title: 'Shell Desktop'
+description: 'Die Komponente Shell Desktop stellt die äußere Layout-Struktur für Desktop-Webanwendungen bereit. Sie hält das Control Panel dauerhaft sichtbar und scrollt nur den Inhaltsbereich.'
+align: start
+toc: true
+tocMaxDepth: 3
+order: 1
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+
+- Layout einer Desktop-Anwendung aufbauen: nur der Inhaltsbereich scrollt
+- Control Panel oben oder links positionieren
+- Sub Navigation für Unterseiten ergänzen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbshell-position--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Control Panel Position
+
+Die Anzahl der Navigation Items auf oberster Ebene entscheidet über die Position des Control Panels. Ab vier Items gibt Left ihnen eine dauerhafte vertikale Übersicht.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=1-1132&embed-host=share"
+		description="Setze Control Panel Left ab vier Navigation Items auf oberster Ebene ein."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=1-1133&embed-host=share"
+		description="Unter vier Navigation Items belegt Left Platz ohne strukturellen Nutzen. Prüfe in diesem Fall Top."
+	/>
+</div>
+
+### Sub Navigation Position
+
+Die Anzahl der Navigation Items auf Unterebene entscheidet über die Position der Sub Navigation. Ab sechs Items hält Left sie dauerhaft im Blick.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1110&embed-host=share"
+		description="Setze Sub Navigation Left ab sechs Navigation Items auf Unterebene ein."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=3-1112&embed-host=share"
+		description="Unter sechs Navigation Items genügt Sub Navigation Top. Left belegt dann Breite, die dem Seitencontent fehlt."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton
+	collapsedText="Alle Richtlinien anzeigen"
+	expandedText="Weniger Richtlinien anzeigen"
+/>
+
+### Control Panel und Sub Navigation
+
+Die folgende Tabelle zeigt, welche Kombinationen aus Positionen und Navigationsvarianten des Control Panels und der Sub Navigation unterstützt werden.
+
+| Control Panel | Control Panel Position | Control Panel Navigation | Sub Navigation Position | Sub Navigation Variant |
+| ------------- | ---------------------- | ------------------------ | ----------------------- | ----------------------- |
+| Desktop       | Top                    | Popover                  | ❌                      | ❌                     |
+| Desktop       | Top                    | Popover                  | Top                     | Popover                |
+| Desktop       | Top                    | Popover                  | Left                    | Drill Down             |
+| Desktop       | Top                    | Popover                  | Left                    | Tree                   |
+| Desktop       | Left                   | Drill Down               | ❌                      | ❌                     |
+| Desktop       | Left                   | Tree                     | ❌                      | ❌                     |
+| Desktop       | Left                   | Drill Down               | Top                     | Popover                |
+| Desktop       | Left                   | Tree                     | Top                     | Popover                |
+| Flat Icon     | Left                   | ❌                       | ❌                      | ❌                     |
+| Flat Icon     | Left                   | ❌                       | Top                     | Popover                |
+
+</DBSection>
+
+<FigmaLearnTeaser componentName="Shell Desktop" locale="de" anchor="control-panel--shell" />
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Shell Desktop" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Control Panel Desktop',
+			description:
+				'Primäre Navigationsleiste für Desktop-Anwendungen in den Positionen Top und Left.',
+			url: '/de/dokumentation/komponenten/control-panel/desktop',
+		},
+		{
+			title: 'Shell Sub Navigation',
+			description:
+				'Untergeordnete Navigation innerhalb der Shell, horizontal oder vertikal ausgerichtet.',
+			url: '/de/dokumentation/komponenten/shell/sub-navigation',
+		},
+		{
+			title: 'Control Panel Brand',
+			description: 'Logo und optionaler Anwendungsname im Control Panel.',
+			url: '/de/dokumentation/komponenten/control-panel/brand',
+		},
+		{
+			title: 'Control Panel Primary Actions',
+			description: 'Bereich im Control Panel für häufig genutzte globale Aktionen.',
+			url: '/de/dokumentation/komponenten/control-panel/primary-actions',
+		},
+		{
+			title: 'Control Panel Secondary Actions',
+			description: 'Bereich im Control Panel für unterstützende globale Aktionen.',
+			url: '/de/dokumentation/komponenten/control-panel/secondary-actions',
+		},
+	]}
+/>
+
+</DBSection>
