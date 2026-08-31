@@ -53,7 +53,7 @@ function toTitleFromSegment(segment: string): string {
  */
 function ensureChild(parent: NavigationItem, child: NavigationItem) {
 	parent.children = parent.children ?? [];
-	const exists = parent.children.find((c) => c.path === child.path);
+	const exists = parent.children.find((c) => c.path === child.path && c.title === child.title);
 	if (!exists) parent.children.push(child);
 }
 
@@ -69,23 +69,27 @@ function getOrder(fm: NavigationFrontmatter): number | undefined {
 }
 
 /**
- * Comparator function for sorting navigation items. First by status priority, then by `order`, then alphabetically by `title`.
+ * Comparator function for sorting navigation items. Items are grouped by status first, with subcomponents listed after the regular status groups; within each group, items are sorted by `order` and then alphabetically by `title`.
  *
  * @param a - The first navigation item.
  * @param b - The second navigation item.
  * @returns -1, 0, or 1 depending on order.
  */
 function compareNav(a: NavigationItem, b: NavigationItem) {
-	// Status priority: stable > beta > concept > legacy > deprecated
+	// 'sub' previously shared the top band with 'stable', which caused Control Panel's
+	// subcomponent pages to interleave with its own top-level status groups. Giving 'sub'
+	// its own trailing band keeps subcomponents grouped after all real status bands.
+	// Other navigation groupings were not affected by the previous grouping.
 	const statusPriority: Record<string, number> = {
 		stable: 1,
 		beta: 2,
 		concept: 3,
 		legacy: 4,
 		deprecated: 5,
+		sub: 6,
 	};
-	const aStatus = statusPriority[a.status || 'stable'] ?? 6;
-	const bStatus = statusPriority[b.status || 'stable'] ?? 6;
+	const aStatus = statusPriority[a.status || 'stable'] ?? 7;
+	const bStatus = statusPriority[b.status || 'stable'] ?? 7;
 	if (aStatus !== bStatus) return aStatus - bStatus;
 
 	const ao = a.order ?? Number.MAX_SAFE_INTEGER;

@@ -3,9 +3,7 @@ import type { MarkdownHeading } from 'astro';
 import '../../styles/global.css';
 import HtmlHead from '@template/components/HtmlHead';
 import DocumentationContent from './DocumentationContent.astro';
-import { appConfig } from '@root/app.config.ts';
 import { Shell } from '@template/components/Shell';
-import Footer from '@template/components/Footer/Footer.astro';
 import { appNavigation } from '@root/app.navigation.ts';
 
 interface Props {
@@ -74,9 +72,9 @@ if (frontmatter.externalUrl) {
 					pathname={currentPath}
 					subNavigationVariant={frontmatter.subNavigationVariant}
 				>
-						<DocumentationContent frontmatter={frontmatter} headings={headings}>
-							<slot />
-						</DocumentationContent>
+					<DocumentationContent frontmatter={frontmatter} headings={headings}>
+						<slot />
+					</DocumentationContent>
 				</Shell>
 				<slot name="script" />
 				<script>import '@template/components/ComponentPlayground/playground-init';</script>

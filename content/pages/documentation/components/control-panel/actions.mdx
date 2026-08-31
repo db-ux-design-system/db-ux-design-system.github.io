@@ -1,0 +1,224 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Control Panel Actions'
+title: 'Control Panel Actions'
+description: 'Control Panel Actions comprises the two independent slot components Actions 1 and Actions 2 for global actions in the Control Panel.'
+align: start
+toc: true
+status: 'sub'
+order: 5
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+- Arrange the main action and utility actions separately
+- Distribute actions across two slots: by content or hierarchy
+- Arrange actions responsively: horizontally, vertically, or in the Drawer
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards path="?path=/docs/components-dbcontrolpanelactions--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Slot Content
+
+Both slots hold either actions or environmental information. The elements of a slot read as one group, so only one of the two content types sits within a single slot. The Control Panel Brand End slot also holds environmental information. On mobile, it is the only slot available in the menu bar besides Actions 1.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=5565-270&embed-host=share"
+		description="Use a slot either for actions or for environmental information."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=5565-402&embed-host=share"
+		description="In a mixed slot the environmental information appears to be part of the action group. Place it in the Control Panel Brand End slot or in the second slot instead."
+	/>
+</div>
+
+### Order and Split
+
+Fill Actions 1 first. Use Actions 2 in addition when the actions are separated by content or hierarchy. On desktop, Actions 2 shows a divider.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4815-1398&embed-host=share"
+		description="Fill Actions 1 first and use Actions 2 for a second group of actions."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4815-1402&embed-host=share"
+		description="Don't fill Actions 2 as the only slot. On desktop the divider then separates an empty area."
+	/>
+</div>
+
+### Count
+
+Across both slots together, at most one main action and at most four utility actions apply. Which slot they sit in depends on the chosen split.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4338-2&embed-host=share"
+		description="Place at most one main action and at most four utility actions across both slots."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4338-4&embed-host=share"
+		description="More actions make the most important action harder to recognize. Check which actions belong on a dedicated page."
+	/>
+</div>
+
+### Count on Mobile
+
+On mobile, the slot in the menu bar shares its width with the Control Panel Brand. With an application name or additional content there is room for one action, without an application name for two icon buttons.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=5566-4609&embed-host=share"
+		description="Place one action in the menu bar when the Control Panel Brand includes an application name or additional content. Without an application name, two icon buttons are possible."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=5566-4724&embed-host=share"
+		description="More actions leave too little room next to the Control Panel Brand in the menu bar. Move additional actions to the Drawer footer."
+	/>
+</div>
+
+### Flat Icon Limitation
+
+The Flat Icon variant has no area for Actions.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4338-10&embed-host=share"
+		description="Choose a variant with an area for Actions when you need global actions."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4338-12&embed-host=share"
+		description="Don't use Flat Icon when Actions are needed. The variant has no area for them."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Split by Page Type
+
+The action split can follow the character of the page and the number of actions. The following variants show possible assignments, not a binding rule.
+
+<h4>Marketing Page with One CTA</h4>
+
+Place the main CTA in Actions 1 and leave Actions 2 empty.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=5566-8126&embed-host=share"
+		description="Place the main CTA in Actions 1 and leave Actions 2 empty."
+	/>
+</div>
+
+<h4>Marketing Page with Additional Actions</h4>
+
+Place the main CTA in Actions 2 and the remaining actions in Actions 1. The divider sets the CTA apart.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=5566-9222&embed-host=share"
+		description="Place the main CTA in Actions 2 and the remaining actions in Actions 1. The divider sets the CTA apart."
+	/>
+</div>
+
+<h4>Utility-Focused Page</h4>
+
+Place search and frequent global actions in Actions 1 and utility actions in Actions 2.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=5566-9349&embed-host=share"
+		description="Place search and frequent global actions in Actions 1 and utility actions in Actions 2."
+	/>
+</div>
+
+### Menu Bar and Drawer on Mobile
+
+On mobile, Actions 1 stays visible in the menu bar, while Actions 2 sits in the Drawer footer and is only reachable after opening it.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4812-1247&embed-host=share"
+		description="Place the main action in Actions 1 and the remaining actions in Actions 2 in the Drawer footer."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Examples" expandedText="Hide some Examples" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Control Panel Brand',
+			description: 'Logo and optional application name within the Control Panel.',
+			url: '/documentation/components/control-panel/brand',
+		},
+		{
+			title: 'Control Panel Desktop',
+			description: 'Primary navigation bar for desktop applications in the Top and Left positions.',
+			url: '/documentation/components/control-panel/desktop',
+		},
+		{
+			title: 'Control Panel Mobile',
+			description:
+				'Primary navigation bar for mobile applications with a Drawer for the full navigation.',
+			url: '/documentation/components/control-panel/mobile',
+		},
+		{
+			title: 'Control Panel Flat Icon',
+			description: 'Flat icon navigation for equally weighted top-level destinations.',
+			url: '/documentation/components/control-panel/flat-icon',
+		},
+	]}
+/>
+
+</DBSection>
