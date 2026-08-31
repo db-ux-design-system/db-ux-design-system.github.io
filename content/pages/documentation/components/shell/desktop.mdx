@@ -17,7 +17,6 @@ import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleW
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 
 - Set up a desktop application layout: only the content area scrolls
@@ -51,7 +50,7 @@ The number of top-level Navigation Items determines the Control Panel position. 
 	<GuidelineExample
 		variant="caution"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=1-1133&embed-host=share"
-		description="Below four Navigation Items, Left takes up space without any structural benefit. Consider Top in that case."
+		description="Below four Navigation Items, Left takes up space without any structural benefit. Consider Top or Flat Icon in that case."
 	/>
 </div>
 
@@ -81,7 +80,7 @@ The number of sub-level Navigation Items determines the Sub Navigation position.
 The following table shows which combinations of Control Panel and Sub Navigation positions and navigation variants are supported.
 
 | Control Panel | Control Panel Position | Control Panel Navigation | Sub Navigation Position | Sub Navigation Variant |
-| ------------- | ---------------------- | ------------------------ | ----------------------- | ----------------------- |
+| ------------- | ---------------------- | ------------------------ | ----------------------- | ---------------------- |
 | Desktop       | Top                    | Popover                  | ❌                      | ❌                     |
 | Desktop       | Top                    | Popover                  | Top                     | Popover                |
 | Desktop       | Top                    | Popover                  | Left                    | Drill Down             |
@@ -96,14 +95,6 @@ The following table shows which combinations of Control Panel and Sub Navigation
 </DBSection>
 
 <FigmaLearnTeaser componentName="Shell Desktop" anchor="control-panel--shell" />
-
-<DBSection spacing="small" width="auto">
-
-## FAQ
-
-<QuestionForm componentName="Shell Desktop" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -127,14 +118,10 @@ The following table shows which combinations of Control Panel and Sub Navigation
 			url: '/documentation/components/control-panel/brand',
 		},
 		{
-			title: 'Control Panel Primary Actions',
-			description: 'Area within the Control Panel for frequently used global actions.',
-			url: '/documentation/components/control-panel/primary-actions',
-		},
-		{
-			title: 'Control Panel Secondary Actions',
-			description: 'Area within the Control Panel for supporting global actions.',
-			url: '/documentation/components/control-panel/secondary-actions',
+			title: 'Control Panel Actions',
+			description:
+				'Two independent action areas for global and supporting utility actions within the Control Panel.',
+			url: '/documentation/components/control-panel/actions',
 		},
 	]}
 />
