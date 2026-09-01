@@ -31,3 +31,6 @@ draft: true
 
 #### Fixed
 - Button: The fixed width of the icon button has been corrected.
+
+#### Deprecated
+- Brand components of the Foundation (Logo + Pulse) are moved to Deprecated.

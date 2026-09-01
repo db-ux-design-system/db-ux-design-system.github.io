@@ -31,3 +31,6 @@ draft: true
 
 #### Behoben
 - Button: Die fixe Breite des Icon-Buttons wurde korrigiert.
+
+#### Deprecated
+- Brand Komponenten der Foundation (Logo + Pulse) werden auf Deprecated gesetzt.
