@@ -141,13 +141,9 @@
    TODO: Move this fix into core-web (control-panel-navigation-item-group component)
    by scoping the :has(menu:hover) rule to .db-control-panel-navigation:not([data-variant='tree']).
    See: https://github.com/db-ux-design-system/core-web/pull/4639/changes#r3595283584 */
-.db-control-panel-navigation-item-group:has(
-		> .db-control-panel-navigation-item-group-menu :hover
-	)
+.db-control-panel-navigation-item-group:has(> .db-control-panel-navigation-item-group-menu :hover)
 	> .db-control-panel-navigation-item-group-expand-button,
-.db-control-panel-navigation-item-group:has(
-		> .db-control-panel-navigation-item-group-menu :focus
-	)
+.db-control-panel-navigation-item-group:has(> .db-control-panel-navigation-item-group-menu :focus)
 	> .db-control-panel-navigation-item-group-expand-button,
 .db-control-panel-navigation-item-group:has(
 		> .db-control-panel-navigation-item-group-menu :focus-visible

@@ -1,11 +1,11 @@
-import { DBControlPanelActions1 } from '@db-ux/react-core-components';
+import { DBControlPanelActions2 } from '@db-ux/react-core-components';
 import { useTranslation } from '@template/i18n';
 
-const PrimaryActions = () => {
+const Actions2 = () => {
 	const { t } = useTranslation();
 
 	return (
-		<DBControlPanelActions1>
+		<DBControlPanelActions2>
 			{/* <Search /> */}
 			<a
 				className="db-button"
@@ -15,8 +15,8 @@ const PrimaryActions = () => {
 			>
 				{t('shell.contactUs')}
 			</a>
-		</DBControlPanelActions1>
+		</DBControlPanelActions2>
 	);
 };
 
-export default PrimaryActions;
+export default Actions2;

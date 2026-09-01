@@ -1,25 +1,39 @@
-import { type PropsWithChildren, type ReactElement, useMemo } from 'react';
+import { type PropsWithChildren, type ReactElement, type ReactNode, useMemo } from 'react';
 import { ColorModeProvider } from '@template/context/color-mode-context.tsx';
 import { LanguageProvider } from '@template/context/language-context.tsx';
 import { toEnSlug } from '@template/i18n/slug-mapping';
-import { DBControlPanelDesktop, DBControlPanelMobile, DBShell } from '@db-ux/react-core-components';
-import PrimaryActions from './control-panel/primary-actions.tsx';
-import SecondaryActions from './control-panel/secondary-actions.tsx';
+import {
+	DBControlPanelDesktop,
+	DBControlPanelMobile,
+	DBShell,
+	DBShellContent,
+} from '@db-ux/react-core-components';
+import Actions1 from './control-panel/actions1.tsx';
+import Actions2 from './control-panel/actions2.tsx';
 import MainNavigation from './control-panel/main-navigation.tsx';
 import SubNavigation from './control-panel/sub-navigation.tsx';
 import Brand from './control-panel/brand.tsx';
 import { findSubNavigation } from '@template/utils/navigation.utils.ts';
 import { useTranslation } from '@template/i18n';
-import type { NavigationItemGroupVariantType } from '@db-ux/react-core-components/dist/shared/model';
 
 type Props = PropsWithChildren & {
 	pathname?: string;
+	/**
+	 * Rendered into DBShellContent's endSlot, e.g. the page footer.
+	 * Passed as an Astro named slot (`slot="endSlot"`).
+	 */
+	endSlot?: ReactNode;
 };
 
-export function Shell({ children, pathname = '/' }: Props): ReactElement {
-	const normalizedPathname = toEnSlug(pathname.replace(/^\/de\//, '').replace(/^\/de$/, '')) || pathname.replace(/^\/de/, '') || '/';
+export function Shell({ children, pathname = '/', endSlot }: Props): ReactElement {
+	const normalizedPathname =
+		toEnSlug(pathname.replace(/^\/de\//, '').replace(/^\/de$/, '')) ||
+		pathname.replace(/^\/de/, '') ||
+		'/';
 	const subNavigation = useMemo(() => {
-		return findSubNavigation(normalizedPathname.startsWith('/') ? normalizedPathname : `/${normalizedPathname}`);
+		return findSubNavigation(
+			normalizedPathname.startsWith('/') ? normalizedPathname : `/${normalizedPathname}`,
+		);
 	}, [normalizedPathname]);
 
 	/*
@@ -28,11 +42,11 @@ export function Shell({ children, pathname = '/' }: Props): ReactElement {
 
 	return (
 		<LanguageProvider pathname={pathname}>
-		<ColorModeProvider>
-			<ShellContent subNavigation={subNavigation}>
-				{children}
-			</ShellContent>
-		</ColorModeProvider>
+			<ColorModeProvider>
+				<ShellContent subNavigation={subNavigation} endSlot={endSlot}>
+					{children}
+				</ShellContent>
+			</ColorModeProvider>
 		</LanguageProvider>
 	);
 }
@@ -40,32 +54,28 @@ export function Shell({ children, pathname = '/' }: Props): ReactElement {
 function ShellContent({
 	children,
 	subNavigation,
+	endSlot,
 }: PropsWithChildren & {
 	subNavigation: NavigationItem[] | undefined;
+	endSlot?: ReactNode;
 }): ReactElement {
 	const { t } = useTranslation();
 
 	return (
-		<DBShell
-			subNavigationDesktopPosition="left"
-			subNavigationMobilePosition="none"
-		>
-			<DBControlPanelDesktop brand={<Brand />} primaryActions={<PrimaryActions />} secondaryActions={<SecondaryActions />}>
+		<DBShell subNavigationDesktopPosition="left" subNavigationMobilePosition="none">
+			<DBControlPanelDesktop brand={<Brand />} actions1={<Actions1 />} actions2={<Actions2 />}>
 				<MainNavigation />
 			</DBControlPanelDesktop>
-			{/* eslint-disable-next-line db-ux/control-panel-mobile-burger-menu-label-required */}
 			<DBControlPanelMobile
 				burgerMenuLabel={t('shell.menu')}
 				brand={<Brand />}
-				primaryActions={<PrimaryActions />}
-				secondaryActions={<SecondaryActions />}
+				actions1={<Actions2 />}
+				actions2={<Actions1 />}
 			>
 				<MainNavigation mobile />
 			</DBControlPanelMobile>
-			{subNavigation ? (
-				<SubNavigation navigationItems={subNavigation} />
-			) : null}
-			{children}
+			{subNavigation ? <SubNavigation navigationItems={subNavigation} /> : null}
+			<DBShellContent endSlot={endSlot}>{children}</DBShellContent>
 		</DBShell>
 	);
 }

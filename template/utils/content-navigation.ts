@@ -114,6 +114,20 @@ function sortTree(node: NavigationItem) {
 }
 
 /**
+ * Removes dedicated desktop sub-navigation containers from the mobile tree.
+ * Their children become regular entries in the mobile navigation.
+ */
+function flattenMobileSubNavigation(items: NavigationItem[]): NavigationItem[] {
+	return items.flatMap((item) => {
+		const children = item.children ? flattenMobileSubNavigation(item.children) : [];
+
+		if (item.isSubNavigation) return children;
+
+		return [{ ...item, isSubNavigation: false, children }];
+	});
+}
+
+/**
  * Builds the complete application navigation dynamically from Markdown content.
  * Scans all markdown files, skips the root homepage, reads the frontmatter, creates intermediate nodes for
  * directories without their own index file and recursively sorts all items by order and title.
@@ -136,10 +150,7 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 
 	// Build DE title map from de/ pages frontmatter
 	const deModules = import.meta.glob<MdModule>(
-		[
-			'../../content/pages/de/**/*.{md,mdx}',
-			'!**/_*/**',
-		],
+		['../../content/pages/de/**/*.{md,mdx}', '!**/_*/**'],
 		{ eager: true },
 	) as Modules;
 
@@ -189,7 +200,7 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 		const title =
 			fm.title || (segments.length ? toTitleFromSegment(segments[segments.length - 1]) : 'Home');
 		const hidePage = fm.hidePage === true;
-		const isSubNavigation = mobile ? false : (fm.isSubNavigation ?? false);
+		const isSubNavigation = fm.isSubNavigation ?? false;
 		const iconTrailing = fm.iconTrailing;
 		const disabled = fm.isMenuItemDisabled === true;
 		const order = getOrder(fm);
@@ -220,7 +231,7 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 			existing.title = title;
 			existing.titleDe = deTitles.get(rel);
 			existing.path = hidePage ? undefined : rel;
-			existing.isSubNavigation = mobile ? false : isSubNavigation;
+			existing.isSubNavigation = isSubNavigation;
 			existing.iconTrailing = iconTrailing;
 			existing.disabled = disabled;
 			existing.order = order;
@@ -257,7 +268,9 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 		}
 	}
 
-	const appNav: AppNavigation = Object.values(roots).sort(compareNav) as NavigationItem[];
+	const appNav: AppNavigation = (
+		mobile ? flattenMobileSubNavigation(Object.values(roots)) : Object.values(roots)
+	).sort(compareNav) as NavigationItem[];
 	appNav.forEach(sortTree);
 
 	return appNav;

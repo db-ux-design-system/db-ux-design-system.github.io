@@ -1,6 +1,6 @@
 import { DBControlPanelActions2, DBButton } from '@db-ux/react-core-components';
 
-const DemoSecondaryActions = () => (
+const DemoActions2 = () => (
 	<DBControlPanelActions2>
 		<DBButton variant="filled" iconLeading="person" type="button">
 			Anmelden
@@ -8,4 +8,4 @@ const DemoSecondaryActions = () => (
 	</DBControlPanelActions2>
 );
 
-export default DemoSecondaryActions;
+export default DemoActions2;

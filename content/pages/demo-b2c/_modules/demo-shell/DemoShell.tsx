@@ -10,8 +10,8 @@ import {
 import DemoBrand from '@template/components/DemoBrand/DemoBrand';
 import DemoMetaNavigation from './control-panel/meta-navigation';
 import DemoNavigation from './control-panel/navigation';
-import DemoPrimaryActions from './control-panel/primary-actions';
-import DemoSecondaryActions from './control-panel/secondary-actions';
+import DemoActions1 from './control-panel/actions1';
+import DemoActions2 from './control-panel/actions2';
 import { useDemoUrlParams } from '@template/hooks/useDemoUrlParams';
 
 function DemoShellContent({ children }: PropsWithChildren): ReactElement {
@@ -22,8 +22,8 @@ function DemoShellContent({ children }: PropsWithChildren): ReactElement {
 			<DBControlPanelDesktop
 				brand={<DemoBrand />}
 				meta={<DemoMetaNavigation />}
-				actions1={<DemoPrimaryActions />}
-				actions2={<DemoSecondaryActions />}
+				actions1={<DemoActions1 />}
+				actions2={<DemoActions2 />}
 			>
 				<DemoNavigation />
 			</DBControlPanelDesktop>
@@ -31,8 +31,8 @@ function DemoShellContent({ children }: PropsWithChildren): ReactElement {
 				burgerMenuLabel="Menu"
 				brand={<DemoBrand />}
 				meta={<DemoMetaNavigation />}
-				actions1={<DemoPrimaryActions />}
-				actions2={<DemoSecondaryActions />}
+				actions1={<DemoActions1 />}
+				actions2={<DemoActions2 />}
 			>
 				<DemoNavigation />
 			</DBControlPanelMobile>

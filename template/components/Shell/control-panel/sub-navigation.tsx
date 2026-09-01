@@ -1,6 +1,5 @@
 import { DBControlPanelNavigation, DBShellSubNavigation } from '@db-ux/react-core-components';
 import NavItem from './nav-item.tsx';
-import type { NavigationItemGroupVariantType } from '@db-ux/react-core-components/dist/shared/model';
 
 const SubNavigation = ({ navigationItems }: { navigationItems: NavigationItem[] }) => (
 	<DBShellSubNavigation aria-label="Sub navigation">

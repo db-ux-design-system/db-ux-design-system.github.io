@@ -2,7 +2,7 @@ import { DBControlPanelActions1, DBButton, DBTooltip } from '@db-ux/react-core-c
 import ColorModeSwitch from '@template/components/color-mode-switch/ColorModeSwitch';
 import ThemeSwitch from '@template/components/theme-switch/ThemeSwitch';
 
-const DemoPrimaryActions = () => (
+const DemoActions1 = () => (
 	<DBControlPanelActions1>
 		<ColorModeSwitch />
 		<ThemeSwitch />
@@ -13,4 +13,4 @@ const DemoPrimaryActions = () => (
 	</DBControlPanelActions1>
 );
 
-export default DemoPrimaryActions;
+export default DemoActions1;

@@ -1,7 +1,7 @@
-import { DBControlPanelActions2, DBButton, DBTooltip } from '@db-ux/react-core-components';
+import { DBControlPanelActions1, DBButton, DBTooltip } from '@db-ux/react-core-components';
 
-const DemoSecondaryActions = () => (
-	<DBControlPanelActions2>
+const DemoActions1 = () => (
+	<DBControlPanelActions1>
 		<DBButton variant="ghost" iconLeading="magnifying_glass" noText type="button">
 			Search
 			<DBTooltip>Search</DBTooltip>
@@ -14,7 +14,7 @@ const DemoSecondaryActions = () => (
 			Settings
 			<DBTooltip>Settings</DBTooltip>
 		</DBButton>
-	</DBControlPanelActions2>
+	</DBControlPanelActions1>
 );
 
-export default DemoSecondaryActions;
+export default DemoActions1;
