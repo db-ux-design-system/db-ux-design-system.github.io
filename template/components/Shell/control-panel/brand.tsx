@@ -7,7 +7,10 @@ const Brand = () => {
 	const href = language === 'de' ? '/de/' : appConfig.basePath;
 
 	return (
-		<a href={href}>
+		// The link wraps the whole brand so the logo is part of the click target.
+		// On mobile this anchor is the grid item itself, so it needs the brand
+		// grid area and alignment - see shell-brand-link in db-ux-overrides.css.
+		<a className="shell-brand-link" href={href}>
 			<DBControlPanelBrand>{appConfig.title}</DBControlPanelBrand>
 		</a>
 	);

@@ -114,16 +114,15 @@ function sortTree(node: NavigationItem) {
 }
 
 /**
- * Removes dedicated desktop sub-navigation containers from the mobile tree.
- * Their children become regular entries in the mobile navigation.
+ * Adapts dedicated desktop sub-navigation containers for the mobile tree.
+ * The containers remain as regular navigation groups so their children can be
+ * reached through the mobile drilldown navigation.
  */
-function flattenMobileSubNavigation(items: NavigationItem[]): NavigationItem[] {
-	return items.flatMap((item) => {
-		const children = item.children ? flattenMobileSubNavigation(item.children) : [];
+function prepareMobileNavigation(items: NavigationItem[]): NavigationItem[] {
+	return items.map((item) => {
+		const children = item.children ? prepareMobileNavigation(item.children) : [];
 
-		if (item.isSubNavigation) return children;
-
-		return [{ ...item, isSubNavigation: false, children }];
+		return { ...item, isSubNavigation: false, children };
 	});
 }
 
@@ -132,7 +131,7 @@ function flattenMobileSubNavigation(items: NavigationItem[]): NavigationItem[] {
  * Scans all markdown files, skips the root homepage, reads the frontmatter, creates intermediate nodes for
  * directories without their own index file and recursively sorts all items by order and title.
  *
- * @param mobile - If true, sub-navigation items are flattened so their children appear as normal ordered items.
+ * @param mobile - If true, dedicated sub-navigation containers are kept as nested groups for mobile drilldown navigation.
  * @returns A fully structured and sorted `AppNavigation` tree.
  */
 export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
@@ -269,7 +268,7 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 	}
 
 	const appNav: AppNavigation = (
-		mobile ? flattenMobileSubNavigation(Object.values(roots)) : Object.values(roots)
+		mobile ? prepareMobileNavigation(Object.values(roots)) : Object.values(roots)
 	).sort(compareNav) as NavigationItem[];
 	appNav.forEach(sortTree);
 
