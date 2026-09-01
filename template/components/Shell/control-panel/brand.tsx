@@ -7,9 +7,9 @@ const Brand = () => {
 	const href = language === 'de' ? '/de/' : appConfig.basePath;
 
 	return (
-		<DBControlPanelBrand>
-			<a href={href}>{appConfig.title}</a>
-		</DBControlPanelBrand>
+		<a href={href}>
+			<DBControlPanelBrand>{appConfig.title}</DBControlPanelBrand>
+		</a>
 	);
 };
 

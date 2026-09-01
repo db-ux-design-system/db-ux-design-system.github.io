@@ -1,5 +1,5 @@
-import { DBControlPanelPrimaryActions } from '@db-ux/react-core-components';
+import { DBControlPanelActions1 } from '@db-ux/react-core-components';
 
-const DemoPrimaryActions = () => <DBControlPanelPrimaryActions></DBControlPanelPrimaryActions>;
+const DemoPrimaryActions = () => <DBControlPanelActions1></DBControlPanelActions1>;
 
 export default DemoPrimaryActions;

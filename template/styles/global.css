@@ -24,8 +24,8 @@
 
 /* App-level custom properties */
 :root {
-	--db-logo-url: url('/db_logo_designsystem.svg');
-	--db-logo-aspect-ratio: 487 / 70;
+/*	--db-logo-url: url('/db_logo_designsystem.svg');
+	--db-logo-aspect-ratio: 487 / 70;*/
 	--header-height: var(--db-sizing-lg);
 	--footer-height: var(--db-sizing-xl);
 	--content-width: min(1440px, 100svw);
@@ -35,9 +35,9 @@
 	}
 }
 
-[data-mode='dark'] {
+/*[data-mode='dark'] {
 	--db-logo-url: url('/db_logo_designsystem_dark.svg');
-}
+}*/
 
 html {
 	/* stylelint-disable-next-line db-ux/use-spacings */

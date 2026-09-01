@@ -22,8 +22,8 @@ function DemoShellContent({ children }: PropsWithChildren): ReactElement {
 			<DBControlPanelDesktop
 				brand={<DemoBrand />}
 				meta={<DemoMetaNavigation />}
-				primaryActions={<DemoPrimaryActions />}
-				secondaryActions={<DemoSecondaryActions />}
+				actions1={<DemoPrimaryActions />}
+				actions2={<DemoSecondaryActions />}
 			>
 				<DemoNavigation />
 			</DBControlPanelDesktop>
@@ -31,8 +31,8 @@ function DemoShellContent({ children }: PropsWithChildren): ReactElement {
 				burgerMenuLabel="Menu"
 				brand={<DemoBrand />}
 				meta={<DemoMetaNavigation />}
-				primaryActions={<DemoPrimaryActions />}
-				secondaryActions={<DemoSecondaryActions />}
+				actions1={<DemoPrimaryActions />}
+				actions2={<DemoSecondaryActions />}
 			>
 				<DemoNavigation />
 			</DBControlPanelMobile>

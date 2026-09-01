@@ -2,19 +2,13 @@ import { DBControlPanelNavigation, DBShellSubNavigation } from '@db-ux/react-cor
 import NavItem from './nav-item.tsx';
 import type { NavigationItemGroupVariantType } from '@db-ux/react-core-components/dist/shared/model';
 
-const SubNavigation = ({
-	navigationItems,
-	variant,
-}: {
-	navigationItems: NavigationItem[];
-	variant?: NavigationItemGroupVariantType;
-}) => (
+const SubNavigation = ({ navigationItems }: { navigationItems: NavigationItem[] }) => (
 	<DBShellSubNavigation aria-label="Sub navigation">
-		<DBControlPanelNavigation aria-label="sub navigation" variant={variant ?? 'tree'}>
+		<DBControlPanelNavigation aria-label="sub navigation" variant="drilldown">
 			{navigationItems.map((navigationItem: NavigationItem) => (
 				<NavItem
 					{...navigationItem}
-					icon={navigationItem.icon ?? 'circle_small'}
+					icon={navigationItem.icon}
 					key={`sub-navigation-${navigationItem.path}-${navigationItem.path}`}
 				/>
 			))}

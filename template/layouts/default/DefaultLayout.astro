@@ -22,7 +22,6 @@ const lang = currentPath.startsWith('/de/') || currentPath === '/de' ? 'de' : 'e
 		<Shell
 			client:only="react"
 			pathname={currentPath}
-			subNavigationVariant={frontmatter.subNavigationVariant}
 		>
 				<MainContent frontmatter={frontmatter} headings={headings}>
 					<slot />

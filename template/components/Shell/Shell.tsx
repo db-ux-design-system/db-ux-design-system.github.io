@@ -14,10 +14,9 @@ import type { NavigationItemGroupVariantType } from '@db-ux/react-core-component
 
 type Props = PropsWithChildren & {
 	pathname?: string;
-	subNavigationVariant?: NavigationItemGroupVariantType;
 };
 
-export function Shell({ children, pathname = '/', subNavigationVariant }: Props): ReactElement {
+export function Shell({ children, pathname = '/' }: Props): ReactElement {
 	const normalizedPathname = toEnSlug(pathname.replace(/^\/de\//, '').replace(/^\/de$/, '')) || pathname.replace(/^\/de/, '') || '/';
 	const subNavigation = useMemo(() => {
 		return findSubNavigation(normalizedPathname.startsWith('/') ? normalizedPathname : `/${normalizedPathname}`);
@@ -30,7 +29,7 @@ export function Shell({ children, pathname = '/', subNavigationVariant }: Props)
 	return (
 		<LanguageProvider pathname={pathname}>
 		<ColorModeProvider>
-			<ShellContent subNavigationVariant={subNavigationVariant} subNavigation={subNavigation}>
+			<ShellContent subNavigation={subNavigation}>
 				{children}
 			</ShellContent>
 		</ColorModeProvider>
@@ -41,10 +40,8 @@ export function Shell({ children, pathname = '/', subNavigationVariant }: Props)
 function ShellContent({
 	children,
 	subNavigation,
-	subNavigationVariant,
 }: PropsWithChildren & {
 	subNavigation: NavigationItem[] | undefined;
-	subNavigationVariant?: NavigationItemGroupVariantType;
 }): ReactElement {
 	const { t } = useTranslation();
 
@@ -66,7 +63,7 @@ function ShellContent({
 				<MainNavigation mobile />
 			</DBControlPanelMobile>
 			{subNavigation ? (
-				<SubNavigation navigationItems={subNavigation} variant={subNavigationVariant} />
+				<SubNavigation navigationItems={subNavigation} />
 			) : null}
 			{children}
 		</DBShell>
