@@ -17,7 +17,6 @@ import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleW
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 
 - Layout einer Desktop-Anwendung aufbauen: nur der Inhaltsbereich scrollt
@@ -51,7 +50,7 @@ Die Anzahl der Navigation Items auf oberster Ebene entscheidet über die Positio
 	<GuidelineExample
 		variant="caution"
 		figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=1-1133&embed-host=share"
-		description="Unter vier Navigation Items belegt Left Platz ohne strukturellen Nutzen. Prüfe in diesem Fall Top."
+		description="Unter vier Navigation Items belegt Left Platz ohne strukturellen Nutzen. Prüfe in diesem Fall Top oder Flat Icon."
 	/>
 </div>
 
@@ -84,7 +83,7 @@ Die Anzahl der Navigation Items auf Unterebene entscheidet über die Position de
 Die folgende Tabelle zeigt, welche Kombinationen aus Positionen und Navigationsvarianten des Control Panels und der Sub Navigation unterstützt werden.
 
 | Control Panel | Control Panel Position | Control Panel Navigation | Sub Navigation Position | Sub Navigation Variant |
-| ------------- | ---------------------- | ------------------------ | ----------------------- | ----------------------- |
+| ------------- | ---------------------- | ------------------------ | ----------------------- | ---------------------- |
 | Desktop       | Top                    | Popover                  | ❌                      | ❌                     |
 | Desktop       | Top                    | Popover                  | Top                     | Popover                |
 | Desktop       | Top                    | Popover                  | Left                    | Drill Down             |
@@ -99,14 +98,6 @@ Die folgende Tabelle zeigt, welche Kombinationen aus Positionen und Navigationsv
 </DBSection>
 
 <FigmaLearnTeaser componentName="Shell Desktop" locale="de" anchor="control-panel--shell" />
-
-<DBSection spacing="small" width="auto">
-
-## FAQ
-
-<QuestionForm componentName="Shell Desktop" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -132,14 +123,10 @@ Die folgende Tabelle zeigt, welche Kombinationen aus Positionen und Navigationsv
 			url: '/de/dokumentation/komponenten/control-panel/brand',
 		},
 		{
-			title: 'Control Panel Primary Actions',
-			description: 'Bereich im Control Panel für häufig genutzte globale Aktionen.',
-			url: '/de/dokumentation/komponenten/control-panel/primary-actions',
-		},
-		{
-			title: 'Control Panel Secondary Actions',
-			description: 'Bereich im Control Panel für unterstützende globale Aktionen.',
-			url: '/de/dokumentation/komponenten/control-panel/secondary-actions',
+			title: 'Control Panel Actions',
+			description:
+				'Zwei eigenständige Aktionsbereiche für globale und unterstützende Utility-Aktionen im Control Panel.',
+			url: '/de/dokumentation/komponenten/control-panel/actions',
 		},
 	]}
 />
