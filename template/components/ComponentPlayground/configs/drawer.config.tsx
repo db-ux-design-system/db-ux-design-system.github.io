@@ -1,5 +1,10 @@
 import type { PlaygroundConfig } from '../types';
-import { DBButton, DBDrawer, type DBDrawerProps } from '@db-ux/react-core-components';
+import {
+	DBButton,
+	DBDrawer,
+	DBDrawerHeader,
+	type DBDrawerProps,
+} from '@db-ux/react-core-components';
 import { useEffect, useState } from 'react';
 
 export const drawerConfig: PlaygroundConfig<DBDrawerProps> = {
@@ -28,6 +33,7 @@ export const drawerConfig: PlaygroundConfig<DBDrawerProps> = {
 					{...rest}
 					open={innerOpen}
 					onClose={() => setInnerOpen(false)}
+					header={<DBDrawerHeader>Drawer</DBDrawerHeader>}
 				>
 					Drawer content
 				</DBDrawer>
