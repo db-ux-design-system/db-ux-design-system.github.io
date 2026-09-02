@@ -53,11 +53,6 @@ declare interface FrontMatter {
 	 */
 	isSubNavigation?: boolean;
 	/**
-	 * The variant of the sub-navigation. If not set, the variant will be determined automatically.
-	 * @default 'tree'
-	 */
-	subNavigationVariant?: 'tree' | 'popover';
-	/**
 	 * If true, the page itself will not be shown; instead, a redirect to the first child will occur.
 	 */
 	hidePage?: boolean;
