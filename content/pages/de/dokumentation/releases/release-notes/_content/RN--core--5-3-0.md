@@ -46,3 +46,8 @@ draft: true
 #### Hinzugefügt
 
 - Logo: Neue Token-Variablen `--db-logo-url`, `--db-logo-aspect-ratio`, `--db-logo-url-short` und `--db-logo-aspect-ratio-short` sind jetzt verfügbar.
+
+#### Behoben
+
+- DBSelect: Controlled `required` Selects behalten jetzt die Auswahl, wenn die Validierung läuft. Die Validierung wartet, bis der neue Wert propagiert wurde, sodass die Auswahl beim Re-Render nicht mehr verworfen wird.
+- DBSwitch: Das Icon scheint nicht mehr durch ein geschlossenes Popover hindurch.

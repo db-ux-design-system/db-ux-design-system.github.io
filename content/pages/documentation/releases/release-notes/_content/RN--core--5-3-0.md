@@ -46,3 +46,8 @@ draft: true
 #### Added
 
 - Logo: New token variables `--db-logo-url`, `--db-logo-aspect-ratio`, `--db-logo-url-short`, and `--db-logo-aspect-ratio-short` are now available.
+
+#### Fixed
+
+- DBSelect: Controlled `required` selects now keep the user's selection when validation runs. Validation waits until the new value has been propagated, so the selection is no longer discarded on re-render.
+- DBSwitch: The icon no longer bleeds through a closed popover.
