@@ -1,4 +1,11 @@
-import { DBButton, DBCard, DBDrawer, DBInput, DBTooltip } from '@db-ux/react-core-components';
+import {
+	DBButton,
+	DBCard,
+	DBDrawer,
+	DBDrawerHeader,
+	DBInput,
+	DBTooltip,
+} from '@db-ux/react-core-components';
 import React, { type ReactElement, useEffect, useState } from 'react';
 import { type AnyOrama, create, load, type RawData, type Results, search } from '@orama/orama';
 import useDebounce from '@root/template/hooks/debounce';
@@ -60,7 +67,11 @@ export function Search(): ReactElement {
 				Open Search
 				<DBTooltip>Open Search</DBTooltip>
 			</DBButton>
-			<DBDrawer open={searchOpen} onClose={() => setSearchOpen(false)}>
+			<DBDrawer
+				open={searchOpen}
+				onClose={() => setSearchOpen(false)}
+				header={<DBDrawerHeader>Search</DBDrawerHeader>}
+			>
 				<div className="dba-search-result-container">
 					<DBInput
 						label="Search"

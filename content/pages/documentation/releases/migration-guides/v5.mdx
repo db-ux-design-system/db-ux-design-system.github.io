@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 title: 'v5.0'
 headline: 'Migration to v5.0'
-description: 'The update to v5.0 introduces refactored Drawer, Accordion, and CustomSelect components, removes components deprecated in v4.6, and aligns default slot visibility in Card and Popover.'
+description: 'The update to v5.0 introduces refactored Drawer, Accordion, and Custom Select components, removes components deprecated in v4.6, and aligns default slot visibility in Card and Popover.'
 align: start
 order: 4
 toc: true
@@ -44,7 +44,7 @@ Copy all contents from your instances **before updating the components** – upd
 
 <YourAction
 	actions={[
-		'1. Review all instances of Accordion, Drawer and CustomSelect in your designs.',
+		'1. Review all instances of Accordion, Drawer and Custom Select in your designs.',
 		'2. Copy all contents that were previously inserted as helper components.',
 		'3. Update the component instances.',
 		'4. Paste the copied content into the new Children Slot.',
@@ -73,16 +73,16 @@ Copy all contents from your instances **before updating the components** – upd
 	/>
 </div>
 
-#### CustomSelect
+#### Custom Select
 
-- **Children Slots replace _🛟 CustomSelect List_ and _🛟 CustomSelect Tag List_ helper components:** List items and tag items are now placed directly inside the CustomSelect via the respective slots.
+- **Children Slots replace _🛟 Custom Select List_ and _🛟 Custom Select Tag List_ helper components:** List items and tag items are now placed directly inside the Custom Select via the respective slots.
 
-**🛟 CustomSelect List**
+**🛟 Custom Select List**
 
 <div className="guideline-examples">
 	<GuidelineExample
 		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=45-62&embed-host=share"
-		description="Step 1: Copy the content from the CustomSelect List before updating."
+		description="Step 1: Copy the content from the Custom Select List before updating."
 		fullWidth
 	/>
 	<GuidelineExample
@@ -97,12 +97,12 @@ Copy all contents from your instances **before updating the components** – upd
 	/>
 </div>
 
-**🛟 CustomSelect Tag List**
+**🛟 Custom Select Tag List**
 
 <div className="guideline-examples">
 	<GuidelineExample
 		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=38-3466&embed-host=share"
-		description="Step 1: Copy the content from the CustomSelect Tag List before updating."
+		description="Step 1: Copy the content from the Custom Select Tag List before updating."
 		fullWidth
 	/>
 	<GuidelineExample
@@ -119,7 +119,7 @@ Copy all contents from your instances **before updating the components** – upd
 
 #### Drawer
 
-- **Standardized layout structure:** The Drawer component has been refactored with unified subcomponents (DrawerHeader + DrawerFooter) and standard container sizes (small, medium, large, full, custom). Previous Drawer components are replaced by the new version.
+- **Standardized layout structure:** The Drawer component has been refactored with unified subcomponents (Drawer Header + Drawer Footer) and standard container sizes (small, medium, large, full, custom). Previous Drawer components are replaced by the new version.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -161,11 +161,11 @@ The following refinements require special attention. Existing instances must be 
 
 #### Scrollbar
 
-- **Scrollbar now uses the Resizer component:** The Scrollbar internally uses the new Resizer helper component. If you have modified the Scrollbar handle size or free position (e.g. in a CustomSelect dropdown), those changes are reset after updating.
+- **Scrollbar now uses the Resizer component:** The Scrollbar internally uses the new Resizer helper component. If you have modified the Scrollbar handle size or free position (e.g. in a Custom Select dropdown), those changes are reset after updating.
 
 <YourAction
 	actions={[
-		'1. Review all instances where the Scrollbar was customized (handle size, free position), e.g. in CustomSelect dropdowns.',
+		'1. Review all instances where the Scrollbar was customized (handle size, free position), e.g. in Custom Select dropdowns.',
 		'2. Reapply custom Scrollbar modifications after updating.',
 	]}
 />

@@ -3,8 +3,8 @@ import type { MarkdownHeading } from 'astro';
 import '../../styles/global.css';
 import HtmlHead from '@template/components/HtmlHead';
 import MainContent from './main-content';
-import { appConfig } from '@root/app.config.ts';
 import { Shell } from '@template/components/Shell';
+import Footer from '@template/components/Footer/Footer.astro';
 
 interface Props {
 	headings?: MarkdownHeading[];
@@ -19,14 +19,11 @@ const lang = currentPath.startsWith('/de/') || currentPath === '/de' ? 'de' : 'e
 <html lang={lang}>
 	<HtmlHead title={frontmatter.title} loadModelViewer={frontmatter.loadModelViewer} />
 	<body>
-		<Shell
-			client:only="react"
-			pathname={currentPath}
-			subNavigationVariant={frontmatter.subNavigationVariant}
-		>
-				<MainContent frontmatter={frontmatter} headings={headings}>
-					<slot />
-				</MainContent>
+		<Shell client:only="react" pathname={currentPath}>
+			<MainContent frontmatter={frontmatter} headings={headings}>
+				<slot />
+			</MainContent>
+			<Footer slot="endSlot" />
 		</Shell>
 		<slot name="script" />
 	</body>

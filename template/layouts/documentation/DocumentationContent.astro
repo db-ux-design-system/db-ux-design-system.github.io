@@ -1,9 +1,8 @@
 ---
 import type { MarkdownHeading } from 'astro';
 import { TableOfContents } from '@template/components/TableOfContents';
-import { DBSection, DBShellContent, DBNotification, type SemanticType } from '@db-ux/react-core-components';
+import { DBSection, DBNotification, type SemanticType } from '@db-ux/react-core-components';
 import { PageHero } from '@components';
-import Footer from '@components/Footer/Footer.astro';
 
 interface Props {
 	headings: MarkdownHeading[];
@@ -24,7 +23,7 @@ const badgeMap: Record<string, { text: string; semantic: SemanticType }> = {
 const badge = frontmatter.status ? badgeMap[frontmatter.status] : undefined;
 const isSub = frontmatter.status === 'sub';
 const SUB_PARENT_LABELS: Record<string, string> = {
-	controlpanel: 'ControlPanel',
+	'control-panel': 'Control Panel',
 	shell: 'Shell',
 };
 const parentSegment = Astro.url.pathname.split('/').filter(Boolean).at(-2);
@@ -37,45 +36,49 @@ const subParent =
 		: undefined);
 ---
 
-<DBShellContent>
+{
+	toc && (
+		<TableOfContents
+			client:only="react"
+			astro={Astro}
+			headings={headings}
+			tocMaxDepth={frontmatter.tocMaxDepth}
+		/>
+	)
+}
+<div class="dba-main-content">
 	{
-		toc && (
-			<TableOfContents
-				client:only="react"
-				astro={Astro}
-				headings={headings}
-				tocMaxDepth={frontmatter.tocMaxDepth}
-			/>
+		(frontmatter.headline || frontmatter.description) && (
+			<DBSection id={frontmatter.title} width="large" spacing="small">
+				<PageHero
+					headline={frontmatter.headline}
+					description={frontmatter.description}
+					badgeText={badge?.text}
+					badgeSemantic={badge?.semantic ?? 'adaptive'}
+					headlineLevel={frontmatter.headlineLevel ?? 1}
+					imageSrc={frontmatter.heroImage}
+					imageAlt={frontmatter.heroImageAlt}
+					align={frontmatter.align}
+				/>
+				{isSub && subParent && (
+					<DBNotification
+						className="sub-component-notice"
+						variant="standalone"
+						semantic="informational"
+						style={{
+							maxInlineSize: 'var(--db-container-md)',
+							marginBlockStart: 'var(--db-spacing-fixed-md)',
+						}}
+					>
+						{isDE
+							? `Dies ist eine Subkomponente von ${subParent} und kann nicht eigenständig verwendet werden.`
+							: `This is a subcomponent of the ${subParent} and cannot be used separately.`}
+					</DBNotification>
+				)}
+			</DBSection>
 		)
 	}
-	<div class="dba-main-content">
-		{
-			(frontmatter.headline || frontmatter.description) && (
-				<DBSection id={frontmatter.title} width="large" spacing="small">
-					<PageHero
-						headline={frontmatter.headline}
-						description={frontmatter.description}
-						badgeText={badge?.text}
-						badgeSemantic={badge?.semantic ?? 'adaptive'}
-						headlineLevel={frontmatter.headlineLevel ?? 1}
-						imageSrc={frontmatter.heroImage}
-						imageAlt={frontmatter.heroImageAlt}
-						align={frontmatter.align}
-					/>
-					{isSub && subParent && (
-						<DBNotification className="sub-component-notice" variant="standalone" semantic="informational" style={{maxInlineSize: 'var(--db-container-md)', marginBlockStart: 'var(--db-spacing-fixed-md)'}}>
-							{isDE
-								? `Dies ist eine Subkomponente von ${subParent} und kann nicht eigenständig verwendet werden.`
-								: `This is a subcomponent of the ${subParent} and cannot be used separately.`}
-						</DBNotification>
-					)}
-				</DBSection>
-			)
-		}
-		<DBSection id="main-content-section" width="large" spacing="none">
-			<slot />
-		</DBSection>
-	</div>
-
-	<Footer slot="endSlot" />
-</DBShellContent>
+	<DBSection id="main-content-section" width="large" spacing="none">
+		<slot />
+	</DBSection>
+</div>

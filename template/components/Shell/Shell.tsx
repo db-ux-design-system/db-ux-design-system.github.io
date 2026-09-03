@@ -1,26 +1,41 @@
-import { type PropsWithChildren, type ReactElement, useMemo } from 'react';
+import { type PropsWithChildren, type ReactElement, type ReactNode, useMemo } from 'react';
 import { ColorModeProvider } from '@template/context/color-mode-context.tsx';
 import { LanguageProvider } from '@template/context/language-context.tsx';
 import { toEnSlug } from '@template/i18n/slug-mapping';
-import { DBControlPanelDesktop, DBControlPanelMobile, DBShell } from '@db-ux/react-core-components';
-import PrimaryActions from './control-panel/primary-actions.tsx';
-import SecondaryActions from './control-panel/secondary-actions.tsx';
+import {
+	DBControlPanelActions1,
+	DBControlPanelActions2,
+	DBControlPanelDesktop,
+	DBControlPanelMobile,
+	DBShell,
+	DBShellContent,
+} from '@db-ux/react-core-components';
+import ContactUs from './control-panel/contact-us.tsx';
+import PreferenceSwitches from './control-panel/preference-switches.tsx';
 import MainNavigation from './control-panel/main-navigation.tsx';
 import SubNavigation from './control-panel/sub-navigation.tsx';
 import Brand from './control-panel/brand.tsx';
 import { findSubNavigation } from '@template/utils/navigation.utils.ts';
 import { useTranslation } from '@template/i18n';
-import type { NavigationItemGroupVariantType } from '@db-ux/react-core-components/dist/shared/model';
 
 type Props = PropsWithChildren & {
 	pathname?: string;
-	subNavigationVariant?: NavigationItemGroupVariantType;
+	/**
+	 * Rendered into DBShellContent's endSlot, e.g. the page footer.
+	 * Passed as an Astro named slot (`slot="endSlot"`).
+	 */
+	endSlot?: ReactNode;
 };
 
-export function Shell({ children, pathname = '/', subNavigationVariant }: Props): ReactElement {
-	const normalizedPathname = toEnSlug(pathname.replace(/^\/de\//, '').replace(/^\/de$/, '')) || pathname.replace(/^\/de/, '') || '/';
+export function Shell({ children, pathname = '/', endSlot }: Props): ReactElement {
+	const normalizedPathname =
+		toEnSlug(pathname.replace(/^\/de\//, '').replace(/^\/de$/, '')) ||
+		pathname.replace(/^\/de/, '') ||
+		'/';
 	const subNavigation = useMemo(() => {
-		return findSubNavigation(normalizedPathname.startsWith('/') ? normalizedPathname : `/${normalizedPathname}`);
+		return findSubNavigation(
+			normalizedPathname.startsWith('/') ? normalizedPathname : `/${normalizedPathname}`,
+		);
 	}, [normalizedPathname]);
 
 	/*
@@ -29,11 +44,11 @@ export function Shell({ children, pathname = '/', subNavigationVariant }: Props)
 
 	return (
 		<LanguageProvider pathname={pathname}>
-		<ColorModeProvider>
-			<ShellContent subNavigationVariant={subNavigationVariant} subNavigation={subNavigation}>
-				{children}
-			</ShellContent>
-		</ColorModeProvider>
+			<ColorModeProvider>
+				<ShellContent subNavigation={subNavigation} endSlot={endSlot}>
+					{children}
+				</ShellContent>
+			</ColorModeProvider>
 		</LanguageProvider>
 	);
 }
@@ -41,34 +56,52 @@ export function Shell({ children, pathname = '/', subNavigationVariant }: Props)
 function ShellContent({
 	children,
 	subNavigation,
-	subNavigationVariant,
+	endSlot,
 }: PropsWithChildren & {
 	subNavigation: NavigationItem[] | undefined;
-	subNavigationVariant?: NavigationItemGroupVariantType;
+	endSlot?: ReactNode;
 }): ReactElement {
 	const { t } = useTranslation();
 
 	return (
-		<DBShell
-			subNavigationDesktopPosition="left"
-			subNavigationMobilePosition="none"
-		>
-			<DBControlPanelDesktop brand={<Brand />} primaryActions={<PrimaryActions />} secondaryActions={<SecondaryActions />}>
+		<DBShell subNavigationDesktopPosition="left" subNavigationMobilePosition="none">
+			{/* The actions slot decides the position, so the same content sits in a
+			    different slot per breakpoint. Desktop splits it up: switches left
+			    (Actions 1), contact button right (Actions 2). Mobile puts both into
+			    the drawer footer (Actions 2) as one row, which keeps the menu bar
+			    free for the brand and the burger button. Keeping the footer a single
+			    row matters: the drilldown overlay reserves a fixed height for it, so
+			    a taller footer would be covered by the overlay. The wrapper has to
+			    match its slot because it carries the grid area. */}
+			<DBControlPanelDesktop
+				brand={<Brand />}
+				actions1={
+					<DBControlPanelActions1>
+						<PreferenceSwitches />
+					</DBControlPanelActions1>
+				}
+				actions2={
+					<DBControlPanelActions2>
+						<ContactUs />
+					</DBControlPanelActions2>
+				}
+			>
 				<MainNavigation />
 			</DBControlPanelDesktop>
-			{/* eslint-disable-next-line db-ux/control-panel-mobile-burger-menu-label-required */}
 			<DBControlPanelMobile
 				burgerMenuLabel={t('shell.menu')}
 				brand={<Brand />}
-				primaryActions={<PrimaryActions />}
-				secondaryActions={<SecondaryActions />}
+				actions2={
+					<DBControlPanelActions2>
+						<ContactUs />
+						<PreferenceSwitches />
+					</DBControlPanelActions2>
+				}
 			>
 				<MainNavigation mobile />
 			</DBControlPanelMobile>
-			{subNavigation ? (
-				<SubNavigation navigationItems={subNavigation} variant={subNavigationVariant} />
-			) : null}
-			{children}
+			{subNavigation ? <SubNavigation navigationItems={subNavigation} /> : null}
+			<DBShellContent endSlot={endSlot}>{children}</DBShellContent>
 		</DBShell>
 	);
 }
