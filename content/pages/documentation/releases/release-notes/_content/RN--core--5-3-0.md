@@ -40,3 +40,9 @@ draft: true
 #### Deprecated
 
 - Brand components of the Foundation (Logo + Pulse) are moved to Deprecated.
+
+### Development
+
+#### Added
+
+- Logo: New token variables `--db-logo-url`, `--db-logo-aspect-ratio`, `--db-logo-url-short`, and `--db-logo-aspect-ratio-short` are now available.
