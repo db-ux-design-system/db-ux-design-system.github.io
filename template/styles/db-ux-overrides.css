@@ -141,13 +141,9 @@
    TODO: Move this fix into core-web (control-panel-navigation-item-group component)
    by scoping the :has(menu:hover) rule to .db-control-panel-navigation:not([data-variant='tree']).
    See: https://github.com/db-ux-design-system/core-web/pull/4639/changes#r3595283584 */
-.db-control-panel-navigation-item-group:has(
-		> .db-control-panel-navigation-item-group-menu :hover
-	)
+.db-control-panel-navigation-item-group:has(> .db-control-panel-navigation-item-group-menu :hover)
 	> .db-control-panel-navigation-item-group-expand-button,
-.db-control-panel-navigation-item-group:has(
-		> .db-control-panel-navigation-item-group-menu :focus
-	)
+.db-control-panel-navigation-item-group:has(> .db-control-panel-navigation-item-group-menu :focus)
 	> .db-control-panel-navigation-item-group-expand-button,
 .db-control-panel-navigation-item-group:has(
 		> .db-control-panel-navigation-item-group-menu :focus-visible
@@ -155,4 +151,74 @@
 	> .db-control-panel-navigation-item-group-expand-button {
 	background-color: var(--db-adaptive-bg-basic-transparent-full-default) !important;
 	cursor: default;
+}
+
+/* Fix: Restore the mobile header offset for nested drilldown menus.
+   The library sets `inset-block: 0` on any menu nested inside an expanded menu.
+   That rule is not scoped to a breakpoint, so on mobile it overrides the
+   `inset-block` that keeps the panel below the mobile header. From the third
+   level on, the panel starts at the viewport top and its back button row is
+   hidden behind the header. The values mirror the library's own mobile inset
+   ($min-mobile-header-height plus the safe area).
+   TODO: Move this fix into core-web (control-panel-navigation component) by
+   scoping the nested `inset-block: 0` rule to the desktop breakpoint. */
+@media (width <= 48em) {
+	.db-control-panel-navigation[data-variant='drilldown']
+		.db-control-panel-navigation-item-group-expand-button[aria-expanded='true']
+		~ .db-control-panel-navigation-item-group-menu
+		.db-control-panel-navigation-item-group-menu {
+		inset-block: calc(
+				calc(var(--db-sizing-md) + 2 * var(--db-spacing-fixed-xs)) + env(safe-area-inset-top)
+			)
+			calc(calc(var(--db-sizing-md) + 2 * var(--db-spacing-fixed-xs)) + env(safe-area-inset-bottom));
+	}
+}
+
+/* Make our brand link the grid item the mobile control panel expects.
+   The library puts `grid-area: brand` and `justify-self: self-start` on
+   .db-control-panel-brand and assumes it is a direct grid child. We wrap it in an
+   anchor so the logo is part of the click target, which makes the anchor the grid
+   item - both declarations then sit on a non-grid-item and do nothing, and
+   `justify-items: center` centers the brand in its column.
+   Stretching the anchor across the column (instead of just aligning it to the
+   start) keeps the library's `inline-size: 100%` plus ellipsis truncation on long
+   brand names working.
+   Note: the library already anticipates the anchor wrapper elsewhere
+   (`a:has(.db-control-panel-brand)` resets text-decoration), and the desktop
+   control panel avoids the problem by wrapping the slot in its own
+   .db-control-panel-desktop-brand-container. Mobile has no such container. */
+.db-control-panel-mobile .shell-brand-link {
+	grid-area: brand;
+	justify-self: stretch;
+	min-inline-size: 0;
+}
+
+/* Divider between the contact button and the switches in the mobile drawer footer.
+   Mirrors what the control panel does between Actions 1 and Actions 2 on desktop:
+   a 1px absolute line on the inline-start edge of the trailing element, with
+   padding to keep the content off it. Desktop draws it in front of the button,
+   mobile in front of the switches, because the order is reversed there.
+   The divider colour follows the same custom property the library uses, so it
+   stays in sync with the emphasis handling. */
+.db-control-panel-mobile .db-control-panel-actions-2 .shell-preference-switches {
+	--db-divider-bg-color: var(--db-adaptive-on-bg-basic-emphasis-60-default);
+
+	position: relative;
+	padding-inline-start: var(--db-spacing-fixed-sm);
+}
+
+.db-control-panel-mobile .db-control-panel-actions-2 .shell-preference-switches::before {
+	content: '';
+	position: absolute;
+	inset-block: 0;
+	inset-inline-start: 0;
+	inline-size: var(--db-border-width-3xs);
+	background-color: var(--db-divider-bg-color);
+}
+
+@media (forced-colors: active) {
+	.db-control-panel-mobile .db-control-panel-actions-2 .shell-preference-switches::before {
+		/* stylelint-disable-next-line db-ux/use-border-color */
+		border-inline-start: var(--db-border-width-3xs) solid var(--db-divider-bg-color);
+	}
 }

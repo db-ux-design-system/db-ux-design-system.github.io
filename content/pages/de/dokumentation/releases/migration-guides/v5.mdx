@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 title: 'v5.0'
 headline: 'Migration zu v5.0'
-description: 'Das Update auf v5.0 führt überarbeitete Drawer-, Accordion- und CustomSelect-Komponenten ein, entfernt in v4.6 als deprecated markierte Komponenten und vereinheitlicht die Standard-Slot-Sichtbarkeit in Card und Popover.'
+description: 'Das Update auf v5.0 führt die überarbeiteten Komponenten Drawer, Accordion und Custom Select ein, entfernt in v4.6 als deprecated markierte Komponenten und vereinheitlicht die Standard-Slot-Sichtbarkeit in Card und Popover.'
 align: start
 order: 4
 toc: true
@@ -44,7 +44,7 @@ Kopiere alle Inhalte aus deinen Instanzen **bevor du die Komponenten aktualisier
 
 <YourAction
 	actions={[
-		'1. Überprüfe alle Instanzen von Accordion, Drawer und CustomSelect in deinen Designs.',
+		'1. Überprüfe alle Instanzen von Accordion, Drawer und Custom Select in deinen Designs.',
 		'2. Kopiere alle Inhalte, die zuvor als Helfer-Komponenten eingefügt waren.',
 		'3. Aktualisiere die Komponenten-Instanzen.',
 		'4. Füge die kopierten Inhalte in den neuen Children Slot ein.',
@@ -73,16 +73,16 @@ Kopiere alle Inhalte aus deinen Instanzen **bevor du die Komponenten aktualisier
 	/>
 </div>
 
-#### CustomSelect
+#### Custom Select
 
-- **Children Slots ersetzen _🛟 CustomSelect List_ und _🛟 CustomSelect Tag List_ Helfer-Komponenten:** List Items und Tag Items werden nun direkt über die jeweiligen Slots im CustomSelect platziert.
+- **Children Slots ersetzen _🛟 Custom Select List_ und _🛟 Custom Select Tag List_ Helfer-Komponenten:** List Items und Tag Items werden nun direkt über die jeweiligen Slots im Custom Select platziert.
 
-**🛟 CustomSelect List**
+**🛟 Custom Select List**
 
 <div className="guideline-examples">
 	<GuidelineExample
 		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=45-62&embed-host=share"
-		description="Schritt 1: Kopiere den Inhalt aus der CustomSelect List vor dem Update."
+		description="Schritt 1: Kopiere den Inhalt aus der Custom Select List vor dem Update."
 		fullWidth
 	/>
 	<GuidelineExample
@@ -97,12 +97,12 @@ Kopiere alle Inhalte aus deinen Instanzen **bevor du die Komponenten aktualisier
 	/>
 </div>
 
-**🛟 CustomSelect Tag List**
+**🛟 Custom Select Tag List**
 
 <div className="guideline-examples">
 	<GuidelineExample
 		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=38-3466&embed-host=share"
-		description="Schritt 1: Kopiere den Inhalt aus der CustomSelect Tag List vor dem Update."
+		description="Schritt 1: Kopiere den Inhalt aus der Custom Select Tag List vor dem Update."
 		fullWidth
 	/>
 	<GuidelineExample
@@ -119,7 +119,7 @@ Kopiere alle Inhalte aus deinen Instanzen **bevor du die Komponenten aktualisier
 
 #### Drawer
 
-- **Standardisierte Layout-Struktur:** Die Drawer-Komponente wurde mit vereinheitlichten Subkomponenten (DrawerHeader + DrawerFooter) und Standard-Containergrößen (small, medium, large, full, custom) überarbeitet. Bisherige Drawer-Komponenten werden durch die neue Version ersetzt.
+- **Standardisierte Layout-Struktur:** Die Drawer-Komponente wurde mit vereinheitlichten Subkomponenten (Drawer Header + Drawer Footer) und Standard-Containergrößen (small, medium, large, full, custom) überarbeitet. Bisherige Drawer-Komponenten werden durch die neue Version ersetzt.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -161,11 +161,11 @@ Die folgenden Verfeinerungen erfordern besondere Aufmerksamkeit. Bestehende Inst
 
 #### Scrollbar
 
-- **Scrollbar verwendet nun die Resizer-Komponente:** Die Scrollbar verwendet intern die neue Resizer Helfer-Komponente. Wenn du die Scrollbar-Griffgröße oder freie Position angepasst hast (z. B. in einem CustomSelect Dropdown), werden diese Änderungen nach dem Update zurückgesetzt.
+- **Scrollbar verwendet nun die Resizer-Komponente:** Die Scrollbar verwendet intern die neue Resizer Helfer-Komponente. Wenn du die Scrollbar-Griffgröße oder freie Position angepasst hast (z. B. in einem Custom Select Dropdown), werden diese Änderungen nach dem Update zurückgesetzt.
 
 <YourAction
 	actions={[
-		'1. Überprüfe alle Instanzen, in denen die Scrollbar angepasst wurde (Griffgröße, freie Position), z. B. in CustomSelect Dropdowns.',
+		'1. Überprüfe alle Instanzen, in denen die Scrollbar angepasst wurde (Griffgröße, freie Position), z. B. in Custom Select Dropdowns.',
 		'2. Wende individuelle Scrollbar-Anpassungen nach dem Update erneut an.',
 	]}
 />

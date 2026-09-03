@@ -10,14 +10,14 @@ toc: true
 tocMaxDepth: 3
 ---
 
-import { DBSection, DBNotification, DBStack } from '@db-ux/react-core-components';
+import { DBSection, DBNotification, DBLink, DBStack } from '@db-ux/react-core-components';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 
 <DBSection spacing="small" width="auto">
 
 ## General
 
-{/* Cross-cutting topics: library setup, workarounds, helper components, density, theming, etc. */}
+{/* General topics: library setup, workarounds, helper components, density, theming, etc. */}
 
 <DBStack gap="medium" style={{marginBlockEnd: 'var(--db-spacing-fixed-3xl)'}}>
 ### Property Icons
@@ -35,14 +35,48 @@ Component properties in the Figma library use emoji prefixes to indicate their t
 </DBStack>
 
 <DBStack gap="medium">
-### 📏 Resizer
+### Floating Container
+
+The 🛟 Floating Container makes it possible to place additional elements such as a badge, tooltip, or popover on a trigger/parent component.
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/Dr7QvFYRn5AwyQVOto4pEz/Doku--Scrollbar?node-id=7074-3625&embed-host=share"
+/>
+
+<div>
+<DBNotification variant="standalone" semantic="informational" headline="Used in:" style={{marginBlockEnd: 'var(--db-spacing-fixed-xl)'}}>
+Buttons, Navigation Items
+</DBNotification>
+
+- Show the Floating Container
+- Add more Floating Items as needed – tip: duplicate the existing item
+	- Manual settings: `full width`, `full height`, `absolute position`, constraints `Left + Right`, `Top + Bottom`
+- Position property: `top-start`, `top-center`, `top-end`, `middle-start`, `middle-end`, `bottom-start`, `bottom-center`, or `bottom-end`.
+- Edge property: `outside` (grows away from the parent component), `center` (centered on the anchor), or `inside` (grows into the parent component)
+</div>
+</div>
+
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/Dr7QvFYRn5AwyQVOto4pEz/Doku--Helper-components-%E2%9C%85?node-id=7074-2974&embed-host=share"
+	description="Place the element that should sit on the parent component into the `Children Slot` of `↳ Floating Item`, such as a tooltip on hover of the icon button or a badge"
+	fullWidth
+/>
+
+</div>
+
+</DBStack>
+
+<DBStack gap="medium">
+### Resizer
 
 The 📏 Resizer helper component can be used in other components to make fixed widths or heights of instances or containers overridable.
 
 <div className="guideline-examples">
 <GuidelineExample
 	figmaUrl="https://embed.figma.com/design/Dr7QvFYRn5AwyQVOto4pEz/Doku--Helper-components-%E2%9C%85?node-id=7055-57&embed-host=share"
-	fullWidth
 	description='Select the 📏 Resizer layer and set the gap value to control the size'
 />
 
@@ -53,14 +87,13 @@ Custom Select (Dropdown, Mobile), Tab List Vertical, Scrollbar (Thumb, Free Posi
 </DBStack>
 
 <DBStack gap="medium">
-### 🛟 Scrollbar
+### Scrollbar
 
 The 🛟 Scrollbar helper component provides a decorative scrollbar indicator for use in figma components. It supports two orientations (Vertical, Horizontal) and multiple positions (Start, Center, End, Free).
 
 <div className="guideline-examples">
 <GuidelineExample
 	figmaUrl="https://embed.figma.com/design/Dr7QvFYRn5AwyQVOto4pEz/Doku--Scrollbar?node-id=7001-470&embed-host=share"
-	fullWidth
 />
 
 <div>
@@ -80,7 +113,7 @@ Custom Select Dropdown
 
 <DBSection spacing="small" width="auto">
 
-## Component-specific
+## Components
 
 {/* Tips and how-tos for individual components */}
 
@@ -149,6 +182,77 @@ For Full Width checkboxes you have to add the asterisk \* manually in the label 
 Set Required Toggle = true for correct Dev Properties.
 
 </GuidelineExample>
+
+</DBStack>
+
+<DBStack gap="medium">
+### Control Panel & Shell
+
+#### Add a custom logo with the DB Logo Importer
+
+<DBNotification variant="standalone" semantic="informational">
+Create your brand-compliant custom logo SVG via the marketing portal. The plugin import ensures system-conformant color variables and sizing.
+</DBNotification>
+
+In the Brand area of the ControlPanel, you can add a brand-compliant custom logo with logo addition only in the **Brand → Logozusatz** variant. Use the Figma plugin <DBLink href="https://www.figma.com/community/plugin/1590462040996560100/concept-db-logo-importer" target="_blank" rel="noopener noreferrer" variant="inline">DB Logo Importer</DBLink> to import an SVG from the <DBLink href="https://marketingportal.extranet.deutschebahn.com/marketingportal/Marke-und-Design/Basiselemente/Logo/Logozusatz-mit-Tool#unit=Regio&mode=unit&breaking=true" target="_blank" rel="noopener noreferrer" variant="inline">DB brand logo generator</DBLink>. The plugin assigns correct color variables and places the logo directly into the **Logo Slot**.
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel-%E2%9C%85?node-id=4617-5&embed-host=share"
+	description="Generate your custom logo SVG via the DB brand logo generator on the Marketing Portal"
+/>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel-%E2%9C%85?node-id=4621-3&embed-host=share"
+	description="Select a Shell or ControlPanel instance in Figma, then run the DB Logo Importer plugin and import your SVG"
+/>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel-%E2%9C%85?node-id=4621-5&embed-host=share"
+	description="The plugin places the logo into the Logo Slot with correct color variables, sizing, and locked aspect ratio"
+/>
+</div>
+
+
+#### Popover Navigation Horizontal: Overflow Buttons
+
+<DBNotification variant="standalone" semantic="informational">
+Desktop only – Mobile Popover Horizontal is limited to SubNavigation (Level 2) with a single level and does not display overflow buttons, an Active Indicator, or expanded Popover items.
+</DBNotification>
+
+The **Clip Content** setting required for correct horizontal overflow removes all elements outside the children container of Popover Navigation – including expanded Popover items and the Active Indicator (Level 1). Show either the overflow cropping or the expanded/active state, not both at the same time.
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell-%E2%9C%85?node-id=4236-4&embed-host=share"
+	description="To show overflow behavior, enable Clip Content on the CP Navigation Popover Children slot. Expanded items and the Active Indicator will not be visible."
+/>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell-%E2%9C%85?node-id=4236-11&embed-host=share"
+	description="To show an expanded Popover navigation item or the Active Indicator, disable Clip Content. The horizontal overflow will not crop correctly."
+/>
+</div>
+
+#### Scroll behavior of vertical navigation and Meta
+
+In the vertical navigation, the Meta navigation docks to the bottom edge. This applies to the Drill Down and Tree variants.
+
+When many navigation items fill the available space, they run underneath the Meta navigation instead of pushing it away. In Figma, change the auto layout behavior of the navigation from Fill to Hug so the Meta navigation stays below all navigation items and is pushed out of the visible area by the navigation.
+
+<div className="guideline-examples">
+<GuidelineExample
+fullWidth
+	figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel-%E2%9C%85?node-id=5533-28082&embed-host=share"
+	description="With few items the Meta navigation stays visible – with many items the navigation items run underneath the Meta navigation"
+/>
+
+<GuidelineExample
+fullWidth
+	figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel-%E2%9C%85?node-id=5534-31129&embed-host=share"
+	description="Select the CP Navigation layer and change the vertical resizing from Fill container to Hug contents"
+/>
+</div>
 
 </DBStack>
 
