@@ -1,9 +1,8 @@
 ---
 import type { MarkdownHeading } from 'astro';
 import { TableOfContents } from '@template/components/TableOfContents';
-import { DBSection, DBShellContent } from '@db-ux/react-core-components';
+import { DBSection } from '@db-ux/react-core-components';
 import { PageHero } from '@components';
-import Footer from '@template/components/Footer/Footer.astro';
 
 const { headings, frontmatter } = Astro.props as {
 	headings: MarkdownHeading[];
@@ -12,37 +11,33 @@ const { headings, frontmatter } = Astro.props as {
 const toc = (headings?.length ?? 0) > 0 && frontmatter.toc === true;
 ---
 
-<DBShellContent>
+{
+	toc && (
+		<TableOfContents
+			client:only="react"
+			astro={Astro}
+			headings={headings}
+			tocMaxDepth={frontmatter.tocMaxDepth}
+		/>
+	)
+}
+<div class="dba-main-content">
 	{
-		toc && (
-			<TableOfContents
-				client:only="react"
-				astro={Astro}
-				headings={headings}
-				tocMaxDepth={frontmatter.tocMaxDepth}
-			/>
+		(frontmatter.title || frontmatter.headline || frontmatter.description) && (
+			<DBSection id={frontmatter.title} width="full" spacing="large">
+				<PageHero
+					title={frontmatter.title}
+					headline={frontmatter.headline}
+					description={frontmatter.description}
+					headlineLevel={frontmatter.headlineLevel ?? 1}
+					imageSrc={frontmatter.heroImage}
+					imageAlt={frontmatter.heroImageAlt}
+					align={frontmatter.align}
+				/>
+			</DBSection>
 		)
 	}
-	<div class="dba-main-content">
-		{
-			(frontmatter.title || frontmatter.headline || frontmatter.description) && (
-				<DBSection id={frontmatter.title} width="full" spacing="large">
-					<PageHero
-						title={frontmatter.title}
-						headline={frontmatter.headline}
-						description={frontmatter.description}
-						headlineLevel={frontmatter.headlineLevel ?? 1}
-						imageSrc={frontmatter.heroImage}
-						imageAlt={frontmatter.heroImageAlt}
-						align={frontmatter.align}
-					/>
-				</DBSection>
-			)
-		}
-		<DBSection id="main-content-section" width="full" spacing="none">
-			<slot />
-		</DBSection>
-	</div>
-
-	<Footer slot="endSlot" />
-</DBShellContent>
+	<DBSection id="main-content-section" width="full" spacing="none">
+		<slot />
+	</DBSection>
+</div>

@@ -1,0 +1,144 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Control Panel Flat Icon'
+title: 'Control Panel Flat Icon'
+description: 'The Control Panel Flat Icon presents equally weighted top-level navigation destinations in a flat icon navigation. It is available for desktop and mobile and is designed for quick access.'
+align: start
+toc: true
+status: 'beta'
+order: 3
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Offer equally weighted destinations at the top level
+- Present a flat hierarchy with visually dominant icons
+- Enable quick access to up to ten destinations on desktop and six on mobile
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards path="?path=/docs/components-dbcontrolpanelflaticon-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Flat Icon Usage
+
+Flat Icon presents all destinations with the same weight. The variant is therefore only suited to equally weighted destinations at the top level.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4799-40&embed-host=share"
+		description="Use Flat Icon for equally weighted destinations at the top level."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4799-44&embed-host=share"
+		description="Don't use Flat Icon when one destination sits above the others. Otherwise sub-destinations appear next to their parent as equals, and the structure is no longer recognizable."
+	/>
+</div>
+
+### Items in Flat Icon
+
+Flat Icon is designed for quick access. On desktop, the variant holds no more than ten Navigation Items, ideally seven.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		imageRatio="portrait"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-14&embed-host=share"
+		description="In Flat Icon on desktop, use at most ten Navigation Items, ideally up to seven."
+	/>
+	<GuidelineExample
+		variant="caution"
+		imageRatio="portrait"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-16&embed-host=share"
+		description="Longer icon lists work against the quick access Flat Icon is meant for. Reduce the number of destinations."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Hiding the Label
+
+In Flat Icon, the label can be hidden so that only the icon remains visible.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		halfWidth
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4804-32&embed-host=share"
+		description="On mobile, hide the label when more than four destinations need to fit into the bar. Without labels the bar holds up to six items."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Examples" expandedText="Hide some Examples" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Control Panel Flat Icon" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Control Panel Navigation',
+			description: 'Navigation container with the Popover, Tree, and Drill Down variants.',
+			url: '/documentation/components/control-panel/navigation',
+		},
+		{
+			title: 'Control Panel Desktop',
+			description: 'Primary navigation bar for desktop applications in the Top and Left positions.',
+			url: '/documentation/components/control-panel/desktop',
+		},
+		{
+			title: 'Control Panel Mobile',
+			description:
+				'Primary navigation bar for mobile applications with a Drawer for the full navigation.',
+			url: '/documentation/components/control-panel/mobile',
+		},
+		{
+			title: 'Control Panel Navigation Item',
+			description: 'Individual navigation entry within the Control Panel Navigation.',
+			url: '/documentation/components/control-panel/navigation-item',
+		},
+	]}
+/>
+
+</DBSection>

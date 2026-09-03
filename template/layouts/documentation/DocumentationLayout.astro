@@ -3,7 +3,6 @@ import type { MarkdownHeading } from 'astro';
 import '../../styles/global.css';
 import HtmlHead from '@template/components/HtmlHead';
 import DocumentationContent from './DocumentationContent.astro';
-import { appConfig } from '@root/app.config.ts';
 import { Shell } from '@template/components/Shell';
 import Footer from '@template/components/Footer/Footer.astro';
 import { appNavigation } from '@root/app.navigation.ts';
@@ -69,14 +68,11 @@ if (frontmatter.externalUrl) {
 		<html lang={lang}>
 			<HtmlHead title={frontmatter.title} loadModelViewer={frontmatter.loadModelViewer} />
 			<body>
-				<Shell
-					client:only="react"
-					pathname={currentPath}
-					subNavigationVariant={frontmatter.subNavigationVariant}
-				>
-						<DocumentationContent frontmatter={frontmatter} headings={headings}>
-							<slot />
-						</DocumentationContent>
+				<Shell client:only="react" pathname={currentPath}>
+					<DocumentationContent frontmatter={frontmatter} headings={headings}>
+						<slot />
+					</DocumentationContent>
+					<Footer slot="endSlot" />
 				</Shell>
 				<slot name="script" />
 				<script>import '@template/components/ComponentPlayground/playground-init';</script>

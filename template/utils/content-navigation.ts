@@ -53,7 +53,7 @@ function toTitleFromSegment(segment: string): string {
  */
 function ensureChild(parent: NavigationItem, child: NavigationItem) {
 	parent.children = parent.children ?? [];
-	const exists = parent.children.find((c) => c.path === child.path);
+	const exists = parent.children.find((c) => c.path === child.path && c.title === child.title);
 	if (!exists) parent.children.push(child);
 }
 
@@ -69,23 +69,27 @@ function getOrder(fm: NavigationFrontmatter): number | undefined {
 }
 
 /**
- * Comparator function for sorting navigation items. First by status priority, then by `order`, then alphabetically by `title`.
+ * Comparator function for sorting navigation items. Items are grouped by status first, with subcomponents listed after the regular status groups; within each group, items are sorted by `order` and then alphabetically by `title`.
  *
  * @param a - The first navigation item.
  * @param b - The second navigation item.
  * @returns -1, 0, or 1 depending on order.
  */
 function compareNav(a: NavigationItem, b: NavigationItem) {
-	// Status priority: stable > beta > concept > legacy > deprecated
+	// 'sub' previously shared the top band with 'stable', which caused Control Panel's
+	// subcomponent pages to interleave with its own top-level status groups. Giving 'sub'
+	// its own trailing band keeps subcomponents grouped after all real status bands.
+	// Other navigation groupings were not affected by the previous grouping.
 	const statusPriority: Record<string, number> = {
 		stable: 1,
 		beta: 2,
 		concept: 3,
 		legacy: 4,
 		deprecated: 5,
+		sub: 6,
 	};
-	const aStatus = statusPriority[a.status || 'stable'] ?? 6;
-	const bStatus = statusPriority[b.status || 'stable'] ?? 6;
+	const aStatus = statusPriority[a.status || 'stable'] ?? 7;
+	const bStatus = statusPriority[b.status || 'stable'] ?? 7;
 	if (aStatus !== bStatus) return aStatus - bStatus;
 
 	const ao = a.order ?? Number.MAX_SAFE_INTEGER;
@@ -110,11 +114,24 @@ function sortTree(node: NavigationItem) {
 }
 
 /**
+ * Adapts dedicated desktop sub-navigation containers for the mobile tree.
+ * The containers remain as regular navigation groups so their children can be
+ * reached through the mobile drilldown navigation.
+ */
+function prepareMobileNavigation(items: NavigationItem[]): NavigationItem[] {
+	return items.map((item) => {
+		const children = item.children ? prepareMobileNavigation(item.children) : [];
+
+		return { ...item, isSubNavigation: false, children };
+	});
+}
+
+/**
  * Builds the complete application navigation dynamically from Markdown content.
  * Scans all markdown files, skips the root homepage, reads the frontmatter, creates intermediate nodes for
  * directories without their own index file and recursively sorts all items by order and title.
  *
- * @param mobile - If true, sub-navigation items are flattened so their children appear as normal ordered items.
+ * @param mobile - If true, dedicated sub-navigation containers are kept as nested groups for mobile drilldown navigation.
  * @returns A fully structured and sorted `AppNavigation` tree.
  */
 export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
@@ -132,10 +149,7 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 
 	// Build DE title map from de/ pages frontmatter
 	const deModules = import.meta.glob<MdModule>(
-		[
-			'../../content/pages/de/**/*.{md,mdx}',
-			'!**/_*/**',
-		],
+		['../../content/pages/de/**/*.{md,mdx}', '!**/_*/**'],
 		{ eager: true },
 	) as Modules;
 
@@ -185,7 +199,7 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 		const title =
 			fm.title || (segments.length ? toTitleFromSegment(segments[segments.length - 1]) : 'Home');
 		const hidePage = fm.hidePage === true;
-		const isSubNavigation = mobile ? false : (fm.isSubNavigation ?? false);
+		const isSubNavigation = fm.isSubNavigation ?? false;
 		const iconTrailing = fm.iconTrailing;
 		const disabled = fm.isMenuItemDisabled === true;
 		const order = getOrder(fm);
@@ -216,7 +230,7 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 			existing.title = title;
 			existing.titleDe = deTitles.get(rel);
 			existing.path = hidePage ? undefined : rel;
-			existing.isSubNavigation = mobile ? false : isSubNavigation;
+			existing.isSubNavigation = isSubNavigation;
 			existing.iconTrailing = iconTrailing;
 			existing.disabled = disabled;
 			existing.order = order;
@@ -253,7 +267,9 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 		}
 	}
 
-	const appNav: AppNavigation = Object.values(roots).sort(compareNav) as NavigationItem[];
+	const appNav: AppNavigation = (
+		mobile ? prepareMobileNavigation(Object.values(roots)) : Object.values(roots)
+	).sort(compareNav) as NavigationItem[];
 	appNav.forEach(sortTree);
 
 	return appNav;
