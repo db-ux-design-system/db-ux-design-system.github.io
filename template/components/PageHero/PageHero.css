@@ -56,14 +56,6 @@
 	font: var(--db-type-body-md);
 }
 
-.page-hero-underline {
-	display: block;
-	inline-size: var(--db-sizing-lg); /* kann aus Token ersetzt werden falls vorhanden */
-	block-size: var(--db-sizing-3xs);
-	border-radius: var(--db-border-radius-xs);
-	background: var(--db-brand-origin-default);
-}
-
 .page-hero-media {
 	margin-block-start: var(--db-spacing-fixed-2xl);
 	display: flex;
@@ -156,12 +148,6 @@
 
 	.page-hero-headline {
 		line-height: 1.2;
-	}
-
-	.page-hero-underline {
-		margin-block-start: var(--db-spacing-fixed-md);
-		inline-size: var(--db-sizing-sm);
-		block-size: var(--db-sizing-3xs);
 	}
 
 	.page-hero-media {

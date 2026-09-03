@@ -1,0 +1,178 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Control Panel Navigation'
+title: 'Control Panel Navigation'
+description: 'Control Panel Navigation is the navigation container within the Control Panel and the Shell Sub Navigation. It holds Navigation Items and is available in the Popover, Tree, and Drill Down variants.'
+align: start
+toc: true
+status: 'sub'
+order: 8
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+
+- Present navigation destinations in the variant that fits the structure
+- Open up deeper levels through Popover, Tree, or Drill Down
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards path="?path=/docs/components-dbcontrolpaneldesktop-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Navigation Destinations Only
+
+The navigation only holds navigation destinations. Actions belong in Control Panel Actions.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4798-2&embed-host=share"
+		description="Only use Navigation Items for navigation destinations."
+	/>
+	<GuidelineExample
+		fullWidth
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4798-6&embed-host=share"
+		description="Don't place actions such as search as a Navigation Item. A Navigation Item announces a page change, an action triggers something."
+	/>
+</div>
+
+### Drill Down for Many Entries
+
+The number of Navigation Items per level decides between Drill Down and Tree. Drill Down shows one level at a time and therefore stays clear even with many entries.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-10&embed-host=share"
+		description="Use Drill Down from eight Navigation Items per level onwards."
+	/>
+	<GuidelineExample
+		fullWidth
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-12&embed-host=share"
+		description="With few entries per level, Drill Down still shows only one level: the overview of the hierarchy is missing even though there is space for it. Consider Tree in that case."
+	/>
+</div>
+
+### Tree for Few Entries
+
+Tree keeps the full hierarchy visible. Up to seven Navigation Items per level, it stays manageable.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-6&embed-host=share"
+		description="Use Tree for up to seven Navigation Items per level."
+	/>
+	<GuidelineExample
+		fullWidth
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4390-8&embed-host=share"
+		description="Above seven entries per level, Tree loses its advantage of keeping the full hierarchy visible."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Popover Overflow
+
+On desktop, the Popover navigation can be scrolled via overflow chevrons when not all Navigation Items fit into the available width.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4806-49&embed-host=share"
+		description="When not all Navigation Items fit the width, overflow chevrons appear and the destinations behind them are not visible."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Examples" expandedText="Hide some Examples" />
+
+</DBSection>
+
+<FigmaLearnTeaser componentName="Control Panel Navigation" anchor="control-panel--shell" />
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Control Panel Navigation" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Control Panel Flat Icon',
+			description: 'Flat icon navigation for equally weighted top-level destinations.',
+			url: '/documentation/components/control-panel/flat-icon',
+		},
+		{
+			title: 'Control Panel Navigation Item',
+			description: 'Individual navigation entry within the Control Panel Navigation.',
+			url: '/documentation/components/control-panel/navigation-item',
+		},
+		{
+			title: 'Control Panel Desktop',
+			description: 'Primary navigation bar for desktop applications in the Top and Left positions.',
+			url: '/documentation/components/control-panel/desktop',
+		},
+		{
+			title: 'Control Panel Mobile',
+			description:
+				'Primary navigation bar for mobile applications with a Drawer for the full navigation.',
+			url: '/documentation/components/control-panel/mobile',
+		},
+		{
+			title: 'Shell Sub Navigation',
+			description: 'Sub-level navigation within the Shell, oriented horizontally or vertically.',
+			url: '/documentation/components/shell/sub-navigation',
+		},
+		{
+			title: 'Shell Desktop',
+			description:
+				'Outer layout structure for desktop web applications with a persistent Control Panel.',
+			url: '/documentation/components/shell/desktop',
+		},
+	]}
+/>
+
+</DBSection>

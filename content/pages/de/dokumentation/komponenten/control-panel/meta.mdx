@@ -1,0 +1,135 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Control Panel Meta'
+title: 'Control Panel Meta'
+description: 'Control Panel Meta ist der Bereich im Control Panel für ergänzende Inhalte mit niedriger Priorität.'
+align: start
+toc: true
+status: 'sub'
+order: 7
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Meta-Navigationslinks im Control Panel unterbringen
+- Rechtliche Hinweise global erreichbar halten
+- Ergänzende Inhalte von der primären Navigation trennen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbcontrolpaneldesktop-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Art des Inhalts
+
+Meta nimmt global gültige Inhalte mit niedriger Priorität auf, etwa Meta-Navigationslinks und rechtliche Hinweise.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		fullWidth
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4358-2&embed-host=share"
+		description="Verwende Meta für global gültige Inhalte mit niedriger Priorität."
+	/>
+	<GuidelineExample
+		variant="dont"
+		fullWidth
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4358-4&embed-host=share"
+		description="Platziere keine primären Navigation Items und keine hochpriorisierten Aktionen in Meta. Sie gehören in die Control Panel Navigation und in Control Panel Actions."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton
+	collapsedText="Alle Richtlinien anzeigen"
+	expandedText="Weniger Richtlinien anzeigen"
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Beispiele
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Position von Meta
+
+Die Position von Meta unterscheidet sich je Variante: bei Top über der Navigation, bei Left und im mobilen Drawer über Control Panel Actions.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4795-88&embed-host=share"
+		description="Bei Top liegt Meta über der Navigation."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4795-100&embed-host=share"
+		description="Bei Left und im mobilen Drawer liegt Meta über Control Panel Actions."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Beispiele anzeigen" expandedText="Weniger Beispiele anzeigen" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Control Panel Meta" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Control Panel Navigation',
+			description: 'Navigations-Container mit den Varianten Popover, Tree und Drill Down.',
+			url: '/de/dokumentation/komponenten/control-panel/navigation',
+		},
+		{
+			title: 'Control Panel Actions',
+			description:
+				'Zwei eigenständige Aktionsbereiche für globale und unterstützende Utility-Aktionen im Control Panel.',
+			url: '/de/dokumentation/komponenten/control-panel/actions',
+		},
+		{
+			title: 'Control Panel Desktop',
+			description:
+				'Primäre Navigationsleiste für Desktop-Anwendungen in den Positionen Top und Left.',
+			url: '/de/dokumentation/komponenten/control-panel/desktop',
+		},
+		{
+			title: 'Control Panel Mobile',
+			description:
+				'Primäre Navigationsleiste für mobile Anwendungen mit Drawer für die vollständige Navigation.',
+			url: '/de/dokumentation/komponenten/control-panel/mobile',
+		},
+	]}
+/>
+
+</DBSection>

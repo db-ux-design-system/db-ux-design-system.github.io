@@ -1,0 +1,134 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Control Panel Mobile'
+title: 'Control Panel Mobile'
+description: 'Das Control Panel Mobile stellt die primäre Navigationsleiste für mobile Anwendungen innerhalb der Shell bereit. Es steht in den Positionen Top und Bottom zur Verfügung und öffnet die vollständige Navigation in einem Drawer. Die Positionswahl ist bei Shell Mobile geregelt, die Wahl der Navigationsvariante bei der Control Panel Navigation; Flat Icon ist als eigene Variante des Control Panels dokumentiert.'
+align: start
+toc: true
+order: 2
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+
+- Logo, Actions 1 und den Zugang zur Navigation in einer mobilen Leiste bündeln
+- Die vollständige Navigation im Drawer öffnen, statt sie dauerhaft anzuzeigen
+- Die Leiste oben oder unten am Bildschirmrand positionieren
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbcontrolpanelmobile-position--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Density
+
+Control Panel Mobile ist auf die Density Regular ausgelegt und setzt den Wert selbst. Eine abweichende Density von außen zu setzen ist nicht vorgesehen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-2&embed-host=share"
+		description="Übernimm die Density Regular, die Control Panel Mobile selbst setzt."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4172-4&embed-host=share"
+		description="Überschreibe die Density von Control Panel Mobile nicht. Die Komponente ist auf Regular ausgelegt, ein abweichender Wert führt zu einer Darstellung, die so nicht vorgesehen ist."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton
+	collapsedText="Alle Richtlinien anzeigen"
+	expandedText="Weniger Richtlinien anzeigen"
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Beispiele
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Erste Ebene und Drawer
+
+Auf der ersten Ebene liegen Brand, Actions 1 und der Menu-Button. Navigation, Meta und Actions 2 liegen im Drawer. Neben dem Menu-Button erscheint automatisch ein Divider, sobald Actions 1 eingeblendet sind.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4748-6&embed-host=share"
+		description="Ohne Öffnen des Drawers erreichbar. Befülle hier die Slots für Brand und Actions 1."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4748-16&embed-host=share"
+		description="Öffnet über den Menu-Button. Befülle hier die Slots für Navigation, Meta und Actions 2."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Beispiele anzeigen" expandedText="Weniger Beispiele anzeigen" />
+
+</DBSection>
+
+<FigmaLearnTeaser componentName="Control Panel Mobile" locale="de" anchor="control-panel--shell" />
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Control Panel Mobile" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Shell Mobile',
+			description:
+				'Äußere Layout-Struktur für mobile Webanwendungen mit Drawer als Hauptnavigation.',
+			url: '/de/dokumentation/komponenten/shell/mobile',
+		},
+		{
+			title: 'Control Panel Desktop',
+			description:
+				'Primäre Navigationsleiste für Desktop-Anwendungen in den Positionen Top und Left.',
+			url: '/de/dokumentation/komponenten/control-panel/desktop',
+		},
+		{
+			title: 'Control Panel Navigation',
+			description: 'Navigations-Container mit den Varianten Popover, Tree und Drill Down.',
+			url: '/de/dokumentation/komponenten/control-panel/navigation',
+		},
+		{
+			title: 'Control Panel Flat Icon',
+			description: 'Flache Icon-Navigation für gleichwertige Ziele auf oberster Ebene.',
+			url: '/de/dokumentation/komponenten/control-panel/flat-icon',
+		},
+	]}
+/>
+
+</DBSection>
