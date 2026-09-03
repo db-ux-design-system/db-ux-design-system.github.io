@@ -60,6 +60,15 @@
 	margin-block-start: var(--db-spacing-fixed-md);
 }
 
+/* Content following a collapse control needs spacing only when it exists. */
+.dba-main-content .collapse-button + * {
+	margin-block-start: var(--db-spacing-fixed-md);
+}
+
+.dba-main-content .collapse-button + :is(h2, h3, h4, h5, h6) {
+	margin-block-start: var(--db-spacing-fixed-2xl);
+}
+
 /* Headlines after content get large spacing to separate sections */
 .dba-main-content
 	:is(
