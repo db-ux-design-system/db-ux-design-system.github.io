@@ -1,0 +1,179 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Control Panel Brand'
+title: 'Control Panel Brand'
+description: 'Control Panel Brand zeigt das Logo und einen optionalen Anwendungsnamen innerhalb des Control Panels an. Im Design stehen die drei Varianten Custom, Logozusatz und Short zur Verfügung.'
+align: start
+toc: true
+status: 'sub'
+order: 4
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+
+- Das Logo der Anwendung im Control Panel anzeigen
+- Einen optionalen Anwendungsnamen ein- oder zweizeilig ergänzen
+- Umgebungs-Informationen im End Slot unterbringen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbcontrolpaneldesktop-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### End Slot
+
+Alle Varianten außer Short haben einen End Slot. Er ist für Umgebungs-Informationen vorgesehen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4185-10&embed-host=share"
+		description="Platziere im End Slot ausschließlich Umgebungs-Informationen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4185-12&embed-host=share"
+		description="Platziere im End Slot keinen Anwendungsnamen und keine interaktiven Elemente. Aktionen gehören in Control Panel Actions."
+	/>
+</div>
+
+### Texthierarchie
+
+Standardmäßig sind beide Textteile Regular. Zeigt der Text eine Hierarchie, wird ausschließlich der erste Teil bold gesetzt.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4782-8&embed-host=share"
+		description="Setze bei einer gewünschten Hierarchie nur den ersten Textteil bold."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4782-18&embed-host=share"
+		description="Setze nicht den zweiten Textteil bold und nicht beide. Bold auf dem zweiten Teil kehrt die Hierarchie um, bold auf beiden hebt sie auf."
+	/>
+</div>
+
+### Standard-Logo in Short
+
+Die Variante Short zeigt das Standard-Logo. Sie erscheint in den eingeklappten Left-Varianten und bei Control Panel Bottom.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4185-2&embed-host=share"
+		description="Belasse in der Variante Short das Standard-Logo."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4185-4&embed-host=share"
+		description="Überschreibe das Standard-Logo in Short nicht. Die Positionen dieser Variante bieten keinen Platz für einen Logozusatz oder einen Anwendungsnamen."
+	/>
+</div>
+
+### Logozusatz
+
+Der Logo Slot der Variante Logozusatz nimmt ausschließlich das freigegebene SVG aus dem Marketingportal auf.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4252-87&embed-host=share"
+		description="Setze im Logo Slot der Variante Logozusatz ausschließlich das freigegebene SVG aus dem Marketingportal ein."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4252-97&embed-host=share"
+		description="Baue den Logozusatz nicht als eigenen Text nach. Nur das freigegebene SVG entspricht der Marken-Vorgabe."
+	/>
+</div>
+
+### Logo bei Flat Icon
+
+Die Flat Icon Navigation auf Mobile hat keinen Bereich für Brand. Das Logo wird dann im Shell Content platziert.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		imageRatio="portrait"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4185-6&embed-host=share"
+		description="Platziere das Logo bei Flat Icon auf Mobile im Shell Content."
+	/>
+	<GuidelineExample
+		variant="dont"
+		imageRatio="portrait"
+		figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel?node-id=4185-8&embed-host=share"
+		description="Platziere das Logo nicht im Slot der Flat Icon Navigation. Der Slot nimmt ausschließlich Navigationsziele auf."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton
+	collapsedText="Alle Richtlinien anzeigen"
+	expandedText="Weniger Richtlinien anzeigen"
+/>
+
+</DBSection>
+
+<FigmaLearnTeaser componentName="Control Panel Brand" locale="de" anchor="control-panel--shell" />
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Control Panel Brand" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Shell Content',
+			description: 'Scrollbarer Hauptinhaltsbereich der Shell mit Slot-basiertem Layout.',
+			url: '/de/dokumentation/komponenten/shell/content',
+		},
+		{
+			title: 'Control Panel Actions',
+			description:
+				'Zwei eigenständige Aktionsbereiche für globale und unterstützende Utility-Aktionen im Control Panel.',
+			url: '/de/dokumentation/komponenten/control-panel/actions',
+		},
+		{
+			title: 'Control Panel Desktop',
+			description:
+				'Primäre Navigationsleiste für Desktop-Anwendungen in den Positionen Top und Left.',
+			url: '/de/dokumentation/komponenten/control-panel/desktop',
+		},
+		{
+			title: 'Control Panel Mobile',
+			description:
+				'Primäre Navigationsleiste für mobile Anwendungen mit Drawer für die vollständige Navigation.',
+			url: '/de/dokumentation/komponenten/control-panel/mobile',
+		},
+	]}
+/>
+
+</DBSection>

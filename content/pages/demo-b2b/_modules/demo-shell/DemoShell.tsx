@@ -9,8 +9,8 @@ import {
 } from '@db-ux/react-core-components';
 import DemoBrand from '@template/components/DemoBrand/DemoBrand';
 import DemoNavigation from './control-panel/navigation';
-import DemoPrimaryActions from './control-panel/primary-actions';
-import DemoSecondaryActions from './control-panel/secondary-actions';
+import DemoActions1 from './control-panel/actions1.tsx';
+import DemoActions2 from './control-panel/actions2.tsx';
 import DemoSubNavigation from './control-panel/sub-navigation.tsx';
 import { useDemoUrlParams } from '@template/hooks/useDemoUrlParams';
 
@@ -19,14 +19,14 @@ function DemoShellContent({ children }: PropsWithChildren): ReactElement {
 
 	return (
 		<DBShell fadeIn controlPanelDesktopPosition="left" subNavigationDesktopPosition="top">
-			<DBControlPanelDesktop brand={<DemoBrand />} secondaryActions={<DemoSecondaryActions />}>
+			<DBControlPanelDesktop brand={<DemoBrand />} actions1={<DemoActions1 />}>
 				<DemoNavigation />
 			</DBControlPanelDesktop>
 			<DBControlPanelMobile
 				burgerMenuLabel="Menu"
 				brand={<DemoBrand />}
-				primaryActions={<DemoPrimaryActions />}
-				secondaryActions={<DemoSecondaryActions />}
+				actions1={<DemoActions1 />}
+				actions2={<DemoActions2 />}
 			>
 				<DemoNavigation />
 			</DBControlPanelMobile>

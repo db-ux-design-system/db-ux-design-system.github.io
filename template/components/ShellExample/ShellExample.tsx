@@ -4,7 +4,7 @@ import {
 	DBControlPanelBrand,
 	DBNavigation,
 	DBNavigationItem,
-	DBControlPanelPrimaryActions,
+	DBControlPanelActions1,
 } from '@db-ux/react-core-components';
 import { useRef, useEffect } from 'react';
 
@@ -40,11 +40,11 @@ export default function ShellExample() {
 						<a href="#">Nav Item 3</a>
 					</DBNavigationItem>
 				</DBNavigation>
-				<DBControlPanelPrimaryActions>
+				<DBControlPanelActions1>
 					<a className="db-button" data-variant="brand">
 						Call to Action
 					</a>
-				</DBControlPanelPrimaryActions>
+				</DBControlPanelActions1>
 			</DBControlPanelDesktop>
 		</DBShell>
 	);
