@@ -27,15 +27,15 @@ draft: true
 
 - Floating Container: The new helper component places additional elements on a trigger or parent component.
 - Button: Floating Container has been integrated.
-- Custom Select: All components are now available in Title Case.
 
 #### Changed
 
 - Scrollbar, Tabs Vertical: The duplicate resizer helper component has been replaced by the original resizer helper component.
+- Custom Select: All components are now available in Title Case.
 
 #### Fixed
 
-- Button: The fixed width of the icon button has been corrected.
+- Button: The fixed width of the icon button has been corrected. (non visible)
 
 #### Deprecated
 

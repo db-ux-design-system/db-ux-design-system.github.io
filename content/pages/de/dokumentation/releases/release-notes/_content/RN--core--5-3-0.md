@@ -27,15 +27,15 @@ draft: true
 
 - Floating Container: Die neue Helper-Komponente platziert zusätzliche Elemente an einer Trigger- oder Parent-Komponente.
 - Button: Floating Container wurde integriert.
-- Custom Select: Alle Komponenten sind jetzt in Title Case verfügbar.
 
 #### Geändert
 
 - Scrollbar, Tabs Vertical: Die duplizierte Resizer-Helper-Komponente wurde durch die ursprüngliche Resizer-Helper-Komponente ersetzt.
+- Custom Select: Alle Komponenten sind jetzt in Title Case verfügbar.
 
 #### Behoben
 
-- Button: Die fixe Breite des Icon-Buttons wurde korrigiert.
+- Button: Die fixe Breite des Icon-Buttons wurde korrigiert. (nicht sichtbar)
 
 #### Deprecated
 
