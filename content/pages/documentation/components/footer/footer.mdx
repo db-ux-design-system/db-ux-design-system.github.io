@@ -31,7 +31,7 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ### One Instance per Page
 
-Exactly one Footer exists per page. A second instance creates a duplicate page ending and splits legal information across two places.
+Exactly one Footer exists per page. A second instance creates a duplicate page ending and splits the Footer's content across two places.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -43,7 +43,7 @@ Exactly one Footer exists per page. A second instance creates a duplicate page e
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=1-1133&embed-host=share"
-		description="Don't add a second Footer instance on the same page. The page ending appears twice and legal information is split across two places."
+		description="Don't add a second Footer instance on the same page. The page ending appears twice and the Footer's content is split across two places."
 		fullWidth={true}
 	/>
 </div>
@@ -139,6 +139,11 @@ Footer Content and Footer Meta are filled independently. The resulting combinati
 			title: 'Footer Meta',
 			description: 'Lower area of the Footer for the copyright notice and legal links',
 			url: '/documentation/components/footer/footer-meta',
+		},
+		{
+			title: 'Shell Content',
+			description: 'Scrollable main content area of the Shell whose End Slot holds the Footer',
+			url: '/documentation/components/shell/content',
 		},
 	]}
 />

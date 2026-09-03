@@ -31,7 +31,7 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ### Eine Instanz pro Seite
 
-Pro Seite existiert genau ein Footer. Eine zweite Instanz erzeugt einen doppelten Seitenabschluss und verteilt rechtliche Informationen auf zwei Stellen.
+Pro Seite existiert genau ein Footer. Eine zweite Instanz erzeugt einen doppelten Seitenabschluss und verteilt die Inhalte des Footers auf zwei Stellen.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -43,7 +43,7 @@ Pro Seite existiert genau ein Footer. Eine zweite Instanz erzeugt einen doppelte
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=1-1133&embed-host=share"
-		description="Ergänze keine zweite Footer-Instanz auf derselben Seite. Der Seitenabschluss erscheint doppelt und rechtliche Informationen verteilen sich auf zwei Stellen."
+		description="Ergänze keine zweite Footer-Instanz auf derselben Seite. Der Seitenabschluss erscheint doppelt und die Inhalte des Footers verteilen sich auf zwei Stellen."
 		fullWidth={true}
 	/>
 </div>
@@ -139,6 +139,11 @@ Footer Content und Footer Meta werden unabhängig voneinander befüllt. Welche K
 			title: 'Footer Meta',
 			description: 'Unterer Bereich des Footers für Copyright-Hinweis und rechtliche Links',
 			url: '/de/dokumentation/komponenten/footer/footer-meta',
+		},
+		{
+			title: 'Shell Content',
+			description: 'Scrollbarer Hauptinhaltsbereich der Shell, dessen End Slot den Footer aufnimmt',
+			url: '/de/dokumentation/komponenten/shell/content',
 		},
 	]}
 />
