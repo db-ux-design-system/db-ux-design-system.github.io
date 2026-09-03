@@ -1,0 +1,151 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Footer'
+title: 'Footer'
+description: 'The Footer forms the bottom area of the layout and bundles secondary navigation, legal links, and meta information.'
+shortDescription: 'Bottom area of the layout with secondary navigation, legal links, and meta information.'
+align: start
+toc: true
+status: 'beta'
+order: 1
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Display legal information at the end of the layout
+- Provide secondary navigation across all pages
+- Close the layout: fill Footer Content and Footer Meta separately
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### One Instance per Page
+
+Exactly one Footer exists per page. A second instance creates a duplicate page ending and splits the Footer's content across two places.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=1-1132&embed-host=share"
+		description="Use the Footer once per page."
+		fullWidth={true}
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=1-1133&embed-host=share"
+		description="Don't add a second Footer instance on the same page. The page ending appears twice and the Footer's content is split across two places."
+		fullWidth={true}
+	/>
+</div>
+
+### Width in the Content Area
+
+The Footer always spans the full width of the content area it sits in.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=4004-1640&embed-host=share"
+		description="Let the Footer span the full width of the content area."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=4004-5943&embed-host=share"
+		description="Don't nest the Footer inside a narrower container. It then detaches from the edge of the content area and no longer reads as the page ending."
+	/>
+</div>
+
+### Footer Meta When Legally Required
+
+Footer Meta carries the application's legal information. If the application is required to display it, Footer Meta belongs in the Footer. Footer Meta defines which content that is.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=4004-6322&embed-host=share"
+		description="Include Footer Meta when the application is required to display legal information."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=4004-10752&embed-host=share"
+		description="Don't omit Footer Meta when the application is required to display legal information. The application then fails to meet its legal requirements."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+### Subcomponent Combination
+
+Footer Content and Footer Meta are filled independently. The resulting combination depends on the application's secondary navigation and its legally required information.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=4004-11530&embed-host=share"
+		description="Footer Content and Footer Meta: Fill both subcomponents when the application offers secondary navigation and displays legal information."
+		fullWidth={true}
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=4004-11855&embed-host=share"
+		description="Footer Meta only: Omit Footer Content when no secondary navigation is needed."
+		fullWidth={true}
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=4004-12028&embed-host=share"
+		description="Footer Content only: Omit Footer Meta when the application is not required to display any legal information."
+		fullWidth={true}
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Footer" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Footer Content',
+			description: 'Upper area of the Footer for secondary navigation and further content',
+			url: '/documentation/components/footer/footer-content',
+		},
+		{
+			title: 'Footer Meta',
+			description: 'Lower area of the Footer for the copyright notice and legal links',
+			url: '/documentation/components/footer/footer-meta',
+		},
+		{
+			title: 'Shell Content',
+			description: 'Scrollable main content area of the Shell whose End Slot holds the Footer',
+			url: '/documentation/components/shell/content',
+		},
+	]}
+/>
+
+</DBSection>

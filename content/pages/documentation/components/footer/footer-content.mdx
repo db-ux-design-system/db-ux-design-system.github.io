@@ -1,0 +1,151 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Footer Content'
+title: 'Footer Content'
+description: 'Footer Content forms the upper area of the Footer and holds secondary navigation as well as further, non-navigational content.'
+shortDescription: 'Upper area of the Footer for secondary navigation and further content.'
+align: start
+toc: true
+status: 'sub'
+subParent: 'Footer'
+order: 2
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Offer further content at the end of the layout: links, company information, payment methods, or social media
+- Provide secondary navigation across all pages
+- Group links by topic: each group gets a heading
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Secondary Content Only
+
+Children holds only curated, secondary and further content. The primary navigation sits in the Control Panel.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=4020-13456&embed-host=share"
+		description="Place curated, secondary and further content in Children."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=4020-13632&embed-host=share"
+		description="Don't reproduce the primary navigation in Children. Users then find the same destinations in two places and the hierarchy between primary and secondary navigation blurs."
+	/>
+</div>
+
+### Number of Links
+
+Up to seven links sit side by side in a single line. From eight links onward they are grouped by content.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=4031-4104&embed-host=share"
+		description="Arrange up to seven links in a single line and group them by content from eight links onward."
+		fullWidth={true}
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=4031-4926&embed-host=share"
+		description="More than seven links in one line become hard to scan. Group them by content instead."
+		fullWidth={true}
+	/>
+</div>
+
+### Group Headings
+
+Each group of grouped links carries a unique heading that names its content.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=4031-5309&embed-host=share"
+		description="Give each group a unique heading."
+		fullWidth={true}
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=4031-5553&embed-host=share"
+		description="Without a heading it is unclear what connects the links within a group. Name the group's content clearly instead."
+		fullWidth={true}
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+### Non-Navigational Content
+
+Beyond secondary navigation, Footer Content also holds non-navigational content. Which of these are used depends on the product.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=4032-225&embed-host=share"
+		description="Company information: Show company information, such as brand and claim."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=4033-622&embed-host=share"
+		description="Payment methods: Display the accepted payment methods."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=4033-902&embed-host=share"
+		description="Social media links: Link to the product's social media channels."
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Footer Content" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Footer',
+			description: 'Parent component that contains Footer Content',
+			url: '/documentation/components/footer/footer',
+		},
+		{
+			title: 'Footer Meta',
+			description: 'Lower area of the Footer for the copyright notice and legal links',
+			url: '/documentation/components/footer/footer-meta',
+		},
+		{
+			title: 'ControlPanel',
+			description: 'Holds the primary navigation of the application',
+			url: '/documentation/components/controlpanel',
+		},
+	]}
+/>
+
+</DBSection>
