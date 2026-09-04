@@ -4,9 +4,202 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Loading Indicator'
 title: 'Loading Indicator'
+description: 'Der Loading Indicator gibt visuelles Feedback darüber, dass Inhalte oder ein Prozess geladen werden. Er ist als Kreis und als Balken verfügbar, jeweils in einer determinierten und einer indeterminierten Variante.'
 shortDescription: 'Visuelles Feedback, das anzeigt, dass Inhalte oder ein Prozess geladen werden.'
 align: start
-status: 'concept'
+status: 'beta'
 toc: true
-isMenuItemDisabled: true
 ---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Wartezeit eines Systemvorgangs sichtbar machen
+- Messbaren Fortschritt als Wert anzeigen
+- Abschluss eines Vorgangs bestätigen: erfolgreich oder abgebrochen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbloadingindicator-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Nur Systemvorgänge
+
+Der Loading Indicator zeigt, wie weit das System mit einem Vorgang ist. Fortschritt, den Nutzende selbst herstellen, etwa ausgefüllte Formularschritte oder erledigte Aufgaben, gehört nicht dazu.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=1-1132&embed-host=share"
+		description="Setze den Loading Indicator für Vorgänge ein, die das System ausführt."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=1-1133&embed-host=share"
+		description="Zeige Fortschritt, den Nutzende selbst herstellen, nicht mit dem Loading Indicator an. Er kündigt ein Ergebnis des Systems an, das in diesem Fall nicht kommt."
+	/>
+</div>
+
+### Ein Indikator pro Vorgang
+
+Jeder Loading Indicator gehört zu genau einem Vorgang. Derselbe Vorgang wird nicht an zwei Stellen gleichzeitig angezeigt.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-2&embed-host=share"
+		description="Ordne jeden Loading Indicator genau einem Vorgang zu."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-3&embed-host=share"
+		description="Zeige denselben Vorgang nicht durch mehrere Indikatoren gleichzeitig an. Es bleibt dann offen, worauf sich das Warten bezieht."
+	/>
+</div>
+
+### Messbarer Fortschritt
+
+Ist der Fortschritt eines Vorgangs berechenbar, zeigt ihn die determinierte Variante als Wert in `progress` an. Die indeterminierte Variante bleibt den Vorgängen vorbehalten, deren Fortschritt sich nicht berechnen lässt.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-5&embed-host=share"
+		description="Wähle die determinierte Variante, sobald der Fortschritt berechenbar ist, und zeige den Wert in progress an."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-6&embed-host=share"
+		description="Wähle indeterminate nicht bei berechenbarem Fortschritt. Nutzende können den verbleibenden Aufwand dann nicht einschätzen, obwohl die Information vorliegt."
+	/>
+</div>
+
+### Vorgang im Label
+
+Das `label` benennt den Vorgang mit einem Verb, nicht nur das betroffene Objekt.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-8&embed-host=share"
+		description="Benenne den Vorgang im label mit einem Verb."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-9&embed-host=share"
+		description="Setze im label nicht nur das betroffene Objekt. Ohne Verb bleibt offen, ob der Vorgang läuft oder abgeschlossen ist."
+	/>
+</div>
+
+### Label je Zustand
+
+Das `label` folgt dem Zustand: bei `state` mit dem Wert `active` beschreibt es den laufenden Vorgang, bei `successful` das Ergebnis.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-11&embed-host=share"
+		description="Beschreibe im label bei active den laufenden Vorgang und bei successful das Ergebnis."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-12&embed-host=share"
+		description="Beschreibe im label nach dem Abschluss nicht weiter den Verlauf. Text und Status-Icon widersprechen sich dann."
+	/>
+</div>
+
+### Grund bei Abbruch
+
+Bei `state` mit dem Wert `critical` nennt das `label` den Grund des Abbruchs. Ein zweites Textfeld für diese Information gibt es nicht.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-14&embed-host=share"
+		description="Nenne bei critical den Grund des Abbruchs im label."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-15&embed-host=share"
+		description="Melde einen Abbruch nicht ohne Grund. Es bleibt dann offen, ob der Vorgang wiederholbar ist."
+	/>
+</div>
+
+### Label ausblenden
+
+Das `label` lässt sich über `showLabel` ausblenden. Dann trägt der umgebende Kontext die Information, um welchen Vorgang es geht.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-17&embed-host=share"
+		description="Blende das label nur aus, wenn der umgebende Kontext den Vorgang eindeutig benennt."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-18&embed-host=share"
+		description="Blende das label nicht aus, wenn der Kontext den Vorgang offen lässt. Sichtbar bleibt dann eine Animation ohne Bezug."
+	/>
+</div>
+
+### Inhalt des Fortschrittstexts
+
+`progress` trägt eine quantitative Angabe: Prozentwert, Anteil oder Menge.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-20&embed-host=share"
+		description="Setze in progress einen Prozentwert, einen Anteil oder eine Menge."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-21&embed-host=share"
+		description="Eine Wiederholung des label in progress belegt Platz, ohne eine zusätzliche Information zu liefern. Setze stattdessen einen quantitativen Wert."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Beispiele
+
+### Mehrere Vorgänge gleichzeitig
+
+Laufen mehrere Vorgänge gleichzeitig, trägt jeder seinen eigenen Loading Indicator.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		halfWidth
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-23&embed-host=share"
+		description="Zeige je Zeile einer Liste den Vorgang an, der zu dieser Zeile gehört."
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Loading Indicator" />
+
+</DBSection>

@@ -4,9 +4,202 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Loading Indicator'
 title: 'Loading Indicator'
+description: 'The Loading Indicator provides visual feedback that content or a process is loading. It is available as a circular indicator and as a bar, each in a determinate and an indeterminate variant.'
 shortDescription: 'Visual feedback indicating that content or a process is loading.'
 align: start
-status: 'concept'
+status: 'beta'
 toc: true
-isMenuItemDisabled: true
 ---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Make the wait time of a system process visible
+- Show measurable progress as a value
+- Confirm the end of a process: successful or failed
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards path="?path=/docs/components-dbloadingindicator-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### System Processes Only
+
+The Loading Indicator shows how far the system has progressed with a process. Progress that people create themselves, such as completed form steps or finished tasks, is not part of that.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=1-1132&embed-host=share"
+		description="Use the Loading Indicator for processes the system runs."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=1-1133&embed-host=share"
+		description="Don't show progress that people create themselves with the Loading Indicator. It announces a system result that never arrives in this case."
+	/>
+</div>
+
+### One Indicator per Process
+
+Each Loading Indicator belongs to exactly one process. The same process is not shown in two places at once.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-2&embed-host=share"
+		description="Assign each Loading Indicator to exactly one process."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-3&embed-host=share"
+		description="Don't show the same process with several indicators at once. It then remains unclear what the wait refers to."
+	/>
+</div>
+
+### Measurable Progress
+
+If a process's progress can be calculated, the determinate variant shows it as a value in `progress`. The indeterminate variant is reserved for processes whose progress cannot be calculated.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-5&embed-host=share"
+		description="Choose the determinate variant as soon as progress can be calculated, and show the value in progress."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-6&embed-host=share"
+		description="Don't choose indeterminate when progress can be calculated. People then cannot estimate the remaining effort even though the information exists."
+	/>
+</div>
+
+### Process in the Label
+
+The `label` names the process with a verb, not just the object involved.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-8&embed-host=share"
+		description="Name the process in the label with a verb."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-9&embed-host=share"
+		description="Don't put only the object involved in the label. Without a verb it remains unclear whether the process is running or finished."
+	/>
+</div>
+
+### Label per State
+
+The `label` follows the state: with `state` set to `active` it describes the running process, with `successful` the result.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-11&embed-host=share"
+		description="In the label, describe the running process for active and the result for successful."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-12&embed-host=share"
+		description="Don't keep describing the process in the label after it has finished. Text and status icon then contradict each other."
+	/>
+</div>
+
+### Reason on Failure
+
+With `state` set to `critical`, the `label` names the reason for the failure. There is no second text field for this information.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-14&embed-host=share"
+		description="Name the reason for the failure in the label for critical."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-15&embed-host=share"
+		description="Don't report a failure without a reason. It then remains unclear whether the process can be retried."
+	/>
+</div>
+
+### Hiding the Label
+
+The `label` can be hidden via `showLabel`. The surrounding context then carries the information about which process is meant.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-17&embed-host=share"
+		description="Hide the label only when the surrounding context clearly names the process."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-18&embed-host=share"
+		description="Don't hide the label when the context leaves the process open. What remains visible is an animation without reference."
+	/>
+</div>
+
+### Progress Text Content
+
+`progress` carries a quantitative value: percentage, ratio, or amount.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-20&embed-host=share"
+		description="Set a percentage, a ratio, or an amount in progress."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-21&embed-host=share"
+		description="Repeating the label in progress takes up space without adding information. Set a quantitative value instead."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+### Several Processes at Once
+
+When several processes run at the same time, each one carries its own Loading Indicator.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		halfWidth
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-23&embed-host=share"
+		description="Show the process belonging to each row of a list in that row."
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Loading Indicator" />
+
+</DBSection>
