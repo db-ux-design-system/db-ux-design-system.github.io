@@ -53,37 +53,54 @@ Der Loading Indicator zeigt, wie weit das System mit einem Vorgang ist. Fortschr
 	/>
 </div>
 
-### Ein Indikator pro Vorgang
+### Ort des Indikators
 
-Jeder Loading Indicator gehört zu genau einem Vorgang. Derselbe Vorgang wird nicht an zwei Stellen gleichzeitig angezeigt.
+Der Loading Indicator steht an der Stelle, die den Vorgang auslöst oder sein Ergebnis zeigt. Elemente, die nur auf den Vorgang warten, werden deaktiviert.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-2&embed-host=share"
-		description="Ordne jeden Loading Indicator genau einem Vorgang zu."
+		description="Zeige den Indikator dort, wo der Vorgang ausgelöst wird oder sein Ergebnis erscheint, und deaktiviere die wartenden Elemente."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-3&embed-host=share"
-		description="Zeige denselben Vorgang nicht durch mehrere Indikatoren gleichzeitig an. Es bleibt dann offen, worauf sich das Warten bezieht."
+		description="Zeige den Indikator nicht an einem Element, das nur auf den Vorgang wartet. Es sieht dann aus, als lade es selbst, und die betroffene Stelle bleibt unmarkiert."
 	/>
 </div>
 
 ### Messbarer Fortschritt
 
-Ist der Fortschritt eines Vorgangs berechenbar, zeigt ihn die determinierte Variante als Wert in `progress` an. Die indeterminierte Variante bleibt den Vorgängen vorbehalten, deren Fortschritt sich nicht berechnen lässt.
+Ist der Fortschritt eines Vorgangs berechenbar, zeigt ihn die determinierte Variante als Wert in `progressText` an. Die indeterminierte Variante bleibt den Vorgängen vorbehalten, deren Fortschritt sich nicht berechnen lässt.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-5&embed-host=share"
-		description="Wähle die determinierte Variante, sobald der Fortschritt berechenbar ist, und zeige den Wert in progress an."
+		description="Wähle die determinierte Variante, sobald der Fortschritt berechenbar ist, und zeige den Wert in `progressText` an."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-6&embed-host=share"
-		description="Wähle indeterminate nicht bei berechenbarem Fortschritt. Nutzende können den verbleibenden Aufwand dann nicht einschätzen, obwohl die Information vorliegt."
+		description="Wähle `indeterminate` nicht bei berechenbarem Fortschritt. Nutzende können den verbleibenden Aufwand dann nicht einschätzen, obwohl die Information vorliegt."
+	/>
+</div>
+
+### Darstellungen je Vorgang
+
+Ein Vorgang kann zwei Darstellungen tragen, wenn sie Unterschiedliches aussagen, etwa die laufende Aktion im auslösenden Element und ihren Fortschritt in der determinierten Variante.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4125-9042&embed-host=share"
+		description="Zeige zwei Darstellungen nur, wenn jede eine eigene Aussage trägt: die laufende Aktion im auslösenden Element und den Fortschritt in der determinierten Variante."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4125-9162&embed-host=share"
+		description="Zeige denselben Vorgang nicht zweimal mit derselben Aussage. Zwei `indeterminate`-Darstellungen lesen sich als zwei Vorgänge."
 	/>
 </div>
 
@@ -95,12 +112,12 @@ Das `label` benennt den Vorgang mit einem Verb, nicht nur das betroffene Objekt.
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-8&embed-host=share"
-		description="Benenne den Vorgang im label mit einem Verb."
+		description="Benenne den Vorgang im `label` mit einem Verb."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-9&embed-host=share"
-		description="Setze im label nicht nur das betroffene Objekt. Ohne Verb bleibt offen, ob der Vorgang läuft oder abgeschlossen ist."
+		description="Setze im `label` nicht nur das betroffene Objekt. Ohne Verb bleibt offen, ob der Vorgang läuft oder abgeschlossen ist."
 	/>
 </div>
 
@@ -112,12 +129,12 @@ Das `label` folgt dem Zustand: bei `state` mit dem Wert `active` beschreibt es d
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-11&embed-host=share"
-		description="Beschreibe im label bei active den laufenden Vorgang und bei successful das Ergebnis."
+		description="Beschreibe im `label` bei `active` den laufenden Vorgang und bei `successful` das Ergebnis."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-12&embed-host=share"
-		description="Beschreibe im label nach dem Abschluss nicht weiter den Verlauf. Text und Status-Icon widersprechen sich dann."
+		description="Beschreibe im `label` nach dem Abschluss nicht weiter den Verlauf. Text und Status-Icon widersprechen sich dann."
 	/>
 </div>
 
@@ -129,7 +146,7 @@ Bei `state` mit dem Wert `critical` nennt das `label` den Grund des Abbruchs. Ei
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-14&embed-host=share"
-		description="Nenne bei critical den Grund des Abbruchs im label."
+		description="Nenne bei `critical` den Grund des Abbruchs im `label`."
 	/>
 	<GuidelineExample
 		variant="dont"
@@ -146,29 +163,29 @@ Das `label` lässt sich über `showLabel` ausblenden. Dann trägt der umgebende 
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-17&embed-host=share"
-		description="Blende das label nur aus, wenn der umgebende Kontext den Vorgang eindeutig benennt."
+		description="Blende das `label` nur aus, wenn der umgebende Kontext den Vorgang eindeutig benennt."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-18&embed-host=share"
-		description="Blende das label nicht aus, wenn der Kontext den Vorgang offen lässt. Sichtbar bleibt dann eine Animation ohne Bezug."
+		description="Blende das `label` nicht aus, wenn der Kontext den Vorgang offen lässt. Sichtbar bleibt dann eine Animation ohne Bezug."
 	/>
 </div>
 
 ### Inhalt des Fortschrittstexts
 
-`progress` trägt eine quantitative Angabe: Prozentwert, Anteil oder Menge.
+`progressText` trägt eine quantitative Angabe: Prozentwert, Anteil oder Menge.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-20&embed-host=share"
-		description="Setze in progress einen Prozentwert, einen Anteil oder eine Menge."
+		description="Setze in `progressText` einen Prozentwert, einen Anteil oder eine Menge."
 	/>
 	<GuidelineExample
 		variant="caution"
 		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-21&embed-host=share"
-		description="Eine Wiederholung des label in progress belegt Platz, ohne eine zusätzliche Information zu liefern. Setze stattdessen einen quantitativen Wert."
+		description="Eine Wiederholung des `label` in `progressText` belegt Platz, ohne eine zusätzliche Information zu liefern. Setze stattdessen einen quantitativen Wert."
 	/>
 </div>
 

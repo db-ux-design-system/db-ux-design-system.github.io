@@ -53,37 +53,54 @@ The Loading Indicator shows how far the system has progressed with a process. Pr
 	/>
 </div>
 
-### One Indicator per Process
+### Indicator Placement
 
-Each Loading Indicator belongs to exactly one process. The same process is not shown in two places at once.
+The Loading Indicator sits where the process is triggered or where its result appears. Elements that only wait for the process are disabled.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-2&embed-host=share"
-		description="Assign each Loading Indicator to exactly one process."
+		description="Show the indicator where the process is triggered or where its result appears, and disable the waiting elements."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-3&embed-host=share"
-		description="Don't show the same process with several indicators at once. It then remains unclear what the wait refers to."
+		description="Don't show the indicator on an element that only waits for the process. It then looks as if it were loading itself, and the affected area stays unmarked."
 	/>
 </div>
 
 ### Measurable Progress
 
-If a process's progress can be calculated, the determinate variant shows it as a value in `progress`. The indeterminate variant is reserved for processes whose progress cannot be calculated.
+If a process's progress can be calculated, the determinate variant shows it as a value in `progressText`. The indeterminate variant is reserved for processes whose progress cannot be calculated.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-5&embed-host=share"
-		description="Choose the determinate variant as soon as progress can be calculated, and show the value in progress."
+		description="Choose the determinate variant as soon as progress can be calculated, and show the value in progressText."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-6&embed-host=share"
 		description="Don't choose indeterminate when progress can be calculated. People then cannot estimate the remaining effort even though the information exists."
+	/>
+</div>
+
+### Representations per Process
+
+A process can carry two representations when they say different things, such as the running action in the triggering element and its progress in the determinate variant.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4125-9042&embed-host=share"
+		description="Show two representations only when each carries its own statement: the running action in the triggering element and the progress in the determinate variant."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4125-9162&embed-host=share"
+		description="Don't show the same process twice with the same statement. Two indeterminate representations read as two processes."
 	/>
 </div>
 
@@ -157,18 +174,18 @@ The `label` can be hidden via `showLabel`. The surrounding context then carries 
 
 ### Progress Text Content
 
-`progress` carries a quantitative value: percentage, ratio, or amount.
+`progressText` carries a quantitative value: percentage, ratio, or amount.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-20&embed-host=share"
-		description="Set a percentage, a ratio, or an amount in progress."
+		description="Set a percentage, a ratio, or an amount in `progressText`."
 	/>
 	<GuidelineExample
 		variant="caution"
 		figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=4005-21&embed-host=share"
-		description="Repeating the label in progress takes up space without adding information. Set a quantitative value instead."
+		description="Repeating the label in `progressText` takes up space without adding information. Set a quantitative value instead."
 	/>
 </div>
 
