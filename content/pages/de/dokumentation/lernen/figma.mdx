@@ -301,6 +301,23 @@ Um automatische Zeilenumbrüche in einer Custom Heading zu ermöglichen, wähle 
 </DBStack>
 
 <DBStack gap="medium">
+### Pagination
+
+#### Sonderfall Zeilenumbruch
+
+Der Slot `📦 Children` ist auf Hug gestellt, die Reihe kann daher nicht umbrechen. Ist die Pagination schmaler als die Reihe braucht, laufen die Items aus der Komponente heraus, statt in eine zweite Zeile zu rutschen. Zwei Schritte ermöglichen den Umbruch.
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=2025-4&embed-host=share"
+	fullWidth
+/>
+
+- Beide Instanzen `Icon Button → Ghost` auf Ebene der Pagination ausblenden und als erstes und letztes Element in den Slot `📦 Children` einfügen
+- Das Breiten-Resize-Verhalten des Containers `📦 Children` von Hug auf Fill stellen
+
+</DBStack>
+
+<DBStack gap="medium">
 ### Radio
 
 #### Full Width – Pflichtfeld-Kennzeichnung

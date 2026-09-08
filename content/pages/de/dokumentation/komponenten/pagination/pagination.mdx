@@ -1,0 +1,193 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Pagination'
+title: 'Pagination'
+description: 'Die Pagination teilt einen großen Datensatz in Seiten auf und lässt Nutzende zwischen diesen Seiten blättern.'
+shortDescription: 'Navigations-Steuerelement zum Blättern zwischen den Seiten eines aufgeteilten Datensatzes.'
+align: start
+toc: true
+status: 'beta'
+order: 1
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Lange Listen und Tabellen in Seiten aufteilen
+- Gezielt zu einer bestimmten Seite springen
+- Umfang eines Datensatzes sichtbar machen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbpagination-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Keine Schrittfolgen
+
+Die Pagination erlaubt freie Sprünge zwischen allen Seiten. Abläufe, die in einer festen Reihenfolge abgearbeitet werden, widersprechen diesem Prinzip.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=1-1132&embed-host=share"
+		description="Setze Pagination für Datensätze ein, deren Seiten in beliebiger Reihenfolge erreichbar sind."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=1-1133&embed-host=share"
+		description="Setze Pagination nicht für Schrittfolgen ein. Freie Sprünge zwischen Schritten widersprechen festen Abläufen."
+	/>
+</div>
+
+### Mindestanzahl Einträge
+
+Pagination lohnt sich ab mehr als 20 Einträgen. Kürzere Listen werden vollständig gezeigt.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-2&embed-host=share"
+		description="Setze Pagination ab mehr als 20 Einträgen ein."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-3&embed-host=share"
+		description="Bei kürzeren Listen kostet das Blättern mehr, als das Aufteilen einspart. Zeige die Liste dann vollständig."
+	/>
+</div>
+
+### Erste und letzte Seite
+
+Die erste und letzte Seite sind immer sichtbar. Sie zeigen, wie groß der Datensatz ist und wo seine Grenzen liegen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-5&embed-host=share"
+		description="Zeige die erste und letzte Seite in jeder Konfiguration an."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-6&embed-host=share"
+		description="Verbirg die erste oder letzte Seite nicht. Der Datensatz-Umfang und die Grenzen müssen erkennbar bleiben."
+	/>
+</div>
+
+### Höchstens sieben Seitenzahlen
+
+Die Reihe bleibt einzeilig, solange sie höchstens sieben Seitenzahlen trägt. `boundaryCount` und `siblingCount` bestimmen die Anzahl.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-8&embed-host=share"
+		description="Wähle boundaryCount und siblingCount so, dass höchstens sieben Seitenzahlen entstehen."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-9&embed-host=share"
+		description="Mehr Seitenzahlen lassen die Reihe umbrechen, und mehrzeilig sind die Items schwerer zu treffen. Reduziere siblingCount, wenn der Platz knapp wird."
+	/>
+</div>
+
+### Truncation je Lücke
+
+Jede Lücke in der Seitenfolge wird durch eine Truncation auf beiden Seiten angezeigt. Sie macht sichtbar, dass zwischen zwei Seitenzahlen weitere Seiten liegen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-11&embed-host=share"
+		description="Zeige für jede Lücke in der Seitenfolge eine Truncation an."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-12&embed-host=share"
+		description="Lass die Truncation nicht weg. Ohne sie lesen sich die angrenzenden Seitenzahlen als benachbart."
+	/>
+</div>
+
+### Aktuelle Seite
+
+Die markierte Seite ist die Seite, deren Inhalt gerade angezeigt wird. Sie verortet Nutzende im Datensatz.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-14&embed-host=share"
+		description="Markiere die Seite, deren Inhalt angezeigt wird, als aktuelle Seite."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-15&embed-host=share"
+		description="Markiere keine andere Seite als die angezeigte. Eine falsche Markierung sieht korrekt aus und fällt an der Pagination selbst nicht auf."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Beispiele
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Lage der aktuellen Seite
+
+Wo die aktuelle Seite im Datensatz liegt, bestimmt das Aussehen der Reihe und welche Pfeile bedienbar sind.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		halfWidth
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-17&embed-host=share"
+		description="Vergleiche die drei Lagen: am Anfang ist der Pfeil zurück deaktiviert, am Ende der Pfeil vorwärts, in der Mitte wird die Reihe auf beiden Seiten gekürzt."
+	/>
+</div>
+
+### Zusammenklappen auf schmalen Viewports
+
+Unterhalb des `sm`-Breakpoints klappt die Seitenliste zusammen. Dieselbe Konfiguration erscheint dort kürzer, ohne dass sich eine Property ändert.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-20&embed-host=share"
+		description="Vergleiche die vollständige Reihe ab dem Breakpoint mit der zusammengeklappten darunter, die nur Randseiten, aktuelle Seite und Truncations trägt."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Beispiele anzeigen" expandedText="Weniger Beispiele anzeigen" />
+
+</DBSection>
+
+<FigmaLearnTeaser componentName="Pagination" locale="de" />
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Pagination" />
+
+</DBSection>
