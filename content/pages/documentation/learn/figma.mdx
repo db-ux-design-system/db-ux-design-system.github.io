@@ -299,6 +299,23 @@ To enable automatic line breaks in a Custom Heading, select the "Heading" layer 
 </DBStack>
 
 <DBStack gap="medium">
+### Pagination
+
+#### Edge Case Row Wrap
+
+The `📦 Children` slot is set to Hug, so the row cannot wrap. If the Pagination is narrower than the row needs, the items overflow beyond the component instead of moving to a second line. Two steps make the row wrap.
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=2025-4&embed-host=share"
+	fullWidth
+/>
+
+- Hide both `Icon Button → Ghost` instances at Pagination level and insert them as the first and last element in the `📦 Children` slot
+- Set the width resizing behavior of the `📦 Children` container from Hug to Fill
+
+</DBStack>
+
+<DBStack gap="medium">
 ### Radio
 
 #### Full Width – Attribute Requirement
