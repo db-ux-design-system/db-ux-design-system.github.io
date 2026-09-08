@@ -1,0 +1,193 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Pagination'
+title: 'Pagination'
+description: 'Pagination splits a large data set into pages and lets people move between those pages.'
+shortDescription: 'Navigation control for moving between the pages of a split data set.'
+align: start
+toc: true
+status: 'beta'
+order: 1
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Split long lists and tables into pages
+- Jump directly to a specific page
+- Make the size of a data set visible
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards path="?path=/docs/components-dbpagination-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### No Step Sequences
+
+Pagination allows free jumps between all pages. Flows that are completed in a fixed order contradict that principle.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=1-1132&embed-host=share"
+		description="Use Pagination for data sets whose pages can be reached in any order."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=1-1133&embed-host=share"
+		description="Don't use Pagination for step sequences. Free jumps between steps contradict fixed workflows."
+	/>
+</div>
+
+### Minimum Number of Entries
+
+Pagination pays off from more than 20 entries. Shorter lists are shown in full.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-2&embed-host=share"
+		description="Use Pagination from more than 20 entries."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-3&embed-host=share"
+		description="With shorter lists, paging costs more than splitting saves. Show the list in full instead."
+	/>
+</div>
+
+### First and Last Page
+
+The first and last page are always visible. They show how large the data set is and where its boundaries are.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-5&embed-host=share"
+		description="Show the first and last page in every configuration."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-6&embed-host=share"
+		description="Don't hide the first or last page. The data set's size and boundaries must stay recognizable."
+	/>
+</div>
+
+### At Most Seven Page Numbers
+
+The row stays on one line as long as it carries at most seven page numbers. `boundaryCount` and `siblingCount` determine the amount.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-8&embed-host=share"
+		description="Choose boundaryCount and siblingCount so that at most seven page numbers appear."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-9&embed-host=share"
+		description="More page numbers make the row wrap, and on multiple lines the items are harder to hit. Reduce siblingCount when space gets tight."
+	/>
+</div>
+
+### Truncation per Gap
+
+Every gap in the page sequence is shown by a truncation on both sides. It makes visible that further pages lie between two page numbers.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-11&embed-host=share"
+		description="Show a truncation for every gap in the page sequence."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-12&embed-host=share"
+		description="Don't leave out the truncation. Without it the adjacent page numbers read as neighbors."
+	/>
+</div>
+
+### Current Page
+
+The marked page is the page whose content is currently shown. It locates people within the data set.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-14&embed-host=share"
+		description="Mark the page whose content is shown as the current page."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-15&embed-host=share"
+		description="Don't mark a page other than the one shown. A wrong marking looks correct and is not noticeable on the Pagination itself."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Position of the Current Page
+
+Where the current page sits in the data set determines how the row looks and which arrows are operable.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		halfWidth
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-17&embed-host=share"
+		description="Compare the three positions: at the start the back arrow is disabled, at the end the forward arrow, and in the middle the row is shortened on both sides."
+	/>
+</div>
+
+### Collapsing on Narrow Viewports
+
+Below the `sm` breakpoint the page list collapses. The same configuration appears shorter there without any property changing.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-20&embed-host=share"
+		description="Compare the full row above the breakpoint with the collapsed one below it, which carries only boundary pages, the current page, and truncations."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Examples" expandedText="Hide some Examples" />
+
+</DBSection>
+
+<FigmaLearnTeaser componentName="Pagination" />
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Pagination" />
+
+</DBSection>

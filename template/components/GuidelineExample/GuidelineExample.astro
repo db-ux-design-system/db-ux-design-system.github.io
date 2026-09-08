@@ -6,7 +6,8 @@ import './GuidelineExample.css';
 
 interface Props {
 	variant?: 'do' | 'dont' | 'caution';
-	figmaUrl: string;
+	/** Omit for guidelines that have no visual yet – the card then renders text only. */
+	figmaUrl?: string;
 	description?: string;
 	fullWidth?: boolean;
 	halfWidth?: boolean;
@@ -40,12 +41,14 @@ const label =
 			: variant === 'dont'
 				? "Don't"
 				: undefined;
-const fullUrl = `${figmaUrl}&embed-host=share&footer=false&viewport-controls=false&page-selector=false&scaling=scale-down-width`;
+const fullUrl = figmaUrl
+	? `${figmaUrl}&embed-host=share&footer=false&viewport-controls=false&page-selector=false&scaling=scale-down-width`
+	: undefined;
 
 // Resolve cached image from manifest
 const manifestPath = resolve('static/assets/figma-cache/manifest.json');
 let cachedImageSrc: string | undefined;
-if (existsSync(manifestPath)) {
+if (figmaUrl && existsSync(manifestPath)) {
 	const manifest = JSON.parse(readFileSync(manifestPath, 'utf-8'));
 	// Normalize lookup key: strip extra embed params, keep node-id only
 	const base = figmaUrl.split('?')[0];
@@ -55,6 +58,8 @@ if (existsSync(manifestPath)) {
 }
 
 const hasSlot = Astro.slots.has('default');
+// Without a visual the description carries the card itself, so no figcaption is rendered.
+const hasVisual = Boolean(cachedImageSrc ?? fullUrl);
 const isDE = Astro.url.pathname.startsWith('/de/') || Astro.url.pathname === '/de';
 // The figcaption describes what the image shows, so the image itself is decorative
 // and gets an empty alt. An iframe still needs an accessible name.
@@ -80,13 +85,8 @@ const frameTitle = description ?? (isDE ? 'Figma-Beispiel' : 'Figma example');
 		}
 		{
 			cachedImageSrc ? (
-				<img
-					class="guideline-example-iframe"
-					src={cachedImageSrc}
-					alt=""
-					loading="lazy"
-				/>
-			) : (
+				<img class="guideline-example-iframe" src={cachedImageSrc} alt="" loading="lazy" />
+			) : fullUrl ? (
 				<iframe
 					class="guideline-example-iframe"
 					src={fullUrl}
@@ -94,14 +94,18 @@ const frameTitle = description ?? (isDE ? 'Figma-Beispiel' : 'Figma example');
 					loading="eager"
 					allowfullscreen
 				/>
+			) : (
+				description && <p class="guideline-example-text">{description}</p>
 			)
 		}
 	</DBCard>
-	{layout === 'side' && hasSlot ? (
-		<figcaption class="guideline-example-side-content">
-			<slot />
-		</figcaption>
-	) : description ? (
-		<figcaption>{description}</figcaption>
-	) : null}
+	{
+		layout === 'side' && hasSlot ? (
+			<figcaption class="guideline-example-side-content">
+				<slot />
+			</figcaption>
+		) : description && hasVisual ? (
+			<figcaption>{description}</figcaption>
+		) : null
+	}
 </figure>
