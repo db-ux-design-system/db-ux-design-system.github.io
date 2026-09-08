@@ -40,7 +40,7 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 ### No Step Sequences
 
-Pagination allows free jumps between all pages. Flows that are completed in a fixed order contradict that principle.
+Pagination allows free jumps between all pages. Flows that are completed in a fixed order contradict this principle.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -51,19 +51,19 @@ Pagination allows free jumps between all pages. Flows that are completed in a fi
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=1-1133&embed-host=share"
-		description="Don't use Pagination for step sequences. Free jumps between steps contradict fixed workflows."
+		description="Don't use Pagination for step sequences that are completed in a fixed order. Pagination invites people to skip steps."
 	/>
 </div>
 
 ### Minimum Number of Entries
 
-Pagination pays off from more than 20 entries. Shorter lists are shown in full.
+Pagination pays off for more than 20 entries. Shorter lists are shown in full.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-2&embed-host=share"
-		description="Use Pagination from more than 20 entries."
+		description="Use Pagination for more than 20 entries."
 	/>
 	<GuidelineExample
 		variant="caution"
@@ -74,41 +74,41 @@ Pagination pays off from more than 20 entries. Shorter lists are shown in full.
 
 ### First and Last Page
 
-The first and last page are always visible. They show how large the data set is and where its boundaries are.
+The first and last page should always be visible. They show how large the data set is and where its boundaries are. `boundaryCount` has to be at least `1` for that.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-5&embed-host=share"
-		description="Show the first and last page in every configuration."
+		description="Set boundaryCount to at least 1 so that the first and last page appear as a page number in every configuration."
 	/>
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-6&embed-host=share"
-		description="Don't hide the first or last page. The data set's size and boundaries must stay recognizable."
+		description="Don't set boundaryCount to 0. A truncation then stands at the edges instead of the first and last page, and the size of the data set is not recognizable."
 	/>
 </div>
 
-### At Most Seven Page Numbers
+### Single-Line Pagination
 
-The row stays on one line as long as it carries at most seven page numbers. `boundaryCount` and `siblingCount` determine the amount.
+Pagination stays on one line. `boundaryCount` and `siblingCount` determine how many page numbers appear; at most seven fit on one line in most views.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-8&embed-host=share"
-		description="Choose boundaryCount and siblingCount so that at most seven page numbers appear."
+		description="Choose boundaryCount and siblingCount so that Pagination stays on one line. At most seven page numbers is the recommended maximum."
 	/>
 	<GuidelineExample
 		variant="caution"
 		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-9&embed-host=share"
-		description="More page numbers make the row wrap, and on multiple lines the items are harder to hit. Reduce siblingCount when space gets tight."
+		description="If Pagination wraps into a second line, it becomes harder to operate. Reduce siblingCount or boundaryCount, the latter not below 1."
 	/>
 </div>
 
 ### Truncation per Gap
 
-Every gap in the page sequence is shown by a truncation on both sides. It makes visible that further pages lie between two page numbers.
+Every gap in the page sequence is shown by a truncation. It makes visible that further pages lie between two page numbers.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -119,7 +119,7 @@ Every gap in the page sequence is shown by a truncation on both sides. It makes 
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-12&embed-host=share"
-		description="Don't leave out the truncation. Without it the adjacent page numbers read as neighbors."
+		description="Don't leave out the truncation. Without it the two page numbers read as consecutive."
 	/>
 </div>
 

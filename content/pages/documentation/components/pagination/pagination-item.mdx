@@ -4,8 +4,8 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Pagination Item'
 title: 'Pagination Item'
-description: 'A Pagination Item is a single page or a truncation within a Pagination.'
-shortDescription: 'Single page or truncation within a Pagination.'
+description: 'A Pagination Item is a single page within a Pagination.'
+shortDescription: 'Single page within a Pagination.'
 align: start
 toc: true
 status: 'sub'
@@ -21,7 +21,6 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 - Render a selectable page within a Pagination
-- Mark omitted pages as a truncation
 - Highlight the current page
 
 <DBSection spacing="small" width="auto">
@@ -46,12 +45,12 @@ Only the page number is visible. The position within the data set is carried by 
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4078-5623&embed-host=share"
-		description="Name the page in context in label, for example Page 2 of 9 for a visible 2, and use the same pattern for every item of the row."
+		description="Name the page in context in label, for example Page 2 of 9 when the visible number is 2, and use the same pattern for every item of the row."
 	/>
 	<GuidelineExample
 		variant="caution"
 		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4078-5693&embed-host=share"
-		description="If label carries only the page number, or the pattern changes between items, all that is announced is a number without reference. Keep the pattern the same across the whole row."
+		description="If label carries only the page number, or the pattern changes between items, all that is announced is a number without context. Keep the pattern the same across the whole row."
 	/>
 </div>
 
