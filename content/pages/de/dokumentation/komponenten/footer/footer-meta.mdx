@@ -1,0 +1,102 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Footer Meta'
+title: 'Footer Meta'
+description: 'Footer Meta bildet den unteren Bereich des Footers und nimmt den Copyright-Hinweis sowie die rechtlichen Links der Anwendung auf.'
+shortDescription: 'Unterer Bereich des Footers für Copyright-Hinweis und rechtliche Links.'
+align: start
+toc: true
+status: 'sub'
+subParent: 'Footer'
+order: 3
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Rechtlich verpflichtende Links am Ende des Layouts ausweisen
+- Rechteinhaber der Anwendung benennen
+- Rechtliche Angaben über alle Seiten hinweg konsistent zeigen
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Nur rechtlich verpflichtende Links
+
+Children nimmt ausschließlich die Links auf, zu denen die Anwendung rechtlich verpflichtet ist.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=4019-12445&embed-host=share"
+		description="Platziere in Children nur die Links, zu denen die Anwendung rechtlich verpflichtet ist."
+		fullWidth={true}
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=4019-12622&embed-host=share"
+		description="Platziere keine werblichen oder navigatorischen Inhalte in Children. Die rechtlichen Angaben treten dann hinter Inhalten zurück, die nicht in diesen Bereich gehören."
+		fullWidth={true}
+	/>
+</div>
+
+### Copyright-Hinweis
+
+Ist die Anwendung zur Angabe eines Rechteinhabers verpflichtet, trägt der Copyright-Hinweis diese Angabe. Ansonsten kann er weggelassen werden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=4020-13004&embed-host=share"
+		description="Benenne im Copyright-Hinweis den Rechteinhaber, wenn die Anwendung dazu verpflichtet ist."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/AtXL3DIkXMbr1PBEWB3yJG/Doku--Footer?node-id=4020-13268&embed-host=share"
+		description="Lasse den Copyright-Hinweis nicht leer, wenn die Anwendung zur Angabe eines Rechteinhabers verpflichtet ist. Die Anwendung erfüllt ihre rechtlichen Vorgaben dann nicht."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Footer Meta" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Footer',
+			description: 'Übergeordnete Komponente, die Footer Meta enthält',
+			url: '/de/dokumentation/komponenten/footer/footer',
+		},
+		{
+			title: 'Footer Content',
+			description: 'Oberer Bereich des Footers für sekundäre Navigation und weiterführende Inhalte',
+			url: '/de/dokumentation/komponenten/footer/footer-content',
+		},
+	]}
+/>
+
+</DBSection>

@@ -16,6 +16,7 @@ import CollapseButton from '@template/components/CollapseButton/CollapseButton.a
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 - Divide content across the Start Slot, Children, and End Slot
@@ -133,5 +134,21 @@ What sits in the End Slot determines the scroll behavior: a footer with legal li
 ## FAQ
 
 <QuestionForm componentName="Shell Content" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Footer',
+			description: 'Sits in the End Slot and scrolls along there depending on the scroll behavior',
+			url: '/documentation/components/footer/footer',
+		},
+	]}
+/>
 
 </DBSection>
