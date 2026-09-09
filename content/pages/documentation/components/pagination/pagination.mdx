@@ -55,23 +55,6 @@ Pagination allows free jumps between all pages. Flows that are completed in a fi
 	/>
 </div>
 
-### Minimum Number of Entries
-
-Pagination pays off for more than 20 entries. Shorter lists are shown in full.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-2&embed-host=share"
-		description="Use Pagination for more than 20 entries."
-	/>
-	<GuidelineExample
-		variant="caution"
-		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-3&embed-host=share"
-		description="With shorter lists, paging costs more than splitting saves. Show the list in full instead."
-	/>
-</div>
-
 ### First and Last Page
 
 The first and last page should always be visible. They show how large the data set is and where its boundaries are. `boundaryCount` has to be at least `1` for that.
@@ -91,7 +74,7 @@ The first and last page should always be visible. They show how large the data s
 
 ### Single-Line Pagination
 
-Pagination stays on one line. `boundaryCount` and `siblingCount` determine how many page numbers appear; at most seven fit on one line in most views.
+Pagination should stay on one line. `boundaryCount` and `siblingCount` determine how many page numbers appear; at most seven is the recommended maximum.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -151,6 +134,28 @@ The marked page is the page whose content is currently shown. It locates people 
 ## Examples
 
 <CollapsibleWrapper collapsedHeight="320px">
+
+### Entries per Page
+
+Which value suits `pageSize` depends on the type of entries and their arrangement. The default is `10`.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		imageRatio="portrait"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-2&embed-host=share"
+		description="Table rows need little height: 20 rows sit on one page here."
+	/>
+	<GuidelineExample
+		imageRatio="portrait"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4170-3837&embed-host=share"
+		description="In a three-column grid, 12 cards sit on one page across four rows."
+	/>
+	<GuidelineExample
+		imageRatio="portrait"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4170-3838&embed-host=share"
+		description="Multi-line entries need more height: 8 entries sit on one page here."
+	/>
+</div>
 
 ### Position of the Current Page
 

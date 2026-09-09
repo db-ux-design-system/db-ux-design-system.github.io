@@ -55,23 +55,6 @@ Die Pagination erlaubt freie Sprünge zwischen allen Seiten. Abläufe, die in ei
 	/>
 </div>
 
-### Mindestanzahl Einträge
-
-Pagination lohnt sich bei mehr als 20 Einträgen. Kürzere Listen werden vollständig gezeigt.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-2&embed-host=share"
-		description="Setze Pagination bei mehr als 20 Einträgen ein."
-	/>
-	<GuidelineExample
-		variant="caution"
-		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-3&embed-host=share"
-		description="Bei kürzeren Listen kostet das Blättern mehr, als das Aufteilen einspart. Zeige die Liste dann vollständig."
-	/>
-</div>
-
 ### Erste und letzte Seite
 
 Die erste und letzte Seite sollen immer sichtbar sein. Sie zeigen, wie groß der Datensatz ist und wo seine Grenzen liegen. Dafür muss `boundaryCount` mindestens `1` sein.
@@ -91,7 +74,7 @@ Die erste und letzte Seite sollen immer sichtbar sein. Sie zeigen, wie groß der
 
 ### Einzeilige Pagination
 
-Die Pagination bleibt einzeilig. `boundaryCount` und `siblingCount` bestimmen, wie viele Seitenzahlen entstehen; höchstens sieben passen in den meisten Ansichten in eine Zeile.
+Die Pagination sollte einzeilig bleiben. `boundaryCount` und `siblingCount` bestimmen, wie viele Seitenzahlen entstehen; höchstens sieben sind dafür der Richtwert.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -151,6 +134,28 @@ Die markierte Seite ist die Seite, deren Inhalt gerade angezeigt wird. Sie veror
 ## Beispiele
 
 <CollapsibleWrapper collapsedHeight="320px">
+
+### Einträge pro Seite
+
+Welcher Wert für `pageSize` passt, hängt von der Art der Einträge und ihrer Anordnung ab. Der Default ist `10`.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		imageRatio="portrait"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4004-2&embed-host=share"
+		description="Tabellenzeilen brauchen wenig Höhe: hier liegen 20 Zeilen auf einer Seite."
+	/>
+	<GuidelineExample
+		imageRatio="portrait"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4170-3837&embed-host=share"
+		description="Im dreispaltigen Grid liegen 12 Karten auf einer Seite, verteilt auf vier Reihen."
+	/>
+	<GuidelineExample
+		imageRatio="portrait"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4170-3838&embed-host=share"
+		description="Mehrzeilige Einträge brauchen mehr Höhe: hier liegen 8 Einträge auf einer Seite."
+	/>
+</div>
 
 ### Lage der aktuellen Seite
 
