@@ -4,6 +4,14 @@ code {
 	color: #e1e4e8 !important;
 }
 
+/* Inline code wraps only at sensible points instead of breaking mid-token,
+   and never overflows its container. Scoped to inline code only –
+   code blocks (pre > code) keep their own wrap/scroll behavior. */
+:not(pre) > code {
+	overflow-wrap: anywhere;
+	word-break: normal;
+}
+
 pre {
 	padding: var(--db-spacing-fixed-xs);
 	border-radius: var(--db-border-radius-xs);
