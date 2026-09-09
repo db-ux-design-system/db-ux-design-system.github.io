@@ -26,11 +26,11 @@ Component properties in the Figma library use emoji prefixes to indicate their t
 
 | Icon | Purpose                               | Example         |
 | ---- | ------------------------------------- | --------------- |
-| 👁️   | Show/Hide toggle (toggles visibility) | `👁️ Show Label` |
-| 🔀   | Variant selection                     | `🔀 Variant`    |
-| 📦   | Slot (content area)                   | `📦 Children`   |
-| 🔄   | Icon swap (instance swap for icons)   | `🔄 Icon`       |
-| ✏️   | Text override                         | `✏️ Label`      |
+| 👁️   | Show/Hide toggle (toggles visibility) | `👁️ Show Label` |
+| 🔀   | Variant selection                     | `🔀 Variant`    |
+| 📦   | Slot (content area)                   | `📦 Children`   |
+| 🔄   | Icon swap (instance swap for icons)   | `🔄 Icon`       |
+| ✏️   | Text override                         | `✏️ Label`      |
 
 </DBStack>
 
@@ -62,7 +62,7 @@ Buttons, Navigation Items
 <div className="guideline-examples">
 <GuidelineExample
 	figmaUrl="https://embed.figma.com/design/Dr7QvFYRn5AwyQVOto4pEz/Doku--Helper-components-%E2%9C%85?node-id=7074-2974&embed-host=share"
-	description="Place the element that should sit on the parent component into the `Children Slot` of `↳ Floating Item`, such as a tooltip on hover of the icon button or a badge"
+	description="Place the element that should sit on the parent component into the `Children Slot` of `↳ Floating Item`, such as a tooltip on hover of the icon button or a badge"
 	fullWidth
 />
 
@@ -295,6 +295,21 @@ To enable automatic line breaks in a Custom Heading, select the "Heading" layer 
 	description='Set the width resizing behavior from "Hug" to "Fill"'
 />
 </div>
+
+</DBStack>
+
+<DBStack gap="medium">
+### Loading Indicator
+
+#### Multi-line Labels at a Fixed Width
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=2025-4&embed-host=share"
+	layout="side"
+>
+When a circular Loading Indicator has a fixed width and the label is longer than that width, set the `🔀 Multiline` property to true so the label is positioned correctly.
+
+</GuidelineExample>
 
 </DBStack>
 

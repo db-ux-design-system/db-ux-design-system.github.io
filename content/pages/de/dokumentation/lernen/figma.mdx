@@ -27,11 +27,11 @@ Komponenteneigenschaften in der Figma-Bibliothek verwenden Emoji-Präfixe, um Ty
 
 | Icon | Zweck                                          | Beispiel        |
 | ---- | ---------------------------------------------- | --------------- |
-| 👁️   | Anzeigen/Ausblenden (schaltet Sichtbarkeit um) | `👁️ Show Label` |
-| 🔀   | Variantenauswahl                               | `🔀 Variant`    |
-| 📦   | Slot (Inhaltsbereich)                          | `📦 Children`   |
-| 🔄   | Icon-Swap (Instance Swap für Icons)            | `🔄 Icon`       |
-| ✏️   | Text-Override                                  | `✏️ Label`      |
+| 👁️   | Anzeigen/Ausblenden (schaltet Sichtbarkeit um) | `👁️ Show Label` |
+| 🔀   | Variantenauswahl                               | `🔀 Variant`    |
+| 📦   | Slot (Inhaltsbereich)                          | `📦 Children`   |
+| 🔄   | Icon-Swap (Instance Swap für Icons)            | `🔄 Icon`       |
+| ✏️   | Text-Override                                  | `✏️ Label`      |
 
 </DBStack>
 
@@ -63,7 +63,7 @@ Buttons, Navigation Items
 <div className="guideline-examples">
 <GuidelineExample
 	figmaUrl="https://embed.figma.com/design/Dr7QvFYRn5AwyQVOto4pEz/Doku--Helper-components-%E2%9C%85?node-id=7074-2974&embed-host=share"
-	description="Im `Children Slot` von `↳ Floating Item` das Element einfügen, das an der Parent-Komponente platziert werden soll, wie z.B. einen Tooltip bei Hover des Icon-Buttons oder einen Badge"
+	description="Im `Children Slot` von `↳ Floating Item` das Element einfügen, das an der Parent-Komponente platziert werden soll, wie z.B. einen Tooltip bei Hover des Icon-Buttons oder einen Badge"
 	fullWidth
 />
 
@@ -297,6 +297,21 @@ Um automatische Zeilenumbrüche in einer Custom Heading zu ermöglichen, wähle 
 	description='Ändere das Breitenverhalten von „Hug" auf „Fill"'
 />
 </div>
+
+</DBStack>
+
+<DBStack gap="medium">
+### Loading Indicator
+
+#### Mehrzeilige Labels bei fixer Breite
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=2025-4&embed-host=share"
+	layout="side"
+>
+Bekommt ein Loading Indicator Circular eine fixe Breite und ist das Label länger als diese Breite, setze die Property `🔀 Multiline` auf true, damit das Label korrekt positioniert wird.
+
+</GuidelineExample>
 
 </DBStack>
 
