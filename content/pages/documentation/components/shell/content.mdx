@@ -17,6 +17,7 @@ import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleW
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 
 - Divide content across the Start Slot, Children, and End Slot
 - Use Fixed to keep the Start Slot and End Slot visible while scrolling
@@ -127,6 +128,8 @@ What sits in the End Slot determines the scroll behavior: a footer with legal li
 <CollapseButton collapsedText="Show all Examples" expandedText="Hide some Examples" />
 
 </DBSection>
+
+<FigmaLearnTeaser componentName="Shell Content" anchor="control-panel--shell" />
 
 <DBSection spacing="small" width="auto">
 
