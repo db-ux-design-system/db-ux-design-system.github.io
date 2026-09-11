@@ -55,6 +55,23 @@ A dialog blocks further work. It is therefore meant only for tasks that have to 
 	/>
 </div>
 
+### Popover or Dialog
+
+Popover and dialog differ in their reference: the popover is anchored to an element, the dialog appears centered. When the content requires no completion, that reference decides which component fits.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4208-39479&embed-host=share"
+		description="Show content that belongs to a specific trigger in a popover anchored directly to that trigger."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4208-39480&embed-host=share"
+		description="Don't use a dialog for this. It always appears centered in the viewport and cannot be anchored to the trigger. Even without a backdrop, where it looks almost like the popover, the centered position and the extra close button remain visible as a lack of reference."
+	/>
+</div>
+
 ### Required Header
 
 The dialog header supplies the accessible name of the dialog. It is linked to the dialog automatically, no configuration is needed.
@@ -201,6 +218,11 @@ With `backdrop` set to `none`, the dialog is not modal. The background stays ope
 			title: 'Dialog Footer',
 			description: 'Lower area of the dialog with the actions for completing or cancelling',
 			url: '/documentation/components/dialog/dialog-footer',
+		},
+		{
+			title: 'Popover',
+			description: 'Overlay anchored to an element for contextual content without completion',
+			url: '/documentation/components/popover',
 		},
 		{
 			title: 'Drawer',

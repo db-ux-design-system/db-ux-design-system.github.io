@@ -55,6 +55,23 @@ Ein Dialog blockiert die Weiterarbeit. Er ist deshalb nur für Aufgaben gedacht,
 	/>
 </div>
 
+### Popover oder Dialog
+
+Popover und Dialog unterscheiden sich im Bezug: Das Popover wird an einem Element verankert, der Dialog erscheint zentriert. Erfordert der Inhalt keinen Abschluss, entscheidet dieser Bezug darüber, welche Komponente passt.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4208-39479&embed-host=share"
+		description="Zeige Inhalte, die zu einem bestimmten Auslöser gehören, im Popover direkt an diesem Auslöser."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4208-39480&embed-host=share"
+		description="Verwende dafür keinen Dialog. Er erscheint immer zentriert im Viewport und lässt sich nicht am Auslöser verankern. Selbst ohne Backdrop, wo er dem Popover fast gleicht, bleiben die zentrierte Position und der zusätzliche Close-Button als Bezugslosigkeit sichtbar."
+	/>
+</div>
+
 ### Erforderlicher Header
 
 Der Dialog Header liefert den zugänglichen Namen des Dialogs. Er wird automatisch mit dem Dialog verknüpft, dafür ist keine Konfiguration nötig.
@@ -201,6 +218,12 @@ Mit `backdrop` `none` ist der Dialog nicht modal. Der Hintergrund bleibt bedienb
 			title: 'Dialog Footer',
 			description: 'Unterer Bereich des Dialogs mit den Aktionen zum Abschließen oder Abbrechen',
 			url: '/de/dokumentation/komponenten/dialog/dialog-footer',
+		},
+		{
+			title: 'Popover',
+			description:
+				'An einem Element verankertes Overlay für kontextbezogene Inhalte ohne Abschluss',
+			url: '/de/dokumentation/komponenten/popover',
 		},
 		{
 			title: 'Drawer',
