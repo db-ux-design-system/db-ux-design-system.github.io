@@ -1,0 +1,246 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Dialog'
+title: 'Dialog'
+description: 'Der Dialog legt den Fokus auf eine einzelne Aufgabe und lässt sie abschließen oder verwerfen, bevor es weitergeht.'
+shortDescription: 'Modales Overlay für eine Aufgabe, die vor dem Weiterarbeiten erledigt werden muss.'
+align: start
+toc: true
+status: 'beta'
+order: 1
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Folgenreiche Aktion bestätigen lassen
+- Erforderliche Eingabe einholen, bevor ein Vorgang weiterläuft
+- Teilaufgabe ohne Seitenwechsel abschließen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbdialog-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Zwingende Aufgaben
+
+Ein Dialog blockiert die Weiterarbeit. Er ist deshalb nur für Aufgaben gedacht, die abgeschlossen oder verworfen werden müssen: eine Bestätigung mit Konsequenz, eine erforderliche Eingabe, eine in sich geschlossene Teilaufgabe, oder eine blockierende Systemmeldung.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=1-1132&embed-host=share"
+		description="Setze den Dialog ein, wenn die Aufgabe abgeschlossen oder verworfen werden muss, bevor es weitergeht."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=1-1133&embed-host=share"
+		description="Setze den Dialog für nicht-blockierendes Feedback nicht ein, dafür ist die Notification vorgesehen. Ein Dialog stoppt die Arbeit für eine Nachricht, die niemand beantworten muss."
+	/>
+</div>
+
+### Popover oder Dialog
+
+Popover und Dialog unterscheiden sich im Bezug: Das Popover wird an einem Element verankert, der Dialog erscheint zentriert. Erfordert der Inhalt keinen Abschluss, entscheidet dieser Bezug darüber, welche Komponente passt.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4208-39479&embed-host=share"
+		description="Zeige Inhalte, die zu einem bestimmten Auslöser gehören, im Popover direkt an diesem Auslöser."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4208-39480&embed-host=share"
+		description="Verwende dafür keinen Dialog. Er erscheint immer zentriert im Viewport und lässt sich nicht am Auslöser verankern. Selbst ohne Backdrop, wo er dem Popover fast gleicht, bleiben die zentrierte Position und der zusätzliche Close-Button als Bezugslosigkeit sichtbar."
+	/>
+</div>
+
+### Erforderlicher Header
+
+Der Dialog Header liefert den zugänglichen Namen des Dialogs. Er wird automatisch mit dem Dialog verknüpft, dafür ist keine Konfiguration nötig.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-3&embed-host=share"
+		description="Verwende jeden Dialog mit einem Dialog Header."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-5&embed-host=share"
+		description="Baue den Dialog nicht ohne Dialog Header. Assistenztechnologien geben dann nur „Dialog“ aus, ohne zu nennen, worum es geht."
+	/>
+</div>
+
+### Umkehrbare Aktionen
+
+Lässt sich eine Aktion rückgängig machen, ist die Rückfrage überflüssig. Führe die Aktion aus und biete das Rückgängigmachen über eine Notification an.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-8&embed-host=share"
+		description="Führe eine umkehrbare Aktion sofort aus und biete das Rückgängigmachen über eine Notification an."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-10&embed-host=share"
+		description="Lass umkehrbare Aktionen nicht bestätigen. Die Rückfrage verhindert hier keinen Fehler, senkt aber die Aufmerksamkeit für die Rückfragen, die wirklich schützen."
+	/>
+</div>
+
+### Konsequenz und Gegenstand
+
+Eine Bestätigung schützt nur, wenn sie erkennen lässt, was passiert und was betroffen ist. Bei vielen Objekten genügt die Anzahl statt einer Aufzählung.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-13&embed-host=share"
+		description="Benenne bei einer irreversiblen Aktion die Konsequenz und den betroffenen Gegenstand im Inhalt."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-15&embed-host=share"
+		description="Frage nicht nur „Sind Sie sicher?“. Ohne Gegenstand und Folge lässt sich nicht erkennen, ob das Richtige ausgewählt wurde."
+	/>
+</div>
+
+### Ein Dialog gleichzeitig
+
+Ein modaler Dialog liegt im Top Layer des Browsers. Öffnet sich darüber ein weiterer, schließt Escape nur den obersten. Die Rückfrage nach ungespeicherten Änderungen beim Schließen ist der begründete Einzelfall.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-23&embed-host=share"
+		description="Öffne nur einen Dialog gleichzeitig."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-25&embed-host=share"
+		description="Bei gestapelten Dialogen schließt Escape nur den obersten. Stapele nur, wenn der zweite Dialog den ersten absichert."
+	/>
+</div>
+
+### Ohne Backdrop
+
+Mit `backdrop` `none` ist der Dialog nicht modal. Der Hintergrund bleibt bedienbar, und der Fokus kann den Dialog mit dem Tabulator verlassen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-28&embed-host=share"
+		description="Behalte den Backdrop, wenn die Aufgabe abgeschlossen oder verworfen werden muss."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-30&embed-host=share"
+		description="Setze `backdrop` `none` bei einer solchen Aufgabe nicht ein. Ohne Backdrop bleibt der Hintergrund bedienbar, und die Aufgabe ist nicht erzwingbar."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Beispiele
+
+### Größe
+
+`containerSize` setzt die Maximalbreite des Dialogs. Welche Stufe passt, hängt von der Art des Inhalts ab. Der Default ist `medium`.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-33&embed-host=share"
+		description="Small: Die kleinste Stufe für kurze Texte, etwa eine Bestätigung mit zwei Aktionen."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-35&embed-host=share"
+		description="Medium: Die Standardstufe für einen kurzen Formularabschnitt."
+	/>
+</div>
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-37&embed-host=share"
+		description="Large: Die größte feste Stufe für breite Inhalte, etwa eine Table mit mehreren Spalten."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-39&embed-host=share"
+		description="Full: Die Viewport-Breite abzüglich des Abstands zum Rand, für datenreiche Inhalte."
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Dialog" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Dialog Header',
+			description: 'Oberer Bereich des Dialogs mit Titel und Close-Button',
+			url: '/de/dokumentation/komponenten/dialog/dialog-header',
+		},
+		{
+			title: 'Dialog Footer',
+			description: 'Unterer Bereich des Dialogs mit den Aktionen zum Abschließen oder Abbrechen',
+			url: '/de/dokumentation/komponenten/dialog/dialog-footer',
+		},
+		{
+			title: 'Popover',
+			description:
+				'An einem Element verankertes Overlay für kontextbezogene Inhalte ohne Abschluss',
+			url: '/de/dokumentation/komponenten/popover',
+		},
+		{
+			title: 'Drawer',
+			description: 'Herausfahrendes Panel für ergänzende Inhalte oder einfache Interaktionen',
+			url: '/de/dokumentation/komponenten/drawer/drawer',
+		},
+		{
+			title: 'Notification',
+			description: 'Nicht-blockierendes Feedback, das die Arbeit nicht unterbricht',
+			url: '/de/dokumentation/komponenten/notification',
+		},
+		{
+			title: 'Backdrop',
+			description: 'Dunkelt den Hintergrund ab und blockiert Interaktionen bei modalen Overlays',
+			url: '/de/dokumentation/komponenten/backdrop',
+		},
+	]}
+/>
+
+</DBSection>

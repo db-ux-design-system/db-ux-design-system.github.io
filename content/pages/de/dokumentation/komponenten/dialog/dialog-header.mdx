@@ -1,0 +1,163 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Dialog Header'
+title: 'Dialog Header'
+description: 'Der Dialog Header bildet den oberen Bereich des Dialogs und nimmt den Titel, den Close-Button und ergänzende Inhalte in Start Slot und End Slot auf.'
+shortDescription: 'Oberer Bereich des Dialogs mit Titel und Close-Button.'
+align: start
+toc: true
+status: 'sub'
+subParent: 'Dialog'
+order: 2
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+
+- Dialog mit einem Titel benennen
+- Dialog über den Close-Button schließbar machen
+- Badge oder Icon neben dem Titel ergänzen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbdialog-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Titel
+
+Der Titel wird automatisch zum zugänglichen Namen des Dialogs. Er lässt sich über `text` setzen oder als Inhalt in Children einsetzen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-44&embed-host=share"
+		description="Vergib immer einen Titel, entweder über `text` oder als Inhalt in Children."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-46&embed-host=share"
+		description="Lass den Dialog Header nicht ohne Titel. Der Dialog bleibt dann unbenannt, weil die Verknüpfung ins Leere zeigt."
+	/>
+</div>
+
+### Wortlaut des Titels
+
+Der Titel benennt die Aktion, die im Dialog ausgeführt wird, und bleibt dabei nah am Label des Elements, über das der Dialog geöffnet wurde. Er muss nicht wortgleich sein.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-49&embed-host=share"
+		description="Benenne im Titel dieselbe Aufgabe wie das auslösende Element, in einem dazu passenden Wortlaut."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-51&embed-host=share"
+		description="Benennt der Titel eine andere Aufgabe als das auslösende Element, bleibt offen, ob der erwartete Dialog geöffnet wurde. Titel und Label dürfen sich im Wortlaut unterscheiden, solange sie dieselbe Aufgabe meinen."
+	/>
+</div>
+
+### Ergänzende Erläuterung
+
+Neben dem Titel lässt sich eine kurze Erläuterung einsetzen. Sie ist nur nötig, wenn der Zweck des Dialogs aus dem Titel allein nicht hervorgeht.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-54&embed-host=share"
+		description="Ergänze eine Erläuterung, wenn der Zweck des Dialogs aus dem Titel nicht hervorgeht."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-56&embed-host=share"
+		description="Eine Erläuterung, die den Titel wiederholt, verlängert den Weg zum Inhalt. Lass sie dann weg."
+	/>
+</div>
+
+### Hierarchie im Header
+
+Der Titel ist standardmäßig im Bold-Schnitt gesetzt. Ergänzende Inhalte stehen im regulären Schnitt darunter und lassen sich optional über Größe und Farbe weiter abstufen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4209-42257&embed-host=share"
+		description="Belasse den Titel im Bold-Schnitt und setze ergänzende Inhalte im regulären Schnitt, nicht größer als den Titel."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4209-42331&embed-host=share"
+		description="Setze ergänzende Inhalte nicht in Bold und nicht größer als den Titel. Sie konkurrieren dann mit ihm und schwächen ihn als Einstieg in den Dialog."
+	/>
+</div>
+
+### Start Slot und End Slot
+
+Start Slot und End Slot nehmen zusätzliche Elemente neben dem Titel auf, etwa ein Badge oder ein Icon. Beide sind standardmäßig ausgeblendet.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-59&embed-host=share"
+		description="Nimm in Start Slot und End Slot nur Elemente auf, die sich auf den Inhalt des Dialogs beziehen."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-61&embed-host=share"
+		description="Aktionen ohne Bezug zum Dialog lenken von der Aufgabe ab. Platziere sie außerhalb des Dialogs."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<FigmaLearnTeaser componentName="Dialog Header" locale="de" anchor="dialog" />
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Dialog Header" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Dialog',
+			description: 'Übergeordnete Komponente, die den Dialog Header enthält',
+			url: '/de/dokumentation/komponenten/dialog/dialog',
+		},
+		{
+			title: 'Dialog Footer',
+			description: 'Unterer Bereich des Dialogs mit den Aktionen zum Abschließen oder Abbrechen',
+			url: '/de/dokumentation/komponenten/dialog/dialog-footer',
+		},
+	]}
+/>
+
+</DBSection>
