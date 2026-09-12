@@ -291,6 +291,25 @@ Set "Dropdown Height" from "(Def) Auto" to "Fill" to constrain the dropdown heig
 </DBStack>
 
 <DBStack gap="medium">
+### Dialog
+
+#### Aligning slot content with the close button
+
+The start and end slot of the dialog header align their content with the height of the close button. Whether this matters for an element depends on its height.
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=2025-4&embed-host=share"
+	fullWidth
+>
+
+</GuidelineExample>
+
+- Elements **smaller than `sizing-md`** (the height of the close button): container with `min-height` `sizing-md` and vertical centring
+- Elements **taller than `sizing-md`**: container with `padding-top` `spacing-X` (depending on the height of the element in the first line), so the first line stays centred vertically with the close button
+
+</DBStack>
+
+<DBStack gap="medium">
 ### Heading
 #### Multi-line text within Custom Headings
 
