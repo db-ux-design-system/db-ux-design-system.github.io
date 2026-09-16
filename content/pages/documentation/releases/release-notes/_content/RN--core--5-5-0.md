@@ -11,11 +11,11 @@ _version bumb_
 
 ### Development
 
-#### Geändert
+#### Changed
 
 - MCP & agent-cli: add `scan_generation_2_migration` tool, deprecate `scan_v2_migration`
 
-#### Behoben
+#### Fixed
 
 - DBCustomSelectListItem: style label in bold when checked
 - DBTable: remove unwanted white background on component wrapper for `variant="spaced"`
