@@ -13,9 +13,9 @@ _version bump_
 
 #### Changed
 
-- MCP & agent-cli: add `scan_generation_2_migration` tool, deprecate `scan_v2_migration`
+- MCP & agent-cli: The `scan_generation_2_migration` tool is now available, replacing the now deprecated and `scan_v2_migration`.
 
 #### Fixed
 
-- DBCustomSelectListItem: style label in bold when checked
-- DBTable: remove unwanted white background on component wrapper for `variant="spaced"`
+- DBCustomSelectListItem: The label is now displayed in bold when the entry is selected.
+- DBTable: The unwanted white background on the component wrapper for `variant="spaced"` has been removed.
