@@ -7,7 +7,7 @@ date: '2026-09-17'
 
 ### Design
 
-_version bumb_
+_version bump_
 
 ### Development
 

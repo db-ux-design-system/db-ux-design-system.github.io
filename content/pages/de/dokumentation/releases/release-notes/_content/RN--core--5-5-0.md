@@ -7,7 +7,7 @@ date: '2026-09-17'
 
 ### Design
 
-_version bumb_
+_version bump_
 
 ### Development
 
@@ -17,5 +17,5 @@ _version bumb_
 
 #### Behoben
 
-- DBCustomSelectListItem: Der Text des jeweiligen wird bold formatiert, sobald dieser ausgewählt wurde
+- DBCustomSelectListItem: Der Text des jeweiligen Eintrags wird bold formatiert, sobald dieser ausgewählt wurde
 - DBTable: Weiße Hintergrundfarbe auf Komponenten Wrapper für `variant="spaced"` entfernt
