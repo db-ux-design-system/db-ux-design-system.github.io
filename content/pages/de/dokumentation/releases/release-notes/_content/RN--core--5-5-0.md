@@ -13,9 +13,9 @@ _version bumb_
 
 #### Geändert
 
-- MCP & agent-cli: add scan_generation_2_migration tool, deprecate scan_v2_migration
+- MCP & agent-cli: `scan_generation_2_migration` Tool hinzugefügt, `scan_v2_migration` auf `deprecate` umgestellt
 
 #### Behoben
 
-- DBCustomSelectListItem: make label bold when checked
-- DBTable: remove unwanted white background on component wrapper for variant="spaced"
+- DBCustomSelectListItem: Der Text des jeweiligen wird bold formatiert, sobald dieser ausgewählt wurde
+- DBTable: Weiße Hintergrundfarbe auf Komponenten Wrapper für `variant="spaced"` entfernt
