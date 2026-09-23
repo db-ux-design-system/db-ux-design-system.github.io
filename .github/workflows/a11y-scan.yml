@@ -3,7 +3,7 @@ on: workflow_dispatch # This configures the workflow to run manually, instead of
 
 jobs:
   accessibility_scanner:
-    runs-on: ubuntu-24.04 # Use Ubuntu 24.04 explicitly
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
     steps:
