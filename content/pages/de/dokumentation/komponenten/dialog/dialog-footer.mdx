@@ -1,0 +1,143 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Dialog Footer'
+title: 'Dialog Footer'
+description: 'Der Dialog Footer bildet den unteren Bereich des Dialogs, nimmt die Aktionen zum Abschließen oder Abbrechen sowie dauerhaft sichtbare Hinweise auf und bleibt beim Scrollen sichtbar.'
+shortDescription: 'Unterer Bereich des Dialogs mit den Aktionen zum Abschließen oder Abbrechen.'
+align: start
+toc: true
+status: 'sub'
+subParent: 'Dialog'
+order: 3
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Aktionen zum Abschließen und Abbrechen anbieten
+- Sternchentext dauerhaft sichtbar halten
+- Aktionen beim Scrollen erreichbar halten
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbdialog-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Inhalt des Footers
+
+Der Dialog Footer scrollt nicht mit. Er ist deshalb für Aktionen und für Hinweise gedacht, die dauerhaft sichtbar bleiben müssen, etwa einen Sternchentext.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-66&embed-host=share"
+		description="Nimm in den Dialog Footer nur Aktionen und dauerhaft sichtbare Hinweise auf."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-68&embed-host=share"
+		description="Lege weiteren Inhalt nicht in den Dialog Footer, er gehört in den Inhaltsbereich. Der Footer scrollt nicht mit und verkleinert den scrollbaren Bereich."
+	/>
+</div>
+
+### Abbrechen-Aktion
+
+Bei einer Bestätigung oder einer Eingabe gehört eine abbrechende Aktion in den Dialog Footer. Der Close-Button im Dialog Header allein reicht nicht, weil er visuell schwächer ist und man bei einer Entscheidung beide Optionen als gleichwertige Buttons erwartet.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4024-2&embed-host=share"
+		description="Lege bei einer Bestätigung oder Eingabe eine abbrechende Aktion neben die bestätigende in den Dialog Footer."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4024-4&embed-host=share"
+		description="Biete das Abbrechen nicht nur über den Close-Button an. Wer die abbrechende Option sucht, findet im Dialog Footer nur die bestätigende Aktion."
+	/>
+</div>
+
+### Button-Labels
+
+Bei einer Bestätigung benennt jeder Button sein Ergebnis. So ist vor dem Klick klar, was jede der beiden Optionen bewirkt.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-71&embed-host=share"
+		description="Benenne die Buttons einer Bestätigung nach ihrem Ergebnis, etwa „Datei löschen“ und „Datei behalten“."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-73&embed-host=share"
+		description="„Ja“ und „Nein“ lassen die Folge offen. Benenne stattdessen das Ergebnis."
+	/>
+</div>
+
+### Reihenfolge der Aktionen
+
+Die bestätigende Aktion steht rechts, abbrechende und ergänzende Aktionen links davon. Damit liegt die Aktion, die den Dialog abschließt, am Ende der Leserichtung.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-76&embed-host=share"
+		description="Platziere die bestätigende Aktion rechts und die abbrechende links davon."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-78&embed-host=share"
+		description="Eine abweichende Reihenfolge widerspricht der Leseerwartung und lässt Nutzende die falsche Aktion treffen. Behalte die gewohnte Anordnung."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Dialog Footer" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Dialog',
+			description: 'Übergeordnete Komponente, die den Dialog Footer enthält',
+			url: '/de/dokumentation/komponenten/dialog/dialog',
+		},
+		{
+			title: 'Dialog Header',
+			description: 'Oberer Bereich des Dialogs mit Titel und Close-Button',
+			url: '/de/dokumentation/komponenten/dialog/dialog-header',
+		},
+	]}
+/>
+
+</DBSection>
