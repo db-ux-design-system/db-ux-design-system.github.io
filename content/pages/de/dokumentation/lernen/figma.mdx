@@ -293,6 +293,25 @@ Setze die Dropdown Height von (Def) Auto auf Fill, um die Dropdown-Höhe in begr
 </DBStack>
 
 <DBStack gap="medium">
+### Dialog
+
+#### Ausrichtung der Slot-Inhalte zum Close-Button
+
+Start Slot und End Slot des Dialog Headers richten ihren Inhalt an der Höhe des Close-Buttons aus. Für welche Elemente das relevant wird, hängt von ihrer Höhe ab.
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=2025-4&embed-host=share"
+	fullWidth
+>
+</GuidelineExample>
+
+
+- Elemente **kleiner als `sizing-md`** (Höhe des Close-Buttons): Container mit `min-height` `sizing-md` und vertikaler Zentrierung
+- Elemente **höher als `sizing-md`**: Container mit `padding-top` `spacing-X` (abhängig von der Höhe des Elements in der ersten Zeile), sodass die erste Zeile vertikal zum Close-Button zentriert bleibt
+
+</DBStack>
+
+<DBStack gap="medium">
 ### Heading
 #### Mehrzeiliger Text bei Custom Headings
 
