@@ -5,17 +5,23 @@ version: 'v5.6.0'
 date: '2026-09-24'
 ---
 
-### Design & Development
+### Design & Entwicklung
 
-- DBLoadingIndicator: Eine neue Komponente für Ladezustände wie Spinner und Fortschrittsbalken.
-- DBDialog: Neue Komponenten `DBDialog`, `DBDialogHeader` und `DBDialogFooter`, die auf dem nativen `<dialog>`-Element aufbauen und dessen Zentrierung sowie Top-Layer-Verhalten nutzen.
-- DBPagination: Eine neue kontrollierte Pagination-Komponente.
+#### Hinzugefügt
+
+- Loading Indicator: Eine neue Komponente für Ladezustände wie Spinner und Fortschrittsbalken.
+- Dialog: Neue Komponenten `DBDialog`, `DBDialogHeader` und `DBDialogFooter`, die auf dem nativen `<dialog>`-Element aufbauen und dessen Zentrierung sowie Top-Layer-Verhalten nutzen.
+- Pagination: Eine neue kontrollierte Pagination-Komponente.
+- Button: Neue Zustände für Loading und Loading Overlay.
+- Custom Select: Loading Indicator im Ladezustand des Dropdowns ergänzt.
 
 ### Design
 
-_tbd_
+#### Behoben
 
-### Development
+- Tag: Die Position des Content Slots wurde korrigiert und fehlende Slots wurden ergänzt.
+
+### Entwicklung
 
 #### Geändert
 

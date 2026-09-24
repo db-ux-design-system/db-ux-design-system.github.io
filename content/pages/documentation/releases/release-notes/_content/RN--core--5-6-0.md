@@ -7,13 +7,19 @@ date: '2026-09-24'
 
 ### Design & Development
 
-- DBLoadingIndicator: A new component that handles loading states such as spinners and progress bars.
-- DBDialog: New `DBDialog`, `DBDialogHeader` and `DBDialogFooter` components, built on the native `<dialog>` element and reusing its centering and top-layer behavior.
-- DBPagination: A new controlled pagination component.
+#### Added
+
+- Loading Indicator: A new component that handles loading states such as spinners and progress bars.
+- Dialog: New `DBDialog`, `DBDialogHeader` and `DBDialogFooter` components, built on the native `<dialog>` element and reusing its centering and top-layer behavior.
+- Pagination: A new controlled pagination component.
+- Button: New states for loading and loading overlay.
+- Custom Select: Loading Indicator added to loading state in dropdown.
 
 ### Design
 
-_tbd_
+#### Fixed
+
+- Tag: Position of the content slot has been fixed and missing slots have been added.
 
 ### Development
 
