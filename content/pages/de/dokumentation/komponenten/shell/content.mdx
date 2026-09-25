@@ -16,7 +16,9 @@ import CollapseButton from '@template/components/CollapseButton/CollapseButton.a
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 
 - Inhalt über Start Slot, Children und End Slot gliedern
 - Mit Fixed Start Slot und End Slot beim Scrollen sichtbar halten
@@ -131,10 +133,28 @@ Was im End Slot liegt, entscheidet über das Scroll-Verhalten: ein Footer mit re
 
 </DBSection>
 
+<FigmaLearnTeaser componentName="Shell Content" locale="de" anchor="control-panel--shell" />
+
 <DBSection spacing="small" width="auto">
 
 ## FAQ
 
 <QuestionForm componentName="Shell Content" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Footer',
+			description: 'Liegt im End Slot und scrollt dort je nach Scroll-Verhalten mit',
+			url: '/de/dokumentation/komponenten/footer/footer',
+		},
+	]}
+/>
 
 </DBSection>

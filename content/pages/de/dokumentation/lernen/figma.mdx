@@ -257,6 +257,18 @@ fullWidth
 />
 </div>
 
+#### Shell Content Auto: Children Inhalt überlagert den End Slot
+
+In der Variante `Auto` von Shell Content dockt der `End Slot` am unteren Rand an. Dafür ist das Auto-Layout-Höhenverhalten des `Children` Slots initial auf Fill gesetzt.
+
+Wird der Inhalt höher als der verfügbare Platz, überlagert er in Figma den `End Slot`. Ändere dann das Höhenverhalten des `Children` Slot von `Fill` auf `Hug`, damit der `End Slot` unterhalb des Inhalts bleibt.
+
+<GuidelineExample
+	fullWidth
+	figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell-%E2%9C%85?node-id=4551-193&embed-host=share"
+	description="Die Ebene Children auswählen und das vertikale Resizing von Fill container auf Hug contents ändern"
+/>
+
 </DBStack>
 
 <DBStack gap="medium">
