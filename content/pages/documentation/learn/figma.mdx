@@ -52,12 +52,12 @@ Buttons, Navigation Items
 
 - Show the Floating Container
 - Add more Floating Items as needed – tip: duplicate the existing item
-	- Manual settings: `full width`, `full height`, `absolute position`, constraints `Left + Right`, `Top + Bottom`
+  - Manual settings: `full width`, `full height`, `absolute position`, constraints `Left + Right`, `Top + Bottom`
 - Position property: `top-start`, `top-center`, `top-end`, `middle-start`, `middle-end`, `bottom-start`, `bottom-center`, or `bottom-end`.
 - Edge property: `outside` (grows away from the parent component), `center` (centered on the anchor), or `inside` (grows into the parent component)
-</div>
-</div>
 
+</div>
+</div>
 
 <div className="guideline-examples">
 <GuidelineExample
@@ -192,7 +192,8 @@ Set Required Toggle = true for correct Dev Properties.
 #### Add a custom logo with the DB Logo Importer
 
 <DBNotification variant="standalone" semantic="informational">
-Create your brand-compliant custom logo SVG via the marketing portal. The plugin import ensures system-conformant color variables and sizing.
+	Create your brand-compliant custom logo SVG via the marketing portal. The plugin import ensures
+	system-conformant color variables and sizing.
 </DBNotification>
 
 In the Brand area of the ControlPanel, you can add a brand-compliant custom logo with logo addition only in the **Brand → Logozusatz** variant. Use the Figma plugin <DBLink href="https://www.figma.com/community/plugin/1590462040996560100/concept-db-logo-importer" target="_blank" rel="noopener noreferrer" variant="inline">DB Logo Importer</DBLink> to import an SVG from the <DBLink href="https://marketingportal.extranet.deutschebahn.com/marketingportal/Marke-und-Design/Basiselemente/Logo/Logozusatz-mit-Tool#unit=Regio&mode=unit&breaking=true" target="_blank" rel="noopener noreferrer" variant="inline">DB brand logo generator</DBLink>. The plugin assigns correct color variables and places the logo directly into the **Logo Slot**.
@@ -214,11 +215,11 @@ In the Brand area of the ControlPanel, you can add a brand-compliant custom logo
 />
 </div>
 
-
 #### Popover Navigation Horizontal: Overflow Buttons
 
 <DBNotification variant="standalone" semantic="informational">
-Desktop only – Mobile Popover Horizontal is limited to SubNavigation (Level 2) with a single level and does not display overflow buttons, an Active Indicator, or expanded Popover items.
+	Desktop only – Mobile Popover Horizontal is limited to SubNavigation (Level 2) with a single level
+	and does not display overflow buttons, an Active Indicator, or expanded Popover items.
 </DBNotification>
 
 The **Clip Content** setting required for correct horizontal overflow removes all elements outside the children container of Popover Navigation – including expanded Popover items and the Active Indicator (Level 1). Show either the overflow cropping or the expanded/active state, not both at the same time.
@@ -311,6 +312,20 @@ To enable automatic line breaks in a Custom Heading, select the "Heading" layer 
 </DBStack>
 
 <DBStack gap="medium">
+### Pagination
+
+#### Edge Case Row Wrap
+
+The `📦 Children` slot is set to Hug, so the row cannot wrap. If the Pagination is narrower than the row needs, the items overflow beyond the component instead of moving to a second line. Two steps make the row wrap.
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=2025-4&embed-host=share"
+	fullWidth
+/>
+
+- Hide both `Icon Button → Ghost` instances at Pagination level and insert them as the first and last element in the `📦 Children` slot
+- Set the width resizing behavior of the `📦 Children` container from Hug to Fill
+
 ### Loading Indicator
 
 #### Multi-line Labels at a Fixed Width

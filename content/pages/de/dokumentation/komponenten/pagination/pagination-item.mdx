@@ -1,0 +1,69 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Pagination Item'
+title: 'Pagination Item'
+description: 'Das Pagination Item ist eine einzelne Seite innerhalb einer Pagination.'
+shortDescription: 'Einzelne Seite innerhalb einer Pagination.'
+align: start
+toc: true
+status: 'sub'
+subParent: 'Pagination'
+order: 2
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Wählbare Seite in einer Pagination darstellen
+- Aktuelle Seite hervorheben
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbpaginationitem-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Seitenzahl und Label
+
+Sichtbar ist allein die Seitenzahl. Die Einordnung in den Datensatz trägt `label`, das nicht dargestellt wird, sondern als zugänglicher Name der Seite dient. Alle Items einer Pagination folgen demselben Muster.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4078-5623&embed-host=share"
+		description="Benenne im label die Seite im Kontext, zum Beispiel Seite 2 von 9 bei sichtbarer 2, und verwende dasselbe Muster für jedes Item der Reihe."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=4078-5693&embed-host=share"
+		description="Steht im label nur die Seitenzahl oder wechselt das Muster zwischen den Items, bleibt beim Vorlesen eine Zahl ohne Bezug. Halte das Muster über die ganze Reihe gleich."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Pagination Item" />
+
+</DBSection>
