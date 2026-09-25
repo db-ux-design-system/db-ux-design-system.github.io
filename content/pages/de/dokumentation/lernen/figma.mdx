@@ -27,11 +27,11 @@ Komponenteneigenschaften in der Figma-Bibliothek verwenden Emoji-Präfixe, um Ty
 
 | Icon | Zweck                                          | Beispiel        |
 | ---- | ---------------------------------------------- | --------------- |
-| 👁️   | Anzeigen/Ausblenden (schaltet Sichtbarkeit um) | `👁️ Show Label` |
-| 🔀   | Variantenauswahl                               | `🔀 Variant`    |
-| 📦   | Slot (Inhaltsbereich)                          | `📦 Children`   |
-| 🔄   | Icon-Swap (Instance Swap für Icons)            | `🔄 Icon`       |
-| ✏️   | Text-Override                                  | `✏️ Label`      |
+| 👁️   | Anzeigen/Ausblenden (schaltet Sichtbarkeit um) | `👁️ Show Label` |
+| 🔀   | Variantenauswahl                               | `🔀 Variant`    |
+| 📦   | Slot (Inhaltsbereich)                          | `📦 Children`   |
+| 🔄   | Icon-Swap (Instance Swap für Icons)            | `🔄 Icon`       |
+| ✏️   | Text-Override                                  | `✏️ Label`      |
 
 </DBStack>
 
@@ -53,17 +53,16 @@ Buttons, Navigation Items
 
 - Floating Container einblenden
 - Bei Bedarf weitere Floating Items ergänzen – Tipp: vorhandenes Item duplizieren
-	- Manuelle Einstellungen: `full width`, `full height`, `absolute position`, Constraints `Left + Right`, `Top + Bottom`
+  - Manuelle Einstellungen: `full width`, `full height`, `absolute position`, Constraints `Left + Right`, `Top + Bottom`
 - Position-Property: `top-start`, `top-center`, `top-end`, `middle-start`, `middle-end`, `bottom-start`, `bottom-center` oder `bottom-end`.
 - Edge-Property: `outside` (von der Parent-Komponente weg), `center` (am Anchor zentriert) oder `inside` (in die Parent-Komponente hinein)
+  </div>
 </div>
-</div>
-
 
 <div className="guideline-examples">
 <GuidelineExample
 	figmaUrl="https://embed.figma.com/design/Dr7QvFYRn5AwyQVOto4pEz/Doku--Helper-components-%E2%9C%85?node-id=7074-2974&embed-host=share"
-	description="Im `Children Slot` von `↳ Floating Item` das Element einfügen, das an der Parent-Komponente platziert werden soll, wie z.B. einen Tooltip bei Hover des Icon-Buttons oder einen Badge"
+	description="Im `Children Slot` von `↳ Floating Item` das Element einfügen, das an der Parent-Komponente platziert werden soll, wie z.B. einen Tooltip bei Hover des Icon-Buttons oder einen Badge"
 	fullWidth
 />
 
@@ -109,7 +108,6 @@ Custom Select Dropdown
 </div>
 </div>
 </DBStack>
-
 
 </DBSection>
 
@@ -194,7 +192,8 @@ Required Toggle = true setzen für korrekte Dev Properties.
 #### Eigenes Logo mit dem DB Logo Importer hinzufügen
 
 <DBNotification variant="standalone" semantic="informational">
-Erstelle dein markenkonformes Logo-SVG über das Marketingportal. Der Plugin-Import stellt systemkonforme Farbvariablen und Größen sicher.
+	Erstelle dein markenkonformes Logo-SVG über das Marketingportal. Der Plugin-Import stellt
+	systemkonforme Farbvariablen und Größen sicher.
 </DBNotification>
 
 Im Brand-Bereich des ControlPanel kannst du nur in der Variante **Brand → Logozusatz** ein markenkonformes eigenes Logo mit Logozusatz hinzufügen. Nutze das Figma-Plugin <DBLink href="https://www.figma.com/community/plugin/1590462040996560100/concept-db-logo-importer" target="_blank" rel="noopener noreferrer" variant="inline">DB Logo Importer</DBLink>, um ein SVG aus dem <DBLink href="https://marketingportal.extranet.deutschebahn.com/marketingportal/Marke-und-Design/Basiselemente/Logo/Logozusatz-mit-Tool#unit=Regio&mode=unit&breaking=true" target="_blank" rel="noopener noreferrer" variant="inline">DB Markenlogo-Generator</DBLink> zu importieren. Das Plugin weist die korrekten Farbvariablen zu und platziert das Logo direkt im **Logo Slot**.
@@ -216,11 +215,12 @@ Im Brand-Bereich des ControlPanel kannst du nur in der Variante **Brand → Logo
 />
 </div>
 
-
 #### Popover Navigation Horizontal: Overflow-Buttons
 
 <DBNotification variant="standalone" semantic="informational">
-Nur Desktop – Mobile Popover Horizontal ist auf SubNavigation (Level 2) mit einer einzelnen Ebene begrenzt und zeigt keine Overflow-Buttons, keinen Active Indicator und keine ausgeklappten Popover-Items.
+	Nur Desktop – Mobile Popover Horizontal ist auf SubNavigation (Level 2) mit einer einzelnen Ebene
+	begrenzt und zeigt keine Overflow-Buttons, keinen Active Indicator und keine ausgeklappten
+	Popover-Items.
 </DBNotification>
 
 Die Einstellung **Clip Content**, die für korrektes horizontales Overflow-Verhalten nötig ist, entfernt alle Elemente außerhalb des Children-Containers der Popover Navigation – einschließlich ausgeklappter Popover-Items und des Active Indicator (Level 1). Zeige entweder das Overflow-Verhalten oder den ausgeklappten bzw. aktiven Zustand, nicht beides gleichzeitig.
@@ -326,6 +326,18 @@ Der Slot `📦 Children` ist auf Hug gestellt, die Reihe kann daher nicht umbrec
 
 - Beide Instanzen `Icon Button → Ghost` auf Ebene der Pagination ausblenden und als erstes und letztes Element in den Slot `📦 Children` einfügen
 - Das Breiten-Resize-Verhalten des Containers `📦 Children` von Hug auf Fill stellen
+
+### Loading Indicator
+
+#### Mehrzeilige Labels bei fixer Breite
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=2025-4&embed-host=share"
+	layout="side"
+>
+Bekommt ein Loading Indicator Circular eine fixe Breite und ist das Label länger als diese Breite, setze die Property `🔀 Multiline` auf true, damit das Label korrekt positioniert wird.
+
+</GuidelineExample>
 
 </DBStack>
 
