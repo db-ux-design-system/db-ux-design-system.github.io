@@ -2,7 +2,7 @@
 hidePage: true
 category: 'Core'
 version: 'v5.6.0'
-date: '2026-09-24'
+date: '2026-09-25'
 ---
 
 ### Design & Entwicklung
