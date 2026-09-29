@@ -142,7 +142,7 @@ A modal dialog sits in the browser top layer. If another one opens on top of it,
 
 ### Without Backdrop
 
-With `backdrop` set to `none`, the dialog is not modal. The background stays operable and focus can leave the dialog with the Tab key.
+With `backdrop` set to `none`, the dialog is not modal. The background stays operable and focus can leave the dialog with the Tab key, which could hide the current focused item (problematic regarding Digital Accessibility).
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -153,7 +153,7 @@ With `backdrop` set to `none`, the dialog is not modal. The background stays ope
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=4004-30&embed-host=share"
-		description="Don't use `backdrop` `none` for such a task. Without a backdrop the background stays operable and the task cannot be enforced."
+		description="Don't use `backdrop=none` for such a task. Without a backdrop the background stays operable and the task cannot be enforced."
 	/>
 </div>
 
