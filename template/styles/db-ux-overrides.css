@@ -223,6 +223,12 @@
 	}
 }
 
+[data-variant='drilldown'] {
+	.db-control-panel-navigation-item-group-menu {
+		z-index: 68;
+	}
+}
+
 .db-shell-sub-navigation::after {
-	z-index: 9999; /* Workaround to show the border of the sub-navigation */
+	z-index: 69; /* Workaround to show the border of the sub-navigation */
 }
