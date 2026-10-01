@@ -222,3 +222,7 @@
 		border-inline-start: var(--db-border-width-3xs) solid var(--db-divider-bg-color);
 	}
 }
+
+.db-shell-sub-navigation::after {
+	z-index: 9999; /* Workaround to show the border of the sub-navigation */
+}
