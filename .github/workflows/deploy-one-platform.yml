@@ -63,13 +63,23 @@ jobs:
           npx playwright install --with-deps chromium
           pnpm run test
 
+      # Skip for Dependabot: its runs have a read-only token and no access to
+      # the GitHub App secrets, so the auto-commit cannot push. Renovate PRs
+      # come from our own GitHub App and are allowed. Same gate as core-web's
+      # snapshot-commit job.
       - name: Playwright regenerate snapshots
-        if: steps.playwright.outcome == 'failure' && github.event_name == 'pull_request'
+        if: |
+          steps.playwright.outcome == 'failure' &&
+          github.event_name == 'pull_request' &&
+          (!contains(github.actor, '[bot]') || startsWith(github.head_ref, 'renovate-'))
         id: playwright-regenerate
         run: pnpm run test:regenerate
 
       - name: 🚘 Auto commit
-        if: steps.playwright-regenerate.outcome == 'success' && github.event_name == 'pull_request'
+        if: |
+          steps.playwright-regenerate.outcome == 'success' &&
+          github.event_name == 'pull_request' &&
+          (!contains(github.actor, '[bot]') || startsWith(github.head_ref, 'renovate-'))
         uses: ./.github/actions/auto-commit
         with:
           branch-name: '${{ github.head_ref }}-auto'
