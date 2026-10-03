@@ -1,6 +1,6 @@
 import { test, expect, type Page, type Locator } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import iconDescriptions from '@db-ux/db-theme-icons/build/assets/descriptions.json';
+import iconDescriptions from '@db-ux/db-theme-icons/build/assets/descriptions.json' with { type: 'json' };
 
 const expectedIconCount = Object.keys(iconDescriptions).length;
 
