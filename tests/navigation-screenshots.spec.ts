@@ -1,5 +1,8 @@
 import { test, expect, type Page, type Locator } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import iconDescriptions from '@db-ux/db-theme-icons/build/assets/descriptions.json' with { type: 'json' };
+
+const expectedIconCount = Object.keys(iconDescriptions).length;
 
 type NavigationItem = {
 	path?: string;
@@ -78,9 +81,17 @@ const setupPage = async (page: Page, path: string) => {
 	await page.waitForLoadState('domcontentloaded');
 	await waitForDBShell(page);
 
-	// Wait for icons to render before measuring viewport
+	// Wait for icons to render before measuring viewport.
+	// Icons are `client:only` React buttons that hydrate in bursts, so we wait
+	// until every expected `.icon-item` exists rather than sleeping a fixed 10s.
+	// Checking against the exact server-rendered count (not "count stopped
+	// changing") avoids exiting early during a slow hydration batch.
 	if (path === 'documentation/icons') {
-		await page.waitForTimeout(10000);
+		await page.waitForFunction(
+			(expected) => document.querySelectorAll('#icon-gallery .icon-item').length >= expected,
+			expectedIconCount,
+			{ polling: 250, timeout: 30_000 },
+		);
 	}
 
 	await setScrollViewport(page);
