@@ -222,3 +222,13 @@
 		border-inline-start: var(--db-border-width-3xs) solid var(--db-divider-bg-color);
 	}
 }
+
+[data-variant='drilldown'] {
+	.db-control-panel-navigation-item-group-menu {
+		z-index: 68;
+	}
+}
+
+.db-shell-sub-navigation::after {
+	z-index: 69; /* Workaround to show the border of the sub-navigation */
+}
