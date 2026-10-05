@@ -55,7 +55,6 @@
 		}
 	}
 
-	/* Not used by any content yet; added proactively so a 1:1 ratio is available when needed. */
 	&[data-image-ratio='square']:not([data-full-width='true']) {
 		.db-card {
 			.guideline-example-iframe {
@@ -94,6 +93,12 @@
 		.guideline-example-iframe {
 			inline-size: 100%;
 			aspect-ratio: 16/9;
+		}
+
+		/* The declared ratio defines the box. Images keep their own aspect ratio
+		   and are fitted into it instead of being stretched to fill it. */
+		img.guideline-example-iframe {
+			object-fit: contain;
 		}
 	}
 }
