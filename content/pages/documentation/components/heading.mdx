@@ -71,20 +71,20 @@ Maintain heading order (H1 → H2 → H3). Skipped levels create an incomplete o
 	/>
 </div>
 
-### Visual hierarchy with size
+### Visual hierarchy
 
-When overriding size, maintain the visual hierarchy from H1 to H6. Each level must be equal to or smaller than the previous one.
+When overriding the visual size, maintain the visual hierarchy from H1 to H6. Each level must be equal to or smaller than the previous one.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4117-10&embed-host=share"
-		description="Ensure H1 remains visually larger than or equal to H2, even when overriding size."
+		description="Ensure H1 remains visually larger than or equal to H2, even when overriding the visual size."
 	/>
 	<GuidelineExample
 		variant="caution"
 		figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4117-12&embed-host=share"
-		description="An inverted size order (H2 larger than H1) contradicts reading expectations and makes it harder to grasp page structure."
+		description="An inverted size order (H2 larger than H1) contradicts reading expectations and makes it harder to grasp page structure. Only deviate when the design deliberately calls for it."
 	/>
 </div>
 
@@ -101,7 +101,7 @@ Use Custom Heading only when additional elements are needed in the start or end 
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4117-16&embed-host=share"
-		description="Don't use Custom Heading for plain text headings. Heading H1–H6 is designed for that."
+		description="Don't use Custom Heading for plain text headings. Heading H1–H6 is designed for that and simpler to use."
 	/>
 </div>
 
@@ -125,6 +125,24 @@ Limit additional elements in the slots to what is necessary. Too many actions di
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+### Decoupled visual size
+
+The semantic level follows the document hierarchy, the visual size follows the visual design. The two can intentionally differ.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4161-483&embed-host=share"
+		description="Topline above the main heading: mark the H1 as a topline visually smaller than the following H2. For screen readers the H1 remains the top level."
+		fullWidth={true}
+	/>
+</div>
 
 </DBSection>
 

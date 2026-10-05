@@ -71,20 +71,20 @@ Halte die Heading-Reihenfolge ein (H1 → H2 → H3). Übersprungene Ebenen erze
 	/>
 </div>
 
-### Visuelle Hierarchie bei Size
+### Visuelle Hierarchie
 
-Behalte bei abweichender Size die visuelle Hierarchie von H1 bis H6 bei. Jede Stufe muss gleich groß oder kleiner als die vorherige sein.
+Behalte bei abweichender Visual Size die visuelle Hierarchie von H1 bis H6 bei. Jede Stufe muss gleich groß oder kleiner als die vorherige sein.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
 		figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4117-10&embed-host=share"
-		description="Stelle sicher, dass H1 visuell größer oder gleich groß wie H2 bleibt, auch bei überschriebener Size."
+		description="Stelle sicher, dass H1 visuell größer oder gleich groß wie H2 bleibt, auch bei überschriebener Visual Size."
 	/>
 	<GuidelineExample
 		variant="caution"
 		figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4117-12&embed-host=share"
-		description="Eine invertierte Größenreihenfolge (H2 größer als H1) widerspricht der Leseerwartung und erschwert das Erfassen der Seitenstruktur."
+		description="Eine invertierte Größenreihenfolge (H2 größer als H1) widerspricht der Leseerwartung und erschwert das Erfassen der Seitenstruktur. Weiche davon nur ab, wenn die Gestaltung es bewusst vorgibt."
 	/>
 </div>
 
@@ -125,6 +125,24 @@ Beschränke zusätzliche Elemente in den Slots auf das Nötigste. Zu viele Aktio
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Beispiele
+
+### Entkoppelte Visual Size
+
+Die semantische Stufe folgt der Dokumenthierarchie, die Visual Size dem visuellen Entwurf. Beide können bewusst voneinander abweichen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4161-483&embed-host=share"
+		description="Topline über der Hauptüberschrift: Zeichne die H1 als Topline visuell kleiner aus als die nachfolgende H2. Für Screenreader bleibt die H1 die oberste Ebene."
+		fullWidth={true}
+	/>
+</div>
 
 </DBSection>
 
