@@ -312,6 +312,25 @@ The start and end slot of the dialog header align their content with the height 
 
 <DBStack gap="medium">
 ### Heading
+
+#### Setting the Alignment
+
+The alignment is no longer available as a component property. For any alignment other than "Left", set it directly on the layer inside the component.
+
+<div className="guideline-examples">
+<GuidelineExample
+	fullWidth
+	figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4160-87&embed-host=share"
+	description='Default Heading: select the "Heading" text layer and set the text alignment'
+/>
+
+<GuidelineExample
+	fullWidth
+	figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4161-368&embed-host=share"
+	description='Custom Heading: select the "Container" layer and set the alignment of the auto layout'
+/>
+</div>
+
 #### Multi-line text within Custom Headings
 
 To enable automatic line breaks in a Custom Heading, select the "Heading" layer inside the component and set the width resizing behavior from "Hug" to "Fill".

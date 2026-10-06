@@ -9,7 +9,7 @@ align: start
 order: 5
 toc: true
 tocMaxDepth: 3
-nav: false
+nav: true
 ---
 
 import { DBSection, DBNotification } from '@db-ux/react-core-components';
@@ -37,48 +37,54 @@ Alle in diesem Release enthaltenen Issues sind am Ende der Seite verlinkt.
 
 <DBSection spacing="small" width="auto">
 
-### Verfeinerungen
+### Refactoring
 
-Die folgenden Verfeinerungen erfordern besondere Aufmerksamkeit. Bestehende Instanzen müssen nach dem Update überprüft werden.
+Das folgende Refactoring erfordert besondere Aufmerksamkeit. Bestehende Instanzen müssen nach dem Update überprüft werden.
 
-#### Scrollbar
+#### Heading
 
-- **Resizer Helfer-Komponente überarbeitet:** Die Scrollbar verwendet nun den Resizer als dedizierte Helfer-Komponente. Komponenten, die die Scrollbar nutzen, müssen überprüft werden, um sicherzustellen, dass die Werte für Handle Size und Free Position nach dem Update noch korrekt sind.
+- **Alignment-Property entfernt:** Das Alignment ist keine Component Property mehr. Ein anderes Alignment als „Left“ stellst du direkt an der Ebene innerhalb der Komponente ein – an der „Heading“-Textebene (Default Heading) oder am „Container“-Auto-Layout (Custom Heading). Instanzen, die nicht linksbündig waren, sind nach dem Update nicht mehr korrekt verknüpft und müssen korrigiert werden (siehe <a href="/de/dokumentation/lernen/figma#alignment-einstellen">Figma Learn</a>).
+- **Size-Property durch Visual Size ersetzt:** Die Property „Size“ wurde durch „Visual Size“ ersetzt. Die Visual Size setzt die visuelle Größe unabhängig von der semantischen Stufe. Instanzen mit einer der entfernten Größen sind nach dem Update nicht mehr korrekt verknüpft und müssen korrigiert werden.
+
+Die bisherigen Size-Werte entsprechen folgenden Visual Sizes:
+
+| Size  | Visual Size |
+| ----- | ----------- |
+| `3xl` | entfällt    |
+| `2xl` | entfällt    |
+| `xl`  | H1          |
+| `lg`  | H2          |
+| `md`  | H3          |
+| `sm`  | H4          |
+| `xs`  | H5          |
+| `2xs` | H6          |
+| `3xs` | entfällt    |
+
+Textinhalte werden durch das Update nicht überschrieben.
 
 <YourAction
 	actions={[
-		'Überprüfe alle Komponenten, die den Scrollbar-Helfer verwenden (z. B. Custom Select Dropdown, Shell, vertikale Navigationen).',
-		'Stelle sicher, dass der „Thumb Resizer“ Gap-Wert noch die korrekte Griffgröße erzeugt.',
-		'Stelle sicher, dass der „Spacer Resizer“ Gap-Wert noch die korrekte freie Position erzeugt.',
+		'Überprüfe alle Heading- und Custom-Heading-Instanzen mit einem anderen Alignment als „Left“ oder einer der entfernten Größen.',
+		'Stelle das Alignment nach dem Update an der Textebene (Default Heading) oder am Container-Auto-Layout (Custom Heading) ein.',
+		'Setze die entsprechende Visual Size gemäß der Zuordnung oben.',
+		'Wähle für Instanzen mit 3xl, 2xl oder 3xs eine neue Visual Size – diese Größen haben keine Entsprechung.',
 	]}
 />
 
-</DBSection>
+#### Drawer
 
-<DBSection spacing="small" width="auto">
+- **Children Slot ersetzt die Textebene des Drawer Headers:** Der Heading-Text des Drawer Headers liegt nun in einem Children Slot, konsistent zum Dialog Header und zur Entwicklung. Bestehende Heading-Inhalte werden nach dem Update zurückgesetzt und müssen in den Slot übernommen werden.
 
-### Deprecated
-
-<div style={{marginBlockEnd: 'var(--db-spacing-fixed-lg)'}} />
-
-<DBNotification variant="standalone" semantic="critical">
-Veraltete Komponenten aus diesem Release werden entfernt
+<DBNotification semantic="critical" variant="standalone" headline="Wichtig">
+Kopiere den Inhalt des Drawer Headers **vor dem Update der Komponente** – das Update setzt den bestehenden Text zurück.
 </DBNotification>
-
-<div style={{marginBlockEnd: 'var(--db-spacing-fixed-lg)'}} />
-
-#### Header & Navigation
-
-- **Ersetzt durch Control Panel + Shell:** Die Komponenten Header und Navigation sind deprecated. Verwende stattdessen Control Panel und Shell. Header und Navigation werden mit v7.0 vollständig entfernt.
-
-In Figma sind betroffene veraltete Komponenten mit **„❌ ... (Deprecated)“** im Namen markiert.
 
 <YourAction
 	actions={[
-		'Identifiziere alle Instanzen von Header und Navigation in deinen Designs.',
-		'Ersetze Header durch die passende Kombination aus Shell und Control Panel (Desktop oder Mobile).',
-		'Ersetze Navigation durch Control Panel Navigation oder Shell Sub Navigation.',
-		'Beachte die Shell Desktop- und Shell Mobile-Dokumentation für Hinweise zur Konfiguration.',
+		'Überprüfe alle Drawer-Instanzen, die den Drawer Header verwenden.',
+		'Kopiere den Heading-Text aus dem Drawer Header vor dem Update.',
+		'Aktualisiere die Komponenten-Instanz.',
+		'Füge den kopierten Text in den Children Slot des Drawer Headers ein.',
 	]}
 />
 
