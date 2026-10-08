@@ -5,6 +5,10 @@ version: 'v5.7.0'
 date: '2026-10-08'
 ---
 
+### Design
+
+_version bump_
+
 ### Development
 
 #### Added
