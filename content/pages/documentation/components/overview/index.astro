@@ -1,0 +1,63 @@
+---
+import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
+import { DBSection, type MaxWidthType } from '@db-ux/react-core-components';
+import { ComponentOverview, VersionSwitch } from './_ComponentOverview.tsx';
+import { SECTIONS, SECTION_HEADINGS } from './_sections.ts';
+import './ComponentOverview.css';
+
+// eslint-disable-next-line astro/no-exports-from-components -- Exported for ChildPageOverview glob
+export const frontmatter: DocumentationFrontMatter = {
+	headline: 'Overview',
+	title: 'Overview',
+	description: 'All components of the Design System at a glance, each shown in selected variants.',
+	align: 'start',
+	toc: true,
+	tocMaxDepth: 2,
+	sectionSpacing: 'small',
+	sectionWidth: 'auto',
+	/*
+	 * First item in the Components section. No other top-level page there sets
+	 * `order`, so they all fall back to sorting by title and this page stays
+	 * ahead of them. `status` is deliberately unset: it keeps the page in the
+	 * first status band and out of the status-filtered teaser grids on the
+	 * Components index, where a page about components does not belong.
+	 */
+	order: 0,
+};
+
+/*
+ * `width="auto"` is how every component page in this section opts out of the
+ * section width constraint: no `.db-section[data-width=…]` rule matches the
+ * value, so the section adds no inline padding of its own and the content lines
+ * up with the hero above it. The component's type only lists the four named
+ * widths, which the MDX pages never had to satisfy, so the value is cast here.
+ * Omitting it instead would match `.db-section:not([data-width])` and indent the
+ * page against its siblings.
+ */
+const sectionWidth = 'auto' as MaxWidthType;
+---
+
+<DocumentationLayout frontmatter={frontmatter} headings={SECTION_HEADINGS}>
+	<DBSection spacing="small" width={sectionWidth}>
+		<VersionSwitch locale="en" />
+		{
+			/*
+			 * Rendered without a client directive, as the MDX version did: Astro
+			 * renders the specimens to static HTML server-side. The ten specimens
+			 * that need JavaScript render an empty placeholder here and are mounted
+			 * by _mount-init.ts.
+			 */
+			SECTIONS.map(({ id, title, component }) => (
+				<Fragment>
+					<h2 id={id}>{title}</h2>
+					<ComponentOverview component={component} locale="en" />
+				</Fragment>
+			))
+		}
+	</DBSection>
+
+	<script>
+		import './_sticky-controls.ts';
+		import './_mount-init.ts';
+	</script>
+</DocumentationLayout>

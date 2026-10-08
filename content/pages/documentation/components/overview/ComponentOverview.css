@@ -1,0 +1,586 @@
+/*
+ * Layout for the Component Overview page.
+ *
+ * Each component lists its variants side by side instead of naming them in
+ * headings, so they stay compact and comparable at a glance. The column count is
+ * set per component via the --overview-columns custom property.
+ */
+
+.overview-grid {
+	display: grid;
+	grid-template-columns: repeat(var(--overview-columns, 2), minmax(0, 1fr));
+
+	/*
+	 * Each row is as tall as the tallest component in it (default auto sizing),
+	 * while every cell keeps its own height and aligns to the top of the row
+	 * instead of being stretched.
+	 */
+	align-items: start;
+	gap: var(--db-spacing-fixed-md) var(--db-spacing-fixed-lg);
+}
+
+/*
+ * One step more air below the heading than content-spacing.css gives a `div`
+ * after a heading (md). The specimens carry no headings of their own, so the
+ * component heading needs to read as the start of a block rather than as a line
+ * directly above the first row. The headings themselves have no bottom margin in
+ * the content area, so nothing collapses into this.
+ *
+ * The class is repeated to match the specificity of the content-spacing rule.
+ */
+.dba-main-content :is(h2, h3, h4, h5, h6) + .overview-grid.overview-grid {
+	margin-block-start: var(--db-spacing-fixed-xl);
+}
+
+/*
+ * content-spacing.css gives any `div + div` inside the content area a top margin
+ * for vertical rhythm. Inside the grid that offsets every cell except the first
+ * one, so cells in the same row no longer line up. The grid gap already provides
+ * the spacing here, so the margin is reset. The class is repeated to match the
+ * specificity of the content-spacing rule.
+ *
+ * Only the cells, never their contents. A reset reaching further cannot tell our
+ * margin from one a component sets itself, so it takes the component's own
+ * spacing with it — the gap between a checkbox and its message, the gaps between
+ * accordion items. Where the rhythm reaches into a component, it is stopped at
+ * that one place instead (see the custom select further down).
+ *
+ * A `dialog` is left out. An open dialog is no longer part of this grid: it moves
+ * to the top layer and centers itself in the viewport with `margin: auto`, which
+ * is the only placement the component has — there is no property to set it with.
+ * Zeroing the start margin would resolve that `auto` to zero on one side only and
+ * pin the dialog to the upper edge.
+ *
+ * The class is repeated to match the specificity of the content-spacing rule.
+ */
+.dba-main-content .overview-grid.overview-grid > *:not(dialog),
+.dba-main-content .overview-grid.overview-grid .overview-stack > * {
+	margin-block-start: 0;
+}
+
+/*
+ * Where the vertical rhythm reaches into a component.
+ *
+ * The rule in content-spacing.css matches on element types, and `div` is one of
+ * them. Component internals are often sibling divs, so the rhythm lands inside
+ * them: it pushed the second tag of a custom select onto its own line and opened
+ * gaps between the rows of a dialog. The places are listed one by one rather than
+ * reset in bulk — a reset on everything below a cell cannot tell this margin from
+ * one a component sets itself and would flatten the component's own spacing with
+ * it, as the gap between a checkbox and its message.
+ *
+ * Every element below declares no block-start margin of its own, in any state, so
+ * zero is what the component itself lays out with: the tags, the rows of a
+ * dropdown and the rows of a dialog or drawer are all spaced with flex gap, grid
+ * or padding. Checked against the component styles before adding them here.
+ */
+.dba-main-content .overview-grid .db-custom-select .db-tag,
+.dba-main-content .overview-grid .db-custom-select-dropdown > *,
+.dba-main-content .overview-grid .db-dialog > :is(.db-dialog-content, .db-dialog-footer),
+.dba-main-content .overview-grid .db-drawer-container > :is(.db-drawer-content, .db-drawer-footer) {
+	margin-block-start: 0;
+}
+
+/*
+ * The same rhythm, reaching into the footer.
+ *
+ * The footer stacks its areas as sibling divs, so the meta area was pushed 16 px
+ * below the content area on top of the border that already divides them. Inside
+ * the meta area the copyright is a `p` and the links next to it a `div`, so the
+ * links were pushed 16 px down although both are flex children of one row — on a
+ * wide viewport that dropped them out of the row entirely.
+ *
+ * Measured at 16 px in both places, which is the rhythm step. Neither element
+ * declares a block-start margin of its own: the footer separates its areas with
+ * borders and padding, and the meta row with flex gap.
+ */
+.dba-main-content .overview-grid .db-footer > .db-footer-meta,
+.dba-main-content .overview-grid .db-footer-meta .db-footer-meta-content {
+	margin-block-start: 0;
+}
+
+/*
+ * The same rhythm, reaching into a row of heading specimens.
+ *
+ * The rule in content-spacing.css matches on element types and `h2` to `h6` are
+ * among them, so the second and any further specimen in a row picked up a 16 px
+ * top margin and dropped out of the row it shares. Measured at 16 px, which is
+ * the rhythm step.
+ *
+ * A heading sets `margin-block: 0` itself, so zero is the component's own layout
+ * and nothing of it is overridden here. Bound to the rows of this page, so no
+ * heading outside them is affected.
+ */
+.dba-main-content .overview-grid .overview-row > .db-heading {
+	margin-block-start: 0;
+}
+
+/*
+ * The same rhythm, reaching into a row of switch specimens.
+ *
+ * A switch is a `label` wrapping a `div`, so the sibling-div half of the rule in
+ * content-spacing.css still matches: every specimen after the first one in a row
+ * picked up a 16 px top margin, which centring then turned into each switch
+ * sitting on its own baseline instead of the row's shared one. Measured at
+ * 16 px, which is the rhythm step.
+ *
+ * The component declares no block-start margin of its own — the control and its
+ * message are laid out with the label's own flow — so zero is what it lays out
+ * with. Bound to the rows of this page.
+ */
+.dba-main-content .overview-grid .overview-row > .db-switch {
+	margin-block-start: 0;
+}
+
+/*
+ * The same rhythm, reaching into a column of tag specimens.
+ *
+ * A tag is a `div`, which is one of the element types the rule in
+ * content-spacing.css matches, so every specimen after the first one in a
+ * column picked up a 16 px top margin on top of the gap the column already
+ * lays out with. Measured at 16 px, which is the rhythm step. Not a direct
+ * child selector: the interactive column wraps its pairs in `.overview-row`,
+ * so a tag inside it is a grandchild of the column, not a child.
+ *
+ * The component declares no block-start margin of its own — a tag sizes itself
+ * to its content and is spaced by whatever lays it out — so zero is what it
+ * lays out with. Bound to this page's tag column.
+ */
+.dba-main-content .overview-grid .overview-tag-column .db-tag {
+	margin-block-start: 0;
+}
+
+/*
+ * The same rhythm, reaching into a row of popover specimens.
+ *
+ * A popover is a `div` around its trigger, and `div` is one of the element types
+ * the rule in content-spacing.css matches, so every specimen after the first one
+ * in a row picked up a 16 px top margin and sank below its neighbours. Measured
+ * at 16 px, which is the rhythm step.
+ *
+ * The component declares no block-start margin of its own — it is a positioning
+ * context around the trigger and sizes itself to its content — so zero is what it
+ * lays out with. Bound to the rows of this page.
+ */
+.dba-main-content .overview-grid .overview-row > .db-popover {
+	margin-block-start: 0;
+}
+
+/*
+ * Hands the heading specimens back to the component.
+ *
+ * The design system styles arrive in the `db-ux` cascade layer, while the
+ * platform's own `h3 { font: … }` override is unlayered — and unlayered styles
+ * win over layered ones no matter how specific the layered selector is. So that
+ * one line overrode `.db-heading[data-size]` and rendered every specimen at the
+ * same 32 px, with the font weight flattened along with it, because `font` is a
+ * shorthand and resets the weight too.
+ *
+ * `revert-layer` rolls the value back to the previous layer instead of naming a
+ * replacement, so the size the component computes from its own property is what
+ * applies. No token is repeated here and nothing of the component is redefined.
+ *
+ * This is a workaround for the specimens, not a fix: the same override defeats
+ * the size property of a heading everywhere on the platform.
+ */
+.dba-main-content .overview-grid .db-heading {
+	font: revert-layer;
+}
+
+/*
+ * Content-sized columns for rows of small controls such as buttons or badges.
+ * Keeps each column only as wide as its content and left-aligns the row, instead
+ * of stretching every item to an equal share.
+ */
+.overview-grid[data-fit='content'] {
+	grid-template-columns: repeat(var(--overview-columns, 2), auto);
+	justify-content: start;
+}
+
+/* A divider separates rows, so it spans every column instead of occupying one cell. */
+.overview-grid > .db-divider {
+	grid-column: 1 / -1;
+}
+
+/*
+ * Page-level controls above the specimens, such as the version switcher. Gets the
+ * same breathing room as a heading so it reads as a control for the whole page
+ * instead of belonging to the first component below it.
+ */
+.dba-main-content .overview-controls {
+	/*
+	 * Stays reachable while scrolling through the specimens, so the comparison can
+	 * be switched at any point on the page. It sticks below the header and spans
+	 * the full content width, so the specimens scroll underneath it rather than
+	 * past it. It has to remain inside .dba-main-content: the version selectors
+	 * below match it with :has() from that same element.
+	 */
+	position: sticky;
+
+	/*
+	 * Zero, not the header height: the scrolling container is the shell content
+	 * area, which already starts below the header. Any offset here would leave a
+	 * gap with content scrolling through it.
+	 */
+	inset-block-start: 0;
+
+	/*
+	 * Above every resting (non-overlay) component on the page, below every
+	 * overlay one.
+	 *
+	 * The components in this stack set their own z-index: a form label sits at
+	 * 2, the tabs list at 20, a dropdown at 32 — none of them covers the bar
+	 * without this. 25 clears the tabs list and leaves room before the dropdown.
+	 * A tooltip (1337), dialog and drawer (9996) are deliberately left above the
+	 * bar: those are overlays the reader just opened, which should cover it,
+	 * while nothing resting in the normal flow should. There is no token for
+	 * this, the design system has none for stacking.
+	 */
+	z-index: 25;
+	background-color: var(--db-neutral-bg-basic-level-1-default);
+	padding-block: var(--db-spacing-fixed-sm);
+	margin-block-end: var(--db-spacing-fixed-2xl);
+
+	/*
+	 * The lower edge is only needed while the bar overlays the specimens: without
+	 * it they appear to be cut off mid-element as they scroll underneath, which
+	 * reads as a glitch rather than an overlay. In its place in the flow there is
+	 * nothing to separate, so the line stays transparent and the bar blends into
+	 * the page. The border itself is always there, so revealing it shifts no
+	 * layout. Same line as a DBDivider.
+	 */
+	border-block-end: var(--db-border-width-3xs) solid transparent;
+}
+
+/* Set by VersionSwitch as soon as the bar has left its place in the flow. */
+.dba-main-content .overview-controls.is-sticky {
+	border-block-end-color: var(--db-adaptive-on-bg-basic-emphasis-60-default);
+}
+
+/*
+ * Probe for the sticky state, observed by VersionSwitch.
+ *
+ * Its lower edge sits exactly where the bar starts in the flow, so the moment the
+ * probe is scrolled out of the content area is the moment the bar begins to
+ * stick. The negative top margin pulls its own height back out of the flow, so it
+ * takes up no space and leaves the bar where it was. Any height works — it only
+ * has to be large enough to be observable.
+ */
+.dba-main-content .overview-controls-sentinel {
+	block-size: var(--db-sizing-3xs);
+	margin-block-start: calc(-1 * var(--db-sizing-3xs));
+}
+
+/*
+ * content-spacing.css gives any `div + div` inside the content area a top margin.
+ * The probe is not content, so the bar following it keeps its own spacing.
+ */
+.dba-main-content .overview-controls-sentinel + .overview-controls {
+	margin-block-start: 0;
+}
+
+/*
+ * Label and control on one line, with the sticky backdrop around them staying
+ * full width. On narrow viewports the label wraps above the control rather than
+ * squeezing it.
+ */
+.overview-controls-field {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--db-spacing-fixed-sm);
+}
+
+/* Only the control itself is constrained. */
+.overview-controls-select {
+	inline-size: var(--db-container-2xs);
+	max-inline-size: 100%;
+}
+
+/*
+ * Version preview.
+ *
+ * Every DB component derives its corners from the --db-border-radius-* tokens, so
+ * redefining those tokens on the content root switches the entire page at once —
+ * no per-component rules and no JavaScript. The selected option is matched with
+ * :has(), which tracks the live selection.
+ *
+ * The option values are produced by VersionSwitch in ComponentOverview.tsx and are
+ * the contract for these selectors; change them only in both places.
+ */
+
+/*
+ * v5 pins the values that are current today. This is intentionally redundant with
+ * the package defaults: once the packages ship v6, where most radii drop to 0,
+ * this block is what keeps the rounded state available for comparison.
+ */
+.dba-main-content:has(.overview-controls option[value='v5']:checked) {
+	--db-border-radius-3xs: 0.0625rem;
+	--db-border-radius-2xs: 0.125rem;
+	--db-border-radius-xs: 0.25rem;
+	--db-border-radius-sm: 0.5rem;
+	--db-border-radius-md: 0.75rem;
+	--db-border-radius-lg: 1rem;
+	--db-border-radius-xl: 1.5rem;
+	--db-border-radius-2xl: 1.75rem;
+	--db-border-radius-3xl: 2rem;
+	--db-border-radius-full: 500rem;
+}
+
+/*
+ * v6 squares the components off. Only `full` keeps its value, so shapes that rely
+ * on a pill or circle stay intact: badges, dots and icon-only buttons.
+ */
+.dba-main-content:has(.overview-controls option[value='v6']:checked) {
+	--db-border-radius-3xs: 0;
+	--db-border-radius-2xs: 0;
+	--db-border-radius-xs: 0;
+	--db-border-radius-sm: 0;
+	--db-border-radius-md: 0;
+	--db-border-radius-lg: 0;
+	--db-border-radius-xl: 0;
+	--db-border-radius-2xl: 0;
+	--db-border-radius-3xl: 0;
+}
+
+/*
+ * The one shape on this page the token switch above cannot reach.
+ *
+ * A circular loading indicator is an SVG stroke, and its rounded ends come from
+ * `stroke-linecap`, not from a --db-border-radius-* token. So the switch leaves
+ * it round while everything around it squares off, and the v6 preview would be
+ * telling only part of the truth.
+ *
+ * Both versions are declared, the same way the radius tokens above are: v5 pins
+ * the value that applies today, deliberately redundant with what the component
+ * sets, because once the packages ship v6 the component itself will deliver the
+ * squared end — and the undeclared v5 column would square off with it and lose
+ * the side of the comparison this page exists for. Measured at `round` on the
+ * rendered spinner before pinning it.
+ *
+ * The selector reaches into design system internals, which this page otherwise
+ * avoids: there is no token and no property for the linecap, so there is nothing
+ * else to address. It fails silently if those class names are renamed, and it
+ * can be dropped as soon as the design system makes the linecap settable.
+ */
+.dba-main-content:has(.overview-controls option[value='v5']:checked)
+	.overview-grid
+	.db-loading-indicator
+	circle {
+	stroke-linecap: round;
+}
+
+.dba-main-content:has(.overview-controls option[value='v6']:checked)
+	.overview-grid
+	.db-loading-indicator
+	circle {
+	stroke-linecap: square;
+}
+
+/*
+ * The heading block carries one set of rows per version, both of them in the
+ * markup, because the preview is pure CSS and cannot change what is rendered.
+ *
+ * v5 shows the visual size scale the component has today, nine rows. v6 shows the
+ * six semantic levels, which is all that is left of that scale there. Each set is
+ * one grid item, so the hidden one is not a grid item at all and leaves neither a
+ * track nor a gap behind — nothing below it shifts when the version changes.
+ */
+.dba-main-content:has(.overview-controls option[value='v5']:checked) [data-overview-version='v6'],
+.dba-main-content:has(.overview-controls option[value='v6']:checked) [data-overview-version='v5'] {
+	display: none;
+}
+
+/*
+ * The drawer's rounded corners are gone in v6, so the whole row of triggers that
+ * would open that state goes with them — they would open a drawer
+ * indistinguishable from the row above and suggest a difference that no longer
+ * exists. The row stays in the markup either way: the preview is pure CSS and
+ * cannot change what is rendered, only what is shown. Hiding the row rather than
+ * its buttons also takes the gap above it with it, so nothing below shifts.
+ */
+.dba-main-content:has(.overview-controls option[value='v6']:checked)
+	[data-overview-rounded='true'] {
+	display: none;
+}
+
+/*
+ * A single grid cell that holds several related items in a row, e.g. all semantic
+ * variants of a badge. Keeps them grouped and wrapping within their column.
+ */
+.overview-row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--db-spacing-fixed-sm);
+}
+
+/*
+ * A vertical divider has no height of its own and takes it from the row it sits
+ * in, so that row has to stretch its items instead of centring them.
+ */
+.overview-row[data-align='stretch'] {
+	align-items: stretch;
+}
+
+/*
+ * Some items in the row carry a message below the control and some do not, so
+ * they are taller than their neighbours — centring would then align each item
+ * on its own vertical midpoint rather than on a shared top edge, leaving the
+ * controls themselves at different heights. Used by the switch row, where only
+ * the invalid and valid specimens carry a message. The row also spreads its
+ * items across the full column width instead of bunching them on the left,
+ * since they wrap on narrower viewports anyway and reads better as one row
+ * spanning the available space on wide ones.
+ */
+.overview-row[data-align='start'] {
+	align-items: flex-start;
+	justify-content: space-between;
+}
+
+/*
+ * A grid cell that stacks several rows below each other, e.g. the content
+ * variants of a badge (text, icon, dot) within one size column.
+ */
+.overview-stack {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	gap: var(--db-spacing-fixed-sm);
+}
+
+/*
+ * A stack whose items take the whole column instead of their content width.
+ *
+ * Content width is right for small controls, which are compared at the size they
+ * have. A notification is not one of them: it is a block of content that fills
+ * what it sits in, and at content width its widest specimen grew past its column
+ * and out of the comparison. Measured at 23 px past the track before this.
+ */
+.overview-stack[data-align='stretch'] {
+	align-items: stretch;
+}
+
+/*
+ * A stack whose items sit in the middle of their column.
+ *
+ * Only the upright loading indicator column uses this. Its specimens are a
+ * circle with the label below it, so every row is only as wide as its own text
+ * and there is no common edge for a start alignment to work with. Centred, the
+ * column reads as one; left-aligned it reads as a ragged edge next to the wider
+ * columns beside it.
+ *
+ * Horizontal only. The vertical alignment of the rows stays with the grid, which
+ * puts every cell of a row on the same top line, so the rows remain comparable
+ * across the columns.
+ */
+.overview-stack[data-align='center'] {
+	align-items: center;
+}
+
+/*
+ * The group a radio specimen is.
+ *
+ * A radio only means something as part of a group, so every specimen is a
+ * `fieldset` with a `legend` — the native grouping, which also gives the group a
+ * name. The browser draws a fieldset with a frame and an inset legend of its own,
+ * which would read as a container the design system does not have, so the frame
+ * is dropped and the legend becomes the caption above the options. The spacing to
+ * them is the same step the stack inside uses.
+ */
+.overview-fieldset {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+.overview-fieldset > legend {
+	padding: 0;
+	margin-block-end: var(--db-spacing-fixed-sm);
+}
+
+/*
+ * Backdrop specimen.
+ *
+ * The backdrop is the one entry on this page without a component behind it: its
+ * documentation states that none exists and names the color recipe to apply
+ * instead, which is what the layer below carries.
+ *
+ * A real backdrop covers the viewport. On this page that would dim the overview
+ * itself, so the layer is bound to a preview box: the box is the positioning
+ * context the layer stretches into, and it clips anything that would reach past
+ * it.
+ */
+.overview-backdrop {
+	position: relative;
+	overflow: hidden;
+	padding: var(--db-spacing-fixed-md);
+	border-radius: var(--db-border-radius-sm);
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+}
+
+/*
+ * The two steps the documentation names: `lg` for the strong backdrop, `sm` for
+ * the weak one. Same recipe the dialog and the drawer use for their own backdrop.
+ */
+.overview-backdrop-layer {
+	position: absolute;
+	inset: 0;
+	background-color: color(
+		from var(--db-adaptive-on-bg-basic-emphasis-100-default) srgb r g b / var(--db-opacity-lg)
+	);
+}
+
+.overview-backdrop-layer[data-emphasis='weak'] {
+	background-color: color(
+		from var(--db-adaptive-on-bg-basic-emphasis-100-default) srgb r g b / var(--db-opacity-sm)
+	);
+}
+
+/*
+ * Neutral placeholder item for the layout components.
+ *
+ * Section and Stack have no optics of their own — they only arrange what sits
+ * inside them. So each specimen needs visible content for its spacing, direction
+ * and gap to read against. These boxes are that content: built from design tokens
+ * rather than hardcoded colours, and kept plain so the arrangement they sit in is
+ * what stands out, not the boxes themselves.
+ */
+.overview-placeholder {
+	padding: var(--db-spacing-fixed-xs) var(--db-spacing-fixed-sm);
+	border-radius: var(--db-border-radius-xs);
+	background-color: var(--db-turquoise-bg-basic-level-1-default);
+	color: var(--db-turquoise-on-bg-basic-emphasis-100-default);
+}
+
+/*
+ * Preview panel behind a section specimen.
+ *
+ * A section's spacing is the padding between its edge and its content, which is
+ * only visible against a filled area. The panel provides that area: the gap
+ * between the placeholder box and the panel edge is the section's padding. Same
+ * tint as the backdrop preview box, so the two previews read alike.
+ */
+.overview-section-preview {
+	border-radius: var(--db-border-radius-sm);
+	background-color: var(--db-turquoise-bg-basic-transparent-semi-default);
+}
+
+/* Side-by-side comparison stops working once the columns get too narrow to read. */
+@media (width <= 767px) {
+	.overview-grid,
+	.overview-grid[data-fit='content'] {
+		grid-template-columns: minmax(0, 1fr);
+		justify-content: stretch;
+	}
+
+	/*
+	 * The centred column only makes sense next to other columns. Once they stack,
+	 * it sits above and below left-aligned specimens of the same component, and
+	 * the centring that steadied the comparison turns into the only item out of
+	 * line. So it reverts to the start alignment every other stack has here.
+	 */
+	.overview-stack[data-align='center'] {
+		align-items: start;
+	}
+}
