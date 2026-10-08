@@ -394,6 +394,14 @@ const PRESELECTED = ['option-1', 'option-2'];
 
 interface OverviewLabels {
 	accordionItems: { headlinePlain: string; text: string }[];
+	/*
+	 * This page's own URL, in this language. Every `href="#"` this page would
+	 * otherwise need — the Link and Footer specimens — points here instead, so
+	 * a click lands back on this same page rather than at the top of it with no
+	 * destination. Not translated as such, but language-specific: the EN and DE
+	 * pages live at different paths.
+	 */
+	selfUrl: string;
 	badge: string;
 	button: string;
 	/** Accessible name for icon-only specimens, matching the `plus` icon. */
@@ -631,6 +639,7 @@ interface OverviewLabels {
  */
 const LABELS: Record<Language, OverviewLabels> = {
 	de: {
+		selfUrl: '/de/dokumentation/komponenten/uebersicht',
 		accordionItems: [
 			{ headlinePlain: 'Erstes Element', text: 'Inhalt des ersten Elements.' },
 			{ headlinePlain: 'Zweites Element', text: 'Inhalt des zweiten Elements.' },
@@ -820,6 +829,7 @@ const LABELS: Record<Language, OverviewLabels> = {
 		v6: 'v6 (neues DB Markendesign)',
 	},
 	en: {
+		selfUrl: '/documentation/components/overview',
 		accordionItems: [
 			{ headlinePlain: 'First item', text: 'Content of the first item.' },
 			{ headlinePlain: 'Second item', text: 'Content of the second item.' },
@@ -1517,7 +1527,7 @@ const FooterOverview = ({ labels }: { labels: OverviewLabels }): ReactElement =>
 					<ul>
 						{labels.footerLinks.map((label) => (
 							<li key={label}>
-								<DBLink href="#" wrap>
+								<DBLink href={labels.selfUrl} wrap>
 									{label}
 								</DBLink>
 							</li>
@@ -1530,7 +1540,7 @@ const FooterOverview = ({ labels }: { labels: OverviewLabels }): ReactElement =>
 					<ul>
 						{labels.footerMetaLinks.map((label) => (
 							<li key={label}>
-								<DBLink variant="inline" size="small" href="#">
+								<DBLink variant="inline" size="small" href={labels.selfUrl}>
 									{label}
 								</DBLink>
 							</li>
@@ -1665,7 +1675,7 @@ const LinkCell = ({ size, labels }: { size: Size; labels: OverviewLabels }): Rea
 		{LINK_SPECIMENS.map((specimen) => (
 			<DBLink
 				key={specimen.key}
-				href="#"
+				href={labels.selfUrl}
 				size={size}
 				variant={specimen.variant}
 				content={specimen.content}
