@@ -64,3 +64,17 @@ export const SECTION_HEADINGS = SECTIONS.map(({ id, title }) => ({
 	slug: id,
 	text: title,
 }));
+
+/**
+ * Path to a component's own documentation page, for the heading links on the
+ * overview. Every section id is also the slug of that page, and the slug is the
+ * same in both languages — only the path around it is translated.
+ *
+ * Takes a base (pass `import.meta.env.BASE_URL`, which ends in a slash) so this
+ * stays framework-agnostic and the caller keeps control of base-path handling,
+ * the way the rest of the platform builds internal links.
+ */
+export const componentPath = (base: string, locale: 'en' | 'de', id: string): string =>
+	locale === 'de'
+		? `${base}de/dokumentation/komponenten/${id}`
+		: `${base}documentation/components/${id}`;

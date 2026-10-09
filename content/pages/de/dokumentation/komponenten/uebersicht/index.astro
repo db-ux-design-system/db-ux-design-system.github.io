@@ -9,6 +9,7 @@ import {
 	SECTIONS,
 	SECTION_HEADINGS,
 } from '../../../../documentation/components/overview/_sections.ts';
+import { SectionHeading } from '../../../../documentation/components/overview/_components/SectionHeading.tsx';
 import '../../../../documentation/components/overview/ComponentOverview.css';
 
 // eslint-disable-next-line astro/no-exports-from-components -- Exported for ChildPageOverview glob
@@ -35,7 +36,7 @@ const sectionWidth = 'auto' as MaxWidthType;
 		<VersionSwitch locale="de" />
 		{SECTIONS.map(({ id, title, component }) => (
 			<Fragment>
-				<h2 id={id}>{title}</h2>
+				<SectionHeading id={id} title={title} locale="de" base={import.meta.env.BASE_URL} />
 				<ComponentOverview component={component} locale="de" />
 			</Fragment>
 		))}

@@ -26,10 +26,31 @@
  * directly above the first row. The headings themselves have no bottom margin in
  * the content area, so nothing collapses into this.
  *
+ * The heading is wrapped in a DBCustomHeading, which renders a
+ * `div.db-custom-heading` around the native `h2`, so the element directly before
+ * the grid is that wrapper rather than the heading itself —
+ * `.overview-heading` is matched alongside the bare heading so the air below the
+ * heading is the same whether or not the wrapper is in place.
+ *
  * The class is repeated to match the specificity of the content-spacing rule.
  */
-.dba-main-content :is(h2, h3, h4, h5, h6) + .overview-grid.overview-grid {
+.dba-main-content :is(h2, h3, h4, h5, h6, .overview-heading) + .overview-grid.overview-grid {
 	margin-block-start: var(--db-spacing-fixed-xl);
+}
+
+/*
+ * The gap from one component's specimens to the next component's heading.
+ *
+ * content-spacing.css gives headings after content a `2xl` step, but that rule
+ * matches on the heading element and the heading is now wrapped in a
+ * `div.db-custom-heading`, which is just a `div` to that rule — so a grid
+ * followed by the next heading fell back to the plain `div + div` step (md) and
+ * the sections ran together. This restores the `2xl` separation between them.
+ *
+ * The class is repeated to match the specificity of the content-spacing rule.
+ */
+.dba-main-content .overview-grid.overview-grid + .overview-heading {
+	margin-block-start: var(--db-spacing-fixed-2xl);
 }
 
 /*
@@ -511,6 +532,14 @@
 .overview-backdrop {
 	position: relative;
 	overflow: hidden;
+
+	/*
+	 * A fixed box height, so the dimmed area reads as a surface the overlay sits
+	 * on rather than a thin strip behind one line of text. The empty dialog is
+	 * centred in it and sized relative to it, so dimmed area stays visible around
+	 * the overlay on every side.
+	 */
+	block-size: var(--db-sizing-2xl);
 	padding: var(--db-spacing-fixed-md);
 	border-radius: var(--db-border-radius-sm);
 	background-color: var(--db-adaptive-bg-basic-level-2-default);
@@ -532,6 +561,48 @@
 	background-color: color(
 		from var(--db-adaptive-on-bg-basic-emphasis-100-default) srgb r g b / var(--db-opacity-sm)
 	);
+}
+
+/*
+ * The empty dialog over the dim layer.
+ *
+ * A backdrop is only ever seen behind an open overlay — it is what the overlay
+ * dims the page for — so the specimen shows that overlay as an empty surface
+ * centred over the dimmed box. It sits after the dim layer in the markup and
+ * declares no z-index, so it stacks above it, while the box's `overflow: hidden`
+ * keeps it bounded to the preview.
+ *
+ * Surface, corners and shadow are the dialog's own recipe: the raised surface
+ * token a dialog sits on, a --db-border-radius-* corner so it follows the v5/v6
+ * version switch like every other shape on the page, and the elevation step that
+ * lifts an overlay off the content below it. Kept empty on purpose — the backdrop
+ * is what this specimen compares, not the dialog.
+ */
+.overview-backdrop-dialog {
+	position: absolute;
+	inset-block-start: 50%;
+	inset-inline-start: 50%;
+	translate: -50% -50%;
+	inline-size: 60%;
+	block-size: 55%;
+	border-radius: var(--db-border-radius-md);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+	box-shadow: var(--db-elevation-lg);
+}
+
+/*
+ * The vertical rhythm, reaching into the backdrop box.
+ *
+ * The dim layer and the dialog follow the box's text as sibling divs, so the
+ * `div + div` rule in content-spacing.css gives each a 16 px block-start margin.
+ * On the dialog that margin adds to its `inset-block-start: 50%` and pushes it
+ * below the centre of the box. The layer and the dialog are both positioned off
+ * the box edges, so neither lays itself out with a block-start margin — zero is
+ * their own placement. The class is repeated to match the specificity of the
+ * content-spacing rule.
+ */
+.dba-main-content .overview-backdrop.overview-backdrop > * {
+	margin-block-start: 0;
 }
 
 /*
@@ -584,4 +655,57 @@
 
 button:has(.db-card) {
 	text-align: start;
+}
+
+/*
+ * The component heading and its link to the component's own page, placed side by
+ * side on one line.
+ *
+ * DBCustomHeading lays the native heading and its endSlot out as a row already,
+ * so this only lifts the two off the content area's default block flow onto one
+ * baseline and keeps a step of air between the title and the arrow link. The
+ * link itself is a DBCustomButton ghost icon button, so its colour, size and the
+ * version-aware corner all come from the design system — nothing of it is styled
+ * here.
+ */
+.dba-main-content .overview-heading {
+	display: flex;
+	align-items: center;
+	gap: var(--db-spacing-fixed-sm);
+}
+
+/*
+ * The vertical rhythm, reaching into the heading row.
+ *
+ * The row holds the native `h2` and, after it, the link in a
+ * `div.db-custom-button`. The `h2 + div` half of the base rule in
+ * content-spacing.css matches that pair and pushed the link down off the shared
+ * baseline. Neither child lays itself out with a block-start margin — the heading
+ * sets `margin-block: 0` and the button is spaced by the row's flex gap — so zero
+ * is the row's own layout. The class is repeated to match the specificity of the
+ * content-spacing rule.
+ */
+.dba-main-content .overview-heading.overview-heading > * {
+	margin-block-start: 0;
+}
+
+/*
+ * The headline font, reaching into the icon button and throwing off its glyph.
+ *
+ * DBCustomHeading puts the headline `font` on the wrapper so `1lh` resolves from
+ * the heading typography — here `700 40px/48px`. That inherits into the endSlot
+ * down to the `div.db-custom-button`. The button sizes the glyph with its own
+ * `--db-icon-font-size` and places it absolutely at `calc(50% - 0.5em)` of that
+ * same wrapper, so the glyph lands in the middle of the box the font builds. The
+ * inherited `48px` line height makes that box `8px` taller than the `40px`
+ * (`--db-sizing-md`) link it draws over, and the glyph centres in the taller box
+ * — `4px` below the link's own middle.
+ *
+ * Handing the wrapper the body font the link already uses collapses it back to
+ * the link's height, so the glyph centres on the link again. The same token the
+ * component itself resets the inner `a` to, so no metric is invented here. Scoped
+ * to the icon button in the heading row; the native `h2` keeps its headline font.
+ */
+.dba-main-content .overview-heading .db-custom-button {
+	font: var(--db-type-body-md);
 }
