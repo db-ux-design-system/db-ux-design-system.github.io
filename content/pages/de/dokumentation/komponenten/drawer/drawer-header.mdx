@@ -4,7 +4,8 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Drawer Header'
 title: 'Drawer Header'
-description: 'Die Drawer-Header-Subkomponente stellt den oberen Bereich des Drawers bereit – mit optionalem Titel, Schließen-Button und ergänzenden Inhalten.'
+description: 'Der Drawer Header bildet den oberen Bereich des Drawers und nimmt den Titel, den Close-Button und ergänzende Inhalte in Start Slot und End Slot auf.'
+shortDescription: 'Oberer Bereich des Drawers mit Titel und Close-Button.'
 align: start
 toc: true
 status: 'sub'
@@ -20,9 +21,9 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Zeigt einen Titel an, der Nutzer:innen Kontext über den Drawer-Inhalt gibt
-- Enthält den Schließen-Button für tastaturzugängliches Schließen
-- Kann ergänzende Inhalte wie Untertitel oder Aktionselemente enthalten
+- Titel für den Drawer vergeben
+- Close-Button für das Schließen bereitstellen
+- Badge oder ergänzende Aktion neben dem Titel platzieren
 
 <DBSection spacing="small" width="auto">
 
@@ -34,22 +35,98 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 <DBSection spacing="small" width="auto">
 
-## Beispiele
+## Richtlinien
 
-### Inhalt
+<CollapsibleWrapper collapsedHeight="320px">
 
-Der Drawer-Header sollte den Zweck des Drawers klar beschreiben und genug Kontext bieten, damit Nutzer:innen verstehen, was sie bearbeiten, ansehen oder auswählen. Er kann ergänzende Aktionen enthalten.
+### Titel
+
+Der Titel benennt den Drawer. Er lässt sich über `text` setzen oder als Inhalt in Children einsetzen.
 
 <div className="guideline-examples">
 	<GuidelineExample
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4924-13&embed-host=share"
-		description="Verwende einen klaren objektbezogenen Titel, wenn der Drawer kontextbezogene Informationen zeigt."
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4947-2&embed-host=share"
+		description="Vergib einen Titel, entweder über `text` oder als Inhalt in Children."
 	/>
 	<GuidelineExample
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4924-10448&embed-host=share"
-		description="Aktionselemente können im Drawer-Header platziert werden, wenn sie direkt mit dem Drawer-Kontext zusammenhängen und Nutzer:innen helfen, auf die angezeigten Inhalte zu reagieren."
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4947-3&embed-host=share"
+		description="Ohne Titel bleibt der Drawer unbenannt, Assistenztechnologien geben dann nur „Dialog“ aus. Lass den Titel nur weg, wenn der Inhalt sich selbst benennt."
 	/>
 </div>
+
+### Titel-Wortlaut
+
+Der Titel orientiert sich am Label des Elements, über das der Drawer geöffnet wurde. Er muss nicht wortgleich sein, solange er dieselbe Sache benennt.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4947-5&embed-host=share"
+		description="Orientiere den Titel am Label des auslösenden Elements."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4947-6&embed-host=share"
+		description="Benennt der Titel etwas anderes, bleibt offen, ob der erwartete Drawer geöffnet wurde. Titel und Label dürfen sich im Wortlaut unterscheiden, solange sie dieselbe Sache meinen."
+	/>
+</div>
+
+### Ergänzende Erläuterung
+
+Neben dem Titel lässt sich eine kurze Erläuterung einsetzen. Sie ist nur nötig, wenn der Zweck des Drawers aus dem Titel allein nicht hervorgeht.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4947-8&embed-host=share"
+		description="Ergänze eine Erläuterung, wenn der Zweck des Drawers aus dem Titel nicht hervorgeht."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4947-9&embed-host=share"
+		description="Eine Erläuterung, die den Titel wiederholt, verlängert nur den Weg zum Inhalt. Lass sie dann weg."
+	/>
+</div>
+
+### Hierarchie
+
+Der Titel ist standardmäßig im Bold-Schnitt gesetzt. Ergänzende Inhalte stehen im regulären Schnitt darunter und lassen sich optional über Größe und Farbe weiter abstufen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4947-11&embed-host=share"
+		description="Setze nur den Titel bold, ergänzende Inhalte im regulären Schnitt und nicht größer."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4947-12&embed-host=share"
+		description="Sind ergänzende Inhalte bold oder größer als der Titel, konkurrieren sie mit ihm und schwächen ihn als Einstieg in den Drawer."
+	/>
+</div>
+
+### Start Slot und End Slot
+
+Start Slot und End Slot nehmen zusätzliche Elemente neben dem Titel auf, etwa ein Badge, ein Icon oder eine ergänzende Aktion. Beide sind standardmäßig ausgeblendet.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4943-2&embed-host=share"
+		description="Platziere in Start Slot und End Slot nur Elemente mit Bezug zum Inhalt des Drawers."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4943-73&embed-host=share"
+		description="Elemente ohne Bezug zum Drawer lenken vom Inhalt ab. Platziere sie außerhalb des Drawers."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
 
 </DBSection>
 
@@ -69,12 +146,12 @@ Der Drawer-Header sollte den Zweck des Drawers klar beschreiben und genug Kontex
 	teasers={[
 		{
 			title: 'Drawer',
-			description: 'Übergeordnete Komponente, die den Drawer-Header enthält',
+			description: 'Herausfahrendes Panel für ergänzende Inhalte oder einfache Interaktionen',
 			url: '/de/dokumentation/komponenten/drawer/drawer',
 		},
 		{
 			title: 'Drawer Footer',
-			description: 'Unterer Bereich des Drawers für Aktionen und Bestätigungen',
+			description: 'Unterer Bereich des Drawers mit den Aktionen',
 			url: '/de/dokumentation/komponenten/drawer/drawer-footer',
 		},
 	]}

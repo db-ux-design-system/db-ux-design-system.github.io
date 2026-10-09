@@ -4,7 +4,8 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Drawer Footer'
 title: 'Drawer Footer'
-description: 'The drawer footer subcomponent provides the bottom section of the drawer for primary actions, confirmations, or supplementary controls.'
+description: 'The drawer footer forms the lower area of the drawer, holds the actions and their related notes, and stays visible while scrolling.'
+shortDescription: 'Lower area of the drawer with the actions.'
 align: start
 toc: true
 status: 'sub'
@@ -20,8 +21,9 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Stays persistently visible at the bottom while the drawer content scrolls
-- Can include secondary actions
+- Offer actions for the drawer content
+- Keep a note about an action visible
+- Secure reachability while scrolling
 
 <DBSection spacing="small" width="auto">
 
@@ -33,17 +35,49 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 <DBSection spacing="small" width="auto">
 
-## Examples
+## Guidelines
 
-### Usage
+<CollapsibleWrapper collapsedHeight="320px">
 
-The drawer footer can remain sticky to keep important actions visible while the drawer body scrolls behind it.
+### Content
+
+The drawer footer does not scroll along. It is therefore meant for the actions and for notes that belong to those actions.
 
 <div className="guideline-examples">
 	<GuidelineExample
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4924-11&embed-host=share"
-		description="Use a footer when users need continuous access to actions such as applying changes, saving progress, or cancelling a task."
-		fullWidth={true}
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4947-14&embed-host=share"
+		description="Only place actions and notes that belong to those actions in the drawer footer."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4947-15&embed-host=share"
+		description="Don't put further content in the drawer footer, it belongs in the content area. The footer does not scroll along and shrinks the scrollable area."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+### Arrangement
+
+The drawer footer stacks its content vertically by default. For a horizontal arrangement the content can be grouped. Both arrangements are valid.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4947-17&embed-host=share"
+		description="Vertical: The default arrangement: the content sits one below the other across the full width."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4947-18&embed-host=share"
+		description="Horizontal: The content is grouped in an additional element and therefore sits side by side."
 	/>
 </div>
 
@@ -65,12 +99,12 @@ The drawer footer can remain sticky to keep important actions visible while the 
 	teasers={[
 		{
 			title: 'Drawer',
-			description: 'Parent component that hosts the drawer footer',
+			description: 'Sliding panel for additional content or simple interactions',
 			url: '/documentation/components/drawer/drawer',
 		},
 		{
 			title: 'Drawer Header',
-			description: 'Top section of the drawer with title and close button',
+			description: 'Upper area of the drawer with title and close button',
 			url: '/documentation/components/drawer/drawer-header',
 		},
 	]}

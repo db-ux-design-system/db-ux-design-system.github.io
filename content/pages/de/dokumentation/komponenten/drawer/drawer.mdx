@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Drawer'
 title: 'Drawer'
-description: 'Drawer ist ein herausfahrendes Panel, das von der Seite, oben oder unten erscheint und ergänzende Inhalte oder einfache Interaktionen anzeigt, während Nutzer:innen im Kontext bleiben. Es eignet sich für optionale Details und einfache Aufgaben und muss immer leicht zu schließen sein.'
+description: 'Der Drawer erscheint von einem Rand des Viewports und zeigt ergänzende Inhalte oder einfache Interaktionen, während der aktuelle Kontext erhalten bleibt.'
 shortDescription: 'Herausfahrendes Panel für ergänzende Inhalte oder einfache Interaktionen.'
 align: start
 toc: true
@@ -21,14 +21,13 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
-- Zusätzliche Details oder sekundäre Informationen anzeigen, ohne die aktuelle Seite zu verlassen
-- Einfache, optionale Formulareingaben oder schnelle Bearbeitungen im Kontext ermöglichen
-- Sekundäre Navigation oder Aktionen in Layouts mit begrenztem Platz bereitstellen
+- Ergänzende Details ohne Seitenwechsel anzeigen
+- Kurze Eingabe im Kontext ermöglichen
+- Sekundäre Navigation bei begrenztem Platz bereitstellen
 
 <DBSection spacing="small" width="auto">
 
 ## Ressourcen
-
 
 <ResourceCards path="?path=/docs/components-dbdrawer-density--docs" />
 
@@ -44,92 +43,106 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 ### Verwendung
 
-Verwende einen Drawer, wenn Nutzer:innen ihre Hauptaufgabe fortsetzen können und der Drawer-Inhalt hilfreich, aber nicht essenziell ist. Wenn der Inhalt kritisch oder blockierend ist oder volle Aufmerksamkeit erfordert, verwende einen Dialog oder eine eigene Seite.
+Der Drawer blockiert die Weiterarbeit nicht. Er ist deshalb für Inhalte gedacht, die hilfreich, aber nicht erforderlich sind.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=1-1132&embed-host=share"
-		description="Verwende den Drawer für kontextbezogene Inhalte, die zusätzliche Details liefern, ohne die Hauptseite zu verlassen."
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=1-1132&embed-host=share"
+		description="Setze den Drawer für kontextbezogene Inhalte ein, die ergänzende Details liefern."
 	/>
 	<GuidelineExample
 		variant="dont"
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=1-1133&embed-host=share"
-		description="Verwende den Drawer nicht für wichtige oder kritische Informationen, die jederzeit sichtbar bleiben müssen."
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=1-1133&embed-host=share"
+		description="Setze den Drawer nicht für kritische oder blockierende Informationen ein. Nutze dafür den Dialog oder eine eigene Seite, weil eine Aufgabe im Drawer nicht erzwingbar ist."
 	/>
 </div>
 
 ### Inhalt
 
-Drawer eignen sich am besten für einfache Aktionen (wenige Steuerelemente). Vermeide komplexe, mehrstufige Formulare oder lange Prozesse, die in einem begrenzten Panel schwer abzuschließen und zu überprüfen sind.
+Der Drawer bietet begrenzten Platz. Mehrstufige Abläufe und umfangreiche Validierungen lassen sich darin schwer abschließen und überprüfen.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=3-1110&embed-host=share"
-		description="Verwende kurze optionale Formulare und klare Aktionen."
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=3-1110&embed-host=share"
+		description="Nimm in den Drawer kurze, optionale Formulare und klare Aktionen auf."
 	/>
 	<GuidelineExample
 		variant="dont"
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=3-1112&embed-host=share"
-		description="Verwende keine mehrstufigen Prozesse, langen Formulare oder komplexen validierungsintensiven Abläufe in einem Drawer."
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=3-1112&embed-host=share"
+		description="Bilde mehrstufige Prozesse und komplexe Validierungen nicht im Drawer ab. Auf dem begrenzten Platz geht der Überblick über den Ablauf verloren."
 	/>
 </div>
 
 ### Platzierung
 
-Unabhängig davon, von welcher Seite der Drawer angezeigt wird, nimmt er immer die gesamte Breite und Höhe der Seite ein. Diese Vollbild-Darstellung sorgt dafür, dass der Drawer die richtige Aufmerksamkeit erhält.
+Der Drawer überlagert die gesamte Seite, unabhängig davon, von welchem Rand er erscheint. Damit erhält er die Aufmerksamkeit, die sein Inhalt braucht.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=3-1113&embed-host=share"
-		description="Stelle sicher, dass die Darstellung des Drawers immer die gesamte Seitenbreite und -höhe überlagert, einschließlich des Headers."
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=3-1113&embed-host=share"
+		description="Lass den Drawer die gesamte Seitenbreite und -höhe überlagern, einschließlich des Headers."
 	/>
 	<GuidelineExample
 		variant="dont"
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=3-1114&embed-host=share"
-		description="Platziere den Drawer nicht nur über einem bestimmten Seitenbereich."
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=3-1114&embed-host=share"
+		description="Beschränke den Drawer nicht auf einen bestimmten Seitenbereich. Als Teilfläche wirkt er wie ein eingebetteter Bereich und nicht wie eine eigene Ebene."
 	/>
 </div>
 
-### Größe
+### Richtung
 
-Wähle die Drawer-Größe entsprechend der Menge und Komplexität des Inhalts. Verwende Small für kurze, fokussierte Aufgaben oder einfache kontextbezogene Informationen. Verwende Medium für Anwendungsfälle mit Formularen, Listen oder detaillierteren Inhalten. Verwende Custom nur, wenn die vordefinierten Größen nicht zum Inhalt oder Layout passen. Verwende Full, wenn Nutzer:innen einen großen Arbeitsbereich, komplexe Interaktionen benötigen oder der Drawer den Hauptseitenkontext vorübergehend ersetzt.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4924-74&embed-host=share"
-		description="Verwende einen Small-Drawer für einfache Aufgaben oder wenn der Hauptinhalt sichtbar bleiben soll."
-	/>
-	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4924-75&embed-host=share"
-		description="Verwende keinen größeren Drawer als nötig oder wähle Custom ohne einen klaren layoutbezogenen Grund."
-	/>
-</div>
-
-### Schließen
-
-Biete immer eine Möglichkeit, den Drawer zu schließen, z. B. durch Klicken außerhalb des Drawer-Bereichs. Füge einen Schließen-Button im Header hinzu, damit der Drawer auch mit der Tastatur geschlossen werden kann. Für Drawer ohne Backdrop ist ein Schließen-Button erforderlich, da ein Klick außerhalb den Drawer nicht schließt.
+`direction` legt fest, von welchem Rand der Drawer erscheint. Auf Mobile entscheidet die Wahl darüber, ob der Inhalt im Greifbereich des Daumens liegt.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=3-1116&embed-host=share"
-		description="Biete immer eine Option zum Einklappen/Schließen des Drawers."
+		imageRatio="portrait"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=5011-2&embed-host=share"
+		description="Wähle auf Mobile `up` für kurze, interaktive Inhalte."
 	/>
 	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=3-1117&embed-host=share"
-		description="Entferne den Schließen-Button nicht ohne einen triftigen Grund."
+		variant="caution"
+		imageRatio="portrait"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=5011-3&embed-host=share"
+		description="Bei voller Höhe verteilen sich wenige Bedienelemente über den ganzen Bildschirm, die oberen liegen dann außerhalb des Daumen-Greifbereichs. Bei langen, scrollbaren Inhalten fällt das nicht ins Gewicht."
 	/>
 </div>
 
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Beispiele
+
+### Größenstufen
+
+Die vier Stufen decken unterschiedliche Inhaltsarten ab. Passend ist die kleinste Stufe, die den Inhalt trägt.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4984-2&embed-host=share"
+		description="Small: Die kleinste Stufe und der Default bei horizontaler Richtung, für kurze, fokussierte Aufgaben."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4984-3&embed-host=share"
+		description="Medium: Für Formulare, Listen und detailliertere Inhalte."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=5005-6765&embed-host=share"
+		description="Large: Die größte feste Stufe für breite Inhalte, etwa eine Table mit mehreren Spalten."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4984-4&embed-host=share"
+		description="Full: Ohne Begrenzung, wenn der Drawer den Seitenkontext vorübergehend ersetzt."
+	/>
+</div>
 
 </DBSection>
 
@@ -148,14 +161,31 @@ Biete immer eine Möglichkeit, den Drawer zu schließen, z. B. durch Klicken au�
 <TeaserCard
 	teasers={[
 		{
-			title: 'Backdrop',
-			description: 'Dunkelt den Hintergrund ab und kann Interaktionen bei modalen Drawern blockieren',
-			url: '/de/dokumentation/komponenten/backdrop',
+			title: 'Drawer Header',
+			description: 'Oberer Bereich des Drawers mit Titel und Close-Button',
+			url: '/de/dokumentation/komponenten/drawer/drawer-header',
+		},
+		{
+			title: 'Drawer Footer',
+			description: 'Unterer Bereich des Drawers mit den Aktionen',
+			url: '/de/dokumentation/komponenten/drawer/drawer-footer',
+		},
+		{
+			title: 'Dialog',
+			description:
+				'Modales Overlay für eine Aufgabe, die vor dem Weiterarbeiten erledigt werden muss',
+			url: '/de/dokumentation/komponenten/dialog/dialog',
 		},
 		{
 			title: 'Popover',
-			description: 'Kleinere verankerte Fläche für kontextbezogene Inhalte',
+			description: 'Schwebendes Overlay für kontextbezogene Inhalte, ausgelöst durch Interaktion',
 			url: '/de/dokumentation/komponenten/popover',
+		},
+		{
+			title: 'Backdrop',
+			description:
+				'Overlay-Ebene hinter modalen Inhalten, die den Fokus lenkt und Interaktion blockiert',
+			url: '/de/dokumentation/komponenten/backdrop',
 		},
 	]}
 />

@@ -4,8 +4,8 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Drawer'
 title: 'Drawer'
-description: 'Drawer is a sliding panel that appears from the side, top, or bottom to show supplemental content or lightweight interactions while keeping the user in context. It is ideal for optional details and simple tasks, and must always be easy to dismiss.'
-shortDescription: 'Sliding panel for supplemental content or lightweight interactions.'
+description: 'The drawer appears from one edge of the viewport and shows additional content or simple interactions while the current context stays in place.'
+shortDescription: 'Sliding panel for additional content or simple interactions.'
 align: start
 toc: true
 status: 'stable'
@@ -21,14 +21,13 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
-- Show additional details or secondary information without leaving the current page
-- Provide simple, optional form inputs or quick edits in context
-- Offer secondary navigation or actions in layouts with limited space
+- Show additional details without leaving the page
+- Enable a short input in context
+- Provide secondary navigation in tight layouts
 
 <DBSection spacing="small" width="auto">
 
 ## Resources
-
 
 <ResourceCards path="?path=/docs/components-dbdrawer-density--docs" />
 
@@ -44,92 +43,106 @@ import ComponentPlayground from '@template/components/ComponentPlayground/Compon
 
 ### Usage
 
-Use a drawer when users can continue their primary task and the drawer content is helpful but not essential. If the content is critical, blocking, or requires full attention, use a Dialog or dedicated page.
+The drawer does not block further work. It is therefore meant for content that is helpful but not required.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=1-1132&embed-host=share"
-		description="Use the drawer for contextual content that provides additional details without leaving the main page."
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=1-1132&embed-host=share"
+		description="Use the drawer for contextual content that provides additional details."
 	/>
 	<GuidelineExample
 		variant="dont"
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=1-1133&embed-host=share"
-		description="Don't use the drawer for important or critical information that needs to remain in view at all times."
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=1-1133&embed-host=share"
+		description="Don't use the drawer for critical or blocking information. Use a dialog or a dedicated page instead, because a task in the drawer cannot be enforced."
 	/>
 </div>
 
 ### Content
 
-Drawers work best for lightweight actions (a few controls). Avoid complex, multi-step forms or long processes that become hard to complete and review in a constrained panel.
+The drawer offers limited space. Multi-step flows and extensive validation are hard to complete and review inside it.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=3-1110&embed-host=share"
-		description="Use short optional forms and clear actions."
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=3-1110&embed-host=share"
+		description="Place short, optional forms and clear actions in the drawer."
 	/>
 	<GuidelineExample
 		variant="dont"
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=3-1112&embed-host=share"
-		description="Don't run multi-step processes, lengthy forms, or complex validation-heavy flows in a drawer."
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=3-1112&embed-host=share"
+		description="Don't run multi-step processes or complex validation inside the drawer. The limited space hides the overall flow."
 	/>
 </div>
 
 ### Placement
 
-Regardless of which side the drawer is displayed from, it always takes up the entire width and height of the page. This full-screen display allows the drawer to get the right amount of attention.
+The drawer overlays the entire page, regardless of the edge it appears from. That gives it the attention its content needs.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=3-1113&embed-host=share"
-		description="The display of the drawers always overlays the entire page width and height, including the header."
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=3-1113&embed-host=share"
+		description="Let the drawer overlay the entire page width and height, including the header."
 	/>
 	<GuidelineExample
 		variant="dont"
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=3-1114&embed-host=share"
-		description="Don't place the drawer only above a specific page area."
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=3-1114&embed-host=share"
+		description="Don't limit the drawer to a specific page region. As a partial area it reads like an embedded section rather than its own layer."
 	/>
 </div>
 
-### Size
+### Direction
 
-Choose the drawer size according to the amount and complexity of the content. Use Small for short, focused tasks or simple contextual information. Use Medium for use cases with forms, lists, or more detailed content. Use Custom only when the predefined sizes don't fit the content or layout requirements. Use Full when users need a large working area, complex interactions, or when the drawer temporarily replaces the main page context.
-
-<div className="guideline-examples">
-	<GuidelineExample
-		variant="do"
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4924-74&embed-host=share"
-		description="Use a Small drawer for simple tasks or when the main content should remain visible."
-	/>
-	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4924-75&embed-host=share"
-		description="Don't use a larger drawer than necessary or choose Custom without a clear layout-related reason."
-	/>
-</div>
-
-### Closing
-
-Always provide a way to close the drawer, such as clicking outside the drawer area. Include a close button in the header for keyboard accessibility. For drawers without a backdrop, a close button is required, since clicking outside will not close the drawer.
+`direction` defines the edge the drawer appears from. On mobile, that choice decides whether the content sits within thumb reach.
 
 <div className="guideline-examples">
 	<GuidelineExample
 		variant="do"
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=3-1116&embed-host=share"
-		description="Always provide an option to collapse/close the drawer."
+		imageRatio="portrait"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=5011-2&embed-host=share"
+		description="Choose `up` on mobile for short, interactive content."
 	/>
 	<GuidelineExample
-		variant="dont"
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer?node-id=3-1117&embed-host=share"
-		description="Don't remove the closing button without a valid reason."
+		variant="caution"
+		imageRatio="portrait"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=5011-3&embed-host=share"
+		description="Across the full height, a few controls spread over the whole screen and the upper ones fall outside thumb reach. For long, scrollable content this does not matter."
 	/>
 </div>
 
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+### Size Steps
+
+The four steps cover different kinds of content. The right one is the smallest step that carries the content.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4984-2&embed-host=share"
+		description="Small: The smallest step and the default for horizontal directions, for short, focused tasks."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4984-3&embed-host=share"
+		description="Medium: For forms, lists and more detailed content."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=5005-6765&embed-host=share"
+		description="Large: The largest fixed step for wide content, such as a table with several columns."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4984-4&embed-host=share"
+		description="Full: Without a limit, when the drawer temporarily replaces the page context."
+	/>
+</div>
 
 </DBSection>
 
@@ -148,14 +161,29 @@ Always provide a way to close the drawer, such as clicking outside the drawer ar
 <TeaserCard
 	teasers={[
 		{
-			title: 'Backdrop',
-			description: 'Dims the background and can block interaction for modal drawers',
-			url: '/documentation/components/backdrop',
+			title: 'Drawer Header',
+			description: 'Upper area of the drawer with title and close button',
+			url: '/documentation/components/drawer/drawer-header',
+		},
+		{
+			title: 'Drawer Footer',
+			description: 'Lower area of the drawer with the actions',
+			url: '/documentation/components/drawer/drawer-footer',
+		},
+		{
+			title: 'Dialog',
+			description: 'Modal overlay for a task that has to be resolved before moving on',
+			url: '/documentation/components/dialog/dialog',
 		},
 		{
 			title: 'Popover',
-			description: 'Smaller anchored surface for lightweight contextual content',
+			description: 'Floating overlay for contextual content triggered by user interaction',
 			url: '/documentation/components/popover',
+		},
+		{
+			title: 'Backdrop',
+			description: 'Overlay layer behind modal content to indicate focus and block interaction',
+			url: '/documentation/components/backdrop',
 		},
 	]}
 />

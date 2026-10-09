@@ -4,7 +4,8 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 headline: 'Drawer Footer'
 title: 'Drawer Footer'
-description: 'Die Drawer-Footer-Subkomponente stellt den unteren Bereich des Drawers bereit – für primäre Aktionen, Bestätigungen oder ergänzende Steuerelemente.'
+description: 'Der Drawer Footer bildet den unteren Bereich des Drawers, nimmt die Aktionen und die dazugehörigen Hinweise auf und bleibt beim Scrollen sichtbar.'
+shortDescription: 'Unterer Bereich des Drawers mit den Aktionen.'
 align: start
 toc: true
 status: 'sub'
@@ -20,8 +21,9 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
-- Bleibt am unteren Rand dauerhaft sichtbar, während der Drawer-Inhalt scrollt
-- Kann sekundäre Aktionen enthalten
+- Aktionen zum Drawer-Inhalt anbieten
+- Hinweis zu einer Aktion sichtbar halten
+- Erreichbarkeit beim Scrollen sichern
 
 <DBSection spacing="small" width="auto">
 
@@ -33,17 +35,49 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 <DBSection spacing="small" width="auto">
 
-## Beispiele
+## Richtlinien
 
-### Verwendung
+<CollapsibleWrapper collapsedHeight="320px">
 
-Der Drawer-Footer kann sticky bleiben, um wichtige Aktionen sichtbar zu halten, während der Drawer-Body dahinter scrollt.
+### Inhalt
+
+Der Drawer Footer scrollt nicht mit. Er ist deshalb für die Aktionen gedacht und für Hinweise, die zu diesen Aktionen gehören.
 
 <div className="guideline-examples">
 	<GuidelineExample
-		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4924-11&embed-host=share"
-		description="Verwende einen Footer, wenn Nutzer:innen dauerhaften Zugriff auf Aktionen wie Änderungen anwenden, Fortschritt speichern oder Abbrechen benötigen."
-		fullWidth={true}
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4947-14&embed-host=share"
+		description="Nimm in den Drawer Footer nur Aktionen und Hinweise auf, die zu diesen Aktionen gehören."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4947-15&embed-host=share"
+		description="Lege weiteren Inhalt nicht in den Drawer Footer, er gehört in den Inhaltsbereich. Der Footer scrollt nicht mit und verkleinert den scrollbaren Bereich."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Beispiele
+
+### Anordnung
+
+Der Drawer Footer stapelt seine Inhalte standardmäßig vertikal. Für eine horizontale Anordnung lassen sie sich gruppieren. Beide Anordnungen sind zulässig.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4947-17&embed-host=share"
+		description="Vertikal: Die Standardanordnung: Die Inhalte stehen untereinander über die volle Breite."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4947-18&embed-host=share"
+		description="Horizontal: Die Inhalte sind in einem zusätzlichen Element gruppiert und stehen dadurch nebeneinander."
 	/>
 </div>
 
@@ -65,12 +99,12 @@ Der Drawer-Footer kann sticky bleiben, um wichtige Aktionen sichtbar zu halten, 
 	teasers={[
 		{
 			title: 'Drawer',
-			description: 'Übergeordnete Komponente, die den Drawer-Footer enthält',
+			description: 'Herausfahrendes Panel für ergänzende Inhalte oder einfache Interaktionen',
 			url: '/de/dokumentation/komponenten/drawer/drawer',
 		},
 		{
 			title: 'Drawer Header',
-			description: 'Oberer Bereich des Drawers mit Titel und Schließen-Button',
+			description: 'Oberer Bereich des Drawers mit Titel und Close-Button',
 			url: '/de/dokumentation/komponenten/drawer/drawer-header',
 		},
 	]}
