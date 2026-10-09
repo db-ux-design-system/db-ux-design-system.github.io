@@ -382,6 +382,7 @@ export type MountedComponent =
 	| 'select'
 	| 'switch'
 	| 'tabs'
+	| 'tag'
 	| 'textarea'
 	| 'tooltip';
 
@@ -424,6 +425,16 @@ interface OverviewLabels {
 	searchPlaceholder: string;
 	/** One per entry in `selectOptions`, in the same order. */
 	removeTags: string[];
+	/*
+	 * The three remaining texts a custom select has an English default for.
+	 * `clearSelection` names the button that drops the whole selection,
+	 * `mobileClose` the close button of the dropdown on small viewports, and
+	 * `selected` is the word a counted selection is built from, see
+	 * CustomSelectOverview.
+	 */
+	customSelectClearSelection: string;
+	customSelectMobileClose: string;
+	customSelectSelected: string;
 	/** Sample content the backdrop layer dims. */
 	backdropContent: string;
 	openDialog: string;
@@ -584,11 +595,6 @@ interface OverviewLabels {
 	 */
 	stackItems: string[];
 	/*
-	 * One per select label variant, naming the `variant` values. Property values,
-	 * so identical in both languages.
-	 */
-	selectVariants: Record<SelectVariant, string>;
-	/*
 	 * One per switch state. These name states rather than property values, but
 	 * they stay the English state names in both languages, as the radio states do.
 	 */
@@ -612,13 +618,16 @@ interface OverviewLabels {
 	tabsLabel: string;
 	/** The three tabs every tab set specimen carries, and their panel content. */
 	tabsItems: { label: string; content: string }[];
-	/*
-	 * One per tag row, naming the `behavior` property values. Property values,
-	 * so identical in both languages.
-	 */
+	/** One per tag column, naming what the column's `behavior` value does. */
 	tagBehaviors: Record<TagBehaviorType, string>;
 	/*
-	 * The labels of the two native controls the interactive column wraps in a tag.
+	 * The accessible name of a removable tag's remove button, passed as
+	 * `removeButton`. Without it the component falls back to its own built-in
+	 * English default, which would stay English on the German page.
+	 */
+	tagRemove: string;
+	/*
+	 * The labels of the two controls the interactive column wraps in a tag.
 	 * These name the control, not a property value, so they are translated.
 	 */
 	tagInteractiveButton: string;
@@ -671,6 +680,9 @@ const LABELS: Record<Language, OverviewLabels> = {
 		searchLabel: 'Optionen durchsuchen',
 		searchPlaceholder: 'Suchbegriff',
 		removeTags: ['Erste Option entfernen', 'Zweite Option entfernen', 'Dritte Option entfernen'],
+		customSelectClearSelection: 'Auswahl aufheben',
+		customSelectMobileClose: 'Schließen',
+		customSelectSelected: 'ausgewählt',
 		backdropContent: 'Inhalt im Hintergrund',
 		openDialog: 'Dialog öffnen',
 		dialogTitle: 'Änderungen speichern',
@@ -791,10 +803,6 @@ const LABELS: Record<Language, OverviewLabels> = {
 			row: 'Row',
 		},
 		stackItems: ['Eins', 'Zwei', 'Drei'],
-		selectVariants: {
-			above: 'Above',
-			floating: 'Floating',
-		},
 		switchStates: {
 			default: 'Default',
 			checked: 'Checked',
@@ -819,6 +827,7 @@ const LABELS: Record<Language, OverviewLabels> = {
 			static: 'Statisch',
 			removable: 'Entfernbar',
 		},
+		tagRemove: 'Entfernen',
 		tagInteractiveButton: 'Button',
 		tagInteractiveCheckbox: 'Checkbox',
 		textareaLabel: 'Beschreibung',
@@ -861,6 +870,9 @@ const LABELS: Record<Language, OverviewLabels> = {
 		searchLabel: 'Search options',
 		searchPlaceholder: 'Search term',
 		removeTags: ['Remove first option', 'Remove second option', 'Remove third option'],
+		customSelectClearSelection: 'Clear selection',
+		customSelectMobileClose: 'Close',
+		customSelectSelected: 'selected',
 		backdropContent: 'Content in the background',
 		openDialog: 'Open dialog',
 		dialogTitle: 'Save changes',
@@ -981,10 +993,6 @@ const LABELS: Record<Language, OverviewLabels> = {
 			row: 'Row',
 		},
 		stackItems: ['One', 'Two', 'Three'],
-		selectVariants: {
-			above: 'Above',
-			floating: 'Floating',
-		},
 		switchStates: {
 			default: 'Default',
 			checked: 'Checked',
@@ -1009,6 +1017,7 @@ const LABELS: Record<Language, OverviewLabels> = {
 			static: 'Static',
 			removable: 'Removable',
 		},
+		tagRemove: 'Remove',
 		tagInteractiveButton: 'Button',
 		tagInteractiveCheckbox: 'Checkbox',
 		textareaLabel: 'Description',
@@ -1023,8 +1032,8 @@ const LABELS: Record<Language, OverviewLabels> = {
 /*
  * Column count for the specimens that are mounted in the browser. It is set on
  * the element the page renders, not inside the mounted component, so the grid is
- * in place before the mount. The drawer gets two columns so each row holds one
- * direction with its two corner states.
+ * in place before the mount. A value of 1 means the specimen lays its own rows
+ * out inside a single full-width column.
  */
 const MOUNT_COLUMNS: Record<MountedComponent, number> = {
 	button: 6,
@@ -1048,10 +1057,12 @@ const MOUNT_COLUMNS: Record<MountedComponent, number> = {
 	 * running down as rows, so each row holds one variant in all three states.
 	 */
 	select: 3,
-	/* One column per state — default, checked, invalid, valid. */
+	/* One full-width row per size, holding that size's four states side by side. */
 	switch: 1,
 	/* Both orientations side by side, which is the dimension of this block. */
 	tabs: 2,
+	/* One column per behavior, see TagOverview. */
+	tag: 3,
 	/* Four states per label variant, so each variant fills one row, like input. */
 	textarea: 4,
 	/* One row of triggers, as wide as the placements it covers. */
@@ -1061,8 +1072,11 @@ const MOUNT_COLUMNS: Record<MountedComponent, number> = {
 /*
  * The mounted specimens whose columns stay as wide as their content: rows of
  * small controls and triggers. Form fields are left out — they fill the column
- * they sit in, as they do in a real form. The loading indicator is left out too:
- * its bar variant is `inline-size: 100%` and needs a column with a width.
+ * they sit in, as they do in a real form — that covers the custom select along
+ * with input, select, checkbox, switch and textarea. The loading indicator is
+ * left out too: its bar variant is `inline-size: 100%` and needs a column with
+ * a width, and so are the tabs, whose tab list fills the column it sits in. The
+ * tag is left out because its columns are stacks, not rows of controls.
  */
 const MOUNT_FIT_CONTENT: MountedComponent[] = [
 	'button',
@@ -1103,7 +1117,9 @@ const AccordionOverview = ({ labels }: { labels: OverviewLabels }): ReactElement
  *
  * The pattern still fails the design system's own `db-ux/text-or-children-required`
  * rule, which only inspects `text`/children content and does not look at
- * `aria-label`, so `pnpm run lint` reports two expected errors here (F-2, F-3).
+ * `aria-label`, so `pnpm run lint` reports two expected errors here. They are
+ * left unsuppressed on purpose: the rule is being discussed with the component
+ * team, and a suppression would hide the finding once it is fixed there.
  */
 const BadgeCell = ({
 	size,
@@ -1270,6 +1286,19 @@ const CustomSelectOverview = ({ labels }: { labels: OverviewLabels }): ReactElem
 
 	const options = toOptions(labels.selectOptions);
 
+	/*
+	 * The texts the component holds an English default for, passed on every
+	 * specimen. `clearSelectionText` reaches the button that drops the whole
+	 * selection, which `showClearSelection` renders by default as soon as
+	 * something is selected, and `mobileCloseButtonText` the dropdown's close
+	 * button on small viewports. Neither has a locale to fall back on, so left
+	 * unset they would read English on the German page.
+	 */
+	const texts = {
+		clearSelectionText: labels.customSelectClearSelection,
+		mobileCloseButtonText: labels.customSelectMobileClose,
+	};
+
 	return (
 		<>
 			{/*
@@ -1280,6 +1309,7 @@ const CustomSelectOverview = ({ labels }: { labels: OverviewLabels }): ReactElem
 			 * search only becomes visible once the field is opened.
 			 */}
 			<DBCustomSelect
+				{...texts}
 				label={labels.selection}
 				placeholder={labels.placeholder}
 				searchLabel={labels.searchLabel}
@@ -1291,6 +1321,7 @@ const CustomSelectOverview = ({ labels }: { labels: OverviewLabels }): ReactElem
 				invalidMessage={labels.required}
 			/>
 			<DBCustomSelect
+				{...texts}
 				multiple
 				selectedType="text"
 				values={PRESELECTED}
@@ -1299,14 +1330,28 @@ const CustomSelectOverview = ({ labels }: { labels: OverviewLabels }): ReactElem
 				options={options}
 			/>
 			<DBCustomSelect
+				{...texts}
 				multiple
 				selectedType="amount"
 				values={PRESELECTED}
 				label={labels.selection}
 				placeholder={labels.placeholder}
+				/*
+				 * The counted selection is built here rather than through `amountText`.
+				 * That property replaces the whole string instead of filling a
+				 * placeholder in it, so it can only carry a fixed number — wrong as soon
+				 * as the selection changes. `transformSelectedLabels` receives the
+				 * selected options and takes precedence over the `amount` branch, so the
+				 * specimen keeps the counted shape `selectedType="amount"` stands for and
+				 * stays correct in both languages.
+				 */
+				transformSelectedLabels={(selected) =>
+					`${selected?.length ?? 0} ${labels.customSelectSelected}`
+				}
 				options={options}
 			/>
 			<DBCustomSelect
+				{...texts}
 				multiple
 				selectedType="tag"
 				values={PRESELECTED}
@@ -1321,6 +1366,7 @@ const CustomSelectOverview = ({ labels }: { labels: OverviewLabels }): ReactElem
 				options={options}
 			/>
 			<DBCustomSelect
+				{...texts}
 				variant="floating"
 				label={labels.selection}
 				placeholder={labels.placeholder}
@@ -1511,8 +1557,10 @@ const DrawerOverview = ({ labels }: { labels: OverviewLabels }): ReactElement =>
  * layout needed.
  *
  * One specimen, composing both areas the component has: the content area with
- * service links and the meta area with the legal ones below it. The links are
- * samples and point nowhere, as they do in the component's own examples.
+ * service links and the meta area with the legal ones below it. Every link
+ * points at this page itself, see selfUrl: a sample link still has to lead
+ * somewhere real, and the page it is already on is the one destination that
+ * cannot go stale.
  */
 const FooterOverview = ({ labels }: { labels: OverviewLabels }): ReactElement => (
 	<div className="overview-grid" style={columns(1)}>
@@ -2204,6 +2252,15 @@ const StackCell = ({
 		 * infotext without an icon is the design system's own quiet caption — the
 		 * same one its stack examples use — so the size and the text colour come from
 		 * the component rather than from a hand-set value.
+		 *
+		 * `icon="none"` is what hides the icon, and the same value the design
+		 * system's own examples use — the badge block's captions among them. It is
+		 * not an icon name: no `[data-icon]` rule matches it, so the `::before`
+		 * carrying the icon resolves to `none`. `showIcon={false}`, which is the
+		 * property the component documents for this, has no effect here — measured
+		 * against 5.6.1, the infotext still renders `information_circle` with the
+		 * attribute set, and the React layer does not emit the attribute for `false`
+		 * in the first place.
 		 */}
 		<DBInfotext size="small" icon="none">
 			{`${labels.stackDirections[direction]} · ${gap}`}
@@ -2229,16 +2286,15 @@ const StackOverview = ({ labels }: { labels: OverviewLabels }): ReactElement => 
 );
 
 /*
- * One field per cell, laid out as a two-column grid: the label variant is the
- * column — `above` on the left, `floating` on the right — and each state takes
- * one row, so the same state sits side by side across the two variants and reads
- * as a comparison. The specimens are emitted state by state, the `above` one
- * before the `floating` one, so the grid fills each row with the two variants of
- * one state. This is the same shape the input block has.
+ * One field per cell, laid out as a three-column grid: the state is the column —
+ * helper, invalid, valid — and each label variant takes one row, so a row holds
+ * one variant in all three states and the same state can be read down the column
+ * as a comparison. The specimens are emitted variant by variant, which is what
+ * fills the rows that way. See SELECT_VARIANTS.
  *
  * The grid aligns its cells to the top of their row, so a field carrying a helper
  * or validation message — which is taller than one without — does not push the
- * other variant of the same state down: both keep their top edge on the row line.
+ * other fields of the same row down: they all keep their top edge on the row line.
  *
  * This is the native select, not the custom one shown further up. The label
  * variant is its one real dimension — `size` on it is the native attribute for
@@ -2425,7 +2481,10 @@ const TabsOverview = ({ labels }: { labels: OverviewLabels }): ReactElement => (
  * dimension worth reading across, see TagOverview.
  *
  * `removable` adds the remove button `onRemove` requires to do anything; without
- * a handler the button would render but do nothing when pressed.
+ * a handler the button would render but do nothing when pressed. `removeButton`
+ * carries that button's accessible name: the component renders the name into a
+ * `DBTooltip variant="label"` and otherwise falls back to its own built-in
+ * English default, which would stay English on the German page.
  *
  * `noText` only hides the text visually, like the button's `noText` does — the
  * text stays the tag's accessible name, so no extra `aria-label` is needed here
@@ -2433,9 +2492,6 @@ const TabsOverview = ({ labels }: { labels: OverviewLabels }): ReactElement => (
  * `string` property, not a `DBIcon` child, so none of the badge's content
  * questions apply. `star` names a tag's own purpose — marking something — rather
  * than standing for an unrelated action the way `plus` would.
- *
- * Static, not mounted: the tag renders everything shown here from its own
- * properties — no id link, no effect, no trigger.
  */
 const TagColumn = ({
 	behavior,
@@ -2449,7 +2505,12 @@ const TagColumn = ({
 			const emphasis = emphasisName === 'strong' ? 'strong' : undefined;
 			return (
 				<Fragment key={emphasisName}>
-					<DBTag behavior={behavior} emphasis={emphasis}>
+					<DBTag
+						behavior={behavior}
+						emphasis={emphasis}
+						onRemove={behavior === 'removable' ? () => undefined : undefined}
+						removeButton={behavior === 'removable' ? labels.tagRemove : undefined}
+					>
 						{labels.tagBehaviors[behavior]}
 					</DBTag>
 					<DBTag
@@ -2457,6 +2518,7 @@ const TagColumn = ({
 						emphasis={emphasis}
 						icon="star"
 						onRemove={behavior === 'removable' ? () => undefined : undefined}
+						removeButton={behavior === 'removable' ? labels.tagRemove : undefined}
 					>
 						{labels.tagBehaviors[behavior]}
 					</DBTag>
@@ -2466,6 +2528,7 @@ const TagColumn = ({
 						icon="star"
 						noText
 						onRemove={behavior === 'removable' ? () => undefined : undefined}
+						removeButton={behavior === 'removable' ? labels.tagRemove : undefined}
 					>
 						{labels.tagBehaviors[behavior]}
 					</DBTag>
@@ -2492,9 +2555,6 @@ const TagColumn = ({
  * `DBTooltip` carrying the name (the same pattern `ButtonOverview` uses), and
  * `DBCheckbox`'s `showLabel={false}` — both keep the name, they only hide the
  * text visually.
- *
- * Static, not mounted: both controls are natively interactive without any
- * script of their own.
  */
 const TagInteractiveColumn = ({ labels }: { labels: OverviewLabels }): ReactElement => (
 	<div className="overview-stack overview-tag-column">
@@ -2544,14 +2604,24 @@ const TagInteractiveColumn = ({ labels }: { labels: OverviewLabels }): ReactElem
  * the composed specimen `TagBehaviorList` has no property value for. No
  * caption above a column: the content variants and the behavior itself are
  * both readable from the tags' own text.
+ *
+ * Mounted: a removable tag's remove button carries its accessible name in a
+ * `DBTooltip variant="label"`, and that tooltip only links itself to the button
+ * once it runs in the browser — rendered only, the six remove buttons of the
+ * removable column have no name at all. The icon-only button in the interactive
+ * column takes its name from a tooltip the same way.
+ *
+ * Renders a plain fragment, not its own grid — the placeholder in
+ * ComponentOverview already carries `overview-grid`, so these columns become
+ * its items directly.
  */
 const TagOverview = ({ labels }: { labels: OverviewLabels }): ReactElement => (
-	<div className="overview-grid" style={columns(3)}>
+	<>
 		{TagBehaviorList.map((behavior) => (
 			<TagColumn key={behavior} behavior={behavior} labels={labels} />
 		))}
 		<TagInteractiveColumn labels={labels} />
-	</div>
+	</>
 );
 
 /*
@@ -2735,8 +2805,6 @@ export function ComponentOverview({
 			return <SectionOverview labels={labels} />;
 		case 'stack':
 			return <StackOverview labels={labels} />;
-		case 'tag':
-			return <TagOverview labels={labels} />;
 		case 'button':
 		case 'checkbox':
 		case 'custom-select':
@@ -2749,6 +2817,7 @@ export function ComponentOverview({
 		case 'select':
 		case 'switch':
 		case 'tabs':
+		case 'tag':
 		case 'textarea':
 		case 'tooltip':
 			/*
@@ -2763,14 +2832,16 @@ export function ComponentOverview({
 			 * `invalidMessage`: the component only writes it into the DOM once native
 			 * form validation has run through an effect, so a server-rendered specimen
 			 * leaves the critical infotext empty but present — a stray icon with no
-			 * text (see F-4 in the bug audit). The button block holds a tooltip, which
+			 * text. The button block holds a tooltip, which
 			 * places itself from script and otherwise stretches the document. The
 			 * loading indicator seeds its state in an effect and would stay at
 			 * `inactive` throughout. The pagination writes the current page onto its
 			 * markup from script and shows none without it. The popover and the tooltip
 			 * both open through their trigger and place their panel from script.
 			 * The textarea has the same `invalidMessage` gap as the input and the
-			 * checkbox and switch above.
+			 * checkbox and switch above. The tag's removable column carries the
+			 * accessible name of each remove button in a tooltip, which links itself
+			 * to the button only once it runs.
 			 *
 			 * An Astro client directive is no option here: the page content is slot
 			 * content of the client-only shell, and an island nested in it leaves the
@@ -2829,11 +2900,13 @@ export function OverviewMount({
 			return <SwitchOverview labels={labels} />;
 		case 'tabs':
 			return <TabsOverview labels={labels} />;
+		case 'tag':
+			return <TagOverview labels={labels} />;
 		case 'textarea':
 			return <TextareaOverview labels={labels} />;
 		case 'tooltip':
 			return <TooltipOverview labels={labels} />;
-		default:
+		case 'drawer':
 			return <DrawerOverview labels={labels} />;
 	}
 }

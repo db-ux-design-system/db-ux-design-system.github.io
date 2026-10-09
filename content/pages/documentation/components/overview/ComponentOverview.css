@@ -197,11 +197,6 @@
 	justify-content: start;
 }
 
-/* A divider separates rows, so it spans every column instead of occupying one cell. */
-.overview-grid > .db-divider {
-	grid-column: 1 / -1;
-}
-
 /*
  * Page-level controls above the specimens, such as the version switcher. Gets the
  * same breathing room as a heading so it reads as a control for the whole page
@@ -228,13 +223,15 @@
 	 * Above every resting (non-overlay) component on the page, below every
 	 * overlay one.
 	 *
-	 * The components in this stack set their own z-index: a form label sits at
-	 * 2, the tabs list at 20, a dropdown at 32 — none of them covers the bar
-	 * without this. 25 clears the tabs list and leaves room before the dropdown.
-	 * A tooltip (1337), dialog and drawer (9996) are deliberately left above the
-	 * bar: those are overlays the reader just opened, which should cover it,
-	 * while nothing resting in the normal flow should. There is no token for
-	 * this, the design system has none for stacking.
+	 * The components in this stack set their own z-index. Measured in the
+	 * installed @db-ux/core-components: a form label sits at 2, the tabs list at
+	 * 20 and its scroll overlays at 21 and 22 — none of them covers the bar
+	 * without this. 25 clears all of those. A tooltip (1337), dialog and drawer
+	 * (9996), the custom select dropdown (9999) and its backdrop (9998) are
+	 * deliberately left above the bar: those are overlays the reader just
+	 * opened, which should cover it, while nothing resting in the normal flow
+	 * should. There is no token for this, the design system has none for
+	 * stacking.
 	 */
 	z-index: 25;
 	background-color: var(--db-neutral-bg-basic-level-1-default);
@@ -252,13 +249,13 @@
 	border-block-end: var(--db-border-width-3xs) solid transparent;
 }
 
-/* Set by VersionSwitch as soon as the bar has left its place in the flow. */
+/* Set by _sticky-controls.ts as soon as the bar has left its place in the flow. */
 .dba-main-content .overview-controls.is-sticky {
 	border-block-end-color: var(--db-adaptive-on-bg-basic-emphasis-60-default);
 }
 
 /*
- * Probe for the sticky state, observed by VersionSwitch.
+ * Probe for the sticky state, observed by _sticky-controls.ts.
  *
  * Its lower edge sits exactly where the bar starts in the flow, so the moment the
  * probe is scrolled out of the content area is the moment the bar begins to
@@ -305,8 +302,8 @@
  * no per-component rules and no JavaScript. The selected option is matched with
  * :has(), which tracks the live selection.
  *
- * The option values are produced by VersionSwitch in ComponentOverview.tsx and are
- * the contract for these selectors; change them only in both places.
+ * The option values are produced by VersionSwitch in _ComponentOverview.tsx and
+ * are the contract for these selectors; change them only in both places.
  */
 
 /*

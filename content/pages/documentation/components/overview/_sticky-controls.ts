@@ -20,6 +20,13 @@ const STICKY_CLASS = 'is-sticky';
 
 const connected = new WeakSet<Element>();
 
+/*
+ * The observer of the probe currently on the page. Kept so it can be dropped
+ * again before Astro's client router swaps the document: without that it would
+ * stay attached to a detached element for as long as the module lives.
+ */
+let observer: IntersectionObserver | undefined;
+
 function connectStickyControls(): boolean {
 	const sentinel = document.querySelector(SENTINEL_SELECTOR);
 	const bar = sentinel?.nextElementSibling;
@@ -40,7 +47,7 @@ function connectStickyControls(): boolean {
 
 	connected.add(sentinel);
 
-	const observer = new IntersectionObserver(
+	observer = new IntersectionObserver(
 		([entry]) => {
 			bar.classList.toggle(STICKY_CLASS, !entry.isIntersecting);
 		},
@@ -60,4 +67,14 @@ document.addEventListener('astro:page-load', () => {
 	if (!connectStickyControls()) {
 		waitForElements(connectStickyControls);
 	}
+});
+
+/*
+ * Astro's client router replaces the document rather than reloading it, so the
+ * probe the observer watches is discarded while the module stays alive. Dropping
+ * the observer here keeps it from outliving the element it was made for.
+ */
+document.addEventListener('astro:before-swap', () => {
+	observer?.disconnect();
+	observer = undefined;
 });

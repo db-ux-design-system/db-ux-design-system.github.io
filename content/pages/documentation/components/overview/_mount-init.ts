@@ -9,24 +9,10 @@ import type { Language } from '@template/context/language-context';
  *
  * Most specimens render completely without it and stay static. A specimen is
  * mounted when the component would otherwise have no accessible name, show a
- * wrong state, or open only through a trigger: dialog, drawer and popover need
- * the trigger, the custom select and the input link their label to the control
- * through an id they only assign once they run, and the tooltip in the button
- * block places itself from
- * script — left to the stylesheet it hangs below the page and makes the document
- * scrollable. The loading indicator seeds its state in an effect and would stay
- * at `inactive`, and the pagination writes the current page onto its markup from
- * script and shows none without it. The native select links its label to the
- * control through an id it only assigns once it runs, the same as the input, and
- * the tabs build their selection — the active tab's `aria-selected`, the
- * tab-to-panel links, the roving tabindex and the hiding of inactive panels — in
- * an effect, so without it every panel shows at once and no tab is selected. The
- * checkbox and switch only write `invalidMessage` into the DOM once native form
- * validation has run through an effect, the same gap as input and select, so
- * their invalid specimens would show the critical infotext empty but present —
- * a stray icon with no text — without mounting. The textarea has the same
- * `invalidMessage` gap. The tooltip opens through its trigger and places its
- * panel from script, the same as the popover.
+ * wrong state, or open only through a trigger. Which component that applies to
+ * and why is documented once, next to the decision itself: see the mounted group
+ * in the `ComponentOverview` switch. MOUNTED_COMPONENTS below repeats only the
+ * list, as the guard this module needs.
  *
  * An Astro client directive cannot provide that here: the page content is slot
  * content of the client-only shell, and an island nested in it leaves the shell
@@ -59,6 +45,7 @@ const MOUNTED_COMPONENTS: MountedComponent[] = [
 	'select',
 	'switch',
 	'tabs',
+	'tag',
 	'textarea',
 	'tooltip',
 ];

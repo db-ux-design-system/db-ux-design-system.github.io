@@ -26,13 +26,20 @@ export const frontmatter: DocumentationFrontMatter = {
 };
 
 /*
- * `width="auto"` is how every component page in this section opts out of the
- * section width constraint: no `.db-section[data-width=…]` rule matches the
- * value, so the section adds no inline padding of its own and the content lines
- * up with the hero above it. The component's type only lists the four named
- * widths, which the MDX pages never had to satisfy, so the value is cast here.
- * Omitting it instead would match `.db-section:not([data-width])` and indent the
- * page against its siblings.
+ * How this section opts out of inline padding. The layout already wraps the page
+ * content in a `DBSection` with `width="large"`, so this inner one only needs
+ * block spacing — but `width` is the property that controls `padding-inline` and
+ * has no value meaning none: `ContainerWidthProps` lists `full`, `medium`,
+ * `large` and `small`, so the value is cast. `auto` then matches no
+ * `.db-section[data-width=…]` rule and the padding stays unset, while omitting
+ * `width` would match `.db-section:not([data-width])` and add
+ * `var(--db-spacing-fixed-md)` on top of the padding the outer section already
+ * applies — measured as a 16px indent of the content against the hero above it,
+ * which is what the foundation pages show.
+ *
+ * So the value is deliberately invalid and works by not being recognised. It is
+ * the only way the component offers to reach this layout; an `auto` or `none`
+ * value in `ContainerWidthProps` would replace it.
  */
 const sectionWidth = 'auto' as MaxWidthType;
 ---
@@ -43,9 +50,9 @@ const sectionWidth = 'auto' as MaxWidthType;
 		{
 			/*
 			 * Rendered without a client directive, as the MDX version did: Astro
-			 * renders the specimens to static HTML server-side. The ten specimens
-			 * that need JavaScript render an empty placeholder here and are mounted
-			 * by _mount-init.ts.
+			 * renders the specimens to static HTML server-side. The specimens that
+			 * need JavaScript render an empty placeholder here and are mounted by
+			 * _mount-init.ts, see MountedComponent.
 			 */
 			SECTIONS.map(({ id, title, component }) => (
 				<Fragment>
