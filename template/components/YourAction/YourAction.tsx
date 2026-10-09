@@ -1,12 +1,18 @@
 import { DBNotification } from '@db-ux/react-core-components';
 import './YourAction.css';
 
-const YourAction = ({ actions }: { actions: string[] }) => {
+const YourAction = ({
+	actions,
+	headline = 'Your Action',
+}: {
+	actions: string[];
+	headline?: string;
+}) => {
 	return (
 		<DBNotification
 			className="your-action"
 			semantic="warning"
-			headline="Your Action"
+			headline={headline}
 			variant="standalone">
 			<ol>
 				{actions.map((action, index) => (

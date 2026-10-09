@@ -14,6 +14,7 @@ nav: true
 
 import { DBSection, DBNotification } from '@db-ux/react-core-components';
 import YourAction from '@template/components/YourAction/YourAction';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import CardTeaserRow from "@template/components/CardTeaser/CardTeaserRow";
 
 {/* TODO: GitHub Link für Dev Release ergänzen */}
@@ -48,43 +49,56 @@ Das folgende Refactoring erfordert besondere Aufmerksamkeit. Bestehende Instanze
 
 Die bisherigen Size-Werte entsprechen folgenden Visual Sizes:
 
-| Size  | Visual Size |
-| ----- | ----------- |
-| `3xl` | entfällt    |
-| `2xl` | entfällt    |
-| `xl`  | H1          |
-| `lg`  | H2          |
-| `md`  | H3          |
-| `sm`  | H4          |
-| `xs`  | H5          |
-| `2xs` | H6          |
-| `3xs` | entfällt    |
+| Size  | Visual Size       |
+| ----- | ----------------- |
+| `3xl` | entfällt – nutze H1 |
+| `2xl` | entfällt – nutze H1 |
+| `xl`  | H1                |
+| `lg`  | H2                |
+| `md`  | H3                |
+| `sm`  | H4                |
+| `xs`  | H5                |
+| `2xs` | H6                |
+| `3xs` | entfällt – nutze H6 |
 
 Textinhalte werden durch das Update nicht überschrieben.
 
 <YourAction
+	headline="Deine Aufgabe"
 	actions={[
 		'Überprüfe alle Heading- und Custom-Heading-Instanzen mit einem anderen Alignment als „Left“ oder einer der entfernten Größen.',
 		'Stelle das Alignment nach dem Update an der Textebene (Default Heading) oder am Container-Auto-Layout (Custom Heading) ein.',
 		'Setze die entsprechende Visual Size gemäß der Zuordnung oben.',
-		'Wähle für Instanzen mit 3xl, 2xl oder 3xs eine neue Visual Size – diese Größen haben keine Entsprechung.',
+		'Setze für Instanzen mit 3xl oder 2xl die Visual Size H1 und für 3xs die Visual Size H6 – diese Größen wurden entfernt.',
 	]}
 />
 
 #### Drawer
 
-- **Children Slot ersetzt die Textebene des Drawer Headers:** Der Heading-Text des Drawer Headers liegt nun in einem Children Slot, konsistent zum Dialog Header und zur Entwicklung. Bestehende Heading-Inhalte werden nach dem Update zurückgesetzt und müssen in den Slot übernommen werden.
+- **Children Slot ersetzt die Textebene des Drawer Headers:** Der Heading-Text des Drawer Headers liegt nun in einem Children Slot, konsistent zum Dialog Header und zur Entwicklung. Bestehende Heading-Inhalte werden nach dem Update zurückgesetzt und müssen in den Textlayer im Slot neu eingetragen werden.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=182-704&embed-host=share"
+		description="Schritt 1: Kopiere den Heading-Text aus dem Drawer Header vor dem Update."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=189-1483&embed-host=share"
+		description="Schritt 2: Aktualisiere die Komponente und trage den kopierten Text in den Textlayer im Children Slot ein."
+	/>
+</div>
 
 <DBNotification semantic="critical" variant="standalone" headline="Wichtig">
 Kopiere den Inhalt des Drawer Headers **vor dem Update der Komponente** – das Update setzt den bestehenden Text zurück.
 </DBNotification>
 
 <YourAction
+	headline="Deine Aufgabe"
 	actions={[
 		'Überprüfe alle Drawer-Instanzen, die den Drawer Header verwenden.',
 		'Kopiere den Heading-Text aus dem Drawer Header vor dem Update.',
 		'Aktualisiere die Komponenten-Instanz.',
-		'Füge den kopierten Text in den Children Slot des Drawer Headers ein.',
+		'Trage den kopierten Text in den Textlayer im Children Slot des Drawer Headers ein.',
 	]}
 />
 

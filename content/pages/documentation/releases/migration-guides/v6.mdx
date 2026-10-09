@@ -14,6 +14,7 @@ nav: true
 
 import { DBSection, DBNotification } from '@db-ux/react-core-components';
 import YourAction from '@template/components/YourAction/YourAction';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import CardTeaserRow from "@template/components/CardTeaser/CardTeaserRow";
 
 {/* TODO: GitHub Link für Dev Release ergänzen */}
@@ -48,17 +49,17 @@ The following refactoring requires special attention. Existing instances must be
 
 The previous Size values map onto Visual Size as follows:
 
-| Size  | Visual Size |
-| ----- | ----------- |
-| `3xl` | removed     |
-| `2xl` | removed     |
-| `xl`  | H1          |
-| `lg`  | H2          |
-| `md`  | H3          |
-| `sm`  | H4          |
-| `xs`  | H5          |
-| `2xs` | H6          |
-| `3xs` | removed     |
+| Size  | Visual Size      |
+| ----- | ---------------- |
+| `3xl` | removed – use H1 |
+| `2xl` | removed – use H1 |
+| `xl`  | H1               |
+| `lg`  | H2               |
+| `md`  | H3               |
+| `sm`  | H4               |
+| `xs`  | H5               |
+| `2xs` | H6               |
+| `3xs` | removed – use H6 |
 
 Text content is not overwritten by the update.
 
@@ -67,13 +68,24 @@ Text content is not overwritten by the update.
 		'Review all Heading and Custom Heading instances with an alignment other than "Left" or one of the removed sizes.',
 		'Set the alignment on the text layer (Default Heading) or the Container auto layout (Custom Heading) after updating.',
 		'Set the corresponding Visual Size according to the mapping above.',
-		'Choose a new Visual Size for instances that used 3xl, 2xl or 3xs – these sizes have no equivalent.',
+		'Set Visual Size H1 for instances that used 3xl or 2xl, and H6 for 3xs – these sizes have been removed.',
 	]}
 />
 
 #### Drawer
 
-- **Children Slot replaces the Drawer Header text layer:** The heading text of the Drawer Header now sits in a Children Slot, consistent with the Dialog Header and the development implementation. Existing heading content is reset after updating and must be transferred into the slot.
+- **Children Slot replaces the Drawer Header text layer:** The heading text of the Drawer Header now sits in a Children Slot, consistent with the Dialog Header and the development implementation. Existing heading content is reset after updating and must be re-entered into the text layer inside the slot.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=182-704&embed-host=share"
+		description="Step 1: Copy the heading text from the Drawer Header before updating."
+	/>
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/xd4zXUd4RKGv1dGdJIaaCV/Doku--Migration-Guides?node-id=189-1483&embed-host=share"
+		description="Step 2: Update the component and enter the copied text into the text layer inside the Children Slot."
+	/>
+</div>
 
 <DBNotification semantic="critical" variant="standalone" headline="Important">
 Copy the Drawer Header content **before updating the component** – the update resets the existing text.
@@ -84,7 +96,7 @@ Copy the Drawer Header content **before updating the component** – the update 
 		'Review all Drawer instances that use the Drawer Header.',
 		'Copy the heading text from the Drawer Header before updating.',
 		'Update the component instance.',
-		'Paste the copied text into the Children Slot of the Drawer Header.',
+		'Paste the copied text into the text layer inside the Children Slot of the Drawer Header.',
 	]}
 />
 
