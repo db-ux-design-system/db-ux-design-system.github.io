@@ -46,7 +46,6 @@ const BadgeCell = ({
 					semantic={semantic}
 					size={size}
 					emphasis={emphasis}
-					aria-label={labels.add}
 				>
 					<DBIcon icon="plus">{labels.add}</DBIcon>
 				</DBBadge>
@@ -60,7 +59,6 @@ const BadgeCell = ({
 					semantic={semantic}
 					size={size}
 					emphasis={emphasis}
-					aria-label={labels.infotextSemantics[semantic]}
 				/>
 			))}
 		</div>
