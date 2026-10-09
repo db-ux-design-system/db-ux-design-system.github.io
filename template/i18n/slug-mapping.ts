@@ -24,6 +24,10 @@ const segmentMap: Record<string, string> = {
 	'privacy': 'datenschutz',
 
 	// documentation children
+	// Only used by documentation/components/overview, but a plain segment entry is
+	// enough: it composes with 'documentation' and 'components', and no other
+	// content path uses an 'overview' segment it could collide with.
+	'overview': 'uebersicht',
 	'get-started': 'erste-schritte',
 	'learn': 'lernen',
 	'contribution': 'mitwirken',

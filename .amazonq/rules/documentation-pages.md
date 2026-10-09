@@ -268,3 +268,21 @@ export const [component]Config = {
 - Component config must be imported and passed to ComponentPlayground and PropertiesTable
 
 --- END: Documentation Pages Structure – do not edit above ---
+
+## Exception: the Overview page
+
+`content/pages/documentation/components/overview/` – titled "Overview" (DE "Übersicht") – is
+a section index, not a component page, and is the one page in the Components section that
+does not sort by name.
+
+- It sets `order: 0` and is therefore the first item in the Components navigation
+- It deliberately sets no `status`. That keeps it in the first status band, and
+  `ChildPageOverview` filters by status, so the page stays out of the "Stable", "Beta" and
+  "Concept" teaser grids on the Components index – it is a page about components, not a
+  component
+- No renumbering was involved: top-level pages in `documentation/components/` set no
+  `order` at all and fall back to sorting by title, so a single `order: 0` is enough to
+  put one page ahead of all of them
+- It is an `.astro` page, not `.mdx`, following the Foundation pages. A DE `.astro` page
+  needs an entry in `astroNavFallback` in `template/utils/content-navigation.ts`,
+  because the DE title glob only matches `md` and `mdx`
