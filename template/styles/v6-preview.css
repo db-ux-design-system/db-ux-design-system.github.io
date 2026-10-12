@@ -1,0 +1,261 @@
+/**
+ * TEMPORARY: DB Theme v6 preview.
+ *
+ * Brings two v6 changes forward so the documentation can already be seen in its
+ * v6 state while the packages are still on v5:
+ *
+ * 1. The Lilac color, which only exists in the v6 theme.
+ * 2. The squared corners, i.e. the --db-border-radius-* tokens dropping to 0.
+ *
+ * Imported last in global.css and deliberately unlayered, so it wins over the
+ * layered package defaults.
+ *
+ * ---------------------------------------------------------------------------
+ * REMOVE THIS IN THE SAME PULL REQUEST THAT BUMPS @db-ux/core-* TO 6.x.
+ * Tracked in issue #769, which carries the full checklist.
+ *
+ * The trigger is the core packages, not the theme version: @db-ux/db-theme was
+ * already on 6.3.0 while the core packages were on 5.6.1, and that theme build
+ * has neither Lilac nor the squared radii. The v6 values arrive with the core
+ * bump.
+ *
+ * Leaving the file in place after that bump fails silently rather than loudly:
+ * because this block is unlayered, it outranks the package layers and shadows
+ * the real v6 theme. Any difference between the hard-coded values below and the
+ * shipped ones would show up as wrong colors or wrong corners, with no build or
+ * lint error.
+ *
+ * Three steps, all of them required:
+ *   1. Delete this file.
+ *   2. Remove its @import from template/styles/global.css.
+ *   3. Verify that Lilac still renders, since the two entries that reference it
+ *      stay behind and are then served by the theme:
+ *        content/pages/.../foundation/colors/_ColorPlayground.astro  (select option)
+ *        content/pages/.../foundation/colors/_ColorTable.astro       (table category)
+ * ---------------------------------------------------------------------------
+ */
+
+/*
+ * Squared corners.
+ *
+ * Mirrors the v6 block of the Component Overview: every DB component derives its
+ * corners from these tokens, so redefining them on :root switches the whole
+ * documentation at once — no per-component rules and no JavaScript.
+ *
+ * `full` keeps its value, so shapes that rely on a pill or circle stay intact:
+ * badges, dots and icon-only buttons.
+ *
+ * The Component Overview keeps its v5/v6 comparison: its own v5 block pins the
+ * rounded values on `.dba-main-content:has(…[value='v5']:checked)`, which outranks
+ * :root by specificity. That block exists for exactly this case. The same applies
+ * to the loading indicator, whose rounded stroke ends come from `stroke-linecap`
+ * rather than from a token — that one is left to the Component Overview, so its
+ * v5 column stays untouched.
+ *
+ * Lilac follows in the same block. Its speaking-color tokens and its adaptive
+ * mapping are generated from the token mapping of @db-ux/core-foundations 5.6.1,
+ * which is identical for every semantic and additional color. Only the palette
+ * and the origin values are lilac-specific.
+ */
+:root {
+	/* Squared corners */
+	--db-border-radius-3xs: 0;
+	--db-border-radius-2xs: 0;
+	--db-border-radius-xs: 0;
+	--db-border-radius-sm: 0;
+	--db-border-radius-md: 0;
+	--db-border-radius-lg: 0;
+	--db-border-radius-xl: 0;
+	--db-border-radius-2xl: 0;
+	--db-border-radius-3xl: 0;
+
+	/* Palette — DB Theme v6 preview values */
+	--db-lilac-0: #11003c;
+	--db-lilac-1: #1b0055;
+	--db-lilac-2: #280074;
+	--db-lilac-3: #360096;
+	--db-lilac-4: #4500b9;
+	--db-lilac-5: #5400dd;
+	--db-lilac-6: #6722ff;
+	--db-lilac-7: #7d57ff;
+	--db-lilac-8: #957cff;
+	--db-lilac-9: #ae9eff;
+	--db-lilac-10: #c8bfff;
+	--db-lilac-11: #e3dfff;
+	--db-lilac-12: #eeecff;
+	--db-lilac-13: #f4f2ff;
+	--db-lilac-14: #f9f9ff;
+
+	/* Origin */
+	--db-lilac-origin-base: #a9f;
+	--db-lilac-origin-light-default: #a9f;
+	--db-lilac-origin-light-hovered: #dfdaff;
+	--db-lilac-origin-light-pressed: #c4baff;
+	--db-lilac-origin-dark-default: #a9f;
+	--db-lilac-origin-dark-hovered: #dfdaff;
+	--db-lilac-origin-dark-pressed: #c4baff;
+	--db-lilac-on-origin-light-default: #000;
+	--db-lilac-on-origin-dark-default: #000;
+
+	/* Speaking colors — generated */
+	--db-lilac-origin-default: light-dark(
+		var(--db-lilac-origin-light-default),
+		var(--db-lilac-origin-dark-default)
+	);
+	--db-lilac-origin-hovered: light-dark(
+		var(--db-lilac-origin-light-hovered),
+		var(--db-lilac-origin-dark-hovered)
+	);
+	--db-lilac-origin-pressed: light-dark(
+		var(--db-lilac-origin-light-pressed),
+		var(--db-lilac-origin-dark-pressed)
+	);
+	--db-lilac-on-origin-default: light-dark(
+		var(--db-lilac-on-origin-light-default),
+		var(--db-lilac-on-origin-dark-default)
+	);
+	--db-lilac-on-bg-basic-emphasis-50-default: light-dark(var(--db-lilac-9), var(--db-lilac-5));
+	--db-lilac-on-bg-basic-emphasis-60-default: light-dark(var(--db-lilac-10), var(--db-lilac-6));
+	--db-lilac-on-bg-basic-emphasis-70-default: light-dark(var(--db-lilac-7), var(--db-lilac-8));
+	--db-lilac-on-bg-basic-emphasis-70-hovered: light-dark(var(--db-lilac-4), var(--db-lilac-10));
+	--db-lilac-on-bg-basic-emphasis-70-pressed: light-dark(var(--db-lilac-6), var(--db-lilac-9));
+	--db-lilac-on-bg-basic-emphasis-80-default: light-dark(var(--db-lilac-6), var(--db-lilac-9));
+	--db-lilac-on-bg-basic-emphasis-80-hovered: light-dark(var(--db-lilac-3), var(--db-lilac-12));
+	--db-lilac-on-bg-basic-emphasis-80-pressed: light-dark(var(--db-lilac-5), var(--db-lilac-10));
+	--db-lilac-on-bg-basic-emphasis-90-default: light-dark(var(--db-lilac-4), var(--db-lilac-10));
+	--db-lilac-on-bg-basic-emphasis-90-hovered: light-dark(var(--db-lilac-0), var(--db-lilac-14));
+	--db-lilac-on-bg-basic-emphasis-90-pressed: light-dark(var(--db-lilac-3), var(--db-lilac-11));
+	--db-lilac-on-bg-basic-emphasis-100-default: light-dark(var(--db-lilac-1), var(--db-lilac-12));
+	--db-lilac-on-bg-basic-emphasis-100-hovered: light-dark(var(--db-lilac-5), var(--db-lilac-9));
+	--db-lilac-on-bg-basic-emphasis-100-pressed: light-dark(var(--db-lilac-2), var(--db-lilac-11));
+	--db-lilac-on-bg-inverted-default: light-dark(var(--db-lilac-14), var(--db-lilac-3));
+	--db-lilac-on-bg-inverted-hovered: light-dark(var(--db-lilac-11), var(--db-lilac-0));
+	--db-lilac-on-bg-inverted-pressed: light-dark(var(--db-lilac-13), var(--db-lilac-2));
+	--db-lilac-on-bg-vibrant-default: light-dark(var(--db-lilac-1), var(--db-lilac-1));
+	--db-lilac-on-bg-vibrant-hovered: light-dark(var(--db-lilac-4), var(--db-lilac-4));
+	--db-lilac-on-bg-vibrant-pressed: light-dark(var(--db-lilac-2), var(--db-lilac-2));
+	--db-lilac-bg-basic-level-1-default: light-dark(var(--db-lilac-14), var(--db-lilac-1));
+	--db-lilac-bg-basic-level-1-hovered: light-dark(var(--db-lilac-13), var(--db-lilac-3));
+	--db-lilac-bg-basic-level-1-pressed: light-dark(var(--db-lilac-12), var(--db-lilac-4));
+	--db-lilac-bg-basic-level-2-default: light-dark(var(--db-lilac-13), var(--db-lilac-2));
+	--db-lilac-bg-basic-level-2-hovered: light-dark(var(--db-lilac-12), var(--db-lilac-4));
+	--db-lilac-bg-basic-level-2-pressed: light-dark(var(--db-lilac-11), var(--db-lilac-5));
+	--db-lilac-bg-basic-level-3-default: light-dark(var(--db-lilac-12), var(--db-lilac-3));
+	--db-lilac-bg-basic-level-3-hovered: light-dark(var(--db-lilac-11), var(--db-lilac-1));
+	--db-lilac-bg-basic-level-3-pressed: light-dark(var(--db-lilac-10), var(--db-lilac-0));
+	--db-lilac-bg-basic-transparent-full-default: light-dark(
+		color-mix(in srgb, #0000 100%, var(--db-lilac-6)),
+		color-mix(in srgb, #0000 100%, var(--db-lilac-9))
+	);
+	--db-lilac-bg-basic-transparent-semi-default: light-dark(
+		color-mix(in srgb, #0000 92%, var(--db-lilac-6)),
+		color-mix(in srgb, #0000 84%, var(--db-lilac-9))
+	);
+	--db-lilac-bg-basic-transparent-full-hovered: light-dark(
+		color-mix(in srgb, #0000 76%, var(--db-lilac-6)),
+		color-mix(in srgb, #0000 76%, var(--db-lilac-9))
+	);
+	--db-lilac-bg-basic-transparent-full-pressed: light-dark(
+		color-mix(in srgb, #0000 68%, var(--db-lilac-6)),
+		color-mix(in srgb, #0000 68%, var(--db-lilac-9))
+	);
+	--db-lilac-bg-basic-transparent-semi-hovered: light-dark(
+		color-mix(in srgb, #0000 76%, var(--db-lilac-6)),
+		color-mix(in srgb, #0000 76%, var(--db-lilac-9))
+	);
+	--db-lilac-bg-basic-transparent-semi-pressed: light-dark(
+		color-mix(in srgb, #0000 68%, var(--db-lilac-6)),
+		color-mix(in srgb, #0000 68%, var(--db-lilac-9))
+	);
+	--db-lilac-bg-inverted-contrast-max-default: light-dark(var(--db-lilac-1), var(--db-lilac-12));
+	--db-lilac-bg-inverted-contrast-max-hovered: light-dark(var(--db-lilac-5), var(--db-lilac-9));
+	--db-lilac-bg-inverted-contrast-max-pressed: light-dark(var(--db-lilac-2), var(--db-lilac-11));
+	--db-lilac-bg-inverted-contrast-high-default: light-dark(var(--db-lilac-6), var(--db-lilac-9));
+	--db-lilac-bg-inverted-contrast-high-hovered: light-dark(var(--db-lilac-2), var(--db-lilac-12));
+	--db-lilac-bg-inverted-contrast-high-pressed: light-dark(var(--db-lilac-5), var(--db-lilac-10));
+	--db-lilac-bg-inverted-contrast-low-default: light-dark(var(--db-lilac-7), var(--db-lilac-8));
+	--db-lilac-bg-inverted-contrast-low-hovered: light-dark(var(--db-lilac-3), var(--db-lilac-12));
+	--db-lilac-bg-inverted-contrast-low-pressed: light-dark(var(--db-lilac-6), var(--db-lilac-9));
+	--db-lilac-bg-vibrant-default: light-dark(var(--db-lilac-9), var(--db-lilac-9));
+	--db-lilac-bg-vibrant-hovered: light-dark(var(--db-lilac-12), var(--db-lilac-12));
+	--db-lilac-bg-vibrant-pressed: light-dark(var(--db-lilac-10), var(--db-lilac-10));
+}
+
+/* Adaptive mapping — generated */
+
+/* Variants for adaptive components like input, select, notification, ... */
+[data-color='lilac'],
+.db-color-lilac {
+	--db-adaptive-bg-basic-level-1-default: var(--db-lilac-bg-basic-level-1-default);
+	--db-adaptive-bg-basic-level-1-hovered: var(--db-lilac-bg-basic-level-1-hovered);
+	--db-adaptive-bg-basic-level-1-pressed: var(--db-lilac-bg-basic-level-1-pressed);
+	--db-adaptive-bg-basic-level-2-default: var(--db-lilac-bg-basic-level-2-default);
+	--db-adaptive-bg-basic-level-2-hovered: var(--db-lilac-bg-basic-level-2-hovered);
+	--db-adaptive-bg-basic-level-2-pressed: var(--db-lilac-bg-basic-level-2-pressed);
+	--db-adaptive-bg-basic-level-3-default: var(--db-lilac-bg-basic-level-3-default);
+	--db-adaptive-bg-basic-level-3-hovered: var(--db-lilac-bg-basic-level-3-hovered);
+	--db-adaptive-bg-basic-level-3-pressed: var(--db-lilac-bg-basic-level-3-pressed);
+	--db-adaptive-bg-basic-transparent-full-default: var(
+		--db-lilac-bg-basic-transparent-full-default
+	);
+	--db-adaptive-bg-basic-transparent-semi-default: var(
+		--db-lilac-bg-basic-transparent-semi-default
+	);
+	--db-adaptive-bg-basic-transparent-full-hovered: var(
+		--db-lilac-bg-basic-transparent-full-hovered
+	);
+	--db-adaptive-bg-basic-transparent-full-pressed: var(
+		--db-lilac-bg-basic-transparent-full-pressed
+	);
+	--db-adaptive-bg-basic-transparent-semi-hovered: var(
+		--db-lilac-bg-basic-transparent-semi-hovered
+	);
+	--db-adaptive-bg-basic-transparent-semi-pressed: var(
+		--db-lilac-bg-basic-transparent-semi-pressed
+	);
+	--db-adaptive-on-bg-basic-emphasis-100-default: var(--db-lilac-on-bg-basic-emphasis-100-default);
+	--db-adaptive-on-bg-basic-emphasis-100-hovered: var(--db-lilac-on-bg-basic-emphasis-100-hovered);
+	--db-adaptive-on-bg-basic-emphasis-100-pressed: var(--db-lilac-on-bg-basic-emphasis-100-pressed);
+	--db-adaptive-on-bg-basic-emphasis-90-default: var(--db-lilac-on-bg-basic-emphasis-90-default);
+	--db-adaptive-on-bg-basic-emphasis-90-hovered: var(--db-lilac-on-bg-basic-emphasis-90-hovered);
+	--db-adaptive-on-bg-basic-emphasis-90-pressed: var(--db-lilac-on-bg-basic-emphasis-90-pressed);
+	--db-adaptive-on-bg-basic-emphasis-80-default: var(--db-lilac-on-bg-basic-emphasis-80-default);
+	--db-adaptive-on-bg-basic-emphasis-80-hovered: var(--db-lilac-on-bg-basic-emphasis-80-hovered);
+	--db-adaptive-on-bg-basic-emphasis-80-pressed: var(--db-lilac-on-bg-basic-emphasis-80-pressed);
+	--db-adaptive-on-bg-basic-emphasis-70-default: var(--db-lilac-on-bg-basic-emphasis-70-default);
+	--db-adaptive-on-bg-basic-emphasis-70-hovered: var(--db-lilac-on-bg-basic-emphasis-70-hovered);
+	--db-adaptive-on-bg-basic-emphasis-70-pressed: var(--db-lilac-on-bg-basic-emphasis-70-pressed);
+	--db-adaptive-on-bg-basic-emphasis-60-default: var(--db-lilac-on-bg-basic-emphasis-60-default);
+	--db-adaptive-on-bg-basic-emphasis-50-default: var(--db-lilac-on-bg-basic-emphasis-50-default);
+	--db-adaptive-bg-inverted-contrast-max-default: var(--db-lilac-bg-inverted-contrast-max-default);
+	--db-adaptive-bg-inverted-contrast-max-hovered: var(--db-lilac-bg-inverted-contrast-max-hovered);
+	--db-adaptive-bg-inverted-contrast-max-pressed: var(--db-lilac-bg-inverted-contrast-max-pressed);
+	--db-adaptive-bg-inverted-contrast-high-default: var(
+		--db-lilac-bg-inverted-contrast-high-default
+	);
+	--db-adaptive-bg-inverted-contrast-high-hovered: var(
+		--db-lilac-bg-inverted-contrast-high-hovered
+	);
+	--db-adaptive-bg-inverted-contrast-high-pressed: var(
+		--db-lilac-bg-inverted-contrast-high-pressed
+	);
+	--db-adaptive-bg-inverted-contrast-low-default: var(--db-lilac-bg-inverted-contrast-low-default);
+	--db-adaptive-bg-inverted-contrast-low-hovered: var(--db-lilac-bg-inverted-contrast-low-hovered);
+	--db-adaptive-bg-inverted-contrast-low-pressed: var(--db-lilac-bg-inverted-contrast-low-pressed);
+	--db-adaptive-on-bg-inverted-default: var(--db-lilac-on-bg-inverted-default);
+	--db-adaptive-on-bg-inverted-hovered: var(--db-lilac-on-bg-inverted-hovered);
+	--db-adaptive-on-bg-inverted-pressed: var(--db-lilac-on-bg-inverted-pressed);
+	--db-adaptive-origin-default: var(--db-lilac-origin-default);
+	--db-adaptive-origin-hovered: var(--db-lilac-origin-hovered);
+	--db-adaptive-origin-pressed: var(--db-lilac-origin-pressed);
+	--db-adaptive-on-origin-default: var(--db-lilac-on-origin-default);
+	--db-adaptive-bg-vibrant-default: var(--db-lilac-bg-vibrant-default);
+	--db-adaptive-bg-vibrant-hovered: var(--db-lilac-bg-vibrant-hovered);
+	--db-adaptive-bg-vibrant-pressed: var(--db-lilac-bg-vibrant-pressed);
+	--db-adaptive-on-bg-vibrant-default: var(--db-lilac-on-bg-vibrant-default);
+	--db-adaptive-on-bg-vibrant-hovered: var(--db-lilac-on-bg-vibrant-hovered);
+	--db-adaptive-on-bg-vibrant-pressed: var(--db-lilac-on-bg-vibrant-pressed);
+
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}
