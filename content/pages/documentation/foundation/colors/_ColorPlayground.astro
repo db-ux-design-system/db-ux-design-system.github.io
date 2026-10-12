@@ -1,9 +1,5 @@
 ---
-import {
-	DBCard,
-	DBPopover,
-	type DBSelectOptionType,
-} from '@db-ux/react-core-components';
+import { DBCard, DBPopover, type DBSelectOptionType } from '@db-ux/react-core-components';
 import Playground from '../_shared/Playground.astro';
 
 const colors: DBSelectOptionType[] = [
@@ -13,6 +9,7 @@ const colors: DBSelectOptionType[] = [
 		options: [
 			{ value: 'neutral', label: 'neutral' },
 			{ value: 'brand', label: 'brand' },
+			{ value: 'lilac', label: 'lilac' },
 			{ value: 'informational', label: 'informational' },
 			{ value: 'warning', label: 'warning' },
 			{ value: 'successful', label: 'successful' },
@@ -51,7 +48,10 @@ const colors: DBSelectOptionType[] = [
 >
 	<DBPopover data-density="functional" width="fixed" gap="true">
 		<button slot="trigger" id="box" class="interactive-box" data-color="neutral">
-			<DBCard behavior="interactive" spacing="none"> Focus Me </DBCard>
+			<DBCard behavior="interactive" spacing="none">
+				{' '}
+				Focus Me{' '}
+			</DBCard>
 		</button>
 	</DBPopover>
 </Playground>
