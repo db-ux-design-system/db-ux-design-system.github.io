@@ -42,6 +42,21 @@ Alle in diesem Release enthaltenen Issues sind am Ende der Seite verlinkt.
 
 Das folgende Refactoring erfordert besondere Aufmerksamkeit. Bestehende Instanzen müssen nach dem Update überprüft werden.
 
+#### Border Radius
+
+Die Border-Radius-Tokens `3xs` bis `3xl` sind jetzt `0`. Komponenten aus dem Design System übernehmen diese Änderung automatisch. `border-radius-full` bleibt unverändert, damit runde Komponenten wie Badges oder Radios ihre Form behalten.
+
+Wenn du `--db-border-radius-*`-Tokens in Custom Components verwendest, prüfe nach dem Update, ob sie dem neuen Markendesign entsprechen. Abgerundete Ecken bei Inputs, Buttons oder Containern sollen gemäß der Token-Änderung eckig werden. Komponenten, die `border-radius-full` für eine runde oder pillenförmige Form nutzen, dürfen bleiben wie sie sind.
+
+<YourAction
+	headline="Deine Aufgabe"
+	actions={[
+		'Prüfe alle Custom Components, die --db-border-radius-*-Tokens verwenden.',
+		'Stelle sicher, dass ehemals abgerundete Ecken (z. B. bei Inputs, Buttons oder Containern) jetzt eckig sind.',
+		'Bestätige, dass Komponenten mit border-radius-full (z. B. Badges, Radios) weiterhin korrekt dargestellt werden.',
+	]}
+/>
+
 #### Heading
 
 - **Alignment-Property entfernt:** Das Alignment ist keine Component Property mehr. Ein anderes Alignment als „Left“ stellst du direkt an der Ebene innerhalb der Komponente ein – an der „Heading“-Textebene (Default Heading) oder am „Container“-Auto-Layout (Custom Heading). Instanzen, die nicht linksbündig waren, sind nach dem Update nicht mehr korrekt verknüpft und müssen korrigiert werden (siehe <a href="/de/dokumentation/lernen/figma#alignment-einstellen">Figma Learn</a>).
@@ -99,6 +114,16 @@ Kopiere den Inhalt des Drawer Headers **vor dem Update der Komponente** – das 
 		'Kopiere den Heading-Text aus dem Drawer Header vor dem Update.',
 		'Aktualisiere die Komponenten-Instanz.',
 		'Trage den kopierten Text in den Textlayer im Children Slot des Drawer Headers ein.',
+		'Setze rounded auf false bei allen Drawer-Instanzen, die noch rounded = true verwenden.',
+	]}
+/>
+
+- **`rounded` ist deprecated:** Die Property `rounded` ist deprecated und wird mit einem der nächsten Major Releases entfernt. Setze `rounded` auf `false`, um das neue Standarderscheinungsbild zu übernehmen. Instanzen, die noch `rounded = true` verwenden, funktionieren weiterhin, sollten aber aktualisiert werden.
+
+<YourAction
+	headline="Deine Aufgabe"
+	actions={[
+		'Setze rounded auf false bei allen Drawer-Instanzen, die noch rounded = true verwenden.',
 	]}
 />
 

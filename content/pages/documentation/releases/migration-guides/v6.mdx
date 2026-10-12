@@ -42,6 +42,20 @@ All issues included in this release are linked at the bottom of the page.
 
 The following refactoring requires special attention. Existing instances must be reviewed after updating.
 
+#### Border Radius
+
+The border radius tokens `3xs` through `3xl` are now `0`. Components from the design system adopt this change automatically. `border-radius-full` stays unchanged, so round components such as Badges or Radios keep their shape.
+
+If you use `--db-border-radius-*` tokens in custom components, verify that they align with the new brand design after updating. Rounded corners on inputs, buttons or containers should become square. Components that rely on `border-radius-full` for a circular or pill shape can stay as they are.
+
+<YourAction
+	actions={[
+		'Check all custom components that reference --db-border-radius-* tokens.',
+		'Verify that corners that were rounded (e.g. on inputs, buttons or containers) are now square.',
+		'Confirm that components using border-radius-full (e.g. Badges, Radios) still render correctly.',
+	]}
+/>
+
 #### Heading
 
 - **Alignment property removed:** The alignment is no longer a component property. Any alignment other than "Left" is set directly on the layer inside the component – on the "Heading" text layer (Default Heading) or on the "Container" auto layout (Custom Heading). Instances that were not left-aligned are no longer correctly linked and must be corrected after updating (see <a href="/documentation/learn/figma#setting-the-alignment">Figma Learn</a>).
@@ -87,6 +101,7 @@ Text content is not overwritten by the update.
 	/>
 </div>
 
+
 <DBNotification semantic="critical" variant="standalone" headline="Important">
 Copy the Drawer Header content **before updating the component** – the update resets the existing text.
 </DBNotification>
@@ -97,6 +112,15 @@ Copy the Drawer Header content **before updating the component** – the update 
 		'Copy the heading text from the Drawer Header before updating.',
 		'Update the component instance.',
 		'Paste the copied text into the text layer inside the Children Slot of the Drawer Header.',
+		'Set rounded to false on all Drawer instances that still use rounded = true.',
+	]}
+/>
+
+- **`rounded` is deprecated:** The `rounded` property is deprecated and will be removed with one of the next major releases. Set `rounded` to `false` to adopt the new default appearance. Instances that still use `rounded = true` continue to work but should be updated.
+
+<YourAction
+	actions={[
+		'Set rounded to false on all Drawer instances that still use rounded = true.',
 	]}
 />
 
