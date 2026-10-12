@@ -42,8 +42,8 @@
  * corners from these tokens, so redefining them on :root switches the whole
  * documentation at once — no per-component rules and no JavaScript.
  *
- * `full` keeps its value, so shapes that rely on a pill or circle stay intact:
- * badges, dots and icon-only buttons.
+ * `full` keeps its value, so round components such as Badges or Radios keep
+ * their shape.
  *
  * The Component Overview keeps its v5/v6 comparison: its own v5 block pins the
  * rounded values on `.dba-main-content:has(…[value='v5']:checked)`, which outranks

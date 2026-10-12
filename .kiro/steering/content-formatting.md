@@ -53,18 +53,18 @@ EN convention follows the [Microsoft](https://learn.microsoft.com/en-us/style-gu
 
 Documentation and Figma spell component and property names **with spaces**, not in the CamelCase form used in code. This applies to both languages and to prose, headings, frontmatter `title`/`headline`, and `componentName` props.
 
-| Write | Not |
-| --- | --- |
-| Control Panel | ControlPanel |
-| Control Panel Navigation | ControlPanel Navigation, CP Navigation |
-| Sub Navigation | SubNavigation |
-| Navigation Item | NavigationItem |
-| Primary Actions, Secondary Actions | PrimaryActions, SecondaryActions |
-| Flat Icon, Drill Down | FlatIcon, DrillDown |
+| Write                                     | Not                                    |
+| ----------------------------------------- | -------------------------------------- |
+| Control Panel                             | ControlPanel                           |
+| Control Panel Navigation                  | ControlPanel Navigation, CP Navigation |
+| Sub Navigation                            | SubNavigation                          |
+| Navigation Item                           | NavigationItem                         |
+| Primary Actions, Secondary Actions        | PrimaryActions, SecondaryActions       |
+| Flat Icon, Drill Down                     | FlatIcon, DrillDown                    |
 | Button Group, Toggle Button, Split Button | ButtonGroup, ToggleButton, SplitButton |
-| Custom Select, Loading Indicator | CustomSelect, LoadingIndicator |
-| Drawer Header, Drawer Footer | DrawerHeader, DrawerFooter |
-| Start Slot, End Slot | StartSlot, EndSlot |
+| Custom Select, Loading Indicator          | CustomSelect, LoadingIndicator         |
+| Drawer Header, Drawer Footer              | DrawerHeader, DrawerFooter             |
+| Start Slot, End Slot                      | StartSlot, EndSlot                     |
 
 ### Never rewrite these
 
@@ -83,14 +83,14 @@ A spaced name cannot take a hyphen from a following German noun — `Control Pan
 - If the whole term is an actual component name, keep it spaced without a hyphen: `Control Panel Navigation`, `Flat Icon Navigation Items`.
 - Otherwise dissolve the compound with a genitive or preposition instead of hyphenating:
 
-| Write | Not |
-| --- | --- |
-| Ebene der Sub Navigation | Sub Navigation-Ebene |
-| Zustände des Control Panels | Control Panel-Zustände |
-| Bereiche des Control Panels | Control Panel-Bereiche |
-| Tree der Sub Navigation | Sub Navigation-Tree |
-| Control Panel in Flat Icon | Flat Icon-Control Panel |
-| Bereich Shell Content | Shell-Content-Bereich |
+| Write                       | Not                     |
+| --------------------------- | ----------------------- |
+| Ebene der Sub Navigation    | Sub Navigation-Ebene    |
+| Zustände des Control Panels | Control Panel-Zustände  |
+| Bereiche des Control Panels | Control Panel-Bereiche  |
+| Tree der Sub Navigation     | Sub Navigation-Tree     |
+| Control Panel in Flat Icon  | Flat Icon-Control Panel |
+| Bereich Shell Content       | Shell-Content-Bereich   |
 
 ### Reserved names
 
@@ -212,7 +212,7 @@ Structure for release notes, based on [Keep a Changelog](https://keepachangelog.
 - Top-level headings (h4 `####`): Group by scope – "Design & Development", "Design", "Development"
 - Use "Design & Development" when a change affects both disciplines equally
 - Subheadings (h5 `#####`): Categorize changes using Keep a Changelog types:
-  - **Added** – new features or capabilities
+  - **Added** – new features or capabilities, including every step up to Beta
   - **Changed** – modifications to existing functionality
   - **Deprecated** – features marked for future removal
   - **Removed** – features that have been deleted
@@ -229,6 +229,12 @@ Structure for release notes, based on [Keep a Changelog](https://keepachangelog.
 - Use sub-bullets for additional details or affected sub-items when needed
 - For deprecation removals, note in parentheses since when the item was deprecated: `(deprecated since v4.6)`
 - When multiple components share the same change, combine them in one line: `- Dialog, Calendar, Pagination: Initial design has been added`
+
+### Status Changes
+
+- A step up to Beta is a regular beta release under **Added**, whether or not the component existed as Concept before. Do not mention the Concept status: `- Breadcrumb, Paragraph, Text Group: These components are now available as a beta release.`
+- Every other status transition belongs under **Changed**, for example a step up from Beta to Stable: `- Tag: The component has been promoted from Beta to Stable.`
+- A move to Deprecated belongs under **Deprecated**
 
 ### Version Bumps
 
