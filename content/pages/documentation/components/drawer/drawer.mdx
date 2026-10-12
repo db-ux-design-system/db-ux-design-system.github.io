@@ -60,7 +60,7 @@ The drawer does not block further work. It is therefore meant for content that i
 
 ### Content
 
-The drawer offers limited space. Multi-step flows and extensive validation are hard to complete and review inside it.
+The drawer is built for dismissal: Escape and a click outside close it at any moment. A flow across several steps, by contrast, relies on being carried through.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -71,7 +71,7 @@ The drawer offers limited space. Multi-step flows and extensive validation are h
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=3-1112&embed-host=share"
-		description="Don't run multi-step processes or complex validation inside the drawer. The limited space hides the overall flow."
+		description="Don't run multi-step processes or complex validation inside the drawer. A click outside interrupts the flow, and more width through `containerSize` does not change that."
 	/>
 </div>
 
@@ -123,7 +123,7 @@ The drawer overlays the entire page, regardless of the edge it appears from. Tha
 
 ### Size Steps
 
-The four steps cover different kinds of content. The right one is the smallest step that carries the content.
+The four steps cover different kinds of content. More area than needed only covers more of the page context.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -134,6 +134,8 @@ The four steps cover different kinds of content. The right one is the smallest s
 		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4984-3&embed-host=share"
 		description="Medium: For forms, lists and more detailed content."
 	/>
+</div>
+<div className="guideline-examples">
 	<GuidelineExample
 		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=5005-6765&embed-host=share"
 		description="Large: The largest fixed step for wide content, such as a table with several columns."
@@ -160,16 +162,6 @@ The four steps cover different kinds of content. The right one is the smallest s
 
 <TeaserCard
 	teasers={[
-		{
-			title: 'Drawer Header',
-			description: 'Upper area of the drawer with title and close button',
-			url: '/documentation/components/drawer/drawer-header',
-		},
-		{
-			title: 'Drawer Footer',
-			description: 'Lower area of the drawer with the actions',
-			url: '/documentation/components/drawer/drawer-footer',
-		},
 		{
 			title: 'Dialog',
 			description: 'Modal overlay for a task that has to be resolved before moving on',

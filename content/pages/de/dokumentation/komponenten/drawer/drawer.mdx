@@ -60,7 +60,7 @@ Der Drawer blockiert die Weiterarbeit nicht. Er ist deshalb für Inhalte gedacht
 
 ### Inhalt
 
-Der Drawer bietet begrenzten Platz. Mehrstufige Abläufe und umfangreiche Validierungen lassen sich darin schwer abschließen und überprüfen.
+Der Drawer ist auf Verwerfen angelegt: Escape und der Klick außerhalb schließen ihn jederzeit. Ein Ablauf über mehrere Schritte baut dagegen darauf, dass er zu Ende geführt wird.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -71,7 +71,7 @@ Der Drawer bietet begrenzten Platz. Mehrstufige Abläufe und umfangreiche Validi
 	<GuidelineExample
 		variant="dont"
 		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=3-1112&embed-host=share"
-		description="Bilde mehrstufige Prozesse und komplexe Validierungen nicht im Drawer ab. Auf dem begrenzten Platz geht der Überblick über den Ablauf verloren."
+		description="Bilde mehrstufige Prozesse und komplexe Validierungen nicht im Drawer ab. Ein Klick außerhalb unterbricht den Ablauf, und mehr Breite über `containerSize` ändert daran nichts."
 	/>
 </div>
 
@@ -123,7 +123,7 @@ Der Drawer überlagert die gesamte Seite, unabhängig davon, von welchem Rand er
 
 ### Größenstufen
 
-Die vier Stufen decken unterschiedliche Inhaltsarten ab. Passend ist die kleinste Stufe, die den Inhalt trägt.
+Die vier Stufen decken unterschiedliche Inhaltsarten ab. Mehr Fläche als nötig verdeckt nur mehr vom Seitenkontext.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -134,6 +134,8 @@ Die vier Stufen decken unterschiedliche Inhaltsarten ab. Passend ist die kleinst
 		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=4984-3&embed-host=share"
 		description="Medium: Für Formulare, Listen und detailliertere Inhalte."
 	/>
+</div>
+<div className="guideline-examples">
 	<GuidelineExample
 		figmaUrl="https://embed.figma.com/design/y9c3hlB0PMdDYj3xLUCRWH/Doku--Drawer-%E2%9C%85?node-id=5005-6765&embed-host=share"
 		description="Large: Die größte feste Stufe für breite Inhalte, etwa eine Table mit mehreren Spalten."
@@ -160,16 +162,6 @@ Die vier Stufen decken unterschiedliche Inhaltsarten ab. Passend ist die kleinst
 
 <TeaserCard
 	teasers={[
-		{
-			title: 'Drawer Header',
-			description: 'Oberer Bereich des Drawers mit Titel und Close-Button',
-			url: '/de/dokumentation/komponenten/drawer/drawer-header',
-		},
-		{
-			title: 'Drawer Footer',
-			description: 'Unterer Bereich des Drawers mit den Aktionen',
-			url: '/de/dokumentation/komponenten/drawer/drawer-footer',
-		},
 		{
 			title: 'Dialog',
 			description:
