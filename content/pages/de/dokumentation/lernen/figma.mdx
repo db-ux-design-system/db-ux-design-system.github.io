@@ -119,6 +119,21 @@ Custom Select Dropdown
 {/* Tipps und Anleitungen für einzelne Komponenten */}
 
 <DBStack gap="medium">
+### Breadcrumb
+
+#### Lange Labels im Popover Item
+
+In der programmierten Komponente wächst das Popover mit seinem Inhalt, sodass lange Labels einzeilig bleiben. In Figma brechen die Labels standardmäßig um. Setze das Breiten-Resize-Verhalten der betroffenen Layer auf „Hug", damit das Verhalten in Figma dem Code entspricht.
+
+<GuidelineExample
+	fullWidth
+	figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=2025-6&embed-host=share"
+	description='Wähle die betroffenen Layer aus und ändere das Breiten-Resize von „Fill" zu „Hug contents", damit das Verhalten dem Code entspricht'
+/>
+
+</DBStack>
+
+<DBStack gap="medium">
 ### Accordion
 
 #### Resize-Verhalten nach dem Bearbeiten
@@ -303,9 +318,7 @@ Start Slot und End Slot des Dialog Headers richten ihren Inhalt an der Höhe des
 <GuidelineExample
 	figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=2025-4&embed-host=share"
 	fullWidth
->
-</GuidelineExample>
-
+></GuidelineExample>
 
 - Elemente **kleiner als `sizing-md`** (Höhe des Close-Buttons): Container mit `min-height=sizing-md` und vertikaler Zentrierung
 - Elemente **höher als `sizing-md`**: Container mit `padding-top=spacing-X` (abhängig von der Höhe des Elements in der ersten Zeile), sodass die erste Zeile vertikal zum Close-Button zentriert bleibt
