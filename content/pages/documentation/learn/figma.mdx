@@ -134,30 +134,6 @@ In the coded component the Popover grows with its content, so long labels stay o
 </DBStack>
 
 <DBStack gap="medium">
-### Accordion
-
-#### Resizing behavior after editing
-
-<DBNotification variant="standalone" semantic="informational">
-	Known Figma bug: changing the item count or item state (open/collapsed) can reset the resizing
-	behavior of accordion items. Re-apply "Fill" or "Hug" after editing.
-</DBNotification>
-
-<div className="guideline-examples">
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion-%E2%9C%85?node-id=5277-7&embed-host=share"
-	description="Place the component and set properties for component and instances"
-/>
-
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion-%E2%9C%85?node-id=5277-8&embed-host=share"
-	description="Set the auto layout behavior of the affected items to hug to fix the bug"
-/>
-</div>
-
-</DBStack>
-
-<DBStack gap="medium">
 ### Button
 #### Multi-line text within Full Width Buttons
 
@@ -365,6 +341,21 @@ To enable automatic line breaks in a Custom Heading, select the "Heading" layer 
 </DBStack>
 
 <DBStack gap="medium">
+### Loading Indicator
+
+#### Multi-line Labels at a Fixed Width
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=2025-4&embed-host=share"
+	layout="side"
+>
+When a circular Loading Indicator has a fixed width and the label is longer than that width, set the `🔀 Multiline` property to true so the label is positioned correctly.
+
+</GuidelineExample>
+
+</DBStack>
+
+<DBStack gap="medium">
 ### Pagination
 
 #### Edge Case Row Wrap
@@ -378,18 +369,6 @@ The `📦 Children` slot is set to Hug, so the row cannot wrap. If the Paginatio
 
 - Hide both `Icon Button → Ghost` instances at Pagination level and insert them as the first and last element in the `📦 Children` slot
 - Set the width resizing behavior of the `📦 Children` container from Hug to Fill
-
-### Loading Indicator
-
-#### Multi-line Labels at a Fixed Width
-
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=2025-4&embed-host=share"
-	layout="side"
->
-When a circular Loading Indicator has a fixed width and the label is longer than that width, set the `🔀 Multiline` property to true so the label is positioned correctly.
-
-</GuidelineExample>
 
 </DBStack>
 

@@ -134,31 +134,6 @@ In der programmierten Komponente wächst das Popover mit seinem Inhalt, sodass l
 </DBStack>
 
 <DBStack gap="medium">
-### Accordion
-
-#### Resize-Verhalten nach dem Bearbeiten
-
-<DBNotification variant="standalone" semantic="informational">
-	Bekannter Figma-Bug: Das Ändern der Item-Anzahl oder des Item-Zustands (offen/eingeklappt) kann
-	das Resize-Verhalten von Accordion-Items zurücksetzen. Wende Fill oder Hug nach dem Bearbeiten
-	erneut an.
-</DBNotification>
-
-<div className="guideline-examples">
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion-%E2%9C%85?node-id=5277-7&embed-host=share"
-	description="Die Komponente platzieren und Eigenschaften für Komponente und Instanzen setzen"
-/>
-
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion-%E2%9C%85?node-id=5277-8&embed-host=share"
-	description="Das Auto-Layout-Verhalten der betroffenen Items auf Hug setzen, um den Bug zu beheben"
-/>
-</div>
-
-</DBStack>
-
-<DBStack gap="medium">
 ### Button
 #### Mehrzeiliger Text in Full-Width-Buttons
 
@@ -365,6 +340,21 @@ Um automatische Zeilenumbrüche in einer Custom Heading zu ermöglichen, wähle 
 </DBStack>
 
 <DBStack gap="medium">
+### Loading Indicator
+
+#### Mehrzeilige Labels bei fixer Breite
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=2025-4&embed-host=share"
+	layout="side"
+>
+Bekommt ein Loading Indicator Circular eine fixe Breite und ist das Label länger als diese Breite, setze die Property `🔀 Multiline` auf true, damit das Label korrekt positioniert wird.
+
+</GuidelineExample>
+
+</DBStack>
+
+<DBStack gap="medium">
 ### Pagination
 
 #### Sonderfall Zeilenumbruch
@@ -378,18 +368,6 @@ Der Slot `📦 Children` ist auf Hug gestellt, die Reihe kann daher nicht umbrec
 
 - Beide Instanzen `Icon Button → Ghost` auf Ebene der Pagination ausblenden und als erstes und letztes Element in den Slot `📦 Children` einfügen
 - Das Breiten-Resize-Verhalten des Containers `📦 Children` von Hug auf Fill stellen
-
-### Loading Indicator
-
-#### Mehrzeilige Labels bei fixer Breite
-
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=2025-4&embed-host=share"
-	layout="side"
->
-Bekommt ein Loading Indicator Circular eine fixe Breite und ist das Label länger als diese Breite, setze die Property `🔀 Multiline` auf true, damit das Label korrekt positioniert wird.
-
-</GuidelineExample>
 
 </DBStack>
 
