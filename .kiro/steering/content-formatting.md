@@ -202,6 +202,31 @@ German umlauts (ä, ö, ü, ß) work fine in JSX description props. Never use AS
 - Focus visuals on a specific rule, decision, or context (e.g. when to use which variant, correct vs. incorrect usage)
 - Guideline visuals demonstrate a Do/Dont; example visuals show a concrete use case, not a component catalogue
 
+### Image ratio must match the Figma frame
+
+`GuidelineExample` does not derive its proportions from the embedded frame. The declared ratio defines the box, and a mismatch leaves large empty areas around the visual. Never accept the default – always verify against the actual frame.
+
+Before setting a ratio, read the real dimensions of the `node-id` referenced in `figmaUrl` (e.g. via the Figma MCP `get_metadata` or `get_screenshot`, which reports `original_width`/`original_height`). Then pick the matching option:
+
+| Frame ratio         | Set                     | Resulting box    |
+| ------------------- | ----------------------- | ---------------- |
+| ≈ 16/9 (1.78:1)     | nothing (default)       | `landscape` 16/9 |
+| ≈ 1/1               | `imageRatio="square"`   | 1/1              |
+| ≈ 4/5 (0.8:1), tall | `imageRatio="portrait"` | 4/5              |
+| anything else       | `fullWidth`             | natural ratio    |
+
+- `fullWidth` sets `aspect-ratio: unset`, so the frame keeps its own proportions. It is the correct choice whenever no preset ratio fits – for example the wide, flat documentation frames of 768 × 216 (≈ 3.56:1).
+- Document frames in one component are often all the same size. Check one, then confirm the others match instead of assuming per-example differences.
+
+### Column layout of examples
+
+Column count comes from the wrapper, not from the ratio:
+
+- Several examples side by side: put them in one `<div className="guideline-examples">` and set **no** width prop. They share the row via `flex: 1 1 0`.
+- `halfWidth` is only for a **single** example that should not span the full width. Two `halfWidth` items in one wrapper exceed 100 % together with the `gap` and wrap onto separate rows.
+- `fullWidth` always occupies its own row.
+- Below 767 px content width every example collapses to one column. The documentation content column is narrower than the browser window, so verify the rendered width rather than the viewport.
+
 ## Release Notes Structure
 
 Structure for release notes, based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).

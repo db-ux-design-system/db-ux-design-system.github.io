@@ -1,0 +1,167 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Breadcrumb'
+title: 'Breadcrumb'
+description: 'The breadcrumb shows the position of the current page within the site hierarchy and opens the path back to the higher-level pages.'
+shortDescription: 'Secondary navigation that shows the path to the current page.'
+align: start
+toc: true
+status: 'beta'
+order: 1
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Jump directly to a higher-level page
+- Provide orientation alongside the main navigation
+- Collapse long paths behind a truncation
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards path="?path=/docs/components-dbbreadcrumb-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Usage
+
+The breadcrumb supplements wayfinding but does not represent the full navigation structure. It therefore sits alongside the main navigation rather than in its place.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4014-32&embed-host=share"
+		description="Use the breadcrumb in addition to the main navigation to show the path to the current page."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4014-33&embed-host=share"
+		description="Don't use the breadcrumb as the only means of navigation. It only reaches the own hierarchy and not all areas of the site."
+	/>
+</div>
+
+### Path
+
+The breadcrumb represents the hierarchy, not the history. The path therefore stays the same for a given page, regardless of how users got there.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4016-35&embed-host=share"
+		description="Show the hierarchical path to the current page, regardless of how the user got there."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4017-38&embed-host=share"
+		description="Don't reconstruct the breadcrumb from the user's click history. Repeated and back-and-forth steps make the path confusing."
+	/>
+</div>
+
+### Labeling
+
+A breadcrumb item and the page it links to carry the same name. That match makes the page's place in the path recognizable.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=1-1132&embed-host=share"
+		description="Use the page title as the breadcrumb label so item and target page are clearly linked."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=1-1133&embed-host=share"
+		description="Don't give the breadcrumb item a different name than the page title. Mismatched labels make the path harder to understand."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Examples
+
+### Truncation with Max Items
+
+`maxItems` defines how many items are shown at most; the default is `4`. Once the path exceeds the limit, the middle items collapse behind a truncation.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4016-36&embed-host=share"
+		description="The middle items are collapsed and expand on a click on the truncation."
+	/>
+</div>
+
+### Truncation with the Popover Item
+
+The breadcrumb popover item is placed manually and shows the collapsed levels in a popover on hover. The length of the path stays unchanged.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4016-37&embed-host=share"
+		description="Manual truncation by inserting a breadcrumb popover item."
+	/>
+</div>
+
+### Breadcrumb on Mobile
+
+On mobile the breadcrumb automatically reduces to the current page and the level directly before it. That keeps the path readable on small viewports.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4017-39&embed-host=share"
+		description="Only the parent level and the current page are visible; the preceding item moves one level up."
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Breadcrumb" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Breadcrumb Item',
+			description: 'Single level within the breadcrumb',
+			url: '/documentation/components/breadcrumb/breadcrumb-item',
+		},
+		{
+			title: 'Breadcrumb Popover Item',
+			description: 'Breadcrumb truncation holding the collapsed levels in a popover',
+			url: '/documentation/components/breadcrumb/breadcrumb-popover-item',
+		},
+	]}
+/>
+
+</DBSection>

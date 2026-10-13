@@ -1,0 +1,131 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Breadcrumb Popover Item'
+title: 'Breadcrumb Popover Item'
+description: 'The breadcrumb popover item collapses the intermediate levels of the breadcrumb into a truncation and shows them in a popover on hover.'
+shortDescription: 'Breadcrumb truncation holding the collapsed levels in a popover.'
+align: start
+toc: true
+status: 'sub'
+subParent: 'Breadcrumb'
+order: 3
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Collapse intermediate levels into a truncation
+- Review the collapsed levels in a popover
+- Save space on narrow viewports
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards path="?path=/docs/components-dbbreadcrumbpopoveritem-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Usage
+
+The breadcrumb popover item is placed manually and does not appear automatically like the `maxItems` truncation. It keeps the length of the path constant because the collapsed levels stay inside the popover.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4009-25&embed-host=share"
+		description="Place the popover item manually to save space on narrow screens while intermediate levels stay reachable."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4009-26&embed-host=share"
+		description="Don't use the automatic maxItems truncation when the path is too long for a narrow screen. Its expanded items push the breadcrumb beyond the viewport."
+	/>
+</div>
+
+### No Mixing
+
+Both mechanisms collapse the same path, but in different ways. Used together, the behavior becomes unpredictable.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4017-44&embed-host=share"
+		description="Decide on one truncation approach per breadcrumb, either the popover item or maxItems."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4017-46&embed-host=share"
+		description="Don't combine the popover item with the maxItems truncation in the same breadcrumb. Two mechanisms for collapsing the same path make the behavior unpredictable."
+	/>
+</div>
+
+### Path Anchors
+
+The first item and the current page bound the path and carry the orientation. Only the levels in between are dispensable.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4017-45&embed-host=share"
+		description="Keep the first item and the current page visible, and collapse only the levels in between into the popover."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4017-47&embed-host=share"
+		description="Don't move the first item or the current page into the popover. Hiding the anchors removes the user's orientation."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Breadcrumb Popover Item" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Breadcrumb',
+			description: 'Secondary navigation that shows the path to the current page',
+			url: '/documentation/components/breadcrumb/breadcrumb',
+		},
+		{
+			title: 'Breadcrumb Item',
+			description: 'Single level within the breadcrumb',
+			url: '/documentation/components/breadcrumb/breadcrumb-item',
+		},
+		{
+			title: 'Popover',
+			description: 'Floating overlay for contextual content triggered by user interaction',
+			url: '/documentation/components/popover',
+		},
+	]}
+/>
+
+</DBSection>

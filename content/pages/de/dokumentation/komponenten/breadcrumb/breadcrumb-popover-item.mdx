@@ -1,0 +1,131 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Breadcrumb Popover Item'
+title: 'Breadcrumb Popover Item'
+description: 'Das Breadcrumb Popover Item klappt die Zwischenebenen der Breadcrumb zu einer Truncation zusammen und zeigt sie beim Hover in einem Popover.'
+shortDescription: 'Truncation der Breadcrumb mit den eingeklappten Ebenen im Popover.'
+align: start
+toc: true
+status: 'sub'
+subParent: 'Breadcrumb'
+order: 3
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Zwischenebenen zu einer Truncation einklappen
+- Eingeklappte Ebenen im Popover einsehen
+- Platz auf schmalen Viewports sparen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbbreadcrumbpopoveritem-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Verwendung
+
+Das Breadcrumb Popover Item wird manuell gesetzt und erscheint nicht automatisch wie die Truncation über `maxItems`. Es hält die Länge des Pfads konstant, weil die eingeklappten Ebenen im Popover bleiben.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4009-25&embed-host=share"
+		description="Setze das Breadcrumb Popover Item manuell, um auf schmalen Viewports Platz zu sparen und die Zwischenebenen erreichbar zu halten."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4009-26&embed-host=share"
+		description="Verwende die automatische Truncation über maxItems nicht, wenn der Pfad für einen schmalen Viewport zu lang ist. Ihre ausgeklappten Items schieben die Breadcrumb über den Viewport hinaus."
+	/>
+</div>
+
+### Keine Kombination
+
+Beide Mechanismen klappen denselben Pfad ein, aber auf unterschiedliche Weise. Gemeinsam eingesetzt wird das Verhalten unvorhersehbar.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4017-44&embed-host=share"
+		description="Entscheide dich je Breadcrumb für einen Mechanismus, entweder das Breadcrumb Popover Item oder maxItems."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4017-46&embed-host=share"
+		description="Kombiniere das Breadcrumb Popover Item und maxItems nicht in derselben Breadcrumb. Zwei Mechanismen für dasselbe Einklappen machen das Verhalten unvorhersehbar."
+	/>
+</div>
+
+### Anker im Pfad
+
+Das erste Item und die aktuelle Seite begrenzen den Pfad und tragen die Orientierung. Entbehrlich sind nur die Ebenen dazwischen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4017-45&embed-host=share"
+		description="Lass das erste Item und die aktuelle Seite sichtbar und klappe nur die Ebenen dazwischen in das Popover."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4017-47&embed-host=share"
+		description="Verschiebe das erste Item und die aktuelle Seite nicht in das Popover. Ohne die beiden Anker verlieren Nutzende die Orientierung."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Breadcrumb Popover Item" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Breadcrumb',
+			description: 'Sekundäre Navigation, die den Pfad zur aktuellen Seite zeigt',
+			url: '/de/dokumentation/komponenten/breadcrumb/breadcrumb',
+		},
+		{
+			title: 'Breadcrumb Item',
+			description: 'Einzelne Ebene innerhalb der Breadcrumb',
+			url: '/de/dokumentation/komponenten/breadcrumb/breadcrumb-item',
+		},
+		{
+			title: 'Popover',
+			description: 'Schwebendes Overlay für kontextbezogene Inhalte, ausgelöst durch Interaktion',
+			url: '/de/dokumentation/komponenten/popover',
+		},
+	]}
+/>
+
+</DBSection>
