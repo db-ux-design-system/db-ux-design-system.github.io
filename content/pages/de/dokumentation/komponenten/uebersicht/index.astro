@@ -1,0 +1,49 @@
+---
+import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
+import { DBSection, type MaxWidthType } from '@db-ux/react-core-components';
+import {
+	ComponentOverview,
+	VersionSwitch,
+} from '../../../../documentation/components/overview/_ComponentOverview.tsx';
+import {
+	SECTIONS,
+	SECTION_HEADINGS,
+} from '../../../../documentation/components/overview/_sections.ts';
+import { SectionHeading } from '../../../../documentation/components/overview/_components/SectionHeading.tsx';
+import '../../../../documentation/components/overview/ComponentOverview.css';
+
+// eslint-disable-next-line astro/no-exports-from-components -- Exported for ChildPageOverview glob
+export const frontmatter: DocumentationFrontMatter = {
+	headline: 'Übersicht',
+	title: 'Übersicht',
+	description:
+		'Alle Komponenten des Design Systems auf einen Blick, jeweils in ausgewählten Varianten.',
+	align: 'start',
+	toc: true,
+	tocMaxDepth: 2,
+	sectionSpacing: 'small',
+	sectionWidth: 'auto',
+	// See the English page for why this is `order: 0` with no `status`.
+	order: 0,
+};
+
+// See the English page for why `auto` is cast rather than omitted.
+const sectionWidth = 'auto' as MaxWidthType;
+---
+
+<DocumentationLayout frontmatter={frontmatter} headings={SECTION_HEADINGS}>
+	<DBSection spacing="small" width={sectionWidth}>
+		<VersionSwitch locale="de" />
+		{SECTIONS.map(({ id, title, component }) => (
+			<Fragment>
+				<SectionHeading id={id} title={title} locale="de" base={import.meta.env.BASE_URL} />
+				<ComponentOverview component={component} locale="de" />
+			</Fragment>
+		))}
+	</DBSection>
+
+	<script>
+		import '../../../../documentation/components/overview/_sticky-controls.ts';
+		import '../../../../documentation/components/overview/_mount-init.ts';
+	</script>
+</DocumentationLayout>

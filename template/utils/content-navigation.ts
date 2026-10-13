@@ -168,21 +168,39 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 		}
 	}
 
-	// Fallback: DE titles for .astro pages (not available in client bundle via glob)
-	const astroTitlesFallback: Record<string, string> = {
-		'documentation/foundation/colors': 'Farben',
-		'documentation/foundation/typography': 'Typografie',
-		'documentation/foundation/spacing': 'Abstände',
-		'documentation/foundation/opacity': 'Transparenz',
-		'documentation/foundation/elevation': 'Schattierung',
-		'documentation/foundation/sizing': 'Größen',
-		'documentation/foundation/border-radius': 'Eckenradius',
-		'documentation/foundation/border-width': 'Strichstärke',
-		'documentation/icons': 'Icons',
-		'documentation/releases/release-notes': 'Release Notes',
+	/*
+	 * Fallback navigation metadata for .astro pages.
+	 *
+	 * This function runs in the client bundle as well, because the Shell is
+	 * `client:only="react"` and rebuilds the tree there. An .astro module imported
+	 * from client code exposes no `frontmatter`, so for those pages the loop below
+	 * sees empty frontmatter: the DE title is missing (the DE glob only matches md
+	 * and mdx), the EN title falls back to the URL segment, and `order` is lost.
+	 *
+	 * `titleDe` is required for every DE .astro page. `title` and `order` only need
+	 * an entry where the slug-derived title would be wrong or the page is
+	 * explicitly positioned — they duplicate the page's own frontmatter and must be
+	 * kept in sync with it.
+	 */
+	const astroNavFallback: Record<string, { title?: string; titleDe: string; order?: number }> = {
+		'documentation/foundation/colors': { titleDe: 'Farben' },
+		'documentation/foundation/typography': { titleDe: 'Typografie' },
+		'documentation/foundation/spacing': { titleDe: 'Abstände' },
+		'documentation/foundation/opacity': { titleDe: 'Transparenz' },
+		'documentation/foundation/elevation': { titleDe: 'Schattierung' },
+		'documentation/foundation/sizing': { titleDe: 'Größen' },
+		'documentation/foundation/border-radius': { titleDe: 'Eckenradius' },
+		'documentation/foundation/border-width': { titleDe: 'Strichstärke' },
+		'documentation/icons': { titleDe: 'Icons' },
+		'documentation/releases/release-notes': { titleDe: 'Release Notes' },
+		'documentation/components/overview': {
+			// No `title`: the slug already yields "Overview".
+			titleDe: 'Übersicht',
+			order: 0,
+		},
 	};
-	for (const [key, title] of Object.entries(astroTitlesFallback)) {
-		if (!deTitles.has(key)) deTitles.set(key, title);
+	for (const [key, fallback] of Object.entries(astroNavFallback)) {
+		if (!deTitles.has(key)) deTitles.set(key, fallback.titleDe);
 	}
 
 	const nodes = new Map<string, NavigationItem>();
@@ -196,13 +214,16 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 		if (rel === '') continue;
 		if (fm.nav === false) continue;
 
+		const navFallback = astroNavFallback[rel];
 		const title =
-			fm.title || (segments.length ? toTitleFromSegment(segments[segments.length - 1]) : 'Home');
+			fm.title ||
+			navFallback?.title ||
+			(segments.length ? toTitleFromSegment(segments[segments.length - 1]) : 'Home');
 		const hidePage = fm.hidePage === true;
 		const isSubNavigation = fm.isSubNavigation ?? false;
 		const iconTrailing = fm.iconTrailing;
 		const disabled = fm.isMenuItemDisabled === true;
-		const order = getOrder(fm);
+		const order = getOrder(fm) ?? navFallback?.order;
 		const status = fm.status;
 		const sortChildrenDescending = fm.sortChildrenDescending === true;
 		const externalUrl = fm.externalUrl;

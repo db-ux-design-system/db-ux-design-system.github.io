@@ -1,0 +1,71 @@
+---
+import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
+import { DBSection, type MaxWidthType } from '@db-ux/react-core-components';
+import { ComponentOverview, VersionSwitch } from './_ComponentOverview.tsx';
+import { SECTIONS, SECTION_HEADINGS } from './_sections.ts';
+import { SectionHeading } from './_components/SectionHeading.tsx';
+import './ComponentOverview.css';
+
+// eslint-disable-next-line astro/no-exports-from-components -- Exported for ChildPageOverview glob
+export const frontmatter: DocumentationFrontMatter = {
+	headline: 'Overview',
+	title: 'Overview',
+	description: 'All components of the Design System at a glance, each shown in selected variants.',
+	align: 'start',
+	toc: true,
+	tocMaxDepth: 2,
+	sectionSpacing: 'small',
+	sectionWidth: 'auto',
+	/*
+	 * First item in the Components section. No other top-level page there sets
+	 * `order`, so they all fall back to sorting by title and this page stays
+	 * ahead of them. `status` is deliberately unset: it keeps the page in the
+	 * first status band and out of the status-filtered teaser grids on the
+	 * Components index, where a page about components does not belong.
+	 */
+	order: 0,
+};
+
+/*
+ * How this section opts out of inline padding. The layout already wraps the page
+ * content in a `DBSection` with `width="large"`, so this inner one only needs
+ * block spacing — but `width` is the property that controls `padding-inline` and
+ * has no value meaning none: `ContainerWidthProps` lists `full`, `medium`,
+ * `large` and `small`, so the value is cast. `auto` then matches no
+ * `.db-section[data-width=…]` rule and the padding stays unset, while omitting
+ * `width` would match `.db-section:not([data-width])` and add
+ * `var(--db-spacing-fixed-md)` on top of the padding the outer section already
+ * applies — measured as a 16px indent of the content against the hero above it,
+ * which is what the foundation pages show.
+ *
+ * So the value is deliberately invalid and works by not being recognised. It is
+ * the only way the component offers to reach this layout; an `auto` or `none`
+ * value in `ContainerWidthProps` would replace it.
+ */
+const sectionWidth = 'auto' as MaxWidthType;
+---
+
+<DocumentationLayout frontmatter={frontmatter} headings={SECTION_HEADINGS}>
+	<DBSection spacing="small" width={sectionWidth}>
+		<VersionSwitch locale="en" />
+		{
+			/*
+			 * Rendered without a client directive, as the MDX version did: Astro
+			 * renders the specimens to static HTML server-side. The specimens that
+			 * need JavaScript render an empty placeholder here and are mounted by
+			 * _mount-init.ts, see MountedComponent.
+			 */
+			SECTIONS.map(({ id, title, component }) => (
+				<Fragment>
+					<SectionHeading id={id} title={title} locale="en" base={import.meta.env.BASE_URL} />
+					<ComponentOverview component={component} locale="en" />
+				</Fragment>
+			))
+		}
+	</DBSection>
+
+	<script>
+		import './_sticky-controls.ts';
+		import './_mount-init.ts';
+	</script>
+</DocumentationLayout>
