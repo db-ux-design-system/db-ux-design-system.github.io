@@ -54,15 +54,23 @@ Use only categories that contain entries:
 
 ## Status changes
 
-A component that already existed as Concept or Beta is not a new component. Describe the status transition under `✨ Geändert`:
+A step up to Beta is announced as a regular beta release under `✨ Hinzugefügt`, no matter whether the component existed as Concept before. The Concept status is not mentioned:
+
+```text
+✨ Hinzugefügt
+
+- **Heading**: Die Komponente ist jetzt als Beta-Release verfügbar
+  - Default Headings für die Level H1–H6
+  - Custom Heading mit Slots
+  - Dokumentation: [Deutsch](DE_URL) · [English](EN_URL)
+```
+
+Every other status transition stays under `✨ Geändert`, for example a step up from Beta to Stable or a move to Deprecated:
 
 ```text
 ✨ Geändert
 
-- **Heading**: Die Komponente wurde von Concept zu Beta hochgestuft
-  - Default Headings für die Level H1–H6
-  - Custom Heading mit Slots
-  - Dokumentation: [Deutsch](DE_URL) · [English](EN_URL)
+- **Tag**: Die Komponente wurde von Beta zu Stable hochgestuft
 ```
 
 ## Multiple releases in one post

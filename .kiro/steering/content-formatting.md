@@ -53,18 +53,18 @@ EN convention follows the [Microsoft](https://learn.microsoft.com/en-us/style-gu
 
 Documentation and Figma spell component and property names **with spaces**, not in the CamelCase form used in code. This applies to both languages and to prose, headings, frontmatter `title`/`headline`, and `componentName` props.
 
-| Write | Not |
-| --- | --- |
-| Control Panel | ControlPanel |
-| Control Panel Navigation | ControlPanel Navigation, CP Navigation |
-| Sub Navigation | SubNavigation |
-| Navigation Item | NavigationItem |
-| Primary Actions, Secondary Actions | PrimaryActions, SecondaryActions |
-| Flat Icon, Drill Down | FlatIcon, DrillDown |
+| Write                                     | Not                                    |
+| ----------------------------------------- | -------------------------------------- |
+| Control Panel                             | ControlPanel                           |
+| Control Panel Navigation                  | ControlPanel Navigation, CP Navigation |
+| Sub Navigation                            | SubNavigation                          |
+| Navigation Item                           | NavigationItem                         |
+| Primary Actions, Secondary Actions        | PrimaryActions, SecondaryActions       |
+| Flat Icon, Drill Down                     | FlatIcon, DrillDown                    |
 | Button Group, Toggle Button, Split Button | ButtonGroup, ToggleButton, SplitButton |
-| Custom Select, Loading Indicator | CustomSelect, LoadingIndicator |
-| Drawer Header, Drawer Footer | DrawerHeader, DrawerFooter |
-| Start Slot, End Slot | StartSlot, EndSlot |
+| Custom Select, Loading Indicator          | CustomSelect, LoadingIndicator         |
+| Drawer Header, Drawer Footer              | DrawerHeader, DrawerFooter             |
+| Start Slot, End Slot                      | StartSlot, EndSlot                     |
 
 ### Never rewrite these
 
@@ -83,14 +83,14 @@ A spaced name cannot take a hyphen from a following German noun — `Control Pan
 - If the whole term is an actual component name, keep it spaced without a hyphen: `Control Panel Navigation`, `Flat Icon Navigation Items`.
 - Otherwise dissolve the compound with a genitive or preposition instead of hyphenating:
 
-| Write | Not |
-| --- | --- |
-| Ebene der Sub Navigation | Sub Navigation-Ebene |
-| Zustände des Control Panels | Control Panel-Zustände |
-| Bereiche des Control Panels | Control Panel-Bereiche |
-| Tree der Sub Navigation | Sub Navigation-Tree |
-| Control Panel in Flat Icon | Flat Icon-Control Panel |
-| Bereich Shell Content | Shell-Content-Bereich |
+| Write                       | Not                     |
+| --------------------------- | ----------------------- |
+| Ebene der Sub Navigation    | Sub Navigation-Ebene    |
+| Zustände des Control Panels | Control Panel-Zustände  |
+| Bereiche des Control Panels | Control Panel-Bereiche  |
+| Tree der Sub Navigation     | Sub Navigation-Tree     |
+| Control Panel in Flat Icon  | Flat Icon-Control Panel |
+| Bereich Shell Content       | Shell-Content-Bereich   |
 
 ### Reserved names
 
@@ -202,6 +202,31 @@ German umlauts (ä, ö, ü, ß) work fine in JSX description props. Never use AS
 - Focus visuals on a specific rule, decision, or context (e.g. when to use which variant, correct vs. incorrect usage)
 - Guideline visuals demonstrate a Do/Dont; example visuals show a concrete use case, not a component catalogue
 
+### Image ratio must match the Figma frame
+
+`GuidelineExample` does not derive its proportions from the embedded frame. The declared ratio defines the box, and a mismatch leaves large empty areas around the visual. Never accept the default – always verify against the actual frame.
+
+Before setting a ratio, read the real dimensions of the `node-id` referenced in `figmaUrl` (e.g. via the Figma MCP `get_metadata` or `get_screenshot`, which reports `original_width`/`original_height`). Then pick the matching option:
+
+| Frame ratio         | Set                     | Resulting box    |
+| ------------------- | ----------------------- | ---------------- |
+| ≈ 16/9 (1.78:1)     | nothing (default)       | `landscape` 16/9 |
+| ≈ 1/1               | `imageRatio="square"`   | 1/1              |
+| ≈ 4/5 (0.8:1), tall | `imageRatio="portrait"` | 4/5              |
+| anything else       | `fullWidth`             | natural ratio    |
+
+- `fullWidth` sets `aspect-ratio: unset`, so the frame keeps its own proportions. It is the correct choice whenever no preset ratio fits – for example the wide, flat documentation frames of 768 × 216 (≈ 3.56:1).
+- Document frames in one component are often all the same size. Check one, then confirm the others match instead of assuming per-example differences.
+
+### Column layout of examples
+
+Column count comes from the wrapper, not from the ratio:
+
+- Several examples side by side: put them in one `<div className="guideline-examples">` and set **no** width prop. They share the row via `flex: 1 1 0`.
+- `halfWidth` is only for a **single** example that should not span the full width. Two `halfWidth` items in one wrapper exceed 100 % together with the `gap` and wrap onto separate rows.
+- `fullWidth` always occupies its own row.
+- Below 767 px content width every example collapses to one column. The documentation content column is narrower than the browser window, so verify the rendered width rather than the viewport.
+
 ## Release Notes Structure
 
 Structure for release notes, based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
@@ -212,7 +237,7 @@ Structure for release notes, based on [Keep a Changelog](https://keepachangelog.
 - Top-level headings (h4 `####`): Group by scope – "Design & Development", "Design", "Development"
 - Use "Design & Development" when a change affects both disciplines equally
 - Subheadings (h5 `#####`): Categorize changes using Keep a Changelog types:
-  - **Added** – new features or capabilities
+  - **Added** – new features or capabilities, including every step up to Beta
   - **Changed** – modifications to existing functionality
   - **Deprecated** – features marked for future removal
   - **Removed** – features that have been deleted
@@ -229,6 +254,12 @@ Structure for release notes, based on [Keep a Changelog](https://keepachangelog.
 - Use sub-bullets for additional details or affected sub-items when needed
 - For deprecation removals, note in parentheses since when the item was deprecated: `(deprecated since v4.6)`
 - When multiple components share the same change, combine them in one line: `- Dialog, Calendar, Pagination: Initial design has been added`
+
+### Status Changes
+
+- A step up to Beta is a regular beta release under **Added**, whether or not the component existed as Concept before. Do not mention the Concept status: `- Breadcrumb, Paragraph, Text Group: These components are now available as a beta release.`
+- Every other status transition belongs under **Changed**, for example a step up from Beta to Stable: `- Tag: The component has been promoted from Beta to Stable.`
+- A move to Deprecated belongs under **Deprecated**
 
 ### Version Bumps
 

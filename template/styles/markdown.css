@@ -1,13 +1,18 @@
 code {
 	border-radius: var(--db-border-radius-xs);
-	background-color: #24292e !important;
-	color: #e1e4e8 !important;
+	background-color: #24292e;
+	color: #e1e4e8;
 }
 
 /* Inline code wraps only at sensible points instead of breaking mid-token,
    and never overflows its container. Scoped to inline code only –
-   code blocks (pre > code) keep their own wrap/scroll behavior. */
+   code blocks (pre > code) keep their own wrap/scroll behavior.
+   The dense inline-code runs in the release notes made the dark fill hard to
+   read, so inline code uses a subtle, token-based surface that adapts to
+   Light/Dark Mode. Code blocks (pre > code) keep the dark theme above. */
 :not(pre) > code {
+	background-color: var(--db-informational-bg-basic-level-3-default);
+	color: var(--db-informational-on-bg-basic-emphasis-80-default);
 	overflow-wrap: anywhere;
 	word-break: normal;
 }

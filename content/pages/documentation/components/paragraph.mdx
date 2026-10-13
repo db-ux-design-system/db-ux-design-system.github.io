@@ -1,0 +1,77 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Paragraph'
+title: 'Paragraph'
+description: 'The paragraph renders a continuous block of body text in which single words or passages can be emphasized.'
+shortDescription: 'Single block of body text.'
+align: start
+toc: true
+status: 'beta'
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Render continuous body text as a single block
+- Emphasize individual words or passages
+- Stack several paragraphs inside a text group
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards path="?path=/docs/components-dbparagraph-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+### Emphasis
+
+Emphasis works through contrast. Bold and italic make single spots stand out as long as the rest of the text stays unchanged.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/uQWIOez4kH98MCBTiZRjGp/Doku--Paragraph?node-id=1-1132&embed-host=share"
+		description="Emphasize single words or short phrases to highlight what matters within the text."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/uQWIOez4kH98MCBTiZRjGp/Doku--Paragraph?node-id=1-1133&embed-host=share"
+		description="Setting a whole paragraph in bold or italic removes the contrast, so nothing stands out any more. Long passages also become harder to read. Limit bold and italic to the spots that need emphasis."
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Paragraph" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Text Group',
+			description: 'Container for several text blocks with automatic spacing',
+			url: '/documentation/components/text-group',
+		},
+	]}
+/>
+
+</DBSection>
