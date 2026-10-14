@@ -9,6 +9,6 @@ date: '2026-10-15'
 
 #### Deprecated
 
-- DB Theme Illustrative Icons: The library is deprecated and will be removed with v7.0.
-  - Existing icons keep working until the removal, but should no longer be used in new designs and implementations.
-  - There is no successor library. The DB Theme Icons are planned to become available in larger sizes.
+- DB Theme Illustrative Icons: The library is deprecated. A date for its removal has not been set yet.
+  - Illustrative icons that have no counterpart in the DB Theme Icons yet and work well as functional icons are being integrated into the DB Theme Icons. There, they will also be available in larger sizes.
+  - Existing icons keep working. In new designs and implementations, use DB Theme Icons when a matching icon is available.
