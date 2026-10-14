@@ -1,0 +1,77 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Paragraph'
+title: 'Paragraph'
+description: 'Der Paragraph gibt einen fortlaufenden Block Bodytext aus, in dem sich einzelne Wörter oder Passagen betonen lassen.'
+shortDescription: 'Einzelner Block Bodytext.'
+align: start
+toc: true
+status: 'beta'
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Fortlaufenden Bodytext als einzelnen Block ausgeben
+- Einzelne Wörter oder Passagen betonen
+- Mehrere Paragraphen in einer Text Group stapeln
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbparagraph-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+### Betonung
+
+Betonung wirkt über Kontrast. Fett und Kursiv heben einzelne Stellen heraus, solange der übrige Text unverändert bleibt.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/uQWIOez4kH98MCBTiZRjGp/Doku--Paragraph?node-id=1-1132&embed-host=share"
+		description="Betone einzelne Wörter oder kurze Passagen, um das Wichtige im Text hervorzuheben."
+	/>
+	<GuidelineExample
+		variant="caution"
+		figmaUrl="https://embed.figma.com/design/uQWIOez4kH98MCBTiZRjGp/Doku--Paragraph?node-id=1-1133&embed-host=share"
+		description="Ein ganzer Paragraph in Fett oder Kursiv nimmt den Kontrast, dann sticht nichts mehr heraus. Lange Passagen werden dadurch außerdem schwerer zu lesen. Beschränke Fett und Kursiv auf die Stellen, die Betonung brauchen."
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Paragraph" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Text Group',
+			description: 'Container für mehrere Textblöcke mit automatischem Abstand',
+			url: '/de/dokumentation/komponenten/text-group',
+		},
+	]}
+/>
+
+</DBSection>

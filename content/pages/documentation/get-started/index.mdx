@@ -9,9 +9,15 @@ description: 'Everything you need to build consistent and accessible digital exp
 ---
 
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import { DBStack } from '@db-ux/react-core-components';
+import { DBStack, DBNotification } from '@db-ux/react-core-components';
 
 <DBStack gap="medium">
+<DBNotification variant="standalone" semantic="informational" headline="Note">
+	All examples in this documentation are based on the DB Theme. If you use the Design System as a
+	White Label or with a different Theme, visual results can differ because a different Foundation
+	applies.
+</DBNotification>
+
 <TeaserCard
 	columns={2}
 	spacing="large"

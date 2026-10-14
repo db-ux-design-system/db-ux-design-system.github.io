@@ -119,27 +119,17 @@ Custom Select Dropdown
 {/* Tipps und Anleitungen für einzelne Komponenten */}
 
 <DBStack gap="medium">
-### Accordion
+### Breadcrumb
 
-#### Resize-Verhalten nach dem Bearbeiten
+#### Lange Labels im Popover Item
 
-<DBNotification variant="standalone" semantic="informational">
-	Bekannter Figma-Bug: Das Ändern der Item-Anzahl oder des Item-Zustands (offen/eingeklappt) kann
-	das Resize-Verhalten von Accordion-Items zurücksetzen. Wende Fill oder Hug nach dem Bearbeiten
-	erneut an.
-</DBNotification>
-
-<div className="guideline-examples">
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion-%E2%9C%85?node-id=5277-7&embed-host=share"
-	description="Die Komponente platzieren und Eigenschaften für Komponente und Instanzen setzen"
-/>
+In der programmierten Komponente wächst das Popover mit seinem Inhalt, sodass lange Labels einzeilig bleiben. In Figma brechen die Labels standardmäßig um. Setze das Breiten-Resize-Verhalten der betroffenen Layer auf „Hug", damit das Verhalten in Figma dem Code entspricht.
 
 <GuidelineExample
-	figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion-%E2%9C%85?node-id=5277-8&embed-host=share"
-	description="Das Auto-Layout-Verhalten der betroffenen Items auf Hug setzen, um den Bug zu beheben"
+	fullWidth
+	figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=2025-6&embed-host=share"
+	description='Wähle die betroffenen Layer aus und ändere das Breiten-Resize von „Fill" zu „Hug contents", damit das Verhalten dem Code entspricht'
 />
-</div>
 
 </DBStack>
 
@@ -303,9 +293,7 @@ Start Slot und End Slot des Dialog Headers richten ihren Inhalt an der Höhe des
 <GuidelineExample
 	figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=2025-4&embed-host=share"
 	fullWidth
->
-</GuidelineExample>
-
+></GuidelineExample>
 
 - Elemente **kleiner als `sizing-md`** (Höhe des Close-Buttons): Container mit `min-height=sizing-md` und vertikaler Zentrierung
 - Elemente **höher als `sizing-md`**: Container mit `padding-top=spacing-X` (abhängig von der Höhe des Elements in der ersten Zeile), sodass die erste Zeile vertikal zum Close-Button zentriert bleibt
@@ -314,6 +302,25 @@ Start Slot und End Slot des Dialog Headers richten ihren Inhalt an der Höhe des
 
 <DBStack gap="medium">
 ### Heading
+
+#### Alignment einstellen
+
+Das Alignment steht nicht mehr als Component Property zur Verfügung. Für ein anderes Alignment als „Left“ stellst du es direkt an der Ebene innerhalb der Komponente ein.
+
+<div className="guideline-examples">
+<GuidelineExample
+	fullWidth
+	figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4160-87&embed-host=share"
+	description='Default Heading: Wähle die „Heading“-Textebene und stelle die Textausrichtung ein'
+/>
+
+<GuidelineExample
+	fullWidth
+	figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4161-368&embed-host=share"
+	description='Custom Heading: Wähle die „Container“-Ebene und stelle die Ausrichtung des Auto Layouts ein'
+/>
+</div>
+
 #### Mehrzeiliger Text bei Custom Headings
 
 Um automatische Zeilenumbrüche in einer Custom Heading zu ermöglichen, wähle die „Heading"-Ebene innerhalb der Komponente und ändere das Breitenverhalten von „Hug" auf „Fill".
@@ -333,6 +340,21 @@ Um automatische Zeilenumbrüche in einer Custom Heading zu ermöglichen, wähle 
 </DBStack>
 
 <DBStack gap="medium">
+### Loading Indicator
+
+#### Mehrzeilige Labels bei fixer Breite
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=2025-4&embed-host=share"
+	layout="side"
+>
+Bekommt ein Loading Indicator Circular eine fixe Breite und ist das Label länger als diese Breite, setze die Property `🔀 Multiline` auf true, damit das Label korrekt positioniert wird.
+
+</GuidelineExample>
+
+</DBStack>
+
+<DBStack gap="medium">
 ### Pagination
 
 #### Sonderfall Zeilenumbruch
@@ -346,18 +368,6 @@ Der Slot `📦 Children` ist auf Hug gestellt, die Reihe kann daher nicht umbrec
 
 - Beide Instanzen `Icon Button → Ghost` auf Ebene der Pagination ausblenden und als erstes und letztes Element in den Slot `📦 Children` einfügen
 - Das Breiten-Resize-Verhalten des Containers `📦 Children` von Hug auf Fill stellen
-
-### Loading Indicator
-
-#### Mehrzeilige Labels bei fixer Breite
-
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=2025-4&embed-host=share"
-	layout="side"
->
-Bekommt ein Loading Indicator Circular eine fixe Breite und ist das Label länger als diese Breite, setze die Property `🔀 Multiline` auf true, damit das Label korrekt positioniert wird.
-
-</GuidelineExample>
 
 </DBStack>
 

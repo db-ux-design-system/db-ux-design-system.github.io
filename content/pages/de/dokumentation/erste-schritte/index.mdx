@@ -9,9 +9,15 @@ description: 'Alles, was du brauchst, um konsistente und barrierefreie digitale 
 ---
 
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import { DBStack } from '@db-ux/react-core-components';
+import { DBStack, DBNotification } from '@db-ux/react-core-components';
 
 <DBStack gap="medium">
+<DBNotification variant="standalone" semantic="informational" headline="Hinweis">
+	Alle Beispiele in dieser Dokumentation basieren auf dem DB Theme. Nutzt du das Design System als
+	White Label oder mit einem anderen Theme, können die visuellen Ergebnisse abweichen, weil dann
+	eine andere Foundation greift.
+</DBNotification>
+
 <TeaserCard
 	columns={2}
 	spacing="large"

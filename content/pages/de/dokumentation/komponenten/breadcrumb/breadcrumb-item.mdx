@@ -1,0 +1,126 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Breadcrumb Item'
+title: 'Breadcrumb Item'
+description: 'Das Breadcrumb Item bildet eine Ebene innerhalb der Breadcrumb ab und verweist als Link auf die zugehörige Seite.'
+shortDescription: 'Einzelne Ebene innerhalb der Breadcrumb.'
+align: start
+toc: true
+status: 'sub'
+subParent: 'Breadcrumb'
+order: 2
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Ebene im Pfad abbilden
+- Übergeordnete Seite verlinken
+- Icon zur schnelleren Wiedererkennung ergänzen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbbreadcrumbitem-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Icons
+
+Icons sind in der Breadcrumb optional. Sobald ein Item ein Icon trägt, wirkt der Pfad nur mit einem durchgehenden Muster einheitlich.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4009-20&embed-host=share"
+		description="Gib entweder allen Breadcrumb Items ein Icon oder keinem, damit der Pfad einheitlich bleibt."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4009-21&embed-host=share"
+		description="Gib einem einzelnen Breadcrumb Item kein Icon, wenn die übrigen keines tragen. Der Pfad wirkt dann unausgewogen und überladen. Das erste Item ist davon ausgenommen."
+	/>
+</div>
+
+### No Text
+
+`noText` blendet das Label aus und zeigt das Item als reines Icon. Das funktioniert nur, wenn das Icon die Ebene allein identifiziert.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4017-42&embed-host=share"
+		description="Setze noText nur am ersten Item des Pfads und kombiniere es mit einem eindeutig erkennbaren Icon wie house."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4017-43&embed-host=share"
+		description="Blende das Label an den übrigen Items nicht aus. Ohne Text sind diese Ebenen nicht mehr identifizierbar."
+	/>
+</div>
+
+### Separator
+
+Der `separator` steht zwischen den Items und ist rein visuell. Er zieht keine Aufmerksamkeit von den Items ab.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4017-40&embed-host=share"
+		description="Verwende einen separator einheitlich über alle Items, entweder chevron oder slash."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4017-41&embed-host=share"
+		description="Mische chevron und slash nicht innerhalb eines Pfads. Wechselnde Separatoren wirken unbeabsichtigt und stören den Pfad."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Breadcrumb Item" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Breadcrumb',
+			description: 'Sekundäre Navigation, die den Pfad zur aktuellen Seite zeigt',
+			url: '/de/dokumentation/komponenten/breadcrumb/breadcrumb',
+		},
+		{
+			title: 'Breadcrumb Popover Item',
+			description: 'Truncation der Breadcrumb mit den eingeklappten Ebenen im Popover',
+			url: '/de/dokumentation/komponenten/breadcrumb/breadcrumb-popover-item',
+		},
+	]}
+/>
+
+</DBSection>
