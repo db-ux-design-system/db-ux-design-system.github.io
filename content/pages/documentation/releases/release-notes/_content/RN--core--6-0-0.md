@@ -17,9 +17,10 @@ date: '2026-10-15'
 #### Changed
 
 - **BREAKING CHANGE** (visual) Brand Design: All affected components have been updated to the new brand design.
-  - Border Radius: The tokens 3xs–3xl are now 0px. `border-radius-full` stays unchanged, so round components such as Badges or Radios keep their shape.
+  - Border Radius: The tokens 3xs–3xl are now 0 px. `border-radius-full` stays unchanged, so round components such as Badges or Radios keep their shape.
   - Affected components: Accordion, Badge, Button, Card, Checkbox, Control Panel, Custom Select, Dialog, Drawer, Heading, Input, Link, Loading Indicator, Notification, Pagination, Popover, Select, Shell, Tabs, Tag, Textarea, Tooltip
 - **BREAKING CHANGE** Heading: The "Size" property has been replaced by "Visual Size". Visual Size decouples the appearance from the semantic level, so every heading can take on the visual size of any other level without losing its own semantics.
+  - Design: Instances that used one of the removed sizes are no longer correctly linked and have to be corrected after updating.
 
 #### Deprecated
 
@@ -28,6 +29,7 @@ date: '2026-10-15'
 #### Removed
 
 - **BREAKING CHANGE** Heading: The "Alignment" and "Paragraph Spacing" properties have been removed.
+  - Design: Alignment is set on the layer inside the component. Instances with an alignment other than "Left" are no longer correctly linked and have to be corrected after updating.
   - Development: Alignment is set with `text-align` on the heading itself, block spacing with the `data-text-spacing` opt-in from the Foundation.
 
 ### Design
@@ -35,6 +37,7 @@ date: '2026-10-15'
 #### Changed
 
 - **BREAKING CHANGE** Drawer: The heading text of the Drawer Header now sits in a Children Slot, consistent with the Dialog Header and the development implementation.
+  - Copy the heading text before updating – the update resets the existing content.
 
 ### Development
 

@@ -17,9 +17,10 @@ date: '2026-10-15'
 #### Geändert
 
 - **BREAKING CHANGE** (visual) Markendesign: Alle betroffenen Komponenten wurden auf das neue Markendesign aktualisiert.
-  - Eckenradius: Die Tokens 3xs–3xl sind jetzt 0px. `border-radius-full` bleibt unverändert, damit runde Komponenten wie Badges oder Radios ihre Form behalten.
+  - Eckenradius: Die Tokens 3xs–3xl sind jetzt 0 px. `border-radius-full` bleibt unverändert, damit runde Komponenten wie Badges oder Radios ihre Form behalten.
   - Betroffene Komponenten: Accordion, Badge, Button, Card, Checkbox, Control Panel, Custom Select, Dialog, Drawer, Heading, Input, Link, Loading Indicator, Notification, Pagination, Popover, Select, Shell, Tabs, Tag, Textarea, Tooltip
 - **BREAKING CHANGE** Heading: Die Property „Size“ wurde durch „Visual Size“ ersetzt. Die Visual Size entkoppelt die Darstellung von der semantischen Stufe, sodass jede Heading visuell die Größe einer beliebigen anderen Stufe einnehmen kann, ohne ihre eigene Semantik zu verlieren.
+  - Design: Instanzen mit einer der entfernten Sizes sind nach dem Update nicht mehr korrekt verknüpft und müssen nachgezogen werden.
 
 #### Deprecated
 
@@ -28,6 +29,7 @@ date: '2026-10-15'
 #### Entfernt
 
 - **BREAKING CHANGE** Heading: Die Properties „Alignment“ und „Paragraph Spacing“ wurden entfernt.
+  - Design: Die Ausrichtung setzt du am Layer innerhalb der Komponente. Instanzen mit einer anderen Ausrichtung als „Left“ sind nach dem Update nicht mehr korrekt verknüpft und müssen nachgezogen werden.
   - Entwicklung: Die Ausrichtung setzt du mit `text-align` auf der Heading selbst, den Blockabstand über das Opt-in `data-text-spacing` aus der Foundation.
 
 ### Design
@@ -35,6 +37,7 @@ date: '2026-10-15'
 #### Geändert
 
 - **BREAKING CHANGE** Drawer: Der Heading-Text des Drawer Headers liegt jetzt in einem Children Slot, konsistent zum Dialog Header und zur Entwicklung.
+  - Kopiere den Heading-Text vor dem Update – das Update setzt den bestehenden Inhalt zurück.
 
 ### Entwicklung
 
