@@ -1,7 +1,7 @@
 ---
 hidePage: true
 category: 'DB Theme Illustrative Icons'
-version: 'v3.1.0'
+version: 'v3.4.0'
 date: '2026-10-15'
 ---
 
