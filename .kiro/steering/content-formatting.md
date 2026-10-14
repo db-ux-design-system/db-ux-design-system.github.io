@@ -321,6 +321,8 @@ date: '2026-07-14'
 
 Structure for the announcement comment posted in the Teams channel for minor releases (see [Kommunikationskanäle](https://db-ux-design-system.github.io/de/dokumentation/releases/versionierung#kommunikationskanäle)). One posting summarizes all libraries released in that cycle, derived from their release notes.
 
+The Markdown notation used in this section documents the structure only. The finished posting is delivered as plain text, because Teams does not render Markdown on paste – see the community teams posting steering under "Output format: plain text, not Markdown".
+
 - Language: German – the Teams channel primarily serves the German-speaking community
 - Anyone announcing a release can write this posting – not only contributors using Figma-specific tooling
 
@@ -366,6 +368,37 @@ Appears once at the very end of the whole posting, not per library:
 Danke für eure Unterstützung, liebe [DB UX Community](<Teams-Link>) 💕
 Viel Freude beim Entdecken des neuen Updates.
 ```
+
+#### Major releases
+
+Major releases additionally open with an intro, placed above the first library block and separated from it by a horizontal rule. It names the released version and links it to its GitHub milestone, and points to the migration guide. With several libraries in the cycle, the intro names the one the release is about.
+
+```
+🎉 Neues vom DB UX Design System!
+Wie versprochen, versorgen wir euch mit den neuesten Infos zum heutigen Major Release. Heute geht's um Core v6.0.0.
+Bitte beachtet die Informationen für die Breaking Changes im → Migration-Guide.
+
+---
+```
+
+The milestone URL follows the pattern that `getRoadmapUrl` builds in the release notes overview (`content/pages/**/releases/release-notes/index.astro`), so the link matches the one on the platform.
+
+Major releases use a longer closing instead. It replaces the standard closing, appears once at the very end of the posting, and is separated from the last changelog entry by a horizontal rule (`---`). The `→` targets are links: Design System Platform to the platform start page, Migration-Guide to the migration guide of that major version, GitHub to the repository.
+
+```
+---
+
+📖 Mehr davon? Die ganze Dokumentation findet ihr wie immer in unserer **→ Design System Platform**.
+🚨 Alles zu den Breaking Changes? Findet ihr im **→ Migration-Guide**.
+📣 Feedback oder Fragen? Erzählt es uns auf **→ Github**, hier in den Kommentaren oder kontaktiert das Team per E-Mail (db-ux-designsystem@deutschebahn.com). Wir freuen uns immer von euch zu hören.
+💬 Für Fragen rund um das Design System könnt ihr gerne in unsere Help, Hints & Hugs Design System Sprechstunde kommen - alle 2 Wochen Mittwochs um 9 Uhr (Termin steht im Community-Kalender).
+🤝 Noch was? Wenn ihr diesen Post gesehen habt, lasst gerne ein Support-Emoji da.
+
+💖 Danke für eure Unterstützung, liebe @Design System Community.
+Viel Freude beim Entdecken der neuen Updates.
+```
+
+The wording of this block is fixed – do not rewrite it to match the house style, and keep the plural address ("ihr/euch") even though documentation uses "du".
 
 ### Version bumps
 
