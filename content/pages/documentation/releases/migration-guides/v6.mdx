@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 title: 'v6.0'
 headline: 'Migration to v6.0'
-description: ''
+description: 'The update to v6.0 brings all components in line with the new brand design, replaces the Heading "Size" property with "Visual Size", and moves the heading text of the Drawer Header into a Children Slot.'
 align: start
 order: 5
 toc: true
@@ -16,9 +16,6 @@ import { DBSection, DBNotification } from '@db-ux/react-core-components';
 import YourAction from '@template/components/YourAction/YourAction';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import CardTeaserRow from "@template/components/CardTeaser/CardTeaserRow";
-
-{/* TODO: GitHub Link für Dev Release ergänzen */}
-{/* TODO: Description im Frontmatter ergänzen */}
 
 <DBSection spacing="small" width="auto">
 
@@ -121,6 +118,26 @@ Copy the Drawer Header content **before updating the component** – the update 
 <YourAction
 	actions={[
 		'Set rounded to false on all Drawer instances that still use rounded = true.',
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Deprecations
+
+### DB Theme Illustrative Icons
+
+The DB Theme Illustrative Icons library is deprecated and will be removed with v7.0. This affects both design and development. Existing icons keep working until the removal, so this update requires no immediate rework. Do not use illustrative icons in new designs and implementations, and plan the replacement of existing usages before the update to v7.0.
+
+There is no successor library. The DB Theme Icons are planned to become available in larger sizes.
+
+<YourAction
+	actions={[
+		'Stop using illustrative icons in new designs and implementations.',
+		'Review where illustrative icons are currently in use, in Figma files as well as in code.',
+		'Plan the replacement of these usages before the update to v7.0.',
 	]}
 />
 
