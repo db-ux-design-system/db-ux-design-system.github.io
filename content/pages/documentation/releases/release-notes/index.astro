@@ -86,6 +86,16 @@ function getRoadmapUrl(category: string, version: string): string | null {
 	const params = new URLSearchParams({ filterQuery });
 	return `${baseUrl}?${params.toString()}`;
 }
+
+// Migration guides exist for major versions only, and only for Core.
+function getMigrationGuideUrl(category: string, version: string): string | null {
+	if (category !== 'Core' || !/^v\d+\.0\.0$/.test(version)) {
+		return null;
+	}
+
+	const major = version.replace(/^v/, '').split('.')[0];
+	return `/documentation/releases/migration-guides/v${major}`;
+}
 ---
 
 <DocumentationLayout
@@ -106,6 +116,7 @@ function getRoadmapUrl(category: string, version: string): string | null {
 		{
 			releaseNotes.map((note) => {
 				const roadmapUrl = getRoadmapUrl(note.category, note.version);
+				const migrationGuideUrl = getMigrationGuideUrl(note.category, note.version);
 				return (
 					<article class="release-note" data-category={note.category}>
 						<DBStack direction="row" justifyContent="space-between" alignment="center">
@@ -122,16 +133,25 @@ function getRoadmapUrl(category: string, version: string): string | null {
 						</DBStack>
 
 						<note.Content />
-						{roadmapUrl && (
-							<a
-								href={roadmapUrl}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="db-link roadmap-link"
-								data-content="external"
-							>
-								View on Roadmap
-							</a>
+						{(migrationGuideUrl || roadmapUrl) && (
+							<div class="release-note-links">
+								{migrationGuideUrl && (
+									<a href={migrationGuideUrl} class="db-link">
+										Migration Guide
+									</a>
+								)}
+								{roadmapUrl && (
+									<a
+										href={roadmapUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+										class="db-link"
+										data-content="external"
+									>
+										View on Roadmap
+									</a>
+								)}
+							</div>
 						)}
 						<DBDivider />
 					</article>

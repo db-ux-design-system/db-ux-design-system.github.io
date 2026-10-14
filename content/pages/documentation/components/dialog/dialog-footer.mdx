@@ -22,6 +22,7 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 - Offer actions for completing and cancelling
+- Keep a footnote permanently visible
 - Keep actions reachable while scrolling
 
 <DBSection spacing="small" width="auto">
@@ -38,9 +39,9 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-### Footer Content
+### Content
 
-The dialog footer does not scroll along. It is therefore meant for actions and for notes that have to stay permanently visible.
+The dialog footer does not scroll along. It is therefore meant for actions and for notes that have to stay permanently visible, such as a footnote.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -57,7 +58,7 @@ The dialog footer does not scroll along. It is therefore meant for actions and f
 
 ### Cancel Action
 
-For a confirmation or an input, a cancelling action belongs in the dialog footer. The close button in the dialog header alone is not enough, because it is visually weaker and only labelled generically e.g. with a.o. "Close" and people expect both options as equal buttons in a decision.
+For a confirmation or an input, a cancelling action belongs in the dialog footer. The close button in the dialog header alone is not enough, because it is visually weaker and people expect both options as equal buttons in a decision.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -128,7 +129,7 @@ The confirming action sits on the right, cancelling and additional actions to it
 	teasers={[
 		{
 			title: 'Dialog',
-			description: 'Parent component that contains the dialog footer',
+			description: 'Modal overlay for a task that has to be resolved before moving on',
 			url: '/documentation/components/dialog/dialog',
 		},
 		{
