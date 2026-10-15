@@ -1,0 +1,126 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Breadcrumb Item'
+title: 'Breadcrumb Item'
+description: 'The breadcrumb item represents one level within the breadcrumb and links to its page.'
+shortDescription: 'Single level within the breadcrumb.'
+align: start
+toc: true
+status: 'sub'
+subParent: 'Breadcrumb'
+order: 2
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Represent one level in the path
+- Link to a higher-level page
+- Add an icon for faster recognition
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards path="?path=/docs/components-dbbreadcrumbitem-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Icons
+
+Icons are optional in the breadcrumb. As soon as one item carries an icon, the path only reads consistently with a continuous pattern.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4009-20&embed-host=share"
+		description="Give either all items an icon or none, so the breadcrumb stays visually consistent."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4009-21&embed-host=share"
+		description="Don't add an icon to just one item while the others have none. The path looks unbalanced and cluttered. The first item is excluded from this rule."
+	/>
+</div>
+
+### No Text
+
+`noText` hides the label and shows the item as an icon only. That works only when the icon identifies the level on its own.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4017-42&embed-host=share"
+		description="Use noText only on the first item of the path, paired with a clearly recognizable icon such as house."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4017-43&embed-host=share"
+		description="Don't hide the label on the remaining items. Without text these levels become unidentifiable."
+	/>
+</div>
+
+### Separator
+
+The `separator` sits between the items and is purely visual. It does not draw attention away from the items.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4017-40&embed-host=share"
+		description="Use one separator style consistently across all items, either chevron or slash."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4017-41&embed-host=share"
+		description="Don't mix chevron and slash in the same breadcrumb. Alternating separators look unintentional and disturb the path."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Breadcrumb Item" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Breadcrumb',
+			description: 'Secondary navigation that shows the path to the current page',
+			url: '/documentation/components/breadcrumb/breadcrumb',
+		},
+		{
+			title: 'Breadcrumb Popover Item',
+			description: 'Breadcrumb truncation holding the collapsed levels in a popover',
+			url: '/documentation/components/breadcrumb/breadcrumb-popover-item',
+		},
+	]}
+/>
+
+</DBSection>

@@ -7,9 +7,9 @@ date: '2026-09-10'
 
 ### Design & Development
 
-#### Changed
+#### Added
 
-- Footer: The component has been promoted from Concept to Beta.
+- Footer: The component is now available as a beta release.
   - Footer Content and Footer Meta have been added as subcomponents.
 
 ### Design

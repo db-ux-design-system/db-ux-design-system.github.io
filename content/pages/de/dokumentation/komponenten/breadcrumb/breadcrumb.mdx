@@ -1,0 +1,167 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Breadcrumb'
+title: 'Breadcrumb'
+description: 'Die Breadcrumb zeigt die Position der aktuellen Seite in der Seitenhierarchie und öffnet den Weg zurück zu den übergeordneten Ebenen.'
+shortDescription: 'Sekundäre Navigation, die den Pfad zur aktuellen Seite zeigt.'
+align: start
+toc: true
+status: 'beta'
+order: 1
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Übergeordnete Ebenen direkt ansteuern
+- Orientierung neben der Hauptnavigation geben
+- Lange Pfade über eine Truncation einklappen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbbreadcrumb-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Verwendung
+
+Die Breadcrumb ergänzt die Wegfindung, bildet die Navigationsstruktur aber nicht vollständig ab. Sie steht deshalb neben der Hauptnavigation und nicht an deren Stelle.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4014-32&embed-host=share"
+		description="Setze die Breadcrumb zusätzlich zur Hauptnavigation ein, um den Pfad zur aktuellen Seite zu zeigen."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4014-33&embed-host=share"
+		description="Setze die Breadcrumb nicht als einzige Navigation ein. Über sie erreichen Nutzer:innen nur die eigene Hierarchie und nicht alle Bereiche der Website."
+	/>
+</div>
+
+### Pfad
+
+Die Breadcrumb bildet die Hierarchie ab, nicht den Verlauf. Der Pfad bleibt damit für eine Seite immer gleich, unabhängig davon, wie Nutzer:innen dorthin gekommen sind.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4016-35&embed-host=share"
+		description="Zeige den hierarchischen Pfad zur aktuellen Seite, unabhängig vom Weg dorthin."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4017-38&embed-host=share"
+		description="Baue die Breadcrumb nicht aus dem Klickverlauf auf. Wiederholte und zurückführende Schritte machen den Pfad unverständlich."
+	/>
+</div>
+
+### Benennung
+
+Das Breadcrumb Item und die Seite, auf die es verweist, tragen denselben Namen. Diese Übereinstimmung macht erkennbar, wo im Pfad die Seite liegt.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=1-1132&embed-host=share"
+		description="Übernimm den Seitentitel als Label des Breadcrumb Items, damit Item und Zielseite erkennbar zusammengehören."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=1-1133&embed-host=share"
+		description="Benenne das Breadcrumb Item nicht anders als den Seitentitel. Abweichende Labels erschweren das Verständnis des Pfads."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Beispiele
+
+### Truncation über Max Items
+
+`maxItems` legt fest, wie viele Items höchstens erscheinen; der Default ist `4`. Überschreitet der Pfad die Grenze, klappen die mittleren Items hinter einer Truncation zusammen.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4016-36&embed-host=share"
+		description="Die mittleren Items sind eingeklappt. Ein Klick auf die Truncation klappt sie aus."
+	/>
+</div>
+
+### Truncation über das Popover Item
+
+Das Breadcrumb Popover Item wird manuell gesetzt und zeigt die eingeklappten Ebenen beim Hover in einem Popover. Die Länge des Pfads bleibt dabei unverändert.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4016-37&embed-host=share"
+		description="Manuelle Truncation durch ein eingesetztes Breadcrumb Popover Item."
+	/>
+</div>
+
+### Reduktion auf Mobile
+
+Auf Mobile reduziert sich die Breadcrumb automatisch auf die aktuelle Seite und die Ebene direkt darüber. Der Pfad bleibt damit auf kleinen Viewports lesbar.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		fullWidth
+		figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=4017-39&embed-host=share"
+		description="Sichtbar sind nur die übergeordnete Ebene und die aktuelle Seite. Das vorangestellte Item führt eine Ebene nach oben."
+	/>
+</div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Breadcrumb" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Breadcrumb Item',
+			description: 'Einzelne Ebene innerhalb der Breadcrumb',
+			url: '/de/dokumentation/komponenten/breadcrumb/breadcrumb-item',
+		},
+		{
+			title: 'Breadcrumb Popover Item',
+			description: 'Truncation der Breadcrumb mit den eingeklappten Ebenen im Popover',
+			url: '/de/dokumentation/komponenten/breadcrumb/breadcrumb-popover-item',
+		},
+	]}
+/>
+
+</DBSection>

@@ -119,26 +119,17 @@ Custom Select Dropdown
 {/* Tips and how-tos for individual components */}
 
 <DBStack gap="medium">
-### Accordion
+### Breadcrumb
 
-#### Resizing behavior after editing
+#### Long labels inside the Popover Item
 
-<DBNotification variant="standalone" semantic="informational">
-	Known Figma bug: changing the item count or item state (open/collapsed) can reset the resizing
-	behavior of accordion items. Re-apply "Fill" or "Hug" after editing.
-</DBNotification>
-
-<div className="guideline-examples">
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion-%E2%9C%85?node-id=5277-7&embed-host=share"
-	description="Place the component and set properties for component and instances"
-/>
+In the coded component the Popover grows with its content, so long labels stay on a single line. In Figma the labels wrap by default. Set the width resizing behavior of the affected layers to "Hug" so the Figma behavior matches the code.
 
 <GuidelineExample
-	figmaUrl="https://embed.figma.com/design/LMNsFNqNZRD6Ey1D1paqCV/Doku--Accordion-%E2%9C%85?node-id=5277-8&embed-host=share"
-	description="Set the auto layout behavior of the affected items to hug to fix the bug"
+	fullWidth
+	figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=2025-6&embed-host=share"
+	description='Select the affected layers and change the width resizing from "Fill" to "Hug contents" to match the coded behavior'
 />
-</div>
 
 </DBStack>
 
@@ -312,6 +303,25 @@ The start and end slot of the dialog header align their content with the height 
 
 <DBStack gap="medium">
 ### Heading
+
+#### Setting the Alignment
+
+The alignment is no longer available as a component property. For any alignment other than "Left", set it directly on the layer inside the component.
+
+<div className="guideline-examples">
+<GuidelineExample
+	fullWidth
+	figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4160-87&embed-host=share"
+	description='Default Heading: select the "Heading" text layer and set the text alignment'
+/>
+
+<GuidelineExample
+	fullWidth
+	figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4161-368&embed-host=share"
+	description='Custom Heading: select the "Container" layer and set the alignment of the auto layout'
+/>
+</div>
+
 #### Multi-line text within Custom Headings
 
 To enable automatic line breaks in a Custom Heading, select the "Heading" layer inside the component and set the width resizing behavior from "Hug" to "Fill".
@@ -331,6 +341,21 @@ To enable automatic line breaks in a Custom Heading, select the "Heading" layer 
 </DBStack>
 
 <DBStack gap="medium">
+### Loading Indicator
+
+#### Multi-line Labels at a Fixed Width
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=2025-4&embed-host=share"
+	layout="side"
+>
+When a circular Loading Indicator has a fixed width and the label is longer than that width, set the `🔀 Multiline` property to true so the label is positioned correctly.
+
+</GuidelineExample>
+
+</DBStack>
+
+<DBStack gap="medium">
 ### Pagination
 
 #### Edge Case Row Wrap
@@ -344,18 +369,6 @@ The `📦 Children` slot is set to Hug, so the row cannot wrap. If the Paginatio
 
 - Hide both `Icon Button → Ghost` instances at Pagination level and insert them as the first and last element in the `📦 Children` slot
 - Set the width resizing behavior of the `📦 Children` container from Hug to Fill
-
-### Loading Indicator
-
-#### Multi-line Labels at a Fixed Width
-
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/bHzo18blEeRJQGWXvmavvC/Doku--Loading-Indicator?node-id=2025-4&embed-host=share"
-	layout="side"
->
-When a circular Loading Indicator has a fixed width and the label is longer than that width, set the `🔀 Multiline` property to true so the label is positioned correctly.
-
-</GuidelineExample>
 
 </DBStack>
 
