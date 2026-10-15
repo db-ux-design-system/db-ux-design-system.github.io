@@ -11,6 +11,7 @@ date: '2026-10-15'
 
 - Breadcrumb, Paragraph, Text Group: Diese Komponenten sind jetzt als Beta-Release verfügbar.
 - Farben: Lilac ist als neue Markenfarbe in der Farbpalette der Foundation verfügbar.
+- DB Logo: verwendet das neue DB Red
 - Typografie: Der neue Headline-Font steht als zusätzlicher Schriftschnitt in der Foundation bereit.
 - Heading: H1 erhält „Wide ExtraBlack“ als zusätzliche Font-Weight-Property.
 
