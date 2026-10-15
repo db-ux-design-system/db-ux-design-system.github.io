@@ -16,7 +16,7 @@ date: '2026-10-15'
 
 #### Geändert
 
-- **BREAKING CHANGE** (visual) Markendesign: Alle betroffenen Komponenten wurden auf das neue Markendesign aktualisiert.
+- **BREAKING CHANGE** (visuell) Markendesign: Alle betroffenen Komponenten wurden auf das neue Markendesign aktualisiert.
   - Eckenradius: Die Tokens 3xs–3xl sind jetzt 0 px. `border-radius-full` bleibt unverändert, damit runde Komponenten wie Badges oder Radios ihre Form behalten.
   - Betroffene Komponenten: Accordion, Badge, Button, Card, Checkbox, Control Panel, Custom Select, Dialog, Drawer, Heading, Input, Link, Loading Indicator, Notification, Pagination, Popover, Select, Shell, Tabs, Tag, Textarea, Tooltip
 - **BREAKING CHANGE** Heading: Die Property „Size“ wurde durch „Visual Size“ ersetzt. Die Visual Size entkoppelt die Darstellung von der semantischen Stufe, sodass jede Heading visuell die Größe einer beliebigen anderen Stufe einnehmen kann, ohne ihre eigene Semantik zu verlieren.
