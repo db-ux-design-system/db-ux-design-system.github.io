@@ -28,8 +28,6 @@
 		inset-block-start: 0;
 		inline-size: var(--db-border-width-sm);
 		background-color: var(--db-brand-on-bg-basic-emphasis-70-default);
-
-		/* border-radius: var(--db-border-radius-full); */
 		transition: none;
 		pointer-events: none;
 		z-index: 1;
@@ -43,7 +41,6 @@
 	inline-size: var(--db-border-width-sm);
 	background-color: var(--db-brand-on-bg-basic-emphasis-70-default);
 
-	/* border-radius: var(--db-border-radius-full); */
 	transition:
 		transform 0.3s ease,
 		height 0.3s ease;
