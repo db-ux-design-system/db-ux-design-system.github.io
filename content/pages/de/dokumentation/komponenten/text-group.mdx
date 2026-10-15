@@ -1,0 +1,131 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Text Group'
+title: 'Text Group'
+description: 'Die Text Group stapelt mehrere Textblöcke und leitet den Abstand zwischen ihnen automatisch aus der jeweiligen Zeilenhöhe ab.'
+shortDescription: 'Container für mehrere Textblöcke mit automatischem Abstand.'
+align: start
+toc: true
+status: 'beta'
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Mehrere Paragraphen und Headings zu einem Textabschnitt gruppieren
+- Abstand zwischen Blöcken aus der Zeilenhöhe ableiten
+- Lesehierarchie aus Headings und Paragraphen aufbauen
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+<ResourceCards path="?path=/docs/components-dbtextgroup-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Abstand
+
+Der Abstand zwischen Textblöcken entsteht auf zwei Wegen. Die Text Group leitet ihn aus der Zeilenhöhe ab, ein Container oder Stack setzt ihn als festen Gap über ein `spacing`-Token.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/osMRGfMob0Zg1Oib7E7bob/Doku--Text-Group?node-id=1-1132&embed-host=share"
+		description="Verwende die Text Group, wenn sich der Abstand zwischen Headings und Paragraphen aus der Zeilenhöhe ableiten soll."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/osMRGfMob0Zg1Oib7E7bob/Doku--Text-Group?node-id=1-1133&embed-host=share"
+		description="Überschreibe den automatischen Abstand innerhalb einer Text Group nicht mit einem manuellen Gap. Ein fester Gap gilt für alle Elemente gleich und skaliert nicht mit deren Zeilenhöhe. Verwende dafür einen Container oder Stack mit einem spacing-Token."
+	/>
+</div>
+
+### Hierarchie
+
+Überschriften und Paragraphen bilden zusammen die Lesehierarchie des Textabschnitts. Jede Überschrift führt ihren Abschnitt ein, und die Ebenen steigen von oben nach unten ab.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/osMRGfMob0Zg1Oib7E7bob/Doku--Text-Group?node-id=4003-12&embed-host=share"
+		description="Ordne die Überschriftenebenen in klarer Folge an und stelle die zugehörigen Paragraphen dahinter."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/osMRGfMob0Zg1Oib7E7bob/Doku--Text-Group?node-id=4003-13&embed-host=share"
+		description="Setze die Überschriftenebenen nicht in beliebiger Reihenfolge ein. Eine unklare Hierarchie macht den Abschnitt schwer erfassbar."
+	/>
+</div>
+
+### Ein H1 pro Seite
+
+Das `h1` benennt die Seite als Ganzes und kommt deshalb nur einmal vor, auch bei mehreren Text Groups.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/osMRGfMob0Zg1Oib7E7bob/Doku--Text-Group?node-id=4003-15&embed-host=share"
+		description="Verwende ein einzelnes h1 als Seitentitel und h2 bis h6 für die Abschnitte innerhalb der Text Groups."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/osMRGfMob0Zg1Oib7E7bob/Doku--Text-Group?node-id=4003-16&embed-host=share"
+		description="Verteile mehrere h1 nicht über die Text Groups einer Seite. Mehrere oberste Ebenen brechen die Dokumentstruktur und erschweren die Navigation mit Screenreadern."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Text Group" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verwandte Inhalte
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Heading',
+			description:
+				'Strukturiert Inhalte mit sechs semantischen Heading-Stufen, optional mit Slots für zusätzliche Elemente',
+			url: '/de/dokumentation/komponenten/heading',
+		},
+		{
+			title: 'Paragraph',
+			description: 'Einzelner Block Bodytext',
+			url: '/de/dokumentation/komponenten/paragraph',
+		},
+		{
+			title: 'Stack',
+			description:
+				'Layout-Komponente zur Anordnung von Elementen in vertikalem oder horizontalem Fluss',
+			url: '/de/dokumentation/komponenten/stack',
+		},
+	]}
+/>
+
+</DBSection>

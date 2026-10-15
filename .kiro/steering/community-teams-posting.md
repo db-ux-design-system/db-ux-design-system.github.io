@@ -7,6 +7,21 @@ description: Defines the format for DB UX Design System release posts in the Com
 
 Use this format for release announcements in the Community Teams channel. Write the post in German unless the user requests another language.
 
+## Output format: plain text, not Markdown
+
+Teams does not render Markdown on paste, so the finished post is delivered as plain text. The Markdown notation in the examples below documents the structure only – it is not what gets handed over.
+
+Leave out of the delivered text:
+
+- Emphasis markers (`**bold**`, `_italic_`) and inline code backticks. Technical names, properties, and paths stay plain text.
+- Markdown links (`[label](url)`). Write the full URL instead, after a label and a colon.
+- List markers at the start of a line (`-`, `*`) and substitute bullet characters such as `•` or `◦`. The author applies Teams' own list formatting to the pasted lines, so any leading marker would have to be deleted by hand first.
+- Character chains standing in for a horizontal rule (`---`, `———`). Note that Teams' own horizontal line is inserted at that position.
+
+Keep the hierarchy readable with two spaces of indentation for sub-entries. Indentation is not a marker, so it needs no cleanup.
+
+State which parts are to be emphasized manually in Teams: the component or topic name before the colon, `BREAKING CHANGE`, and the arrow labels in the major-release closing.
+
 ## Standard format
 
 Start each release with the scope and version as plain text:
@@ -54,16 +69,30 @@ Use only categories that contain entries:
 
 ## Status changes
 
-A component that already existed as Concept or Beta is not a new component. Describe the status transition under `✨ Geändert`:
+A step up to Beta is announced as a regular beta release under `✨ Hinzugefügt`, no matter whether the component existed as Concept before. The Concept status is not mentioned:
 
 ```text
-✨ Geändert
+✨ Hinzugefügt
 
-- **Heading**: Die Komponente wurde von Concept zu Beta hochgestuft
+- **Heading**: Die Komponente ist jetzt als Beta-Release verfügbar
   - Default Headings für die Level H1–H6
   - Custom Heading mit Slots
   - Dokumentation: [Deutsch](DE_URL) · [English](EN_URL)
 ```
+
+Every other status transition stays under `✨ Geändert`, for example a step up from Beta to Stable or a move to Deprecated:
+
+```text
+✨ Geändert
+
+- **Tag**: Die Komponente wurde von Beta zu Stable hochgestuft
+```
+
+## Closing
+
+Minor and patch releases use the two fixed closing sentences shown in the standard format above.
+
+Major releases use the longer major-release closing instead, separated from the last changelog entry by a horizontal rule (`---`), and additionally open with an intro above the first library block. Both blocks are documented in the content formatting steering under "Teams Posting Structure → Closing → Major releases". Their wording is fixed.
 
 ## Multiple releases in one post
 

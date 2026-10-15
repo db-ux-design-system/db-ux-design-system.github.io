@@ -7,9 +7,9 @@ date: '2026-09-10'
 
 ### Design & Entwicklung
 
-#### Geändert
+#### Hinzugefügt
 
-- Footer: Die Komponente wurde von Concept zu Beta hochgestuft.
+- Footer: Die Komponente ist jetzt als Beta-Release verfügbar.
   - Footer Content und Footer Meta wurden als Subkomponenten ergänzt.
 
 ### Design

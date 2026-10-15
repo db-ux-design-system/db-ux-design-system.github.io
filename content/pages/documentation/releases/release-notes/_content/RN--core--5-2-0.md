@@ -7,9 +7,9 @@ date: '2026-08-27'
 
 ### Design & Development
 
-#### Changed
+#### Added
 
-- Heading: The component has been promoted from Concept to Beta. It includes default headings for levels H1–H6 and a Custom Heading with slots.
+- Heading: The component is now available as a beta release. It includes default headings for levels H1–H6 and a Custom Heading with slots.
 
 ### Development
 
