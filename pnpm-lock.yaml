@@ -207,17 +207,17 @@ importers:
         specifier: 5.6.1
         version: 5.6.1(stylelint@17.15.0(supports-color@10.2.2)(typescript@6.0.3))
       '@db-ux/db-theme':
-        specifier: 6.3.0
-        version: 6.3.0
+        specifier: 7.0.0
+        version: 7.0.0
       '@db-ux/db-theme-fonts':
-        specifier: 2.0.5
-        version: 2.0.5
+        specifier: 2.1.0
+        version: 2.1.0
       '@db-ux/db-theme-icons':
         specifier: 4.3.0
         version: 4.3.0
       '@db-ux/db-theme-illustrative-icons':
-        specifier: 3.3.1
-        version: 3.3.1
+        specifier: 3.4.0
+        version: 3.4.0
       '@db-ux/react-core-components':
         specifier: 5.6.1
         version: 5.6.1
@@ -707,17 +707,18 @@ packages:
     peerDependencies:
       stylelint: '>=14.0.0'
 
-  '@db-ux/db-theme-fonts@2.0.5':
-    resolution: {integrity: sha512-wtYxHGApW6tmjt/dOoNQL0MzlQ6w6YLHy0fIBQm3Ao6gQJ4DbTpInArzQI1/ctYm/nhCBwvPUIe14vhxqmnz4Q==}
+  '@db-ux/db-theme-fonts@2.1.0':
+    resolution: {integrity: sha512-fY0xO6/x89wQsobpMSw2QGYqzOAA756xg4npJQEwgiYj6b1hm4urcqTMbjkUwL3nvDsL6erVKuH0WbEQG4QZEA==}
 
   '@db-ux/db-theme-icons@4.3.0':
     resolution: {integrity: sha512-hklUeB6IUa8J3tEQEtlQXdt7KT4jTL83KmZ4Q3IgmPtfj9vOJ2PRFuwC77s3g4oNRIxQl78uEtlNbJY47s04Tg==}
 
-  '@db-ux/db-theme-illustrative-icons@3.3.1':
-    resolution: {integrity: sha512-pMpNIqp5EzxxMrSPe7NzA//P1uyaZ1dfZMFar2u7tWBhvCXzNSQ/fdrgNaLRLzlXQtARVzihfzxyqAI+v+vqvg==}
+  '@db-ux/db-theme-illustrative-icons@3.4.0':
+    resolution: {integrity: sha512-4pHuK6aT2rwvJvQkNvayhLyUH+nWnnnc8HrMPVwYN/NF85YQm5D26C0LBrOF/WYme84q3+gLFO8tYsSrN85l2w==}
+    deprecated: This package is deprecated and no longer maintained. It will not receive further updates.
 
-  '@db-ux/db-theme@6.3.0':
-    resolution: {integrity: sha512-/9JVmZdy2yjQGoBe3kHQfNFqjB0e0GSEfnHg7He+2UufH1rwQ+jH2FDza89zo8oZzL481XQo8QDSwDia8PCaWg==}
+  '@db-ux/db-theme@7.0.0':
+    resolution: {integrity: sha512-dGdnC04tDLC5Fymh7P1QGnZNEP5HfsSkrMv2LrP4nUq2P4tqFhZZAxuWOyPcnq8S1QUVwr3hsVS8mchnlxxoRg==}
 
   '@db-ux/react-core-components@5.6.1':
     resolution: {integrity: sha512-fmsbBFtQrY2tI6eJEtYTOFREGEHzuTVXzq6xUcycvFI+qz18pdgEICXEFGDO7R1WYS40Pg4jbq1Vua/iWyZVRg==}
@@ -3591,17 +3592,16 @@ snapshots:
     dependencies:
       stylelint: 17.15.0(supports-color@10.2.2)(typescript@6.0.3)
 
-  '@db-ux/db-theme-fonts@2.0.5': {}
+  '@db-ux/db-theme-fonts@2.1.0': {}
 
   '@db-ux/db-theme-icons@4.3.0': {}
 
-  '@db-ux/db-theme-illustrative-icons@3.3.1': {}
+  '@db-ux/db-theme-illustrative-icons@3.4.0': {}
 
-  '@db-ux/db-theme@6.3.0':
+  '@db-ux/db-theme@7.0.0':
     dependencies:
-      '@db-ux/db-theme-fonts': 2.0.5
+      '@db-ux/db-theme-fonts': 2.1.0
       '@db-ux/db-theme-icons': 4.3.0
-      '@db-ux/db-theme-illustrative-icons': 3.3.1
 
   '@db-ux/react-core-components@5.6.1':
     dependencies:
