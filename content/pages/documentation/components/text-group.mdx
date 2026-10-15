@@ -1,0 +1,130 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+headline: 'Text Group'
+title: 'Text Group'
+description: 'The text group stacks several text blocks and derives the spacing between them automatically from their respective line height.'
+shortDescription: 'Container for several text blocks with automatic spacing.'
+align: start
+toc: true
+status: 'beta'
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
+import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
+import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+
+- Group several paragraphs and headings into one text section
+- Derive the spacing between blocks from the line height
+- Build a reading hierarchy from headings and paragraphs
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+<ResourceCards path="?path=/docs/components-dbtextgroup-density--docs" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Guidelines
+
+<CollapsibleWrapper collapsedHeight="320px">
+
+### Spacing
+
+The spacing between text blocks comes from one of two mechanisms. The text group derives it from the line height, while a container or stack sets it as a fixed gap through a `spacing` token.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/osMRGfMob0Zg1Oib7E7bob/Doku--Text-Group?node-id=1-1132&embed-host=share"
+		description="Use the text group when the spacing between headings and paragraphs should derive from the line height."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/osMRGfMob0Zg1Oib7E7bob/Doku--Text-Group?node-id=1-1133&embed-host=share"
+		description="Don't override the automatic spacing inside a text group with a manual gap. A fixed gap applies to every element alike and does not scale with their line height. Use a container or stack with a spacing token instead."
+	/>
+</div>
+
+### Hierarchy
+
+Headings and paragraphs together form the reading hierarchy of the text section. Each heading introduces its section, and the levels descend from top to bottom.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/osMRGfMob0Zg1Oib7E7bob/Doku--Text-Group?node-id=4003-12&embed-host=share"
+		description="Structure the section with a clear order of heading levels followed by their paragraphs."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/osMRGfMob0Zg1Oib7E7bob/Doku--Text-Group?node-id=4003-13&embed-host=share"
+		description="Don't mix heading levels without a logical order. An unclear hierarchy makes the section hard to scan."
+	/>
+</div>
+
+### One H1 per Page
+
+The `h1` names the page as a whole and therefore appears only once, even with several text groups.
+
+<div className="guideline-examples">
+	<GuidelineExample
+		variant="do"
+		figmaUrl="https://embed.figma.com/design/osMRGfMob0Zg1Oib7E7bob/Doku--Text-Group?node-id=4003-15&embed-host=share"
+		description="Use a single h1 as the page title and h2 to h6 for the sections within the text groups."
+	/>
+	<GuidelineExample
+		variant="dont"
+		figmaUrl="https://embed.figma.com/design/osMRGfMob0Zg1Oib7E7bob/Doku--Text-Group?node-id=4003-16&embed-host=share"
+		description="Don't place multiple h1 elements across the text groups of a page. Several top-level headings break the document structure and impair screen reader navigation."
+	/>
+</div>
+
+</CollapsibleWrapper>
+
+<CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## FAQ
+
+<QuestionForm componentName="Text Group" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Related Content
+
+<TeaserCard
+	teasers={[
+		{
+			title: 'Heading',
+			description:
+				'Structures content with six semantic heading levels, optionally with slots for additional elements',
+			url: '/documentation/components/heading',
+		},
+		{
+			title: 'Paragraph',
+			description: 'Single block of body text',
+			url: '/documentation/components/paragraph',
+		},
+		{
+			title: 'Stack',
+			description: 'Layout component for arranging elements in a vertical or horizontal flow',
+			url: '/documentation/components/stack',
+		},
+	]}
+/>
+
+</DBSection>

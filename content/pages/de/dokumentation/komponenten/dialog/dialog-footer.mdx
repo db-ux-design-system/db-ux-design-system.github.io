@@ -22,6 +22,7 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 - Aktionen zum Abschließen und Abbrechen anbieten
+- Sternchentext dauerhaft sichtbar halten
 - Aktionen beim Scrollen erreichbar halten
 
 <DBSection spacing="small" width="auto">
@@ -38,9 +39,9 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 <CollapsibleWrapper collapsedHeight="320px">
 
-### Inhalt des Footers
+### Inhalt
 
-Der Dialog Footer scrollt nicht mit. Er ist deshalb für Aktionen und für Hinweise gedacht, die dauerhaft sichtbar bleiben müssen.
+Der Dialog Footer scrollt nicht mit. Er ist deshalb für Aktionen und für Hinweise gedacht, die dauerhaft sichtbar bleiben müssen, etwa einen Sternchentext.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -57,7 +58,7 @@ Der Dialog Footer scrollt nicht mit. Er ist deshalb für Aktionen und für Hinwe
 
 ### Abbrechen-Aktion
 
-Bei einer Bestätigung oder einer Eingabe gehört eine abbrechende Aktion in den Dialog Footer. Der Close-Button im Dialog Header allein reicht nicht, weil er visuell schwächer und nur generisch mit "Schließen" o.ä. ist und man bei einer Entscheidung beide Optionen als gleichwertige Buttons erwartet.
+Bei einer Bestätigung oder einer Eingabe gehört eine abbrechende Aktion in den Dialog Footer. Der Close-Button im Dialog Header allein reicht nicht, weil er visuell schwächer ist und man bei einer Entscheidung beide Optionen als gleichwertige Buttons erwartet.
 
 <div className="guideline-examples">
 	<GuidelineExample
@@ -89,7 +90,7 @@ Bei einer Bestätigung benennt jeder Button sein Ergebnis. So ist vor dem Klick 
 	/>
 </div>
 
-### Reihenfolge der Aktionen
+### Aktionsreihenfolge
 
 Die bestätigende Aktion steht rechts, abbrechende und ergänzende Aktionen links davon. Damit liegt die Aktion, die den Dialog abschließt, am Ende der Leserichtung.
 
@@ -128,7 +129,8 @@ Die bestätigende Aktion steht rechts, abbrechende und ergänzende Aktionen link
 	teasers={[
 		{
 			title: 'Dialog',
-			description: 'Übergeordnete Komponente, die den Dialog Footer enthält',
+			description:
+				'Modales Overlay für eine Aufgabe, die vor dem Weiterarbeiten erledigt werden muss',
 			url: '/de/dokumentation/komponenten/dialog/dialog',
 		},
 		{

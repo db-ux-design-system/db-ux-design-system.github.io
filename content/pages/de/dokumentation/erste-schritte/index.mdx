@@ -9,18 +9,25 @@ description: 'Alles, was du brauchst, um konsistente und barrierefreie digitale 
 ---
 
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import { DBStack } from '@db-ux/react-core-components';
+import { DBStack, DBNotification, DBLink } from '@db-ux/react-core-components';
 
 <DBStack gap="medium">
+<DBNotification variant="standalone" semantic="informational" headline="Hinweis">
+	Alle Beispiele in dieser Dokumentation basieren auf dem <DBLink href="https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/db-ux-design-system/resources/db-theme" target="_blank" rel="noopener noreferrer" variant="inline">DB Theme</DBLink>. Nutzt du das Design System als
+	White Label oder mit einem anderen Theme, können die visuellen Ergebnisse abweichen, weil dann
+	eine andere Foundation greift.
+</DBNotification>
+
 <TeaserCard
 	columns={2}
 	spacing="large"
-    headlineSize="large"
+	headlineSize="large"
 	headlineLevel={2}
 	teasers={[
 		{
 			title: 'Foundation',
-			description: 'Gemeinsame Basis-Tokens und Modi bilden ein stabiles Fundament für klare und einheitliche Interfaces.',
+			description:
+				'Gemeinsame Basis-Tokens und Modi bilden ein stabiles Fundament für klare und einheitliche Interfaces.',
 			url: '/de/dokumentation/foundation',
 			imageSrc: '/assets/Foundations-Teaser--C.png',
 			imageAlt: 'Foundations',
@@ -30,7 +37,8 @@ import { DBStack } from '@db-ux/react-core-components';
 		},
 		{
 			title: 'Komponenten',
-			description: 'Core Components sorgen für vorhersehbare Interaktionen über alle Produkte hinweg.',
+			description:
+				'Core Components sorgen für vorhersehbare Interaktionen über alle Produkte hinweg.',
 			url: '/de/dokumentation/komponenten',
 			imageSrc: '/assets/Components-Teaser--C.png',
 			imageAlt: 'Komponenten',

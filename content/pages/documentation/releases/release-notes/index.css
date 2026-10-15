@@ -58,8 +58,11 @@
 	margin-block-start: var(--db-spacing-fixed-2xs);
 }
 
-/* Roadmap link closes the note's content and is set off from the last category */
-.dba-main-content .release-note.release-note > .roadmap-link {
+/* Links close the note's content and are set off from the last category */
+.dba-main-content .release-note.release-note > .release-note-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--db-spacing-fixed-md);
 	margin-block-start: var(--db-spacing-fixed-lg);
 }
 
