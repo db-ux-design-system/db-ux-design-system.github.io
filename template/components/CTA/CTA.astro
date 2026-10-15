@@ -1,6 +1,5 @@
 ---
 import './CTA.css';
-import { DBCard } from '@db-ux/react-core-components';
 
 type ButtonVariant = 'brand' | 'outlined' | 'filled' | 'ghost';
 
@@ -31,7 +30,7 @@ const normalizeVariant = (
 
 {
 	primaryAction && (
-		<DBCard spacing="large" elevationLevel="2" className="cta">
+		<div class="cta">
 			<div class="cta-content" data-align={align}>
 				{title && <h3 class="cta-title">{title}</h3>}
 				{text && <p class="cta-text">{text}</p>}
@@ -54,6 +53,6 @@ const normalizeVariant = (
 					)}
 				</div>
 			</div>
-		</DBCard>
+		</div>
 	)
 }
