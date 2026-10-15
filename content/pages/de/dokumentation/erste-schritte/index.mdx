@@ -9,7 +9,7 @@ description: 'Alles, was du brauchst, um konsistente und barrierefreie digitale 
 ---
 
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import { DBStack, DBNotification } from '@db-ux/react-core-components';
+import { DBStack, DBNotification, DBLink } from '@db-ux/react-core-components';
 
 <DBStack gap="medium">
 <DBNotification variant="standalone" semantic="informational" headline="Hinweis">
@@ -21,12 +21,13 @@ import { DBStack, DBNotification } from '@db-ux/react-core-components';
 <TeaserCard
 	columns={2}
 	spacing="large"
-    headlineSize="large"
+	headlineSize="large"
 	headlineLevel={2}
 	teasers={[
 		{
 			title: 'Foundation',
-			description: 'Gemeinsame Basis-Tokens und Modi bilden ein stabiles Fundament für klare und einheitliche Interfaces.',
+			description:
+				'Gemeinsame Basis-Tokens und Modi bilden ein stabiles Fundament für klare und einheitliche Interfaces.',
 			url: '/de/dokumentation/foundation',
 			imageSrc: '/assets/Foundations-Teaser--C.png',
 			imageAlt: 'Foundations',
@@ -36,7 +37,8 @@ import { DBStack, DBNotification } from '@db-ux/react-core-components';
 		},
 		{
 			title: 'Komponenten',
-			description: 'Core Components sorgen für vorhersehbare Interaktionen über alle Produkte hinweg.',
+			description:
+				'Core Components sorgen für vorhersehbare Interaktionen über alle Produkte hinweg.',
 			url: '/de/dokumentation/komponenten',
 			imageSrc: '/assets/Components-Teaser--C.png',
 			imageAlt: 'Komponenten',

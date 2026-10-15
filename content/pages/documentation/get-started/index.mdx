@@ -9,7 +9,7 @@ description: 'Everything you need to build consistent and accessible digital exp
 ---
 
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import { DBStack, DBNotification } from '@db-ux/react-core-components';
+import { DBStack, DBNotification, DBLink } from '@db-ux/react-core-components';
 
 <DBStack gap="medium">
 <DBNotification variant="standalone" semantic="informational" headline="Note">
@@ -21,12 +21,13 @@ import { DBStack, DBNotification } from '@db-ux/react-core-components';
 <TeaserCard
 	columns={2}
 	spacing="large"
-    headlineSize="large"
+	headlineSize="large"
 	headlineLevel={2}
 	teasers={[
 		{
 			title: 'Foundation',
-			description: 'Shared base tokens and modes provide a stable foundation for clear and coherent interfaces.',
+			description:
+				'Shared base tokens and modes provide a stable foundation for clear and coherent interfaces.',
 			url: '/documentation/foundation',
 			imageSrc: '/assets/Foundations-Teaser--C.png',
 			imageAlt: 'Foundations',
