@@ -40,7 +40,6 @@
 	inset-block-start: 0;
 	inline-size: var(--db-border-width-sm);
 	background-color: var(--db-brand-on-bg-basic-emphasis-70-default);
-
 	transition:
 		transform 0.3s ease,
 		height 0.3s ease;
@@ -84,12 +83,6 @@
 	inset-block: 0;
 	inline-size: var(--db-border-width-sm);
 	background-color: var(--db-neutral-on-bg-inverted-pressed);
-}
-
-.dba-toc-heading:first-child::before {
-}
-
-.dba-toc-heading:last-child::before {
 }
 
 .dba-toc-heading svg {
