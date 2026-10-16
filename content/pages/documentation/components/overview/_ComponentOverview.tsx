@@ -41,8 +41,8 @@ import { TooltipOverview } from './_components/Tooltip.tsx';
 export type { OverviewComponent, MountedComponent } from './_components/_shared.tsx';
 
 /**
- * Switches the page between the current rounded look and the squared-off v6
- * preview.
+ * Switches the page between the current squared-off v6 look (selected by
+ * default) and the rounded v5 look kept for comparison.
  *
  * The switch itself is declarative: the stylesheet matches the selected option
  * with `:has()` and redefines the --db-border-radius-* tokens, so the selection
@@ -84,8 +84,14 @@ export function VersionSwitch({ locale }: { locale: Language }): ReactElement {
 							 */
 							aria-label={labels.version}
 							showEmptyOption={false}
+							/*
+							 * v6 is the default. DBSelect ignores `selected` on options, so the
+							 * default comes from `value`. Without hydration this only renders
+							 * `selected` on the v6 option and the select stays freely switchable.
+							 */
+							value="v6"
 							options={[
-								{ value: 'v5', label: labels.v5, selected: true },
+								{ value: 'v5', label: labels.v5 },
 								{ value: 'v6', label: labels.v6 },
 							]}
 						/>

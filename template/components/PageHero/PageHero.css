@@ -41,19 +41,20 @@
 	max-inline-size: 100%;
 }
 
-.page-hero-title {
-	margin: 0;
+/* Text group follows the hero alignment (center/start/end) set on .page-hero-content */
+.page-hero-text-group {
+	align-items: inherit;
+	inline-size: 100%;
 }
 
-.page-hero-headline {
-	margin: 0;
+/* DBHeading v6 always sets text-align: start; keep the hero alignment */
+.page-hero-text-group .db-heading {
+	text-align: inherit;
 }
 
 .page-hero-description {
-	margin: 0;
 	max-inline-size: var(--db-container-md);
 	opacity: 0.75;
-	font: var(--db-type-body-md);
 }
 
 .page-hero-media {
@@ -144,10 +145,6 @@
 	.page-hero[data-align='start'] .page-hero-media,
 	.page-hero[data-align='end'] .page-hero-media {
 		justify-content: center !important;
-	}
-
-	.page-hero-headline {
-		line-height: 1.2;
 	}
 
 	.page-hero-media {
