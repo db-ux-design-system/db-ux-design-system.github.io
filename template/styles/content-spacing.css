@@ -121,6 +121,16 @@
 	margin-block-start: 0;
 }
 
+/* Exclude: Carousel items and the TextImage inside them align via flex gap.
+ * The base rule above has a specificity of (0,3,0) through its two :is() lists,
+ * so these selectors need (0,4,0) to win. Without them, every card after the
+ * first gets a top margin (first card stretches taller) and the image gets a
+ * top margin (more space above than below). */
+.dba-main-content .carousel > .db-card + .db-card,
+.dba-main-content .carousel .text-image-content + .text-image-image {
+	margin-block-start: 0;
+}
+
 /* Exclude: don't add margins inside grid or flex containers (spacing via gap) */
 .dba-main-content
 	[style*='grid']
