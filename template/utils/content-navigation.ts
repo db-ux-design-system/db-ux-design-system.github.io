@@ -13,6 +13,10 @@ type NavigationFrontmatter = FrontMatter & {
 	 * Adds an "Overview" entry linking to this page as the first child. A page with
 	 * children renders as a collapsible group whose header toggles the group, so
 	 * without this entry the page itself is not reachable from the navigation.
+	 *
+	 * Set it in the EN frontmatter only. The navigation tree is built from the EN
+	 * pages; DE pages only contribute their titles (see `deTitles` below), so the
+	 * flag has no effect in a DE frontmatter. The DE label "Übersicht" is set here.
 	 */
 	navOverview?: boolean;
 };

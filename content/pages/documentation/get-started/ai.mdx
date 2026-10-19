@@ -76,6 +76,12 @@ Add the server to the MCP configuration of your IDE:
 	The MCP Server page describes each of them.
 </DBNotification>
 
+<DBNotification variant="standalone" semantic="warning" headline="Pin the version">
+	Without a version, `npx --yes` downloads the latest release and runs it without asking – the same
+	applies to `npx @db-ux/agent-cli`. To control what runs in your IDE, add the version that matches
+	your `@db-ux` packages, for example `"@db-ux/mcp-server@6.0.0"` and `npx @db-ux/agent-cli@6.0.0`.
+</DBNotification>
+
 ### 3. Check the connection
 
 Look for `db-ux` in the list of MCP servers of your IDE. Then ask your agent to list the components of the design system – it should answer with the real component names.

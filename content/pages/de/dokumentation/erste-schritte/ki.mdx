@@ -76,6 +76,13 @@ Ergänze den Server in der MCP-Konfiguration deiner IDE:
 	und Kiro. Die Seite MCP Server beschreibt jede davon.
 </DBNotification>
 
+<DBNotification variant="standalone" semantic="warning" headline="Version festlegen">
+	Ohne Version lädt `npx --yes` die neueste Version herunter und führt sie ohne Rückfrage aus – das
+	gilt auch für `npx @db-ux/agent-cli`. Damit du kontrollierst, was in deiner IDE läuft, gib die
+	Version an, die zu deinen `@db-ux`-Paketen passt, zum Beispiel `"@db-ux/mcp-server@6.0.0"` und
+	`npx @db-ux/agent-cli@6.0.0`.
+</DBNotification>
+
 ### 3. Verbindung prüfen
 
 Suche `db-ux` in der Liste der MCP-Server deiner IDE. Bitte dann deinen Agenten, die Komponenten des Design Systems aufzulisten – er sollte mit den echten Komponentennamen antworten.
