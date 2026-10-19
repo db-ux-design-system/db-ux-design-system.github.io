@@ -42,18 +42,24 @@ export default defineConfig({
 	vite: {
 		plugins: [
 			viteStaticCopy({
+				// Since vite-plugin-static-copy 4, the source directory structure is
+				// preserved in the output. `rename: { stripBase: true }` restores the
+				// flat copy, so the files are served from the site root.
 				targets: [
 					{
 						src: './node_modules/@google/model-viewer/dist/model-viewer.min.js',
 						dest: './',
+						rename: { stripBase: true },
 					},
 					{
 						src: './node_modules/@google/model-viewer/dist/model-viewer.min.js.map',
 						dest: './',
+						rename: { stripBase: true },
 					},
 					{
 						src: 'node_modules/@db-ux/db-theme/build/images/light/db_logo.svg',
 						dest: './',
+						rename: { stripBase: true },
 					},
 				],
 			}),

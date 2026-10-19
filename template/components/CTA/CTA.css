@@ -1,8 +1,9 @@
+/* Plain section surface: basic background level 2 with the default on-colors, no card */
 .cta {
-	background: var(--db-brand-origin-default) !important;
-	color: var(--db-brand-on-origin-default) !important;
-	border-radius: var(--db-border-radius-sm) !important;
-	border: 0;
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	border-radius: var(--db-border-radius-sm);
+	padding: var(--db-spacing-fixed-lg);
 }
 
 .cta-content {
@@ -44,49 +45,6 @@
 
 .cta .db-button {
 	text-decoration: none;
-}
-
-/* Brand variant (inverted on red background) */
-.cta .db-button[data-variant='brand'] {
-	background: var(--db-brand-on-origin-default);
-	color: var(--db-brand-on-bg-vibrant-hovered);
-	/* stylelint-disable-next-line db-ux/use-border-color */
-	border-color: var(--db-brand-on-origin-default);
-}
-
-.cta .db-button[data-variant='brand']:hover,
-.cta .db-button[data-variant='brand']:focus {
-	opacity: 0.88;
-}
-
-.cta .db-button[data-variant='brand']:active {
-	opacity: 0.76;
-}
-
-.cta .db-button[data-variant='brand']:not([data-disable-focus='true']):focus-visible {
-	outline-color: var(--db-brand-on-origin-default);
-}
-
-/* Outlined variant */
-.cta .db-button[data-variant='outlined'] {
-	background: transparent;
-	color: var(--db-brand-on-origin-default);
-	border-color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
-}
-
-.cta .db-button[data-variant='outlined']:hover,
-.cta .db-button[data-variant='outlined']:focus {
-	background: rgb(255 255 255 / 24%);
-}
-
-.cta .db-button[data-variant='outlined']:active {
-	background: rgb(255 255 255 / 36%);
-}
-
-/* TODO: why do we define an outline on focus here, shouldn't this even already been defined by the system itself ? */
-.cta .db-button[data-variant='outlined']:not([data-disable-focus='true']):focus-visible {
-	outline: var(--db-border-width-2xs) solid var(--db-brand-on-origin-default);
-	outline-offset: var(--db-spacing-fixed-3xs);
 }
 
 @media (width <= 767px) {
