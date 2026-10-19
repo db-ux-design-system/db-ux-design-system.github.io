@@ -1,0 +1,60 @@
+---
+import { DBButton } from '@db-ux/react-core-components';
+import CodeVisualHint from '@components/CodeVisualHint/CodeVisualHint.astro';
+import './FlexibleIntegrationVisual.css';
+
+interface Props {
+	label: string;
+}
+
+const { label } = Astro.props;
+const hintId = `flexible-integration-visual-hint-${crypto.randomUUID()}`;
+const text = 'Jetzt kaufen';
+
+// HTML of the button shown on the left; every attribute equals the rendered button.
+// Each part is [text, kind]; kind maps to a color class, undefined stays uncolored.
+type Kind = 'tag' | 'attribute' | 'value' | undefined;
+type Part = [string, Kind];
+const attribute = (name: string, value: string): { indent: boolean; parts: Part[] } => ({
+	indent: true,
+	parts: [
+		[name, 'attribute'],
+		['=', undefined],
+		[`"${value}"`, 'value'],
+	],
+});
+const lines: { indent?: boolean; parts: Part[] }[] = [
+	{ parts: [['<button', 'tag']] },
+	attribute('class', 'db-button'),
+	attribute('type', 'button'),
+	attribute('data-variant', 'brand'),
+	attribute('data-icon', 'shopping_cart'),
+	attribute('data-show-icon', 'true'),
+	{ parts: [['>', 'tag']] },
+	{ parts: [[text, undefined]] },
+	{ parts: [['</button>', 'tag']] },
+];
+const colorClass: Record<Exclude<Kind, undefined>, string> = {
+	tag: 'db-color-yellow',
+	attribute: 'db-color-turquoise',
+	value: 'db-color-green',
+};
+---
+
+<div class="flexible-integration-visual" role="group" aria-label={label} aria-describedby={hintId}>
+	<CodeVisualHint id={hintId} />
+	<div class="flexible-integration-visual-design">
+		<DBButton variant="brand" type="button" icon="shopping_cart" showIcon text={text} />
+	</div>
+	<div class="flexible-integration-visual-code" aria-hidden="true">
+		{lines.map((line) => (
+			<span class="flexible-integration-visual-line" data-indent={line.indent ? '' : undefined}>
+				{line.parts.map(([part, kind]) => (
+					<span class:list={['flexible-integration-visual-part', kind && colorClass[kind]]}>
+						{part}
+					</span>
+				))}
+			</span>
+		))}
+	</div>
+</div>

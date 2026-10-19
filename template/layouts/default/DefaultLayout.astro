@@ -5,6 +5,7 @@ import HtmlHead from '@template/components/HtmlHead';
 import MainContent from './main-content';
 import { Shell } from '@template/components/Shell';
 import Footer from '@template/components/Footer/Footer.astro';
+import CodeVisualsScript from './CodeVisualsScript.astro';
 
 interface Props {
 	headings?: MarkdownHeading[];
@@ -26,5 +27,6 @@ const lang = currentPath.startsWith('/de/') || currentPath === '/de' ? 'de' : 'e
 			<Footer slot="endSlot" />
 		</Shell>
 		<slot name="script" />
+		{frontmatter.loadCodeVisuals && <CodeVisualsScript />}
 	</body>
 </html>

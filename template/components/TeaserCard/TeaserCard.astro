@@ -31,7 +31,6 @@ import './TeaserCard.css';
  * | `imageAlt`      | `string`                                          | `title`     | Alt text for the image                               |
  * | `imagePosition` | `'top' \| 'bottom' \| 'left' \| 'right'`         | `'top'`     | Image placement relative to text                     |
  * | `imageWidth`    | `'50' \| '33' \| '66'`                            | –           | Image/text ratio for horizontal layouts              |
- * | `mask`          | `'fade-right' \| 'fade-left' \| ... \| 'fade-top-left'` | –    | CSS mask gradient applied to the image               |
  */
 
 interface Props {
@@ -47,15 +46,6 @@ interface Props {
 		imageAlt?: string;
 		imagePosition?: 'top' | 'bottom' | 'left' | 'right';
 		imageWidth?: '50' | '33' | '66';
-		mask?:
-			| 'fade-right'
-			| 'fade-left'
-			| 'fade-top'
-			| 'fade-bottom'
-			| 'fade-bottom-right'
-			| 'fade-bottom-left'
-			| 'fade-top-right'
-			| 'fade-top-left';
 	}[];
 	/** Fixed number of columns (e.g. 2 or 3). Uses auto-fit when omitted. */
 	columns?: number;
@@ -86,7 +76,6 @@ const disabledLabel = isDE ? 'Demnächst verfügbar' : 'Coming Soon';
 					imageSrc={teaser.imageSrc!}
 					imageSrcDark={teaser.imageSrcDark}
 					imageAlt={teaser.imageAlt ?? teaser.title}
-					mask={teaser.mask}
 					headlineLevel={headlineLevel}
 				>
 					{teaser.description}

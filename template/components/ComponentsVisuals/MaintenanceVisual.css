@@ -1,0 +1,73 @@
+/*
+ * Maintenance code visual: a release card with three layers of the same size behind it.
+ * All four share one grid cell; each layer is offset by one more step (--db-spacing-fixed-md)
+ * to the bottom and the inline end, so the free space equals three steps.
+ */
+.maintenance-visual {
+	display: grid;
+	inline-size: 100%;
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+}
+
+.maintenance-visual-card.db-card,
+.maintenance-visual-stack {
+	grid-area: 1 / 1;
+	inline-size: calc(100% - 3 * var(--db-spacing-fixed-md));
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}
+
+.maintenance-visual-card.db-card {
+	display: flex;
+	position: relative;
+	z-index: 4;
+	flex-direction: column;
+	align-self: start;
+	gap: var(--db-spacing-fixed-2xs);
+	margin-block-end: calc(3 * var(--db-spacing-fixed-md));
+}
+
+.maintenance-visual-title {
+	font: var(--db-type-body-lg);
+	font-weight: 700;
+}
+
+.maintenance-visual-meta {
+	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+	font: var(--db-type-body-sm);
+}
+
+.maintenance-visual-text {
+	padding-block: var(--db-spacing-fixed-sm) var(--db-spacing-fixed-lg);
+	font: var(--db-type-body-md);
+}
+
+/* Empty layers stretch to the card height; the margins place them one step further each */
+.maintenance-visual-stack {
+	display: block;
+	position: relative;
+}
+
+.maintenance-visual-stack[data-level='1'] {
+	z-index: 3;
+	margin-block: var(--db-spacing-fixed-md) calc(2 * var(--db-spacing-fixed-md));
+	margin-inline-start: var(--db-spacing-fixed-md);
+}
+
+.maintenance-visual-stack[data-level='2'] {
+	z-index: 2;
+	margin-block: calc(2 * var(--db-spacing-fixed-md)) var(--db-spacing-fixed-md);
+	margin-inline-start: calc(2 * var(--db-spacing-fixed-md));
+}
+
+.maintenance-visual-stack[data-level='3'] {
+	z-index: 1;
+	margin-block: calc(3 * var(--db-spacing-fixed-md)) 0;
+	margin-inline-start: calc(3 * var(--db-spacing-fixed-md));
+}
+
+/* The global content spacing must not add to the card gap (0,4,0 beats its 0,3,0) */
+.dba-main-content .maintenance-visual-card > .maintenance-visual-title + .maintenance-visual-meta,
+.dba-main-content .maintenance-visual-card > .maintenance-visual-meta + .maintenance-visual-text {
+	margin-block-start: 0;
+}

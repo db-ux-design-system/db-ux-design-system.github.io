@@ -98,6 +98,13 @@
 	margin-block-end: 0;
 }
 
+/* Code visual (named slot "visual") instead of images */
+.text-image-visual {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
 .text-image-image img {
 	inline-size: 100%;
 	block-size: auto;
@@ -144,108 +151,6 @@
 /* Rounded image opt-in */
 .text-image-image img[data-rounded] {
 	border-radius: var(--db-border-radius-xs);
-	overflow: hidden;
-}
-
-/* ============================= */
-
-/* Image Mask Variants           */
-
-/* ============================= */
-
-/* Basis Farb-Stopps über CSS Variablen für Wiederverwendbarkeit */
-
-/* Sichtbarer Bereich -> voll opaque; Ausblendung -> transparent */
-:root {
-	--ti-mask-visible: rgb(0 0 0 / 100%);
-	--ti-mask-invisible: rgb(0 0 0 / 0%);
-}
-
-/* Single direction fades */
-img[data-mask='fade-right'] {
-	mask-image: linear-gradient(to right, var(--ti-mask-visible) 20%, var(--ti-mask-invisible) 100%);
-}
-
-img[data-mask='fade-left'] {
-	mask-image: linear-gradient(to left, var(--ti-mask-visible) 20%, var(--ti-mask-invisible) 100%);
-}
-
-img[data-mask='fade-top'] {
-	mask-image: linear-gradient(to top, var(--ti-mask-visible) 20%, var(--ti-mask-invisible) 100%);
-}
-
-img[data-mask='fade-bottom'] {
-	mask-image: linear-gradient(to bottom, var(--ti-mask-visible) 50%, var(--ti-mask-invisible) 100%);
-}
-
-/* Combined corner fades (two gradients) */
-
-/* Bottom-Right */
-img[data-mask='fade-bottom-right'] {
-	--ti-mask-bottom: linear-gradient(
-		to bottom,
-		var(--ti-mask-visible) 50%,
-		var(--ti-mask-invisible) 100%
-	);
-	--ti-mask-right: linear-gradient(
-		to right,
-		var(--ti-mask-visible) 20%,
-		var(--ti-mask-invisible) 100%
-	);
-
-	mask-image: var(--ti-mask-bottom), var(--ti-mask-right);
-	mask-composite: source-in;
-	mask-composite: intersect;
-}
-
-/* Bottom-Left */
-img[data-mask='fade-bottom-left'] {
-	--ti-mask-bottom: linear-gradient(
-		to bottom,
-		var(--ti-mask-visible) 50%,
-		var(--ti-mask-invisible) 100%
-	);
-	--ti-mask-left: linear-gradient(
-		to left,
-		var(--ti-mask-visible) 20%,
-		var(--ti-mask-invisible) 100%
-	);
-
-	mask-image: var(--ti-mask-bottom), var(--ti-mask-left);
-	mask-composite: source-in;
-	mask-composite: intersect;
-}
-
-/* Top-Right */
-img[data-mask='fade-top-right'] {
-	--ti-mask-top: linear-gradient(to top, var(--ti-mask-visible) 50%, var(--ti-mask-invisible) 100%);
-	--ti-mask-right: linear-gradient(
-		to right,
-		var(--ti-mask-visible) 20%,
-		var(--ti-mask-invisible) 100%
-	);
-
-	mask-image: var(--ti-mask-top), var(--ti-mask-right);
-	mask-composite: source-in;
-	mask-composite: intersect;
-}
-
-/* Top-Left */
-img[data-mask='fade-top-left'] {
-	--ti-mask-top: linear-gradient(to top, var(--ti-mask-visible) 50%, var(--ti-mask-invisible) 100%);
-	--ti-mask-left: linear-gradient(
-		to left,
-		var(--ti-mask-visible) 20%,
-		var(--ti-mask-invisible) 100%
-	);
-
-	mask-image: var(--ti-mask-top), var(--ti-mask-left);
-	mask-composite: source-in;
-	mask-composite: intersect;
-}
-
-/* Ensure images with masks don't overflow their container visually */
-img[data-mask] {
 	overflow: hidden;
 }
 
