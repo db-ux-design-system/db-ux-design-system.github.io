@@ -39,8 +39,26 @@ sections:
     imagePosition: 'left'
 ---
 
-import { ContentSections, ContactUsSection } from '@components';
+import { DBSection } from '@db-ux/react-core-components';
+import { ContentSections, ContactUsSection, CTA } from '@components';
 
 <ContentSections sections={frontmatter.sections} />
+
+<DBSection width="medium" spacing="medium">
+	<CTA
+		title="Jetzt entwickeln"
+		text="Installiere das Paket für dein Framework und bau dein erstes Formular – Schritt für Schritt geprüft bis zum Produktions-Build."
+		primaryAction={{
+			label: 'Mit Code starten',
+			href: '/de/dokumentation/erste-schritte/entwicklung',
+			variant: 'brand',
+		}}
+		secondaryAction={{
+			label: 'React-Tutorial',
+			href: '/de/dokumentation/erste-schritte/entwicklung/tutorial',
+			variant: 'outlined',
+		}}
+	/>
+</DBSection>
 
 <ContactUsSection />

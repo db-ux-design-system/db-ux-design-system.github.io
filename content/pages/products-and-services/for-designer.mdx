@@ -38,8 +38,26 @@ sections:
     imagePosition: 'left'
 ---
 
-import { ContentSections, ContactUsSection } from '@components';
+import { DBSection } from '@db-ux/react-core-components';
+import { ContentSections, ContactUsSection, CTA } from '@components';
 
 <ContentSections sections={frontmatter.sections} />
+
+<DBSection width="medium" spacing="medium">
+	<CTA
+		title="Start designing"
+		text="Get access to the Figma libraries and design your first screen with the components – step by step, all the way to the handoff."
+		primaryAction={{
+			label: 'Get started in Figma',
+			href: '/documentation/get-started/design',
+			variant: 'brand',
+		}}
+		secondaryAction={{
+			label: 'Figma Tutorial',
+			href: '/documentation/get-started/design/tutorial',
+			variant: 'outlined',
+		}}
+	/>
+</DBSection>
 
 <ContactUsSection />

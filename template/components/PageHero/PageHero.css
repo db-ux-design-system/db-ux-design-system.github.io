@@ -45,6 +45,17 @@
 	margin: 0;
 }
 
+.page-hero-actions {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: var(--db-spacing-fixed-sm);
+}
+
+.page-hero[data-layout='split'] .page-hero-actions {
+	justify-content: flex-start;
+}
+
 .page-hero-headline {
 	margin: 0;
 }

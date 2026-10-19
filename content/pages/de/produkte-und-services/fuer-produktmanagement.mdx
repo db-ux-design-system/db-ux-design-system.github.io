@@ -32,8 +32,26 @@ sections:
     mask: 'fade-right'
 ---
 
-import { ContentSections, ContactUsSection } from '@components';
+import { DBSection } from '@db-ux/react-core-components';
+import { ContentSections, ContactUsSection, CTA } from '@components';
 
 <ContentSections sections={frontmatter.sections} />
+
+<DBSection width="medium" spacing="medium">
+	<CTA
+		title="Das Design System in dein Produkt bringen"
+		text="Erfahre, was das Design System enthält, wie es veröffentlicht wird und wie verbindlich es ist – die Grundlage, um die Einführung zu planen."
+		primaryAction={{
+			label: 'Über das Design System',
+			href: '/de/dokumentation/erste-schritte/ueber',
+			variant: 'brand',
+		}}
+		secondaryAction={{
+			label: 'Erste Schritte',
+			href: '/de/dokumentation/erste-schritte',
+			variant: 'outlined',
+		}}
+	/>
+</DBSection>
 
 <ContactUsSection />
