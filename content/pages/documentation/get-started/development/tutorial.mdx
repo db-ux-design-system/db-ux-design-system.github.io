@@ -8,7 +8,7 @@ description: 'Build a small React app with the DB UX Design System step by step 
 align: start
 toc: true
 tocMaxDepth: 2
-order: 4
+order: 2
 ---
 
 import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
@@ -235,6 +235,7 @@ const App = () => {
 						semantic="successful"
 						headline="Message sent"
 						closeable
+						closeButtonText="Close"
 						onClose={() => setSent(false)}
 					>
 						We will get back to you within two working days.
@@ -269,7 +270,7 @@ const App = () => {
 export default App;
 ```
 
-The notification has the role `status`, so screen readers announce it without moving the focus. The `form-actions` wrapper around the button is used in the next step.
+The notification has the role `status`, so screen readers announce it without moving the focus. `closeButtonText` sets the accessible name of the close button – the ESLint plugin of the design system reports a closeable notification without it. The `form-actions` wrapper around the button is used in the next step.
 
 **Check:**
 

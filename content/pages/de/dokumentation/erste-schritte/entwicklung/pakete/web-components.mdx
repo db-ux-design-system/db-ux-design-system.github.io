@@ -176,7 +176,7 @@ Trage die mitgelieferte Custom-Data-Datei in deine VS-Code-Einstellungen ein, um
 Reduziert die Bundle-Größe, indem es `var()`, `calc()`, `color-mix()` und `light-dark()` zur Build-Zeit auflöst und ungenutzte Deklarationen entfernt.
 
 ```shell
-pnpm add @db-ux/core-postcss-plugin --save-dev
+pnpm add @db-ux/core-postcss-plugin esbuild --save-dev
 ```
 
 ```ts
@@ -186,10 +186,15 @@ import { dbUxFlatten } from '@db-ux/core-postcss-plugin';
 
 export default defineConfig({
 	css: {
-		transformer: 'postcss', // ab Vite 8 erforderlich (Standard: 'lightningcss')
+		// Ab Vite 8 Standard ist LightningCSS – ohne diese Zeile laufen keine PostCSS-Plugins
+		transformer: 'postcss',
 		postcss: {
 			plugins: [dbUxFlatten()],
 		},
+	},
+	build: {
+		// Ab Vite 8: erhält light-dark() im Produktions-Build (braucht esbuild)
+		cssMinify: 'esbuild',
 	},
 });
 ```

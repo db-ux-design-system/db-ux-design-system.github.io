@@ -8,7 +8,7 @@ description: 'Bau Schritt für Schritt eine kleine React-App mit dem DB UX Desig
 align: start
 toc: true
 tocMaxDepth: 2
-order: 4
+order: 2
 ---
 
 import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
@@ -270,7 +270,7 @@ const App = () => {
 export default App;
 ```
 
-Die Meldung hat die Rolle `status`. Screenreader sagen sie an, ohne den Fokus zu verschieben. Mit `closeButtonText` legst du den Text des Schließen-Buttons fest, ohne die Angabe ist er englisch. Den Wrapper `form-actions` um den Button brauchst du im nächsten Schritt.
+Die Meldung hat die Rolle `status`. Screenreader sagen sie an, ohne den Fokus zu verschieben. Mit `closeButtonText` legst du den zugänglichen Namen des Schließen-Buttons fest, ohne die Angabe ist er englisch. Das ESLint-Plugin des Design Systems meldet eine schließbare Meldung ohne diesen Text. Den Wrapper `form-actions` um den Button brauchst du im nächsten Schritt.
 
 **Prüfen:**
 

@@ -96,6 +96,13 @@ Load the component styles first and the DB Theme after them. The theme overrides
 
 This replaces the whitelabel theme import shown on the framework package pages.
 
+<DBNotification variant="standalone" semantic="informational" headline="Why the order is reversed">
+	On the framework package pages, the whitelabel theme comes first (`@layer whitelabel-theme,
+	db-ux;`). There it is the base that the component styles build on. The DB Theme is an override: it
+	comes last (`@layer db-ux, db-theme;`) so its values win over the whitelabel defaults. Both orders
+	are correct for their setup – mixing them up shows the whitelabel colors.
+</DBNotification>
+
 ### Pick the variant for your bundler
 
 | Variant                          | Use when                          |

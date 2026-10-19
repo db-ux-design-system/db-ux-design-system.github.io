@@ -101,6 +101,18 @@ Lade zuerst die Komponenten-Styles und danach das DB Theme. Das Theme überschre
 
 Das ersetzt den Import des Whitelabel-Themes aus den Anleitungen der Framework-Pakete.
 
+<DBNotification
+	variant="standalone"
+	semantic="informational"
+	headline="Warum die Reihenfolge umgekehrt ist"
+>
+	In den Anleitungen der Framework-Pakete kommt das Whitelabel-Theme zuerst (`@layer
+	whitelabel-theme, db-ux;`). Dort ist es die Basis, auf der die Komponenten-Styles aufbauen. Das DB
+	Theme überschreibt dagegen: Es kommt zuletzt (`@layer db-ux, db-theme;`), damit seine Werte die
+	Whitelabel-Standardwerte schlagen. Beide Reihenfolgen sind für ihr Setup richtig – wer sie
+	vertauscht, sieht die Whitelabel-Farben.
+</DBNotification>
+
 ### Variante für deinen Bundler wählen
 
 | Variante                           | Nutze sie, wenn                   |

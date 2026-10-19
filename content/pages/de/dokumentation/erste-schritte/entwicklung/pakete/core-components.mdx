@@ -21,9 +21,10 @@ Nutze Core Components, wenn du HTML selbst schreibst – in einfachen Seiten, in
 
 Wenn du mit React, Angular, Vue oder Custom Elements arbeitest, installiere stattdessen das passende Framework-Paket. Jedes davon enthält dieses Paket bereits.
 
-<DBNotification variant="standalone" semantic="informational" headline="Foundation ist enthalten">
-	Dieses Paket zieht `@db-ux/core-foundations` als Abhängigkeit mit. Bei `npm` passiert das
-	automatisch. Bei `pnpm` installierst du beide explizit.
+<DBNotification variant="standalone" semantic="informational" headline="Foundation mitinstallieren">
+	Dieses Paket hängt von `@db-ux/core-foundations` ab, und dein Stylesheet importiert beide. npm
+	installiert die Foundation automatisch mit, pnpm stellt sie aber nur bereit, wenn du sie selbst
+	angibst – deshalb installiert der Befehl unten beide.
 </DBNotification>
 
 </DBSection>
@@ -35,7 +36,7 @@ Wenn du mit React, Angular, Vue oder Custom Elements arbeitest, installiere stat
 Du brauchst:
 
 - Ein Projekt, in dem du das HTML selbst schreibst, zum Beispiel einfache Seiten oder eine Template-Engine.
-- Node.js und einen Paketmanager. Die Befehle auf dieser Seite nutzen npm. Mit pnpm verwendest du `pnpm add` statt `npm i`.
+- Node.js und einen Paketmanager. Die Befehle auf dieser Seite nutzen pnpm. Mit npm verwendest du `npm i` statt `pnpm add`.
 - Einen unterstützten Browser: die letzten drei Versionen von Chrome und Edge, Firefox ESR und die letzten zwei Major-Versionen von Safari.
 
 Für Produkte der Deutschen Bahn brauchst du zusätzlich Zugang zum Marketingportal für das [DB Theme](/de/dokumentation/erste-schritte/entwicklung/pakete/db-theme). Du kannst ohne ihn starten: Das Whitelabel-Theme funktioniert sofort, das DB Theme ergänzt du später.
@@ -47,7 +48,7 @@ Für Produkte der Deutschen Bahn brauchst du zusätzlich Zugang zum Marketingpor
 ## Installation
 
 ```shell
-npm i @db-ux/core-components
+pnpm add @db-ux/core-components @db-ux/core-foundations
 ```
 
 </DBSection>

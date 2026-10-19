@@ -163,7 +163,7 @@ Neither package is required to get started. Add them once your first component r
 Reduces the bundle size by resolving `var()`, `calc()`, `color-mix()` and `light-dark()` at build time and removing unused declarations.
 
 ```shell
-pnpm add @db-ux/core-postcss-plugin --save-dev
+pnpm add @db-ux/core-postcss-plugin esbuild --save-dev
 ```
 
 ```ts
@@ -173,10 +173,15 @@ import { dbUxFlatten } from '@db-ux/core-postcss-plugin';
 
 export default defineConfig({
 	css: {
-		transformer: 'postcss', // required for Vite 8+ (default: 'lightningcss')
+		// Vite 8+ uses LightningCSS by default and skips PostCSS plugins without this line
+		transformer: 'postcss',
 		postcss: {
 			plugins: [dbUxFlatten()],
 		},
+	},
+	build: {
+		// Vite 8+: keeps light-dark() intact in the production build (needs esbuild)
+		cssMinify: 'esbuild',
 	},
 });
 ```
