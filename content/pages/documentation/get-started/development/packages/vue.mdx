@@ -209,11 +209,11 @@ pnpm add eslint @db-ux/core-eslint-plugin @typescript-eslint/parser --save-dev
 
 ## Troubleshooting
 
-| Symptom                           | Cause and fix                                                                                                                                                         |
-| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Components render without styles  | The CSS import is missing, or the theme is loaded after the component styles. Check that `@layer whitelabel-theme, db-ux;` is the first statement in your stylesheet. |
-| Icons and fonts do not load       | The asset path does not match your bundler. Switch between `rollup.css`, `webpack.css` and `relative.css`.                                                            |
-| CSS output looks broken on Vite 8 | Vite 8 minifies with LightningCSS, which transforms modern CSS such as `light-dark()` incorrectly. Set `css.transformer: 'postcss'`.                                  |
+| Symptom                           | Cause and fix                                                                                                                                                                                      |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Components render without styles  | The CSS import is missing, or the theme is loaded after the component styles. Check that `@layer whitelabel-theme, db-ux;` is the first statement in your stylesheet.                              |
+| Icons and fonts do not load       | The asset path does not match your bundler. Switch between `rollup.css`, `webpack.css` and `relative.css`.                                                                                         |
+| CSS output looks broken on Vite 8 | Vite 8 minifies with LightningCSS, which transforms modern CSS such as `light-dark()` incorrectly. Set `build.cssMinify: 'esbuild'` in `vite.config.ts` and install `esbuild` as a dev dependency. |
 
 If none of this helps, open an issue in the [core-web repository](https://github.com/db-ux-design-system/core-web/issues/new/choose). Please check first whether the issue already exists.
 

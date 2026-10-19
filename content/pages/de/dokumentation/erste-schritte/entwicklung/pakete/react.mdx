@@ -182,11 +182,11 @@ pnpm add eslint @db-ux/core-eslint-plugin @typescript-eslint/parser --save-dev
 
 ## Fehlerbehebung
 
-| Symptom                                  | Ursache und Lösung                                                                                                                                                       |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Komponenten erscheinen ohne Styles       | Der CSS-Import fehlt, oder das Theme wird nach den Komponenten-Styles geladen. Prüfe, ob `@layer whitelabel-theme, db-ux;` die erste Anweisung in deinem Stylesheet ist. |
-| Icons und Schriften werden nicht geladen | Der Asset-Pfad passt nicht zu deinem Bundler. Wechsle zwischen `rollup.css`, `webpack.css` und `relative.css`.                                                           |
-| CSS-Ausgabe ist mit Vite 8 fehlerhaft    | Vite 8 minifiziert mit LightningCSS und transformiert modernes CSS wie `light-dark()` falsch. Setze `css.transformer: 'postcss'`.                                        |
+| Symptom                                  | Ursache und Lösung                                                                                                                                                                                 |
+| ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Komponenten erscheinen ohne Styles       | Der CSS-Import fehlt, oder das Theme wird nach den Komponenten-Styles geladen. Prüfe, ob `@layer whitelabel-theme, db-ux;` die erste Anweisung in deinem Stylesheet ist.                           |
+| Icons und Schriften werden nicht geladen | Der Asset-Pfad passt nicht zu deinem Bundler. Wechsle zwischen `rollup.css`, `webpack.css` und `relative.css`.                                                                                     |
+| CSS-Ausgabe ist mit Vite 8 fehlerhaft    | Vite 8 minifiziert mit LightningCSS und transformiert modernes CSS wie `light-dark()` falsch. Setze `build.cssMinify: 'esbuild'` in `vite.config.ts` und installiere `esbuild` als Dev-Dependency. |
 
 Wenn das nicht hilft, öffne ein Issue im [core-web-Repository](https://github.com/db-ux-design-system/core-web/issues/new/choose). Prüfe vorher, ob es das Issue schon gibt.
 

@@ -213,11 +213,12 @@ export default defineConfig({
 
 ## Fehlerbehebung
 
-| Symptom                                 | Ursache und Lösung                                                                                                                                                       |
-| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Custom-Element-Tags bleiben leer        | `defineCustomElements()` wurde nicht ausgeführt oder läuft, bevor das Modul geladen ist. Rufe es einmal beim Start der Anwendung auf.                                    |
-| Build scheitert an einem Stencil-Import | Der Standard-Entry-Point erwartet `@stencil/core` als Peer-Dependency. Installiere es oder wechsle auf den Bundle-Entry-Point.                                           |
-| Komponenten erscheinen ohne Styles      | Der CSS-Import fehlt, oder das Theme wird nach den Komponenten-Styles geladen. Prüfe, ob `@layer whitelabel-theme, db-ux;` die erste Anweisung in deinem Stylesheet ist. |
+| Symptom                                 | Ursache und Lösung                                                                                                                                                                                 |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Custom-Element-Tags bleiben leer        | `defineCustomElements()` wurde nicht ausgeführt oder läuft, bevor das Modul geladen ist. Rufe es einmal beim Start der Anwendung auf.                                                              |
+| Build scheitert an einem Stencil-Import | Der Standard-Entry-Point erwartet `@stencil/core` als Peer-Dependency. Installiere es oder wechsle auf den Bundle-Entry-Point.                                                                     |
+| Komponenten erscheinen ohne Styles      | Der CSS-Import fehlt, oder das Theme wird nach den Komponenten-Styles geladen. Prüfe, ob `@layer whitelabel-theme, db-ux;` die erste Anweisung in deinem Stylesheet ist.                           |
+| CSS-Ausgabe ist mit Vite 8 fehlerhaft   | Vite 8 minifiziert mit LightningCSS und transformiert modernes CSS wie `light-dark()` falsch. Setze `build.cssMinify: 'esbuild'` in `vite.config.ts` und installiere `esbuild` als Dev-Dependency. |
 
 Wenn das nicht hilft, öffne ein Issue im [core-web-Repository](https://github.com/db-ux-design-system/core-web/issues/new/choose). Prüfe vorher, ob es das Issue schon gibt.
 
