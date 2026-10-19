@@ -165,12 +165,6 @@ declare interface NavigationItem {
 	protected?: boolean;
 
 	/**
-	 * If true and the item has children, clicking the group header navigates to
-	 * the item's own page. The group opens there because it covers the current path.
-	 */
-	groupLink?: boolean;
-
-	/**
 	 * Optional German translation of the title, populated from .de.md(x) frontmatter.
 	 */
 	titleDe?: string;

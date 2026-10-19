@@ -223,32 +223,6 @@
 	}
 }
 
-/* Group title next to the back button, made a link to the group's own page
-   (`navGroupLink` frontmatter, see nav-item.tsx). The library renders it as plain
-   text, so it gets the interaction states of a navigation item here.
-   TODO: Move into core-web together with the option in
-   DBControlPanelNavigationItemGroup. */
-.db-control-panel-navigation-item-group-back-button > span[data-group-link='true'] {
-	cursor: pointer;
-	border-radius: var(--db-border-radius-xs);
-	padding: var(--db-spacing-fixed-3xs) var(--db-spacing-fixed-xs);
-	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
-
-	&:hover,
-	&:focus {
-		background-color: var(--db-adaptive-bg-basic-transparent-full-hovered);
-	}
-
-	&:active {
-		background-color: var(--db-adaptive-bg-basic-transparent-full-pressed);
-	}
-
-	&:focus-visible {
-		outline: var(--db-border-width-2xs) solid var(--db-focus-outline-color);
-		outline-offset: var(--db-border-width-2xs);
-	}
-}
-
 [data-variant='drilldown'] {
 	.db-control-panel-navigation-item-group-menu {
 		z-index: 68;

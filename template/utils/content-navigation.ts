@@ -10,11 +10,11 @@ type NavigationFrontmatter = FrontMatter & {
 	externalUrl?: string;
 	protected?: boolean;
 	/**
-	 * Makes the group header of a page with children navigate to the page itself.
-	 * Without it, the header only toggles the group and the page is not reachable
-	 * from the navigation.
+	 * Adds an "Overview" entry linking to this page as the first child. A page with
+	 * children renders as a collapsible group whose header toggles the group, so
+	 * without this entry the page itself is not reachable from the navigation.
 	 */
-	navGroupLink?: boolean;
+	navOverview?: boolean;
 };
 
 type MdModule = {
@@ -210,6 +210,7 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 	}
 
 	const nodes = new Map<string, NavigationItem>();
+	const overviewRels = new Set<string>();
 
 	for (const [key, mod] of Object.entries(mods)) {
 		const rel = strip(key);
@@ -234,7 +235,7 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 		const sortChildrenDescending = fm.sortChildrenDescending === true;
 		const externalUrl = fm.externalUrl;
 		const isProtected = fm.protected === true;
-		const groupLink = fm.navGroupLink === true && !hidePage;
+		if (fm.navOverview === true && !hidePage) overviewRels.add(rel);
 
 		const node: NavigationItem = {
 			title,
@@ -249,7 +250,6 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 			sortChildrenDescending,
 			externalUrl,
 			protected: isProtected,
-			groupLink,
 		};
 
 		// If a placeholder node already exists (created as intermediate directory),
@@ -267,7 +267,6 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 			existing.sortChildrenDescending = sortChildrenDescending;
 			existing.externalUrl = externalUrl;
 			existing.protected = isProtected;
-			existing.groupLink = groupLink;
 		} else {
 			nodes.set(rel, node);
 		}
@@ -295,6 +294,21 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 			const parent = nodes.get(parentKey);
 			if (parent) ensureChild(parent, node);
 		}
+	}
+
+	// Only groups need the entry; a page without children already renders as a link.
+	// The entry is a regular leaf, so it renders as a real link (href, new tab,
+	// aria-current) and the group header keeps its plain toggle behavior.
+	for (const rel of overviewRels) {
+		const node = nodes.get(rel);
+		if (!node?.path || !node.children?.length) continue;
+		node.children.unshift({
+			title: 'Overview',
+			titleDe: 'Übersicht',
+			path: node.path,
+			children: [],
+			order: Number.MIN_SAFE_INTEGER,
+		});
 	}
 
 	const appNav: AppNavigation = (
