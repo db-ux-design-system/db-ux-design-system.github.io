@@ -1,0 +1,170 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Design'
+headline: 'Design'
+description: 'Start designing with the DB UX Design System in Figma. Get access to the libraries, learn how the components work and hand designs over to development.'
+align: start
+toc: true
+tocMaxDepth: 2
+order: 1
+navGroupLink: true
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<DBSection spacing="small" width="auto">
+
+## Learn about the design system
+
+The DB UX Design System gives design and development one shared base: the same Foundation, the same components and the same names in Figma and in code.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'For Designers',
+			description: 'What the design system offers your design work.',
+			url: '/products-and-services/for-designer',
+		},
+		{
+			title: 'Development',
+			description: 'How developers get started – useful to know for the handoff.',
+			url: '/documentation/get-started/development',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Access the tools
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Design Resources',
+			description: 'Get access to the Figma libraries and enable them in your file.',
+			url: '/documentation/get-started/design/resources',
+		},
+		{
+			title: 'Figma Tutorial',
+			description: 'Design a contact form step by step and check the handoff in Dev Mode.',
+			url: '/documentation/get-started/design/tutorial',
+		},
+		{
+			title: 'Figma Tips',
+			description: 'Property icons, helper components and how-tos for individual components.',
+			url: '/documentation/learn/figma',
+		},
+		{
+			title: 'Code Connect',
+			description: 'How component properties in Figma turn into code in Dev Mode.',
+			url: '/documentation/learn/code-connect',
+		},
+		{
+			title: 'Plugins & Tools',
+			description: 'Logo Importer, Theme Builder and Custom Color Importer.',
+			url: '/documentation/get-started/design/plugins',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Read the guidelines
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Foundation',
+			description: 'Colors, typography, spacing and the other base tokens.',
+			url: '/documentation/foundation',
+		},
+		{
+			title: 'Components',
+			description: 'Usage, variants and guidelines for every component.',
+			url: '/documentation/components',
+		},
+		{
+			title: 'Patterns',
+			description: 'Recurring solutions that combine several components.',
+			url: '/documentation/patterns',
+		},
+		{
+			title: 'Extensions',
+			description: 'Additional libraries for specific domains such as passenger information.',
+			url: '/documentation/extensions',
+		},
+		{
+			title: 'Accessibility',
+			description: 'How the components are tested and what remains your responsibility.',
+			url: '/documentation/get-started/accessibility',
+		},
+		{
+			title: 'DB Brand Guidelines',
+			description:
+				'Logo, colors and the other brand basics of Deutsche Bahn in the Marketing Portal. Requires a login.',
+			url: 'https://marketingportal.extranet.deutschebahn.com/marketingportal/Marke-und-Design',
+			external: true,
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Stay up to date and get help
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Release Notes',
+			description: 'Changes per release, grouped by design and development.',
+			url: '/documentation/releases/release-notes',
+		},
+		{
+			title: 'Migration Guides',
+			description: 'What changes between major versions and how to update.',
+			url: '/documentation/releases/migration-guides',
+		},
+		{
+			title: 'Contribution',
+			description: 'Give feedback, report issues and help improve the design system.',
+			url: '/documentation/contribution',
+		},
+		{
+			title: 'Consultation Hour',
+			description:
+				'Help, Hints & Hugs: every two weeks on Wednesday at 9:00. The date is in the community calendar.',
+		},
+		{
+			title: 'Teams Channel',
+			description:
+				'Ask questions and exchange ideas with the community in the Overall & Design channel.',
+			url: 'https://teams.microsoft.com/l/channel/19%3A7dd9929be1fe494c823b11e0e2d22341%40thread.skype/DB%20UX%20Design%20System?groupId=72c53609-2941-46dd-8be9-e4d1d2c45c77&tenantId=a1a72d9c-49e6-4f6d-9af6-5aafa1183bfd',
+			external: true,
+		},
+		{
+			title: 'Support',
+			description: 'Contact the team for anything that does not fit an issue. Requires a login.',
+			url: 'https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/User-Experience/DB-UX-Design-System/support',
+			external: true,
+		},
+	]}
+/>
+
+</DBSection>

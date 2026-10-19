@@ -1,0 +1,328 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'React Tutorial'
+headline: 'React Tutorial: Build a Contact Form'
+description: 'Build a small React app with the DB UX Design System step by step – from an empty Vite project to a working contact form with feedback after sending.'
+align: start
+toc: true
+tocMaxDepth: 2
+order: 4
+---
+
+import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+
+<DBSection spacing="small" width="auto">
+
+In this tutorial you build a contact form with name, email, topic and message. After sending, a notification confirms the message. On the way, you set up the styles, combine layout and form components and add your own CSS with tokens.
+
+Every step ends with a check, so you know the step worked before you continue.
+
+The same form is designed in Figma in the [Figma Tutorial](/documentation/get-started/design/tutorial).
+
+<DBNotification variant="standalone" semantic="informational" headline="Only want to install?">
+	If you add the design system to an existing project, follow the{' '}
+	<DBLink href="/documentation/get-started/development/packages/react" variant="inline">
+		React guide
+	</DBLink>{' '}
+	instead. This tutorial starts from an empty project.
+</DBNotification>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Before you begin
+
+You need:
+
+- Node.js and pnpm. With npm, use `npm create` and `npm i` instead of `pnpm create` and `pnpm add`.
+- Basic knowledge of React: components, JSX and the `useState` hook.
+- A supported browser: the last three versions of Chrome and Edge, Firefox ESR and the last two major versions of Safari.
+
+The tutorial was tested with Vite 8, React 19 and version 6 of the design system packages.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Step 1: Create the project
+
+Create a React project with TypeScript and start it:
+
+```shell
+pnpm create vite my-app --template react-ts
+cd my-app
+pnpm install
+pnpm dev
+```
+
+Delete `src/App.css`. The next steps replace the starter styles.
+
+**Check:** The browser shows the Vite starter page at the address printed in the terminal, by default `http://localhost:5173`.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Step 2: Install the packages and styles
+
+Install the React components and both style packages:
+
+```shell
+pnpm add @db-ux/react-core-components @db-ux/core-components @db-ux/core-foundations
+```
+
+Replace the content of `src/index.css`:
+
+```css
+/* src/index.css */
+@layer whitelabel-theme, db-ux;
+
+@import '@db-ux/core-foundations/build/styles/theme/rollup.css' layer(whitelabel-theme);
+@import '@db-ux/core-components/build/styles/bundle.css' layer(db-ux);
+```
+
+The first line fixes the order of the cascade layers, so the theme always comes before the component styles.
+
+Vite 8 minifies CSS with LightningCSS by default. It transforms the `light-dark()` function of the design system incorrectly, and colors break in the production build. Switch the minifier to esbuild:
+
+```shell
+pnpm add esbuild --save-dev
+```
+
+```ts
+// vite.config.ts
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+	plugins: [react()],
+	build: {
+		cssMinify: 'esbuild',
+	},
+});
+```
+
+**Check:** The commands run without errors. You see the result in the next step, once the page uses the first components.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Step 3: Build the page structure
+
+Replace the content of `src/App.tsx`:
+
+```tsx
+// src/App.tsx
+import { DBHeadingH1, DBSection, DBStack } from '@db-ux/react-core-components';
+
+const App = () => (
+	<DBSection spacing="medium" width="small">
+		<DBStack gap="large">
+			<DBHeadingH1>Contact us</DBHeadingH1>
+		</DBStack>
+	</DBSection>
+);
+
+export default App;
+```
+
+- **Section** sets the outer spacing and limits the content width. `width="small"` keeps the form at a readable width.
+- **Stack** arranges its children with an even gap. You use it again for the form fields.
+- **Heading** renders a real `<h1>` with the typography of the design system.
+
+**Check:** The page shows the headline “Contact us” in a large, bold font. The font is `OpenSans` – you can see it under the rendered fonts in the DevTools. If the headline appears in the browser default font, the CSS import from step 2 is missing.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Step 4: Add the form
+
+Put the form fields into a card below the headline:
+
+```tsx
+// src/App.tsx
+import {
+	DBButton,
+	DBCard,
+	DBCheckbox,
+	DBHeadingH1,
+	DBInput,
+	DBSection,
+	DBSelect,
+	DBStack,
+	DBTextarea,
+} from '@db-ux/react-core-components';
+
+const App = () => (
+	<DBSection spacing="medium" width="small">
+		<DBStack gap="large">
+			<DBHeadingH1>Contact us</DBHeadingH1>
+
+			<DBCard spacing="medium">
+				<form>
+					<DBStack gap="medium">
+						<DBInput label="Name" name="name" required />
+						<DBInput label="Email" name="email" type="email" required />
+						<DBSelect label="Topic" name="topic">
+							<option value="booking">Booking</option>
+							<option value="refund">Refund</option>
+							<option value="other">Other</option>
+						</DBSelect>
+						<DBTextarea label="Message" name="message" required />
+						<DBCheckbox name="copy">Send me a copy</DBCheckbox>
+						<DBButton type="submit" variant="brand" icon="arrow_right">
+							Send message
+						</DBButton>
+					</DBStack>
+				</form>
+			</DBCard>
+		</DBStack>
+	</DBSection>
+);
+
+export default App;
+```
+
+Each form component renders a native form element with its label. That is why `label` is a required part of every field: screen readers read it out, and a click on the label focuses the field. `required` and `type="email"` use the validation of the browser.
+
+**Check:** The card shows five fields and a button in the brand color with an arrow icon. A click on a label focuses the field. If the arrow is missing, the browser cannot load the icon font – look for a failed `.woff2` request in the Network tab of the DevTools.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Step 5: Show feedback after sending
+
+Store whether the form was sent, and show a notification in that case. This is the complete `src/App.tsx`:
+
+```tsx
+// src/App.tsx
+import { useState, type FormEvent } from 'react';
+import {
+	DBButton,
+	DBCard,
+	DBCheckbox,
+	DBHeadingH1,
+	DBInput,
+	DBNotification,
+	DBSection,
+	DBSelect,
+	DBStack,
+	DBTextarea,
+} from '@db-ux/react-core-components';
+
+const App = () => {
+	const [sent, setSent] = useState(false);
+
+	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		setSent(true);
+	};
+
+	return (
+		<DBSection spacing="medium" width="small">
+			<DBStack gap="large">
+				<DBHeadingH1>Contact us</DBHeadingH1>
+
+				{sent && (
+					<DBNotification
+						variant="standalone"
+						semantic="successful"
+						headline="Message sent"
+						closeable
+						onClose={() => setSent(false)}
+					>
+						We will get back to you within two working days.
+					</DBNotification>
+				)}
+
+				<DBCard spacing="medium">
+					<form onSubmit={handleSubmit}>
+						<DBStack gap="medium">
+							<DBInput label="Name" name="name" required />
+							<DBInput label="Email" name="email" type="email" required />
+							<DBSelect label="Topic" name="topic">
+								<option value="booking">Booking</option>
+								<option value="refund">Refund</option>
+								<option value="other">Other</option>
+							</DBSelect>
+							<DBTextarea label="Message" name="message" required />
+							<DBCheckbox name="copy">Send me a copy</DBCheckbox>
+							<div className="form-actions">
+								<DBButton type="submit" variant="brand" icon="arrow_right">
+									Send message
+								</DBButton>
+							</div>
+						</DBStack>
+					</form>
+				</DBCard>
+			</DBStack>
+		</DBSection>
+	);
+};
+
+export default App;
+```
+
+The notification has the role `status`, so screen readers announce it without moving the focus. The `form-actions` wrapper around the button is used in the next step.
+
+**Check:**
+
+- Send the empty form: the browser marks the first required field, and no notification appears.
+- Fill in name, email and message and send again: a green notification “Message sent” appears above the card.
+- Close the notification with its close button: it disappears.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Step 6: Add your own styles with tokens
+
+Align the button to the end of the form. Add this rule to `src/index.css`, below the imports:
+
+```css
+/* src/index.css */
+.form-actions {
+	display: flex;
+	justify-content: flex-end;
+	padding-block-start: var(--db-spacing-fixed-sm);
+}
+```
+
+`--db-spacing-fixed-sm` is a spacing token of the Foundation. Use tokens instead of fixed pixel values for spacing, colors and sizes, so your styles follow the theme and the density. All tokens are listed under [Foundation](/documentation/foundation).
+
+**Check:** The button sits at the right edge of the card, with a little more space above it.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Step 7: Build for production
+
+```shell
+pnpm build
+pnpm preview
+```
+
+**Check:** The preview at `http://localhost:4173` looks exactly like the development version. Switch your operating system to Dark Mode: page, card and fields switch to dark colors in both versions. If colors look wrong only in the preview, the `cssMinify` setting from step 2 is missing.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Next steps
+
+| Next step                            | Where                                                                                  |
+| ------------------------------------ | -------------------------------------------------------------------------------------- |
+| Use the DB Theme for a DB product    | [DB Theme](/documentation/get-started/development/packages/db-theme)                   |
+| Report incorrect usage in the editor | [ESLint plugin](/documentation/get-started/development/packages/react#eslint-plugin)   |
+| Reduce the CSS bundle size           | [PostCSS plugin](/documentation/get-started/development/packages/react#postcss-plugin) |
+| Look up properties and guidelines    | [Components](/documentation/components)                                                |
+| Let an AI agent use correct APIs     | [MCP Server](/documentation/learn/mcp-server)                                          |
+
+</DBSection>

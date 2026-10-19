@@ -1,0 +1,126 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'KI'
+headline: 'KI'
+description: 'Gib KI-Coding-Agenten verlässliches Wissen über das DB UX Design System – Komponenten-APIs, Tokens, Icons und Migrationsregeln –, statt sie raten zu lassen.'
+align: start
+toc: true
+tocMaxDepth: 2
+order: 4
+---
+
+import { DBSection, DBNotification } from '@db-ux/react-core-components';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<DBSection spacing="small" width="auto">
+
+## Warum Agenten Unterstützung brauchen
+
+KI-Coding-Agenten kennen gängige Bibliotheken, aber nicht die genaue API des DB UX Design Systems. Ohne Kontext erfinden sie Komponentennamen, Properties und Token-Werte, die plausibel aussehen, aber nicht existieren. Die Werkzeuge auf dieser Seite geben Agenten stattdessen die echte Quelle.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Welches Werkzeug brauche ich?
+
+| Werkzeug            | Was es tut                                                                                                               | Nutze es, wenn                                   |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
+| `@db-ux/mcp-server` | Beantwortet Anfragen von Agenten live: Komponenten-APIs, Code-Beispiele, Tokens, Icons, Prompts für Migration und Review | deine IDE das Model Context Protocol unterstützt |
+| `@db-ux/agent-cli`  | Schreibt die Dokumentation deiner installierten `@db-ux`-Pakete in `.github/copilot-instructions.md`                     | du Projektregeln willst, die jeder Agent liest   |
+| Code Connect        | Zeigt im Dev Mode den passenden Code-Schnipsel zu einem Figma-Design                                                     | du Designs aus Figma umsetzt                     |
+
+MCP Server und Agent CLI ergänzen sich. Nutze beide, wenn du kannst.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Schnellstart
+
+### 1. Projektregeln erzeugen
+
+Führe das im Stammverzeichnis deines Repositorys aus:
+
+```shell
+npx @db-ux/agent-cli
+```
+
+Das Werkzeug durchsucht `node_modules` nach installierten `@db-ux`-Paketen und legt `.github/copilot-instructions.md` mit der Dokumentation genau dieser Versionen an oder aktualisiert die Datei. Führe es nach jedem Update des Design Systems erneut aus.
+
+In einem Monorepo gibst du den Ordner an, in dem die Pakete installiert sind:
+
+```shell
+npx @db-ux/agent-cli packages/frontend
+```
+
+### 2. MCP Server verbinden
+
+Ergänze den Server in der MCP-Konfiguration deiner IDE:
+
+```json
+{
+	"mcpServers": {
+		"db-ux": {
+			"command": "npx",
+			"args": ["--yes", "@db-ux/mcp-server"]
+		}
+	}
+}
+```
+
+<DBNotification variant="standalone" semantic="informational" headline="Setup je IDE">
+	Wo diese Konfiguration genau liegt, unterscheidet sich zwischen VS Code, JetBrains-IDEs, Cursor
+	und Kiro. Die Seite MCP Server beschreibt jede davon.
+</DBNotification>
+
+### 3. Verbindung prüfen
+
+Suche `db-ux` in der Liste der MCP-Server deiner IDE. Bitte dann deinen Agenten, die Komponenten des Design Systems aufzulisten – er sollte mit den echten Komponentennamen antworten.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Was du damit tun kannst
+
+| Aufgabe                        | Werkzeug oder Prompt des MCP Servers            |
+| ------------------------------ | ----------------------------------------------- |
+| Seite oder Komponente aufbauen | `scaffold_page`, `scaffold_component`           |
+| Von DB UI migrieren            | `analyze_v2_migration`, `migrate_component`     |
+| Code prüfen                    | `review_ui_code`                                |
+| Barrierefreiheit prüfen        | `audit_accessibility` – prüft gegen WCAG 2.2 AA |
+
+Prüfe erzeugten Code immer selbst. Die Werkzeuge verringern das Raten, ersetzen aber nicht dein eigenes Urteil.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Mehr erfahren
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'MCP Server',
+			description: 'Setup je IDE, alle Werkzeuge und Prompts, Fehlerbehebung.',
+			url: '/de/dokumentation/lernen/mcp-server',
+		},
+		{
+			title: 'Code Connect',
+			description: 'Wie aus Figma-Properties Code im Dev Mode wird.',
+			url: '/de/dokumentation/lernen/code-connect',
+		},
+		{
+			title: 'Migration von DB UI',
+			description: 'Lass einen Agenten die Vorarbeit einer Migration erledigen.',
+			url: '/de/dokumentation/erste-schritte/migration',
+		},
+	]}
+/>
+
+</DBSection>

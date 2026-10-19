@@ -1,0 +1,98 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Accessibility'
+headline: 'Accessibility'
+description: 'How the components of the DB UX Design System are tested for accessibility, and what remains your responsibility in your product.'
+align: start
+toc: true
+tocMaxDepth: 2
+order: 6
+---
+
+import { DBSection, DBNotification } from '@db-ux/react-core-components';
+
+<DBSection spacing="small" width="auto">
+
+## What the design system covers – and what it does not
+
+The components are built and tested for accessibility. That makes your product easier to build accessibly, but it does not make it accessible automatically.
+
+| The design system takes care of …                                    | You take care of …                                                     |
+| -------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Semantic structure and roles inside each component                   | The structure of your page: headings, landmarks, order of content      |
+| Keyboard operation and focus styles of each component                | The focus order across your page and focus handling in your own flows  |
+| Color contrast within the components, checked by the automated tests | Colors you add yourself, for example custom colors or images with text |
+| Automated and screen reader tests of each component                  | Labels, alternative texts and error messages – the content you pass in |
+|                                                                      | Testing your product as a whole                                        |
+
+Content with the status **Stable** is considered accessible as part of being Design System conformant – see [Content Status](/documentation/releases/content-status).
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## How the components are tested
+
+| Test                      | What it checks                                                                               |
+| ------------------------- | -------------------------------------------------------------------------------------------- |
+| axe-core                  | Every component showcase is scanned. The test fails as soon as a violation is found.         |
+| IBM Accessibility Checker | A second automated rule engine on the same showcases.                                        |
+| ARIA snapshots            | The accessibility tree of each component, so that changes to roles and names become visible. |
+| Screen reader tests       | Automated tests with NVDA on Windows and VoiceOver on macOS.                                 |
+| Accessibility reviews     | Manual reviews of individual components.                                                     |
+
+Screen reader tests exist for: Accordion, Badge, Brand, Button, Card, Checkbox, Control Panel, Drawer, Header, Icon, Infotext, Input, Link, Navigation, Notification, Popover, Radio, Section, Select, Switch, Tabs, Tag, Textarea and Tooltip.
+
+Manual accessibility reviews are completed for: Badge, Button, Card, Checkbox, Drawer, Infotext, Input, Link, Notification, Radio, Select, Switch, Tag and Textarea.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## In design
+
+- Use the components from the Figma library instead of rebuilding them. Their structure matches the tested code.
+- Fill in labels, messages and alternative texts in the design. Developers need them, and they are easy to forget later.
+- Check the **Guidelines** section of each component page for the rules that apply to it.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## In development
+
+- Pass `aria-*` attributes directly to the components. They are forwarded to the right element automatically – no extra property is needed.
+- Don't hide labels or messages without a replacement. A visually hidden label still has to exist.
+- Add the ESLint plugin. Several of its rules catch accessibility issues while you type.
+
+| ESLint rule                           | Reports                                                                        |
+| ------------------------------------- | ------------------------------------------------------------------------------ |
+| `form-label-required`                 | Form components without a label                                                |
+| `button-no-text-requires-tooltip`     | Buttons without text that lack an icon or a tooltip                            |
+| `close-button-text-required`          | Close buttons of Notification, Drawer, Dialog and Custom Select without a text |
+| `header-burger-menu-label-required`   | A burger menu without a label                                                  |
+| `no-interactive-tooltip-content`      | Interactive elements inside a tooltip                                          |
+| `tooltip-requires-interactive-parent` | Tooltips that are not placed inside an interactive element                     |
+
+The setup of the plugin is described on the package pages for [React](/documentation/get-started/development/packages/react), [Angular](/documentation/get-started/development/packages/angular) and [Vue](/documentation/get-started/development/packages/vue).
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Check your product
+
+<DBNotification
+	variant="standalone"
+	semantic="informational"
+	headline="Automated checks find only part of the issues"
+>
+	Automated tools find a share of all accessibility issues. Test with the keyboard and a screen
+	reader, and plan a review with people who use assistive technology.
+</DBNotification>
+
+The MCP Server provides the prompt `audit_accessibility`, which checks a code snippet against WCAG 2.2 AA and generates manual test scripts. See [AI](/documentation/get-started/ai).
+
+</DBSection>

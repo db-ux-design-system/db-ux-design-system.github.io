@@ -1,0 +1,186 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Figma Tutorial'
+headline: 'Figma Tutorial: Design a Contact Form'
+description: 'Design a contact form with the DB UX Design System in Figma step by step and hand it over to development with Code Connect.'
+align: start
+toc: true
+tocMaxDepth: 2
+order: 3
+---
+
+import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+
+<DBSection spacing="small" width="auto">
+
+In this tutorial you design the same contact form that developers build in the <DBLink href="/documentation/get-started/development/tutorial" variant="inline">React Tutorial</DBLink>: name, email, topic, message and a confirmation after sending. On the way, you combine components, configure them through their properties and check in Dev Mode which code your design produces.
+
+Every step ends with a check, so you know the step worked before you continue.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Before you begin
+
+You need:
+
+- Access to the Figma libraries of the DB UX Design System – see [Design Resources](/documentation/get-started/design/resources).
+- A Figma seat that lets you edit files. With a Dev seat you can inspect designs, but not create them.
+- Basic knowledge of Figma: frames, Auto Layout and component instances.
+
+Property names in Figma start with an icon that shows their purpose, for example ✏️ for texts and 📦 for slots. This tutorial names the properties as they appear in the properties panel. The icons are explained under [Design Resources](/documentation/get-started/design/resources#work-with-the-components).
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Step 1: Create a file and enable the libraries
+
+1. Create a new design file in the Figma organization of Deutsche Bahn.
+2. Open the Assets panel and select **Libraries**.
+3. Enable **DB UX - Core Foundation** and **DB UX - Core Components**. Core Foundation contains the variables for colors, spacing and typography that the components use.
+
+**Check:** In the Assets panel, a search for “Button” finds `Button → Brand` from DB UX - Core Components.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Step 2: Build the page structure
+
+1. Create a frame for the page and give it a vertical Auto Layout.
+2. Bind the gap of the Auto Layout to the variable `db-spacing/fixed/lg`. Click the gap value and pick the variable instead of typing a number.
+3. Insert `Heading H1 (Beta)` and set **✏️ Text** to “Contact us”.
+
+Variables instead of fixed values keep your spacing in line with the density, and developers see the matching token in Dev Mode.
+
+**Check:** The headline appears in the headline font of the DB Theme. When you select the gap of the frame, it shows the variable `db-spacing/fixed/lg`, not a pixel value.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Step 3: Add the form
+
+1. Insert `Card → (Def) Level 1 (Beta)` below the headline and set **🔀 Spacing** to **Medium**.
+2. Give the **📦 Children** slot of the card a vertical Auto Layout with the gap `db-spacing/fixed/md`.
+3. Place these components into the slot and set their texts:
+
+| Component                                    | Property | Value          |
+| -------------------------------------------- | -------- | -------------- |
+| `Input → (Def) Label Above - (Def) Empty`    | ✏️ Label | Name           |
+| `Input → (Def) Label Above - (Def) Empty`    | ✏️ Label | Email          |
+| `Select → (Def) Label Above - (Def) Empty`   | ✏️ Label | Topic          |
+| `Textarea → Label Above - (Def) Empty`       | ✏️ Label | Message        |
+| `Checkbox → (Def) Medium - (Def) Auto Width` | ✏️ Label | Send me a copy |
+| `Button → Brand`                             | ✏️ Text  | Send message   |
+
+4. On the button, switch on **👁️ Show Icon Leading** and swap **🔄 Icon Leading Medium** for the icon `arrow_right`.
+
+Change the components only through their properties and slots. Do not detach them and do not edit their layers directly. The properties correspond to the properties in code – a detached instance loses this link, and developers can no longer read the correct code from it.
+
+**Check:** The card shows five fields and a button in the brand color with an arrow. In the layers panel, every field is still an instance (component icon), not a frame.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Step 4: Mark the required fields
+
+Name, email and message are required. For each of the three fields:
+
+1. Set **⚙️ Required** to **true**. This property does not change the look – it only tells the code that the field is required.
+2. Switch on **👁️ Show Required Asterisk**, so users see which fields are required.
+
+Properties with ⚙️ only affect the code. Set them anyway, so the snippet in Dev Mode is complete. More on this under [Code Connect](/documentation/learn/code-connect).
+
+**Check:** Name, Email and Message show an asterisk next to their label. Topic and the checkbox do not.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Step 5: Design the state after sending
+
+Developers need to know what happens after sending. Show it as a second screen:
+
+1. Duplicate the page frame and name the copies “Contact – Form” and “Contact – Sent”.
+2. In “Contact – Sent”, insert `Notification → Standalone - (Def) Icon` between headline and card.
+3. Set **Semantic** to **Successful**, the headline to “Message sent” and the text to “We will get back to you within two working days.”
+4. Switch on **Closeable**.
+
+**Check:** “Contact – Sent” shows a green notification with an icon and a close button above the card. “Contact – Form” is unchanged.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Step 6: Check the handoff in Dev Mode
+
+Switch to Dev Mode with `Shift` + `D` and select the components one by one. Thanks to Code Connect, the inspect panel shows the matching code instead of generic CSS.
+
+Select the Name field. The snippet looks like this:
+
+```tsx
+<DBInput
+	variant="above"
+	label="Name"
+	showLabel={true}
+	required={true}
+	showRequiredAsterisk={true}
+	readonly={false}
+	disabled={false}
+	validation="no-validation"
+	showIconLeading={false}
+	showIconTrailing={false}
+	showMessage={false}
+	name="input"
+/>
+```
+
+- `label` and `required` come from **✏️ Label** and **⚙️ Required**. If `required={true}` is missing, step 4 is missing for this field.
+- Properties with default values such as `disabled={false}` are part of the snippet. Developers can leave them out.
+- `name="input"` is a placeholder. The real field name is set in code.
+
+Select the card. Its snippet starts with:
+
+```tsx
+<DBCard elevationLevel="1" spacing="medium" behavior="static">
+```
+
+**Check:** Every component of the form shows a snippet with a `DB` component – `DBHeadingH1`, `DBCard`, `DBInput`, `DBSelect`, `DBTextarea`, `DBCheckbox`, `DBButton` and `DBNotification`. If a component shows only CSS, it is detached or not from the DB UX libraries.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## What developers add
+
+Some things cannot be designed. Agree on them in the handoff or note them in the file:
+
+| Topic                  | Where it comes from                                                                     |
+| ---------------------- | --------------------------------------------------------------------------------------- |
+| Options of the select  | Developers add them as `<option>` elements. List the options in a note on the screen.   |
+| Field names            | Set in code, for example `name="email"`.                                                |
+| Behavior after sending | Developers show the notification once the form was sent. Your second screen shows when. |
+| Layout frames          | Frames are not components. Developers rebuild them with layout components and tokens.   |
+
+The result in code is shown step by step in the <DBLink href="/documentation/get-started/development/tutorial" variant="inline">React Tutorial</DBLink>.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Next steps
+
+| Next step                               | Where                                                        |
+| --------------------------------------- | ------------------------------------------------------------ |
+| Helper components and component how-tos | [Figma Tips](/documentation/learn/figma)                     |
+| All about ⚙️ properties and Dev Mode    | [Code Connect](/documentation/learn/code-connect)            |
+| Usage, variants and guidelines          | [Components](/documentation/components)                      |
+| Logos and custom colors                 | [Plugins & Tools](/documentation/get-started/design/plugins) |
+
+</DBSection>

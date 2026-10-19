@@ -1,0 +1,180 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Entwicklung'
+headline: 'Entwicklung'
+description: 'Entwickle mit dem DB UX Design System. Installiere das Paket für dein Framework, richte die Styles ein und verbinde deinen KI-Coding-Agenten.'
+align: start
+toc: true
+tocMaxDepth: 2
+order: 2
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<DBSection spacing="small" width="auto">
+
+## Das Design System kennenlernen
+
+Das DB UX Design System gibt Design und Entwicklung eine gemeinsame Basis: dieselbe Foundation, dieselben Komponenten und dieselben Namen in Figma und im Code.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Für Entwickler:innen',
+			description: 'Was das Design System deiner Entwicklungsarbeit bietet.',
+			url: '/de/produkte-und-services/fuer-entwicklerinnen',
+		},
+		{
+			title: 'Design',
+			description: 'Wie Designer:innen starten – hilfreich für die Übergabe.',
+			url: '/de/dokumentation/erste-schritte/design',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Werkzeuge nutzen
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Pakete',
+			description: 'Wähle das Paket für dein Framework und richte es Schritt für Schritt ein.',
+			url: '/de/dokumentation/erste-schritte/entwicklung/pakete',
+		},
+		{
+			title: 'React-Tutorial',
+			description:
+				'Bau Schritt für Schritt ein Kontaktformular, vom leeren Projekt bis zum Produktions-Build.',
+			url: '/de/dokumentation/erste-schritte/entwicklung/tutorial',
+		},
+		{
+			title: 'Beispiele & Starter',
+			description: 'Beispielprojekte pro Framework, einige direkt im Browser lauffähig.',
+			url: '/de/dokumentation/erste-schritte/entwicklung/beispiele',
+		},
+		{
+			title: 'MCP Server',
+			description: 'Verbinde KI-Coding-Agenten mit korrekten Komponenten-APIs und Tokens.',
+			url: '/de/dokumentation/lernen/mcp-server',
+		},
+		{
+			title: 'Code Connect',
+			description: 'Lies den passenden Code-Schnipsel zu einem Design direkt im Figma Dev Mode.',
+			url: '/de/dokumentation/lernen/code-connect',
+		},
+		{
+			title: 'Migration von DB UI',
+			description: 'Bring ein bestehendes Projekt von Generation 2 auf Generation 3.',
+			url: '/de/dokumentation/erste-schritte/migration',
+		},
+		{
+			title: 'Native Plattformen',
+			description: 'Der Stand der Bibliotheken für iOS und Android.',
+			url: '/de/dokumentation/erste-schritte/entwicklung/native',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Richtlinien lesen
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Foundation',
+			description: 'Farben, Typografie, Abstände und die übrigen Basis-Tokens.',
+			url: '/de/dokumentation/foundation',
+		},
+		{
+			title: 'Komponenten',
+			description: 'Einsatz, Varianten und Richtlinien für jede Komponente.',
+			url: '/de/dokumentation/komponenten',
+		},
+		{
+			title: 'Pattern',
+			description: 'Wiederkehrende Lösungen, die mehrere Komponenten kombinieren.',
+			url: '/de/dokumentation/pattern',
+		},
+		{
+			title: 'Erweiterungen',
+			description: 'Zusätzliche Bibliotheken für bestimmte Bereiche wie die Reisendeninformation.',
+			url: '/de/dokumentation/erweiterungen',
+		},
+		{
+			title: 'Barrierefreiheit',
+			description: 'Wie die Komponenten getestet werden und was in deiner Verantwortung bleibt.',
+			url: '/de/dokumentation/erste-schritte/barrierefreiheit',
+		},
+		{
+			title: 'DB-Markenvorgaben',
+			description:
+				'Logo, Farben und die übrigen Markengrundlagen der Deutschen Bahn im Marketingportal. Erfordert einen Login.',
+			url: 'https://marketingportal.extranet.deutschebahn.com/marketingportal/Marke-und-Design',
+			external: true,
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Auf dem Laufenden bleiben und Hilfe bekommen
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Release Notes',
+			description: 'Änderungen pro Release, getrennt nach Design und Entwicklung.',
+			url: '/de/dokumentation/releases/release-notes',
+		},
+		{
+			title: 'Migration Guides',
+			description: 'Was sich zwischen Major-Versionen ändert und wie du aktualisierst.',
+			url: '/de/dokumentation/releases/migration-guides',
+		},
+		{
+			title: 'Mitwirken',
+			description: 'Gib Feedback, melde Fehler und hilf mit, das Design System zu verbessern.',
+			url: '/de/dokumentation/mitwirken',
+		},
+		{
+			title: 'Sprechstunde',
+			description:
+				'Help, Hints & Hugs: alle zwei Wochen mittwochs um 9 Uhr. Den Termin findest du im Community-Kalender.',
+		},
+		{
+			title: 'Teams-Kanal',
+			description: 'Stell Fragen und tausch dich im Kanal Development mit der Community aus.',
+			url: 'https://teams.microsoft.com/l/channel/19%3A6c0e92ce4aef409598ff77c4cd06e001%40thread.skype/SIG%20-%20DB%20UX%20Design%20System?groupId=2f363785-c59e-4763-9bc3-8e13998a4588&tenantId=a1a72d9c-49e6-4f6d-9af6-5aafa1183bfd',
+			external: true,
+		},
+		{
+			title: 'Support',
+			description:
+				'Kontaktiere das Team für alles, was nicht in ein Issue passt. Erfordert einen Login.',
+			url: 'https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/User-Experience/DB-UX-Design-System/support',
+			external: true,
+		},
+	]}
+/>
+
+</DBSection>

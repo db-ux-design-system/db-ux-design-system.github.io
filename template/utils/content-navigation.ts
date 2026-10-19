@@ -9,6 +9,12 @@ type NavigationFrontmatter = FrontMatter & {
 	nav?: boolean | { order?: number };
 	externalUrl?: string;
 	protected?: boolean;
+	/**
+	 * Makes the group header of a page with children navigate to the page itself.
+	 * Without it, the header only toggles the group and the page is not reachable
+	 * from the navigation.
+	 */
+	navGroupLink?: boolean;
 };
 
 type MdModule = {
@@ -228,6 +234,7 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 		const sortChildrenDescending = fm.sortChildrenDescending === true;
 		const externalUrl = fm.externalUrl;
 		const isProtected = fm.protected === true;
+		const groupLink = fm.navGroupLink === true && !hidePage;
 
 		const node: NavigationItem = {
 			title,
@@ -242,6 +249,7 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 			sortChildrenDescending,
 			externalUrl,
 			protected: isProtected,
+			groupLink,
 		};
 
 		// If a placeholder node already exists (created as intermediate directory),
@@ -259,6 +267,7 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 			existing.sortChildrenDescending = sortChildrenDescending;
 			existing.externalUrl = externalUrl;
 			existing.protected = isProtected;
+			existing.groupLink = groupLink;
 		} else {
 			nodes.set(rel, node);
 		}

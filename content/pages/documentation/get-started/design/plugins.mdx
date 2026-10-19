@@ -1,0 +1,119 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Plugins & Tools'
+headline: 'Plugins & Tools'
+description: 'Figma plugins and web tools that support your design work with the DB UX Design System – for logos, custom colors and themes.'
+align: start
+toc: true
+tocMaxDepth: 2
+order: 2
+---
+
+import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+
+<DBSection spacing="small" width="auto">
+
+## Overview
+
+| Tool                     | Type         | Use it to                                                      |
+| ------------------------ | ------------ | -------------------------------------------------------------- |
+| DB Logo Importer         | Figma plugin | Place a brand-compliant logo with logo addition in your design |
+| Theme Builder            | Web tool     | Create a custom color palette and export it                    |
+| DB Custom Color Importer | Figma plugin | Import the colors from the Theme Builder as Figma variables    |
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## DB Logo Importer
+
+The plugin creates a Figma component from an SVG logo, assigns the correct color variables and scales it to a defined size.
+
+1. Create your logo with the [DB brand logo generator](https://marketingportal.extranet.deutschebahn.com/marketingportal/Marke-und-Design/Basiselemente/Logo/Logozusatz-mit-Tool) in the Marketing Portal and download the SVG.
+2. In Figma, select a Shell or Control Panel instance.
+3. Run the [DB Logo Importer](https://www.figma.com/community/plugin/1590462040996560100/concept-db-logo-importer), select **Choose SVG File** and pick your SVG.
+4. Select **Import SVG**.
+
+The plugin places the logo in the Logo Slot with locked aspect ratio. The Control Panel accepts a custom logo only in the **Brand → Logozusatz** variant.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Custom colors
+
+Custom colors take two steps: you create the palette in the Theme Builder and import it into Figma with the DB Custom Color Importer.
+
+<DBNotification
+	variant="standalone"
+	semantic="warning"
+	headline="Only secondary colors for DB products"
+>
+	For products of Deutsche Bahn, use only the{' '}
+	<DBLink
+		href="https://marketingportal.extranet.deutschebahn.com/marketingportal/Marke-und-Design/Basiselemente/Farbe/Sekundaerfarben"
+		variant="inline"
+	>
+		secondary colors
+	</DBLink>{' '}
+	of the DB brand palette as custom colors.
+</DBNotification>
+
+### 1. Create the palette in the Theme Builder
+
+1. Open the [Theme Builder](https://design-system.deutschebahn.com/theme-builder/).
+2. Create or adjust your color palette.
+3. Export the color configuration as a JSON file.
+
+### 2. Import the colors into Figma
+
+1. Open the DB Custom Color Importer in Figma.
+2. Select **select file** and choose the exported JSON file. In the export, it is located under `Utils/` and ends with `-figma-custom-colors.json`.
+3. Optional: check **Delete existing color variables** to start from scratch.
+4. Select **Import variables**.
+
+The plugin creates three variable collections. Their names start with a prefix that the plugin derives from the theme name in the file name. If no prefix can be derived, it uses `custom`. The examples below use `custom`:
+
+| Collection      | Contains                                                                             | Published |
+| --------------- | ------------------------------------------------------------------------------------ | --------- |
+| `custom-Theme`  | The raw color values per color family, for example `custom-colors/custom-<family>/9` | No        |
+| `custom-Mode`   | The Light Mode and Dark Mode assignment per color family                             | No        |
+| `custom-Colors` | The adaptive color variables you use in your designs                                 | Yes       |
+
+The `custom-Colors` collection has the mode `db-adaptive`, which links to the default DB colors, plus one mode `custom-<family>` per imported color family. Its variables mirror the adaptive colors of the Core Foundation, for example `custom-adaptive/bg/basic/level-1/default` or `custom-adaptive/on-bg/basic/emphasis-100/default`.
+
+The variables are scoped: `bg/*` and `origin/*` are available for frame and shape fills, `on-bg/*` and `on-origin/*` for text, strokes, shape fills and effects.
+
+### 3. Use custom colors with DB components
+
+DB components use the `db-adaptive/*` variables. To give a component your custom colors, wrap it in a local component:
+
+1. Create a local component, for example `CustomTag`, that contains an instance of the DB component.
+2. Add the variants you need, matching the original component.
+3. Replace each `db-adaptive/*` color variable with its `custom-adaptive/*` equivalent, for example `db-adaptive/bg/basic/level-1/default` with `custom-adaptive/bg/basic/level-1/default`.
+4. Use your local component instead of the original one.
+
+<DBNotification variant="standalone" semantic="informational" headline="Where to find the plugin">
+	The DB Custom Color Importer is not yet linked in this documentation. Ask in the Teams channel if
+	you cannot find it in Figma.
+</DBNotification>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+| Resource         | Link                                                                                                   |
+| ---------------- | ------------------------------------------------------------------------------------------------------ |
+| DB Logo Importer | [Figma Community](https://www.figma.com/community/plugin/1590462040996560100/concept-db-logo-importer) |
+| Theme Builder    | [Theme Builder](https://design-system.deutschebahn.com/theme-builder/)                                 |
+| Plugin source    | [figma-hub](https://github.com/db-ux-design-system/figma-hub)                                          |
+| Design Resources | [Design Resources](/documentation/get-started/design/resources)                                        |
+| Figma Tips       | [Figma Tips](/documentation/learn/figma)                                                               |
+
+More plugins are in development in the [figma-hub repository](https://github.com/db-ux-design-system/figma-hub).
+
+</DBSection>

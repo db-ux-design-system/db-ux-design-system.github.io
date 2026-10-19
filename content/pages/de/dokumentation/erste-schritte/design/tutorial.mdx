@@ -1,0 +1,186 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Figma-Tutorial'
+headline: 'Figma-Tutorial: Ein Kontaktformular gestalten'
+description: 'Gestalte Schritt für Schritt ein Kontaktformular mit dem DB UX Design System in Figma und übergib es mit Code Connect an die Entwicklung.'
+align: start
+toc: true
+tocMaxDepth: 2
+order: 3
+---
+
+import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+
+<DBSection spacing="small" width="auto">
+
+In diesem Tutorial gestaltest du dasselbe Kontaktformular, das Entwickler:innen im <DBLink href="/de/dokumentation/erste-schritte/entwicklung/tutorial" variant="inline">React-Tutorial</DBLink> bauen: Name, E-Mail, Thema, Nachricht und eine Bestätigung nach dem Absenden. Unterwegs kombinierst du Komponenten, stellst sie über ihre Properties ein und prüfst im Dev Mode, welchen Code dein Design erzeugt.
+
+Jeder Schritt endet mit einer Prüfung. So weißt du, dass der Schritt funktioniert hat, bevor du weitermachst.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Bevor du anfängst
+
+Du brauchst:
+
+- Zugang zu den Figma-Bibliotheken des DB UX Design Systems – siehe [Design-Ressourcen](/de/dokumentation/erste-schritte/design/ressourcen).
+- Einen Figma-Seat, mit dem du Dateien bearbeiten kannst. Mit einem Dev-Seat kannst du Designs untersuchen, aber nicht anlegen.
+- Grundkenntnisse in Figma: Frames, Auto Layout und Komponenten-Instanzen.
+
+Die Namen der Properties beginnen in Figma mit einem Icon, das ihren Zweck zeigt, zum Beispiel ✏️ für Texte und 📦 für Slots. Dieses Tutorial nennt die Properties so, wie sie im Properties-Panel stehen. Die Icons sind unter [Design-Ressourcen](/de/dokumentation/erste-schritte/design/ressourcen#mit-den-komponenten-arbeiten) erklärt.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Schritt 1: Datei anlegen und Bibliotheken aktivieren
+
+1. Leg eine neue Design-Datei in der Figma-Organisation der Deutschen Bahn an.
+2. Öffne das Assets-Panel und wähle **Libraries**.
+3. Aktiviere **DB UX - Core Foundation** und **DB UX - Core Components**. Core Foundation enthält die Variablen für Farben, Abstände und Typografie, die die Komponenten nutzen.
+
+**Prüfen:** Eine Suche nach „Button“ im Assets-Panel findet `Button → Brand` aus DB UX - Core Components.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Schritt 2: Seitenstruktur aufbauen
+
+1. Leg einen Frame für die Seite an und gib ihm ein vertikales Auto Layout.
+2. Verknüpfe den Abstand des Auto Layouts mit der Variable `db-spacing/fixed/lg`. Klick dafür auf den Abstandswert und wähl die Variable, statt eine Zahl einzutippen.
+3. Füge `Heading H1 (Beta)` ein und setz **✏️ Text** auf „Kontakt“.
+
+Variablen statt fester Werte halten deine Abstände passend zur Density, und Entwickler:innen sehen im Dev Mode das passende Token.
+
+**Prüfen:** Die Überschrift erscheint in der Headline-Schrift des DB Themes. Wählst du den Abstand des Frames aus, zeigt er die Variable `db-spacing/fixed/lg` statt eines Pixelwerts.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Schritt 3: Formular ergänzen
+
+1. Füge unter der Überschrift `Card → (Def) Level 1 (Beta)` ein und setz **🔀 Spacing** auf **Medium**.
+2. Gib dem Slot **📦 Children** der Card ein vertikales Auto Layout mit dem Abstand `db-spacing/fixed/md`.
+3. Setz diese Komponenten in den Slot und trag ihre Texte ein:
+
+| Komponente                                   | Property | Wert                 |
+| -------------------------------------------- | -------- | -------------------- |
+| `Input → (Def) Label Above - (Def) Empty`    | ✏️ Label | Name                 |
+| `Input → (Def) Label Above - (Def) Empty`    | ✏️ Label | E-Mail               |
+| `Select → (Def) Label Above - (Def) Empty`   | ✏️ Label | Thema                |
+| `Textarea → Label Above - (Def) Empty`       | ✏️ Label | Nachricht            |
+| `Checkbox → (Def) Medium - (Def) Auto Width` | ✏️ Label | Kopie an mich senden |
+| `Button → Brand`                             | ✏️ Text  | Nachricht senden     |
+
+4. Schalte beim Button **👁️ Show Icon Leading** ein und tausch **🔄 Icon Leading Medium** gegen das Icon `arrow_right`.
+
+Ändere die Komponenten nur über ihre Properties und Slots. Löse sie nicht von der Komponente (Detach) und bearbeite ihre Ebenen nicht direkt. Die Properties entsprechen den Properties im Code – eine gelöste Instanz verliert diese Verbindung, und Entwickler:innen können daraus keinen korrekten Code mehr ablesen.
+
+**Prüfen:** Die Card zeigt fünf Felder und einen Button in der Markenfarbe mit Pfeil. Im Ebenen-Panel ist jedes Feld weiterhin eine Instanz (Komponenten-Icon) und kein Frame.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Schritt 4: Pflichtfelder markieren
+
+Name, E-Mail und Nachricht sind Pflichtfelder. Für jedes der drei Felder:
+
+1. Setz **⚙️ Required** auf **true**. Diese Property ändert das Aussehen nicht – sie teilt dem Code nur mit, dass das Feld Pflicht ist.
+2. Schalte **👁️ Show Required Asterisk** ein, damit Nutzer:innen sehen, welche Felder Pflicht sind.
+
+Properties mit ⚙️ wirken nur im Code. Setz sie trotzdem, damit das Snippet im Dev Mode vollständig ist. Mehr dazu unter [Code Connect](/de/dokumentation/lernen/code-connect).
+
+**Prüfen:** Name, E-Mail und Nachricht zeigen ein Sternchen neben dem Label. Thema und die Checkbox nicht.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Schritt 5: Zustand nach dem Absenden gestalten
+
+Entwickler:innen müssen wissen, was nach dem Absenden passiert. Zeig es als zweiten Screen:
+
+1. Dupliziere den Seiten-Frame und benenn die Kopien „Kontakt – Formular“ und „Kontakt – Gesendet“.
+2. Füge in „Kontakt – Gesendet“ zwischen Überschrift und Card `Notification → Standalone - (Def) Icon` ein.
+3. Setz **Semantic** auf **Successful**, die Headline auf „Nachricht gesendet“ und den Text auf „Wir melden uns innerhalb von zwei Werktagen bei dir.“
+4. Schalte **Closeable** ein.
+
+**Prüfen:** „Kontakt – Gesendet“ zeigt über der Card eine grüne Meldung mit Icon und Schließen-Button. „Kontakt – Formular“ ist unverändert.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Schritt 6: Übergabe im Dev Mode prüfen
+
+Wechsle mit `Shift` + `D` in den Dev Mode und wähl die Komponenten nacheinander aus. Dank Code Connect zeigt das Inspect-Panel den passenden Code statt allgemeinem CSS.
+
+Wähl das Feld Name aus. Das Snippet sieht so aus:
+
+```tsx
+<DBInput
+	variant="above"
+	label="Name"
+	showLabel={true}
+	required={true}
+	showRequiredAsterisk={true}
+	readonly={false}
+	disabled={false}
+	validation="no-validation"
+	showIconLeading={false}
+	showIconTrailing={false}
+	showMessage={false}
+	name="input"
+/>
+```
+
+- `label` und `required` kommen aus **✏️ Label** und **⚙️ Required**. Fehlt `required={true}`, fehlt bei diesem Feld Schritt 4.
+- Properties mit Standardwerten wie `disabled={false}` gehören zum Snippet. Entwickler:innen können sie weglassen.
+- `name="input"` ist ein Platzhalter. Den echten Feldnamen legt der Code fest.
+
+Wähl die Card aus. Ihr Snippet beginnt mit:
+
+```tsx
+<DBCard elevationLevel="1" spacing="medium" behavior="static">
+```
+
+**Prüfen:** Jede Komponente des Formulars zeigt ein Snippet mit einer `DB`-Komponente – `DBHeadingH1`, `DBCard`, `DBInput`, `DBSelect`, `DBTextarea`, `DBCheckbox`, `DBButton` und `DBNotification`. Zeigt eine Komponente nur CSS, ist sie gelöst oder stammt nicht aus den DB UX-Bibliotheken.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Was die Entwicklung ergänzt
+
+Manches lässt sich nicht gestalten. Stimmt es bei der Übergabe ab oder notier es in der Datei:
+
+| Thema                       | Woher es kommt                                                                                          |
+| --------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Optionen des Selects        | Die Entwicklung ergänzt sie als `<option>`-Elemente. Liste die Optionen in einer Notiz am Screen auf.   |
+| Feldnamen                   | Werden im Code gesetzt, zum Beispiel `name="email"`.                                                    |
+| Verhalten nach dem Absenden | Die Entwicklung zeigt die Meldung, sobald das Formular gesendet wurde. Dein zweiter Screen zeigt, wann. |
+| Layout-Frames               | Frames sind keine Komponenten. Die Entwicklung baut sie mit Layout-Komponenten und Tokens nach.         |
+
+Das Ergebnis im Code zeigt das <DBLink href="/de/dokumentation/erste-schritte/entwicklung/tutorial" variant="inline">React-Tutorial</DBLink> Schritt für Schritt.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Nächste Schritte
+
+| Nächster Schritt                                | Wo                                                                 |
+| ----------------------------------------------- | ------------------------------------------------------------------ |
+| Hilfskomponenten und Anleitungen zu Komponenten | [Figma-Tipps](/de/dokumentation/lernen/figma)                      |
+| Alles zu ⚙️-Properties und Dev Mode             | [Code Connect](/de/dokumentation/lernen/code-connect)              |
+| Einsatz, Varianten und Richtlinien              | [Komponenten](/de/dokumentation/komponenten)                       |
+| Logos und eigene Farben                         | [Plugins & Tools](/de/dokumentation/erste-schritte/design/plugins) |
+
+</DBSection>

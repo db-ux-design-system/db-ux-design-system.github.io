@@ -1,0 +1,147 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Migration von DB UI'
+headline: 'Migration von DB UI'
+description: 'Wechsle vom DB UX Design System – Generation 2 (aka DB UI) auf Generation 3. Die Seite behandelt Pakete, Komponenten, Tokens und Icons und zeigt, wie ein KI-Agent den Großteil der Arbeit übernimmt.'
+align: start
+toc: true
+tocMaxDepth: 2
+order: 3
+---
+
+import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+
+<DBSection spacing="small" width="auto">
+
+## Welche Migration brauche ich?
+
+| Du nutzt …                                  | Folge                                                                                            |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Generation 2 (aka DB UI)                    | dieser Seite                                                                                     |
+| eine frühere Major-Version von Generation 3 | den [Migration Guides](/de/dokumentation/releases/migration-guides) der jeweiligen Major-Version |
+
+Generation 2 nutzt Element-Präfixe wie `elm-button`, `cmp-card` oder `rea-header` und Farb-Tokens wie `db-color-yellow-500`. Findest du sie in deinem Code, nutzt du Generation 2.
+
+Die Dokumentation von Generation 2 steht weiterhin im [Marketingportal](https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/User-Experience/DB-UX-Design-System/version-2).
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Die Vorarbeit einem KI-Agenten überlassen
+
+Der [MCP Server](/de/dokumentation/lernen/mcp-server) kennt die Migrationsregeln. Verbinde ihn mit deiner IDE und nutze dann zwei seiner Werkzeuge:
+
+| Werkzeug / Prompt      | Was es tut                                                                                                                  |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `analyze_v2_migration` | Durchsucht eine Datei nach Mustern aus Generation 2 – Element-Präfixen und Farb-Tokens – und liefert einen Bericht.         |
+| `migrate_component`    | Migriert einen Code-Schnipsel Schritt für Schritt und prüft das Ergebnis mit dem TypeScript-Compiler, bevor es zurückkommt. |
+
+Prüfe das Ergebnis. Der Agent folgt denselben Zuordnungen wie diese Seite, kann dir aber keine Layout-Entscheidungen abnehmen.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Schritt 1: Die neuen Pakete installieren
+
+Generation 3 erscheint unter dem Scope `@db-ux`. Entferne die DB-UI-Pakete und installiere das Paket für dein Framework – die [Paketanleitungen](/de/dokumentation/erste-schritte/entwicklung/pakete) behandeln Installation und Styling-Setup pro Framework.
+
+Für Produkte der Deutschen Bahn ergänzt du zusätzlich das [DB Theme](/de/dokumentation/erste-schritte/entwicklung/pakete/db-theme).
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Schritt 2: Die Komponenten ersetzen
+
+Die Präfixe fallen weg: Aus `elm-*`, `cmp-*` und `rea-*` wird `db-*` in HTML und Angular und `DB*` in React und Vue. Viele Properties haben sich geändert. Die häufigsten Fälle:
+
+| Generation 2                | Generation 3              | Was sich ändert                                                                                                                                                                                                      |
+| --------------------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `elm-button`                | `db-button`               | Varianten: `brand-primary` → `primary`, `secondary-outline` → `outlined`, `secondary-solid` → `solid`, `tertiary-plain` → `text`. `iconOnly` → `noText`. Die Größen `large` und `regular` entfallen – nutze Density. |
+| `elm-input`, `elm-textarea` | `db-input`, `db-textarea` | `description` → `message`. Die Message ist jetzt immer sichtbar. Setze `showMessage={false}`, um sie wie bisher auszublenden.                                                                                        |
+| `elm-notification`          | `db-notification`         | Varianten: `error` → `critical`, `informative` → `informational`, `success` → `successful`.                                                                                                                          |
+| `elm-tag`                   | `db-tag`                  | Chip und Tag sind zusammengeführt. Für interaktive Tags setzt du einen Button, Link, eine Checkbox oder ein Radio in den Tag.                                                                                        |
+| `elm-toggle`                | `db-switch`               | `htmlid` → `id`.                                                                                                                                                                                                     |
+| `elm-checkbox`, `elm-radio` | `db-checkbox`, `db-radio` | `input_id` → `id` in React und Vue.                                                                                                                                                                                  |
+| `elm-select`                | `db-select`               | `multiple` und `size` entfallen. Für Mehrfachauswahl nutzt du Custom Select.                                                                                                                                         |
+| `cmp-card`                  | `db-card`                 | `image` → `imgSrc`, `alt` → `imgAlt`. Header und Inhalt werden als Children übergeben.                                                                                                                               |
+| `elm-link`                  | `db-link`                 | Die Icon-Properties entfallen.                                                                                                                                                                                       |
+| `cmp-accordion`             | `db-accordion-item`       | Ein Item pro Element, gruppiert in `db-accordion`. `summary` → `headline`.                                                                                                                                           |
+| `cmp-tab-bar`, `cmp-db-tab` | `db-tabs`, `db-tab-item`  | Tabs bestehen aus Tab List, Tab Item und Tab Panel.                                                                                                                                                                  |
+
+<DBNotification variant="standalone" semantic="warning" headline="Header und Navigation">
+	`rea-header` und `cmp-mainnavigation` haben in Generation 3 Entsprechungen (Header und
+	Navigation), beide sind aber deprecated. Baue neue Layouts stattdessen mit{' '}
+	<DBLink href="/de/dokumentation/komponenten/shell" variant="inline">
+		Shell
+	</DBLink>{' '}
+	und Control Panel.
+</DBNotification>
+
+Jede Seite der [Komponentendokumentation](/de/dokumentation/komponenten) führt die aktuellen Properties auf.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Schritt 3: Die Tokens ersetzen
+
+Generation 3 ersetzt feste Werte und die Farb-Tokens aus Generation 2 durch semantische Tokens. Sie passen sich automatisch an Light Mode, Dark Mode und Density an.
+
+| Bereich    | Ersetze                                                  | Durch                                                                                                            |
+| ---------- | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Typografie | `font-size`, `line-height`, `font-weight` in px oder rem | die Kurzschreibweise `font` mit `--db-type-body-*` oder `--db-type-headline-*`. Sie setzt alle Werte auf einmal. |
+| Abstände   | `padding`, `margin`, `gap` in px oder rem                | `--db-spacing-fixed-*` oder `--db-spacing-responsive-*` für responsive Abstände                                  |
+| Farben     | `db-color-*`                                             | semantische Farb-Tokens. Die Zuordnung unterscheidet sich für Hintergründe und Vordergründe.                     |
+| Schatten   | Werte für `box-shadow`                                   | `--db-elevation-sm`, `--db-elevation-md` oder `--db-elevation-lg`                                                |
+
+Zwei Regeln gelten überall: Simuliere hellere Farben nicht mit `opacity`, und nutze keine Farb-Tokens für Schatten. Inline-`style`-Attribute umgehen Theming, Density und Dark Mode – verschiebe sie in CSS mit Tokens.
+
+Die vollständigen Zuordnungen für Farben und Schriftgrößen stehen in den [Migrationsdokumenten von core-web](https://github.com/db-ux-design-system/core-web/tree/main/docs/migration/db-ui).
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Schritt 4: Die Icons umbenennen
+
+Die meisten Icon-Namen haben sich geändert. Aus Bindestrichen werden Unterstriche, und viele Icons haben neue, sprechendere Namen.
+
+| Generation 2 | Generation 3         |
+| ------------ | -------------------- |
+| `search`     | `magnifying_glass`   |
+| `edit`       | `pen`                |
+| `delete`     | `bin`                |
+| `close`      | `cross`              |
+| `info`       | `information_circle` |
+| `settings`   | `gear_wheel`         |
+
+Die [vollständige Icon-Zuordnung](https://github.com/db-ux-design-system/core-web/blob/main/docs/migration/db-ui/icon-migration.md) deckt alle Icons ab. Alle aktuellen Namen stehen unter [Icons](/de/dokumentation/icons).
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Design
+
+Generation 3 hat eigene Figma-Bibliotheken. Baue neue Screens damit – wie du Zugang bekommst und sie aktivierst, steht unter [Design-Ressourcen](/de/dokumentation/erste-schritte/design/ressourcen).
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+| Ressource                      | Link                                                                                                                                                  |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Migrationsdokumente            | [core-web/docs/migration/db-ui](https://github.com/db-ux-design-system/core-web/tree/main/docs/migration/db-ui)                                       |
+| MCP Server                     | [MCP Server](/de/dokumentation/lernen/mcp-server)                                                                                                     |
+| Paketanleitungen               | [Pakete](/de/dokumentation/erste-schritte/entwicklung/pakete)                                                                                         |
+| Dokumentation von Generation 2 | [Marketingportal](https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/User-Experience/DB-UX-Design-System/version-2) |
+| Migration Guides               | [Migration Guides](/de/dokumentation/releases/migration-guides)                                                                                       |
+
+</DBSection>

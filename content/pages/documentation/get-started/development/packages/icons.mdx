@@ -1,0 +1,175 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Icons'
+headline: 'Icons'
+description: 'The DB icon packages provide the functional icons as icon font and SVG, and the illustrative icons as SVG and React component.'
+align: start
+toc: true
+tocMaxDepth: 2
+order: 8
+---
+
+import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+
+<DBSection spacing="small" width="auto">
+
+## Which package do I need?
+
+| Package                              | Contains                                      | Use for                                     |
+| ------------------------------------ | --------------------------------------------- | ------------------------------------------- |
+| `@db-ux/db-theme-icons`              | Functional icons as icon font and SVG         | Icons inside components and in running text |
+| `@db-ux/db-theme-illustrative-icons` | Illustrative icons as SVG and React component | Larger pictograms, for example in teasers   |
+
+<DBNotification
+	variant="standalone"
+	semantic="informational"
+	headline="Already included in the DB Theme"
+>
+	If you have installed{' '}
+	<DBLink href="/documentation/get-started/development/packages/db-theme" variant="inline">
+		the DB Theme
+	</DBLink>
+	, both packages are already in your project and the theme loads the icon font. Install them
+	separately only if you use the icons without the theme.
+</DBNotification>
+
+Both packages are encrypted like the DB Theme. They need the same `ASSET_PASSWORD` and `ASSET_INIT_VECTOR` from the Marketing Portal – the steps are described under [Before you install](/documentation/get-started/development/packages/db-theme#before-you-install).
+
+All available icon names are listed under [Icons](/documentation/icons).
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Functional icons
+
+### Install
+
+```shell
+npm i @db-ux/db-theme-icons
+```
+
+### Styling setup
+
+The icons are delivered as font. Import the variant that matches your bundler.
+
+```css
+/* index.css */
+@import '@db-ux/db-theme-icons/build/styles/rollup.css';
+```
+
+| Variant                          | Use when                      |
+| -------------------------------- | ----------------------------- |
+| `rollup.css`                     | You build with Vite or Rollup |
+| `webpack.css`                    | You build with Webpack        |
+| `relative.css` or `absolute.css` | You do not use a bundler      |
+
+### Replace the default icons
+
+The components ship with a default icon set. To replace it with the DB icons everywhere, import `default-font.css`:
+
+```css
+/* index.css */
+@import '@db-ux/db-theme-icons/build/styles/default-font.css';
+```
+
+### First icon
+
+Set the icon name on the component. `data-icon-variant="db"` selects the DB icon font for this element.
+
+```tsx
+// React and Vue
+<DBButton icon="my_icon" data-icon-variant="db">
+	Test
+</DBButton>
+```
+
+```html
+<!-- Angular -->
+<db-button icon="my_icon" data-icon-variant="db">Test</db-button>
+
+<!-- HTML and CSS -->
+<button class="db-button" data-icon="my_icon" data-icon-variant="db">Test</button>
+```
+
+Replace `my_icon` with a name from the [icon list](/documentation/icons).
+
+### Plain SVG
+
+Copy the SVG files from `node_modules/@db-ux/db-theme-icons/build/assets` if you need the icons outside of components.
+
+### TypeScript autocomplete
+
+Add the generated types to your `tsconfig.json` to get autocomplete for icon names:
+
+```json
+{
+	"compilerOptions": {
+		"types": ["@db-ux/db-theme-icons"]
+	},
+	"include": ["node_modules/@db-ux/db-theme-icons/build/types/overwrite.d.ts"]
+}
+```
+
+For React or Vue, include `build/types/react.d.ts` or `build/types/vue.d.ts` instead.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Illustrative icons
+
+### Install
+
+```shell
+npm i @db-ux/db-theme-illustrative-icons
+```
+
+### Use in React
+
+The package exports an `IllustrativeIcon` component. The `icon` property takes the icon name, `size` the size in pixels.
+
+```tsx
+import { IllustrativeIcon } from '@db-ux/db-theme-illustrative-icons';
+
+<IllustrativeIcon icon="luggage" size={64} />;
+```
+
+The list of names is exported as `IllustrativeIcons`, the matching type as `IllustrativeIconsType`.
+
+### Use as SVG
+
+For all other frameworks, copy the SVG files from `node_modules/@db-ux/db-theme-illustrative-icons/build/assets`. They are grouped in folders by topic.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+| Resource              | Link                                                                                                   |
+| --------------------- | ------------------------------------------------------------------------------------------------------ |
+| Icon list             | [Icons](/documentation/icons)                                                                          |
+| npm package           | [@db-ux/db-theme-icons](https://www.npmjs.com/package/@db-ux/db-theme-icons)                           |
+| npm package           | [@db-ux/db-theme-illustrative-icons](https://www.npmjs.com/package/@db-ux/db-theme-illustrative-icons) |
+| Credentials           | [DB Theme package guide](/documentation/get-started/development/packages/db-theme)                     |
+| Icon package releases | [GitHub project board](https://github.com/orgs/db-ux-design-system/projects/4/views/15)                |
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Troubleshooting
+
+| Symptom                                          | Cause and fix                                                                                                                       |
+| ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Icons show as empty boxes or fallback glyphs     | The icon font is not loaded. Import the styles, or check that the asset path variant matches your bundler.                          |
+| The default icons appear instead of the DB icons | `default-font.css` is not imported, or `data-icon-variant="db"` is missing on the element.                                          |
+| The build fails with `ENOENT` in the package     | The assets were never decrypted. See [Decrypt manually](/documentation/get-started/development/packages/db-theme#decrypt-manually). |
+| An icon name is not recognized                   | The name does not exist. Check the spelling against the [icon list](/documentation/icons).                                          |
+
+If none of this helps, open an issue in the [core-web repository](https://github.com/db-ux-design-system/core-web/issues/new/choose). Please check first whether the issue already exists.
+
+</DBSection>

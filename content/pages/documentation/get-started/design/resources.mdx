@@ -1,0 +1,134 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Design Resources'
+headline: 'Design Resources'
+description: 'The Figma libraries of the DB UX Design System. Get access, enable the libraries in your file and work with the components.'
+align: start
+toc: true
+tocMaxDepth: 2
+order: 1
+---
+
+import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+
+<DBSection spacing="small" width="auto">
+
+## Get access
+
+The libraries live in the Figma organization of Deutsche Bahn. How you get access depends on your email address.
+
+| You have …          | How to get access                                                                                                                                                                                                      |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A DB email address  | Sign in to Figma with your DB email address. The libraries are available in the [DB UX Design System folder](https://www.figma.com/files/1555127211835288633/folder/170790368).                                        |
+| No DB email address | Request access through the [Marketing Portal](https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/db-ux-design-system/support/freigabe-figma). The Marketing Portal requires a login. |
+
+<DBNotification variant="standalone" semantic="informational" headline="Protected content">
+	Both the Figma folder and the Marketing Portal require a login. Without access, the links lead to
+	a sign-in page.
+</DBNotification>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Libraries
+
+| Library                     | Contains                                                | Use it for                            |
+| --------------------------- | ------------------------------------------------------- | ------------------------------------- |
+| Core Foundation             | Tokens, colors, typography and spacing                  | Every file – the base for all others  |
+| Core Components             | All core components                                     | Design and prototyping                |
+| Core Patterns               | Recurring solutions that combine several components     | Design and prototyping                |
+| DB Theme Icons              | The functional DB icons                                 | Every file that uses icons            |
+| DB Theme Illustrative Icons | The illustrative DB icons                               | Teasers and larger pictograms         |
+| Core Lab                    | Concepts for future components and patterns             | Exploration – not for production work |
+| Passenger Information       | Information standards for travelers                     | Products with passenger information   |
+| DataViz                     | Chart components and data visualization patterns (Beta) | Data visualization                    |
+
+The direct links to each library are listed under <DBLink href="/documentation/resources" variant="inline">Resources</DBLink>.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Enable the libraries
+
+1. Open your Figma file.
+2. Open the **Assets** panel and select the library icon.
+3. Enable **Core Foundation**.
+4. Enable **Core Components** and **DB Theme Icons**.
+5. Enable **Core Patterns** and **DB Theme Illustrative Icons** if you need them.
+6. Enable extensions such as Passenger Information or DataViz only if your product needs them.
+
+In Figma, all libraries carry the prefix `DB UX –`, for example `DB UX – Core Components`.
+
+After that, the components are available in the Assets panel of your file.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Work with the components
+
+Component properties use emoji prefixes that show their purpose at a glance.
+
+| Icon | Purpose                   | Example         |
+| ---- | ------------------------- | --------------- |
+| 👁️   | Show or hide an element   | `👁️ Show Label` |
+| 🔀   | Variant selection         | `🔀 Variant`    |
+| 📦   | Slot for your own content | `📦 Children`   |
+| 🔄   | Icon swap                 | `🔄 Icon`       |
+| ✏️   | Text override             | `✏️ Label`      |
+| ⚙️   | Code Connect property     | `⚙️ Required`   |
+
+Helper components such as the Floating Container, the Resizer and the Scrollbar as well as how-tos for individual components are described under <DBLink href="/documentation/learn/figma" variant="inline">Figma Tips</DBLink>.
+
+### Logo in the Control Panel
+
+Use the Figma plugin [DB Logo Importer](https://www.figma.com/community/plugin/1590462040996560100/concept-db-logo-importer) to place a brand-compliant logo with logo addition into the Control Panel. The plugin assigns the correct color variables.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Hand over to development
+
+The components in Figma are linked to their code through **Code Connect**. Developers see the matching code snippet for every configured instance in Dev Mode.
+
+Properties marked with ⚙️ affect only the generated code, not the design. Set them as well so the snippet in Dev Mode is complete. How this works is described under <DBLink href="/documentation/learn/code-connect" variant="inline">Code Connect</DBLink>.
+
+<DBNotification variant="standalone" semantic="informational" headline="DB Theme">
+	All examples in this documentation use the DB Theme. For a whitelabel or another theme, the visual
+	result differs because a different Foundation applies.
+</DBNotification>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+| Resource      | Link                                                                                    |
+| ------------- | --------------------------------------------------------------------------------------- |
+| Figma folder  | [DB UX Design System](https://www.figma.com/files/1555127211835288633/folder/170790368) |
+| Library links | [Resources](/documentation/resources)                                                   |
+| Figma Tips    | [Figma Tips](/documentation/learn/figma)                                                |
+| Code Connect  | [Code Connect](/documentation/learn/code-connect)                                       |
+| Release Notes | [Release Notes](/documentation/releases/release-notes)                                  |
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Troubleshooting
+
+| Symptom                                    | Cause and fix                                                                                                                                               |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The libraries do not appear in your file   | You are not signed in with an account that belongs to the DB Figma organization. Sign in with your DB email address or request access.                      |
+| A component looks different than in code   | Some layers need a different resizing behavior, for example Hug instead of Fill. The known cases are listed under [Figma Tips](/documentation/learn/figma). |
+| The Dev Mode snippet shows a default value | A ⚙️ Code Connect property has not been set. Set it on the first level of the instance.                                                                     |
+
+If none of this helps, open an issue in the [core repository](https://github.com/db-ux-design-system/core/issues/new/choose). It collects design feedback and design bugs. Please check first whether the issue already exists.
+
+</DBSection>
