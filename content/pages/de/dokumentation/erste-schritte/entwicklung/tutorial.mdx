@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 title: 'React-Tutorial'
 headline: 'React-Tutorial: Ein Kontaktformular bauen'
-description: 'Bau Schritt für Schritt eine kleine React-App mit dem DB UX Design System – vom leeren Vite-Projekt bis zum funktionierenden Kontaktformular mit Rückmeldung nach dem Absenden.'
+description: 'Baue Schritt für Schritt eine kleine React-App mit dem DB UX Design System – vom leeren Vite-Projekt bis zum funktionierenden Kontaktformular mit Rückmeldung nach dem Absenden.'
 align: start
 toc: true
 tocMaxDepth: 2
@@ -49,7 +49,7 @@ Das Tutorial wurde mit Vite 8, React 19 und Version 6 der Pakete des Design Syst
 
 ## Schritt 1: Projekt anlegen
 
-Leg ein React-Projekt mit TypeScript an und starte es:
+Lege ein React-Projekt mit TypeScript an und starte es:
 
 ```shell
 pnpm create vite my-app --template react-ts
@@ -86,7 +86,7 @@ Ersetze den Inhalt von `src/index.css`:
 
 Die erste Zeile legt die Reihenfolge der Cascade Layers fest. So kommt das Theme immer vor den Styles der Komponenten.
 
-Vite 8 minifiziert CSS standardmäßig mit LightningCSS. Es wandelt die Funktion `light-dark()` des Design Systems falsch um, und im Produktions-Build stimmen die Farben nicht mehr. Stell den Minifier auf esbuild um:
+Vite 8 minifiziert CSS standardmäßig mit LightningCSS. Es wandelt die Funktion `light-dark()` des Design Systems falsch um, und im Produktions-Build stimmen die Farben nicht mehr. Stelle den Minifier auf esbuild um:
 
 ```shell
 pnpm add esbuild --save-dev
@@ -142,7 +142,7 @@ export default App;
 
 ## Schritt 4: Formular ergänzen
 
-Setz die Formularfelder in eine Card unter der Überschrift:
+Setze die Formularfelder in eine Card unter der Überschrift:
 
 ```tsx
 // src/App.tsx
@@ -188,9 +188,9 @@ const App = () => (
 export default App;
 ```
 
-Jede Formular-Komponente rendert ein natives Formularelement mit seinem Label. Deshalb gehört `label` zu jedem Feld: Screenreader lesen es vor, und ein Klick auf das Label setzt den Fokus ins Feld. `required` und `type="email"` nutzen die Validierung des Browsers.
+Jede Formular-Komponente rendert ein natives Formularelement mit seinem Label. Deshalb gehört `label` zu jedem Feld: Screenreader lesen es vor, und ein Klicke auf das Label setzt den Fokus ins Feld. `required` und `type="email"` nutzen die Validierung des Browsers.
 
-**Prüfen:** Die Card zeigt fünf Felder und einen Button in der Markenfarbe mit Pfeil-Icon. Ein Klick auf ein Label setzt den Fokus ins Feld. Fehlt der Pfeil, kann der Browser die Icon-Schrift nicht laden – such im Netzwerk-Tab der DevTools nach einer fehlgeschlagenen Anfrage für eine `.woff2`-Datei.
+**Prüfen:** Die Card zeigt fünf Felder und einen Button in der Markenfarbe mit Pfeil-Icon. Ein Klicke auf ein Label setzt den Fokus ins Feld. Fehlt der Pfeil, kann der Browser die Icon-Schrift nicht laden – suche im Netzwerk-Tab der DevTools nach einer fehlgeschlagenen Anfrage für eine `.woff2`-Datei.
 
 </DBSection>
 
@@ -198,7 +198,7 @@ Jede Formular-Komponente rendert ein natives Formularelement mit seinem Label. D
 
 ## Schritt 5: Rückmeldung nach dem Absenden zeigen
 
-Merk dir, ob das Formular abgeschickt wurde, und zeig in diesem Fall eine Meldung. Das ist die vollständige `src/App.tsx`:
+Merke dir, ob das Formular abgeschickt wurde, und zeige in diesem Fall eine Meldung. Das ist die vollständige `src/App.tsx`:
 
 ```tsx
 // src/App.tsx
@@ -274,9 +274,9 @@ Die Meldung hat die Rolle `status`. Screenreader sagen sie an, ohne den Fokus zu
 
 **Prüfen:**
 
-- Schick das leere Formular ab: Der Browser markiert das erste Pflichtfeld, und es erscheint keine Meldung.
-- Füll Name, E-Mail und Nachricht aus und schick erneut ab: Über der Card erscheint die grüne Meldung „Nachricht gesendet“.
-- Schließ die Meldung mit dem Button „Schließen“: Sie verschwindet.
+- Schicke das leere Formular ab: Der Browser markiert das erste Pflichtfeld, und es erscheint keine Meldung.
+- Fülle Name, E-Mail und Nachricht aus und schicke erneut ab: Über der Card erscheint die grüne Meldung „Nachricht gesendet“.
+- Schließe die Meldung mit dem Button „Schließen“: Sie verschwindet.
 
 </DBSection>
 
@@ -310,7 +310,7 @@ pnpm build
 pnpm preview
 ```
 
-**Prüfen:** Die Vorschau unter `http://localhost:4173` sieht genauso aus wie die Entwicklungsversion. Stell dein Betriebssystem auf Dark Mode um: Seite, Card und Felder wechseln in beiden Versionen auf dunkle Farben. Stimmen die Farben nur in der Vorschau nicht, fehlt die Einstellung `cssMinify` aus Schritt 2.
+**Prüfen:** Die Vorschau unter `http://localhost:4173` sieht genauso aus wie die Entwicklungsversion. Stelle dein Betriebssystem auf Dark Mode um: Seite, Card und Felder wechseln in beiden Versionen auf dunkle Farben. Stimmen die Farben nur in der Vorschau nicht, fehlt die Einstellung `cssMinify` aus Schritt 2.
 
 </DBSection>
 
