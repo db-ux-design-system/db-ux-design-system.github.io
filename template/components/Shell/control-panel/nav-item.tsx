@@ -114,6 +114,7 @@ const NavItem = ({
 				key={`router-group-${path ?? title}`}
 				aria-disabled={disabled ? 'true' : undefined}
 				expanded={isActive}
+				backButtonText={language === 'de' ? 'Zurück' : 'Back'}
 			>
 				{children.map((sub) => (
 					<NavItem key={`router-sub-${sub.path ?? sub.title}`} {...sub} parentStatus={status} />

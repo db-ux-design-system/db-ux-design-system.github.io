@@ -1,8 +1,89 @@
 ---
 order: 10
 layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
 title: 'Documentation'
-hidePage: true
-redirectTo: '/documentation/get-started'
+headline: 'Documentation'
+description: 'Guidelines, components and resources of the DB UX Design System for design and development.'
 isSubNavigation: true
 ---
+
+import { DBStack } from '@db-ux/react-core-components';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<DBStack gap="medium">
+
+## Work with the design system
+
+<TeaserCard
+	columns={3}
+	spacing="large"
+	headlineSize="medium"
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Get Started',
+			description: 'Answer a few questions and find the start that fits your role and your project.',
+			url: '/documentation/get-started',
+		},
+		{
+			title: 'Foundation',
+			description: 'Colors, typography, spacing and the other tokens all components build on.',
+			url: '/documentation/foundation',
+		},
+		{
+			title: 'Components',
+			description: 'All components with guidelines, examples and their status.',
+			url: '/documentation/components',
+		},
+		{
+			title: 'Patterns',
+			description: 'Recurring solutions that combine several components.',
+			url: '/documentation/patterns',
+		},
+		{
+			title: 'Extensions',
+			description: 'Domain-specific add-ons that build on the design system.',
+			url: '/documentation/extensions',
+		},
+		{
+			title: 'Icons',
+			description: 'Search all icons and copy their names for use in code.',
+			url: '/documentation/icons',
+		},
+	]}
+/>
+
+## Learn more
+
+<TeaserCard
+	columns={2}
+	spacing="large"
+	headlineSize="medium"
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Resources',
+			description: 'Figma libraries, plugins and code packages.',
+			url: '/documentation/resources',
+		},
+		{
+			title: 'Learn',
+			description: 'Tutorials, guides and background knowledge.',
+			url: '/documentation/learn',
+		},
+		{
+			title: 'Releases',
+			description: 'Release notes, versioning, content status and migration guides.',
+			url: '/documentation/releases',
+		},
+		{
+			title: 'Contribution',
+			description: 'Give feedback and help improve the design system.',
+			url: '/documentation/contribution',
+		},
+	]}
+/>
+
+</DBStack>

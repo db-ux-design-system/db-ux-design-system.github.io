@@ -1,8 +1,89 @@
 ---
 order: 10
 layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
 title: 'Dokumentation'
-hidePage: true
-redirectTo: '/de/dokumentation/erste-schritte'
+headline: 'Dokumentation'
+description: 'Richtlinien, Komponenten und Ressourcen des DB UX Design Systems für Design und Entwicklung.'
 isSubNavigation: true
 ---
+
+import { DBStack } from '@db-ux/react-core-components';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<DBStack gap="medium">
+
+## Mit dem Design System arbeiten
+
+<TeaserCard
+	columns={3}
+	spacing="large"
+	headlineSize="medium"
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Erste Schritte',
+			description: 'Beantworte ein paar Fragen und finde den Einstieg, der zu deiner Rolle und deinem Projekt passt.',
+			url: '/de/dokumentation/erste-schritte',
+		},
+		{
+			title: 'Foundation',
+			description: 'Farben, Typografie, Abstände und die übrigen Tokens, auf denen alle Komponenten aufbauen.',
+			url: '/de/dokumentation/foundation',
+		},
+		{
+			title: 'Komponenten',
+			description: 'Alle Komponenten mit Richtlinien, Beispielen und ihrem Status.',
+			url: '/de/dokumentation/komponenten',
+		},
+		{
+			title: 'Patterns',
+			description: 'Wiederkehrende Lösungen, die mehrere Komponenten kombinieren.',
+			url: '/de/dokumentation/pattern',
+		},
+		{
+			title: 'Erweiterungen',
+			description: 'Fachspezifische Add-ons, die auf dem Design System aufbauen.',
+			url: '/de/dokumentation/erweiterungen',
+		},
+		{
+			title: 'Icons',
+			description: 'Durchsuche alle Icons und kopiere ihre Namen für den Code.',
+			url: '/de/dokumentation/icons',
+		},
+	]}
+/>
+
+## Mehr erfahren
+
+<TeaserCard
+	columns={2}
+	spacing="large"
+	headlineSize="medium"
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Ressourcen',
+			description: 'Figma-Bibliotheken, Plugins und Code-Pakete.',
+			url: '/de/dokumentation/ressourcen',
+		},
+		{
+			title: 'Lernen',
+			description: 'Tutorials, Anleitungen und Hintergrundwissen.',
+			url: '/de/dokumentation/lernen',
+		},
+		{
+			title: 'Releases',
+			description: 'Release Notes, Versionierung, Content-Status und Migration Guides.',
+			url: '/de/dokumentation/releases',
+		},
+		{
+			title: 'Mitwirken',
+			description: 'Gib Feedback und hilf, das Design System zu verbessern.',
+			url: '/de/dokumentation/mitwirken',
+		},
+	]}
+/>
+
+</DBStack>
