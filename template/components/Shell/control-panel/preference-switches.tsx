@@ -6,10 +6,8 @@ import LanguageSwitch from '@template/components/language-switch/LanguageSwitch.
  * Color mode and language switches as a single row.
  *
  * Content only - the caller wraps this in the actions slot that matches the
- * intended position. Grouping both switches keeps them together as one item, so
- * the mobile drawer footer can draw a single divider in front of the group
- * instead of one per switch - see shell-preference-switches in
- * db-ux-overrides.css.
+ * intended position. Grouping both switches keeps them together as one item in
+ * the actions slot.
  */
 const PreferenceSwitches = () => (
 	<DBStack className="shell-preference-switches" direction="row" alignment="center" gap="x-small">
