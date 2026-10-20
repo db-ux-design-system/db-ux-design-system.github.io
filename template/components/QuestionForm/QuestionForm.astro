@@ -42,7 +42,9 @@ const fallbackText = isDE ? 'Oder direkt an' : 'Or write directly to';
 			const body = encodeURIComponent(textarea.value);
 			window.location.href = 'mailto:${mailTo}?subject=${encodedSubject}&body=' + body;
 		`}
-	>{buttonText}</button>
+	>
+		{buttonText}
+	</button>
 	<p class="question-form-fallback">
 		{fallbackText} <a href={`mailto:${mailTo}`}>{mailTo}</a>
 	</p>

@@ -277,7 +277,11 @@ export type SelectVariant = (typeof SELECT_VARIANTS)[number];
  */
 export type SelectState = 'helper' | 'invalid' | 'valid';
 
-export const SELECT_STATES = ['helper', 'invalid', 'valid'] as const satisfies readonly SelectState[];
+export const SELECT_STATES = [
+	'helper',
+	'invalid',
+	'valid',
+] as const satisfies readonly SelectState[];
 
 /*
  * The states that change a switch itself, as data: whether it is on, and whether

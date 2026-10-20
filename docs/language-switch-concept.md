@@ -54,15 +54,15 @@ template/i18n/slug-mapping.ts
 
 Bidirektionale Segment-Übersetzung. Beispiele:
 
-| EN | DE |
-|----|-----|
+| EN                      | DE                      |
+| ----------------------- | ----------------------- |
 | `products-and-services` | `produkte-und-services` |
-| `components` | `komponenten` |
-| `for-developer` | `fuer-entwicklerinnen` |
-| `legal` | `rechtliches` |
-| `about-us` | `ueber-uns` |
-| `foundation` | `foundation` (bleibt) |
-| `pattern` | `pattern` (bleibt) |
+| `components`            | `komponenten`           |
+| `for-developer`         | `fuer-entwicklerinnen`  |
+| `legal`                 | `rechtliches`           |
+| `about-us`              | `ueber-uns`             |
+| `foundation`            | `foundation` (bleibt)   |
+| `pattern`               | `pattern` (bleibt)      |
 
 Genutzt von: LanguageSwitch, NavItem, Footer, Catch-All-Fallback, Content-Navigation.
 

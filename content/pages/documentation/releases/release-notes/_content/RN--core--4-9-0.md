@@ -8,6 +8,7 @@ date: '2026-05-20'
 ### Design
 
 #### Added
+
 - Multiple components: "Children" and "Content" slots have been added.
   - Accordion Item, Notification: "Children" slot below text content
   - Badge (Text), Button, Link, Infotext (Auto Width), Tooltip (Auto Width): "Children" slot right of text
@@ -18,4 +19,5 @@ date: '2026-05-20'
 ### Development
 
 #### Changed
+
 - Components: The `text` property and the `children` property can now be set at the same time.

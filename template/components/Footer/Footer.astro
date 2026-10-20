@@ -12,7 +12,11 @@ const privacyHref = isDE ? '/de/rechtliches/datenschutz' : '/legal/privacy';
 
 <footer class="footer">
 	<DBStack direction="row" gap="medium">
-		<DBLink variant="inline" href={imprintHref}> {imprintLabel} </DBLink>
-		<DBLink variant="inline" href={privacyHref}> {privacyLabel} </DBLink>
+		<DBLink variant="inline" href={imprintHref}>
+			{imprintLabel}
+		</DBLink>
+		<DBLink variant="inline" href={privacyHref}>
+			{privacyLabel}
+		</DBLink>
 	</DBStack>
 </footer>

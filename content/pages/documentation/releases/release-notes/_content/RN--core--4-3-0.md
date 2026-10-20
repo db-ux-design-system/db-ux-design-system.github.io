@@ -8,4 +8,5 @@ date: '2026-01-12'
 ### Design
 
 #### Added
+
 - Headline, Text: Paragraph spacing tokens have been added.

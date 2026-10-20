@@ -106,59 +106,55 @@ function getMigrationGuideUrl(category: string, version: string): string | null 
 	<DBStack>
 		<DBStack id="filter-tags" direction="row" alignment="center" wrap="true" role="group">
 			<small>Filter:</small>
-			{
-				categories.map((cat) => (
-					<DBTag data-category={cat} client:load showCheckState={false}>
-						<DBCheckbox>{cat}</DBCheckbox>
-					</DBTag>
-				))
-			}
+			{categories.map((cat) => (
+				<DBTag data-category={cat} client:load showCheckState={false}>
+					<DBCheckbox>{cat}</DBCheckbox>
+				</DBTag>
+			))}
 		</DBStack>
-		{
-			releaseNotes.map((note) => {
-				const roadmapUrl = getRoadmapUrl(note.category, note.version);
-				const migrationGuideUrl = getMigrationGuideUrl(note.category, note.version);
-				return (
-					<article class="release-note" data-category={note.category}>
-						<DBStack direction="row" justifyContent="space-between" alignment="center">
-							<h2 id={note.slug} class="release-note-version">
-								{note.heading}
-							</h2>
-							<time class="release-note-date">
-								{note.date.toLocaleDateString('de-DE', {
-									day: '2-digit',
-									month: '2-digit',
-									year: 'numeric',
-								})}
-							</time>
-						</DBStack>
+		{releaseNotes.map((note) => {
+			const roadmapUrl = getRoadmapUrl(note.category, note.version);
+			const migrationGuideUrl = getMigrationGuideUrl(note.category, note.version);
+			return (
+				<article class="release-note" data-category={note.category}>
+					<DBStack direction="row" justifyContent="space-between" alignment="center">
+						<h2 id={note.slug} class="release-note-version">
+							{note.heading}
+						</h2>
+						<time class="release-note-date">
+							{note.date.toLocaleDateString('de-DE', {
+								day: '2-digit',
+								month: '2-digit',
+								year: 'numeric',
+							})}
+						</time>
+					</DBStack>
 
-						<note.Content />
-						{(migrationGuideUrl || roadmapUrl) && (
-							<div class="release-note-links">
-								{migrationGuideUrl && (
-									<a href={migrationGuideUrl} class="db-link">
-										Migration Guide
-									</a>
-								)}
-								{roadmapUrl && (
-									<a
-										href={roadmapUrl}
-										target="_blank"
-										rel="noopener noreferrer"
-										class="db-link"
-										data-content="external"
-									>
-										Auf der Roadmap ansehen
-									</a>
-								)}
-							</div>
-						)}
-						<DBDivider />
-					</article>
-				);
-			})
-		}
+					<note.Content />
+					{(migrationGuideUrl || roadmapUrl) && (
+						<div class="release-note-links">
+							{migrationGuideUrl && (
+								<a href={migrationGuideUrl} class="db-link">
+									Migration Guide
+								</a>
+							)}
+							{roadmapUrl && (
+								<a
+									href={roadmapUrl}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="db-link"
+									data-content="external"
+								>
+									Auf der Roadmap ansehen
+								</a>
+							)}
+						</div>
+					)}
+					<DBDivider />
+				</article>
+			);
+		})}
 	</DBStack>
 </DocumentationLayout>
 

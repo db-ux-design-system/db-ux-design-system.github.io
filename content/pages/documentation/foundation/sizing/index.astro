@@ -27,7 +27,6 @@ const headings = [
 	Sizing refers to the consistent use of set sizes for elements and components, regardless of device
 	screen. Fixed sizings ensure that layouts remain balanced and components are easily recognizable
 	across desktop, tablet, and mobile devices.
-
 	<DBSection spacing="small">
 		<DBStack gap="x-large">
 			<DBStack gap="none">
@@ -38,17 +37,14 @@ const headings = [
 			<SizingPlayground layout="horizontal" />
 		</DBStack>
 	</DBSection>
-
 	<DBSection spacing="small">
 		<h2 id="tokens">Tokens</h2>
 		<SizingTable />
 	</DBSection>
-
 	<DBSection spacing="small">
 		<h2 id="faq">FAQ</h2>
 		<QuestionForm componentName="Sizing" />
 	</DBSection>
-
 	<script>
 		import { waitForElements } from '@template/utils/client.utils.ts';
 		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';
