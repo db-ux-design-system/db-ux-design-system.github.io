@@ -41,12 +41,7 @@ const BadgeCell = ({
 		<div className="overview-row">
 			{SEMANTICS.map((semantic) => (
 				// eslint-disable-next-line db-ux/text-or-children-required
-				<DBBadge
-					key={semantic}
-					semantic={semantic}
-					size={size}
-					emphasis={emphasis}
-				>
+				<DBBadge key={semantic} semantic={semantic} size={size} emphasis={emphasis}>
 					<DBIcon icon="plus">{labels.add}</DBIcon>
 				</DBBadge>
 			))}
@@ -54,12 +49,7 @@ const BadgeCell = ({
 		<div className="overview-row">
 			{SEMANTICS.map((semantic: Semantic) => (
 				// eslint-disable-next-line db-ux/text-or-children-required
-				<DBBadge
-					key={semantic}
-					semantic={semantic}
-					size={size}
-					emphasis={emphasis}
-				/>
+				<DBBadge key={semantic} semantic={semantic} size={size} emphasis={emphasis} />
 			))}
 		</div>
 	</div>

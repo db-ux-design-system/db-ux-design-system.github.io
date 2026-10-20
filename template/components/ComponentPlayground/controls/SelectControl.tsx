@@ -1,14 +1,9 @@
 import type { ControlProps } from '../types';
 import { DBSelect } from '@db-ux/react-core-components';
 
-const SelectControl = ({
-	property,
-	value,
-	onChange,
-	defaultValue,
-}: ControlProps) => {
+const SelectControl = ({ property, value, onChange, defaultValue }: ControlProps) => {
 	const controlId = `control-${property.name}`;
-	const options =  property.options ?? [];
+	const options = property.options ?? [];
 
 	return (
 		// eslint-disable-next-line db-ux/select-requires-options

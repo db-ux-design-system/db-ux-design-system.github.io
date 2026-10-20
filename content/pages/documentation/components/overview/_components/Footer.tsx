@@ -1,10 +1,5 @@
 import { type ReactElement } from 'react';
-import {
-	DBFooter,
-	DBFooterContent,
-	DBFooterMeta,
-	DBLink,
-} from '@db-ux/react-core-components';
+import { DBFooter, DBFooterContent, DBFooterMeta, DBLink } from '@db-ux/react-core-components';
 import { columns, type OverviewLabels } from './_shared.tsx';
 
 /*

@@ -29,27 +29,25 @@ const iconNames = Object.keys(iconDescriptions);
 	/>
 
 	<div class="icon-gallery" id="icon-gallery">
-		{
-			iconNames.map((icon) => {
-				const iconName = icon.replace(/-/g, '_');
-				const tooltipId = `tooltip-${icon}`;
-				return (
-					<DBButton
-						className="icon-item"
-						variant="filled"
-						noText
-						icon={iconName}
-						data-icon-name={iconName}
-						data-icon-key={icon}
-						client:only="react"
-						data-has-tooltip="true"
-					>
-						{iconName}
-						<DBTooltip id={tooltipId}>{iconName}</DBTooltip>
-					</DBButton>
-				);
-			})
-		}
+		{iconNames.map((icon) => {
+			const iconName = icon.replace(/-/g, '_');
+			const tooltipId = `tooltip-${icon}`;
+			return (
+				<DBButton
+					className="icon-item"
+					variant="filled"
+					noText
+					icon={iconName}
+					data-icon-name={iconName}
+					data-icon-key={icon}
+					client:only="react"
+					data-has-tooltip="true"
+				>
+					{iconName}
+					<DBTooltip id={tooltipId}>{iconName}</DBTooltip>
+				</DBButton>
+			);
+		})}
 	</div>
 </DocumentationLayout>
 

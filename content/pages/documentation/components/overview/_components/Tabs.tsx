@@ -1,15 +1,6 @@
 import { type ReactElement } from 'react';
-import {
-	DBTabItem,
-	DBTabList,
-	DBTabPanel,
-	DBTabs,
-} from '@db-ux/react-core-components';
-import {
-	TABS_ORIENTATIONS,
-	type OverviewLabels,
-	type TabsOrientation,
-} from './_shared.tsx';
+import { DBTabItem, DBTabList, DBTabPanel, DBTabs } from '@db-ux/react-core-components';
+import { TABS_ORIENTATIONS, type OverviewLabels, type TabsOrientation } from './_shared.tsx';
 
 /*
  * One tab set per orientation, horizontal and vertical.

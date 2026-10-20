@@ -27,9 +27,8 @@ const headings = [
 
 <DocumentationLayout frontmatter={frontmatter} headings={headings}>
 	Typografie hilft dabei, Hierarchie zu schaffen und zentrale Inhalte durch klare visuelle Muster zu
-	kommunizieren. Gut gestaltete Typografie verbessert die Lesbarkeit und steigert direkt die
-	User Experience.
-
+	kommunizieren. Gut gestaltete Typografie verbessert die Lesbarkeit und steigert direkt die User
+	Experience.
 	<DBSection spacing="small">
 		<DBStack gap="x-large">
 			<DBStack gap="none">
@@ -41,7 +40,6 @@ const headings = [
 			<TypographyPlayground layout="horizontal" />
 		</DBStack>
 	</DBSection>
-
 	<DBSection spacing="small">
 		<h2 id="richtlinien">Richtlinien</h2>
 
@@ -49,9 +47,9 @@ const headings = [
 
 		<p>
 			Unsere Typografie verfügt über ein einfaches und effektives Code-Mapping-System, das die
-			gängigsten HTML-Tags (h1, h2, h3, h4, h5, h6, p, small) direkt mit unseren
-			Typografie-Tokens 3xs bis 3xl verknüpft. Wenn dies für einen bestimmten Anwendungsfall nicht
-			ausreicht, können stattdessen spezifische Tokens verwendet werden.
+			gängigsten HTML-Tags (h1, h2, h3, h4, h5, h6, p, small) direkt mit unseren Typografie-Tokens
+			3xs bis 3xl verknüpft. Wenn dies für einen bestimmten Anwendungsfall nicht ausreicht, können
+			stattdessen spezifische Tokens verwendet werden.
 		</p>
 
 		<div class="guideline-examples">
@@ -62,17 +60,14 @@ const headings = [
 			/>
 		</div>
 	</DBSection>
-
 	<DBSection spacing="small">
 		<h2 id="tokens">Tokens</h2>
 		<TypographyTable />
 	</DBSection>
-
 	<DBSection spacing="small">
 		<h2 id="faq">FAQ</h2>
 		<QuestionForm componentName="Typography" />
 	</DBSection>
-
 	<script>
 		import { waitForElements } from '@template/utils/client.utils.ts';
 		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';

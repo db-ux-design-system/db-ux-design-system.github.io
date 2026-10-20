@@ -15,7 +15,7 @@ nav: true
 import { DBSection, DBNotification } from '@db-ux/react-core-components';
 import YourAction from '@template/components/YourAction/YourAction';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import CardTeaserRow from "@template/components/CardTeaser/CardTeaserRow";
+import CardTeaserRow from '@template/components/CardTeaser/CardTeaserRow';
 
 <DBSection spacing="small" width="auto">
 
@@ -98,9 +98,9 @@ Text content is not overwritten by the update.
 	/>
 </div>
 
-
 <DBNotification semantic="critical" variant="standalone" headline="Important">
-Copy the Drawer Header content **before updating the component** – the update resets the existing text.
+	Copy the Drawer Header content **before updating the component** – the update resets the existing
+	text.
 </DBNotification>
 
 <YourAction
@@ -116,9 +116,7 @@ Copy the Drawer Header content **before updating the component** – the update 
 - **`rounded` is deprecated:** The `rounded` property is deprecated and will be removed with one of the next major releases. Set `rounded` to `false` to adopt the new default appearance. Instances that still use `rounded = true` continue to work but should be updated.
 
 <YourAction
-	actions={[
-		'Set rounded to false on all Drawer instances that still use rounded = true.',
-	]}
+	actions={['Set rounded to false on all Drawer instances that still use rounded = true.']}
 />
 
 </DBSection>
