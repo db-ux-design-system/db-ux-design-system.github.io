@@ -1,12 +1,6 @@
 import { Fragment, type ReactElement } from 'react';
 import { DBRadio } from '@db-ux/react-core-components';
-import {
-	columns,
-	RADIO_STATES,
-	SIZES,
-	type OverviewLabels,
-	type Size,
-} from './_shared.tsx';
+import { columns, RADIO_STATES, SIZES, type OverviewLabels, type Size } from './_shared.tsx';
 
 /*
  * One group per state, in both sizes.

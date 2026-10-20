@@ -8,6 +8,7 @@ date: '2026-05-20'
 ### Design
 
 #### Hinzugefügt
+
 - Mehrere Komponenten: `Children`- und `Content`-Slots wurden hinzugefügt.
   - Accordion Item, Notification: `Children`-Slot unterhalb des Textinhalts
   - Badge (Text), Button, Link, Infotext (Auto Width), Tooltip (Auto Width): `Children`-Slot rechts vom Text
@@ -18,4 +19,5 @@ date: '2026-05-20'
 ### Entwicklung
 
 #### Geändert
+
 - Components: Die `text`-Property und die `children`-Property können jetzt gleichzeitig gesetzt werden.

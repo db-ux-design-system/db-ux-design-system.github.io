@@ -67,19 +67,29 @@ const teasers = [
 ];
 ---
 
-{
-	noSection ? (
-		<section aria-label={ariaLabel} id="extensions--extensions-section">
-			<TeaserCard teasers={teasers} columns={2} spacing="large" headlineSize="large" headlineLevel={2} />
-		</section>
-	) : (
-		<DBSection
-			width={width}
-			spacing="medium"
-			aria-label={ariaLabel}
-			id="extensions--extensions-section"
-		>
-			<TeaserCard teasers={teasers} columns={2} spacing="large" headlineSize="large" headlineLevel={2} />
-		</DBSection>
-	)
-}
+{noSection ? (
+	<section aria-label={ariaLabel} id="extensions--extensions-section">
+		<TeaserCard
+			teasers={teasers}
+			columns={2}
+			spacing="large"
+			headlineSize="large"
+			headlineLevel={2}
+		/>
+	</section>
+) : (
+	<DBSection
+		width={width}
+		spacing="medium"
+		aria-label={ariaLabel}
+		id="extensions--extensions-section"
+	>
+		<TeaserCard
+			teasers={teasers}
+			columns={2}
+			spacing="large"
+			headlineSize="large"
+			headlineLevel={2}
+		/>
+	</DBSection>
+)}

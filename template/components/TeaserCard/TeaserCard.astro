@@ -57,70 +57,72 @@ interface Props {
 	headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
-const { teasers, columns, spacing = 'small', headlineSize = 'small', headlineLevel = 3 } = Astro.props;
+const {
+	teasers,
+	columns,
+	spacing = 'small',
+	headlineSize = 'small',
+	headlineLevel = 3,
+} = Astro.props;
 const isDE = Astro.url.pathname.startsWith('/de/');
 const disabledLabel = isDE ? 'Demnächst verfügbar' : 'Coming Soon';
 ---
 
-<div class={`teaser-cards${columns ? ` teaser-cards-cols-${columns}` : ''}${headlineSize === 'large' ? ' teaser-cards-large' : headlineSize === 'medium' ? ' teaser-cards-medium' : ''}`}>
-	{
-		teasers.map((teaser) => {
-			const hasImage = !!teaser.imageSrc;
-			const isDisabled = teaser.disabled === true;
+<div
+	class={`teaser-cards${columns ? ` teaser-cards-cols-${columns}` : ''}${headlineSize === 'large' ? ' teaser-cards-large' : headlineSize === 'medium' ? ' teaser-cards-medium' : ''}`}
+>
+	{teasers.map((teaser) => {
+		const hasImage = !!teaser.imageSrc;
+		const isDisabled = teaser.disabled === true;
 
-			const cardContent = hasImage ? (
-				<TextImage
-					title={teaser.title}
-					imagePosition={teaser.imagePosition ?? 'top'}
-					imageWidth={teaser.imageWidth}
-					imageSrc={teaser.imageSrc!}
-					imageSrcDark={teaser.imageSrcDark}
-					imageAlt={teaser.imageAlt ?? teaser.title}
-					headlineLevel={headlineLevel}
-				>
-					{teaser.description}
-				</TextImage>
-			) : (
-				<div class="teaser-content">
-					{headlineLevel === 1 ? (
-						<h1 class="teaser-title">{teaser.title}</h1>
-					) : headlineLevel === 2 ? (
-						<h2 class="teaser-title">{teaser.title}</h2>
-					) : headlineLevel === 3 ? (
-						<h3 class="teaser-title">{teaser.title}</h3>
-					) : headlineLevel === 4 ? (
-						<h4 class="teaser-title">{teaser.title}</h4>
-					) : headlineLevel === 5 ? (
-						<h5 class="teaser-title">{teaser.title}</h5>
-					) : (
-						<h6 class="teaser-title">{teaser.title}</h6>
-					)}
-					<p class="teaser-description">{teaser.description}</p>
-				</div>
-			);
+		const cardContent = hasImage ? (
+			<TextImage
+				title={teaser.title}
+				imagePosition={teaser.imagePosition ?? 'top'}
+				imageWidth={teaser.imageWidth}
+				imageSrc={teaser.imageSrc!}
+				imageSrcDark={teaser.imageSrcDark}
+				imageAlt={teaser.imageAlt ?? teaser.title}
+				headlineLevel={headlineLevel}
+			>
+				{teaser.description}
+			</TextImage>
+		) : (
+			<div class="teaser-content">
+				{headlineLevel === 1 ? (
+					<h1 class="teaser-title">{teaser.title}</h1>
+				) : headlineLevel === 2 ? (
+					<h2 class="teaser-title">{teaser.title}</h2>
+				) : headlineLevel === 3 ? (
+					<h3 class="teaser-title">{teaser.title}</h3>
+				) : headlineLevel === 4 ? (
+					<h4 class="teaser-title">{teaser.title}</h4>
+				) : headlineLevel === 5 ? (
+					<h5 class="teaser-title">{teaser.title}</h5>
+				) : (
+					<h6 class="teaser-title">{teaser.title}</h6>
+				)}
+				<p class="teaser-description">{teaser.description}</p>
+			</div>
+		);
 
-			return isDisabled ? (
-				<DisabledWrapper label={disabledLabel} size={hasImage ? 'medium' : 'small'}>
-					<DBCard spacing={spacing}>{cardContent}</DBCard>
-				</DisabledWrapper>
-			) : teaser.url ? (
-				<a
-					href={teaser.url}
-					class="teaser-card-link"
-					{...(teaser.external
-						? { target: '_blank', rel: 'noreferrer' }
-						: {})}
-				>
-					<DBCard behavior="interactive" spacing={spacing}>
-						{cardContent}
-					</DBCard>
-					{teaser.external && (
-						<span data-visually-hidden="true">(opens in new tab)</span>
-					)}
-				</a>
-			) : (
+		return isDisabled ? (
+			<DisabledWrapper label={disabledLabel} size={hasImage ? 'medium' : 'small'}>
 				<DBCard spacing={spacing}>{cardContent}</DBCard>
-			);
-		})
-	}
+			</DisabledWrapper>
+		) : teaser.url ? (
+			<a
+				href={teaser.url}
+				class="teaser-card-link"
+				{...(teaser.external ? { target: '_blank', rel: 'noreferrer' } : {})}
+			>
+				<DBCard behavior="interactive" spacing={spacing}>
+					{cardContent}
+				</DBCard>
+				{teaser.external && <span data-visually-hidden="true">(opens in new tab)</span>}
+			</a>
+		) : (
+			<DBCard spacing={spacing}>{cardContent}</DBCard>
+		);
+	})}
 </div>

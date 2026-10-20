@@ -20,7 +20,9 @@ import {
 				<DBStack gap="small">
 					<h2>Explore Europe from €19.99</h2>
 					<small>Travel fast and affordably to many European destinations.</small>
-					<DBButton width="full" variant="brand">Find cheap price</DBButton>
+					<DBButton width="full" variant="brand">
+						Find cheap price
+					</DBButton>
 				</DBStack>
 			</DBCard>
 		</DBSection>
@@ -38,19 +40,24 @@ import {
 									data-size="small"
 									id="class-1"
 									onclick="document.getElementById('class-1').setAttribute('data-variant','brand');document.getElementById('class-2').setAttribute('data-variant','filled');"
-									>1st Class</button
 								>
+									1st Class
+								</button>
 								<button
 									class="db-button"
 									data-variant="filled"
 									data-size="small"
 									id="class-2"
 									onclick="document.getElementById('class-2').setAttribute('data-variant','brand');document.getElementById('class-1').setAttribute('data-variant','filled');"
-									>2nd Class</button
 								>
+									2nd Class
+								</button>
 							</div>
 
-							<DBButton iconLeading="map" variant="ghost" size="small" noText> Show map </DBButton>
+							<DBButton iconLeading="map" variant="ghost" size="small" noText>
+								{' '}
+								Show map{' '}
+							</DBButton>
 						</DBStack>
 					</DBStack>
 					<DBStack direction="row" gap="small" justifyContent="space-between" className="journey">
@@ -71,12 +78,16 @@ import {
 						<DBButton variant="brand"> Search </DBButton>
 					</DBStack>
 					<DBStack direction="row" gap="small" justifyContent="space-between" className="column">
-						<DBButton width="full" variant="filled" iconLeading="calendar" wrap="false"
-							>Today, from 2:30 PM</DBButton
-						>
-						<DBButton width="full" variant="filled" iconLeading="calendar" wrap="false">Add return trip</DBButton
-						>
-						<DBButton width="full" variant="filled" iconLeading="person" wrap="false"> Traveler info </DBButton>
+						<DBButton width="full" variant="filled" iconLeading="calendar" wrap="false">
+							Today, from 2:30 PM
+						</DBButton>
+						<DBButton width="full" variant="filled" iconLeading="calendar" wrap="false">
+							Add return trip
+						</DBButton>
+						<DBButton width="full" variant="filled" iconLeading="person" wrap="false">
+							{' '}
+							Traveler info{' '}
+						</DBButton>
 					</DBStack>
 				</DBStack>
 			</DBCard>

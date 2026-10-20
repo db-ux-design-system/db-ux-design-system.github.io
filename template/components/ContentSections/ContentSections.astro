@@ -36,27 +36,22 @@ for (const section of sections) {
 }
 ---
 
-{
-	sections.map((section) => {
-		const Visual = section.visual ? visuals[section.visual] : undefined;
-		return (
-			<DBSection
-				width="medium"
-				spacing="medium"
-				aria-label={section.ariaLabel}
-				id={section.id}
+{sections.map((section) => {
+	const Visual = section.visual ? visuals[section.visual] : undefined;
+	return (
+		<DBSection width="medium" spacing="medium" aria-label={section.ariaLabel} id={section.id}>
+			<TextImage
+				title={section.title}
+				imageSrc={`${appConfig.basePath}${section.imageSrc}`}
+				imageSrcDark={
+					section.imageSrcDark ? `${appConfig.basePath}${section.imageSrcDark}` : undefined
+				}
+				imageAlt={section.imageAlt}
+				imagePosition={section.imagePosition ?? 'right'}
 			>
-				<TextImage
-					title={section.title}
-					imageSrc={`${appConfig.basePath}${section.imageSrc}`}
-					imageSrcDark={section.imageSrcDark ? `${appConfig.basePath}${section.imageSrcDark}` : undefined}
-					imageAlt={section.imageAlt}
-					imagePosition={section.imagePosition ?? 'right'}
-				>
-					{Visual && <Visual slot="visual" label={section.imageAlt} />}
-					{section.text}
-				</TextImage>
-			</DBSection>
-		);
-	})
-}
+				{Visual && <Visual slot="visual" label={section.imageAlt} />}
+				{section.text}
+			</TextImage>
+		</DBSection>
+	);
+})}

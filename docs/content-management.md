@@ -17,7 +17,7 @@ The process applies to two main types of changes:
    - Examples: changes to Astro components, templates, styling, layout, build logic, or other implementation-related parts of the website.
    - These changes usually require review by someone from the **development discipline**.
 
-3. Content changes
+2. Content changes
    - Examples: changes to Markdown files, release notes, changelog entries, editorial content, or structured CMS-related content stored in the repository.
    - These changes can usually be reviewed by **any qualified team member**, provided the review criteria are met.
 
@@ -123,6 +123,7 @@ focus on: Markdown validity, consistent structure, naming conventions, links, an
 
 For **functional or design changes**\
 additionally check: technical correctness, visual consistency, component behavior, and potential regressions.
+
 ### 5. Follow commit conventions
 
 Commit messages follow [Conventional Commits](conventions.md) and are checked automatically with `commitlint`.
