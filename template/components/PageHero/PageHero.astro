@@ -11,6 +11,8 @@ import {
 	DBTextGroup,
 	type SemanticType,
 } from '@db-ux/react-core-components';
+import Visual from '@template/components/Visual/Visual.astro';
+import type { VisualName } from '@template/visuals';
 import './PageHero.css';
 
 interface Props {
@@ -21,6 +23,8 @@ interface Props {
 	badgeSemantic?: SemanticType;
 	imageSrc?: string;
 	imageAlt?: string;
+	/** Decorative inline visual from `template/visuals/`. Takes precedence over `imageSrc`. */
+	visual?: VisualName;
 	align?: FrontMatter['align'];
 	layout?: 'stack' | 'split';
 	imageSide?: 'left' | 'right';
@@ -38,6 +42,7 @@ const {
 	badgeSemantic = 'informational',
 	imageSrc,
 	imageAlt,
+	visual,
 	align = 'center',
 	layout = 'stack',
 	imageSide = 'right',
@@ -57,11 +62,15 @@ const safeHeadlineLevel = (title ? 2 : Math.min(Math.max(headlineLevel, 1), 6)) 
 const Headline = headingComponents[safeHeadlineLevel];
 ---
 
-{(title || headline || description || imageSrc) && (
+{(title || headline || description || imageSrc || visual) && (
 	<div class="page-hero" data-align={align} data-layout={layout} data-image-side={imageSide}>
-		{layout === 'split' && imageSrc && imageSide === 'left' && (
-			<div class="page-hero-media">
-				<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
+		{layout === 'split' && (visual || imageSrc) && imageSide === 'left' && (
+			<div class:list={['page-hero-media', { 'page-hero-media-visual': !!visual }]}>
+				{visual ? (
+					<Visual name={visual} class="page-hero-visual" strokeScaling="scale" />
+				) : (
+					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
+				)}
 			</div>
 		)}
 		<div class="page-hero-content">
@@ -86,14 +95,22 @@ const Headline = headingComponents[safeHeadlineLevel];
 				</DBTextGroup>
 			)}
 		</div>
-		{layout === 'split' && imageSrc && imageSide === 'right' && (
-			<div class="page-hero-media">
-				<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
+		{layout === 'split' && (visual || imageSrc) && imageSide === 'right' && (
+			<div class:list={['page-hero-media', { 'page-hero-media-visual': !!visual }]}>
+				{visual ? (
+					<Visual name={visual} class="page-hero-visual" strokeScaling="scale" />
+				) : (
+					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
+				)}
 			</div>
 		)}
-		{layout === 'stack' && imageSrc && (
-			<div class="page-hero-media">
-				<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
+		{layout === 'stack' && (visual || imageSrc) && (
+			<div class:list={['page-hero-media', { 'page-hero-media-visual': !!visual }]}>
+				{visual ? (
+					<Visual name={visual} class="page-hero-visual" strokeScaling="scale" />
+				) : (
+					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
+				)}
 			</div>
 		)}
 	</div>

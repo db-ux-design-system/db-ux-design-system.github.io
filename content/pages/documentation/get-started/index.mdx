@@ -11,7 +11,7 @@ description: 'Everything you need to build consistent and accessible digital exp
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import { DBStack, DBNotification, DBLink } from '@db-ux/react-core-components';
 
-<DBStack gap="medium">
+<DBStack gap="large">
 <DBNotification variant="standalone" semantic="informational" headline="Note">
 	All examples in this documentation are based on the <DBLink href="https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/db-ux-design-system/resources/db-theme" target="_blank" rel="noopener noreferrer" variant="inline">DB Theme</DBLink>. If you use the Design System as a
 	White Label or with a different Theme, visual results can differ because a different Foundation
@@ -29,8 +29,7 @@ import { DBStack, DBNotification, DBLink } from '@db-ux/react-core-components';
 			description:
 				'Shared base tokens and modes provide a stable foundation for clear and coherent interfaces.',
 			url: '/documentation/foundation',
-			imageSrc: '/assets/Foundations-Teaser--C.png',
-			imageAlt: 'Foundations',
+			visual: 'foundation',
 			imagePosition: 'right',
 			imageWidth: '33',
 		},
@@ -38,26 +37,7 @@ import { DBStack, DBNotification, DBLink } from '@db-ux/react-core-components';
 			title: 'Components',
 			description: 'Core components ensure predictable interactions across products.',
 			url: '/documentation/components',
-			imageSrc: '/assets/Components-Teaser--C.png',
-			imageAlt: 'Components',
-			imagePosition: 'right',
-			imageWidth: '33',
-		},
-	]}
-/>
-
-<TeaserCard
-	columns={3}
-	spacing="large"
-	headlineSize="medium"
-	headlineLevel={2}
-	teasers={[
-		{
-			title: 'Icons',
-			description: 'Browse and copy all available DB UX icon names for usage in code.',
-			url: '/documentation/icons',
-			imageSrc: '/assets/Extensions-Teaser--C.png',
-			imageAlt: 'Icons',
+			visual: 'components',
 			imagePosition: 'right',
 			imageWidth: '33',
 		},
@@ -65,8 +45,7 @@ import { DBStack, DBNotification, DBLink } from '@db-ux/react-core-components';
 			title: 'Release Notes',
 			description: 'Stay up to date with the latest changes and improvements.',
 			url: '/documentation/releases/release-notes',
-			imageSrc: '/assets/Release-Notes-Teaser.png',
-			imageAlt: 'Release Notes',
+			visual: 'releases',
 			imagePosition: 'right',
 			imageWidth: '33',
 		},
@@ -74,8 +53,7 @@ import { DBStack, DBNotification, DBLink } from '@db-ux/react-core-components';
 			title: 'Resources',
 			description: 'Figma libraries for designers and code packages for developers.',
 			url: '/documentation/resources',
-			imageSrc: '/assets/Resources-Teaser.png',
-			imageAlt: 'Resources',
+			visual: 'resources',
 			imagePosition: 'right',
 			imageWidth: '33',
 		},

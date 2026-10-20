@@ -31,6 +31,11 @@ declare interface FrontMatter {
 	 */
 	heroImageAlt?: string;
 	/**
+	 * Optional decorative inline visual from `template/visuals/` for the hero.
+	 * Takes precedence over `heroImage`.
+	 */
+	heroVisual?: import('@template/visuals').VisualName;
+	/**
 	 * The creation date of the page.
 	 */
 	date?: Date;

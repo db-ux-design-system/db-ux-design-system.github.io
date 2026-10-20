@@ -1,5 +1,6 @@
 [id='demo-iframe'] {
 	inline-size: 100%;
+
 	/* Fixed landscape ratio so the height derives from the content box, not the
 	   viewport. Keeps the demo stable instead of tracking the window height. */
 	aspect-ratio: 900 / 570;

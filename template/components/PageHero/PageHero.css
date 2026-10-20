@@ -86,6 +86,12 @@
 	block-size: auto;
 }
 
+/* Visual size for P&S hero – tune here (14rem = 224 px).
+ * Stroke: strokeScaling="scale" in the markup, width from --visual-stroke-ratio (Visual.css) */
+.page-hero-visual {
+	--visual-inline-size: var(--db-container-3xs);
+}
+
 /* Zentrierter Variant (z.B. Landing Pages) */
 
 /* Alignment Variants */

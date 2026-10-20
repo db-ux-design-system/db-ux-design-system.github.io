@@ -165,12 +165,105 @@
 	flex: 1 1 0;
 }
 
+/* 75/25: Text:Bild 3:1 */
+.text-image[data-image-width='25'] .text-image-content {
+	flex: 3 1 0;
+}
+
+.text-image[data-image-width='25'] .text-image-image {
+	flex: 1 1 0;
+}
+
 .text-image[data-image-width='66'] .text-image-content {
 	flex: 1 1 0;
 }
 
 .text-image[data-image-width='66'] .text-image-image {
 	flex: 2 1 0;
+}
+
+/*
+ * Visual-Fläche bündig in der Karte (Visual prop `surface` im Slot `visual`, TextImage direkt in DBCard):
+ * Die Karte verliert ihr Padding, der Text bekommt es zurück (gleicher Wert wie DBCard spacing).
+ * Die Fläche liegt damit oben, unten und an der Bildseite am Kartenrand, innerhalb des 1px-Rahmens.
+ * overflow: hidden schneidet die Fläche am border-radius der Karte ab.
+ * Fläche: quadratisch (Kante = Breite der Bildspalte); ist der Text höher, wächst sie in der Höhe mit,
+ * damit sie bündig bleibt (flex-grow).
+ */
+.db-card:has(> .text-image > .text-image-visual > .db-visual-surface) {
+	padding: 0;
+	overflow: hidden;
+}
+
+/* Text-Padding = DBCard spacing (sm ist der DBCard-Default) */
+.db-card > .text-image:has(> .text-image-visual > .db-visual-surface) > .text-image-content {
+	padding: var(--db-spacing-fixed-sm);
+}
+
+.db-card[data-spacing='medium']
+	> .text-image:has(> .text-image-visual > .db-visual-surface)
+	> .text-image-content {
+	padding: var(--db-spacing-fixed-md);
+}
+
+.db-card[data-spacing='large']
+	> .text-image:has(> .text-image-visual > .db-visual-surface)
+	> .text-image-content {
+	padding: var(--db-spacing-fixed-lg);
+}
+
+.db-card[data-spacing='none']
+	> .text-image:has(> .text-image-visual > .db-visual-surface)
+	> .text-image-content {
+	padding: 0;
+}
+
+.text-image:has(> .text-image-visual > .db-visual-surface) {
+	gap: 0;
+}
+
+/* Gegen den Content-Rhythmus (content-spacing.css: `div + div`, Spezifität 0,3,0),
+ * der der Bildspalte sonst 16 px Abstand oben gibt und die Fläche vom Kartenrand löst */
+.text-image:has(> .text-image-visual > .db-visual-surface) > .text-image-visual {
+	margin-block-start: 0;
+}
+
+/* Die Bildspalte (`imageWidth`) bestimmt die Flächengröße, nicht die Props `size`/`width`/`height`
+ * von Visual (sie landen als --visual-inline-size/--visual-block-size auf der Fläche und werden
+ * hier überschrieben). Das Visual nimmt --visual-surface-content-size der Fläche ein (Visual.css, 52 %).
+ * Richtwerte bei 1440 px Viewport:
+ * - Startseite groß (imageWidth 25, Text:Visual 3:1): Fläche ~228 px, Visual ~118 px
+ * - Startseite Coming Soon (imageWidth 33): Fläche ~136–147 px breit, Visual ~71–76 px
+ * - Get Started (imageWidth 33): Fläche ~162 px, Visual ~84 px
+ * Mobile gestapelt: --text-image-surface-stacked-size (160 px), Visual ~83 px */
+.text-image-visual > .db-visual-surface {
+	flex: 1 0 auto;
+	inline-size: 100%;
+	block-size: auto;
+}
+
+/* Interaktive Karte: Die Fläche geht mit dem Hover-/Pressed-Zustand eine Stufe mit.
+ * Sonst entspricht Level 1 hovered (Karte) im Light Mode genau Level 2 default (Fläche)
+ * und die Fläche verschwindet beim Hover. */
+:is(a[href], button):is(:hover, :focus-visible) > .db-card .db-visual-surface,
+.db-card[data-behavior='interactive']:is(:hover, :focus-visible) .db-visual-surface {
+	--visual-surface-bg: var(--db-adaptive-bg-basic-level-2-hovered);
+}
+
+:is(a[href], button):active > .db-card .db-visual-surface,
+.db-card[data-behavior='interactive']:active .db-visual-surface {
+	--visual-surface-bg: var(--db-adaptive-bg-basic-level-2-pressed);
+}
+
+/* Interaktive Karte: Visual wächst bei Hover und Tastaturfokus (Fläche bleibt gleich).
+ * transform statt Breite, damit kein Layout-Shift entsteht. Faktor: --visual-surface-hover-scale
+ * (Visual.css), 52 % × 1,2 ≈ 62 % der Fläche. Deaktivierte Teaser liegen in keinem Link
+ * und haben kein data-behavior="interactive", sie skalieren nicht. */
+@media (prefers-reduced-motion: no-preference) {
+	:is(a[href], button):is(:hover, :focus-visible) > .db-card .db-visual-surface > .db-visual,
+	.db-card[data-behavior='interactive']:is(:hover, :focus-visible) .db-visual-surface > .db-visual {
+		transform: scale(var(--visual-surface-hover-scale, 1.2));
+	}
 }
 
 /* Align Varianten (optional) */
@@ -208,6 +301,23 @@
 	.text-image[data-image-position='right'] .text-image-content {
 		order: 1 !important;
 		flex: 2 1 0 !important;
+	}
+
+	/* Mobile: Fläche bleibt quadratisch, aber begrenzt statt in voller Kartenbreite.
+	 * Bündig unten und an der Bildseite. Stellschraube: --text-image-surface-stacked-size */
+	.text-image-visual > .db-visual-surface {
+		flex: none;
+
+		/* min(): in schmalen Karten (Coming Soon 2er-Reihe) schrumpft die Fläche mit, statt die Karte zu verbreitern */
+		inline-size: min(100%, var(--text-image-surface-stacked-size, var(--db-sizing-2xl)));
+	}
+
+	.text-image[data-image-position='right'] > .text-image-visual > .db-visual-surface {
+		align-self: flex-end;
+	}
+
+	.text-image[data-image-position='left'] > .text-image-visual > .db-visual-surface {
+		align-self: flex-start;
 	}
 
 	/* Mobile: textGap stets sm, egal welche Variante gewählt wurde */
