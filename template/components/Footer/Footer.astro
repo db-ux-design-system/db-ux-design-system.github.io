@@ -7,14 +7,17 @@ const imprintLabel = isDE ? 'Impressum' : 'Imprint';
 const privacyLabel = isDE ? 'Datenschutz' : 'Privacy';
 const imprintHref = isDE ? '/de/rechtliches/impressum' : '/legal/imprint';
 const privacyHref = isDE ? '/de/rechtliches/datenschutz' : '/legal/privacy';
-const legalNavLabel = isDE ? 'Rechtliches' : 'Legal';
+const contactLabel = isDE ? 'Kontakt' : 'Contact';
+// Design system mailbox. The control panel has no contact button, so this is the site-wide contact link.
+const contactHref = 'mailto:db-ux-designsystem@deutschebahn.com';
+const footerNavLabel = isDE ? 'Kontakt und Rechtliches' : 'Contact and legal';
 // DBFooterMeta prepends the copyright sign; the year follows the build date.
 const copyright = `${new Date().getFullYear()} Deutsche Bahn AG`;
 ---
 
 <DBFooter width="full">
 	<DBFooterMeta copyright={copyright}>
-		<nav aria-label={legalNavLabel}>
+		<nav aria-label={footerNavLabel}>
 			<ul>
 				<li>
 					<DBLink variant="inline" size="small" href={imprintHref}>
@@ -24,6 +27,11 @@ const copyright = `${new Date().getFullYear()} Deutsche Bahn AG`;
 				<li>
 					<DBLink variant="inline" size="small" href={privacyHref}>
 						{privacyLabel}
+					</DBLink>
+				</li>
+				<li>
+					<DBLink variant="inline" size="small" href={contactHref}>
+						{contactLabel}
 					</DBLink>
 				</li>
 			</ul>
