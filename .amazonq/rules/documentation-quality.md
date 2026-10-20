@@ -54,8 +54,4 @@ const tokens = [
 - Token accuracy is critical for design-to-code handoff
 - Errors propagate across all applications using the design system
 
----
-
-```
-END: Documentation Quality Rules – do not edit above ---
-```
+--- END: Documentation Quality Rules – do not edit above ---

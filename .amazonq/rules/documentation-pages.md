@@ -140,7 +140,9 @@ Configure the [component] through its properties, such as [property examples].
 <DBSection spacing="small" width="auto">
 	## Guidelines
 	<CollapsibleWrapper collapsedHeight="320px">
-		###### [Guideline Title] [Guideline description text]
+		###### [Guideline Title]
+		
+		[Guideline description text]
 		<div className="guideline-examples">
 			<GuidelineExample
 				variant="do"
@@ -163,7 +165,9 @@ Configure the [component] through its properties, such as [property examples].
 
 ```jsx
 <DBSection spacing="small" width="auto">
-	## FAQ Have a question about the [Component] component? We'll answer it and add frequently asked
+	## FAQ Have a question about the [Component] component?
+	
+	We'll answer it and add frequently asked
 	questions to this page.
 	<QuestionForm componentName="[ComponentName]" />
 </DBSection>
