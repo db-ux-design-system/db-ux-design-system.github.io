@@ -193,6 +193,36 @@
 	min-inline-size: 0;
 }
 
+/* Divider between the Get Started button and the switches in the mobile drawer footer.
+   Mirrors what the control panel does between Actions 1 and Actions 2 on desktop:
+   a 1px absolute line on the inline-start edge of the trailing element, with
+   padding to keep the content off it. Desktop draws it in front of the button,
+   mobile in front of the switches, because the order is reversed there.
+   The divider colour follows the same custom property the library uses, so it
+   stays in sync with the emphasis handling. */
+.db-control-panel-mobile .db-control-panel-actions-2 .shell-preference-switches {
+	--db-divider-bg-color: var(--db-adaptive-on-bg-basic-emphasis-60-default);
+
+	position: relative;
+	padding-inline-start: var(--db-spacing-fixed-sm);
+}
+
+.db-control-panel-mobile .db-control-panel-actions-2 .shell-preference-switches::before {
+	content: '';
+	position: absolute;
+	inset-block: 0;
+	inset-inline-start: 0;
+	inline-size: var(--db-border-width-3xs);
+	background-color: var(--db-divider-bg-color);
+}
+
+@media (forced-colors: active) {
+	.db-control-panel-mobile .db-control-panel-actions-2 .shell-preference-switches::before {
+		/* stylelint-disable-next-line db-ux/use-border-color */
+		border-inline-start: var(--db-border-width-3xs) solid var(--db-divider-bg-color);
+	}
+}
+
 [data-variant='drilldown'] {
 	.db-control-panel-navigation-item-group-menu {
 		z-index: 68;

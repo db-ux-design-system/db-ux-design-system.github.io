@@ -5,6 +5,7 @@ export const en: TranslationDictionary = {
 	'shell.menu': 'Menu',
 	'shell.mainNavigation': 'main navigation',
 	'shell.colorModeToggle': 'Switch color scheme (light/dark)',
+	'shell.getStarted': 'Get started',
 	'shell.languageSwitch.label': 'Switch language',
 
 	// Footer
