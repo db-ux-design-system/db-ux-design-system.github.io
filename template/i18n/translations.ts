@@ -7,7 +7,7 @@ export interface TranslationDictionary {
 	'shell.menu': string;
 	'shell.mainNavigation': string;
 	'shell.colorModeToggle': string;
-	'shell.contactUs': string;
+	'shell.getStarted': string;
 	'shell.languageSwitch.label': string;
 
 	// Footer
