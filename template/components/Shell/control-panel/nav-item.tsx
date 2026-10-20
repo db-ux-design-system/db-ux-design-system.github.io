@@ -43,7 +43,7 @@ const NavItem = ({
 	parentStatus,
 }: NavigationItem & { parentStatus?: string }) => {
 	const { language } = useLanguage();
-	const displayTitle = (language === 'de' && titleDe) ? titleDe : title;
+	const displayTitle = language === 'de' && titleDe ? titleDe : title;
 	const localePath = (p: string | undefined) => {
 		if (!p) return p;
 		const trimmed = trimExtension(p) ?? p;
@@ -82,7 +82,13 @@ const NavItem = ({
 		typeof window !== 'undefined' &&
 		covers(
 			{ path, title, icon, iconTrailing, children, isSubNavigation },
-			'/' + toEnSlug(window.location.pathname.replace(/^\/de\//, '').replace(/^\/de$/, '').replace(/\/+$/, '')),
+			'/' +
+				toEnSlug(
+					window.location.pathname
+						.replace(/^\/de\//, '')
+						.replace(/^\/de$/, '')
+						.replace(/\/+$/, ''),
+				),
 		);
 
 	if (isSubNavigation) {

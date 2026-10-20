@@ -1,11 +1,6 @@
 import { type ReactElement } from 'react';
 import { DBSection } from '@db-ux/react-core-components';
-import {
-	columns,
-	SECTION_SPACINGS,
-	type OverviewLabels,
-	type SectionSpacing,
-} from './_shared.tsx';
+import { columns, SECTION_SPACINGS, type OverviewLabels, type SectionSpacing } from './_shared.tsx';
 
 /*
  * One section per spacing step, each wrapping the same placeholder content.

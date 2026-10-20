@@ -27,7 +27,6 @@ const headings = [
 	Elevations are an important tool in our design system for creating visual hierarchy and depth. By
 	creating visual layers, we help users quickly and easily understand which elements are more
 	important than others.
-
 	<DBSection spacing="small">
 		<DBStack gap="x-large">
 			<DBStack gap="none">
@@ -38,17 +37,14 @@ const headings = [
 			<ElevationPlayground layout="horizontal" />
 		</DBStack>
 	</DBSection>
-
 	<DBSection spacing="small">
 		<h2 id="tokens">Tokens</h2>
 		<ElevationTable />
 	</DBSection>
-
 	<DBSection spacing="small">
 		<h2 id="faq">FAQ</h2>
 		<QuestionForm componentName="Elevation" />
 	</DBSection>
-
 	<script>
 		import { waitForElements } from '@template/utils/client.utils.ts';
 		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';

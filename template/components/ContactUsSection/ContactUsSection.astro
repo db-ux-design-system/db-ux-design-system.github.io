@@ -5,7 +5,9 @@ import { CTA } from '@components';
 const currentPath = Astro.url?.pathname ?? '';
 const isDE = currentPath.startsWith('/de/') || currentPath === '/de';
 
-const title = isDE ? 'Schneller vorankommen mit gemeinsamen Standards.' : 'Move faster with shared standards.';
+const title = isDE
+	? 'Schneller vorankommen mit gemeinsamen Standards.'
+	: 'Move faster with shared standards.';
 const label = isDE ? 'Kontakt aufnehmen' : 'Contact Us';
 ---
 

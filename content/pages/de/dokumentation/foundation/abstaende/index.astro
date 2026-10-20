@@ -31,7 +31,6 @@ const headings = [
 	Spacing ist ein Schlüsselelement des Design Systems und definiert die Abstände zwischen
 	verschiedenen Komponenten. Die konsistente Verwendung von Spacing sorgt für ein harmonisches,
 	übersichtliches und nutzungsfreundliches Erscheinungsbild.
-
 	<DBSection spacing="small">
 		<DBStack gap="x-large">
 			<DBStack gap="none">
@@ -42,7 +41,6 @@ const headings = [
 			<SpacingPlayground layout="horizontal" />
 		</DBStack>
 	</DBSection>
-
 	<DBSection spacing="small">
 		<h2 id="richtlinien">Richtlinien</h2>
 
@@ -68,8 +66,8 @@ const headings = [
 			<p>
 				Responsive Abstände sind Lücken, die sich automatisch an die Größe des Gerätebildschirms
 				anpassen (Desktop, Tablet, Mobile). Sie eignen sich ideal zur Trennung verschiedener
-				Layoutbereiche und sorgen für ein konsistentes, nutzungsfreundliches Erscheinungsbild
-				auf allen Geräten.
+				Layoutbereiche und sorgen für ein konsistentes, nutzungsfreundliches Erscheinungsbild auf
+				allen Geräten.
 			</p>
 
 			<div class="guideline-examples">
@@ -81,19 +79,19 @@ const headings = [
 			</div>
 		</CollapsibleWrapper>
 
-		<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+		<CollapseButton
+			collapsedText="Alle Richtlinien anzeigen"
+			expandedText="Richtlinien ausblenden"
+		/>
 	</DBSection>
-
 	<DBSection spacing="small">
 		<h2 id="tokens">Tokens</h2>
 		<SpacingTable />
 	</DBSection>
-
 	<DBSection spacing="small">
 		<h2 id="faq">FAQ</h2>
 		<QuestionForm componentName="Spacing" />
 	</DBSection>
-
 	<script>
 		import { waitForElements } from '@template/utils/client.utils.ts';
 		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';

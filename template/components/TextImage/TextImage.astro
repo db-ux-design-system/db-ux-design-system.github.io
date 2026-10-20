@@ -51,31 +51,25 @@ const {
 	data-text-gap={textGap}
 >
 	<div class="text-image-content">
-		{
-			tag && (
-				<div class="text-image-tag" data-density="functional">
-					<DBTag emphasis={tag.emphasis === 'default' ? undefined : tag.emphasis}>
-						{tag.label}
-					</DBTag>
-				</div>
-			)
-		}
-		{
-			title &&
-				(headlineLevel === 1 ? (
-					<h1 class="text-image-title">{title}</h1>
-				) : headlineLevel === 2 ? (
-					<h2 class="text-image-title">{title}</h2>
-				) : headlineLevel === 3 ? (
-					<h3 class="text-image-title">{title}</h3>
-				) : headlineLevel === 4 ? (
-					<h4 class="text-image-title">{title}</h4>
-				) : headlineLevel === 5 ? (
-					<h5 class="text-image-title">{title}</h5>
-				) : (
-					<h6 class="text-image-title">{title}</h6>
-				))
-		}
+		{tag && (
+			<div class="text-image-tag" data-density="functional">
+				<DBTag emphasis={tag.emphasis === 'default' ? undefined : tag.emphasis}>{tag.label}</DBTag>
+			</div>
+		)}
+		{title &&
+			(headlineLevel === 1 ? (
+				<h1 class="text-image-title">{title}</h1>
+			) : headlineLevel === 2 ? (
+				<h2 class="text-image-title">{title}</h2>
+			) : headlineLevel === 3 ? (
+				<h3 class="text-image-title">{title}</h3>
+			) : headlineLevel === 4 ? (
+				<h4 class="text-image-title">{title}</h4>
+			) : headlineLevel === 5 ? (
+				<h5 class="text-image-title">{title}</h5>
+			) : (
+				<h6 class="text-image-title">{title}</h6>
+			))}
 		<div class="text-image-text">
 			<slot />
 		</div>
