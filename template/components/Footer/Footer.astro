@@ -1,6 +1,5 @@
 ---
-import { DBLink, DBStack } from '@db-ux/react-core-components';
-import './Footer.css';
+import { DBFooter, DBFooterMeta, DBLink } from '@db-ux/react-core-components';
 
 const currentPath = Astro.url?.pathname ?? '';
 const isDE = currentPath.startsWith('/de/') || currentPath === '/de';
@@ -8,11 +7,26 @@ const imprintLabel = isDE ? 'Impressum' : 'Imprint';
 const privacyLabel = isDE ? 'Datenschutz' : 'Privacy';
 const imprintHref = isDE ? '/de/rechtliches/impressum' : '/legal/imprint';
 const privacyHref = isDE ? '/de/rechtliches/datenschutz' : '/legal/privacy';
+const legalNavLabel = isDE ? 'Rechtliches' : 'Legal';
+// DBFooterMeta prepends the copyright sign; the year follows the build date.
+const copyright = `${new Date().getFullYear()} Deutsche Bahn AG`;
 ---
 
-<footer class="footer">
-	<DBStack direction="row" gap="medium">
-		<DBLink variant="inline" href={imprintHref}> {imprintLabel} </DBLink>
-		<DBLink variant="inline" href={privacyHref}> {privacyLabel} </DBLink>
-	</DBStack>
-</footer>
+<DBFooter width="full">
+	<DBFooterMeta copyright={copyright}>
+		<nav aria-label={legalNavLabel}>
+			<ul>
+				<li>
+					<DBLink variant="inline" size="small" href={imprintHref}>
+						{imprintLabel}
+					</DBLink>
+				</li>
+				<li>
+					<DBLink variant="inline" size="small" href={privacyHref}>
+						{privacyLabel}
+					</DBLink>
+				</li>
+			</ul>
+		</nav>
+	</DBFooterMeta>
+</DBFooter>
