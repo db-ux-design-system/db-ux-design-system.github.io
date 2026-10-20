@@ -6,45 +6,50 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 title: 'Get Started'
 headline: 'Get Started'
-description: 'Everything you need to build consistent and accessible digital experiences with the DB UX Design System. Choose your path – design in Figma or development in code.'
+description: 'Find the right start into the DB UX Design System. Answer a few questions and get to the page that fits your role and your project.'
 ---
 
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import { DBStack, DBNotification, DBLink } from '@db-ux/react-core-components';
+import { DBStack } from '@db-ux/react-core-components';
 
 <DBStack gap="medium">
-<DBNotification variant="standalone" semantic="informational" headline="Note">
-	All examples in this documentation are based on the <DBLink href="https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/db-ux-design-system/resources/db-theme" target="_blank" rel="noopener noreferrer" variant="inline">DB Theme</DBLink>. If you use the Design System as a
-	White Label or with a different Theme, visual results can differ because a different Foundation
-	applies.
-</DBNotification>
 
-## Choose your path
+## What is your role?
+
+Answer two or three questions and you land on the page that fits what you are about to do.
 
 <TeaserCard
-	columns={2}
+	columns={3}
 	spacing="large"
 	headlineSize="large"
 	headlineLevel={3}
 	teasers={[
 		{
-			title: 'Start designing',
-			description:
-				'Get access to the Figma libraries, learn how the components work and hand your designs over to development.',
+			title: 'Design',
+			description: 'You design interfaces in Figma.',
 			url: '/documentation/get-started/design',
 			imageSrc: '/assets/for-designer/For-Designer--C.png',
-			imageAlt: 'Design',
+			imageAlt: '',
 			imagePosition: 'right',
 			imageWidth: '33',
 			mask: 'fade-bottom-right',
 		},
 		{
-			title: 'Start developing',
-			description:
-				'Install the package for your framework, set up the styles and render your first component.',
+			title: 'Development',
+			description: 'You build interfaces in code.',
 			url: '/documentation/get-started/development',
 			imageSrc: '/assets/for-developer/For-Developer--C.png',
-			imageAlt: 'Development',
+			imageAlt: '',
+			imagePosition: 'right',
+			imageWidth: '33',
+			mask: 'fade-bottom-right',
+		},
+		{
+			title: 'Product management',
+			description: 'You decide on, plan or steer the use of the design system.',
+			url: '/documentation/get-started/product-management',
+			imageSrc: '/assets/for-productmanagement/For-Productmanagement--C.png',
+			imageAlt: '',
 			imagePosition: 'right',
 			imageWidth: '33',
 			mask: 'fade-bottom-right',
@@ -52,108 +57,4 @@ import { DBStack, DBNotification, DBLink } from '@db-ux/react-core-components';
 	]}
 />
 
-## For every role
-
-<TeaserCard
-	columns={3}
-	spacing="large"
-	headlineSize="medium"
-	headlineLevel={3}
-	teasers={[
-		{
-			title: 'About the Design System',
-			description:
-				'What the design system contains, how it is released, what a status means and where to ask which question.',
-			url: '/documentation/get-started/about',
-		},
-		{
-			title: 'AI',
-			description:
-				'Connect your coding agent to accurate component APIs, tokens and icons via the MCP Server.',
-			url: '/documentation/get-started/ai',
-		},
-		{
-			title: 'Contribution',
-			description: 'Give feedback, report issues and help improve the design system.',
-			url: '/documentation/contribution',
-		},
-		{
-			title: 'Migration',
-			description: 'Coming from DB UI or an earlier major version? Find the steps for your update.',
-			url: '/documentation/get-started/migration',
-		},
-		{
-			title: 'Accessibility',
-			description: 'How the components are tested and what remains your responsibility.',
-			url: '/documentation/get-started/accessibility',
-		},
-		{
-			title: 'Extensions',
-			description: 'Domain-specific additions such as passenger information or data visualization.',
-			url: '/documentation/get-started/extensions',
-		},
-	]}
-/>
-
-## The documentation
-
-<TeaserCard
-	columns={3}
-	spacing="large"
-	headlineSize="medium"
-	headlineLevel={3}
-	teasers={[
-		{
-			title: 'Foundation',
-			description:
-				'Shared base tokens and modes provide a stable foundation for clear and coherent interfaces.',
-			url: '/documentation/foundation',
-			imageSrc: '/assets/Foundations-Teaser--C.png',
-			imageAlt: 'Foundations',
-			imagePosition: 'right',
-			imageWidth: '33',
-			mask: 'fade-bottom-right',
-		},
-		{
-			title: 'Components',
-			description: 'Core components ensure predictable interactions across products.',
-			url: '/documentation/components',
-			imageSrc: '/assets/Components-Teaser--C.png',
-			imageAlt: 'Components',
-			imagePosition: 'right',
-			imageWidth: '33',
-			mask: 'fade-bottom-right',
-		},
-		{
-			title: 'Icons',
-			description: 'Browse and copy all available DB UX icon names for usage in code.',
-			url: '/documentation/icons',
-			imageSrc: '/assets/Extensions-Teaser--C.png',
-			imageAlt: 'Icons',
-			imagePosition: 'right',
-			imageWidth: '33',
-			mask: 'fade-bottom-right',
-		},
-		{
-			title: 'Release Notes',
-			description: 'Stay up to date with the latest changes and improvements.',
-			url: '/documentation/releases/release-notes',
-			imageSrc: '/assets/Release-Notes-Teaser.png',
-			imageAlt: 'Release Notes',
-			imagePosition: 'right',
-			imageWidth: '33',
-			mask: 'fade-bottom-right',
-		},
-		{
-			title: 'Resources',
-			description: 'Figma libraries for designers and code packages for developers.',
-			url: '/documentation/resources',
-			imageSrc: '/assets/Resources-Teaser.png',
-			imageAlt: 'Resources',
-			imagePosition: 'right',
-			imageWidth: '33',
-			mask: 'fade-bottom-right',
-		},
-	]}
-/>
 </DBStack>

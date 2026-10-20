@@ -1,0 +1,42 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Move an existing product'
+headline: 'Move an existing product'
+description: 'Plan the move of an existing product onto the DB UX Design System.'
+align: start
+nav: false
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<DBSection spacing="small" width="auto">
+
+## What is your product based on?
+
+The effort depends on what your product uses today.
+
+<TeaserCard
+	columns={2}
+	spacing="large"
+	headlineSize="medium"
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'DB UI (Generation 2)',
+			description:
+				'What changes for design and development when a Generation 2 product moves to Generation 3.',
+			url: '/documentation/get-started/migration',
+		},
+		{
+			title: 'Something else',
+			description:
+				'Own components or another library: check which components are ready for production to estimate the effort.',
+			url: '/documentation/learn/about#what-a-status-means',
+		},
+	]}
+/>
+
+</DBSection>

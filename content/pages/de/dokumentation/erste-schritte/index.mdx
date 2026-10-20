@@ -5,45 +5,50 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 title: 'Erste Schritte'
 headline: 'Erste Schritte'
-description: 'Alles, was du brauchst, um konsistente und barrierefreie digitale Erlebnisse mit dem DB UX Design System zu gestalten. Wähle deinen Weg – Design in Figma oder Entwicklung im Code.'
+description: 'Finde den passenden Einstieg in das DB UX Design System. Beantworte ein paar Fragen und gelange zur Seite, die zu deiner Rolle und deinem Projekt passt.'
 ---
 
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
-import { DBStack, DBNotification, DBLink } from '@db-ux/react-core-components';
+import { DBStack } from '@db-ux/react-core-components';
 
 <DBStack gap="medium">
-<DBNotification variant="standalone" semantic="informational" headline="Hinweis">
-	Alle Beispiele in dieser Dokumentation basieren auf dem <DBLink href="https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/db-ux-design-system/resources/db-theme" target="_blank" rel="noopener noreferrer" variant="inline">DB Theme</DBLink>. Nutzt du das Design System als
-	White Label oder mit einem anderen Theme, können die visuellen Ergebnisse abweichen, weil dann
-	eine andere Foundation greift.
-</DBNotification>
 
-## Wähle deinen Weg
+## Was ist deine Rolle?
+
+Beantworte zwei oder drei Fragen, und du landest auf der Seite, die zu deinem Vorhaben passt.
 
 <TeaserCard
-	columns={2}
+	columns={3}
 	spacing="large"
 	headlineSize="large"
 	headlineLevel={3}
 	teasers={[
 		{
-			title: 'Mit dem Design starten',
-			description:
-				'Hole dir Zugang zu den Figma-Bibliotheken, lerne die Komponenten kennen und übergib deine Designs an die Entwicklung.',
+			title: 'Design',
+			description: 'Du gestaltest Interfaces in Figma.',
 			url: '/de/dokumentation/erste-schritte/design',
 			imageSrc: '/assets/for-designer/For-Designer--C.png',
-			imageAlt: 'Design',
+			imageAlt: '',
 			imagePosition: 'right',
 			imageWidth: '33',
 			mask: 'fade-bottom-right',
 		},
 		{
-			title: 'Mit der Entwicklung starten',
-			description:
-				'Installiere das Paket für dein Framework, richte die Styles ein und zeige deine erste Komponente an.',
+			title: 'Entwicklung',
+			description: 'Du baust Interfaces im Code.',
 			url: '/de/dokumentation/erste-schritte/entwicklung',
 			imageSrc: '/assets/for-developer/For-Developer--C.png',
-			imageAlt: 'Entwicklung',
+			imageAlt: '',
+			imagePosition: 'right',
+			imageWidth: '33',
+			mask: 'fade-bottom-right',
+		},
+		{
+			title: 'Produktverantwortung',
+			description: 'Du entscheidest über den Einsatz des Design Systems, planst oder steuerst ihn.',
+			url: '/de/dokumentation/erste-schritte/produktverantwortung',
+			imageSrc: '/assets/for-productmanagement/For-Productmanagement--C.png',
+			imageAlt: '',
 			imagePosition: 'right',
 			imageWidth: '33',
 			mask: 'fade-bottom-right',
@@ -51,111 +56,4 @@ import { DBStack, DBNotification, DBLink } from '@db-ux/react-core-components';
 	]}
 />
 
-## Für alle Rollen
-
-<TeaserCard
-	columns={3}
-	spacing="large"
-	headlineSize="medium"
-	headlineLevel={3}
-	teasers={[
-		{
-			title: 'Über das Design System',
-			description:
-				'Was das Design System enthält, wie es veröffentlicht wird, was ein Status bedeutet und wohin welche Frage gehört.',
-			url: '/de/dokumentation/erste-schritte/ueber',
-		},
-		{
-			title: 'KI',
-			description:
-				'Verbinde deinen Coding-Agenten über den MCP Server mit korrekten Komponenten-APIs, Tokens und Icons.',
-			url: '/de/dokumentation/erste-schritte/ki',
-		},
-		{
-			title: 'Mitwirken',
-			description: 'Gib Feedback, melde Fehler und hilf mit, das Design System zu verbessern.',
-			url: '/de/dokumentation/mitwirken',
-		},
-		{
-			title: 'Migration',
-			description:
-				'Du kommst von DB UI oder einer früheren Major-Version? Hier findest du die Schritte für dein Update.',
-			url: '/de/dokumentation/erste-schritte/migration',
-		},
-		{
-			title: 'Barrierefreiheit',
-			description: 'Wie die Komponenten getestet werden und was in deiner Verantwortung bleibt.',
-			url: '/de/dokumentation/erste-schritte/barrierefreiheit',
-		},
-		{
-			title: 'Erweiterungen',
-			description:
-				'Ergänzungen für bestimmte Bereiche wie Reisendeninformation oder Datenvisualisierung.',
-			url: '/de/dokumentation/erste-schritte/erweiterungen',
-		},
-	]}
-/>
-
-## Die Dokumentation
-
-<TeaserCard
-	columns={3}
-	spacing="large"
-	headlineSize="medium"
-	headlineLevel={3}
-	teasers={[
-		{
-			title: 'Foundation',
-			description:
-				'Gemeinsame Basis-Tokens und Modi bilden ein stabiles Fundament für klare und einheitliche Interfaces.',
-			url: '/de/dokumentation/foundation',
-			imageSrc: '/assets/Foundations-Teaser--C.png',
-			imageAlt: 'Foundations',
-			imagePosition: 'right',
-			imageWidth: '33',
-			mask: 'fade-bottom-right',
-		},
-		{
-			title: 'Komponenten',
-			description:
-				'Core Components sorgen für vorhersehbare Interaktionen über alle Produkte hinweg.',
-			url: '/de/dokumentation/komponenten',
-			imageSrc: '/assets/Components-Teaser--C.png',
-			imageAlt: 'Komponenten',
-			imagePosition: 'right',
-			imageWidth: '33',
-			mask: 'fade-bottom-right',
-		},
-		{
-			title: 'Icons',
-			description: 'Durchsuche alle verfügbaren DB UX Icon-Namen und kopiere sie für die Verwendung im Code.',
-			url: '/de/dokumentation/icons',
-			imageSrc: '/assets/Extensions-Teaser--C.png',
-			imageAlt: 'Icons',
-			imagePosition: 'right',
-			imageWidth: '33',
-			mask: 'fade-bottom-right',
-		},
-		{
-			title: 'Release Notes',
-			description: 'Bleibe auf dem Laufenden über die neuesten Änderungen und Verbesserungen.',
-			url: '/de/dokumentation/releases/release-notes',
-			imageSrc: '/assets/Release-Notes-Teaser.png',
-			imageAlt: 'Release Notes',
-			imagePosition: 'right',
-			imageWidth: '33',
-			mask: 'fade-bottom-right',
-		},
-		{
-			title: 'Ressourcen',
-			description: 'Figma-Bibliotheken für Designer:innen und Code-Pakete für Entwickler:innen.',
-			url: '/de/dokumentation/ressourcen',
-			imageSrc: '/assets/Resources-Teaser.png',
-			imageAlt: 'Ressourcen',
-			imagePosition: 'right',
-			imageWidth: '33',
-			mask: 'fade-bottom-right',
-		},
-	]}
-/>
 </DBStack>

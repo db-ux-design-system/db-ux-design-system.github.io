@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 title: 'Packages'
 headline: 'Packages'
-description: 'Pick the packages that match your target platform and framework. Every package page covers installation, styling setup, a first component and the matching resources.'
+description: 'Pick your framework and find out whether you need the DB Theme. Every package guide covers installation, styling setup, a first component and a check.'
 align: start
 toc: true
 tocMaxDepth: 2
@@ -13,108 +13,98 @@ navOverview: true
 ---
 
 import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
-import ChildPageOverview from '@template/components/ChildPageOverview/ChildPageOverview.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 
 <DBSection spacing="small" width="auto">
 
-## Which package do I need?
+## Which framework do you use?
 
-Start with your target platform. For web, the framework determines which package you install – everything else follows from there.
-
-| Target                       | Install                        | Guide                                                                               |
-| ---------------------------- | ------------------------------ | ----------------------------------------------------------------------------------- |
-| Web with React               | `@db-ux/react-core-components` | [React](/documentation/get-started/development/packages/react)                      |
-| Web with Angular             | `@db-ux/ngx-core-components`   | [Angular](/documentation/get-started/development/packages/angular)                  |
-| Web with Vue                 | `@db-ux/v-core-components`     | [Vue](/documentation/get-started/development/packages/vue)                          |
-| Web with any other framework | `@db-ux/wc-core-components`    | [Web Components](/documentation/get-started/development/packages/web-components)    |
-| Web with plain HTML and CSS  | `@db-ux/core-components`       | [Core Components](/documentation/get-started/development/packages/core-components)  |
-| Own components, tokens only  | `@db-ux/core-foundations`      | [Core Foundation](/documentation/get-started/development/packages/core-foundations) |
-| Static website with Astro    | `@db-ux/astro`                 | [Astro](/documentation/get-started/development/packages/astro)                      |
-| iOS                          | `core-ios`                     | [Native Platforms](/documentation/get-started/development/native)                   |
-| Android                      | `core-android`                 | [Native Platforms](/documentation/get-started/development/native)                   |
-
-<DBNotification variant="standalone" semantic="informational" headline="Native platforms">
-	The libraries for SwiftUI and Jetpack Compose are still in development and have no release yet.
-	The current state is described under{' '}
-	<DBLink href="/documentation/get-started/development/native" variant="inline">
-		Native Platforms
-	</DBLink>
-	.
-</DBNotification>
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## How the packages relate to each other
-
-Three layers build on each other. You only install the top layer you need – the ones below come with it.
-
-| Layer                | Package                                                                      | Contains                                                  |
-| -------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------- |
-| Framework components | `@db-ux/react-core-components` and the Angular, Vue and Web Components twins | Components for one framework                              |
-| Component styles     | `@db-ux/core-components`                                                     | CSS and SCSS for all components, includes the layer below |
-| Tokens and assets    | `@db-ux/core-foundations`                                                    | Colors, spacing, typography, density, icons, fonts        |
-
-<DBNotification variant="standalone" semantic="informational" headline="Note">
-	`@db-ux/core-components` pulls in `@db-ux/core-foundations` as a dependency. With `npm` that
-	happens automatically. With `pnpm` you install both explicitly.
-</DBNotification>
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Themes and assets
-
-All framework package guides use the whitelabel theme in their styling setup, because it works without further access. Products of Deutsche Bahn additionally need the DB Theme. Theme and icons are encrypted and need credentials from the Marketing Portal.
-
-| Target                  | Install                 | Guide                                                                             |
-| ----------------------- | ----------------------- | --------------------------------------------------------------------------------- |
-| Deutsche Bahn brand     | `@db-ux/db-theme`       | [DB Theme](/documentation/get-started/development/packages/db-theme)              |
-| S-Bahn brand            | `@db-ux/s-bahn-theme`   | [DB Theme](/documentation/get-started/development/packages/db-theme#s-bahn-theme) |
-| Icons without the theme | `@db-ux/db-theme-icons` | [Icons](/documentation/get-started/development/packages/icons)                    |
-
-<DBNotification
-	variant="standalone"
-	semantic="warning"
-	headline="DB Theme required for DB products"
->
-	Building for Deutsche Bahn means the DB Theme is mandatory. Without it, colors, typography and
-	assets stay on the whitelabel defaults. See{' '}
-	<DBLink href="/documentation/get-started/development/packages/db-theme" variant="inline">
-		DB Theme
-	</DBLink>{' '}
-	for how to get access.
-</DBNotification>
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Optional tooling
-
-None of these are needed to get started. Add them once your first component renders.
-
-| Package                      | Purpose                                                                                                  | Recommendation                    |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------- | --------------------------------- |
-| `@db-ux/core-postcss-plugin` | Resolves `var()`, `calc()`, `color-mix()` and `light-dark()` at build time and drops unused declarations | Recommended for production builds |
-| `@db-ux/core-vite-plugin`    | Reduces the CSS setup to a single import                                                                 | Recommended when you use Vite     |
-| `@db-ux/core-eslint-plugin`  | Reports incorrect component usage in your editor                                                         | Optional, but helpful in teams    |
-| `@db-ux/core-stylelint`      | Checks your CSS and SCSS against the design system rules                                                 | Optional                          |
-
-For AI coding agents, use `@db-ux/mcp-server` and `@db-ux/agent-cli`. Both are covered on the [MCP Server](/documentation/learn/mcp-server) page.
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## All package guides
-
-<ChildPageOverview
-	parentPath="documentation/get-started/development/packages"
+<TeaserCard
 	columns={2}
-	headlineLevel={2}
+	spacing="small"
+	headlineSize="medium"
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'React',
+			description: '@db-ux/react-core-components',
+			url: '/documentation/get-started/development/packages/react',
+		},
+		{
+			title: 'Angular',
+			description: '@db-ux/ngx-core-components',
+			url: '/documentation/get-started/development/packages/angular',
+		},
+		{
+			title: 'Vue',
+			description: '@db-ux/v-core-components',
+			url: '/documentation/get-started/development/packages/vue',
+		},
+		{
+			title: 'Web Components',
+			description: 'For any other framework: @db-ux/wc-core-components',
+			url: '/documentation/get-started/development/packages/web-components',
+		},
+		{
+			title: 'HTML and CSS',
+			description: 'You write the markup yourself: @db-ux/core-components',
+			url: '/documentation/get-started/development/packages/core-components',
+		},
+		{
+			title: 'Astro',
+			description: 'Static websites: @db-ux/astro',
+			url: '/documentation/get-started/development/packages/astro',
+		},
+		{
+			title: 'Own components',
+			description: 'Only tokens, icons and fonts: @db-ux/core-foundations',
+			url: '/documentation/get-started/development/packages/core-foundations',
+		},
+		{
+			title: 'iOS or Android',
+			description: 'The native libraries are still in development.',
+			url: '/documentation/get-started/development/native',
+		},
+	]}
 />
+
+<DBNotification variant="standalone" semantic="informational" headline="New project with React?">
+	The{' '}
+	<DBLink href="/documentation/learn/react-tutorial" variant="inline">
+		React Tutorial
+	</DBLink>{' '}
+	takes you from an empty project to a working form, with a check after every step.
+</DBNotification>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Do you build a product of Deutsche Bahn?
+
+<TeaserCard
+	columns={2}
+	spacing="small"
+	headlineSize="medium"
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Yes',
+			description:
+				'You need the DB Theme in addition. It brings the DB colors, fonts and icons and needs credentials from the Marketing Portal.',
+			url: '/documentation/get-started/development/packages/db-theme',
+		},
+		{
+			title: 'No',
+			description: 'You need nothing else. Every package guide sets up the whitelabel theme.',
+		},
+	]}
+/>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+How the packages build on each other, which themes exist and which tooling is optional is described under [All packages](/documentation/get-started/development/packages/all-packages).
 
 </DBSection>

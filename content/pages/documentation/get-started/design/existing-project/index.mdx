@@ -1,0 +1,41 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Rebuild an existing project'
+headline: 'Rebuild an existing project'
+description: 'Move existing designs onto the Figma libraries of the DB UX Design System.'
+align: start
+nav: false
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<DBSection spacing="small" width="auto">
+
+## What is your project based on?
+
+The way onto the design system depends on what your designs use today.
+
+<TeaserCard
+	columns={2}
+	spacing="large"
+	headlineSize="medium"
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'DB UI (Generation 2)',
+			description: 'Replace the Generation 2 components and colors with the new libraries.',
+			url: '/documentation/get-started/migration#design',
+		},
+		{
+			title: 'Something else',
+			description:
+				'Own components or another design system: enable the libraries and replace your components with instances step by step.',
+			url: '/documentation/get-started/design/resources',
+		},
+	]}
+/>
+
+</DBSection>

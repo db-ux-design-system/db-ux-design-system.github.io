@@ -1,0 +1,53 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Product management'
+headline: 'Product management'
+description: 'Decide on, plan and steer the use of the DB UX Design System in your product.'
+align: start
+toc: true
+tocMaxDepth: 2
+order: 3
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<DBSection spacing="small" width="auto">
+
+## What are you about to do?
+
+<TeaserCard
+	columns={2}
+	spacing="large"
+	headlineSize="medium"
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Evaluate the design system',
+			description:
+				'What it contains, what a status means, how binding it is and what it covers for accessibility.',
+			url: '/documentation/learn/about',
+		},
+		{
+			title: 'Plan the introduction',
+			description:
+				'How releases are versioned and announced, so you can plan updates in your product.',
+			url: '/documentation/releases/versioning',
+		},
+		{
+			title: 'Move an existing product',
+			description:
+				'What changes for your team when an existing product moves onto the design system.',
+			url: '/documentation/get-started/product-management/existing-product',
+		},
+		{
+			title: 'Follow the development',
+			description: 'Release notes for every version and the roadmap of the coming releases.',
+			url: '/documentation/releases/release-notes',
+		},
+	]}
+/>
+
+</DBSection>

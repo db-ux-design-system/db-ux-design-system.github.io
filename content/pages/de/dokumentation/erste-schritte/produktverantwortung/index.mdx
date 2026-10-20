@@ -1,0 +1,53 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Produktverantwortung'
+headline: 'Produktverantwortung'
+description: 'Entscheide über den Einsatz des DB UX Design Systems in deinem Produkt, plane und steuere ihn.'
+align: start
+toc: true
+tocMaxDepth: 2
+order: 3
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<DBSection spacing="small" width="auto">
+
+## Was hast du vor?
+
+<TeaserCard
+	columns={2}
+	spacing="large"
+	headlineSize="medium"
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Das Design System bewerten',
+			description:
+				'Was es enthält, was ein Status bedeutet, wie verbindlich es ist und was es bei der Barrierefreiheit abdeckt.',
+			url: '/de/dokumentation/lernen/ueber',
+		},
+		{
+			title: 'Die Einführung planen',
+			description:
+				'Wie Releases versioniert und angekündigt werden, damit du Updates in deinem Produkt planen kannst.',
+			url: '/de/dokumentation/releases/versionierung',
+		},
+		{
+			title: 'Bestehendes Produkt umstellen',
+			description:
+				'Was sich für dein Team ändert, wenn ein bestehendes Produkt auf das Design System wechselt.',
+			url: '/de/dokumentation/erste-schritte/produktverantwortung/bestehendes-produkt',
+		},
+		{
+			title: 'Die Entwicklung verfolgen',
+			description: 'Release Notes zu jeder Version und die Roadmap der kommenden Releases.',
+			url: '/de/dokumentation/releases/release-notes',
+		},
+	]}
+/>
+
+</DBSection>

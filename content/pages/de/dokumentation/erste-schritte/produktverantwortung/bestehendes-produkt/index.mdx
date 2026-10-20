@@ -1,0 +1,42 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Bestehendes Produkt umstellen'
+headline: 'Bestehendes Produkt umstellen'
+description: 'Plane die Umstellung eines bestehenden Produkts auf das DB UX Design System.'
+align: start
+nav: false
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<DBSection spacing="small" width="auto">
+
+## Worauf basiert dein Produkt?
+
+Der Aufwand hängt davon ab, was dein Produkt heute nutzt.
+
+<TeaserCard
+	columns={2}
+	spacing="large"
+	headlineSize="medium"
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'DB UI (Generation 2)',
+			description:
+				'Was sich für Design und Entwicklung ändert, wenn ein Produkt von Generation 2 auf Generation 3 wechselt.',
+			url: '/de/dokumentation/erste-schritte/migration',
+		},
+		{
+			title: 'Eine andere Grundlage',
+			description:
+				'Eigene Komponenten oder eine andere Bibliothek: Prüfe, welche Komponenten produktionsreif sind, um den Aufwand abzuschätzen.',
+			url: '/de/dokumentation/lernen/ueber#was-ein-status-bedeutet',
+		},
+	]}
+/>
+
+</DBSection>

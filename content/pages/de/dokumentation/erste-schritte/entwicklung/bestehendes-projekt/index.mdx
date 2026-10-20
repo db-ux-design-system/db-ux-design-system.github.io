@@ -1,0 +1,42 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Bestehendes Projekt umbauen'
+headline: 'Bestehendes Projekt umbauen'
+description: 'Stelle eine bestehende Codebasis auf die Pakete des DB UX Design Systems um.'
+align: start
+nav: false
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<DBSection spacing="small" width="auto">
+
+## Worauf basiert dein Projekt?
+
+Der Weg zum Design System hängt davon ab, was dein Code heute nutzt.
+
+<TeaserCard
+	columns={2}
+	spacing="large"
+	headlineSize="medium"
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'DB UI (Generation 2)',
+			description:
+				'Ersetze Pakete, Komponenten, Tokens und Icons – ein KI-Agent kann die Vorarbeit übernehmen.',
+			url: '/de/dokumentation/erste-schritte/migration',
+		},
+		{
+			title: 'Eine andere Grundlage',
+			description:
+				'Eigene Komponenten oder eine andere Bibliothek: Wähle dein Framework, ergänze die Styles und ersetze deine Komponenten nach und nach.',
+			url: '/de/dokumentation/erste-schritte/entwicklung/pakete',
+		},
+	]}
+/>
+
+</DBSection>

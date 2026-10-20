@@ -1,0 +1,42 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Rebuild an existing project'
+headline: 'Rebuild an existing project'
+description: 'Move an existing code base onto the packages of the DB UX Design System.'
+align: start
+nav: false
+---
+
+import { DBSection } from '@db-ux/react-core-components';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<DBSection spacing="small" width="auto">
+
+## What is your project based on?
+
+The way onto the design system depends on what your code uses today.
+
+<TeaserCard
+	columns={2}
+	spacing="large"
+	headlineSize="medium"
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'DB UI (Generation 2)',
+			description:
+				'Replace packages, components, tokens and icons – an AI agent can do the groundwork.',
+			url: '/documentation/get-started/migration',
+		},
+		{
+			title: 'Something else',
+			description:
+				'Own components or another library: pick your framework, add the styles and replace your components step by step.',
+			url: '/documentation/get-started/development/packages',
+		},
+	]}
+/>
+
+</DBSection>
