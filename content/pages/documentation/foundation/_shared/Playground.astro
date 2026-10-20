@@ -20,30 +20,30 @@ interface Props {
 const { selects, playgroundClass = '', previewId, previewDataDensity } = Astro.props;
 
 const isDE = Astro.url.pathname.startsWith('/de/') || Astro.url.pathname === '/de';
-const tokenHint = isDE ? 'Element fokussieren, um die Tokens zu sehen' : 'Focus the element/elements to see the tokens';
+const tokenHint = isDE
+	? 'Element fokussieren, um die Tokens zu sehen'
+	: 'Focus the element/elements to see the tokens';
 
 const classes = ['playground', playgroundClass].filter(Boolean).join(' ');
 ---
 
 <div class={classes}>
 	<div class="playground-controls" data-density="regular">
-		{
-			selects.map((select) => (
-				<DBSelect
-					client:only="react"
-					id={select.id}
-					label={select.label}
-					variant="floating"
-					defaultValue={select.defaultValue}
-					options={select.options}
-				/>
-			))
-		}
+		{selects.map((select) => (
+			<DBSelect
+				client:only="react"
+				id={select.id}
+				label={select.label}
+				variant="floating"
+				defaultValue={select.defaultValue}
+				options={select.options}
+			/>
+		))}
 	</div>
 	<div
 		class="playground-preview"
 		id={previewId}
-		{...previewDataDensity ? { 'data-density': previewDataDensity } : {}}
+		{...(previewDataDensity ? { 'data-density': previewDataDensity } : {})}
 	>
 		<slot />
 	</div>

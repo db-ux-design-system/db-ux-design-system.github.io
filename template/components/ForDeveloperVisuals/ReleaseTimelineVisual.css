@@ -1,0 +1,115 @@
+/* Release Timeline code visual: release history rows, each with a colored type icon field */
+.release-timeline-visual {
+	inline-size: 100%;
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	font: var(--db-type-body-md);
+}
+
+.release-timeline-visual-list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-xs);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.release-timeline-visual-item {
+	display: flex;
+	margin: 0;
+	padding: 0;
+}
+
+/* The color class resolves the adaptive tokens to green, blue or orange */
+.release-timeline-visual-icon {
+	display: grid;
+	flex: none;
+	place-items: center;
+
+	/* Fixed square: aspect-ratio alone does not apply to a flex-stretched item */
+	inline-size: var(--db-sizing-md);
+	block-size: var(--db-sizing-md);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-70-default);
+	border-start-start-radius: var(--db-border-radius-xs);
+	border-end-start-radius: var(--db-border-radius-xs);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+}
+
+.release-timeline-visual-label {
+	display: flex;
+	flex: 1 1 auto;
+	gap: var(--db-spacing-fixed-sm);
+	align-items: center;
+	min-inline-size: 0;
+	min-block-size: var(--db-sizing-md);
+	padding-inline: var(--db-spacing-fixed-md);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-inline-start: 0;
+	border-start-end-radius: var(--db-border-radius-xs);
+	border-end-end-radius: var(--db-border-radius-xs);
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+}
+
+.release-timeline-visual-version {
+	/* Lighter than the release type, emphasis-70 fails the contrast check on level-2 */
+	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+}
+
+/*
+ * Icon animations, all running at the same time:
+ * - Major (arrow_up_right): moves back and forth along its diagonal (bottom left ↔ top right)
+ * - Minor (circular_arrows): turns continuously around its center
+ * - Bug fix (bug): wiggles around its center
+ * Only the icon moves; the icon field keeps its size.
+ */
+@media (prefers-reduced-motion: no-preference) {
+	.release-timeline-visual-icon .db-icon {
+		transform-origin: center;
+	}
+
+	.release-timeline-visual-icon .db-icon[data-icon='arrow_up_right'] {
+		animation: release-timeline-visual-arrow 0.9s ease-in-out infinite alternate both;
+	}
+
+	.release-timeline-visual-icon .db-icon[data-icon='circular_arrows'] {
+		animation: release-timeline-visual-spin 3s linear infinite both;
+	}
+
+	.release-timeline-visual-icon .db-icon[data-icon='bug'] {
+		animation: release-timeline-visual-wiggle 1.2s ease-in-out infinite both;
+	}
+
+	@keyframes release-timeline-visual-arrow {
+		from {
+			translate: calc(var(--db-spacing-fixed-3xs) * -1) var(--db-spacing-fixed-3xs);
+		}
+
+		to {
+			translate: var(--db-spacing-fixed-3xs) calc(var(--db-spacing-fixed-3xs) * -1);
+		}
+	}
+
+	@keyframes release-timeline-visual-spin {
+		to {
+			rotate: 1turn;
+		}
+	}
+
+	@keyframes release-timeline-visual-wiggle {
+		0%,
+		50%,
+		100% {
+			rotate: 0deg;
+		}
+
+		12.5%,
+		37.5% {
+			rotate: -12deg;
+		}
+
+		25% {
+			rotate: 12deg;
+		}
+	}
+}

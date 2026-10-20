@@ -3,6 +3,9 @@ import { DBSection } from '@db-ux/react-core-components';
 import { TextImage } from '@components';
 import { appConfig } from '@config';
 
+/** Astro component rendered as code visual; receives the former imageAlt as label */
+export type SectionVisual = (props: { label: string }) => any;
+
 export interface SectionData {
 	id: string;
 	title: string;
@@ -11,35 +14,44 @@ export interface SectionData {
 	imageSrcDark?: string;
 	imageAlt: string;
 	imagePosition?: 'left' | 'right';
-	mask?: 'fade-right' | 'fade-bottom-right';
 	ariaLabel?: string;
+	/** Key into the `visuals` prop; rendered instead of imageSrc/imageSrcDark */
+	visual?: string;
 }
 
 interface Props {
 	sections: SectionData[];
+	/** Code visuals by key. Import them in the page so their CSS only ships there. */
+	visuals?: Record<string, SectionVisual>;
 }
 
-const { sections } = Astro.props;
+const { sections, visuals = {} } = Astro.props;
+// Fail the build on a typo instead of silently falling back to the image
+for (const section of sections) {
+	if (section.visual && !(section.visual in visuals)) {
+		throw new Error(
+			`ContentSections: section "${section.id}" sets visual "${section.visual}", but no visual with this key was passed in the visuals prop.`,
+		);
+	}
+}
 ---
 
-{
-	sections.map((section) => (
-		<DBSection
-			width="medium"
-			spacing="medium"
-			aria-label={section.ariaLabel}
-			id={section.id}
-		>
+{sections.map((section) => {
+	const Visual = section.visual ? visuals[section.visual] : undefined;
+	return (
+		<DBSection width="medium" spacing="medium" aria-label={section.ariaLabel} id={section.id}>
 			<TextImage
 				title={section.title}
 				imageSrc={`${appConfig.basePath}${section.imageSrc}`}
-				imageSrcDark={section.imageSrcDark ? `${appConfig.basePath}${section.imageSrcDark}` : undefined}
+				imageSrcDark={
+					section.imageSrcDark ? `${appConfig.basePath}${section.imageSrcDark}` : undefined
+				}
 				imageAlt={section.imageAlt}
 				imagePosition={section.imagePosition ?? 'right'}
-				mask={section.mask ?? 'fade-bottom-right'}
 			>
+				{Visual && <Visual slot="visual" label={section.imageAlt} />}
 				{section.text}
 			</TextImage>
 		</DBSection>
-	))
-}
+	);
+})}

@@ -1,5 +1,18 @@
 ---
-import { DBBadge, type SemanticType } from '@db-ux/react-core-components';
+import {
+	DBBadge,
+	DBHeadingH1,
+	DBHeadingH2,
+	DBHeadingH3,
+	DBHeadingH4,
+	DBHeadingH5,
+	DBHeadingH6,
+	DBParagraph,
+	DBTextGroup,
+	type SemanticType,
+} from '@db-ux/react-core-components';
+import Visual from '@template/components/Visual/Visual.astro';
+import type { VisualName } from '@template/visuals';
 import './PageHero.css';
 
 interface Props {
@@ -10,14 +23,16 @@ interface Props {
 	badgeSemantic?: SemanticType;
 	imageSrc?: string;
 	imageAlt?: string;
+	/** Decorative inline visual from `template/visuals/`. Takes precedence over `imageSrc`. */
+	visual?: VisualName;
 	align?: FrontMatter['align'];
 	layout?: 'stack' | 'split';
 	imageSide?: 'left' | 'right';
+	/** Semantic level of the headline. Ignored when a title is set: the title is the H1, the headline the H2. */
 	headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
-type HeadingTagName = `h${HeadingLevel}`;
 
 const {
 	title,
@@ -27,40 +42,76 @@ const {
 	badgeSemantic = 'informational',
 	imageSrc,
 	imageAlt,
+	visual,
 	align = 'center',
 	layout = 'stack',
 	imageSide = 'right',
 	headlineLevel = 2,
 } = Astro.props as Props;
 
-const safeHeadlineLevel = Math.min(Math.max(headlineLevel, 1), 6) as HeadingLevel;
-const HeadingTag = `h${safeHeadlineLevel}` as HeadingTagName;
+const headingComponents = {
+	1: DBHeadingH1,
+	2: DBHeadingH2,
+	3: DBHeadingH3,
+	4: DBHeadingH4,
+	5: DBHeadingH5,
+	6: DBHeadingH6,
+} as const;
+
+const safeHeadlineLevel = (title ? 2 : Math.min(Math.max(headlineLevel, 1), 6)) as HeadingLevel;
+const Headline = headingComponents[safeHeadlineLevel];
 ---
 
-{
-	(title || headline || description || imageSrc) && (
-		<div class="page-hero" data-align={align} data-layout={layout} data-image-side={imageSide}>
-			{layout === 'split' && imageSrc && imageSide === 'left' && (
-				<div class="page-hero-media">
+{(title || headline || description || imageSrc || visual) && (
+	<div class="page-hero" data-align={align} data-layout={layout} data-image-side={imageSide}>
+		{layout === 'split' && (visual || imageSrc) && imageSide === 'left' && (
+			<div class:list={['page-hero-media', { 'page-hero-media-visual': !!visual }]}>
+				{visual ? (
+					<Visual name={visual} class="page-hero-visual" strokeScaling="scale" />
+				) : (
 					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
-				</div>
-			)}
-			<div class="page-hero-content">
-				{badgeText && <DBBadge semantic={badgeSemantic}>{badgeText}</DBBadge>}
-				{title && <p class="page-hero-title">{title}</p>}
-				{headline && <HeadingTag class="page-hero-headline">{headline}</HeadingTag>}
-				{description && <p class="page-hero-description">{description}</p>}
+				)}
 			</div>
-			{layout === 'split' && imageSrc && imageSide === 'right' && (
-				<div class="page-hero-media">
-					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
-				</div>
-			)}
-			{layout === 'stack' && imageSrc && (
-				<div class="page-hero-media">
-					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
-				</div>
+		)}
+		<div class="page-hero-content">
+			{badgeText && <DBBadge semantic={badgeSemantic}>{badgeText}</DBBadge>}
+			{(title || headline || description) && (
+				<DBTextGroup className="page-hero-text-group" textSpacing>
+					{title && (
+						<DBHeadingH1 className="page-hero-title" visualSize="p-large">
+							{title}
+						</DBHeadingH1>
+					)}
+					{headline && (
+						<Headline className="page-hero-headline" visualSize="h1" fontWeight="black">
+							{headline}
+						</Headline>
+					)}
+					{description && (
+						<DBParagraph className="page-hero-description" size="md">
+							{description}
+						</DBParagraph>
+					)}
+				</DBTextGroup>
 			)}
 		</div>
-	)
-}
+		{layout === 'split' && (visual || imageSrc) && imageSide === 'right' && (
+			<div class:list={['page-hero-media', { 'page-hero-media-visual': !!visual }]}>
+				{visual ? (
+					<Visual name={visual} class="page-hero-visual" strokeScaling="scale" />
+				) : (
+					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
+				)}
+			</div>
+		)}
+		{layout === 'stack' && (visual || imageSrc) && (
+			<div class:list={['page-hero-media', { 'page-hero-media-visual': !!visual }]}>
+				{visual ? (
+					<Visual name={visual} class="page-hero-visual" strokeScaling="scale" />
+				) : (
+					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
+				)}
+			</div>
+		)}
+	</div>
+)}

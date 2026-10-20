@@ -1,8 +1,4 @@
-import {
-	DBButton,
-	DBPopover,
-	DBControlPanelNavigationItem,
-} from '@db-ux/react-core-components';
+import { DBButton, DBPopover, DBControlPanelNavigationItem } from '@db-ux/react-core-components';
 import { useLanguage } from '@template/context/language-context';
 import { getLocalizedPath } from '@template/i18n/slug-mapping';
 import { useTranslation } from '@template/i18n/useTranslation';
@@ -17,12 +13,20 @@ const LanguageSwitch = () => {
 	return (
 		<DBPopover
 			trigger={
-				<DBButton type="button" variant="ghost" icon="globe" aria-label={t('shell.languageSwitch.label')}>
+				<DBButton
+					type="button"
+					variant="ghost"
+					icon="globe"
+					aria-label={t('shell.languageSwitch.label')}
+				>
 					{language.toUpperCase()}
 				</DBButton>
 			}
 		>
-			<nav aria-label={language === 'de' ? 'Sprachauswahl' : 'Language selection'} style={{ width: '100%' }}>
+			<nav
+				aria-label={language === 'de' ? 'Sprachauswahl' : 'Language selection'}
+				style={{ width: '100%' }}
+			>
 				<DBControlPanelNavigationItem active={language === 'en'} style={{ width: '100%' }}>
 					<a href={enPath}>English</a>
 				</DBControlPanelNavigationItem>

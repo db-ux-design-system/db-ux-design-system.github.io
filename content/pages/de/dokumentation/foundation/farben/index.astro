@@ -28,10 +28,8 @@ const headings = [
 ---
 
 <DocumentationLayout frontmatter={frontmatter} headings={headings}>
-	Farben spielen eine zentrale Rolle bei der Gestaltung von Interfaces. Sie können
-	Botschaften verstärken, Bedeutungen kommunizieren und eine gezielte Nutzer:innenführung
-	ermöglichen.
-
+	Farben spielen eine zentrale Rolle bei der Gestaltung von Interfaces. Sie können Botschaften
+	verstärken, Bedeutungen kommunizieren und eine gezielte Nutzer:innenführung ermöglichen.
 	<DBSection spacing="small">
 		<DBStack gap="x-large">
 			<DBStack gap="none">
@@ -43,7 +41,6 @@ const headings = [
 			<ColorPlayground layout="horizontal" />
 		</DBStack>
 	</DBSection>
-
 	<DBSection spacing="small">
 		<h2 id="richtlinien">Richtlinien</h2>
 
@@ -108,19 +105,19 @@ const headings = [
 			</div>
 		</CollapsibleWrapper>
 
-		<CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+		<CollapseButton
+			collapsedText="Alle Richtlinien anzeigen"
+			expandedText="Richtlinien ausblenden"
+		/>
 	</DBSection>
-
 	<DBSection spacing="small">
 		<h2 id="tokens">Tokens</h2>
 		<ColorTable />
 	</DBSection>
-
 	<DBSection spacing="small">
 		<h2 id="faq">FAQ</h2>
 		<QuestionForm componentName="Colors" />
 	</DBSection>
-
 	<script>
 		import { waitForElements } from '@template/utils/client.utils.ts';
 		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';

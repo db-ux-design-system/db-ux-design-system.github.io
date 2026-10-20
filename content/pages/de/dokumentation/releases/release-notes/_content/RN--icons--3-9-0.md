@@ -8,4 +8,5 @@ date: '2026-04-28'
 ### Design & Entwicklung
 
 #### Hinzugefügt
+
 - Icons: Das neue Icon `bordlift` wurde hinzugefügt.

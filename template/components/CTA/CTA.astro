@@ -28,31 +28,29 @@ const normalizeVariant = (
 	BUTTON_VARIANTS.includes(variant as ButtonVariant) ? (variant as ButtonVariant) : fallback;
 ---
 
-{
-	primaryAction && (
-		<div class="cta">
-			<div class="cta-content" data-align={align}>
-				{title && <h3 class="cta-title">{title}</h3>}
-				{text && <p class="cta-text">{text}</p>}
-				<div class="cta-actions">
+{primaryAction && (
+	<div class="cta">
+		<div class="cta-content" data-align={align}>
+			{title && <h3 class="cta-title">{title}</h3>}
+			{text && <p class="cta-text">{text}</p>}
+			<div class="cta-actions">
+				<a
+					href={primaryAction.href}
+					class="db-button"
+					data-variant={normalizeVariant(primaryAction.variant, 'brand')}
+				>
+					{primaryAction.label}
+				</a>
+				{secondaryAction && (
 					<a
-						href={primaryAction.href}
+						href={secondaryAction.href}
 						class="db-button"
-						data-variant={normalizeVariant(primaryAction.variant, 'brand')}
+						data-variant={normalizeVariant(secondaryAction.variant, 'outlined')}
 					>
-						{primaryAction.label}
+						{secondaryAction.label}
 					</a>
-					{secondaryAction && (
-						<a
-							href={secondaryAction.href}
-							class="db-button"
-							data-variant={normalizeVariant(secondaryAction.variant, 'outlined')}
-						>
-							{secondaryAction.label}
-						</a>
-					)}
-				</div>
+				)}
 			</div>
 		</div>
-	)
-}
+	</div>
+)}

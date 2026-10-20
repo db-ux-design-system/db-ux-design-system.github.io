@@ -28,7 +28,6 @@ const headings = [
 <DocumentationLayout frontmatter={frontmatter} headings={headings}>
 	Typography helps establish hierarchy and communicate key content through clear visual patterns.
 	Well-designed typography improves readability and directly enhances the user experience.
-
 	<DBSection spacing="small">
 		<DBStack gap="x-large">
 			<DBStack gap="none">
@@ -39,7 +38,6 @@ const headings = [
 			<TypographyPlayground layout="horizontal" />
 		</DBStack>
 	</DBSection>
-
 	<DBSection spacing="small">
 		<h2 id="guidelines">Guidelines</h2>
 
@@ -59,17 +57,14 @@ const headings = [
 			/>
 		</div>
 	</DBSection>
-
 	<DBSection spacing="small">
 		<h2 id="tokens">Tokens</h2>
 		<TypographyTable />
 	</DBSection>
-
 	<DBSection spacing="small">
 		<h2 id="faq">FAQ</h2>
 		<QuestionForm componentName="Typography" />
 	</DBSection>
-
 	<script>
 		import { waitForElements } from '@template/utils/client.utils.ts';
 		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';

@@ -13,7 +13,8 @@ const YourAction = ({
 			className="your-action"
 			semantic="warning"
 			headline={headline}
-			variant="standalone">
+			variant="standalone"
+		>
 			<ol>
 				{actions.map((action, index) => (
 					<li key={index}>{action.replace(/^\d+\.\s*/, '')}</li>

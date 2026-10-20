@@ -34,7 +34,6 @@ const teasers = [
 		imageSrcDark: `${appConfig.basePath}assets/extensions/RI--Darkmode--C.png`,
 		imageAlt: 'RI Extension Visual',
 		imagePosition: 'bottom' as const,
-		mask: 'fade-bottom-right' as const,
 	},
 	{
 		title: 'DataViz Extension',
@@ -45,7 +44,6 @@ const teasers = [
 		imageSrcDark: `${appConfig.basePath}assets/extensions/DataViz--Darkmode--C.png`,
 		imageAlt: 'DataViz Extension Visual',
 		imagePosition: 'bottom' as const,
-		mask: 'fade-bottom-right' as const,
 	},
 	{
 		title: 'Table Extension',
@@ -56,7 +54,6 @@ const teasers = [
 		imageSrcDark: `${appConfig.basePath}assets/extensions/Table--Darkmode--C.png`,
 		imageAlt: 'Table Extension Visual',
 		imagePosition: 'bottom' as const,
-		mask: 'fade-bottom-right' as const,
 	},
 	{
 		title: 'Content Extension',
@@ -66,24 +63,33 @@ const teasers = [
 		imageSrcDark: `${appConfig.basePath}assets/extensions/Content--Darkmode--C.png`,
 		imageAlt: 'Content Extension Visual',
 		imagePosition: 'bottom' as const,
-		mask: 'fade-bottom-right' as const,
 	},
 ];
 ---
 
-{
-	noSection ? (
-		<section aria-label={ariaLabel} id="extensions--extensions-section">
-			<TeaserCard teasers={teasers} columns={2} spacing="large" headlineSize="large" headlineLevel={2} />
-		</section>
-	) : (
-		<DBSection
-			width={width}
-			spacing="medium"
-			aria-label={ariaLabel}
-			id="extensions--extensions-section"
-		>
-			<TeaserCard teasers={teasers} columns={2} spacing="large" headlineSize="large" headlineLevel={2} />
-		</DBSection>
-	)
-}
+{noSection ? (
+	<section aria-label={ariaLabel} id="extensions--extensions-section">
+		<TeaserCard
+			teasers={teasers}
+			columns={2}
+			spacing="large"
+			headlineSize="large"
+			headlineLevel={2}
+		/>
+	</section>
+) : (
+	<DBSection
+		width={width}
+		spacing="medium"
+		aria-label={ariaLabel}
+		id="extensions--extensions-section"
+	>
+		<TeaserCard
+			teasers={teasers}
+			columns={2}
+			spacing="large"
+			headlineSize="large"
+			headlineLevel={2}
+		/>
+	</DBSection>
+)}

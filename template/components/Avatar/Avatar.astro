@@ -43,25 +43,24 @@ const {
 				camera-orbit={cameraOrbit}
 				max-camera-orbit="Infinity 180deg auto"
 				field-of-view="20deg"
-				loading="eager"></model-viewer>
-			{
-				hoverSrc && (
-					<model-viewer
-						class="viewer-hover"
-						alt={alt}
-						src={hoverSrc}
-						interaction-prompt="none"
-						camera-controls
-						disable-zoom
-						disable-pan
-						autoplay
-						camera-target={hoverCameraTarget}
-						camera-orbit={hoverCameraOrbit}
-						field-of-view="20deg"
-						loading="eager"
-					/>
-				)
-			}
+				loading="eager"
+			></model-viewer>
+			{hoverSrc && (
+				<model-viewer
+					class="viewer-hover"
+					alt={alt}
+					src={hoverSrc}
+					interaction-prompt="none"
+					camera-controls
+					disable-zoom
+					disable-pan
+					autoplay
+					camera-target={hoverCameraTarget}
+					camera-orbit={hoverCameraOrbit}
+					field-of-view="20deg"
+					loading="eager"
+				/>
+			)}
 		</div>
 	</DBCard>
 	<div class="avatar-meta">
