@@ -1,0 +1,142 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Pakete'
+headline: 'Pakete'
+description: 'Die Pakete des DB UX Design Systems je Framework, wie sie aufeinander aufbauen und welche Themes und Tools es gibt.'
+align: start
+toc: true
+tocMaxDepth: 2
+order: 2
+---
+
+import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<DBSection spacing="small" width="auto">
+
+## Pakete je Framework
+
+<TeaserCard
+	columns={2}
+	spacing="small"
+	headlineSize="medium"
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'React',
+			description: '@db-ux/react-core-components',
+			url: '/de/dokumentation/ressourcen/pakete/react',
+		},
+		{
+			title: 'Angular',
+			description: '@db-ux/ngx-core-components',
+			url: '/de/dokumentation/ressourcen/pakete/angular',
+		},
+		{
+			title: 'Vue',
+			description: '@db-ux/v-core-components',
+			url: '/de/dokumentation/ressourcen/pakete/vue',
+		},
+		{
+			title: 'Web Components',
+			description: 'Für jedes andere Framework: @db-ux/wc-core-components',
+			url: '/de/dokumentation/ressourcen/pakete/web-components',
+		},
+		{
+			title: 'HTML und CSS',
+			description: 'Du schreibst das Markup selbst: @db-ux/core-components',
+			url: '/de/dokumentation/ressourcen/pakete/core-components',
+		},
+		{
+			title: 'Astro',
+			description: 'Statische Websites: @db-ux/astro',
+			url: '/de/dokumentation/ressourcen/pakete/astro',
+		},
+		{
+			title: 'Eigene Komponenten',
+			description: 'Nur Tokens, Icons und Schriften: @db-ux/core-foundations',
+			url: '/de/dokumentation/ressourcen/pakete/core-foundations',
+		},
+		{
+			title: 'iOS oder Android',
+			description: 'Die nativen Bibliotheken sind noch in Entwicklung.',
+			url: '/de/dokumentation/ressourcen/pakete/native',
+		},
+	]}
+/>
+
+<DBNotification variant="standalone" semantic="informational" headline="Neues Projekt mit React?">
+	Das{' '}
+	<DBLink href="/de/dokumentation/lernen/react-tutorial" variant="inline">
+		React-Tutorial
+	</DBLink>{' '}
+	führt dich vom leeren Projekt bis zum funktionierenden Formular, mit einer Prüfung nach jedem
+	Schritt.
+</DBNotification>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Wie die Pakete zusammenhängen
+
+Drei Schichten bauen aufeinander auf. Du installierst nur die oberste, die du brauchst – die darunterliegenden kommen mit.
+
+| Schicht               | Paket                                                                               | Inhalt                                                       |
+| --------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Framework-Komponenten | `@db-ux/react-core-components` und die Pendants für Angular, Vue und Web Components | Komponenten für ein Framework                                |
+| Komponenten-Styles    | `@db-ux/core-components`                                                            | CSS und SCSS aller Komponenten, enthält die Schicht darunter |
+| Tokens und Assets     | `@db-ux/core-foundations`                                                           | Farben, Abstände, Typografie, Density, Icons, Schriften      |
+
+<DBNotification variant="standalone" semantic="informational" headline="Hinweis">
+	`@db-ux/core-components` zieht `@db-ux/core-foundations` als Abhängigkeit mit. Bei `npm` passiert
+	das automatisch. Bei `pnpm` installierst du beide explizit.
+</DBNotification>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Themes und Assets
+
+Alle Anleitungen für Framework-Pakete nutzen im Styling-Setup das Whitelabel-Theme, weil es ohne weiteren Zugang funktioniert. Produkte der Deutschen Bahn brauchen zusätzlich das DB Theme. Theme und Icons sind verschlüsselt und brauchen Zugangsdaten aus dem Marketingportal.
+
+| Ziel                | Installation            | Anleitung                                                                             |
+| ------------------- | ----------------------- | ------------------------------------------------------------------------------------- |
+| Marke Deutsche Bahn | `@db-ux/db-theme`       | [DB Theme](/de/dokumentation/ressourcen/pakete/db-theme)              |
+| Marke S-Bahn        | `@db-ux/s-bahn-theme`   | [DB Theme](/de/dokumentation/ressourcen/pakete/db-theme#s-bahn-theme) |
+| Icons ohne Theme    | `@db-ux/db-theme-icons` | [Icons](/de/dokumentation/ressourcen/pakete/icons)                    |
+
+<DBNotification
+	variant="standalone"
+	semantic="warning"
+	headline="DB Theme für DB-Produkte verpflichtend"
+>
+	Wenn du für die Deutsche Bahn baust, ist das DB Theme Pflicht. Ohne es bleiben Farben, Typografie
+	und Assets auf den Whitelabel-Standardwerten. Unter{' '}
+	<DBLink href="/de/dokumentation/ressourcen/pakete/db-theme" variant="inline">
+		DB Theme
+	</DBLink>{' '}
+	steht, wie du Zugang bekommst.
+</DBNotification>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Optionales Tooling
+
+Keines dieser Pakete brauchst du für den Start. Ergänze sie, sobald deine erste Komponente erscheint.
+
+| Paket                        | Zweck                                                                                                             | Empfehlung                       |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| `@db-ux/core-postcss-plugin` | Löst `var()`, `calc()`, `color-mix()` und `light-dark()` zur Build-Zeit auf und entfernt ungenutzte Deklarationen | Empfohlen für Produktions-Builds |
+| `@db-ux/core-vite-plugin`    | Reduziert das CSS-Setup auf einen einzigen Import                                                                 | Empfohlen, wenn du Vite nutzt    |
+| `@db-ux/core-eslint-plugin`  | Meldet falsche Komponentennutzung im Editor                                                                       | Optional, im Team aber hilfreich |
+| `@db-ux/core-stylelint`      | Prüft dein CSS und SCSS gegen die Regeln des Design Systems                                                       | Optional                         |
+
+Für KI-Coding-Agenten gibt es `@db-ux/mcp-server` und `@db-ux/agent-cli`. Beide sind auf der Seite [MCP Server](/de/dokumentation/lernen/mcp-server) beschrieben.
+
+</DBSection>

@@ -1,0 +1,137 @@
+.gsw {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-lg);
+
+	/* The page has no hero, so the wizard takes over its top spacing: the same token
+	   as DBSection with spacing="small", which wraps the hero on other pages. */
+	padding-block-start: var(--db-spacing-responsive-sm);
+}
+
+.gsw-fieldset {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	min-inline-size: 0;
+}
+
+.gsw-legend {
+	padding: 0;
+	margin-block-end: var(--db-spacing-fixed-lg);
+}
+
+/* The page has no hero, so the question is the page's h1. Its size stays at the h2
+   size the question had below the hero; the levels below shift up accordingly. */
+.gsw-heading {
+	margin: 0;
+	font: var(--db-type-headline-lg);
+
+	/* Receives focus after each step so screen readers announce the new question. */
+	&:focus-visible {
+		/* Same focus ring as the library: 2xs outline with the library fallback color. */
+		outline: var(--db-border-width-2xs) solid
+			var(--db-focus-outline-color, var(--db-informational-on-bg-basic-emphasis-70-default));
+		outline-offset: var(--db-border-width-xs);
+	}
+}
+
+.gsw-options {
+	display: grid;
+	gap: var(--db-spacing-fixed-sm);
+}
+
+@media (width >= 48em) {
+	.gsw-options-tiles {
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--db-spacing-fixed-md);
+	}
+}
+
+/* The radio is visually hidden, so the selected option is marked by the thicker
+   border from `:has(input:checked)` - a change in shape, not only in color. */
+.gsw-option {
+	/* Anchors the visually hidden radio, which is positioned absolutely. */
+	position: relative;
+	display: flex;
+	gap: var(--db-spacing-fixed-sm);
+	align-items: flex-start;
+	padding: var(--db-spacing-fixed-md);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-sm);
+	cursor: pointer;
+
+	&:hover,
+	&:focus-within {
+		background-color: var(--db-adaptive-bg-basic-level-1-hovered);
+	}
+
+	&:has(input:checked) {
+		border-color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+		box-shadow: inset 0 0 0 var(--db-border-width-2xs)
+			var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	}
+
+	&:has(input:focus-visible) {
+		/* Same focus ring as the library: 2xs outline with the library fallback color. */
+		outline: var(--db-border-width-2xs) solid
+			var(--db-focus-outline-color, var(--db-informational-on-bg-basic-emphasis-70-default));
+		outline-offset: var(--db-border-width-xs);
+	}
+}
+
+.gsw-option-text {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-3xs);
+}
+
+.gsw-option-description {
+	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+}
+
+/* Tiles: icon and text centered. */
+.gsw-options-tiles .gsw-option {
+	flex-direction: column;
+	align-items: center;
+	padding: var(--db-spacing-fixed-xl) var(--db-spacing-fixed-md);
+	text-align: center;
+}
+
+.gsw-option-icon {
+	--db-icon-font-size: var(--db-sizing-lg);
+
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+}
+
+.gsw-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--db-spacing-fixed-sm);
+	justify-content: flex-end;
+}
+
+.gsw-result {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-sm);
+	align-items: flex-start;
+	padding: var(--db-spacing-fixed-xl);
+	background-color: var(--db-successful-bg-basic-level-3-default);
+	border: var(--db-border-width-3xs) solid var(--db-successful-on-bg-basic-emphasis-70-default);
+	border-radius: var(--db-border-radius-sm);
+
+	p {
+		margin: 0;
+	}
+}
+
+.gsw-result-title,
+.gsw-more-title {
+	margin: 0;
+	font: var(--db-type-headline-md);
+}
+
+.gsw-more .teaser-cards {
+	margin-block-start: var(--db-spacing-fixed-sm);
+}

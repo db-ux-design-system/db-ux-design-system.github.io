@@ -1,0 +1,21 @@
+---
+import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
+import GetStartedWizard from '@template/components/GetStartedWizard/GetStartedWizard.tsx';
+import '@template/components/TeaserCard/TeaserCard.css';
+import '@template/components/GetStartedWizard/GetStartedWizard.css';
+
+// eslint-disable-next-line astro/no-exports-from-components -- Exported for ChildPageOverview glob
+export const frontmatter: DocumentationFrontMatter = {
+	layout: '@template/layouts/documentation',
+	sectionSpacing: 'small',
+	sectionWidth: 'auto',
+	// No headline and no description, so the layout renders no hero (see the EN page).
+	title: 'Erste Schritte',
+	align: 'start',
+	order: 1,
+};
+---
+
+<DocumentationLayout frontmatter={frontmatter} headings={[]}>
+	<GetStartedWizard lang="de" client:only="react" />
+</DocumentationLayout>

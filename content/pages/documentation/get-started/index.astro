@@ -1,0 +1,27 @@
+---
+import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
+import GetStartedWizard from '@template/components/GetStartedWizard/GetStartedWizard.tsx';
+// Imported here rather than in the island, so the styles are part of the page head.
+import '@template/components/TeaserCard/TeaserCard.css';
+import '@template/components/GetStartedWizard/GetStartedWizard.css';
+
+// An .astro page instead of MDX: as an MDX page the wizard island did not render inside the
+// client-only Shell. The client-side navigation cannot read the frontmatter of .astro
+// pages, so the DE title and the order are repeated in astroNavFallback
+// (content-navigation.ts).
+// eslint-disable-next-line astro/no-exports-from-components -- Exported for ChildPageOverview glob
+export const frontmatter: DocumentationFrontMatter = {
+	layout: '@template/layouts/documentation',
+	sectionSpacing: 'small',
+	sectionWidth: 'auto',
+	// No headline and no description: without them the layout renders no hero, so the
+	// wizard starts right away. Its question is the h1 of the page.
+	title: 'Get Started',
+	align: 'start',
+	order: 1,
+};
+---
+
+<DocumentationLayout frontmatter={frontmatter} headings={[]}>
+	<GetStartedWizard lang="en" client:only="react" />
+</DocumentationLayout>

@@ -202,6 +202,7 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 		'documentation/foundation/border-radius': { titleDe: 'Eckenradius' },
 		'documentation/foundation/border-width': { titleDe: 'Strichstärke' },
 		'documentation/icons': { titleDe: 'Icons' },
+		'documentation/get-started': { titleDe: 'Erste Schritte', order: 1 },
 		'documentation/releases/release-notes': { titleDe: 'Release Notes' },
 		'documentation/components/overview': {
 			// No `title`: the slug already yields "Overview".

@@ -1,0 +1,69 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Native Plattformen'
+headline: 'Native Plattformen'
+description: 'Der Stand der nativen Komponentenbibliotheken für iOS (SwiftUI) und Android (Jetpack Compose).'
+align: start
+toc: true
+tocMaxDepth: 2
+order: 10
+---
+
+import { DBSection, DBNotification } from '@db-ux/react-core-components';
+
+<DBSection spacing="small" width="auto">
+
+## Aktueller Stand
+
+<DBNotification
+	variant="standalone"
+	semantic="warning"
+	headline="In Entwicklung – noch kein Release"
+>
+	Keine der beiden Bibliotheken hat ein veröffentlichtes Release. Eine Installationsanleitung für
+	Produkte gibt es noch nicht. Die Repositories beschreiben, wie du das Projekt zum Mitwirken
+	einrichtest, nicht, wie du es in einer App nutzt.
+</DBNotification>
+
+| Plattform | Technologie                     | Mindestversion | Repository                                                          |
+| --------- | ------------------------------- | -------------- | ------------------------------------------------------------------- |
+| iOS       | SwiftUI, Swift Package `DBUXDS` | iOS 18         | [core-ios](https://github.com/db-ux-design-system/core-ios)         |
+| Android   | Jetpack Compose                 | Android API 30 | [core-android](https://github.com/db-ux-design-system/core-android) |
+
+Beide Bibliotheken gliedern sich in **Foundation** – Farben, Typografie und Abstände als Tokens – und **Komponenten**.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Verfügbare Komponenten
+
+| Komponente | iOS | Android |
+| ---------- | --- | ------- |
+| Accordion  | ✅  | ✅      |
+| Badge      | ✅  | ✅      |
+| Button     | ✅  | ✅      |
+| Card       | ✅  | ✅      |
+| Checkbox   | ✅  | ✅      |
+| Icon       | –   | ✅      |
+| Infotext   | ✅  | ✅      |
+| Link       | ✅  | ✅      |
+| Switch     | ✅  | –       |
+
+Die Liste gibt den Quellcode in den Repositories wieder. Über den Status einer Komponente sagt sie nichts aus – die Web-Komponenten und ihr Status sind unter [Komponenten](/de/dokumentation/komponenten) dokumentiert.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Was du jetzt tun kannst
+
+| Du möchtest …                                | So gehst du vor                                                                                                                                                              |
+| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| eine native App mit dem Design System planen | Sprich Luis Schroff an, den Product Owner des Design Systems, bevor du mit diesen Bibliotheken planst: [luis.schroff@deutschebahn.com](mailto:luis.schroff@deutschebahn.com) |
+| eine native App gestalten                    | Nutze die Figma-Bibliotheken – siehe [Design-Ressourcen](/de/dokumentation/ressourcen/design).                                                                |
+| mitwirken                                    | Folge der `DEVELOPMENT.md` im Repository.                                                                                                                                    |
+
+</DBSection>
