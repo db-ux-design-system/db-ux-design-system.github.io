@@ -10,7 +10,7 @@ import {
 	DBShell,
 	DBShellContent,
 } from '@db-ux/react-core-components';
-import ContactUs from './control-panel/contact-us.tsx';
+import GetStarted from './control-panel/get-started.tsx';
 import PreferenceSwitches from './control-panel/preference-switches.tsx';
 import MainNavigation from './control-panel/main-navigation.tsx';
 import SubNavigation from './control-panel/sub-navigation.tsx';
@@ -67,7 +67,7 @@ function ShellContent({
 		<DBShell subNavigationDesktopPosition="left" subNavigationMobilePosition="none">
 			{/* The actions slot decides the position, so the same content sits in a
 			    different slot per breakpoint. Desktop splits it up: switches left
-			    (Actions 1), contact button right (Actions 2). Mobile puts both into
+			    (Actions 1), Get Started button right (Actions 2). Mobile puts both into
 			    the drawer footer (Actions 2) as one row, which keeps the menu bar
 			    free for the brand and the burger button. Keeping the footer a single
 			    row matters: the drilldown overlay reserves a fixed height for it, so
@@ -82,7 +82,7 @@ function ShellContent({
 				}
 				actions2={
 					<DBControlPanelActions2>
-						<ContactUs />
+						<GetStarted />
 					</DBControlPanelActions2>
 				}
 			>
@@ -93,7 +93,7 @@ function ShellContent({
 				brand={<Brand />}
 				actions2={
 					<DBControlPanelActions2>
-						<ContactUs />
+						<GetStarted />
 						<PreferenceSwitches />
 					</DBControlPanelActions2>
 				}
