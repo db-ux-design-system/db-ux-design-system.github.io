@@ -1,0 +1,89 @@
+/* Shared Source code visual: brand button with annotated padding next to its CSS */
+.shared-source-visual {
+	/*
+	 * Split 1/3 design, 2/3 code (padding included in the tracks).
+	 * The design column never gets narrower than the button with its token label.
+	 */
+	display: grid;
+	grid-template-columns: minmax(min-content, 1fr) minmax(0, 2fr);
+	inline-size: 100%;
+	overflow: hidden;
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-md);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	font: var(--db-type-body-md);
+}
+
+.shared-source-visual-design,
+.shared-source-visual-code {
+	min-inline-size: 0;
+	padding: var(--db-spacing-fixed-lg);
+}
+
+.shared-source-visual-design {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-inline-end: var(--db-border-width-3xs) solid
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}
+
+.shared-source-visual-code {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	overflow: hidden;
+	padding-inline: var(--db-spacing-fixed-md);
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+
+	/* Smaller than the visual's body-md, so every line except "color" fits (as in the PNG) */
+	font: var(--db-type-body-sm);
+}
+
+/* Flex lines ignore the markup whitespace between the parts; the parts keep their own spaces */
+.shared-source-visual-line {
+	display: flex;
+}
+
+.shared-source-visual-part {
+	flex: none;
+	white-space: pre;
+}
+
+.shared-source-visual-line[data-indent] {
+	padding-inline-start: var(--db-spacing-fixed-md);
+}
+
+/*
+ * The color class resolves emphasis-80 to its mid (light mode) or light (dark mode) tone.
+ * It also sets a level-1 background, which the code half must not show.
+ */
+.shared-source-visual-part[class*='db-color-'] {
+	background-color: transparent;
+	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+}
+
+/* Narrow viewports: less padding and a smaller code font; clipping at the right is intended */
+@media (width <= 767px) {
+	.shared-source-visual-design,
+	.shared-source-visual-code {
+		padding: var(--db-spacing-fixed-sm);
+	}
+
+	.shared-source-visual-code {
+		font: var(--db-type-body-xs);
+	}
+
+	.shared-source-visual-line[data-indent] {
+		padding-inline-start: var(--db-spacing-fixed-sm);
+	}
+}
+
+/* The global content spacing must not add to the layout (0,4,0 beats its 0,3,0) */
+.dba-main-content
+	.shared-source-visual
+	> .shared-source-visual-design
+	+ .shared-source-visual-code {
+	margin-block-start: 0;
+}

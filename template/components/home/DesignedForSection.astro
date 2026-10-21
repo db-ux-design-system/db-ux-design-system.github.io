@@ -3,6 +3,10 @@ import { appConfig } from '@config';
 import { DBCard, DBSection } from '@db-ux/react-core-components';
 import { SectionTitle, TextImage } from '@components';
 import { toDeSlug } from '@template/i18n/slug-mapping';
+import EfficientDeliveryVisual from '@components/ForProductManagementVisuals/EfficientDeliveryVisual.astro';
+import ReleaseTimelineVisual from '@components/ForDeveloperVisuals/ReleaseTimelineVisual.astro';
+import ButtonPlaygroundVisual from '@components/ForDesignerVisuals/ButtonPlaygroundVisual.astro';
+import './DesignedForSection.css';
 
 const isDE = Astro.url.pathname.startsWith('/de/') || Astro.url.pathname === '/de';
 const localizeHref = (enPath: string) =>
@@ -20,6 +24,9 @@ interface Props {
 	designTitle?: string;
 	designText?: string;
 	designTag?: string;
+	pmVisualLabel?: string;
+	devVisualLabel?: string;
+	designVisualLabel?: string;
 	linkPrefix?: string;
 }
 
@@ -35,6 +42,10 @@ const {
 	designTitle = 'Flexible Choices',
 	designText = 'Adapt components and tokens to fit context without losing alignment.',
 	designTag = 'For Designer',
+	// Labels of the static code visuals, same wording as on the audience pages
+	pmVisualLabel = 'Timeline compression illustrating faster delivery cycles',
+	devVisualLabel = 'Version timeline and update badges denoting planned maintenance',
+	designVisualLabel = 'Button playground with variant, text, show icon and icon settings',
 	linkPrefix = '',
 } = Astro.props;
 
@@ -63,13 +74,16 @@ const audiencePageLabel = (tag: string) =>
 					contentAlign="end"
 					imageWidth="33"
 					title={pmTitle}
-					imageSrc={`${appConfig.basePath}assets/for-productmanagement/Efficient-Delivery--Lightmode--C.png`}
-					imageSrcDark={`${appConfig.basePath}assets/for-productmanagement/Efficient-Delivery--Darkmode--C.png`}
+					imageSrc=""
 					imageAlt=""
-					mask="fade-bottom-right"
 					headlineLevel={3}
 					tag={{ label: pmTag, emphasis: 'strong' }}
 				>
+					<div slot="visual" class="designed-for-visual" data-color="neutral">
+						<div class="designed-for-visual-canvas">
+							<EfficientDeliveryVisual label={pmVisualLabel} static />
+						</div>
+					</div>
 					{pmText}
 				</TextImage>
 			</DBCard>
@@ -84,13 +98,16 @@ const audiencePageLabel = (tag: string) =>
 					contentAlign="end"
 					imageWidth="33"
 					title={devTitle}
-					imageSrc={`${appConfig.basePath}assets/for-developer/Predictable-Maintenance--Lightmode--C.png`}
-					imageSrcDark={`${appConfig.basePath}assets/for-developer/Predictable-Maintenance--Darkmode--C.png`}
+					imageSrc=""
 					imageAlt=""
-					mask="fade-bottom-right"
 					headlineLevel={3}
 					tag={{ label: devTag, emphasis: 'strong' }}
 				>
+					<div slot="visual" class="designed-for-visual" data-color="neutral">
+						<div class="designed-for-visual-canvas">
+							<ReleaseTimelineVisual label={devVisualLabel} />
+						</div>
+					</div>
 					{devText}
 				</TextImage>
 			</DBCard>
@@ -106,13 +123,16 @@ const audiencePageLabel = (tag: string) =>
 					contentAlign="end"
 					imageWidth="33"
 					title={designTitle}
-					imageSrc={`${appConfig.basePath}assets/for-designer/Flexible-Choices--Lightmode--C.png`}
-					imageSrcDark={`${appConfig.basePath}assets/for-designer/Flexible-Choices--Darkmode--C.png`}
+					imageSrc=""
 					imageAlt=""
-					mask="fade-bottom-right"
 					headlineLevel={3}
 					tag={{ label: designTag, emphasis: 'strong' }}
 				>
+					<div slot="visual" class="designed-for-visual" data-color="neutral">
+						<div class="designed-for-visual-canvas">
+							<ButtonPlaygroundVisual label={designVisualLabel} static />
+						</div>
+					</div>
 					{designText}
 				</TextImage>
 			</DBCard>

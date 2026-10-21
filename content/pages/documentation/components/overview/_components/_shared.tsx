@@ -61,9 +61,10 @@ export const DRAWER_ROUNDED = [false, true] as const;
 export type DrawerDirection = (typeof DRAWER_DIRECTIONS)[number];
 
 /*
- * The full visual size scale of a heading, largest first. This is the one scale
- * the component has: the semantic level only maps to a default size, which `size`
- * then overrides.
+ * The full v5 visual size scale of a heading, largest first. In v5 the semantic
+ * level only mapped to a default size, which `size` then overrode. v6 removed
+ * `size`, so the scale only names the v5 rows now, which ComponentOverview.css
+ * fakes at their v5 sizes.
  */
 export const HEADING_SIZES = ['3xl', '2xl', 'xl', 'lg', 'md', 'sm', 'xs', '2xs', '3xs'] as const;
 
@@ -75,8 +76,7 @@ export type HeadingLevel = (typeof HEADING_LEVELS)[number];
 
 /*
  * The default visual size per semantic level, and the only place this page holds
- * it. It feeds both directions: the level named next to a size in the v5 rows,
- * and the size each level is rendered at in the v6 rows.
+ * it. It names the level next to a size in the v5 rows.
  *
  * The design system's own source for this mapping is
  * @db-ux/core-foundations/build/styles/fonts/_headline-levels.scss. It is a

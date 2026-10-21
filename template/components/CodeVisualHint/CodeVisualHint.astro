@@ -1,0 +1,14 @@
+---
+// Visually hidden hint for the interactive code visuals, referenced via aria-describedby.
+// Single place for the shared wording (and a later translation).
+interface Props {
+	id: string;
+	/** Optional visual-specific sentence appended to the shared hint */
+	extra?: string;
+}
+const { id, extra } = Astro.props;
+---
+
+<span id={id} data-visually-hidden="true">
+	Example components for demonstration – they trigger no action.{extra && ` ${extra}`}
+</span>

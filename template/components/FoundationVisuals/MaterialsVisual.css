@@ -1,0 +1,155 @@
+/* Materials code visual: brand button on a level-2 surface next to the six material levels */
+
+.materials-visual {
+	display: flex;
+	inline-size: 100%;
+	overflow: hidden;
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-md);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	font: var(--db-type-body-md);
+}
+
+.materials-visual-surface {
+	display: flex;
+	flex: 1 1 0;
+	align-items: center;
+	justify-content: center;
+	min-inline-size: 0;
+	padding: var(--db-spacing-fixed-lg);
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+}
+
+/*
+ * FAKE material on the brand button – remove once DBButton supports materials.
+ * The selected level sets data-material (and db-color-red for Vibrant) on the button
+ * (code-visuals.client.ts). The brand variant reads its default/hovered/pressed
+ * background, text and border color from the --db-brand-* tokens below, so remapping
+ * them to the tokens of the level bar keeps the DB hover, pressed and focus states.
+ * Origin (preselected) is the stock brand button and has no override.
+ */
+.materials-visual-button.db-button[data-material='vibrant'] {
+	--db-brand-origin-default: var(--db-adaptive-bg-vibrant-default);
+	--db-brand-origin-hovered: var(--db-adaptive-bg-vibrant-hovered);
+	--db-brand-origin-pressed: var(--db-adaptive-bg-vibrant-pressed);
+	--db-brand-on-origin-default: var(--db-adaptive-on-bg-vibrant-default);
+	--db-brand-on-bg-basic-emphasis-70-default: var(--db-adaptive-on-bg-basic-emphasis-60-default);
+}
+
+.materials-visual-button.db-button[data-material='inverted'] {
+	--db-brand-origin-default: var(--db-adaptive-bg-inverted-contrast-max-default);
+	--db-brand-origin-hovered: var(--db-adaptive-bg-inverted-contrast-max-hovered);
+	--db-brand-origin-pressed: var(--db-adaptive-bg-inverted-contrast-max-pressed);
+	--db-brand-on-origin-default: var(--db-adaptive-on-bg-inverted-default);
+	--db-brand-on-bg-basic-emphasis-70-default: var(--db-adaptive-on-bg-basic-emphasis-60-default);
+}
+
+.materials-visual-button.db-button[data-material='outlined'] {
+	--db-brand-origin-default: var(--db-adaptive-bg-basic-level-1-default);
+	--db-brand-origin-hovered: var(--db-adaptive-bg-basic-level-1-hovered);
+	--db-brand-origin-pressed: var(--db-adaptive-bg-basic-level-1-pressed);
+	--db-brand-on-origin-default: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	--db-brand-on-bg-basic-emphasis-70-default: var(--db-adaptive-on-bg-basic-emphasis-60-default);
+}
+
+/* Semi Transparent and Transparent have no visible border, as the level bars */
+.materials-visual-button.db-button[data-material='semi-transparent'] {
+	--db-brand-origin-default: var(--db-adaptive-bg-basic-transparent-semi-default);
+	--db-brand-origin-hovered: var(--db-adaptive-bg-basic-transparent-semi-hovered);
+	--db-brand-origin-pressed: var(--db-adaptive-bg-basic-transparent-semi-pressed);
+	--db-brand-on-origin-default: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	--db-brand-on-bg-basic-emphasis-70-default: transparent;
+}
+
+.materials-visual-button.db-button[data-material='transparent'] {
+	--db-brand-origin-default: var(--db-adaptive-bg-basic-transparent-full-default);
+	--db-brand-origin-hovered: var(--db-adaptive-bg-basic-transparent-full-hovered);
+	--db-brand-origin-pressed: var(--db-adaptive-bg-basic-transparent-full-pressed);
+	--db-brand-on-origin-default: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	--db-brand-on-bg-basic-emphasis-70-default: transparent;
+}
+
+/* Fieldset with the material levels; each bar is a label around a visually hidden radio */
+.materials-visual-levels {
+	display: flex;
+	flex: 1 1 0;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-xs);
+	min-inline-size: 0;
+	margin: 0;
+	padding: var(--db-spacing-fixed-lg);
+	border: 0;
+	border-inline-start: var(--db-border-width-3xs) solid
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}
+
+.materials-visual-level {
+	display: flex;
+	position: relative;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--db-spacing-fixed-xs);
+	padding-block: var(--db-spacing-fixed-2xs);
+	padding-inline: var(--db-spacing-fixed-sm);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-xs);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	cursor: pointer;
+}
+
+/* Selected: check icon and bold text, so the state is not conveyed by color alone */
+.materials-visual-check {
+	visibility: hidden;
+}
+
+.materials-visual-level:has(input:checked) {
+	font-weight: 700;
+}
+
+.materials-visual-level:has(input:checked) .materials-visual-check {
+	visibility: visible;
+}
+
+/* The radio is visually hidden, so the bar shows the DB focus ring */
+.materials-visual-level:has(input:focus-visible) {
+	outline: var(--db-border-width-2xs) solid
+		var(--db-focus-outline-color, var(--db-informational-on-bg-basic-emphasis-70-default));
+	outline-offset: var(--db-border-width-xs);
+}
+
+/* Origin and Vibrant: tokens resolve to red through .db-color-red on the item */
+.materials-visual-level[data-material='origin'] {
+	background-color: var(--db-adaptive-origin-default);
+	color: var(--db-adaptive-on-origin-default);
+}
+
+.materials-visual-level[data-material='vibrant'] {
+	background-color: var(--db-adaptive-bg-vibrant-default);
+	color: var(--db-adaptive-on-bg-vibrant-default);
+}
+
+.materials-visual-level[data-material='inverted'] {
+	background-color: var(--db-adaptive-bg-inverted-contrast-max-default);
+	color: var(--db-adaptive-on-bg-inverted-default);
+}
+
+.materials-visual-level[data-material='outlined'] {
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}
+
+/* Semi Transparent and Transparent have no visible border, the transparent border keeps the bar height */
+.materials-visual-level[data-material='semi-transparent'] {
+	border-color: transparent;
+	background-color: var(--db-adaptive-bg-basic-transparent-semi-default);
+}
+
+.materials-visual-level[data-material='transparent'] {
+	border-color: transparent;
+	background-color: var(--db-adaptive-bg-basic-transparent-full-default);
+}
+
+/* The global content spacing must not add to the flex gap (0,4,0 beats its 0,3,0) */
+.dba-main-content .materials-visual > .materials-visual-surface + .materials-visual-levels {
+	margin-block-start: 0;
+}

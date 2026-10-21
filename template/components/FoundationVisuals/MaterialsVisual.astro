@@ -1,0 +1,70 @@
+---
+import { DBButton, DBIcon } from '@db-ux/react-core-components';
+import CodeVisualHint from '@components/CodeVisualHint/CodeVisualHint.astro';
+import './MaterialsVisual.css';
+interface Props {
+	label: string;
+}
+const { label } = Astro.props;
+const uid = crypto.randomUUID();
+const hintId = `materials-visual-hint-${uid}`;
+const radioName = `materials-${uid}`;
+// Material levels of the original visual. The bars of Origin and Vibrant use the red color mode.
+// Selecting a level applies its material to the brand button (code-visuals.client.ts,
+// faked in CSS until DBButton supports materials). Origin is preselected: the stock
+// brand button is the origin material, so it needs no override and no color class.
+// Vibrant needs db-color-red on the button (buttonColorClass) for its red tokens.
+const materials = [
+	{ key: 'origin', label: 'Origin', colorClass: 'db-color-red' },
+	{
+		key: 'vibrant',
+		label: 'Vibrant',
+		colorClass: 'db-color-red',
+		buttonColorClass: 'db-color-red',
+	},
+	{ key: 'inverted', label: 'Inverted' },
+	{ key: 'outlined', label: 'Outlined' },
+	{ key: 'semi-transparent', label: 'Semi Transparent' },
+	{ key: 'transparent', label: 'Transparent' },
+] as const;
+---
+
+<div
+	class="materials-visual"
+	role="group"
+	aria-label={label}
+	aria-describedby={hintId}
+	data-code-visual="materials"
+>
+	<CodeVisualHint id={hintId} extra="Select a material to apply it to the button." />
+	<div class="materials-visual-surface">
+		<DBButton
+			variant="brand"
+			type="button"
+			className="materials-visual-button"
+			data-material="origin"
+			text="Button"
+		/>
+	</div>
+	<fieldset class="materials-visual-levels">
+		<legend data-visually-hidden="true">Material</legend>
+		{materials.map((material) => {
+			const colorClass = 'colorClass' in material ? material.colorClass : '';
+			const buttonColorClass = 'buttonColorClass' in material ? material.buttonColorClass : '';
+			return (
+				<label class:list={['materials-visual-level', colorClass]} data-material={material.key}>
+					<input
+						type="radio"
+						name={radioName}
+						value={material.key}
+						checked={material.key === 'origin'}
+						data-color-class={buttonColorClass}
+						data-visually-hidden="true"
+					/>
+					{material.label}
+					<DBIcon icon="check" className="materials-visual-check" />
+				</label>
+			);
+		})}
+	</fieldset>
+</div>

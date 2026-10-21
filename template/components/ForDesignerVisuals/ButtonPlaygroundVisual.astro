@@ -1,0 +1,160 @@
+---
+import { DBButton, DBInput, DBSelect, DBSwitch } from '@db-ux/react-core-components';
+import CodeVisualHint from '@components/CodeVisualHint/CodeVisualHint.astro';
+import './ButtonPlaygroundVisual.css';
+
+interface Props {
+	label: string;
+	// Static preview (e.g. home page cards): image role with label, no client hook, and only
+	// non-interactive look-alikes (spans), so the visual is valid inside a link. Always the
+	// desktop layout, independent of the viewport.
+	static?: boolean;
+}
+
+const { label, static: isStatic = false } = Astro.props;
+const uid = crypto.randomUUID();
+const hintId = `button-playground-visual-hint-${uid}`;
+const labelId = (key: string) => `${uid}-${key}`;
+
+// Initial state of the preview and the controls (kept identical).
+// The controls update the button live via code-visuals.client.ts. DB form
+// components set their own ids only after hydration, so each control is named
+// by its visible row label via aria-labelledby.
+const defaultText = 'Jetzt kaufen';
+const variants = [
+	{ value: 'brand', label: 'Brand' },
+	{ value: 'outlined', label: 'Outlined' },
+	{ value: 'filled', label: 'Filled' },
+	{ value: 'ghost', label: 'Ghost' },
+];
+// Cart plus four icons that fit a purchase or booking call to action
+const icons = [
+	{ value: 'shopping_cart', label: 'Cart' },
+	{ value: 'shopping_bag', label: 'Shopping bag' },
+	{ value: 'ticket', label: 'Ticket' },
+	{ value: 'credit_card', label: 'Credit card' },
+	{ value: 'arrow_right', label: 'Arrow right' },
+];
+---
+
+<div
+	class="button-playground-visual"
+	role={isStatic ? 'img' : 'group'}
+	aria-label={label}
+	aria-describedby={isStatic ? undefined : hintId}
+	data-code-visual={isStatic ? undefined : 'button-playground'}
+	data-default-text={isStatic ? undefined : defaultText}
+	data-static={isStatic ? 'true' : undefined}
+>
+	{isStatic ? (
+		<>
+			{/* Same look as the controls below, built from spans; inert as defense in depth */}
+			<div class="button-playground-visual-preview" inert>
+				<span
+					class="db-button button-playground-visual-button"
+					data-icon="shopping_cart"
+					data-show-icon="true"
+					data-variant="brand"
+				>
+					{defaultText}
+				</span>
+			</div>
+			<ul class="button-playground-visual-controls" inert>
+				{[
+					{ label: 'Variant', type: 'select', value: variants[0].label },
+					{ label: 'Text', type: 'input', value: defaultText },
+					{ label: 'Show Icon', type: 'switch' },
+					{ label: 'Icon', type: 'select', value: icons[0].label },
+				].map((row) => (
+					<li class="button-playground-visual-row">
+						<span class="button-playground-visual-label">{row.label}</span>
+						{row.type === 'switch' ? (
+							<span class="db-switch button-playground-visual-switch" data-hide-label="true">
+								<span class="button-playground-visual-static-switch"></span>
+							</span>
+						) : (
+							<span
+								class={`db-${row.type} button-playground-visual-control`}
+								data-hide-label="true"
+							>
+								<span class="button-playground-visual-static-field">{row.value}</span>
+							</span>
+						)}
+					</li>
+				))}
+			</ul>
+		</>
+	) : (
+		<>
+			<CodeVisualHint id={hintId} extra="The settings only change the button preview." />
+			<div class="button-playground-visual-preview">
+				<DBButton
+					variant="brand"
+					type="button"
+					icon="shopping_cart"
+					showIcon
+					text={defaultText}
+					className="button-playground-visual-button"
+				/>
+			</div>
+			<ul class="button-playground-visual-controls">
+				<li class="button-playground-visual-row">
+					<span class="button-playground-visual-label" id={labelId('variant')}>
+						Variant
+					</span>
+					<DBSelect
+						label="Variant"
+						showLabel={false}
+						aria-labelledby={labelId('variant')}
+						defaultValue="brand"
+						data-control="variant"
+						className="button-playground-visual-control"
+						options={variants}
+					/>
+				</li>
+				<li class="button-playground-visual-row">
+					<span class="button-playground-visual-label" id={labelId('text')}>
+						Text
+					</span>
+					<DBInput
+						label="Text"
+						showLabel={false}
+						aria-labelledby={labelId('text')}
+						defaultValue={defaultText}
+						maxLength={30}
+						validation="no-validation"
+						data-control="text"
+						className="button-playground-visual-control"
+					/>
+				</li>
+				<li class="button-playground-visual-row">
+					<span class="button-playground-visual-label" id={labelId('show-icon')}>
+						Show Icon
+					</span>
+					<DBSwitch
+						label="Show Icon"
+						showLabel={false}
+						aria-labelledby={labelId('show-icon')}
+						defaultChecked
+						data-control="show-icon"
+						className="button-playground-visual-switch"
+					/>
+				</li>
+				<li class="button-playground-visual-row">
+					<span class="button-playground-visual-label" id={labelId('icon')}>
+						Icon
+					</span>
+					<DBSelect
+						label="Icon"
+						showLabel={false}
+						aria-labelledby={labelId('icon')}
+						defaultValue="shopping_cart"
+						data-control="icon"
+						className="button-playground-visual-control"
+						options={icons}
+					/>
+				</li>
+			</ul>
+		</>
+	)}
+</div>
