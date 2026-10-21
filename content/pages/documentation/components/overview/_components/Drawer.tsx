@@ -1,10 +1,5 @@
 import { useState, type ReactElement } from 'react';
-import {
-	DBButton,
-	DBDrawer,
-	DBDrawerFooter,
-	DBDrawerHeader,
-} from '@db-ux/react-core-components';
+import { DBButton, DBDrawer, DBDrawerFooter, DBDrawerHeader } from '@db-ux/react-core-components';
 import {
 	DRAWER_DIRECTIONS,
 	DRAWER_ROUNDED,

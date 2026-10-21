@@ -27,25 +27,33 @@ const baseUrl = 'https://design-system.deutschebahn.com/core-web/review/main';
 const defaultResources: Resource[] = [
 	{
 		title: 'React',
-		description: isDE ? 'Interaktive Beispiele und Dokumentation.' : 'Interactive examples and documentation.',
+		description: isDE
+			? 'Interaktive Beispiele und Dokumentation.'
+			: 'Interactive examples and documentation.',
 		url: `${baseUrl}/react-storybook${path}`,
 		icon: 'react',
 	},
 	{
 		title: 'Vue',
-		description: isDE ? 'Interaktive Beispiele und Dokumentation.' : 'Interactive examples and documentation.',
+		description: isDE
+			? 'Interaktive Beispiele und Dokumentation.'
+			: 'Interactive examples and documentation.',
 		url: `${baseUrl}/vue-storybook${path}`,
 		icon: 'vue',
 	},
 	{
 		title: 'Angular',
-		description: isDE ? 'Interaktive Beispiele und Dokumentation.' : 'Interactive examples and documentation.',
+		description: isDE
+			? 'Interaktive Beispiele und Dokumentation.'
+			: 'Interactive examples and documentation.',
 		url: `${baseUrl}/angular-storybook${path}`,
 		icon: 'angular',
 	},
 	{
 		title: 'Web Components',
-		description: isDE ? 'Interaktive Beispiele und Dokumentation.' : 'Interactive examples and documentation.',
+		description: isDE
+			? 'Interaktive Beispiele und Dokumentation.'
+			: 'Interactive examples and documentation.',
 		url: `${baseUrl}/web-components-storybook${path}`,
 		icon: 'web-components',
 		disabled: true,
@@ -77,47 +85,45 @@ const getIconPath = (icon: string): string => {
 ---
 
 <div class="resource-cards">
-	{
-		resources.map((resource) => {
-			const isDisabled = resource.disabled === true;
-			const cardContent = (
-				<>
-					{resource.protected && (
-						<span
-							class="resource-protected-icon"
-							data-icon="lock_closed"
-							aria-label={isDE ? 'Geschützter Inhalt' : 'Protected content'}
-							role="img"
-						/>
-					)}
-					{resource.icon && (
-						<img
-							src={getIconPath(resource.icon)}
-							alt={`Image for ${resource.title}, ${resource.description}`}
-							width="32"
-							height="32"
-						/>
-					)}
-					<div class="resource-text">
-						<strong class="resource-title">{resource.title}</strong>
-						<p>{resource.description}</p>
-					</div>
-				</>
-			);
-			return isDisabled ? (
-				<DisabledWrapper label={comingSoonLabel} size="small">
-					<DBCard className="resource-card-item">{cardContent}</DBCard>
-				</DisabledWrapper>
-			) : (
-				<a href={resource.url} target="_blank" rel="noopener noreferrer" class="resource-card-link">
-					<DBCard behavior="interactive" className="resource-card-item">
-						{cardContent}
-						<strong class="resource-link-label" data-icon-trailing="arrow_up_right">
-							{resource.label || defaultLabel}
-						</strong>
-					</DBCard>
-				</a>
-			);
-		})
-	}
+	{resources.map((resource) => {
+		const isDisabled = resource.disabled === true;
+		const cardContent = (
+			<>
+				{resource.protected && (
+					<span
+						class="resource-protected-icon"
+						data-icon="lock_closed"
+						aria-label={isDE ? 'Geschützter Inhalt' : 'Protected content'}
+						role="img"
+					/>
+				)}
+				{resource.icon && (
+					<img
+						src={getIconPath(resource.icon)}
+						alt={`Image for ${resource.title}, ${resource.description}`}
+						width="32"
+						height="32"
+					/>
+				)}
+				<div class="resource-text">
+					<strong class="resource-title">{resource.title}</strong>
+					<p>{resource.description}</p>
+				</div>
+			</>
+		);
+		return isDisabled ? (
+			<DisabledWrapper label={comingSoonLabel} size="small">
+				<DBCard className="resource-card-item">{cardContent}</DBCard>
+			</DisabledWrapper>
+		) : (
+			<a href={resource.url} target="_blank" rel="noopener noreferrer" class="resource-card-link">
+				<DBCard behavior="interactive" className="resource-card-item">
+					{cardContent}
+					<strong class="resource-link-label" data-icon-trailing="arrow_up_right">
+						{resource.label || defaultLabel}
+					</strong>
+				</DBCard>
+			</a>
+		);
+	})}
 </div>

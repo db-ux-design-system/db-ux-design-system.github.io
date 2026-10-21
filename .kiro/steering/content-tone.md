@@ -9,10 +9,10 @@ The platform has two areas, each with its own tone. Pick the right one before wr
 
 ## Step 1: Determine the area
 
-| Area | Typical content | Tone reference |
-|---|---|---|
+| Area                   | Typical content                                                                      | Tone reference                                 |
+| ---------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------- |
 | **Product & Services** | General information about the design system, value/benefit arguments, status updates | #[[file:content-tone/product-and-services.md]] |
-| **Documentation** | Component descriptions, guidelines, usage notes, changelogs | #[[file:content-tone/documentation.md]] |
+| **Documentation**      | Component descriptions, guidelines, usage notes, changelogs                          | #[[file:content-tone/documentation.md]]        |
 
 If it isn't clear from context, ask briefly.
 

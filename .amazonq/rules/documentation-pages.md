@@ -24,7 +24,7 @@ status: 'stable' # optional
 
 ---
 
-```
+````
 
 ## Required Imports
 ```jsx
@@ -38,7 +38,7 @@ import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlayground.astro';
 import PropertiesTable from '@template/components/PropertiesTable/PropertiesTable.astro';
 import { [component]Config } from '@template/configs/[component].config.js';
-```
+````
 
 ## Page Structure (in order)
 
@@ -67,9 +67,7 @@ Experiment with the [Component] component and its properties.
 
 ```jsx
 <DBSection spacing="small" width="auto">
-
 	## Resources
-
 	<ResourceCards
 		resources={[
 			{
@@ -167,10 +165,10 @@ Configure the [component] through its properties, such as [property examples].
 
 ```jsx
 <DBSection spacing="small" width="auto">
-
 	## FAQ Have a question about the [Component] component?
-
-	We'll answer it and add frequently asked questions to this page.
+	
+	We'll answer it and add frequently asked
+	questions to this page.
 	<QuestionForm componentName="[ComponentName]" />
 </DBSection>
 ```
@@ -179,9 +177,7 @@ Configure the [component] through its properties, such as [property examples].
 
 ```jsx
 <DBSection spacing="small" width="auto">
-
 	## Related Content
-
 	<TeaserCard
 		teasers={[
 			{

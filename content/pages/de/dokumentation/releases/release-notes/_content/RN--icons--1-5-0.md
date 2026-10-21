@@ -8,6 +8,7 @@ date: '2025-07-07'
 ### Design & Entwicklung
 
 #### Hinzugefügt
+
 - Icons: 5 neue Icons wurden hinzugefügt.
   - Audio/Video: AV Description
   - File: Bookmark, Receive Item, Share Item

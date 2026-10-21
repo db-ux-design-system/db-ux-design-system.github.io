@@ -52,51 +52,53 @@ if (frontmatter.externalUrl) {
 }
 ---
 
-{
-	redirectUrl ? (
-		<html lang={lang}>
-			<head>
-				<meta charset="utf-8" />
-				<title>{`Redirecting…`}</title>
-				<meta http-equiv="refresh" content={`0; url=${redirectUrl}`} />
-			</head>
-			<body>
-				<script define:vars={{ redirectUrl }}>window.location.replace(redirectUrl);</script>
-			</body>
-		</html>
-	) : (
-		<html lang={lang}>
-			<HtmlHead title={frontmatter.title} loadModelViewer={frontmatter.loadModelViewer} />
-			<body>
-				<Shell client:only="react" pathname={currentPath}>
-					<DocumentationContent frontmatter={frontmatter} headings={headings}>
-						<slot />
-					</DocumentationContent>
-					<Footer slot="endSlot" />
-				</Shell>
-				<slot name="script" />
-				<script>import '@template/components/ComponentPlayground/playground-init';</script>
-				<!-- Deep-link scroll fix: The Shell renders client-side (client:only="react"),
+{redirectUrl ? (
+	<html lang={lang}>
+		<head>
+			<meta charset="utf-8" />
+			<title>{`Redirecting…`}</title>
+			<meta http-equiv="refresh" content={`0; url=${redirectUrl}`} />
+		</head>
+		<body>
+			<script define:vars={{ redirectUrl }}>
+				window.location.replace(redirectUrl);
+			</script>
+		</body>
+	</html>
+) : (
+	<html lang={lang}>
+		<HtmlHead title={frontmatter.title} loadModelViewer={frontmatter.loadModelViewer} />
+		<body>
+			<Shell client:only="react" pathname={currentPath}>
+				<DocumentationContent frontmatter={frontmatter} headings={headings}>
+					<slot />
+				</DocumentationContent>
+				<Footer slot="endSlot" />
+			</Shell>
+			<slot name="script" />
+			<script>
+				import '@template/components/ComponentPlayground/playground-init';
+			</script>
+			<!-- Deep-link scroll fix: The Shell renders client-side (client:only="react"),
 				     so anchor targets don't exist yet when the browser performs its native
 				     hash scroll. This script retries scrolling until the target element
 				     appears in the DOM (up to ~3 s after page load). -->
-				<script is:inline>
-					if (window.location.hash) {
-						var id = decodeURIComponent(window.location.hash.slice(1));
-						var attempts = 0;
-						var scrollToHash = function() {
-							var el = document.getElementById(id);
-							if (el) {
-								el.scrollIntoView();
-							} else if (attempts < 20) {
-								attempts++;
-								setTimeout(scrollToHash, 150);
-							}
-						};
-						setTimeout(scrollToHash, 300);
-					}
-				</script>
-			</body>
-		</html>
-	)
-}
+			<script is:inline>
+				if (window.location.hash) {
+					var id = decodeURIComponent(window.location.hash.slice(1));
+					var attempts = 0;
+					var scrollToHash = function () {
+						var el = document.getElementById(id);
+						if (el) {
+							el.scrollIntoView();
+						} else if (attempts < 20) {
+							attempts++;
+							setTimeout(scrollToHash, 150);
+						}
+					};
+					setTimeout(scrollToHash, 300);
+				}
+			</script>
+		</body>
+	</html>
+)}

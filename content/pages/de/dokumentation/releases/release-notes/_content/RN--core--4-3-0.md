@@ -8,4 +8,5 @@ date: '2026-01-12'
 ### Design
 
 #### Hinzugefügt
+
 - Headline, Text: Absatzabstand-Tokens wurden hinzugefügt.

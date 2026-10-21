@@ -15,7 +15,7 @@ nav: true
 import { DBSection, DBNotification } from '@db-ux/react-core-components';
 import YourAction from '@template/components/YourAction/YourAction';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import CardTeaserRow from "@template/components/CardTeaser/CardTeaserRow";
+import CardTeaserRow from '@template/components/CardTeaser/CardTeaserRow';
 
 <DBSection spacing="small" width="auto">
 
@@ -61,16 +61,16 @@ Wenn du `--db-border-radius-*`-Tokens in Custom Components verwendest, prüfe na
 
 Die bisherigen Size-Werte entsprechen folgenden Visual Sizes:
 
-| Size  | Visual Size       |
-| ----- | ----------------- |
+| Size  | Visual Size         |
+| ----- | ------------------- |
 | `3xl` | entfällt – nutze H1 |
 | `2xl` | entfällt – nutze H1 |
-| `xl`  | H1                |
-| `lg`  | H2                |
-| `md`  | H3                |
-| `sm`  | H4                |
-| `xs`  | H5                |
-| `2xs` | H6                |
+| `xl`  | H1                  |
+| `lg`  | H2                  |
+| `md`  | H3                  |
+| `sm`  | H4                  |
+| `xs`  | H5                  |
+| `2xs` | H6                  |
 | `3xs` | entfällt – nutze H6 |
 
 Textinhalte werden durch das Update nicht überschrieben.
@@ -101,7 +101,8 @@ Textinhalte werden durch das Update nicht überschrieben.
 </div>
 
 <DBNotification semantic="critical" variant="standalone" headline="Wichtig">
-Kopiere den Inhalt des Drawer Headers **vor dem Update der Komponente** – das Update setzt den bestehenden Text zurück.
+	Kopiere den Inhalt des Drawer Headers **vor dem Update der Komponente** – das Update setzt den
+	bestehenden Text zurück.
 </DBNotification>
 
 <YourAction

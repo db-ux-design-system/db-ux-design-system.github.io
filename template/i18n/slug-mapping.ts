@@ -9,41 +9,41 @@ const segmentMap: Record<string, string> = {
 	// Top-level
 	'products-and-services': 'produkte-und-services',
 	'about-us': 'ueber-uns',
-	'legal': 'rechtliches',
-	'documentation': 'dokumentation',
+	legal: 'rechtliches',
+	documentation: 'dokumentation',
 
 	// products-and-services children
-	'components': 'komponenten',
-	'extensions': 'erweiterungen',
+	components: 'komponenten',
+	extensions: 'erweiterungen',
 	'for-designer': 'fuer-designerinnen',
 	'for-developer': 'fuer-entwicklerinnen',
 	'for-productmanagement': 'fuer-produktmanagement',
 
 	// legal children
-	'imprint': 'impressum',
-	'privacy': 'datenschutz',
+	imprint: 'impressum',
+	privacy: 'datenschutz',
 
 	// documentation children
 	// Only used by documentation/components/overview, but a plain segment entry is
 	// enough: it composes with 'documentation' and 'components', and no other
 	// content path uses an 'overview' segment it could collide with.
-	'overview': 'uebersicht',
+	overview: 'uebersicht',
 	'get-started': 'erste-schritte',
-	'learn': 'lernen',
-	'contribution': 'mitwirken',
-	'resources': 'ressourcen',
-	'versioning': 'versionierung',
+	learn: 'lernen',
+	contribution: 'mitwirken',
+	resources: 'ressourcen',
+	versioning: 'versionierung',
 	// Note: 'patterns' is identical in both languages under products-and-services,
 	// so no segment entry is needed. Only 'documentation/patterns' still differs
 	// (DE uses the singular folder) and is handled via fullPathMap below.
 
 	// foundation children
-	'colors': 'farben',
-	'typography': 'typografie',
-	'spacing': 'abstaende',
-	'opacity': 'transparenz',
-	'elevation': 'schattierung',
-	'sizing': 'groessen',
+	colors: 'farben',
+	typography: 'typografie',
+	spacing: 'abstaende',
+	opacity: 'transparenz',
+	elevation: 'schattierung',
+	sizing: 'groessen',
 	'border-radius': 'eckenradius',
 	'border-width': 'strichstaerke',
 };

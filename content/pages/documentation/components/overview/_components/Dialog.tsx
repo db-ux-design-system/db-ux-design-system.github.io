@@ -1,10 +1,5 @@
 import { useState, type ReactElement } from 'react';
-import {
-	DBButton,
-	DBDialog,
-	DBDialogFooter,
-	DBDialogHeader,
-} from '@db-ux/react-core-components';
+import { DBButton, DBDialog, DBDialogFooter, DBDialogHeader } from '@db-ux/react-core-components';
 import { type OverviewLabels } from './_shared.tsx';
 
 /*
