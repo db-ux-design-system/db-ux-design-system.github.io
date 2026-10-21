@@ -1,0 +1,116 @@
+/* Learning package: the popover in the control panel. Loaded through global.css,
+   because styles imported inside the client-only islands are missing after
+   client-side navigation. */
+.lp-list {
+	display: grid;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+/* One row per page: the link on the start side, the checkbox on the end side. The
+   link is stretched over the whole row (::after), so a click anywhere on the row
+   navigates. The checkbox sits above that area and stays operable on its own. */
+.lp-item {
+	position: relative;
+	display: grid;
+	grid-template-columns: 1fr auto;
+	gap: var(--db-spacing-fixed-sm);
+	align-items: center;
+	padding: var(--db-spacing-fixed-xs);
+	border-radius: var(--db-border-radius-sm);
+
+	/* No hover state while the pointer is on the checkbox: there, a click toggles.
+	   Keyboard focus on the link gets the same background. */
+	&:hover:not(:has(.lp-item-check:hover)),
+	&:has(.lp-item-link:focus-visible) {
+		background-color: var(--db-adaptive-bg-basic-transparent-full-hovered);
+	}
+
+	&:has(.lp-item-link:active) {
+		background-color: var(--db-adaptive-bg-basic-transparent-full-pressed);
+	}
+}
+
+.lp-item-link {
+	min-inline-size: 0;
+	font: var(--db-type-body-md);
+	color: inherit;
+	text-decoration: none;
+	margin-inline-end: var(--db-spacing-fixed-xl);
+
+	&::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: inherit;
+	}
+
+	/* The focus ring wraps the whole row. The inset offset keeps it inside the
+	   popover, so the popover does not clip it. That ring is the alternative to the
+	   removed outline of the link text. */
+	/* stylelint-disable-next-line a11y/no-outline-none */
+	&:focus-visible {
+		outline: none;
+	}
+
+	&:focus-visible::after {
+		/* Same focus ring as the library: 2xs outline with the library fallback color. */
+		outline: var(--db-border-width-2xs) solid
+			var(--db-focus-outline-color, var(--db-informational-on-bg-basic-emphasis-70-default));
+		outline-offset: calc(-1 * var(--db-border-width-2xs));
+	}
+}
+
+/* Above the stretched link area. */
+.lp-item-check {
+	position: relative;
+	z-index: 1;
+}
+
+/* Ends at the same inline position as the checkbox column of the rows below. */
+.lp-progress {
+	margin: 0;
+	padding-inline-end: var(--db-spacing-fixed-xs);
+	font: var(--db-type-body-sm);
+	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+	text-align: end;
+}
+
+/* Popover in the control panel */
+.lp-popover-body {
+	display: grid;
+	gap: var(--db-spacing-fixed-xs);
+	inline-size: 100%;
+}
+
+.lp-popover-title {
+	margin: 0;
+	font: var(--db-type-headline-2xs);
+}
+
+.lp-popover-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--db-spacing-fixed-xs);
+	padding-block-start: var(--db-spacing-fixed-xs);
+}
+
+/* Mobile menu bar: the button sits close to the end edge, and the popover is wider
+   than the space on either side of it. The library then centers it below the button
+   and it runs out of the viewport. Pinned to both viewport edges instead, still below
+   the menu bar. The library writes the position as inline styles, so the inset needs
+   !important. */
+.db-control-panel-mobile .lp-popover > .db-popover-content {
+	/* stylelint-disable-next-line declaration-no-important */
+	inset-inline: var(--db-spacing-fixed-sm) !important;
+	inline-size: auto;
+	max-inline-size: none;
+	max-block-size: calc(100dvh - var(--db-sizing-xl));
+	overflow-y: auto;
+
+	/* No horizontal centering: the library shifts by these offsets. */
+	--db-popover-center-x: 0%;
+	--db-popover-translate-x: 0%;
+}

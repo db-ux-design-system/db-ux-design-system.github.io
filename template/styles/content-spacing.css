@@ -8,7 +8,8 @@
  * code blocks, notifications, guidelines) wherever they appear in the
  * content tree, using adjacent sibling selectors for spacing.
  *
- * Excluded: .db-card internals, .db-notification internals, table cells.
+ * Excluded: .db-card internals, .db-notification internals, table cells,
+ * the Get Started wizard (.gsw).
  */
 
 /* Reset browser default margins on all content elements */
@@ -300,6 +301,14 @@
 .dba-main-content .actionbar .actionbar-group + .actionbar-group,
 .dba-main-content .db-stack[data-direction='row'] > * + *,
 .dba-main-content .component-playground.component-playground * + * {
+	margin-block-start: 0;
+}
+
+/* Exclude: the Get Started wizard (GetStartedWizard.css) spaces its steps, cards and
+ * result rows with grid and flex gaps only. The repeated class raises the selector to
+ * (0,3,0), the specificity of the base rule and of the headline rules above. It sits
+ * after all of them in this file, so it wins by source order. */
+.dba-main-content .gsw.gsw * + * {
 	margin-block-start: 0;
 }
 
