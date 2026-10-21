@@ -1,7 +1,6 @@
 ---
 import { DBSection } from '@db-ux/react-core-components';
 import PageHero from '@template/components/PageHero/PageHero.astro';
-import { appConfig } from '@config';
 
 interface Props {
 	title?: string;
@@ -20,12 +19,11 @@ const {
 } = Astro.props;
 
 // Single entry point into Get Started; the role question there splits into the paths.
+// Root-relative for both languages, like the footer links and the language switch.
 const actions = [
 	{
 		label: startLabel,
-		href: isDE
-			? '/de/dokumentation/erste-schritte'
-			: `${appConfig.basePath}documentation/get-started`,
+		href: isDE ? '/de/dokumentation/erste-schritte' : '/documentation/get-started',
 	},
 ];
 ---
