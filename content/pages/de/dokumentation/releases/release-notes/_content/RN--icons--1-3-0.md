@@ -8,4 +8,5 @@ date: '2025-06-23'
 ### Design & Entwicklung
 
 #### Hinzugefügt
+
 - Icons: 1 neues funktionales Icon wurde hinzugefügt (Journey/Mixed Class Reversed).

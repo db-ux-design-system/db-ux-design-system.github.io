@@ -26,7 +26,6 @@ const headings = [
 <DocumentationLayout frontmatter={frontmatter} headings={headings}>
 	The border width defines the stroke widths within the design system, ensuring a consistent visual
 	appearance and clear structure of the user interface.
-
 	<DBSection spacing="small">
 		<DBStack gap="x-large">
 			<DBStack gap="none">
@@ -37,17 +36,14 @@ const headings = [
 			<BorderWidthPlayground layout="horizontal" />
 		</DBStack>
 	</DBSection>
-
 	<DBSection spacing="small">
 		<h2 id="tokens">Tokens</h2>
 		<BorderWidthTable />
 	</DBSection>
-
 	<DBSection spacing="small">
 		<h2 id="faq">FAQ</h2>
 		<QuestionForm componentName="Border Width" />
 	</DBSection>
-
 	<script>
 		import { waitForElements } from '@template/utils/client.utils.ts';
 		import { handleSimplePlaygrounds } from '@content/pages/documentation/foundation/_shared';

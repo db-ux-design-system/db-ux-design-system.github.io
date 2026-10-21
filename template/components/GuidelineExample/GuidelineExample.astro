@@ -69,33 +69,24 @@ const frameTitle = description ?? (isDE ? 'Figma-Beispiel' : 'Figma example');
 	data-image-ratio={imageRatio}
 >
 	<DBCard elevationLevel="2" data-mode="light">
-		{
-			variant && (
-				<div class="guideline-example-badge">
-					<DBBadge semantic={semantic} emphasis="strong" size="medium">
-						<span>{label}</span>
-					</DBBadge>
-				</div>
-			)
-		}
-		{
-			cachedImageSrc ? (
-				<img
-					class="guideline-example-iframe"
-					src={cachedImageSrc}
-					alt=""
-					loading="lazy"
-				/>
-			) : (
-				<iframe
-					class="guideline-example-iframe"
-					src={fullUrl}
-					title={frameTitle}
-					loading="eager"
-					allowfullscreen
-				/>
-			)
-		}
+		{variant && (
+			<div class="guideline-example-badge">
+				<DBBadge semantic={semantic} emphasis="strong" size="medium">
+					<span>{label}</span>
+				</DBBadge>
+			</div>
+		)}
+		{cachedImageSrc ? (
+			<img class="guideline-example-iframe" src={cachedImageSrc} alt="" loading="lazy" />
+		) : (
+			<iframe
+				class="guideline-example-iframe"
+				src={fullUrl}
+				title={frameTitle}
+				loading="eager"
+				allowfullscreen
+			/>
+		)}
 	</DBCard>
 	{layout === 'side' && hasSlot ? (
 		<figcaption class="guideline-example-side-content">

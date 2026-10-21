@@ -14,7 +14,7 @@ tocMaxDepth: 3
 import { DBSection, DBNotification } from '@db-ux/react-core-components';
 import YourAction from '@template/components/YourAction/YourAction';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import CardTeaserRow from "@template/components/CardTeaser/CardTeaserRow";
+import CardTeaserRow from '@template/components/CardTeaser/CardTeaserRow';
 
 <DBSection spacing="small" width="auto">
 
@@ -39,7 +39,8 @@ All issues included in this release are linked at the bottom of the page.
 The following refactoring requires special attention. Existing instances must be reviewed after updating.
 
 <DBNotification semantic="critical" variant="standalone" headline="Important">
-Copy all contents from your instances **before updating the components** – updates may reset existing content.
+	Copy all contents from your instances **before updating the components** – updates may reset
+	existing content.
 </DBNotification>
 
 <YourAction
@@ -145,8 +146,6 @@ Copy all contents from your instances **before updating the components** – upd
 ### Refinements
 
 The following refinements require special attention. Existing instances must be reviewed after updating.
-
-
 
 #### Card & Popover
 

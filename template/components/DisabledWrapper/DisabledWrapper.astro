@@ -17,17 +17,15 @@ const { label, disabled = true, emphasis, size = 'medium', ariaLabel } = Astro.p
 	<div class="disabled-wrapper-content">
 		<slot />
 	</div>
-	{
-		disabled && (
-			<div class="disabled-wrapper-overlay" aria-label={ariaLabel || label}>
-				<DBBadge
-					size={size}
-					semantic="warning"
-					emphasis={emphasis === 'default' ? undefined : emphasis}
-				>
-					{label}
-				</DBBadge>
-			</div>
-		)
-	}
+	{disabled && (
+		<div class="disabled-wrapper-overlay" aria-label={ariaLabel || label}>
+			<DBBadge
+				size={size}
+				semantic="warning"
+				emphasis={emphasis === 'default' ? undefined : emphasis}
+			>
+				{label}
+			</DBBadge>
+		</div>
+	)}
 </div>

@@ -22,24 +22,19 @@ interface Props {
 const { sections } = Astro.props;
 ---
 
-{
-	sections.map((section) => (
-		<DBSection
-			width="medium"
-			spacing="medium"
-			aria-label={section.ariaLabel}
-			id={section.id}
+{sections.map((section) => (
+	<DBSection width="medium" spacing="medium" aria-label={section.ariaLabel} id={section.id}>
+		<TextImage
+			title={section.title}
+			imageSrc={`${appConfig.basePath}${section.imageSrc}`}
+			imageSrcDark={
+				section.imageSrcDark ? `${appConfig.basePath}${section.imageSrcDark}` : undefined
+			}
+			imageAlt={section.imageAlt}
+			imagePosition={section.imagePosition ?? 'right'}
+			mask={section.mask ?? 'fade-bottom-right'}
 		>
-			<TextImage
-				title={section.title}
-				imageSrc={`${appConfig.basePath}${section.imageSrc}`}
-				imageSrcDark={section.imageSrcDark ? `${appConfig.basePath}${section.imageSrcDark}` : undefined}
-				imageAlt={section.imageAlt}
-				imagePosition={section.imagePosition ?? 'right'}
-				mask={section.mask ?? 'fade-bottom-right'}
-			>
-				{section.text}
-			</TextImage>
-		</DBSection>
-	))
-}
+			{section.text}
+		</TextImage>
+	</DBSection>
+))}
