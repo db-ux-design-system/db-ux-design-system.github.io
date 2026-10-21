@@ -8,7 +8,10 @@ const MainNavigation = ({ mobile }: { mobile?: boolean }) => {
 	const { t } = useTranslation();
 
 	return (
-		<DBControlPanelNavigation variant={mobile ? 'drilldown' : 'popover'} aria-label={t('shell.mainNavigation')}>
+		<DBControlPanelNavigation
+			variant={mobile ? 'drilldown' : 'popover'}
+			aria-label={t('shell.mainNavigation')}
+		>
 			{navigation.map((navigationItem: NavigationItem) => (
 				<NavItem
 					key={`router-${navigationItem.path}-${navigationItem.title}`}

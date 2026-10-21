@@ -36,8 +36,7 @@ export const SectionHeading = ({
 	base: string;
 }): ReactElement => {
 	const href = componentPath(base, locale, id);
-	const linkLabel =
-		locale === 'de' ? `Zur Komponente ${title}` : `Go to ${title} component`;
+	const linkLabel = locale === 'de' ? `Zur Komponente ${title}` : `Go to ${title} component`;
 
 	return (
 		<DBCustomHeading

@@ -11,9 +11,7 @@ const FigmaLearnTeaser = ({ componentName, locale, anchor }: FigmaLearnTeaserPro
 		locale === 'de' ||
 		(typeof window !== 'undefined' && window.location.pathname.startsWith('/de/'));
 
-	const figmaLearnUrl = isDE
-		? '/de/dokumentation/lernen/figma'
-		: '/documentation/learn/figma';
+	const figmaLearnUrl = isDE ? '/de/dokumentation/lernen/figma' : '/documentation/learn/figma';
 
 	return (
 		<CardTeaser

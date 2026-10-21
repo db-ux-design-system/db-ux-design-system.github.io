@@ -8,4 +8,5 @@ date: '2025-11-11'
 ### Development
 
 #### Added
+
 - Header: The new `closeButtonText` property has been added.

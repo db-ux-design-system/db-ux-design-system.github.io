@@ -16,12 +16,12 @@ The documentation is prepared entirely in Figma – both the structured text con
 
 ## Related Skills (db-ux-ds-design Power)
 
-| Task | Skill |
-|------|-------|
-| Build/extend components in the Figma library | `design-library.md` |
-| Create/fill Component.Overview frames | `component-overview.md` |
-| Organize page layout in component library | `component-page-layout.md` |
-| Review library/component quality | `design-review.md` |
+| Task                                         | Skill                      |
+| -------------------------------------------- | -------------------------- |
+| Build/extend components in the Figma library | `design-library.md`        |
+| Create/fill Component.Overview frames        | `component-overview.md`    |
+| Organize page layout in component library    | `component-page-layout.md` |
+| Review library/component quality             | `design-review.md`         |
 
 ---
 
@@ -32,16 +32,19 @@ Each component in the DB UX Design System has a dedicated **Figma documentation 
 ### Project Location
 
 All documentation files live in a single Figma project:
+
 - **Project:** https://www.figma.com/files/1555127211835288633/project/4915706988
 
 ### Naming Convention
 
 Documentation files are named:
+
 ```
 Doku – [Component Name]
 ```
 
 **Examples:**
+
 - `Doku – Shell`
 - `Doku – Button`
 - `Doku – Navigation`
@@ -52,11 +55,11 @@ Doku – [Component Name]
 
 Each documentation file consists of multiple **Figma pages**:
 
-| Page Type | Naming Pattern | Purpose |
-|-----------|---------------|---------|
-| Content Page | `📋 Content [Component Name]` | Main content – structured text defining all documentation sections |
-| Guideline Page (Do) | `Guideline: [Topic] (do)` | Visual example showing correct usage |
-| Guideline Page (Dont) | `Guideline: [Topic] (dont)` | Visual example showing incorrect usage |
+| Page Type             | Naming Pattern                | Purpose                                                            |
+| --------------------- | ----------------------------- | ------------------------------------------------------------------ |
+| Content Page          | `📋 Content [Component Name]` | Main content – structured text defining all documentation sections |
+| Guideline Page (Do)   | `Guideline: [Topic] (do)`     | Visual example showing correct usage                               |
+| Guideline Page (Dont) | `Guideline: [Topic] (dont)`   | Visual example showing incorrect usage                             |
 
 ### Example File Layout (Shell Desktop)
 
@@ -120,23 +123,23 @@ RELATED:
 
 ### Section Rules
 
-| Section | Required | Notes |
-|---------|----------|-------|
-| COMPONENT | Yes | Exact component name as shown on the platform |
-| DESCRIPTION | Yes | First line is a summary paragraph. Bullet points (`- `) list key features/use cases |
-| RESOURCES | Yes | Framework links. Leave value empty if not yet available (e.g. `React:`) |
-| GUIDELINE | At least one recommended | Each guideline is a separate `===`-delimited block. Multiple guidelines allowed |
-| RELATED | Optional | List of related components with pipe-separated descriptions |
+| Section     | Required                 | Notes                                                                               |
+| ----------- | ------------------------ | ----------------------------------------------------------------------------------- |
+| COMPONENT   | Yes                      | Exact component name as shown on the platform                                       |
+| DESCRIPTION | Yes                      | First line is a summary paragraph. Bullet points (`- `) list key features/use cases |
+| RESOURCES   | Yes                      | Framework links. Leave value empty if not yet available (e.g. `React:`)             |
+| GUIDELINE   | At least one recommended | Each guideline is a separate `===`-delimited block. Multiple guidelines allowed     |
+| RELATED     | Optional                 | List of related components with pipe-separated descriptions                         |
 
 ### Format Details
 
-| Element | Format | Example |
-|---------|--------|---------|
-| Section separator | `===` on its own line | `===` |
+| Element               | Format                              | Example                                                                          |
+| --------------------- | ----------------------------------- | -------------------------------------------------------------------------------- |
+| Section separator     | `===` on its own line               | `===`                                                                            |
 | Guideline Do/Dont URL | Full Figma URL with `node-id` param | `https://www.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell?node-id=1-1132` |
-| URL-Caption separator | ` \| ` (space-pipe-space) | `Do: [URL] \| Use Top position for simple apps.` |
-| Bullet points | `- ` (dash + space) | `- Provide consistent page structure` |
-| Resource frameworks | Fixed labels | `React:`, `Vue:`, `Angular:`, `Web C.:` |
+| URL-Caption separator | `\|` (space-pipe-space)             | `Do: [URL] \| Use Top position for simple apps.`                                 |
+| Bullet points         | `- ` (dash + space)                 | `- Provide consistent page structure`                                            |
+| Resource frameworks   | Fixed labels                        | `React:`, `Vue:`, `Angular:`, `Web C.:`                                          |
 
 ---
 
@@ -154,35 +157,36 @@ Page: "Guideline: [Topic] (do)" or "Guideline: [Topic] (dont)"
 
 ### Container Specifications
 
-| Property | Value |
-|----------|-------|
-| Name | `Container` |
-| Size | **480 x 270 px** (fixed) |
-| Aspect Ratio | **Locked** (16:9) |
-| Clip Content | **Enabled** |
-| Auto Layout | Enabled |
-| Direction | Vertical (or Horizontal depending on content) |
-| Alignment | **Center, Center** (primary axis: center, counter axis: center) |
-| Padding | **None** (0 on all sides) |
-| Gap | `spacing-fixed-md` (DB UX spacing token) |
-| Fill | **None** (no background) |
-| Stroke | **None** |
+| Property     | Value                                                           |
+| ------------ | --------------------------------------------------------------- |
+| Name         | `Container`                                                     |
+| Size         | **480 x 270 px** (fixed)                                        |
+| Aspect Ratio | **Locked** (16:9)                                               |
+| Clip Content | **Enabled**                                                     |
+| Auto Layout  | Enabled                                                         |
+| Direction    | Vertical (or Horizontal depending on content)                   |
+| Alignment    | **Center, Center** (primary axis: center, counter axis: center) |
+| Padding      | **None** (0 on all sides)                                       |
+| Gap          | `spacing-fixed-md` (DB UX spacing token)                        |
+| Fill         | **None** (no background)                                        |
+| Stroke       | **None**                                                        |
 
 ### Rules
 
-| Rule | Details |
-|------|---------|
-| Page naming | `Guideline: [Exact Headline from content] (do)` / `(dont)` |
-| One visual per page | Each Do or Dont example is a separate Figma page |
-| Container frame | Named `Container`, 480x270, Auto Layout, center-aligned |
-| Content | A screenshot, component instance, or illustration showing the usage pattern |
-| Image naming | Typically `image [N]` (auto-generated from fills) |
-| Image format | Usually a rectangle with an image fill (exported screenshot) |
-| Referencing | The Content Page text references these pages via their Figma node URL |
+| Rule                | Details                                                                     |
+| ------------------- | --------------------------------------------------------------------------- |
+| Page naming         | `Guideline: [Exact Headline from content] (do)` / `(dont)`                  |
+| One visual per page | Each Do or Dont example is a separate Figma page                            |
+| Container frame     | Named `Container`, 480x270, Auto Layout, center-aligned                     |
+| Content             | A screenshot, component instance, or illustration showing the usage pattern |
+| Image naming        | Typically `image [N]` (auto-generated from fills)                           |
+| Image format        | Usually a rectangle with an image fill (exported screenshot)                |
+| Referencing         | The Content Page text references these pages via their Figma node URL       |
 
 ### URL Format for References
 
 The Figma URL in the content text references the **page node ID**:
+
 ```
 https://www.figma.com/design/[FILE_KEY]/[FILE_NAME]?node-id=[PAGE_NODE_ID]
 ```
@@ -211,14 +215,14 @@ Where `PAGE_NODE_ID` is the canvas/page ID (e.g. `1-1132`, `3-1110`).
 
 ### Content Writing Guidelines
 
-| Aspect | Guidance |
-|--------|----------|
-| Description | Start with a clear one-sentence summary. Follow with 2–4 bullet points highlighting key features or use cases |
-| Guideline Headline | Short, descriptive title (e.g. "ControlPanel Position", "Navigation Depth") |
-| Guideline Text | Explain the rationale / when to apply this pattern. Keep concise (1–2 sentences) |
-| Do Caption | Describe what the correct example shows – phrased as instruction ("Use X for Y") |
-| Dont Caption | Describe what's wrong – phrased as prohibition ("Don't use X when Y") |
-| Related entries | List components that are commonly used together or are variants of the documented component |
+| Aspect             | Guidance                                                                                                      |
+| ------------------ | ------------------------------------------------------------------------------------------------------------- |
+| Description        | Start with a clear one-sentence summary. Follow with 2–4 bullet points highlighting key features or use cases |
+| Guideline Headline | Short, descriptive title (e.g. "ControlPanel Position", "Navigation Depth")                                   |
+| Guideline Text     | Explain the rationale / when to apply this pattern. Keep concise (1–2 sentences)                              |
+| Do Caption         | Describe what the correct example shows – phrased as instruction ("Use X for Y")                              |
+| Dont Caption       | Describe what's wrong – phrased as prohibition ("Don't use X when Y")                                         |
+| Related entries    | List components that are commonly used together or are variants of the documented component                   |
 
 ---
 
@@ -253,7 +257,7 @@ The structured text format is parsed by the documentation platform build system.
 - **Separator is exactly `===`** – 3 equals signs on a dedicated line
 - **Line breaks matter** – each field (Headline, Text, Do, Dont) must be on its own line
 - **URLs must be valid Figma URLs** – the platform resolves them to extract the visual content
-- **Pipe separator** in Do/Dont and RELATED is ` | ` (space-pipe-space)
+- **Pipe separator** in Do/Dont and RELATED is `|` (space-pipe-space)
 
 ---
 

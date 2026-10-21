@@ -22,7 +22,8 @@ interface Props {
 }
 
 const isDE = Astro.url.pathname.startsWith('/de/') || Astro.url.pathname === '/de';
-const localizeHref = (enPath: string) => isDE ? `/de/${toDeSlug(enPath)}` : `${appConfig.basePath}${enPath}`;
+const localizeHref = (enPath: string) =>
+	isDE ? `/de/${toDeSlug(enPath)}` : `${appConfig.basePath}${enPath}`;
 
 const {
 	sectionTitle = 'A unified model for product teams',
@@ -52,13 +53,10 @@ const openPageLabel = (title: string) => (isDE ? `Seite ${title} öffnen` : `Ope
 	aria-label={sectionTitle}
 	id="home--unified-model-section"
 >
-	<SectionTitle
-		title={sectionTitle}
-		description={sectionDescription}
-	/>
+	<SectionTitle title={sectionTitle} description={sectionDescription} />
 	<DBStack gap="large">
 		<a
-			href={localizeHref("products-and-services/foundations")}
+			href={localizeHref('products-and-services/foundations')}
 			aria-label={openPageLabel(foundationTitle)}
 		>
 			<DBCard behavior="interactive" spacing="large">
@@ -75,7 +73,7 @@ const openPageLabel = (title: string) => (isDE ? `Seite ${title} öffnen` : `Ope
 			</DBCard>
 		</a>
 		<a
-			href={localizeHref("products-and-services/components")}
+			href={localizeHref('products-and-services/components')}
 			aria-label={openPageLabel(componentsTitle)}
 		>
 			<DBCard behavior="interactive" spacing="large">
@@ -92,7 +90,7 @@ const openPageLabel = (title: string) => (isDE ? `Seite ${title} öffnen` : `Ope
 			</DBCard>
 		</a>
 		<a
-			href={localizeHref("products-and-services/extensions")}
+			href={localizeHref('products-and-services/extensions')}
 			aria-label={openPageLabel(extensionsTitle)}
 		>
 			<DBCard behavior="interactive" spacing="large">

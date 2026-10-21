@@ -11,23 +11,21 @@ const { title, description, layout = 'split' } = Astro.props as Props;
 ---
 
 <div class="section-title" data-layout={layout}>
-	{
-		layout === 'split' ? (
-			<>
-				<div class="section-title-col section-title-col-headline">
-					<h3 class="section-title-headline">{title}</h3>
+	{layout === 'split' ? (
+		<>
+			<div class="section-title-col section-title-col-headline">
+				<h3 class="section-title-headline">{title}</h3>
+			</div>
+			{description && (
+				<div class="section-title-col section-title-col-description">
+					<p class="section-title-description">{description}</p>
 				</div>
-				{description && (
-					<div class="section-title-col section-title-col-description">
-						<p class="section-title-description">{description}</p>
-					</div>
-				)}
-			</>
-		) : (
-			<>
-				<h2 class="section-title-headline">{title}</h2>
-				{description && <p class="section-title-description">{description}</p>}
-			</>
-		)
-	}
+			)}
+		</>
+	) : (
+		<>
+			<h2 class="section-title-headline">{title}</h2>
+			{description && <p class="section-title-description">{description}</p>}
+		</>
+	)}
 </div>
