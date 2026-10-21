@@ -31,6 +31,17 @@ declare interface FrontMatter {
 	 */
 	heroImageAlt?: string;
 	/**
+	 * Optional hero 3D model URL (.glb). When set, the hero renders an
+	 * interactive model-viewer instead of the hero image. Requires
+	 * `loadModelViewer: true` on the same page.
+	 */
+	heroModel?: string;
+	/**
+	 * Name of the animation in the hero model to play.
+	 * Defaults to the first animation in the file.
+	 */
+	heroModelAnimation?: string;
+	/**
 	 * The creation date of the page.
 	 */
 	date?: Date;

@@ -96,6 +96,25 @@
 	block-size: auto;
 }
 
+/* 3D model hero: model-viewer needs explicit dimensions to render */
+.page-hero-media[data-model='true'] {
+	justify-content: center;
+}
+
+.page-hero-media model-viewer {
+	display: block;
+	inline-size: 100%;
+	max-inline-size: var(--db-container-sm);
+	block-size: var(--db-container-xs);
+	--poster-color: transparent;
+}
+
+@media (width <= 767px) {
+	.page-hero-media model-viewer {
+		block-size: calc(var(--db-container-xs) / 1.5);
+	}
+}
+
 /* Zentrierter Variant (z.B. Landing Pages) */
 
 /* Alignment Variants */
