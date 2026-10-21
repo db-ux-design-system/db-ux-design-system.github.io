@@ -47,12 +47,6 @@ const HeadingRow = ({
 					? `${name} ${labels.headingFontWeights[weight]}`
 					: labels.headingFontWeights[weight];
 
-			/*
-			 * Since v6 the component only takes a level (`visualSize`), so the
-			 * nine-step v5 scale cannot be rendered with it anymore. The v5 rows use
-			 * a native h3 with the size utility class the foundations still ship,
-			 * and `data-variant="light"` for the light weight.
-			 */
 			return level ? (
 				<DBHeadingH3 key={weight} visualSize={level} fontWeight={weight}>
 					{text}
