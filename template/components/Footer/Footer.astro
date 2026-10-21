@@ -11,8 +11,9 @@ const contactLabel = isDE ? 'Kontakt' : 'Contact';
 // Design system mailbox. The control panel has no contact button, so this is the site-wide contact link.
 const contactHref = 'mailto:db-ux-designsystem@deutschebahn.com';
 const footerNavLabel = isDE ? 'Kontakt und Rechtliches' : 'Contact and legal';
-// DBFooterMeta prepends the copyright sign; the year follows the build date.
-const copyright = `${new Date().getFullYear()} Deutsche Bahn AG`;
+// DBFooterMeta prepends the copyright sign. No year: the notice is not required
+// for protection, and a year would only need maintenance.
+const copyright = 'Deutsche Bahn AG';
 ---
 
 <DBFooter width="full">

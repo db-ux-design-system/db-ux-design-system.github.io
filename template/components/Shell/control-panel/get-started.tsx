@@ -1,4 +1,3 @@
-import { appConfig } from '@root/app.config.ts';
 import { useLanguage } from '@template/context/language-context';
 import { useTranslation } from '@template/i18n';
 
@@ -12,10 +11,9 @@ import { useTranslation } from '@template/i18n';
 const GetStarted = () => {
 	const { t } = useTranslation();
 	const { language } = useLanguage();
+	// Root-relative for both languages, like the footer links and the language switch.
 	const href =
-		language === 'de'
-			? '/de/dokumentation/erste-schritte'
-			: `${appConfig.basePath}documentation/get-started`;
+		language === 'de' ? '/de/dokumentation/erste-schritte' : '/documentation/get-started';
 
 	return (
 		<a className="db-button" href={href} data-variant="brand" data-wrap="false">
