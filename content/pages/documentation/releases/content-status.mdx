@@ -21,7 +21,7 @@ Every component, pattern, and template in the DB UX Design System has a status t
 <div style={{ display: 'grid', gridTemplateColumns: 'auto auto', columnGap: 'var(--db-spacing-fixed-lg)', rowGap: 'var(--db-spacing-fixed-xs)', width: 'fit-content' }}>
 
 <DBCard data-density="expressive" style={{ width: 'fit-content' }} spacing="large">
-	<DBStack direction="row" gap="small" alignment="center">
+	<DBStack direction="row" gap="small" alignment="center" height="full">
 		<DBBadge semantic="warning">Concept</DBBadge>
 		<span data-icon="arrow_right" />
 		<DBBadge semantic="informational">Beta</DBBadge>
@@ -31,7 +31,7 @@ Every component, pattern, and template in the DB UX Design System has a status t
 </DBCard>
 
 <DBCard data-density="expressive" style={{ width: 'fit-content' }} spacing="large">
-	<DBStack direction="row" gap="small" alignment="center">
+	<DBStack direction="row" gap="small" alignment="center" height="full">
 		<DBBadge semantic="critical">Legacy</DBBadge>
 		<DBBadge>Deprecated</DBBadge>
 	</DBStack>

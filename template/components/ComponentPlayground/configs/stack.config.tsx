@@ -70,5 +70,27 @@ export const stackConfig: PlaygroundConfig<DBStackProps> = {
 				{ value: 'space-between', label: 'Space Between' },
 			],
 		},
+		// New in v6. Since v6 a stack no longer stretches to its parent's height, so
+		// Justify Content in a column only shows an effect with Height "Full".
+		{
+			name: 'width',
+			type: 'select',
+			label: 'Width',
+			defaultValue: 'full',
+			options: [
+				{ value: 'full', label: 'Full', default: true },
+				{ value: 'auto', label: 'Auto' },
+			],
+		},
+		{
+			name: 'height',
+			type: 'select',
+			label: 'Height',
+			defaultValue: 'auto',
+			options: [
+				{ value: 'auto', label: 'Auto', default: true },
+				{ value: 'full', label: 'Full' },
+			],
+		},
 	],
 };
