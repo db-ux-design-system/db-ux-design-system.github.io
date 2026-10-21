@@ -12,7 +12,7 @@
 .card-teaser .card-teaser-protected-icon {
 	position: absolute;
 	inset-block-start: var(--db-spacing-fixed-sm);
-	inset-inline-end: 0;
+	inset-inline-end: var(--db-spacing-fixed-sm);
 	font-size: var(--db-sizing-md);
 	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
 }

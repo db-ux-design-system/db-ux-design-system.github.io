@@ -32,7 +32,7 @@ const CardTeaser = ({
 			{...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
 			className="card-teaser"
 		>
-			<DBCard behavior="interactive" spacing="medium">
+			<DBCard behavior="interactive" spacing="small">
 				{isProtected && (
 					<span
 						className="card-teaser-protected-icon"
