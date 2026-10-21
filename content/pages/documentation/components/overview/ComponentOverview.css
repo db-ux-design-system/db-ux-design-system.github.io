@@ -132,7 +132,7 @@
  * and nothing of it is overridden here. Bound to the rows of this page, so no
  * heading outside them is affected.
  */
-.dba-main-content .overview-grid .overview-row > .db-heading {
+.dba-main-content .overview-grid .overview-row > :is(.db-heading, .overview-heading-specimen) {
 	margin-block-start: 0;
 }
 
@@ -203,8 +203,12 @@
  *
  * This is a workaround for the specimens, not a fix: the same override defeats
  * the size property of a heading everywhere on the platform.
+ *
+ * `.overview-heading-specimen` are the native h3 of the v5 rows. Since v6 the
+ * component has no nine-step size scale anymore, so those rows use the
+ * foundations' `db-headline-size-*` classes, which the same override defeats.
  */
-.dba-main-content .overview-grid .db-heading {
+.dba-main-content .overview-grid :is(.db-heading, .overview-heading-specimen) {
 	font: revert-layer;
 }
 
