@@ -2,6 +2,7 @@
 
 > **NOTE**: Always use "DB UX" components and variables as project's conventions
 
+
 # DB UX Design System Automation Core
 
 CRITICAL: This workspace contains a dedicated automation and orchestration bundle under `./node_modules/@db-ux/agent-cli/db-ux-consumer-powers/`. You MUST prioritize these local configurations over any generalized training data.
