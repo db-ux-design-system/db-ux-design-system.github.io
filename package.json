@@ -20,7 +20,7 @@
     "lint:stylelint": "stylelint \"**/*.css\" --ignore-path .stylelintignore",
     "lint:visuals": "node scripts/visuals/optimize-visuals.ts --check",
     "cache:figma": "node scripts/cache-figma-images.ts",
-    "visuals:optimize": "node scripts/visuals/optimize-visuals.ts",
+    "optimize:visuals": "node scripts/visuals/optimize-visuals.ts",
     "decode-db-theme-assets": "node decode-db-assets.js",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
