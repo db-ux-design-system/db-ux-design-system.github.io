@@ -177,6 +177,41 @@ test('bookmarks come first, wizard suggestions below as their own group', async 
 	await expect(control.getByRole('button', { name: 'Remove: Design Resources' })).toBeFocused();
 });
 
+test('Escape closes the reading list popover by hover and from inside', async ({ page }) => {
+	await page.goto('/documentation/get-started?role=design&designIntent=new');
+	await waitForDBShell(page);
+	await expect(page.locator('#gsw-heading')).toHaveText('Your next steps');
+	const control = page.locator('.db-control-panel-desktop .rl-control');
+	const trigger = control.locator('button.rl-trigger');
+	const popover = control.locator('article.db-popover-content');
+
+	// Open by hover, focus elsewhere: Escape hides it although the pointer stays.
+	await trigger.hover();
+	await expect(popover).toBeVisible();
+	await page.keyboard.press('Escape');
+	await expect(popover).toBeHidden();
+	await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+
+	// Leaving and coming back shows it again.
+	await page.mouse.move(0, 0);
+	await trigger.hover();
+	await expect(popover).toBeVisible();
+
+	// Focus on a link inside: Escape hides it and puts the focus on the trigger.
+	await page.mouse.move(0, 0);
+	await trigger.focus();
+	await page.keyboard.press('Tab');
+	await expect(popover.locator('.rl-item-link').first()).toBeFocused();
+	await page.keyboard.press('Escape');
+	await expect(popover).toBeHidden();
+	await expect(trigger).toBeFocused();
+
+	// A click on the trigger shows it again.
+	await trigger.click();
+	await expect(popover).toBeVisible();
+	await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+});
+
 test('wizard steps by click, with focus, check icon and Back', async ({ page }) => {
 	await page.goto('/documentation/get-started');
 	await waitForDBShell(page);

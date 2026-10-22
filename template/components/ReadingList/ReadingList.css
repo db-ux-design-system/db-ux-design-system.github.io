@@ -136,12 +136,32 @@
 	--db-popover-translate-x: 0%;
 }
 
+/* Closed with Escape (see ReadingListButton): hidden although the pointer or the
+   focus is still on it. The library shows the popover through this property. */
+.rl-control[data-dismissed='true'] .rl-popover > .db-popover-content {
+	--db-show-popover-visibility: hidden;
+}
+
+/* Count badge: the library centers a corner badge on the corner of the button. The
+   icon-only button is larger than its icon, so the badge floated beside the icon.
+   Moved in, so it overlaps the top end corner of the bookmark glyph slightly. */
+.rl-trigger > .db-badge[data-placement='corner-top-right'] {
+	inset-inline-end: calc(var(--db-spacing-fixed-xs) + var(--db-spacing-fixed-3xs));
+	inset-block-start: calc(var(--db-spacing-fixed-xs) - var(--db-spacing-fixed-3xs));
+}
+
+/* Small button in the mobile menu bar: less space around the icon. */
+.rl-trigger[data-size='small'] > .db-badge[data-placement='corner-top-right'] {
+	inset-inline-end: var(--db-spacing-fixed-2xs);
+	inset-block-start: var(--db-spacing-fixed-3xs);
+}
+
 /* Desktop header: the language switch is a button with text and 16 px inline
-   padding, the reading list button is icon-only, and its badge reaches beyond the
-   end edge into the gap. The extra space keeps the badge clear of the color mode
-   switch, so the row looks evenly spaced. */
+   padding, the reading list button is icon-only with 8 px around the icon. The extra
+   8 px give the icon the same visible gap to the color mode switch as the switch has
+   to the globe icon. The badge stays within the button, see above. */
 .shell-preference-switches > .rl-control {
-	margin-inline-end: var(--db-spacing-fixed-md);
+	margin-inline-end: var(--db-spacing-fixed-xs);
 }
 
 /* Bookmark button in the page hero, right after the headline. */

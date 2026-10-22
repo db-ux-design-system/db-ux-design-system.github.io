@@ -1,4 +1,4 @@
-import { useId, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { DBBadge, DBButton, DBPopover, DBTooltip } from '@db-ux/react-core-components';
 import { useLanguage } from '@template/context/language-context';
 import { wizardHref } from '@template/components/GetStartedWizard/wizard-flow';
@@ -12,9 +12,14 @@ import { readingListTexts } from './texts';
  * is empty.
  *
  * The popover opens and closes like the language switch: uncontrolled DBPopover,
- * open while the pointer is over it or the focus is inside. Escape is handled by the
- * library: it only closes the popover while the trigger has focus, and the focus then
- * moves to the page body. Escape from a control inside the popover does nothing.
+ * open while the pointer is over it or the focus is inside.
+ *
+ * Escape closes it in every case (WCAG 1.4.13, dismissible): while it is open by
+ * hover, and while the focus is on the trigger or on a control inside. The library
+ * only handles Escape on the trigger and then moves the focus to the page body, so
+ * the component handles it itself: it hides the popover, keeps or puts the focus on
+ * the trigger and shows the popover again once the pointer and the focus have left,
+ * or on a click on the trigger.
  */
 const ReadingListButton = ({ size }: { size?: 'small' }) => {
 	const { language: lang } = useLanguage();
@@ -27,6 +32,56 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 	// The desktop and the mobile control panel both render this button, so the ids
 	// need to be unique per instance.
 	const idPrefix = `rl-popover${useId().replace(/[^\w-]/g, '')}`;
+	// True after Escape until the pointer and the focus have left (see above).
+	const [dismissed, setDismissed] = useState(false);
+	const dismissedRef = useRef(false);
+
+	useEffect(() => {
+		const wrapper = wrapperRef.current;
+		if (!wrapper) return;
+		const trigger = () => wrapper.querySelector<HTMLElement>('.rl-trigger');
+		const setState = (value: boolean) => {
+			dismissedRef.current = value;
+			setDismissed(value);
+		};
+		const onKeyDown = (event: KeyboardEvent) => {
+			if (event.key !== 'Escape' || dismissedRef.current) return;
+			const focusInside = wrapper.contains(document.activeElement);
+			if (!focusInside && !wrapper.matches(':hover')) return;
+			if (focusInside) {
+				// Registered on window in the capture phase: this keeps the library's
+				// handler from blurring the trigger.
+				event.stopPropagation();
+				trigger()?.focus();
+			}
+			setState(true);
+			trigger()?.setAttribute('aria-expanded', 'false');
+		};
+		const onMouseLeave = () => {
+			if (!wrapper.contains(document.activeElement)) setState(false);
+		};
+		const onFocusOut = (event: FocusEvent) => {
+			if (!wrapper.contains(event.relatedTarget as Node | null) && !wrapper.matches(':hover')) {
+				setState(false);
+			}
+		};
+		window.addEventListener('keydown', onKeyDown, true);
+		wrapper.addEventListener('mouseleave', onMouseLeave);
+		wrapper.addEventListener('focusout', onFocusOut);
+		return () => {
+			window.removeEventListener('keydown', onKeyDown, true);
+			wrapper.removeEventListener('mouseleave', onMouseLeave);
+			wrapper.removeEventListener('focusout', onFocusOut);
+		};
+	}, []);
+
+	// A click on the trigger shows a dismissed popover again.
+	const reopen = () => {
+		if (!dismissedRef.current) return;
+		dismissedRef.current = false;
+		setDismissed(false);
+		wrapperRef.current?.querySelector('.rl-trigger')?.setAttribute('aria-expanded', 'true');
+	};
 
 	// Own bookmarks first, wizard suggestions below as a separate group. Within each
 	// group, the order of the list is kept.
@@ -49,7 +104,7 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 	};
 
 	return (
-		<div className="rl-control" ref={wrapperRef}>
+		<div className="rl-control" ref={wrapperRef} data-dismissed={dismissed ? 'true' : undefined}>
 			<DBPopover
 				className="rl-popover"
 				placement="bottom-end"
@@ -71,6 +126,7 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 						noText
 						className="rl-trigger"
 						aria-label={text.triggerLabel(count)}
+						onClick={reopen}
 					>
 						{text.title}
 						{count > 0 && (
