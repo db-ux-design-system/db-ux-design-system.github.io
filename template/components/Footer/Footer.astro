@@ -1,6 +1,5 @@
 ---
-import { DBLink, DBStack } from '@db-ux/react-core-components';
-import './Footer.css';
+import { DBFooter, DBFooterMeta, DBLink } from '@db-ux/react-core-components';
 
 const currentPath = Astro.url?.pathname ?? '';
 const isDE = currentPath.startsWith('/de/') || currentPath === '/de';
@@ -8,15 +7,35 @@ const imprintLabel = isDE ? 'Impressum' : 'Imprint';
 const privacyLabel = isDE ? 'Datenschutz' : 'Privacy';
 const imprintHref = isDE ? '/de/rechtliches/impressum' : '/legal/imprint';
 const privacyHref = isDE ? '/de/rechtliches/datenschutz' : '/legal/privacy';
+const contactLabel = isDE ? 'Kontakt' : 'Contact';
+// Design system mailbox. The control panel has no contact button, so this is the site-wide contact link.
+const contactHref = 'mailto:db-ux-designsystem@deutschebahn.com';
+const footerNavLabel = isDE ? 'Kontakt und Rechtliches' : 'Contact and legal';
+// DBFooterMeta prepends the copyright sign. No year: the notice is not required
+// for protection, and a year would only need maintenance.
+const copyright = 'Deutsche Bahn AG';
 ---
 
-<footer class="footer">
-	<DBStack direction="row" gap="medium">
-		<DBLink variant="inline" href={imprintHref}>
-			{imprintLabel}
-		</DBLink>
-		<DBLink variant="inline" href={privacyHref}>
-			{privacyLabel}
-		</DBLink>
-	</DBStack>
-</footer>
+<DBFooter width="full">
+	<DBFooterMeta copyright={copyright}>
+		<nav aria-label={footerNavLabel}>
+			<ul>
+				<li>
+					<DBLink variant="inline" size="small" href={imprintHref}>
+						{imprintLabel}
+					</DBLink>
+				</li>
+				<li>
+					<DBLink variant="inline" size="small" href={privacyHref}>
+						{privacyLabel}
+					</DBLink>
+				</li>
+				<li>
+					<DBLink variant="inline" size="small" href={contactHref}>
+						{contactLabel}
+					</DBLink>
+				</li>
+			</ul>
+		</nav>
+	</DBFooterMeta>
+</DBFooter>

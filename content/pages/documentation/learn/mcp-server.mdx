@@ -197,23 +197,23 @@ Amazon Q can automatically load the project's `CONTEXT.md` as a persistent syste
 
 ### Tokens & Assets
 
-| Tool                           | Description                                                                                                            |
-| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
-| `get_design_tokens`            | Returns CSS custom properties (`--db-*`) for a token category. Spacing, elevation, and density return compiled values. |
-| `list_design_token_categories` | Lists all available token categories (e.g. `colors`, `spacing`, `typography`, `elevation`, `density`).                 |
-| `list_icons`                   | Returns all valid DB UX icon names. **Always call before setting an `icon` prop.**                                     |
-| `get_component_visual`         | Returns a downscaled screenshot (max 800×800 px, JPEG q75) as Base64. Use only when needed.                            |
-| `docs_search`                  | Searches the DB UX documentation (guidelines, A11y, migration docs). Acts as a RAG engine.                             |
+| Tool                           | Description                                                                                                                             |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `get_design_tokens`            | Returns CSS custom properties (`--db-*`) for a token category. Spacing, elevation, and density return compiled values.                  |
+| `list_design_token_categories` | Lists all available token categories (e.g. `colors`, `spacing`, `typography`, `elevation`, `density`).                                  |
+| `list_icons`                   | Returns all valid DB UX icon names. **Always call before setting an `icon` prop.**                                                      |
+| `list_visuals`                 | Returns all available visual reference names (e.g. `dashboard`, `form`, `table`). Call before `get_visual_reference`.                   |
+| `get_visual_reference`         | Returns a visual reference image (max 800×800 px, JPEG q75) as Base64. Use only when you need visual context, e.g. for complex layouts. |
+| `docs_search`                  | Searches the DB UX documentation (guidelines, A11y, migration docs). Acts as a RAG engine.                                              |
 
-### Migration & Scaffolding
+### Migration
 
-| Tool                    | Description                                                                                                                       |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `analyze_v2_migration`  | **Call first for migrations.** Scans a file for DB UI v2 patterns (`<cmp-*>`, `<elm-*>`, `db-color-*`) and returns a JSON report. |
-| `list_migration_guides` | Returns all available migration guides (e.g. `color-migration`, `component-migration`).                                           |
-| `get_migration_guide`   | Returns the full Markdown content of a migration guide.                                                                           |
-| `verify_migrated_code`  | Saves generated code temporarily and checks it with `tsc --noEmit`. Returns diagnostics on errors (max 3 attempts).               |
-| `scaffold_component`    | Generates a DB UX-compliant component skeleton for a framework with correct `@db-ux/*` imports and SCSS `@use` directives.        |
+| Tool                          | Description                                                                                                                                                                                                                                          |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `scan_generation_2_migration` | **Call first for migrations.** Scans a file for Generation 2 patterns (`cmp-*`, `elm-*` and `rea-*` classes, `<db-*>` Web Components, `db-color-*` tokens, legacy icon names) and returns a JSON report with line numbers and migration suggestions. |
+| `list_migration_guides`       | Returns all available migration guides (e.g. `color-migration`, `component-migration`).                                                                                                                                                              |
+| `get_migration_guide`         | Returns the full Markdown content of a migration guide.                                                                                                                                                                                              |
+| `verify_migrated_code`        | Saves generated code temporarily and checks it with `tsc --noEmit`. Returns diagnostics on errors (max 3 attempts).                                                                                                                                  |
 
 ### Example Workflow: React Button
 
@@ -258,7 +258,7 @@ Transforms legacy code (Bootstrap, native HTML, DB UI v1/v2) into the modern DB 
 **Workflow steps:**
 
 ```text
-Step 0: analyze_v2_migration    → file scan (deterministic, no guessing)
+Step 0: scan_generation_2_migration → file scan (deterministic, no guessing)
 Step 1: Migration Analysis      → mapping table: Legacy → DB UX v3
 Step 2: Component Discovery     → load props, examples, tokens, icons
 Step 3: Code Generation         → complete migrated code (internal)
