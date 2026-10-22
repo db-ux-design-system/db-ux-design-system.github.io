@@ -13,6 +13,13 @@ const waitForDBShell = async (page: Page) => {
 
 const KEY = 'db-ux-reading-list';
 
+// The bookmark button is a client:load island. A click before hydration does nothing,
+// so wait until Astro has hydrated it (it removes the ssr attribute then). Direct
+// child only: the Shell island around the page contains the toggle as well.
+const waitForToggle = async (page: Page) => {
+	await expect(page.locator('astro-island:has(> .rl-toggle)')).not.toHaveAttribute('ssr', /.*/);
+};
+
 const readList = (page: Page) =>
 	page.evaluate((key) => JSON.parse(localStorage.getItem(key) ?? 'null'), KEY);
 
@@ -114,6 +121,7 @@ test('bookmark button adds and removes the page', async ({ page }) => {
 	// The button sits outside the heading, so the heading name stays the headline.
 	await expect(page.locator('h1')).toHaveAccessibleName('Figma');
 
+	await waitForToggle(page);
 	await toggle.click();
 	await expect(toggle).toHaveAccessibleName('Remove from reading list');
 	await expect(toggle).toHaveAttribute('data-icon-variant', 'db-filled');
@@ -136,6 +144,7 @@ test('bookmark button adds and removes the page', async ({ page }) => {
 	await expect(link).toHaveAttribute('href', '/de/dokumentation/lernen/figma');
 
 	await page.mouse.move(0, 0);
+	await waitForToggle(page);
 	await deToggle.click();
 	await expect(deToggle).toHaveAccessibleName('Zur Leseliste hinzufügen');
 	expect((await readList(page)).items).toEqual([]);
@@ -148,6 +157,7 @@ test('bookmarks come first, wizard suggestions below as their own group', async 
 	await expect(page.locator('#gsw-heading')).toHaveText('Your next steps');
 	await page.goto('/documentation/learn/ai');
 	await waitForDBShell(page);
+	await waitForToggle(page);
 	await page.locator('.rl-toggle button').click();
 
 	const control = page.locator('.db-control-panel-desktop .rl-control');
