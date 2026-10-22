@@ -78,6 +78,12 @@ if (frontmatter.externalUrl) {
 			<slot name="script" />
 			<script>
 				import '@template/components/ComponentPlayground/playground-init';
+				// Learn articles opt in to a stepper view. The controller is a no-op on
+				// pages without a #learn-article, so it is safe to run on every doc page.
+				// It lives here, not in the MDX-embedded LearnArticle component, because
+				// Astro does not hoist <script> from .astro components used inside MDX.
+				import { initLearnArticle } from '@template/components/Learn/learn-controller';
+				initLearnArticle();
 			</script>
 			<!-- Deep-link scroll fix: The Shell renders client-side (client:only="react"),
 				     so anchor targets don't exist yet when the browser performs its native

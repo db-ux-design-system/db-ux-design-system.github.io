@@ -1,0 +1,25 @@
+---
+import { DBSection } from '@db-ux/react-core-components';
+
+interface Props {
+	/** Heading of the additional-info block, rendered as an h3. */
+	title: string;
+}
+
+const { title } = Astro.props as Props;
+---
+
+{/*
+	Additional information. In article view it renders inline like any other section.
+	In stepper view the LearnArticle controller collapses it into a details/summary
+	accordion attached to the end of the main content, so the step stays focused on the
+	essentials while the extra detail remains reachable.
+*/}
+<DBSection spacing="small" width="full">
+	<details class="learn-aside" data-learn-aside data-learn-title={title}>
+		<summary class="learn-aside-summary">{title}</summary>
+		<div class="learn-aside-body">
+			<slot />
+		</div>
+	</details>
+</DBSection>

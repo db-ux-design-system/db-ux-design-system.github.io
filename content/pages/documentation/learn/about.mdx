@@ -6,27 +6,31 @@ title: 'About the Design System'
 headline: 'About the Design System'
 description: 'What the DB UX Design System contains, how it is released, what a status means and where to ask which question.'
 align: start
-toc: true
-tocMaxDepth: 2
+toc: false
 order: 1
+category: 'Foundations'
+keywords:
+  ['overview', 'status', 'versioning', 'release', 'generation 3', 'db ui', 'support', 'roadmap']
+stepper: true
 ---
 
-import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+import { DBNotification } from '@db-ux/react-core-components';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import LearnArticle from '@template/components/Learn/LearnArticle.astro';
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
 
-<DBSection spacing="small" width="auto">
+<LearnArticle stepper={frontmatter.stepper}>
 
-## What the design system is
+<LearnBlock title="What the design system is">
 
 The DB UX Design System is the shared base for digital products of Deutsche Bahn. Design and development use the same Foundation, the same components and the same names – in Figma and in code.
 
 This documentation covers **Generation 3**, the current generation. Its predecessor is Generation 2, formerly known as DB UI. If you still work with it, start with the [migration from DB UI](/documentation/learn/migration).
 
-</DBSection>
+</LearnBlock>
 
-<DBSection spacing="small" width="auto">
-
-## What it contains
+<LearnBlock title="What it contains">
 
 | Part       | Contains                                                                                       | Documentation                                                                                      |
 | ---------- | ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
@@ -39,15 +43,11 @@ This documentation covers **Generation 3**, the current generation. Its predeces
 
 The core of the system is the same for all products. Extensions build on it for specific domains.
 
-### Platforms
-
 The components are available for web: as CSS, as Web Components and for Angular, React and Vue. Native components for iOS (SwiftUI) and Android (Jetpack Compose) are developed in separate repositories – see [Native Platforms](/documentation/resources/packages/native).
 
-</DBSection>
+</LearnBlock>
 
-<DBSection spacing="small" width="auto">
-
-## How it is released
+<LearnBlock title="How it is released">
 
 The design system follows Semantic Versioning: `MAJOR.MINOR.PATCH`.
 
@@ -59,11 +59,9 @@ The design system follows Semantic Versioning: `MAJOR.MINOR.PATCH`.
 
 Major and minor version numbers are kept in sync across design and development. The details, including all communication channels, are described under [Versioning & Releases](/documentation/releases/versioning).
 
-</DBSection>
+</LearnBlock>
 
-<DBSection spacing="small" width="auto">
-
-## What a status means
+<LearnBlock title="What a status means">
 
 Every component, pattern and template has a status. It tells you how mature and reliable it is.
 
@@ -77,11 +75,9 @@ Every component, pattern and template has a status. It tells you how mature and 
 
 What to expect from each status in detail is described under [Content Status](/documentation/releases/content-status). The current status of every component is tracked on the [component status board](https://github.com/orgs/db-ux-design-system/projects/4/views/1).
 
-</DBSection>
+</LearnBlock>
 
-<DBSection spacing="small" width="auto">
-
-## How binding it is
+<LearnBlock title="How binding it is">
 
 | Part            | Obligation                                                                                   |
 | --------------- | -------------------------------------------------------------------------------------------- |
@@ -92,11 +88,9 @@ What to expect from each status in detail is described under [Content Status](/d
 
 For questions about adopting the design system in your product, contact Luis Schroff, Product Owner of the design system: [luis.schroff@deutschebahn.com](mailto:luis.schroff@deutschebahn.com).
 
-</DBSection>
+</LearnBlock>
 
-<DBSection spacing="small" width="auto">
-
-## Where to ask which question
+<LearnBlock title="Where to ask which question">
 
 | Your topic                                                             | Where it goes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -111,32 +105,9 @@ For questions about adopting the design system in your product, contact Luis Sch
 
 Please check first whether an issue already exists. More ways to get involved are listed under [Contribution](/documentation/contribution).
 
-</DBSection>
+</LearnBlock>
 
-<DBSection spacing="small" width="auto">
-
-## Roadmap
-
-| Board                  | Link                                                                              |
-| ---------------------- | --------------------------------------------------------------------------------- |
-| Roadmap                | [GitHub project](https://github.com/orgs/db-ux-design-system/projects/4/views/8)  |
-| Component status       | [GitHub project](https://github.com/orgs/db-ux-design-system/projects/4/views/1)  |
-| Design System releases | [GitHub project](https://github.com/orgs/db-ux-design-system/projects/4/views/12) |
-| Icon package releases  | [GitHub project](https://github.com/orgs/db-ux-design-system/projects/4/views/15) |
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Brand and license
-
-The code of the design system is published under the Apache 2.0 license. The DB Theme and its assets are an exception: they may only be used for websites and applications of Deutsche Bahn.
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Choose your path
+<LearnBlock title="Choose your path">
 
 <TeaserCard
 	columns={2}
@@ -155,4 +126,23 @@ The code of the design system is published under the Apache 2.0 license. The DB 
 	]}
 />
 
-</DBSection>
+</LearnBlock>
+
+<LearnAside title="Roadmap">
+
+| Board                  | Link                                                                              |
+| ---------------------- | --------------------------------------------------------------------------------- |
+| Roadmap                | [GitHub project](https://github.com/orgs/db-ux-design-system/projects/4/views/8)  |
+| Component status       | [GitHub project](https://github.com/orgs/db-ux-design-system/projects/4/views/1)  |
+| Design System releases | [GitHub project](https://github.com/orgs/db-ux-design-system/projects/4/views/12) |
+| Icon package releases  | [GitHub project](https://github.com/orgs/db-ux-design-system/projects/4/views/15) |
+
+</LearnAside>
+
+<LearnAside title="Brand and license">
+
+The code of the design system is published under the Apache 2.0 license. The DB Theme and its assets are an exception: they may only be used for websites and applications of Deutsche Bahn.
+
+</LearnAside>
+
+</LearnArticle>

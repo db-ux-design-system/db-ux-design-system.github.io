@@ -110,6 +110,20 @@ declare type DocumentationFrontMatter = {
 	sectionSpacing?: 'none' | 'small' | 'medium' | 'large';
 	sectionWidth?: 'auto' | 'full';
 	subParent?: string;
+	/**
+	 * Learn area: the single category a Learn article belongs to. Drives the
+	 * category filter on the Learn overview.
+	 */
+	category?: string;
+	/**
+	 * Learn area: free keywords for search and filtering on the Learn overview.
+	 */
+	keywords?: string[];
+	/**
+	 * Learn area: opt in to the step-by-step "Stepper" view. When true, the article
+	 * can be read block by block with previous/next. Defaults to false (article only).
+	 */
+	stepper?: boolean;
 } & FrontMatter;
 
 /**

@@ -1,0 +1,92 @@
+---
+import './Learn.css';
+import { learnViewTexts } from './learn-view-texts';
+
+interface Props {
+	/** Enables the article/stepper toggle. Mirrors the `stepper` frontmatter flag. */
+	stepper?: boolean;
+}
+
+const { stepper = false } = Astro.props as Props;
+
+// Derive the language from the URL, like the layouts do.
+const lang = Astro.url.pathname.startsWith('/de/') ? 'de' : 'en';
+const t = learnViewTexts[lang];
+
+// A stable id so the controller script can find the rendered blocks.
+const targetId = 'learn-article';
+---
+
+{/*
+	Wraps a Learn article. The blocks (LearnBlock / LearnAside) are slotted and rendered
+	server-side, so the full content ships in the HTML and the article reads as a normal
+	long-form page without JS. The controller below is progressive enhancement: a bundled
+	module script (no React island, which does not hydrate reliably inside MDX) toggles
+	between the article and the stepper and shows one block at a time. The controls use
+	the db-button classes so they look like the rest of the UI without a framework.
+*/}
+{stepper && (
+	<div class="learn-view" data-learn-controls hidden>
+		{/* View toggle as a segmented button group, aligned to the end so it reads as a
+		    header control next to the page headline. The active button is marked with
+		    aria-pressed and styled as pressed, not brand. */}
+		<div class="learn-view-toggle db-button-group" role="group" aria-label={t.viewLabel}>
+			<button
+				type="button"
+				class="db-button"
+				data-variant="filled"
+				data-icon="document"
+				data-view-btn="article"
+				aria-pressed="true"
+			>
+				{t.article}
+			</button>
+			<button
+				type="button"
+				class="db-button"
+				data-variant="filled"
+				data-icon="list"
+				data-view-btn="stepper"
+				aria-pressed="false"
+			>
+				{t.steps}
+			</button>
+		</div>
+	</div>
+)}
+
+<div
+	id={targetId}
+	class="learn-article"
+	data-learn-view="article"
+	data-stepper={String(stepper)}
+	data-step-template={t.stepOf(1, 2).replace('1', '{current}').replace('2', '{total}')}
+>
+	<slot />
+</div>
+
+{stepper && (
+	<div class="learn-stepper-nav" data-stepper-nav hidden>
+		{/* The progress bar sits on top of the navigation so the two read as one control.
+		    Below it: Back on the start side, the step count in the middle, Next on the
+		    end side. The whole bar is sticky at the bottom, the content scrolls above. */}
+		<div class="learn-stepper-progress" aria-hidden="true">
+			<span class="learn-stepper-progress-fill" data-progress-fill></span>
+		</div>
+		<div class="learn-stepper-actions">
+			<button type="button" class="db-button" data-variant="ghost" data-icon="arrow_left" data-step-prev>
+				{t.back}
+			</button>
+			<p class="learn-stepper-status" aria-live="polite" data-step-status></p>
+			<button
+				type="button"
+				class="db-button"
+				data-variant="brand"
+				data-icon-trailing="arrow_right"
+				data-step-next
+			>
+				{t.next}
+			</button>
+		</div>
+	</div>
+)}

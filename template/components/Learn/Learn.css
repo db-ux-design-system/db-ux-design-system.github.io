@@ -1,0 +1,149 @@
+/* Learn article: view toggle, stepper navigation, and the additional-info accordions. */
+
+/* A flex/grid display value overrides the native [hidden] behavior, so re-assert it
+   for the controller-toggled elements. */
+.learn-view[hidden],
+.learn-stepper-nav[hidden],
+.learn-article .db-section[hidden] {
+	display: none;
+}
+
+/* View toggle: a segmented button group aligned to the end, so it reads as a header
+   control. Pulled up with a negative top margin to sit level with the page headline. */
+.learn-view {
+	display: flex;
+	justify-content: flex-end;
+	margin-block: calc(-1 * var(--db-spacing-fixed-xl)) var(--db-spacing-fixed-lg);
+}
+
+/* Segmented look: the two filled buttons join into one control with square inner
+   corners and rounded outer corners. */
+.learn-view-toggle {
+	display: inline-flex;
+}
+
+.learn-view-toggle .db-button {
+	border-radius: 0;
+}
+
+.learn-view-toggle .db-button:first-child {
+	border-start-start-radius: var(--db-border-radius-sm);
+	border-end-start-radius: var(--db-border-radius-sm);
+}
+
+.learn-view-toggle .db-button:last-child {
+	border-start-end-radius: var(--db-border-radius-sm);
+	border-end-end-radius: var(--db-border-radius-sm);
+}
+
+/* The active toggle shows the hovered surface of the filled variant at rest, so it
+   reads as selected. Only the resting state is overridden; on hover and press it
+   moves on to the pressed surface, so it still gives feedback. */
+.learn-view-toggle .db-button[aria-pressed='true'] {
+	background-color: var(--db-adaptive-bg-basic-transparent-semi-hovered);
+}
+
+.learn-view-toggle .db-button[aria-pressed='true']:is(:hover, :focus-visible, :active) {
+	background-color: var(--db-adaptive-bg-basic-transparent-semi-pressed);
+}
+
+/* Sticky stepper navigation at the bottom: progress on top, then Back · step count ·
+   Next. It stays in view while the step content scrolls above it. */
+.learn-stepper-nav {
+	position: sticky;
+
+	/* A gap to the viewport edge so the bar does not stick to the very bottom. */
+	inset-block-end: var(--db-spacing-fixed-md);
+	display: flex;
+	flex-direction: column;
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-sm);
+	overflow: hidden;
+}
+
+/*
+ * The global content spacing (.dba-main-content ... + :is(...)) adds a top margin to
+ * sibling blocks. The sticky bar follows the #learn-article div, so it gets that
+ * margin too; the id selector outranks the global rule and removes it.
+ */
+#learn-article + .learn-stepper-nav {
+	margin-block-start: 0;
+}
+
+/*
+ * The same global sibling spacing hits the actions row, because the progress bar div
+ * precedes it inside the nav. The id makes this outrank the global 0-3-0 rule so the
+ * nav padding alone controls the spacing.
+ */
+#learn-article + .learn-stepper-nav .learn-stepper-actions {
+	margin-block-start: 0;
+}
+
+.learn-stepper-progress {
+	block-size: var(--db-sizing-3xs);
+	inline-size: 100%;
+	background-color: var(--db-adaptive-on-bg-basic-emphasis-40-default);
+}
+
+.learn-stepper-progress-fill {
+	display: block;
+	block-size: 100%;
+	background-color: var(--db-brand-origin-default, var(--db-adaptive-on-bg-basic-emphasis-100-default));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.learn-stepper-progress-fill {
+		transition: inline-size 150ms ease;
+	}
+}
+
+/* Back on the start side, the step count centered, Next on the end side. */
+.learn-stepper-actions {
+	display: flex;
+	align-items: center;
+	gap: var(--db-spacing-fixed-sm);
+	padding: var(--db-spacing-fixed-sm);
+	margin: 0;
+}
+
+.learn-stepper-status {
+	flex: 1 1 auto;
+	margin: 0;
+	text-align: center;
+	font: var(--db-type-body-sm);
+	color: var(--db-adaptive-on-bg-basic-emphasis-90-default);
+}
+
+/* The block heading is the section heading in both views; the stepper bar only shows
+   the progress and step count above it. Programmatic focus (moved on step change) does
+   not trigger :focus-visible, so no persistent ring appears on click. */
+.learn-block-title:focus-visible {
+	outline: var(--db-border-width-2xs) solid
+		var(--db-focus-outline-color, var(--db-informational-on-bg-basic-emphasis-70-default));
+	outline-offset: var(--db-border-width-xs);
+}
+
+/* Additional-info accordion. The details/summary renders as a disclosure in both
+   views: inline detail in the article, collapsible extra in the stepper. */
+.learn-aside {
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-sm);
+	padding: var(--db-spacing-fixed-md);
+}
+
+.learn-aside-summary {
+	cursor: pointer;
+	font: var(--db-type-headline-sm);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+}
+
+.learn-aside-summary:focus-visible {
+	outline: var(--db-border-width-2xs) solid
+		var(--db-focus-outline-color, var(--db-informational-on-bg-basic-emphasis-70-default));
+	outline-offset: var(--db-border-width-xs);
+}
+
+.learn-aside[open] .learn-aside-body {
+	margin-block-start: var(--db-spacing-fixed-sm);
+}
