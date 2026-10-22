@@ -15,8 +15,6 @@ _version bump_
 
 - Heading: Die Font-Weights lassen sich jetzt pro Theme über `OverwriteHeadingFontWeights` überschreiben.
 
-### Entwicklung
-
 #### Behoben
 
 - Custom Select: Die entfernbaren Tags im Modus `selectedType="tag"` rendern nicht mehr innerhalb des interaktiven `<summary>`, womit der Nested-Interactive-Verstoß (WCAG 4.1.2) behoben ist. Die öffentliche API (Props, Events, Custom-Element-Tags) bleibt unverändert, nur die gerenderte HTML-Struktur hat sich geändert.

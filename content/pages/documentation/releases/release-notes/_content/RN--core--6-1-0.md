@@ -15,8 +15,6 @@ _version bump_
 
 - Heading: Font weights can now be overridden per theme via `OverwriteHeadingFontWeights`.
 
-### Development
-
 #### Fixed
 
 - Custom Select: The removable tags in `selectedType="tag"` mode no longer render inside the interactive `<summary>`, resolving the nested-interactive accessibility violation (WCAG 4.1.2). The public API (props, events, custom-element tags) stays unchanged, only the rendered HTML structure moved.
