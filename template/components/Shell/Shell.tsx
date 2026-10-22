@@ -15,7 +15,7 @@ import PreferenceSwitches from './control-panel/preference-switches.tsx';
 import MainNavigation from './control-panel/main-navigation.tsx';
 import SubNavigation from './control-panel/sub-navigation.tsx';
 import Brand from './control-panel/brand.tsx';
-import LearningPackageButton from '@template/components/LearningPackage/LearningPackageButton.tsx';
+import ReadingListButton from '@template/components/ReadingList/ReadingListButton.tsx';
 import { findSubNavigation } from '@template/utils/navigation.utils.ts';
 import { useTranslation } from '@template/i18n';
 
@@ -72,16 +72,15 @@ function ShellContent({
 			    the drawer footer (Actions 2) as one row. Keeping the footer a single
 			    row matters: the drilldown overlay reserves a fixed height for it, so
 			    a taller footer would be covered by the overlay. The footer has no
-			    room for the learning package button, so on mobile it sits in the
-			    menu bar (Actions 1): the menu bar holds the brand, the learning
-			    package button (only while a package is saved, small size) and the burger
-			    button. The wrapper has to match its slot because it carries the
-			    grid area. */}
+			    room for the reading list button, so on mobile it sits in the menu
+			    bar (Actions 1): the menu bar holds the brand, the reading list
+			    button (small size) and the burger button. The wrapper has to match
+			    its slot because it carries the grid area. */}
 			<DBControlPanelDesktop
 				brand={<Brand />}
 				actions1={
 					<DBControlPanelActions1>
-						<PreferenceSwitches learningPackage />
+						<PreferenceSwitches readingList />
 					</DBControlPanelActions1>
 				}
 				actions2={
@@ -98,7 +97,7 @@ function ShellContent({
 				actions1={
 					<DBControlPanelActions1>
 						{/* Small, so the brand still fits next to it at 320 px. */}
-						<LearningPackageButton size="small" />
+						<ReadingListButton size="small" />
 					</DBControlPanelActions1>
 				}
 				actions2={

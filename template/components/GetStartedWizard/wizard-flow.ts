@@ -34,7 +34,10 @@ export type Question = {
 	options: Option[];
 };
 
-/** A documentation page or a section of it. The id is language independent and is stored. */
+/**
+ * A documentation page or a section of it. The id is language independent. The
+ * reading list stores pages by their full EN path instead (toReadingListId).
+ */
 export type PackagePage = {
 	id: string;
 	path: string;
@@ -453,9 +456,6 @@ export const toHref = (target: { path: string; anchor?: Text }, lang: Lang) => {
 
 /** URL of the wizard start page in the given language. */
 export const wizardHref = (lang: Lang) => toHref({ path: '/documentation/get-started' }, lang);
-
-/** The stored part of the pages: the language-independent id. Labels and links come from packagePages. */
-export const toStoredItems = (items: PackagePage[]) => items.map(({ id }) => ({ id }));
 
 function frameworkResult(answers: Answers): Result {
 	const framework = answers.framework ?? 'react';

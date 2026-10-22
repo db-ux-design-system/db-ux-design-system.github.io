@@ -1,7 +1,7 @@
 import { DBStack } from '@db-ux/react-core-components';
 import ColorModeSwitch from '@template/components/color-mode-switch/ColorModeSwitch.tsx';
 import LanguageSwitch from '@template/components/language-switch/LanguageSwitch.tsx';
-import LearningPackageButton from '@template/components/LearningPackage/LearningPackageButton.tsx';
+import ReadingListButton from '@template/components/ReadingList/ReadingListButton.tsx';
 /**
  * Color mode and language switches as a single row.
  *
@@ -11,13 +11,12 @@ import LearningPackageButton from '@template/components/LearningPackage/Learning
  * instead of one per switch - see shell-preference-switches in
  * db-ux-overrides.css.
  *
- * With learningPackage, the learning package button comes first (desktop). It only
- * renders once the Get Started wizard has saved a package. On mobile the drawer
- * footer has no room for it, so Shell.tsx puts it into the menu bar instead.
+ * With readingList, the reading list button comes first (desktop). On mobile the
+ * drawer footer has no room for it, so Shell.tsx puts it into the menu bar instead.
  */
-const PreferenceSwitches = ({ learningPackage = false }: { learningPackage?: boolean }) => (
+const PreferenceSwitches = ({ readingList = false }: { readingList?: boolean }) => (
 	<DBStack className="shell-preference-switches" direction="row" alignment="center" gap="x-small">
-		{learningPackage && <LearningPackageButton />}
+		{readingList && <ReadingListButton />}
 		<ColorModeSwitch />
 		<LanguageSwitch />
 	</DBStack>

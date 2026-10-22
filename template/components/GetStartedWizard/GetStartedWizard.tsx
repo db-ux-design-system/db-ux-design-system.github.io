@@ -1,7 +1,8 @@
 import { type FormEvent, useEffect, useRef, useState } from 'react';
 import { DBButton, DBCard, DBHeadingH2 } from '@db-ux/react-core-components';
-import { savePackage } from '@template/components/LearningPackage/learning-package-store';
-import { learningPackageTexts } from '@template/components/LearningPackage/texts';
+import { addWizardResult } from '@template/components/ReadingList/reading-list-store';
+import { toReadingListId } from '@template/components/ReadingList/reading-list-items';
+import { readingListTexts } from '@template/components/ReadingList/texts';
 import {
 	type Answers,
 	type Lang,
@@ -12,10 +13,9 @@ import {
 	roleColor,
 	roleColors,
 	toHref,
-	toStoredItems,
 } from './wizard-flow';
 // Styles: GetStartedWizard.css is imported by the .astro pages that render this island,
-// LearningPackage.css by global.css. Imported here, they only arrived with the
+// ReadingList.css by global.css. Imported here, they only arrived with the
 // client-only island and were missing after client-side navigation until a reload.
 
 const ui = {
@@ -24,12 +24,14 @@ const ui = {
 		back: 'Back',
 		restart: 'Start again',
 		open: 'Open',
+		resultTitle: 'Your next steps',
 	},
 	de: {
 		next: 'Weiter',
 		back: 'Zurück',
 		restart: 'Neu starten',
 		open: 'Öffnen',
+		resultTitle: 'Deine nächsten Schritte',
 	},
 } as const;
 
@@ -114,12 +116,15 @@ const GetStartedWizard = ({ lang = 'en' }: { lang?: Lang }) => {
 		moveFocus.current = false;
 	}, [answers]);
 
-	// Saves the package once a result is reached, also from a shared link or a reload.
-	// Keyed on the answers only: "Remove" in the popover must not be undone while the
-	// result stays on screen.
+	// Adds the result pages to the reading list once a result is reached, also from a
+	// shared link. Keyed on the answers only, and the store skips the result it added
+	// last: pages deleted from the list are not added again while the result stays on
+	// screen or after a reload.
 	const answersKey = asked.map((id) => `${id}=${answers[id]}`).join('&');
 	useEffect(() => {
-		if ('result' in step) savePackage(answers, toStoredItems(step.result.items));
+		if ('result' in step) {
+			addWizardResult(answersKey, step.result.items.map(toReadingListId));
+		}
 		// step and answers follow answersKey.
 	}, [answersKey]);
 
@@ -149,19 +154,18 @@ const GetStartedWizard = ({ lang = 'en' }: { lang?: Lang }) => {
 
 	if ('result' in step) {
 		const { result } = step;
-		const lpText = learningPackageTexts[lang];
 		return (
 			<section className="gsw" aria-labelledby="gsw-heading">
 				{/* Headline and intro as on the page hero of other pages: tight gap. */}
 				<div className="gsw-hero">
 					<h1 id="gsw-heading" className="gsw-heading" ref={headingRef} tabIndex={-1}>
-						{lpText.title}
+						{text.resultTitle}
 					</h1>
-					<p className="gsw-result-intro">{lpText.intro}</p>
+					<p className="gsw-result-intro">{readingListTexts[lang].intro}</p>
 				</div>
 				{/* Styled like the selected cards of the previous steps: elevation level 3,
 				    tinted in the color of the chosen role. Static, because only the links
-				    inside are interactive. Pages are ticked off in the popover only. */}
+				    inside are interactive. */}
 				<DBCard
 					spacing="large"
 					elevationLevel="3"
