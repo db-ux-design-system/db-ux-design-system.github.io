@@ -12,6 +12,12 @@
 const STORAGE_KEY = 'db-ux-learn-view';
 
 /**
+ * Dispatched on window when the reader moves to another step with Back or Next.
+ * Detail: `{ index, total }`, index starting at 0.
+ */
+export const LEARN_STEP_EVENT = 'db-ux-learn-step';
+
+/**
  * Smallest height of the step content, about three lines of text. Only on very low
  * screens, where even this does not fit, the page itself scrolls instead.
  */
@@ -322,6 +328,11 @@ function setup(root: HTMLElement): boolean {
 		stepIndex = Math.max(0, Math.min(index, total - 1));
 		writeUrl();
 		render(true);
+		// Only clicks report the step, not the initial render from the URL: the reading
+		// list asks whether the page is finished when the reader clicks to the last step.
+		window.dispatchEvent(
+			new CustomEvent(LEARN_STEP_EVENT, { detail: { index: stepIndex, total } }),
+		);
 	};
 
 	articleBtn.addEventListener('click', () => setView('article'));
