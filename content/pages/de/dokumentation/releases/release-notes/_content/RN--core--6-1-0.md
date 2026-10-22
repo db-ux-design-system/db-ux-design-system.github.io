@@ -5,7 +5,11 @@ version: 'v6.1.0'
 date: '2026-10-22'
 ---
 
-### Design & Entwicklung
+### Design
+
+_version bump_
+
+### Entwicklung
 
 #### Hinzugefügt
 
