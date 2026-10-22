@@ -14,7 +14,7 @@
     "astro": "astro",
     "check": "prettier --check . && astro check",
     "format": "prettier --write .",
-    "update:agent": "npx @db-ux/agent-cli .",
+    "update:agent": "pnpm exec db-ux-agent-cli .",
     "lint": "pnpm run \"/lint:.*/\"",
     "lint:eslint": "eslint \"**/*.{js,ts,tsx,astro}\"",
     "lint:stylelint": "stylelint \"**/*.css\" --ignore-path .stylelintignore",
