@@ -193,7 +193,7 @@
 	min-inline-size: 0;
 }
 
-/* Divider between the contact button and the switches in the mobile drawer footer.
+/* Divider between the Get Started button and the switches in the mobile drawer footer.
    Mirrors what the control panel does between Actions 1 and Actions 2 on desktop:
    a 1px absolute line on the inline-start edge of the trailing element, with
    padding to keep the content off it. Desktop draws it in front of the button,
@@ -231,4 +231,15 @@
 
 .db-shell-sub-navigation::after {
 	z-index: 69; /* Workaround to show the border of the sub-navigation */
+}
+
+/*
+ * Match the legal strip of the footer to the collapse button area at the bottom
+ * of the sub navigation (40 px button + 12 px padding on each side), so both
+ * bottom bars line up instead of the footer looking cramped next to it.
+ */
+.db-footer-meta {
+	display: flex;
+	align-items: center;
+	min-block-size: calc(var(--db-sizing-md) + 2 * var(--db-spacing-fixed-sm));
 }
