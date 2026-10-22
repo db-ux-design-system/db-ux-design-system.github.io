@@ -70,5 +70,25 @@ export const stackConfig: PlaygroundConfig<DBStackProps> = {
 				{ value: 'space-between', label: 'Space Between' },
 			],
 		},
+		{
+			name: 'width',
+			type: 'select',
+			label: 'Width',
+			defaultValue: 'full',
+			options: [
+				{ value: 'full', label: 'Full', default: true },
+				{ value: 'auto', label: 'Auto' },
+			],
+		},
+		{
+			name: 'height',
+			type: 'select',
+			label: 'Height',
+			defaultValue: 'auto',
+			options: [
+				{ value: 'auto', label: 'Auto', default: true },
+				{ value: 'full', label: 'Full' },
+			],
+		},
 	],
 };

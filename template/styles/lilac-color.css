@@ -1,102 +1,25 @@
 /**
- * TEMPORARY: DB Theme v6 preview.
+ * Lilac speaking colors and adaptive mapping.
  *
- * Brings two v6 changes forward so the documentation can already be seen in its
- * v6 state while the packages are still on v5:
+ * DB Theme 7 ships the Lilac palette and origin values (--db-lilac-0 ... -14,
+ * --db-lilac-origin-*, --db-lilac-on-origin-*), but @db-ux/core-foundations 6.0.0
+ * does not yet derive the speaking-color tokens from them, and has no
+ * [data-color='lilac'] mapping. Without this file, Lilac renders as nothing on
+ * the Colors foundation page (select option in _ColorPlayground.astro, table
+ * category in _ColorTable.astro).
  *
- * 1. The Lilac color, which only exists in the v6 theme.
- * 2. The squared corners, i.e. the --db-border-radius-* tokens dropping to 0.
+ * The derivation follows the token mapping of @db-ux/core-foundations, which is
+ * identical for every semantic and additional color. It only references the
+ * palette, so the values themselves come from the theme.
  *
- * Imported last in global.css and deliberately unlayered, so it wins over the
- * layered package defaults.
+ * Imported into the db-ux layer, right after the core components, like the
+ * mappings of the other colors in the foundations.
  *
- * ---------------------------------------------------------------------------
- * REMOVE THIS IN THE SAME PULL REQUEST THAT BUMPS @db-ux/core-* TO 6.x.
- * Tracked in issue #769, which carries the full checklist.
- *
- * The trigger is the core packages, not the theme version: @db-ux/db-theme was
- * already on 6.3.0 while the core packages were on 5.6.1, and that theme build
- * has neither Lilac nor the squared radii. The v6 values arrive with the core
- * bump.
- *
- * Leaving the file in place after that bump fails silently rather than loudly:
- * because this block is unlayered, it outranks the package layers and shadows
- * the real v6 theme. Any difference between the hard-coded values below and the
- * shipped ones would show up as wrong colors or wrong corners, with no build or
- * lint error.
- *
- * Three steps, all of them required:
- *   1. Delete this file.
- *   2. Remove its @import from template/styles/global.css.
- *   3. Verify that Lilac still renders, since the two entries that reference it
- *      stay behind and are then served by the theme:
- *        content/pages/.../foundation/colors/_ColorPlayground.astro  (select option)
- *        content/pages/.../foundation/colors/_ColorTable.astro       (table category)
- * ---------------------------------------------------------------------------
+ * REMOVE THIS FILE once @db-ux/core-foundations ships Lilac: delete it, drop its
+ * @import from global.css and check the Colors page again.
  */
 
-/*
- * Squared corners.
- *
- * Mirrors the v6 block of the Component Overview: every DB component derives its
- * corners from these tokens, so redefining them on :root switches the whole
- * documentation at once — no per-component rules and no JavaScript.
- *
- * `full` keeps its value, so round components such as Badges or Radios keep
- * their shape.
- *
- * The Component Overview keeps its v5/v6 comparison: its own v5 block pins the
- * rounded values on `.dba-main-content:has(…[value='v5']:checked)`, which outranks
- * :root by specificity. That block exists for exactly this case. The same applies
- * to the loading indicator, whose rounded stroke ends come from `stroke-linecap`
- * rather than from a token — that one is left to the Component Overview, so its
- * v5 column stays untouched.
- *
- * Lilac follows in the same block. Its speaking-color tokens and its adaptive
- * mapping are generated from the token mapping of @db-ux/core-foundations 5.6.1,
- * which is identical for every semantic and additional color. Only the palette
- * and the origin values are lilac-specific.
- */
 :root {
-	/* Squared corners */
-	--db-border-radius-3xs: 0;
-	--db-border-radius-2xs: 0;
-	--db-border-radius-xs: 0;
-	--db-border-radius-sm: 0;
-	--db-border-radius-md: 0;
-	--db-border-radius-lg: 0;
-	--db-border-radius-xl: 0;
-	--db-border-radius-2xl: 0;
-	--db-border-radius-3xl: 0;
-
-	/* Palette — DB Theme v6 preview values */
-	--db-lilac-0: #11003c;
-	--db-lilac-1: #1b0055;
-	--db-lilac-2: #280074;
-	--db-lilac-3: #360096;
-	--db-lilac-4: #4500b9;
-	--db-lilac-5: #5400dd;
-	--db-lilac-6: #6722ff;
-	--db-lilac-7: #7d57ff;
-	--db-lilac-8: #957cff;
-	--db-lilac-9: #ae9eff;
-	--db-lilac-10: #c8bfff;
-	--db-lilac-11: #e3dfff;
-	--db-lilac-12: #eeecff;
-	--db-lilac-13: #f4f2ff;
-	--db-lilac-14: #f9f9ff;
-
-	/* Origin */
-	--db-lilac-origin-base: #a9f;
-	--db-lilac-origin-light-default: #a9f;
-	--db-lilac-origin-light-hovered: #dfdaff;
-	--db-lilac-origin-light-pressed: #c4baff;
-	--db-lilac-origin-dark-default: #a9f;
-	--db-lilac-origin-dark-hovered: #dfdaff;
-	--db-lilac-origin-dark-pressed: #c4baff;
-	--db-lilac-on-origin-light-default: #000;
-	--db-lilac-on-origin-dark-default: #000;
-
 	/* Speaking colors — generated */
 	--db-lilac-origin-default: light-dark(
 		var(--db-lilac-origin-light-default),

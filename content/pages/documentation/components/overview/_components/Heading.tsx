@@ -4,11 +4,11 @@ import {
 	columns,
 	HEADING_FONT_WEIGHTS,
 	HEADING_LEVEL_FONT_WEIGHTS,
-	HEADING_LEVEL_SIZES,
 	HEADING_LEVELS,
 	HEADING_SIZE_LEVELS,
 	HEADING_SIZES,
 	type HeadingFontWeight,
+	type HeadingLevel,
 	type HeadingSize,
 	type OverviewLabels,
 } from './_shared.tsx';
@@ -30,22 +30,37 @@ import {
 const HeadingRow = ({
 	name,
 	size,
+	level,
 	weights,
 	labels,
 }: {
 	name: string;
-	size: HeadingSize;
 	weights: readonly HeadingFontWeight[];
 	labels: OverviewLabels;
-}): ReactElement => (
+} & (
+	{ size: HeadingSize; level?: never } | { level: HeadingLevel; size?: never }
+)): ReactElement => (
 	<div className="overview-row">
-		{weights.map((weight, index) => (
-			<DBHeadingH3 key={weight} size={size} fontWeight={weight}>
-				{index === 0
+		{weights.map((weight, index) => {
+			const text =
+				index === 0
 					? `${name} ${labels.headingFontWeights[weight]}`
-					: labels.headingFontWeights[weight]}
-			</DBHeadingH3>
-		))}
+					: labels.headingFontWeights[weight];
+
+			return level ? (
+				<DBHeadingH3 key={weight} visualSize={level} fontWeight={weight}>
+					{text}
+				</DBHeadingH3>
+			) : (
+				<h3
+					key={weight}
+					className={`overview-heading-specimen db-headline-size-${size}`}
+					data-variant={weight === 'light' ? 'light' : undefined}
+				>
+					{text}
+				</h3>
+			);
+		})}
 	</div>
 );
 
@@ -95,7 +110,7 @@ export const HeadingOverview = ({ labels }: { labels: OverviewLabels }): ReactEl
 			{HEADING_LEVELS.map((level) => (
 				<HeadingRow
 					key={level}
-					size={HEADING_LEVEL_SIZES[level]}
+					level={level}
 					name={labels.headingLevels[level]}
 					weights={HEADING_LEVEL_FONT_WEIGHTS[level]}
 					labels={labels}
