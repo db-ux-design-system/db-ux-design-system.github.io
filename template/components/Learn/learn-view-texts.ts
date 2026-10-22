@@ -9,7 +9,8 @@ export const learnViewTexts = {
 		next: 'Next',
 		finish: 'Finish',
 		stepOf: (current: number, total: number) => `Step ${current} of ${total}`,
-		moreInfo: 'More information',
+		moreInfo: 'Show more',
+		lessInfo: 'Show less',
 	},
 	de: {
 		article: 'Artikel',
@@ -19,6 +20,7 @@ export const learnViewTexts = {
 		next: 'Weiter',
 		finish: 'Fertig',
 		stepOf: (current: number, total: number) => `Schritt ${current} von ${total}`,
-		moreInfo: 'Weitere Informationen',
+		moreInfo: 'Mehr anzeigen',
+		lessInfo: 'Weniger anzeigen',
 	},
 } as const satisfies Record<Lang, Record<string, unknown>>;

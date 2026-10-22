@@ -20,6 +20,8 @@ interface Props {
 	headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 	/** Optional link buttons below the description. The first one is styled as brand. */
 	actions?: { label: string; href: string }[];
+	/** Shows a right-aligned page toolbar row for page actions (e.g. reading list, view toggle). */
+	toolbar?: boolean;
 }
 
 type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
@@ -40,10 +42,12 @@ const {
 	imageSide = 'right',
 	headlineLevel = 2,
 	actions = [],
+	toolbar = false,
 } = Astro.props as Props;
 
 const hasMedia = Boolean(modelSrc || imageSrc);
 const hasHeadlineEnd = Astro.slots.has('headline-end');
+const hasToolbar = toolbar || Astro.slots.has('toolbar');
 
 const safeHeadlineLevel = Math.min(Math.max(headlineLevel, 1), 6) as HeadingLevel;
 const HeadingTag = `h${safeHeadlineLevel}` as HeadingTagName;
@@ -53,122 +57,129 @@ const showMediaRight = layout === 'split' && hasMedia && imageSide === 'right';
 const showMediaStack = layout === 'stack' && hasMedia;
 ---
 
-{
-	(title || headline || description || hasMedia) && (
-		<div class="page-hero" data-align={align} data-layout={layout} data-image-side={imageSide}>
-			{showMediaLeft && (
-				<div class="page-hero-media" data-model={modelSrc ? 'true' : undefined}>
-					{modelSrc ? (
-						<model-viewer
-							src={modelSrc}
-							alt={imageAlt || ''}
-							camera-controls
-							disable-pan
-							disable-zoom
-							autoplay
-							animation-name={modelAnimation}
-							interaction-prompt-threshold="8000"
-							environment-image="neutral"
-							tone-mapping="aces"
-							exposure="0.8"
-							shadow-intensity="0"
-							camera-orbit="-20deg 110deg 0.5m"
-							camera-target="0m 0m -0.0091m"
-							min-camera-orbit="auto auto 0.0526m"
-							max-camera-orbit="auto auto 2.6316m"
-							field-of-view="35deg"
-							loading="eager"
-						/>
-					) : (
-						<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
-					)}
-				</div>
-			)}
-			<div class="page-hero-content">
-				{badgeText && <DBBadge semantic={badgeSemantic}>{badgeText}</DBBadge>}
-				{title && <p class="page-hero-title">{title}</p>}
-				{headline &&
-					(hasHeadlineEnd ? (
-						// Controls next to the headline (e.g. the reading list bookmark) sit
-						// outside the heading, so they are not part of its name.
-						<div class="page-hero-headline-row">
-							<HeadingTag class="page-hero-headline">{headline}</HeadingTag>
-							<slot name="headline-end" />
-						</div>
-					) : (
-						<HeadingTag class="page-hero-headline">{headline}</HeadingTag>
-					))}
-				{description && <p class="page-hero-description">{description}</p>}
-				{actions.length > 0 && (
-					<div class="page-hero-actions">
-						{actions.map((action, index) => (
-							<a
-								href={action.href}
-								class="db-button"
-								data-variant={index === 0 ? 'brand' : 'outlined'}
-							>
-								{action.label}
-							</a>
-						))}
-					</div>
+{(title || headline || description || hasMedia) && (
+	<div class="page-hero" data-align={align} data-layout={layout} data-image-side={imageSide}>
+		{showMediaLeft && (
+			<div class="page-hero-media" data-model={modelSrc ? 'true' : undefined}>
+				{modelSrc ? (
+					<model-viewer
+						src={modelSrc}
+						alt={imageAlt || ''}
+						camera-controls
+						disable-pan
+						disable-zoom
+						autoplay
+						animation-name={modelAnimation}
+						interaction-prompt-threshold="8000"
+						environment-image="neutral"
+						tone-mapping="aces"
+						exposure="0.8"
+						shadow-intensity="0"
+						camera-orbit="-20deg 110deg 0.5m"
+						camera-target="0m 0m -0.0091m"
+						min-camera-orbit="auto auto 0.0526m"
+						max-camera-orbit="auto auto 2.6316m"
+						field-of-view="35deg"
+						loading="eager"
+					/>
+				) : (
+					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
 				)}
 			</div>
-			{showMediaRight && (
-				<div class="page-hero-media" data-model={modelSrc ? 'true' : undefined}>
-					{modelSrc ? (
-						<model-viewer
-							src={modelSrc}
-							alt={imageAlt || ''}
-							camera-controls
-							disable-pan
-							disable-zoom
-							autoplay
-							animation-name={modelAnimation}
-							interaction-prompt-threshold="8000"
-							environment-image="neutral"
-							tone-mapping="aces"
-							exposure="0.8"
-							shadow-intensity="0"
-							camera-orbit="-20deg 110deg 0.5m"
-							camera-target="0m 0m -0.0091m"
-							min-camera-orbit="auto auto 0.0526m"
-							max-camera-orbit="auto auto 2.6316m"
-							field-of-view="35deg"
-							loading="eager"
-						/>
-					) : (
-						<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
-					)}
-				</div>
-			)}
-			{showMediaStack && (
-				<div class="page-hero-media" data-model={modelSrc ? 'true' : undefined}>
-					{modelSrc ? (
-						<model-viewer
-							src={modelSrc}
-							alt={imageAlt || ''}
-							camera-controls
-							disable-pan
-							disable-zoom
-							autoplay
-							animation-name={modelAnimation}
-							interaction-prompt-threshold="8000"
-							environment-image="neutral"
-							tone-mapping="aces"
-							exposure="0.8"
-							shadow-intensity="0"
-							camera-orbit="-20deg 110deg 0.5m"
-							camera-target="0m 0m -0.0091m"
-							min-camera-orbit="auto auto 0.0526m"
-							max-camera-orbit="auto auto 2.6316m"
-							field-of-view="35deg"
-							loading="eager"
-						/>
-					) : (
-						<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
-					)}
+		)}
+		<div class="page-hero-content">
+			{badgeText && <DBBadge semantic={badgeSemantic}>{badgeText}</DBBadge>}
+			{title && <p class="page-hero-title">{title}</p>}
+			{headline &&
+				(hasHeadlineEnd || hasToolbar ? (
+					// Controls next to the headline sit outside the heading, so they are
+					// not part of its name. The page toolbar sits at the end of the same
+					// row, aligned with the right edge of the content.
+					<div class="page-hero-headline-row">
+						<HeadingTag class="page-hero-headline">{headline}</HeadingTag>
+						{hasHeadlineEnd && <slot name="headline-end" />}
+						{hasToolbar && (
+							// data-page-toolbar is a drop target: client enhancements (e.g. the
+							// Learn view toggle rendered in the page body) move their controls
+							// in here, so the actions share one toolbar.
+							<div class="page-hero-toolbar" data-page-toolbar>
+								<slot name="toolbar" />
+							</div>
+						)}
+					</div>
+				) : (
+					<HeadingTag class="page-hero-headline">{headline}</HeadingTag>
+				))}
+			{description && <p class="page-hero-description">{description}</p>}
+			{actions.length > 0 && (
+				<div class="page-hero-actions">
+					{actions.map((action, index) => (
+						<a
+							href={action.href}
+							class="db-button"
+							data-variant={index === 0 ? 'brand' : 'outlined'}
+						>
+							{action.label}
+						</a>
+					))}
 				</div>
 			)}
 		</div>
-	)
-}
+		{showMediaRight && (
+			<div class="page-hero-media" data-model={modelSrc ? 'true' : undefined}>
+				{modelSrc ? (
+					<model-viewer
+						src={modelSrc}
+						alt={imageAlt || ''}
+						camera-controls
+						disable-pan
+						disable-zoom
+						autoplay
+						animation-name={modelAnimation}
+						interaction-prompt-threshold="8000"
+						environment-image="neutral"
+						tone-mapping="aces"
+						exposure="0.8"
+						shadow-intensity="0"
+						camera-orbit="-20deg 110deg 0.5m"
+						camera-target="0m 0m -0.0091m"
+						min-camera-orbit="auto auto 0.0526m"
+						max-camera-orbit="auto auto 2.6316m"
+						field-of-view="35deg"
+						loading="eager"
+					/>
+				) : (
+					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
+				)}
+			</div>
+		)}
+		{showMediaStack && (
+			<div class="page-hero-media" data-model={modelSrc ? 'true' : undefined}>
+				{modelSrc ? (
+					<model-viewer
+						src={modelSrc}
+						alt={imageAlt || ''}
+						camera-controls
+						disable-pan
+						disable-zoom
+						autoplay
+						animation-name={modelAnimation}
+						interaction-prompt-threshold="8000"
+						environment-image="neutral"
+						tone-mapping="aces"
+						exposure="0.8"
+						shadow-intensity="0"
+						camera-orbit="-20deg 110deg 0.5m"
+						camera-target="0m 0m -0.0091m"
+						min-camera-orbit="auto auto 0.0526m"
+						max-camera-orbit="auto auto 2.6316m"
+						field-of-view="35deg"
+						loading="eager"
+					/>
+				) : (
+					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
+				)}
+			</div>
+		)}
+	</div>
+)}

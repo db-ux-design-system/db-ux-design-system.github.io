@@ -1,25 +1,39 @@
 ---
-import { DBSection } from '@db-ux/react-core-components';
+import { learnViewTexts } from './learn-view-texts';
 
-interface Props {
-	/** Heading of the additional-info block, rendered as an h3. */
-	title: string;
-}
-
-const { title } = Astro.props as Props;
+// Derive the language from the URL, like the layouts do.
+const lang = Astro.url.pathname.startsWith('/de/') ? 'de' : 'en';
+const t = learnViewTexts[lang];
 ---
 
 {/*
-	Additional information. In article view it renders inline like any other section.
-	In stepper view the LearnArticle controller collapses it into a details/summary
-	accordion attached to the end of the main content, so the step stays focused on the
-	essentials while the extra detail remains reachable.
+	Additional information that belongs to the step it sits in. Place it inside a
+	LearnBlock, after the main content.
+
+	Article view: the content is shown, the button is hidden – it reads as normal
+	content.
+	Stepper view: the controller hides the content and shows a "Show more" ghost button;
+	clicking it reveals the content above the button, which then reads "Show less".
+
+	The content comes before the button in the DOM, so when it expands it appears above
+	the button. Without JS the content stays visible (the button is hidden by default),
+	so the article fallback shows everything.
 */}
-<DBSection spacing="small" width="full">
-	<details class="learn-aside" data-learn-aside data-learn-title={title}>
-		<summary class="learn-aside-summary">{title}</summary>
-		<div class="learn-aside-body">
-			<slot />
-		</div>
-	</details>
-</DBSection>
+<div class="learn-aside" data-learn-aside>
+	<div class="learn-aside-body" data-learn-aside-body>
+		<slot />
+	</div>
+	<button
+		type="button"
+		class="db-button learn-aside-toggle"
+		data-variant="ghost"
+		data-icon="plus"
+		data-learn-aside-toggle
+		data-label-more={t.moreInfo}
+		data-label-less={t.lessInfo}
+		aria-expanded="false"
+		hidden
+	>
+		{t.moreInfo}
+	</button>
+</div>

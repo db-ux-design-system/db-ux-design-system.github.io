@@ -1,23 +1,16 @@
 ---
-import { DBSection } from '@db-ux/react-core-components';
-
-interface Props {
-	/** Block heading, rendered as an h2. Also used as the step label in the stepper. */
-	title: string;
-}
-
-const { title } = Astro.props as Props;
+// No props: the block heading is the first `## …` inside the block, written in the MDX.
+// It has to be Markdown, not rendered here, so that Astro lists it in the page headings
+// and the table of contents shows it in the article view. The controller reads the step
+// label from that heading.
 ---
 
 {/*
-	A main Learn block. One block equals one step in the stepper view. The heading and
-	body render as a normal section in article view; the LearnArticle controller shows
-	exactly one block at a time in stepper view. The data-learn-title is read by the
-	controller to label the step without parsing the heading.
+	A main Learn block. One block equals one step in the stepper view. It renders as a
+	plain section, not a DBSection: the article already sits in the layout's DBSection,
+	and a nested DBSection adds its viewport-based inline padding a second time, which
+	indents the content against the headline.
 */}
-<DBSection spacing="small" width="full">
-	<div class="learn-block" data-learn-block data-learn-title={title}>
-		<h2 class="learn-block-title" tabindex="-1">{title}</h2>
-		<slot />
-	</div>
-</DBSection>
+<section class="learn-section learn-block" data-learn-block>
+	<slot />
+</section>

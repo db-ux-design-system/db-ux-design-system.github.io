@@ -1,5 +1,8 @@
 ---
 import './Learn.css';
+// The controller builds teaser cards from inline links in the stepper view, so the
+// teaser card styles are needed even on articles without a TeaserCard of their own.
+import '@template/components/TeaserCard/TeaserCard.css';
 import { learnViewTexts } from './learn-view-texts';
 
 interface Props {
@@ -18,12 +21,14 @@ const targetId = 'learn-article';
 ---
 
 {/*
-	Wraps a Learn article. The blocks (LearnBlock / LearnAside) are slotted and rendered
-	server-side, so the full content ships in the HTML and the article reads as a normal
-	long-form page without JS. The controller below is progressive enhancement: a bundled
-	module script (no React island, which does not hydrate reliably inside MDX) toggles
-	between the article and the stepper and shows one block at a time. The controls use
-	the db-button classes so they look like the rest of the UI without a framework.
+	Wraps a Learn article. The documentation layout puts it around the page content when
+	the frontmatter sets `stepper: true`; articles do not use it themselves.
+
+	Both views come from the same markup: the blocks (LearnBlock / LearnAside) are
+	rendered once, server-side, and the article reads as a normal long-form page without
+	JS. The controller (learn-controller.ts, loaded by the layout) only toggles what is
+	visible. The first step of the stepper is the page hero itself, so the headline and
+	description are not rendered a second time.
 */}
 {stepper && (
 	<div class="learn-view" data-learn-controls hidden>
@@ -74,7 +79,13 @@ const targetId = 'learn-article';
 			<span class="learn-stepper-progress-fill" data-progress-fill></span>
 		</div>
 		<div class="learn-stepper-actions">
-			<button type="button" class="db-button" data-variant="ghost" data-icon="arrow_left" data-step-prev>
+			<button
+				type="button"
+				class="db-button"
+				data-variant="ghost"
+				data-icon="arrow_left"
+				data-step-prev
+			>
 				{t.back}
 			</button>
 			<p class="learn-stepper-status" aria-live="polite" data-step-status></p>

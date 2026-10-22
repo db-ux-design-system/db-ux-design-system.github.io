@@ -11,62 +11,177 @@
 
 const STORAGE_KEY = 'db-ux-learn-view';
 
+/**
+ * Smallest height of the step content, about three lines of text. Only on very low
+ * screens, where even this does not fit, the page itself scrolls instead.
+ */
+const MIN_STEP_HEIGHT = 80;
+
 type View = 'article' | 'stepper';
 
 type Step = {
 	title: string;
-	/** The section wrappers that make up this step, in document order. */
-	elements: HTMLElement[];
+	/**
+	 * The block section of this step. Additional-info asides live inside it. The intro
+	 * step has none: it is the page hero, which stays where it is.
+	 */
+	element?: HTMLElement;
 };
 
-/** The DBSection wrapper that owns a block, or the block itself as a fallback. */
-function sectionOf(node: HTMLElement): HTMLElement {
-	return node.closest<HTMLElement>('.db-section') ?? node;
+/** The heading that opens a block: the first `## …` of the block. */
+function headingOf(block: HTMLElement): HTMLElement | null {
+	return block.querySelector<HTMLElement>('h2');
 }
 
-/** Groups the rendered blocks into steps: a main block plus the asides that follow it. */
-function readSteps(root: HTMLElement): Step[] {
-	const nodes = Array.from(
-		root.querySelectorAll<HTMLElement>('[data-learn-block], [data-learn-aside]'),
+/** The page headline in the hero; it opens the intro step. */
+function heroHeadline(): HTMLElement | null {
+	return document.querySelector<HTMLElement>('.page-hero-headline');
+}
+
+/**
+ * Turns the links in the core text of a block into teaser cards, shown below the text
+ * in the stepper view. Core text means the paragraphs and lists directly in the block,
+ * not the additional info and not existing teaser cards. The card title is the link
+ * text; an optional description comes from the Markdown link title,
+ * e.g. `[Migration](/path "Switch from DB UI step by step")`.
+ *
+ * The inline link stays in the text for the article view. In the stepper it is marked
+ * so CSS shows it as plain text, and it leaves the tab order, so each target is reached
+ * once, through its card.
+ */
+function buildLinkCards(block: HTMLElement) {
+	if (block.querySelector(':scope > .learn-link-cards')) return;
+	const links = Array.from(
+		block.querySelectorAll<HTMLAnchorElement>(':scope > :is(p, ul, ol) a[href]'),
 	);
-	const steps: Step[] = [];
-	for (const node of nodes) {
-		const isBlock = node.hasAttribute('data-learn-block');
-		const section = sectionOf(node);
-		if (isBlock || steps.length === 0) {
-			steps.push({ title: node.dataset.learnTitle ?? '', elements: [section] });
-		} else {
-			steps[steps.length - 1].elements.push(section);
+	if (links.length === 0) return;
+
+	const grid = document.createElement('div');
+	grid.className = `teaser-cards teaser-cards-cols-${Math.min(links.length, 2)} learn-link-cards`;
+
+	for (const link of links) {
+		const url = new URL(link.href, window.location.href);
+		const external = url.protocol.startsWith('http') && url.origin !== window.location.origin;
+		const label = link.textContent?.trim() ?? '';
+
+		const card = document.createElement('a');
+		card.href = link.href;
+		card.className = 'teaser-card-link';
+		if (external) {
+			card.target = '_blank';
+			card.rel = 'noreferrer';
 		}
+
+		const surface = document.createElement('div');
+		surface.className = 'db-card';
+		surface.dataset.behavior = 'interactive';
+		surface.dataset.spacing = 'small';
+
+		const content = document.createElement('div');
+		content.className = 'teaser-content';
+		const title = document.createElement('h3');
+		title.className = 'teaser-title';
+		// Link texts often start lowercase in running text ("start with the migration"),
+		// so a phrase gets a capital first letter. Single tokens such as an e-mail
+		// address or a URL stay as written.
+		title.textContent = /\s/.test(label) ? label.charAt(0).toUpperCase() + label.slice(1) : label;
+		content.append(title);
+		if (link.title) {
+			const description = document.createElement('p');
+			description.className = 'teaser-description';
+			description.textContent = link.title;
+			content.append(description);
+		}
+		surface.append(content);
+		card.append(surface);
+
+		if (external) {
+			const hint = document.createElement('span');
+			hint.dataset.visuallyHidden = 'true';
+			hint.textContent =
+				document.documentElement.lang === 'de' ? '(öffnet in neuem Tab)' : '(opens in new tab)';
+			card.append(hint);
+		}
+		grid.append(card);
+		link.dataset.learnInlineLink = '';
 	}
-	return steps;
+
+	// After the core text, before the additional info.
+	const aside = block.querySelector(':scope > [data-learn-aside]');
+	block.insertBefore(grid, aside);
 }
 
-function setup(root: HTMLElement) {
-	// Guard against double init on the same element after client navigation.
-	if (root.dataset.learnReady === 'true') return;
+/** The "Show more" button of an additional-info area. */
+function toggleOf(aside: HTMLElement): HTMLButtonElement {
+	return aside.querySelector<HTMLButtonElement>('[data-learn-aside-toggle]')!;
+}
+
+/** Shows or hides the body of an additional-info area and updates its button. */
+function setAside(aside: HTMLElement, expanded: boolean, labels?: { more: string; less: string }) {
+	const body = aside.querySelector<HTMLElement>('[data-learn-aside-body]')!;
+	const button = toggleOf(aside);
+	body.hidden = !expanded;
+	button.setAttribute('aria-expanded', String(expanded));
+	button.dataset.icon = expanded ? 'minus' : 'plus';
+	if (labels) button.textContent = expanded ? labels.less : labels.more;
+}
+
+/**
+ * Builds the steps from the rendered article; nothing is authored twice. The first step
+ * is the page hero (headline and description), then one step per block. Additional
+ * info lives inside its block, so a block is the whole step.
+ */
+function readSteps(root: HTMLElement): Step[] {
+	const blocks = Array.from(root.querySelectorAll<HTMLElement>('[data-learn-block]')).map(
+		(block) => ({ title: headingOf(block)?.textContent?.trim() ?? '', element: block }),
+	);
+	const headline = heroHeadline();
+	return headline ? [{ title: headline.textContent?.trim() ?? '' }, ...blocks] : blocks;
+}
+
+function setup(root: HTMLElement): boolean {
+	// Already wired (e.g. astro:page-load fired after the first setup): keep the page
+	// flag in sync with the current view and do not attach the listeners twice.
+	if (root.dataset.learnReady === 'true') {
+		document.documentElement.dataset.learnView = root.dataset.learnView;
+		return true;
+	}
 
 	const controls = document.querySelector<HTMLElement>('[data-learn-controls]');
-	if (!controls) return;
-
+	const nav = document.querySelector<HTMLElement>('[data-stepper-nav]');
 	const steps = readSteps(root);
-	if (steps.length === 0) return;
+	// On the first load the client:only Shell mounts the content in stages, so the
+	// controls, the nav or the blocks may not all be present yet. Report "not ready"
+	// so the caller keeps observing and retries, instead of giving up until a reload.
+	if (!controls || !nav || steps.length === 0) return false;
+
+	const toggle = controls.querySelector<HTMLElement>('.learn-view-toggle');
+
+	// Move the view toggle into the page toolbar in the hero, so it shares one action
+	// bar with the reading list button. It goes first, so the icon button stays at the
+	// far end. The toolbar is rendered by the hero and may appear a tick later than the
+	// content; if it is not there yet, wait and retry.
+	const toolbar = document.querySelector<HTMLElement>('[data-page-toolbar]');
+	if (toggle && !toolbar) return false;
+	if (toggle && toolbar && toggle.parentElement !== toolbar) {
+		toolbar.prepend(toggle);
+	}
 
 	root.dataset.learnReady = 'true';
-	controls.hidden = false;
+	for (const step of steps) if (step.element) buildLinkCards(step.element);
+	// The controls wrapper only held the toggle, which now lives in the toolbar; keep
+	// it hidden so it leaves no empty space in the content flow.
+	controls.hidden = true;
 
-	// The sticky navigation sits after the content, so it is a sibling of the controls,
-	// not a descendant. Find it from the document.
-	const nav = document.querySelector<HTMLElement>('[data-stepper-nav]');
-	if (!nav) return;
-
-	const articleBtn = controls.querySelector<HTMLButtonElement>('[data-view-btn="article"]')!;
-	const stepperBtn = controls.querySelector<HTMLButtonElement>('[data-view-btn="stepper"]')!;
+	const scope = toolbar ?? controls;
+	const articleBtn = scope.querySelector<HTMLButtonElement>('[data-view-btn="article"]')!;
+	const stepperBtn = scope.querySelector<HTMLButtonElement>('[data-view-btn="stepper"]')!;
 	const prevBtn = nav.querySelector<HTMLButtonElement>('[data-step-prev]')!;
 	const nextBtn = nav.querySelector<HTMLButtonElement>('[data-step-next]')!;
 	const statusEl = nav.querySelector<HTMLElement>('[data-step-status]')!;
 	const progressFill = nav.querySelector<HTMLElement>('[data-progress-fill]')!;
 	const template = root.dataset.stepTemplate ?? 'Step {current} of {total}';
+	const shell = root.closest<HTMLElement>('.db-shell-content');
 
 	const total = steps.length;
 	let view: View = 'article';
@@ -101,33 +216,98 @@ function setup(root: HTMLElement) {
 		);
 	};
 
+	/**
+	 * Stepper view: the step content always fills exactly the space between the hero and
+	 * the navigation bar, so the bar sits right above the footer on every step and never
+	 * jumps, and the footer stays visible. A taller step scrolls inside its area.
+	 *
+	 * The free space is measured, not calculated: the step area is made far too tall for
+	 * a moment, then the shell content (the scroll container of the page) reports by how
+	 * much it overflows. That amount comes off again, which leaves the exact height.
+	 */
+	const PROBE_HEIGHT = 100_000;
+	const fit = () => {
+		root.style.blockSize = '';
+		root.removeAttribute('tabindex');
+		root.removeAttribute('role');
+		root.removeAttribute('aria-label');
+		if (view !== 'stepper' || !shell) return;
+
+		const scrollTop = shell.scrollTop;
+		root.style.blockSize = `${PROBE_HEIGHT}px`;
+		const excess = shell.scrollHeight - shell.clientHeight;
+		root.style.blockSize = `${Math.max(MIN_STEP_HEIGHT, Math.floor(PROBE_HEIGHT - excess))}px`;
+		shell.scrollTop = scrollTop;
+
+		// A scrollable region has to be reachable with the keyboard and needs a name.
+		if (root.scrollHeight > root.clientHeight) {
+			root.tabIndex = 0;
+			root.setAttribute('role', 'region');
+			root.setAttribute('aria-label', steps[stepIndex]?.title ?? '');
+		}
+	};
+
 	const render = (focusHeading = false) => {
 		root.dataset.learnView = view;
-		// The active toggle is marked with aria-pressed; the pressed look comes from CSS.
+		// Inline links of the core text: a tab stop in the article view only. In the
+		// stepper their teaser cards below the text are the tab stops.
+		for (const link of root.querySelectorAll<HTMLElement>('[data-learn-inline-link]')) {
+			if (view === 'stepper') link.tabIndex = -1;
+			else link.removeAttribute('tabindex');
+		}
+		// Page-level flag, e.g. to hide the table of contents in stepper view.
+		document.documentElement.dataset.learnView = view;
 		articleBtn.setAttribute('aria-pressed', String(view === 'article'));
 		stepperBtn.setAttribute('aria-pressed', String(view === 'stepper'));
 		nav.hidden = view !== 'stepper';
 
 		if (view === 'article') {
-			for (const step of steps) for (const el of step.elements) el.hidden = false;
+			delete document.documentElement.dataset.learnIntro;
+			for (const step of steps) if (step.element) step.element.hidden = false;
+			// Additional info is shown as plain content, the "Show more" button is hidden.
+			for (const aside of root.querySelectorAll<HTMLElement>('[data-learn-aside]')) {
+				setAside(aside, true);
+				toggleOf(aside).hidden = true;
+			}
+			fit();
 			return;
 		}
 
 		steps.forEach((step, index) => {
-			const show = index === stepIndex;
-			for (const el of step.elements) el.hidden = !show;
+			if (step.element) step.element.hidden = index !== stepIndex;
 		});
+		// The intro step shows the hero headline and description; CSS hides them on every
+		// other step.
+		const intro = !steps[stepIndex].element;
+		if (intro) document.documentElement.dataset.learnIntro = 'true';
+		else delete document.documentElement.dataset.learnIntro;
+		// Stepper: additional info starts collapsed behind a "Show more" button.
+		for (const aside of root.querySelectorAll<HTMLElement>('[data-learn-aside]')) {
+			toggleOf(aside).hidden = false;
+			setAside(aside, false);
+		}
 
-		const current = steps[stepIndex];
-		const label = template.replace('{current}', String(stepIndex + 1)).replace('{total}', String(total));
+		const label = template
+			.replace('{current}', String(stepIndex + 1))
+			.replace('{total}', String(total));
 		statusEl.textContent = label;
 		progressFill.style.inlineSize = `${Math.round(((stepIndex + 1) / total) * 100)}%`;
 		prevBtn.disabled = stepIndex === 0;
 		nextBtn.disabled = stepIndex >= total - 1;
+
+		// Each step starts at its top, inside the step and on the page.
+		root.scrollTop = 0;
+		if (shell) shell.scrollTop = 0;
+		fit();
+
 		// Move focus to the heading of the current block so the step is announced.
 		if (focusHeading) {
-			const heading = current?.elements[0]?.querySelector<HTMLElement>('.learn-block-title');
-			heading?.focus();
+			const element = steps[stepIndex].element;
+			const heading = element ? headingOf(element) : heroHeadline();
+			if (heading) {
+				heading.tabIndex = -1;
+				heading.focus({ preventScroll: true });
+			}
 		}
 	};
 
@@ -149,37 +329,83 @@ function setup(root: HTMLElement) {
 	prevBtn.addEventListener('click', () => goTo(stepIndex - 1));
 	nextBtn.addEventListener('click', () => goTo(stepIndex + 1));
 
+	// "Show more" / "Show less" per additional-info area (stepper view only).
+	for (const aside of root.querySelectorAll<HTMLElement>('[data-learn-aside]')) {
+		const button = toggleOf(aside);
+		const labels = {
+			more: button.dataset.labelMore ?? 'Show more',
+			less: button.dataset.labelLess ?? 'Show less',
+		};
+		button.addEventListener('click', () => {
+			setAside(aside, button.getAttribute('aria-expanded') !== 'true', labels);
+			fit();
+		});
+	}
+
+	// Refit when the available space or the step height changes: window size, the hero
+	// settling after fonts and the toolbar island load, the footer, an additional-info
+	// accordion opening or closing, late images. The step content itself is not
+	// observed, because fit changes its height.
+	const resizeObserver = new ResizeObserver(() => fit());
+	for (const el of [
+		shell,
+		document.querySelector('.page-hero'),
+		nav,
+		shell?.querySelector('footer'),
+	]) {
+		if (el) resizeObserver.observe(el);
+	}
+	root.addEventListener('toggle', () => fit(), true);
+	root.addEventListener('load', () => fit(), true);
+
 	readInitial();
 	render(false);
+	return true;
 }
 
+/** How long to wait for the Shell to mount the content before giving up. */
+const MOUNT_TIMEOUT = 30_000;
+
 export function initLearnArticle() {
-	// The article lives inside the client:only React Shell, which mounts after this
-	// script runs. Try now, on astro:page-load, and via a short-lived observer so the
-	// controller wires up as soon as the content appears, without polling forever.
+	// The article lives inside the client:only React Shell. It mounts after this script
+	// runs on the first load, and again after every ClientRouter navigation, in both
+	// cases after astro:page-load has fired. So every page start begins a fresh wait:
+	// try once, then observe the DOM until the content is wired up.
 	let observer: MutationObserver | undefined;
+	let timeout: number | undefined;
+
+	const stop = () => {
+		observer?.disconnect();
+		observer = undefined;
+		window.clearTimeout(timeout);
+	};
 
 	const run = () => {
 		const root = document.getElementById('learn-article');
-		const controls = document.querySelector<HTMLElement>('[data-learn-controls]');
-		// Both the content and the controls must be present before wiring.
-		if (root && controls) {
-			setup(root);
-			observer?.disconnect();
-			observer = undefined;
+		// setup returns true only once the content, controls, nav and toolbar are all
+		// present and wired. Until then the observer keeps retrying.
+		if (root && setup(root)) {
+			stop();
 			return true;
 		}
 		return false;
 	};
 
-	if (!run()) {
-		observer = new MutationObserver(() => {
-			run();
-		});
+	const start = () => {
+		stop();
+		// A new page: drop the page-level flags of a previous Learn article. setup sets
+		// them again if this page is a Learn article.
+		delete document.documentElement.dataset.learnView;
+		delete document.documentElement.dataset.learnIntro;
+		if (run()) return;
+		observer = new MutationObserver(() => run());
 		observer.observe(document.body, { childList: true, subtree: true });
-		// Safety: stop observing after a few seconds even if nothing matched.
-		window.setTimeout(() => observer?.disconnect(), 8000);
-	}
+		// Pages without a Learn article never match; stop observing them eventually.
+		timeout = window.setTimeout(stop, MOUNT_TIMEOUT);
+	};
 
-	document.addEventListener('astro:page-load', run);
+	start();
+	// After a client-side navigation the old observer would watch a page that is gone.
+	document.addEventListener('astro:before-swap', stop);
+	document.addEventListener('astro:page-load', start);
 }
