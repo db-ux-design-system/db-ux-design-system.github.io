@@ -14,35 +14,57 @@
 	padding-block: var(--db-spacing-responsive-sm);
 }
 
+/*
+ * Stepper spacing. One scale for every step – the hero (step 1) and the blocks alike –
+ * so all steps look the same. The stepper sets the text larger, so the spacing grows
+ * with it and is never smaller than in the article view. Keep the three values in sync
+ * when changing them (the db-ux/use-spacings lint rule only allows the tokens directly,
+ * not custom properties):
+ *   heading → text:                          2xl
+ *   text → what follows (cards, "Show more"): 2xl
+ *   cards → "Show more":                      xl
+ */
+
 /* Stepper view shows one focused step at a time, so the core text is set larger for
-   easier reading and the heading gets more air. The additional-info body keeps the
-   regular size. */
+   easier reading. The additional-info body keeps the regular size. */
 .learn-article[data-learn-view='stepper'] .learn-block > p,
 html[data-learn-intro] .page-hero-description {
 	font: var(--db-type-body-xl);
+
+	/* After the font shorthand, which resets the line height of the token. */
+	line-height: 150%;
+}
+
+/* Heading → text, step 1 (the hero). The gap alone sets the distance: the global content
+   spacing would add a top margin to the description, which follows the headline row. */
+html[data-learn-view='stepper'] .page-hero-content {
+	gap: var(--db-spacing-fixed-2xl);
+}
+
+html[data-learn-view='stepper'] .dba-main-content .page-hero-description {
+	margin-block-start: 0;
 }
 
 /*
- * Stepper spacing: more air below the heading and between the text and what follows it
- * (the link cards and the "Show more" button). The global content spacing sets the same
- * margins with equal specificity, so these rules are anchored on the article id.
+ * Heading → text, all other steps. The global content spacing sets the same margins
+ * with equal specificity, so these rules are anchored on the article id.
  */
 #learn-article[data-learn-view='stepper'] .learn-block > h2 {
-	margin-block-end: var(--db-spacing-fixed-xl);
+	margin-block-end: var(--db-spacing-fixed-2xl);
 }
 
 #learn-article[data-learn-view='stepper'] .learn-block > h2 + * {
 	margin-block-start: 0;
 }
 
-/* Any card grid in a step – generated from links or written as a TeaserCard in the MDX –
-   and the "Show more" button get the same gap to the text above. */
+/* Text → what follows: any card grid in a step – generated from links or written as a
+   TeaserCard in the MDX – and the "Show more" button. */
 #learn-article[data-learn-view='stepper'] .learn-block > .teaser-cards,
 #learn-article[data-learn-view='stepper'] .learn-aside {
 	margin-block-start: var(--db-spacing-fixed-2xl);
 }
 
-/* Cards directly followed by the button: one gap is enough, not two. */
+/* Cards → "Show more": one gap is enough, not two. */
 #learn-article[data-learn-view='stepper'] .learn-block > .teaser-cards + .learn-aside {
 	margin-block-start: var(--db-spacing-fixed-xl);
 }
@@ -137,9 +159,20 @@ html[data-learn-view='stepper']:not([data-learn-intro]) .page-hero-description {
 	display: none;
 }
 
-html[data-learn-view='stepper'] .page-hero,
-html[data-learn-view='stepper'] .page-hero-content {
-	gap: 0;
+/*
+ * Step 1 (the hero) starts where every other step starts: below the toolbar, not next
+ * to it. The toolbar takes its own line at the top of the headline row. The gap below
+ * it is the distance from the toolbar to a step heading on the other steps: the hero
+ * section padding, the gap between the two sections and the block padding.
+ */
+html[data-learn-intro] .page-hero-headline-row {
+	flex-wrap: wrap;
+	row-gap: calc(2 * var(--db-spacing-responsive-sm) + var(--db-spacing-fixed-md));
+}
+
+html[data-learn-intro] .page-hero-toolbar {
+	order: -1;
+	flex-basis: 100%;
 }
 
 /* Stepper navigation below the step content: progress on top, then Back · step count ·
