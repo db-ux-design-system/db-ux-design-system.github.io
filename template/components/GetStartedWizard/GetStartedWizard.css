@@ -160,86 +160,46 @@
 	justify-content: flex-end;
 }
 
-/* Hint above the list, without a card: the icon of the control panel button on the
-   start side, headline and text on the end side. In a narrow column the text moves
-   below the icon instead of wrapping in a column of a few words. */
-.gsw-saved {
-	display: flex;
-	flex-flow: row wrap;
-	gap: var(--db-spacing-fixed-md);
-	align-items: flex-start;
+/* The hint hangs below the control panel at the end edge, over the page, not in its
+   flow. --gsw-saved-top is the lower edge of the visible control panel, measured by
+   the island; the sizing token is only the fallback before the first measurement. */
+.gsw-saved.db-notification {
+	position: fixed;
+	inset-block-start: calc(var(--gsw-saved-top, var(--db-sizing-2xl)) + var(--db-spacing-fixed-sm));
+	inset-inline-end: var(--db-spacing-fixed-sm);
+	z-index: 100;
+	max-inline-size: min(calc(100vw - 2 * var(--db-spacing-fixed-sm)), 28rem);
+
+	/* The semantic colors its icon through the ::before itself, so --db-icon-color on
+	   the notification has no effect. */
+	&::before {
+		color: var(--db-informational-on-bg-basic-emphasis-100-default);
+	}
 }
 
-/* Headline of the hint: one step below the headlines of the list. */
-.gsw-saved .db-heading {
-	font: var(--db-type-headline-sm);
-}
-
-/* The icon of the control panel button with its badge, without a frame. Not scaled:
-   the box has the height of a button (sizing md) and the icon the size it has in the
-   control panel (sizing sm), so the badge keeps its distance to the icon. */
-.gsw-saved-trigger {
-	position: relative;
-	display: flex;
-	flex: none;
-	align-items: center;
-	justify-content: center;
-	inline-size: var(--db-sizing-md);
-	block-size: var(--db-sizing-md);
-}
-
-/* Without the frame the badge would hang over the top edge of the hint, because the
-   library shifts a corner badge by half its size. Shifted back, it sits in the corner
-   of the box and keeps the same overlap with the icon. */
-.gsw-saved-badge {
-	--badge-transform-x: 0%;
-	--badge-transform-y: 0%;
-}
-
-.gsw-saved-icon {
-	--db-icon-font-size: var(--db-sizing-sm);
-
-	display: flex;
-	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
-}
-
-.gsw-saved-text {
-	display: grid;
-	flex: 1 1 20rem;
-	gap: var(--db-spacing-fixed-xs);
-}
-
-/* The CTA and the list below it: one block, closer together than the sections of the
-   wizard. */
-.gsw-result-block {
-	display: grid;
-	gap: var(--db-spacing-fixed-lg);
-}
-
-/* The call to action of the package keeps its content width instead of spanning the
-   grid column. position: relative anchors the trailing icon: the library places it
-   absolutely at the end of the button, and the DBButton component brings that
-   position with it, a plain anchor with the button class does not. */
+/* The call to action of the package, in the button row below the list.
+   position: relative anchors the trailing icon: the library places it absolutely at
+   the end of the button, and the DBButton component brings that position with it, a
+   plain anchor with the button class does not. */
 .gsw-start {
 	position: relative;
-	justify-self: start;
 }
 
-/* No frame around the list and no dividers: the items stand on their own. Spacing
+/* No frame around the list and no dividers. No gap either: the lines of the items
+   form one continuous line, like the group bar in the reading list popover. Spacing
    inside the wizard comes from the gaps only: the content margins of
    content-spacing.css are excluded for .gsw there. */
 .gsw-package-list {
 	display: grid;
-	gap: var(--db-spacing-fixed-md);
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 
-/* Headline of an item: one step below the h1 of the page (headline lg). DBHeading has
-   no size property, so the font comes from here. */
+/* Headline of an item: two steps below the h1 of the page (headline lg). DBHeading
+   has no size property, so the font comes from here. */
 .gsw-package-item .db-heading {
-	font: var(--db-type-headline-md);
+	font: var(--db-type-headline-sm);
 }
 
 /* One item per page: a 2 px line on the start side in the color of the chosen role
@@ -251,6 +211,7 @@
 	gap: var(--db-spacing-fixed-xs) var(--db-spacing-fixed-md);
 	align-items: center;
 	justify-content: space-between;
+	padding-block: var(--db-spacing-fixed-sm);
 	padding-inline-start: var(--db-spacing-fixed-md);
 	border-inline-start: var(--db-border-width-2xs) solid
 		var(--gsw-role-color, var(--db-adaptive-on-bg-basic-emphasis-70-default));

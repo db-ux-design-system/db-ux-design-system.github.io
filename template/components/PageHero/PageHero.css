@@ -60,6 +60,13 @@
 	margin: 0;
 }
 
+/* Headline with controls after it, e.g. the reading list bookmark. */
+.page-hero-headline-row {
+	display: flex;
+	align-items: center;
+	gap: var(--db-spacing-fixed-xs);
+}
+
 .page-hero-description {
 	margin: 0;
 	max-inline-size: var(--db-container-md);
