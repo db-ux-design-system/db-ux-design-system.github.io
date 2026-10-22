@@ -9,12 +9,32 @@ description: 'Richtlinien, Komponenten und Ressourcen des DB UX Design Systems f
 isSubNavigation: true
 ---
 
-import { DBStack } from '@db-ux/react-core-components';
+import { DBStack, DBNotification, DBLink } from '@db-ux/react-core-components';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 
 <DBStack gap="medium">
 
-## Mit dem Design System arbeiten
+<TeaserCard
+	columns={1}
+	spacing="large"
+	headlineSize="large"
+	headlineLevel={2}
+	teasers={[
+		{
+			title: 'Neu im Design System?',
+			description:
+				'Beantworte ein paar Fragen und finde den Einstieg, der zu deiner Rolle und deinem Projekt passt.',
+			url: '/de/dokumentation/erste-schritte',
+			imageSrc: '/assets/Design-System--C.png',
+			imageAlt: '',
+			imagePosition: 'right',
+			imageWidth: '33',
+			mask: 'fade-bottom-right',
+		},
+	]}
+/>
+
+## Schnellzugriff
 
 <TeaserCard
 	columns={3}
@@ -23,67 +43,26 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 	headlineLevel={3}
 	teasers={[
 		{
-			title: 'Erste Schritte',
-			description: 'Beantworte ein paar Fragen und finde den Einstieg, der zu deiner Rolle und deinem Projekt passt.',
-			url: '/de/dokumentation/erste-schritte',
-		},
-		{
 			title: 'Foundation',
-			description: 'Farben, Typografie, Abstände und die übrigen Tokens, auf denen alle Komponenten aufbauen.',
+			description: 'Farben, Typografie, Abstände und weitere Tokens.',
 			url: '/de/dokumentation/foundation',
 		},
 		{
 			title: 'Komponenten',
-			description: 'Alle Komponenten mit Richtlinien, Beispielen und ihrem Status.',
+			description: 'Richtlinien, Beispiele und Status aller Komponenten.',
 			url: '/de/dokumentation/komponenten',
 		},
 		{
-			title: 'Patterns',
-			description: 'Wiederkehrende Lösungen, die mehrere Komponenten kombinieren.',
-			url: '/de/dokumentation/pattern',
-		},
-		{
-			title: 'Erweiterungen',
-			description: 'Fachspezifische Add-ons, die auf dem Design System aufbauen.',
-			url: '/de/dokumentation/erweiterungen',
-		},
-		{
-			title: 'Icons',
-			description: 'Durchsuche alle Icons und kopiere ihre Namen für den Code.',
-			url: '/de/dokumentation/icons',
+			title: 'Release Notes',
+			description: 'Alle Änderungen pro Version.',
+			url: '/de/dokumentation/releases/release-notes',
 		},
 	]}
 />
 
-## Mehr erfahren
-
-<TeaserCard
-	columns={2}
-	spacing="large"
-	headlineSize="medium"
-	headlineLevel={3}
-	teasers={[
-		{
-			title: 'Ressourcen',
-			description: 'Figma-Bibliotheken, Plugins und Code-Pakete.',
-			url: '/de/dokumentation/ressourcen',
-		},
-		{
-			title: 'Lernen',
-			description: 'Tutorials, Anleitungen und Hintergrundwissen.',
-			url: '/de/dokumentation/lernen',
-		},
-		{
-			title: 'Releases',
-			description: 'Release Notes, Versionierung, Content-Status und Migration Guides.',
-			url: '/de/dokumentation/releases',
-		},
-		{
-			title: 'Mitwirken',
-			description: 'Gib Feedback und hilf, das Design System zu verbessern.',
-			url: '/de/dokumentation/mitwirken',
-		},
-	]}
-/>
+{/* prettier-ignore */}
+<DBNotification variant="standalone" semantic="informational" headline="Hinweis">
+	Alle Beispiele in dieser Dokumentation basieren auf dem <DBLink href="/de/dokumentation/ressourcen/pakete/db-theme" variant="inline">DB Theme</DBLink>. Nutzt du das Design System als White Label oder mit einem anderen Theme, können die visuellen Ergebnisse abweichen, weil dann eine andere Foundation greift.
+</DBNotification>
 
 </DBStack>
