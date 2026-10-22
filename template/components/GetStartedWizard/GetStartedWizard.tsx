@@ -1,5 +1,5 @@
-import { type FormEvent, useEffect, useRef, useState } from 'react';
-import { DBButton, DBCard, DBHeadingH2 } from '@db-ux/react-core-components';
+import { type CSSProperties, type FormEvent, useEffect, useRef, useState } from 'react';
+import { DBBadge, DBButton, DBCard, DBHeadingH2 } from '@db-ux/react-core-components';
 import { savePackage } from '@template/components/LearningPackage/learning-package-store';
 import { learningPackageTexts } from '@template/components/LearningPackage/texts';
 import {
@@ -24,12 +24,14 @@ const ui = {
 		back: 'Back',
 		restart: 'Start again',
 		open: 'Open',
+		start: 'Start learning package',
 	},
 	de: {
 		next: 'Weiter',
 		back: 'Zurück',
 		restart: 'Neu starten',
 		open: 'Öffnen',
+		start: 'Lernpaket starten',
 	},
 } as const;
 
@@ -158,44 +160,89 @@ const GetStartedWizard = ({ lang = 'en' }: { lang?: Lang }) => {
 						{lpText.title}
 					</h1>
 					<p className="gsw-result-intro">{lpText.intro}</p>
+					{/* The package is saved automatically, so the hint stands above the list
+					    and close to the intro: where the package is kept and how to open it
+					    again. It shows the control panel button with the number of pages, so
+					    the button is recognizable in the header. No card: the hint belongs to
+					    the text above it, not to the list. */}
+					<div className="gsw-saved">
+						{/* The icon of the button with its badge, not the button itself: the
+						    real one sits in the control panel. Hidden from assistive
+						    technology, the text names it. */}
+						<span className="gsw-saved-trigger" aria-hidden="true">
+							<span className="gsw-saved-icon" data-icon="bookmark" />
+							<DBBadge
+								className="gsw-saved-badge"
+								placement="corner-top-right"
+								semantic="informational"
+								emphasis="strong"
+								size="small"
+								label={lpText.badgeLabel}
+							>
+								{result.items.length}
+							</DBBadge>
+						</span>
+						<div className="gsw-saved-text">
+							<DBHeadingH2>{lpText.savedTitle}</DBHeadingH2>
+							<p>{lpText.saved}</p>
+						</div>
+					</div>
 				</div>
-				{/* Styled like the selected cards of the previous steps: elevation level 3,
-				    tinted in the color of the chosen role. Static, because only the links
-				    inside are interactive. Pages are ticked off in the popover only. */}
-				<DBCard
-					spacing="large"
-					elevationLevel="3"
-					className="gsw-result"
-					data-color={roleColor(answers)}
-				>
-					{/* One row per page: text on the start side, button on the end side.
-					    No package title above the list: it repeated the first page. Every
-					    row has the same headline size as the option cards (sm = h4) and the
-					    same button text. Only the button marks the first page: brand
-					    instead of outlined. */}
-					<ol className="gsw-package-list">
-						{result.items.map((item, index) => {
-							const first = index === 0;
-							return (
-								<li key={item.id} className="gsw-package-item">
-									<div className="gsw-package-text">
-										<DBHeadingH2 size="sm">{item.label[lang]}</DBHeadingH2>
-										<p className="gsw-package-description">{item.description[lang]}</p>
-									</div>
-									<a
-										className="db-button gsw-package-button"
-										data-variant={first ? 'brand' : 'outlined'}
-										href={toHref(item, lang)}
-										// The visible text alone ("Open") does not name the page.
-										aria-label={`${text.open}: ${item.label[lang]}`}
-									>
-										{text.open}
-									</a>
-								</li>
-							);
-						})}
+				{/* The CTA and the list belong together, so they keep a tighter gap than the
+				    sections of the wizard. */}
+				<div className="gsw-result-block">
+					{/* One call to action for the whole package. It opens the first page until
+					    the walkthrough across all pages exists. */}
+					<a
+						className="db-button gsw-start"
+						data-variant="brand"
+						// Arrow after the label: data-icon-trailing carries the icon name,
+						// data-icon would put it in front of the label.
+						data-icon-trailing="arrow_right"
+						href={toHref(result.items[0], lang)}
+					>
+						{text.start}
+					</a>
+					{/* One item per page, each standing on its own: no frame around the list
+					    and no dividers, every item carries a 2 px line on its start side in
+					    the color of the chosen role (emphasis 70). Text on the start side,
+					    the arrow on the end side. */}
+					<ol
+						className="gsw-package-list"
+						// Not data-color: that attribute also tints the background and the text
+						// of everything inside. Only the line needs the color, so the role
+						// color is handed over as a custom property.
+						style={
+							{
+								'--gsw-role-color': `var(--db-${roleColor(answers)}-on-bg-basic-emphasis-70-default)`,
+							} as CSSProperties
+						}
+					>
+						{result.items.map((item) => (
+							<li key={item.id} className="gsw-package-item">
+								<div className="gsw-package-text">
+									{/* Font one step below the h1, set in the CSS: DBHeading has no
+										    size property. */}
+									<DBHeadingH2>{item.label[lang]}</DBHeadingH2>
+									<p className="gsw-package-description">{item.description[lang]}</p>
+								</div>
+								{/* Arrow only: the headline next to it says where it goes, and the
+								    package has one call to action above the list. data-no-text sets
+								    the font size to 0, so the name comes from the aria-label. */}
+								<a
+									className="db-button gsw-package-button"
+									data-variant="ghost"
+									data-icon="arrow_right"
+									data-no-text="true"
+									href={toHref(item, lang)}
+									aria-label={`${text.open}: ${item.label[lang]}`}
+								>
+									{text.open}
+								</a>
+							</li>
+						))}
 					</ol>
-				</DBCard>
+				</div>
 				<div className="gsw-actions">
 					<DBButton type="button" variant="ghost" onClick={goBack}>
 						{text.back}
@@ -236,7 +283,7 @@ const GetStartedWizard = ({ lang = 'en' }: { lang?: Lang }) => {
 						const tinted = checked || (question.id === 'role' && !current);
 						const id = `gsw-${question.id}-${option.id}`;
 						return (
-							// Same card spacing as the result card (spacing="large"). DBCard
+							// Card spacing="large" on every step. DBCard
 							// renders a div, which may not sit inside a label, so the radio
 							// gets its name through aria-labelledby and a click anywhere on
 							// the card selects it.
@@ -250,7 +297,8 @@ const GetStartedWizard = ({ lang = 'en' }: { lang?: Lang }) => {
 								elevationLevel={tinted ? '3' : undefined}
 								data-color={tinted ? colorFor(option.id) : undefined}
 								onClick={(event) => {
-									setSelection(option.id);
+									// A click on the selected card clears the selection again.
+									setSelection(checked ? undefined : option.id);
 									// A click on the card is not a click on a label, so the radio
 									// does not get the focus by itself. Without this, the focus and
 									// the arrow-key position stay on another card. focusVisible:

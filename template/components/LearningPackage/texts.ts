@@ -12,6 +12,11 @@ export const learningPackageTexts: Record<
 		restart: string;
 		remove: string;
 		intro: string;
+		/** Hint on the result page: where the package is kept and how to open it again. */
+		savedTitle: string;
+		saved: string;
+		/** Describes the count badge of the button shown in that hint. */
+		badgeLabel: string;
 	}
 > = {
 	en: {
@@ -21,8 +26,11 @@ export const learningPackageTexts: Record<
 		viewedLabel: (label) => `Viewed: ${label}`,
 		restart: 'Start again',
 		remove: 'Remove',
-		intro:
-			'Work through these pages in this order. The list stays saved in this browser. Open it on any page with the light bulb button at the top. There, tick off each page once you have viewed it.',
+		intro: 'Work through these pages in this order.',
+		savedTitle: 'Saved to your reading list',
+		saved:
+			'Open your reading list on any page with the bookmark button at the top. There you tick off each page once you have viewed it. The list stays saved in this browser.',
+		badgeLabel: 'pages in your reading list',
 	},
 	de: {
 		title: 'Deine nächsten Schritte',
@@ -31,7 +39,10 @@ export const learningPackageTexts: Record<
 		viewedLabel: (label) => `Angeschaut: ${label}`,
 		restart: 'Neu starten',
 		remove: 'Entfernen',
-		intro:
-			'Arbeite diese Seiten der Reihe nach durch. Die Liste bleibt in diesem Browser gespeichert. Öffne sie auf jeder Seite über den Button mit der Glühbirne oben. Hake dort jede Seite ab, sobald du sie angeschaut hast.',
+		intro: 'Arbeite diese Seiten der Reihe nach durch.',
+		savedTitle: 'In deiner Leseliste gespeichert',
+		saved:
+			'Öffne deine Leseliste auf jeder Seite über den Button mit dem Lesezeichen oben. Dort hakst du jede Seite ab, sobald du sie angeschaut hast. Die Liste bleibt in diesem Browser gespeichert.',
+		badgeLabel: 'Seiten in deiner Leseliste',
 	},
 };

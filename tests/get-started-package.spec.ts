@@ -18,16 +18,32 @@ test('learning package is saved and available in the control panel', async ({ pa
 	await waitForDBShell(page);
 	await expect(page.locator('#gsw-heading')).toHaveText('Your next steps');
 
-	// Result page: intro outside the card, CTA to the first item, no checkboxes.
+	// Result page: intro in the hero, one brand CTA above the list, arrow links in the
+	// list, no checkboxes.
 	await expect(page.locator('.gsw > .gsw-hero > .gsw-result-intro')).toHaveCount(1);
-	await expect(page.locator('.gsw-result .gsw-result-intro')).toHaveCount(0);
-	const cta = page.locator('.gsw-result a.db-button[data-variant=brand]');
-	await expect(cta).toHaveText('Open');
-	await expect(cta).toHaveAccessibleName('Open: Design Resources');
+	await expect(page.locator('.gsw-package-list .gsw-result-intro')).toHaveCount(0);
+	const cta = page.locator('.gsw-start');
+	await expect(cta).toHaveText('Start learning package');
+	await expect(cta).toHaveAttribute('data-variant', 'brand');
+	await expect(cta).toHaveAttribute('data-icon-trailing', 'arrow_right');
 	await expect(cta).toHaveAttribute('href', '/documentation/resources/design');
-	await expect(page.locator('.gsw-result .gsw-package-item')).toHaveCount(3);
+	await expect(page.locator('.gsw-package-list a[data-variant=brand]')).toHaveCount(0);
+	const firstArrow = page.locator('.gsw-package-button').first();
+	await expect(firstArrow).toHaveAttribute('data-variant', 'ghost');
+	await expect(firstArrow).toHaveAttribute('data-icon', 'arrow_right');
+	await expect(firstArrow).toHaveAccessibleName('Open: Design Resources');
+	await expect(firstArrow).toHaveAttribute('href', '/documentation/resources/design');
+	await expect(page.locator('.gsw-package-list .gsw-package-item')).toHaveCount(3);
 	await expect(page.locator('.gsw input[type=checkbox]')).toHaveCount(0);
 	await expect(page.locator('.gsw .lp-progress')).toHaveCount(0);
+
+	// Hint that the package is saved: headline, text and a picture of the button with
+	// the number of pages.
+	const saved = page.locator('.gsw-saved');
+	await expect(saved.getByRole('heading')).toHaveText('Saved to your reading list');
+	await expect(saved).toContainText('with the bookmark button at the top');
+	await expect(saved.locator('.gsw-saved-icon')).toHaveAttribute('data-icon', 'bookmark');
+	await expect(saved.locator('.gsw-saved-badge')).toHaveText('3');
 
 	const stored = await page.evaluate((key) => JSON.parse(localStorage.getItem(key) ?? 'null'), KEY);
 	expect(stored.version).toBe(1);
@@ -85,7 +101,7 @@ test('wizard steps by click, with focus, check icon and Back', async ({ page }) 
 	const check = page.locator('.gsw-option-check');
 	await expect(check).toHaveCount(0);
 
-	const designer = page.getByRole('radio', { name: 'Design', exact: true });
+	const designer = page.getByRole('radio', { name: 'Designer', exact: true });
 	await page.locator('.gsw-option', { has: designer }).click();
 	await expect(designer).toBeChecked();
 	await expect(designer).toBeFocused();
@@ -122,7 +138,7 @@ test('browser Back and Forward between steps and from a result link', async ({ p
 	await waitForDBShell(page);
 	const heading = page.locator('.gsw h1');
 	await page
-		.locator('.gsw-option', { has: page.getByRole('radio', { name: 'Design', exact: true }) })
+		.locator('.gsw-option', { has: page.getByRole('radio', { name: 'Designer', exact: true }) })
 		.click();
 	await page.getByRole('button', { name: 'Next', exact: true }).click();
 	await expect(heading).toHaveText('What are you about to do?');
@@ -145,13 +161,13 @@ test('browser Back and Forward between steps and from a result link', async ({ p
 	await expect(page.locator('body[data-test-same-page]')).toHaveCount(1);
 
 	// A result link navigates to another page; Back shows the result again.
-	await page.locator('.gsw-result a.db-button[data-variant=brand]').click();
+	await page.locator('.gsw-start').click();
 	await page.waitForURL(/\/documentation\/resources\/design$/);
 	await expect(page.locator('.gsw')).toHaveCount(0);
 	await page.goBack();
 	await expect(page).toHaveURL(/\/documentation\/get-started\?role=design&designIntent=new$/);
 	await expect(heading).toHaveText('Your next steps');
-	await expect(page.locator('.gsw-result .gsw-package-item')).toHaveCount(3);
+	await expect(page.locator('.gsw-package-list .gsw-package-item')).toHaveCount(3);
 });
 
 test('German wizard path', async ({ page }) => {
@@ -160,12 +176,14 @@ test('German wizard path', async ({ page }) => {
 	const heading = page.locator('.gsw h1');
 	await expect(heading).toHaveText('Was ist deine Rolle?');
 	await expect(page.locator('.gsw-option-label')).toHaveText([
-		'Design',
-		'Entwicklung',
-		'Produktmanagement',
+		'Designer:in',
+		'Entwickler:in',
+		'Produktmanager:in',
 	]);
 
-	await page.locator('.gsw-option', { has: page.getByRole('radio', { name: 'Design' }) }).click();
+	await page
+		.locator('.gsw-option', { has: page.getByRole('radio', { name: 'Designer:in' }) })
+		.click();
 	await page.getByRole('button', { name: 'Weiter' }).click();
 	await expect(heading).toHaveText('Was hast du vor?');
 	await page
@@ -174,10 +192,12 @@ test('German wizard path', async ({ page }) => {
 	await page.getByRole('button', { name: 'Weiter' }).click();
 
 	await expect(heading).toHaveText('Deine nächsten Schritte');
-	const cta = page.locator('.gsw-result a.db-button[data-variant=brand]');
-	await expect(cta).toHaveText('Öffnen');
-	await expect(cta).toHaveAccessibleName('Öffnen: Design-Ressourcen');
+	const cta = page.locator('.gsw-start');
+	await expect(cta).toHaveText('Lernpaket starten');
 	await expect(cta).toHaveAttribute('href', '/de/dokumentation/ressourcen/design');
+	await expect(page.locator('.gsw-package-button').first()).toHaveAccessibleName(
+		'Öffnen: Design-Ressourcen',
+	);
 	const hrefs = await page
 		.locator('.gsw-package-button')
 		.evaluateAll((links) => links.map((link) => link.getAttribute('href')));
