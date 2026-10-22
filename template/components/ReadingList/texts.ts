@@ -21,8 +21,11 @@ export const readingListTexts: Record<
 		added: string;
 		removeCurrent: string;
 		removedCurrent: string;
-		/** Intro of the wizard result. */
+		/** Intro of the wizard result: points at the package, not at single pages. */
 		intro: string;
+		/** Headline of the hint on the wizard result: the pages are on the list now. */
+		savedTitle: string;
+		saved: string;
 	}
 > = {
 	en: {
@@ -43,7 +46,10 @@ export const readingListTexts: Record<
 		removeCurrent: 'Remove from reading list',
 		removedCurrent: 'Removed from reading list',
 		intro:
-			'Work through these pages in this order. They are now also on your reading list. Open it on any page with the “Reading list” button in the header.',
+			'Your learning package is ready. The pages are ordered so you get through without detours.',
+		savedTitle: 'Saved to your reading list',
+		saved:
+			'Open it on any page with the “Reading list” button in the header. It stays saved in this browser.',
 	},
 	de: {
 		title: 'Leseliste',
@@ -60,7 +66,9 @@ export const readingListTexts: Record<
 		added: 'Zur Leseliste hinzugefügt',
 		removeCurrent: 'Von der Leseliste entfernen',
 		removedCurrent: 'Von der Leseliste entfernt',
-		intro:
-			'Arbeite diese Seiten der Reihe nach durch. Sie stehen jetzt auch auf deiner Leseliste. Du öffnest sie auf jeder Seite über den Button „Leseliste“ im Header.',
+		intro: 'Dein Lernpaket steht. Die Seiten sind so sortiert, dass du ohne Umwege durchkommst.',
+		savedTitle: 'In deiner Leseliste gespeichert',
+		saved:
+			'Öffne sie jederzeit über den Button „Leseliste“ im Header. Sie bleibt in diesem Browser gespeichert.',
 	},
 };
