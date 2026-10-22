@@ -1,0 +1,229 @@
+/*
+ * Consistent Results code visual: the same page wireframe on a phone (portrait) and a
+ * desktop (landscape), connected by a dashed line. Block heights grow proportionally
+ * to the frame height (flex-grow), so both formats keep their aspect ratio and nothing
+ * overflows at any width.
+ */
+.consistent-results-visual {
+	display: flex;
+	align-items: center;
+	inline-size: 100%;
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+}
+
+.consistent-results-visual-device {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-xs);
+	min-inline-size: 0;
+	padding: var(--db-spacing-fixed-md);
+	border: var(--db-border-width-2xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-lg);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}
+
+.consistent-results-visual-device[data-device='phone'] {
+	flex: 0 0 26%;
+	aspect-ratio: 9 / 19;
+	padding-inline: var(--db-spacing-fixed-sm);
+}
+
+.consistent-results-visual-device[data-device='desktop'] {
+	flex: 0 0 56%;
+	aspect-ratio: 16 / 10;
+}
+
+.consistent-results-visual-notch {
+	display: block;
+	flex: none;
+	align-self: center;
+	inline-size: 35%;
+	padding-block: var(--db-spacing-fixed-2xs);
+	border-radius: var(--db-border-radius-full);
+	background-color: var(--db-adaptive-bg-basic-level-3-default);
+}
+
+.consistent-results-visual-screen {
+	display: flex;
+	flex: 1 1 0;
+	gap: var(--db-spacing-fixed-sm);
+	min-block-size: 0;
+}
+
+.consistent-results-visual-device[data-device='phone'] .consistent-results-visual-screen {
+	flex-direction: column;
+}
+
+/* Navigation: tab bar on the phone, sidebar on the desktop; the first item is active */
+.consistent-results-visual-nav {
+	display: flex;
+	gap: var(--db-spacing-fixed-3xs);
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+}
+
+.consistent-results-visual-nav-item {
+	display: block;
+	flex: 1 1 0;
+	padding-block: var(--db-spacing-fixed-2xs);
+	background-color: var(--db-adaptive-bg-basic-level-3-default);
+}
+
+.consistent-results-visual-nav-item[data-active] {
+	background-color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+}
+
+.consistent-results-visual-device[data-device='desktop'] .consistent-results-visual-nav {
+	flex: 0 0 14%;
+	flex-direction: column;
+	padding: var(--db-spacing-fixed-3xs);
+}
+
+/* Sidebar items keep the height of a title bar; the rest of the sidebar stays empty */
+.consistent-results-visual-device[data-device='desktop'] .consistent-results-visual-nav-item {
+	flex: 0.8 1 0;
+	padding-block: 0;
+}
+
+.consistent-results-visual-device[data-device='desktop'] .consistent-results-visual-nav::after {
+	content: '';
+	flex: 7 1 0;
+}
+
+/* Page content: hero, title with text lines, form fields, call to action */
+.consistent-results-visual-main {
+	display: flex;
+	flex: 1 1 0;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-sm);
+	min-inline-size: 0;
+	min-block-size: 0;
+}
+
+.consistent-results-visual-hero {
+	display: block;
+	flex: 5 1 0;
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+}
+
+.consistent-results-visual-group {
+	display: flex;
+	flex: 4 1 0;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-3xs);
+	min-block-size: 0;
+}
+
+.consistent-results-visual-title,
+.consistent-results-visual-text,
+.consistent-results-visual-field {
+	display: block;
+	flex: 1 1 0;
+}
+
+.consistent-results-visual-title {
+	inline-size: 50%;
+	background-color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+}
+
+.consistent-results-visual-text {
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+}
+
+.consistent-results-visual-field {
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}
+
+.consistent-results-visual-cta {
+	display: block;
+	flex: 1.2 1 0;
+	background-color: var(--db-brand-origin-default);
+}
+
+/* Desktop: shorter title, text lines and CTA; free space below the content */
+.consistent-results-visual-device[data-device='desktop'] .consistent-results-visual-title,
+.consistent-results-visual-device[data-device='desktop'] .consistent-results-visual-cta {
+	inline-size: 18%;
+}
+
+.consistent-results-visual-device[data-device='desktop'] .consistent-results-visual-text {
+	inline-size: 45%;
+}
+
+.consistent-results-visual-device[data-device='desktop']
+	.consistent-results-visual-text[data-line='2'] {
+	inline-size: 60%;
+}
+
+.consistent-results-visual-device[data-device='desktop']
+	.consistent-results-visual-text[data-line='3'] {
+	inline-size: 52%;
+}
+
+.consistent-results-visual-device[data-device='desktop'] .consistent-results-visual-main {
+	gap: var(--db-spacing-fixed-xs);
+}
+
+.consistent-results-visual-device[data-device='desktop'] .consistent-results-visual-main::after {
+	content: '';
+	flex: 1 1 0;
+}
+
+/* Dashed connector with the sync icon between both devices */
+.consistent-results-visual-connector {
+	display: flex;
+	flex: 1 1 0;
+	align-items: center;
+	gap: var(--db-spacing-fixed-2xs);
+	min-inline-size: 0;
+}
+
+.consistent-results-visual-line {
+	display: block;
+	flex: 1 1 0;
+	border-block-start: var(--db-border-width-2xs) dashed
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
+}
+
+.consistent-results-visual-icon {
+	flex: none;
+}
+
+/* The sync icon turns slowly around its own center (24 × 24 box, default origin 50% 50%) */
+@media (prefers-reduced-motion: no-preference) {
+	.consistent-results-visual-icon {
+		animation: consistent-results-visual-rotate 2s linear infinite;
+	}
+
+	@keyframes consistent-results-visual-rotate {
+		to {
+			rotate: 360deg;
+		}
+	}
+}
+
+/* Narrow viewports: smaller paddings and gaps, both devices stay side by side */
+@media (width <= 767px) {
+	.consistent-results-visual-device,
+	.consistent-results-visual-device[data-device='phone'] {
+		gap: var(--db-spacing-fixed-2xs);
+		padding: var(--db-spacing-fixed-xs);
+	}
+
+	.consistent-results-visual-screen,
+	.consistent-results-visual-main {
+		gap: var(--db-spacing-fixed-xs);
+	}
+
+	.consistent-results-visual-nav-item {
+		padding-block: var(--db-spacing-fixed-3xs);
+	}
+
+	.consistent-results-visual-group {
+		gap: var(--db-spacing-fixed-3xs);
+	}
+
+	.consistent-results-visual-connector {
+		gap: 0;
+	}
+}

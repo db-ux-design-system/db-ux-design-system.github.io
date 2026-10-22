@@ -1,0 +1,22 @@
+---
+import './BaseTokensVisual.css';
+
+interface Props {
+	label: string;
+}
+
+const { label } = Astro.props;
+const swatches = ['1', '2', '3', '4', '5'];
+---
+
+<div class="base-tokens-visual" role="img" aria-label={label}>
+	<p class="base-tokens-visual-title">Colors</p>
+	<ul class="base-tokens-visual-list db-color-red">
+		{swatches.map((step) => (
+			<li class="base-tokens-visual-item" data-step={step}>
+				<span class="base-tokens-visual-swatch" />
+				<span>Red-{step}</span>
+			</li>
+		))}
+	</ul>
+</div>

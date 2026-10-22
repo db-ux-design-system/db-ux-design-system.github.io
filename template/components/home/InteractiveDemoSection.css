@@ -1,7 +1,18 @@
 [id='demo-iframe'] {
 	inline-size: 100%;
-	block-size: 98vh;
+
+	/* Fixed landscape ratio so the height derives from the content box, not the
+	   viewport. Keeps the demo stable instead of tracking the window height. */
+	aspect-ratio: 900 / 570;
+	block-size: auto;
 	zoom: 0.6;
+}
+
+/* Mobile widths: switch to a portrait ratio that fits narrow viewports. */
+@media (width <= 767px) {
+	[id='demo-iframe'] {
+		aspect-ratio: 6 / 9;
+	}
 }
 
 .db-card.actionbar {

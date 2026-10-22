@@ -1,0 +1,136 @@
+/*
+ * Visual – inline SVGs from template/visuals/.
+ * Colors and stroke width are controlled via custom properties (set by the component props
+ * or by any parent selector). The classes are written by `pnpm run visuals:optimize`.
+ */
+.db-visual {
+	display: inline-block;
+	vertical-align: middle;
+	max-inline-size: 100%;
+	inline-size: var(--visual-inline-size, 100%);
+
+	/* `auto` keeps the aspect ratio of the viewBox; the prop only accepts DB UX tokens or lengths */
+	/* stylelint-disable-next-line db-ux/use-sizing */
+	block-size: var(--visual-block-size, auto);
+
+	/*
+	 * Library convention: sharp corners. Joins and caps default to miter and butt.
+	 * Both properties are inherited, so they are reset here against styles of the surrounding page.
+	 * Presentation attributes kept by the normalizer (`stroke-linecap="square"`, `stroke-miterlimit`)
+	 * sit on the child elements and win over this inherited value – don't set them on child selectors.
+	 */
+	stroke-linejoin: miter;
+	stroke-linecap: butt;
+}
+
+.db-visual .v-stroke {
+	stroke: var(--visual-stroke, currentcolor);
+}
+
+.db-visual .v-accent {
+	stroke: var(--visual-accent, var(--visual-stroke, currentcolor));
+}
+
+.db-visual .v-solid {
+	fill: var(--visual-stroke, currentcolor);
+}
+
+.db-visual .v-accent-solid {
+	fill: var(--visual-accent, var(--visual-stroke, currentcolor));
+}
+
+.db-visual .v-fill {
+	fill: var(--visual-fill, none);
+}
+
+/*
+ * Proportional stroke width for `strokeScaling="scale"`: share of the viewBox width,
+ * 0.05 = 5 % of the rendered size (e.g. 16 px at 320 px). Central value – tune here.
+ * Can be overridden on any ancestor or on the visual itself.
+ */
+:root {
+	--visual-stroke-ratio: 0.05;
+
+	/* Surface (`surface` prop), see the surface block below */
+	--visual-surface-content-size: 52%;
+	--visual-surface-hover-scale: 1.2;
+}
+
+.db-visual :is(.v-stroke, .v-accent) {
+	stroke-width: var(--visual-stroke-width, 2);
+}
+
+/* `--visual-viewbox-size` is set per SVG by the component; `--visual-stroke-width` still wins */
+.db-visual-stroke-scale :is(.v-stroke, .v-accent) {
+	stroke-width: var(
+		--visual-stroke-width,
+		calc(var(--visual-stroke-ratio) * var(--visual-viewbox-size, 24))
+	);
+}
+
+/*
+ * Stroke scaling
+ * - default (`strokeScaling="fixed"`): constant stroke width in screen px at every size
+ * - `strokeScaling="scale"` (`.db-visual-stroke-scale`): stroke width in viewBox units,
+ *   grows and shrinks with the rendered size
+ * `--visual-vector-effect: none` from any parent selector also switches off non-scaling-stroke,
+ * but the proportional default stroke width (`--visual-stroke-ratio`) needs the class.
+ * `vector-effect` is not inherited, so it is set on every element (stroke classes may sit on groups).
+ */
+.db-visual * {
+	vector-effect: var(--visual-vector-effect, non-scaling-stroke);
+}
+
+.db-visual-stroke-scale {
+	--visual-vector-effect: none;
+}
+
+/*
+ * Surface (`surface` prop): square area without corner radius behind the visual.
+ * Central values – tune here, or override on any ancestor:
+ * - `--visual-surface-content-size`: visual edge as share of the surface edge
+ *   (52 % ≈ reference 215 px visual on a 413 px surface, ~24 % space per side)
+ * - `--visual-surface-hover-scale`: visual scale on hover/focus of an interactive card (TextImage.css)
+ * - `--visual-surface-bg`: background, default adaptive level 2 (Light #f3f3f5, Dark #222428).
+ *   Kept as fallback below, so the adaptive token resolves on the element, not on :root.
+ * The surface size comes from `--visual-inline-size`/`--visual-block-size`: set by the
+ * `size`/`width`/`height` props on the surface, or by a context class on the surface.
+ * Inside TextImage the image column sizes the surface instead (TextImage.css, `inline-size: 100%`).
+ * The stroke stays proportional to the rendered visual, not to the surface.
+ * Values: `--visual-surface-content-size` and `--visual-surface-hover-scale` in `:root` above.
+ */
+
+.db-visual-surface {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	inline-size: var(--visual-inline-size, 100%);
+	max-inline-size: 100%;
+
+	/* With only `height` set, `aspect-ratio` derives the width (`--visual-inline-size: auto`) */
+	/* stylelint-disable-next-line db-ux/use-sizing */
+	block-size: var(--visual-block-size, auto);
+	aspect-ratio: 1;
+	background-color: var(--visual-surface-bg, var(--db-adaptive-bg-basic-level-2-default));
+	border-radius: 0;
+}
+
+.db-visual-surface > .db-visual {
+	flex: none;
+
+	/* Share of the surface edge in %, set in :root */
+	/* stylelint-disable-next-line db-ux/use-sizing */
+	inline-size: var(--visual-surface-content-size);
+
+	/* The size variables of the surface are inherited – the visual keeps the viewBox ratio */
+	block-size: auto;
+	transform-origin: center;
+	transition: transform var(--db-transition-duration-medium) var(--db-transition-timing-emotional);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.db-visual-surface > .db-visual {
+		transition: none;
+	}
+}

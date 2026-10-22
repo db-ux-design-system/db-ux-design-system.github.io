@@ -1,0 +1,23 @@
+---
+import { DBIcon } from '@db-ux/react-core-components';
+import './TestedVisual.css';
+interface Props {
+	label: string;
+}
+const { label } = Astro.props;
+// Test areas of the original visual, each marked with a successful check field
+const checks = ['Accessibility', 'Brand Compliance', 'Industry Research', 'Multi-Framework'];
+---
+
+<div class="tested-visual" role="img" aria-label={label}>
+	<ul class="tested-visual-list">
+		{checks.map((check) => (
+			<li class="tested-visual-item">
+				<span class="tested-visual-check db-color-successful">
+					<DBIcon icon="check" />
+				</span>
+				<span class="tested-visual-label">{check}</span>
+			</li>
+		))}
+	</ul>
+</div>

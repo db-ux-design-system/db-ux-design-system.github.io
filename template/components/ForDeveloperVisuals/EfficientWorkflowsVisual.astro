@@ -1,0 +1,43 @@
+---
+import { DBButton } from '@db-ux/react-core-components';
+import './EfficientWorkflowsVisual.css';
+
+interface Props {
+	label: string;
+}
+
+const { label } = Astro.props;
+
+// Three features built from one shared component (static, the button is inert)
+const features = ['Feature A', 'Feature B', 'Feature C'];
+
+// One animated dash marker per connector path (hidden under reduced motion)
+const paths = ['a', 'b', 'c'];
+---
+
+<div class="efficient-workflows-visual" role="img" aria-label={label}>
+	<div class="efficient-workflows-visual-features">
+		{features.map((feature) => (
+			<span class="efficient-workflows-visual-feature">{feature}</span>
+		))}
+	</div>
+	<span class="efficient-workflows-visual-connector">
+		{paths.map((path) => (
+			<span class="efficient-workflows-visual-marker" data-path={path} />
+		))}
+	</span>
+	<div class="efficient-workflows-visual-shared">
+		<div class="efficient-workflows-visual-design">
+			<span class="efficient-workflows-visual-button" inert aria-hidden="true">
+				<DBButton variant="brand" type="button" text="Button" tabIndex={-1} />
+			</span>
+		</div>
+		<div class="efficient-workflows-visual-code">
+			<span class="efficient-workflows-visual-line db-color-yellow">.db-button &#123;</span>
+			<span class="efficient-workflows-visual-line" data-indent>
+				…
+			</span>
+			<span class="efficient-workflows-visual-line db-color-yellow">&#125;</span>
+		</div>
+	</div>
+</div>

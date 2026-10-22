@@ -1,0 +1,49 @@
+---
+import AnnotatedButton from '@components/ComponentsVisuals/AnnotatedButton.astro';
+import CodeVisualHint from '@components/CodeVisualHint/CodeVisualHint.astro';
+import './SmoothHandoffVisual.css';
+
+interface Props {
+	label: string;
+}
+
+const { label } = Astro.props;
+const hintId = `smooth-handoff-visual-hint-${crypto.randomUUID()}`;
+
+// Handoff properties of the annotated button, as an inspect panel lists them.
+// Values match DBButton defaults (@db-ux/react-core-components) and button.css;
+// token values are highlighted like the Shared Source code.
+const properties: { name: string; value: string; token?: boolean }[] = [
+	{ name: 'Variant', value: 'Brand' },
+	{ name: 'Size', value: 'Medium' },
+	{ name: 'Width', value: 'Auto' },
+	{ name: 'Text', value: 'Button' },
+	{ name: 'Show Icon', value: 'False' },
+	{ name: 'Disabled', value: 'False' },
+	{ name: 'Min block size', value: 'db-sizing-md', token: true },
+	{ name: 'Padding inline', value: 'db-spacing-fixed-md', token: true },
+];
+---
+
+<div class="smooth-handoff-visual" role="group" aria-label={label} aria-describedby={hintId}>
+	<CodeVisualHint id={hintId} />
+	<div class="smooth-handoff-visual-design">
+		<AnnotatedButton />
+	</div>
+	<div class="smooth-handoff-visual-inspect">
+		<span class="smooth-handoff-visual-title">Button</span>
+		<dl class="smooth-handoff-visual-properties">
+			{properties.map((property) => (
+				<>
+					<dt class="smooth-handoff-visual-name">{property.name}</dt>
+					<dd
+						class:list={['smooth-handoff-visual-value', property.token && 'db-color-blue']}
+						data-token={property.token ? 'true' : undefined}
+					>
+						{property.value}
+					</dd>
+				</>
+			))}
+		</dl>
+	</div>
+</div>
