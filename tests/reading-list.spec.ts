@@ -138,13 +138,12 @@ test('reading list is always visible and filled by the wizard result', async ({ 
 	await expect(page.locator('#gsw-heading')).toHaveText('Your next steps');
 	expect((await readList(page)).items).toHaveLength(2);
 
-	// Another result appends its pages without duplicates.
+	// Another result replaces the pages of the one before: only one package is on the
+	// list at a time.
 	await page.goto('/documentation/get-started?role=design&designIntent=learn');
 	await waitForDBShell(page);
 	await expect(page.locator('#gsw-heading')).toHaveText('Your next steps');
 	expect((await readList(page)).items.map((item: { id: string }) => item.id)).toEqual([
-		'documentation/resources/design',
-		'documentation/learn/about#where-to-ask-which-question',
 		'documentation/learn/about',
 		'documentation/foundation',
 		'documentation/components',
@@ -157,7 +156,7 @@ test('reading list is always visible and filled by the wizard result', async ({ 
 		.locator('.rl-item')
 		.first()
 		.click({ position: { x: 4, y: 4 } });
-	await page.waitForURL(/\/documentation\/resources\/design/);
+	await page.waitForURL(/\/documentation\/learn\/about$/);
 });
 
 test('bookmark button adds and removes the page', async ({ page }) => {
@@ -226,6 +225,48 @@ test('bookmarks come first, wizard suggestions below as their own group', async 
 	await lists.nth(0).getByRole('button', { name: 'Remove: Connect your AI coding agent' }).click();
 	await expect(control.locator('.rl-list')).toHaveCount(1);
 	await expect(control.getByRole('button', { name: 'Remove: Design Resources' })).toBeFocused();
+});
+
+test('a new result replaces the pages of the one before', async ({ page }) => {
+	// A page saved by hand, so it can be told apart from the wizard pages.
+	await page.goto('/documentation/learn/figma');
+	await waitForDBShell(page);
+	await waitForToggle(page);
+	await page.locator('.rl-toggle button').click();
+
+	await page.goto('/documentation/get-started?role=design&designIntent=new');
+	await waitForDBShell(page);
+	const sources = async () =>
+		(await readList(page)).items.map(
+			(item: { source?: string; id: string }) => `${item.source}:${item.id}`,
+		);
+	expect(await sources()).toEqual([
+		'bookmark:documentation/learn/figma',
+		'wizard:documentation/resources/design',
+		'wizard:documentation/learn/figma-tutorial',
+		'wizard:documentation/learn/about#where-to-ask-which-question',
+	]);
+
+	// Start again with another role: only the pages of the new package are left, the
+	// bookmark stays.
+	await page.getByRole('button', { name: 'Start again' }).click();
+	await page
+		.locator('.gsw-option', { has: page.getByRole('radio', { name: 'Product manager' }) })
+		.click();
+	await page.getByRole('button', { name: 'Next' }).click();
+	await page.locator('.gsw-option').first().click();
+	await page.getByRole('button', { name: 'Next' }).click();
+	await expect(page.locator('.gsw-package-list .gsw-package-item')).toHaveCount(2);
+	expect(await sources()).toEqual([
+		'bookmark:documentation/learn/figma',
+		'wizard:documentation/learn/about',
+		'wizard:documentation/learn/accessibility',
+	]);
+
+	// The same result again does not add the pages a second time.
+	await page.reload();
+	await waitForDBShell(page);
+	expect((await readList(page)).items).toHaveLength(3);
 });
 
 test('Escape closes the reading list popover by hover and from inside', async ({ page }) => {

@@ -121,16 +121,28 @@ export function removeItem(id: string) {
 }
 
 /**
- * Adds the pages of a wizard result. Pages already on the list keep their place.
- * The same result is only added once in a row (see ReadingList.wizard).
+ * Which group an item belongs to. Same rule as resolveItems, kept here to avoid an
+ * import between the two modules: items stored without a source count as bookmarks
+ * when they have a title, otherwise as wizard pages.
+ */
+const isWizardItem = (item: ReadingListItem) =>
+	(item.source ?? (item.title ? 'bookmark' : 'wizard')) === 'wizard';
+
+/**
+ * Puts the pages of a wizard result on the list. Only one result is on it at a time:
+ * the pages of the previous one are dropped, the pages saved with the bookmark button
+ * stay and keep their place. A page of the result that is already a bookmark stays a
+ * bookmark. The same result is only added once in a row (see ReadingList.wizard), so
+ * a reload does not bring back pages that were deleted.
  */
 export function addWizardResult(answersKey: string, ids: string[]) {
 	const list = getSnapshot();
 	if (list.wizard === answersKey) return;
+	const withoutPrevious = { ...list, items: list.items.filter((item) => !isWizardItem(item)) };
 	write({
 		version: 1,
 		items: append(
-			list,
+			withoutPrevious,
 			ids.map((id) => ({ id, source: 'wizard' as const })),
 		),
 		wizard: answersKey,
