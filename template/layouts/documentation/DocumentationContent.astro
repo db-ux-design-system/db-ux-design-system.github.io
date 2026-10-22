@@ -3,6 +3,9 @@ import type { MarkdownHeading } from 'astro';
 import { TableOfContents } from '@template/components/TableOfContents';
 import { DBSection, DBNotification, type SemanticType } from '@db-ux/react-core-components';
 import { PageHero } from '@components';
+import ReadingListToggle from '@template/components/ReadingList/ReadingListToggle.tsx';
+import { pageId } from '@template/components/ReadingList/reading-list-items';
+import { appNavigation } from '@root/app.navigation.ts';
 
 interface Props {
 	headings: MarkdownHeading[];
@@ -34,6 +37,27 @@ const subParent =
 		? (SUB_PARENT_LABELS[parentSegment] ??
 			parentSegment.charAt(0).toUpperCase() + parentSegment.slice(1))
 		: undefined);
+
+// Reading list: the page is stored by its EN path with the title in both languages.
+// The title of the other language comes from the navigation tree, which is built from
+// the EN pages and carries the DE title (titleDe) where a DE page exists.
+const lang = isDE ? 'de' : 'en';
+let readingList: { id: string; title: { en?: string; de?: string } } | undefined;
+if (frontmatter.readingList) {
+	const id = pageId(Astro.url.pathname);
+	const find = (items: NavigationItem[]): NavigationItem | undefined => {
+		for (const item of items) {
+			if (item.path === id) return item;
+			const found = item.children && find(item.children);
+			if (found) return found;
+		}
+		return undefined;
+	};
+	const node = find(appNavigation);
+	const title = { en: node?.title, de: node?.titleDe };
+	title[lang] = frontmatter.title ?? frontmatter.headline ?? title[lang];
+	readingList = { id, title };
+}
 ---
 
 {toc && (
@@ -56,7 +80,17 @@ const subParent =
 				imageSrc={frontmatter.heroImage}
 				imageAlt={frontmatter.heroImageAlt}
 				align={frontmatter.align}
-			/>
+			>
+				{readingList && (
+					<ReadingListToggle
+						slot="headline-end"
+						client:load
+						lang={lang}
+						id={readingList.id}
+						title={readingList.title}
+					/>
+				)}
+			</PageHero>
 			{isSub && subParent && (
 				<DBNotification
 					className="sub-component-notice"

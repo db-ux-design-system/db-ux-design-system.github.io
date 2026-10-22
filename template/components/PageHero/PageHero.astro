@@ -43,6 +43,7 @@ const {
 } = Astro.props as Props;
 
 const hasMedia = Boolean(modelSrc || imageSrc);
+const hasHeadlineEnd = Astro.slots.has('headline-end');
 
 const safeHeadlineLevel = Math.min(Math.max(headlineLevel, 1), 6) as HeadingLevel;
 const HeadingTag = `h${safeHeadlineLevel}` as HeadingTagName;
@@ -86,7 +87,17 @@ const showMediaStack = layout === 'stack' && hasMedia;
 			<div class="page-hero-content">
 				{badgeText && <DBBadge semantic={badgeSemantic}>{badgeText}</DBBadge>}
 				{title && <p class="page-hero-title">{title}</p>}
-				{headline && <HeadingTag class="page-hero-headline">{headline}</HeadingTag>}
+				{headline &&
+					(hasHeadlineEnd ? (
+						// Controls next to the headline (e.g. the reading list bookmark) sit
+						// outside the heading, so they are not part of its name.
+						<div class="page-hero-headline-row">
+							<HeadingTag class="page-hero-headline">{headline}</HeadingTag>
+							<slot name="headline-end" />
+						</div>
+					) : (
+						<HeadingTag class="page-hero-headline">{headline}</HeadingTag>
+					))}
 				{description && <p class="page-hero-description">{description}</p>}
 				{actions.length > 0 && (
 					<div class="page-hero-actions">

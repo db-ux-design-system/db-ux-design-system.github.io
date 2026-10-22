@@ -1,0 +1,151 @@
+/* Reading list: the popover in the control panel and the bookmark button in the page
+   hero. Loaded through global.css, because styles imported inside the client-only
+   islands are missing after client-side navigation. */
+
+/* Both groups share one scroll area. It scrolls from the 8th page on: 7 rows of
+   one line each stay visible. A row is as tall as the small delete button plus the
+   block padding of the row. With both groups shown, the gap between them is added,
+   so the 7 rows stay visible. */
+.rl-lists {
+	--rl-row-size: calc(var(--db-sizing-sm) + 2 * var(--db-spacing-fixed-2xs));
+
+	display: grid;
+	gap: var(--db-spacing-fixed-sm);
+	max-block-size: calc(7 * var(--rl-row-size));
+	overflow-y: auto;
+	overscroll-behavior: contain;
+
+	&:has(> .rl-list + .rl-list) {
+		max-block-size: calc(7 * var(--rl-row-size) + var(--db-spacing-fixed-sm));
+	}
+}
+
+.rl-list {
+	display: grid;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+/* Wizard suggestions: grouped by a continuous bar on the start side. */
+.rl-list[data-source='wizard'] {
+	border-inline-start: var(--db-border-width-2xs) solid
+		var(--db-brand-on-bg-basic-emphasis-70-default);
+}
+
+/* One row per page: the link on the start side, the delete button on the end side.
+   The link is stretched over the whole row (::after), so a click anywhere on the row
+   navigates. The delete button sits above that area and stays operable on its own. */
+.rl-item {
+	position: relative;
+	display: grid;
+	grid-template-columns: 1fr auto;
+	gap: var(--db-spacing-fixed-sm);
+	align-items: center;
+	padding: var(--db-spacing-fixed-2xs) var(--db-spacing-fixed-2xs) var(--db-spacing-fixed-2xs)
+		var(--db-spacing-fixed-xs);
+	border-radius: var(--db-border-radius-sm);
+
+	/* No hover state while the pointer is on the delete button: there, a click
+	   deletes. Keyboard focus on the link gets the same background. */
+	&:hover:not(:has(.rl-item-remove:hover)),
+	&:has(.rl-item-link:focus-visible) {
+		background-color: var(--db-adaptive-bg-basic-transparent-full-hovered);
+	}
+
+	&:has(.rl-item-link:active) {
+		background-color: var(--db-adaptive-bg-basic-transparent-full-pressed);
+	}
+}
+
+.rl-item-link {
+	min-inline-size: 0;
+	font: var(--db-type-body-md);
+	color: inherit;
+
+	/* A list of links, like a navigation: the row hover background and the focus ring
+	   mark them, so no underline. */
+	text-decoration: none;
+
+	&::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: inherit;
+	}
+
+	/* The focus ring wraps the whole row. The inset offset keeps it inside the
+	   popover, so the popover does not clip it. That ring is the alternative to the
+	   removed outline of the link text. */
+	/* stylelint-disable-next-line a11y/no-outline-none */
+	&:focus-visible {
+		outline: none;
+	}
+
+	&:focus-visible::after {
+		/* Same focus ring as the library: 2xs outline with the library fallback color. */
+		outline: var(--db-border-width-2xs) solid
+			var(--db-focus-outline-color, var(--db-informational-on-bg-basic-emphasis-70-default));
+		outline-offset: calc(-1 * var(--db-border-width-2xs));
+	}
+}
+
+/* Above the stretched link area. */
+.rl-item-remove {
+	position: relative;
+	z-index: 1;
+}
+
+/* Popover in the control panel */
+.rl-popover-body {
+	display: grid;
+	gap: var(--db-spacing-fixed-xs);
+	inline-size: 100%;
+}
+
+.rl-popover-title {
+	margin: 0;
+	font: var(--db-type-headline-2xs);
+}
+
+.rl-empty {
+	display: grid;
+	gap: var(--db-spacing-fixed-xs);
+	font: var(--db-type-body-sm);
+
+	& p {
+		margin: 0;
+	}
+}
+
+/* Mobile menu bar: the button sits close to the end edge, and the popover is wider
+   than the space on either side of it. The library then centers it below the button
+   and it runs out of the viewport. Pinned to both viewport edges instead, still below
+   the menu bar. The library writes the position as inline styles, so the inset needs
+   !important. */
+.db-control-panel-mobile .rl-popover > .db-popover-content {
+	/* stylelint-disable-next-line declaration-no-important */
+	inset-inline: var(--db-spacing-fixed-sm) !important;
+	inline-size: auto;
+	max-inline-size: none;
+	max-block-size: calc(100dvh - var(--db-sizing-xl));
+	overflow-y: auto;
+
+	/* No horizontal centering: the library shifts by these offsets. */
+	--db-popover-center-x: 0%;
+	--db-popover-translate-x: 0%;
+}
+
+/* Desktop header: the language switch is a button with text and 16 px inline
+   padding, the reading list button is icon-only, and its badge reaches beyond the
+   end edge into the gap. The extra space keeps the badge clear of the color mode
+   switch, so the row looks evenly spaced. */
+.shell-preference-switches > .rl-control {
+	margin-inline-end: var(--db-spacing-fixed-md);
+}
+
+/* Bookmark button in the page hero, right after the headline. */
+.rl-toggle {
+	display: flex;
+	flex-shrink: 0;
+}

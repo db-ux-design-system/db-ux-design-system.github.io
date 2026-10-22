@@ -9,12 +9,32 @@ description: 'Guidelines, components and resources of the DB UX Design System fo
 isSubNavigation: true
 ---
 
-import { DBStack } from '@db-ux/react-core-components';
+import { DBStack, DBNotification, DBLink } from '@db-ux/react-core-components';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 
 <DBStack gap="medium">
 
-## Work with the design system
+<TeaserCard
+	columns={1}
+	spacing="large"
+	headlineSize="large"
+	headlineLevel={2}
+	teasers={[
+		{
+			title: 'New to the design system?',
+			description:
+				'Answer a few questions and find the start that fits your role and your project.',
+			url: '/documentation/get-started',
+			imageSrc: '/assets/Design-System--C.png',
+			imageAlt: '',
+			imagePosition: 'right',
+			imageWidth: '33',
+			mask: 'fade-bottom-right',
+		},
+	]}
+/>
+
+## Quick access
 
 <TeaserCard
 	columns={3}
@@ -23,67 +43,26 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 	headlineLevel={3}
 	teasers={[
 		{
-			title: 'Get Started',
-			description: 'Answer a few questions and find the start that fits your role and your project.',
-			url: '/documentation/get-started',
-		},
-		{
 			title: 'Foundation',
-			description: 'Colors, typography, spacing and the other tokens all components build on.',
+			description: 'Colors, typography, spacing and other tokens.',
 			url: '/documentation/foundation',
 		},
 		{
 			title: 'Components',
-			description: 'All components with guidelines, examples and their status.',
+			description: 'Guidelines, examples and status of all components.',
 			url: '/documentation/components',
 		},
 		{
-			title: 'Patterns',
-			description: 'Recurring solutions that combine several components.',
-			url: '/documentation/patterns',
-		},
-		{
-			title: 'Extensions',
-			description: 'Domain-specific add-ons that build on the design system.',
-			url: '/documentation/extensions',
-		},
-		{
-			title: 'Icons',
-			description: 'Search all icons and copy their names for use in code.',
-			url: '/documentation/icons',
+			title: 'Release Notes',
+			description: 'All changes per version.',
+			url: '/documentation/releases/release-notes',
 		},
 	]}
 />
 
-## Learn more
-
-<TeaserCard
-	columns={2}
-	spacing="large"
-	headlineSize="medium"
-	headlineLevel={3}
-	teasers={[
-		{
-			title: 'Resources',
-			description: 'Figma libraries, plugins and code packages.',
-			url: '/documentation/resources',
-		},
-		{
-			title: 'Learn',
-			description: 'Tutorials, guides and background knowledge.',
-			url: '/documentation/learn',
-		},
-		{
-			title: 'Releases',
-			description: 'Release notes, versioning, content status and migration guides.',
-			url: '/documentation/releases',
-		},
-		{
-			title: 'Contribution',
-			description: 'Give feedback and help improve the design system.',
-			url: '/documentation/contribution',
-		},
-	]}
-/>
+{/* prettier-ignore */}
+<DBNotification variant="standalone" semantic="informational" headline="Note">
+	All examples in this documentation are based on the <DBLink href="/documentation/resources/packages/db-theme" variant="inline">DB Theme</DBLink>. If you use the design system as a white label or with a different theme, visual results can differ because a different Foundation applies.
+</DBNotification>
 
 </DBStack>

@@ -102,6 +102,12 @@ declare interface FrontMatter {
 	 * Explicit redirect target when hidePage is true. Overrides the automatic first-child detection.
 	 */
 	redirectTo?: string;
+
+	/**
+	 * Shows the "Add to reading list" button in the page hero. Only rendered on pages
+	 * with a hero (headline or description) in the documentation layout.
+	 */
+	readingList?: boolean;
 }
 
 declare type DocumentationFrontMatter = {
