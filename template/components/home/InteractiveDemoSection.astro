@@ -23,24 +23,34 @@ const {
 		<DBCard spacing="small" className="actionbar">
 			<DBStack direction="row" gap="2x-small">
 				<div class="actionbar-group">
-					<DBButton variant="filled" icon="circular_arrows" id="toggle-demo">
-						B2C
-					</DBButton>
+					<DBButton variant="filled" icon="circular_arrows" id="toggle-demo" text="B2C" />
 				</div>
 				<div class="actionbar-group">
 					<DBButton variant="brand" data-action="theme" data-value="default">
 						<span class="label-full">Deutsche Bahn</span>
 						<span class="label-short">DB</span>
 					</DBButton>
-					<DBButton data-theme="station" variant="brand" data-action="theme" data-value="station">
-						Station
-					</DBButton>
-					<DBButton data-theme="s-bahn" variant="brand" data-action="theme" data-value="s-bahn">
-						S-Bahn
-					</DBButton>
-					<DBButton data-theme="neutral" variant="brand" data-action="theme" data-value="neutral">
-						Neutral
-					</DBButton>
+					<DBButton
+						data-theme="station"
+						variant="brand"
+						data-action="theme"
+						data-value="station"
+						text="Station"
+					/>
+					<DBButton
+						data-theme="s-bahn"
+						variant="brand"
+						data-action="theme"
+						data-value="s-bahn"
+						text="S-Bahn"
+					/>
+					<DBButton
+						data-theme="neutral"
+						variant="brand"
+						data-action="theme"
+						data-value="neutral"
+						text="Neutral"
+					/>
 				</div>
 				<div class="actionbar-group">
 					<DBButton
