@@ -105,45 +105,66 @@
 	justify-content: center;
 }
 
+/* Cancel the global content-spacing rule (content-spacing.css: `img + img`,
+ * specificity 0,3,0), which gives the second image a 16px top margin whenever
+ * a light/dark pair is rendered. The dark image is always the second one, so
+ * the margin only showed in Dark Mode: extra space above the image, none below.
+ * content-spacing.css is imported after component CSS, so matching specificity
+ * would lose on source order; (0,4,0) wins outright. Same approach as
+ * DesignedForSection.css. */
+.dba-main-content .text-image > .text-image-image > .darkmode-image,
+.dba-main-content .text-image > .text-image-image > .lightmode-image {
+	margin-block-start: 0;
+}
+
 .text-image-image img {
 	inline-size: 100%;
 	block-size: auto;
 	display: block;
 }
 
-/* Default: show light, hide dark */
-.text-image-image .lightmode-image {
-	display: block;
-}
-
+/* Light/Dark image swap.
+ * The dark image is only in the DOM when a separate dark asset was passed
+ * (TextImage.astro). Every rule that hides the light image is therefore guarded
+ * with :has(.darkmode-image) – without that guard a single image would
+ * disappear in Dark Mode instead of being used for both modes.
+ * display (not visibility) keeps the hidden image out of layout, so the browser
+ * skips the download of the unused asset. */
 .text-image-image .darkmode-image {
 	display: none;
 }
 
-/* Global theme toggle via shell data-mode */
-.db-shell[data-mode='dark'] .text-image .lightmode-image {
+/* Theme toggle via data-mode. Both <html> and the shell are matched: the shell is
+ * client:only, so until it mounts only <html> carries the mode (set before the
+ * first paint by the inline script in HtmlHead.astro). Keying on the shell alone
+ * would show the light image first and make the browser fetch the unused asset
+ * on top of the dark one. */
+:is(html[data-mode='dark'], .db-shell[data-mode='dark'])
+	.text-image-image:has(.darkmode-image)
+	.lightmode-image {
 	display: none;
 }
 
-.db-shell[data-mode='dark'] .text-image .darkmode-image {
+:is(html[data-mode='dark'], .db-shell[data-mode='dark']) .text-image-image .darkmode-image {
 	display: block;
 }
 
-.db-shell[data-mode='light'] .text-image .lightmode-image {
+:is(html[data-mode='light'], .db-shell[data-mode='light']) .text-image-image .lightmode-image {
 	display: block;
 }
 
-.db-shell[data-mode='light'] .text-image .darkmode-image {
+:is(html[data-mode='light'], .db-shell[data-mode='light']) .text-image-image .darkmode-image {
 	display: none;
 }
 
-/* OS-level fallback when no explicit data-mode is present */
+/* OS-level fallback when no explicit data-mode is present. Lower specificity
+ * (0,3,0) than the data-mode rules above (0,4,0), so an explicit mode wins. */
 @media (prefers-color-scheme: dark) {
-	.text-image .lightmode-image {
+	.text-image-image:has(.darkmode-image) .lightmode-image {
 		display: none;
 	}
 
-	.text-image .darkmode-image {
+	.text-image-image .darkmode-image {
 		display: block;
 	}
 }
