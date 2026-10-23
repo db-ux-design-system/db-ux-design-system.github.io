@@ -2,7 +2,7 @@ import { type CSSProperties, useEffect, useId, useRef, useState } from 'react';
 import { DBBadge, DBButton, DBPopover } from '@db-ux/react-core-components';
 import { useLanguage } from '@template/context/language-context';
 import { roleColors, wizardHref } from '@template/components/GetStartedWizard/wizard-flow';
-import { removeItem, useReadingList } from './reading-list-store';
+import { clearItems, removeItem, useReadingList } from './reading-list-store';
 import { resolveItems } from './reading-list-items';
 import { readingListTexts } from './texts';
 
@@ -109,6 +109,15 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 		requestAnimationFrame(() => (target?.isConnected ? target : trigger)?.focus());
 	};
 
+	// The button disappears with the entries, so the focus moves to the trigger, which
+	// keeps the popover open on the empty state.
+	const removeAll = () => {
+		const trigger = wrapperRef.current?.querySelector<HTMLElement>('.rl-trigger');
+		clearItems();
+		setStatus(text.removedAll);
+		requestAnimationFrame(() => trigger?.focus());
+	};
+
 	return (
 		<div className="rl-control" ref={wrapperRef} data-dismissed={dismissed ? 'true' : undefined}>
 			<DBPopover
@@ -152,9 +161,30 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 				}
 			>
 				<div role="group" aria-labelledby={`${idPrefix}-title`} className="rl-popover-body">
-					<p id={`${idPrefix}-title`} className="rl-popover-title">
-						{text.title}
-					</p>
+					{/* Title on the start side, "Remove all" on the end side, only while the
+					    list has entries. */}
+					<div className="rl-popover-header">
+						<p id={`${idPrefix}-title`} className="rl-popover-title">
+							{text.title}
+						</p>
+						{count > 0 && (
+							// Icon only, no tooltip, like the delete buttons of the rows: a tooltip
+							// inside the popover is misplaced by the library. The button keeps its
+							// name ("Remove all") through the visually hidden label.
+							// eslint-disable-next-line db-ux/button-no-text-requires-tooltip
+							<DBButton
+								type="button"
+								variant="ghost"
+								size="small"
+								icon="bin"
+								noText
+								className="rl-remove-all"
+								onClick={removeAll}
+							>
+								{text.removeAll}
+							</DBButton>
+						)}
+					</div>
 					{count === 0 ? (
 						<div className="rl-empty">
 							<p>

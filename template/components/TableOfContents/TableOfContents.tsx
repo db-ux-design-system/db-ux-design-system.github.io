@@ -4,6 +4,7 @@ import type { ReactElement } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { useActiveHeading } from './useActiveHeading';
 import { DBButton, DBTooltip } from '@db-ux/react-core-components';
+import { getTranslation } from '@template/i18n/translations';
 
 interface Props {
 	astro: AstroGlobal;
@@ -16,6 +17,11 @@ export function TableOfContents(props: Props): ReactElement | null {
 	const filteredHeadings = headings.filter(({ depth }) => (props.tocMaxDepth ?? 3) >= depth);
 	const slugs = filteredHeadings.map((h) => h.slug);
 	const currentPath = getCurrentPathname(props.astro);
+	// The TOC is its own island outside the Shell's LanguageProvider, so the language
+	// comes from the path.
+	const lang = /^\/de(\/|$)/.test(currentPath) ? 'de' : 'en';
+	const toggleText = (expanded: boolean) =>
+		getTranslation(lang, expanded ? 'toc.collapse' : 'toc.expand');
 	const { activeIDs, setCurrentID } = useActiveHeading({
 		slugs,
 		tocMaxDepth: props.tocMaxDepth,
@@ -103,14 +109,14 @@ export function TableOfContents(props: Props): ReactElement | null {
 										noText
 										icon={expandedH2s.has(slug) ? 'chevron_up' : 'chevron_down'}
 										onClick={() => toggleH2(slug)}
-										aria-label={expandedH2s.has(slug) ? 'Collapse' : 'Expand'}
+										aria-label={toggleText(expandedH2s.has(slug))}
 										aria-expanded={expandedH2s.has(slug)}
 										aria-controls={`toc-children-${slug}`}
 										type="button"
 									>
-										{expandedH2s.has(slug) ? 'Collapse' : 'Expand'}
+										{toggleText(expandedH2s.has(slug))}
 
-										<DBTooltip>{expandedH2s.has(slug) ? 'Collapse' : 'Expand'}</DBTooltip>
+										<DBTooltip>{toggleText(expandedH2s.has(slug))}</DBTooltip>
 									</DBButton>
 								)}
 							</li>

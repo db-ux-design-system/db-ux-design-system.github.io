@@ -121,6 +121,16 @@ export function removeItem(id: string) {
 }
 
 /**
+ * Removes all pages. The key of the last wizard result stays, so showing that result
+ * again (e.g. after a reload) does not bring its pages back, as with single deletes.
+ */
+export function clearItems() {
+	const list = getSnapshot();
+	if (list.items.length === 0) return;
+	write({ ...list, items: [] });
+}
+
+/**
  * Which group an item belongs to. Same rule as resolveItems, kept here to avoid an
  * import between the two modules: items stored without a source count as bookmarks
  * when they have a title, otherwise as wizard pages.

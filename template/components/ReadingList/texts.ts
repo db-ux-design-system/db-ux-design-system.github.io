@@ -19,6 +19,9 @@ export const readingListTexts: Record<
 		/** Accessible name of the delete button of a page. */
 		remove: (label: string) => string;
 		removed: (label: string) => string;
+		/** Button that empties the whole list, and its status message. */
+		removeAll: string;
+		removedAll: string;
 		add: string;
 		added: string;
 		removeCurrent: string;
@@ -47,6 +50,8 @@ export const readingListTexts: Record<
 		wizardGroup: 'Suggested in Get Started',
 		remove: (label) => `Remove: ${label}`,
 		removed: (label) => `Removed: ${label}`,
+		removeAll: 'Remove all',
+		removedAll: 'All pages removed from the reading list',
 		add: 'Add to reading list',
 		added: 'Added to reading list',
 		removeCurrent: 'Remove from reading list',
@@ -75,6 +80,8 @@ export const readingListTexts: Record<
 		wizardGroup: 'Vorgeschlagen in Erste Schritte',
 		remove: (label) => `Entfernen: ${label}`,
 		removed: (label) => `Entfernt: ${label}`,
+		removeAll: 'Alle entfernen',
+		removedAll: 'Alle Seiten von der Leseliste entfernt',
 		add: 'Zur Leseliste hinzufügen',
 		added: 'Zur Leseliste hinzugefügt',
 		removeCurrent: 'Von der Leseliste entfernen',
