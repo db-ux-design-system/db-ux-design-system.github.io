@@ -177,9 +177,21 @@
 	font: var(--db-type-headline-2xs);
 }
 
+/* Title and "Remove all" in one row. The min-block-size keeps the row as tall with
+   and without the button, so the list does not jump when the last entry goes. */
+.rl-popover-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--db-spacing-fixed-xs);
+	min-block-size: var(--db-sizing-sm);
+}
+
 /* Bookmark icon inside the hint of the empty list, at text size. */
 .rl-inline-icon {
-	--db-icon-font-size: 1.25em;
+	/* The icon size the library uses next to body-sm text. A custom size (e.g. 1.25em)
+	   grew the icon box but not the glyph, so the glyph sat in the top start corner. */
+	--db-icon-font-size: var(--db-base-body-icon-font-size-sm);
 
 	display: inline-block;
 	vertical-align: text-bottom;

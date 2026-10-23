@@ -273,6 +273,37 @@ test('a new result replaces the pages of the one before', async ({ page }) => {
 	expect((await readList(page)).items).toHaveLength(3);
 });
 
+test('Remove all empties the list and is only shown with entries', async ({ page }) => {
+	await page.goto('/documentation/learn');
+	await waitForDBShell(page);
+	const control = page.locator('.db-control-panel-desktop .rl-control');
+	const trigger = control.locator('button.rl-trigger');
+	const popover = control.locator('article.db-popover-content');
+	const removeAll = popover.getByRole('button', { name: 'Remove all' });
+
+	// Empty list: no button.
+	await trigger.hover();
+	await expect(popover).toBeVisible();
+	await expect(removeAll).toHaveCount(0);
+
+	await page.goto('/documentation/get-started?role=design&designIntent=new');
+	await waitForDBShell(page);
+	await expect(page.locator('#gsw-heading')).toBeVisible();
+	await expect.poll(async () => (await readList(page))?.items.length).toBeGreaterThan(0);
+
+	await trigger.hover();
+	await expect(removeAll).toBeVisible();
+	await removeAll.click();
+	await expect.poll(async () => (await readList(page)).items).toEqual([]);
+	await expect(popover.locator('.rl-empty')).toBeVisible();
+	await expect(removeAll).toHaveCount(0);
+	await expect(trigger).toBeFocused();
+	await expect(trigger).toHaveAccessibleName('Reading list, empty');
+	await expect(popover.locator('[role=status]')).toHaveText(
+		'All pages removed from the reading list',
+	);
+});
+
 test('Escape closes the reading list popover by hover and from inside', async ({ page }) => {
 	await page.goto('/documentation/get-started?role=design&designIntent=new');
 	await waitForDBShell(page);
@@ -296,6 +327,9 @@ test('Escape closes the reading list popover by hover and from inside', async ({
 	// Focus on a link inside: Escape hides it and puts the focus on the trigger.
 	await page.mouse.move(0, 0);
 	await trigger.focus();
+	// The first Tab reaches "Remove all" in the header, the second the first link.
+	await page.keyboard.press('Tab');
+	await expect(popover.getByRole('button', { name: 'Remove all' })).toBeFocused();
 	await page.keyboard.press('Tab');
 	await expect(popover.locator('.rl-item-link').first()).toBeFocused();
 	await page.keyboard.press('Escape');
