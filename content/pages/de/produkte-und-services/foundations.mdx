@@ -5,6 +5,7 @@ title: 'Foundation'
 headline: 'Klarheit von Anfang an'
 description: 'Gemeinsame Basis-Tokens und Modi schaffen ein stabiles Fundament für klare und konsistente Interfaces.'
 heroVisual: 'foundation'
+loadCodeVisuals: true
 sections:
   - id: 'foundations--base-tokens-section'
     title: 'Basis-Tokens'
@@ -13,6 +14,7 @@ sections:
     imageSrcDark: 'assets/foundations/Base-Tokens--Darkmode--C.png'
     imageAlt: 'Diagramm mit Base-Token-Kategorien (Farben, Abstände, Typografie)'
     imagePosition: 'right'
+    visual: 'base-tokens'
   - id: 'foundations--adaptive-colors-section'
     title: 'Adaptive Farben'
     text: 'Konsistenter Kontrast und Farbton über verschiedene Farbmodi und Kontexte hinweg.'
@@ -20,6 +22,7 @@ sections:
     imageSrcDark: 'assets/foundations/Adaptive-Colors--Darkmode--C.png'
     imageAlt: 'Farbpalette mit adaptiven Farbwechseln zwischen Light Mode und Dark Mode'
     imagePosition: 'left'
+    visual: 'adaptive-colors'
   - id: 'foundations--materials-section'
     title: 'Materialitäten'
     text: 'Visuelle Hierarchie durch Variationen in Rahmen, Transparenz und Füllung.'
@@ -27,6 +30,7 @@ sections:
     imageSrcDark: 'assets/foundations/Materials--Darkmode--C.png'
     imageAlt: 'Geschichtete Flächen mit Elevation, Rahmen und Transparenz-Stilen'
     imagePosition: 'right'
+    visual: 'materials'
   - id: 'foundations--darkmode-section'
     title: 'Darkmode'
     text: 'Komfortable und gut lesbare Interfaces in Light Mode und Dark Mode.'
@@ -34,10 +38,23 @@ sections:
     imageSrcDark: 'assets/foundations/Darkmode--Darkmode--C.png'
     imageAlt: 'Vergleich von Interface-Elementen in Light Mode und Dark Mode'
     imagePosition: 'left'
+    visual: 'darkmode'
 ---
 
 import { ContentSections, ContactUsSection } from '@components';
+import BaseTokensVisual from '@components/FoundationVisuals/BaseTokensVisual.astro';
+import AdaptiveColorsVisual from '@components/FoundationVisuals/AdaptiveColorsVisual.astro';
+import MaterialsVisual from '@components/FoundationVisuals/MaterialsVisual.astro';
+import DarkmodeVisual from '@components/FoundationVisuals/DarkmodeVisual.astro';
 
-<ContentSections sections={frontmatter.sections} />
+<ContentSections
+	sections={frontmatter.sections}
+	visuals={{
+		'base-tokens': BaseTokensVisual,
+		'adaptive-colors': AdaptiveColorsVisual,
+		materials: MaterialsVisual,
+		darkmode: DarkmodeVisual,
+	}}
+/>
 
 <ContactUsSection />
