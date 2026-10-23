@@ -107,7 +107,11 @@ export const questions: Record<QuestionId, Question> = {
 			},
 			{
 				id: 'product',
-				label: t('Product manager', 'Produktmanager:in'),
+				// Soft hyphen (U+00AD): the only option label that is a single long word.
+				// In the three-column layout it does not fit on one line, and without a
+				// break opportunity the browser splits it anywhere ("Produktmanager:i|n").
+				// Screen readers ignore the character; it only marks where to hyphenate.
+				label: t('Product manager', 'Produkt\u00ADmanager:in'),
 			},
 		],
 	},

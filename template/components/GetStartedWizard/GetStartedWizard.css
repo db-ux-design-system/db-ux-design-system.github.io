@@ -113,12 +113,16 @@
    the check icon (sizing md) plus a safety gap (spacing sm) at its end, so a long label wraps before the icon and nothing reflows
    when a card gets selected. */
 .gsw-option-label {
-	padding-inline-end: calc(var(--db-sizing-md) + var(--db-spacing-fixed-sm));
+	/* Room for the check icon (sizing md) plus a small gap, so a wrapped label keeps clear
+	   of the icon. The gap is xs rather than sm because "Produktmanager:in" needs every
+	   pixel to stay on one line in the single-column layout. */
+	padding-inline-end: calc(var(--db-sizing-md) + var(--db-spacing-fixed-xs));
 	font: var(--db-type-headline-sm);
 
-	/* A long word such as "Produktmanager:in" breaks before the check icon instead of
-	   running under it. */
-	overflow-wrap: break-word;
+	/* No `overflow-wrap: break-word` here. It lets the browser split a word at any
+	   character, which produced "Produktmanager:i|n". The long labels either contain a
+	   space or carry a soft hyphen (see wizard-flow.ts), so a break opportunity always
+	   exists and the word never has to overflow. */
 	hyphens: auto;
 }
 

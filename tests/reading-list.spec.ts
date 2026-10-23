@@ -400,7 +400,9 @@ test('German wizard path', async ({ page }) => {
 	await expect(page.locator('.gsw-option-label')).toHaveText([
 		'Designer:in',
 		'Entwickler:in',
-		'Produktmanager:in',
+		// Carries a soft hyphen (U+00AD) so the long word hyphenates instead of being
+		// split at an arbitrary character. See wizard-flow.ts.
+		'Produkt\u00ADmanager:in',
 	]);
 
 	await page
