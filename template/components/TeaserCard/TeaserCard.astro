@@ -4,6 +4,7 @@ import DisabledWrapper from '@template/components/DisabledWrapper/DisabledWrappe
 import TextImage from '@template/components/TextImage/TextImage.astro';
 import Visual from '@template/components/Visual/Visual.astro';
 import type { VisualName } from '@template/visuals';
+import type { VisualImageName } from '@template/visuals/images';
 import './TeaserCard.css';
 
 /**
@@ -32,6 +33,7 @@ import './TeaserCard.css';
  * | `imageSrcDark`  | `string`                                          | –           | Image URL (dark mode). Falls back to imageSrc        |
  * | `imageAlt`      | `string`                                          | `title`     | Alt text for the image                               |
  * | `visual`        | `VisualName`                                      | –           | Decorative inline visual from template/visuals/. Replaces imageSrc |
+ * | `visualImage`   | `VisualImageName`                                 | –           | Decorative PNG visual from static/assets/teasers/. Replaces imageSrc, visual wins over it |
  * | `imagePosition` | `'top' \| 'bottom' \| 'left' \| 'right'`         | `'top'`     | Image placement relative to text                     |
  * | `imageWidth`    | `'50' \| '33' \| '66' \| '25'`                    | –           | Image/text ratio for horizontal layouts              |
  */
@@ -49,6 +51,11 @@ interface Props {
 		imageAlt?: string;
 		/** Decorative inline visual from `template/visuals/`. Replaces `imageSrc`. */
 		visual?: VisualName;
+		/**
+		 * Decorative PNG visual from `static/assets/teasers/`. Replaces `imageSrc`,
+		 * `visual` takes precedence over it.
+		 */
+		visualImage?: VisualImageName;
 		imagePosition?: 'top' | 'bottom' | 'left' | 'right';
 		imageWidth?: '50' | '33' | '66' | '25';
 	}[];
@@ -77,7 +84,9 @@ const disabledLabel = isDE ? 'Demnächst verfügbar' : 'Coming Soon';
 	class={`teaser-cards${columns ? ` teaser-cards-cols-${columns}` : ''}${headlineSize === 'large' ? ' teaser-cards-large' : headlineSize === 'medium' ? ' teaser-cards-medium' : ''}`}
 >
 	{teasers.map((teaser) => {
-		const hasImage = !!teaser.imageSrc || !!teaser.visual;
+		// An SVG visual or a PNG visual both fill the `visual` slot, which replaces the images
+		const hasVisual = !!teaser.visual || !!teaser.visualImage;
+		const hasImage = !!teaser.imageSrc || hasVisual;
 		const isDisabled = teaser.disabled === true;
 
 		const cardContent = hasImage ? (
@@ -85,13 +94,15 @@ const disabledLabel = isDE ? 'Demnächst verfügbar' : 'Coming Soon';
 				title={teaser.title}
 				imagePosition={teaser.imagePosition ?? 'top'}
 				imageWidth={teaser.imageWidth}
-				imageSrc={teaser.visual ? undefined : teaser.imageSrc}
-				imageSrcDark={teaser.visual ? undefined : teaser.imageSrcDark}
-				imageAlt={teaser.visual ? undefined : (teaser.imageAlt ?? teaser.title)}
+				imageSrc={hasVisual ? undefined : teaser.imageSrc}
+				imageSrcDark={hasVisual ? undefined : teaser.imageSrcDark}
+				imageAlt={hasVisual ? undefined : (teaser.imageAlt ?? teaser.title)}
 				headlineLevel={headlineLevel}
 			>
-				{teaser.visual && (
+				{teaser.visual ? (
 					<Visual slot="visual" name={teaser.visual} strokeScaling="scale" surface />
+				) : (
+					teaser.visualImage && <Visual slot="visual" image={teaser.visualImage} surface />
 				)}
 				{teaser.description}
 			</TextImage>
