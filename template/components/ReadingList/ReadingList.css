@@ -191,6 +191,22 @@
 	}
 }
 
+/* Link to the wizard in the empty list: a row like the list items. The arrow is
+   always shown, as it is the only action, and the row sits flush with the text. */
+.rl-suggest {
+	margin-inline: calc(-1 * var(--db-spacing-fixed-2xs));
+
+	& .rl-item-link {
+		padding-inline-start: 0;
+
+		&::before {
+			inline-size: var(--db-sizing-sm);
+			margin-inline-end: var(--db-spacing-fixed-2xs);
+			opacity: 1;
+		}
+	}
+}
+
 /* Mobile menu bar: the button sits close to the end edge, and the popover is wider
    than the space on either side of it. The library then centers it below the button
    and it runs out of the viewport. Pinned to both viewport edges instead, still below

@@ -162,7 +162,13 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 								<span className="rl-inline-icon" data-icon="bookmark" aria-hidden="true" />{' '}
 								{text.empty[1]}
 							</p>
-							<a href={wizardHref(lang)}>{text.suggest}</a>
+							{/* Styled like a row of the list, with the arrow always shown: it is the
+							    only action here. */}
+							<div className="rl-item rl-suggest">
+								<a className="rl-item-link" data-icon="arrow_right" href={wizardHref(lang)}>
+									<span className="rl-item-label">{text.suggest}</span>
+								</a>
+							</div>
 						</div>
 					) : (
 						// One scroll area for both groups. Each group is its own list, named for

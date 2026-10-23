@@ -70,7 +70,7 @@ export const readingListTexts: Record<
 			'Noch keine Seiten gemerkt. Merke dir eine Seite über das Lesezeichen',
 			'neben ihrer Überschrift.',
 		],
-		suggest: 'Passende Seiten vorschlagen lassen',
+		suggest: 'Passende Seiten vorschlagen',
 		bookmarkGroup: 'Von dir gemerkt',
 		wizardGroup: 'Vorgeschlagen in Erste Schritte',
 		remove: (label) => `Entfernen: ${label}`,
