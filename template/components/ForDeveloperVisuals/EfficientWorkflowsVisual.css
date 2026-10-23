@@ -1,0 +1,326 @@
+/* Efficient Workflows code visual: three features connected to one shared button and its CSS */
+.efficient-workflows-visual {
+	display: flex;
+	flex-direction: column;
+	inline-size: 100%;
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	font: var(--db-type-body-lg);
+}
+
+.efficient-workflows-visual-features {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: var(--db-spacing-fixed-md);
+}
+
+.efficient-workflows-visual-feature {
+	padding-block: var(--db-spacing-fixed-xl);
+	padding-inline: var(--db-spacing-fixed-xs);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-xs);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+	text-align: center;
+}
+
+/*
+ * Dashed connectors, spanning from the center of feature A to the center of feature C.
+ * ::before draws the drops from A and C plus the horizontal line, ::after the drop from B
+ * that continues into the shared component.
+ */
+.efficient-workflows-visual-connector {
+	--efficient-workflows-cycle: 1.8s;
+
+	position: relative;
+	display: block;
+	block-size: var(--db-sizing-lg);
+	margin-inline: calc((100% - 2 * var(--db-spacing-fixed-md)) / 6);
+}
+
+.efficient-workflows-visual-connector::before,
+.efficient-workflows-visual-connector::after {
+	content: '';
+	position: absolute;
+	inset-block-start: 0;
+	box-sizing: border-box;
+}
+
+/* Line centers sit exactly on x = 0 / 50% / 100% and y = 50% of the connector */
+.efficient-workflows-visual-connector::before {
+	inset-inline: calc(var(--db-border-width-xs) / -2);
+	block-size: calc(50% + var(--db-border-width-xs) / 2);
+	border: var(--db-border-width-xs) dashed var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-block-start: 0;
+}
+
+.efficient-workflows-visual-connector::after {
+	inset-inline-start: calc(50% - var(--db-border-width-xs) / 2);
+	block-size: 100%;
+	border-inline-start: var(--db-border-width-xs) dashed
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
+}
+
+/*
+ * Red dash marker (line thickness × one dash). It is moved with layout properties
+ * (insets and size) instead of transforms, so it snaps to device pixels exactly like the
+ * dashed borders and stays on the line center at any browser zoom.
+ * Hidden by default, so reduced motion shows the static connectors only.
+ */
+.efficient-workflows-visual-marker {
+	position: absolute;
+
+	/* Above the connector's ::after (the center drop), which is painted after the markers */
+	z-index: 1;
+	inset-block-start: 0;
+	inset-inline-start: calc(var(--db-border-width-xs) / -2);
+	display: none;
+
+	/*
+	 * The thickness comes from borders (half the line width on each side), so it is rounded to
+	 * device pixels exactly like the dashed border lines; the content box only adds the length.
+	 */
+	box-sizing: content-box;
+	inline-size: 0;
+	block-size: calc(var(--db-sizing-3xs) - var(--db-border-width-xs));
+	/* stylelint-disable-next-line db-ux/use-border-color -- the border is the marker fill, it must match the brand origin red */
+	border: calc(var(--db-border-width-xs) / 2) solid var(--db-brand-origin-default);
+}
+
+/*
+ * A, B and C each send a marker along their own path in a continuous loop.
+ * The loops run independently (slightly different durations), so the markers drift apart.
+ */
+@media (prefers-reduced-motion: no-preference) {
+	.efficient-workflows-visual-marker {
+		display: block;
+		animation: efficient-workflows-visual-marker-a var(--efficient-workflows-cycle) linear infinite
+			both;
+	}
+
+	/* Each path loops on its own, with slightly different durations, so the markers drift apart */
+	.efficient-workflows-visual-marker[data-path='b'] {
+		animation-name: efficient-workflows-visual-marker-b;
+		animation-duration: calc(var(--efficient-workflows-cycle) * 0.75);
+	}
+
+	.efficient-workflows-visual-marker[data-path='c'] {
+		animation-name: efficient-workflows-visual-marker-c;
+		animation-duration: calc(var(--efficient-workflows-cycle) * 1.52);
+	}
+
+	@keyframes efficient-workflows-visual-marker-a {
+		0% {
+			opacity: 0;
+			inset-block-start: 0%;
+			inset-inline-start: calc(0% - var(--db-border-width-xs) / 2);
+			inline-size: 0;
+			block-size: calc(var(--db-sizing-3xs) - var(--db-border-width-xs));
+		}
+
+		6%,
+		94% {
+			opacity: 1;
+		}
+
+		21% {
+			inset-block-start: calc(50% - var(--db-sizing-3xs) / 2);
+			inset-inline-start: calc(0% - var(--db-border-width-xs) / 2);
+			inline-size: 0;
+			block-size: calc(var(--db-sizing-3xs) - var(--db-border-width-xs));
+		}
+
+		24% {
+			inset-block-start: calc(50% - var(--db-border-width-xs) / 2);
+			inset-inline-start: calc(0% - var(--db-sizing-3xs) / 2);
+			inline-size: calc(var(--db-sizing-3xs) - var(--db-border-width-xs));
+			block-size: 0;
+		}
+
+		79% {
+			inset-block-start: calc(50% - var(--db-border-width-xs) / 2);
+			inset-inline-start: calc(50% - var(--db-sizing-3xs) / 2);
+			inline-size: calc(var(--db-sizing-3xs) - var(--db-border-width-xs));
+			block-size: 0;
+		}
+
+		83% {
+			inset-block-start: calc(50% - var(--db-sizing-3xs) / 2);
+			inset-inline-start: calc(50% - var(--db-border-width-xs) / 2);
+			inline-size: 0;
+			block-size: calc(var(--db-sizing-3xs) - var(--db-border-width-xs));
+		}
+
+		100% {
+			opacity: 0;
+			inset-block-start: calc(100% - var(--db-sizing-3xs));
+			inset-inline-start: calc(50% - var(--db-border-width-xs) / 2);
+			inline-size: 0;
+			block-size: calc(var(--db-sizing-3xs) - var(--db-border-width-xs));
+		}
+	}
+
+	@keyframes efficient-workflows-visual-marker-b {
+		0% {
+			opacity: 0;
+			inset-block-start: 0%;
+			inset-inline-start: calc(50% - var(--db-border-width-xs) / 2);
+			inline-size: 0;
+			block-size: calc(var(--db-sizing-3xs) - var(--db-border-width-xs));
+		}
+
+		6%,
+		94% {
+			opacity: 1;
+		}
+
+		100% {
+			opacity: 0;
+			inset-block-start: calc(100% - var(--db-sizing-3xs));
+			inset-inline-start: calc(50% - var(--db-border-width-xs) / 2);
+			inline-size: 0;
+			block-size: calc(var(--db-sizing-3xs) - var(--db-border-width-xs));
+		}
+	}
+
+	@keyframes efficient-workflows-visual-marker-c {
+		0% {
+			opacity: 0;
+			inset-block-start: 0%;
+			inset-inline-start: calc(100% - var(--db-border-width-xs) / 2);
+			inline-size: 0;
+			block-size: calc(var(--db-sizing-3xs) - var(--db-border-width-xs));
+		}
+
+		6%,
+		94% {
+			opacity: 1;
+		}
+
+		21% {
+			inset-block-start: calc(50% - var(--db-sizing-3xs) / 2);
+			inset-inline-start: calc(100% - var(--db-border-width-xs) / 2);
+			inline-size: 0;
+			block-size: calc(var(--db-sizing-3xs) - var(--db-border-width-xs));
+		}
+
+		24% {
+			inset-block-start: calc(50% - var(--db-border-width-xs) / 2);
+			inset-inline-start: calc(100% - var(--db-sizing-3xs) / 2);
+			inline-size: calc(var(--db-sizing-3xs) - var(--db-border-width-xs));
+			block-size: 0;
+		}
+
+		79% {
+			inset-block-start: calc(50% - var(--db-border-width-xs) / 2);
+			inset-inline-start: calc(50% - var(--db-sizing-3xs) / 2);
+			inline-size: calc(var(--db-sizing-3xs) - var(--db-border-width-xs));
+			block-size: 0;
+		}
+
+		83% {
+			inset-block-start: calc(50% - var(--db-sizing-3xs) / 2);
+			inset-inline-start: calc(50% - var(--db-border-width-xs) / 2);
+			inline-size: 0;
+			block-size: calc(var(--db-sizing-3xs) - var(--db-border-width-xs));
+		}
+
+		100% {
+			opacity: 0;
+			inset-block-start: calc(100% - var(--db-sizing-3xs));
+			inset-inline-start: calc(50% - var(--db-border-width-xs) / 2);
+			inline-size: 0;
+			block-size: calc(var(--db-sizing-3xs) - var(--db-border-width-xs));
+		}
+	}
+}
+
+.efficient-workflows-visual-shared {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	overflow: hidden;
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-xs);
+}
+
+.efficient-workflows-visual-design,
+.efficient-workflows-visual-code {
+	min-inline-size: 0;
+	padding: var(--db-spacing-fixed-lg);
+}
+
+.efficient-workflows-visual-design {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-inline-end: var(--db-border-width-3xs) solid
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+}
+
+.efficient-workflows-visual-code {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+	font: var(--db-type-body-md);
+}
+
+.efficient-workflows-visual-line {
+	white-space: pre;
+}
+
+.efficient-workflows-visual-line[data-indent] {
+	padding-inline-start: var(--db-spacing-fixed-md);
+}
+
+/* Same treatment as the Shared Source code: color class without its level-1 background */
+.efficient-workflows-visual-line[class*='db-color-'] {
+	background-color: transparent;
+	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+}
+
+@media (width <= 767px) {
+	.efficient-workflows-visual {
+		font: var(--db-type-body-sm);
+	}
+
+	.efficient-workflows-visual-features {
+		gap: var(--db-spacing-fixed-xs);
+	}
+
+	.efficient-workflows-visual-connector {
+		margin-inline: calc((100% - 2 * var(--db-spacing-fixed-xs)) / 6);
+	}
+
+	.efficient-workflows-visual-feature {
+		padding-block: var(--db-spacing-fixed-md);
+	}
+
+	.efficient-workflows-visual-design,
+	.efficient-workflows-visual-code {
+		padding: var(--db-spacing-fixed-sm);
+	}
+
+	.efficient-workflows-visual-code {
+		font: var(--db-type-body-xs);
+	}
+
+	.efficient-workflows-visual-line[data-indent] {
+		padding-inline-start: var(--db-spacing-fixed-sm);
+	}
+}
+
+/* The global content spacing must not add to the layout (0,4,0 beats its 0,3,0) */
+.dba-main-content
+	.efficient-workflows-visual
+	> .efficient-workflows-visual-features
+	+ .efficient-workflows-visual-connector,
+.dba-main-content
+	.efficient-workflows-visual
+	> .efficient-workflows-visual-connector
+	+ .efficient-workflows-visual-shared,
+.dba-main-content
+	.efficient-workflows-visual-shared
+	> .efficient-workflows-visual-design
+	+ .efficient-workflows-visual-code {
+	margin-block-start: 0;
+}

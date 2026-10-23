@@ -1,0 +1,95 @@
+---
+import { DBBadge, DBSelect } from '@db-ux/react-core-components';
+import CodeVisualHint from '@components/CodeVisualHint/CodeVisualHint.astro';
+import './ConfigurableVisual.css';
+interface Props {
+	label: string;
+}
+const { label } = Astro.props;
+const uid = crypto.randomUUID();
+const hintId = `configurable-visual-hint-${uid}`;
+// Each select maps to a real DBBadge property and updates the badge live
+// (code-visuals.client.ts): size, content (text, dot = empty badge, icon-only),
+// emphasis and semantic. DBSelect sets its own id only after hydration, so each
+// select is named by its visible row label via aria-labelledby.
+const controls = [
+	{
+		key: 'size',
+		label: 'Size',
+		value: 'medium',
+		options: [
+			{ value: 'small', label: 'Small' },
+			{ value: 'medium', label: 'Medium' },
+		],
+	},
+	{
+		key: 'content',
+		label: 'Content',
+		value: 'text',
+		options: [
+			{ value: 'text', label: 'Text' },
+			{ value: 'dot', label: 'Dot' },
+			{ value: 'icon', label: 'Icon' },
+		],
+	},
+	{
+		key: 'emphasis',
+		label: 'Emphasis',
+		value: 'weak',
+		options: [
+			{ value: 'weak', label: 'Weak' },
+			{ value: 'strong', label: 'Strong' },
+		],
+	},
+	{
+		key: 'semantic',
+		label: 'Semantic',
+		value: 'informational',
+		options: [
+			{ value: 'adaptive', label: 'Adaptive' },
+			{ value: 'critical', label: 'Critical' },
+			{ value: 'informational', label: 'Informational' },
+			{ value: 'neutral', label: 'Neutral' },
+			{ value: 'successful', label: 'Successful' },
+			{ value: 'warning', label: 'Warning' },
+		],
+	},
+];
+---
+
+<div
+	class="configurable-visual"
+	role="group"
+	aria-label={label}
+	aria-describedby={hintId}
+	data-code-visual="configurable"
+>
+	<CodeVisualHint id={hintId} extra="The settings only change the badge preview." />
+	<div class="configurable-visual-preview">
+		<DBBadge
+			size="medium"
+			emphasis="weak"
+			semantic="informational"
+			className="configurable-visual-badge"
+			text="Badge"
+		/>
+	</div>
+	<ul class="configurable-visual-controls">
+		{controls.map((control) => (
+			<li class="configurable-visual-row">
+				<span class="configurable-visual-label" id={`${uid}-${control.key}`}>
+					{control.label}
+				</span>
+				<DBSelect
+					label={control.label}
+					showLabel={false}
+					aria-labelledby={`${uid}-${control.key}`}
+					defaultValue={control.value}
+					data-control={control.key}
+					className="configurable-visual-select"
+					options={control.options}
+				/>
+			</li>
+		))}
+	</ul>
+</div>

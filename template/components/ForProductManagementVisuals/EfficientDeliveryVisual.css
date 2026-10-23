@@ -1,0 +1,96 @@
+/* Efficient Delivery code visual: Gantt chart with a design and a dev phase per feature */
+.efficient-delivery-visual {
+	display: grid;
+
+	/* Label column plus 8 weeks of 2 half-week tracks each */
+	grid-template-columns: max-content repeat(16, minmax(0, 1fr));
+	row-gap: var(--db-spacing-fixed-md);
+	align-items: center;
+	inline-size: 100%;
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	font: var(--db-type-body-lg);
+}
+
+.efficient-delivery-visual-label {
+	grid-column: 1;
+	padding-inline-end: var(--db-spacing-fixed-md);
+	white-space: nowrap;
+}
+
+.efficient-delivery-visual-divider {
+	grid-column: 1 / -1;
+	border-block-end: var(--db-border-width-3xs) solid
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
+}
+
+.efficient-delivery-visual-phase {
+	display: flex;
+	min-inline-size: 0;
+}
+
+/* The color class only resolves the adaptive tokens; its level-1 background stays off */
+.efficient-delivery-visual-phase[class*='db-color-'] {
+	background-color: transparent;
+}
+
+.efficient-delivery-visual-phase[data-phase='dev'] {
+	margin-inline-start: var(--db-spacing-fixed-2xs);
+}
+
+.efficient-delivery-visual-solid,
+.efficient-delivery-visual-extension {
+	min-inline-size: 0;
+	min-block-size: var(--db-sizing-md);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-50-default);
+}
+
+/* Inverted background: dark in light mode, light in dark mode */
+.efficient-delivery-visual-solid {
+	display: flex;
+	flex: 2 1 0;
+	align-items: center;
+	padding-inline: var(--db-spacing-fixed-xs);
+	border-start-start-radius: var(--db-border-radius-xs);
+	border-end-start-radius: var(--db-border-radius-xs);
+	background-color: var(--db-adaptive-bg-inverted-contrast-max-default);
+	color: var(--db-adaptive-on-bg-inverted-default);
+}
+
+/* Narrow bars cut their label with an ellipsis instead of overflowing */
+.efficient-delivery-visual-text {
+	min-inline-size: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.efficient-delivery-visual-extension {
+	flex: 1 1 0;
+	border-style: dashed;
+	border-inline-start: 0;
+	border-start-end-radius: var(--db-border-radius-xs);
+	border-end-end-radius: var(--db-border-radius-xs);
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+}
+
+/* Static previews (home cards) keep the desktop layout at every viewport */
+@media (width <= 767px) {
+	.efficient-delivery-visual:not([data-static]) {
+		row-gap: var(--db-spacing-fixed-sm);
+		font: var(--db-type-body-sm);
+	}
+
+	.efficient-delivery-visual:not([data-static]) .efficient-delivery-visual-label {
+		padding-inline-end: var(--db-spacing-fixed-xs);
+	}
+
+	.efficient-delivery-visual:not([data-static]) .efficient-delivery-visual-solid,
+	.efficient-delivery-visual:not([data-static]) .efficient-delivery-visual-extension {
+		min-block-size: var(--db-sizing-sm);
+	}
+
+	.efficient-delivery-visual:not([data-static]) .efficient-delivery-visual-solid {
+		padding-inline: var(--db-spacing-fixed-2xs);
+		font: var(--db-type-body-xs);
+	}
+}

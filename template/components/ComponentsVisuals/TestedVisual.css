@@ -1,0 +1,96 @@
+/* Tested code visual: four test areas, each with a successful check field next to a label bar */
+.tested-visual {
+	inline-size: 100%;
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	font: var(--db-type-body-md);
+}
+
+.tested-visual-list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-sm);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.tested-visual-item {
+	display: flex;
+	margin: 0;
+	padding: 0;
+}
+
+/* The color class .db-color-successful resolves the adaptive tokens to green */
+.tested-visual-check {
+	display: grid;
+	flex: none;
+	place-items: center;
+
+	/* Fixed square: aspect-ratio alone does not apply to a flex-stretched item */
+	inline-size: var(--db-sizing-md);
+	block-size: var(--db-sizing-md);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-70-default);
+	border-start-start-radius: var(--db-border-radius-xs);
+	border-end-start-radius: var(--db-border-radius-xs);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+}
+
+.tested-visual-label {
+	display: flex;
+	flex: 1 1 auto;
+	align-items: center;
+	min-inline-size: 0;
+	min-block-size: var(--db-sizing-md);
+	padding-inline: var(--db-spacing-fixed-md);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-inline-start: 0;
+	border-start-end-radius: var(--db-border-radius-xs);
+	border-end-end-radius: var(--db-border-radius-xs);
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+}
+
+/*
+ * The check icons pulse one after another, top to bottom, in a continuous loop.
+ * Only the icon scales (transform around its own center); the check field keeps its size.
+ */
+@media (prefers-reduced-motion: no-preference) {
+	.tested-visual-check .db-icon {
+		--tested-visual-step: 0.5s;
+
+		transform-origin: center;
+		animation: tested-visual-check-pulse calc(4 * var(--tested-visual-step)) ease-in-out infinite
+			both;
+	}
+
+	.tested-visual-item:nth-child(2) .db-icon {
+		animation-delay: var(--tested-visual-step);
+	}
+
+	.tested-visual-item:nth-child(3) .db-icon {
+		animation-delay: calc(2 * var(--tested-visual-step));
+	}
+
+	.tested-visual-item:nth-child(4) .db-icon {
+		animation-delay: calc(3 * var(--tested-visual-step));
+	}
+
+	/*
+	 * One pulse (~0.8 s): a soft grow (ease-in-out), then a quick linear return to the normal size.
+	 * It lasts longer than one step (0.5 s), so consecutive checks overlap slightly and the
+	 * pulse runs as a continuous wave from top to bottom.
+	 */
+	@keyframes tested-visual-check-pulse {
+		0%,
+		38%,
+		100% {
+			scale: 1;
+		}
+
+		/* From the full size back to 100 %: quick and linear (no ease) */
+		29% {
+			scale: 1.5;
+			animation-timing-function: linear;
+		}
+	}
+}

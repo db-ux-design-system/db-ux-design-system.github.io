@@ -4,8 +4,8 @@ layout: '@template/layouts/default'
 title: 'Foundation'
 headline: 'Start with clarity'
 description: 'Shared base tokens and modes provide a stable foundation for clear and coherent interfaces.'
-heroImage: '/assets/foundations/Foundations--C.png'
-heroImageAlt: 'Foundations Visual'
+heroVisual: 'foundation'
+loadCodeVisuals: true
 sections:
   - id: 'foundations--base-tokens-section'
     title: 'Base-Tokens'
@@ -14,6 +14,7 @@ sections:
     imageSrcDark: 'assets/foundations/Base-Tokens--Darkmode--C.png'
     imageAlt: 'Diagram showing base token categories (colors, spacing, typography)'
     imagePosition: 'right'
+    visual: 'base-tokens'
   - id: 'foundations--adaptive-colors-section'
     title: 'Adaptive Colors'
     text: 'Maintain consistent contrast and tone across different color modes and contexts.'
@@ -21,6 +22,7 @@ sections:
     imageSrcDark: 'assets/foundations/Adaptive-Colors--Darkmode--C.png'
     imageAlt: 'Palette illustrating adaptive color shifts between light mode and dark mode'
     imagePosition: 'left'
+    visual: 'adaptive-colors'
   - id: 'foundations--materials-section'
     title: 'Materials'
     text: 'Create visual hierarchy through variations in borders, opacity, and fill.'
@@ -28,6 +30,7 @@ sections:
     imageSrcDark: 'assets/foundations/Materials--Darkmode--C.png'
     imageAlt: 'Layered panels showing elevation, border and opacity material styles'
     imagePosition: 'right'
+    visual: 'materials'
   - id: 'foundations--darkmode-section'
     title: 'Darkmode'
     text: 'Support comfortable and readable interfaces in light mode and dark mode.'
@@ -35,10 +38,23 @@ sections:
     imageSrcDark: 'assets/foundations/Darkmode--Darkmode--C.png'
     imageAlt: 'Comparison of interface elements in light mode and dark mode'
     imagePosition: 'left'
+    visual: 'darkmode'
 ---
 
 import { ContentSections, ContactUsSection } from '@components';
+import BaseTokensVisual from '@components/FoundationVisuals/BaseTokensVisual.astro';
+import AdaptiveColorsVisual from '@components/FoundationVisuals/AdaptiveColorsVisual.astro';
+import MaterialsVisual from '@components/FoundationVisuals/MaterialsVisual.astro';
+import DarkmodeVisual from '@components/FoundationVisuals/DarkmodeVisual.astro';
 
-<ContentSections sections={frontmatter.sections} />
+<ContentSections
+	sections={frontmatter.sections}
+	visuals={{
+		'base-tokens': BaseTokensVisual,
+		'adaptive-colors': AdaptiveColorsVisual,
+		materials: MaterialsVisual,
+		darkmode: DarkmodeVisual,
+	}}
+/>
 
 <ContactUsSection />

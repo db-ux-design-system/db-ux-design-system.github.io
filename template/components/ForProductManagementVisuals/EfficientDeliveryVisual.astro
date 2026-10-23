@@ -1,0 +1,56 @@
+---
+import './EfficientDeliveryVisual.css';
+interface Props {
+	label: string;
+	// Static preview (home cards): always the desktop layout, independent of the viewport
+	static?: boolean;
+}
+const { label, static: isStatic = false } = Astro.props;
+// Continuous week header (the original image skipped week 5)
+const weeks = [1, 2, 3, 4, 5, 6, 7, 8];
+// Phases on a grid of 16 half-week tracks: start and span in half weeks
+const features = [
+	{ name: 'Feature A', design: { start: 0, span: 5 }, dev: { start: 5, span: 4 } },
+	{ name: 'Feature B', design: { start: 0, span: 6 }, dev: { start: 6, span: 6 } },
+	{ name: 'Feature C', design: { start: 0, span: 4 }, dev: { start: 4, span: 4 } },
+];
+// Track 1 is the label column, so half week 0 starts at grid line 2
+const column = ({ start, span }: { start: number; span: number }) =>
+	`grid-column: ${start + 2} / span ${span}`;
+---
+
+<div
+	class="efficient-delivery-visual"
+	role="img"
+	aria-label={label}
+	data-static={isStatic ? 'true' : undefined}
+>
+	<span class="efficient-delivery-visual-label">Week</span>
+	{weeks.map((week) => (
+		<span class="efficient-delivery-visual-week" style={`grid-column: ${2 * week} / span 2`}>
+			{week}
+		</span>
+	))}
+	<span class="efficient-delivery-visual-divider"></span>
+	{features.map((feature) => (
+		<>
+			<span class="efficient-delivery-visual-label">{feature.name}</span>
+			<span class="efficient-delivery-visual-phase db-color-blue" style={column(feature.design)}>
+				<span class="efficient-delivery-visual-solid">
+					<span class="efficient-delivery-visual-text">Design</span>
+				</span>
+				<span class="efficient-delivery-visual-extension"></span>
+			</span>
+			<span
+				class="efficient-delivery-visual-phase db-color-green"
+				data-phase="dev"
+				style={column(feature.dev)}
+			>
+				<span class="efficient-delivery-visual-solid">
+					<span class="efficient-delivery-visual-text">Dev</span>
+				</span>
+				<span class="efficient-delivery-visual-extension"></span>
+			</span>
+		</>
+	))}
+</div>

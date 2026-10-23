@@ -32,7 +32,9 @@ export function getI18nFallbackPaths() {
 			'!../../content/pages/**/_*/**',
 			'!../../content/pages/**/_*.astro',
 		],
-		{ eager: true },
+		// Only the keys are used: the non-eager `?raw` glob loads no module and keeps the page
+		// modules (and their CSS) out of the graph.
+		{ query: '?raw', import: 'default' },
 	);
 
 	const dePages = import.meta.glob(
@@ -42,7 +44,7 @@ export function getI18nFallbackPaths() {
 			'!../../content/pages/de/**/_*/**',
 			'!../../content/pages/de/**/_*.astro',
 		],
-		{ eager: true },
+		{ query: '?raw', import: 'default' },
 	);
 
 	// Collect existing DE slugs (already in German)
