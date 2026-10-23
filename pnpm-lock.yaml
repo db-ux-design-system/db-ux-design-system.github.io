@@ -207,11 +207,11 @@ importers:
         specifier: 6.0.0
         version: 6.0.0(stylelint@17.15.0(supports-color@10.2.2)(typescript@6.0.3))
       '@db-ux/db-theme':
-        specifier: 7.0.0
-        version: 7.0.0
+        specifier: 7.1.0
+        version: 7.1.0
       '@db-ux/db-theme-fonts':
-        specifier: 2.1.0
-        version: 2.1.0
+        specifier: 2.2.0
+        version: 2.2.0
       '@db-ux/db-theme-icons':
         specifier: 4.3.0
         version: 4.3.0
@@ -710,8 +710,8 @@ packages:
     peerDependencies:
       stylelint: '>=14.0.0'
 
-  '@db-ux/db-theme-fonts@2.1.0':
-    resolution: {integrity: sha512-fY0xO6/x89wQsobpMSw2QGYqzOAA756xg4npJQEwgiYj6b1hm4urcqTMbjkUwL3nvDsL6erVKuH0WbEQG4QZEA==}
+  '@db-ux/db-theme-fonts@2.2.0':
+    resolution: {integrity: sha512-RTgOUo6eNhRXiaZj+7XbqYLyPorZd6muebGT8PQF81Zw56EQN/GvaTaYOH8pMMAVhO8HyEi22P7H7qh3/eBnNQ==}
 
   '@db-ux/db-theme-icons@4.3.0':
     resolution: {integrity: sha512-hklUeB6IUa8J3tEQEtlQXdt7KT4jTL83KmZ4Q3IgmPtfj9vOJ2PRFuwC77s3g4oNRIxQl78uEtlNbJY47s04Tg==}
@@ -720,8 +720,8 @@ packages:
     resolution: {integrity: sha512-4pHuK6aT2rwvJvQkNvayhLyUH+nWnnnc8HrMPVwYN/NF85YQm5D26C0LBrOF/WYme84q3+gLFO8tYsSrN85l2w==}
     deprecated: This package is deprecated and no longer maintained. It will not receive further updates.
 
-  '@db-ux/db-theme@7.0.0':
-    resolution: {integrity: sha512-dGdnC04tDLC5Fymh7P1QGnZNEP5HfsSkrMv2LrP4nUq2P4tqFhZZAxuWOyPcnq8S1QUVwr3hsVS8mchnlxxoRg==}
+  '@db-ux/db-theme@7.1.0':
+    resolution: {integrity: sha512-ni1IHRHM+f82QSfiOHRivGeRHuUNqrJBGrGmo7XK3nNQe6x340Qado3VHI/g+j6syzoYjNPe3wsaAn0peXHLPg==}
 
   '@db-ux/react-core-components@6.0.0':
     resolution: {integrity: sha512-tbhDzD625x+hd9isGh9zK0wSL2HlzihkSG7YBIINkbPOZK3s+16sKK3KdciYfej3qQ3IB720VObP9OzThFQKoQ==}
@@ -3593,15 +3593,15 @@ snapshots:
     dependencies:
       stylelint: 17.15.0(supports-color@10.2.2)(typescript@6.0.3)
 
-  '@db-ux/db-theme-fonts@2.1.0': {}
+  '@db-ux/db-theme-fonts@2.2.0': {}
 
   '@db-ux/db-theme-icons@4.3.0': {}
 
   '@db-ux/db-theme-illustrative-icons@3.4.0': {}
 
-  '@db-ux/db-theme@7.0.0':
+  '@db-ux/db-theme@7.1.0':
     dependencies:
-      '@db-ux/db-theme-fonts': 2.1.0
+      '@db-ux/db-theme-fonts': 2.2.0
       '@db-ux/db-theme-icons': 4.3.0
 
   '@db-ux/react-core-components@6.0.0':
