@@ -29,6 +29,13 @@ const segmentMap: Record<string, string> = {
 	// content path uses an 'overview' segment it could collide with.
 	overview: 'uebersicht',
 	'get-started': 'erste-schritte',
+	// get-started children ('design', 'migration' and 'native' are identical in both languages)
+	about: 'ueber',
+	accessibility: 'barrierefreiheit',
+	ai: 'ki',
+	development: 'entwicklung',
+	examples: 'beispiele',
+	packages: 'pakete',
 	learn: 'lernen',
 	contribution: 'mitwirken',
 	resources: 'ressourcen',

@@ -4,7 +4,7 @@ layout: '@template/layouts/default'
 title: 'Für Produktmanagement'
 headline: 'Wirksam ausrichten'
 description: 'Ein gemeinsames System, das teamübergreifend konsistente Entscheidungen und effiziente Produktentwicklung ermöglicht.'
-heroVisual: 'product-management'
+heroVisualImage: 'product-management'
 sections:
   - id: 'for-productmanagement--efficient-delivery-section'
     title: 'Effiziente Umsetzung'
@@ -33,7 +33,8 @@ sections:
     visual: 'scalable-approach'
 ---
 
-import { ContentSections, ContactUsSection } from '@components';
+import { DBSection } from '@db-ux/react-core-components';
+import { ContentSections, CTA } from '@components';
 import EfficientDeliveryVisual from '@components/ForProductManagementVisuals/EfficientDeliveryVisual.astro';
 import TestedVisual from '@components/ComponentsVisuals/TestedVisual.astro';
 import ScalableApproachVisual from '@components/ForProductManagementVisuals/ScalableApproachVisual.astro';
@@ -47,4 +48,19 @@ import ScalableApproachVisual from '@components/ForProductManagementVisuals/Scal
 	}}
 />
 
-<ContactUsSection />
+<DBSection width="medium" spacing="medium">
+	<CTA
+		title="Das Design System in dein Produkt bringen"
+		text="Erfahre, was das Design System enthält, wie es veröffentlicht wird und wie verbindlich es ist – die Grundlage, um die Einführung zu planen."
+		primaryAction={{
+			label: 'Über das Design System',
+			href: '/de/dokumentation/lernen/ueber',
+			variant: 'brand',
+		}}
+		secondaryAction={{
+			label: 'Einstieg für Produktverantwortliche',
+			href: '/de/dokumentation/erste-schritte?role=product',
+			variant: 'outlined',
+		}}
+	/>
+</DBSection>

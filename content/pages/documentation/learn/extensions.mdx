@@ -1,0 +1,80 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Using Extensions'
+headline: 'Using Extensions'
+description: 'Extensions add standards for specific domains on top of the core of the design system. How to find out whether you need one and where to get it.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 7
+---
+
+import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+
+<DBSection spacing="small" width="auto">
+
+## Core or extension?
+
+The core – Foundation and Components – is the same for every product. Extensions build on it and add standards for a specific domain. You always need the core. You need an extension only if your product works in its domain.
+
+| Extension             | Domain                                       |
+| --------------------- | -------------------------------------------- |
+| Passenger Information | Information standards for travelers          |
+| DataViz               | Data visualization, currently in Beta        |
+| Table                 | Display of large data sets                   |
+| Content               | Consistent communication – not yet available |
+
+All extensions are presented under <DBLink href="/documentation/extensions" variant="inline">Extensions</DBLink>.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## What each extension provides
+
+| Extension             | Design        | Code                                            | Documentation                                                                                                                                                                |
+| --------------------- | ------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Passenger Information | Figma library | Web Components in GitLab (login required)       | [Marketing Portal](https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/User-Experience/DB-UX-Design-System/extensions/reisendeninformation) |
+| DataViz               | Figma library | Power BI templates and code snippets for Plotly | [Marketing Portal](https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/User-Experience/DB-UX-Design-System/extensions/dataviz)              |
+| Table                 | –             | –                                               | [Marketing Portal](https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/User-Experience/DB-UX-Design-System/extensions/table)                |
+
+The direct links to the Figma libraries and code packages are listed under <DBLink href="/documentation/resources" variant="inline">Resources</DBLink>.
+
+<DBNotification
+	variant="standalone"
+	semantic="informational"
+	headline="Documentation behind a login"
+>
+	The documentation of all extensions is in the Marketing Portal, which requires a login. Deep links
+	do not work before login – open the link again after signing in.
+</DBNotification>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Get started with an extension
+
+1. Set up the core first – see [Design](/documentation/get-started?role=design) or [Development](/documentation/get-started?role=development).
+2. Read the documentation of the extension in the Marketing Portal.
+3. Enable the Figma library of the extension in addition to Core Foundation and Core Components.
+4. Add the code of the extension, if it provides any.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Feedback
+
+Each extension has its own GitHub repository for design feedback and issues:
+
+| Extension             | Repository                                                                           |
+| --------------------- | ------------------------------------------------------------------------------------ |
+| Passenger Information | [extension-ri](https://github.com/db-ux-design-system/extension-ri/issues)           |
+| DataViz               | [extension-dataviz](https://github.com/db-ux-design-system/extension-dataviz/issues) |
+| Table                 | [extension-table](https://github.com/db-ux-design-system/extension-table/issues)     |
+
+</DBSection>

@@ -15,6 +15,7 @@ import PreferenceSwitches from './control-panel/preference-switches.tsx';
 import MainNavigation from './control-panel/main-navigation.tsx';
 import SubNavigation from './control-panel/sub-navigation.tsx';
 import Brand from './control-panel/brand.tsx';
+import ReadingListButton from '@template/components/ReadingList/ReadingListButton.tsx';
 import { findSubNavigation } from '@template/utils/navigation.utils.ts';
 import { useTranslation } from '@template/i18n';
 
@@ -68,16 +69,18 @@ function ShellContent({
 			{/* The actions slot decides the position, so the same content sits in a
 			    different slot per breakpoint. Desktop splits it up: switches left
 			    (Actions 1), Get Started button right (Actions 2). Mobile puts both into
-			    the drawer footer (Actions 2) as one row, which keeps the menu bar
-			    free for the brand and the burger button. Keeping the footer a single
+			    the drawer footer (Actions 2) as one row. Keeping the footer a single
 			    row matters: the drilldown overlay reserves a fixed height for it, so
-			    a taller footer would be covered by the overlay. The wrapper has to
-			    match its slot because it carries the grid area. */}
+			    a taller footer would be covered by the overlay. The footer has no
+			    room for the reading list button, so on mobile it sits in the menu
+			    bar (Actions 1): the menu bar holds the brand, the reading list
+			    button (small size) and the burger button. The wrapper has to match
+			    its slot because it carries the grid area. */}
 			<DBControlPanelDesktop
 				brand={<Brand />}
 				actions1={
 					<DBControlPanelActions1>
-						<PreferenceSwitches />
+						<PreferenceSwitches readingList />
 					</DBControlPanelActions1>
 				}
 				actions2={
@@ -91,6 +94,12 @@ function ShellContent({
 			<DBControlPanelMobile
 				burgerMenuLabel={t('shell.menu')}
 				brand={<Brand />}
+				actions1={
+					<DBControlPanelActions1>
+						{/* Small, so the brand still fits next to it at 320 px. */}
+						<ReadingListButton size="small" />
+					</DBControlPanelActions1>
+				}
 				actions2={
 					<DBControlPanelActions2>
 						<GetStarted />

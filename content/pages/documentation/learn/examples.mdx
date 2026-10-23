@@ -1,0 +1,94 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Examples & Starters'
+headline: 'Examples & Starters'
+description: 'Ready-made example projects for every framework. Open them in the browser or use them as a starting point for your own project.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 9
+---
+
+import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+
+<DBSection spacing="small" width="auto">
+
+## Try it in the browser
+
+These examples run in StackBlitz. You need no local setup – the editor opens in a new tab and starts the app.
+
+| Example       | Shows                                                  | Open                                                                                            |
+| ------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| Documentation | An application shell with navigation and content pages | [StackBlitz](https://stackblitz.com/edit/db-ux-design-system-examples-tue2w1lm?file=index.html) |
+| Table         | A data table inside an application shell               | [StackBlitz](https://stackblitz.com/edit/db-ux-design-system-examples-7yy1wm69?file=index.html) |
+| KPI           | A dashboard with KPI cards                             | [StackBlitz](https://stackblitz.com/edit/db-ux-design-system-examples-8qc2ure1?file=index.html) |
+
+All three are built with React.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Example projects per framework
+
+Each project shows a minimal, working setup for one framework. The README of each project lists every step that was needed to create it – useful if you want to reproduce the setup in your own project.
+
+| Framework           | Project                                                                                                      | Built with                    |
+| ------------------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------- |
+| React               | [react-example](https://github.com/db-ux-design-system/examples/tree/main/react-example)                     | Vite, Sass                    |
+| React with Tailwind | [react-tailwind-template](https://github.com/db-ux-design-system/examples/tree/main/react-tailwind-template) | Vite, Tailwind, Vite plugin   |
+| Angular             | [angular-example](https://github.com/db-ux-design-system/examples/tree/main/angular-example)                 | Angular CLI, SCSS             |
+| Vue                 | [vue-example](https://github.com/db-ux-design-system/examples/tree/main/vue-example)                         | Vite, Sass                    |
+| Python with htmx    | [htmx-jinja-example](https://github.com/db-ux-design-system/examples/tree/main/python/htmx-jinja-example)    | Flask, Jinja2, Web Components |
+| Custom theme        | [custom-theme-example](https://github.com/db-ux-design-system/examples/tree/main/custom-theme-example)       | React, own icon font          |
+
+### Run an example locally
+
+```shell
+git clone https://github.com/db-ux-design-system/examples.git
+cd examples/react-example
+npm install
+npm run dev
+```
+
+Replace `react-example` with the folder of the example you want to run. The Python example additionally needs `pip install -r requirements.txt` and starts with `python app.py`.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Before you build on an example
+
+<DBNotification
+	variant="standalone"
+	semantic="warning"
+	headline="Examples use the whitelabel theme and older versions"
+>
+	The examples do not include the DB Theme, so they show the whitelabel defaults instead of the DB
+	font and icons. They are also not always on the latest version of the design system. Update the
+	packages and add the{' '}
+	<DBLink href="/documentation/resources/packages/db-theme" variant="inline">
+		DB Theme
+	</DBLink>{' '}
+	before you use an example as the base for a product.
+</DBNotification>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Resources
+
+| Resource       | Link                                                                            |
+| -------------- | ------------------------------------------------------------------------------- |
+| All examples   | [db-ux-design-system/examples](https://github.com/db-ux-design-system/examples) |
+| Package guides | [Packages](/documentation/resources/packages)                     |
+| DB Theme       | [DB Theme](/documentation/resources/packages/db-theme)            |
+| React Tutorial | [React Tutorial](/documentation/learn/react-tutorial)                           |
+
+If an example does not work, open an issue in the [examples repository](https://github.com/db-ux-design-system/examples/issues). Please check first whether the issue already exists.
+
+</DBSection>

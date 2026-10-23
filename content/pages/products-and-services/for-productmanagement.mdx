@@ -4,7 +4,7 @@ layout: '@template/layouts/default'
 title: 'For Product Management'
 headline: 'Align for impact'
 description: 'A shared system that supports consistent decision-making and efficient product delivery across teams.'
-heroVisual: 'product-management'
+heroVisualImage: 'product-management'
 sections:
   - id: 'for-productmanagement--efficient-delivery-section'
     title: 'Efficient Delivery'
@@ -33,7 +33,8 @@ sections:
     visual: 'scalable-approach'
 ---
 
-import { ContentSections, ContactUsSection } from '@components';
+import { DBSection } from '@db-ux/react-core-components';
+import { ContentSections, CTA } from '@components';
 import EfficientDeliveryVisual from '@components/ForProductManagementVisuals/EfficientDeliveryVisual.astro';
 import TestedVisual from '@components/ComponentsVisuals/TestedVisual.astro';
 import ScalableApproachVisual from '@components/ForProductManagementVisuals/ScalableApproachVisual.astro';
@@ -47,4 +48,19 @@ import ScalableApproachVisual from '@components/ForProductManagementVisuals/Scal
 	}}
 />
 
-<ContactUsSection />
+<DBSection width="medium" spacing="medium">
+	<CTA
+		title="Bring the design system into your product"
+		text="Find out what the design system contains, how it is released and how binding it is – the basis for planning its introduction."
+		primaryAction={{
+			label: 'About the Design System',
+			href: '/documentation/learn/about',
+			variant: 'brand',
+		}}
+		secondaryAction={{
+			label: 'Get started as product manager',
+			href: '/documentation/get-started?role=product',
+			variant: 'outlined',
+		}}
+	/>
+</DBSection>

@@ -6,15 +6,34 @@ interface Props {
 	title?: string;
 	headline?: string;
 	description?: string;
+	startLabel?: string;
 }
+
+const isDE = Astro.url.pathname.startsWith('/de/') || Astro.url.pathname === '/de';
 
 const {
 	title = 'DB UX Design System',
 	headline = 'A Design System designed to align teams and streamline product delivery.',
 	description = 'Brings clarity to design and implementation through shared standards and reusable components.',
+	startLabel = 'Get started',
 } = Astro.props;
+
+// Single entry point into Get Started; the role question there splits into the paths.
+// Root-relative for both languages, like the footer links and the language switch.
+const actions = [
+	{
+		label: startLabel,
+		href: isDE ? '/de/dokumentation/erste-schritte' : '/documentation/get-started',
+	},
+];
 ---
 
 <DBSection width="medium" spacing="medium" id="home--page-hero-section">
-	<PageHero title={title} headline={headline} description={description} />
+	<PageHero
+		title={title}
+		headlineLevel={1}
+		headline={headline}
+		description={description}
+		actions={actions}
+	/>
 </DBSection>

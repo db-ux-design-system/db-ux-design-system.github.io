@@ -1,0 +1,108 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Astro'
+headline: 'Astro'
+description: 'Die Integration `@db-ux/astro` richtet ein Astro-Projekt mit dem DB UX Design System ein. Sie ist für statische und inhaltsgetriebene Websites gedacht.'
+align: start
+toc: true
+tocMaxDepth: 2
+order: 9
+---
+
+import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+
+<DBSection spacing="small" width="auto">
+
+## Wann du dieses Paket nutzt
+
+[Astro](https://astro.build/) ist ein Framework für schnelle, inhaltsgetriebene Websites. Die Integration verbindet es mit den React-Komponenten des Design Systems und übernimmt das Setup für dich.
+
+<DBNotification variant="standalone" semantic="warning" headline="Frühe Version">
+	`@db-ux/astro` liegt in Version 0.1.0 vor. Es erwartet `@db-ux/core-components` 4.x und Astro 5
+	als Peer-Dependencies – beide liegen hinter den aktuellen Versionen. Prüfe den Stand im{' '}
+	<DBLink href="https://github.com/db-ux-design-system/astro" variant="inline">
+		Repository
+	</DBLink>
+	, bevor du ein neues Projekt damit beginnst. Für ein aktuelles Setup folgst du stattdessen der{' '}
+	<DBLink href="/de/dokumentation/ressourcen/pakete/react" variant="inline">
+		Anleitung für React
+	</DBLink>
+	.
+</DBNotification>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Installation
+
+### 1. Astro-Projekt anlegen
+
+```shell
+npm create astro@latest
+```
+
+Wähle im Fragebogen `Use minimal (empty) template`. Die Integration ist für ein leeres Projekt gedacht.
+
+### 2. Integration installieren
+
+```shell
+npm i
+npm create @db-ux/astro
+```
+
+Das Installationsskript erkennt deinen Paketmanager, prüft, ob du dich in einem Astro-Projekt befindest, und installiert `@db-ux/astro` mit allen nötigen Peer-Dependencies.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Setup
+
+Ergänze die Integration in `astro.config.mjs`:
+
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import { dbUxAstro } from '@db-ux/astro';
+
+export default defineConfig({
+	integrations: [
+		dbUxAstro({
+			appName: 'Meine App',
+		}),
+	],
+});
+```
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+| Ressource           | Link                                                                      |
+| ------------------- | ------------------------------------------------------------------------- |
+| Dokumentation       | [@db-ux/astro](https://design-system.deutschebahn.com/astro/)             |
+| Quellcode           | [db-ux-design-system/astro](https://github.com/db-ux-design-system/astro) |
+| npm-Paket           | [@db-ux/astro](https://www.npmjs.com/package/@db-ux/astro)                |
+| Installationsskript | [@db-ux/create-astro](https://www.npmjs.com/package/@db-ux/create-astro)  |
+| Anleitung React     | [React](/de/dokumentation/ressourcen/pakete/react)        |
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Fehlerbehebung
+
+| Symptom                                                          | Ursache und Lösung                                                                                                          |
+| ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Das Installationsskript meldet, dass kein Astro-Projekt vorliegt | Führe es im Stammverzeichnis deines Astro-Projekts aus, dort, wo `astro.config.mjs` liegt.                                  |
+| `npm create db-ux-astro` schlägt fehl                            | Das Paket heißt `@db-ux/create-astro`. Nutze `npm create @db-ux/astro`.                                                     |
+| Konflikte bei Peer-Dependencies während der Installation         | Die Integration erwartet Core 4.x und Astro 5. Neuere Versionen führen zu Konflikten, bis die Integration aktualisiert ist. |
+
+Wenn das nicht hilft, öffne ein Issue im [astro-Repository](https://github.com/db-ux-design-system/astro/issues). Prüfe vorher, ob es das Issue schon gibt.
+
+</DBSection>

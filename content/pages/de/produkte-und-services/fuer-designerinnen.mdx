@@ -4,7 +4,7 @@ layout: '@template/layouts/default'
 title: 'Für Designer:innen'
 headline: 'Sicher gestalten'
 description: 'Ein gemeinsames System, das teamübergreifend klare Entscheidungen und konsistente Interfaces ermöglicht.'
-heroVisual: 'design'
+heroVisualImage: 'design'
 loadCodeVisuals: true
 sections:
   - id: 'for-designer--consistent-results-section'
@@ -42,7 +42,8 @@ sections:
     visual: 'smooth-handoff'
 ---
 
-import { ContentSections, ContactUsSection } from '@components';
+import { DBSection } from '@db-ux/react-core-components';
+import { ContentSections, CTA } from '@components';
 // Backup (statisches Zwei-Geräte-Visual): import ConsistentResultsVisual from '@components/ForDesignerVisuals/ConsistentResultsVisual.astro'; und stattdessen auf 'consistent-results' mappen
 import ConsistentResultsMorphVisual from '@components/ForDesignerVisuals/ConsistentResultsMorphVisual.astro';
 import ButtonPlaygroundVisual from '@components/ForDesignerVisuals/ButtonPlaygroundVisual.astro';
@@ -59,4 +60,19 @@ import SmoothHandoffVisual from '@components/ForDesignerVisuals/SmoothHandoffVis
 	}}
 />
 
-<ContactUsSection />
+<DBSection width="medium" spacing="medium">
+	<CTA
+		title="Jetzt gestalten"
+		text="Hole dir Zugang zu den Figma-Bibliotheken und gestalte deinen ersten Screen mit den Komponenten – Schritt für Schritt bis zur Übergabe."
+		primaryAction={{
+			label: 'Mit Figma starten',
+			href: '/de/dokumentation/erste-schritte?role=design',
+			variant: 'brand',
+		}}
+		secondaryAction={{
+			label: 'Figma-Tutorial',
+			href: '/de/dokumentation/lernen/figma-tutorial',
+			variant: 'outlined',
+		}}
+	/>
+</DBSection>

@@ -5,6 +5,7 @@ sectionWidth: 'auto'
 title: 'MCP Server'
 headline: 'MCP Server'
 description: 'Verbinde KI-Coding-Agents über das Model Context Protocol mit dem DB UX Design System. Du erhältst korrekte Komponenten-APIs, Design Tokens und Code-Beispiele – ohne Halluzinationen.'
+readingList: true
 align: start
 toc: true
 tocMaxDepth: 2
@@ -183,23 +184,23 @@ Amazon Q kann die `CONTEXT.md` des Projekts automatisch als dauerhaften System-P
 
 ### Tokens & Assets
 
-| Tool                           | Beschreibung                                                                                                                     |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
-| `get_design_tokens`            | Gibt CSS Custom Properties (`--db-*`) für eine Token-Kategorie zurück. Spacing, Elevation und Density liefern kompilierte Werte. |
-| `list_design_token_categories` | Listet alle verfügbaren Token-Kategorien auf (z. B. `colors`, `spacing`, `typography`, `elevation`, `density`).                  |
-| `list_icons`                   | Gibt alle gültigen DB UX Icon-Namen zurück. **Immer aufrufen, bevor eine `icon`-Property gesetzt wird.**                         |
-| `get_component_visual`         | Gibt einen verkleinerten Screenshot (max. 800×800 px, JPEG q75) als Base64 zurück. Nur bei Bedarf verwenden.                     |
-| `docs_search`                  | Durchsucht die DB UX Dokumentation (Richtlinien, Barrierefreiheit, Migrations-Dokus). Funktioniert als RAG-Engine.               |
+| Tool                           | Beschreibung                                                                                                                                             |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `get_design_tokens`            | Gibt CSS Custom Properties (`--db-*`) für eine Token-Kategorie zurück. Spacing, Elevation und Density liefern kompilierte Werte.                         |
+| `list_design_token_categories` | Listet alle verfügbaren Token-Kategorien auf (z. B. `colors`, `spacing`, `typography`, `elevation`, `density`).                                          |
+| `list_icons`                   | Gibt alle gültigen DB UX Icon-Namen zurück. **Immer aufrufen, bevor eine `icon`-Property gesetzt wird.**                                                 |
+| `list_visuals`                 | Gibt alle verfügbaren Namen visueller Referenzen zurück (z. B. `dashboard`, `form`, `table`). Vor `get_visual_reference` aufrufen.                       |
+| `get_visual_reference`         | Gibt eine visuelle Referenz (max. 800×800 px, JPEG q75) als Base64 zurück. Nur verwenden, wenn visueller Kontext nötig ist, z. B. bei komplexen Layouts. |
+| `docs_search`                  | Durchsucht die DB UX Dokumentation (Richtlinien, Barrierefreiheit, Migrations-Dokus). Funktioniert als RAG-Engine.                                       |
 
-### Migration & Scaffolding
+### Migration
 
-| Tool                    | Beschreibung                                                                                                                                          |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `analyze_v2_migration`  | **Bei Migrationen zuerst aufrufen.** Scannt eine Datei nach DB UI v2 Patterns (`<cmp-*>`, `<elm-*>`, `db-color-*`) und gibt einen JSON-Report zurück. |
-| `list_migration_guides` | Gibt alle verfügbaren Migration Guides zurück (z. B. `color-migration`, `component-migration`).                                                       |
-| `get_migration_guide`   | Gibt den vollständigen Markdown-Inhalt eines Migration Guides zurück.                                                                                 |
-| `verify_migrated_code`  | Speichert generierten Code temporär und prüft ihn mit `tsc --noEmit`. Gibt bei Fehlern Diagnostics zurück (max. 3 Versuche).                          |
-| `scaffold_component`    | Generiert ein DB UX konformes Komponenten-Grundgerüst für ein Framework mit korrekten `@db-ux/*`-Imports und SCSS-`@use`-Direktiven.                  |
+| Tool                          | Beschreibung                                                                                                                                                                                                                                                              |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `scan_generation_2_migration` | **Bei Migrationen zuerst aufrufen.** Scannt eine Datei nach Mustern aus Generation 2 (Klassen `cmp-*`, `elm-*` und `rea-*`, Web Components `<db-*>`, Tokens `db-color-*`, alte Icon-Namen) und gibt einen JSON-Report mit Zeilennummern und Migrationsvorschlägen zurück. |
+| `list_migration_guides`       | Gibt alle verfügbaren Migration Guides zurück (z. B. `color-migration`, `component-migration`).                                                                                                                                                                           |
+| `get_migration_guide`         | Gibt den vollständigen Markdown-Inhalt eines Migration Guides zurück.                                                                                                                                                                                                     |
+| `verify_migrated_code`        | Speichert generierten Code temporär und prüft ihn mit `tsc --noEmit`. Gibt bei Fehlern Diagnostics zurück (max. 3 Versuche).                                                                                                                                              |
 
 ### Beispiel-Workflow: React Button
 
@@ -244,7 +245,7 @@ Generiert die Grundstruktur einer kompletten Webseite oder eines komplexen Modul
 **Workflow-Schritte:**
 
 ```text
-Schritt 0: analyze_v2_migration   → Datei-Scan (deterministisch, kein Raten)
+Schritt 0: scan_generation_2_migration → Datei-Scan (deterministisch, kein Raten)
 Schritt 1: Migrations-Analyse     → Mapping-Tabelle: Legacy → DB UX v3
 Schritt 2: Component Discovery    → Props, Beispiele, Tokens, Icons laden
 Schritt 3: Code-Generierung       → vollständig migrierter Code (intern)

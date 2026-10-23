@@ -1,0 +1,145 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Design-Ressourcen'
+headline: 'Design-Ressourcen'
+description: 'Die Figma-Bibliotheken des DB UX Design Systems. Hole dir Zugang, aktiviere die Bibliotheken in deiner Datei und arbeite mit den Komponenten.'
+align: start
+toc: true
+tocMaxDepth: 2
+order: 1
+---
+
+import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+
+<DBSection spacing="small" width="auto">
+
+## Zugang bekommen
+
+Die Bibliotheken liegen in der Figma-Organisation der Deutschen Bahn. Wie du Zugang bekommst, hängt von deiner E-Mail-Adresse ab.
+
+| Du hast …               | So bekommst du Zugang                                                                                                                                                                                                           |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| eine DB-E-Mail-Adresse  | Melde dich mit deiner DB-E-Mail-Adresse in Figma an. Die Bibliotheken liegen im [Ordner DB UX Design System](https://www.figma.com/files/1555127211835288633/folder/170790368).                                                 |
+| keine DB-E-Mail-Adresse | Beantrage den Zugang über das [Marketingportal](https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/db-ux-design-system/support/freigabe-figma). Das Marketingportal erfordert eine Anmeldung. |
+
+<DBNotification variant="standalone" semantic="informational" headline="Geschützte Inhalte">
+	Der Figma-Ordner und das Marketingportal erfordern beide eine Anmeldung. Ohne Zugang führen die
+	Links auf eine Anmeldeseite.
+</DBNotification>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Bibliotheken
+
+| Bibliothek                  | Inhalt                                                          | Nutze sie für                              |
+| --------------------------- | --------------------------------------------------------------- | ------------------------------------------ |
+| Core Foundation             | Tokens, Farben, Typografie und Abstände                         | jede Datei – die Basis für alle anderen    |
+| Core Components             | alle Core Components                                            | Design und Prototyping                     |
+| Core Patterns               | wiederkehrende Lösungen, die mehrere Komponenten kombinieren    | Design und Prototyping                     |
+| DB Theme Icons              | die funktionalen DB-Icons                                       | jede Datei, die Icons nutzt                |
+| DB Theme Illustrative Icons | die illustrativen DB-Icons                                      | Teaser und größere Piktogramme             |
+| Core Lab                    | Konzepte für zukünftige Komponenten und Pattern                 | Erkundung – nicht für den Produktiveinsatz |
+| Reisendeninformation        | Informationsstandards für Reisende                              | Produkte mit Reisendeninformation          |
+| DataViz                     | Diagramm-Komponenten und Pattern zur Datenvisualisierung (Beta) | Datenvisualisierung                        |
+
+Die direkten Links zu jeder Bibliothek stehen unter <DBLink href="/de/dokumentation/ressourcen" variant="inline">Ressourcen</DBLink>.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Bibliotheken aktivieren
+
+1. Öffne deine Figma-Datei.
+2. Öffne das Panel **Assets** und wähle das Bibliotheks-Icon.
+3. Aktiviere **Core Foundation**.
+4. Aktiviere **Core Components** und **DB Theme Icons**.
+5. Aktiviere **Core Patterns** und **DB Theme Illustrative Icons**, wenn du sie brauchst.
+6. Aktiviere Erweiterungen wie Reisendeninformation oder DataViz nur, wenn dein Produkt sie braucht.
+
+In Figma tragen alle Bibliotheken das Präfix `DB UX -`, zum Beispiel `DB UX - Core Components`.
+
+Danach stehen dir die Komponenten im Panel Assets deiner Datei zur Verfügung.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Mit den Komponenten arbeiten
+
+Komponenten-Properties tragen Emoji-Präfixe, die ihren Zweck auf einen Blick zeigen.
+
+| Icon | Zweck                        | Beispiel        |
+| ---- | ---------------------------- | --------------- |
+| 👁️   | Element ein- oder ausblenden | `👁️ Show Label` |
+| 🔀   | Variantenauswahl             | `🔀 Variant`    |
+| 📦   | Slot für eigene Inhalte      | `📦 Children`   |
+| 🔄   | Icon tauschen                | `🔄 Icon`       |
+| ✏️   | Text überschreiben           | `✏️ Label`      |
+| ⚙️   | Code-Connect-Property        | `⚙️ Required`   |
+
+Hilfskomponenten wie Floating Container, Resizer und Scrollbar sowie Anleitungen zu einzelnen Komponenten findest du unter <DBLink href="/de/dokumentation/lernen/figma" variant="inline">Figma-Tipps</DBLink>.
+
+### Logo im Control Panel
+
+Mit dem Figma-Plugin [DB Logo Importer](https://www.figma.com/community/plugin/1590462040996560100/concept-db-logo-importer) setzt du ein markenkonformes Logo mit Logozusatz in das Control Panel. Das Plugin vergibt die richtigen Farbvariablen.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## An die Entwicklung übergeben
+
+Die Komponenten in Figma sind über **Code Connect** mit ihrem Code verknüpft. Entwickler:innen sehen im Dev Mode zu jeder konfigurierten Instanz den passenden Code-Schnipsel.
+
+Properties mit ⚙️ wirken nur auf den erzeugten Code, nicht auf das Design. Setze sie trotzdem, damit der Schnipsel im Dev Mode vollständig ist. Wie das funktioniert, steht unter <DBLink href="/de/dokumentation/lernen/code-connect" variant="inline">Code Connect</DBLink>.
+
+<DBNotification variant="standalone" semantic="informational" headline="DB Theme">
+	Alle Beispiele in dieser Dokumentation nutzen das DB Theme. Mit dem Whitelabel- oder einem anderen
+	Theme sieht das Ergebnis anders aus, weil dann eine andere Foundation greift.
+</DBNotification>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Wie es weitergeht
+
+| Du möchtest …                   | Weiter mit                                                                                                           |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| ein neues Projekt starten       | [Figma-Tutorial](/de/dokumentation/lernen/figma-tutorial) – gestalte ein Kontaktformular und übergib es              |
+| ein bestehendes Projekt umbauen | [Figma-Tipps](/de/dokumentation/lernen/figma) und [Plugins & Tools](/de/dokumentation/lernen/plugins) |
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Ressourcen
+
+| Ressource         | Link                                                                                    |
+| ----------------- | --------------------------------------------------------------------------------------- |
+| Figma-Ordner      | [DB UX Design System](https://www.figma.com/files/1555127211835288633/folder/170790368) |
+| Bibliotheks-Links | [Ressourcen](/de/dokumentation/ressourcen)                                              |
+| Figma-Tipps       | [Figma-Tipps](/de/dokumentation/lernen/figma)                                           |
+| Code Connect      | [Code Connect](/de/dokumentation/lernen/code-connect)                                   |
+| Release Notes     | [Release Notes](/de/dokumentation/releases/release-notes)                               |
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Fehlerbehebung
+
+| Symptom                                         | Ursache und Lösung                                                                                                                                               |
+| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Die Bibliotheken erscheinen nicht in der Datei  | Du bist nicht mit einem Konto der DB-Figma-Organisation angemeldet. Melde dich mit deiner DB-E-Mail-Adresse an oder beantrage Zugang.                            |
+| Eine Komponente sieht anders aus als im Code    | Manche Ebenen brauchen ein anderes Größenverhalten, zum Beispiel Hug statt Fill. Die bekannten Fälle stehen unter [Figma-Tipps](/de/dokumentation/lernen/figma). |
+| Der Dev-Mode-Schnipsel zeigt einen Standardwert | Eine ⚙️ Code-Connect-Property ist nicht gesetzt. Setze sie auf der ersten Ebene der Instanz.                                                                     |
+
+Wenn das nicht hilft, öffne ein Issue im [core-Repository](https://github.com/db-ux-design-system/core/issues/new/choose). Dort sammeln wir Design-Feedback und Design-Fehler. Prüfe vorher, ob es das Issue schon gibt.
+
+</DBSection>

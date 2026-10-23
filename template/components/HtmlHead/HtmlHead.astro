@@ -25,4 +25,26 @@ const { title, loadModelViewer } = Astro.props as {
 	)}
 
 	<ClientRouter />
+
+	<!--
+		Apply the stored color mode to <html> before the first paint and after every
+		client-side navigation. The Shell is client:only and is recreated on each
+		navigation without data-mode until its effect runs; without this, the page
+		briefly falls back to the OS color scheme (a dark or white flash when the
+		site mode differs from the OS). Keep the key and the default in sync with
+		template/context/color-mode-context.tsx.
+	-->
+	<script is:inline>
+		(() => {
+			const apply = () => {
+				const stored = window.localStorage.getItem('db-ux-mode');
+				document.documentElement.setAttribute('data-mode', stored === 'dark' ? 'dark' : 'light');
+			};
+			apply();
+			if (!window.__dbUxColorModeListener) {
+				window.__dbUxColorModeListener = true;
+				document.addEventListener('astro:after-swap', apply);
+			}
+		})();
+	</script>
 </head>

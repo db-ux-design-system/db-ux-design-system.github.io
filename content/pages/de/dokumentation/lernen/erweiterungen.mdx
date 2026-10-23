@@ -1,0 +1,80 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Erweiterungen nutzen'
+headline: 'Erweiterungen nutzen'
+description: 'Erweiterungen ergänzen den Kern des Design Systems um Standards für bestimmte Bereiche. Wie du herausfindest, ob du eine brauchst, und wo du sie bekommst.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 7
+---
+
+import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+
+<DBSection spacing="small" width="auto">
+
+## Kern oder Erweiterung?
+
+Der Kern – Foundation und Komponenten – ist für jedes Produkt gleich. Erweiterungen bauen darauf auf und ergänzen Standards für einen bestimmten Bereich. Den Kern brauchst du immer. Eine Erweiterung brauchst du nur, wenn dein Produkt in ihrem Bereich arbeitet.
+
+| Erweiterung          | Bereich                                           |
+| -------------------- | ------------------------------------------------- |
+| Reisendeninformation | Informationsstandards für Reisende                |
+| DataViz              | Datenvisualisierung, derzeit in Beta              |
+| Table                | Darstellung großer Datenmengen                    |
+| Content              | einheitliche Kommunikation – noch nicht verfügbar |
+
+Alle Erweiterungen stellt die Seite <DBLink href="/de/dokumentation/erweiterungen" variant="inline">Erweiterungen</DBLink> vor.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Was jede Erweiterung mitbringt
+
+| Erweiterung          | Design           | Code                                              | Dokumentation                                                                                                                                                               |
+| -------------------- | ---------------- | ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Reisendeninformation | Figma-Bibliothek | Web Components in GitLab (Anmeldung erforderlich) | [Marketingportal](https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/User-Experience/DB-UX-Design-System/extensions/reisendeninformation) |
+| DataViz              | Figma-Bibliothek | Power-BI-Vorlagen und Code-Schnipsel für Plotly   | [Marketingportal](https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/User-Experience/DB-UX-Design-System/extensions/dataviz)              |
+| Table                | –                | –                                                 | [Marketingportal](https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/User-Experience/DB-UX-Design-System/extensions/table)                |
+
+Die direkten Links zu den Figma-Bibliotheken und Code-Paketen stehen unter <DBLink href="/de/dokumentation/ressourcen" variant="inline">Ressourcen</DBLink>.
+
+<DBNotification
+	variant="standalone"
+	semantic="informational"
+	headline="Dokumentation hinter einer Anmeldung"
+>
+	Die Dokumentation aller Erweiterungen liegt im Marketingportal, das eine Anmeldung erfordert. Deep
+	Links funktionieren vor der Anmeldung nicht – öffne den Link nach dem Anmelden erneut.
+</DBNotification>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Mit einer Erweiterung starten
+
+1. Richte zuerst den Kern ein – siehe [Design](/de/dokumentation/erste-schritte?role=design) oder [Entwicklung](/de/dokumentation/erste-schritte?role=development).
+2. Lies die Dokumentation der Erweiterung im Marketingportal.
+3. Aktiviere die Figma-Bibliothek der Erweiterung zusätzlich zu Core Foundation und Core Components.
+4. Ergänze den Code der Erweiterung, sofern sie welchen mitbringt.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Feedback
+
+Jede Erweiterung hat ein eigenes GitHub-Repository für Design-Feedback und Issues:
+
+| Erweiterung          | Repository                                                                           |
+| -------------------- | ------------------------------------------------------------------------------------ |
+| Reisendeninformation | [extension-ri](https://github.com/db-ux-design-system/extension-ri/issues)           |
+| DataViz              | [extension-dataviz](https://github.com/db-ux-design-system/extension-dataviz/issues) |
+| Table                | [extension-table](https://github.com/db-ux-design-system/extension-table/issues)     |
+
+</DBSection>

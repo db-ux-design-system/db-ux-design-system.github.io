@@ -1,0 +1,276 @@
+/* Learn article: view toggle, stepper navigation, and the additional-info accordions. */
+
+/* A flex/grid display value overrides the native [hidden] behavior, so re-assert it
+   for the controller-toggled elements. */
+.learn-view[hidden],
+.learn-stepper-nav[hidden],
+.learn-section[hidden] {
+	display: none;
+}
+
+/* Vertical rhythm of a block, the same as DBSection spacing="small", but without the
+   inline padding: the layout's DBSection already provides it. */
+.learn-section {
+	padding-block: var(--db-spacing-responsive-sm);
+}
+
+/*
+ * Stepper spacing. One scale for every step – the hero (step 1) and the blocks alike –
+ * so all steps look the same. The stepper sets the text larger, so the spacing grows
+ * with it and is never smaller than in the article view. Keep the three values in sync
+ * when changing them (the db-ux/use-spacings lint rule only allows the tokens directly,
+ * not custom properties):
+ *   heading → text:                          2xl
+ *   text → what follows (cards, "Show more"): 2xl
+ *   cards → "Show more":                      xl
+ */
+
+/* Stepper view shows one focused step at a time, so the core text is set larger for
+   easier reading. The additional-info body keeps the regular size. */
+.learn-article[data-learn-view='stepper'] .learn-block > p,
+html[data-learn-intro] .page-hero-description {
+	font: var(--db-type-body-xl);
+
+	/* After the font shorthand, which resets the line height of the token. */
+	line-height: 150%;
+}
+
+/* Heading → text, step 1 (the hero). The gap alone sets the distance: the global content
+   spacing would add a top margin to the description, which follows the headline row. */
+html[data-learn-view='stepper'] .page-hero-content {
+	gap: var(--db-spacing-fixed-2xl);
+}
+
+html[data-learn-view='stepper'] .dba-main-content .page-hero-description {
+	margin-block-start: 0;
+}
+
+/*
+ * Heading → text, all other steps. The global content spacing sets the same margins
+ * with equal specificity, so these rules are anchored on the article id.
+ */
+#learn-article[data-learn-view='stepper'] .learn-block > h2 {
+	margin-block-end: var(--db-spacing-fixed-2xl);
+}
+
+#learn-article[data-learn-view='stepper'] .learn-block > h2 + * {
+	margin-block-start: 0;
+}
+
+/* Text → what follows: any card grid in a step – generated from links or written as a
+   TeaserCard in the MDX – and the "Show more" button. */
+#learn-article[data-learn-view='stepper'] .learn-block > .teaser-cards,
+#learn-article[data-learn-view='stepper'] .learn-aside {
+	margin-block-start: var(--db-spacing-fixed-2xl);
+}
+
+/* Cards → "Show more": one gap is enough, not two. */
+#learn-article[data-learn-view='stepper'] .learn-block > .teaser-cards + .learn-aside {
+	margin-block-start: var(--db-spacing-fixed-xl);
+}
+
+/*
+ * Links in the core text of a step: in the stepper they are offered as teaser cards
+ * below the text, which are easier to hit and read as the next action. The controller
+ * builds the cards from the inline links. In the text itself the link then reads as
+ * plain text and leaves the tab order, so each target is one tab stop. In the article
+ * view the cards are hidden and the inline links work as usual.
+ */
+.learn-article[data-learn-view='article'] .learn-link-cards {
+	display: none;
+}
+
+.learn-article[data-learn-view='stepper'] [data-learn-inline-link] {
+	color: inherit;
+	text-decoration: none;
+	pointer-events: none;
+}
+
+/* The controls wrapper only carries the toggle until the controller moves it into the
+   page toolbar; it has no layout of its own. */
+.learn-view {
+	display: contents;
+}
+
+/* Segmented look: the two filled buttons join into one control with square inner
+   corners and rounded outer corners. */
+.learn-view-toggle {
+	display: inline-flex;
+}
+
+.learn-view-toggle .db-button {
+	border-radius: 0;
+}
+
+.learn-view-toggle .db-button:first-child {
+	border-start-start-radius: var(--db-border-radius-sm);
+	border-end-start-radius: var(--db-border-radius-sm);
+}
+
+.learn-view-toggle .db-button:last-child {
+	border-start-end-radius: var(--db-border-radius-sm);
+	border-end-end-radius: var(--db-border-radius-sm);
+}
+
+/* The active toggle shows the hovered surface of the filled variant at rest, so it
+   reads as selected. Only the resting state is overridden; on hover and press it
+   moves on to the pressed surface, so it still gives feedback. */
+.learn-view-toggle .db-button[aria-pressed='true'] {
+	background-color: var(--db-adaptive-bg-basic-transparent-semi-hovered);
+}
+
+.learn-view-toggle .db-button[aria-pressed='true']:is(:hover, :focus-visible, :active) {
+	background-color: var(--db-adaptive-bg-basic-transparent-semi-pressed);
+}
+
+/* Stepper view: the controller limits the height of the step content so the page fits
+   the screen and the footer stays visible. A taller step scrolls inside this area.
+   overflow-y:auto forces overflow-x to clip, which would cut focus rings at the edges.
+   The ring reaches 6 px beyond an element (2 px outline plus 4 px offset), so an 8 px
+   inline gutter, pulled back with a negative margin, gives it room without shifting the
+   content. */
+.learn-article[data-learn-view='stepper'] {
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	padding-inline: var(--db-spacing-fixed-xs);
+	margin-inline: calc(-1 * var(--db-spacing-fixed-xs));
+}
+
+.learn-article[data-learn-view='stepper']:focus-visible {
+	outline: var(--db-border-width-2xs) solid
+		var(--db-focus-outline-color, var(--db-informational-on-bg-basic-emphasis-70-default));
+	outline-offset: var(--db-border-width-xs);
+}
+
+/* The table of contents belongs to the article view. Its column stays reserved, so the
+   toolbar does not move under the pointer when the view is switched. */
+html[data-learn-view='stepper'] .dba-toc {
+	visibility: hidden;
+}
+
+/*
+ * Stepper view: drop the page hero. The headline and description repeat what the step
+ * heading already says and only cost vertical space, so each step gets the full height.
+ * The toolbar stays — it holds the view toggle and the reading list — and moves to the
+ * top on its own. The hero section also drops its block padding.
+ */
+html[data-learn-view='stepper']:not([data-learn-intro]) .page-hero-headline,
+html[data-learn-view='stepper']:not([data-learn-intro]) .page-hero-description {
+	display: none;
+}
+
+/*
+ * Step 1 (the hero) starts where every other step starts: below the toolbar, not next
+ * to it. The toolbar takes its own line at the top of the headline row. The gap below
+ * it is the distance from the toolbar to a step heading on the other steps: the hero
+ * section padding, the gap between the two sections and the block padding.
+ */
+html[data-learn-intro] .page-hero-headline-row {
+	flex-wrap: wrap;
+	row-gap: calc(2 * var(--db-spacing-responsive-sm) + var(--db-spacing-fixed-md));
+}
+
+html[data-learn-intro] .page-hero-toolbar {
+	order: -1;
+	flex-basis: 100%;
+}
+
+/* Stepper navigation below the step content: progress on top, then Back · step count ·
+   Next. No frame; the progress track separates it from the step content above. The page
+   itself does not scroll in stepper view, so the bar is always in view. */
+.learn-stepper-nav {
+	display: flex;
+	flex-direction: column;
+}
+
+/*
+ * The global content spacing (.dba-main-content ... + :is(...)) adds a top margin to
+ * sibling blocks. The bar follows the #learn-article div, so it gets that margin too;
+ * the id selector outranks the global rule and removes it.
+ */
+#learn-article + .learn-stepper-nav {
+	margin-block-start: 0;
+}
+
+/*
+ * The same global sibling spacing hits the actions row, because the progress bar div
+ * precedes it inside the nav. The id makes this outrank the global 0-3-0 rule so the
+ * nav padding alone controls the spacing.
+ */
+#learn-article + .learn-stepper-nav .learn-stepper-actions {
+	margin-block-start: 0;
+}
+
+/* The progress track sits on a level-2 band. The band both holds the progress fill and
+   separates the navigation from the step content above, so no frame is needed. */
+.learn-stepper-progress {
+	block-size: var(--db-sizing-3xs);
+	inline-size: 100%;
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+}
+
+.learn-stepper-progress-fill {
+	display: block;
+	block-size: 100%;
+	background-color: var(
+		--db-brand-origin-default,
+		var(--db-adaptive-on-bg-basic-emphasis-100-default)
+	);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.learn-stepper-progress-fill {
+		transition: inline-size 150ms ease;
+	}
+}
+
+/* Back on the start side, the step count centered, Next on the end side. Only a top gap
+   to the progress band; the row is flush with the content on the sides and the bottom. */
+.learn-stepper-actions {
+	display: flex;
+	align-items: center;
+	gap: var(--db-spacing-fixed-sm);
+	padding-block-start: var(--db-spacing-fixed-md);
+	margin: 0;
+}
+
+.learn-stepper-status {
+	flex: 1 1 auto;
+	margin: 0;
+	text-align: center;
+	font: var(--db-type-body-sm);
+	color: var(--db-adaptive-on-bg-basic-emphasis-90-default);
+}
+
+/* The block heading is the section heading in both views; the stepper bar only shows
+   the progress and step count. Programmatic focus (moved on step change) does not
+   trigger :focus-visible, so no persistent ring appears on click. */
+.learn-block > h2:focus-visible {
+	outline: var(--db-border-width-2xs) solid
+		var(--db-focus-outline-color, var(--db-informational-on-bg-basic-emphasis-70-default));
+	outline-offset: var(--db-border-width-xs);
+}
+
+/*
+ * Additional information that belongs to a step.
+ *
+ * Article view: shown as plain content; the "Show more" button is hidden by the
+ * controller, so it reads as a normal subsection.
+ * Stepper view: the controller hides the body and shows a "Show more" ghost button that
+ * reveals it.
+ */
+.learn-aside {
+	margin-block-start: var(--db-spacing-fixed-md);
+}
+
+/* Re-assert [hidden] against the button's and body's own display values. */
+.learn-aside-toggle[hidden],
+.learn-aside-body[hidden] {
+	display: none;
+}
+
+/* Space between the revealed content and the "Show less" button below it. The margin
+   only applies while the body is visible, so a collapsed area shows just the button. */
+.learn-aside-body:not([hidden]) + .learn-aside-toggle {
+	margin-block-start: var(--db-spacing-fixed-md);
+}

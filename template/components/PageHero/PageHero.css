@@ -47,9 +47,60 @@
 	inline-size: 100%;
 }
 
+.page-hero-actions {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: var(--db-spacing-fixed-sm);
+}
+
+.page-hero[data-layout='split'] .page-hero-actions {
+	justify-content: flex-start;
+}
+
 /* DBHeading v6 always sets text-align: start; keep the hero alignment */
 .page-hero-text-group .db-heading {
 	text-align: inherit;
+}
+
+/* Headline with controls after it. */
+.page-hero-headline-row {
+	display: flex;
+	align-items: center;
+	gap: var(--db-spacing-fixed-xs);
+}
+
+/* With a page toolbar the hero content spans the full section, so the toolbar ends on
+   the same right edge as the page content below. */
+.page-hero:has(.page-hero-toolbar) .page-hero-content {
+	max-inline-size: none;
+}
+
+.page-hero-headline-row:has(.page-hero-toolbar) {
+	inline-size: 100%;
+}
+
+/* Page toolbar for page actions (reading list, view toggle, …) at the end of the
+   headline row, pushed to the right edge instead of sitting next to the headline. */
+.page-hero-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	flex: none;
+	align-items: center;
+	justify-content: flex-end;
+	gap: var(--db-spacing-fixed-sm);
+	margin-inline-start: auto;
+
+	/* Top-aligned with the headline, so it stays in place when the headline wraps. */
+	align-self: flex-start;
+}
+
+/* The global content spacing (content-spacing.css) adds a top margin to an element that
+   follows an astro-island, so a control placed after the reading list island would sit
+   lower than it. The toolbar aligns its items itself; the extra classes outrank that
+   rule. */
+.dba-main-content .page-hero-headline-row .page-hero-toolbar > * {
+	margin-block: 0;
 }
 
 .page-hero-description {

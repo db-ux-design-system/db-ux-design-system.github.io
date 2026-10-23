@@ -1,0 +1,133 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'AI'
+headline: 'AI'
+description: 'Give AI coding agents accurate knowledge of the DB UX Design System – component APIs, tokens, icons and migration rules – instead of letting them guess.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 4
+---
+
+import { DBSection, DBNotification } from '@db-ux/react-core-components';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<DBSection spacing="small" width="auto">
+
+## Why agents need help
+
+AI coding agents know common libraries, but not the exact API of the DB UX Design System. Without context, they invent component names, properties and token values that look right but do not exist. The tools on this page give agents the real source instead.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Which tool do I need?
+
+| Tool                | What it does                                                                                            | Use it when                                   |
+| ------------------- | ------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| `@db-ux/mcp-server` | Answers agent requests live: component APIs, code examples, tokens, icons, migration and review prompts | Your IDE supports the Model Context Protocol  |
+| `@db-ux/agent-cli`  | Writes the documentation of your installed `@db-ux` packages into `.github/copilot-instructions.md`     | You want project rules that every agent reads |
+| Code Connect        | Shows the matching code snippet for a Figma design in Dev Mode                                          | You implement designs from Figma              |
+
+The MCP Server and the Agent CLI complement each other. Use both if you can.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Quick start
+
+### 1. Generate the project rules
+
+Run this in the root of your repository:
+
+```shell
+npx @db-ux/agent-cli
+```
+
+The tool scans `node_modules` for installed `@db-ux` packages and creates or updates `.github/copilot-instructions.md` with the documentation for exactly those versions. Run it again after every update of the design system.
+
+In a monorepo, pass the folder where the packages are installed:
+
+```shell
+npx @db-ux/agent-cli packages/frontend
+```
+
+### 2. Connect the MCP Server
+
+Add the server to the MCP configuration of your IDE:
+
+```json
+{
+	"mcpServers": {
+		"db-ux": {
+			"command": "npx",
+			"args": ["--yes", "@db-ux/mcp-server"]
+		}
+	}
+}
+```
+
+<DBNotification variant="standalone" semantic="informational" headline="IDE-specific setup">
+	The exact location of this configuration differs between VS Code, JetBrains IDEs, Cursor and Kiro.
+	The MCP Server page describes each of them.
+</DBNotification>
+
+<DBNotification variant="standalone" semantic="warning" headline="Pin the version">
+	Without a version, `npx --yes` downloads the latest release and runs it without asking – the same
+	applies to `npx @db-ux/agent-cli`. To control what runs in your IDE, add the version that matches
+	your `@db-ux` packages, for example `"@db-ux/mcp-server@6.0.0"` and `npx @db-ux/agent-cli@6.0.0`.
+</DBNotification>
+
+### 3. Check the connection
+
+Look for `db-ux` in the list of MCP servers of your IDE. Then ask your agent to list the components of the design system – it should answer with the real component names.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## What you can do with it
+
+| Task                      | Tool or prompt of the MCP Server                   |
+| ------------------------- | -------------------------------------------------- |
+| Build a page or component | `scaffold_page`                                    |
+| Migrate from DB UI        | `scan_generation_2_migration`, `migrate_component` |
+| Review code               | `review_ui_code`                                   |
+| Check accessibility       | `audit_accessibility` – checks against WCAG 2.2 AA |
+
+Always review generated code. The tools reduce guessing, but they do not replace your own judgment.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Learn more
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'MCP Server',
+			description: 'Setup per IDE, all tools and prompts, troubleshooting.',
+			url: '/documentation/learn/mcp-server',
+		},
+		{
+			title: 'Code Connect',
+			description: 'How Figma properties turn into code in Dev Mode.',
+			url: '/documentation/learn/code-connect',
+		},
+		{
+			title: 'Migration from DB UI',
+			description: 'Let an agent do the groundwork of a migration.',
+			url: '/documentation/learn/migration',
+		},
+	]}
+/>
+
+</DBSection>

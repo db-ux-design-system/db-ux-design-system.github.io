@@ -1,8 +1,84 @@
 ---
 order: 10
 layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
 title: 'Dokumentation'
-hidePage: true
-redirectTo: '/de/dokumentation/erste-schritte'
+headline: 'Dokumentation'
+description: 'Richtlinien, Komponenten und Ressourcen des DB UX Design Systems für Design und Entwicklung.'
+align: start
 isSubNavigation: true
 ---
+
+import { DBStack, DBNotification, DBLink } from '@db-ux/react-core-components';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<DBStack gap="medium">
+
+<TeaserCard
+	columns={1}
+	spacing="large"
+	headlineSize="large"
+	headlineLevel={2}
+	teasers={[
+		{
+			title: 'Neu im Design System?',
+			description:
+				'Beantworte ein paar Fragen und finde den Einstieg, der zu deiner Rolle und deinem Projekt passt.',
+			url: '/de/dokumentation/erste-schritte',
+			visualImage: 'getting-started',
+			imagePosition: 'right',
+			imageWidth: '25',
+		},
+	]}
+/>
+
+## Schnellzugriff
+
+<TeaserCard
+	columns={2}
+	spacing="large"
+	headlineSize="medium"
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Foundation',
+			description: 'Farben, Typografie, Abstände und weitere Tokens.',
+			url: '/de/dokumentation/foundation',
+			visualImage: 'foundation',
+			imagePosition: 'right',
+			imageWidth: '33',
+		},
+		{
+			title: 'Komponenten',
+			description: 'Richtlinien, Beispiele und Status aller Komponenten.',
+			url: '/de/dokumentation/komponenten',
+			visualImage: 'components',
+			imagePosition: 'right',
+			imageWidth: '33',
+		},
+		{
+			title: 'Release Notes',
+			description: 'Alle Änderungen pro Version.',
+			url: '/de/dokumentation/releases/release-notes',
+			visualImage: 'releases',
+			imagePosition: 'right',
+			imageWidth: '33',
+		},
+		{
+			title: 'Ressourcen',
+			description: 'Figma-Bibliotheken für Designer:innen und Code-Pakete für Entwickler:innen.',
+			url: '/de/dokumentation/ressourcen',
+			visualImage: 'resources',
+			imagePosition: 'right',
+			imageWidth: '33',
+		},
+	]}
+/>
+
+{/* prettier-ignore */}
+<DBNotification variant="standalone" semantic="informational" headline="Hinweis">
+	Alle Beispiele in dieser Dokumentation basieren auf dem <DBLink href="/de/dokumentation/ressourcen/pakete/db-theme" variant="inline">DB Theme</DBLink>. Nutzt du das Design System als White Label oder mit einem anderen Theme, können die visuellen Ergebnisse abweichen, weil dann eine andere Foundation greift.
+</DBNotification>
+
+</DBStack>

@@ -1,0 +1,101 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Barrierefreiheit'
+headline: 'Barrierefreiheit'
+description: 'Wie die Komponenten des DB UX Design Systems auf Barrierefreiheit getestet werden und was in deinem Produkt in deiner Verantwortung bleibt.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 5
+---
+
+import { DBSection, DBNotification } from '@db-ux/react-core-components';
+
+<DBSection spacing="small" width="auto">
+
+## Was das Design System abdeckt – und was nicht
+
+Die Komponenten sind auf Barrierefreiheit hin gebaut und getestet. Das macht es leichter, dein Produkt barrierefrei zu bauen, macht es aber nicht automatisch barrierefrei.
+
+| Das Design System kümmert sich um …                                              | Du kümmerst dich um …                                                             |
+| -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| semantische Struktur und Rollen innerhalb jeder Komponente                       | die Struktur deiner Seite: Überschriften, Landmarks, Reihenfolge der Inhalte      |
+| Tastaturbedienung und Fokus-Darstellung jeder Komponente                         | die Fokus-Reihenfolge über die Seite und das Fokus-Management in eigenen Abläufen |
+| Farbkontraste innerhalb der Komponenten, geprüft durch die automatisierten Tests | Farben, die du selbst ergänzt, zum Beispiel eigene Farben oder Bilder mit Text    |
+| automatisierte Tests und Screenreader-Tests jeder Komponente                     | Labels, Alternativtexte und Fehlermeldungen – die Inhalte, die du übergibst       |
+
+Darüber hinaus testest du dein Produkt als Ganzes – Komponenten, die einzeln bestehen, können zusammen trotzdem eine Seite ergeben, die nicht barrierefrei ist.
+
+Inhalte mit dem Status **Stable** sind innerhalb der Komponente auf Barrierefreiheit validiert – siehe [Content Status](/de/dokumentation/releases/content-status).
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Wie die Komponenten getestet werden
+
+| Test                      | Was er prüft                                                                                      |
+| ------------------------- | ------------------------------------------------------------------------------------------------- |
+| axe-core                  | Jeder Komponenten-Showcase wird geprüft. Der Test schlägt fehl, sobald ein Verstoß gefunden wird. |
+| IBM Accessibility Checker | eine zweite automatisierte Regel-Engine auf denselben Showcases                                   |
+| ARIA-Snapshots            | den Accessibility-Tree jeder Komponente, damit Änderungen an Rollen und Namen sichtbar werden     |
+| Screenreader-Tests        | automatisierte Tests mit NVDA unter Windows und VoiceOver unter macOS                             |
+| Accessibility-Reviews     | manuelle Reviews einzelner Komponenten                                                            |
+
+Screenreader-Tests gibt es für: Accordion, Badge, Brand, Button, Card, Checkbox, Control Panel, Drawer, Header, Icon, Infotext, Input, Link, Navigation, Notification, Popover, Radio, Section, Select, Switch, Tabs, Tag, Textarea und Tooltip.
+
+Manuelle Accessibility-Reviews sind abgeschlossen für: Badge, Button, Card, Checkbox, Drawer, Infotext, Input, Link, Notification, Radio, Select, Switch, Tag und Textarea.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Im Design
+
+- Nutze die Komponenten aus der Figma-Bibliothek, statt sie nachzubauen. Ihre Struktur entspricht dem getesteten Code.
+- Trage Labels, Meldungen und Alternativtexte schon im Design ein. Die Entwicklung braucht sie, und später werden sie leicht vergessen.
+- Lies auf jeder Komponentenseite den Abschnitt **Richtlinien** mit den Regeln, die für sie gelten.
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## In der Entwicklung
+
+- Übergib `aria-*`-Attribute direkt an die Komponenten. Sie werden automatisch an das richtige Element weitergereicht – eine eigene Property ist nicht nötig.
+- Blende Labels oder Meldungen nicht ersatzlos aus. Auch ein visuell verstecktes Label muss existieren.
+- Ergänze das ESLint-Plugin. Mehrere seiner Regeln finden Probleme der Barrierefreiheit schon beim Schreiben.
+
+| ESLint-Regel                          | Meldet                                                                         |
+| ------------------------------------- | ------------------------------------------------------------------------------ |
+| `form-label-required`                 | Formular-Komponenten ohne Label                                                |
+| `button-no-text-requires-tooltip`     | Buttons ohne Text, denen ein Icon oder ein Tooltip fehlt                       |
+| `close-button-text-required`          | Schließen-Buttons von Notification, Drawer, Dialog und Custom Select ohne Text |
+| `header-burger-menu-label-required`   | ein Burger-Menü ohne Label                                                     |
+| `no-interactive-tooltip-content`      | interaktive Elemente in einem Tooltip                                          |
+| `tooltip-requires-interactive-parent` | Tooltips, die nicht in einem interaktiven Element liegen                       |
+
+Das Setup des Plugins steht auf den Paketseiten für [React](/de/dokumentation/ressourcen/pakete/react), [Angular](/de/dokumentation/ressourcen/pakete/angular) und [Vue](/de/dokumentation/ressourcen/pakete/vue).
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Dein Produkt prüfen
+
+<DBNotification
+	variant="standalone"
+	semantic="informational"
+	headline="Automatisierte Prüfungen finden nur einen Teil der Probleme"
+>
+	Automatisierte Werkzeuge finden nur einen Teil aller Probleme der Barrierefreiheit. Teste mit der
+	Tastatur und einem Screenreader, und plane ein Review mit Menschen ein, die assistive Technologien
+	nutzen.
+</DBNotification>
+
+Der MCP Server bietet den Prompt `audit_accessibility`, der einen Code-Schnipsel gegen WCAG 2.2 AA prüft und manuelle Testskripte erzeugt. Siehe [KI](/de/dokumentation/lernen/ki).
+
+</DBSection>
