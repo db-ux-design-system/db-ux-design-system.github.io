@@ -72,3 +72,34 @@
 	margin: 0;
 	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
 }
+
+/*
+ * Teaser images stay beside the text below the TextImage breakpoint.
+ *
+ * TextImage.css stacks every `.text-image` at 767 px and turns the visual surface into a
+ * fixed square aligned to the card edge. That is right for the large content sections, but
+ * a teaser card is short enough to keep its image in the column next to the text, which
+ * avoids the tall empty gap above the surface.
+ *
+ * The order and flex values from the mobile block keep applying (they carry `!important`)
+ * and already match a row with the image on the trailing side: content order 1, image
+ * order 2. Only the direction, the gap and the surface sizing are reverted here.
+ */
+@media (width <= 767px) {
+	/* Only the side positions. `top`/`bottom` teasers (e.g. the Extensions cards) are
+	 * column by design and must stay stacked. */
+	.teaser-cards .text-image[data-image-position='right'],
+	.teaser-cards .text-image[data-image-position='left'] {
+		flex-direction: row;
+		gap: var(--db-spacing-fixed-md);
+	}
+
+	/* Fill the image column again instead of the fixed stacked square. The (0,4,0) selector
+	 * outranks the stacked rules in TextImage.css (0,2,0 and 0,3,0) regardless of load order. */
+	.teaser-cards .text-image[data-image-position='right'] > .text-image-visual > .db-visual-surface,
+	.teaser-cards .text-image[data-image-position='left'] > .text-image-visual > .db-visual-surface {
+		flex: 1 0 auto;
+		align-self: auto;
+		inline-size: 100%;
+	}
+}
