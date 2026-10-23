@@ -18,8 +18,6 @@ export const readingListTexts: Record<
 		wizardGroup: string;
 		/** Accessible name of the delete button of a page. */
 		remove: (label: string) => string;
-		/** Tooltip of the delete button. The row already shows the page. */
-		removeShort: string;
 		removed: (label: string) => string;
 		add: string;
 		added: string;
@@ -48,7 +46,6 @@ export const readingListTexts: Record<
 		bookmarkGroup: 'Saved by you',
 		wizardGroup: 'Suggested in Get Started',
 		remove: (label) => `Remove: ${label}`,
-		removeShort: 'Remove',
 		removed: (label) => `Removed: ${label}`,
 		add: 'Add to reading list',
 		added: 'Added to reading list',
@@ -77,7 +74,6 @@ export const readingListTexts: Record<
 		bookmarkGroup: 'Von dir gemerkt',
 		wizardGroup: 'Vorgeschlagen in Erste Schritte',
 		remove: (label) => `Entfernen: ${label}`,
-		removeShort: 'Entfernen',
 		removed: (label) => `Entfernt: ${label}`,
 		add: 'Zur Leseliste hinzufügen',
 		added: 'Zur Leseliste hinzugefügt',

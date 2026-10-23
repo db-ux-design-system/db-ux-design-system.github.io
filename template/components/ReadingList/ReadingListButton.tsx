@@ -1,5 +1,5 @@
 import { type CSSProperties, useEffect, useId, useRef, useState } from 'react';
-import { DBBadge, DBButton, DBPopover, DBTooltip } from '@db-ux/react-core-components';
+import { DBBadge, DBButton, DBPopover } from '@db-ux/react-core-components';
 import { useLanguage } from '@template/context/language-context';
 import { roleColors, wizardHref } from '@template/components/GetStartedWizard/wizard-flow';
 import { removeItem, useReadingList } from './reading-list-store';
@@ -194,6 +194,11 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 												<a className="rl-item-link" data-icon="arrow_right" href={item.href}>
 													<span className="rl-item-label">{item.label}</span>
 												</a>
+												{/* No tooltip: inside the popover the library positions it wrongly (it covered
+												    the button and ran beyond the list, adding a horizontal scrollbar). The
+												    bin icon is self-explanatory; the button keeps its name through the visually
+												    hidden label. */}
+												{/* eslint-disable-next-line db-ux/button-no-text-requires-tooltip */}
 												<DBButton
 													type="button"
 													variant="ghost"
@@ -204,15 +209,6 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 													onClick={() => remove(item.id, item.label, offset + index)}
 												>
 													{text.remove(item.label)}
-													{/* forceAbsolute: positioned against the button. As a fixed
-													    element inside the popover, the library computed the
-													    position against the popover and put the tooltip of lower
-													    rows above them, under the first row.
-													    placement="left": the list scrolls and clips what reaches
-													    beyond it, so the tooltip stays within the row height. */}
-													<DBTooltip forceAbsolute placement="left">
-														{text.removeShort}
-													</DBTooltip>
 												</DBButton>
 											</li>
 										))}

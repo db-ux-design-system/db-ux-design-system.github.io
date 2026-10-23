@@ -161,16 +161,6 @@
 	max-inline-size: calc(100vw - 2 * var(--db-spacing-fixed-sm));
 }
 
-/* Tooltip of the delete button, left of it (see ReadingListButton). With
-   forceAbsolute and placement left, the library offsets it by the button width
-   instead of its own width, so it covers the button. Its end edge is placed at the
-   start edge of the button instead. The library writes the inset as inline styles,
-   so the override needs !important. */
-.rl-item-remove > .db-tooltip[data-corrected-placement^='left'] {
-	/* stylelint-disable-next-line declaration-no-important */
-	inset-inline: auto calc(100% + var(--db-popover-distance, 0px)) !important;
-}
-
 .rl-popover-body {
 	display: grid;
 	gap: var(--db-spacing-fixed-xs);
