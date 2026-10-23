@@ -5,6 +5,7 @@ title: 'Für Designer:innen'
 headline: 'Sicher gestalten'
 description: 'Ein gemeinsames System, das teamübergreifend klare Entscheidungen und konsistente Interfaces ermöglicht.'
 heroVisual: 'design'
+loadCodeVisuals: true
 sections:
   - id: 'for-designer--consistent-results-section'
     title: 'Konsistente Ergebnisse'
@@ -13,14 +14,16 @@ sections:
     imageSrcDark: 'assets/for-designer/Consistent-Results--Darkmode--C.png'
     imageAlt: 'Screens mit einheitlichen Interface-Layouts über verschiedene Geräte'
     imagePosition: 'right'
+    visual: 'consistent-results'
     ariaLabel: 'Bereich für Designer:innen'
   - id: 'for-designer--flexible-choices-section'
     title: 'Flexible Konfiguration'
     text: 'Komponenten und Tokens kontextgerecht anpassen, ohne die Konsistenz zu verlieren.'
     imageSrc: 'assets/for-designer/Flexible-Choices--Lightmode--C.png'
     imageSrcDark: 'assets/for-designer/Flexible-Choices--Darkmode--C.png'
-    imageAlt: 'Komponentenvarianten mit anpassbaren Design-Optionen'
+    imageAlt: 'Button-Playground mit Einstellungen für Variante, Text, Icon-Anzeige und Icon'
     imagePosition: 'left'
+    visual: 'button-playground'
   - id: 'for-designer--reliable-quality-section'
     title: 'Verlässliche Qualität'
     text: 'Geprüfte Patterns reduzieren Fehler und Nacharbeit.'
@@ -28,6 +31,7 @@ sections:
     imageSrcDark: 'assets/for-designer/Reliable-Quality--Darkmode--C.png'
     imageAlt: 'Checkliste und UI-Beispiele für Qualitätssicherung'
     imagePosition: 'right'
+    visual: 'tested'
   - id: 'for-designer--smooth-handoff-section'
     title: 'Reibungslose Übergabe'
     text: 'Klare Spezifikationen und eine gemeinsame Foundation ermöglichen effiziente Zusammenarbeit mit Entwickler:innen.'
@@ -35,10 +39,24 @@ sections:
     imageSrcDark: 'assets/for-designer/Smooth-Handoff--Darkmode--C.png'
     imageAlt: 'Design-to-Code-Übergabe mit Spezifikationen und Komponenten'
     imagePosition: 'left'
+    visual: 'smooth-handoff'
 ---
 
 import { ContentSections, ContactUsSection } from '@components';
+// Backup (statisches Zwei-Geräte-Visual): import ConsistentResultsVisual from '@components/ForDesignerVisuals/ConsistentResultsVisual.astro'; und stattdessen auf 'consistent-results' mappen
+import ConsistentResultsMorphVisual from '@components/ForDesignerVisuals/ConsistentResultsMorphVisual.astro';
+import ButtonPlaygroundVisual from '@components/ForDesignerVisuals/ButtonPlaygroundVisual.astro';
+import TestedVisual from '@components/ComponentsVisuals/TestedVisual.astro';
+import SmoothHandoffVisual from '@components/ForDesignerVisuals/SmoothHandoffVisual.astro';
 
-<ContentSections sections={frontmatter.sections} />
+<ContentSections
+	sections={frontmatter.sections}
+	visuals={{
+		'consistent-results': ConsistentResultsMorphVisual,
+		'button-playground': ButtonPlaygroundVisual,
+		tested: TestedVisual,
+		'smooth-handoff': SmoothHandoffVisual,
+	}}
+/>
 
 <ContactUsSection />
