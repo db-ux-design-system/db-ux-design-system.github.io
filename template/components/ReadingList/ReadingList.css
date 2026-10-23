@@ -13,7 +13,11 @@
 	gap: var(--db-spacing-fixed-sm);
 	max-block-size: calc(7 * var(--rl-row-size));
 	overflow-y: auto;
-	overscroll-behavior: contain;
+
+	/* "none" instead of "contain": both keep the scroll inside the box, but "contain"
+	   also keeps the elastic overscroll of the platform. On a trackpad the rows could
+	   then be dragged inside the box even while the list is short enough to fit. */
+	overscroll-behavior: none;
 
 	&:has(> .rl-list + .rl-list) {
 		max-block-size: calc(7 * var(--rl-row-size) + var(--db-spacing-fixed-sm));
@@ -215,6 +219,7 @@
 	max-inline-size: none;
 	max-block-size: calc(100dvh - var(--db-sizing-xl));
 	overflow-y: auto;
+	overscroll-behavior: none;
 
 	/* No horizontal centering: the library shifts by these offsets. */
 	--db-popover-center-x: 0%;
