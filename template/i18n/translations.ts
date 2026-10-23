@@ -9,6 +9,13 @@ export interface TranslationDictionary {
 	'shell.colorModeToggle': string;
 	'shell.getStarted': string;
 	'shell.languageSwitch.label': string;
+	'shell.subNavigation': string;
+	'shell.subNavigation.collapse': string;
+	'shell.subNavigation.expand': string;
+
+	// Table of contents
+	'toc.collapse': string;
+	'toc.expand': string;
 
 	// Footer
 	'footer.imprint': string;
