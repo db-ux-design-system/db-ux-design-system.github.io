@@ -151,7 +151,11 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 					</p>
 					{count === 0 ? (
 						<div className="rl-empty">
-							<p>{text.empty}</p>
+							<p>
+								{text.empty[0]} {/* Same icon as the bookmark button on the pages. */}
+								<span className="rl-inline-icon" data-icon="bookmark" aria-hidden="true" />{' '}
+								{text.empty[1]}
+							</p>
 							<a href={wizardHref(lang)}>{text.suggest}</a>
 						</div>
 					) : (
@@ -184,7 +188,15 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 													onClick={() => remove(item.id, item.label, offset + index)}
 												>
 													{text.remove(item.label)}
-													<DBTooltip>{text.removeShort}</DBTooltip>
+													{/* forceAbsolute: positioned against the button. As a fixed
+													    element inside the popover, the library computed the
+													    position against the popover and put the tooltip of lower
+													    rows above them, under the first row.
+													    placement="left": the list scrolls and clips what reaches
+													    beyond it, so the tooltip stays within the row height. */}
+													<DBTooltip forceAbsolute placement="left">
+														{text.removeShort}
+													</DBTooltip>
 												</DBButton>
 											</li>
 										))}

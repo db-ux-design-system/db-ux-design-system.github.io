@@ -7,7 +7,11 @@ export const readingListTexts: Record<
 		title: string;
 		/** Accessible name of the header button. The count is shown as a badge. */
 		triggerLabel: (count: number) => string;
-		empty: string;
+		/**
+		 * Hint for the empty list, split around the inline bookmark icon. The icon is
+		 * decorative; the text names it, so the hint works without seeing it.
+		 */
+		empty: [before: string, after: string];
 		suggest: string;
 		/** Accessible names of the two groups. The groups are only told apart visually otherwise. */
 		bookmarkGroup: string;
@@ -31,7 +35,7 @@ export const readingListTexts: Record<
 			count === 0
 				? 'Reading list, empty'
 				: `Reading list, ${count} ${count === 1 ? 'page' : 'pages'}`,
-		empty: 'No pages saved yet. Add pages with “Add to reading list”.',
+		empty: ['No pages saved yet. Save a page with the bookmark', 'next to its headline.'],
 		suggest: 'Get page suggestions',
 		bookmarkGroup: 'Saved by you',
 		wizardGroup: 'Suggested in Get Started',
@@ -49,7 +53,10 @@ export const readingListTexts: Record<
 		title: 'Leseliste',
 		triggerLabel: (count) =>
 			count === 0 ? 'Leseliste, leer' : `Leseliste, ${count} ${count === 1 ? 'Seite' : 'Seiten'}`,
-		empty: 'Noch keine Seiten gemerkt. Füge Seiten über „Zur Leseliste hinzufügen“ hinzu.',
+		empty: [
+			'Noch keine Seiten gemerkt. Merke dir eine Seite über das Lesezeichen',
+			'neben ihrer Überschrift.',
+		],
 		suggest: 'Passende Seiten vorschlagen lassen',
 		bookmarkGroup: 'Von dir gemerkt',
 		wizardGroup: 'Vorgeschlagen in Erste Schritte',
