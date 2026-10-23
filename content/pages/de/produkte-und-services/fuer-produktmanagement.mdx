@@ -14,6 +14,7 @@ sections:
     imageAlt: 'Timeline-Komprimierung für schnellere Delivery-Zyklen'
     imagePosition: 'right'
     ariaLabel: 'Bereich für Produktmanagement'
+    visual: 'efficient-delivery'
   - id: 'for-productmanagement--lower-risk-section'
     title: 'Geringeres Risiko'
     text: 'Barrierefreie, markengerechte und geprüfte Patterns vermeiden unnötige Nacharbeit.'
@@ -21,6 +22,7 @@ sections:
     imageSrcDark: 'assets/for-productmanagement/Lower-Risk--Darkmode--C.png'
     imageAlt: 'Schild und konforme UI-Elemente für reduziertes Produktrisiko'
     imagePosition: 'left'
+    visual: 'tested'
   - id: 'for-productmanagement--scalable-approach-section'
     title: 'Skalierbarer Ansatz'
     text: 'Standards, die mitwachsen, unterstützen mehrere Teams und Produkte.'
@@ -28,10 +30,21 @@ sections:
     imageSrcDark: 'assets/for-productmanagement/Scalable-Approach--Darkmode--C.png'
     imageAlt: 'Wachsendes Raster an Produktmodulen für skalierbare Standards'
     imagePosition: 'right'
+    visual: 'scalable-approach'
 ---
 
 import { ContentSections, ContactUsSection } from '@components';
+import EfficientDeliveryVisual from '@components/ForProductManagementVisuals/EfficientDeliveryVisual.astro';
+import TestedVisual from '@components/ComponentsVisuals/TestedVisual.astro';
+import ScalableApproachVisual from '@components/ForProductManagementVisuals/ScalableApproachVisual.astro';
 
-<ContentSections sections={frontmatter.sections} />
+<ContentSections
+	sections={frontmatter.sections}
+	visuals={{
+		'efficient-delivery': EfficientDeliveryVisual,
+		tested: TestedVisual,
+		'scalable-approach': ScalableApproachVisual,
+	}}
+/>
 
 <ContactUsSection />

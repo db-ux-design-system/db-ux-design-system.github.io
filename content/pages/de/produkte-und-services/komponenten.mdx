@@ -5,6 +5,7 @@ title: 'Komponenten'
 headline: 'Konsistente Interfaces umsetzen'
 description: 'Core Components sorgen für vorhersagbare Interaktionen über alle Produkte hinweg.'
 heroVisual: 'components'
+loadCodeVisuals: true
 sections:
   - id: 'components--tested-and-verified-section'
     title: 'Getestet & abgesichert'
@@ -13,14 +14,16 @@ sections:
     imageSrcDark: 'assets/components/Tested--Darkmode--C.png'
     imageAlt: 'Barrierefreiheits- und Teststatus-Badges einer UI-Komponente'
     imagePosition: 'right'
+    visual: 'tested'
     ariaLabel: 'Bereich Komponenten'
   - id: 'components--configurable-section'
     title: 'Konfigurierbar'
     text: 'Varianten, Größen und Inhalte passen sich Produktanforderungen an, ohne die Struktur zu verändern.'
     imageSrc: 'assets/components/Configurable--Lightmode--C.png'
     imageSrcDark: 'assets/components/Configurable--Darkmode--C.png'
-    imageAlt: 'Komponenten-Panel mit anpassbaren Varianten und Größenoptionen'
+    imageAlt: 'Komponenten-Panel mit anpassbaren Optionen für Größe, Inhalt, Gewichtung und Semantik'
     imagePosition: 'left'
+    visual: 'configurable'
   - id: 'components--maintenance-section'
     title: 'Kontinuierliche Pflege'
     text: 'Regelmäßige Updates verbessern die Stabilität und sichern die langfristige Nutzbarkeit.'
@@ -28,6 +31,7 @@ sections:
     imageSrcDark: 'assets/components/Ongoing-Maintenance--Darkmode--C.png'
     imageAlt: 'Roadmap- und Update-Indikatoren für kontinuierliche Wartung'
     imagePosition: 'right'
+    visual: 'maintenance'
   - id: 'components--shared-source-section'
     title: 'Gemeinsame Quelle'
     text: 'Design und Code basieren auf derselben Logik. Das sorgt für eine abgestimmte Umsetzung.'
@@ -35,6 +39,7 @@ sections:
     imageSrcDark: 'assets/components/Shared-Source--Darkmode--C.png'
     imageAlt: 'Design- und Code-Ansichten nebeneinander'
     imagePosition: 'left'
+    visual: 'shared-source'
   - id: 'components--practical-guidance-section'
     title: 'Praxisnahe Empfehlungen'
     text: 'Nutzungsempfehlungen unterstützen klare Entscheidungen und eine konsistente User Experience.'
@@ -42,10 +47,25 @@ sections:
     imageSrcDark: 'assets/components/Practical-Guidance--Darkmode--C.png'
     imageAlt: 'Nutzungsrichtlinien und Do/Dont-Beispiele einer Komponente'
     imagePosition: 'right'
+    visual: 'practical-guidance'
 ---
 
 import { ContentSections, ContactUsSection } from '@components';
+import TestedVisual from '@components/ComponentsVisuals/TestedVisual.astro';
+import ConfigurableVisual from '@components/ComponentsVisuals/ConfigurableVisual.astro';
+import MaintenanceVisual from '@components/ComponentsVisuals/MaintenanceVisual.astro';
+import SharedSourceVisual from '@components/ComponentsVisuals/SharedSourceVisual.astro';
+import PracticalGuidanceVisual from '@components/ComponentsVisuals/PracticalGuidanceVisual.astro';
 
-<ContentSections sections={frontmatter.sections} />
+<ContentSections
+	sections={frontmatter.sections}
+	visuals={{
+		tested: TestedVisual,
+		configurable: ConfigurableVisual,
+		maintenance: MaintenanceVisual,
+		'shared-source': SharedSourceVisual,
+		'practical-guidance': PracticalGuidanceVisual,
+	}}
+/>
 
 <ContactUsSection />
