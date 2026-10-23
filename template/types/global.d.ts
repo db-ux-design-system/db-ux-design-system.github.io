@@ -31,16 +31,10 @@ declare interface FrontMatter {
 	 */
 	heroImageAlt?: string;
 	/**
-	 * Optional hero 3D model URL (.glb). When set, the hero renders an
-	 * interactive model-viewer instead of the hero image. Requires
-	 * `loadModelViewer: true` on the same page.
+	 * Optional decorative inline visual from `template/visuals/` for the hero.
+	 * Takes precedence over `heroImage`.
 	 */
-	heroModel?: string;
-	/**
-	 * Name of the animation in the hero model to play.
-	 * Defaults to the first animation in the file.
-	 */
-	heroModelAnimation?: string;
+	heroVisual?: import('@template/visuals').VisualName;
 	/**
 	 * The creation date of the page.
 	 */
@@ -75,6 +69,10 @@ declare interface FrontMatter {
 	 * If true, load the model viewer web-component on this page.
 	 */
 	loadModelViewer?: boolean;
+	/**
+	 * If true, load the client script for the interactive code visuals on Products & Services pages.
+	 */
+	loadCodeVisuals?: boolean;
 
 	/**
 	 * Set a badge inside sub-navigation

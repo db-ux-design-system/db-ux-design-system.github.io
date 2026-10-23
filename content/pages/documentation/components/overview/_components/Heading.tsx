@@ -4,11 +4,11 @@ import {
 	columns,
 	HEADING_FONT_WEIGHTS,
 	HEADING_LEVEL_FONT_WEIGHTS,
-	HEADING_LEVEL_SIZES,
 	HEADING_LEVELS,
 	HEADING_SIZE_LEVELS,
 	HEADING_SIZES,
 	type HeadingFontWeight,
+	type HeadingLevel,
 	type HeadingSize,
 	type OverviewLabels,
 } from './_shared.tsx';
@@ -22,25 +22,38 @@ import {
  * same thing three times in one line and push the longest rows off a narrow
  * viewport for nothing.
  *
- * Every specimen is an h3 with an explicit `size`, deliberately: the page uses h1
- * for its title and h2 for every component section, so a specimen carrying one of
- * those tags would corrupt the document outline. Separating the semantic level
- * from the visual size is what the component offers `size` for.
+ * Every specimen is an h3, deliberately: the page uses h1 for its title and h2
+ * for every component section, so a specimen carrying one of those tags would
+ * corrupt the document outline.
+ *
+ * The v5 `size` property was removed in v6, and its replacement `visualSize` no
+ * longer offers the v5 scale. So a v5 row names its size in
+ * `data-v5-headline-size` and a v6 row its level in `data-v6-headline-size`, and
+ * ComponentOverview.css fakes the size of that version from it. No row sets
+ * `visualSize`, so the comparison stays stable when the team reworks the Heading
+ * defaults.
  */
 const HeadingRow = ({
 	name,
-	size,
+	v5Size,
+	v6Size,
 	weights,
 	labels,
 }: {
 	name: string;
-	size: HeadingSize;
+	v5Size?: HeadingSize;
+	v6Size?: HeadingLevel;
 	weights: readonly HeadingFontWeight[];
 	labels: OverviewLabels;
 }): ReactElement => (
 	<div className="overview-row">
 		{weights.map((weight, index) => (
-			<DBHeadingH3 key={weight} size={size} fontWeight={weight}>
+			<DBHeadingH3
+				key={weight}
+				fontWeight={weight}
+				data-v5-headline-size={v5Size}
+				data-v6-headline-size={v6Size}
+			>
 				{index === 0
 					? `${name} ${labels.headingFontWeights[weight]}`
 					: labels.headingFontWeights[weight]}
@@ -57,9 +70,9 @@ const HeadingRow = ({
  * therefore always rendered and the stylesheet shows the one that fits, the same
  * way the rounded drawer row disappears in v6.
  *
- * v5 is the visual size scale the component has today, nine rows, each naming the
- * level that defaults to that size. v6 is the six semantic levels, which is all
- * that is left of the scale there, each at the size its level maps to.
+ * v5 is the visual size scale the component had, nine rows, each naming the
+ * level that defaulted to that size, each faked at its v5 size. v6 is the six
+ * semantic levels, each faked at the v6 size of its level, see HeadingRow.
  */
 export const HeadingOverview = ({ labels }: { labels: OverviewLabels }): ReactElement => (
 	<div className="overview-grid" style={columns(1)}>
@@ -70,7 +83,7 @@ export const HeadingOverview = ({ labels }: { labels: OverviewLabels }): ReactEl
 				return (
 					<HeadingRow
 						key={size}
-						size={size}
+						v5Size={size}
 						/*
 						 * The level in brackets behind the size token, where there is one:
 						 * three of the nine sizes are not the default of any level.
@@ -95,7 +108,7 @@ export const HeadingOverview = ({ labels }: { labels: OverviewLabels }): ReactEl
 			{HEADING_LEVELS.map((level) => (
 				<HeadingRow
 					key={level}
-					size={HEADING_LEVEL_SIZES[level]}
+					v6Size={level}
 					name={labels.headingLevels[level]}
 					weights={HEADING_LEVEL_FONT_WEIGHTS[level]}
 					labels={labels}

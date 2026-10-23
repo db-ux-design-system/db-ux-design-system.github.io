@@ -1,0 +1,87 @@
+/* Darkmode code visual: the same components forced to light mode (left) and dark mode (right) via data-mode */
+
+.darkmode-visual {
+	display: flex;
+	inline-size: 100%;
+}
+
+/*
+ * data-mode sets color-scheme, so the light-dark() tokens resolve per panel.
+ * Background AND color must be set here: color inherits as an already resolved value.
+ */
+.darkmode-visual-panel {
+	display: flex;
+	flex: 1 1 0;
+	flex-direction: column;
+	align-items: stretch;
+	gap: var(--db-spacing-fixed-sm);
+	min-inline-size: 0;
+	padding: var(--db-spacing-fixed-lg);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	font: var(--db-type-body-md);
+}
+
+.darkmode-visual-panel + .darkmode-visual-panel {
+	border-inline-start: 0;
+}
+
+.darkmode-visual-panel:first-child {
+	border-start-start-radius: var(--db-border-radius-md);
+	border-end-start-radius: var(--db-border-radius-md);
+}
+
+.darkmode-visual-panel:last-child {
+	border-start-end-radius: var(--db-border-radius-md);
+	border-end-end-radius: var(--db-border-radius-md);
+}
+
+.darkmode-visual-icon {
+	align-self: flex-start;
+}
+
+.darkmode-visual-list-item {
+	padding-block: var(--db-spacing-fixed-2xs);
+	padding-inline: var(--db-spacing-fixed-sm);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-xs);
+}
+
+/*
+ * No DBButton variant renders the inverted button of the original visual.
+ * The "filled" variant reads its default/hovered/pressed background from these tokens,
+ * so remapping them keeps the DB hover and pressed states, resolved per forced half.
+ * Remove the override for the stock "filled" look.
+ */
+.darkmode-visual-button.db-button {
+	--db-adaptive-bg-basic-transparent-semi-default: var(
+		--db-adaptive-bg-inverted-contrast-max-default
+	);
+	--db-adaptive-bg-basic-transparent-semi-hovered: var(
+		--db-adaptive-bg-inverted-contrast-max-hovered
+	);
+	--db-adaptive-bg-basic-transparent-semi-pressed: var(
+		--db-adaptive-bg-inverted-contrast-max-pressed
+	);
+
+	color: var(--db-adaptive-on-bg-inverted-default);
+}
+
+/* Narrow viewports: less padding so the notification fits into the half-width panels */
+@media (width <= 767px) {
+	.darkmode-visual-panel {
+		padding: var(--db-spacing-fixed-xs);
+	}
+
+	.darkmode-visual-panel > .db-notification {
+		column-gap: var(--db-spacing-fixed-xs);
+		padding-inline: var(--db-spacing-fixed-sm);
+	}
+}
+
+/* The global content spacing must not add to the flex gap (0,4,0 beats its 0,3,0) */
+.dba-main-content .darkmode-visual > .darkmode-visual-panel + .darkmode-visual-panel,
+.dba-main-content .darkmode-visual-panel > .db-notification + .darkmode-visual-list-item {
+	margin-block-start: 0;
+}

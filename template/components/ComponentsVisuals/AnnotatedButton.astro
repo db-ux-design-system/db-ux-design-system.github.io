@@ -1,0 +1,27 @@
+---
+// Brand button with hatched inline padding and its token label.
+// Shared by SharedSourceVisual (Components) and SmoothHandoffVisual (For Designer).
+// The class prefix stays shared-source-visual-* so the Components page markup is unchanged.
+import { DBButton } from '@db-ux/react-core-components';
+import './AnnotatedButton.css';
+---
+
+<span class="shared-source-visual-annotated">
+	{/* Real example button with DB states; the padding overlays ignore the pointer */}
+	<span class="shared-source-visual-button">
+		<DBButton variant="brand" type="button" text="Button" />
+		<span
+			class="shared-source-visual-padding db-color-blue"
+			data-side="start"
+			aria-hidden="true"
+		></span>
+		<span
+			class="shared-source-visual-padding db-color-blue"
+			data-side="end"
+			aria-hidden="true"
+		></span>
+	</span>
+	<span class="shared-source-visual-token db-color-blue" aria-hidden="true">
+		db-spacing-fixed-md
+	</span>
+</span>

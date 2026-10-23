@@ -1,0 +1,139 @@
+/* Scalable Approach code visual: three products connected to one shared standards bar */
+.scalable-approach-visual {
+	display: flex;
+	flex-direction: column;
+	inline-size: 100%;
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	font: var(--db-type-body-lg);
+}
+
+.scalable-approach-visual-products,
+.scalable-approach-visual-connectors {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: var(--db-spacing-fixed-md);
+}
+
+/* Same card as the Efficient Workflows features on For Developer */
+.scalable-approach-visual-product {
+	padding-block: var(--db-spacing-fixed-xl);
+	padding-inline: var(--db-spacing-fixed-xs);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-xs);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+	text-align: center;
+}
+
+/*
+ * Dashed drop from the card center with a dash-shaped marker. Line and marker share
+ * the same position calc, so the marker sits exactly on the line center at every width.
+ */
+.scalable-approach-visual-connector {
+	--scalable-approach-cycle: 1.2s;
+
+	position: relative;
+	block-size: var(--db-sizing-lg);
+}
+
+.scalable-approach-visual-connector::before,
+.scalable-approach-visual-connector::after {
+	content: '';
+	position: absolute;
+	inset-inline-start: calc(50% - var(--db-border-width-xs) / 2);
+	box-sizing: border-box;
+	inline-size: var(--db-border-width-xs);
+}
+
+.scalable-approach-visual-connector::before {
+	inset-block: 0;
+	border-inline-start: var(--db-border-width-xs) dashed
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
+}
+
+/* Static marker (also the reduced motion state): one red dash in the middle of the line */
+.scalable-approach-visual-connector::after {
+	inset-block-start: calc(50% - var(--db-sizing-3xs) / 2);
+	block-size: var(--db-sizing-3xs);
+	background-color: var(--db-brand-origin-default);
+}
+
+/*
+ * The markers bounce between each product and the standards bar (standards flow into the
+ * products, the products feed back), each connector in its own continuous loop.
+ */
+@media (prefers-reduced-motion: no-preference) {
+	.scalable-approach-visual-connector::after {
+		inset-block-start: 0;
+		animation: scalable-approach-visual-marker var(--scalable-approach-cycle) ease-in-out infinite
+			alternate both;
+	}
+
+	/* Each connector loops on its own, with slightly different durations, so the markers drift apart */
+	.scalable-approach-visual-connector:nth-child(2)::after {
+		animation-duration: calc(var(--scalable-approach-cycle) * 0.85);
+	}
+
+	.scalable-approach-visual-connector:nth-child(3)::after {
+		animation-duration: calc(var(--scalable-approach-cycle) * 1.15);
+	}
+
+	@keyframes scalable-approach-visual-marker {
+		from {
+			translate: 0 0;
+		}
+
+		to {
+			translate: 0 calc(var(--db-sizing-lg) - var(--db-sizing-3xs));
+		}
+	}
+}
+
+/* Icon field and label bar as in the Tested visual */
+.scalable-approach-visual-standards {
+	display: flex;
+}
+
+/* The color class .db-color-red resolves the adaptive tokens to red */
+.scalable-approach-visual-icon {
+	display: grid;
+	flex: none;
+	place-items: center;
+
+	/* Fixed square: aspect-ratio alone does not apply to a flex-stretched item */
+	inline-size: var(--db-sizing-md);
+	block-size: var(--db-sizing-md);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-70-default);
+	border-start-start-radius: var(--db-border-radius-xs);
+	border-end-start-radius: var(--db-border-radius-xs);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+}
+
+.scalable-approach-visual-label {
+	display: flex;
+	flex: 1 1 auto;
+	align-items: center;
+	min-inline-size: 0;
+	min-block-size: var(--db-sizing-md);
+	padding-inline: var(--db-spacing-fixed-md);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-inline-start: 0;
+	border-start-end-radius: var(--db-border-radius-xs);
+	border-end-end-radius: var(--db-border-radius-xs);
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+}
+
+@media (width <= 767px) {
+	.scalable-approach-visual {
+		font: var(--db-type-body-sm);
+	}
+
+	.scalable-approach-visual-products,
+	.scalable-approach-visual-connectors {
+		gap: var(--db-spacing-fixed-xs);
+	}
+
+	.scalable-approach-visual-product {
+		padding-block: var(--db-spacing-fixed-md);
+	}
+}

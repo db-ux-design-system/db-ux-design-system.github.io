@@ -12,8 +12,12 @@
  * the Get Started wizard (.gsw).
  */
 
-/* Reset browser default margins on all content elements */
-.dba-main-content :is(h1, h2, h3, h4, h5, h6, p, ul, ol, pre, table) {
+/* Reset browser default margins on all content elements.
+ * Children of a DB UX Text Group are excluded in all rules below via
+ * `:where(:not(.db-text-group > *))` (zero specificity): the Text Group owns
+ * their spacing through `data-text-spacing`. */
+.dba-main-content
+	:is(h1, h2, h3, h4, h5, h6, p, ul, ol, pre, table):where(:not(.db-text-group > *)) {
 	margin-block: 0;
 }
 
@@ -57,7 +61,7 @@
 		.card-teaser-row,
 		.component-playground-root,
 		astro-island
-	) {
+	):where(:not(.db-text-group > *)) {
 	margin-block-start: var(--db-spacing-fixed-md);
 }
 
@@ -89,7 +93,7 @@
 		.component-playground-root,
 		astro-island
 	)
-	+ :is(h2, h3, h4, h5, h6) {
+	+ :is(h2, h3, h4, h5, h6):where(:not(.db-text-group > *)) {
 	margin-block-start: var(--db-spacing-fixed-2xl);
 }
 
@@ -106,7 +110,9 @@
 }
 
 /* Headlines after headlines get tighter spacing (sub-section) */
-.dba-main-content :is(h2, h3, h4, h5, h6) + :is(h2, h3, h4, h5, h6) {
+.dba-main-content
+	:is(h2, h3, h4, h5, h6)
+	+ :is(h2, h3, h4, h5, h6):where(:not(.db-text-group > *)) {
 	margin-block-start: var(--db-spacing-fixed-md);
 }
 

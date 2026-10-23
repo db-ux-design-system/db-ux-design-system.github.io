@@ -1,5 +1,6 @@
 ---
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import { mergePageSources } from '@template/utils/page-sources';
 
 interface Props {
 	/** Relative path prefix to filter child pages (e.g. "documentation/releases") */
@@ -42,16 +43,33 @@ const {
 	headlineLevel,
 } = Astro.props;
 
-// Glob all content pages eagerly (path relative to this file's location)
-const modules = import.meta.glob<MdModule>(
-	[
-		'../../../content/pages/**/*.{md,mdx,astro}',
-		'!**/_*/**',
-		'!**/_*.astro',
-		'!**/demo-b2b/**',
-		'!**/demo-b2c/**',
-	],
-	{ eager: true },
+// Glob all content pages eagerly (path relative to this file's location).
+// md/mdx pages are read as frontmatter only, so their components and CSS do not
+// reach every page that renders this overview (see vite-plugin-page-frontmatter.ts).
+const modules = mergePageSources<FrontMatter, MdModule>(
+	import.meta.glob<FrontMatter>(
+		[
+			'../../../content/pages/**/*.{md,mdx}',
+			'!**/_*/**',
+			'!**/_*.astro',
+			'!**/demo-b2b/**',
+			'!**/demo-b2c/**',
+		],
+		{ eager: true, query: '?raw&page-frontmatter', import: 'default' },
+	),
+	import.meta.glob<MdModule>(
+		[
+			'../../../content/pages/**/*.astro',
+			'!**/_*/**',
+			'!**/_*.astro',
+			'!**/demo-b2b/**',
+			'!**/demo-b2c/**',
+			// Home pages are never child pages; excluded so their CSS stays off other pages
+			'!../../../content/pages/index.astro',
+			'!../../../content/pages/de/index.astro',
+		],
+		{ eager: true },
+	),
 );
 
 /**

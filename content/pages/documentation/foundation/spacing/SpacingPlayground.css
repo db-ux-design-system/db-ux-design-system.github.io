@@ -58,6 +58,11 @@
 	}
 }
 
+/* The global content spacing must not add to the flex gap (0,4,0 beats its 0,3,0) */
+.dba-main-content .spacing-stack > .spacing-card + .spacing-card {
+	margin-block-start: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.spacing-stack .spacing-card::after,
 	.spacing-stack::before {

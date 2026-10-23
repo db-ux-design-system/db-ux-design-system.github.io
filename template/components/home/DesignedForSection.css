@@ -1,0 +1,44 @@
+/* Home "How the system supports your work" cards: static code visuals, scaled to the card */
+
+/* Image area: one ratio for all three cards, just tall enough for the tallest scaled visual */
+.designed-for-visual {
+	position: relative;
+	inline-size: 100%;
+	aspect-ratio: 16 / 9;
+
+	/* Stay at the top of the stretched image column */
+	margin-block-end: auto;
+	overflow: clip;
+	container-type: inline-size;
+	pointer-events: none;
+
+	/* data-color only resolves the adaptive tokens to neutral; its background stays off */
+	background-color: transparent;
+}
+
+/* Canvas at a fixed scale of 0.45: it is 1 / 0.45 times as wide as the image area and
+   scaled down by 0.45, so it always fills the area exactly and the visuals get enough room. */
+.designed-for-visual-canvas {
+	--designed-for-visual-scale: 0.45;
+
+	position: absolute;
+	inset-block-start: 0;
+	inset-inline-start: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: safe center;
+	/* stylelint-disable-next-line db-ux/use-sizing -- canvas width derived from the container width */
+	inline-size: calc(100cqi / var(--designed-for-visual-scale));
+	aspect-ratio: inherit;
+	transform-origin: 0 0;
+	transform: scale(var(--designed-for-visual-scale));
+}
+
+/*
+ * The global content spacing (0,3,0) adds margin-block-start to the image column, because it
+ * follows the text column in the DOM. TextImage's own reset (0,2,2) loses against it, so the
+ * reset is repeated here with higher specificity (0,4,0) for the home cards only.
+ */
+.dba-main-content .text-image > .text-image-visual:has(.designed-for-visual) {
+	margin-block-start: 0;
+}

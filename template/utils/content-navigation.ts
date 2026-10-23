@@ -1,4 +1,5 @@
 import { toEnSlug } from '@template/i18n/slug-mapping';
+import { mergePageSources } from '@template/utils/page-sources';
 
 type NavigationFrontmatter = FrontMatter & {
 	hidePage?: boolean;
@@ -145,22 +146,46 @@ function prepareMobileNavigation(items: NavigationItem[]): NavigationItem[] {
  * @returns A fully structured and sorted `AppNavigation` tree.
  */
 export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
-	const mods = import.meta.glob<MdModule>(
-		[
-			'../../content/pages/**/*.{md,mdx,astro}',
-			'!**/_*/**',
-			'!**/_*.astro',
-			'!**/demo-b2b/**',
-			'!**/demo-b2c/**',
-			'!**/de/**',
-		],
-		{ eager: true },
+	/*
+	 * md/mdx pages are read as frontmatter only (`?raw&page-frontmatter`, see
+	 * template/integrations/vite-plugin-page-frontmatter.ts). Importing the page modules
+	 * would pull their components and CSS into every page that renders the navigation.
+	 * `.astro` pages keep the module glob: their frontmatter is a JS export.
+	 */
+	const mods = mergePageSources<NavigationFrontmatter, MdModule>(
+		import.meta.glob<NavigationFrontmatter>(
+			[
+				'../../content/pages/**/*.{md,mdx}',
+				'!**/_*/**',
+				'!**/_*.astro',
+				'!**/demo-b2b/**',
+				'!**/demo-b2c/**',
+				'!**/de/**',
+			],
+			{ eager: true, query: '?raw&page-frontmatter', import: 'default' },
+		),
+		import.meta.glob<MdModule>(
+			[
+				'../../content/pages/**/*.astro',
+				'!**/_*/**',
+				'!**/_*.astro',
+				'!**/demo-b2b/**',
+				'!**/demo-b2c/**',
+				'!**/de/**',
+				// The home page carries no nav metadata; excluded so its CSS stays off other pages
+				'!../../content/pages/index.astro',
+			],
+			{ eager: true },
+		),
 	) as Modules;
 
 	// Build DE title map from de/ pages frontmatter
-	const deModules = import.meta.glob<MdModule>(
-		['../../content/pages/de/**/*.{md,mdx}', '!**/_*/**'],
-		{ eager: true },
+	const deModules = mergePageSources<NavigationFrontmatter, MdModule>(
+		import.meta.glob<NavigationFrontmatter>(['../../content/pages/de/**/*.{md,mdx}', '!**/_*/**'], {
+			eager: true,
+			query: '?raw&page-frontmatter',
+			import: 'default',
+		}),
 	) as Modules;
 
 	const deTitles = new Map<string, string>();

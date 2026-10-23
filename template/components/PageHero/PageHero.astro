@@ -1,5 +1,18 @@
 ---
-import { DBBadge, type SemanticType } from '@db-ux/react-core-components';
+import {
+	DBBadge,
+	DBHeadingH1,
+	DBHeadingH2,
+	DBHeadingH3,
+	DBHeadingH4,
+	DBHeadingH5,
+	DBHeadingH6,
+	DBParagraph,
+	DBTextGroup,
+	type SemanticType,
+} from '@db-ux/react-core-components';
+import Visual from '@template/components/Visual/Visual.astro';
+import type { VisualName } from '@template/visuals';
 import './PageHero.css';
 
 interface Props {
@@ -10,13 +23,12 @@ interface Props {
 	badgeSemantic?: SemanticType;
 	imageSrc?: string;
 	imageAlt?: string;
-	/** Optional 3D model (.glb). When set, the hero renders an interactive model-viewer instead of the image. */
-	modelSrc?: string;
-	/** Name of the GLB animation to play. Defaults to the first animation in the file. */
-	modelAnimation?: string;
+	/** Decorative inline visual from `template/visuals/`. Takes precedence over `imageSrc`. */
+	visual?: VisualName;
 	align?: FrontMatter['align'];
 	layout?: 'stack' | 'split';
 	imageSide?: 'left' | 'right';
+	/** Semantic level of the headline. Ignored when a title is set: the title is the H1, the headline the H2. */
 	headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 	/** Optional link buttons below the description. The first one is styled as brand. */
 	actions?: { label: string; href: string }[];
@@ -25,7 +37,6 @@ interface Props {
 }
 
 type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
-type HeadingTagName = `h${HeadingLevel}`;
 
 const {
 	title,
@@ -35,8 +46,7 @@ const {
 	badgeSemantic = 'informational',
 	imageSrc,
 	imageAlt,
-	modelSrc,
-	modelAnimation,
+	visual,
 	align = 'center',
 	layout = 'stack',
 	imageSide = 'right',
@@ -45,43 +55,28 @@ const {
 	toolbar = false,
 } = Astro.props as Props;
 
-const hasMedia = Boolean(modelSrc || imageSrc);
+const headingComponents = {
+	1: DBHeadingH1,
+	2: DBHeadingH2,
+	3: DBHeadingH3,
+	4: DBHeadingH4,
+	5: DBHeadingH5,
+	6: DBHeadingH6,
+} as const;
+
+const safeHeadlineLevel = (title ? 2 : Math.min(Math.max(headlineLevel, 1), 6)) as HeadingLevel;
+const Headline = headingComponents[safeHeadlineLevel];
+
 const hasHeadlineEnd = Astro.slots.has('headline-end');
 const hasToolbar = toolbar || Astro.slots.has('toolbar');
-
-const safeHeadlineLevel = Math.min(Math.max(headlineLevel, 1), 6) as HeadingLevel;
-const HeadingTag = `h${safeHeadlineLevel}` as HeadingTagName;
-
-const showMediaLeft = layout === 'split' && hasMedia && imageSide === 'left';
-const showMediaRight = layout === 'split' && hasMedia && imageSide === 'right';
-const showMediaStack = layout === 'stack' && hasMedia;
 ---
 
-{(title || headline || description || hasMedia) && (
+{(title || headline || description || imageSrc || visual) && (
 	<div class="page-hero" data-align={align} data-layout={layout} data-image-side={imageSide}>
-		{showMediaLeft && (
-			<div class="page-hero-media" data-model={modelSrc ? 'true' : undefined}>
-				{modelSrc ? (
-					<model-viewer
-						src={modelSrc}
-						alt={imageAlt || ''}
-						camera-controls
-						disable-pan
-						disable-zoom
-						autoplay
-						animation-name={modelAnimation}
-						interaction-prompt-threshold="8000"
-						environment-image="neutral"
-						tone-mapping="aces"
-						exposure="0.8"
-						shadow-intensity="0"
-						camera-orbit="-20deg 110deg 0.5m"
-						camera-target="0m 0m -0.0091m"
-						min-camera-orbit="auto auto 0.0526m"
-						max-camera-orbit="auto auto 2.6316m"
-						field-of-view="35deg"
-						loading="eager"
-					/>
+		{layout === 'split' && (visual || imageSrc) && imageSide === 'left' && (
+			<div class:list={['page-hero-media', { 'page-hero-media-visual': !!visual }]}>
+				{visual ? (
+					<Visual name={visual} class="page-hero-visual" strokeScaling="scale" />
 				) : (
 					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
 				)}
@@ -89,28 +84,44 @@ const showMediaStack = layout === 'stack' && hasMedia;
 		)}
 		<div class="page-hero-content">
 			{badgeText && <DBBadge semantic={badgeSemantic}>{badgeText}</DBBadge>}
-			{title && <p class="page-hero-title">{title}</p>}
-			{headline &&
-				(hasHeadlineEnd || hasToolbar ? (
-					// Controls next to the headline sit outside the heading, so they are
-					// not part of its name. The page toolbar sits at the end of the same
-					// row, aligned with the right edge of the content.
-					<div class="page-hero-headline-row">
-						<HeadingTag class="page-hero-headline">{headline}</HeadingTag>
-						{hasHeadlineEnd && <slot name="headline-end" />}
-						{hasToolbar && (
-							// data-page-toolbar is a drop target: client enhancements (e.g. the
-							// Learn view toggle rendered in the page body) move their controls
-							// in here, so the actions share one toolbar.
-							<div class="page-hero-toolbar" data-page-toolbar>
-								<slot name="toolbar" />
+			{(title || headline || description) && (
+				<DBTextGroup className="page-hero-text-group" textSpacing>
+					{title && (
+						<DBHeadingH1 className="page-hero-title" visualSize="p-large">
+							{title}
+						</DBHeadingH1>
+					)}
+					{headline &&
+						(hasHeadlineEnd || hasToolbar ? (
+							// Controls next to the headline sit outside the heading, so they are
+							// not part of its name. The page toolbar sits at the end of the same
+							// row, aligned with the right edge of the content.
+							<div class="page-hero-headline-row">
+								<Headline className="page-hero-headline" visualSize="h1" fontWeight="black">
+									{headline}
+								</Headline>
+								{hasHeadlineEnd && <slot name="headline-end" />}
+								{hasToolbar && (
+									// data-page-toolbar is a drop target: client enhancements (e.g. the
+									// Learn view toggle rendered in the page body) move their controls
+									// in here, so the actions share one toolbar.
+									<div class="page-hero-toolbar" data-page-toolbar>
+										<slot name="toolbar" />
+									</div>
+								)}
 							</div>
-						)}
-					</div>
-				) : (
-					<HeadingTag class="page-hero-headline">{headline}</HeadingTag>
-				))}
-			{description && <p class="page-hero-description">{description}</p>}
+						) : (
+							<Headline className="page-hero-headline" visualSize="h1" fontWeight="black">
+								{headline}
+							</Headline>
+						))}
+					{description && (
+						<DBParagraph className="page-hero-description" size="md">
+							{description}
+						</DBParagraph>
+					)}
+				</DBTextGroup>
+			)}
 			{actions.length > 0 && (
 				<div class="page-hero-actions">
 					{actions.map((action, index) => (
@@ -125,57 +136,19 @@ const showMediaStack = layout === 'stack' && hasMedia;
 				</div>
 			)}
 		</div>
-		{showMediaRight && (
-			<div class="page-hero-media" data-model={modelSrc ? 'true' : undefined}>
-				{modelSrc ? (
-					<model-viewer
-						src={modelSrc}
-						alt={imageAlt || ''}
-						camera-controls
-						disable-pan
-						disable-zoom
-						autoplay
-						animation-name={modelAnimation}
-						interaction-prompt-threshold="8000"
-						environment-image="neutral"
-						tone-mapping="aces"
-						exposure="0.8"
-						shadow-intensity="0"
-						camera-orbit="-20deg 110deg 0.5m"
-						camera-target="0m 0m -0.0091m"
-						min-camera-orbit="auto auto 0.0526m"
-						max-camera-orbit="auto auto 2.6316m"
-						field-of-view="35deg"
-						loading="eager"
-					/>
+		{layout === 'split' && (visual || imageSrc) && imageSide === 'right' && (
+			<div class:list={['page-hero-media', { 'page-hero-media-visual': !!visual }]}>
+				{visual ? (
+					<Visual name={visual} class="page-hero-visual" strokeScaling="scale" />
 				) : (
 					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
 				)}
 			</div>
 		)}
-		{showMediaStack && (
-			<div class="page-hero-media" data-model={modelSrc ? 'true' : undefined}>
-				{modelSrc ? (
-					<model-viewer
-						src={modelSrc}
-						alt={imageAlt || ''}
-						camera-controls
-						disable-pan
-						disable-zoom
-						autoplay
-						animation-name={modelAnimation}
-						interaction-prompt-threshold="8000"
-						environment-image="neutral"
-						tone-mapping="aces"
-						exposure="0.8"
-						shadow-intensity="0"
-						camera-orbit="-20deg 110deg 0.5m"
-						camera-target="0m 0m -0.0091m"
-						min-camera-orbit="auto auto 0.0526m"
-						max-camera-orbit="auto auto 2.6316m"
-						field-of-view="35deg"
-						loading="eager"
-					/>
+		{layout === 'stack' && (visual || imageSrc) && (
+			<div class:list={['page-hero-media', { 'page-hero-media-visual': !!visual }]}>
+				{visual ? (
+					<Visual name={visual} class="page-hero-visual" strokeScaling="scale" />
 				) : (
 					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
 				)}
