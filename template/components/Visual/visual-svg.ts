@@ -166,7 +166,7 @@ export function parseVisualSvg(name: VisualName): ParsedVisualSvg {
 		if (ROOT_ATTRIBUTES.includes(key)) attributes[key] = value;
 	}
 	if (!attributes.viewBox) {
-		throw new Error(`[Visual] "${name}" has no viewBox. Run \`pnpm run visuals:optimize\`.`);
+		throw new Error(`[Visual] "${name}" has no viewBox. Run \`pnpm run optimize:visuals\`.`);
 	}
 
 	// Titles/descriptions come from the `label` prop only

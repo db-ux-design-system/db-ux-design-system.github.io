@@ -24,12 +24,12 @@ Internal SVG library for illustrative visuals on documentation pages (MDX) and p
    - Use fills only for surfaces or small solid details
    - No text layers, no raster images
 2. Export the frame as SVG and save it as `template/visuals/<name>.svg`. Use kebab-case, e.g. `product-management.svg`.
-3. Run `pnpm run visuals:optimize`.
+3. Run `pnpm run optimize:visuals`.
 4. Commit the normalized SVG and the regenerated `index.ts`.
 
 ## What the normalizer changes
 
-`pnpm run visuals:optimize` runs SVGO with `scripts/visuals/svgo.config.ts`. It keeps the `viewBox`, removes root `width`/`height`, `<title>`, `<desc>`, every `stroke-width`, every `stroke-linejoin` and every `stroke-linecap` except `square` (as attribute or inside `style`), and maps hard colors to `currentColor` plus a class:
+`pnpm run optimize:visuals` runs SVGO with `scripts/visuals/svgo.config.ts`. It keeps the `viewBox`, removes root `width`/`height`, `<title>`, `<desc>`, every `stroke-width`, every `stroke-linejoin` and every `stroke-linecap` except `square` (as attribute or inside `style`), and maps hard colors to `currentColor` plus a class:
 
 | Source                              | Result                                   | Controlled by                         |
 | ----------------------------------- | ---------------------------------------- | ------------------------------------- |
@@ -238,5 +238,5 @@ Every ID inside a visual (e.g. clip paths, gradients) is prefixed per instance (
 
 | Command                     | Purpose                                                                                |
 | --------------------------- | -------------------------------------------------------------------------------------- |
-| `pnpm run visuals:optimize` | Normalize and optimize all SVGs, regenerate `index.ts`                                 |
+| `pnpm run optimize:visuals` | Normalize and optimize all SVGs, regenerate `index.ts`                                 |
 | `pnpm run lint:visuals`     | Check only. Fails if an SVG or the registry is not up to date. Part of `pnpm run lint` |
