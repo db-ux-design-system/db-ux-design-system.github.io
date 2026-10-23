@@ -1,0 +1,44 @@
+---
+import { DBButton, DBIcon, DBNotification } from '@db-ux/react-core-components';
+import CodeVisualHint from '@components/CodeVisualHint/CodeVisualHint.astro';
+import './DarkmodeVisual.css';
+interface Props {
+	label: string;
+}
+const { label } = Astro.props;
+const hintId = `darkmode-visual-hint-${crypto.randomUUID()}`;
+// The same components forced to light mode and dark mode via data-mode,
+// independent of the page mode. The buttons are real example components with
+// DB hover/pressed/focus states; the other parts are presentational.
+const panels = [
+	{ mode: 'light', icon: 'sun' },
+	{ mode: 'dark', icon: 'moon' },
+] as const;
+---
+
+<div class="darkmode-visual" role="group" aria-label={label} aria-describedby={hintId}>
+	<CodeVisualHint id={hintId} />
+	{panels.map((panel) => (
+		<div class="darkmode-visual-panel" data-mode={panel.mode}>
+			<DBIcon icon={panel.icon} weight="32" className="darkmode-visual-icon" aria-hidden="true" />
+			<DBNotification
+				semantic="informational"
+				variant="standalone"
+				icon="information_circle"
+				role="none"
+				aria-hidden="true"
+				text="Notification"
+			/>
+			<div class="darkmode-visual-list-item" aria-hidden="true">
+				List Item
+			</div>
+			<DBButton
+				variant="filled"
+				width="full"
+				type="button"
+				className="darkmode-visual-button"
+				text="Button"
+			/>
+		</div>
+	))}
+</div>

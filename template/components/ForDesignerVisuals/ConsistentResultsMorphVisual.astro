@@ -1,0 +1,47 @@
+---
+import './ConsistentResultsMorphVisual.css';
+interface Props {
+	label: string;
+}
+const { label } = Astro.props;
+// Active variant on For Designer: one page wireframe that morphs between a phone (portrait)
+// and a desktop (landscape) frame. The tab bar and the sidebar both exist and swap via the
+// grid tracks. The static two-device version stays as backup in ConsistentResultsVisual.astro.
+// All blocks are spans, so the global div + div content spacing does not apply.
+const navItems = 5;
+const textLines = 3;
+const fields = 4;
+---
+
+<div class="consistent-results-morph-visual" role="img" aria-label={label}>
+	<span class="consistent-results-morph-visual-frame">
+		<span class="consistent-results-morph-visual-notch" />
+		<span class="consistent-results-morph-visual-screen">
+			{['tabs', 'sidebar'].map((nav) => (
+				<span class="consistent-results-morph-visual-nav" data-nav={nav}>
+					{Array.from({ length: navItems }, (_, i) => (
+						<span
+							class="consistent-results-morph-visual-nav-item"
+							data-active={i === 0 ? 'true' : undefined}
+						/>
+					))}
+				</span>
+			))}
+			<span class="consistent-results-morph-visual-main">
+				<span class="consistent-results-morph-visual-hero" />
+				<span class="consistent-results-morph-visual-group">
+					<span class="consistent-results-morph-visual-title" />
+					{Array.from({ length: textLines }, (_, i) => (
+						<span class="consistent-results-morph-visual-text" data-line={i + 1} />
+					))}
+				</span>
+				<span class="consistent-results-morph-visual-group">
+					{Array.from({ length: fields }, () => (
+						<span class="consistent-results-morph-visual-field" />
+					))}
+				</span>
+				<span class="consistent-results-morph-visual-cta" />
+			</span>
+		</span>
+	</span>
+</div>

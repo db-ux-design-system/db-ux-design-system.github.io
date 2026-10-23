@@ -1,0 +1,78 @@
+/* Configurable code visual: badge preview next to four configuration selects */
+.configurable-visual {
+	display: flex;
+	inline-size: 100%;
+	overflow: hidden;
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-md);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	font: var(--db-type-body-md);
+}
+
+.configurable-visual-preview {
+	display: flex;
+	flex: 1 1 0;
+	align-items: center;
+	justify-content: center;
+	min-inline-size: 0;
+	padding: var(--db-spacing-fixed-lg);
+	border-inline-end: var(--db-border-width-3xs) solid
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+}
+
+.configurable-visual-controls {
+	display: flex;
+	flex: 2 1 0;
+	flex-direction: column;
+	justify-content: center;
+	gap: var(--db-spacing-fixed-sm);
+	min-inline-size: 0;
+	margin: 0;
+	padding: var(--db-spacing-fixed-xl);
+	list-style: none;
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}
+
+.configurable-visual-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--db-spacing-fixed-md);
+	margin: 0;
+	padding: 0;
+}
+
+.configurable-visual-label {
+	min-inline-size: 0;
+	overflow-wrap: anywhere;
+}
+
+.configurable-visual-select {
+	flex: 0 1 50%;
+	min-inline-size: 0;
+}
+
+/* Narrow viewports: less padding so labels and selects fit next to the preview */
+@media (width <= 767px) {
+	.configurable-visual-preview {
+		flex: none;
+	}
+
+	.configurable-visual-preview,
+	.configurable-visual-controls {
+		padding: var(--db-spacing-fixed-sm);
+	}
+
+	.configurable-visual-row {
+		gap: var(--db-spacing-fixed-xs);
+	}
+}
+
+/* The global content spacing must not add to the layout (0,4,0 beats its 0,3,0) */
+.dba-main-content
+	.configurable-visual
+	> .configurable-visual-preview
+	+ .configurable-visual-controls {
+	margin-block-start: 0;
+}

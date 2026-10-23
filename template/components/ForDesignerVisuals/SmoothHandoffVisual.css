@@ -1,0 +1,95 @@
+/* Smooth Handoff code visual: annotated brand button next to its handoff properties */
+.smooth-handoff-visual {
+	display: grid;
+	grid-template-columns: minmax(min-content, 1fr) minmax(0, 1fr);
+	inline-size: 100%;
+	overflow: hidden;
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-md);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	font: var(--db-type-body-md);
+}
+
+.smooth-handoff-visual-design,
+.smooth-handoff-visual-inspect {
+	min-inline-size: 0;
+	padding: var(--db-spacing-fixed-lg);
+}
+
+.smooth-handoff-visual-design {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-inline-end: var(--db-border-width-3xs) solid
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+}
+
+/* Inspect panel: title and one property per line (name at the start, value at the end) */
+.smooth-handoff-visual-inspect {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: var(--db-spacing-fixed-sm);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}
+
+.smooth-handoff-visual-title {
+	font-weight: 700;
+}
+
+.smooth-handoff-visual-properties {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr);
+	gap: var(--db-spacing-fixed-2xs) var(--db-spacing-fixed-sm);
+	margin: 0;
+	font: var(--db-type-body-sm);
+}
+
+.smooth-handoff-visual-name,
+.smooth-handoff-visual-value {
+	min-inline-size: 0;
+	margin: 0;
+	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+}
+
+.smooth-handoff-visual-value {
+	overflow-wrap: anywhere;
+	text-align: end;
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+}
+
+/*
+ * Token values: the color class resolves emphasis-80 to its mid (light mode) or
+ * light (dark mode) tone; its level-1 background must not show.
+ */
+.smooth-handoff-visual-value[data-token] {
+	background-color: transparent;
+	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+}
+
+/* Narrow viewports: design on top, properties below */
+@media (width <= 767px) {
+	.smooth-handoff-visual {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.smooth-handoff-visual-design {
+		border-inline-end: 0;
+		border-block-end: var(--db-border-width-3xs) solid
+			var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	}
+
+	.smooth-handoff-visual-design,
+	.smooth-handoff-visual-inspect {
+		padding: var(--db-spacing-fixed-sm);
+	}
+}
+
+/* The global content spacing must not add to the layout (0,4,0 beats its 0,3,0) */
+.dba-main-content
+	.smooth-handoff-visual
+	> .smooth-handoff-visual-design
+	+ .smooth-handoff-visual-inspect {
+	margin-block-start: 0;
+}

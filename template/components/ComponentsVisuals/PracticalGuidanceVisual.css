@@ -1,0 +1,79 @@
+/* Practical Guidance code visual: Do and Don't panels, each with a status marker and a button pair */
+.practical-guidance-visual {
+	display: flex;
+	inline-size: 100%;
+	overflow: hidden;
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-md);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	font: var(--db-type-body-md);
+}
+
+.practical-guidance-visual-panel {
+	display: flex;
+	flex: 1 1 0;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-lg);
+	min-inline-size: 0;
+	padding: var(--db-spacing-fixed-md);
+}
+
+.practical-guidance-visual-panel + .practical-guidance-visual-panel {
+	border-inline-start: var(--db-border-width-3xs) solid
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
+}
+
+/*
+ * The color class resolves the origin tokens to red (Don't). The marker is forced to
+ * light mode (data-mode), so the tokens resolve the same in both page modes.
+ */
+.practical-guidance-visual-marker {
+	display: grid;
+	place-items: center;
+	align-self: flex-start;
+	inline-size: var(--db-sizing-sm);
+	block-size: var(--db-sizing-sm);
+	border-radius: var(--db-border-radius-full);
+	background-color: var(--db-adaptive-origin-default);
+	color: var(--db-adaptive-on-origin-default);
+}
+
+/*
+ * Successful origin is a light green with a dark glyph; the inverted high-contrast pair
+ * gives the dark green fill with a light glyph of the PNG (light mode is forced above)
+ */
+.practical-guidance-visual-panel[data-variant='do'] .practical-guidance-visual-marker {
+	background-color: var(--db-adaptive-bg-inverted-contrast-high-default);
+	color: var(--db-adaptive-on-bg-inverted-default);
+}
+
+.practical-guidance-visual-actions {
+	display: flex;
+	flex: 1 1 auto;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: var(--db-spacing-fixed-sm);
+	padding-block-end: calc(var(--db-sizing-sm) + var(--db-spacing-fixed-lg));
+}
+
+/* Narrow viewports: less padding; the buttons may wrap */
+@media (width <= 767px) {
+	.practical-guidance-visual-panel {
+		gap: var(--db-spacing-fixed-sm);
+		padding: var(--db-spacing-fixed-sm);
+	}
+
+	.practical-guidance-visual-actions {
+		padding-block-end: 0;
+	}
+}
+
+/* The global content spacing must not add to the layout (0,4,0 beats its 0,3,0) */
+.dba-main-content
+	.practical-guidance-visual
+	> .practical-guidance-visual-panel
+	+ .practical-guidance-visual-panel {
+	margin-block-start: 0;
+}

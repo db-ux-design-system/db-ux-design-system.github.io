@@ -1,0 +1,148 @@
+/* Button Playground code visual: button preview next to four property controls */
+.button-playground-visual {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	inline-size: 100%;
+	overflow: hidden;
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-md);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	font: var(--db-type-body-md);
+}
+
+.button-playground-visual-preview {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-inline-size: 0;
+	padding: var(--db-spacing-fixed-lg);
+	border-inline-end: var(--db-border-width-3xs) solid
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+}
+
+.button-playground-visual-controls {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: var(--db-spacing-fixed-sm);
+	min-inline-size: 0;
+	margin: 0;
+	padding: var(--db-spacing-fixed-lg);
+	list-style: none;
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}
+
+.button-playground-visual-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--db-spacing-fixed-md);
+	margin: 0;
+	padding: 0;
+}
+
+.button-playground-visual-label {
+	min-inline-size: 0;
+	overflow-wrap: anywhere;
+}
+
+.button-playground-visual-control {
+	flex: 0 1 55%;
+	min-inline-size: 0;
+}
+
+.button-playground-visual-switch {
+	flex: none;
+}
+
+/* Narrow viewports: preview on top, controls below, so the selects show their full value.
+   Static previews (home cards) keep the desktop layout at every viewport. */
+@media (width <= 767px) {
+	.button-playground-visual:not([data-static]) {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.button-playground-visual:not([data-static]) .button-playground-visual-preview {
+		border-inline-end: 0;
+		border-block-end: var(--db-border-width-3xs) solid
+			var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	}
+
+	.button-playground-visual:not([data-static]) .button-playground-visual-preview,
+	.button-playground-visual:not([data-static]) .button-playground-visual-controls {
+		padding: var(--db-spacing-fixed-sm);
+	}
+
+	.button-playground-visual:not([data-static]) .button-playground-visual-row {
+		gap: var(--db-spacing-fixed-xs);
+	}
+}
+
+/*
+ * Static preview: span look-alikes of the DB select/input field and the checked DB switch,
+ * with the same tokens as the form components (the DB styles only target form elements).
+ *
+ * Why look-alikes: on the home page the static preview sits inside the card link
+ * (<a> wrapping DBCard, the pattern the DB card CSS is built for), and interactive elements
+ * are not allowed inside <a>. So the real DBSelect/DBInput/DBSwitch can't be used there.
+ *
+ * MAINTENANCE: these rules mirror @db-ux/core-components (select, input and switch styles:
+ * border, radius, background, sizes, thumb). When updating DB UX Core, compare the static
+ * home preview with the interactive playground on /products-and-services/for-designer and
+ * align the values here if the components changed.
+ */
+.button-playground-visual-static-field {
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
+	inline-size: 100%;
+	block-size: var(--db-sizing-md);
+	padding-inline: var(--db-spacing-fixed-sm);
+	overflow: hidden;
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-70-default);
+	border-radius: var(--db-border-radius-xs);
+	background-color: var(--db-adaptive-bg-basic-transparent-semi-default);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	font: var(--db-type-body-md);
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+/* Room for the chevron of .db-select::after */
+.db-select > .button-playground-visual-static-field {
+	padding-inline-end: var(--db-sizing-md);
+}
+
+.button-playground-visual-static-switch {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	box-sizing: content-box;
+
+	/* Track of two thumbs plus the fixed gap, as in the DB switch */
+	inline-size: calc(2lh + var(--db-border-width-2xs));
+	block-size: 1lh;
+	margin-inline-end: var(--db-spacing-fixed-xs);
+	border: var(--db-border-width-2xs) solid var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	border-radius: var(--db-border-radius-full);
+	background-color: var(--db-adaptive-bg-inverted-contrast-max-default);
+	font: var(--db-type-body-sm);
+}
+
+/* Thumb at the end of the track (checked) */
+.button-playground-visual-static-switch::before {
+	content: '';
+	aspect-ratio: 1;
+	block-size: 1lh;
+	border-radius: var(--db-border-radius-full);
+	background-color: var(--db-adaptive-on-bg-inverted-default);
+}
+
+/* The global content spacing must not add to the layout (0,4,0 beats its 0,3,0) */
+.dba-main-content
+	.button-playground-visual
+	> .button-playground-visual-preview
+	+ .button-playground-visual-controls {
+	margin-block-start: 0;
+}

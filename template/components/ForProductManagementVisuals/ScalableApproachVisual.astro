@@ -1,0 +1,29 @@
+---
+import { DBIcon } from '@db-ux/react-core-components';
+import './ScalableApproachVisual.css';
+interface Props {
+	label: string;
+}
+const { label } = Astro.props;
+// Three products, each connected to the same standards
+const products = ['Product A', 'Product B', 'Product C'];
+---
+
+<div class="scalable-approach-visual" role="img" aria-label={label}>
+	<span class="scalable-approach-visual-products">
+		{products.map((product) => (
+			<span class="scalable-approach-visual-product">{product}</span>
+		))}
+	</span>
+	<span class="scalable-approach-visual-connectors">
+		{products.map(() => (
+			<span class="scalable-approach-visual-connector"></span>
+		))}
+	</span>
+	<span class="scalable-approach-visual-standards">
+		<span class="scalable-approach-visual-icon db-color-red">
+			<DBIcon icon="upload" />
+		</span>
+		<span class="scalable-approach-visual-label">Standards</span>
+	</span>
+</div>

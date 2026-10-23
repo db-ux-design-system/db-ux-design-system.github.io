@@ -1,0 +1,36 @@
+---
+import { DBButton, DBIcon } from '@db-ux/react-core-components';
+import CodeVisualHint from '@components/CodeVisualHint/CodeVisualHint.astro';
+import './PracticalGuidanceVisual.css';
+interface Props {
+	label: string;
+}
+const { label } = Astro.props;
+const hintId = `practical-guidance-visual-hint-${crypto.randomUUID()}`;
+// Do (brand primary action) and Don't (neutral primary action) of the original visual
+const panels = [
+	{ key: 'do', icon: 'check', colorClass: 'db-color-successful', continueVariant: 'brand' },
+	{ key: 'dont', icon: 'cross', colorClass: 'db-color-critical', continueVariant: 'filled' },
+] as const;
+---
+
+<div class="practical-guidance-visual" role="group" aria-label={label} aria-describedby={hintId}>
+	<CodeVisualHint id={hintId} />
+	{panels.map((panel) => (
+		<div class="practical-guidance-visual-panel" data-variant={panel.key}>
+			{/* data-mode="light" keeps the marker identical in both page modes, as in the PNGs */}
+			<span
+				class:list={['practical-guidance-visual-marker', panel.colorClass]}
+				data-mode="light"
+				aria-hidden="true"
+			>
+				<DBIcon icon={panel.icon} />
+			</span>
+			{/* Real example buttons with DB hover/pressed/focus states */}
+			<div class="practical-guidance-visual-actions">
+				<DBButton variant={panel.continueVariant} type="button" text="Continue" />
+				<DBButton variant="outlined" type="button" text="Back" />
+			</div>
+		</div>
+	))}
+</div>

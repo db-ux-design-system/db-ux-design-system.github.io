@@ -1,0 +1,225 @@
+/*
+ * Consistent Results code visual (experiment): one page wireframe that morphs between
+ * a phone (portrait) and a desktop (landscape) frame in a loop.
+ * A single registered custom property (--crm-progress: 0 = phone, 1 = desktop) drives
+ * every size, track and opacity via calc(), so all parts stay in sync and one keyframe
+ * set is enough. Without animation (reduced motion) the progress stays 1 = desktop.
+ */
+@property --crm-progress {
+	syntax: '<number>';
+	inherits: true;
+	initial-value: 1;
+}
+
+/* Constant box (no layout shift); the frame is sized in cqi and centered in it */
+.consistent-results-morph-visual {
+	display: flex;
+	flex: none;
+	align-items: center;
+	justify-content: center;
+	inline-size: 100%;
+	aspect-ratio: 16 / 9;
+	container-type: inline-size;
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+}
+
+.consistent-results-morph-visual-frame {
+	--crm-phone: calc(1 - var(--crm-progress));
+	--crm-gap: var(--db-spacing-fixed-sm);
+	--crm-tab-size: calc(var(--db-spacing-fixed-xs) * var(--crm-phone));
+
+	display: flex;
+	flex: none;
+	flex-direction: column;
+	overflow: hidden;
+
+	/* Phone 9 / 19 (25.6 × 54 cqi) to desktop 16 / 10 (86 × 53.75 cqi) */
+	inline-size: calc(25.6cqi + 60.4cqi * var(--crm-progress));
+	block-size: calc(54cqi - 0.25cqi * var(--crm-progress));
+	padding-block: var(--db-spacing-fixed-md);
+	padding-inline: calc(
+		var(--db-spacing-fixed-sm) + (var(--db-spacing-fixed-md) - var(--db-spacing-fixed-sm)) *
+			var(--crm-progress)
+	);
+	border: var(--db-border-width-2xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-lg);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}
+
+/* Notch: only in the phone state, collapses and fades out towards the desktop */
+.consistent-results-morph-visual-notch {
+	display: block;
+	flex: none;
+	align-self: center;
+	inline-size: 35%;
+	margin-block-end: calc(var(--db-spacing-fixed-xs) * var(--crm-phone));
+	padding-block: calc(var(--db-spacing-fixed-2xs) * var(--crm-phone));
+	border-radius: var(--db-border-radius-full);
+	background-color: var(--db-adaptive-bg-basic-level-3-default);
+	opacity: var(--crm-phone);
+}
+
+/*
+ * Screen grid: column 1 = sidebar, row 1 = tab bar. The phone has a 0 sidebar column,
+ * the desktop a 0 tab bar row, so the navigation swaps without discrete jumps.
+ */
+.consistent-results-morph-visual-screen {
+	display: grid;
+	flex: 1 1 0;
+	grid-template-columns: calc(14% * var(--crm-progress)) minmax(0, 1fr);
+	grid-template-rows: var(--crm-tab-size) minmax(0, 1fr);
+	gap: calc(var(--crm-gap) * var(--crm-phone)) calc(var(--crm-gap) * var(--crm-progress));
+	min-block-size: 0;
+}
+
+/* Navigation: tab bar on the phone, sidebar on the desktop; the first item is active */
+.consistent-results-morph-visual-nav {
+	display: flex;
+	gap: var(--db-spacing-fixed-3xs);
+	overflow: hidden;
+	min-inline-size: 0;
+	min-block-size: 0;
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+}
+
+.consistent-results-morph-visual-nav[data-nav='tabs'] {
+	grid-area: 1 / 2;
+	opacity: var(--crm-phone);
+}
+
+.consistent-results-morph-visual-nav[data-nav='sidebar'] {
+	grid-area: 1 / 1 / 3 / 2;
+	flex-direction: column;
+	padding: calc(var(--db-spacing-fixed-3xs) * var(--crm-progress));
+	opacity: var(--crm-progress);
+}
+
+.consistent-results-morph-visual-nav-item {
+	display: block;
+	flex: 1 1 0;
+	min-inline-size: 0;
+	min-block-size: 0;
+	background-color: var(--db-adaptive-bg-basic-level-3-default);
+}
+
+.consistent-results-morph-visual-nav-item[data-active] {
+	background-color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+}
+
+/* Sidebar items keep the height of a title bar; the rest of the sidebar stays empty */
+.consistent-results-morph-visual-nav[data-nav='sidebar'] .consistent-results-morph-visual-nav-item {
+	flex-grow: 0.8;
+}
+
+.consistent-results-morph-visual-nav[data-nav='sidebar']::after {
+	content: '';
+	flex: 7 1 0;
+}
+
+/* Page content: hero, title with text lines, form fields, call to action */
+.consistent-results-morph-visual-main {
+	display: flex;
+	grid-area: 2 / 2;
+	flex-direction: column;
+	gap: calc(
+		var(--db-spacing-fixed-sm) - (var(--db-spacing-fixed-sm) - var(--db-spacing-fixed-xs)) *
+			var(--crm-progress)
+	);
+	min-inline-size: 0;
+	min-block-size: 0;
+}
+
+/* Free space below the content grows in towards the desktop */
+.consistent-results-morph-visual-main::after {
+	content: '';
+	flex: var(--crm-progress) 1 0;
+}
+
+.consistent-results-morph-visual-hero {
+	display: block;
+	flex: 5 1 0;
+	min-block-size: 0;
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+}
+
+.consistent-results-morph-visual-group {
+	display: flex;
+	flex: 4 1 0;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-3xs);
+	min-block-size: 0;
+}
+
+.consistent-results-morph-visual-title,
+.consistent-results-morph-visual-text,
+.consistent-results-morph-visual-field {
+	display: block;
+	flex: 1 1 0;
+	min-block-size: 0;
+}
+
+/* Widths shrink from the phone value to the desktop value (calc(phone - delta × progress)) */
+.consistent-results-morph-visual-title {
+	inline-size: calc(50% - 32% * var(--crm-progress));
+	background-color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+}
+
+.consistent-results-morph-visual-text {
+	inline-size: calc(100% - 55% * var(--crm-progress));
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+}
+
+.consistent-results-morph-visual-text[data-line='2'] {
+	inline-size: calc(100% - 40% * var(--crm-progress));
+}
+
+.consistent-results-morph-visual-text[data-line='3'] {
+	inline-size: calc(100% - 48% * var(--crm-progress));
+}
+
+.consistent-results-morph-visual-field {
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}
+
+.consistent-results-morph-visual-cta {
+	display: block;
+	flex: 1.2 1 0;
+	inline-size: calc(100% - 82% * var(--crm-progress));
+	min-block-size: 0;
+	background-color: var(--db-brand-origin-default);
+}
+
+/* Loop: hold phone 1.5 s, morph 1.5 s, hold desktop 1.5 s, morph back 1.5 s */
+@media (prefers-reduced-motion: no-preference) {
+	.consistent-results-morph-visual-frame {
+		animation: consistent-results-morph-visual-morph 6s ease-in-out infinite;
+	}
+
+	@keyframes consistent-results-morph-visual-morph {
+		0%,
+		25%,
+		100% {
+			--crm-progress: 0;
+		}
+
+		50%,
+		75% {
+			--crm-progress: 1;
+		}
+	}
+}
+
+/* Narrow viewports: smaller paddings and gaps */
+@media (width <= 767px) {
+	.consistent-results-morph-visual-frame {
+		--crm-gap: var(--db-spacing-fixed-xs);
+		--crm-tab-size: calc(var(--db-spacing-fixed-2xs) * var(--crm-phone));
+
+		padding: var(--db-spacing-fixed-xs);
+	}
+
+	.consistent-results-morph-visual-main {
+		gap: var(--db-spacing-fixed-xs);
+	}
+}
