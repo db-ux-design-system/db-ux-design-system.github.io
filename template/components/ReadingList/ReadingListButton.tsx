@@ -162,8 +162,7 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 								<span className="rl-inline-icon" data-icon="bookmark" aria-hidden="true" />{' '}
 								{text.empty[1]}
 							</p>
-							{/* Styled like a row of the list, with the arrow always shown: it is the
-							    only action here. */}
+							{/* Styled and animated like a row of the list. */}
 							<div className="rl-item rl-suggest">
 								<a className="rl-item-link" data-icon="arrow_right" href={wizardHref(lang)}>
 									<span className="rl-item-label">{text.suggest}</span>
