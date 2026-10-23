@@ -6,6 +6,7 @@ sectionWidth: 'auto'
 title: 'Dokumentation'
 headline: 'Dokumentation'
 description: 'Richtlinien, Komponenten und Ressourcen des DB UX Design Systems für Design und Entwicklung.'
+align: start
 isSubNavigation: true
 ---
 
@@ -25,11 +26,9 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 			description:
 				'Beantworte ein paar Fragen und finde den Einstieg, der zu deiner Rolle und deinem Projekt passt.',
 			url: '/de/dokumentation/erste-schritte',
-			imageSrc: '/assets/Design-System--C.png',
-			imageAlt: '',
+			visualImage: 'getting-started',
 			imagePosition: 'right',
-			imageWidth: '33',
-			mask: 'fade-bottom-right',
+			imageWidth: '25',
 		},
 	]}
 />
@@ -37,7 +36,7 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 ## Schnellzugriff
 
 <TeaserCard
-	columns={3}
+	columns={2}
 	spacing="large"
 	headlineSize="medium"
 	headlineLevel={3}
@@ -46,16 +45,33 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 			title: 'Foundation',
 			description: 'Farben, Typografie, Abstände und weitere Tokens.',
 			url: '/de/dokumentation/foundation',
+			visualImage: 'foundation',
+			imagePosition: 'right',
+			imageWidth: '33',
 		},
 		{
 			title: 'Komponenten',
 			description: 'Richtlinien, Beispiele und Status aller Komponenten.',
 			url: '/de/dokumentation/komponenten',
+			visualImage: 'components',
+			imagePosition: 'right',
+			imageWidth: '33',
 		},
 		{
 			title: 'Release Notes',
 			description: 'Alle Änderungen pro Version.',
 			url: '/de/dokumentation/releases/release-notes',
+			visualImage: 'releases',
+			imagePosition: 'right',
+			imageWidth: '33',
+		},
+		{
+			title: 'Ressourcen',
+			description: 'Figma-Bibliotheken für Designer:innen und Code-Pakete für Entwickler:innen.',
+			url: '/de/dokumentation/ressourcen',
+			visualImage: 'resources',
+			imagePosition: 'right',
+			imageWidth: '33',
 		},
 	]}
 />
