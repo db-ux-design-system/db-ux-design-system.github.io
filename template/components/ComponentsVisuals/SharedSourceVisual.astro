@@ -1,0 +1,57 @@
+---
+import AnnotatedButton from './AnnotatedButton.astro';
+import CodeVisualHint from '@components/CodeVisualHint/CodeVisualHint.astro';
+import './SharedSourceVisual.css';
+interface Props {
+	label: string;
+}
+const { label } = Astro.props;
+const hintId = `shared-source-visual-hint-${crypto.randomUUID()}`;
+// CSS of the brand button shown on the left, taken from @db-ux/core-components
+// (button.css, simplified). The padding-inline line matches the annotated token.
+// Each part is [text, kind]; kind maps to a color class, undefined stays uncolored.
+type Kind = 'selector' | 'property' | 'literal' | 'var' | undefined;
+type Part = [string, Kind];
+const declaration = (property: string, value: Part[]): { indent: boolean; parts: Part[] } => ({
+	indent: true,
+	parts: [[property, 'property'], [': ', undefined], ...value, [';', undefined]],
+});
+const token = (name: string): Part[] => [
+	['var', undefined],
+	[`(--${name})`, 'var'],
+];
+const lines: { indent?: boolean; parts: Part[] }[] = [
+	{ parts: [['.db-button[data-variant="brand"] {', 'selector']] },
+	declaration('min-block-size', token('db-sizing-md')),
+	declaration('padding-block', token('db-spacing-fixed-2xs')),
+	declaration('padding-inline', token('db-spacing-fixed-md')),
+	declaration('border-radius', token('db-border-radius-xs')),
+	declaration('background-color', token('db-brand-origin-default')),
+	declaration('color', token('db-brand-on-origin-default')),
+	declaration('font', token('db-type-body-md')),
+	declaration('font-weight', [['700', 'literal']]),
+	{ parts: [['}', 'selector']] },
+];
+const colorClass: Record<Exclude<Kind, undefined>, string> = {
+	selector: 'db-color-yellow',
+	property: 'db-color-turquoise',
+	literal: 'db-color-green',
+	var: 'db-color-blue',
+};
+---
+
+<div class="shared-source-visual" role="group" aria-label={label} aria-describedby={hintId}>
+	<CodeVisualHint id={hintId} />
+	<div class="shared-source-visual-design">
+		<AnnotatedButton />
+	</div>
+	<div class="shared-source-visual-code" aria-hidden="true">
+		{lines.map((line) => (
+			<span class="shared-source-visual-line" data-indent={line.indent ? '' : undefined}>
+				{line.parts.map(([text, kind]) => (
+					<span class:list={['shared-source-visual-part', kind && colorClass[kind]]}>{text}</span>
+				))}
+			</span>
+		))}
+	</div>
+</div>

@@ -1,0 +1,33 @@
+---
+import { DBNotification } from '@db-ux/react-core-components';
+import './AdaptiveColorsVisual.css';
+
+interface Props {
+	label: string;
+}
+
+const { label } = Astro.props;
+
+// Adaptive notifications inside a DB color mode class.
+// "Blue" uses the cyan color mode, which matches the blue tone of the original visual.
+const notifications = [
+	{ headline: 'Green Notification', name: 'green', colorMode: 'green' },
+	{ headline: 'Yellow Notification', name: 'yellow', colorMode: 'yellow' },
+	{ headline: 'Blue Notification', name: 'blue', colorMode: 'cyan' },
+] as const;
+---
+
+<div class="adaptive-colors-visual" role="img" aria-label={label}>
+	{notifications.map((notification) => (
+		<DBNotification
+			className={`db-color-${notification.colorMode}`}
+			semantic="adaptive"
+			variant="standalone"
+			icon="information_circle"
+			headline={notification.headline}
+			role="none"
+		>
+			{`This component does use the ${notification.name} color mode.`}
+		</DBNotification>
+	))}
+</div>

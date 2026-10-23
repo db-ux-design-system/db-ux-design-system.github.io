@@ -11,7 +11,7 @@ description: 'Alles, was du brauchst, um konsistente und barrierefreie digitale 
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import { DBStack, DBNotification, DBLink } from '@db-ux/react-core-components';
 
-<DBStack gap="medium">
+<DBStack gap="large">
 <DBNotification variant="standalone" semantic="informational" headline="Hinweis">
 	Alle Beispiele in dieser Dokumentation basieren auf dem <DBLink href="https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/db-ux-design-system/resources/db-theme" target="_blank" rel="noopener noreferrer" variant="inline">DB Theme</DBLink>. Nutzt du das Design System als
 	White Label oder mit einem anderen Theme, können die visuellen Ergebnisse abweichen, weil dann
@@ -29,61 +29,34 @@ import { DBStack, DBNotification, DBLink } from '@db-ux/react-core-components';
 			description:
 				'Gemeinsame Basis-Tokens und Modi bilden ein stabiles Fundament für klare und einheitliche Interfaces.',
 			url: '/de/dokumentation/foundation',
-			imageSrc: '/assets/Foundations-Teaser--C.png',
-			imageAlt: 'Foundations',
+			visual: 'foundation',
 			imagePosition: 'right',
 			imageWidth: '33',
-			mask: 'fade-bottom-right',
 		},
 		{
 			title: 'Komponenten',
 			description:
 				'Core Components sorgen für vorhersehbare Interaktionen über alle Produkte hinweg.',
 			url: '/de/dokumentation/komponenten',
-			imageSrc: '/assets/Components-Teaser--C.png',
-			imageAlt: 'Komponenten',
+			visual: 'components',
 			imagePosition: 'right',
 			imageWidth: '33',
-			mask: 'fade-bottom-right',
-		},
-	]}
-/>
-
-<TeaserCard
-	columns={3}
-	spacing="large"
-	headlineSize="medium"
-	headlineLevel={2}
-	teasers={[
-		{
-			title: 'Icons',
-			description: 'Durchsuche alle verfügbaren DB UX Icon-Namen und kopiere sie für die Verwendung im Code.',
-			url: '/de/dokumentation/icons',
-			imageSrc: '/assets/Extensions-Teaser--C.png',
-			imageAlt: 'Icons',
-			imagePosition: 'right',
-			imageWidth: '33',
-			mask: 'fade-bottom-right',
 		},
 		{
 			title: 'Release Notes',
 			description: 'Bleib auf dem Laufenden über die neuesten Änderungen und Verbesserungen.',
 			url: '/de/dokumentation/releases/release-notes',
-			imageSrc: '/assets/Release-Notes-Teaser.png',
-			imageAlt: 'Release Notes',
+			visual: 'releases',
 			imagePosition: 'right',
 			imageWidth: '33',
-			mask: 'fade-bottom-right',
 		},
 		{
 			title: 'Ressourcen',
 			description: 'Figma-Bibliotheken für Designer:innen und Code-Pakete für Entwickler:innen.',
 			url: '/de/dokumentation/ressourcen',
-			imageSrc: '/assets/Resources-Teaser.png',
-			imageAlt: 'Ressourcen',
+			visual: 'resources',
 			imagePosition: 'right',
 			imageWidth: '33',
-			mask: 'fade-bottom-right',
 		},
 	]}
 />

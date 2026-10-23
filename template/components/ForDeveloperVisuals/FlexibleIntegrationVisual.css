@@ -1,0 +1,89 @@
+/* Flexible Integration code visual: brand button with cart icon next to its HTML */
+.flexible-integration-visual {
+	display: grid;
+	grid-template-columns: minmax(min-content, 1fr) minmax(0, 1fr);
+	inline-size: 100%;
+	overflow: hidden;
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-md);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	font: var(--db-type-body-md);
+}
+
+.flexible-integration-visual-design,
+.flexible-integration-visual-code {
+	min-inline-size: 0;
+	padding: var(--db-spacing-fixed-lg);
+}
+
+.flexible-integration-visual-design {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-inline-end: var(--db-border-width-3xs) solid
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+}
+
+.flexible-integration-visual-code {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	overflow: hidden;
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+	font: var(--db-type-body-sm);
+}
+
+/* Flex lines ignore the markup whitespace between the parts; the parts keep their own spaces */
+.flexible-integration-visual-line {
+	display: flex;
+}
+
+.flexible-integration-visual-part {
+	flex: none;
+	white-space: pre;
+}
+
+.flexible-integration-visual-line[data-indent] {
+	padding-inline-start: var(--db-spacing-fixed-md);
+}
+
+/* Same treatment as the Shared Source code: color class without its level-1 background */
+.flexible-integration-visual-part[class*='db-color-'] {
+	background-color: transparent;
+	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+}
+
+/* Narrow viewports: design on top, code below, so the attribute lines keep their width */
+@media (width <= 767px) {
+	.flexible-integration-visual {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.flexible-integration-visual-design,
+	.flexible-integration-visual-code {
+		padding: var(--db-spacing-fixed-sm);
+	}
+
+	.flexible-integration-visual-design {
+		border-inline-end: 0;
+		border-block-end: var(--db-border-width-3xs) solid
+			var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	}
+
+	.flexible-integration-visual-code {
+		font: var(--db-type-body-xs);
+	}
+
+	.flexible-integration-visual-line[data-indent] {
+		padding-inline-start: var(--db-spacing-fixed-sm);
+	}
+}
+
+/* The global content spacing must not add to the layout (0,4,0 beats its 0,3,0) */
+.dba-main-content
+	.flexible-integration-visual
+	> .flexible-integration-visual-design
+	+ .flexible-integration-visual-code {
+	margin-block-start: 0;
+}

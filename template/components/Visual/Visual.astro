@@ -1,0 +1,170 @@
+---
+import {
+	getVisualNames,
+	isVisualName,
+	nextVisualPrefix,
+	parseVisualSvg,
+	prefixSvgIds,
+	resolveVisualColor,
+	resolveVisualSize,
+	resolveVisualStrokeWidth,
+	VISUAL_STROKE_SCALING,
+	type VisualColor,
+	type VisualName,
+	type VisualSize,
+	type VisualStrokeScaling,
+	type VisualStrokeWidth,
+} from './visual-svg';
+import './Visual.css';
+/**
+ * Visual – Renders an SVG from `template/visuals/` inline, so colors and stroke width follow
+ * DB UX tokens and Light/Dark Mode. See `template/visuals/README.md`.
+ *
+ * ## Component Props
+ *
+ * | Prop            | Type                | Default        | Description                                                  |
+ * |-----------------|---------------------|----------------|--------------------------------------------------------------|
+ * | `name`          | `VisualName`        | required       | File name in `template/visuals/` without `.svg`              |
+ * | `stroke`        | `VisualColor`       | `currentColor` | Primary stroke color (`--visual-stroke`)                     |
+ * | `accent`        | `VisualColor`       | `stroke`       | Accent stroke/detail color (`--visual-accent`)               |
+ * | `fill`          | `VisualColor`       | `none`         | Surface fill (`--visual-fill`)                               |
+ * | `strokeWidth`   | `VisualStrokeWidth` | `2` / ratio    | Stroke width (`--visual-stroke-width`): px with `fixed`, viewBox units with `scale`. Default with `scale`: `--visual-stroke-ratio` × viewBox width |
+ * | `size`          | `VisualSize`        | `100%`         | Inline size (alias for `width`)                              |
+ * | `width`         | `VisualSize`        | `100%`         | Inline size (`--visual-inline-size`)                         |
+ * | `height`        | `VisualSize`        | `auto`         | Block size (`--visual-block-size`)                           |
+ * | `label`         | `string`            | –              | Accessible name. Without it the visual is decorative         |
+ * | `strokeScaling` | `VisualStrokeScaling` | `fixed`      | `fixed`: constant stroke in px, `scale`: stroke grows with the visual |
+ * | `surface`       | `boolean`           | `false`        | Square light grey surface behind the visual. `size`/`width`/`height`, `class` and `--visual-inline-size` then size the surface, the visual takes `--visual-surface-content-size` of it. Inside `TextImage` the image column sizes the surface instead |
+ * | `class`         | `string`            | –              | Additional CSS classes (on the surface when `surface` is set) |
+ */
+interface Props {
+	/** File name in `template/visuals/` without `.svg`. */
+	name: VisualName;
+	/** Primary stroke color. Defaults to `currentColor`. */
+	stroke?: VisualColor;
+	/** Accent color for secondary strokes and details. Defaults to `stroke`. */
+	accent?: VisualColor;
+	/** Fill color for surfaces. Defaults to `none`. */
+	fill?: VisualColor;
+	/**
+	 * Stroke width. Interpreted as screen px with `strokeScaling="fixed"` (default `2`) and as
+	 * viewBox units with `strokeScaling="scale"` (default `--visual-stroke-ratio` × viewBox width).
+	 */
+	strokeWidth?: VisualStrokeWidth;
+	/** Inline size, alias for `width`. */
+	size?: VisualSize;
+	/** Inline size. Defaults to `100%` of the container. */
+	width?: VisualSize;
+	/** Block size. Defaults to `auto` (aspect ratio of the viewBox). */
+	height?: VisualSize;
+	/** Accessible name. Makes the visual informative (`role="img"`). */
+	label?: string;
+	/**
+	 * `fixed` (default): constant stroke width at every size (`vector-effect: non-scaling-stroke`).
+	 * `scale`: the stroke width scales with the rendered size.
+	 */
+	strokeScaling?: VisualStrokeScaling;
+	/**
+	 * Renders a square surface (`--visual-surface-bg`) behind the visual and centers the visual in it.
+	 * `size`/`width`/`height`, `class` and `--visual-inline-size` then apply to the surface; the visual
+	 * takes `--visual-surface-content-size` of it. Inside `TextImage` (slot `visual`) the image column
+	 * sizes the surface and the size props have no effect.
+	 */
+	surface?: boolean;
+	/** Additional CSS classes. */
+	class?: string;
+}
+const {
+	name,
+	stroke,
+	accent,
+	fill,
+	strokeWidth,
+	size,
+	width,
+	height,
+	label,
+	strokeScaling = 'fixed',
+	surface = false,
+	class: className,
+} = Astro.props;
+
+if (!isVisualName(name)) {
+	throw new Error(`[Visual] Unknown visual "${name}". Available: ${getVisualNames().join(', ')}`);
+}
+
+if (!(VISUAL_STROKE_SCALING as readonly string[]).includes(strokeScaling)) {
+	throw new Error(
+		`[Visual] Invalid strokeScaling "${strokeScaling}". Use ${VISUAL_STROKE_SCALING.join(' or ')}.`,
+	);
+}
+const { attributes, inner } = parseVisualSvg(name);
+const prefix = nextVisualPrefix(name);
+const markup = prefixSvgIds(inner, prefix);
+const titleId = `${prefix}-title`;
+
+const inlineSize = size ?? width;
+// viewBox width, used for the proportional default stroke width with `strokeScaling="scale"`
+const viewBoxSize = Number.parseFloat(attributes.viewBox.trim().split(/[\s,]+/)[2] ?? '');
+type Variables = [string, string | undefined][];
+const toStyle = (variables: Variables) =>
+	variables
+		.filter(([, value]) => value !== undefined)
+		.map(([property, value]) => `${property}: ${value}`)
+		.join('; ') || undefined;
+
+// Colors, stroke and viewBox always sit on the <svg>
+const svgVariables: Variables = [
+	['--visual-viewbox-size', Number.isFinite(viewBoxSize) ? String(viewBoxSize) : undefined],
+	['--visual-stroke', stroke && resolveVisualColor(stroke)],
+	['--visual-accent', accent && resolveVisualColor(accent)],
+	['--visual-fill', fill && resolveVisualColor(fill)],
+	[
+		'--visual-stroke-width',
+		strokeWidth === undefined ? undefined : resolveVisualStrokeWidth(strokeWidth),
+	],
+];
+// Size: on the <svg>, or on the surface when `surface` is set (the visual then takes
+// `--visual-surface-content-size` of the surface)
+const sizeVariables: Variables = [
+	[
+		'--visual-inline-size',
+		inlineSize ? resolveVisualSize(inlineSize) : height ? 'auto' : undefined,
+	],
+	['--visual-block-size', height && resolveVisualSize(height)],
+];
+const svgStyle = toStyle(surface ? svgVariables : [...svgVariables, ...sizeVariables]);
+const surfaceStyle = surface ? toStyle(sizeVariables) : undefined;
+
+const a11yAttributes = label
+	? ({ role: 'img', 'aria-labelledby': titleId } as const)
+	: ({ 'aria-hidden': 'true' } as const);
+---
+
+{surface ? (
+	<span class:list={['db-visual-surface', className]} style={surfaceStyle}>
+		<svg
+			{...attributes}
+			class:list={['db-visual', { 'db-visual-stroke-scale': strokeScaling === 'scale' }]}
+			style={svgStyle}
+			data-visual={name}
+			focusable="false"
+			{...a11yAttributes}
+		>
+			{label && <title id={titleId}>{label}</title>}
+			<Fragment set:html={markup} />
+		</svg>
+	</span>
+) : (
+	<svg
+		{...attributes}
+		class:list={['db-visual', { 'db-visual-stroke-scale': strokeScaling === 'scale' }, className]}
+		style={svgStyle}
+		data-visual={name}
+		focusable="false"
+		{...a11yAttributes}
+	>
+		{label && <title id={titleId}>{label}</title>}
+		<Fragment set:html={markup} />
+	</svg>
+)}
