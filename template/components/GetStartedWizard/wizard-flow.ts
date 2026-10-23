@@ -99,15 +99,15 @@ export const questions: Record<QuestionId, Question> = {
 		options: [
 			{
 				id: 'design',
-				label: t('Design', 'Design'),
+				label: t('Designer', 'Designer:in'),
 			},
 			{
 				id: 'development',
-				label: t('Development', 'Entwicklung'),
+				label: t('Developer', 'Entwickler:in'),
 			},
 			{
 				id: 'product',
-				label: t('Product management', 'Produktmanagement'),
+				label: t('Product manager', 'Produktmanager:in'),
 			},
 		],
 	},
@@ -191,7 +191,7 @@ export const questions: Record<QuestionId, Question> = {
 	},
 	framework: {
 		id: 'framework',
-		title: t('Which framework do you use?', 'Welches Framework nutzt du?'),
+		title: t('What do you build your interface with?', 'Womit baust du dein Interface?'),
 		options: [
 			{ id: 'react', label: t('React', 'React') },
 			{ id: 'angular', label: t('Angular', 'Angular') },

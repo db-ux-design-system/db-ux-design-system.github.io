@@ -233,6 +233,18 @@
 	z-index: 69; /* Workaround to show the border of the sub-navigation */
 }
 
+/* Reading list and language switch popovers fade in, without the fly-in of the
+   library: its keyframe animates opacity and a translate, and the translate comes
+   from these two properties. Set to zero, only the opacity is left - the same
+   impression as the popovers of the main navigation.
+   TODO: Move this into core-web (popover component) as an option for the animation,
+   so the fly-in does not have to be switched off per popover. */
+.rl-popover,
+.language-switch-popover {
+	--db-popover-translate-x: 0%;
+	--db-popover-translate-y: 0%;
+}
+
 /*
  * Match the legal strip of the footer to the collapse button area at the bottom
  * of the sub navigation (40 px button + 12 px padding on each side), so both

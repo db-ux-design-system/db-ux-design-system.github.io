@@ -7,12 +7,17 @@
 	flex-direction: column;
 	gap: calc(2 * var(--db-spacing-responsive-sm));
 
+	/* All text of the wizard uses the highest emphasis (100). */
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+
 	/* The page has no hero, so the wizard takes over its top spacing: the same token
 	   as DBSection with spacing="small", which wraps the hero on other pages. */
 	padding-block-start: var(--db-spacing-responsive-sm);
 }
 
-/* Headline and intro of the result, with the gap of the page hero. */
+/* Headline, intro and the hint of the result, with the gap of the page hero. The
+   hint sits in this block, so it stays close to the copy text above it and keeps the
+   full distance of the wizard rhythm to the list below. */
 .gsw-hero {
 	display: flex;
 	flex-direction: column;
@@ -105,14 +110,19 @@
 }
 
 /* The answer label: headline font, but no heading element. Every label keeps room for
-   the check icon at its end, so a long label wraps before the icon and nothing reflows
+   the check icon (sizing md) plus a safety gap (spacing sm) at its end, so a long label wraps before the icon and nothing reflows
    when a card gets selected. */
 .gsw-option-label {
-	padding-inline-end: calc(var(--db-sizing-sm) + var(--db-spacing-fixed-xs));
+	padding-inline-end: calc(var(--db-sizing-md) + var(--db-spacing-fixed-sm));
 	font: var(--db-type-headline-sm);
+
+	/* A long word such as "Produktmanager:in" breaks before the check icon instead of
+	   running under it. */
+	overflow-wrap: break-word;
+	hyphens: auto;
 }
 
-/* Check icon of the selected card: 24 px (sizing sm) in the top-right corner, inside
+/* Check icon of the selected card: sizing md in the top-right corner, inside
    the card padding (spacing="large" = fixed lg). It uses the label font, so 1lh is the
    height of the first label line and the icon is centered on it. */
 .gsw-option-check {
@@ -135,13 +145,12 @@
 }
 
 .gsw-option-description {
-	color: var(--db-adaptive-on-bg-basic-emphasis-90-default);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
 }
 
-/* Headline of a tinted card (selected option, role tiles before a pick, result). */
-.gsw-option[data-color] .gsw-option-label,
-.gsw-result .db-heading {
-	color: var(--db-adaptive-on-bg-basic-emphasis-90-default);
+/* Headline of a tinted card (selected option, role tiles before a pick). */
+.gsw-option[data-color] .gsw-option-label {
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
 }
 
 .gsw-actions {
@@ -151,48 +160,61 @@
 	justify-content: flex-end;
 }
 
-/* Result: a DBCard with elevation level 3 and the data-color of the chosen role, like
-   the selected cards of the previous steps. Border, radius, padding and background
-   come from the card. */
-.gsw-result {
-	gap: var(--db-spacing-fixed-sm);
-	align-items: flex-start;
+/* The hint hangs below the control panel at the end edge, over the page, not in its
+   flow. --gsw-saved-top is the lower edge of the visible control panel, measured by
+   the island; the sizing token is only the fallback before the first measurement. */
+.gsw-saved.db-notification {
+	position: fixed;
+	inset-block-start: calc(var(--gsw-saved-top, var(--db-sizing-2xl)) + var(--db-spacing-fixed-sm));
+	inset-inline-end: var(--db-spacing-fixed-sm);
+	z-index: 100;
+	max-inline-size: min(calc(100vw - 2 * var(--db-spacing-fixed-sm)), 28rem);
+
+	/* The semantic colors its icon through the ::before itself, so --db-icon-color on
+	   the notification has no effect. */
+	&::before {
+		color: var(--db-informational-on-bg-basic-emphasis-100-default);
+	}
 }
 
-/* The list spans the card. Spacing inside the wizard comes from the gaps only: the
-   content margins of content-spacing.css are excluded for .gsw there. */
+/* The call to action of the package, in the button row below the list.
+   position: relative anchors the trailing icon: the library places it absolutely at
+   the end of the button, and the DBButton component brings that position with it, a
+   plain anchor with the button class does not. */
+.gsw-start {
+	position: relative;
+}
+
+/* No frame around the list and no dividers. No gap either: the lines of the items
+   form one continuous line, like the group bar in the reading list popover. Spacing
+   inside the wizard comes from the gaps only: the content margins of
+   content-spacing.css are excluded for .gsw there. */
 .gsw-package-list {
 	display: grid;
-	align-self: stretch;
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 
-/* Text on the start side, button on the end side of the row. In a narrow card the
-   button wraps below the text. The border uses the adaptive tokens, so the data-color
-   of the card tints it. */
+/* Headline of an item: two steps below the h1 of the page (headline lg). DBHeading
+   has no size property, so the font comes from here. */
+.gsw-package-item .db-heading {
+	font: var(--db-type-headline-sm);
+}
+
+/* One item per page: a 2 px line on the start side in the color of the chosen role
+   (--gsw-role-color, set on the list, emphasis 70). Text on the start side, button on
+   the end side; in a narrow column the button wraps below the text. */
 .gsw-package-item {
 	display: flex;
 	flex-wrap: wrap;
 	gap: var(--db-spacing-fixed-xs) var(--db-spacing-fixed-md);
 	align-items: center;
 	justify-content: space-between;
-	padding-block: var(--db-spacing-fixed-md);
-
-	/* Dividers only between the rows. The card padding frames the first and last row. */
-	& + & {
-		border-block-start: var(--db-border-width-3xs) solid
-			var(--db-adaptive-on-bg-basic-emphasis-60-default);
-	}
-
-	&:first-child {
-		padding-block-start: 0;
-	}
-
-	&:last-child {
-		padding-block-end: 0;
-	}
+	padding-block: var(--db-spacing-fixed-sm);
+	padding-inline-start: var(--db-spacing-fixed-md);
+	border-inline-start: var(--db-border-width-2xs) solid
+		var(--gsw-role-color, var(--db-adaptive-on-bg-basic-emphasis-70-default));
 }
 
 .gsw-package-text {
@@ -207,5 +229,5 @@
 
 .gsw-package-description {
 	font: var(--db-type-body-sm);
-	color: var(--db-adaptive-on-bg-basic-emphasis-90-default);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
 }

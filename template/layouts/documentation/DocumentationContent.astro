@@ -6,6 +6,7 @@ import { PageHero } from '@components';
 import ReadingListToggle from '@template/components/ReadingList/ReadingListToggle.tsx';
 import { pageId } from '@template/components/ReadingList/reading-list-items';
 import { appNavigation } from '@root/app.navigation.ts';
+import LearnArticle from '@template/components/Learn/LearnArticle.astro';
 
 interface Props {
 	headings: MarkdownHeading[];
@@ -80,10 +81,11 @@ if (frontmatter.readingList) {
 				imageSrc={frontmatter.heroImage}
 				imageAlt={frontmatter.heroImageAlt}
 				align={frontmatter.align}
+				toolbar={Boolean(readingList) || frontmatter.stepper === true}
 			>
 				{readingList && (
 					<ReadingListToggle
-						slot="headline-end"
+						slot="toolbar"
 						client:load
 						lang={lang}
 						id={readingList.id}
@@ -109,6 +111,14 @@ if (frontmatter.readingList) {
 		</DBSection>
 	)}
 	<DBSection id="main-content-section" width="large" spacing="none">
-		<slot />
+		{/* Learn articles with `stepper: true` get the article/stepper wrapper here, so
+		    the MDX only contains the blocks and nothing is wired up per article. */}
+		{frontmatter.stepper ? (
+			<LearnArticle stepper>
+				<slot />
+			</LearnArticle>
+		) : (
+			<slot />
+		)}
 	</DBSection>
 </div>

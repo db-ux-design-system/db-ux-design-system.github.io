@@ -1,7 +1,7 @@
-import { useEffect, useId, useRef, useState } from 'react';
+import { type CSSProperties, useEffect, useId, useRef, useState } from 'react';
 import { DBBadge, DBButton, DBPopover, DBTooltip } from '@db-ux/react-core-components';
 import { useLanguage } from '@template/context/language-context';
-import { wizardHref } from '@template/components/GetStartedWizard/wizard-flow';
+import { roleColors, wizardHref } from '@template/components/GetStartedWizard/wizard-flow';
 import { removeItem, useReadingList } from './reading-list-store';
 import { resolveItems } from './reading-list-items';
 import { readingListTexts } from './texts';
@@ -82,6 +82,12 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 		setDismissed(false);
 		wrapperRef.current?.querySelector('.rl-trigger')?.setAttribute('aria-expanded', 'true');
 	};
+
+	// The bar of the wizard group takes the color of the role of the stored result, so
+	// it matches the lines of the result list. The role is read from the stored answers
+	// ("role=design&..."); without them the CSS falls back to brand.
+	const wizardRole = new URLSearchParams(list.wizard ?? '').get('role');
+	const wizardColor = wizardRole ? roleColors[wizardRole] : undefined;
 
 	// Own bookmarks first, wizard suggestions below as a separate group. Within each
 	// group, the order of the list is kept.
@@ -171,12 +177,22 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 										key={group.source}
 										className="rl-list"
 										data-source={group.source}
+										style={
+											group.source === 'wizard' && wizardColor
+												? ({
+														'--rl-wizard-color': `var(--db-${wizardColor}-on-bg-basic-emphasis-70-default)`,
+													} as CSSProperties)
+												: undefined
+										}
 										aria-label={group.source === 'wizard' ? text.wizardGroup : text.bookmarkGroup}
 									>
 										{group.items.map((item, index) => (
 											<li key={item.id} className="rl-item">
-												<a className="rl-item-link" href={item.href}>
-													{item.label}
+												{/* Arrow in front of the label, shown on hover and focus. The
+												    label is its own element, so it can be truncated instead of
+												    wrapping (see ReadingList.css). */}
+												<a className="rl-item-link" data-icon="arrow_right" href={item.href}>
+													<span className="rl-item-label">{item.label}</span>
 												</a>
 												<DBButton
 													type="button"

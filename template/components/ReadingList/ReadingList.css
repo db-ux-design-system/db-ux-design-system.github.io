@@ -24,32 +24,42 @@
 	display: grid;
 	margin: 0;
 	padding: 0;
+
+	/* Keeps the hover background of a row off the bar: 2 px, the smallest spacing. */
+	padding-inline-start: var(--db-spacing-fixed-3xs);
 	list-style: none;
-}
 
-/* Wizard suggestions: grouped by a continuous bar on the start side. */
-.rl-list[data-source='wizard'] {
+	/* Every group carries a bar, so the rows of both groups start at the same inline
+	   position. Own bookmarks keep it quiet at emphasis 60, the wizard group colors
+	   it. */
 	border-inline-start: var(--db-border-width-2xs) solid
-		var(--db-brand-on-bg-basic-emphasis-70-default);
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
 }
 
-/* One row per page: the link on the start side, the delete button on the end side.
-   The link is stretched over the whole row (::after), so a click anywhere on the row
-   navigates. The delete button sits above that area and stays operable on its own. */
+/* Wizard suggestions: grouped by a continuous bar on the start side, in the color of
+   the role of the stored result (--rl-wizard-color), like the lines of the result list.
+   Brand as the fallback when no role can be read from the stored answers. */
+.rl-list[data-source='wizard'] {
+	border-inline-start-color: var(
+		--rl-wizard-color,
+		var(--db-brand-on-bg-basic-emphasis-70-default)
+	);
+}
+
+/* One row per page: link and delete button side by side on one surface. The row
+   carries the hover background, so the button stands on it. The column of the button
+   keeps its width while the button is hidden, so nothing moves on hover. */
 .rl-item {
-	position: relative;
 	display: grid;
-	grid-template-columns: 1fr auto;
-	gap: var(--db-spacing-fixed-sm);
+	grid-template-columns: minmax(0, 1fr) auto;
+	gap: var(--db-spacing-fixed-2xs);
 	align-items: center;
-	padding: var(--db-spacing-fixed-2xs) var(--db-spacing-fixed-2xs) var(--db-spacing-fixed-2xs)
-		var(--db-spacing-fixed-xs);
+	padding-inline: var(--db-spacing-fixed-2xs);
 	border-radius: var(--db-border-radius-sm);
 
-	/* No hover state while the pointer is on the delete button: there, a click
-	   deletes. Keyboard focus on the link gets the same background. */
-	&:hover:not(:has(.rl-item-remove:hover)),
-	&:has(.rl-item-link:focus-visible) {
+	/* Keyboard focus inside the row gets the same background as hover. */
+	&:hover,
+	&:focus-within {
 		background-color: var(--db-adaptive-bg-basic-transparent-full-hovered);
 	}
 
@@ -58,42 +68,97 @@
 	}
 }
 
+/* The link of the page: arrow on the start side, label next to it. The background
+   comes from the row, so the delete button next to it stands on the same surface. */
 .rl-item-link {
+	display: flex;
+	align-items: center;
 	min-inline-size: 0;
+	padding-block: var(--db-spacing-fixed-2xs);
+	padding-inline: var(--db-spacing-fixed-2xs);
+	border-radius: var(--db-border-radius-sm);
 	font: var(--db-type-body-md);
 	color: inherit;
 
-	/* A list of links, like a navigation: the row hover background and the focus ring
-	   mark them, so no underline. */
+	/* A list of links, like a navigation: the box background and the focus ring mark
+	   them, so no underline. */
 	text-decoration: none;
 
-	&::after {
-		content: '';
-		position: absolute;
-		inset: 0;
-		border-radius: inherit;
+	/* The arrow of data-icon, hidden until the box is hovered or focused. It grows out
+	   of zero width, so it takes room from the label instead of pushing it out of the
+	   box. */
+	&::before {
+		flex: none;
+		inline-size: 0;
+		margin-inline-end: 0;
+		overflow: hidden;
+		opacity: 0;
+		transition:
+			inline-size var(--db-transition-straight-emotional),
+			margin-inline-end var(--db-transition-straight-emotional),
+			opacity var(--db-transition-straight-emotional);
+
+		@media (prefers-reduced-motion: reduce) {
+			transition: none;
+		}
 	}
 
-	/* The focus ring wraps the whole row. The inset offset keeps it inside the
-	   popover, so the popover does not clip it. That ring is the alternative to the
-	   removed outline of the link text. */
-	/* stylelint-disable-next-line a11y/no-outline-none */
+	/* The arrow comes in on hover of the row, so it also shows while the pointer is on
+	   the delete button: the row is one surface. */
+	.rl-item:hover > &::before,
+	&:focus-visible::before {
+		inline-size: var(--db-sizing-sm);
+		margin-inline-end: var(--db-spacing-fixed-2xs);
+		opacity: 1;
+	}
+
 	&:focus-visible {
-		outline: none;
-	}
-
-	&:focus-visible::after {
-		/* Same focus ring as the library: 2xs outline with the library fallback color. */
+		/* Same focus ring as the library: 2xs outline with the library fallback color.
+		   The inset offset keeps it inside the popover, so the popover does not clip it. */
 		outline: var(--db-border-width-2xs) solid
 			var(--db-focus-outline-color, var(--db-informational-on-bg-basic-emphasis-70-default));
 		outline-offset: calc(-1 * var(--db-border-width-2xs));
 	}
 }
 
-/* Above the stretched link area. */
+/* One line per page: a long title is truncated, so the rows keep their height and the
+   delete buttons stay on one column. */
+.rl-item-label {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+/* The delete button appears with the row. Its column is there either way, so the
+   label does not move. */
 .rl-item-remove {
-	position: relative;
-	z-index: 1;
+	opacity: 0;
+	transition: opacity var(--db-transition-straight-emotional);
+
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
+	}
+
+	.rl-item:hover &,
+	.rl-item:focus-within &,
+	&:focus-visible {
+		opacity: 1;
+	}
+}
+
+/* Without hover there is no way to reveal the button, so it stays visible. */
+@media (hover: none) {
+	.rl-item-remove {
+		opacity: 1;
+	}
+}
+
+/* Popover in the control panel. The library sizes it with inline-size: max-content,
+   so it would grow as soon as the arrow of a row takes its space. A fixed width keeps
+   it still, no matter which row is hovered and how long the titles are. */
+.rl-popover > .db-popover-content {
+	inline-size: var(--db-container-xs);
+	max-inline-size: calc(100vw - 2 * var(--db-spacing-fixed-sm));
 }
 
 /* Tooltip of the delete button, left of it (see ReadingListButton). With
@@ -106,11 +171,11 @@
 	inset-inline: auto calc(100% + var(--db-popover-distance, 0px)) !important;
 }
 
-/* Popover in the control panel */
 .rl-popover-body {
 	display: grid;
 	gap: var(--db-spacing-fixed-xs);
 	inline-size: 100%;
+	min-inline-size: 0;
 }
 
 .rl-popover-title {

@@ -1,6 +1,7 @@
-import { type FormEvent, useEffect, useRef, useState } from 'react';
-import { DBButton, DBCard, DBHeadingH2 } from '@db-ux/react-core-components';
+import { type CSSProperties, type FormEvent, useEffect, useRef, useState } from 'react';
+import { DBButton, DBCard, DBHeadingH2, DBNotification } from '@db-ux/react-core-components';
 import { addWizardResult } from '@template/components/ReadingList/reading-list-store';
+import { hasSeenSavedHint, markSavedHintSeen } from './saved-hint';
 import { toReadingListId } from '@template/components/ReadingList/reading-list-items';
 import { readingListTexts } from '@template/components/ReadingList/texts';
 import {
@@ -18,12 +19,16 @@ import {
 // ReadingList.css by global.css. Imported here, they only arrived with the
 // client-only island and were missing after client-side navigation until a reload.
 
+/** How long the hint about the reading list stays once it has been seen before. */
+const HINT_SECONDS = 8;
+
 const ui = {
 	en: {
 		next: 'Next',
 		back: 'Back',
 		restart: 'Start again',
 		open: 'Open',
+		start: 'Start learning package',
 		resultTitle: 'Your next steps',
 	},
 	de: {
@@ -31,6 +36,7 @@ const ui = {
 		back: 'Zurück',
 		restart: 'Neu starten',
 		open: 'Öffnen',
+		start: 'Lernpaket starten',
 		resultTitle: 'Deine nächsten Schritte',
 	},
 } as const;
@@ -77,6 +83,16 @@ const GetStartedWizard = ({ lang = 'en' }: { lang?: Lang }) => {
 	// A deep link then paints the right step at once, without the role step first.
 	const [answers, setAnswers] = useState<Answers>(readAnswers);
 	const [selection, setSelection] = useState<string | undefined>();
+	// The hint about the reading list. The first result ever keeps it open until it is
+	// closed, every later one hides it after HINT_SECONDS. Read before the first
+	// result marks it as seen.
+	const [savedOpen, setSavedOpen] = useState(true);
+	const hintSeen = useRef<boolean | undefined>(undefined);
+	hintSeen.current ??= hasSeenSavedHint();
+	// Hover and focus stop the countdown, so the hint cannot disappear while it is
+	// being read. The rest of the time is kept, the countdown does not start over.
+	const [hintPaused, setHintPaused] = useState(false);
+	const hintLeft = useRef(HINT_SECONDS * 1000);
 	const headingRef = useRef<HTMLHeadingElement>(null);
 	// Focus only moves after a user action, not on the initial page load.
 	const moveFocus = useRef(false);
@@ -108,8 +124,51 @@ const GetStartedWizard = ({ lang = 'en' }: { lang?: Lang }) => {
 		// the closure sees the current answers.
 	}, [answers]);
 
+	// The overlay notification hangs below the control panel. Its height is not
+	// available as a token, and the control panel is outside this island, so the lower
+	// edge of the visible panel is measured and handed to the CSS. Desktop and mobile
+	// panel are both in the DOM, only one of them has a size.
+	useEffect(() => {
+		const panels = [
+			...document.querySelectorAll<HTMLElement>(
+				'.db-control-panel-desktop, .db-control-panel-mobile',
+			),
+		];
+		if (panels.length === 0) return;
+		const update = () => {
+			const visible = panels.find((panel) => panel.getBoundingClientRect().height > 0);
+			const bottom = visible?.getBoundingClientRect().bottom ?? 0;
+			document.documentElement.style.setProperty('--gsw-saved-top', `${Math.max(bottom, 0)}px`);
+		};
+		update();
+		const observer = new ResizeObserver(update);
+		for (const panel of panels) observer.observe(panel);
+		return () => {
+			observer.disconnect();
+			document.documentElement.style.removeProperty('--gsw-saved-top');
+		};
+	}, []);
+
 	const step = next(answers);
 	const asked = askedQuestions(answers);
+	const hasResult = 'result' in step;
+
+	// Seen as soon as a result put the hint on screen, no matter how it ends.
+	useEffect(() => {
+		if (hasResult) markSavedHintSeen();
+	}, [hasResult]);
+
+	// Countdown of the hint, only from the second time on. Paused while the pointer or
+	// the focus is on it; the cleanup keeps the rest of the time.
+	useEffect(() => {
+		if (!hasResult || !hintSeen.current || !savedOpen || hintPaused) return;
+		const startedAt = Date.now();
+		const timer = window.setTimeout(() => setSavedOpen(false), hintLeft.current);
+		return () => {
+			window.clearTimeout(timer);
+			hintLeft.current = Math.max(hintLeft.current - (Date.now() - startedAt), 0);
+		};
+	}, [hasResult, savedOpen, hintPaused]);
 
 	useEffect(() => {
 		if (moveFocus.current) headingRef.current?.focus();
@@ -154,6 +213,7 @@ const GetStartedWizard = ({ lang = 'en' }: { lang?: Lang }) => {
 
 	if ('result' in step) {
 		const { result } = step;
+		const rlText = readingListTexts[lang];
 		return (
 			<section className="gsw" aria-labelledby="gsw-heading">
 				{/* Headline and intro as on the page hero of other pages: tight gap. */}
@@ -161,53 +221,93 @@ const GetStartedWizard = ({ lang = 'en' }: { lang?: Lang }) => {
 					<h1 id="gsw-heading" className="gsw-heading" ref={headingRef} tabIndex={-1}>
 						{text.resultTitle}
 					</h1>
-					<p className="gsw-result-intro">{readingListTexts[lang].intro}</p>
+					<p className="gsw-result-intro">{rlText.intro}</p>
 				</div>
-				{/* Styled like the selected cards of the previous steps: elevation level 3,
-				    tinted in the color of the chosen role. Static, because only the links
-				    inside are interactive. */}
-				<DBCard
-					spacing="large"
-					elevationLevel="3"
-					className="gsw-result"
-					data-color={roleColor(answers)}
+				{/* One item per page, each standing on its own: no frame around the list and
+				    no dividers, every item carries a 2 px line on its start side in the
+				    color of the chosen role (emphasis 70). Text on the start side, the arrow
+				    to the page on the end side. */}
+				<ol
+					className="gsw-package-list"
+					// Not data-color: that attribute also tints the background and the text of
+					// everything inside. Only the line needs the color, so the role color is
+					// handed over as a custom property.
+					style={
+						{
+							'--gsw-role-color': `var(--db-${roleColor(answers)}-on-bg-basic-emphasis-70-default)`,
+						} as CSSProperties
+					}
 				>
-					{/* One row per page: text on the start side, button on the end side.
-					    No package title above the list: it repeated the first page. Every
-					    row has the same headline size as the option cards (sm = h4) and the
-					    same button text. Only the button marks the first page: brand
-					    instead of outlined. */}
-					<ol className="gsw-package-list">
-						{result.items.map((item, index) => {
-							const first = index === 0;
-							return (
-								<li key={item.id} className="gsw-package-item">
-									<div className="gsw-package-text">
-										<DBHeadingH2 size="sm">{item.label[lang]}</DBHeadingH2>
-										<p className="gsw-package-description">{item.description[lang]}</p>
-									</div>
-									<a
-										className="db-button gsw-package-button"
-										data-variant={first ? 'brand' : 'outlined'}
-										href={toHref(item, lang)}
-										// The visible text alone ("Open") does not name the page.
-										aria-label={`${text.open}: ${item.label[lang]}`}
-									>
-										{text.open}
-									</a>
-								</li>
-							);
-						})}
-					</ol>
-				</DBCard>
+					{result.items.map((item) => (
+						<li key={item.id} className="gsw-package-item">
+							<div className="gsw-package-text">
+								{/* Font one step below the h1, set in the CSS: DBHeading has no
+										    size property. */}
+								<DBHeadingH2>{item.label[lang]}</DBHeadingH2>
+								<p className="gsw-package-description">{item.description[lang]}</p>
+							</div>
+							{/* Arrow only: the headline next to it says where it goes, and the
+								    package has one call to action above the list. data-no-text sets
+								    the font size to 0, so the name comes from the aria-label. */}
+							<a
+								className="db-button gsw-package-button"
+								data-variant="ghost"
+								data-icon="arrow_right"
+								data-no-text="true"
+								href={toHref(item, lang)}
+								aria-label={`${text.open}: ${item.label[lang]}`}
+							>
+								{text.open}
+							</a>
+						</li>
+					))}
+				</ol>
+				{/* Below the list: starting over on the start side, the call to action for
+				    the whole package on the end side. It opens the first page until the
+				    walkthrough across all pages exists. No Back button here: from the
+				    result the way on is the package or a new start, and the browser Back
+				    still steps to the last question. */}
 				<div className="gsw-actions">
-					<DBButton type="button" variant="ghost" onClick={goBack}>
-						{text.back}
-					</DBButton>
-					<DBButton type="button" variant="filled" onClick={restart}>
+					<DBButton type="button" variant="ghost" onClick={restart}>
 						{text.restart}
 					</DBButton>
+					<a
+						className="db-button gsw-start"
+						data-variant="brand"
+						// Arrow after the label: data-icon-trailing carries the icon name,
+						// data-icon would put it in front of the label.
+						data-icon-trailing="arrow_right"
+						href={toHref(result.items[0], lang)}
+					>
+						{text.start}
+					</a>
 				</div>
+				{/* The pages are added to the reading list automatically, so the hint is an
+				    overlay notification below the control panel instead of a block in the
+				    page: it belongs to the reading list button up there, not to the list of
+				    pages. It stays until it is closed. */}
+				{savedOpen && (
+					<DBNotification
+						className="gsw-saved"
+						variant="overlay"
+						semantic="informational"
+						headline={rlText.savedTitle}
+						// Custom icon instead of the icon of the semantic: the same bookmark as
+						// the button in the header, filled like there, because the list is never
+						// empty at this point.
+						icon="bookmark"
+						data-icon-variant="db-filled"
+						closeable
+						onClose={() => setSavedOpen(false)}
+						// Stops the countdown while it is read or operated.
+						onMouseEnter={() => setHintPaused(true)}
+						onMouseLeave={() => setHintPaused(false)}
+						onFocusCapture={() => setHintPaused(true)}
+						onBlurCapture={() => setHintPaused(false)}
+					>
+						{rlText.saved}
+					</DBNotification>
+				)}
 			</section>
 		);
 	}
@@ -240,7 +340,7 @@ const GetStartedWizard = ({ lang = 'en' }: { lang?: Lang }) => {
 						const tinted = checked || (question.id === 'role' && !current);
 						const id = `gsw-${question.id}-${option.id}`;
 						return (
-							// Same card spacing as the result card (spacing="large"). DBCard
+							// Card spacing="large" on every step. DBCard
 							// renders a div, which may not sit inside a label, so the radio
 							// gets its name through aria-labelledby and a click anywhere on
 							// the card selects it.
@@ -254,7 +354,8 @@ const GetStartedWizard = ({ lang = 'en' }: { lang?: Lang }) => {
 								elevationLevel={tinted ? '3' : undefined}
 								data-color={tinted ? colorFor(option.id) : undefined}
 								onClick={(event) => {
-									setSelection(option.id);
+									// A click on the selected card clears the selection again.
+									setSelection(checked ? undefined : option.id);
 									// A click on the card is not a click on a label, so the radio
 									// does not get the focus by itself. Without this, the focus and
 									// the arrow-key position stay on another card. focusVisible:
