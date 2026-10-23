@@ -2,6 +2,8 @@
 import { DBCard } from '@db-ux/react-core-components';
 import DisabledWrapper from '@template/components/DisabledWrapper/DisabledWrapper.astro';
 import TextImage from '@template/components/TextImage/TextImage.astro';
+import Visual from '@template/components/Visual/Visual.astro';
+import type { VisualName } from '@template/visuals';
 import './TeaserCard.css';
 
 /**
@@ -29,9 +31,9 @@ import './TeaserCard.css';
  * | `imageSrc`      | `string`                                          | –           | Image URL (light mode). Enables image teaser variant |
  * | `imageSrcDark`  | `string`                                          | –           | Image URL (dark mode). Falls back to imageSrc        |
  * | `imageAlt`      | `string`                                          | `title`     | Alt text for the image                               |
+ * | `visual`        | `VisualName`                                      | –           | Decorative inline visual from template/visuals/. Replaces imageSrc |
  * | `imagePosition` | `'top' \| 'bottom' \| 'left' \| 'right'`         | `'top'`     | Image placement relative to text                     |
- * | `imageWidth`    | `'50' \| '33' \| '66'`                            | –           | Image/text ratio for horizontal layouts              |
- * | `mask`          | `'fade-right' \| 'fade-left' \| ... \| 'fade-top-left'` | –    | CSS mask gradient applied to the image               |
+ * | `imageWidth`    | `'50' \| '33' \| '66' \| '25'`                    | –           | Image/text ratio for horizontal layouts              |
  */
 
 interface Props {
@@ -45,17 +47,10 @@ interface Props {
 		imageSrc?: string;
 		imageSrcDark?: string;
 		imageAlt?: string;
+		/** Decorative inline visual from `template/visuals/`. Replaces `imageSrc`. */
+		visual?: VisualName;
 		imagePosition?: 'top' | 'bottom' | 'left' | 'right';
-		imageWidth?: '50' | '33' | '66';
-		mask?:
-			| 'fade-right'
-			| 'fade-left'
-			| 'fade-top'
-			| 'fade-bottom'
-			| 'fade-bottom-right'
-			| 'fade-bottom-left'
-			| 'fade-top-right'
-			| 'fade-top-left';
+		imageWidth?: '50' | '33' | '66' | '25';
 	}[];
 	/** Fixed number of columns (e.g. 2 or 3). Uses auto-fit when omitted. */
 	columns?: number;
@@ -82,7 +77,7 @@ const disabledLabel = isDE ? 'Demnächst verfügbar' : 'Coming Soon';
 	class={`teaser-cards${columns ? ` teaser-cards-cols-${columns}` : ''}${headlineSize === 'large' ? ' teaser-cards-large' : headlineSize === 'medium' ? ' teaser-cards-medium' : ''}`}
 >
 	{teasers.map((teaser) => {
-		const hasImage = !!teaser.imageSrc;
+		const hasImage = !!teaser.imageSrc || !!teaser.visual;
 		const isDisabled = teaser.disabled === true;
 
 		const cardContent = hasImage ? (
@@ -90,12 +85,14 @@ const disabledLabel = isDE ? 'Demnächst verfügbar' : 'Coming Soon';
 				title={teaser.title}
 				imagePosition={teaser.imagePosition ?? 'top'}
 				imageWidth={teaser.imageWidth}
-				imageSrc={teaser.imageSrc!}
-				imageSrcDark={teaser.imageSrcDark}
-				imageAlt={teaser.imageAlt ?? teaser.title}
-				mask={teaser.mask}
+				imageSrc={teaser.visual ? undefined : teaser.imageSrc}
+				imageSrcDark={teaser.visual ? undefined : teaser.imageSrcDark}
+				imageAlt={teaser.visual ? undefined : (teaser.imageAlt ?? teaser.title)}
 				headlineLevel={headlineLevel}
 			>
+				{teaser.visual && (
+					<Visual slot="visual" name={teaser.visual} strokeScaling="scale" surface />
+				)}
 				{teaser.description}
 			</TextImage>
 		) : (

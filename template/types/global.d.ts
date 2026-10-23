@@ -31,6 +31,11 @@ declare interface FrontMatter {
 	 */
 	heroImageAlt?: string;
 	/**
+	 * Optional decorative inline visual from `template/visuals/` for the hero.
+	 * Takes precedence over `heroImage`.
+	 */
+	heroVisual?: import('@template/visuals').VisualName;
+	/**
 	 * The creation date of the page.
 	 */
 	date?: Date;
@@ -64,6 +69,10 @@ declare interface FrontMatter {
 	 * If true, load the model viewer web-component on this page.
 	 */
 	loadModelViewer?: boolean;
+	/**
+	 * If true, load the client script for the interactive code visuals on Products & Services pages.
+	 */
+	loadCodeVisuals?: boolean;
 
 	/**
 	 * Set a badge inside sub-navigation

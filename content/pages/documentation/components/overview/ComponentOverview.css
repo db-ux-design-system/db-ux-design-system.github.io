@@ -193,9 +193,9 @@
  * The design system styles arrive in the `db-ux` cascade layer, while the
  * platform's own `h3 { font: … }` override is unlayered — and unlayered styles
  * win over layered ones no matter how specific the layered selector is. So that
- * one line overrode `.db-heading[data-size]` and rendered every specimen at the
- * same 32 px, with the font weight flattened along with it, because `font` is a
- * shorthand and resets the weight too.
+ * one line overrode the size and weight rules of `.db-heading` and rendered every
+ * specimen at the same 32 px, with the font weight flattened along with it,
+ * because `font` is a shorthand and resets the weight too.
  *
  * `revert-layer` rolls the value back to the previous layer instead of naming a
  * replacement, so the size the component computes from its own property is what
@@ -206,6 +206,228 @@
  */
 .dba-main-content .overview-grid .db-heading {
 	font: revert-layer;
+}
+
+/*
+ * Fakes the headline sizes of both versions for the v5/v6 comparison.
+ *
+ * v6 dropped the `size` property of a heading and with it the v5 `3xl`–`3xs`
+ * scale. No specimen sets `visualSize` either, so every row would render at the
+ * default h3 size. Instead each row names its size in a data attribute (see
+ * Heading.tsx): a v5 row its v5 size in `data-v5-headline-size`, a v6 row its
+ * level in `data-v6-headline-size`. The values below restore the size per row.
+ *
+ * The values are hardcoded on purpose, the same way the v5 radii further down
+ * are, so the comparison stays stable when the team reworks the Heading defaults
+ * or the theme changes its tokens. Both sets are the regular density, the only
+ * one this page uses, with the mobile, tablet and desktop steps at the 48em and
+ * 64em breakpoints of the foundations. The line heights are the theme's unitless
+ * ratios multiplied out.
+ *
+ * - v5: the `--db-type-headline-<size>` tokens of @db-ux/db-theme 6.3.0 with
+ *   @db-ux/core-foundations 5.6.1.
+ * - v6: what `visualSize` h1–h6 of @db-ux/core-components 6.0.0 resolves to,
+ *   `--db-type-headline-xl` down to `--db-type-headline-2xs` of
+ *   @db-ux/db-theme 7.0.0 with @db-ux/core-foundations 6.0.0.
+ *
+ * Only `font-size` and `line-height` are set, so family and weight still come
+ * from the component and the `fontWeight` property keeps working. The selectors
+ * are one step more specific than the `revert-layer` rule above, which they have
+ * to beat for these two properties.
+ */
+.dba-main-content [data-overview-version='v5'] {
+	--dba-v5-headline-3xl-font-size: 2rem;
+	--dba-v5-headline-3xl-line-height: 2.5rem;
+	--dba-v5-headline-2xl-font-size: 2rem;
+	--dba-v5-headline-2xl-line-height: 2.5rem;
+	--dba-v5-headline-xl-font-size: 2rem;
+	--dba-v5-headline-xl-line-height: 2.5rem;
+	--dba-v5-headline-lg-font-size: 1.75rem;
+	--dba-v5-headline-lg-line-height: 2rem;
+	--dba-v5-headline-md-font-size: 1.5rem;
+	--dba-v5-headline-md-line-height: 1.75rem;
+	--dba-v5-headline-sm-font-size: 1.25rem;
+	--dba-v5-headline-sm-line-height: 1.5rem;
+	--dba-v5-headline-xs-font-size: 1rem;
+	--dba-v5-headline-xs-line-height: 1.25rem;
+	--dba-v5-headline-2xs-font-size: 0.875rem;
+	--dba-v5-headline-2xs-line-height: 1rem;
+	--dba-v5-headline-3xs-font-size: 0.875rem;
+	--dba-v5-headline-3xs-line-height: 1rem;
+}
+
+/* v5 tablet breakpoint. */
+@media (48em < width <= 64em) {
+	.dba-main-content [data-overview-version='v5'] {
+		--dba-v5-headline-3xl-font-size: 3rem;
+		--dba-v5-headline-3xl-line-height: 4rem;
+		--dba-v5-headline-2xl-font-size: 3rem;
+		--dba-v5-headline-2xl-line-height: 4rem;
+		--dba-v5-headline-xl-font-size: 2.5rem;
+		--dba-v5-headline-xl-line-height: 3rem;
+		--dba-v5-headline-lg-font-size: 2rem;
+		--dba-v5-headline-lg-line-height: 2.5rem;
+		--dba-v5-headline-md-font-size: 1.75rem;
+		--dba-v5-headline-md-line-height: 2rem;
+		--dba-v5-headline-sm-font-size: 1.5rem;
+		--dba-v5-headline-sm-line-height: 1.75rem;
+		--dba-v5-headline-xs-font-size: 1.25rem;
+		--dba-v5-headline-xs-line-height: 1.5rem;
+		--dba-v5-headline-2xs-font-size: 1rem;
+		--dba-v5-headline-2xs-line-height: 1.25rem;
+		--dba-v5-headline-3xs-font-size: 1rem;
+		--dba-v5-headline-3xs-line-height: 1.25rem;
+	}
+}
+
+/* v5 desktop breakpoint. */
+@media (64em < width) {
+	.dba-main-content [data-overview-version='v5'] {
+		--dba-v5-headline-3xl-font-size: 5rem;
+		--dba-v5-headline-3xl-line-height: 6rem;
+		--dba-v5-headline-2xl-font-size: 4rem;
+		--dba-v5-headline-2xl-line-height: 5rem;
+		--dba-v5-headline-xl-font-size: 3rem;
+		--dba-v5-headline-xl-line-height: 4rem;
+		--dba-v5-headline-lg-font-size: 2.5rem;
+		--dba-v5-headline-lg-line-height: 3rem;
+		--dba-v5-headline-md-font-size: 2rem;
+		--dba-v5-headline-md-line-height: 2.5rem;
+		--dba-v5-headline-sm-font-size: 1.75rem;
+		--dba-v5-headline-sm-line-height: 2rem;
+		--dba-v5-headline-xs-font-size: 1.5rem;
+		--dba-v5-headline-xs-line-height: 1.75rem;
+		--dba-v5-headline-2xs-font-size: 1.25rem;
+		--dba-v5-headline-2xs-line-height: 1.5rem;
+		--dba-v5-headline-3xs-font-size: 1rem;
+		--dba-v5-headline-3xs-line-height: 1.25rem;
+	}
+}
+
+.dba-main-content .overview-grid .db-heading[data-v5-headline-size='3xl'] {
+	font-size: var(--dba-v5-headline-3xl-font-size);
+	line-height: var(--dba-v5-headline-3xl-line-height);
+}
+
+.dba-main-content .overview-grid .db-heading[data-v5-headline-size='2xl'] {
+	font-size: var(--dba-v5-headline-2xl-font-size);
+	line-height: var(--dba-v5-headline-2xl-line-height);
+}
+
+.dba-main-content .overview-grid .db-heading[data-v5-headline-size='xl'] {
+	font-size: var(--dba-v5-headline-xl-font-size);
+	line-height: var(--dba-v5-headline-xl-line-height);
+}
+
+.dba-main-content .overview-grid .db-heading[data-v5-headline-size='lg'] {
+	font-size: var(--dba-v5-headline-lg-font-size);
+	line-height: var(--dba-v5-headline-lg-line-height);
+}
+
+.dba-main-content .overview-grid .db-heading[data-v5-headline-size='md'] {
+	font-size: var(--dba-v5-headline-md-font-size);
+	line-height: var(--dba-v5-headline-md-line-height);
+}
+
+.dba-main-content .overview-grid .db-heading[data-v5-headline-size='sm'] {
+	font-size: var(--dba-v5-headline-sm-font-size);
+	line-height: var(--dba-v5-headline-sm-line-height);
+}
+
+.dba-main-content .overview-grid .db-heading[data-v5-headline-size='xs'] {
+	font-size: var(--dba-v5-headline-xs-font-size);
+	line-height: var(--dba-v5-headline-xs-line-height);
+}
+
+.dba-main-content .overview-grid .db-heading[data-v5-headline-size='2xs'] {
+	font-size: var(--dba-v5-headline-2xs-font-size);
+	line-height: var(--dba-v5-headline-2xs-line-height);
+}
+
+.dba-main-content .overview-grid .db-heading[data-v5-headline-size='3xs'] {
+	font-size: var(--dba-v5-headline-3xs-font-size);
+	line-height: var(--dba-v5-headline-3xs-line-height);
+}
+
+.dba-main-content [data-overview-version='v6'] {
+	--dba-v6-headline-h1-font-size: 2rem;
+	--dba-v6-headline-h1-line-height: 2.5rem;
+	--dba-v6-headline-h2-font-size: 1.75rem;
+	--dba-v6-headline-h2-line-height: 2rem;
+	--dba-v6-headline-h3-font-size: 1.5rem;
+	--dba-v6-headline-h3-line-height: 1.75rem;
+	--dba-v6-headline-h4-font-size: 1.25rem;
+	--dba-v6-headline-h4-line-height: 1.5rem;
+	--dba-v6-headline-h5-font-size: 1rem;
+	--dba-v6-headline-h5-line-height: 1.25rem;
+	--dba-v6-headline-h6-font-size: 0.875rem;
+	--dba-v6-headline-h6-line-height: 1rem;
+}
+
+/* v6 tablet breakpoint. */
+@media (48em < width <= 64em) {
+	.dba-main-content [data-overview-version='v6'] {
+		--dba-v6-headline-h1-font-size: 2.5rem;
+		--dba-v6-headline-h1-line-height: 3rem;
+		--dba-v6-headline-h2-font-size: 2rem;
+		--dba-v6-headline-h2-line-height: 2.5rem;
+		--dba-v6-headline-h3-font-size: 1.75rem;
+		--dba-v6-headline-h3-line-height: 2rem;
+		--dba-v6-headline-h4-font-size: 1.5rem;
+		--dba-v6-headline-h4-line-height: 1.75rem;
+		--dba-v6-headline-h5-font-size: 1.25rem;
+		--dba-v6-headline-h5-line-height: 1.5rem;
+		--dba-v6-headline-h6-font-size: 1rem;
+		--dba-v6-headline-h6-line-height: 1.25rem;
+	}
+}
+
+/* v6 desktop breakpoint. */
+@media (64em < width) {
+	.dba-main-content [data-overview-version='v6'] {
+		--dba-v6-headline-h1-font-size: 3rem;
+		--dba-v6-headline-h1-line-height: 4rem;
+		--dba-v6-headline-h2-font-size: 2.5rem;
+		--dba-v6-headline-h2-line-height: 3rem;
+		--dba-v6-headline-h3-font-size: 2rem;
+		--dba-v6-headline-h3-line-height: 2.5rem;
+		--dba-v6-headline-h4-font-size: 1.75rem;
+		--dba-v6-headline-h4-line-height: 2rem;
+		--dba-v6-headline-h5-font-size: 1.5rem;
+		--dba-v6-headline-h5-line-height: 1.75rem;
+		--dba-v6-headline-h6-font-size: 1.25rem;
+		--dba-v6-headline-h6-line-height: 1.5rem;
+	}
+}
+
+.dba-main-content .overview-grid .db-heading[data-v6-headline-size='h1'] {
+	font-size: var(--dba-v6-headline-h1-font-size);
+	line-height: var(--dba-v6-headline-h1-line-height);
+}
+
+.dba-main-content .overview-grid .db-heading[data-v6-headline-size='h2'] {
+	font-size: var(--dba-v6-headline-h2-font-size);
+	line-height: var(--dba-v6-headline-h2-line-height);
+}
+
+.dba-main-content .overview-grid .db-heading[data-v6-headline-size='h3'] {
+	font-size: var(--dba-v6-headline-h3-font-size);
+	line-height: var(--dba-v6-headline-h3-line-height);
+}
+
+.dba-main-content .overview-grid .db-heading[data-v6-headline-size='h4'] {
+	font-size: var(--dba-v6-headline-h4-font-size);
+	line-height: var(--dba-v6-headline-h4-line-height);
+}
+
+.dba-main-content .overview-grid .db-heading[data-v6-headline-size='h5'] {
+	font-size: var(--dba-v6-headline-h5-font-size);
+	line-height: var(--dba-v6-headline-h5-line-height);
+}
+
+.dba-main-content .overview-grid .db-heading[data-v6-headline-size='h6'] {
+	font-size: var(--dba-v6-headline-h6-font-size);
+	line-height: var(--dba-v6-headline-h6-line-height);
 }
 
 /*
@@ -399,8 +621,8 @@
  * The heading block carries one set of rows per version, both of them in the
  * markup, because the preview is pure CSS and cannot change what is rendered.
  *
- * v5 shows the visual size scale the component has today, nine rows. v6 shows the
- * six semantic levels, which is all that is left of that scale there. Each set is
+ * v5 shows the nine-step visual size scale the component had, faked further up.
+ * v6 shows the six semantic levels, faked further up as well. Each set is
  * one grid item, so the hidden one is not a grid item at all and leaves neither a
  * track nor a gap behind — nothing below it shifts when the version changes.
  */

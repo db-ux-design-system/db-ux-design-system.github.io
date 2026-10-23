@@ -4,24 +4,17 @@ import { DBTag } from '@db-ux/react-core-components';
 
 interface Props {
 	title?: string;
-	imageSrc: string;
-	imageAlt: string;
+	/** Optional when the named slot `visual` is used instead of images. */
+	imageSrc?: string;
+	imageAlt?: string;
 	imageSrcDark?: string;
 	reversed?: boolean;
 	contentAlign?: 'start' | 'center' | 'end';
 	headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
-	imageWidth?: '50' | '33' | '66';
+	/** Image share of the row: '25' = text:image 3:1, '33' = 2:1, '50' = 1:1, '66' = 1:2. */
+	imageWidth?: '50' | '33' | '66' | '25';
 	layout?: 'horizontal' | 'vertical';
 	imagePosition?: 'top' | 'bottom' | 'left' | 'right';
-	mask?:
-		| 'fade-right'
-		| 'fade-left'
-		| 'fade-top'
-		| 'fade-bottom'
-		| 'fade-bottom-right'
-		| 'fade-bottom-left'
-		| 'fade-top-right'
-		| 'fade-top-left';
 	rounded?: boolean;
 	textGap?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
 	tag?: { label: string; emphasis?: 'strong' | 'weak' | 'default' };
@@ -35,12 +28,16 @@ const {
 	imagePosition = 'right',
 	contentAlign = 'center',
 	imageWidth = '66',
-	mask,
 	rounded = false,
 	textGap = 'sm',
 	headlineLevel = 2,
 	tag,
 } = Astro.props as Props;
+
+// Optional code visual that replaces the light/dark images.
+// Rendered content is checked because a conditional slot expression registers an empty slot.
+const visualHtml = Astro.slots.has('visual') ? (await Astro.slots.render('visual')).trim() : '';
+const hasVisual = visualHtml !== '';
 ---
 
 <div
@@ -74,22 +71,26 @@ const {
 			<slot />
 		</div>
 	</div>
-	<div class="text-image-image">
-		<img
-			class="lightmode-image"
-			src={imageSrc}
-			alt={imageAlt}
-			loading="lazy"
-			data-mask={mask}
-			data-rounded={rounded ? 'true' : undefined}
-		/>
-		<img
-			class="darkmode-image"
-			src={imageSrcDark ?? imageSrc}
-			alt={imageAlt}
-			loading="lazy"
-			data-mask={mask}
-			data-rounded={rounded ? 'true' : undefined}
-		/>
+	<div class:list={['text-image-image', { 'text-image-visual': hasVisual }]}>
+		{hasVisual ? (
+			<Fragment set:html={visualHtml} />
+		) : imageSrc ? (
+			<>
+				<img
+					class="lightmode-image"
+					src={imageSrc}
+					alt={imageAlt ?? ''}
+					loading="lazy"
+					data-rounded={rounded ? 'true' : undefined}
+				/>
+				<img
+					class="darkmode-image"
+					src={imageSrcDark ?? imageSrc}
+					alt={imageAlt ?? ''}
+					loading="lazy"
+					data-rounded={rounded ? 'true' : undefined}
+				/>
+			</>
+		) : null}
 	</div>
 </div>

@@ -1,0 +1,75 @@
+/* Base-Tokens code visual: red palette swatches on adaptive red rows */
+
+.base-tokens-visual {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-xs);
+	inline-size: 100%;
+}
+
+.base-tokens-visual-title {
+	margin: 0;
+	font: var(--db-type-body-md);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+}
+
+.base-tokens-visual-list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-xs);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	/* .db-color-red sets a level-1 background, the rows sit on the page background */
+	background-color: var(--db-adaptive-bg-basic-transparent-full-default);
+}
+
+.base-tokens-visual-item {
+	display: flex;
+	align-items: center;
+	gap: var(--db-spacing-fixed-sm);
+	padding: var(--db-spacing-fixed-2xs);
+	border-radius: var(--db-border-radius-xs);
+	background-color: var(--db-adaptive-bg-basic-transparent-semi-default);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	font: var(--db-type-body-md);
+}
+
+.base-tokens-visual-swatch {
+	flex-shrink: 0;
+	inline-size: var(--db-sizing-sm);
+	block-size: var(--db-sizing-sm);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-2xs);
+}
+
+/*
+ * Labels follow the original visual (Red-1 … Red-5).
+ * Mapped palette tokens: red-1, red-3, red-5, red-7, red-9.
+ * Swatch colors are identical in light mode and dark mode.
+ */
+.base-tokens-visual-item[data-step='1'] .base-tokens-visual-swatch {
+	background-color: var(--db-red-1);
+}
+
+.base-tokens-visual-item[data-step='2'] .base-tokens-visual-swatch {
+	background-color: var(--db-red-3);
+}
+
+.base-tokens-visual-item[data-step='3'] .base-tokens-visual-swatch {
+	background-color: var(--db-red-5);
+}
+
+.base-tokens-visual-item[data-step='4'] .base-tokens-visual-swatch {
+	background-color: var(--db-red-7);
+}
+
+.base-tokens-visual-item[data-step='5'] .base-tokens-visual-swatch {
+	background-color: var(--db-red-9);
+}
+
+/* The global content spacing must not add to the flex gap (0,4,0 beats its 0,3,0) */
+.dba-main-content .base-tokens-visual > .base-tokens-visual-title + .base-tokens-visual-list {
+	margin-block-start: 0;
+}

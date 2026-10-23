@@ -18,13 +18,6 @@
 	}
 }
 
-.db-control-panel-brand[data-icon='train']::before {
-	color: var(--db-brand-on-bg-basic-emphasis-70-default);
-	font-size: var(--db-sizing-sm);
-	inline-size: var(--db-sizing-sm);
-	block-size: var(--db-sizing-sm);
-}
-
 .db-stack .db-stack {
 	inline-size: auto;
 }
@@ -35,21 +28,6 @@
 
 .journey .db-input {
 	inline-size: 100%;
-}
-
-.pulse {
-	margin-block-end: var(--db-spacing-fixed-sm);
-
-	&::after {
-		content: '';
-		display: block;
-		position: relative;
-		inset-block-start: var(--db-spacing-fixed-sm);
-		inline-size: var(--db-sizing-sm);
-		block-size: var(--db-border-width-xs);
-		background-color: var(--db-brand-on-bg-basic-emphasis-70-default);
-		border-radius: var(--db-border-radius-full);
-	}
 }
 
 .buttongroup {
@@ -115,24 +93,6 @@
 .hero-section .db-card {
 	float: right;
 	max-inline-size: var(--db-container-xs);
-	background: var(--db-brand-origin-default);
-	color: var(--db-brand-on-origin-default);
-}
-
-.hero-section .db-card .db-button[data-variant='filled'] {
-	color: var(--db-brand-origin-default);
-	background: var(--db-brand-on-origin-default);
-}
-
-.hero-section .db-card .db-button[data-variant='filled']:hover,
-.hero-section .db-card .db-button[data-variant='filled']:focus {
-	background: var(--db-brand-on-origin-default);
-	opacity: var(--db-opacity-2xl);
-}
-
-.hero-section .db-card .db-button[data-variant='filled']:active {
-	background: var(--db-brand-on-origin-default);
-	opacity: var(--db-opacity-xl);
 }
 
 .hero-section h6,

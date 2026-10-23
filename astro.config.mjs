@@ -10,6 +10,7 @@ import { filterSitemapBlacklist } from './template/integrations/sitemap';
 
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import pngToWebpIntegration from './astro-integration-png-to-webp.mjs';
+import { pageFrontmatterPlugin } from './template/integrations/vite-plugin-page-frontmatter';
 
 // https://astro.build/config
 export default defineConfig({
@@ -41,6 +42,8 @@ export default defineConfig({
 	publicDir: './static',
 	vite: {
 		plugins: [
+			// Frontmatter-only page imports for navigation (prevents page CSS leaking to all pages).
+			pageFrontmatterPlugin(),
 			viteStaticCopy({
 				// Since vite-plugin-static-copy 4, the source directory structure is
 				// preserved in the output. `rename: { stripBase: true }` restores the

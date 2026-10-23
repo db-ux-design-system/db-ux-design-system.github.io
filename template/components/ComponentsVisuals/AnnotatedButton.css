@@ -1,0 +1,50 @@
+/* Annotated brand button: hatched inline padding plus token label (Shared Source, Smooth Handoff) */
+.shared-source-visual-annotated {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--db-spacing-fixed-2xs);
+}
+
+.shared-source-visual-button {
+	display: inline-flex;
+	position: relative;
+}
+
+/* Hatched overlay on the inline padding of the button (DBButton medium uses --db-spacing-fixed-md) */
+.shared-source-visual-padding {
+	position: absolute;
+	inset-block: 0;
+
+	/* Empty overlay: its width is the padding, the same token the button uses */
+	padding-inline-start: var(--db-spacing-fixed-md);
+	background: repeating-linear-gradient(
+		135deg,
+		var(--db-adaptive-origin-default) 0 var(--db-border-width-2xs),
+		transparent var(--db-border-width-2xs) var(--db-spacing-fixed-2xs)
+	);
+	pointer-events: none;
+}
+
+.shared-source-visual-padding[data-side='start'] {
+	inset-inline-start: 0;
+}
+
+.shared-source-visual-padding[data-side='end'] {
+	inset-inline-end: 0;
+}
+
+.shared-source-visual-token {
+	padding-inline: var(--db-spacing-fixed-xs);
+	background-color: var(--db-adaptive-origin-default);
+	color: var(--db-adaptive-on-origin-default);
+	font: var(--db-type-body-sm);
+	white-space: nowrap;
+}
+
+/* Narrow viewports: smaller token label */
+@media (width <= 767px) {
+	.shared-source-visual-token {
+		font: var(--db-type-body-xs);
+	}
+}

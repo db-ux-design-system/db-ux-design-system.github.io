@@ -1,0 +1,50 @@
+---
+import { DBIcon } from '@db-ux/react-core-components';
+import './ReleaseTimelineVisual.css';
+
+interface Props {
+	label: string;
+}
+
+const { label } = Astro.props;
+
+// Release history of the original visual, newest first; versions follow SemVer
+const releases = [
+	{
+		type: 'Major Release',
+		version: 'v4.0.0',
+		icon: 'arrow_up_right',
+		color: 'db-color-successful',
+	},
+	{
+		type: 'Minor Release',
+		version: 'v3.5.0',
+		icon: 'circular_arrows',
+		color: 'db-color-informational',
+	},
+	{ type: 'Bug Fix', version: 'v3.4.6', icon: 'bug', color: 'db-color-warning' },
+	{ type: 'Bug Fix', version: 'v3.4.5', icon: 'bug', color: 'db-color-warning' },
+	{
+		type: 'Minor Release',
+		version: 'v3.4.0',
+		icon: 'circular_arrows',
+		color: 'db-color-informational',
+	},
+];
+---
+
+<div class="release-timeline-visual" role="img" aria-label={label}>
+	<ul class="release-timeline-visual-list">
+		{releases.map((release) => (
+			<li class="release-timeline-visual-item">
+				<span class:list={['release-timeline-visual-icon', release.color]}>
+					<DBIcon icon={release.icon} />
+				</span>
+				<span class="release-timeline-visual-label">
+					<span class="release-timeline-visual-type">{release.type}</span>
+					<span class="release-timeline-visual-version">{release.version}</span>
+				</span>
+			</li>
+		))}
+	</ul>
+</div>

@@ -21,8 +21,6 @@
 }
 
 .cta-card {
-	background: var(--db-brand-origin-default);
-	color: var(--db-brand-on-origin-default);
 	min-block-size: var(--db-sizing-3xl);
 }
 
@@ -38,23 +36,6 @@
 .cta-card h2,
 .cta-card p {
 	margin: 0;
-}
-
-.cta-card .db-button.cta-button {
-	background-color: var(--db-brand-on-origin-default);
-	border-color: var(--db-brand-on-bg-basic-emphasis-70-default);
-	color: var(--db-brand-origin-default);
-}
-
-.cta-card .db-button.cta-button:hover,
-.cta-card .db-button.cta-button:focus {
-	background-color: var(--db-brand-on-origin-default);
-	opacity: var(--db-opacity-2xl);
-}
-
-.cta-card .db-button.cta-button:active {
-	background-color: var(--db-brand-on-origin-default);
-	opacity: var(--db-opacity-xl);
 }
 
 .db-control-panel-brand::before {
