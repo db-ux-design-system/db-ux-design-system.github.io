@@ -140,8 +140,8 @@ export const questions: Record<QuestionId, Question> = {
 		options: intentOptions(
 			t('Install the packages for your framework.', 'Installiere die Pakete für dein Framework.'),
 			t(
-				'Move an existing code base onto the packages.',
-				'Stelle eine bestehende Codebasis auf die Pakete um.',
+				'Replace your components and styles with the packages of the design system.',
+				'Ersetze deine Komponenten und Styles durch die Pakete des Design Systems.',
 			),
 			t(
 				'Try the components and look at example projects.',
