@@ -22,17 +22,13 @@ import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components'
 | `@db-ux/db-theme-icons`              | Functional icons as icon font and SVG         | Icons inside components and in running text |
 | `@db-ux/db-theme-illustrative-icons` | Illustrative icons as SVG and React component | Larger pictograms, for example in teasers   |
 
+{/* prettier-ignore */}
 <DBNotification
 	variant="standalone"
 	semantic="informational"
 	headline="Already included in the DB Theme"
 >
-	If you have installed{' '}
-	<DBLink href="/documentation/resources/packages/db-theme" variant="inline">
-		the DB Theme
-	</DBLink>
-	, both packages are already in your project and the theme loads the icon font. Install them
-	separately only if you use the icons without the theme.
+	If you have installed <DBLink href="/documentation/resources/packages/db-theme" variant="inline">the DB Theme</DBLink>, both packages are already in your project and the theme loads the icon font. Install them separately only if you use the icons without the theme.
 </DBNotification>
 
 Both packages are encrypted like the DB Theme. They need the same `ASSET_PASSWORD` and `ASSET_INIT_VECTOR` from the Marketing Portal – the steps are described under [Before you install](/documentation/resources/packages/db-theme#before-you-install).

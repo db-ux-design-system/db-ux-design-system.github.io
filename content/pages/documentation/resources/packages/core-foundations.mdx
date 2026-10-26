@@ -19,12 +19,9 @@ import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components'
 
 Use Core Foundation on its own only if you need the tokens without any component styles – for example when you build your own components on top of the design system, or when you only need icons and fonts.
 
+{/* prettier-ignore */}
 <DBNotification variant="standalone" semantic="informational" headline="Looking for components?">
-	In most cases{' '}
-	<DBLink href="/documentation/resources/packages/core-components" variant="inline">
-		Core Components
-	</DBLink>{' '}
-	is the better choice. It already includes this package.
+	In most cases <DBLink href="/documentation/resources/packages/core-components" variant="inline">Core Components</DBLink> is the better choice. It already includes this package.
 </DBNotification>
 
 Supported formats: CSS, SCSS and Tailwind.
@@ -94,13 +91,9 @@ Each of these makes one group of data attributes available everywhere. Import on
 @import '@db-ux/core-foundations/build/styles/colors/classes/all.css' layer(db-ux);
 ```
 
+{/* prettier-ignore */}
 <DBNotification variant="standalone" semantic="warning" headline="DB Theme">
-	The import above loads the whitelabel theme. Products of Deutsche Bahn additionally need the DB
-	Theme from the Marketing Portal – see{' '}
-	<DBLink href="/documentation/resources/packages/db-theme" variant="inline">
-		DB Theme
-	</DBLink>
-	.
+	The import above loads the whitelabel theme. Products of Deutsche Bahn additionally need the DB Theme from the Marketing Portal – see <DBLink href="/documentation/resources/packages/db-theme" variant="inline">DB Theme</DBLink>.
 </DBNotification>
 
 </DBSection>
