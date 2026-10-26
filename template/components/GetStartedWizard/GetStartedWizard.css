@@ -122,8 +122,11 @@
 	/* No `overflow-wrap: break-word` here. It lets the browser split a word at any
 	   character, which produced "Produktmanager:i|n". The long labels either contain a
 	   space or carry a soft hyphen (see wizard-flow.ts), so a break opportunity always
-	   exists and the word never has to overflow. */
-	hyphens: auto;
+	   exists and the word never has to overflow.
+	   manual, not auto: labels break at spaces and only hyphenate at a soft hyphen.
+	   With auto the browser also split words that wrap fine between words, such as
+	   "Pro-jekt" or "proj-ect". */
+	hyphens: manual;
 }
 
 /* Check icon of the selected card: sizing md in the top-right corner, inside

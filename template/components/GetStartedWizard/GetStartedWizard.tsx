@@ -1,6 +1,9 @@
 import { type CSSProperties, type FormEvent, useEffect, useRef, useState } from 'react';
 import { DBButton, DBCard, DBHeadingH2, DBNotification } from '@db-ux/react-core-components';
-import { addWizardResult } from '@template/components/ReadingList/reading-list-store';
+import {
+	addWizardResult,
+	useReadingList,
+} from '@template/components/ReadingList/reading-list-store';
 import { hasSeenSavedHint, markSavedHintSeen } from './saved-hint';
 import { toReadingListId } from '@template/components/ReadingList/reading-list-items';
 import { readingListTexts } from '@template/components/ReadingList/texts';
@@ -96,6 +99,8 @@ const GetStartedWizard = ({ lang = 'en' }: { lang?: Lang }) => {
 	const headingRef = useRef<HTMLHeadingElement>(null);
 	// Focus only moves after a user action, not on the initial page load.
 	const moveFocus = useRef(false);
+	// Set by "Next", read by the effect that adds the result to the reading list.
+	const submitted = useRef(false);
 
 	useEffect(() => {
 		const { pathname } = window.location;
@@ -179,13 +184,20 @@ const GetStartedWizard = ({ lang = 'en' }: { lang?: Lang }) => {
 	// shared link. Keyed on the answers only, and the store skips the result it added
 	// last: pages deleted from the list are not added again while the result stays on
 	// screen or after a reload.
+	// Reaching the result with "Next" is a deliberate run: its pages are added even if
+	// the same result was added before and its pages were deleted since.
 	const answersKey = asked.map((id) => `${id}=${answers[id]}`).join('&');
 	useEffect(() => {
 		if ('result' in step) {
-			addWizardResult(answersKey, step.result.items.map(toReadingListId));
+			addWizardResult(answersKey, step.result.items.map(toReadingListId), submitted.current);
 		}
+		submitted.current = false;
 		// step and answers follow answersKey.
 	}, [answersKey]);
+
+	const readingList = useReadingList();
+	const resultIds = 'result' in step ? step.result.items.map(toReadingListId) : [];
+	const resultOnList = readingList.items.some((item) => resultIds.includes(item.id));
 
 	const update = (nextAnswers: Answers, nextSelection?: string) => {
 		moveFocus.current = true;
@@ -208,7 +220,10 @@ const GetStartedWizard = ({ lang = 'en' }: { lang?: Lang }) => {
 		event.preventDefault();
 		if (!('question' in step)) return;
 		const value = selection ?? answers[step.question.id];
-		if (value) update({ ...answers, [step.question.id]: value });
+		if (value) {
+			submitted.current = true;
+			update({ ...answers, [step.question.id]: value });
+		}
 	};
 
 	if ('result' in step) {
@@ -285,8 +300,9 @@ const GetStartedWizard = ({ lang = 'en' }: { lang?: Lang }) => {
 				{/* The pages are added to the reading list automatically, so the hint is an
 				    overlay notification below the control panel instead of a block in the
 				    page: it belongs to the reading list button up there, not to the list of
-				    pages. It stays until it is closed. */}
-				{savedOpen && (
+				    pages. It stays until it is closed. Only shown while pages of this result are
+				    on the list, so it never claims a save that did not happen. */}
+				{savedOpen && resultOnList && (
 					<DBNotification
 						className="gsw-saved"
 						variant="overlay"

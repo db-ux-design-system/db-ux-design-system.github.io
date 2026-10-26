@@ -101,7 +101,7 @@ test('reading list is always visible and filled by the wizard result', async ({ 
 	expect(stored.items.map((item: { id: string }) => item.id)).toEqual([
 		'documentation/resources/design',
 		'documentation/learn/figma-tutorial',
-		'documentation/learn/about#where-to-ask-which-question',
+		'documentation/learn/about#where-to-get-help',
 	]);
 	await expect(trigger).toHaveAccessibleName('Reading list, 3 pages');
 	await expect(trigger.locator('.db-badge')).toHaveText('3');
@@ -119,7 +119,7 @@ test('reading list is always visible and filled by the wizard result', async ({ 
 	await expect(popover.locator('.rl-item-link')).toHaveText([
 		'Design Resources',
 		'Figma Tutorial',
-		'Where to ask which question',
+		'Where to get help',
 	]);
 	await expect(popover.locator('input[type=checkbox]')).toHaveCount(0);
 	await expect(popover.getByRole('button', { name: /Start again|Remove$/ })).toHaveCount(0);
@@ -127,9 +127,7 @@ test('reading list is always visible and filled by the wizard result', async ({ 
 	// Delete: the focus moves to the delete button that takes the row's place.
 	await popover.getByRole('button', { name: 'Remove: Figma Tutorial' }).click();
 	await expect(popover.locator('.rl-item')).toHaveCount(2);
-	await expect(
-		popover.getByRole('button', { name: 'Remove: Where to ask which question' }),
-	).toBeFocused();
+	await expect(popover.getByRole('button', { name: 'Remove: Where to get help' })).toBeFocused();
 	await expect(trigger).toHaveAccessibleName('Reading list, 2 pages');
 
 	// The same result again (reload) does not bring the deleted page back.
@@ -246,7 +244,7 @@ test('a new result replaces the pages of the one before', async ({ page }) => {
 			'bookmark:documentation/learn/figma',
 			'wizard:documentation/resources/design',
 			'wizard:documentation/learn/figma-tutorial',
-			'wizard:documentation/learn/about#where-to-ask-which-question',
+			'wizard:documentation/learn/about#where-to-get-help',
 		]);
 
 	// Start again with another role: only the pages of the new package are left, the
@@ -271,6 +269,64 @@ test('a new result replaces the pages of the one before', async ({ page }) => {
 	await page.reload();
 	await waitForDBShell(page);
 	expect((await readList(page)).items).toHaveLength(3);
+});
+
+test('going through the wizard again adds the same result after Remove all', async ({ page }) => {
+	await page.goto('/documentation/get-started?role=design&designIntent=new');
+	await waitForDBShell(page);
+	await expect.poll(async () => (await readList(page))?.items.length).toBe(3);
+	const control = page.locator('.db-control-panel-desktop .rl-control');
+	await control.locator('button.rl-trigger').hover();
+	await control.getByRole('button', { name: 'Remove all' }).click();
+	await expect.poll(async () => (await readList(page)).items).toEqual([]);
+
+	// A reload of the result must not bring the pages back, and the hint says nothing.
+	await page.reload();
+	await waitForDBShell(page);
+	await expect(page.locator('#gsw-heading')).toBeVisible();
+	expect((await readList(page)).items).toEqual([]);
+	await expect(page.locator('.gsw-saved')).toHaveCount(0);
+
+	// Going through the wizard to the same result adds its pages again.
+	await page.mouse.move(0, 0);
+	await page.getByRole('button', { name: 'Start again' }).click();
+	await page
+		.locator('.gsw-option', { has: page.getByRole('radio', { name: 'Designer', exact: true }) })
+		.click();
+	await page.getByRole('button', { name: 'Next', exact: true }).click();
+	await page
+		.locator('.gsw-option', { has: page.getByRole('radio', { name: 'Start a new project' }) })
+		.click();
+	await page.getByRole('button', { name: 'Next', exact: true }).click();
+	await expect.poll(async () => (await readList(page)).items.length).toBe(3);
+	await expect(page.locator('.gsw-saved')).toBeVisible();
+});
+
+test('pages saved under a renamed anchor are kept with the new id', async ({ page }) => {
+	await page.goto('/documentation/learn');
+	await waitForDBShell(page);
+	await page.evaluate(
+		(key) =>
+			localStorage.setItem(
+				key,
+				JSON.stringify({
+					version: 1,
+					items: [
+						{ id: 'documentation/learn/about#where-to-ask-which-question', source: 'wizard' },
+						{ id: 'documentation/learn/about#where-to-get-help', source: 'wizard' },
+					],
+				}),
+			),
+		KEY,
+	);
+	await page.reload();
+	await waitForDBShell(page);
+	const control = page.locator('.db-control-panel-desktop .rl-control');
+	await control.locator('button.rl-trigger').hover();
+	// Old and new id are the same page: listed once, linking to the current anchor.
+	const link = control.locator('.rl-item-link');
+	await expect(link).toHaveCount(1);
+	await expect(link).toHaveAttribute('href', '/documentation/learn/about#where-to-get-help');
 });
 
 test('Remove all empties the list and is only shown with entries', async ({ page }) => {
@@ -381,7 +437,7 @@ test('wizard steps by click, with focus, check icon and Back', async ({ page }) 
 	).toHaveCount(1);
 
 	await page.getByRole('button', { name: 'Next' }).click();
-	const newProject = page.getByRole('radio', { name: 'New project' });
+	const newProject = page.getByRole('radio', { name: 'Start a new project' });
 	await page.locator('.gsw-option', { has: newProject }).click();
 	await expect(newProject).toBeChecked();
 	await page.getByRole('button', { name: 'Next' }).click();
@@ -399,7 +455,7 @@ test('browser Back and Forward between steps and from a result link', async ({ p
 	await page.getByRole('button', { name: 'Next', exact: true }).click();
 	await expect(heading).toHaveText('What are you about to do?');
 	await page
-		.locator('.gsw-option', { has: page.getByRole('radio', { name: 'New project' }) })
+		.locator('.gsw-option', { has: page.getByRole('radio', { name: 'Start a new project' }) })
 		.click();
 	await page.getByRole('button', { name: 'Next', exact: true }).click();
 	await expect(heading).toHaveText('Your next steps');
@@ -445,7 +501,7 @@ test('German wizard path', async ({ page }) => {
 	await page.getByRole('button', { name: 'Weiter' }).click();
 	await expect(heading).toHaveText('Was hast du vor?');
 	await page
-		.locator('.gsw-option', { has: page.getByRole('radio', { name: 'Neues Projekt' }) })
+		.locator('.gsw-option', { has: page.getByRole('radio', { name: 'Neues Projekt starten' }) })
 		.click();
 	await page.getByRole('button', { name: 'Weiter' }).click();
 

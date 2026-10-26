@@ -60,15 +60,16 @@ export type Answers = Partial<Record<QuestionId, string>>;
 const t = (en: string, de: string): Text => ({ en, de });
 
 const intentOptions = (newText: Text, existingText: Text, learnText: Text): Option[] => [
-	{ id: 'new', label: t('New project', 'Neues Projekt'), description: newText },
+	// Actions, not objects: the question asks what the user is about to do.
+	{ id: 'new', label: t('Start a new project', 'Neues Projekt starten'), description: newText },
 	{
 		id: 'existing',
-		label: t('Existing project', 'Bestehendes Projekt'),
+		label: t('Move an existing project', 'Bestehendes Projekt umstellen'),
 		description: existingText,
 	},
 	{
 		id: 'learn',
-		label: t('Explore', 'Kennenlernen'),
+		label: t('Explore the design system', 'Design System kennenlernen'),
 		description: learnText,
 	},
 ];
@@ -124,8 +125,8 @@ export const questions: Record<QuestionId, Question> = {
 				'Richte die Figma-Bibliotheken für eine neue Datei ein.',
 			),
 			t(
-				'Move existing designs onto the design system.',
-				'Stelle bestehende Designs auf das Design System um.',
+				'Replace your components and styles with those of the design system.',
+				'Ersetze deine Komponenten und Styles durch die des Design Systems.',
 			),
 			t(
 				'Find out what it contains and how binding it is.',
@@ -154,32 +155,35 @@ export const questions: Record<QuestionId, Question> = {
 		options: [
 			{
 				id: 'evaluate',
-				label: t('Evaluate', 'Bewerten'),
+				label: t('Evaluate the design system', 'Design System bewerten'),
 				description: t(
-					'What it contains, what a status means and how binding it is.',
-					'Was es enthält, was ein Status bedeutet und wie verbindlich es ist.',
+					'Find out what it contains, what a status means and how binding it is.',
+					'Erfahre, was es enthält, was ein Status bedeutet und wie verbindlich es ist.',
 				),
 			},
 			{
 				id: 'plan',
-				label: t('Plan adoption', 'Einführung planen'),
+				label: t('Plan the adoption', 'Einführung planen'),
 				description: t(
-					'How releases are versioned and announced.',
-					'Wie Releases versioniert und angekündigt werden.',
+					'Estimate which components are ready for production and how often updates come.',
+					'Schätze ab, welche Komponenten produktionsreif sind und wie oft Updates kommen.',
 				),
 			},
 			{
 				id: 'existing',
-				label: t('Existing product', 'Bestehendes Produkt'),
+				label: t('Move an existing product', 'Bestehendes Produkt umstellen'),
 				description: t(
-					'What changes when a product moves onto the design system.',
-					'Was sich ändert, wenn ein Produkt auf das Design System wechselt.',
+					'Find out what changes when your product moves onto the design system.',
+					'Erfahre, was sich ändert, wenn dein Produkt auf das Design System wechselt.',
 				),
 			},
 			{
 				id: 'follow',
 				label: t('Follow updates', 'Updates verfolgen'),
-				description: t('Release notes and the roadmap.', 'Release Notes und die Roadmap.'),
+				description: t(
+					'Read the release notes and look at the roadmap.',
+					'Lies die Release Notes und sieh dir die Roadmap an.',
+				),
 			},
 		],
 	},
@@ -314,12 +318,8 @@ export const packagePages: Record<string, PackagePage> = Object.fromEntries(
 				'Was das Design System enthält, wie es veröffentlicht wird und wie verbindlich es ist.',
 			),
 		),
-		page(
-			'learn/about',
-			t('Roadmap', 'Roadmap'),
-			t('What the coming releases bring.', 'Was die kommenden Releases bringen.'),
-			t('roadmap', 'roadmap'),
-		),
+		// Anchors per language: the EN About page was reworked, the DE page not yet. The id
+		// is built from the EN anchor; renamed ids are mapped in reading-list-store.ts.
 		page(
 			'learn/about',
 			t('What a status means', 'Was ein Status bedeutet'),
@@ -327,16 +327,16 @@ export const packagePages: Record<string, PackagePage> = Object.fromEntries(
 				'Check which components are ready for production to estimate the effort.',
 				'Prüfe, welche Komponenten produktionsreif sind, um den Aufwand abzuschätzen.',
 			),
-			t('what-a-status-means', 'was-ein-status-bedeutet'),
+			t('every-content-has-a-status', 'was-ein-status-bedeutet'),
 		),
 		page(
 			'learn/about',
-			t('Where to ask which question', 'Wohin welche Frage gehört'),
+			t('Where to get help', 'Wohin welche Frage gehört'),
 			t(
 				'Teams channels, consultation hour and issue trackers.',
 				'Teams-Kanäle, Sprechstunde und Issue-Tracker.',
 			),
-			t('where-to-ask-which-question', 'wohin-welche-frage-gehört'),
+			t('where-to-get-help', 'wohin-welche-frage-gehört'),
 		),
 		page(
 			'foundation',
@@ -443,7 +443,7 @@ export const packagePages: Record<string, PackagePage> = Object.fromEntries(
 	].map((item) => [item.id, item]),
 );
 
-const HELP = 'learn/about#where-to-ask-which-question';
+const HELP = 'learn/about#where-to-get-help';
 
 /**
  * Resolves the ids to pages and appends "Where to ask which question" as the last
@@ -597,23 +597,27 @@ export function next(answers: Answers): { question: Question } | { result: Resul
 					);
 				case 'plan':
 					return done(
-						t('Versioning', 'Versionierung'),
+						t('Plan the adoption', 'Einführung planen'),
 						t(
-							'How releases are versioned and announced, so you can plan updates in your product.',
-							'Wie Releases versioniert und angekündigt werden, damit du Updates in deinem Produkt planen kannst.',
+							'Which components are ready for production and how releases are versioned, so you can estimate the effort.',
+							'Welche Komponenten produktionsreif sind und wie Releases versioniert werden, damit du den Aufwand abschätzen kannst.',
 						),
-						t('Go to versioning', 'Zur Versionierung'),
-						['releases/versioning', 'releases/release-notes'],
+						t('Go to the components', 'Zu den Komponenten'),
+						// Adoption: which components are ready (status in the overview), then how
+						// releases are versioned. The release notes belong to "Follow updates".
+						['components', 'releases/versioning'],
 					);
 				case 'follow':
 					return done(
 						t('Release Notes', 'Release Notes'),
 						t(
-							'Release notes for every version and the roadmap of the coming releases.',
-							'Release Notes zu jeder Version und die Roadmap der kommenden Releases.',
+							'Release notes for every version, each with a link to its roadmap.',
+							'Release Notes zu jeder Version, jeweils mit Link zur Roadmap.',
 						),
 						t('Go to the release notes', 'Zu den Release Notes'),
-						['releases/release-notes', 'learn/about#roadmap'],
+						// The EN About page has no roadmap section anymore; every release note
+						// links to the roadmap of its version.
+						['releases/release-notes'],
 					);
 				default:
 					if (!answers.productBasis) return ask('productBasis');
@@ -634,7 +638,7 @@ export function next(answers: Answers): { question: Question } | { result: Resul
 									'Prüfe, welche Komponenten produktionsreif sind, um den Aufwand abzuschätzen.',
 								),
 								t('Check the status', 'Status prüfen'),
-								['learn/about#what-a-status-means', 'components'],
+								['learn/about#every-content-has-a-status', 'components'],
 							);
 			}
 
