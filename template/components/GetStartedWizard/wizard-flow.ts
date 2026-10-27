@@ -8,6 +8,7 @@
  */
 
 import { toDeSlug } from '@template/i18n/slug-mapping';
+import { withBasePath } from '@template/utils/base-path';
 
 export type Lang = 'en' | 'de';
 export type Text = Record<Lang, string>;
@@ -465,10 +466,11 @@ const HELP = 'learn/about#where-to-get-help';
 const withHelp = (ids: string[]): PackagePage[] =>
 	(ids.includes('learn/about') ? ids : [...ids, HELP]).map((id) => packagePages[id]);
 
-/** Link target of a page in the given language. */
+/** Link target of a page in the given language, including the configured base path. */
 export const toHref = (target: { path: string; anchor?: Text }, lang: Lang) => {
 	const path = lang === 'de' ? `/de/${toDeSlug(target.path.replace(/^\//, ''))}` : target.path;
-	return target.anchor ? `${path}#${target.anchor[lang]}` : path;
+	const href = withBasePath(path);
+	return target.anchor ? `${href}#${target.anchor[lang]}` : href;
 };
 
 /** URL of the wizard start page in the given language. */
