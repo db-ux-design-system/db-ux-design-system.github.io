@@ -35,14 +35,17 @@ html[data-learn-intro] .page-hero-description {
 	line-height: 150%;
 }
 
-/* Heading → text, step 1 (the hero). The gap alone sets the distance: the global content
-   spacing would add a top margin to the description, which follows the headline row. */
+/* Heading → text, step 1 (the hero): the same distance as below the h2 of every other
+   step. Headline and description both sit inside the text group, so the gap of
+   .page-hero-content does not reach them; the description carries the distance itself.
+   The selector outranks the text spacing of the text group and the global content
+   spacing. */
 html[data-learn-view='stepper'] .page-hero-content {
 	gap: var(--db-spacing-fixed-2xl);
 }
 
 html[data-learn-view='stepper'] .dba-main-content .page-hero-description {
-	margin-block-start: 0;
+	margin-block-start: var(--db-spacing-fixed-2xl);
 }
 
 /*

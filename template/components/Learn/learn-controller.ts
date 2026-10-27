@@ -203,6 +203,18 @@ function setup(root: HTMLElement): boolean {
 		}
 		const rawStep = Number(params.get('step'));
 		stepIndex = Number.isFinite(rawStep) && rawStep > 0 ? Math.min(rawStep - 1, total - 1) : 0;
+		// A link to a section (e.g. from the Get Started wizard) opens the step that
+		// contains it, unless the URL names a step itself.
+		const hashStep = params.has('step') ? -1 : stepOfHash();
+		if (hashStep >= 0) stepIndex = hashStep;
+	};
+
+	/** Index of the step that contains the element of the URL hash, or -1. */
+	const stepOfHash = () => {
+		const id = decodeURIComponent(window.location.hash.slice(1));
+		const target = id ? document.getElementById(id) : null;
+		if (!target) return -1;
+		return steps.findIndex((step) => step.element?.contains(target));
 	};
 
 	const writeUrl = () => {
@@ -368,6 +380,14 @@ function setup(root: HTMLElement): boolean {
 	}
 	root.addEventListener('toggle', () => fit(), true);
 	root.addEventListener('load', () => fit(), true);
+
+	// A section link on the same page: in the stepper, switch to its step. The article
+	// view scrolls to the heading on its own.
+	window.addEventListener('hashchange', () => {
+		if (view !== 'stepper') return;
+		const hashStep = stepOfHash();
+		if (hashStep >= 0) goTo(hashStep);
+	});
 
 	readInitial();
 	render(false);
