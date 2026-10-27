@@ -591,7 +591,7 @@ test('German wizard path', async ({ page }) => {
 	expect(hrefs).toHaveLength(3);
 	for (const href of hrefs) expect(href).toMatch(/^\/de\/dokumentation\//);
 	// The anchor of the help item is localized as well.
-	expect(hrefs.at(-1)).toMatch(/#wohin-welche-frage-geh/);
+	expect(hrefs.at(-1)).toMatch(/#wo-du-hilfe-bekommst/);
 });
 
 test('the hint stays the first time and disappears on the next result', async ({ page }) => {

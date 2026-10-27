@@ -4,69 +4,81 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 title: 'Über das Design System'
 headline: 'Über das Design System'
-description: 'Was das DB UX Design System enthält, wie es veröffentlicht wird, was ein Status bedeutet und wohin welche Frage gehört.'
+description: 'Die gemeinsame Basis für die digitalen Produkte der Deutschen Bahn – was sie ist, was sie enthält und wie verbindlich sie ist.'
 readingList: true
 align: start
 toc: true
 tocMaxDepth: 2
 order: 1
+category: 'Foundations'
+keywords:
+  [
+    'überblick',
+    'design system',
+    'generation 3',
+    'db ui',
+    'status',
+    'stable',
+    'beta',
+    'concept',
+    'db theme',
+    'hilfe',
+    'kontakt',
+    'bestandteile',
+    'foundation',
+    'komponenten',
+    'pattern',
+    'erweiterungen',
+    'versionierung',
+    'release',
+    'lizenz',
+  ]
+stepper: true
 ---
 
-import { DBSection } from '@db-ux/react-core-components';
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 
-<DBSection spacing="small" width="auto">
+<LearnBlock>
 
-## Was das Design System ist
+## Eine Basis für Design und Code
 
 Das DB UX Design System ist die gemeinsame Basis für die digitalen Produkte der Deutschen Bahn. Design und Entwicklung nutzen dieselbe Foundation, dieselben Komponenten und dieselben Namen – in Figma und im Code.
 
-Diese Dokumentation beschreibt **Generation 3**, die aktuelle Generation. Ihr Vorgänger ist Generation 2, früher bekannt als DB UI. Wenn du noch damit arbeitest, beginne mit der [Migration von DB UI](/de/dokumentation/lernen/migration).
+Diese Dokumentation beschreibt Generation 3, die aktuelle Generation.
 
-</DBSection>
+</LearnBlock>
 
-<DBSection spacing="small" width="auto">
+<LearnBlock>
 
 ## Was es enthält
 
-| Bestandteil   | Inhalt                                                                                              | Dokumentation                                                                                                  |
-| ------------- | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| Foundation    | Tokens für Farben, Typografie, Abstände, Density und mehr                                           | [Foundation](/de/dokumentation/foundation)                                                                     |
-| Komponenten   | Bausteine für Interfaces in Design und Code                                                         | [Komponenten](/de/dokumentation/komponenten)                                                                   |
-| Pattern       | Wiederkehrende Lösungen, die mehrere Komponenten kombinieren                                        | [Pattern](/de/dokumentation/pattern)                                                                           |
-| Erweiterungen | Zusätzliche Bibliotheken für bestimmte Bereiche, etwa Reisendeninformation oder Datenvisualisierung | [Erweiterungen](/de/dokumentation/erweiterungen)                                                               |
-| Themes        | Das DB Theme und das S-Bahn Theme, die die Marke auf alles oben Genannte bringen                    | [DB Theme](/de/dokumentation/ressourcen/pakete/db-theme)                                       |
-| Werkzeuge     | Figma-Bibliotheken und Plugins, Code-Pakete, der MCP Server für KI-Agenten                          | [Design-Ressourcen](/de/dokumentation/ressourcen/design), [Pakete](/de/dokumentation/ressourcen/pakete) |
+Die Foundation für die Tokens, Komponenten als Bausteine, Pattern, die sie kombinieren, Erweiterungen für besondere Bereiche und Themes, die die Marke anwenden. Die Komponenten gibt es als CSS, als Web Components und für Angular, React und Vue.
 
-Der Kern des Systems ist für alle Produkte gleich. Erweiterungen bauen für bestimmte Bereiche darauf auf.
+<LearnAside>
 
-### Plattformen
+| Bestandteil   | Inhalt                                                                | Dokumentation                                            |
+| ------------- | --------------------------------------------------------------------- | -------------------------------------------------------- |
+| Foundation    | Tokens für Farben, Typografie, Abstände und Density                   | [Foundation](/de/dokumentation/foundation)               |
+| Komponenten   | Bausteine für Interfaces in Design und Code                           | [Komponenten](/de/dokumentation/komponenten)             |
+| Pattern       | Wiederkehrende Lösungen, die mehrere Komponenten kombinieren          | [Pattern](/de/dokumentation/pattern)                     |
+| Erweiterungen | Bibliotheken für Bereiche wie Reisendeninformation oder DataViz       | [Erweiterungen](/de/dokumentation/erweiterungen)         |
+| Themes        | Bringen eine Marke auf alles oben Genannte, zum Beispiel das DB Theme | [DB Theme](/de/dokumentation/ressourcen/pakete/db-theme) |
 
-Die Komponenten gibt es für das Web: als CSS, als Web Components und für Angular, React und Vue. Native Komponenten für iOS (SwiftUI) und Android (Jetpack Compose) entstehen in eigenen Repositories – siehe [Native Plattformen](/de/dokumentation/ressourcen/pakete/native).
+Native Komponenten für iOS und Android liegen in [eigenen Paketen](/de/dokumentation/ressourcen/pakete/native).
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## Wie es veröffentlicht wird
+<LearnBlock>
 
-Das Design System folgt der semantischen Versionierung: `MAJOR.MINOR.PATCH`.
+## Jeder Inhalt hat einen Status
 
-| Release | Inhalt                                          | Rhythmus                                                  |
-| ------- | ----------------------------------------------- | --------------------------------------------------------- |
-| Major   | Breaking Changes                                | geplant, mindestens 2–3 Monate Abstand, vorab angekündigt |
-| Minor   | neue Funktionen, vollständig abwärtskompatibel  | im Zwei-Wochen-Rhythmus der Sprints                       |
-| Patch   | Fehlerbehebungen und sehr kleine Verbesserungen | nach Bedarf                                               |
+Ein Status zeigt dir, wie ausgereift eine Komponente, ein Pattern oder ein Template ist. **Stable** ist als UX-Standard verpflichtend, **Beta** wird empfohlen, **Concept** dient nur als Design-Referenz.
 
-Major- und Minor-Versionsnummern sind zwischen Design und Entwicklung synchron. Die Details inklusive aller Kommunikationskanäle stehen unter [Versionierung](/de/dokumentation/releases/versionierung).
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Was ein Status bedeutet
-
-Jede Komponente, jedes Pattern und jedes Template hat einen Status. Er zeigt, wie ausgereift und verlässlich der Inhalt ist.
+<LearnAside>
 
 | Status     | Bedeutung                                                                                                                 |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------- |
@@ -76,68 +88,57 @@ Jede Komponente, jedes Pattern und jedes Template hat einen Status. Er zeigt, wi
 | Legacy     | Wird nicht mehr aktiv weiterentwickelt, nur noch kritische Fehlerbehebungen. Migriere auf aktuelle Inhalte.               |
 | Deprecated | Wird in einem kommenden Major-Release entfernt. Plane den Ersatz ein.                                                     |
 
-Was du von jedem Status im Detail erwarten kannst, steht unter [Content Status](/de/dokumentation/releases/content-status). Den aktuellen Status jeder Komponente zeigt das [Board zum Komponentenstatus](https://github.com/orgs/db-ux-design-system/projects/4/views/1).
+Releases folgen der semantischen Versionierung: Major-Releases werden vorab angekündigt, Minor- und Patch-Releases erscheinen laufend. Mehr dazu unter [Content Status](/de/dokumentation/releases/content-status) und [Versionierung](/de/dokumentation/releases/versionierung).
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
+
+<LearnBlock>
 
 ## Wie verbindlich es ist
 
-| Bestandteil                | Verbindlichkeit                                                                                      |
-| -------------------------- | ---------------------------------------------------------------------------------------------------- |
-| Inhalte mit Status Stable  | **verpflichtend** als UX-Standard                                                                    |
-| Inhalte mit Status Beta    | empfohlen – teste gründlich und gib Feedback                                                         |
-| Inhalte mit Status Concept | nur als Design-Referenz, mit Änderungen ist zu rechnen                                               |
-| DB Theme                   | **erforderlich** für alle Websites und Anwendungen der Deutschen Bahn, außerhalb davon nicht erlaubt |
+Inhalte mit Status Stable sind der verpflichtende UX-Standard. Das DB Theme ist für alle Websites und Anwendungen der Deutschen Bahn erforderlich und darf außerhalb davon nicht verwendet werden.
 
-Bei Fragen zur Einführung des Design Systems in deinem Produkt wende dich an Luis Schroff, den Product Owner des Design Systems: [luis.schroff@deutschebahn.com](mailto:luis.schroff@deutschebahn.com).
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Wohin welche Frage gehört
-
-| Dein Thema                                                                  | Wohin damit                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Design-Feedback, Design-Fehler, Feature-Wünsche, Feedback zur Dokumentation | [GitHub: core](https://github.com/db-ux-design-system/core/issues/new/choose)                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Fehler und Features in den Code-Paketen                                     | [GitHub: core-web](https://github.com/db-ux-design-system/core-web/issues/new/choose)                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| Erweiterung DataViz                                                         | [GitHub: extension-dataviz](https://github.com/db-ux-design-system/extension-dataviz/issues)                                                                                                                                                                                                                                                                                                                                                                                                               |
-| Erweiterung Reisendeninformation                                            | [GitHub: extension-ri](https://github.com/db-ux-design-system/extension-ri/issues)                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| Erweiterung Table                                                           | [GitHub: extension-table](https://github.com/db-ux-design-system/extension-table/issues)                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| Fragen und Austausch mit der Community                                      | Teams-Kanäle für [Übergreifendes und Design](https://teams.microsoft.com/l/channel/19%3A7dd9929be1fe494c823b11e0e2d22341%40thread.skype/DB%20UX%20Design%20System?groupId=72c53609-2941-46dd-8be9-e4d1d2c45c77&tenantId=a1a72d9c-49e6-4f6d-9af6-5aafa1183bfd) und [Entwicklung](https://teams.microsoft.com/l/channel/19%3A6c0e92ce4aef409598ff77c4cd06e001%40thread.skype/SIG%20-%20DB%20UX%20Design%20System?groupId=2f363785-c59e-4763-9bc3-8e13998a4588&tenantId=a1a72d9c-49e6-4f6d-9af6-5aafa1183bfd) |
-| Fragen im direkten Gespräch                                                 | Sprechstunde Help, Hints & Hugs: alle zwei Wochen mittwochs um 9 Uhr. Den Termin findest du im Community-Kalender.                                                                                                                                                                                                                                                                                                                                                                                         |
-| Alles andere                                                                | [db-ux-designsystem@deutschebahn.com](mailto:db-ux-designsystem@deutschebahn.com)                                                                                                                                                                                                                                                                                                                                                                                                                          |
-
-Prüfe vorher, ob es das Issue schon gibt. Weitere Wege, dich einzubringen, findest du unter [Mitwirken](/de/dokumentation/mitwirken).
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Roadmap
-
-| Board                       | Link                                                                              |
-| --------------------------- | --------------------------------------------------------------------------------- |
-| Roadmap                     | [GitHub-Projekt](https://github.com/orgs/db-ux-design-system/projects/4/views/8)  |
-| Komponentenstatus           | [GitHub-Projekt](https://github.com/orgs/db-ux-design-system/projects/4/views/1)  |
-| Releases des Design Systems | [GitHub-Projekt](https://github.com/orgs/db-ux-design-system/projects/4/views/12) |
-| Releases der Icon-Pakete    | [GitHub-Projekt](https://github.com/orgs/db-ux-design-system/projects/4/views/15) |
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Marke und Lizenz
+<LearnAside>
 
 Der Code des Design Systems steht unter der Apache-2.0-Lizenz. Das DB Theme und seine Assets sind die Ausnahme: Sie dürfen nur für Websites und Anwendungen der Deutschen Bahn verwendet werden.
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
+
+<LearnBlock>
+
+## Du kommst von DB UI?
+
+Generation 2 war als DB UI bekannt. Wenn du noch damit arbeitest, beginne mit der [Migration von DB UI](/de/dokumentation/lernen/migration 'Wechsle Schritt für Schritt von Generation 2 auf Generation 3.'). Sie führt dich Schritt für Schritt durch den Wechsel.
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Wo du Hilfe bekommst
+
+Du hast einen Fehler gefunden oder wünschst dir ein Feature? Eröffne ein Issue auf [GitHub](https://github.com/db-ux-design-system/core/issues/new/choose 'Fehler melden und Features wünschen.'). Für alles andere schreib an [db-ux-designsystem@deutschebahn.com](mailto:db-ux-designsystem@deutschebahn.com 'Fragen, die sonst nirgends hinpassen.').
+
+<LearnAside>
+
+- Fragen und Austausch: die Teams-Kanäle für [Übergreifendes und Design](https://teams.microsoft.com/l/channel/19%3A7dd9929be1fe494c823b11e0e2d22341%40thread.skype/DB%20UX%20Design%20System?groupId=72c53609-2941-46dd-8be9-e4d1d2c45c77&tenantId=a1a72d9c-49e6-4f6d-9af6-5aafa1183bfd) und [Entwicklung](https://teams.microsoft.com/l/channel/19%3A6c0e92ce4aef409598ff77c4cd06e001%40thread.skype/SIG%20-%20DB%20UX%20Design%20System?groupId=2f363785-c59e-4763-9bc3-8e13998a4588&tenantId=a1a72d9c-49e6-4f6d-9af6-5aafa1183bfd)
+- Sprechstunde Help, Hints & Hugs: alle zwei Wochen mittwochs um 9 Uhr, im Community-Kalender
+- Fehler und Features in den Code-Paketen: [GitHub: core-web](https://github.com/db-ux-design-system/core-web/issues/new/choose)
+- Erweiterungen: [DataViz](https://github.com/db-ux-design-system/extension-dataviz/issues), [Reisendeninformation](https://github.com/db-ux-design-system/extension-ri/issues), [Table](https://github.com/db-ux-design-system/extension-table/issues)
+- Weitere Wege, dich einzubringen: [Mitwirken](/de/dokumentation/mitwirken)
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
 
 ## Wähle deinen Weg
+
+Bereit für den Start? Wähle deine Rolle, und wir stellen dir eine Leseliste zusammen.
 
 <TeaserCard
 	columns={2}
@@ -145,7 +146,7 @@ Der Code des Design Systems steht unter der Apache-2.0-Lizenz. Das DB Theme und 
 	teasers={[
 		{
 			title: 'Design',
-			description: 'Hole dir Zugang zu den Figma-Bibliotheken und beginne zu gestalten.',
+			description: 'Hole dir Zugang zu den Figma-Bibliotheken und gestalte deinen ersten Screen.',
 			url: '/de/dokumentation/erste-schritte?role=design',
 		},
 		{
@@ -156,4 +157,4 @@ Der Code des Design Systems steht unter der Apache-2.0-Lizenz. Das DB Theme und 
 	]}
 />
 
-</DBSection>
+</LearnBlock>

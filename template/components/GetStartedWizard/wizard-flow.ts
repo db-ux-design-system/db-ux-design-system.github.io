@@ -327,16 +327,16 @@ export const packagePages: Record<string, PackagePage> = Object.fromEntries(
 				'Check which components are ready for production to estimate the effort.',
 				'Prüfe, welche Komponenten produktionsreif sind, um den Aufwand abzuschätzen.',
 			),
-			t('every-content-has-a-status', 'was-ein-status-bedeutet'),
+			t('every-content-has-a-status', 'jeder-inhalt-hat-einen-status'),
 		),
 		page(
 			'learn/about',
-			t('Where to get help', 'Wohin welche Frage gehört'),
+			t('Where to get help', 'Wo du Hilfe bekommst'),
 			t(
 				'Teams channels, consultation hour and issue trackers.',
 				'Teams-Kanäle, Sprechstunde und Issue-Tracker.',
 			),
-			t('where-to-get-help', 'wohin-welche-frage-gehört'),
+			t('where-to-get-help', 'wo-du-hilfe-bekommst'),
 		),
 		page(
 			'foundation',
