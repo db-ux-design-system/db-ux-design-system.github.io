@@ -302,6 +302,27 @@ test('going through the wizard again adds the same result after Remove all', asy
 	await expect(page.locator('.gsw-saved')).toBeVisible();
 });
 
+test('the saved hint comes back on the next result after it was closed', async ({ page }) => {
+	await page.goto('/documentation/get-started?role=design&designIntent=new');
+	await waitForDBShell(page);
+	const saved = page.locator('.gsw-saved');
+	await expect(saved).toBeVisible();
+	await saved.getByRole('button').click();
+	await expect(saved).toHaveCount(0);
+
+	await page.getByRole('button', { name: 'Start again' }).click();
+	await page
+		.locator('.gsw-option', { has: page.getByRole('radio', { name: 'Designer', exact: true }) })
+		.click();
+	await page.getByRole('button', { name: 'Next', exact: true }).click();
+	await page
+		.locator('.gsw-option', { has: page.getByRole('radio', { name: 'Explore the design system' }) })
+		.click();
+	await page.getByRole('button', { name: 'Next', exact: true }).click();
+	await expect(page.locator('#gsw-heading')).toBeVisible();
+	await expect(saved).toBeVisible();
+});
+
 test('pages saved under a renamed anchor are kept with the new id', async ({ page }) => {
 	await page.goto('/documentation/learn');
 	await waitForDBShell(page);

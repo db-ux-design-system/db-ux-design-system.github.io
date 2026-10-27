@@ -159,8 +159,19 @@ const GetStartedWizard = ({ lang = 'en' }: { lang?: Lang }) => {
 	const hasResult = 'result' in step;
 
 	// Seen as soon as a result put the hint on screen, no matter how it ends.
+	// Every further result in the same visit (e.g. after "Start again") shows the hint
+	// again: closed or timed out before, it would otherwise stay hidden for good. It is
+	// a later result, so it counts down from the full time.
+	const resultShown = useRef(false);
 	useEffect(() => {
-		if (hasResult) markSavedHintSeen();
+		if (!hasResult) return;
+		markSavedHintSeen();
+		if (resultShown.current) {
+			hintSeen.current = true;
+			hintLeft.current = HINT_SECONDS * 1000;
+			setSavedOpen(true);
+		}
+		resultShown.current = true;
 	}, [hasResult]);
 
 	// Countdown of the hint, only from the second time on. Paused while the pointer or
