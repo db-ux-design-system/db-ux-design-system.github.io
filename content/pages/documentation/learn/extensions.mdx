@@ -2,23 +2,48 @@
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
-title: 'Using Extensions'
-headline: 'Using Extensions'
-description: 'Extensions add standards for specific domains on top of the core of the design system. How to find out whether you need one and where to get it.'
+title: 'Add an extension for your domain'
+headline: 'Add an extension for your domain'
+description: 'Extensions add standards for specific domains on top of the core. Find out whether your product needs one, what it provides and how to start.'
 readingList: true
 align: start
 toc: true
 tocMaxDepth: 2
-order: 7
+order: 25
+category: 'Foundations'
+keywords:
+  [
+    'extensions',
+    'extension',
+    'passenger information',
+    'reisendeninformation',
+    'dataviz',
+    'data visualization',
+    'charts',
+    'table',
+    'content',
+    'domain',
+    'figma library',
+    'web components',
+    'power bi',
+    'plotly',
+    'marketing portal',
+    'feedback',
+  ]
+stepper: true
 ---
 
-import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 
-<DBSection spacing="small" width="auto">
+<LearnBlock>
 
-## Core or extension?
+## The core is for everyone, an extension for one domain
 
-The core – Foundation and Components – is the same for every product. Extensions build on it and add standards for a specific domain. You always need the core. You need an extension only if your product works in its domain.
+The **core** – Foundation and Components – is the same for every product. An **extension** builds on it and adds standards for one domain, so you need it only if your product works in that domain.
+
+<LearnAside>
 
 | Extension             | Domain                                       |
 | --------------------- | -------------------------------------------- |
@@ -27,13 +52,19 @@ The core – Foundation and Components – is the same for every product. Extens
 | Table                 | Display of large data sets                   |
 | Content               | Consistent communication – not yet available |
 
-All extensions are presented under <DBLink href="/documentation/extensions" variant="inline">Extensions</DBLink>.
+All extensions are presented under [Extensions](/documentation/extensions).
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## What each extension provides
+<LearnBlock>
+
+## Each extension brings its own material
+
+An extension can bring a Figma library, code and documentation in the Marketing Portal. The [Extensions overview](/documentation/extensions 'All extensions and their domains.') shows what exists.
+
+<LearnAside>
 
 | Extension             | Design        | Code                                            | Documentation                                                                                                                                                                |
 | --------------------- | ------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -41,35 +72,36 @@ All extensions are presented under <DBLink href="/documentation/extensions" vari
 | DataViz               | Figma library | Power BI templates and code snippets for Plotly | [Marketing Portal](https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/User-Experience/DB-UX-Design-System/extensions/dataviz)              |
 | Table                 | –             | –                                               | [Marketing Portal](https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/User-Experience/DB-UX-Design-System/extensions/table)                |
 
-The direct links to the Figma libraries and code packages are listed under <DBLink href="/documentation/resources" variant="inline">Resources</DBLink>.
+The Marketing Portal requires a login. Deep links do not work before login – open the link again after signing in.
 
-<DBNotification
-	variant="standalone"
-	semantic="informational"
-	headline="Documentation behind a login"
->
-	The documentation of all extensions is in the Marketing Portal, which requires a login. Deep links
-	do not work before login – open the link again after signing in.
-</DBNotification>
+</LearnAside>
 
-</DBSection>
+</LearnBlock>
 
-<DBSection spacing="small" width="auto">
+<LearnBlock>
 
-## Get started with an extension
+## Start with the core
 
-1. Set up the core first – see [Design](/documentation/get-started?role=design) or [Development](/documentation/get-started?role=development).
-2. Read the documentation of the extension in the Marketing Portal.
-3. Enable the Figma library of the extension in addition to Core Foundation and Core Components.
-4. Add the code of the extension, if it provides any.
+Set up the core with the [Figma setup](/documentation/learn/figma-setup 'Get access to the Figma libraries.') or your framework package. Then add the library and code of the extension from [Resources](/documentation/resources#extensions 'Links to the extension libraries and packages.').
 
-</DBSection>
+<LearnAside>
 
-<DBSection spacing="small" width="auto">
+1. Set up the core first – in [Design](/documentation/get-started?role=design) or [Development](/documentation/get-started?role=development)
+2. Read the documentation of the extension in the Marketing Portal
+3. Enable the Figma library of the extension in addition to Core Foundation and Core Components
+4. Add the code of the extension, if it provides any
 
-## Feedback
+</LearnAside>
 
-Each extension has its own GitHub repository for design feedback and issues:
+</LearnBlock>
+
+<LearnBlock>
+
+## Feedback goes to the extension's repository
+
+Each extension has its own GitHub repository for design feedback and issues. Share what is missing in your domain there.
+
+<LearnAside>
 
 | Extension             | Repository                                                                           |
 | --------------------- | ------------------------------------------------------------------------------------ |
@@ -77,4 +109,33 @@ Each extension has its own GitHub repository for design feedback and issues:
 | DataViz               | [extension-dataviz](https://github.com/db-ux-design-system/extension-dataviz/issues) |
 | Table                 | [extension-table](https://github.com/db-ux-design-system/extension-table/issues)     |
 
-</DBSection>
+For questions about the core, use the channels listed in [Where to get help](/documentation/learn/about#where-to-get-help).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Find your extension
+
+Check which extension fits your product, or set up the core first if you have not done so yet.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Extensions',
+			description: 'All extensions of the design system and their domains.',
+			url: '/documentation/extensions',
+		},
+		{
+			title: 'Get started',
+			description: 'Pick your role and set up the core for design or development.',
+			url: '/documentation/get-started',
+		},
+	]}
+/>
+
+</LearnBlock>

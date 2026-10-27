@@ -2,80 +2,70 @@
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
-title: 'React-Tutorial'
-headline: 'React-Tutorial: Ein Kontaktformular bauen'
-description: 'Baue Schritt für Schritt eine kleine React-App mit dem DB UX Design System – vom leeren Vite-Projekt bis zum funktionierenden Kontaktformular mit Rückmeldung nach dem Absenden.'
+title: 'Ein Kontaktformular in React bauen'
+headline: 'Ein Kontaktformular in React bauen'
+description: 'Baue Schritt für Schritt ein Kontaktformular mit Name, E-Mail, Thema und Nachricht – mit Rückmeldung nach dem Absenden und eigenen Styles mit Tokens.'
 readingList: true
 align: start
 toc: true
 tocMaxDepth: 2
-order: 3
+order: 19
+category: 'Development'
+keywords:
+  [
+    'react',
+    'tutorial',
+    'contact form',
+    'form',
+    'getting started',
+    'first app',
+    'vite',
+    'typescript',
+    'usestate',
+    'notification',
+    'card',
+    'stack',
+    'section',
+    'tokens',
+    'css',
+    'production build',
+  ]
+stepper: true
 ---
 
-import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 
-<DBSection spacing="small" width="auto">
+<LearnBlock>
 
-In diesem Tutorial baust du ein Kontaktformular mit Name, E-Mail, Thema und Nachricht. Nach dem Absenden bestätigt eine Meldung den Versand. Unterwegs richtest du die Styles ein, kombinierst Layout- und Formular-Komponenten und ergänzt eigenes CSS mit Tokens.
+## Richte zuerst das Projekt ein
 
-Jeder Schritt endet mit einer Prüfung. So weißt du, dass der Schritt funktioniert hat, bevor du weitermachst.
+Lege ein Vite-Projekt mit React und TypeScript an und richte es mit dem [Setup für React](/de/dokumentation/lernen/react-einrichten 'Installiere die Pakete, lade die Styles und halte die Farben im Build intakt.') ein. **Prüfen:** `pnpm dev` startet die App ohne Fehler.
 
-Dasselbe Formular gestaltet das [Figma-Tutorial](/de/dokumentation/lernen/figma-tutorial) in Figma.
+<LearnAside>
 
-<DBNotification variant="standalone" semantic="informational" headline="Nur installieren?">
-	Wenn du das Design System in ein bestehendes Projekt einbaust, folge stattdessen der{' '}
-	<DBLink href="/de/dokumentation/ressourcen/pakete/react" variant="inline">
-		React-Anleitung
-	</DBLink>
-	. Dieses Tutorial beginnt mit einem leeren Projekt.
-</DBNotification>
+### Was du brauchst
 
-</DBSection>
+- Node.js und pnpm. Mit npm verwendest du `npm create` und `npm i` statt `pnpm create` und `pnpm add`
+- Grundkenntnisse in React: Komponenten, JSX und den Hook `useState`
+- Einen unterstützten Browser: die letzten drei Versionen von Chrome und Edge, Firefox ESR und die letzten zwei Major-Versionen von Safari
 
-<DBSection spacing="small" width="auto">
+Das Tutorial wurde mit Vite 8, React 19 und Version 6 der Pakete des Design Systems getestet. Dasselbe Formular gestaltest du im [Figma-Tutorial](/de/dokumentation/lernen/figma-tutorial).
 
-## Bevor du anfängst
+### Alle Befehle für das Setup
 
-Du brauchst:
-
-- Node.js und pnpm. Mit npm verwendest du `npm create` und `npm i` statt `pnpm create` und `pnpm add`.
-- Grundkenntnisse in React: Komponenten, JSX und den Hook `useState`.
-- Einen unterstützten Browser: die letzten drei Versionen von Chrome und Edge, Firefox ESR und die letzten zwei Major-Versionen von Safari.
-
-Das Tutorial wurde mit Vite 8, React 19 und Version 6 der Pakete des Design Systems getestet.
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Schritt 1: Projekt anlegen
-
-Lege ein React-Projekt mit TypeScript an und starte es:
+Lege das Projekt an und installiere die Pakete:
 
 ```shell
 pnpm create vite my-app --template react-ts
 cd my-app
 pnpm install
-pnpm dev
-```
-
-Lösche `src/App.css`. Die nächsten Schritte ersetzen die Styles der Vorlage.
-
-**Prüfen:** Der Browser zeigt die Startseite von Vite unter der Adresse, die im Terminal steht, standardmäßig `http://localhost:5173`.
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Schritt 2: Pakete und Styles installieren
-
-Installiere die React-Komponenten und beide Style-Pakete:
-
-```shell
 pnpm add @db-ux/react-core-components @db-ux/core-components @db-ux/core-foundations
+pnpm add esbuild --save-dev
 ```
 
-Ersetze den Inhalt von `src/index.css`:
+Lösche `src/App.css`. Ersetze den Inhalt von `src/index.css`:
 
 ```css
 /* src/index.css */
@@ -87,11 +77,7 @@ Ersetze den Inhalt von `src/index.css`:
 
 Die erste Zeile legt die Reihenfolge der Cascade Layers fest. So kommt das Theme immer vor den Styles der Komponenten.
 
-Vite 8 minifiziert CSS standardmäßig mit LightningCSS. Es wandelt die Funktion `light-dark()` des Design Systems falsch um, und im Produktions-Build stimmen die Farben nicht mehr. Stelle den Minifier auf esbuild um:
-
-```shell
-pnpm add esbuild --save-dev
-```
+Vite 8 minifiziert CSS standardmäßig mit LightningCSS. Es wandelt die Funktion `light-dark()` des Design Systems falsch um, und im Production Build stimmen die Farben nicht mehr. Stelle den Minifier auf esbuild um:
 
 ```ts
 // vite.config.ts
@@ -106,13 +92,25 @@ export default defineConfig({
 });
 ```
 
-**Prüfen:** Die Befehle laufen ohne Fehler durch. Das Ergebnis siehst du im nächsten Schritt, sobald die Seite die ersten Komponenten nutzt.
+Starte die App danach mit `pnpm dev`.
 
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Baue die Seitenstruktur auf
+
+Lege eine **Section** und einen **Stack** um die Seite. **Prüfen:** „Kontakt“ erscheint in der fetten Schrift `OpenSans`.
+
+```tsx
+<DBSection spacing="medium" width="small">
+	<DBStack gap="large">{/* Überschrift, später das Formular */}</DBStack>
 </DBSection>
+```
 
-<DBSection spacing="small" width="auto">
-
-## Schritt 3: Seitenstruktur aufbauen
+<LearnAside>
 
 Ersetze den Inhalt von `src/App.tsx`:
 
@@ -135,15 +133,27 @@ export default App;
 - **Stack** ordnet seine Kinder mit gleichmäßigem Abstand an. Du nutzt ihn gleich wieder für die Formularfelder.
 - **Heading** rendert ein echtes `<h1>` mit der Typografie des Design Systems.
 
-**Prüfen:** Die Seite zeigt die Überschrift „Kontakt“ in großer, fetter Schrift. Die Schrift ist `OpenSans` – du siehst sie in den DevTools unter den gerenderten Schriften. Erscheint die Überschrift in der Standardschrift des Browsers, fehlt der CSS-Import aus Schritt 2.
+Die Schrift siehst du in den DevTools unter den gerenderten Schriften. Erscheint die Überschrift in der Standardschrift des Browsers, fehlt der CSS-Import aus dem Setup.
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## Schritt 4: Formular ergänzen
+<LearnBlock>
 
-Setze die Formularfelder in eine Card unter der Überschrift:
+## Ergänze das Formular in einer Card
+
+Setze die Felder in eine **Card**, jedes mit einem `label`. **Prüfen:** Fünf Felder und ein Button in der Markenfarbe mit Pfeil erscheinen.
+
+```tsx
+<DBCard spacing="medium">
+	<form>{/* <DBInput label="Name" name="name" required /> … */}</form>
+</DBCard>
+```
+
+<LearnAside>
+
+Setze die Card unter die Überschrift. Das ist die vollständige `src/App.tsx`:
 
 ```tsx
 // src/App.tsx
@@ -189,17 +199,29 @@ const App = () => (
 export default App;
 ```
 
-Jede Formular-Komponente rendert ein natives Formularelement mit seinem Label. Deshalb gehört `label` zu jedem Feld: Screenreader lesen es vor, und ein Klicke auf das Label setzt den Fokus ins Feld. `required` und `type="email"` nutzen die Validierung des Browsers.
+Jede Formular-Komponente rendert ein natives Formularelement mit seinem Label. Deshalb gehört `label` zu jedem Feld: Screenreader lesen es vor, und ein Klick auf das Label setzt den Fokus ins Feld. `required` und `type="email"` nutzen die Validierung des Browsers.
 
-**Prüfen:** Die Card zeigt fünf Felder und einen Button in der Markenfarbe mit Pfeil-Icon. Ein Klicke auf ein Label setzt den Fokus ins Feld. Fehlt der Pfeil, kann der Browser die Icon-Schrift nicht laden – suche im Netzwerk-Tab der DevTools nach einer fehlgeschlagenen Anfrage für eine `.woff2`-Datei.
+**Genauer prüfen:** Ein Klick auf ein Label setzt den Fokus ins Feld. Fehlt der Pfeil, kann der Browser die Icon-Schrift nicht laden – suche im Network-Tab der DevTools nach einer fehlgeschlagenen Anfrage für eine `.woff2`-Datei.
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## Schritt 5: Rückmeldung nach dem Absenden zeigen
+<LearnBlock>
 
-Merke dir, ob das Formular abgeschickt wurde, und zeige in diesem Fall eine Meldung. Das ist die vollständige `src/App.tsx`:
+## Bestätige das Absenden
+
+Zeige eine **Notification**, sobald das Formular abgeschickt ist. **Prüfen:** Nach dem Absenden erscheint „Nachricht gesendet“ in Grün.
+
+```tsx
+const [sent, setSent] = useState(false);
+// in onSubmit: event.preventDefault(); setSent(true);
+<DBNotification semantic="successful" headline="Nachricht gesendet" />;
+```
+
+<LearnAside>
+
+Das ist die vollständige `src/App.tsx`:
 
 ```tsx
 // src/App.tsx
@@ -273,19 +295,31 @@ export default App;
 
 Die Meldung hat die Rolle `status`. Screenreader sagen sie an, ohne den Fokus zu verschieben. Mit `closeButtonText` legst du den zugänglichen Namen des Schließen-Buttons fest, ohne die Angabe ist er englisch. Das ESLint-Plugin des Design Systems meldet eine schließbare Meldung ohne diesen Text. Den Wrapper `form-actions` um den Button brauchst du im nächsten Schritt.
 
-**Prüfen:**
+**Genauer prüfen:**
 
-- Schicke das leere Formular ab: Der Browser markiert das erste Pflichtfeld, und es erscheint keine Meldung.
-- Fülle Name, E-Mail und Nachricht aus und schicke erneut ab: Über der Card erscheint die grüne Meldung „Nachricht gesendet“.
-- Schließe die Meldung mit dem Button „Schließen“: Sie verschwindet.
+- Schicke das leere Formular ab: Der Browser markiert das erste Pflichtfeld, und es erscheint keine Meldung
+- Fülle Name, E-Mail und Nachricht aus und schicke erneut ab: Über der Card erscheint die grüne Meldung „Nachricht gesendet“
+- Schließe die Meldung mit dem Button „Schließen“: Sie verschwindet
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## Schritt 6: Eigene Styles mit Tokens ergänzen
+<LearnBlock>
 
-Richte den Button am Ende des Formulars aus. Ergänze diese Regel in `src/index.css` unter den Imports:
+## Ergänze eigene Styles mit Tokens
+
+Nutze **Tokens** statt Pixelwerten. **Prüfen:** Der Button rückt an den rechten Rand der Card.
+
+```css
+.form-actions {
+	padding-block-start: var(--db-spacing-fixed-sm);
+}
+```
+
+<LearnAside>
+
+Ergänze die vollständige Regel in `src/index.css` unter den Imports. Die Klasse `form-actions` ist der Wrapper um den Button aus dem vorigen Schritt.
 
 ```css
 /* src/index.css */
@@ -298,33 +332,65 @@ Richte den Button am Ende des Formulars aus. Ergänze diese Regel in `src/index.
 
 `--db-spacing-fixed-sm` ist ein Abstands-Token der Foundation. Nutze für Abstände, Farben und Größen Tokens statt fester Pixelwerte, damit deine Styles dem Theme und der Density folgen. Alle Tokens findest du unter [Foundation](/de/dokumentation/foundation).
 
-**Prüfen:** Der Button sitzt am rechten Rand der Card, mit etwas mehr Abstand nach oben.
+**Genauer prüfen:** Der Button sitzt am rechten Rand der Card, mit etwas mehr Abstand nach oben.
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## Schritt 7: Für die Produktion bauen
+<LearnBlock>
+
+## Baue für die Produktion
+
+Baue die App und öffne die Vorschau. **Prüfen:** Die Vorschau unter `http://localhost:4173` sieht genauso aus wie die Entwicklungsversion.
 
 ```shell
 pnpm build
 pnpm preview
 ```
 
-**Prüfen:** Die Vorschau unter `http://localhost:4173` sieht genauso aus wie die Entwicklungsversion. Stelle dein Betriebssystem auf Dark Mode um: Seite, Card und Felder wechseln in beiden Versionen auf dunkle Farben. Stimmen die Farben nur in der Vorschau nicht, fehlt die Einstellung `cssMinify` aus Schritt 2.
+<LearnAside>
 
-</DBSection>
+Stelle dein Betriebssystem auf Dark Mode um: Seite, Card und Felder wechseln in beiden Versionen auf dunkle Farben. Stimmen die Farben nur in der Vorschau nicht, fehlt die Einstellung `cssMinify` aus dem Setup.
 
-<DBSection spacing="small" width="auto">
+</LearnAside>
 
-## Nächste Schritte
+</LearnBlock>
 
-| Nächster Schritt                                    | Wo                                                                                         |
-| --------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Das DB Theme für ein DB-Produkt nutzen              | [DB Theme](/de/dokumentation/ressourcen/pakete/db-theme)                   |
-| Falsche Verwendung im Editor melden lassen          | [ESLint-Plugin](/de/dokumentation/ressourcen/pakete/react#eslint-plugin)   |
-| Das CSS-Bundle verkleinern                          | [PostCSS-Plugin](/de/dokumentation/ressourcen/pakete/react#postcss-plugin) |
-| Properties und Richtlinien nachschlagen             | [Komponenten](/de/dokumentation/komponenten)                                               |
-| Einen KI-Agenten mit korrekten APIs arbeiten lassen | [MCP Server](/de/dokumentation/lernen/mcp-server)                                          |
+<LearnBlock>
 
-</DBSection>
+## Bring dein Formular weiter
+
+Mach mit dem DB Theme, Beispielen oder KI weiter.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'DB Theme',
+			description: 'Farben, Schriften und Icons der Marke.',
+			url: '/de/dokumentation/lernen/db-theme-einrichten',
+		},
+		{
+			title: 'Mit einem Beispielprojekt starten',
+			description: 'Beispielprojekte im Browser oder auf deinem Rechner.',
+			url: '/de/dokumentation/lernen/beispiele',
+		},
+		{
+			title: 'KI-Agenten mit dem MCP Server verbinden',
+			description: 'Lass einen KI-Agenten die richtigen APIs nutzen.',
+			url: '/de/dokumentation/lernen/mcp-server',
+		},
+	]}
+/>
+
+<LearnAside>
+
+- [ESLint-Plugin](/de/dokumentation/lernen/react-einrichten#eslint-plugin): falsche Verwendung im Editor melden lassen
+- [PostCSS-Plugin](/de/dokumentation/lernen/react-einrichten#postcss-plugin): das CSS-Bundle verkleinern
+- [Komponenten](/de/dokumentation/komponenten): Properties und Richtlinien nachschlagen
+
+</LearnAside>
+
+</LearnBlock>

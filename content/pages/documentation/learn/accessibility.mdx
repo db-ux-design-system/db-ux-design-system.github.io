@@ -2,40 +2,70 @@
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
-title: 'Accessibility'
-headline: 'Accessibility'
-description: 'How the components of the DB UX Design System are tested for accessibility, and what remains your responsibility in your product.'
+title: 'Build accessible products'
+headline: 'Build accessible products'
+description: 'What the components already do for accessibility, how they are tested and what stays with your team in design and development.'
 readingList: true
 align: start
 toc: true
 tocMaxDepth: 2
-order: 5
+order: 23
+category: 'Accessibility'
+keywords:
+  [
+    'accessibility',
+    'a11y',
+    'wcag',
+    'wcag 2.2',
+    'screen reader',
+    'keyboard',
+    'focus',
+    'contrast',
+    'aria',
+    'axe-core',
+    'nvda',
+    'voiceover',
+    'eslint',
+    'audit',
+    'labels',
+    'alternative text',
+    'barrier-free',
+  ]
+stepper: true
 ---
 
-import { DBSection, DBNotification } from '@db-ux/react-core-components';
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 
-<DBSection spacing="small" width="auto">
+<LearnBlock>
 
-## What the design system covers – and what it does not
+## Components help, but do not make your product accessible
 
-The components are built and tested for accessibility. That makes your product easier to build accessibly, but it does not make it accessible automatically.
+The components bring **semantics, keyboard operation and contrast** with them. The structure of your page, your own colors and the content you pass in stay with your team.
 
-| The design system takes care of …                                    | You take care of …                                                     |
+<LearnAside>
+
+| The design system takes care of …                                    | Your team takes care of …                                              |
 | -------------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | Semantic structure and roles inside each component                   | The structure of your page: headings, landmarks, order of content      |
 | Keyboard operation and focus styles of each component                | The focus order across your page and focus handling in your own flows  |
 | Color contrast within the components, checked by the automated tests | Colors you add yourself, for example custom colors or images with text |
 | Automated and screen reader tests of each component                  | Labels, alternative texts and error messages – the content you pass in |
 
-Beyond that, you test your product as a whole – components that pass on their own can still form a page that does not.
+Components that pass on their own can still form a page that does not. Content with the status Stable has been validated for accessibility within the component. What each status means is explained in [What a status means](/documentation/learn/status).
 
-Content with the status **Stable** has been validated for accessibility within the component – see [Content Status](/documentation/releases/content-status).
+</LearnAside>
 
-</DBSection>
+</LearnBlock>
 
-<DBSection spacing="small" width="auto">
+<LearnBlock>
 
-## How the components are tested
+## Every component is tested automatically
+
+Two rule engines scan every component showcase, and ARIA snapshots make changes to roles and names visible. **Screen reader tests** and manual reviews cover a growing number of components.
+
+<LearnAside>
 
 | Test                      | What it checks                                                                               |
 | ------------------------- | -------------------------------------------------------------------------------------------- |
@@ -49,25 +79,37 @@ Screen reader tests exist for: Accordion, Badge, Brand, Button, Card, Checkbox, 
 
 Manual accessibility reviews are completed for: Badge, Button, Card, Checkbox, Drawer, Infotext, Input, Link, Notification, Radio, Select, Switch, Tag and Textarea.
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## In design
+<LearnBlock>
 
-- Use the components from the Figma library instead of rebuilding them. Their structure matches the tested code.
-- Fill in labels, messages and alternative texts in the design. Developers need them, and they are easy to forget later.
-- Check the **Guidelines** section of each component page for the rules that apply to it.
+## In design, use the components and write the content
 
-</DBSection>
+Use the components from the Figma library instead of rebuilding them – their structure matches the tested code. Fill in **labels, messages and alternative texts** in the design, so development does not have to invent them later.
 
-<DBSection spacing="small" width="auto">
+<LearnAside>
 
-## In development
+- Use the components from the Figma library instead of rebuilding them
+- Fill in labels, messages and alternative texts in the design. Developers need them, and they are easy to forget later
+- Check the Guidelines section of each component page in the [component documentation](/documentation/components) for the rules that apply to it
+- Check the contrast of colors you add yourself, for example custom colors or text on images
 
-- Pass `aria-*` attributes directly to the components. They are forwarded to the right element automatically – no extra property is needed.
-- Don't hide labels or messages without a replacement. A visually hidden label still has to exist.
-- Add the ESLint plugin. Several of its rules catch accessibility issues while you type.
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## In code, pass the content and let the linter check it
+
+Pass `aria-*` attributes directly to the components – they forward them to the right element. The **ESLint plugin** reports missing labels and similar issues while you type.
+
+<LearnAside>
+
+- `aria-*` attributes are forwarded automatically – no extra property is needed
+- Don't hide labels or messages without a replacement. A visually hidden label still has to exist
 
 | ESLint rule                           | Reports                                                                        |
 | ------------------------------------- | ------------------------------------------------------------------------------ |
@@ -78,23 +120,56 @@ Manual accessibility reviews are completed for: Badge, Button, Card, Checkbox, D
 | `no-interactive-tooltip-content`      | Interactive elements inside a tooltip                                          |
 | `tooltip-requires-interactive-parent` | Tooltips that are not placed inside an interactive element                     |
 
-The setup of the plugin is described on the package pages for [React](/documentation/resources/packages/react), [Angular](/documentation/resources/packages/angular) and [Vue](/documentation/resources/packages/vue).
+The setup of the plugin is described in the setup articles for [React](/documentation/learn/react-setup#eslint-plugin), [Angular](/documentation/learn/angular-setup#eslint-plugin) and [Vue](/documentation/learn/vue-setup#eslint-plugin).
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## Check your product
+<LearnBlock>
 
-<DBNotification
-	variant="standalone"
-	semantic="informational"
-	headline="Automated checks find only part of the issues"
->
-	Automated tools find a share of all accessibility issues. Test with the keyboard and a screen
-	reader, and plan a review with people who use assistive technology.
-</DBNotification>
+## Test your product as a whole
 
-The MCP Server provides the prompt `audit_accessibility`, which checks a code snippet against WCAG 2.2 AA and generates manual test scripts. See [AI](/documentation/learn/ai).
+Automated tools find only part of the issues, so also test with the **keyboard and a screen reader**. The [MCP Server](/documentation/learn/mcp-server 'Its prompt audit_accessibility checks code against WCAG 2.2 AA.') offers a first audit.
 
-</DBSection>
+<LearnAside>
+
+The prompt `audit_accessibility` checks a code snippet against WCAG 2.2 AA and generates manual test scripts. It does not replace the manual checks.
+
+A possible order of checks:
+
+1. Run the automated checks, for example axe-core in your browser or in your tests
+2. Operate every flow with the keyboard only and watch the focus
+3. Go through the main flows with a screen reader, for example NVDA on Windows or VoiceOver on macOS
+4. Review with people who use assistive technology
+
+How to connect the MCP Server to your IDE is described in [Connect your agent to the MCP Server](/documentation/learn/mcp-server).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Put it into practice
+
+Read the rules of the components you use, or try them in a small accessible form.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Components',
+			description: 'Read the Guidelines and accessibility notes of each component.',
+			url: '/documentation/components',
+		},
+		{
+			title: 'Build a contact form in React',
+			description: 'Build a contact form with labels, messages and an accessible notification.',
+			url: '/documentation/learn/react-tutorial',
+		},
+	]}
+/>
+
+</LearnBlock>

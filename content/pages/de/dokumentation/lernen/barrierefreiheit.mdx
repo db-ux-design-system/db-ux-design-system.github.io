@@ -2,40 +2,70 @@
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
-title: 'Barrierefreiheit'
-headline: 'Barrierefreiheit'
-description: 'Wie die Komponenten des DB UX Design Systems auf Barrierefreiheit getestet werden und was in deinem Produkt in deiner Verantwortung bleibt.'
+title: 'Barrierefreie Produkte bauen'
+headline: 'Barrierefreie Produkte bauen'
+description: 'Was die Komponenten bereits für die Barrierefreiheit leisten, wie sie getestet werden und was im Design und in der Entwicklung bei deinem Team bleibt.'
 readingList: true
 align: start
 toc: true
 tocMaxDepth: 2
-order: 5
+order: 23
+category: 'Accessibility'
+keywords:
+  [
+    'accessibility',
+    'a11y',
+    'wcag',
+    'wcag 2.2',
+    'screen reader',
+    'keyboard',
+    'focus',
+    'contrast',
+    'aria',
+    'axe-core',
+    'nvda',
+    'voiceover',
+    'eslint',
+    'audit',
+    'labels',
+    'alternative text',
+    'barrier-free',
+  ]
+stepper: true
 ---
 
-import { DBSection, DBNotification } from '@db-ux/react-core-components';
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 
-<DBSection spacing="small" width="auto">
+<LearnBlock>
 
-## Was das Design System abdeckt – und was nicht
+## Komponenten helfen, machen dein Produkt aber nicht barrierefrei
 
-Die Komponenten sind auf Barrierefreiheit hin gebaut und getestet. Das macht es leichter, dein Produkt barrierefrei zu bauen, macht es aber nicht automatisch barrierefrei.
+Die Komponenten bringen **Semantik, Tastaturbedienung und Kontraste** mit. Die Struktur deiner Seite, eigene Farben und die Inhalte, die du übergibst, bleiben bei deinem Team.
 
-| Das Design System kümmert sich um …                                              | Du kümmerst dich um …                                                             |
+<LearnAside>
+
+| Das Design System kümmert sich um …                                              | Dein Team kümmert sich um …                                                       |
 | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
 | semantische Struktur und Rollen innerhalb jeder Komponente                       | die Struktur deiner Seite: Überschriften, Landmarks, Reihenfolge der Inhalte      |
 | Tastaturbedienung und Fokus-Darstellung jeder Komponente                         | die Fokus-Reihenfolge über die Seite und das Fokus-Management in eigenen Abläufen |
-| Farbkontraste innerhalb der Komponenten, geprüft durch die automatisierten Tests | Farben, die du selbst ergänzt, zum Beispiel eigene Farben oder Bilder mit Text    |
+| Farbkontraste innerhalb der Komponenten, geprüft durch die automatisierten Tests | Farben, die du selbst ergänzt, z. B. eigene Farben oder Bilder mit Text           |
 | automatisierte Tests und Screenreader-Tests jeder Komponente                     | Labels, Alternativtexte und Fehlermeldungen – die Inhalte, die du übergibst       |
 
-Darüber hinaus testest du dein Produkt als Ganzes – Komponenten, die einzeln bestehen, können zusammen trotzdem eine Seite ergeben, die nicht barrierefrei ist.
+Komponenten, die einzeln bestehen, können zusammen trotzdem eine Seite ergeben, die nicht barrierefrei ist. Inhalte mit dem Status Stable sind innerhalb der Komponente auf Barrierefreiheit validiert. Was die einzelnen Status bedeuten, steht unter [Was ein Status bedeutet](/de/dokumentation/lernen/status).
 
-Inhalte mit dem Status **Stable** sind innerhalb der Komponente auf Barrierefreiheit validiert – siehe [Content Status](/de/dokumentation/releases/content-status).
+</LearnAside>
 
-</DBSection>
+</LearnBlock>
 
-<DBSection spacing="small" width="auto">
+<LearnBlock>
 
-## Wie die Komponenten getestet werden
+## Jede Komponente wird automatisiert getestet
+
+Zwei Regel-Engines prüfen jeden Komponenten-Showcase, und ARIA-Snapshots machen Änderungen an Rollen und Namen sichtbar. **Screenreader-Tests** und manuelle Reviews decken eine wachsende Zahl von Komponenten ab.
+
+<LearnAside>
 
 | Test                      | Was er prüft                                                                                      |
 | ------------------------- | ------------------------------------------------------------------------------------------------- |
@@ -49,25 +79,37 @@ Screenreader-Tests gibt es für: Accordion, Badge, Brand, Button, Card, Checkbox
 
 Manuelle Accessibility-Reviews sind abgeschlossen für: Badge, Button, Card, Checkbox, Drawer, Infotext, Input, Link, Notification, Radio, Select, Switch, Tag und Textarea.
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## Im Design
+<LearnBlock>
 
-- Nutze die Komponenten aus der Figma-Bibliothek, statt sie nachzubauen. Ihre Struktur entspricht dem getesteten Code.
-- Trage Labels, Meldungen und Alternativtexte schon im Design ein. Die Entwicklung braucht sie, und später werden sie leicht vergessen.
-- Lies auf jeder Komponentenseite den Abschnitt **Richtlinien** mit den Regeln, die für sie gelten.
+## Im Design: Komponenten nutzen und Inhalte schreiben
 
-</DBSection>
+Nutze die Komponenten aus der Figma-Bibliothek, statt sie nachzubauen – ihre Struktur entspricht dem getesteten Code. Trage **Labels, Meldungen und Alternativtexte** schon im Design ein, damit die Entwicklung sie später nicht erfinden muss.
 
-<DBSection spacing="small" width="auto">
+<LearnAside>
 
-## In der Entwicklung
+- Nutze die Komponenten aus der Figma-Bibliothek, statt sie nachzubauen
+- Trage Labels, Meldungen und Alternativtexte schon im Design ein. Die Entwicklung braucht sie, und später werden sie leicht vergessen
+- Lies auf jeder Seite der [Komponentendokumentation](/de/dokumentation/komponenten) den Abschnitt Richtlinien mit den Regeln, die für die Komponente gelten
+- Prüfe den Kontrast von Farben, die du selbst ergänzt, z. B. eigene Farben oder Text auf Bildern
 
-- Übergib `aria-*`-Attribute direkt an die Komponenten. Sie werden automatisch an das richtige Element weitergereicht – eine eigene Property ist nicht nötig.
-- Blende Labels oder Meldungen nicht ersatzlos aus. Auch ein visuell verstecktes Label muss existieren.
-- Ergänze das ESLint-Plugin. Mehrere seiner Regeln finden Probleme der Barrierefreiheit schon beim Schreiben.
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Im Code: Inhalte übergeben und den Linter prüfen lassen
+
+Übergib `aria-*`-Attribute direkt an die Komponenten – sie reichen sie an das richtige Element weiter. Das **ESLint-Plugin** meldet fehlende Labels und ähnliche Probleme schon beim Schreiben.
+
+<LearnAside>
+
+- `aria-*`-Attribute werden automatisch weitergereicht – eine eigene Property ist nicht nötig
+- Blende Labels oder Meldungen nicht ersatzlos aus. Auch ein visuell verstecktes Label muss existieren
 
 | ESLint-Regel                          | Meldet                                                                         |
 | ------------------------------------- | ------------------------------------------------------------------------------ |
@@ -78,24 +120,57 @@ Manuelle Accessibility-Reviews sind abgeschlossen für: Badge, Button, Card, Che
 | `no-interactive-tooltip-content`      | interaktive Elemente in einem Tooltip                                          |
 | `tooltip-requires-interactive-parent` | Tooltips, die nicht in einem interaktiven Element liegen                       |
 
-Das Setup des Plugins steht auf den Paketseiten für [React](/de/dokumentation/ressourcen/pakete/react), [Angular](/de/dokumentation/ressourcen/pakete/angular) und [Vue](/de/dokumentation/ressourcen/pakete/vue).
+Das Setup des Plugins steht in den Setup-Artikeln für [React](/de/dokumentation/lernen/react-einrichten#eslint-plugin), [Angular](/de/dokumentation/lernen/angular-einrichten#eslint-plugin) und [Vue](/de/dokumentation/lernen/vue-einrichten#eslint-plugin).
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## Dein Produkt prüfen
+<LearnBlock>
 
-<DBNotification
-	variant="standalone"
-	semantic="informational"
-	headline="Automatisierte Prüfungen finden nur einen Teil der Probleme"
->
-	Automatisierte Werkzeuge finden nur einen Teil aller Probleme der Barrierefreiheit. Teste mit der
-	Tastatur und einem Screenreader, und plane ein Review mit Menschen ein, die assistive Technologien
-	nutzen.
-</DBNotification>
+## Teste dein Produkt als Ganzes
 
-Der MCP Server bietet den Prompt `audit_accessibility`, der einen Code-Schnipsel gegen WCAG 2.2 AA prüft und manuelle Testskripte erzeugt. Siehe [KI](/de/dokumentation/lernen/ki).
+Werkzeuge finden nur einen Teil der Probleme – teste auch mit **Tastatur und Screenreader**. Einen ersten Audit bietet der [MCP Server](/de/dokumentation/lernen/mcp-server 'Sein Prompt audit_accessibility prüft gegen WCAG 2.2 AA.').
 
-</DBSection>
+<LearnAside>
+
+Der Prompt `audit_accessibility` prüft einen Code-Schnipsel gegen WCAG 2.2 AA und erzeugt manuelle Testskripte. Die manuellen Prüfungen ersetzt er nicht.
+
+Eine mögliche Reihenfolge der Prüfungen:
+
+1. Führe die automatisierten Prüfungen aus, z. B. axe-core im Browser oder in deinen Tests
+2. Bediene jeden Ablauf nur mit der Tastatur und achte auf den Fokus
+3. Geh die wichtigsten Abläufe mit einem Screenreader durch, z. B. NVDA unter Windows oder VoiceOver unter macOS
+4. Plane ein Review mit Menschen, die assistive Technologien nutzen
+
+Wie du den MCP Server mit deiner IDE verbindest, steht unter [KI-Agenten mit dem MCP Server verbinden](/de/dokumentation/lernen/mcp-server).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Setz es in die Praxis um
+
+Lies die Regeln der Komponenten, die du nutzt, oder probiere sie in einem kleinen barrierefreien Formular aus.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Komponenten',
+			description: 'Lies die Richtlinien und Hinweise zur Barrierefreiheit jeder Komponente.',
+			url: '/de/dokumentation/komponenten',
+		},
+		{
+			title: 'Ein Kontaktformular in React bauen',
+			description:
+				'Baue ein Kontaktformular mit Labels, Meldungen und einer barrierefreien Notification.',
+			url: '/de/dokumentation/lernen/react-tutorial',
+		},
+	]}
+/>
+
+</LearnBlock>

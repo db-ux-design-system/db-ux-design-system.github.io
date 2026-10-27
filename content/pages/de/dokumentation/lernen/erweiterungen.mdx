@@ -2,23 +2,48 @@
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
-title: 'Erweiterungen nutzen'
-headline: 'Erweiterungen nutzen'
-description: 'Erweiterungen ergänzen den Kern des Design Systems um Standards für bestimmte Bereiche. Wie du herausfindest, ob du eine brauchst, und wo du sie bekommst.'
+title: 'Eine Erweiterung für deinen Bereich nutzen'
+headline: 'Eine Erweiterung für deinen Bereich nutzen'
+description: 'Erweiterungen ergänzen den Kern um Standards für bestimmte Bereiche. Finde heraus, ob dein Produkt eine braucht, was sie mitbringt und wie du startest.'
 readingList: true
 align: start
 toc: true
 tocMaxDepth: 2
-order: 7
+order: 25
+category: 'Foundations'
+keywords:
+  [
+    'extensions',
+    'extension',
+    'passenger information',
+    'reisendeninformation',
+    'dataviz',
+    'data visualization',
+    'charts',
+    'table',
+    'content',
+    'domain',
+    'figma library',
+    'web components',
+    'power bi',
+    'plotly',
+    'marketing portal',
+    'feedback',
+  ]
+stepper: true
 ---
 
-import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 
-<DBSection spacing="small" width="auto">
+<LearnBlock>
 
-## Kern oder Erweiterung?
+## Den Kern brauchen alle, eine Erweiterung nur ein Bereich
 
-Der Kern – Foundation und Komponenten – ist für jedes Produkt gleich. Erweiterungen bauen darauf auf und ergänzen Standards für einen bestimmten Bereich. Den Kern brauchst du immer. Eine Erweiterung brauchst du nur, wenn dein Produkt in ihrem Bereich arbeitet.
+Der **Kern** – Foundation und Komponenten – ist für jedes Produkt gleich. Eine **Erweiterung** baut darauf auf und ergänzt Standards für einen Bereich – du brauchst sie also nur, wenn dein Produkt in diesem Bereich arbeitet.
+
+<LearnAside>
 
 | Erweiterung          | Bereich                                           |
 | -------------------- | ------------------------------------------------- |
@@ -27,13 +52,19 @@ Der Kern – Foundation und Komponenten – ist für jedes Produkt gleich. Erwei
 | Table                | Darstellung großer Datenmengen                    |
 | Content              | einheitliche Kommunikation – noch nicht verfügbar |
 
-Alle Erweiterungen stellt die Seite <DBLink href="/de/dokumentation/erweiterungen" variant="inline">Erweiterungen</DBLink> vor.
+Alle Erweiterungen stellt die Seite [Erweiterungen](/de/dokumentation/erweiterungen) vor.
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## Was jede Erweiterung mitbringt
+<LearnBlock>
+
+## Jede Erweiterung hat eigenes Material
+
+Eine Erweiterung kann Figma-Bibliothek, Code und Dokumentation im Marketingportal mitbringen. Was es gibt, zeigt die [Übersicht](/de/dokumentation/erweiterungen 'Alle Erweiterungen und ihre Bereiche.').
+
+<LearnAside>
 
 | Erweiterung          | Design           | Code                                              | Dokumentation                                                                                                                                                               |
 | -------------------- | ---------------- | ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -41,35 +72,36 @@ Alle Erweiterungen stellt die Seite <DBLink href="/de/dokumentation/erweiterunge
 | DataViz              | Figma-Bibliothek | Power-BI-Vorlagen und Code-Schnipsel für Plotly   | [Marketingportal](https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/User-Experience/DB-UX-Design-System/extensions/dataviz)              |
 | Table                | –                | –                                                 | [Marketingportal](https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/User-Experience/DB-UX-Design-System/extensions/table)                |
 
-Die direkten Links zu den Figma-Bibliotheken und Code-Paketen stehen unter <DBLink href="/de/dokumentation/ressourcen" variant="inline">Ressourcen</DBLink>.
+Das Marketingportal erfordert eine Anmeldung. Deep Links funktionieren vor der Anmeldung nicht – öffne den Link nach dem Anmelden erneut.
 
-<DBNotification
-	variant="standalone"
-	semantic="informational"
-	headline="Dokumentation hinter einer Anmeldung"
->
-	Die Dokumentation aller Erweiterungen liegt im Marketingportal, das eine Anmeldung erfordert. Deep
-	Links funktionieren vor der Anmeldung nicht – öffne den Link nach dem Anmelden erneut.
-</DBNotification>
+</LearnAside>
 
-</DBSection>
+</LearnBlock>
 
-<DBSection spacing="small" width="auto">
+<LearnBlock>
 
-## Mit einer Erweiterung starten
+## Starte mit dem Kern
 
-1. Richte zuerst den Kern ein – siehe [Design](/de/dokumentation/erste-schritte?role=design) oder [Entwicklung](/de/dokumentation/erste-schritte?role=development).
-2. Lies die Dokumentation der Erweiterung im Marketingportal.
-3. Aktiviere die Figma-Bibliothek der Erweiterung zusätzlich zu Core Foundation und Core Components.
-4. Ergänze den Code der Erweiterung, sofern sie welchen mitbringt.
+Richte erst den Kern ein, z. B. per [Figma-Einrichtung](/de/dokumentation/lernen/figma-einrichten 'Zugang zu den Figma-Bibliotheken.'). Ergänze dann Bibliothek und Code der Erweiterung aus den [Ressourcen](/de/dokumentation/ressourcen#erweiterungen 'Bibliotheken und Pakete der Erweiterungen.').
 
-</DBSection>
+<LearnAside>
 
-<DBSection spacing="small" width="auto">
+1. Richte zuerst den Kern ein – im [Design](/de/dokumentation/erste-schritte?role=design) oder in der [Entwicklung](/de/dokumentation/erste-schritte?role=development)
+2. Lies die Dokumentation der Erweiterung im Marketingportal
+3. Aktiviere die Figma-Bibliothek der Erweiterung zusätzlich zu Core Foundation und Core Components
+4. Ergänze den Code der Erweiterung, sofern sie welchen mitbringt
 
-## Feedback
+</LearnAside>
 
-Jede Erweiterung hat ein eigenes GitHub-Repository für Design-Feedback und Issues:
+</LearnBlock>
+
+<LearnBlock>
+
+## Feedback gehört ins Repository der Erweiterung
+
+Jede Erweiterung hat ein eigenes GitHub-Repository für Design-Feedback und Issues. Teile dort, was dir in deinem Bereich fehlt.
+
+<LearnAside>
 
 | Erweiterung          | Repository                                                                           |
 | -------------------- | ------------------------------------------------------------------------------------ |
@@ -77,4 +109,33 @@ Jede Erweiterung hat ein eigenes GitHub-Repository für Design-Feedback und Issu
 | DataViz              | [extension-dataviz](https://github.com/db-ux-design-system/extension-dataviz/issues) |
 | Table                | [extension-table](https://github.com/db-ux-design-system/extension-table/issues)     |
 
-</DBSection>
+Für Fragen zum Kern nutzt du die Kanäle, die unter [Wo du Hilfe bekommst](/de/dokumentation/lernen/ueber#wo-du-hilfe-bekommst) aufgeführt sind.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Finde deine Erweiterung
+
+Prüfe, welche Erweiterung zu deinem Produkt passt, oder richte zuerst den Kern ein, falls noch nicht geschehen.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Erweiterungen',
+			description: 'Alle Erweiterungen des Design Systems und ihre Bereiche.',
+			url: '/de/dokumentation/erweiterungen',
+		},
+		{
+			title: 'Erste Schritte',
+			description: 'Wähle deine Rolle und richte den Kern für Design oder Entwicklung ein.',
+			url: '/de/dokumentation/erste-schritte',
+		},
+	]}
+/>
+
+</LearnBlock>

@@ -2,21 +2,48 @@
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
-title: 'Plugins & Tools'
-headline: 'Plugins & Tools'
-description: 'Figma-Plugins und Web-Tools, die deine Gestaltungsarbeit mit dem DB UX Design System unterstützen – für Logos, eigene Farben und Themes.'
+title: 'Logos und eigene Farben in Figma ergänzen'
+headline: 'Logos und eigene Farben in Figma ergänzen'
+description: 'Figma-Plugins und Web-Tools für deine Gestaltungsarbeit – setze ein markenkonformes Logo, erstelle eigene Farben und nutze sie mit den Komponenten.'
 readingList: true
 align: start
 toc: true
 tocMaxDepth: 2
-order: 8
+order: 6
+category: 'Tooling'
+keywords:
+  [
+    'plugins',
+    'figma plugin',
+    'tools',
+    'db logo importer',
+    'logo',
+    'logo addition',
+    'logozusatz',
+    'theme builder',
+    'db custom color importer',
+    'custom colors',
+    'color palette',
+    'variables',
+    'figma variables',
+    'theme',
+    'secondary colors',
+    'figma-hub',
+  ]
+stepper: true
 ---
 
-import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 
-<DBSection spacing="small" width="auto">
+<LearnBlock>
 
-## Überblick
+## Drei Werkzeuge für Logos und Farben
+
+Der **DB Logo Importer** setzt dein Logo, der **Theme Builder** erstellt eine Farbpalette, und der **DB Custom Color Importer** bringt diese Palette nach Figma.
+
+<LearnAside>
 
 | Werkzeug                 | Art          | Nutze es, um                                                        |
 | ------------------------ | ------------ | ------------------------------------------------------------------- |
@@ -24,56 +51,59 @@ import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components'
 | Theme Builder            | Web-Tool     | eine eigene Farbpalette zu erstellen und zu exportieren             |
 | DB Custom Color Importer | Figma-Plugin | die Farben aus dem Theme Builder als Figma-Variablen zu importieren |
 
-</DBSection>
+Der Quellcode der Plugins liegt im [figma-hub-Repository](https://github.com/db-ux-design-system/figma-hub). Dort entstehen auch weitere Plugins.
 
-<DBSection spacing="small" width="auto">
+</LearnAside>
 
-## DB Logo Importer
+</LearnBlock>
 
-Das Plugin erstellt aus einem SVG-Logo eine Figma-Komponente, vergibt die richtigen Farbvariablen und skaliert sie auf eine festgelegte Größe.
+<LearnBlock>
 
-1. Erstelle dein Logo mit dem [DB-Logo-Generator](https://marketingportal.extranet.deutschebahn.com/marketingportal/Marke-und-Design/Basiselemente/Logo/Logozusatz-mit-Tool) im Marketingportal und lade das SVG herunter.
-2. Wähle in Figma eine Instanz von Shell oder Control Panel aus.
-3. Starte den [DB Logo Importer](https://www.figma.com/community/plugin/1590462040996560100/concept-db-logo-importer), wähle **Choose SVG File** und dein SVG.
-4. Wähle **Import SVG**.
+## Importiere dein Logo als Komponente
+
+Erstelle das Logo im [DB-Logo-Generator](https://marketingportal.extranet.deutschebahn.com/marketingportal/Marke-und-Design/Basiselemente/Logo/Logozusatz-mit-Tool 'Logo mit Logozusatz als SVG.'). Der [DB Logo Importer](https://www.figma.com/community/plugin/1590462040996560100/concept-db-logo-importer 'Macht aus dem SVG eine Figma-Komponente.') ergänzt Farbvariablen und Größe.
+
+<LearnAside>
+
+1. Erstelle dein Logo mit dem DB-Logo-Generator im Marketingportal und lade das SVG herunter
+2. Wähle in Figma eine Instanz von Shell oder Control Panel aus
+3. Starte den DB Logo Importer, wähle **Choose SVG File** und dein SVG
+4. Wähle **Import SVG**
 
 Das Plugin setzt das Logo mit gesperrtem Seitenverhältnis in den Logo Slot. Das Control Panel nimmt ein eigenes Logo nur in der Variante **Brand → Logozusatz** auf.
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## Eigene Farben
+<LearnBlock>
 
-Eigene Farben entstehen in zwei Schritten: Du erstellst die Palette im Theme Builder und importierst sie mit dem DB Custom Color Importer in Figma.
+## Erstelle die Farbpalette
 
-<DBNotification
-	variant="standalone"
-	semantic="warning"
-	headline="Für DB-Produkte nur Sekundärfarben"
->
-	Nutze für Produkte der Deutschen Bahn als eigene Farben nur die{' '}
-	<DBLink
-		href="https://marketingportal.extranet.deutschebahn.com/marketingportal/Marke-und-Design/Basiselemente/Farbe/Sekundaerfarben"
-		variant="inline"
-	>
-		Sekundärfarben
-	</DBLink>{' '}
-	der DB-Markenpalette.
-</DBNotification>
+Baue deine Palette im [Theme Builder](https://design-system.deutschebahn.com/theme-builder/ 'Erstelle und exportiere eine Farbpalette.') und exportiere sie als JSON. DB-Produkte nutzen als eigene Farben nur die [Sekundärfarben](https://marketingportal.extranet.deutschebahn.com/marketingportal/Marke-und-Design/Basiselemente/Farbe/Sekundaerfarben 'Sekundärfarben der DB-Markenpalette.').
 
-### 1. Palette im Theme Builder erstellen
+<LearnAside>
 
-1. Öffne den [Theme Builder](https://design-system.deutschebahn.com/theme-builder/).
-2. Erstelle oder passe deine Farbpalette an.
-3. Exportiere die Farbkonfiguration als JSON-Datei.
+1. Öffne den Theme Builder
+2. Erstelle oder passe deine Farbpalette an
+3. Exportiere die Farbkonfiguration als JSON-Datei
 
-### 2. Farben in Figma importieren
+</LearnAside>
 
-1. Öffne den DB Custom Color Importer in Figma.
-2. Wähle **select file** und die exportierte JSON-Datei. Im Export liegt sie unter `Utils/` und endet auf `-figma-custom-colors.json`.
-3. Optional: Aktiviere **Delete existing color variables**, um ohne bestehende Variablen zu beginnen.
-4. Wähle **Import variables**.
+</LearnBlock>
+
+<LearnBlock>
+
+## Importiere die Farben mit dem DB Custom Color Importer
+
+Das Plugin liest den JSON-Export und legt **Figma-Variablen** für deine Farben an. Sie entsprechen den adaptiven Farben der Core Foundation und funktionieren daher in Light Mode und Dark Mode.
+
+<LearnAside>
+
+1. Öffne den DB Custom Color Importer in Figma. Findest du ihn nicht, frag im [Teams-Kanal Overall & Design](https://teams.microsoft.com/l/channel/19%3A7dd9929be1fe494c823b11e0e2d22341%40thread.skype/DB%20UX%20Design%20System?groupId=72c53609-2941-46dd-8be9-e4d1d2c45c77&tenantId=a1a72d9c-49e6-4f6d-9af6-5aafa1183bfd) nach
+2. Wähle **select file** und die exportierte JSON-Datei. Im Export liegt sie unter `Utils/` und endet auf `-figma-custom-colors.json`
+3. Optional: Aktiviere **Delete existing color variables**, um ohne bestehende Variablen zu beginnen
+4. Wähle **Import variables**
 
 Das Plugin legt drei Variablen-Sammlungen an. Ihre Namen beginnen mit einem Präfix, das das Plugin aus dem Theme-Namen im Dateinamen ableitet. Lässt sich keins ableiten, verwendet es `custom`. Die Beispiele unten nutzen `custom`:
 
@@ -87,34 +117,49 @@ Die Sammlung `custom-Colors` hat den Modus `db-adaptive`, der auf die DB-Standar
 
 Die Variablen sind auf bestimmte Einsatzorte beschränkt: `bg/*` und `origin/*` stehen für Flächen von Frames und Formen zur Verfügung, `on-bg/*` und `on-origin/*` für Text, Konturen, Flächen von Formen und Effekte.
 
-### 3. Eigene Farben mit DB-Komponenten nutzen
+</LearnAside>
 
-DB-Komponenten nutzen die Variablen `db-adaptive/*`. Um einer Komponente deine eigenen Farben zu geben, packst du sie in eine lokale Komponente:
+</LearnBlock>
 
-1. Lege eine lokale Komponente an, zum Beispiel `CustomTag`, die eine Instanz der DB-Komponente enthält.
-2. Ergänze die Varianten, die du brauchst, passend zur Originalkomponente.
-3. Ersetze jede Farbvariable `db-adaptive/*` durch ihre Entsprechung `custom-adaptive/*`, z. B. `db-adaptive/bg/basic/level-1/default` durch `custom-adaptive/bg/basic/level-1/default`.
-4. Nutze deine lokale Komponente statt der Originalkomponente.
+<LearnBlock>
 
-<DBNotification variant="standalone" semantic="informational" headline="Wo du das Plugin findest">
-	Der DB Custom Color Importer ist in dieser Dokumentation noch nicht verlinkt. Frage im Teams-Kanal
-	nach, wenn du ihn in Figma nicht findest.
-</DBNotification>
+## Pack eine Komponente ein, um ihr deine Farben zu geben
 
-</DBSection>
+Die Komponenten nutzen die Variablen `db-adaptive/*`. Pack eine Komponente in eine **lokale Komponente** und tausche jede Variable gegen ihre Entsprechung `custom-adaptive/*`.
 
-<DBSection spacing="small" width="auto">
+<LearnAside>
 
-## Ressourcen
+1. Lege eine lokale Komponente an, z. B. `CustomTag`, die eine Instanz der DB-Komponente enthält
+2. Ergänze die Varianten, die du brauchst, passend zur Originalkomponente
+3. Ersetze jede Farbvariable `db-adaptive/*` durch ihre Entsprechung `custom-adaptive/*`, z. B. `db-adaptive/bg/basic/level-1/default` durch `custom-adaptive/bg/basic/level-1/default`
+4. Nutze deine lokale Komponente statt der Originalkomponente
 
-| Ressource             | Link                                                                                                   |
-| --------------------- | ------------------------------------------------------------------------------------------------------ |
-| DB Logo Importer      | [Figma Community](https://www.figma.com/community/plugin/1590462040996560100/concept-db-logo-importer) |
-| Theme Builder         | [Theme Builder](https://design-system.deutschebahn.com/theme-builder/)                                 |
-| Quellcode der Plugins | [figma-hub](https://github.com/db-ux-design-system/figma-hub)                                          |
-| Design-Ressourcen     | [Design-Ressourcen](/de/dokumentation/ressourcen/design)                                |
-| Figma-Tipps           | [Figma-Tipps](/de/dokumentation/lernen/figma)                                                          |
+</LearnAside>
 
-Weitere Plugins entstehen im [figma-hub-Repository](https://github.com/db-ux-design-system/figma-hub).
+</LearnBlock>
 
-</DBSection>
+<LearnBlock>
+
+## Arbeite in Figma weiter
+
+Hol dir weitere Tipps für die Komponenten in Figma, oder gestalte Schritt für Schritt ein erstes Formular.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Mit den Komponenten in Figma arbeiten',
+			description:
+				'Tipps und Workarounds, mit denen sich die Komponenten in Figma wie im Code verhalten.',
+			url: '/de/dokumentation/lernen/figma',
+		},
+		{
+			title: 'Ein Kontaktformular in Figma gestalten',
+			description: 'Gestalte ein Kontaktformular und übergib es mit Code Connect.',
+			url: '/de/dokumentation/lernen/figma-tutorial',
+		},
+	]}
+/>
+
+</LearnBlock>

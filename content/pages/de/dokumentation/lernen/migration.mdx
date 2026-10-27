@@ -2,63 +2,112 @@
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
-title: 'Migration von DB UI'
-headline: 'Migration von DB UI'
-description: 'Wechsle vom DB UX Design System – Generation 2 (aka DB UI) auf Generation 3. Die Seite behandelt Pakete, Komponenten, Tokens und Icons und zeigt, wie ein KI-Agent den Großteil der Arbeit übernimmt.'
+title: 'Von DB UI auf Generation 3 wechseln'
+headline: 'Von DB UI auf Generation 3 wechseln'
+description: 'Wechsle von Generation 2 (aka DB UI) auf Generation 3 – Pakete, Komponenten, Tokens, Icons und Figma-Bibliotheken, die Vorarbeit übernimmt ein KI-Agent.'
 readingList: true
 align: start
 toc: true
 tocMaxDepth: 2
-order: 6
+order: 24
+category: 'Migration'
+keywords:
+  [
+    'migration',
+    'db ui',
+    'generation 2',
+    'generation 3',
+    'upgrade',
+    'elm',
+    'cmp',
+    'rea',
+    'prefix',
+    'tokens',
+    'color tokens',
+    'icons',
+    'icon mapping',
+    'mcp server',
+    'ai agent',
+    'figma libraries',
+    'breaking changes',
+    'migration guide',
+  ]
+stepper: true
 ---
 
-import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 
-<DBSection spacing="small" width="auto">
+<LearnBlock>
 
-## Welche Migration brauche ich?
+## Generation 2 erkennst du schnell
+
+Präfixe wie `elm-button` und Tokens wie `db-color-yellow-500` kennzeichnen **Generation 2**. Schon auf Generation 3? Nutze die [Migration Guides](/de/dokumentation/releases/migration-guides 'Breaking Changes je Major-Version.').
+
+<LearnAside>
 
 | Du nutzt …                                  | Folge                                                                                            |
 | ------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| Generation 2 (aka DB UI)                    | dieser Seite                                                                                     |
+| Generation 2 (aka DB UI)                    | diesem Artikel                                                                                   |
 | eine frühere Major-Version von Generation 3 | den [Migration Guides](/de/dokumentation/releases/migration-guides) der jeweiligen Major-Version |
-
-Generation 2 nutzt Element-Präfixe wie `elm-button`, `cmp-card` oder `rea-header` und Farb-Tokens wie `db-color-yellow-500`. Findest du sie in deinem Code, nutzt du Generation 2.
 
 Die Dokumentation von Generation 2 steht weiterhin im [Marketingportal](https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/User-Experience/DB-UX-Design-System/version-2).
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## Die Vorarbeit einem KI-Agenten überlassen
+<LearnBlock>
 
-Der [MCP Server](/de/dokumentation/lernen/mcp-server) kennt die Migrationsregeln. Verbinde ihn mit deiner IDE und nutze dann zwei seiner Werkzeuge:
+## Überlass die Vorarbeit einem KI-Agenten
+
+Der [MCP Server](/de/dokumentation/lernen/mcp-server 'Verbindet das Design System mit deiner IDE.') prüft und migriert deine Dateien. Kontrolliere das Ergebnis – Layout-Entscheidungen bleiben bei dir.
+
+<LearnAside>
 
 | Werkzeug / Prompt             | Was es tut                                                                                                                  |
 | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | `scan_generation_2_migration` | Durchsucht eine Datei nach Mustern aus Generation 2 – Element-Präfixen und Farb-Tokens – und liefert einen Bericht.         |
 | `migrate_component`           | Migriert einen Code-Schnipsel Schritt für Schritt und prüft das Ergebnis mit dem TypeScript-Compiler, bevor es zurückkommt. |
 
-Prüfe das Ergebnis. Der Agent folgt denselben Zuordnungen wie diese Seite, kann dir aber keine Layout-Entscheidungen abnehmen.
+Der Agent folgt denselben Zuordnungen wie dieser Artikel.
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## Schritt 1: Die neuen Pakete installieren
+<LearnBlock>
 
-Generation 3 erscheint unter dem Scope `@db-ux`. Entferne die DB-UI-Pakete und installiere das Paket für dein Framework – die [Paketanleitungen](/de/dokumentation/ressourcen/pakete) behandeln Installation und Styling-Setup pro Framework.
+## Installiere die neuen Pakete
 
-Für Produkte der Deutschen Bahn ergänzt du zusätzlich das [DB Theme](/de/dokumentation/ressourcen/pakete/db-theme).
+Ersetze die DB-UI-Pakete durch das `@db-ux`-Paket deines Frameworks. DB-Produkte brauchen zusätzlich das [DB Theme](/de/dokumentation/lernen/db-theme-einrichten 'Installiere das Theme der DB-Marke.').
 
-</DBSection>
+<LearnAside>
 
-<DBSection spacing="small" width="auto">
+Einrichtung je Framework:
 
-## Schritt 2: Die Komponenten ersetzen
+- [React](/de/dokumentation/lernen/react-einrichten)
+- [Angular](/de/dokumentation/lernen/angular-einrichten)
+- [Vue](/de/dokumentation/lernen/vue-einrichten)
+- [Web Components](/de/dokumentation/lernen/web-components-einrichten)
+- [HTML & CSS](/de/dokumentation/lernen/html-css-einrichten)
 
-Die Präfixe fallen weg: Aus `elm-*`, `cmp-*` und `rea-*` wird `db-*` in HTML und Angular und `DB*` in React und Vue. Viele Properties haben sich geändert. Die häufigsten Fälle:
+Alle Pakete und ihre Details stehen unter [Welche Pakete du brauchst](/de/dokumentation/lernen/ueber#welche-pakete-du-brauchst).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Ersetze die Komponenten
+
+Aus `elm-*`, `cmp-*` und `rea-*` wird `db-*` in HTML und Angular, `DB*` in React und Vue. Neue Properties zeigt die [Komponentendokumentation](/de/dokumentation/komponenten 'Aktuelle Properties jeder Komponente.').
+
+<LearnAside>
+
+Die häufigsten Fälle:
 
 | Generation 2                | Generation 3              | Was sich ändert                                                                                                                                                                                                      |
 | --------------------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -74,24 +123,23 @@ Die Präfixe fallen weg: Aus `elm-*`, `cmp-*` und `rea-*` wird `db-*` in HTML un
 | `cmp-accordion`             | `db-accordion-item`       | Ein Item pro Element, gruppiert in `db-accordion`. `summary` → `headline`.                                                                                                                                           |
 | `cmp-tab-bar`, `cmp-db-tab` | `db-tabs`, `db-tab-item`  | Tabs bestehen aus Tab List, Tab Item und Tab Panel.                                                                                                                                                                  |
 
-<DBNotification variant="standalone" semantic="warning" headline="Header und Navigation">
-	`rea-header` und `cmp-mainnavigation` haben in Generation 3 Entsprechungen (Header und
-	Navigation), beide sind aber deprecated. Baue neue Layouts stattdessen mit{' '}
-	<DBLink href="/de/dokumentation/komponenten/shell" variant="inline">
-		Shell
-	</DBLink>{' '}
-	und Control Panel.
-</DBNotification>
+**Header und Navigation:** `rea-header` und `cmp-mainnavigation` haben in Generation 3 Entsprechungen (Header und Navigation), beide sind aber deprecated. Baue neue Layouts stattdessen mit [Shell](/de/dokumentation/komponenten/shell) und Control Panel.
 
-Jede Seite der [Komponentendokumentation](/de/dokumentation/komponenten) führt die aktuellen Properties auf.
+</LearnAside>
 
-</DBSection>
+</LearnBlock>
 
-<DBSection spacing="small" width="auto">
+<LearnBlock>
 
-## Schritt 3: Die Tokens ersetzen
+## Ersetze Tokens und Icons
 
-Generation 3 ersetzt feste Werte und die Farb-Tokens aus Generation 2 durch semantische Tokens. Sie passen sich automatisch an Light Mode, Dark Mode und Density an.
+Feste Werte und alte Farb-Tokens werden zu **semantischen Tokens**, viele Icons heißen neu. Alles zeigen die [Migrationsdokumente](https://github.com/db-ux-design-system/core-web/tree/main/docs/migration/db-ui 'Zuordnungen für Farben, Schriften und Icons.').
+
+<LearnAside>
+
+### Tokens
+
+Semantische Tokens passen sich automatisch an Light Mode, Dark Mode und Density an.
 
 | Bereich    | Ersetze                                                  | Durch                                                                                                            |
 | ---------- | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -102,15 +150,9 @@ Generation 3 ersetzt feste Werte und die Farb-Tokens aus Generation 2 durch sema
 
 Zwei Regeln gelten überall: Simuliere hellere Farben nicht mit `opacity`, und nutze keine Farb-Tokens für Schatten. Inline-`style`-Attribute umgehen Theming, Density und Dark Mode – verschiebe sie in CSS mit Tokens.
 
-Die vollständigen Zuordnungen für Farben und Schriftgrößen stehen in den [Migrationsdokumenten von core-web](https://github.com/db-ux-design-system/core-web/tree/main/docs/migration/db-ui).
+### Icons
 
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Schritt 4: Die Icons umbenennen
-
-Die meisten Icon-Namen haben sich geändert. Aus Bindestrichen werden Unterstriche, und viele Icons haben neue, sprechendere Namen.
+Aus Bindestrichen werden Unterstriche, und viele Icons haben neue, sprechendere Namen:
 
 | Generation 2 | Generation 3         |
 | ------------ | -------------------- |
@@ -123,26 +165,39 @@ Die meisten Icon-Namen haben sich geändert. Aus Bindestrichen werden Unterstric
 
 Die [vollständige Icon-Zuordnung](https://github.com/db-ux-design-system/core-web/blob/main/docs/migration/db-ui/icon-migration.md) deckt alle Icons ab. Alle aktuellen Namen stehen unter [Icons](/de/dokumentation/icons).
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
+
+<LearnBlock>
 
 ## Design
 
-Generation 3 hat eigene Figma-Bibliotheken. Baue neue Screens damit – wie du Zugang bekommst und sie aktivierst, steht unter [Design-Ressourcen](/de/dokumentation/ressourcen/design).
+Generation 3 hat eigene Figma-Bibliotheken – baue neue Screens damit statt mit den Dateien aus Generation 2. Wie du Zugang bekommst, zeigt die [Figma-Einrichtung](/de/dokumentation/lernen/figma-einrichten 'Bekomme Zugang zu den Figma-Bibliotheken und aktiviere sie.').
 
-</DBSection>
+</LearnBlock>
 
-<DBSection spacing="small" width="auto">
+<LearnBlock>
 
-## Ressourcen
+## Bleib nach dem Wechsel auf dem Laufenden
 
-| Ressource                      | Link                                                                                                                                                  |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Migrationsdokumente            | [core-web/docs/migration/db-ui](https://github.com/db-ux-design-system/core-web/tree/main/docs/migration/db-ui)                                       |
-| MCP Server                     | [MCP Server](/de/dokumentation/lernen/mcp-server)                                                                                                     |
-| Paketanleitungen               | [Pakete](/de/dokumentation/ressourcen/pakete)                                                                                                         |
-| Dokumentation von Generation 2 | [Marketingportal](https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/User-Experience/DB-UX-Design-System/version-2) |
-| Migration Guides               | [Migration Guides](/de/dokumentation/releases/migration-guides)                                                                                       |
+Auf Generation 3 bringt jede Major-Version ihren eigenen Migration Guide mit, und die Release Notes führen jede Änderung dazwischen auf.
 
-</DBSection>
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Migration Guides',
+			description: 'Die Breaking Changes jeder Major-Version von Generation 3.',
+			url: '/de/dokumentation/releases/migration-guides',
+		},
+		{
+			title: 'Release Notes',
+			description: 'Alle Änderungen jedes Releases, nach Paket.',
+			url: '/de/dokumentation/releases/release-notes',
+		},
+	]}
+/>
+
+</LearnBlock>

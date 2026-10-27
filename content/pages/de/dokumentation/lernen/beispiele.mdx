@@ -2,23 +2,48 @@
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
-title: 'Beispiele & Starter'
-headline: 'Beispiele & Starter'
-description: 'Fertige Beispielprojekte für jedes Framework. Öffne sie im Browser oder nutze sie als Ausgangspunkt für dein eigenes Projekt.'
+title: 'Mit einem Beispielprojekt starten'
+headline: 'Mit einem Beispielprojekt starten'
+description: 'Probiere fertige Beispielprojekte im Browser aus oder kopiere eines als Ausgangspunkt für dein eigenes Projekt.'
 readingList: true
 align: start
 toc: true
 tocMaxDepth: 2
-order: 9
+order: 20
+category: 'Development'
+keywords:
+  [
+    'examples',
+    'starter',
+    'template',
+    'boilerplate',
+    'stackblitz',
+    'demo',
+    'degit',
+    'git clone',
+    'react',
+    'angular',
+    'vue',
+    'tailwind',
+    'python',
+    'htmx',
+    'custom theme',
+    'shell',
+  ]
+stepper: true
 ---
 
-import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 
-<DBSection spacing="small" width="auto">
+<LearnBlock>
 
-## Im Browser ausprobieren
+## Probiere es zuerst im Browser aus
 
-Diese Beispiele laufen in StackBlitz. Du brauchst kein lokales Setup – der Editor öffnet sich in einem neuen Tab und startet die App.
+Drei React-Demos laufen in **StackBlitz** ganz ohne lokales Setup. Der Editor öffnet sich in einem neuen Tab und startet die App.
+
+<LearnAside>
 
 | Beispiel      | Zeigt                                                  | Öffnen                                                                                          |
 | ------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
@@ -26,15 +51,19 @@ Diese Beispiele laufen in StackBlitz. Du brauchst kein lokales Setup – der Edi
 | Table         | eine Datentabelle in einer Anwendungs-Shell            | [StackBlitz](https://stackblitz.com/edit/db-ux-design-system-examples-7yy1wm69?file=index.html) |
 | KPI           | ein Dashboard mit KPI-Karten                           | [StackBlitz](https://stackblitz.com/edit/db-ux-design-system-examples-8qc2ure1?file=index.html) |
 
-Alle drei sind mit React gebaut.
+Den Quellcode der Demos findest du im Ordner [shell-examples](https://github.com/db-ux-design-system/examples/tree/main/shell-examples) des examples-Repositorys: [react-documentation-example](https://github.com/db-ux-design-system/examples/tree/main/shell-examples/react-documentation-example), [react-table-example](https://github.com/db-ux-design-system/examples/tree/main/shell-examples/react-table-example) und [react-kpi-example](https://github.com/db-ux-design-system/examples/tree/main/shell-examples/react-kpi-example).
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## Beispielprojekte pro Framework
+<LearnBlock>
 
-Jedes Projekt zeigt ein minimales, lauffähiges Setup für ein Framework. Das README jedes Projekts listet alle Schritte auf, mit denen es angelegt wurde – hilfreich, wenn du das Setup in deinem Projekt nachbauen willst.
+## Wähle das Beispiel für dein Framework
+
+Jedes Projekt im [examples-Repository](https://github.com/db-ux-design-system/examples 'Alle Beispielprojekte des Design Systems auf GitHub.') zeigt ein minimales Setup für ein Framework. Sein README listet jeden Schritt.
+
+<LearnAside>
 
 | Framework          | Projekt                                                                                                      | Gebaut mit                    |
 | ------------------ | ------------------------------------------------------------------------------------------------------------ | ----------------------------- |
@@ -45,7 +74,30 @@ Jedes Projekt zeigt ein minimales, lauffähiges Setup für ein Framework. Das RE
 | Python mit htmx    | [htmx-jinja-example](https://github.com/db-ux-design-system/examples/tree/main/python/htmx-jinja-example)    | Flask, Jinja2, Web Components |
 | Eigenes Theme      | [custom-theme-example](https://github.com/db-ux-design-system/examples/tree/main/custom-theme-example)       | React, eigene Icon-Schrift    |
 
-### Ein Beispiel lokal starten
+Das README hilft dir, wenn du das Setup in deinem eigenen Projekt nachbauen willst.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Kopiere nur das Beispiel, das du brauchst
+
+**degit** kopiert einen einzelnen Ordner des Repositorys ohne Git-Historie. Ersetze `react-example` durch den Ordner deines Beispiels.
+
+```shell
+npx degit db-ux-design-system/examples/react-example my-app
+cd my-app
+npm install
+npm run dev
+```
+
+<LearnAside>
+
+### Alternativ das ganze Repository klonen
+
+Wenn du alle Beispiele auf einmal willst, klone das Repository und wechsle in einen Ordner:
 
 ```shell
 git clone https://github.com/db-ux-design-system/examples.git
@@ -54,41 +106,87 @@ npm install
 npm run dev
 ```
 
-Ersetze `react-example` durch den Ordner des Beispiels, das du starten willst. Das Python-Beispiel braucht zusätzlich `pip install -r requirements.txt` und startet mit `python app.py`.
+### Python-Beispiel
 
-</DBSection>
+Das Python-Beispiel liegt in einem Unterordner: `db-ux-design-system/examples/python/htmx-jinja-example`. Statt der npm-Befehle braucht es `pip install -r requirements.txt` und startet mit `python app.py`.
 
-<DBSection spacing="small" width="auto">
+</LearnAside>
 
-## Bevor du auf einem Beispiel aufbaust
+</LearnBlock>
 
-<DBNotification
-	variant="standalone"
-	semantic="warning"
-	headline="Die Beispiele nutzen das Whitelabel-Theme und ältere Versionen"
->
-	Die Beispiele enthalten das DB Theme nicht. Sie zeigen deshalb die Whitelabel-Standardwerte statt
-	der DB-Schrift und DB-Icons. Außerdem sind sie nicht immer auf der neuesten Version des Design
-	Systems. Aktualisiere die Pakete und ergänze das{' '}
-	<DBLink href="/de/dokumentation/ressourcen/pakete/db-theme" variant="inline">
-		DB Theme
-	</DBLink>
-	, bevor du ein Beispiel als Basis für ein Produkt nutzt.
-</DBNotification>
+<LearnBlock>
 
-</DBSection>
+## Aktualisiere, bevor du darauf aufbaust
 
-<DBSection spacing="small" width="auto">
+Die Beispiele nutzen das **Whitelabel-Theme** und ältere Versionen. Aktualisiere sie und ergänze für ein Produkt das [DB Theme](/de/dokumentation/lernen/db-theme-einrichten 'Farben, Schriften und Icons der Marke.').
 
-## Ressourcen
+<LearnAside>
 
-| Ressource        | Link                                                                            |
-| ---------------- | ------------------------------------------------------------------------------- |
-| Alle Beispiele   | [db-ux-design-system/examples](https://github.com/db-ux-design-system/examples) |
-| Paketanleitungen | [Pakete](/de/dokumentation/ressourcen/pakete)                   |
-| DB Theme         | [DB Theme](/de/dokumentation/ressourcen/pakete/db-theme)        |
-| React-Tutorial   | [React-Tutorial](/de/dokumentation/lernen/react-tutorial)                       |
+Ohne DB Theme zeigen die Beispiele die Whitelabel-Standardwerte statt der DB-Schrift und der DB-Icons.
 
-Wenn ein Beispiel nicht funktioniert, öffne ein Issue im [examples-Repository](https://github.com/db-ux-design-system/examples/issues). Prüfe vorher, ob es das Issue schon gibt.
+So aktualisierst du die Pakete des Design Systems im React-Beispiel auf die neueste Version:
 
-</DBSection>
+```shell
+npm install @db-ux/react-core-components@latest @db-ux/core-components@latest @db-ux/core-foundations@latest
+```
+
+Nutze für andere Frameworks das passende Paket, zum Beispiel `@db-ux/ngx-core-components` oder `@db-ux/v-core-components`. Springst du dabei über eine Major-Version, prüfe die [Release Notes](/de/dokumentation/releases/release-notes) auf Breaking Changes.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Melde ein Beispiel, das nicht funktioniert
+
+Eröffne ein Issue im [examples-Repository](https://github.com/db-ux-design-system/examples/issues 'Melde ein Problem mit einem der Beispielprojekte.'). Prüfe vorher, ob es das Issue schon gibt.
+
+<LearnAside>
+
+Probleme mit einer Komponente selbst, nicht mit dem Beispiel, gehören ins [core-web-Repository](https://github.com/db-ux-design-system/core-web/issues/new/choose).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Mach mit deinem eigenen Projekt weiter
+
+Richte dein Framework ein oder baue ein erstes Formular.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Ein Kontaktformular in React bauen',
+			description: 'Baue Schritt für Schritt ein Kontaktformular.',
+			url: '/de/dokumentation/lernen/react-tutorial',
+		},
+		{
+			title: 'Komponenten in React einbinden',
+			description: 'Binde die Komponenten in ein React-Projekt ein.',
+			url: '/de/dokumentation/lernen/react-einrichten',
+		},
+		{
+			title: 'Alle Setup-Artikel',
+			description: 'Angular, Vue, Web Components und mehr.',
+			url: '/de/dokumentation/lernen',
+		},
+	]}
+/>
+
+<LearnAside>
+
+- [Komponenten in Angular einbinden](/de/dokumentation/lernen/angular-einrichten)
+- [Komponenten in Vue einbinden](/de/dokumentation/lernen/vue-einrichten)
+- [Komponenten als Web Components nutzen](/de/dokumentation/lernen/web-components-einrichten)
+- [Komponenten mit HTML und CSS nutzen](/de/dokumentation/lernen/html-css-einrichten)
+- [Komponenten in Astro einbinden](/de/dokumentation/lernen/astro-einrichten)
+- [Welche Pakete du brauchst](/de/dokumentation/lernen/ueber#welche-pakete-du-brauchst)
+
+</LearnAside>
+
+</LearnBlock>

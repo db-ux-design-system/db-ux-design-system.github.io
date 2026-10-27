@@ -2,80 +2,70 @@
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
-title: 'React Tutorial'
-headline: 'React Tutorial: Build a Contact Form'
-description: 'Build a small React app with the DB UX Design System step by step – from an empty Vite project to a working contact form with feedback after sending.'
+title: 'Build a contact form in React'
+headline: 'Build a contact form in React'
+description: 'Build a contact form with name, email, topic and message step by step – with feedback after sending and your own styles with tokens.'
 readingList: true
 align: start
 toc: true
 tocMaxDepth: 2
-order: 3
+order: 19
+category: 'Development'
+keywords:
+  [
+    'react',
+    'tutorial',
+    'contact form',
+    'form',
+    'getting started',
+    'first app',
+    'vite',
+    'typescript',
+    'usestate',
+    'notification',
+    'card',
+    'stack',
+    'section',
+    'tokens',
+    'css',
+    'production build',
+  ]
+stepper: true
 ---
 
-import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 
-<DBSection spacing="small" width="auto">
+<LearnBlock>
 
-In this tutorial you build a contact form with name, email, topic and message. After sending, a notification confirms the message. On the way, you set up the styles, combine layout and form components and add your own CSS with tokens.
+## Start with a React project that is set up
 
-Every step ends with a check, so you know the step worked before you continue.
+Create a Vite project with React and set it up with the [React setup](/documentation/learn/react-setup 'Install the packages, load the styles and keep the colors intact in the build.'). **Check:** `pnpm dev` starts without errors.
 
-The same form is designed in Figma in the [Figma Tutorial](/documentation/learn/figma-tutorial).
+<LearnAside>
 
-<DBNotification variant="standalone" semantic="informational" headline="Only want to install?">
-	If you add the design system to an existing project, follow the{' '}
-	<DBLink href="/documentation/resources/packages/react" variant="inline">
-		React guide
-	</DBLink>{' '}
-	instead. This tutorial starts from an empty project.
-</DBNotification>
+### What you need
 
-</DBSection>
+- Node.js and pnpm. With npm, use `npm create` and `npm i` instead of `pnpm create` and `pnpm add`
+- Basic knowledge of React: components, JSX and the `useState` hook
+- A supported browser: the last three versions of Chrome and Edge, Firefox ESR and the last two major versions of Safari
 
-<DBSection spacing="small" width="auto">
+The tutorial was tested with Vite 8, React 19 and version 6 of the design system packages. The same form is designed in Figma in the [Figma tutorial](/documentation/learn/figma-tutorial).
 
-## Before you begin
+### All setup commands
 
-You need:
-
-- Node.js and pnpm. With npm, use `npm create` and `npm i` instead of `pnpm create` and `pnpm add`.
-- Basic knowledge of React: components, JSX and the `useState` hook.
-- A supported browser: the last three versions of Chrome and Edge, Firefox ESR and the last two major versions of Safari.
-
-The tutorial was tested with Vite 8, React 19 and version 6 of the design system packages.
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Step 1: Create the project
-
-Create a React project with TypeScript and start it:
+Create the project and install the packages:
 
 ```shell
 pnpm create vite my-app --template react-ts
 cd my-app
 pnpm install
-pnpm dev
-```
-
-Delete `src/App.css`. The next steps replace the starter styles.
-
-**Check:** The browser shows the Vite starter page at the address printed in the terminal, by default `http://localhost:5173`.
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Step 2: Install the packages and styles
-
-Install the React components and both style packages:
-
-```shell
 pnpm add @db-ux/react-core-components @db-ux/core-components @db-ux/core-foundations
+pnpm add esbuild --save-dev
 ```
 
-Replace the content of `src/index.css`:
+Delete `src/App.css`. Replace the content of `src/index.css`:
 
 ```css
 /* src/index.css */
@@ -88,10 +78,6 @@ Replace the content of `src/index.css`:
 The first line fixes the order of the cascade layers, so the theme always comes before the component styles.
 
 Vite 8 minifies CSS with LightningCSS by default. It transforms the `light-dark()` function of the design system incorrectly, and colors break in the production build. Switch the minifier to esbuild:
-
-```shell
-pnpm add esbuild --save-dev
-```
 
 ```ts
 // vite.config.ts
@@ -106,13 +92,25 @@ export default defineConfig({
 });
 ```
 
-**Check:** The commands run without errors. You see the result in the next step, once the page uses the first components.
+Then start the app with `pnpm dev`.
 
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Build the page structure
+
+Wrap the page in a **Section** and a **Stack**. **Check:** "Contact us" appears in the bold `OpenSans` font.
+
+```tsx
+<DBSection spacing="medium" width="small">
+	<DBStack gap="large">{/* Heading, later the form */}</DBStack>
 </DBSection>
+```
 
-<DBSection spacing="small" width="auto">
-
-## Step 3: Build the page structure
+<LearnAside>
 
 Replace the content of `src/App.tsx`:
 
@@ -135,15 +133,27 @@ export default App;
 - **Stack** arranges its children with an even gap. You use it again for the form fields.
 - **Heading** renders a real `<h1>` with the typography of the design system.
 
-**Check:** The page shows the headline “Contact us” in a large, bold font. The font is `OpenSans` – you can see it under the rendered fonts in the DevTools. If the headline appears in the browser default font, the CSS import from step 2 is missing.
+You find the font under the rendered fonts in the DevTools. If the headline appears in the browser default font, the CSS import from the setup is missing.
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## Step 4: Add the form
+<LearnBlock>
 
-Put the form fields into a card below the headline:
+## Add the form in a Card
+
+Put the fields into a **Card**, each with a `label`. **Check:** five fields and a brand-colored button with an arrow appear.
+
+```tsx
+<DBCard spacing="medium">
+	<form>{/* <DBInput label="Name" name="name" required /> … */}</form>
+</DBCard>
+```
+
+<LearnAside>
+
+Put the Card below the headline. This is the complete `src/App.tsx`:
 
 ```tsx
 // src/App.tsx
@@ -189,17 +199,29 @@ const App = () => (
 export default App;
 ```
 
-Each form component renders a native form element with its label. That is why `label` is a required part of every field: screen readers read it out, and a click on the label focuses the field. `required` and `type="email"` use the validation of the browser.
+That is why `label` is a required part of every field: screen readers read it out, and a click on the label focuses the field. `required` and `type="email"` use the validation of the browser.
 
-**Check:** The card shows five fields and a button in the brand color with an arrow icon. A click on a label focuses the field. If the arrow is missing, the browser cannot load the icon font – look for a failed `.woff2` request in the Network tab of the DevTools.
+**Check in detail:** a click on a label focuses the field. If the arrow is missing, the browser cannot load the icon font – look for a failed `.woff2` request in the Network tab of the DevTools.
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## Step 5: Show feedback after sending
+<LearnBlock>
 
-Store whether the form was sent, and show a notification in that case. This is the complete `src/App.tsx`:
+## Show feedback after sending
+
+Show a **Notification** once the form is sent. **Check:** a green "Message sent" appears after sending.
+
+```tsx
+const [sent, setSent] = useState(false);
+// in onSubmit: event.preventDefault(); setSent(true);
+<DBNotification semantic="successful" headline="Message sent" />;
+```
+
+<LearnAside>
+
+This is the complete `src/App.tsx`:
 
 ```tsx
 // src/App.tsx
@@ -273,19 +295,31 @@ export default App;
 
 The notification has the role `status`, so screen readers announce it without moving the focus. `closeButtonText` sets the accessible name of the close button – the ESLint plugin of the design system reports a closeable notification without it. The `form-actions` wrapper around the button is used in the next step.
 
-**Check:**
+**Check in detail:**
 
-- Send the empty form: the browser marks the first required field, and no notification appears.
-- Fill in name, email and message and send again: a green notification “Message sent” appears above the card.
-- Close the notification with its close button: it disappears.
+- Send the empty form: the browser marks the first required field, and no notification appears
+- Fill in name, email and message and send again: a green notification "Message sent" appears above the Card
+- Close the notification with its close button: it disappears
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## Step 6: Add your own styles with tokens
+<LearnBlock>
 
-Align the button to the end of the form. Add this rule to `src/index.css`, below the imports:
+## Add your own styles with tokens
+
+Style with **tokens** instead of pixel values. **Check:** the button moves to the right edge of the Card.
+
+```css
+.form-actions {
+	padding-block-start: var(--db-spacing-fixed-sm);
+}
+```
+
+<LearnAside>
+
+Add the complete rule to `src/index.css`, below the imports. The class `form-actions` is the wrapper around the button from the previous step.
 
 ```css
 /* src/index.css */
@@ -298,33 +332,65 @@ Align the button to the end of the form. Add this rule to `src/index.css`, below
 
 `--db-spacing-fixed-sm` is a spacing token of the Foundation. Use tokens instead of fixed pixel values for spacing, colors and sizes, so your styles follow the theme and the density. All tokens are listed under [Foundation](/documentation/foundation).
 
-**Check:** The button sits at the right edge of the card, with a little more space above it.
+**Check in detail:** the button sits at the right edge of the Card, with a little more space above it.
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## Step 7: Build for production
+<LearnBlock>
+
+## Build for production
+
+Build the app and open the preview. **Check:** the preview at `http://localhost:4173` looks exactly like the development version.
 
 ```shell
 pnpm build
 pnpm preview
 ```
 
-**Check:** The preview at `http://localhost:4173` looks exactly like the development version. Switch your operating system to Dark Mode: page, card and fields switch to dark colors in both versions. If colors look wrong only in the preview, the `cssMinify` setting from step 2 is missing.
+<LearnAside>
 
-</DBSection>
+Switch your operating system to Dark Mode: page, Card and fields switch to dark colors in both versions. If colors look wrong only in the preview, the `cssMinify` setting from the setup is missing.
 
-<DBSection spacing="small" width="auto">
+</LearnAside>
 
-## Next steps
+</LearnBlock>
 
-| Next step                            | Where                                                                                  |
-| ------------------------------------ | -------------------------------------------------------------------------------------- |
-| Use the DB Theme for a DB product    | [DB Theme](/documentation/resources/packages/db-theme)                   |
-| Report incorrect usage in the editor | [ESLint plugin](/documentation/resources/packages/react#eslint-plugin)   |
-| Reduce the CSS bundle size           | [PostCSS plugin](/documentation/resources/packages/react#postcss-plugin) |
-| Look up properties and guidelines    | [Components](/documentation/components)                                                |
-| Let an AI agent use correct APIs     | [MCP Server](/documentation/learn/mcp-server)                                          |
+<LearnBlock>
 
-</DBSection>
+## Take your form further
+
+Your form works. Continue with the brand, examples or AI support.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'DB Theme',
+			description: 'Add the colors, fonts and icons of the Deutsche Bahn brand.',
+			url: '/documentation/learn/db-theme-setup',
+		},
+		{
+			title: 'Start from an example project',
+			description: 'Example projects in the browser or on your machine.',
+			url: '/documentation/learn/examples',
+		},
+		{
+			title: 'Connect your agent to the MCP Server',
+			description: 'Let an AI agent use the correct component APIs.',
+			url: '/documentation/learn/mcp-server',
+		},
+	]}
+/>
+
+<LearnAside>
+
+- [ESLint plugin](/documentation/learn/react-setup#eslint-plugin): report incorrect usage in the editor
+- [PostCSS plugin](/documentation/learn/react-setup#postcss-plugin): reduce the CSS bundle size
+- [Components](/documentation/components): look up properties and guidelines
+
+</LearnAside>
+
+</LearnBlock>

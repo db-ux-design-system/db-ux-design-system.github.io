@@ -2,55 +2,74 @@
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
-title: 'Figma Tutorial'
-headline: 'Figma Tutorial: Design a Contact Form'
-description: 'Design a contact form with the DB UX Design System in Figma step by step and hand it over to development with Code Connect.'
+title: 'Design a contact form in Figma'
+headline: 'Design a contact form in Figma'
+description: 'Design a contact form in Figma step by step, configure the components through their properties and hand it over with Code Connect.'
 readingList: true
 align: start
 toc: true
 tocMaxDepth: 2
-order: 2
+order: 3
+category: 'Design'
+keywords:
+  [
+    'figma',
+    'tutorial',
+    'contact form',
+    'form',
+    'getting started',
+    'first screen',
+    'auto layout',
+    'variables',
+    'spacing tokens',
+    'component properties',
+    'slots',
+    'required fields',
+    'notification',
+    'dev mode',
+    'code connect',
+    'handoff',
+  ]
+stepper: true
 ---
 
-import { DBSection, DBNotification, DBLink } from '@db-ux/react-core-components';
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 
-<DBSection spacing="small" width="auto">
-
-In this tutorial you design the same contact form that developers build in the <DBLink href="/documentation/learn/react-tutorial" variant="inline">React Tutorial</DBLink>: name, email, topic, message and a confirmation after sending. On the way, you combine components, configure them through their properties and check in Dev Mode which code your design produces.
-
-Every step ends with a check, so you know the step worked before you continue.
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
+<LearnBlock>
 
 ## Before you begin
 
+Enable Core Foundation and Core Components in your file, see [Set up the Figma libraries](/documentation/learn/figma-setup 'Get access and enable the libraries.'). The [React tutorial](/documentation/learn/react-tutorial 'The same contact form in code.') builds the same form in code.
+
+<LearnAside>
+
+You design a contact form with name, email, topic, message and a confirmation after sending. Every step ends with a check, so you know the step worked before you continue.
+
 You need:
 
-- Access to the Figma libraries of the DB UX Design System – see [Design Resources](/documentation/resources/design).
+- Access to the Figma libraries of the DB UX Design System
 - A Figma seat that lets you edit files. With a Dev seat you can inspect designs, but not create them.
-- Basic knowledge of Figma: frames, Auto Layout and component instances.
+- Basic knowledge of Figma: frames, Auto Layout and component instances
 
-Property names in Figma start with an icon that shows their purpose, for example ✏️ for texts and 📦 for slots. This tutorial names the properties as they appear in the properties panel. The icons are explained under [Design Resources](/documentation/resources/design#work-with-the-components).
-
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Step 1: Create a file and enable the libraries
-
-1. Create a new design file in the Figma organization of Deutsche Bahn.
-2. Open the Assets panel and select **Libraries**.
-3. Enable **DB UX - Core Foundation** and **DB UX - Core Components**. Core Foundation contains the variables for colors, spacing and typography that the components use.
+To start, create a new design file in the Figma organization of Deutsche Bahn, open the Assets panel, select **Libraries** and enable **DB UX - Core Foundation** and **DB UX - Core Components**. Core Foundation contains the variables for colors, spacing and typography that the components use.
 
 **Check:** In the Assets panel, a search for “Button” finds `Button → Brand` from DB UX - Core Components.
 
-</DBSection>
+Property names in Figma start with an icon that shows their purpose, for example ✏️ for texts and 📦 for slots. This tutorial names the properties as they appear in the properties panel. The icons are explained under [Set up the Figma libraries](/documentation/learn/figma-setup#work-with-the-components-through-their-properties).
 
-<DBSection spacing="small" width="auto">
+</LearnAside>
 
-## Step 2: Build the page structure
+</LearnBlock>
+
+<LearnBlock>
+
+## Build the page structure
+
+Create a page frame with a vertical Auto Layout, bind its gap to the variable `db-spacing/fixed/lg` and add a headline.
+
+<LearnAside>
 
 1. Create a frame for the page and give it a vertical Auto Layout.
 2. Bind the gap of the Auto Layout to the variable `db-spacing/fixed/lg`. Click the gap value and pick the variable instead of typing a number.
@@ -60,11 +79,17 @@ Variables instead of fixed values keep your spacing in line with the density, an
 
 **Check:** The headline appears in the headline font of the DB Theme. When you select the gap of the frame, it shows the variable `db-spacing/fixed/lg`, not a pixel value.
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## Step 3: Add the form
+<LearnBlock>
+
+## Add the form to a card
+
+Place a Card below the headline and put five form fields and a button into its **📦 Children** slot. Change the components only through their properties and slots – never detach them.
+
+<LearnAside>
 
 1. Insert `Card → (Def) Level 1 (Beta)` below the headline and set **🔀 Spacing** to **Medium**.
 2. Give the **📦 Children** slot of the card a vertical Auto Layout with the gap `db-spacing/fixed/md`.
@@ -81,32 +106,37 @@ Variables instead of fixed values keep your spacing in line with the density, an
 
 4. On the button, switch on **👁️ Show Icon Leading** and swap **🔄 Icon Leading Medium** for the icon `arrow_right`.
 
-Change the components only through their properties and slots. Do not detach them and do not edit their layers directly. The properties correspond to the properties in code – a detached instance loses this link, and developers can no longer read the correct code from it.
+Do not edit the layers of a component directly. The properties correspond to the properties in code – a detached instance loses this link, and developers can no longer read the correct code from it.
 
 **Check:** The card shows five fields and a button in the brand color with an arrow. In the layers panel, every field is still an instance (component icon), not a frame.
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## Step 4: Mark the required fields
+<LearnBlock>
 
-Name, email and message are required. For each of the three fields:
+## Mark the required fields
 
-1. Set **⚙️ Required** to **true**. This property does not change the look – it only tells the code that the field is required.
-2. Switch on **👁️ Show Required Asterisk**, so users see which fields are required.
+For Name, Email and Message, set **⚙️ Required** to true and switch on **👁️ Show Required Asterisk**. Check: these three fields show an asterisk, Topic and the checkbox do not.
+
+<LearnAside>
+
+**⚙️ Required** does not change the look – it only tells the code that the field is required. **👁️ Show Required Asterisk** shows users which fields are required.
 
 Properties with ⚙️ only affect the code. Set them anyway, so the snippet in Dev Mode is complete. More on this under [Code Connect](/documentation/learn/code-connect).
 
-**Check:** Name, Email and Message show an asterisk next to their label. Topic and the checkbox do not.
+</LearnAside>
 
-</DBSection>
+</LearnBlock>
 
-<DBSection spacing="small" width="auto">
+<LearnBlock>
 
-## Step 5: Design the state after sending
+## Design the state after sending
 
-Developers need to know what happens after sending. Show it as a second screen:
+Developers need to know what happens after sending. Duplicate the page and show a success Notification on the copy.
+
+<LearnAside>
 
 1. Duplicate the page frame and name the copies “Contact – Form” and “Contact – Sent”.
 2. In “Contact – Sent”, insert `Notification → Standalone - (Def) Icon` between headline and card.
@@ -117,13 +147,19 @@ Developers need to know what happens after sending. Show it as a second screen:
 
 **Check:** “Contact – Sent” shows a green notification with an icon and a close button above the card. “Contact – Form” is unchanged.
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## Step 6: Check the handoff in Dev Mode
+<LearnBlock>
 
-Switch to Dev Mode with `Shift` + `D` and select the components one by one. Thanks to Code Connect, the inspect panel shows the matching code instead of generic CSS.
+## Check the handoff in Dev Mode
+
+Switch to Dev Mode with `Shift` + `D` and select the components one by one. Thanks to Code Connect, each one shows its code with a `DB` component instead of generic CSS.
+
+<LearnAside>
+
+### The snippets
 
 Select the Name field. The snippet looks like this:
 
@@ -144,7 +180,7 @@ Select the Name field. The snippet looks like this:
 />
 ```
 
-- `label` and `required` come from **✏️ Label** and **⚙️ Required**. If `required={true}` is missing, step 4 is missing for this field.
+- `label` and `required` come from **✏️ Label** and **⚙️ Required**. If `required={true}` is missing, the previous step is missing for this field.
 - Properties with default values such as `disabled={false}` are part of the snippet. Developers can leave them out.
 - `name="input"` is a placeholder. The real field name is set in code.
 
@@ -156,11 +192,7 @@ Select the card. Its snippet starts with:
 
 **Check:** Every component of the form shows a snippet with a `DB` component – `DBHeadingH1`, `DBCard`, `DBInput`, `DBSelect`, `DBTextarea`, `DBCheckbox`, `DBButton` and `DBNotification`. If a component shows only CSS, it is detached or not from the DB UX libraries.
 
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## What developers add
+### What developers add
 
 Some things cannot be designed. Agree on them in the handoff or note them in the file:
 
@@ -171,19 +203,43 @@ Some things cannot be designed. Agree on them in the handoff or note them in the
 | Behavior after sending | Developers show the notification once the form was sent. Your second screen shows when. |
 | Layout frames          | Frames are not components. Developers rebuild them with layout components and tokens.   |
 
-The result in code is shown step by step in the <DBLink href="/documentation/learn/react-tutorial" variant="inline">React Tutorial</DBLink>.
+</LearnAside>
 
-</DBSection>
+</LearnBlock>
 
-<DBSection spacing="small" width="auto">
+<LearnBlock>
 
-## Next steps
+## Continue with the details
 
-| Next step                               | Where                                                        |
-| --------------------------------------- | ------------------------------------------------------------ |
-| Helper components and component how-tos | [Figma Tips](/documentation/learn/figma)                     |
-| All about ⚙️ properties and Dev Mode    | [Code Connect](/documentation/learn/code-connect)            |
-| Usage, variants and guidelines          | [Components](/documentation/components)                      |
-| Logos and custom colors                 | [Plugins & Tools](/documentation/learn/plugins) |
+See the result in code, or go deeper into Figma and Code Connect.
 
-</DBSection>
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Contact form in React',
+			description: 'The same contact form built in code, step by step.',
+			url: '/documentation/learn/react-tutorial',
+		},
+		{
+			title: 'Components in Figma',
+			description: 'Helper components, resizing behavior and how-tos for single components.',
+			url: '/documentation/learn/figma',
+		},
+		{
+			title: 'Code Connect',
+			description: 'All about ⚙️ properties and the snippets in Dev Mode.',
+			url: '/documentation/learn/code-connect',
+		},
+	]}
+/>
+
+<LearnAside>
+
+- Usage, variants and guidelines of every component: [Components](/documentation/components)
+- Logos and custom colors: [Add logos and custom colors in Figma](/documentation/learn/plugins)
+
+</LearnAside>
+
+</LearnBlock>

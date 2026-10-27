@@ -2,30 +2,63 @@
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
-title: 'AI'
-headline: 'AI'
-description: 'Give AI coding agents accurate knowledge of the DB UX Design System – component APIs, tokens, icons and migration rules – instead of letting them guess.'
+title: 'Work with AI coding agents'
+headline: 'Work with AI coding agents'
+description: 'Give AI coding agents accurate knowledge of the design system – component APIs, tokens, icons and migration rules – instead of letting them guess.'
 readingList: true
 align: start
 toc: true
 tocMaxDepth: 2
-order: 4
+order: 21
+category: 'Tooling'
+keywords:
+  [
+    'ai',
+    'artificial intelligence',
+    'llm',
+    'coding agent',
+    'github copilot',
+    'amazon q',
+    'kiro',
+    'cursor',
+    'claude',
+    'mcp',
+    'mcp server',
+    'model context protocol',
+    'agent cli',
+    'copilot instructions',
+    'code connect',
+    'prompts',
+    'hallucination',
+  ]
+stepper: true
 ---
 
-import { DBSection, DBNotification } from '@db-ux/react-core-components';
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 
-<DBSection spacing="small" width="auto">
+<LearnBlock>
 
-## Why agents need help
+## Without context, agents guess
 
-AI coding agents know common libraries, but not the exact API of the DB UX Design System. Without context, they invent component names, properties and token values that look right but do not exist. The tools on this page give agents the real source instead.
+AI coding agents know common libraries, but not the exact API of the DB UX Design System. Without context, they invent component names, properties and token values that look right but do not exist.
 
-</DBSection>
+<LearnAside>
 
-<DBSection spacing="small" width="auto">
+The tools in this article give agents the real source instead: the generated code and documentation shipped in the `@db-ux` packages. Generated code still needs your review – the tools reduce guessing, they do not replace your own judgment.
 
-## Which tool do I need?
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Three tools, each for one job
+
+The **MCP Server** answers agent requests live, the **Agent CLI** writes project rules into your repository, and **Code Connect** shows code for Figma designs. The MCP Server and the Agent CLI complement each other, so use both if you can.
+
+<LearnAside>
 
 | Tool                | What it does                                                                                            | Use it when                                   |
 | ------------------- | ------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
@@ -33,101 +66,78 @@ AI coding agents know common libraries, but not the exact API of the DB UX Desig
 | `@db-ux/agent-cli`  | Writes the documentation of your installed `@db-ux` packages into `.github/copilot-instructions.md`     | You want project rules that every agent reads |
 | Code Connect        | Shows the matching code snippet for a Figma design in Dev Mode                                          | You implement designs from Figma              |
 
-The MCP Server and the Agent CLI complement each other. Use both if you can.
+The Model Context Protocol (MCP) is an open standard that lets an IDE connect agents to external tools and data sources.
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## Quick start
+<LearnBlock>
 
-### 1. Generate the project rules
+## Start with the Agent CLI
 
-Run this in the root of your repository:
+Generate the project rules with `npx @db-ux/agent-cli`, then register the [MCP Server](/documentation/learn/mcp-server 'Configuration for each IDE and the connection check.') in your IDE.
+
+<LearnAside>
 
 ```shell
 npx @db-ux/agent-cli
 ```
 
-The tool scans `node_modules` for installed `@db-ux` packages and creates or updates `.github/copilot-instructions.md` with the documentation for exactly those versions. Run it again after every update of the design system.
+1. Run `npx @db-ux/agent-cli` in the root of your repository. It creates or updates `.github/copilot-instructions.md` for the `@db-ux` packages installed in your project.
+2. Add the `db-ux` entry to the MCP configuration of your IDE.
+3. Ask your agent to list the components of the design system. It should answer with the real component names.
 
-In a monorepo, pass the folder where the packages are installed:
+Run the Agent CLI again after every update of the design system. Monorepos, version pinning and IDE-specific details are covered in the MCP Server article.
 
-```shell
-npx @db-ux/agent-cli packages/frontend
-```
+</LearnAside>
 
-### 2. Connect the MCP Server
+</LearnBlock>
 
-Add the server to the MCP configuration of your IDE:
+<LearnBlock>
 
-```json
-{
-	"mcpServers": {
-		"db-ux": {
-			"command": "npx",
-			"args": ["--yes", "@db-ux/mcp-server"]
-		}
-	}
-}
-```
+## Ask for the task, not for the code
 
-<DBNotification variant="standalone" semantic="informational" headline="IDE-specific setup">
-	The exact location of this configuration differs between VS Code, JetBrains IDEs, Cursor and Kiro.
-	The MCP Server page describes each of them.
-</DBNotification>
+Describe what you want to build, migrate or check. The MCP Server offers prompts for these tasks, and the agent calls the matching tools on its own.
 
-<DBNotification variant="standalone" semantic="warning" headline="Pin the version">
-	Without a version, `npx --yes` downloads the latest release and runs it without asking – the same
-	applies to `npx @db-ux/agent-cli`. To control what runs in your IDE, add the version that matches
-	your `@db-ux` packages, for example `"@db-ux/mcp-server@6.0.0"` and `npx @db-ux/agent-cli@6.0.0`.
-</DBNotification>
+<LearnAside>
 
-### 3. Check the connection
+| Task                      | Prompt or tool of the MCP Server                   | Example request                                                     |
+| ------------------------- | -------------------------------------------------- | ------------------------------------------------------------------- |
+| Build a page or component | `scaffold_page`                                    | "Build a booking form in React with DB UX components."              |
+| Migrate from DB UI        | `scan_generation_2_migration`, `migrate_component` | "Scan this file for Generation 2 patterns and migrate it to Vue."   |
+| Review code               | `review_ui_code`                                   | "Review this component for DB UX compliance."                       |
+| Check accessibility       | `audit_accessibility`                              | "Audit this dialog against WCAG 2.2 AA and list manual test steps." |
 
-Look for `db-ux` in the list of MCP servers of your IDE. Then ask your agent to list the components of the design system – it should answer with the real component names.
+WCAG 2.2 AA is the accessibility level the audit checks against. An automated audit does not replace manual testing with assistive technologies.
 
-</DBSection>
+The [migration from DB UI](/documentation/learn/migration) describes how an agent can do the groundwork of a migration.
 
-<DBSection spacing="small" width="auto">
+</LearnAside>
 
-## What you can do with it
+</LearnBlock>
 
-| Task                      | Tool or prompt of the MCP Server                   |
-| ------------------------- | -------------------------------------------------- |
-| Build a page or component | `scaffold_page`                                    |
-| Migrate from DB UI        | `scan_generation_2_migration`, `migrate_component` |
-| Review code               | `review_ui_code`                                   |
-| Check accessibility       | `audit_accessibility` – checks against WCAG 2.2 AA |
+<LearnBlock>
 
-Always review generated code. The tools reduce guessing, but they do not replace your own judgment.
+## Set up the tool you need
 
-</DBSection>
-
-<DBSection spacing="small" width="auto">
-
-## Learn more
+Connect your IDE to the MCP Server, or learn how Figma properties turn into code with Code Connect.
 
 <TeaserCard
-	columns={3}
+	columns={2}
 	headlineLevel={3}
 	teasers={[
 		{
-			title: 'MCP Server',
-			description: 'Setup per IDE, all tools and prompts, troubleshooting.',
+			title: 'Connect your agent to the MCP Server',
+			description: 'Setup per IDE, project rules, all tools and prompts, troubleshooting.',
 			url: '/documentation/learn/mcp-server',
 		},
 		{
-			title: 'Code Connect',
+			title: 'Hand over designs with Code Connect',
 			description: 'How Figma properties turn into code in Dev Mode.',
 			url: '/documentation/learn/code-connect',
-		},
-		{
-			title: 'Migration from DB UI',
-			description: 'Let an agent do the groundwork of a migration.',
-			url: '/documentation/learn/migration',
 		},
 	]}
 />
 
-</DBSection>
+</LearnBlock>
