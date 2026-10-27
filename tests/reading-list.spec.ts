@@ -21,6 +21,14 @@ const waitForToggle = async (page: Page) => {
 	await expect(page.locator('astro-island:has(> .rl-toggle)')).not.toHaveAttribute('ssr', /.*/);
 };
 
+// Deleting asks first: confirms the dialog of the desktop reading list.
+const confirmDelete = async (page: Page, button = 'Remove') => {
+	const dialog = page.locator('.db-control-panel-desktop .rl-control dialog[open]');
+	await expect(dialog).toBeVisible();
+	await dialog.getByRole('button', { name: button, exact: true }).click();
+	await expect(dialog).toHaveCount(0);
+};
+
 const readList = (page: Page) =>
 	page.evaluate((key) => JSON.parse(localStorage.getItem(key) ?? 'null'), KEY);
 
@@ -126,6 +134,7 @@ test('reading list is always visible and filled by the wizard result', async ({ 
 
 	// Delete: the focus moves to the delete button that takes the row's place.
 	await popover.getByRole('button', { name: 'Remove: Figma Tutorial' }).click();
+	await confirmDelete(page);
 	await expect(popover.locator('.rl-item')).toHaveCount(2);
 	await expect(popover.getByRole('button', { name: 'Remove: Where to get help' })).toBeFocused();
 	await expect(trigger).toHaveAccessibleName('Reading list, 2 pages');
@@ -221,6 +230,7 @@ test('bookmarks come first, wizard suggestions below as their own group', async 
 
 	// Deleting the last bookmark moves the focus into the wizard group.
 	await lists.nth(0).getByRole('button', { name: 'Remove: Connect your AI coding agent' }).click();
+	await confirmDelete(page);
 	await expect(control.locator('.rl-list')).toHaveCount(1);
 	await expect(control.getByRole('button', { name: 'Remove: Design Resources' })).toBeFocused();
 });
@@ -278,6 +288,7 @@ test('going through the wizard again adds the same result after Remove all', asy
 	const control = page.locator('.db-control-panel-desktop .rl-control');
 	await control.locator('button.rl-trigger').hover();
 	await control.getByRole('button', { name: 'Remove all' }).click();
+	await confirmDelete(page, 'Remove all');
 	await expect.poll(async () => (await readList(page)).items).toEqual([]);
 
 	// A reload of the result must not bring the pages back, and the hint says nothing.
@@ -371,6 +382,7 @@ test('Remove all empties the list and is only shown with entries', async ({ page
 	await trigger.hover();
 	await expect(removeAll).toBeVisible();
 	await removeAll.click();
+	await confirmDelete(page, 'Remove all');
 	await expect.poll(async () => (await readList(page)).items).toEqual([]);
 	await expect(popover.locator('.rl-empty')).toBeVisible();
 	await expect(removeAll).toHaveCount(0);
@@ -379,6 +391,45 @@ test('Remove all empties the list and is only shown with entries', async ({ page
 	await expect(popover.locator('[role=status]')).toHaveText(
 		'All pages removed from the reading list',
 	);
+});
+
+test('deleting asks first; cancel and Escape keep the entry', async ({ page }) => {
+	await page.goto('/de/dokumentation/erste-schritte?role=design&designIntent=new');
+	await waitForDBShell(page);
+	await expect.poll(async () => (await readList(page))?.items.length).toBe(3);
+	const control = page.locator('.db-control-panel-desktop .rl-control');
+	const dialog = control.locator('dialog');
+	const bin = control.getByRole('button', { name: 'Entfernen: Figma-Tutorial' });
+
+	await control.locator('button.rl-trigger').hover();
+	await bin.click();
+	await expect(dialog).toBeVisible();
+	await expect(dialog).toHaveAccessibleName('Eintrag entfernen?');
+	await expect(dialog).toHaveAccessibleDescription(
+		'„Figma-Tutorial“ wird von deiner Leseliste entfernt.',
+	);
+
+	// Cancel: nothing removed, the focus returns to the bin button.
+	await dialog.getByRole('button', { name: 'Abbrechen' }).click();
+	await expect(dialog).toBeHidden();
+	await expect(bin).toBeFocused();
+	expect((await readList(page)).items).toHaveLength(3);
+
+	// Escape cancels as well.
+	await bin.click();
+	await expect(dialog).toBeVisible();
+	await page.keyboard.press('Escape');
+	await expect(dialog).toBeHidden();
+	expect((await readList(page)).items).toHaveLength(3);
+
+	// "Remove all" asks with the number of pages.
+	await control.getByRole('button', { name: 'Alle entfernen' }).click();
+	await expect(dialog).toHaveAccessibleName('Alle Einträge entfernen?');
+	await expect(dialog).toHaveAccessibleDescription(
+		'Alle 3 Seiten werden von deiner Leseliste entfernt.',
+	);
+	await dialog.getByRole('button', { name: 'Abbrechen' }).click();
+	expect((await readList(page)).items).toHaveLength(3);
 });
 
 test('Escape closes the reading list popover by hover and from inside', async ({ page }) => {

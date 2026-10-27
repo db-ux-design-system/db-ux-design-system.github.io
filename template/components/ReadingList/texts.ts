@@ -22,6 +22,13 @@ export const readingListTexts: Record<
 		/** Button that empties the whole list, and its status message. */
 		removeAll: string;
 		removedAll: string;
+		/** Confirmation dialogs before a page or all pages are removed. */
+		confirmRemoveTitle: string;
+		confirmRemoveText: (label: string) => string;
+		confirmRemoveAllTitle: string;
+		confirmRemoveAllText: (count: number) => string;
+		confirmRemove: string;
+		confirmCancel: string;
 		add: string;
 		added: string;
 		removeCurrent: string;
@@ -52,6 +59,15 @@ export const readingListTexts: Record<
 		removed: (label) => `Removed: ${label}`,
 		removeAll: 'Remove all',
 		removedAll: 'All pages removed from the reading list',
+		confirmRemoveTitle: 'Remove entry?',
+		confirmRemoveText: (label) => `“${label}” will be removed from your reading list.`,
+		confirmRemoveAllTitle: 'Remove all entries?',
+		confirmRemoveAllText: (count) =>
+			count === 1
+				? 'The page will be removed from your reading list.'
+				: `All ${count} pages will be removed from your reading list.`,
+		confirmRemove: 'Remove',
+		confirmCancel: 'Cancel',
 		add: 'Add to reading list',
 		added: 'Added to reading list',
 		removeCurrent: 'Remove from reading list',
@@ -82,6 +98,15 @@ export const readingListTexts: Record<
 		removed: (label) => `Entfernt: ${label}`,
 		removeAll: 'Alle entfernen',
 		removedAll: 'Alle Seiten von der Leseliste entfernt',
+		confirmRemoveTitle: 'Eintrag entfernen?',
+		confirmRemoveText: (label) => `„${label}“ wird von deiner Leseliste entfernt.`,
+		confirmRemoveAllTitle: 'Alle Einträge entfernen?',
+		confirmRemoveAllText: (count) =>
+			count === 1
+				? 'Die Seite wird von deiner Leseliste entfernt.'
+				: `Alle ${count} Seiten werden von deiner Leseliste entfernt.`,
+		confirmRemove: 'Entfernen',
+		confirmCancel: 'Abbrechen',
 		add: 'Zur Leseliste hinzufügen',
 		added: 'Zur Leseliste hinzugefügt',
 		removeCurrent: 'Von der Leseliste entfernen',
