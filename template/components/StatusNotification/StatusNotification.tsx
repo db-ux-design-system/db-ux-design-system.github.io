@@ -79,9 +79,7 @@ const StatusNotification = ({
 	const config = statusConfig[status];
 	const text = variant === 'short' ? config.short[language] : config.long[language];
 	const linkHref =
-		language === 'de'
-			? '/de/dokumentation/releases/content-status'
-			: '/documentation/releases/content-status';
+		language === 'de' ? '/de/dokumentation/lernen/status' : '/documentation/learn/status';
 	const linkText = language === 'de' ? 'Mehr erfahren' : 'Learn more';
 
 	return (

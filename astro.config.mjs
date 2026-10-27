@@ -37,6 +37,13 @@ export default defineConfig({
 		// }),
 		pngToWebpIntegration(),
 	],
+	// Pages that moved into the Learn area. The old URLs stay valid for links and bookmarks.
+	redirects: {
+		'/documentation/releases/content-status': '/documentation/learn/status',
+		'/de/dokumentation/releases/content-status': '/de/dokumentation/lernen/status',
+		'/documentation/releases/versioning': '/documentation/learn/versioning',
+		'/de/dokumentation/releases/versionierung': '/de/dokumentation/lernen/versionierung',
+	},
 	srcDir: './content',
 	outDir: './public',
 	publicDir: './static',
