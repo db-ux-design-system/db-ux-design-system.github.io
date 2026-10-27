@@ -36,6 +36,7 @@ import './TeaserCard.css';
  * | `visualImage`   | `VisualImageName`                                 | –           | Decorative PNG visual from static/assets/teasers/. Replaces imageSrc, visual wins over it |
  * | `imagePosition` | `'top' \| 'bottom' \| 'left' \| 'right'`         | `'top'`     | Image placement relative to text                     |
  * | `imageWidth`    | `'50' \| '33' \| '66' \| '25'`                    | –           | Image/text ratio for horizontal layouts              |
+ * | `searchText`    | `string`                                          | –           | Search text for linked teasers (`data-search`)       |
  */
 
 interface Props {
@@ -58,6 +59,10 @@ interface Props {
 		visualImage?: VisualImageName;
 		imagePosition?: 'top' | 'bottom' | 'left' | 'right';
 		imageWidth?: '50' | '33' | '66' | '25';
+		/** Text a search filter matches against, e.g. title, description and keywords. Rendered as `data-search` on linked teasers. */
+		searchText?: string;
+		/** Category a filter matches against. Rendered as `data-category` on linked teasers. */
+		category?: string;
 	}[];
 	/** Fixed number of columns (e.g. 2 or 3). Uses auto-fit when omitted. */
 	columns?: number;
@@ -125,6 +130,11 @@ const disabledLabel = isDE ? 'Demnächst verfügbar' : 'Coming Soon';
 			</div>
 		);
 
+		const search = {
+			...(teaser.searchText ? { 'data-search': teaser.searchText } : {}),
+			...(teaser.category ? { 'data-category': teaser.category } : {}),
+		};
+
 		return isDisabled ? (
 			<DisabledWrapper label={disabledLabel} size={hasImage ? 'medium' : 'small'}>
 				<DBCard spacing={spacing}>{cardContent}</DBCard>
@@ -133,6 +143,7 @@ const disabledLabel = isDE ? 'Demnächst verfügbar' : 'Coming Soon';
 			<a
 				href={teaser.url}
 				class="teaser-card-link"
+				{...search}
 				{...(teaser.external ? { target: '_blank', rel: 'noreferrer' } : {})}
 			>
 				<DBCard behavior="interactive" spacing={spacing}>

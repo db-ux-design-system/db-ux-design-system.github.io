@@ -84,6 +84,10 @@ if (frontmatter.externalUrl) {
 				// Astro does not hoist <script> from .astro components used inside MDX.
 				import { initLearnArticle } from '@template/components/Learn/learn-controller';
 				initLearnArticle();
+				// Search field of ChildPageOverview (e.g. on the Learn overview). Delegated
+				// listeners, so it works with the client-side mounted Shell.
+				import { initChildPageSearch } from '@template/components/ChildPageOverview/child-page-search';
+				initChildPageSearch();
 			</script>
 			<!-- Deep-link scroll fix: The Shell renders client-side (client:only="react"),
 				     so anchor targets don't exist yet when the browser performs its native
