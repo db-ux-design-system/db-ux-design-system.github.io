@@ -25,6 +25,24 @@ const MIN_STEP_HEIGHT = 80;
 
 type View = 'article' | 'stepper';
 
+// localStorage throws when it is blocked (e.g. some private modes) or full. The view
+// toggle keeps working then; only the preference is not remembered.
+function readStoredView(): View {
+	try {
+		return window.localStorage.getItem(STORAGE_KEY) === 'stepper' ? 'stepper' : 'article';
+	} catch {
+		return 'article';
+	}
+}
+
+function storeView(view: View) {
+	try {
+		window.localStorage.setItem(STORAGE_KEY, view);
+	} catch {
+		// Not remembered; the current view still applies.
+	}
+}
+
 type Step = {
 	title: string;
 	/**
@@ -199,7 +217,7 @@ function setup(root: HTMLElement): boolean {
 		if (urlView === 'stepper' || urlView === 'article') {
 			view = urlView;
 		} else {
-			view = window.localStorage.getItem(STORAGE_KEY) === 'stepper' ? 'stepper' : 'article';
+			view = readStoredView();
 		}
 		const rawStep = Number(params.get('step'));
 		stepIndex = Number.isFinite(rawStep) && rawStep > 0 ? Math.min(rawStep - 1, total - 1) : 0;
@@ -345,7 +363,7 @@ function setup(root: HTMLElement): boolean {
 
 	const setView = (next: View) => {
 		view = next;
-		window.localStorage.setItem(STORAGE_KEY, next);
+		storeView(next);
 		writeUrl();
 		render(next === 'stepper');
 	};
