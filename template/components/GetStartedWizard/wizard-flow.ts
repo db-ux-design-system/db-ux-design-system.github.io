@@ -179,7 +179,10 @@ export const questions: Record<QuestionId, Question> = {
 			{
 				id: 'follow',
 				label: t('Follow updates', 'Updates verfolgen'),
-				description: t('Release notes and the roadmap.', 'Release Notes und die Roadmap.'),
+				description: t(
+					'Release notes and the announcement channels.',
+					'Release Notes und die Kanäle für Ankündigungen.',
+				),
 			},
 		],
 	},
@@ -252,31 +255,56 @@ const page = (id: string, label: Text, description: Text, anchor?: Text): Packag
 	description,
 });
 
-const frameworkNames: Record<string, Text> = {
-	react: t('React', 'React'),
-	angular: t('Angular', 'Angular'),
-	vue: t('Vue', 'Vue'),
-	'web-components': t('Web Components', 'Web Components'),
-	'core-components': t('Core Components', 'Core Components'),
-	astro: t('Astro', 'Astro'),
-	'core-foundations': t('Core Foundation', 'Core Foundation'),
+/**
+ * The setup article in the Learn area per framework option. The id is the page id
+ * below /documentation/, the title is used as label and call to action.
+ */
+const frameworkSetups: Record<string, { id: string; title: Text }> = {
+	react: {
+		id: 'learn/react-setup',
+		title: t('Add the components to React', 'Komponenten in React einbinden'),
+	},
+	angular: {
+		id: 'learn/angular-setup',
+		title: t('Add the components to Angular', 'Komponenten in Angular einbinden'),
+	},
+	vue: {
+		id: 'learn/vue-setup',
+		title: t('Add the components to Vue', 'Komponenten in Vue einbinden'),
+	},
+	'web-components': {
+		id: 'learn/web-components-setup',
+		title: t('Use the components as Web Components', 'Komponenten als Web Components nutzen'),
+	},
+	'core-components': {
+		id: 'learn/html-css-setup',
+		title: t('Use the components with HTML and CSS', 'Komponenten mit HTML und CSS nutzen'),
+	},
+	astro: {
+		id: 'learn/astro-setup',
+		title: t('Add the components to Astro', 'Komponenten in Astro einbinden'),
+	},
+	'core-foundations': {
+		id: 'learn/foundation-setup',
+		title: t('Use the tokens without components', 'Tokens ohne Komponenten nutzen'),
+	},
 };
 
 const frameworkDescription = t(
-	'Install the package, add the styles and check your setup.',
-	'Installiere das Paket, binde die Styles ein und prüfe dein Setup.',
+	'Install the packages, load the styles and check your setup.',
+	'Installiere die Pakete, lade die Styles und prüfe dein Setup.',
 );
 
 /**
- * All pages a learning package can contain: Learn pages and, until the Learn area is
- * reworked, the resources, releases, foundation and components pages. Keyed by id:
+ * All pages a learning package can contain: mostly Learn articles, plus the
+ * releases, foundation, components and native pages for reference. Keyed by id:
  * the EN path below /documentation/, plus # and the EN anchor for a section.
  */
 export const packagePages: Record<string, PackagePage> = Object.fromEntries(
 	[
 		page(
-			'resources/design',
-			t('Design Resources', 'Design-Ressourcen'),
+			'learn/figma-setup',
+			t('Set up the Figma libraries', 'Figma-Bibliotheken einrichten'),
 			t(
 				'Get access to the Figma libraries and enable them in your file.',
 				'Hole dir Zugang zu den Figma-Bibliotheken und aktiviere sie in deiner Datei.',
@@ -284,7 +312,7 @@ export const packagePages: Record<string, PackagePage> = Object.fromEntries(
 		),
 		page(
 			'learn/figma-tutorial',
-			t('Figma Tutorial', 'Figma-Tutorial'),
+			t('Design a contact form in Figma', 'Ein Kontaktformular in Figma gestalten'),
 			t(
 				'Design a contact form step by step, up to the handoff in Dev Mode.',
 				'Gestalte Schritt für Schritt ein Kontaktformular, bis zur Übergabe im Dev Mode.',
@@ -292,7 +320,7 @@ export const packagePages: Record<string, PackagePage> = Object.fromEntries(
 		),
 		page(
 			'learn/figma',
-			t('Figma Tips', 'Figma-Tipps'),
+			t('Work with the components in Figma', 'Mit den Komponenten in Figma arbeiten'),
 			t(
 				'Practical tips and workarounds for working in Figma.',
 				'Praktische Tipps und Workarounds für die Arbeit in Figma.',
@@ -300,7 +328,7 @@ export const packagePages: Record<string, PackagePage> = Object.fromEntries(
 		),
 		page(
 			'learn/plugins',
-			t('Plugins & Tools', 'Plugins & Tools'),
+			t('Add logos and custom colors in Figma', 'Logos und eigene Farben in Figma ergänzen'),
 			t(
 				'Figma plugins and web tools for logos, custom colors and themes.',
 				'Figma-Plugins und Web-Tools für Logos, eigene Farben und Themes.',
@@ -308,35 +336,28 @@ export const packagePages: Record<string, PackagePage> = Object.fromEntries(
 		),
 		page(
 			'learn/about',
-			t('About the Design System', 'Über das Design System'),
+			t('What the design system is', 'Was das Design System ist'),
 			t(
-				'What the design system contains, how it is released and how binding it is.',
-				'Was das Design System enthält, wie es veröffentlicht wird und wie verbindlich es ist.',
+				'What the design system contains, what a status means and how binding it is.',
+				'Was das Design System enthält, was ein Status bedeutet und wie verbindlich es ist.',
 			),
 		),
 		page(
-			'learn/about',
-			t('Roadmap', 'Roadmap'),
-			t('What the coming releases bring.', 'Was die kommenden Releases bringen.'),
-			t('roadmap', 'roadmap'),
-		),
-		page(
-			'learn/about',
+			'learn/status',
 			t('What a status means', 'Was ein Status bedeutet'),
 			t(
 				'Check which components are ready for production to estimate the effort.',
 				'Prüfe, welche Komponenten produktionsreif sind, um den Aufwand abzuschätzen.',
 			),
-			t('what-a-status-means', 'was-ein-status-bedeutet'),
 		),
 		page(
 			'learn/about',
-			t('Where to ask which question', 'Wohin welche Frage gehört'),
+			t('Where to get help', 'Wo du Hilfe bekommst'),
 			t(
-				'Teams channels, consultation hour and issue trackers.',
-				'Teams-Kanäle, Sprechstunde und Issue-Tracker.',
+				'Issue trackers, Teams channels, consultation hour and email.',
+				'Issue-Tracker, Teams-Kanäle, Sprechstunde und E-Mail.',
 			),
-			t('where-to-ask-which-question', 'wohin-welche-frage-gehört'),
+			t('where-to-get-help', 'wo-du-hilfe-bekommst'),
 		),
 		page(
 			'foundation',
@@ -356,7 +377,7 @@ export const packagePages: Record<string, PackagePage> = Object.fromEntries(
 		),
 		page(
 			'learn/migration',
-			t('Migration from DB UI', 'Migration von DB UI'),
+			t('Move from DB UI to Generation 3', 'Von DB UI auf Generation 3 wechseln'),
 			t(
 				'What changes in Figma when a Generation 2 file moves to Generation 3.',
 				'Was sich in Figma ändert, wenn eine Datei von Generation 2 auf Generation 3 wechselt.',
@@ -365,7 +386,7 @@ export const packagePages: Record<string, PackagePage> = Object.fromEntries(
 		),
 		page(
 			'learn/migration',
-			t('Migration from DB UI', 'Migration von DB UI'),
+			t('Move from DB UI to Generation 3', 'Von DB UI auf Generation 3 wechseln'),
 			t(
 				'Replace packages, components, tokens and icons – an AI agent can do the groundwork.',
 				'Ersetze Pakete, Komponenten, Tokens und Icons – ein KI-Agent kann die Vorarbeit übernehmen.',
@@ -373,7 +394,7 @@ export const packagePages: Record<string, PackagePage> = Object.fromEntries(
 		),
 		page(
 			'learn/ai',
-			t('Connect your AI coding agent', 'KI-Coding-Agenten verbinden'),
+			t('Work with AI coding agents', 'Mit KI-Coding-Agenten arbeiten'),
 			t(
 				'Give your AI coding agent access to components, tokens and examples.',
 				'Gib deinem KI-Coding-Agenten Zugriff auf Komponenten, Tokens und Beispiele.',
@@ -381,7 +402,7 @@ export const packagePages: Record<string, PackagePage> = Object.fromEntries(
 		),
 		page(
 			'learn/accessibility',
-			t('Accessibility', 'Barrierefreiheit'),
+			t('Build accessible products', 'Barrierefreie Produkte bauen'),
 			t(
 				'What the components cover and what remains your responsibility.',
 				'Was die Komponenten abdecken und was in deiner Verantwortung bleibt.',
@@ -389,7 +410,7 @@ export const packagePages: Record<string, PackagePage> = Object.fromEntries(
 		),
 		page(
 			'learn/examples',
-			t('Examples & Starters', 'Beispiele & Starter'),
+			t('Start from an example project', 'Mit einem Beispielprojekt starten'),
 			t(
 				'Try the components in the browser and look at the example projects for every framework.',
 				'Probiere die Komponenten im Browser aus und sieh dir die Beispielprojekte für jedes Framework an.',
@@ -397,31 +418,32 @@ export const packagePages: Record<string, PackagePage> = Object.fromEntries(
 		),
 		page(
 			'learn/react-tutorial',
-			t('React Tutorial', 'React-Tutorial'),
+			t('Build a contact form in React', 'Ein Kontaktformular in React bauen'),
 			t(
-				'Build a contact form step by step, from an empty project to the production build.',
-				'Baue Schritt für Schritt ein Kontaktformular, vom leeren Projekt bis zum Production Build.',
+				'Build a contact form step by step, up to the production build.',
+				'Baue Schritt für Schritt ein Kontaktformular, bis zum Production Build.',
 			),
 		),
 		page(
-			'resources/packages/native',
-			t('Native Platforms', 'Native Plattformen'),
+			'learn/about',
+			t('Native platforms', 'Native Plattformen'),
 			t(
 				'The state of the native component libraries for iOS and Android.',
 				'Der Stand der nativen Komponentenbibliotheken für iOS und Android.',
 			),
+			t('native-platforms', 'native-plattformen'),
 		),
 		page(
-			'resources/packages/db-theme',
-			t('Add the DB Theme', 'DB Theme ergänzen'),
+			'learn/db-theme-setup',
+			t('Add the DB Theme for DB products', 'DB Theme für DB-Produkte ergänzen'),
 			t(
 				'Colors, fonts and icons of the Deutsche Bahn brand.',
 				'Farben, Schriften und Icons der Marke Deutsche Bahn.',
 			),
 		),
 		page(
-			'releases/versioning',
-			t('Versioning', 'Versionierung'),
+			'learn/versioning',
+			t('How releases work', 'Wie Releases funktionieren'),
 			t(
 				'How releases are versioned and announced.',
 				'Wie Releases versioniert und angekündigt werden.',
@@ -432,22 +454,16 @@ export const packagePages: Record<string, PackagePage> = Object.fromEntries(
 			t('Release Notes', 'Release Notes'),
 			t('What changed in every version.', 'Was sich in jeder Version geändert hat.'),
 		),
-		// One setup guide per framework.
-		...Object.entries(frameworkNames).map(([framework, name]) =>
-			page(
-				`resources/packages/${framework}`,
-				t(`${name.en} guide`, `Anleitung für ${name.de}`),
-				frameworkDescription,
-			),
-		),
+		// One setup article per framework.
+		...Object.values(frameworkSetups).map(({ id, title }) => page(id, title, frameworkDescription)),
 	].map((item) => [item.id, item]),
 );
 
-const HELP = 'learn/about#where-to-ask-which-question';
+const HELP = 'learn/about#where-to-get-help';
 
 /**
- * Resolves the ids to pages and appends "Where to ask which question" as the last
- * item. A package with the whole About page already contains that section.
+ * Resolves the ids to pages and appends "Where to get help" as the last item. A
+ * package with the whole About page already contains that section.
  */
 const withHelp = (ids: string[]): PackagePage[] =>
 	(ids.includes('learn/about') ? ids : [...ids, HELP]).map((id) => packagePages[id]);
@@ -462,19 +478,16 @@ export const toHref = (target: { path: string; anchor?: Text }, lang: Lang) => {
 export const wizardHref = (lang: Lang) => toHref({ path: '/documentation/get-started' }, lang);
 
 function frameworkResult(answers: Answers): Result {
-	const framework = answers.framework ?? 'react';
-	const name = frameworkNames[framework];
-	const ids = [`resources/packages/${framework}`];
-	if (answers.dbProduct === 'yes') ids.push('resources/packages/db-theme');
-	// The tutorial starts with an empty project, so it only fits a new React project.
-	if (framework === 'react' && answers.developmentIntent === 'new') {
-		ids.push('learn/react-tutorial');
-	}
+	const setup = frameworkSetups[answers.framework ?? 'react'] ?? frameworkSetups.react;
+	const ids = [setup.id];
+	// Only what a developer needs to start: the setup (it also offers a starter project
+	// where one exists), the brand for DB products and the AI agent.
+	if (answers.dbProduct === 'yes') ids.push('learn/db-theme-setup');
 	ids.push('learn/ai');
 	return {
-		title: t(`Set up ${name.en}`, `${name.de} einrichten`),
+		title: setup.title,
 		description: frameworkDescription,
-		cta: t(`${name.en} guide`, `Anleitung für ${name.de}`),
+		cta: setup.title,
 		items: withHelp(ids),
 	};
 }
@@ -501,8 +514,8 @@ export function next(answers: Answers): { question: Question } | { result: Resul
 							'Enable the libraries and design a first page with the components.',
 							'Aktiviere die Bibliotheken und gestalte eine erste Seite mit den Komponenten.',
 						),
-						t('Go to the Design Resources', 'Zu den Design-Ressourcen'),
-						['resources/design', 'learn/figma-tutorial'],
+						t('Set up Figma', 'Figma einrichten'),
+						['learn/figma-setup', 'learn/figma-tutorial'],
 					);
 				case 'learn':
 					return done(
@@ -524,7 +537,7 @@ export function next(answers: Answers): { question: Question } | { result: Resul
 									'Was sich in Figma ändert, wenn eine Datei von Generation 2 auf Generation 3 wechselt.',
 								),
 								t('Go to the migration', 'Zur Migration'),
-								['learn/migration#design', 'resources/design'],
+								['learn/migration#design', 'learn/figma-setup'],
 							)
 						: done(
 								t('Move existing designs', 'Bestehende Designs umstellen'),
@@ -532,8 +545,8 @@ export function next(answers: Answers): { question: Question } | { result: Resul
 									'Enable the libraries and replace your components and styles step by step.',
 									'Aktiviere die Bibliotheken und ersetze deine Komponenten und Styles nach und nach.',
 								),
-								t('Go to the Design Resources', 'Zu den Design-Ressourcen'),
-								['resources/design', 'learn/figma', 'learn/plugins'],
+								t('Set up Figma', 'Figma einrichten'),
+								['learn/figma-setup', 'learn/figma', 'learn/plugins'],
 							);
 			}
 
@@ -574,7 +587,7 @@ export function next(answers: Answers): { question: Question } | { result: Resul
 						'Der Stand der nativen Komponentenbibliotheken für iOS und Android.',
 					),
 					t('Go to Native Platforms', 'Zu den nativen Plattformen'),
-					['resources/packages/native'],
+					['learn/about#native-platforms'],
 				);
 			}
 			if (!answers.dbProduct) return ask('dbProduct');
@@ -603,17 +616,17 @@ export function next(answers: Answers): { question: Question } | { result: Resul
 							'Wie Releases versioniert und angekündigt werden, damit du Updates in deinem Produkt planen kannst.',
 						),
 						t('Go to versioning', 'Zur Versionierung'),
-						['releases/versioning', 'releases/release-notes'],
+						['learn/versioning', 'releases/release-notes'],
 					);
 				case 'follow':
 					return done(
 						t('Release Notes', 'Release Notes'),
 						t(
-							'Release notes for every version and the roadmap of the coming releases.',
-							'Release Notes zu jeder Version und die Roadmap der kommenden Releases.',
+							'Release notes for every version and the channels where releases are announced.',
+							'Release Notes zu jeder Version und die Kanäle, in denen Releases angekündigt werden.',
 						),
 						t('Go to the release notes', 'Zu den Release Notes'),
-						['releases/release-notes', 'learn/about#roadmap'],
+						['releases/release-notes', 'learn/versioning'],
 					);
 				default:
 					if (!answers.productBasis) return ask('productBasis');
@@ -625,7 +638,7 @@ export function next(answers: Answers): { question: Question } | { result: Resul
 									'Was sich für Design und Entwicklung ändert, wenn ein Produkt von Generation 2 auf Generation 3 wechselt.',
 								),
 								t('Go to the migration', 'Zur Migration'),
-								['learn/migration', 'releases/versioning'],
+								['learn/migration', 'learn/versioning'],
 							)
 						: done(
 								t('What a status means', 'Was ein Status bedeutet'),
@@ -634,7 +647,7 @@ export function next(answers: Answers): { question: Question } | { result: Resul
 									'Prüfe, welche Komponenten produktionsreif sind, um den Aufwand abzuschätzen.',
 								),
 								t('Check the status', 'Status prüfen'),
-								['learn/about#what-a-status-means', 'components'],
+								['learn/status', 'components'],
 							);
 			}
 
