@@ -305,6 +305,13 @@
 	margin: 0;
 }
 
+/* Large card (a card with image or visual): one title size, whatever the heading level.
+   The small card without image is defined in TeaserCard.css. The selector outranks the
+   heading styles of the global typography and of TeaserCard. */
+.db-card .text-image .text-image-title {
+	font: var(--db-type-headline-sm);
+}
+
 /* Responsive Stack */
 @media (width <= 767px) {
 	.text-image {

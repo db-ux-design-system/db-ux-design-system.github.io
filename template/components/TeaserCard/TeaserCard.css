@@ -49,23 +49,29 @@
 .teaser-content {
 	display: flex;
 	flex-direction: column;
-	gap: var(--db-spacing-fixed-xs);
+
+	/* Same as the card padding (spacing small), like ResourceCards and CardTeaser. */
+	gap: var(--db-spacing-fixed-sm);
 }
 
-.teaser-cards .db-card h2,
-.teaser-cards .db-card h3 {
+/*
+ * The documentation has two card sizes:
+ * - Small card, without image: bold body-md title, body-md text below, gap = card padding.
+ *   Same as ResourceCards and CardTeaser.
+ * - Large card, with image or visual: headline-sm title, see TextImage.css.
+ * The size follows the card type, not the heading level, so an h3 looks like an h2.
+ * The global content spacing (content-spacing.css) adds a top margin to a paragraph
+ * after a heading; its selector counts three classes, so these need four to win.
+ */
+.dba-main-content .teaser-cards .teaser-content > .teaser-description {
+	margin-block-start: 0;
+	font: var(--db-type-body-md);
+}
+
+.teaser-cards .teaser-content > .teaser-title {
 	margin: 0;
-	font: var(--db-type-headline-3xs);
-}
-
-.teaser-cards-medium .db-card h2,
-.teaser-cards-medium .db-card h3 {
-	font: var(--db-type-headline-2xs);
-}
-
-.teaser-cards-large .db-card h2,
-.teaser-cards-large .db-card h3 {
-	font: var(--db-type-headline-sm);
+	font: var(--db-type-body-md);
+	font-weight: 700;
 }
 
 .teaser-cards .db-card p {
