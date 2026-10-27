@@ -6,6 +6,7 @@ import MainContent from './main-content';
 import { Shell } from '@template/components/Shell';
 import Footer from '@template/components/Footer/Footer.astro';
 import CodeVisualsScript from './CodeVisualsScript.astro';
+import { isVisualModelName } from '@template/components/Visual/visual-model';
 
 interface Props {
 	headings?: MarkdownHeading[];
@@ -14,11 +15,18 @@ interface Props {
 const { headings, frontmatter } = Astro.props;
 const currentPath = Astro.url.pathname;
 const lang = currentPath.startsWith('/de/') || currentPath === '/de' ? 'de' : 'en';
+
+// A hero teaser that has a matching glb renders as a <model-viewer>, so the runtime is needed.
+// This keeps the opt-in on the shared naming convention – no per-page `loadModelViewer` flag.
+const hasHeroModel = Boolean(
+	frontmatter.heroVisualImage && isVisualModelName(frontmatter.heroVisualImage),
+);
+const loadModelViewer = frontmatter.loadModelViewer || hasHeroModel;
 ---
 
 <!doctype html>
 <html lang={lang}>
-	<HtmlHead title={frontmatter.title} loadModelViewer={frontmatter.loadModelViewer} />
+	<HtmlHead title={frontmatter.title} loadModelViewer={loadModelViewer} />
 	<body>
 		<Shell client:only="react" pathname={currentPath}>
 			<MainContent frontmatter={frontmatter} headings={headings}>

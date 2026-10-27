@@ -4,7 +4,7 @@ layout: '@template/layouts/default'
 title: 'For Designer'
 headline: 'Design with confidence'
 description: 'A shared system that supports clear decisions and consistent interfaces across teams.'
-heroVisual: 'design'
+heroVisualImage: 'design'
 loadCodeVisuals: true
 sections:
   - id: 'for-designer--consistent-results-section'
@@ -42,7 +42,8 @@ sections:
     visual: 'smooth-handoff'
 ---
 
-import { ContentSections, ContactUsSection } from '@components';
+import { DBSection } from '@db-ux/react-core-components';
+import { ContentSections, CTA } from '@components';
 // Backup (static two-device visual): import ConsistentResultsVisual from '@components/ForDesignerVisuals/ConsistentResultsVisual.astro'; and map it to 'consistent-results' instead
 import ConsistentResultsMorphVisual from '@components/ForDesignerVisuals/ConsistentResultsMorphVisual.astro';
 import ButtonPlaygroundVisual from '@components/ForDesignerVisuals/ButtonPlaygroundVisual.astro';
@@ -59,4 +60,19 @@ import SmoothHandoffVisual from '@components/ForDesignerVisuals/SmoothHandoffVis
 	}}
 />
 
-<ContactUsSection />
+<DBSection width="medium" spacing="medium">
+	<CTA
+		title="Start designing"
+		text="Get access to the Figma libraries and design your first screen with the components – step by step, all the way to the handoff."
+		primaryAction={{
+			label: 'Get started in Figma',
+			href: '/documentation/get-started?role=design',
+			variant: 'brand',
+		}}
+		secondaryAction={{
+			label: 'Design a contact form in Figma',
+			href: '/documentation/learn/figma-tutorial',
+			variant: 'outlined',
+		}}
+	/>
+</DBSection>

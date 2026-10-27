@@ -1,0 +1,396 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Ein Kontaktformular in React bauen'
+headline: 'Ein Kontaktformular in React bauen'
+description: 'Baue Schritt für Schritt ein Kontaktformular mit Name, E-Mail, Thema und Nachricht – mit Rückmeldung nach dem Absenden und eigenen Styles mit Tokens.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 19
+category: 'Development'
+keywords:
+  [
+    'react',
+    'tutorial',
+    'contact form',
+    'form',
+    'getting started',
+    'first app',
+    'vite',
+    'typescript',
+    'usestate',
+    'notification',
+    'card',
+    'stack',
+    'section',
+    'tokens',
+    'css',
+    'production build',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Richte zuerst das Projekt ein
+
+Lege ein Vite-Projekt mit React und TypeScript an und richte es mit dem [Setup für React](/de/dokumentation/lernen/react-einrichten 'Installiere die Pakete, lade die Styles und halte die Farben im Build intakt.') ein. **Prüfen:** `pnpm dev` startet die App ohne Fehler.
+
+<LearnAside>
+
+### Was du brauchst
+
+- Node.js und pnpm. Mit npm verwendest du `npm create` und `npm i` statt `pnpm create` und `pnpm add`
+- Grundkenntnisse in React: Komponenten, JSX und den Hook `useState`
+- Einen unterstützten Browser: die letzten drei Versionen von Chrome und Edge, Firefox ESR und die letzten zwei Major-Versionen von Safari
+
+Das Tutorial wurde mit Vite 8, React 19 und Version 6 der Pakete des Design Systems getestet. Dasselbe Formular gestaltest du im [Figma-Tutorial](/de/dokumentation/lernen/figma-tutorial).
+
+### Alle Befehle für das Setup
+
+Lege das Projekt an und installiere die Pakete:
+
+```shell
+pnpm create vite my-app --template react-ts
+cd my-app
+pnpm install
+pnpm add @db-ux/react-core-components @db-ux/core-components @db-ux/core-foundations
+pnpm add esbuild --save-dev
+```
+
+Lösche `src/App.css`. Ersetze den Inhalt von `src/index.css`:
+
+```css
+/* src/index.css */
+@layer whitelabel-theme, db-ux;
+
+@import '@db-ux/core-foundations/build/styles/theme/rollup.css' layer(whitelabel-theme);
+@import '@db-ux/core-components/build/styles/bundle.css' layer(db-ux);
+```
+
+Die erste Zeile legt die Reihenfolge der Cascade Layers fest. So kommt das Theme immer vor den Styles der Komponenten.
+
+Vite 8 minifiziert CSS standardmäßig mit LightningCSS. Es wandelt die Funktion `light-dark()` des Design Systems falsch um, und im Production Build stimmen die Farben nicht mehr. Stelle den Minifier auf esbuild um:
+
+```ts
+// vite.config.ts
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+	plugins: [react()],
+	build: {
+		cssMinify: 'esbuild',
+	},
+});
+```
+
+Starte die App danach mit `pnpm dev`.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Baue die Seitenstruktur auf
+
+Lege eine **Section** und einen **Stack** um die Seite. **Prüfen:** „Kontakt“ erscheint in der fetten Schrift `OpenSans`.
+
+```tsx
+<DBSection spacing="medium" width="small">
+	<DBStack gap="large">{/* Überschrift, später das Formular */}</DBStack>
+</DBSection>
+```
+
+<LearnAside>
+
+Ersetze den Inhalt von `src/App.tsx`:
+
+```tsx
+// src/App.tsx
+import { DBHeadingH1, DBSection, DBStack } from '@db-ux/react-core-components';
+
+const App = () => (
+	<DBSection spacing="medium" width="small">
+		<DBStack gap="large">
+			<DBHeadingH1>Kontakt</DBHeadingH1>
+		</DBStack>
+	</DBSection>
+);
+
+export default App;
+```
+
+- **Section** setzt den äußeren Abstand und begrenzt die Breite des Inhalts. Mit `width="small"` bleibt das Formular gut lesbar.
+- **Stack** ordnet seine Kinder mit gleichmäßigem Abstand an. Du nutzt ihn gleich wieder für die Formularfelder.
+- **Heading** rendert ein echtes `<h1>` mit der Typografie des Design Systems.
+
+Die Schrift siehst du in den DevTools unter den gerenderten Schriften. Erscheint die Überschrift in der Standardschrift des Browsers, fehlt der CSS-Import aus dem Setup.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Ergänze das Formular in einer Card
+
+Setze die Felder in eine **Card**, jedes mit einem `label`. **Prüfen:** Fünf Felder und ein Button in der Markenfarbe mit Pfeil erscheinen.
+
+```tsx
+<DBCard spacing="medium">
+	<form>{/* <DBInput label="Name" name="name" required /> … */}</form>
+</DBCard>
+```
+
+<LearnAside>
+
+Setze die Card unter die Überschrift. Das ist die vollständige `src/App.tsx`:
+
+```tsx
+// src/App.tsx
+import {
+	DBButton,
+	DBCard,
+	DBCheckbox,
+	DBHeadingH1,
+	DBInput,
+	DBSection,
+	DBSelect,
+	DBStack,
+	DBTextarea,
+} from '@db-ux/react-core-components';
+
+const App = () => (
+	<DBSection spacing="medium" width="small">
+		<DBStack gap="large">
+			<DBHeadingH1>Kontakt</DBHeadingH1>
+
+			<DBCard spacing="medium">
+				<form>
+					<DBStack gap="medium">
+						<DBInput label="Name" name="name" required />
+						<DBInput label="E-Mail" name="email" type="email" required />
+						<DBSelect label="Thema" name="topic">
+							<option value="booking">Buchung</option>
+							<option value="refund">Erstattung</option>
+							<option value="other">Sonstiges</option>
+						</DBSelect>
+						<DBTextarea label="Nachricht" name="message" required />
+						<DBCheckbox name="copy">Kopie an mich senden</DBCheckbox>
+						<DBButton type="submit" variant="brand" icon="arrow_right">
+							Nachricht senden
+						</DBButton>
+					</DBStack>
+				</form>
+			</DBCard>
+		</DBStack>
+	</DBSection>
+);
+
+export default App;
+```
+
+Jede Formular-Komponente rendert ein natives Formularelement mit seinem Label. Deshalb gehört `label` zu jedem Feld: Screenreader lesen es vor, und ein Klick auf das Label setzt den Fokus ins Feld. `required` und `type="email"` nutzen die Validierung des Browsers.
+
+**Genauer prüfen:** Ein Klick auf ein Label setzt den Fokus ins Feld. Fehlt der Pfeil, kann der Browser die Icon-Schrift nicht laden – suche im Network-Tab der DevTools nach einer fehlgeschlagenen Anfrage für eine `.woff2`-Datei.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Bestätige das Absenden
+
+Zeige eine **Notification**, sobald das Formular abgeschickt ist. **Prüfen:** Nach dem Absenden erscheint „Nachricht gesendet“ in Grün.
+
+```tsx
+const [sent, setSent] = useState(false);
+// in onSubmit: event.preventDefault(); setSent(true);
+<DBNotification semantic="successful" headline="Nachricht gesendet" />;
+```
+
+<LearnAside>
+
+Das ist die vollständige `src/App.tsx`:
+
+```tsx
+// src/App.tsx
+import { useState, type FormEvent } from 'react';
+import {
+	DBButton,
+	DBCard,
+	DBCheckbox,
+	DBHeadingH1,
+	DBInput,
+	DBNotification,
+	DBSection,
+	DBSelect,
+	DBStack,
+	DBTextarea,
+} from '@db-ux/react-core-components';
+
+const App = () => {
+	const [sent, setSent] = useState(false);
+
+	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		setSent(true);
+	};
+
+	return (
+		<DBSection spacing="medium" width="small">
+			<DBStack gap="large">
+				<DBHeadingH1>Kontakt</DBHeadingH1>
+
+				{sent && (
+					<DBNotification
+						variant="standalone"
+						semantic="successful"
+						headline="Nachricht gesendet"
+						closeable
+						closeButtonText="Schließen"
+						onClose={() => setSent(false)}
+					>
+						Wir melden uns innerhalb von zwei Werktagen bei dir.
+					</DBNotification>
+				)}
+
+				<DBCard spacing="medium">
+					<form onSubmit={handleSubmit}>
+						<DBStack gap="medium">
+							<DBInput label="Name" name="name" required />
+							<DBInput label="E-Mail" name="email" type="email" required />
+							<DBSelect label="Thema" name="topic">
+								<option value="booking">Buchung</option>
+								<option value="refund">Erstattung</option>
+								<option value="other">Sonstiges</option>
+							</DBSelect>
+							<DBTextarea label="Nachricht" name="message" required />
+							<DBCheckbox name="copy">Kopie an mich senden</DBCheckbox>
+							<div className="form-actions">
+								<DBButton type="submit" variant="brand" icon="arrow_right">
+									Nachricht senden
+								</DBButton>
+							</div>
+						</DBStack>
+					</form>
+				</DBCard>
+			</DBStack>
+		</DBSection>
+	);
+};
+
+export default App;
+```
+
+Die Meldung hat die Rolle `status`. Screenreader sagen sie an, ohne den Fokus zu verschieben. Mit `closeButtonText` legst du den zugänglichen Namen des Schließen-Buttons fest, ohne die Angabe ist er englisch. Das ESLint-Plugin des Design Systems meldet eine schließbare Meldung ohne diesen Text. Den Wrapper `form-actions` um den Button brauchst du im nächsten Schritt.
+
+**Genauer prüfen:**
+
+- Schicke das leere Formular ab: Der Browser markiert das erste Pflichtfeld, und es erscheint keine Meldung
+- Fülle Name, E-Mail und Nachricht aus und schicke erneut ab: Über der Card erscheint die grüne Meldung „Nachricht gesendet“
+- Schließe die Meldung mit dem Button „Schließen“: Sie verschwindet
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Ergänze eigene Styles mit Tokens
+
+Nutze **Tokens** statt Pixelwerten. **Prüfen:** Der Button rückt an den rechten Rand der Card.
+
+```css
+.form-actions {
+	padding-block-start: var(--db-spacing-fixed-sm);
+}
+```
+
+<LearnAside>
+
+Ergänze die vollständige Regel in `src/index.css` unter den Imports. Die Klasse `form-actions` ist der Wrapper um den Button aus dem vorigen Schritt.
+
+```css
+/* src/index.css */
+.form-actions {
+	display: flex;
+	justify-content: flex-end;
+	padding-block-start: var(--db-spacing-fixed-sm);
+}
+```
+
+`--db-spacing-fixed-sm` ist ein Abstands-Token der Foundation. Nutze für Abstände, Farben und Größen Tokens statt fester Pixelwerte, damit deine Styles dem Theme und der Density folgen. Alle Tokens findest du unter [Foundation](/de/dokumentation/foundation).
+
+**Genauer prüfen:** Der Button sitzt am rechten Rand der Card, mit etwas mehr Abstand nach oben.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Baue für die Produktion
+
+Baue die App und öffne die Vorschau. **Prüfen:** Die Vorschau unter `http://localhost:4173` sieht genauso aus wie die Entwicklungsversion.
+
+```shell
+pnpm build
+pnpm preview
+```
+
+<LearnAside>
+
+Stelle dein Betriebssystem auf Dark Mode um: Seite, Card und Felder wechseln in beiden Versionen auf dunkle Farben. Stimmen die Farben nur in der Vorschau nicht, fehlt die Einstellung `cssMinify` aus dem Setup.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Bring dein Formular weiter
+
+Mach mit dem DB Theme, Beispielen oder KI weiter.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'DB Theme',
+			description: 'Farben, Schriften und Icons der Marke.',
+			url: '/de/dokumentation/lernen/db-theme-einrichten',
+		},
+		{
+			title: 'Mit einem Beispielprojekt starten',
+			description: 'Beispielprojekte im Browser oder auf deinem Rechner.',
+			url: '/de/dokumentation/lernen/beispiele',
+		},
+		{
+			title: 'KI-Agenten mit dem MCP Server verbinden',
+			description: 'Lass einen KI-Agenten die richtigen APIs nutzen.',
+			url: '/de/dokumentation/lernen/mcp-server',
+		},
+	]}
+/>
+
+<LearnAside>
+
+- [ESLint-Plugin](/de/dokumentation/lernen/react-einrichten#eslint-plugin): falsche Verwendung im Editor melden lassen
+- [PostCSS-Plugin](/de/dokumentation/lernen/react-einrichten#postcss-plugin): das CSS-Bundle verkleinern
+- [Komponenten](/de/dokumentation/komponenten): Properties und Richtlinien nachschlagen
+
+</LearnAside>
+
+</LearnBlock>

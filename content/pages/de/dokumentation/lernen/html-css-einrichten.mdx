@@ -1,0 +1,222 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Komponenten mit HTML und CSS nutzen'
+headline: 'Komponenten mit HTML und CSS nutzen'
+description: 'Nutze die Komponenten als CSS-Klassen in einem Projekt ohne JavaScript-Framework und prüfe, ob Styles, Schriften und Icons laden.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 14
+category: 'Development'
+keywords:
+  [
+    'html',
+    'css',
+    'setup',
+    'installation',
+    'getting started',
+    'plain html',
+    'template engine',
+    'no framework',
+    'css classes',
+    'npm',
+    'pnpm',
+    'css import',
+    'whitelabel theme',
+    'core-components',
+    'core-foundations',
+    'troubleshooting',
+    'icons not loading',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Du schreibst das HTML selbst
+
+Dieses Setup passt zu einfachen Seiten, Template-Engines und Frameworks ohne eigenes Paket. Du erhältst die Styles der Komponenten, aber keine Logik.
+
+<LearnAside>
+
+- **Framework-Pakete:** Mit React, Angular, Vue oder Custom Elements nutzt du stattdessen das passende Framework-Paket. Jedes davon enthält die Styles der Komponenten bereits.
+- **Paketmanager:** Die Befehle auf dieser Seite nutzen pnpm. Mit npm nutzt du `npm i` statt `pnpm add`.
+- **Browser:** die letzten drei Versionen von Chrome und Edge, Firefox ESR und die letzten zwei Major-Versionen von Safari.
+- **DB Theme:** Produkte der Deutschen Bahn brauchen zusätzlich das DB Theme aus dem Marketingportal. Du kannst ohne anfangen, denn das Whitelabel-Theme funktioniert sofort.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Installiere zwei Pakete
+
+Die Styles der Komponenten bauen auf der Foundation auf, und dein Stylesheet importiert beide.
+
+```shell
+pnpm add @db-ux/core-components @db-ux/core-foundations
+```
+
+<LearnAside>
+
+| Paket                     | Inhalt                                            |
+| ------------------------- | ------------------------------------------------- |
+| `@db-ux/core-components`  | CSS und SCSS aller Komponenten                    |
+| `@db-ux/core-foundations` | Tokens, das Whitelabel-Theme, Schriften und Icons |
+
+npm installiert die Foundation automatisch als Abhängigkeit mit. pnpm stellt sie nur bereit, wenn du sie selbst angibst – deshalb installiert der Befehl beide.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Bei den Styles zählt die Reihenfolge
+
+Importiere zuerst das Theme, danach die Styles der Komponenten. Die Zeile mit `@layer` legt das fest.
+
+```css
+/* index.css */
+@layer whitelabel-theme, db-ux;
+@import '@db-ux/core-foundations/build/styles/theme/rollup.css' layer(whitelabel-theme);
+@import '@db-ux/core-components/build/styles/bundle.css' layer(db-ux);
+```
+
+<LearnAside>
+
+### Die passende Asset-Pfad-Variante
+
+Die Theme-Datei gibt es in drei Varianten. Sie unterscheiden sich nur darin, wie sie die Pfade zu Icons und Schriften auflösen.
+
+| Variante       | Asset-Pfad                        | Nutze sie, wenn …                                                 |
+| -------------- | --------------------------------- | ----------------------------------------------------------------- |
+| `rollup.css`   | `@db-ux/core-foundations/assets`  | dein Bundler Paketpfade auflöst                                   |
+| `webpack.css`  | `~@db-ux/core-foundations/assets` | du mit Webpack baust                                              |
+| `relative.css` | `../assets`                       | du Icons und Schriften in deinen eigenen `public`-Ordner kopierst |
+
+### DB Theme
+
+Der Import lädt das Whitelabel-Theme. Produkte der Deutschen Bahn brauchen zusätzlich das [DB Theme](/de/dokumentation/lernen/db-theme-einrichten).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Prüfe das Setup mit einem Button
+
+Ein Button mit Icon zeigt an einer Stelle, ob Styles, Schrift und Icons laden.
+
+```html
+<button class="db-button" data-variant="brand" data-icon="arrow_right">
+	Artikel in den Warenkorb
+</button>
+```
+
+<LearnAside>
+
+| Prüfung | Erwartet                                                                                            |
+| ------- | --------------------------------------------------------------------------------------------------- |
+| Styles  | Der Button hat einen gefüllten Hintergrund in der Markenfarbe und abgerundete Ecken.                |
+| Schrift | Die DevTools zeigen `OpenSans` als gerenderte Schrift – oder `DB Neo Screen Sans` mit dem DB Theme. |
+| Icon    | Vor dem Text erscheint ein Pfeil.                                                                   |
+
+Klassennamen und Data-Attribute unterscheiden sich pro Komponente. Schreibe das Markup wie auf der [Komponentenseite](/de/dokumentation/komponenten) dokumentiert und setze die Klasse der Komponente.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Wenn etwas nicht richtig aussieht
+
+Die meisten Probleme beim Setup kommen von der Reihenfolge der Styles oder von Asset-Pfaden, die nicht zu deinem Setup passen.
+
+<LearnAside>
+
+| Symptom                               | Ursache und Lösung                                                                                                                                                                             |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Komponenten erscheinen ohne Styles    | Der CSS-Import fehlt, oder das Theme wird nach den Styles der Komponenten geladen. Setze `@layer whitelabel-theme, db-ux;` als erste Anweisung in dein Stylesheet.                             |
+| Schrift oder Icons fehlen             | Der Browser findet die Asset-Dateien nicht. Im Network-Tab schlägt eine Anfrage für eine `.woff2`-Datei fehl. Wechsle zwischen `rollup.css`, `webpack.css` und `relative.css`.                 |
+| Tokens sind mit pnpm nicht definiert  | pnpm hebt transitive Abhängigkeiten nicht an. Installiere `@db-ux/core-foundations` explizit.                                                                                                  |
+| CSS-Ausgabe ist mit Vite 8 fehlerhaft | Vite 8 minifiziert mit LightningCSS und zerstört dabei modernes CSS wie `light-dark()`. Setze `build.cssMinify: 'esbuild'` in `vite.config.ts` und installiere `esbuild` als Dev-Abhängigkeit. |
+
+Wenn nichts davon hilft, eröffne ein Issue im [core-web-Repository](https://github.com/db-ux-design-system/core-web/issues/new/choose). Prüfe vorher, ob es das Issue schon gibt.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Mach mit deinem Projekt weiter
+
+Baue deine Seiten oder ergänze das DB Theme.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Komponenten',
+			description: 'Markup, Varianten und Richtlinien für jede Komponente.',
+			url: '/de/dokumentation/komponenten',
+		},
+		{
+			title: 'DB Theme',
+			description: 'Ergänze die Farben, Schriften und Icons der Marke Deutsche Bahn.',
+			url: '/de/dokumentation/lernen/db-theme-einrichten',
+		},
+		{
+			title: 'Beispielprojekte',
+			description: 'Fertige Beispielprojekte zum Öffnen im Browser oder als Ausgangspunkt.',
+			url: '/de/dokumentation/lernen/beispiele',
+		},
+	]}
+/>
+
+<LearnAside>
+
+Keines der beiden Plugins brauchst du für den Start. Ergänze sie, sobald deine erste Komponente erscheint.
+
+### PostCSS-Plugin
+
+Reduziert die Bundle-Größe, indem es `var()`, `calc()`, `color-mix()` und `light-dark()` zur Build-Zeit auflöst und ungenutzte Deklarationen entfernt.
+
+```shell
+pnpm add @db-ux/core-postcss-plugin --save-dev
+```
+
+### Stylelint-Plugin
+
+Prüft dein eigenes CSS und SCSS gegen die Regeln des Design Systems, zum Beispiel ob du Tokens statt fester Werte referenzierst.
+
+```shell
+pnpm add @db-ux/core-stylelint --save-dev
+```
+
+### Ressourcen
+
+| Ressource        | Link                                                                                                          |
+| ---------------- | ------------------------------------------------------------------------------------------------------------- |
+| npm-Paket        | [@db-ux/core-components](https://www.npmjs.com/package/@db-ux/core-components)                                |
+| Quellcode        | [core-web/packages/components](https://github.com/db-ux-design-system/core-web/tree/main/packages/components) |
+| Komponentendoku  | [Komponenten](/de/dokumentation/komponenten)                                                                  |
+| Foundation       | [Foundation](/de/dokumentation/foundation)                                                                    |
+| Migration Guides | [Migration Guides](/de/dokumentation/releases/migration-guides)                                               |
+| Issues           | [core-web-Repository](https://github.com/db-ux-design-system/core-web/issues/new/choose)                      |
+
+</LearnAside>
+
+</LearnBlock>

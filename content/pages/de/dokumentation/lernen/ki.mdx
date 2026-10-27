@@ -1,0 +1,143 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Mit KI-Coding-Agenten arbeiten'
+headline: 'Mit KI-Coding-Agenten arbeiten'
+description: 'Gib KI-Coding-Agenten verlässliches Wissen über das Design System – Komponenten-APIs, Tokens, Icons und Migrationsregeln –, statt sie raten zu lassen.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 21
+category: 'Tooling'
+keywords:
+  [
+    'ai',
+    'artificial intelligence',
+    'llm',
+    'coding agent',
+    'github copilot',
+    'amazon q',
+    'kiro',
+    'cursor',
+    'claude',
+    'mcp',
+    'mcp server',
+    'model context protocol',
+    'agent cli',
+    'copilot instructions',
+    'code connect',
+    'prompts',
+    'hallucination',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Ohne Kontext raten Agenten
+
+KI-Coding-Agenten kennen gängige Bibliotheken, aber nicht die genaue API des DB UX Design Systems. Ohne Kontext erfinden sie Komponentennamen, Properties und Token-Werte, die plausibel aussehen, aber nicht existieren.
+
+<LearnAside>
+
+Die Werkzeuge in diesem Artikel geben Agenten stattdessen die echte Quelle: den generierten Code und die Dokumentation aus den `@db-ux`-Paketen. Prüfe erzeugten Code trotzdem selbst – die Werkzeuge verringern das Raten, ersetzen aber nicht dein eigenes Urteil.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Drei Werkzeuge mit je einer Aufgabe
+
+Der **MCP Server** beantwortet Anfragen von Agenten live, die **Agent CLI** schreibt Projektregeln in dein Repository und **Code Connect** zeigt Code zu Figma-Designs. MCP Server und Agent CLI ergänzen sich, nutze also beide, wenn du kannst.
+
+<LearnAside>
+
+| Werkzeug            | Was es tut                                                                                                               | Nutze es, wenn                                   |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
+| `@db-ux/mcp-server` | Beantwortet Anfragen von Agenten live: Komponenten-APIs, Code-Beispiele, Tokens, Icons, Prompts für Migration und Review | deine IDE das Model Context Protocol unterstützt |
+| `@db-ux/agent-cli`  | Schreibt die Dokumentation deiner installierten `@db-ux`-Pakete in `.github/copilot-instructions.md`                     | du Projektregeln willst, die jeder Agent liest   |
+| Code Connect        | Zeigt im Dev Mode den passenden Code-Schnipsel zu einem Figma-Design                                                     | du Designs aus Figma umsetzt                     |
+
+Das Model Context Protocol (MCP) ist ein offener Standard, mit dem eine IDE Agenten an externe Werkzeuge und Datenquellen anbindet.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Starte mit Projektregeln und Server
+
+Erzeuge die Projektregeln mit `npx @db-ux/agent-cli` und registriere dann den [MCP Server](/de/dokumentation/lernen/mcp-server 'Konfiguration für jede IDE und die Prüfung der Verbindung.') in deiner IDE.
+
+<LearnAside>
+
+```shell
+npx @db-ux/agent-cli
+```
+
+1. Führe `npx @db-ux/agent-cli` im Stammverzeichnis deines Repositorys aus. Der Befehl legt `.github/copilot-instructions.md` für die `@db-ux`-Pakete in deinem Projekt an oder aktualisiert die Datei.
+2. Ergänze den Eintrag `db-ux` in der MCP-Konfiguration deiner IDE.
+3. Bitte deinen Agenten, die Komponenten des Design Systems aufzulisten. Er sollte mit den echten Komponentennamen antworten.
+
+Führe die Agent CLI nach jedem Update des Design Systems erneut aus. Monorepos, feste Versionen und Details je IDE beschreibt der Artikel zum MCP Server.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Beschreibe die Aufgabe, nicht den Code
+
+Sag, was du bauen, migrieren oder prüfen willst. Der MCP Server bietet für diese Aufgaben Prompts an, und der Agent ruft die passenden Werkzeuge selbst auf.
+
+<LearnAside>
+
+| Aufgabe                        | Prompt oder Werkzeug des MCP Servers               | Beispielanfrage                                                                 |
+| ------------------------------ | -------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Seite oder Komponente aufbauen | `scaffold_page`                                    | „Baue ein Buchungsformular in React mit DB UX Komponenten.“                     |
+| Von DB UI migrieren            | `scan_generation_2_migration`, `migrate_component` | „Durchsuche diese Datei nach Mustern aus Generation 2 und migriere sie zu Vue.“ |
+| Code prüfen                    | `review_ui_code`                                   | „Prüfe diese Komponente auf Konformität mit DB UX.“                             |
+| Barrierefreiheit prüfen        | `audit_accessibility`                              | „Prüfe diesen Dialog gegen WCAG 2.2 AA und liste manuelle Testschritte auf.“    |
+
+WCAG 2.2 AA ist die Stufe der Barrierefreiheit, gegen die das Audit prüft. Ein automatisches Audit ersetzt keine manuellen Tests mit assistiven Technologien.
+
+Der Artikel [Von DB UI auf Generation 3 wechseln](/de/dokumentation/lernen/migration) beschreibt, wie ein Agent die Vorarbeit einer Migration erledigt.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Richte das passende Werkzeug ein
+
+Verbinde deine IDE mit dem MCP Server oder erfahre, wie aus Figma-Properties mit Code Connect Code wird.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'KI-Agenten mit dem MCP Server verbinden',
+			description: 'Setup je IDE, Projektregeln, alle Werkzeuge und Prompts, Fehlerbehebung.',
+			url: '/de/dokumentation/lernen/mcp-server',
+		},
+		{
+			title: 'Designs mit Code Connect übergeben',
+			description: 'Wie aus Figma-Properties Code im Dev Mode wird.',
+			url: '/de/dokumentation/lernen/code-connect',
+		},
+	]}
+/>
+
+</LearnBlock>

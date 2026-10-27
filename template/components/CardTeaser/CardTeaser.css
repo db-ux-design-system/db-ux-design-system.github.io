@@ -12,7 +12,7 @@
 .card-teaser .card-teaser-protected-icon {
 	position: absolute;
 	inset-block-start: var(--db-spacing-fixed-sm);
-	inset-inline-end: 0;
+	inset-inline-end: var(--db-spacing-fixed-sm);
 	font-size: var(--db-sizing-md);
 	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
 }
@@ -27,12 +27,14 @@
 	flex: 1;
 }
 
+/* Small card: the gap below the title equals the card padding, like ResourceCards and TeaserCard. */
 .card-teaser-title {
 	display: block;
-	margin-block-end: var(--db-spacing-fixed-xs);
+	margin-block-end: var(--db-spacing-fixed-sm);
 }
 
 .card-teaser-description {
+	display: block;
 	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
 }
 

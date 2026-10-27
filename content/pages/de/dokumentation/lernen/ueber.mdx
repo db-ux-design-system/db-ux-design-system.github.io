@@ -1,0 +1,239 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Was das Design System ist'
+headline: 'Was das Design System ist'
+description: 'Die gemeinsame Basis für die digitalen Produkte der Deutschen Bahn – was sie ist, was sie enthält und wie verbindlich sie ist.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 1
+category: 'Foundations'
+keywords:
+  [
+    'overview',
+    'design system',
+    'generation 3',
+    'db ui',
+    'status',
+    'stable',
+    'beta',
+    'concept',
+    'db theme',
+    'support',
+    'contact',
+    'parts',
+    'foundation',
+    'components',
+    'patterns',
+    'extensions',
+    'versioning',
+    'release',
+    'license',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Eine Basis für Design und Code
+
+Das DB UX Design System ist die gemeinsame Basis für die digitalen Produkte der Deutschen Bahn. Design und Entwicklung nutzen dieselbe Foundation, dieselben Komponenten und dieselben Namen – in Figma und im Code.
+
+Diese Dokumentation beschreibt Generation 3, die aktuelle Generation.
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Was es enthält
+
+Die Foundation für die Tokens, Komponenten als Bausteine, Pattern, die sie kombinieren, Erweiterungen für besondere Bereiche und Themes, die die Marke anwenden. Die Komponenten gibt es für CSS, Web Components, Angular, React und Vue.
+
+<LearnAside>
+
+| Bestandteil   | Inhalt                                                                | Dokumentation                                            |
+| ------------- | --------------------------------------------------------------------- | -------------------------------------------------------- |
+| Foundation    | Tokens für Farben, Typografie, Abstände und Density                   | [Foundation](/de/dokumentation/foundation)               |
+| Komponenten   | Bausteine für Interfaces in Design und Code                           | [Komponenten](/de/dokumentation/komponenten)             |
+| Pattern       | Wiederkehrende Lösungen, die mehrere Komponenten kombinieren          | [Pattern](/de/dokumentation/pattern)                     |
+| Erweiterungen | Bibliotheken für Bereiche wie Reisendeninformation oder DataViz       | [Erweiterungen](/de/dokumentation/erweiterungen)         |
+| Themes        | Bringen eine Marke auf alles oben Genannte, zum Beispiel das DB Theme | [DB Theme](/de/dokumentation/lernen/db-theme-einrichten) |
+
+Native Komponenten für iOS und Android gibt es in [eigenen Paketen](#native-plattformen).
+
+### Welche Pakete du brauchst
+
+Wähle das Paket für dein Framework. Jeder Setup-Artikel führt dich von der Installation bis zur ersten Komponente.
+
+| Du baust mit …               | Paket                          | Setup                                                                                       |
+| ---------------------------- | ------------------------------ | ------------------------------------------------------------------------------------------- |
+| React                        | `@db-ux/react-core-components` | [Komponenten in React einbinden](/de/dokumentation/lernen/react-einrichten)                 |
+| Angular                      | `@db-ux/ngx-core-components`   | [Komponenten in Angular einbinden](/de/dokumentation/lernen/angular-einrichten)             |
+| Vue                          | `@db-ux/v-core-components`     | [Komponenten in Vue einbinden](/de/dokumentation/lernen/vue-einrichten)                     |
+| einem anderen Framework      | `@db-ux/wc-core-components`    | [Komponenten als Web Components nutzen](/de/dokumentation/lernen/web-components-einrichten) |
+| HTML und CSS, eigenem Markup | `@db-ux/core-components`       | [Komponenten mit HTML und CSS nutzen](/de/dokumentation/lernen/html-css-einrichten)         |
+| Astro, statischen Websites   | `@db-ux/astro`                 | [Komponenten in Astro einbinden](/de/dokumentation/lernen/astro-einrichten)                 |
+| eigenen Komponenten          | `@db-ux/core-foundations`      | [Tokens ohne Komponenten nutzen](/de/dokumentation/lernen/foundation-einrichten)            |
+| iOS oder Android             | Noch in Entwicklung            | [Native Plattformen](#native-plattformen)                                                   |
+
+Du startest ein neues Projekt mit React? Das [React-Tutorial](/de/dokumentation/lernen/react-tutorial) führt dich von einem leeren Projekt zu einem funktionierenden Formular, mit einer Prüfung nach jedem Schritt.
+
+#### Wie die Pakete zusammenhängen
+
+Drei Schichten bauen aufeinander auf. Du installierst nur die oberste, die du brauchst – die darunterliegenden kommen mit.
+
+| Schicht               | Paket                                                                               | Inhalt                                                       |
+| --------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Framework-Komponenten | `@db-ux/react-core-components` und die Pendants für Angular, Vue und Web Components | Komponenten für ein Framework                                |
+| Komponenten-Styles    | `@db-ux/core-components`                                                            | CSS und SCSS aller Komponenten, enthält die Schicht darunter |
+| Tokens und Assets     | `@db-ux/core-foundations`                                                           | Farben, Abstände, Typografie, Density, Icons, Schriften      |
+
+`@db-ux/core-components` zieht `@db-ux/core-foundations` als Abhängigkeit mit. Bei npm passiert das automatisch. Bei pnpm installierst du beide explizit.
+
+#### Themes und Assets
+
+Alle Setup-Artikel für Frameworks nutzen das Whitelabel-Theme, weil es ohne weiteren Zugang funktioniert. Produkte der Deutschen Bahn brauchen zusätzlich das DB Theme – ohne es bleiben Farben, Typografie und Assets auf den Whitelabel-Standardwerten. Theme und Icons sind verschlüsselt und brauchen Zugangsdaten aus dem Marketingportal.
+
+| Ziel                | Installation            | Anleitung                                                                         |
+| ------------------- | ----------------------- | --------------------------------------------------------------------------------- |
+| Marke Deutsche Bahn | `@db-ux/db-theme`       | [DB Theme für DB-Produkte ergänzen](/de/dokumentation/lernen/db-theme-einrichten) |
+| Marke S-Bahn        | `@db-ux/s-bahn-theme`   | [S-Bahn Theme](/de/dokumentation/lernen/db-theme-einrichten#s-bahn-theme)         |
+| Icons ohne Theme    | `@db-ux/db-theme-icons` | [Icons im Interface anzeigen](/de/dokumentation/lernen/icons-einrichten)          |
+
+#### Optionales Tooling
+
+Keines dieser Pakete brauchst du für den Start. Ergänze sie, sobald deine erste Komponente erscheint. Die Konfiguration steht im Setup-Artikel deines Frameworks.
+
+| Paket                        | Zweck                                                                                                             | Empfehlung                       |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| `@db-ux/core-postcss-plugin` | Löst `var()`, `calc()`, `color-mix()` und `light-dark()` zur Build-Zeit auf und entfernt ungenutzte Deklarationen | Empfohlen für Produktions-Builds |
+| `@db-ux/core-vite-plugin`    | Reduziert das CSS-Setup auf einen einzigen Import                                                                 | Empfohlen, wenn du Vite nutzt    |
+| `@db-ux/core-eslint-plugin`  | Meldet falsche Komponentennutzung im Editor                                                                       | Optional, im Team aber hilfreich |
+| `@db-ux/core-stylelint`      | Prüft dein CSS und SCSS gegen die Regeln des Design Systems                                                       | Optional                         |
+
+Für KI-Coding-Agenten gibt es `@db-ux/mcp-server` und `@db-ux/agent-cli`. Beide beschreibt der [Artikel zum MCP Server](/de/dokumentation/lernen/mcp-server).
+
+### Native Plattformen
+
+Die nativen Bibliotheken für iOS (SwiftUI) und Android (Jetpack Compose) sind in Entwicklung. Keine der beiden hat ein veröffentlichtes Release, und eine Installationsanleitung für Produkte gibt es noch nicht. Die Repositories beschreiben, wie du das Projekt zum Mitwirken einrichtest, nicht, wie du es in einer App nutzt.
+
+| Plattform | Technologie                     | Mindestversion | Repository                                                          |
+| --------- | ------------------------------- | -------------- | ------------------------------------------------------------------- |
+| iOS       | SwiftUI, Swift Package `DBUXDS` | iOS 18         | [core-ios](https://github.com/db-ux-design-system/core-ios)         |
+| Android   | Jetpack Compose                 | Android API 30 | [core-android](https://github.com/db-ux-design-system/core-android) |
+
+Beide Bibliotheken gliedern sich in **Foundation** – Farben, Typografie und Abstände als Tokens – und **Komponenten**.
+
+#### Verfügbare Komponenten
+
+| Komponente | iOS | Android |
+| ---------- | --- | ------- |
+| Accordion  | ✅  | ✅      |
+| Badge      | ✅  | ✅      |
+| Button     | ✅  | ✅      |
+| Card       | ✅  | ✅      |
+| Checkbox   | ✅  | ✅      |
+| Icon       | –   | ✅      |
+| Infotext   | ✅  | ✅      |
+| Link       | ✅  | ✅      |
+| Switch     | ✅  | –       |
+
+Die Liste gibt den Quellcode in den Repositories wieder. Über den Status einer Komponente sagt sie nichts aus – die Web-Komponenten und ihr Status sind unter [Komponenten](/de/dokumentation/komponenten) dokumentiert.
+
+#### Was du jetzt tun kannst
+
+| Du möchtest …                                | So gehst du vor                                                                                                                                                              |
+| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| eine native App mit dem Design System planen | Sprich Luis Schroff an, den Product Owner des Design Systems, bevor du mit diesen Bibliotheken planst: [luis.schroff@deutschebahn.com](mailto:luis.schroff@deutschebahn.com) |
+| eine native App gestalten                    | Nutze die Figma-Bibliotheken – siehe [Figma-Bibliotheken einrichten](/de/dokumentation/lernen/figma-einrichten).                                                             |
+| mitwirken                                    | Folge der `DEVELOPMENT.md` im Repository.                                                                                                                                    |
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Jeder Inhalt hat einen Status
+
+Ein Status zeigt dir, wie ausgereift eine Komponente, ein Pattern oder ein Template ist. **Stable** ist als UX-Standard verpflichtend, **Beta** ist empfohlen, **Concept** ist nur eine Design-Referenz.
+
+<LearnAside>
+
+Was jeder Status im Detail bedeutet, steht unter [Was ein Status bedeutet](/de/dokumentation/lernen/status). Releases folgen der semantischen Versionierung: Major-Releases werden vorab angekündigt, Minor- und Patch-Releases erscheinen laufend – siehe [Wie Releases funktionieren](/de/dokumentation/lernen/versionierung).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Wie verbindlich es ist
+
+Inhalte mit Status Stable sind der verpflichtende UX-Standard. Das DB Theme ist für alle Websites und Anwendungen der Deutschen Bahn erforderlich und darf außerhalb davon nicht verwendet werden.
+
+<LearnAside>
+
+Der Code des Design Systems steht unter der Apache-2.0-Lizenz. Das DB Theme und seine Assets sind die Ausnahme: Sie dürfen nur für Websites und Anwendungen der Deutschen Bahn verwendet werden.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Du kommst von DB UI?
+
+Generation 2 war als DB UI bekannt. Wenn du noch damit arbeitest, beginne mit der [Migration von DB UI](/de/dokumentation/lernen/migration 'Wechsle Schritt für Schritt von Generation 2 auf Generation 3.'). Sie führt dich Schritt für Schritt durch den Umstieg.
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Wo du Hilfe bekommst
+
+Fehler gefunden oder ein Feature-Wunsch? Eröffne ein Issue auf [GitHub](https://github.com/db-ux-design-system/core/issues/new/choose 'Melde Fehler und wünsch dir Features.'). Für alles andere schreib an [db-ux-designsystem@deutschebahn.com](mailto:db-ux-designsystem@deutschebahn.com 'Fragen, die sonst nirgends hinpassen.').
+
+<LearnAside>
+
+- Fragen und Austausch: die Teams-Kanäle für [Übergreifendes und Design](https://teams.microsoft.com/l/channel/19%3A7dd9929be1fe494c823b11e0e2d22341%40thread.skype/DB%20UX%20Design%20System?groupId=72c53609-2941-46dd-8be9-e4d1d2c45c77&tenantId=a1a72d9c-49e6-4f6d-9af6-5aafa1183bfd) und [Entwicklung](https://teams.microsoft.com/l/channel/19%3A6c0e92ce4aef409598ff77c4cd06e001%40thread.skype/SIG%20-%20DB%20UX%20Design%20System?groupId=2f363785-c59e-4763-9bc3-8e13998a4588&tenantId=a1a72d9c-49e6-4f6d-9af6-5aafa1183bfd)
+- Sprechstunde Help, Hints & Hugs: alle zwei Wochen mittwochs um 9 Uhr, im Community-Kalender
+- Fehler und Features in den Code-Paketen: [GitHub: core-web](https://github.com/db-ux-design-system/core-web/issues/new/choose)
+- Erweiterungen: [DataViz](https://github.com/db-ux-design-system/extension-dataviz/issues), [Reisendeninformation](https://github.com/db-ux-design-system/extension-ri/issues), [Table](https://github.com/db-ux-design-system/extension-table/issues)
+- Weitere Wege, dich einzubringen: [Mitwirken](/de/dokumentation/mitwirken)
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Wähle deinen Weg
+
+Bereit für den Start? Wähle deine Rolle, und wir stellen dir eine Leseliste zusammen.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Design',
+			description: 'Hol dir Zugang zu den Figma-Bibliotheken und gestalte deinen ersten Screen.',
+			url: '/de/dokumentation/erste-schritte?role=design',
+		},
+		{
+			title: 'Entwicklung',
+			description: 'Installiere das Paket für dein Framework und zeige deine erste Komponente an.',
+			url: '/de/dokumentation/erste-schritte?role=development',
+		},
+	]}
+/>
+
+</LearnBlock>

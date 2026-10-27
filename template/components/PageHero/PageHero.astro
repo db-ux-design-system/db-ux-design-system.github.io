@@ -11,8 +11,9 @@ import {
 	DBTextGroup,
 	type SemanticType,
 } from '@db-ux/react-core-components';
-import Visual from '@template/components/Visual/Visual.astro';
+import HeroMedia from '@template/components/PageHero/HeroMedia.astro';
 import type { VisualName } from '@template/visuals';
+import type { VisualImageName } from '@template/visuals/images';
 import './PageHero.css';
 
 interface Props {
@@ -25,11 +26,20 @@ interface Props {
 	imageAlt?: string;
 	/** Decorative inline visual from `template/visuals/`. Takes precedence over `imageSrc`. */
 	visual?: VisualName;
+	/**
+	 * Decorative PNG visual from `static/assets/teasers/`. Takes precedence over `imageSrc`,
+	 * `visual` takes precedence over it.
+	 */
+	visualImage?: VisualImageName;
 	align?: FrontMatter['align'];
 	layout?: 'stack' | 'split';
 	imageSide?: 'left' | 'right';
 	/** Semantic level of the headline. Ignored when a title is set: the title is the H1, the headline the H2. */
 	headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
+	/** Optional link buttons below the description. The first one is styled as brand. */
+	actions?: { label: string; href: string }[];
+	/** Shows a right-aligned page toolbar row for page actions (e.g. reading list, view toggle). */
+	toolbar?: boolean;
 }
 
 type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
@@ -43,10 +53,13 @@ const {
 	imageSrc,
 	imageAlt,
 	visual,
+	visualImage,
 	align = 'center',
 	layout = 'stack',
 	imageSide = 'right',
 	headlineLevel = 2,
+	actions = [],
+	toolbar = false,
 } = Astro.props as Props;
 
 const headingComponents = {
@@ -60,18 +73,25 @@ const headingComponents = {
 
 const safeHeadlineLevel = (title ? 2 : Math.min(Math.max(headlineLevel, 1), 6)) as HeadingLevel;
 const Headline = headingComponents[safeHeadlineLevel];
+
+const hasHeadlineEnd = Astro.slots.has('headline-end');
+const hasToolbar = toolbar || Astro.slots.has('toolbar');
+
+// A 3D model, an SVG visual, a PNG visual or a plain image. The picking and sizing lives in
+// HeroMedia; here we only decide whether the media area is rendered at all.
+const hasVisual = Boolean(visual || visualImage);
+const hasMedia = hasVisual || Boolean(imageSrc);
 ---
 
-{(title || headline || description || imageSrc || visual) && (
+{(title || headline || description || hasMedia) && (
 	<div class="page-hero" data-align={align} data-layout={layout} data-image-side={imageSide}>
-		{layout === 'split' && (visual || imageSrc) && imageSide === 'left' && (
-			<div class:list={['page-hero-media', { 'page-hero-media-visual': !!visual }]}>
-				{visual ? (
-					<Visual name={visual} class="page-hero-visual" strokeScaling="scale" />
-				) : (
-					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
-				)}
-			</div>
+		{layout === 'split' && hasMedia && imageSide === 'left' && (
+			<HeroMedia
+				visual={visual}
+				visualImage={visualImage}
+				imageSrc={imageSrc}
+				imageAlt={imageAlt}
+			/>
 		)}
 		<div class="page-hero-content">
 			{badgeText && <DBBadge semantic={badgeSemantic}>{badgeText}</DBBadge>}
@@ -82,11 +102,30 @@ const Headline = headingComponents[safeHeadlineLevel];
 							{title}
 						</DBHeadingH1>
 					)}
-					{headline && (
-						<Headline className="page-hero-headline" visualSize="h1" fontWeight="black">
-							{headline}
-						</Headline>
-					)}
+					{headline &&
+						(hasHeadlineEnd || hasToolbar ? (
+							// Controls next to the headline sit outside the heading, so they are
+							// not part of its name. The page toolbar sits at the end of the same
+							// row, aligned with the right edge of the content.
+							<div class="page-hero-headline-row">
+								<Headline className="page-hero-headline" visualSize="h1" fontWeight="black">
+									{headline}
+								</Headline>
+								{hasHeadlineEnd && <slot name="headline-end" />}
+								{hasToolbar && (
+									// data-page-toolbar is a drop target: client enhancements (e.g. the
+									// Learn view toggle rendered in the page body) move their controls
+									// in here, so the actions share one toolbar.
+									<div class="page-hero-toolbar" data-page-toolbar>
+										<slot name="toolbar" />
+									</div>
+								)}
+							</div>
+						) : (
+							<Headline className="page-hero-headline" visualSize="h1" fontWeight="black">
+								{headline}
+							</Headline>
+						))}
 					{description && (
 						<DBParagraph className="page-hero-description" size="md">
 							{description}
@@ -94,24 +133,35 @@ const Headline = headingComponents[safeHeadlineLevel];
 					)}
 				</DBTextGroup>
 			)}
+			{actions.length > 0 && (
+				<div class="page-hero-actions">
+					{actions.map((action, index) => (
+						<a
+							href={action.href}
+							class="db-button"
+							data-variant={index === 0 ? 'brand' : 'outlined'}
+						>
+							{action.label}
+						</a>
+					))}
+				</div>
+			)}
 		</div>
-		{layout === 'split' && (visual || imageSrc) && imageSide === 'right' && (
-			<div class:list={['page-hero-media', { 'page-hero-media-visual': !!visual }]}>
-				{visual ? (
-					<Visual name={visual} class="page-hero-visual" strokeScaling="scale" />
-				) : (
-					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
-				)}
-			</div>
+		{layout === 'split' && hasMedia && imageSide === 'right' && (
+			<HeroMedia
+				visual={visual}
+				visualImage={visualImage}
+				imageSrc={imageSrc}
+				imageAlt={imageAlt}
+			/>
 		)}
-		{layout === 'stack' && (visual || imageSrc) && (
-			<div class:list={['page-hero-media', { 'page-hero-media-visual': !!visual }]}>
-				{visual ? (
-					<Visual name={visual} class="page-hero-visual" strokeScaling="scale" />
-				) : (
-					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
-				)}
-			</div>
+		{layout === 'stack' && hasMedia && (
+			<HeroMedia
+				visual={visual}
+				visualImage={visualImage}
+				imageSrc={imageSrc}
+				imageAlt={imageAlt}
+			/>
 		)}
 	</div>
 )}
