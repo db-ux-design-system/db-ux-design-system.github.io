@@ -33,10 +33,12 @@ export const readingListTexts: Record<
 		added: string;
 		removeCurrent: string;
 		removedCurrent: string;
-		/** Dialog at the end of a saved page: asks whether to remove it from the list. */
+		/**
+		 * Notification at the end of a saved page: asks whether to remove it from the list.
+		 * finishedClose also names the close button of the confirmation dialogs.
+		 */
 		finishedTitle: string;
 		finishedText: string;
-		finishedKeep: string;
 		finishedClose: string;
 		/** Intro of the wizard result: points at the package, not at single pages. */
 		intro: string;
@@ -75,7 +77,6 @@ export const readingListTexts: Record<
 		finishedTitle: 'Finished reading?',
 		finishedText:
 			'You have reached the end of this page. Do you want to remove it from your reading list?',
-		finishedKeep: 'Keep on list',
 		finishedClose: 'Close',
 		intro:
 			'Your learning package is ready. The pages are ordered so you get through without detours.',
@@ -114,7 +115,6 @@ export const readingListTexts: Record<
 		finishedTitle: 'Fertig gelesen?',
 		finishedText:
 			'Du bist am Ende der Seite angekommen. Möchtest du sie von deiner Leseliste entfernen?',
-		finishedKeep: 'Auf der Liste behalten',
 		finishedClose: 'Schließen',
 		intro: 'Dein Lernpaket steht. Die Seiten sind so sortiert, dass du ohne Umwege durchkommst.',
 		savedTitle: 'In deiner Leseliste gespeichert',

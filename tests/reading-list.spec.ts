@@ -436,6 +436,57 @@ test('deleting asks first; cancel and Escape keep the entry', async ({ page }) =
 	expect((await readList(page)).items).toHaveLength(3);
 });
 
+test.describe('finished reading', () => {
+	const saveAbout = async (page: Page) => {
+		await page.goto('/documentation/learn/about');
+		await waitForDBShell(page);
+		await waitForToggle(page);
+		await page.locator('.rl-toggle > button').click();
+		await expect.poll(async () => (await readList(page))?.items.length).toBe(1);
+	};
+
+	test('article view: a notification at the end, without taking the focus', async ({ page }) => {
+		await page.addInitScript(() => window.localStorage.setItem('db-ux-learn-view', 'article'));
+		await saveAbout(page);
+		const finished = page.locator('.rl-finished');
+		await expect(finished).toHaveCount(0);
+
+		// Focus somewhere in the page, then scroll to the end.
+		await page.locator('.rl-toggle > button').focus();
+		await page
+			.locator('.db-shell-content')
+			.evaluate((shell) => shell.scrollTo({ top: shell.scrollHeight }));
+		await expect(finished).toBeVisible();
+		await expect(finished).toContainText('Finished reading?');
+		// No modal: the focus stays where it was, nothing is inert.
+		await expect(page.locator('.rl-toggle > button')).toBeFocused();
+		await expect(page.locator('dialog[open]')).toHaveCount(0);
+		await expect(page.locator('.rl-toggle > [role=status]')).toContainText('Finished reading?');
+		// Announced once: the notification itself is no live region.
+		await expect(finished).toHaveAttribute('role', 'article');
+
+		await finished.getByRole('button', { name: 'Remove from reading list' }).click();
+		await expect(finished).toHaveCount(0);
+		expect((await readList(page)).items).toEqual([]);
+	});
+
+	test('stepper view: the notification comes on the last step and can be closed', async ({
+		page,
+	}) => {
+		await page.addInitScript(() => window.localStorage.setItem('db-ux-learn-view', 'stepper'));
+		await saveAbout(page);
+		const finished = page.locator('.rl-finished');
+		const next = page.locator('[data-step-next]');
+		while (await next.isEnabled()) await next.click();
+		await expect(finished).toBeVisible();
+
+		await finished.getByRole('button', { name: 'Close' }).click();
+		await expect(finished).toHaveCount(0);
+		// Closing keeps the page on the list.
+		expect((await readList(page)).items).toHaveLength(1);
+	});
+});
+
 test('Escape closes the reading list popover by hover and from inside', async ({ page }) => {
 	await page.goto('/documentation/get-started?role=design&designIntent=new');
 	await waitForDBShell(page);

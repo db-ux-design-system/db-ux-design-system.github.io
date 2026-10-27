@@ -271,3 +271,30 @@
 	display: flex;
 	flex-shrink: 0;
 }
+
+/* "Finished reading?" at the end of a saved page: an overlay notification below the
+   control panel, at the same place as the hint on the wizard result
+   (GetStartedWizard.css, .gsw-saved). --rl-finished-top is the lower edge of the
+   visible control panel, measured by the island; the sizing token is only the fallback
+   before the first measurement. */
+.rl-finished.db-notification {
+	position: fixed;
+	inset-block-start: calc(
+		var(--rl-finished-top, var(--db-sizing-2xl)) + var(--db-spacing-fixed-sm)
+	);
+	inset-inline-end: var(--db-spacing-fixed-sm);
+	z-index: 100;
+	max-inline-size: min(calc(100vw - 2 * var(--db-spacing-fixed-sm)), 28rem);
+
+	/* The semantic colors its icon through the ::before itself, so --db-icon-color on
+	   the notification has no effect. */
+	&::before {
+		color: var(--db-informational-on-bg-basic-emphasis-100-default);
+	}
+}
+
+/* Text and action stacked: the action reads as the answer to the question. Scoped to
+   the notification, as ".db-notification p" (db-ux-overrides.css) resets the margin. */
+.rl-finished .rl-finished-text {
+	margin: 0 0 var(--db-spacing-fixed-md);
+}

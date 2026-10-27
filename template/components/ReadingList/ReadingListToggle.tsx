@@ -1,11 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import {
-	DBButton,
-	DBDialog,
-	DBDialogFooter,
-	DBDialogHeader,
-	DBTooltip,
-} from '@db-ux/react-core-components';
+import { DBButton, DBNotification, DBTooltip } from '@db-ux/react-core-components';
+import { useOverlayTop } from '@template/utils/overlay-top';
 import type { Lang } from '@template/components/GetStartedWizard/wizard-flow';
 import { LEARN_STEP_EVENT } from '@template/components/Learn/learn-controller';
 import { addItem, removeItem, useReadingList } from './reading-list-store';
@@ -45,10 +40,17 @@ function contentEndInView(): boolean {
  * the action, so it changes with the state; the status region announces the change,
  * because a label change on the focused button is not announced reliably.
  *
- * While the page is on the list, a dialog asks whether the reader has finished it and
- * wants to remove it: in the article view when they scroll to the end of the content,
- * in the stepper view when they click through to the last step. It asks once per page
- * visit. A page that fits without scrolling never asks, as nobody scrolled to its end.
+ * While the page is on the list, a notification asks whether the reader has finished
+ * it and offers to remove it: in the article view when they scroll to the end of the
+ * content, in the stepper view when they click through to the last step. It asks once
+ * per page visit. A page that fits without scrolling never asks, as nobody scrolled to
+ * its end.
+ *
+ * Not a modal dialog: that took the focus and pulled the reader out of the text. The
+ * notification is an overlay below the control panel, like the hint on the wizard
+ * result. It takes no focus and stays until it is closed or the page is removed, so
+ * nobody misses the action (no time limit, WCAG 2.2.1). Screen readers hear it through
+ * the status region of the button, without moving the reading cursor.
  */
 const ReadingListToggle = ({ lang, id, title }: Props) => {
 	const text = readingListTexts[lang];
@@ -115,6 +117,17 @@ const ReadingListToggle = ({ lang, id, title }: Props) => {
 		setAskFinished(false);
 	};
 
+	useOverlayTop('--rl-finished-top');
+
+	// Announced through the status region; the notification itself has no live role,
+	// so it is not read twice.
+	useEffect(() => {
+		if (askFinished) setStatus(`${text.finishedTitle} ${text.finishedText}`);
+	}, [askFinished]);
+
+	// Removed in another way (bookmark button, reading list): nothing left to ask.
+	const showFinished = askFinished && saved;
+
 	return (
 		<div className="rl-toggle">
 			<DBButton
@@ -135,25 +148,29 @@ const ReadingListToggle = ({ lang, id, title }: Props) => {
 			<span role="status" data-visually-hidden="true">
 				{status}
 			</span>
-			{/* Modal: Escape, the close button and the backdrop keep the page on the list.
-			    onClose mirrors these back into the state. */}
-			<DBDialog
-				open={askFinished}
-				onClose={() => setAskFinished(false)}
-				header={<DBDialogHeader closeButtonText={text.finishedClose} text={text.finishedTitle} />}
-				footer={
-					<DBDialogFooter>
-						<DBButton type="button" variant="ghost" onClick={() => setAskFinished(false)}>
-							{text.finishedKeep}
-						</DBButton>
-						<DBButton type="button" variant="brand" onClick={removeFinished}>
-							{text.removeCurrent}
-						</DBButton>
-					</DBDialogFooter>
-				}
-			>
-				{text.finishedText}
-			</DBDialog>
+			{showFinished && (
+				<DBNotification
+					className="rl-finished"
+					variant="overlay"
+					semantic="informational"
+					// Informational renders role="status", a live region. The status
+					// region of the button announces it already; "off" renders a plain
+					// article, so it is not read twice.
+					ariaLive="off"
+					headline={text.finishedTitle}
+					// Same bookmark as in the header, filled: the page is on the list.
+					icon="bookmark"
+					data-icon-variant="db-filled"
+					closeable
+					closeButtonText={text.finishedClose}
+					onClose={() => setAskFinished(false)}
+				>
+					<p className="rl-finished-text">{text.finishedText}</p>
+					<DBButton type="button" variant="brand" size="small" onClick={removeFinished}>
+						{text.removeCurrent}
+					</DBButton>
+				</DBNotification>
+			)}
 		</div>
 	);
 };

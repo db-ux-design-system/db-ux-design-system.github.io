@@ -5,6 +5,7 @@ import {
 	useReadingList,
 } from '@template/components/ReadingList/reading-list-store';
 import { hasSeenSavedHint, markSavedHintSeen } from './saved-hint';
+import { useOverlayTop } from '@template/utils/overlay-top';
 import { toReadingListId } from '@template/components/ReadingList/reading-list-items';
 import { readingListTexts } from '@template/components/ReadingList/texts';
 import {
@@ -133,26 +134,7 @@ const GetStartedWizard = ({ lang = 'en' }: { lang?: Lang }) => {
 	// available as a token, and the control panel is outside this island, so the lower
 	// edge of the visible panel is measured and handed to the CSS. Desktop and mobile
 	// panel are both in the DOM, only one of them has a size.
-	useEffect(() => {
-		const panels = [
-			...document.querySelectorAll<HTMLElement>(
-				'.db-control-panel-desktop, .db-control-panel-mobile',
-			),
-		];
-		if (panels.length === 0) return;
-		const update = () => {
-			const visible = panels.find((panel) => panel.getBoundingClientRect().height > 0);
-			const bottom = visible?.getBoundingClientRect().bottom ?? 0;
-			document.documentElement.style.setProperty('--gsw-saved-top', `${Math.max(bottom, 0)}px`);
-		};
-		update();
-		const observer = new ResizeObserver(update);
-		for (const panel of panels) observer.observe(panel);
-		return () => {
-			observer.disconnect();
-			document.documentElement.style.removeProperty('--gsw-saved-top');
-		};
-	}, []);
+	useOverlayTop('--gsw-saved-top');
 
 	const step = next(answers);
 	const asked = askedQuestions(answers);
