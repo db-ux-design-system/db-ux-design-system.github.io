@@ -124,9 +124,12 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 	// Runs after the dialog has closed: closing a modal dialog moves the focus back to
 	// the element it was opened from, which is hidden in the closed popover then, and
 	// that would override the focus set here.
-	const focusInPopover = (target?: HTMLElement | null) => {
+	// The status message is written at the same time: while the modal dialog is open,
+	// everything outside it is inert, and a change there is not announced.
+	const focusInPopover = (target?: HTMLElement | null, message?: string) => {
 		const trigger = wrapperRef.current?.querySelector<HTMLElement>('.rl-trigger');
 		window.setTimeout(() => {
+			if (message) setStatus(message);
 			trigger?.focus();
 			// One frame for the popover to show before its content can take the focus.
 			requestAnimationFrame(() => {
@@ -144,16 +147,14 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 		const buttons = [...(wrapper?.querySelectorAll<HTMLElement>('.rl-item-remove') ?? [])];
 		const target = buttons[index + 1] ?? buttons[index - 1];
 		removeItem(id);
-		setStatus(text.removed(label));
-		focusInPopover(target);
+		focusInPopover(target, text.removed(label));
 	};
 
 	// The button disappears with the entries, so the focus moves to the trigger, which
 	// keeps the popover open on the empty state.
 	const removeAll = () => {
 		clearItems();
-		setStatus(text.removedAll);
-		focusInPopover();
+		focusInPopover(undefined, text.removedAll);
 	};
 
 	const cancelConfirm = () => {
@@ -314,14 +315,16 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 							})}
 						</div>
 					)}
-					<span role="status" data-visually-hidden="true">
-						{status}
-					</span>
 				</div>
 			</DBPopover>
+			{/* Outside the popover: it is hidden while the confirmation dialog has the
+			    focus, and a status message inside would not be announced. */}
+			<span role="status" data-visually-hidden="true">
+				{status}
+			</span>
 			{/* Outside the popover: inside, it would be hidden together with the popover
-			    once the focus moves into the dialog. Modal, like the "Finished reading?"
-			    dialog: Escape, the close button and the backdrop cancel. */}
+			    once the focus moves into the dialog. Modal, as deleting cannot be undone:
+			    Escape, the close button and the backdrop cancel. */}
 			<DBDialog
 				open={Boolean(confirm)}
 				onClose={cancelConfirm}

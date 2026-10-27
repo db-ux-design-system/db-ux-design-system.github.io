@@ -390,8 +390,13 @@ test('Remove all empties the list and is only shown with entries', async ({ page
 	await expect(removeAll).toHaveCount(0);
 	await expect(trigger).toBeFocused();
 	await expect(trigger).toHaveAccessibleName('Reading list, empty');
-	await expect(popover.locator('[role=status]')).toHaveText(
-		'All pages removed from the reading list',
+	// The status region sits outside the popover, which is hidden while the dialog is
+	// open, and it is reachable for assistive technology after the dialog closed.
+	const status = control.locator('> [role=status]');
+	await expect(status).toHaveText('All pages removed from the reading list');
+	await expect(popover.locator('[role=status]')).toHaveCount(0);
+	expect(await status.evaluate((element) => element.closest('[inert], [aria-hidden=true]'))).toBe(
+		null,
 	);
 });
 
@@ -434,6 +439,15 @@ test('deleting asks first; cancel and Escape keep the entry', async ({ page }) =
 	);
 	await dialog.getByRole('button', { name: 'Abbrechen' }).click();
 	expect((await readList(page)).items).toHaveLength(3);
+
+	// Confirmed: the entry is gone and the removal is announced.
+	await bin.click();
+	await dialog.getByRole('button', { name: 'Entfernen', exact: true }).click();
+	await expect(dialog).toBeHidden();
+	await expect.poll(async () => (await readList(page)).items.length).toBe(2);
+	await expect(control.locator('> [role=status]')).toContainText(
+		'Ein Kontaktformular in Figma gestalten',
+	);
 });
 
 test.describe('finished reading', () => {
