@@ -1,0 +1,263 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Icons im Interface anzeigen'
+headline: 'Icons im Interface anzeigen'
+description: 'Lade die DB-Icons, zeige ein erstes Icon in einer Komponente an und ergänze illustrative Icons, wo ein Piktogramm besser passt.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 18
+category: 'Development'
+keywords:
+  [
+    'icons',
+    'icon font',
+    'db-theme-icons',
+    'illustrative icons',
+    'db-theme-illustrative-icons',
+    'pictogram',
+    'svg',
+    'data-icon-variant',
+    'default-font',
+    'setup',
+    'installation',
+    'typescript',
+    'autocomplete',
+    'troubleshooting',
+    'icons not loading',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Zwei Pakete für zwei Arten von Icons
+
+**Funktionale Icons** stehen in Komponenten und im Fließtext. **Illustrative Icons** sind größere Piktogramme, zum Beispiel in Teasern.
+
+<LearnAside>
+
+| Paket                                | Inhalt                                          | Nutze es für                                 |
+| ------------------------------------ | ----------------------------------------------- | -------------------------------------------- |
+| `@db-ux/db-theme-icons`              | Funktionale Icons als Icon-Schrift und SVG      | Icons in Komponenten und im Fließtext        |
+| `@db-ux/db-theme-illustrative-icons` | Illustrative Icons als SVG und React-Komponente | Größere Piktogramme, zum Beispiel in Teasern |
+
+Wenn du [das DB Theme ergänzt](/de/dokumentation/lernen/db-theme-einrichten) hast, sind beide Pakete schon in deinem Projekt und das Theme lädt die Icon-Schrift. Überspringe dann Installation und Styles und mach mit dem ersten Icon weiter.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Installiere die funktionalen Icons
+
+Das Paket braucht dieselben Zugangsdaten wie das DB Theme.
+
+```shell
+pnpm add @db-ux/db-theme-icons
+```
+
+<LearnAside>
+
+- **Zugangsdaten:** Das Paket ist wie das DB Theme verschlüsselt. Es braucht `ASSET_PASSWORD` und `ASSET_INIT_VECTOR` aus dem Marketingportal in deiner `.env`-Datei, wie in [DB Theme für DB-Produkte ergänzen](/de/dokumentation/lernen/db-theme-einrichten) beschrieben. Ein `postinstall`-Skript entschlüsselt die Dateien.
+- **pnpm:** Erlaube das Install-Skript mit `pnpm approve-builds`.
+- **npm:** Nutze `npm i @db-ux/db-theme-icons`.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Lade die Icon-Schrift
+
+Die Icons werden als Schrift ausgeliefert. Importiere die Style-Datei, die zu deinem Bundler passt.
+
+```css
+/* src/index.css */
+@import '@db-ux/db-theme-icons/build/styles/rollup.css';
+```
+
+<LearnAside>
+
+### Die passende Datei für deinen Bundler
+
+| Datei                              | Nutze sie, wenn …             |
+| ---------------------------------- | ----------------------------- |
+| `rollup.css`                       | du mit Vite oder Rollup baust |
+| `webpack.css`                      | du mit Webpack baust          |
+| `relative.css` oder `absolute.css` | du keinen Bundler nutzt       |
+
+Alle Dateien liegen unter `@db-ux/db-theme-icons/build/styles/`.
+
+### Standard-Icons überall ersetzen
+
+Die Komponenten bringen ein Standard-Icon-Set mit. Um es in allen Komponenten durch die DB-Icons zu ersetzen, importiere zusätzlich `default-font.css`:
+
+```css
+@import '@db-ux/db-theme-icons/build/styles/default-font.css';
+```
+
+### Autovervollständigung für Icon-Namen
+
+Trage die generierten Typen in deine `tsconfig.json` ein:
+
+```json
+{
+	"compilerOptions": {
+		"types": ["@db-ux/db-theme-icons"]
+	},
+	"include": ["node_modules/@db-ux/db-theme-icons/build/types/overwrite.d.ts"]
+}
+```
+
+Für React oder Vue bindest du stattdessen `build/types/react.d.ts` oder `build/types/vue.d.ts` ein.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Zeige dein erstes Icon an
+
+Setze den Icon-Namen an der Komponente. `data-icon-variant="db"` wählt für dieses Element die DB-Icon-Schrift.
+
+```tsx
+<DBButton icon="arrow_right" data-icon-variant="db">
+	Weiter
+</DBButton>
+```
+
+<LearnAside>
+
+### Angular und HTML
+
+```html
+<!-- Angular -->
+<db-button icon="arrow_right" data-icon-variant="db">Weiter</db-button>
+
+<!-- HTML und CSS -->
+<button class="db-button" data-icon="arrow_right" data-icon-variant="db">Weiter</button>
+```
+
+Alle verfügbaren Namen stehen in der [Icon-Liste](/de/dokumentation/icons). Das React-Beispiel funktioniert in Vue genauso.
+
+### Icons außerhalb von Komponenten
+
+Kopiere die SVG-Dateien aus `node_modules/@db-ux/db-theme-icons/build/assets`.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Ergänze illustrative Icons als Piktogramme
+
+Installiere das Paket und nutze in React die Komponente `IllustrativeIcon`. `icon` nimmt den Namen, `size` die Größe in Pixeln.
+
+```tsx
+import { IllustrativeIcon } from '@db-ux/db-theme-illustrative-icons';
+<IllustrativeIcon icon="luggage" size={64} />;
+```
+
+<LearnAside>
+
+```shell
+pnpm add @db-ux/db-theme-illustrative-icons
+```
+
+- **Namen und Typ:** Die Liste der Namen wird als `IllustrativeIcons` exportiert, der passende Typ als `IllustrativeIconsType`.
+- **Andere Frameworks:** Kopiere die SVG-Dateien aus `node_modules/@db-ux/db-theme-illustrative-icons/build/assets`. Sie sind nach Themen in Ordnern gruppiert.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Wenn ein Icon nicht erscheint
+
+Die meisten Probleme kommen von einer nicht geladenen Icon-Schrift oder einem fehlenden `data-icon-variant`.
+
+<LearnAside>
+
+| Symptom                                                | Ursache und Lösung                                                                                                                          |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Icons erscheinen als leere Kästchen oder Ersatzzeichen | Die Icon-Schrift ist nicht geladen. Importiere die Styles oder prüfe, ob die Dateivariante zu deinem Bundler passt.                         |
+| Statt der DB-Icons erscheinen die Standard-Icons       | `default-font.css` ist nicht importiert oder `data-icon-variant="db"` fehlt am Element.                                                     |
+| Der Build scheitert mit `ENOENT` im Paket              | Die Assets wurden nie entschlüsselt. Erlaube das Install-Skript oder [entschlüssele manuell](/de/dokumentation/lernen/db-theme-einrichten). |
+| Ein Icon-Name wird nicht erkannt                       | Den Namen gibt es nicht. Prüfe die Schreibweise in der [Icon-Liste](/de/dokumentation/icons).                                               |
+
+Wenn nichts davon hilft, eröffne ein Issue im [core-web-Repository](https://github.com/db-ux-design-system/core-web/issues/new/choose). Prüfe vorher, ob es das Issue schon gibt.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Finde das passende Icon
+
+Such dir die Icons aus der vollständigen Liste aus.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Icon-Liste',
+			description: 'Alle funktionalen Icons mit den Namen, die du im Code nutzt.',
+			url: '/de/dokumentation/icons',
+		},
+		{
+			title: 'Icons auf npm',
+			description: 'Versionen und Readme des Pakets mit den funktionalen Icons.',
+			url: 'https://www.npmjs.com/package/@db-ux/db-theme-icons',
+		},
+		{
+			title: 'DB Theme',
+			description: 'Bring die Farben und Schriften der Deutschen Bahn auf deine Komponenten.',
+			url: '/de/dokumentation/lernen/db-theme-einrichten',
+		},
+	]}
+/>
+
+<LearnAside>
+
+### Typen, Exporte und Assets
+
+| Element                    | Pfad oder Name                                                 |
+| -------------------------- | -------------------------------------------------------------- |
+| Style-Dateien              | `@db-ux/db-theme-icons/build/styles/`                          |
+| Typen (allgemein)          | `@db-ux/db-theme-icons/build/types/overwrite.d.ts`             |
+| Typen (React)              | `@db-ux/db-theme-icons/build/types/react.d.ts`                 |
+| Typen (Vue)                | `@db-ux/db-theme-icons/build/types/vue.d.ts`                   |
+| Funktionale Icons als SVG  | `node_modules/@db-ux/db-theme-icons/build/assets`              |
+| React-Komponente           | `IllustrativeIcon` aus `@db-ux/db-theme-illustrative-icons`    |
+| Liste der Namen            | `IllustrativeIcons`, Typ `IllustrativeIconsType`               |
+| Illustrative Icons als SVG | `node_modules/@db-ux/db-theme-illustrative-icons/build/assets` |
+
+### Ressourcen
+
+| Ressource                | Link                                                                                                   |
+| ------------------------ | ------------------------------------------------------------------------------------------------------ |
+| Icon-Liste               | [Icons](/de/dokumentation/icons)                                                                       |
+| npm-Paket                | [@db-ux/db-theme-icons](https://www.npmjs.com/package/@db-ux/db-theme-icons)                           |
+| npm-Paket                | [@db-ux/db-theme-illustrative-icons](https://www.npmjs.com/package/@db-ux/db-theme-illustrative-icons) |
+| Zugangsdaten             | [DB Theme für DB-Produkte ergänzen](/de/dokumentation/lernen/db-theme-einrichten)                      |
+| Releases der Icon-Pakete | [GitHub-Projektboard](https://github.com/orgs/db-ux-design-system/projects/4/views/15)                 |
+| Issues                   | [core-web-Repository](https://github.com/db-ux-design-system/core-web/issues/new/choose)               |
+
+</LearnAside>
+
+</LearnBlock>

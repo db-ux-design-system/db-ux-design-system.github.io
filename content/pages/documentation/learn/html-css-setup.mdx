@@ -1,0 +1,220 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Use the components with HTML and CSS'
+headline: 'Use the components with HTML and CSS'
+description: 'Use the components as CSS classes in a project without a JavaScript framework and check that styles, fonts and icons load.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 14
+category: 'Development'
+keywords:
+  [
+    'html',
+    'css',
+    'setup',
+    'installation',
+    'getting started',
+    'plain html',
+    'template engine',
+    'no framework',
+    'css classes',
+    'npm',
+    'pnpm',
+    'css import',
+    'whitelabel theme',
+    'core-components',
+    'core-foundations',
+    'troubleshooting',
+    'icons not loading',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## You write the HTML yourself
+
+This setup fits plain pages, template engines and frameworks without a dedicated package. You get the component styles, but no component logic.
+
+<LearnAside>
+
+- **Framework packages:** with React, Angular, Vue or custom elements, use the matching framework package instead. Each of them already includes the component styles.
+- **Package manager:** the commands on this page use pnpm. With npm, use `npm i` instead of `pnpm add`.
+- **Browsers:** the last three versions of Chrome and Edge, Firefox ESR and the last two major versions of Safari.
+- **DB Theme:** products of Deutsche Bahn also need the DB Theme from the Marketing Portal. You can start without it, because the whitelabel theme works right away.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Install two packages
+
+The component styles build on the Foundation, and your stylesheet imports both.
+
+```shell
+pnpm add @db-ux/core-components @db-ux/core-foundations
+```
+
+<LearnAside>
+
+| Package                   | Contains                                      |
+| ------------------------- | --------------------------------------------- |
+| `@db-ux/core-components`  | The CSS and SCSS of all components            |
+| `@db-ux/core-foundations` | Tokens, the whitelabel theme, fonts and icons |
+
+npm installs the Foundation automatically as a dependency. pnpm only makes it available if you list it yourself – that is why the command installs both.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Load the styles in the right order
+
+Import the theme first and the component styles after it. The `@layer` line fixes this order.
+
+```css
+/* index.css */
+@layer whitelabel-theme, db-ux;
+@import '@db-ux/core-foundations/build/styles/theme/rollup.css' layer(whitelabel-theme);
+@import '@db-ux/core-components/build/styles/bundle.css' layer(db-ux);
+```
+
+<LearnAside>
+
+### Pick the asset path variant
+
+The theme file exists in three variants. They differ only in how they resolve the paths to icons and fonts.
+
+| Variant        | Asset path                        | Use when                                               |
+| -------------- | --------------------------------- | ------------------------------------------------------ |
+| `rollup.css`   | `@db-ux/core-foundations/assets`  | Your bundler resolves package paths                    |
+| `webpack.css`  | `~@db-ux/core-foundations/assets` | You build with Webpack                                 |
+| `relative.css` | `../assets`                       | You copy icons and fonts into your own `public` folder |
+
+### DB Theme
+
+The import loads the whitelabel theme. Products of Deutsche Bahn additionally need the [DB Theme](/documentation/learn/db-theme-setup).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Render a button to check the setup
+
+A button with an icon shows in one place whether styles, font and icons load.
+
+```html
+<button class="db-button" data-variant="brand" data-icon="arrow_right">Add item to cart</button>
+```
+
+<LearnAside>
+
+| Check  | Expected                                                                                       |
+| ------ | ---------------------------------------------------------------------------------------------- |
+| Styles | The button has a filled background in the brand color and rounded corners.                     |
+| Font   | The DevTools show `OpenSans` as the rendered font – or `DB Neo Screen Sans` with the DB Theme. |
+| Icon   | An arrow appears in front of the text.                                                         |
+
+Class names and data attributes differ per component. Write the markup as documented on the [component page](/documentation/components), then apply the component class.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## If something does not look right
+
+Most setup problems come from the order of the styles or from asset paths that do not match your setup.
+
+<LearnAside>
+
+| Symptom                           | Cause and fix                                                                                                                                                                      |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Components render without styles  | The CSS import is missing, or the theme is loaded after the component styles. Make `@layer whitelabel-theme, db-ux;` the first statement in your stylesheet.                       |
+| Font or icons are missing         | The browser cannot find the asset files. A `.woff2` request fails in the Network tab. Switch between `rollup.css`, `webpack.css` and `relative.css`.                               |
+| Tokens are undefined with pnpm    | pnpm does not hoist transitive dependencies. Install `@db-ux/core-foundations` explicitly.                                                                                         |
+| CSS output looks broken on Vite 8 | Vite 8 minifies with LightningCSS, which breaks modern CSS such as `light-dark()`. Set `build.cssMinify: 'esbuild'` in `vite.config.ts` and install `esbuild` as a dev dependency. |
+
+If none of this helps, open an issue in the [core-web repository](https://github.com/db-ux-design-system/core-web/issues/new/choose). Please check first whether the issue already exists.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Continue with your project
+
+Build your pages or add the DB Theme.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Components',
+			description: 'Markup, variants and guidelines for every component.',
+			url: '/documentation/components',
+		},
+		{
+			title: 'DB Theme',
+			description: 'Add the colors, fonts and icons of the Deutsche Bahn brand.',
+			url: '/documentation/learn/db-theme-setup',
+		},
+		{
+			title: 'Example projects',
+			description: 'Ready-made example projects to open in the browser or build on.',
+			url: '/documentation/learn/examples',
+		},
+	]}
+/>
+
+<LearnAside>
+
+Neither plugin is required to get started. Add them once your first component renders.
+
+### PostCSS plugin
+
+Reduces the bundle size by resolving `var()`, `calc()`, `color-mix()` and `light-dark()` at build time and removing unused declarations.
+
+```shell
+pnpm add @db-ux/core-postcss-plugin --save-dev
+```
+
+### Stylelint plugin
+
+Checks your own CSS and SCSS against the design system rules, for example whether you reference tokens instead of fixed values.
+
+```shell
+pnpm add @db-ux/core-stylelint --save-dev
+```
+
+### Resources
+
+| Resource         | Link                                                                                                          |
+| ---------------- | ------------------------------------------------------------------------------------------------------------- |
+| npm package      | [@db-ux/core-components](https://www.npmjs.com/package/@db-ux/core-components)                                |
+| Source code      | [core-web/packages/components](https://github.com/db-ux-design-system/core-web/tree/main/packages/components) |
+| Component docs   | [Components](/documentation/components)                                                                       |
+| Foundation docs  | [Foundation](/documentation/foundation)                                                                       |
+| Migration Guides | [Migration Guides](/documentation/releases/migration-guides)                                                  |
+| Issues           | [core-web repository](https://github.com/db-ux-design-system/core-web/issues/new/choose)                      |
+
+</LearnAside>
+
+</LearnBlock>

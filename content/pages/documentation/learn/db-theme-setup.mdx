@@ -1,0 +1,289 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Add the DB Theme for DB products'
+headline: 'Add the DB Theme for DB products'
+description: 'Replace the whitelabel defaults with the colors, fonts and icons of Deutsche Bahn and check that the brand shows up.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 17
+category: 'Development'
+keywords:
+  [
+    'db theme',
+    'db-theme',
+    'theme',
+    'brand',
+    'setup',
+    'installation',
+    'marketing portal',
+    'credentials',
+    'asset_password',
+    'asset_init_vector',
+    'env',
+    'decryption',
+    'postinstall',
+    'css layer',
+    'db neo screen',
+    's-bahn theme',
+    'troubleshooting',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Get the credentials first
+
+Encrypted theme files need `ASSET_PASSWORD` and `ASSET_INIT_VECTOR` from the [Marketing Portal](https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/db-ux-design-system/resources/db-theme 'Sign in and copy both values from the DB Theme page.').
+
+<LearnAside>
+
+- **Why encrypted:** the files are encrypted for legal reasons.
+- **Before you start:** the components already run with the whitelabel theme, for example after [Add the components to React](/documentation/learn/react-setup).
+- **Sign in first:** deep links into the Marketing Portal do not work before login. Sign in, then open the link again.
+- **License:** the code of the design system is free to use under the Apache 2.0 license. The DB Theme is not: its design assets and trademarks may only be used for websites and applications of Deutsche Bahn. Questions about the brand go to the Marketing Portal.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Store them in a .env file and never commit it
+
+Create a `.env` file in your project root and add both values. Add the file to your `.gitignore` before your next commit.
+
+```dotenv
+ASSET_PASSWORD=<value from the Marketing Portal>
+ASSET_INIT_VECTOR=<value from the Marketing Portal>
+```
+
+<LearnAside>
+
+In CI/CD, pass both values as secret environment variables instead of a `.env` file. The decryption reads them from the environment in both cases.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Install the theme – it decrypts itself
+
+A `postinstall` script decrypts the files during installation. The theme brings fonts and icons with it.
+
+```shell
+pnpm add @db-ux/db-theme
+```
+
+<LearnAside>
+
+### Packages that come with the theme
+
+You do not install them separately.
+
+| Package                              | Contains                                      |
+| ------------------------------------ | --------------------------------------------- |
+| `@db-ux/db-theme-fonts`              | The DB Neo Screen fonts                       |
+| `@db-ux/db-theme-icons`              | The DB icon font and SVG icons                |
+| `@db-ux/db-theme-illustrative-icons` | Illustrative icons as SVG and React component |
+
+### Allow the install scripts with pnpm
+
+pnpm runs install scripts of dependencies only after you allow them. Run `pnpm approve-builds` and allow the four `@db-ux/db-theme*` packages. With npm, use `npm i @db-ux/db-theme`.
+
+### Decrypt manually
+
+If your setup disables lifecycle scripts – for example with the `ignore-scripts` setting – the files stay encrypted. Run the decryption script `node_modules/@db-ux/<package>/build/scripts/index.js` yourself, once per package:
+
+```shell
+node node_modules/@db-ux/db-theme/build/scripts/index.js
+node node_modules/@db-ux/db-theme-fonts/build/scripts/index.js
+node node_modules/@db-ux/db-theme-icons/build/scripts/index.js
+node node_modules/@db-ux/db-theme-illustrative-icons/build/scripts/index.js
+```
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## The DB Theme comes last
+
+The DB Theme overrides the whitelabel defaults, so it comes last – the reverse of the whitelabel setup.
+
+```css
+/* src/index.css */
+@layer db-ux, db-theme;
+@import '@db-ux/core-components/build/styles/rollup.css' layer(db-ux);
+@import '@db-ux/db-theme/build/styles/rollup.css' layer(db-theme);
+```
+
+<LearnAside>
+
+These lines replace the whitelabel theme import from the framework setup. There, the whitelabel theme is the base that the component styles build on, so it comes first: `@layer whitelabel-theme, db-ux;`. Both orders are correct for their setup. If you mix them up, the whitelabel colors show.
+
+### Pick the file for your bundler
+
+The same variants exist for `@db-ux/core-components` and `@db-ux/db-theme`.
+
+| File                             | Use when                          |
+| -------------------------------- | --------------------------------- |
+| `rollup.css`                     | You build with Vite or Rollup     |
+| `webpack.css`                    | You build with Webpack or Next.js |
+| `relative.css` or `absolute.css` | You do not use a bundler          |
+
+### Vite cannot resolve the asset paths
+
+Add an alias:
+
+```ts
+// vite.config.ts
+import * as path from 'node:path';
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+	resolve: {
+		alias: {
+			'@db-ux': path.resolve('node_modules/@db-ux'),
+		},
+	},
+});
+```
+
+### Load each part on its own
+
+Instead of the combined theme file, you can import each part separately. This gives you control over which helper classes and assets end up in your bundle.
+
+```css
+/* Components */
+@import '@db-ux/core-components/build/styles/index.css';
+
+/* Foundation helper classes (optional) */
+@import '@db-ux/core-foundations/build/styles/helpers/classes/all.css';
+@import '@db-ux/core-foundations/build/styles/density/classes/all.css';
+@import '@db-ux/core-foundations/build/styles/fonts/classes/all.css';
+@import '@db-ux/core-foundations/build/styles/colors/classes/all.css';
+
+/* Assets */
+@import '@db-ux/db-theme-fonts/build/styles/rollup.css';
+@import '@db-ux/db-theme-icons/build/styles/rollup.css';
+
+/* Theme */
+@import '@db-ux/db-theme/build/styles/index.css';
+```
+
+### S-Bahn Theme
+
+For S-Bahn products, `@db-ux/s-bahn-theme` provides the regional logos and the S-Bahn brand colors. It uses the same credentials and the same decryption. It depends on the DB fonts and DB icons, but not on the illustrative icons. Install it and import it in place of the DB Theme:
+
+```shell
+pnpm add @db-ux/s-bahn-theme
+```
+
+```css
+/* src/index.css */
+@layer db-ux, db-theme;
+@import '@db-ux/core-components/build/styles/rollup.css' layer(db-ux);
+@import '@db-ux/s-bahn-theme/build/styles/rollup.css' layer(db-theme);
+```
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Check for the DB red and the DB Neo Screen font
+
+Render any component, for example a button with the variant `brand`. If it shows the DB red and the DB Neo Screen font, the theme works.
+
+<LearnAside>
+
+| Check | Expected                                                     |
+| ----- | ------------------------------------------------------------ |
+| Color | The button has a filled background in the DB red.            |
+| Font  | The DevTools show `DB Neo Screen Sans` as the rendered font. |
+| Icons | Icons in components use the DB icon font.                    |
+
+If the button shows the whitelabel colors, the theme import is missing or loaded before the component styles.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## If the brand does not show up
+
+Most problems come from missing credentials, files that were never decrypted or the wrong `@layer` order.
+
+<LearnAside>
+
+| Symptom                                                                  | Cause and fix                                                                                      |
+| ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| `Environment variables ASSET_PASSWORD and ASSET_INIT_VECTOR must be set` | The `.env` file is missing or does not contain both values. Add them and run the decryption again. |
+| The build fails with `ENOENT` on a file in `@db-ux/db-theme/build`       | The assets were never decrypted. Allow the install scripts or decrypt manually.                    |
+| Components show the whitelabel colors                                    | The theme is not imported, or it is loaded before the component styles. Check the `@layer` order.  |
+| Fonts or icons fall back to system defaults                              | The asset paths do not match your bundler. Switch the file variant or add the Vite alias.          |
+| The Marketing Portal link opens the start page                           | Deep links do not work before login. Sign in and open the link again.                              |
+
+If none of this helps, open an issue in the [core-web repository](https://github.com/db-ux-design-system/core-web/issues/new/choose). Please check first whether the issue already exists.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Continue with the brand in place
+
+Add icons or look up the package on npm.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Show icons in your interface',
+			description: 'Show functional and illustrative icons in your components.',
+			url: '/documentation/learn/icons-setup',
+		},
+		{
+			title: 'DB Theme on npm',
+			description: 'Versions, dependencies and the package readme.',
+			url: 'https://www.npmjs.com/package/@db-ux/db-theme',
+		},
+		{
+			title: 'Release Notes',
+			description: 'See what changed in the latest versions of the theme.',
+			url: '/documentation/releases/release-notes',
+		},
+	]}
+/>
+
+<LearnAside>
+
+### Resources
+
+| Resource      | Link                                                                                                                                                       |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| npm package   | [@db-ux/db-theme](https://www.npmjs.com/package/@db-ux/db-theme)                                                                                           |
+| S-Bahn Theme  | [@db-ux/s-bahn-theme](https://www.npmjs.com/package/@db-ux/s-bahn-theme)                                                                                   |
+| Credentials   | [Marketing Portal – DB Theme](https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/db-ux-design-system/resources/db-theme) |
+| Icons         | [Show icons in your interface](/documentation/learn/icons-setup)                                                                                           |
+| Release Notes | [Release Notes](/documentation/releases/release-notes)                                                                                                     |
+| Issues        | [core-web repository](https://github.com/db-ux-design-system/core-web/issues/new/choose)                                                                   |
+
+</LearnAside>
+
+</LearnBlock>
