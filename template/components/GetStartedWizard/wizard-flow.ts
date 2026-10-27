@@ -48,10 +48,6 @@ export type PackagePage = {
 
 /** The learning package at the end of a path. The first item is the main page. */
 export type Result = {
-	title: Text;
-	description: Text;
-	/** Label of the button that links to the first item. */
-	cta: Text;
 	items: PackagePage[];
 };
 
@@ -258,7 +254,7 @@ const page = (id: string, label: Text, description: Text, anchor?: Text): Packag
 
 /**
  * The setup article in the Learn area per framework option. The id is the page id
- * below /documentation/, the title is used as label and call to action.
+ * below /documentation/, the title is the label of the page in the result.
  */
 const frameworkSetups: Record<string, { id: string; title: Text }> = {
 	react: {
@@ -485,20 +481,13 @@ function frameworkResult(answers: Answers): Result {
 	// where one exists), the brand for DB products and the AI agent.
 	if (answers.dbProduct === 'yes') ids.push('learn/db-theme-setup');
 	ids.push('learn/ai');
-	return {
-		title: setup.title,
-		description: frameworkDescription,
-		cta: setup.title,
-		items: withHelp(ids),
-	};
+	return { items: withHelp(ids) };
 }
 
 /** Returns the next question for the given answers, or the result once the path is complete. */
 export function next(answers: Answers): { question: Question } | { result: Result } {
 	const ask = (id: QuestionId) => ({ question: questions[id] });
-	const done = (title: Text, description: Text, cta: Text, ids: string[]) => ({
-		result: { title, description, cta, items: withHelp(ids) },
-	});
+	const done = (ids: string[]) => ({ result: { items: withHelp(ids) } });
 
 	switch (answers.role) {
 		case undefined:
@@ -509,87 +498,31 @@ export function next(answers: Answers): { question: Question } | { result: Resul
 				case undefined:
 					return ask('designIntent');
 				case 'new':
-					return done(
-						t('Your first Figma file', 'Deine erste Figma-Datei'),
-						t(
-							'Enable the libraries and design a first page with the components.',
-							'Aktiviere die Bibliotheken und gestalte eine erste Seite mit den Komponenten.',
-						),
-						t('Set up Figma', 'Figma einrichten'),
-						['learn/figma-setup', 'learn/figma-tutorial'],
-					);
+					return done(['learn/figma-setup', 'learn/figma-tutorial']);
 				case 'learn':
-					return done(
-						t('About the Design System', 'Über das Design System'),
-						t(
-							'What the design system contains, how it is released and how binding it is.',
-							'Was das Design System enthält, wie es veröffentlicht wird und wie verbindlich es ist.',
-						),
-						t('Read more', 'Mehr erfahren'),
-						['learn/about', 'foundation', 'components'],
-					);
+					return done(['learn/about', 'foundation', 'components']);
 				default:
 					if (!answers.projectBasis) return ask('projectBasis');
 					return answers.projectBasis === 'dbui'
-						? done(
-								t('Migration from DB UI', 'Migration von DB UI'),
-								t(
-									'What changes in Figma when a Generation 2 file moves to Generation 3.',
-									'Was sich in Figma ändert, wenn eine Datei von Generation 2 auf Generation 3 wechselt.',
-								),
-								t('Go to the migration', 'Zur Migration'),
-								['learn/migration#design', 'learn/figma-setup'],
-							)
-						: done(
-								t('Move existing designs', 'Bestehende Designs umstellen'),
-								t(
-									'Enable the libraries and replace your components and styles step by step.',
-									'Aktiviere die Bibliotheken und ersetze deine Komponenten und Styles nach und nach.',
-								),
-								t('Set up Figma', 'Figma einrichten'),
-								['learn/figma-setup', 'learn/figma', 'learn/plugins'],
-							);
+						? done(['learn/migration#design', 'learn/figma-setup'])
+						: done(['learn/figma-setup', 'learn/figma', 'learn/plugins']);
 			}
 
 		case 'development': {
 			const intent = answers.developmentIntent;
 			if (!intent) return ask('developmentIntent');
 			if (intent === 'learn') {
-				return done(
-					t('Examples & Starters', 'Beispiele & Starter'),
-					t(
-						'Try the components in the browser and look at the example projects for every framework.',
-						'Probiere die Komponenten im Browser aus und sieh dir die Beispielprojekte für jedes Framework an.',
-					),
-					t('Go to the examples', 'Zu den Beispielen'),
-					['learn/examples', 'learn/about'],
-				);
+				return done(['learn/examples', 'learn/about']);
 			}
 			if (intent === 'existing') {
 				if (!answers.projectBasis) return ask('projectBasis');
 				if (answers.projectBasis === 'dbui') {
-					return done(
-						t('Migration from DB UI', 'Migration von DB UI'),
-						t(
-							'Replace packages, components, tokens and icons – an AI agent can do the groundwork.',
-							'Ersetze Pakete, Komponenten, Tokens und Icons – ein KI-Agent kann die Vorarbeit übernehmen.',
-						),
-						t('Go to the migration', 'Zur Migration'),
-						['learn/migration', 'learn/ai'],
-					);
+					return done(['learn/migration', 'learn/ai']);
 				}
 			}
 			if (!answers.framework) return ask('framework');
 			if (answers.framework === 'native') {
-				return done(
-					t('Native Platforms', 'Native Plattformen'),
-					t(
-						'The state of the native component libraries for iOS and Android.',
-						'Der Stand der nativen Komponentenbibliotheken für iOS und Android.',
-					),
-					t('Go to Native Platforms', 'Zu den nativen Plattformen'),
-					['learn/about#native-platforms'],
-				);
+				return done(['learn/about#native-platforms']);
 			}
 			if (!answers.dbProduct) return ask('dbProduct');
 			return { result: frameworkResult(answers) };
@@ -600,33 +533,11 @@ export function next(answers: Answers): { question: Question } | { result: Resul
 				case undefined:
 					return ask('productIntent');
 				case 'evaluate':
-					return done(
-						t('About the Design System', 'Über das Design System'),
-						t(
-							'What it contains, what a status means, how binding it is and what it covers for accessibility.',
-							'Was es enthält, was ein Status bedeutet, wie verbindlich es ist und was es bei der Barrierefreiheit abdeckt.',
-						),
-						t('Read more', 'Mehr erfahren'),
-						['learn/about', 'learn/accessibility'],
-					);
+					return done(['learn/about', 'learn/accessibility']);
 				case 'plan':
-					return done(
-						t('Plan the adoption', 'Einführung planen'),
-						t(
-							'Which components are ready for production and how releases are versioned, so you can estimate the effort.',
-							'Welche Komponenten produktionsreif sind und wie Releases versioniert werden, damit du den Aufwand abschätzen kannst.',
-						),
-						t('Go to versioning', 'Zur Versionierung'),
-						['learn/versioning', 'releases/release-notes'],
-					);
+					return done(['learn/versioning', 'releases/release-notes']);
 				case 'follow':
 					return done(
-						t('Release Notes', 'Release Notes'),
-						t(
-							'Release notes for every version, each with a link to its roadmap.',
-							'Release Notes zu jeder Version, jeweils mit Link zur Roadmap.',
-						),
-						t('Go to the release notes', 'Zu den Release Notes'),
 						// The EN About page has no roadmap section anymore; every release note
 						// links to the roadmap of its version.
 						['releases/release-notes'],
@@ -634,24 +545,8 @@ export function next(answers: Answers): { question: Question } | { result: Resul
 				default:
 					if (!answers.productBasis) return ask('productBasis');
 					return answers.productBasis === 'dbui'
-						? done(
-								t('Migration from DB UI', 'Migration von DB UI'),
-								t(
-									'What changes for design and development when a Generation 2 product moves to Generation 3.',
-									'Was sich für Design und Entwicklung ändert, wenn ein Produkt von Generation 2 auf Generation 3 wechselt.',
-								),
-								t('Go to the migration', 'Zur Migration'),
-								['learn/migration', 'learn/versioning'],
-							)
-						: done(
-								t('What a status means', 'Was ein Status bedeutet'),
-								t(
-									'Check which components are ready for production to estimate the effort.',
-									'Prüfe, welche Komponenten produktionsreif sind, um den Aufwand abzuschätzen.',
-								),
-								t('Check the status', 'Status prüfen'),
-								['learn/status', 'components'],
-							);
+						? done(['learn/migration', 'learn/versioning'])
+						: done(['learn/status', 'components']);
 			}
 
 		default:
