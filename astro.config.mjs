@@ -59,6 +59,14 @@ export default defineConfig({
 						dest: './',
 						rename: { stripBase: true },
 					},
+					// Decoder for meshopt-compressed glb files (the teaser models). model-viewer only
+					// loads it when `meshoptDecoderLocation` is set, see HtmlHead.astro. The UMD build
+					// works as a classic script, as model-viewer loads it.
+					{
+						src: './node_modules/meshoptimizer/meshopt_decoder.cjs',
+						dest: './',
+						rename: { stripBase: true, name: 'meshopt_decoder.js' },
+					},
 					{
 						src: 'node_modules/@db-ux/db-theme/build/images/light/db_logo.svg',
 						dest: './',

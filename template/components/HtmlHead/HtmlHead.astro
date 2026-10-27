@@ -23,6 +23,19 @@ const { title, loadModelViewer } = Astro.props as {
 	{loadModelViewer && (
 		<script type="module" is:inline src={`${appConfig.basePath}model-viewer.min.js`} />
 	)}
+	{loadModelViewer && <script
+		is:inline
+		define:vars={{ decoder: `${appConfig.basePath}meshopt_decoder.js` }}
+	>
+		// The teaser glb files are meshopt-compressed. Without a decoder location model-viewer
+		// fails to load them and keeps showing the PNG poster.
+		customElements.whenDefined('model-viewer').then(() => {
+			const ModelViewer = customElements.get('model-viewer');
+			if (ModelViewer && !ModelViewer.meshoptDecoderLocation) {
+				ModelViewer.meshoptDecoderLocation = decoder;
+			}
+		});
+	</script>}
 
 	<ClientRouter />
 

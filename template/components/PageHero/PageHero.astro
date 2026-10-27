@@ -11,7 +11,7 @@ import {
 	DBTextGroup,
 	type SemanticType,
 } from '@db-ux/react-core-components';
-import Visual from '@template/components/Visual/Visual.astro';
+import HeroMedia from '@template/components/PageHero/HeroMedia.astro';
 import type { VisualName } from '@template/visuals';
 import type { VisualImageName } from '@template/visuals/images';
 import './PageHero.css';
@@ -77,8 +77,8 @@ const Headline = headingComponents[safeHeadlineLevel];
 const hasHeadlineEnd = Astro.slots.has('headline-end');
 const hasToolbar = toolbar || Astro.slots.has('toolbar');
 
-// An SVG visual, a PNG visual or the plain image – the visuals share the sizing of
-// `.page-hero-media-visual` and `.page-hero-visual`
+// A 3D model, an SVG visual, a PNG visual or a plain image. The picking and sizing lives in
+// HeroMedia; here we only decide whether the media area is rendered at all.
 const hasVisual = Boolean(visual || visualImage);
 const hasMedia = hasVisual || Boolean(imageSrc);
 ---
@@ -86,15 +86,12 @@ const hasMedia = hasVisual || Boolean(imageSrc);
 {(title || headline || description || hasMedia) && (
 	<div class="page-hero" data-align={align} data-layout={layout} data-image-side={imageSide}>
 		{layout === 'split' && hasMedia && imageSide === 'left' && (
-			<div class:list={['page-hero-media', { 'page-hero-media-visual': hasVisual }]}>
-				{visual ? (
-					<Visual name={visual} class="page-hero-visual" strokeScaling="scale" />
-				) : visualImage ? (
-					<Visual image={visualImage} class="page-hero-visual" />
-				) : (
-					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
-				)}
-			</div>
+			<HeroMedia
+				visual={visual}
+				visualImage={visualImage}
+				imageSrc={imageSrc}
+				imageAlt={imageAlt}
+			/>
 		)}
 		<div class="page-hero-content">
 			{badgeText && <DBBadge semantic={badgeSemantic}>{badgeText}</DBBadge>}
@@ -151,26 +148,20 @@ const hasMedia = hasVisual || Boolean(imageSrc);
 			)}
 		</div>
 		{layout === 'split' && hasMedia && imageSide === 'right' && (
-			<div class:list={['page-hero-media', { 'page-hero-media-visual': hasVisual }]}>
-				{visual ? (
-					<Visual name={visual} class="page-hero-visual" strokeScaling="scale" />
-				) : visualImage ? (
-					<Visual image={visualImage} class="page-hero-visual" />
-				) : (
-					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
-				)}
-			</div>
+			<HeroMedia
+				visual={visual}
+				visualImage={visualImage}
+				imageSrc={imageSrc}
+				imageAlt={imageAlt}
+			/>
 		)}
 		{layout === 'stack' && hasMedia && (
-			<div class:list={['page-hero-media', { 'page-hero-media-visual': hasVisual }]}>
-				{visual ? (
-					<Visual name={visual} class="page-hero-visual" strokeScaling="scale" />
-				) : visualImage ? (
-					<Visual image={visualImage} class="page-hero-visual" />
-				) : (
-					<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
-				)}
-			</div>
+			<HeroMedia
+				visual={visual}
+				visualImage={visualImage}
+				imageSrc={imageSrc}
+				imageAlt={imageAlt}
+			/>
 		)}
 	</div>
 )}

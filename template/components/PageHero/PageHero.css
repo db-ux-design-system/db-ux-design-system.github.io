@@ -137,6 +137,82 @@
 	block-size: auto;
 }
 
+/* Wrapper that wires the pause/play button, see HeroMedia.astro. It adds no box. */
+hero-model {
+	display: contents;
+}
+
+/* Pause/play button in the bottom right corner. It shows on hover and keyboard focus, and stays
+   visible while paused. Touch devices have no hover, so it is always visible there. */
+.page-hero-model-toggle {
+	position: absolute;
+	inset-block-end: var(--db-spacing-fixed-sm);
+	inset-inline-end: var(--db-spacing-fixed-sm);
+	opacity: 0;
+	transition: opacity var(--db-transition-duration-medium, 0.2s) ease;
+}
+
+.page-hero-model:hover .page-hero-model-toggle,
+.page-hero-model-toggle:focus-visible,
+hero-model[data-paused] .page-hero-model-toggle {
+	opacity: 1;
+}
+
+@media (hover: none) {
+	.page-hero-model-toggle {
+		opacity: 1;
+	}
+}
+
+/* Leave room for model-viewer's AR button, which sits in the same corner on AR devices.
+   It is 40 px wide and 16 px from the edge, so the toggle moves to 64 px (4rem). */
+hero-model[data-ar] .page-hero-model-toggle {
+	inset-inline-end: 4rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.page-hero-model-toggle {
+		transition: none;
+	}
+}
+
+/* 3D teaser – a model-viewer has no intrinsic size, so the box is set here (28rem = 448 px).
+   The model is rendered without a ground shadow on a transparent background. */
+.page-hero-model {
+	inline-size: var(--db-container-md);
+	block-size: var(--db-container-md);
+	max-inline-size: 100%;
+
+	/* Transparent until the poster or the model is shown. */
+	--poster-color: transparent;
+
+	background-color: transparent;
+}
+
+/* Poster shown while the glb loads. The rendered model fills about 64 % of the box at the camera
+   distance in visual-model.ts, so the PNG is scaled to the same size. Change both together. */
+.page-hero-model-poster {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.page-hero-media .page-hero-model-poster img {
+	inline-size: 64%;
+	block-size: 64%;
+	max-block-size: none;
+	object-fit: contain;
+}
+
+@media (width <= 767px) {
+	.page-hero-model {
+		inline-size: var(--db-container-xs);
+		block-size: var(--db-container-xs);
+	}
+}
+
 /* Visual size for P&S hero – tune here (14rem = 224 px).
  * Stroke: strokeScaling="scale" in the markup, width from --visual-stroke-ratio (Visual.css) */
 .page-hero-visual {
