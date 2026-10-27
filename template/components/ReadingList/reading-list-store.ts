@@ -151,6 +151,17 @@ export function clearItems() {
 }
 
 /**
+ * Removes the items that do not pass keep, e.g. pages that were deleted. Writes only
+ * when something was removed, so calling it on every change does not loop.
+ */
+export function pruneItems(keep: (item: ReadingListItem) => boolean) {
+	const list = getSnapshot();
+	const items = list.items.filter(keep);
+	if (items.length === list.items.length) return;
+	write({ ...list, items });
+}
+
+/**
  * Which group an item belongs to. Same rule as resolveItems, kept here to avoid an
  * import between the two modules: items stored without a source count as bookmarks
  * when they have a title, otherwise as wizard pages.

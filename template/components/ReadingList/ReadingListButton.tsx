@@ -9,8 +9,8 @@ import {
 } from '@db-ux/react-core-components';
 import { useLanguage } from '@template/context/language-context';
 import { roleColors, wizardHref } from '@template/components/GetStartedWizard/wizard-flow';
-import { clearItems, removeItem, useReadingList } from './reading-list-store';
-import { resolveItems } from './reading-list-items';
+import { clearItems, pruneItems, removeItem, useReadingList } from './reading-list-store';
+import { isKnownItem, resolveItems } from './reading-list-items';
 import { readingListTexts } from './texts';
 
 /**
@@ -39,6 +39,11 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 	const list = useReadingList();
 	const items = resolveItems(list.items, lang);
 	const count = items.length;
+
+	// Pages that were deleted leave the list: they could not be opened, and without a
+	// row they could not be removed by hand either. The header button is on every page,
+	// so this runs once per page load and after every change.
+	useEffect(() => pruneItems(isKnownItem), [list]);
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const [status, setStatus] = useState('');
 	// The desktop and the mobile control panel both render this button, so the ids

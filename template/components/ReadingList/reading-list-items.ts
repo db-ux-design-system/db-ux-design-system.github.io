@@ -5,6 +5,8 @@ import {
 	toHref,
 } from '@template/components/GetStartedWizard/wizard-flow';
 import { toDeSlug, toEnSlug } from '@template/i18n/slug-mapping';
+import { stripBasePath, withBasePath } from '@template/utils/base-path';
+import { pageIds } from '@template/utils/page-ids';
 import type { ReadingListItem } from './reading-list-store';
 
 /** Id of a wizard page on the reading list: EN path without leading slash, plus # and EN anchor. */
@@ -14,13 +16,22 @@ export const toReadingListId = (page: PackagePage) =>
 const catalog = new Map(Object.values(packagePages).map((page) => [toReadingListId(page), page]));
 
 /**
- * Id of the page at the given URL path: the EN path without leading and trailing
- * slash. DE paths are translated with toEnSlug.
+ * Id of the page at the given URL path: the EN path without base path, leading and
+ * trailing slash. DE paths are translated with toEnSlug.
  */
 export const pageId = (pathname: string) => {
-	const path = pathname.replace(/^\/+|\/+$/g, '');
+	const path = stripBasePath(pathname).replace(/^\/+|\/+$/g, '');
 	return path === 'de' || path.startsWith('de/') ? toEnSlug(path.replace(/^de\/?/, '')) : path;
 };
+
+/**
+ * True while the page of the item still exists: a wizard page of the catalog, or a
+ * bookmarked Markdown page (the anchor does not count). Items of deleted or moved
+ * pages are removed from the list (see pruneItems); a known move is kept with its new
+ * id by RENAMED_IDS in the store.
+ */
+export const isKnownItem = (item: ReadingListItem) =>
+	catalog.has(item.id) || pageIds.has(item.id.split('#')[0]);
 
 export type ResolvedItem = {
 	id: string;
@@ -50,7 +61,7 @@ export function resolveItems(items: ReadingListItem[], lang: Lang): ResolvedItem
 		resolved.push({
 			id: item.id,
 			label: item.title![linkLang]!,
-			href: linkLang === 'de' ? `/de/${toDeSlug(item.id)}` : `/${item.id}`,
+			href: withBasePath(linkLang === 'de' ? `/de/${toDeSlug(item.id)}` : `/${item.id}`),
 			source,
 		});
 	}

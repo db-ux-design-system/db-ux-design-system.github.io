@@ -609,6 +609,57 @@ test('browser Back and Forward between steps and from a result link', async ({ p
 	await expect(page.locator('.gsw-package-list .gsw-package-item')).toHaveCount(3);
 });
 
+test('browser Forward to an unanswered question shows it without a choice', async ({ page }) => {
+	await page.goto('/documentation/get-started');
+	await waitForDBShell(page);
+	const heading = page.locator('.gsw h1');
+	const nextButton = page.getByRole('button', { name: 'Next', exact: true });
+	await page
+		.locator('.gsw-option', { has: page.getByRole('radio', { name: 'Developer', exact: true }) })
+		.click();
+	await nextButton.click();
+	await page
+		.locator('.gsw-option', { has: page.getByRole('radio', { name: 'Move an existing project' }) })
+		.click();
+	await nextButton.click();
+	await expect(heading).toHaveText('What is your project based on?');
+
+	// Back keeps the answer of the step shown; Forward shows the next question unanswered.
+	// The choice of the step before must not carry over and be submitted as its answer.
+	await page.goBack();
+	await expect(heading).toHaveText('What are you about to do?');
+	await expect(page.getByRole('radio', { name: 'Move an existing project' })).toBeChecked();
+	await page.goForward();
+	await expect(heading).toHaveText('What is your project based on?');
+	await expect(page.locator('.gsw input[type=radio]:checked')).toHaveCount(0);
+	await expect(nextButton).toBeDisabled();
+});
+
+test('pages that no longer exist are removed from the list', async ({ page }) => {
+	await page.addInitScript((key) => {
+		if (window.localStorage.getItem(key)) return;
+		window.localStorage.setItem(
+			key,
+			JSON.stringify({
+				version: 1,
+				items: [
+					{ id: 'documentation/learn/figma', title: { en: 'Figma' }, source: 'bookmark' },
+					{ id: 'documentation/learn/deleted-page', title: { en: 'Gone' }, source: 'bookmark' },
+					{ id: 'documentation/learn/deleted-wizard-page', source: 'wizard' },
+				],
+			}),
+		);
+	}, KEY);
+	await page.goto('/documentation/learn/about');
+	await waitForDBShell(page);
+	await expect
+		.poll(async () => (await readList(page))?.items.map((item: { id: string }) => item.id))
+		.toEqual(['documentation/learn/figma']);
+	await expect(page.locator('.db-control-panel-desktop .rl-trigger')).toHaveAccessibleName(
+		'Reading list, 1 page',
+	);
+});
+
 test('German wizard path', async ({ page }) => {
 	await page.goto('/de/dokumentation/erste-schritte');
 	await waitForDBShell(page);
