@@ -123,10 +123,14 @@ const GetStartedWizard = ({ lang = 'en' }: { lang?: Lang }) => {
 			// Going Back drops the last answer from the URL: the step now shown is the
 			// first id that is no longer answered. Preselect its previous value from the
 			// current answers, like the wizard's own Back button, so the choice stays.
-			setSelection((previous) => {
-				const back = next(nextAnswers);
-				return 'question' in back ? (answers[back.question.id] ?? previous) : undefined;
-			});
+			// Going Forward to a question that was never answered shows it without a
+			// choice: the selection on screen belongs to another question and must not
+			// be submitted as the answer to this one.
+			const shown = next(nextAnswers);
+			const previousAnswer = 'question' in shown ? answers[shown.question.id] : undefined;
+			const offered =
+				'question' in shown && shown.question.options.some(({ id }) => id === previousAnswer);
+			setSelection(offered ? previousAnswer : undefined);
 			setAnswers(nextAnswers);
 			return true;
 		};
