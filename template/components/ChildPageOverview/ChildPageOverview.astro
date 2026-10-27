@@ -15,6 +15,13 @@ interface Props {
 	disabled?: boolean;
 	/** Heading level for card titles (1–6). Defaults to 2. */
 	headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
+	/**
+	 * Shows a search field above the cards. It filters by title, description, category
+	 * and keywords of the child pages. If the pages set a `category`, filter tags per
+	 * category appear below the field. The filter script is child-page-search.ts, loaded
+	 * by the documentation layout.
+	 */
+	searchable?: boolean;
 }
 
 type FrontMatter = {
@@ -27,6 +34,8 @@ type FrontMatter = {
 	externalUrl?: string;
 	redirectTo?: string;
 	status?: string;
+	category?: string;
+	keywords?: string[];
 };
 
 type MdModule = {
@@ -41,7 +50,9 @@ const {
 	status,
 	disabled = false,
 	headlineLevel,
+	searchable = false,
 } = Astro.props;
+const isDE = Astro.url.pathname.startsWith('/de/');
 
 // Glob all content pages eagerly (path relative to this file's location).
 // md/mdx pages are read as frontmatter only, so their components and CSS do not
@@ -101,6 +112,8 @@ const children: {
 	url: string;
 	order: number;
 	status?: string;
+	category?: string;
+	searchText: string;
 }[] = [];
 
 for (const [filePath, mod] of Object.entries(modules)) {
@@ -139,6 +152,11 @@ for (const [filePath, mod] of Object.entries(modules)) {
 		url: fm.redirectTo || `/${routePath}`,
 		order,
 		status: fm.status,
+		category: fm.category,
+		searchText: [title, description, fm.category, ...(fm.keywords ?? [])]
+			.filter(Boolean)
+			.join(' ')
+			.toLowerCase(),
 	});
 }
 
@@ -152,18 +170,144 @@ children.sort((a, b) => {
 	return a.title.localeCompare(b.title);
 });
 
-const teasers = children.map(({ title, description, url }) => ({
+const teasers = children.map(({ title, description, url, searchText, category }) => ({
 	title,
 	description,
 	...(disabled ? { disabled: true } : { url }),
+	...(searchable ? { searchText, category } : {}),
 }));
+
+/**
+ * Filter tags: the categories of the Learn skill in their fixed order, then any other
+ * category in order of appearance. The category value is the same in EN and DE; only
+ * the label is translated.
+ */
+const categoryOrder = [
+	'Foundations',
+	'Design',
+	'Development',
+	'Tooling',
+	'Accessibility',
+	'Migration',
+];
+const usedCategories = [
+	...new Set(children.map(({ category }) => category).filter(Boolean)),
+] as string[];
+const categories = [
+	...categoryOrder.filter((category) => usedCategories.includes(category)),
+	...usedCategories.filter((category) => !categoryOrder.includes(category)),
+];
+const categoryLabels: Record<string, string> = isDE
+	? {
+			Foundations: 'Foundations',
+			Design: 'Design',
+			Development: 'Entwicklung',
+			Tooling: 'Tooling',
+			Accessibility: 'Barrierefreiheit',
+			Migration: 'Migration',
+		}
+	: {};
+
+const searchId = `child-page-search-${parentPath.replace(/[^a-z0-9]+/gi, '-')}`;
+const texts = isDE
+	? {
+			label: 'Artikel durchsuchen',
+			placeholder: 'Zum Beispiel Figma, React oder Barrierefreiheit',
+			count: '{shown} von {total} Artikeln',
+			filter: 'Filter:',
+			filterGroup: 'Nach Kategorie filtern',
+			empty: 'Kein Artikel passt zu deiner Suche. Versuch einen anderen Begriff.',
+		}
+	: {
+			label: 'Search articles',
+			placeholder: 'For example Figma, React or accessibility',
+			count: '{shown} of {total} articles',
+			filter: 'Filter:',
+			filterGroup: 'Filter by category',
+			empty: 'No article matches your search. Try another term.',
+		};
 ---
 
-{teasers.length > 0 && (
+{teasers.length > 0 && searchable && (
+	<div
+		class="child-page-search"
+		data-child-page-search
+		data-count-template={texts.count}
+		data-total={teasers.length}
+	>
+		{/* Plain DB UX Input markup instead of DBInput: the overview is rendered statically
+		    without hydration, and DBInput sets the id that links label and field only on
+		    the client. */}
+		<div class="db-input" data-icon="magnifying_glass">
+			<label for={searchId}>{texts.label}</label>
+			<input id={searchId} type="search" placeholder={texts.placeholder} autocomplete="off" />
+		</div>
+		{/* Same markup as the filter tags of the release notes (DBTag with a checkbox),
+		    written as plain HTML because the overview is not hydrated. No tag selected
+		    shows all categories, several tags combine with OR. */}
+		{categories.length > 1 && (
+			<div
+				class="db-stack child-page-search-tags"
+				data-direction="row"
+				data-alignment="center"
+				data-wrap="true"
+				role="group"
+				aria-label={texts.filterGroup}
+			>
+				<small aria-hidden="true">{texts.filter}</small>
+				{categories.map((category) => (
+					<div class="db-tag" data-show-check-state="false" data-filter-category={category}>
+						<div class="db-checkbox">
+							<label>
+								<input type="checkbox" value={category} data-child-page-search-category />
+								{categoryLabels[category] ?? category}
+							</label>
+						</div>
+					</div>
+				))}
+			</div>
+		)}
+		{/* Announces the number of results while typing or filtering. */}
+		<p class="child-page-search-status" role="status" data-child-page-search-status>
+			{texts.count
+				.replace('{shown}', String(teasers.length))
+				.replace('{total}', String(teasers.length))}
+		</p>
+		<TeaserCard
+			teasers={teasers}
+			columns={columns}
+			headlineLevel={headlineLevel}
+		/>
+		<p class="child-page-search-empty" data-child-page-search-empty hidden>
+			{texts.empty}
+		</p>
+	</div>
+)}
+
+{teasers.length > 0 && !searchable && (
 	<TeaserCard
 		teasers={teasers}
 		columns={columns}
-		headlineSize="medium"
 		headlineLevel={headlineLevel}
 	/>
 )}
+
+<style>
+	.child-page-search {
+		display: flex;
+		flex-direction: column;
+		gap: var(--db-spacing-fixed-md);
+	}
+
+	/* The count is for screen readers and a quiet hint; the cards show the result. */
+	.child-page-search-status,
+	.child-page-search-empty {
+		margin: 0;
+		font: var(--db-type-body-sm);
+		color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+	}
+
+	.child-page-search-empty[hidden] {
+		display: none;
+	}
+</style>

@@ -7,6 +7,13 @@ export const de: TranslationDictionary = {
 	'shell.colorModeToggle': 'Farbschema wechseln (hell/dunkel)',
 	'shell.getStarted': 'Jetzt starten',
 	'shell.languageSwitch.label': 'Sprache wechseln',
+	'shell.subNavigation': 'Unternavigation',
+	'shell.subNavigation.collapse': 'Navigation einklappen',
+	'shell.subNavigation.expand': 'Navigation ausklappen',
+
+	// Table of contents
+	'toc.collapse': 'Abschnitt einklappen',
+	'toc.expand': 'Abschnitt ausklappen',
 
 	// Footer
 	'footer.imprint': 'Impressum',

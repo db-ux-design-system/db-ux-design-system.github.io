@@ -4,7 +4,7 @@ layout: '@template/layouts/default'
 title: 'For Developer'
 headline: 'Build with consistency'
 description: 'A shared component system that streamlines implementation and reduces decision overhead.'
-heroVisual: 'development'
+heroVisualImage: 'development'
 sections:
   - id: 'for-developer--efficient-workflows-section'
     title: 'Efficient Workflows'
@@ -41,7 +41,8 @@ sections:
     visual: 'smooth-handoff'
 ---
 
-import { ContentSections, ContactUsSection } from '@components';
+import { DBSection } from '@db-ux/react-core-components';
+import { ContentSections, CTA } from '@components';
 import EfficientWorkflowsVisual from '@components/ForDeveloperVisuals/EfficientWorkflowsVisual.astro';
 import FlexibleIntegrationVisual from '@components/ForDeveloperVisuals/FlexibleIntegrationVisual.astro';
 import ReleaseTimelineVisual from '@components/ForDeveloperVisuals/ReleaseTimelineVisual.astro';
@@ -57,4 +58,19 @@ import SmoothHandoffVisual from '@components/ForDesignerVisuals/SmoothHandoffVis
 	}}
 />
 
-<ContactUsSection />
+<DBSection width="medium" spacing="medium">
+	<CTA
+		title="Start developing"
+		text="Install the package for your framework and build your first form – checked step by step, all the way to the production build."
+		primaryAction={{
+			label: 'Get started in code',
+			href: '/documentation/get-started?role=development',
+			variant: 'brand',
+		}}
+		secondaryAction={{
+			label: 'Build a contact form in React',
+			href: '/documentation/learn/react-tutorial',
+			variant: 'outlined',
+		}}
+	/>
+</DBSection>

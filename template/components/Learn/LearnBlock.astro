@@ -1,0 +1,16 @@
+---
+// No props: the block heading is the first `## …` inside the block, written in the MDX.
+// It has to be Markdown, not rendered here, so that Astro lists it in the page headings
+// and the table of contents shows it in the article view. The controller reads the step
+// label from that heading.
+---
+
+{/*
+	A main Learn block. One block equals one step in the stepper view. It renders as a
+	plain section, not a DBSection: the article already sits in the layout's DBSection,
+	and a nested DBSection adds its viewport-based inline padding a second time, which
+	indents the content against the headline.
+*/}
+<section class="learn-section learn-block" data-learn-block>
+	<slot />
+</section>

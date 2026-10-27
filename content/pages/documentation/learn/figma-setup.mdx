@@ -1,0 +1,214 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Set up the Figma libraries'
+headline: 'Set up the Figma libraries'
+description: 'Get access to the Figma libraries, enable them in your file and hand your design over to development.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 2
+category: 'Design'
+keywords:
+  [
+    'figma',
+    'setup',
+    'getting started',
+    'access',
+    'libraries',
+    'enable library',
+    'assets panel',
+    'core foundation',
+    'core components',
+    'db theme icons',
+    'component properties',
+    'property icons',
+    'code connect',
+    'dev mode',
+    'handoff',
+    'troubleshooting',
+  ]
+stepper: true
+---
+
+import { DBNotification } from '@db-ux/react-core-components';
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Access depends on your email address
+
+With a DB email address, open the [DB UX Design System folder](https://www.figma.com/files/1555127211835288633/folder/170790368 'All libraries, for DB email addresses.') in Figma. Otherwise, use the [Marketing Portal](https://marketingportal.extranet.deutschebahn.com/marketingportal/Design-Anwendungen/db-ux-design-system/support/freigabe-figma 'Request access without a DB email address.').
+
+<LearnAside>
+
+| You have …          | How to get access                                                                                 |
+| ------------------- | ------------------------------------------------------------------------------------------------- |
+| A DB email address  | Sign in to Figma with your DB email address. The libraries are in the DB UX Design System folder. |
+| No DB email address | Request access through the Marketing Portal. The Marketing Portal requires a login.               |
+
+- **Protected content:** both the Figma folder and the Marketing Portal require a login. Without access, the links lead to a sign-in page.
+- **Seat:** to create designs, you need a Figma seat that lets you edit files. With a Dev seat you can inspect designs, but not create them.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Start with Core Foundation
+
+Open the **Assets** panel of your file, select the library icon and enable **Core Foundation**. It holds the tokens for colors, spacing and typography that all other libraries use.
+
+<LearnAside>
+
+1. Open your Figma file.
+2. Open the **Assets** panel and select the library icon.
+3. Enable **Core Foundation**.
+
+In Figma, all libraries carry the prefix `DB UX -`, for example `DB UX - Core Foundation`.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Add components, icons and what your product needs
+
+Enable **Core Components** and **DB Theme Icons** next. Add the other libraries only when your product needs them.
+
+<LearnAside>
+
+4. Enable **Core Components** and **DB Theme Icons**.
+5. Enable **Core Patterns** and **DB Theme Illustrative Icons** if you need them.
+6. Enable extensions such as Passenger Information or DataViz only if your product needs them.
+
+After that, the components are available in the Assets panel of your file.
+
+**Check:** In the Assets panel, a search for “Button” finds `Button → Brand` from DB UX - Core Components.
+
+### All libraries
+
+| Library                     | Contains                                                | Use it for                            |
+| --------------------------- | ------------------------------------------------------- | ------------------------------------- |
+| Core Foundation             | Tokens, colors, typography and spacing                  | Every file – the base for all others  |
+| Core Components             | All core components                                     | Design and prototyping                |
+| Core Patterns               | Recurring solutions that combine several components     | Design and prototyping                |
+| DB Theme Icons              | The functional DB icons                                 | Every file that uses icons            |
+| DB Theme Illustrative Icons | The illustrative DB icons                               | Teasers and larger pictograms         |
+| Core Lab                    | Concepts for future components and patterns             | Exploration – not for production work |
+| Passenger Information       | Information standards for travelers                     | Products with passenger information   |
+| DataViz                     | Chart components and data visualization patterns (Beta) | Data visualization                    |
+
+The direct links to each library are listed under [Resources](/documentation/resources).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Work with the components through their properties
+
+Change components only through their properties and slots, and do not detach them. Each property name starts with an icon that shows its purpose.
+
+<LearnAside>
+
+| Icon | Purpose                   | Example         |
+| ---- | ------------------------- | --------------- |
+| 👁️   | Show or hide an element   | `👁️ Show Label` |
+| 🔀   | Variant selection         | `🔀 Variant`    |
+| 📦   | Slot for your own content | `📦 Children`   |
+| 🔄   | Icon swap                 | `🔄 Icon`       |
+| ✏️   | Text override             | `✏️ Label`      |
+| ⚙️   | Code Connect property     | `⚙️ Required`   |
+
+Properties marked with ⚙️ affect only the generated code, see [Code Connect](/documentation/learn/code-connect). Helper components such as the Floating Container, the Resizer and the Scrollbar as well as how-tos for individual components are described under [Work with the components in Figma](/documentation/learn/figma). To place a brand-compliant logo with logo addition into the Control Panel, use the Figma plugin [DB Logo Importer](https://www.figma.com/community/plugin/1590462040996560100/concept-db-logo-importer). It assigns the correct color variables.
+
+<DBNotification variant="standalone" semantic="informational" headline="DB Theme">
+	All examples in this documentation use the DB Theme. For a whitelabel or another theme, the visual
+	result differs because a different Foundation applies.
+</DBNotification>
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Code Connect hands your design over
+
+Developers see the matching code snippet for every instance in Dev Mode. Set the ⚙️ properties as well – they only affect the code, and [Code Connect](/documentation/learn/code-connect 'How the components in Figma are linked to their code.') needs them for a complete snippet.
+
+</LearnBlock>
+
+<LearnBlock>
+
+## If something does not look right
+
+Most problems come from a missing library access, a different resizing behavior or a ⚙️ property that is not set.
+
+<LearnAside>
+
+| Symptom                                    | Cause and fix                                                                                                                                                                      |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The libraries do not appear in your file   | You are not signed in with an account that belongs to the DB Figma organization. Sign in with your DB email address or request access.                                             |
+| A component looks different than in code   | Some layers need a different resizing behavior, for example Hug instead of Fill. The known cases are listed under [Work with the components in Figma](/documentation/learn/figma). |
+| The Dev Mode snippet shows a default value | A ⚙️ Code Connect property has not been set. Set it on the first level of the instance.                                                                                            |
+
+If none of this helps, open an issue in the [core repository](https://github.com/db-ux-design-system/core/issues/new/choose). It collects design feedback and design bugs. Please check first whether the issue already exists.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Design your first screen
+
+Your file is ready. Design a first screen.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Contact form in Figma',
+			description: 'Design a contact form step by step and hand it over with Code Connect.',
+			url: '/documentation/learn/figma-tutorial',
+		},
+		{
+			title: 'Components in Figma',
+			description: 'Helper components, resizing behavior and how-tos for single components.',
+			url: '/documentation/learn/figma',
+		},
+		{
+			title: 'Resources',
+			description: 'Direct links to every Figma library and the code packages.',
+			url: '/documentation/resources',
+		},
+	]}
+/>
+
+<LearnAside>
+
+### Resources
+
+| Resource      | Link                                                                                    |
+| ------------- | --------------------------------------------------------------------------------------- |
+| Figma folder  | [DB UX Design System](https://www.figma.com/files/1555127211835288633/folder/170790368) |
+| Library links | [Resources](/documentation/resources)                                                   |
+| Figma Tips    | [Work with the components in Figma](/documentation/learn/figma)                         |
+| Code Connect  | [Hand over designs with Code Connect](/documentation/learn/code-connect)                |
+| Plugins       | [Add logos and custom colors in Figma](/documentation/learn/plugins)                    |
+| Release Notes | [Release Notes](/documentation/releases/release-notes)                                  |
+| Issues        | [core repository](https://github.com/db-ux-design-system/core/issues/new/choose)        |
+
+</LearnAside>
+
+</LearnBlock>

@@ -15,7 +15,7 @@ const FigmaLearnTeaser = ({ componentName, locale, anchor }: FigmaLearnTeaserPro
 
 	return (
 		<CardTeaser
-			title="Figma Learn"
+			title={isDE ? 'Mit den Komponenten in Figma arbeiten' : 'Work with the components in Figma'}
 			description={
 				isDE
 					? `Figma-spezifische Workarounds und Tipps zur Verwendung der ${componentName}-Komponente in deinen Designs.`

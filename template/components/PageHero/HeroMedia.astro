@@ -1,0 +1,161 @@
+---
+import Visual from '@template/components/Visual/Visual.astro';
+import { resolveVisualImageSrc } from '@template/components/Visual/visual-image';
+import {
+	isVisualModelName,
+	resolveVisualModelSrc,
+	visualModelCamera,
+	VISUAL_MODEL_PROMPT_DELAY,
+} from '@template/components/Visual/visual-model';
+import type { VisualName } from '@template/visuals';
+import type { VisualImageName } from '@template/visuals/images';
+
+interface Props {
+	visual?: VisualName;
+	visualImage?: VisualImageName;
+	imageSrc?: string;
+	imageAlt?: string;
+}
+
+const { visual, visualImage, imageSrc, imageAlt } = Astro.props as Props;
+
+const hasVisual = Boolean(visual || visualImage);
+
+// A PNG teaser that also ships a glb model is shown as a 3D viewer. The PNG stays the poster, so
+// it is what shows before the model has loaded.
+const modelName = visualImage && isVisualModelName(visualImage) ? visualImage : undefined;
+const modelSrc = modelName ? resolveVisualModelSrc(modelName) : undefined;
+const modelPoster = modelName ? resolveVisualImageSrc(modelName) : undefined;
+
+// Labels of the pause/play button. The script swaps them with the state.
+const lang = /^\/de(\/|$)/.test(Astro.url.pathname) ? 'de' : 'en';
+const toggleLabels = {
+	de: { pause: 'Animation pausieren', play: 'Animation abspielen' },
+	en: { pause: 'Pause animation', play: 'Play animation' },
+}[lang];
+---
+
+<div class:list={['page-hero-media', { 'page-hero-media-visual': hasVisual }]}>
+	{modelSrc ? (
+		// Rotating is possible right away. The hand prompt only appears after
+		// VISUAL_MODEL_PROMPT_DELAY without interaction (interaction-prompt-threshold).
+		<hero-model>
+			<model-viewer
+				class="page-hero-model"
+				src={modelSrc}
+				alt={imageAlt || modelName}
+				tone-mapping="aces"
+				exposure="1"
+				shadow-intensity="0"
+				camera-orbit={visualModelCamera.cameraOrbit}
+				orientation={visualModelCamera.orientation}
+				camera-target={visualModelCamera.cameraTarget}
+				min-camera-orbit={visualModelCamera.minCameraOrbit}
+				max-camera-orbit={visualModelCamera.maxCameraOrbit}
+				field-of-view={visualModelCamera.fieldOfView}
+				camera-controls
+				disable-zoom
+				disable-pan
+				interaction-prompt="auto"
+				interaction-prompt-threshold={VISUAL_MODEL_PROMPT_DELAY}
+				autoplay
+				animation-name="Schwenken"
+				ar
+				loading="eager"
+				reveal="auto"
+			>
+				{/* Own poster instead of the poster attribute: the default poster always fills the
+				    whole box, while the model only fills part of it. model-viewer hides this slot
+				    as soon as the model is shown. */}
+				<div slot="poster" class="page-hero-model-poster">
+					<img src={modelPoster} alt="" decoding="async" />
+				</div>
+				{/* Pauses the "Schwenken" animation (WCAG 2.2.2). Outside the viewer's input area,
+				    so a click does not start a camera drag. data-no-text hides the text visually,
+				    it stays the accessible name. */}
+				<button
+					type="button"
+					class="db-button page-hero-model-toggle"
+					data-variant="ghost"
+					data-size="small"
+					data-no-text="true"
+					data-icon="pause"
+					data-label-pause={toggleLabels.pause}
+					data-label-play={toggleLabels.play}
+				>
+					{toggleLabels.pause}
+				</button>
+			</model-viewer>
+		</hero-model>
+	) : visual ? (
+		<Visual name={visual} class="page-hero-visual" strokeScaling="scale" />
+	) : visualImage ? (
+		<Visual image={visualImage} class="page-hero-visual" />
+	) : (
+		<img src={imageSrc} alt={imageAlt || ''} loading="lazy" decoding="async" />
+	)}
+</div>
+
+<script>
+	type ModelViewer = HTMLElement & {
+		paused?: boolean;
+		canActivateAR?: boolean;
+		currentTime?: number;
+		cameraOrbit?: string;
+		play?: () => void;
+		pause?: () => void;
+		jumpCameraToGoal?: () => void;
+	};
+
+	/**
+	 * Wrapper around the hero <model-viewer>. It wires the pause/play button and, with reduced
+	 * motion, keeps the "Schwenken" animation on its first frame. The model can be rotated by hand
+	 * in both cases. A custom element runs whenever it is attached, so this also works after
+	 * client-side navigations of the ClientRouter.
+	 */
+	class HeroModel extends HTMLElement {
+		connectedCallback() {
+			const viewer = this.querySelector<ModelViewer>('model-viewer');
+			const toggle = this.querySelector<HTMLButtonElement>('.page-hero-model-toggle');
+			if (!viewer || !toggle) return;
+
+			const render = (paused: boolean) => {
+				const label = (paused ? toggle.dataset.labelPlay : toggle.dataset.labelPause) ?? '';
+				toggle.dataset.icon = paused ? 'play' : 'pause';
+				toggle.textContent = label;
+				// Paused, the button stays visible, so the way back to the animation is not hidden.
+				this.toggleAttribute('data-paused', paused);
+			};
+
+			// Stopping returns to the start view: the first frame of the animation and the initial
+			// camera angle, also when the model was rotated by hand. The camera-orbit attribute
+			// keeps the initial value, a drag only moves the camera internally.
+			const stop = () => {
+				viewer.pause?.();
+				viewer.currentTime = 0;
+				viewer.cameraOrbit = viewer.getAttribute('camera-orbit') ?? undefined;
+				viewer.jumpCameraToGoal?.();
+			};
+
+			if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+				viewer.removeAttribute('autoplay');
+				stop();
+				render(true);
+			}
+
+			toggle.addEventListener('click', () => {
+				if (viewer.paused) viewer.play?.();
+				else stop();
+			});
+			viewer.addEventListener('play', () => render(false));
+			viewer.addEventListener('pause', () => render(true));
+
+			// On AR-capable devices model-viewer shows its AR button in the same corner.
+			viewer.addEventListener('load', () => {
+				this.toggleAttribute('data-ar', Boolean(viewer.canActivateAR));
+			});
+		}
+	}
+
+	if (!customElements.get('hero-model')) customElements.define('hero-model', HeroModel);
+</script>

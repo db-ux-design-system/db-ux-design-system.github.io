@@ -1,0 +1,170 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Add the components to Astro'
+headline: 'Add the components to Astro'
+description: 'Set up an Astro project for a static or content-driven website with the integration of the design system.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 15
+category: 'Development'
+keywords:
+  [
+    'astro',
+    'setup',
+    'installation',
+    'install',
+    'getting started',
+    'integration',
+    'static site',
+    'content website',
+    'npm create',
+    'create-astro',
+    'astro.config',
+    'react components',
+    'peer dependencies',
+    'troubleshooting',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## The integration is an early version
+
+`@db-ux/astro` still expects older versions of Core and Astro. For an up-to-date setup, follow the [React setup](/documentation/learn/react-setup 'Use the components with the current versions.') instead.
+
+<LearnAside>
+
+- **State:** `@db-ux/astro` is at version 0.1.0. It expects `@db-ux/core-components` 4.x and Astro 5 as peer dependencies – both are behind the current versions.
+- **Before you start:** check the [astro repository](https://github.com/db-ux-design-system/astro) for the current state before you start a new project with it.
+- **Astro:** [Astro](https://astro.build/) is a framework for fast, content-driven websites. The integration connects it with the React components of the design system and handles the setup for you.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Start with an empty Astro project
+
+Create a new project and choose `Use minimal (empty) template` in the questionnaire. The integration is designed for an empty project.
+
+```shell
+npm create astro@latest
+```
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Install the integration with the installer
+
+The installer adds `@db-ux/astro` together with all required peer dependencies.
+
+```shell
+npm i
+npm create @db-ux/astro
+```
+
+<LearnAside>
+
+The installer detects your package manager and checks that you are in an Astro project. Its package name is `@db-ux/create-astro`, so the command is `npm create @db-ux/astro`.
+
+| Package               | Contains                                                |
+| --------------------- | ------------------------------------------------------- |
+| `@db-ux/astro`        | The Astro integration, configured in `astro.config.mjs` |
+| `@db-ux/create-astro` | The installer, run with `npm create @db-ux/astro`       |
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Add the integration to the config
+
+Register `dbUxAstro` in `astro.config.mjs` and give your app a name.
+
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import { dbUxAstro } from '@db-ux/astro';
+
+export default defineConfig({
+	integrations: [dbUxAstro({ appName: 'My app' })],
+});
+```
+
+</LearnBlock>
+
+<LearnBlock>
+
+## If something does not work
+
+Most problems come from the place where you run the installer or from version conflicts with the peer dependencies.
+
+<LearnAside>
+
+| Symptom                                             | Cause and fix                                                                                                            |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| The installer reports that this is no Astro project | Run it in the root of your Astro project, where `astro.config.mjs` is located.                                           |
+| `npm create db-ux-astro` fails                      | The package name is `@db-ux/create-astro`. Use `npm create @db-ux/astro`.                                                |
+| Peer dependency conflicts on install                | The integration expects Core 4.x and Astro 5. Newer versions of either cause conflicts until the integration is updated. |
+
+If none of this helps, open an issue in the [astro repository](https://github.com/db-ux-design-system/astro/issues). Please check first whether the issue already exists.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Continue with your project
+
+Look up all options, or use React directly.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Integration documentation',
+			description: 'All options of the @db-ux/astro integration.',
+			url: 'https://design-system.deutschebahn.com/astro/',
+		},
+		{
+			title: 'Add the components to React',
+			description: 'Add the components to a React project with the current versions.',
+			url: '/documentation/learn/react-setup',
+		},
+		{
+			title: 'astro repository',
+			description: 'Source code and the current state of the integration.',
+			url: 'https://github.com/db-ux-design-system/astro',
+		},
+	]}
+/>
+
+<LearnAside>
+
+### Resources
+
+| Resource      | Link                                                                      |
+| ------------- | ------------------------------------------------------------------------- |
+| Documentation | [@db-ux/astro](https://design-system.deutschebahn.com/astro/)             |
+| Source code   | [db-ux-design-system/astro](https://github.com/db-ux-design-system/astro) |
+| npm package   | [@db-ux/astro](https://www.npmjs.com/package/@db-ux/astro)                |
+| Installer     | [@db-ux/create-astro](https://www.npmjs.com/package/@db-ux/create-astro)  |
+| Issues        | [astro repository](https://github.com/db-ux-design-system/astro/issues)   |
+
+</LearnAside>
+
+</LearnBlock>

@@ -10,6 +10,16 @@ type NavigationFrontmatter = FrontMatter & {
 	nav?: boolean | { order?: number };
 	externalUrl?: string;
 	protected?: boolean;
+	/**
+	 * Adds an "Overview" entry linking to this page as the first child. A page with
+	 * children renders as a collapsible group whose header toggles the group, so
+	 * without this entry the page itself is not reachable from the navigation.
+	 *
+	 * Set it in the EN frontmatter only. The navigation tree is built from the EN
+	 * pages; DE pages only contribute their titles (see `deTitles` below), so the
+	 * flag has no effect in a DE frontmatter. The DE label "Übersicht" is set here.
+	 */
+	navOverview?: boolean;
 };
 
 type MdModule = {
@@ -217,6 +227,7 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 		'documentation/foundation/border-radius': { titleDe: 'Eckenradius' },
 		'documentation/foundation/border-width': { titleDe: 'Strichstärke' },
 		'documentation/icons': { titleDe: 'Icons' },
+		'documentation/get-started': { titleDe: 'Erste Schritte', order: 1 },
 		'documentation/releases/release-notes': { titleDe: 'Release Notes' },
 		'documentation/components/overview': {
 			// No `title`: the slug already yields "Overview".
@@ -229,6 +240,7 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 	}
 
 	const nodes = new Map<string, NavigationItem>();
+	const overviewRels = new Set<string>();
 
 	for (const [key, mod] of Object.entries(mods)) {
 		const rel = strip(key);
@@ -253,6 +265,7 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 		const sortChildrenDescending = fm.sortChildrenDescending === true;
 		const externalUrl = fm.externalUrl;
 		const isProtected = fm.protected === true;
+		if (fm.navOverview === true && !hidePage) overviewRels.add(rel);
 
 		const node: NavigationItem = {
 			title,
@@ -311,6 +324,21 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 			const parent = nodes.get(parentKey);
 			if (parent) ensureChild(parent, node);
 		}
+	}
+
+	// Only groups need the entry; a page without children already renders as a link.
+	// The entry is a regular leaf, so it renders as a real link (href, new tab,
+	// aria-current) and the group header keeps its plain toggle behavior.
+	for (const rel of overviewRels) {
+		const node = nodes.get(rel);
+		if (!node?.path || !node.children?.length) continue;
+		node.children.unshift({
+			title: 'Overview',
+			titleDe: 'Übersicht',
+			path: node.path,
+			children: [],
+			order: Number.MIN_SAFE_INTEGER,
+		});
 	}
 
 	const appNav: AppNavigation = (

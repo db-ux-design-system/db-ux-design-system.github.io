@@ -49,26 +49,63 @@
 .teaser-content {
 	display: flex;
 	flex-direction: column;
-	gap: var(--db-spacing-fixed-xs);
+
+	/* Same as the card padding (spacing small), like ResourceCards and CardTeaser. */
+	gap: var(--db-spacing-fixed-sm);
 }
 
-.teaser-cards .db-card h2,
-.teaser-cards .db-card h3 {
+/*
+ * The documentation has two card sizes:
+ * - Small card, without image: bold body-md title, body-md text below, gap = card padding.
+ *   Same as ResourceCards and CardTeaser.
+ * - Large card, with image or visual: headline-sm title, see TextImage.css.
+ * The size follows the card type, not the heading level, so an h3 looks like an h2.
+ * The global content spacing (content-spacing.css) adds a top margin to a paragraph
+ * after a heading; its selector counts three classes, so these need four to win.
+ */
+.dba-main-content .teaser-cards .teaser-content > .teaser-description {
+	margin-block-start: 0;
+	font: var(--db-type-body-md);
+}
+
+.teaser-cards .teaser-content > .teaser-title {
 	margin: 0;
-	font: var(--db-type-headline-3xs);
-}
-
-.teaser-cards-medium .db-card h2,
-.teaser-cards-medium .db-card h3 {
-	font: var(--db-type-headline-2xs);
-}
-
-.teaser-cards-large .db-card h2,
-.teaser-cards-large .db-card h3 {
-	font: var(--db-type-headline-sm);
+	font: var(--db-type-body-md);
+	font-weight: 700;
 }
 
 .teaser-cards .db-card p {
 	margin: 0;
 	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+}
+
+/*
+ * Teaser images stay beside the text below the TextImage breakpoint.
+ *
+ * TextImage.css stacks every `.text-image` at 767 px and turns the visual surface into a
+ * fixed square aligned to the card edge. That is right for the large content sections, but
+ * a teaser card is short enough to keep its image in the column next to the text, which
+ * avoids the tall empty gap above the surface.
+ *
+ * The order and flex values from the mobile block keep applying (they carry `!important`)
+ * and already match a row with the image on the trailing side: content order 1, image
+ * order 2. Only the direction, the gap and the surface sizing are reverted here.
+ */
+@media (width <= 767px) {
+	/* Only the side positions. `top`/`bottom` teasers (e.g. the Extensions cards) are
+	 * column by design and must stay stacked. */
+	.teaser-cards .text-image[data-image-position='right'],
+	.teaser-cards .text-image[data-image-position='left'] {
+		flex-direction: row;
+		gap: var(--db-spacing-fixed-md);
+	}
+
+	/* Fill the image column again instead of the fixed stacked square. The (0,4,0) selector
+	 * outranks the stacked rules in TextImage.css (0,2,0 and 0,3,0) regardless of load order. */
+	.teaser-cards .text-image[data-image-position='right'] > .text-image-visual > .db-visual-surface,
+	.teaser-cards .text-image[data-image-position='left'] > .text-image-visual > .db-visual-surface {
+		flex: 1 0 auto;
+		align-self: auto;
+		inline-size: 100%;
+	}
 }

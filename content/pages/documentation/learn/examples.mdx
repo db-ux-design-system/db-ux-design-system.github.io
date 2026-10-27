@@ -1,0 +1,192 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Start from an example project'
+headline: 'Start from an example project'
+description: 'Try ready-made example projects in the browser or copy one as the starting point for your own project.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 20
+category: 'Development'
+keywords:
+  [
+    'examples',
+    'starter',
+    'template',
+    'boilerplate',
+    'stackblitz',
+    'demo',
+    'degit',
+    'git clone',
+    'react',
+    'angular',
+    'vue',
+    'tailwind',
+    'python',
+    'htmx',
+    'custom theme',
+    'shell',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Try it in the browser first
+
+Three React demos run in **StackBlitz** without any local setup. The editor opens in a new tab and starts the app.
+
+<LearnAside>
+
+| Example       | Shows                                                  | Open                                                                                            |
+| ------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| Documentation | An application shell with navigation and content pages | [StackBlitz](https://stackblitz.com/edit/db-ux-design-system-examples-tue2w1lm?file=index.html) |
+| Table         | A data table inside an application shell               | [StackBlitz](https://stackblitz.com/edit/db-ux-design-system-examples-7yy1wm69?file=index.html) |
+| KPI           | A dashboard with KPI cards                             | [StackBlitz](https://stackblitz.com/edit/db-ux-design-system-examples-8qc2ure1?file=index.html) |
+
+The source code of the demos lives in the [shell-examples](https://github.com/db-ux-design-system/examples/tree/main/shell-examples) folder of the examples repository: [react-documentation-example](https://github.com/db-ux-design-system/examples/tree/main/shell-examples/react-documentation-example), [react-table-example](https://github.com/db-ux-design-system/examples/tree/main/shell-examples/react-table-example) and [react-kpi-example](https://github.com/db-ux-design-system/examples/tree/main/shell-examples/react-kpi-example).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Pick the example for your framework
+
+Each project in the [examples repository](https://github.com/db-ux-design-system/examples 'All example projects of the design system on GitHub.') shows a minimal setup for one framework. Its README lists every step.
+
+<LearnAside>
+
+| Framework           | Project                                                                                                      | Built with                    |
+| ------------------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------- |
+| React               | [react-example](https://github.com/db-ux-design-system/examples/tree/main/react-example)                     | Vite, Sass                    |
+| React with Tailwind | [react-tailwind-template](https://github.com/db-ux-design-system/examples/tree/main/react-tailwind-template) | Vite, Tailwind, Vite plugin   |
+| Angular             | [angular-example](https://github.com/db-ux-design-system/examples/tree/main/angular-example)                 | Angular CLI, SCSS             |
+| Vue                 | [vue-example](https://github.com/db-ux-design-system/examples/tree/main/vue-example)                         | Vite, Sass                    |
+| Python with htmx    | [htmx-jinja-example](https://github.com/db-ux-design-system/examples/tree/main/python/htmx-jinja-example)    | Flask, Jinja2, Web Components |
+| Custom theme        | [custom-theme-example](https://github.com/db-ux-design-system/examples/tree/main/custom-theme-example)       | React, own icon font          |
+
+The README helps if you want to reproduce the setup in your own project.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Copy only the example you need
+
+**degit** copies one folder of the repository without its Git history. Replace `react-example` with the folder of your example.
+
+```shell
+npx degit db-ux-design-system/examples/react-example my-app
+cd my-app
+npm install
+npm run dev
+```
+
+<LearnAside>
+
+### Clone the whole repository instead
+
+If you want all examples at once, clone the repository and change into one folder:
+
+```shell
+git clone https://github.com/db-ux-design-system/examples.git
+cd examples/react-example
+npm install
+npm run dev
+```
+
+### Python example
+
+The Python example lives in a subfolder: `db-ux-design-system/examples/python/htmx-jinja-example`. Instead of the npm commands, it needs `pip install -r requirements.txt` and starts with `python app.py`.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Update before you build on it
+
+The examples use the **whitelabel theme** and older versions. Update them and add the [DB Theme](/documentation/learn/db-theme-setup 'Colors, fonts and icons of the brand.') for a product.
+
+<LearnAside>
+
+Without the DB Theme, the examples show the whitelabel defaults instead of the DB font and icons.
+
+To update the design system packages of the React example to the latest version:
+
+```shell
+npm install @db-ux/react-core-components@latest @db-ux/core-components@latest @db-ux/core-foundations@latest
+```
+
+Use the matching package for other frameworks, for example `@db-ux/ngx-core-components` or `@db-ux/v-core-components`. Check the [Release Notes](/documentation/releases/release-notes) for Breaking Changes when the update crosses a Major version.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Report an example that does not work
+
+Open an issue in the [examples repository](https://github.com/db-ux-design-system/examples/issues 'Report a problem with one of the example projects.'). Please check first whether the issue already exists.
+
+<LearnAside>
+
+Problems with a component itself, not with the example, belong in the [core-web repository](https://github.com/db-ux-design-system/core-web/issues/new/choose).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Continue with your own project
+
+Set up your framework or build a first form.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Build a contact form in React',
+			description: 'Build a contact form step by step.',
+			url: '/documentation/learn/react-tutorial',
+		},
+		{
+			title: 'Add the components to React',
+			description: 'Add the components to a React project.',
+			url: '/documentation/learn/react-setup',
+		},
+		{
+			title: 'All setup articles',
+			description: 'Angular, Vue, Web Components and more.',
+			url: '/documentation/learn',
+		},
+	]}
+/>
+
+<LearnAside>
+
+- [Add the components to Angular](/documentation/learn/angular-setup)
+- [Add the components to Vue](/documentation/learn/vue-setup)
+- [Use the components as Web Components](/documentation/learn/web-components-setup)
+- [Use the components with HTML and CSS](/documentation/learn/html-css-setup)
+- [Add the components to Astro](/documentation/learn/astro-setup)
+- [Which packages you need](/documentation/learn/about#which-packages-you-need)
+
+</LearnAside>
+
+</LearnBlock>

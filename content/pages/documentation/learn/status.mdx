@@ -1,0 +1,177 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'What a status means'
+headline: 'What a status means'
+description: 'Every component, pattern and template has a status. It tells you how mature the content is and what you can rely on.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 1.5
+category: 'Foundations'
+keywords:
+  [
+    'status',
+    'content status',
+    'concept',
+    'beta',
+    'stable',
+    'legacy',
+    'deprecated',
+    'maturity',
+    'lifecycle',
+    'production ready',
+    'mandatory',
+    'breaking changes',
+    'migration',
+    'ux standard',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Content matures from Concept to Stable
+
+New content starts as **Concept**, becomes **Beta** and ends as **Stable**. **Legacy** and **Deprecated** mark content that is being replaced.
+
+<LearnAside>
+
+| Status     | Phase                        | In short                                 |
+| ---------- | ---------------------------- | ---------------------------------------- |
+| Concept    | Active development lifecycle | Design reference, nothing is final       |
+| Beta       | Active development lifecycle | Functional, minor changes still possible |
+| Stable     | Active development lifecycle | Mature and mandatory as the UX standard  |
+| Legacy     | Superseded or being removed  | Outdated, only critical bug fixes        |
+| Deprecated | Superseded or being removed  | Removed in a future Major release        |
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Concept is a design reference
+
+Concept content shows early directions, and **nothing is final**. Use it as a reference for your design, and plan for changes.
+
+<LearnAside>
+
+Designs and implementations may change substantially as ideas are tested and refined. The design is always available. A code implementation may not exist yet and usually follows in the Beta phase.
+
+### What to expect
+
+- **Design available**, the code implementation may follow later
+- **No stability guarantees** – API, design and accessibility are not validated yet and may change at any time
+- **Limited documentation** and usage guidelines
+- **Plan for rework** as the content matures toward Beta and Stable
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Beta is ready to test in your project
+
+Beta content is **functional and largely stable**, and design and development are aligned. Test it thoroughly and share your feedback.
+
+<LearnAside>
+
+Minor visual or functional changes may still occur. The content has gone through initial user testing and addresses a validated user need.
+
+### What to expect
+
+- **Aligned between design and development**
+- Suitable for project use, but **minor Breaking Changes are still possible**
+- Documentation and usage guidelines are available but may be incomplete
+- Accessibility and cross-browser testing is **underway but not fully validated**
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Stable is the mandatory standard
+
+Stable content is mature, accessible and brand-compliant. It is **mandatory to use** as the UX standard.
+
+<LearnAside>
+
+Stable content is updated and improved continuously, so it keeps meeting user needs and current standards.
+
+### What to expect
+
+- **Fully validated** for accessibility, cross-browser and cross-framework compatibility
+- **Complete documentation**, usage guidelines and design specs
+- **API stability** – Breaking Changes only happen in Major releases
+- **Ongoing maintenance** and regular improvements
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Legacy and Deprecated content is being replaced
+
+**Legacy** content only gets critical bug fixes. **Deprecated** content is removed in a future Major release – plan your migration.
+
+<LearnAside>
+
+### Legacy
+
+Legacy content is outdated and no longer actively developed. Migrate to current content of the design system.
+
+- **No new features** or improvements
+- Only **critical bug fixes**
+- A **recommended alternative** is available in the design system
+
+### Deprecated
+
+Deprecated content is marked for removal. In design, it is marked visually first, which gives you time to migrate before it is removed.
+
+- **The content will be removed** – plan your migration
+- **No bug fixes** or maintenance
+- A **sufficient transition period** before the removal in a Major release
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Check the status before you use content
+
+Every component page shows its status. The overview groups all components by status.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Components',
+			description: 'All components, grouped by Stable, Beta and Concept.',
+			url: '/documentation/components',
+		},
+		{
+			title: 'How releases work',
+			description: 'Versions, release types and where they are announced.',
+			url: '/documentation/learn/versioning',
+		},
+		{
+			title: 'Contribution',
+			description: 'Share feedback on Beta and Concept content.',
+			url: '/documentation/contribution',
+		},
+	]}
+/>
+
+</LearnBlock>

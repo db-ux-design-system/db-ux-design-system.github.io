@@ -2,43 +2,128 @@
 layout: '@template/layouts/documentation'
 sectionSpacing: 'small'
 sectionWidth: 'auto'
-title: 'Figma'
-headline: 'Figma'
-description: 'Praktische Tipps, Workarounds und Anleitungen für die Arbeit mit dem DB UX Design System in Figma.'
+title: 'Mit den Komponenten in Figma arbeiten'
+headline: 'Mit den Komponenten in Figma arbeiten'
+description: 'Praktische Tipps, Workarounds und Anleitungen, mit denen sich die Komponenten in Figma wie im Code verhalten.'
+readingList: true
 align: start
-order: 2
 toc: true
-tocMaxDepth: 3
+tocMaxDepth: 2
+order: 4
+category: 'Design'
+keywords:
+  [
+    'figma',
+    'tips',
+    'how-to',
+    'workaround',
+    'property icons',
+    'helper components',
+    'floating container',
+    'resizer',
+    'scrollbar',
+    'resizing',
+    'hug',
+    'fill',
+    'auto layout',
+    'multi-line',
+    'alignment',
+    'required asterisk',
+    'logo',
+    'control panel',
+    'overflow',
+  ]
+stepper: true
 ---
 
-import { DBSection, DBNotification, DBLink, DBStack } from '@db-ux/react-core-components';
+import { DBNotification, DBLink } from '@db-ux/react-core-components';
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 
-<DBSection spacing="small" width="auto">
+<LearnBlock>
 
-## Allgemein
+## Property-Namen zeigen ihren Zweck
 
-{/* Allgemeine Themen: Library-Setup, Workarounds, Helper-Komponenten, Density, Theming usw. */}
+Jede Property in der Figma-Bibliothek beginnt mit einem Icon für ihren Typ. Toggles wie das Pflichtfeld-Sternchen funktionieren genauso – mit einer Ausnahme bei Auswahl-Elementen in Full Width.
 
-<DBStack gap="medium">
+<LearnAside>
+
 ### Property Icons
-
-Komponenteneigenschaften in der Figma-Bibliothek verwenden Emoji-Präfixe, um Typ und Zweck auf einen Blick erkennbar zu machen.
 
 | Icon | Zweck                                          | Beispiel        |
 | ---- | ---------------------------------------------- | --------------- |
-| 👁️   | Anzeigen/Ausblenden (schaltet Sichtbarkeit um) | `👁️ Show Label` |
-| 🔀   | Variantenauswahl                               | `🔀 Variant`    |
-| 📦   | Slot (Inhaltsbereich)                          | `📦 Children`   |
-| 🔄   | Icon-Swap (Instance Swap für Icons)            | `🔄 Icon`       |
-| ✏️   | Text-Override                                  | `✏️ Label`      |
+| 👁️   | Anzeigen/Ausblenden (schaltet Sichtbarkeit um) | `👁️ Show Label` |
+| 🔀   | Variantenauswahl                               | `🔀 Variant`    |
+| 📦   | Slot (Inhaltsbereich)                          | `📦 Children`   |
+| 🔄   | Icon-Swap (Instance Swap für Icons)            | `🔄 Icon`       |
+| ✏️   | Text-Override                                  | `✏️ Label`      |
+| ⚙️   | Code-Connect-Property (wirkt nur im Code)      | `⚙️ Required`   |
 
-</DBStack>
+### Checkbox
 
-<DBStack gap="medium">
+#### Full Width – Pflichtfeld-Kennzeichnung
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=5608-40&embed-host=share"
+	layout="side"
+>
+Checkboxen haben eine Toggle-Property für das Pflichtfeld-Sternchen.
+
+Bei Checkboxen in Full Width musst du das Sternchen \* manuell im Label-Feld ergänzen.
+
+Setze den Required Toggle auf true, damit die Dev Properties stimmen.
+
+</GuidelineExample>
+
+### Radio
+
+#### Full Width – Pflichtfeld-Kennzeichnung
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--Radio-%E2%9C%85?node-id=4721-38&embed-host=share"
+	layout="side"
+>
+Radio Buttons haben eine Toggle-Property für das Pflichtfeld-Sternchen.
+
+Bei Radio Buttons in Full Width musst du das Sternchen \* manuell im Label-Feld ergänzen.
+
+Setze den Required Toggle auf true, damit die Dev Properties stimmen.
+
+</GuidelineExample>
+
+### Switch
+
+#### Full Width – Pflichtfeld-Kennzeichnung
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=5430-39&embed-host=share"
+	layout="side"
+>
+Switches haben eine Toggle-Property für das Pflichtfeld-Sternchen.
+
+Bei Switches in Full Width musst du das Sternchen \* manuell im Label-Feld ergänzen.
+
+Setze den Required Toggle auf true, damit die Dev Properties stimmen.
+
+</GuidelineExample>
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Hilfskomponenten erweitern eine Instanz
+
+**Floating Container**, **Resizer** und **Scrollbar** stecken in anderen Komponenten. Sie legen Elemente über eine Komponente, machen feste Größen überschreibbar und zeigen eine dekorative Scrollbar.
+
+<LearnAside>
+
 ### Floating Container
 
-Der 🛟 Floating Container ermöglicht es, zusätzliche Elemente wie Badge, Tooltip oder Popover an einer Trigger-/Parent-Komponente zu platzieren.
+Mit dem 🛟 Floating Container platzierst du zusätzliche Elemente wie Badge, Tooltip oder Popover an einer Trigger- bzw. Parent-Komponente.
 
 <div className="guideline-examples">
 <GuidelineExample
@@ -54,44 +139,38 @@ Buttons, Navigation Items
 - Floating Container einblenden
 - Bei Bedarf weitere Floating Items ergänzen – Tipp: vorhandenes Item duplizieren
   - Manuelle Einstellungen: `full width`, `full height`, `absolute position`, Constraints `Left + Right`, `Top + Bottom`
-- Position-Property: `top-start`, `top-center`, `top-end`, `middle-start`, `middle-end`, `bottom-start`, `bottom-center` oder `bottom-end`.
+- Position-Property: `top-start`, `top-center`, `top-end`, `middle-start`, `middle-end`, `bottom-start`, `bottom-center` oder `bottom-end`
 - Edge-Property: `outside` (von der Parent-Komponente weg), `center` (am Anchor zentriert) oder `inside` (in die Parent-Komponente hinein)
 
 </div>
 </div>
 
 <div className="guideline-examples">
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/Dr7QvFYRn5AwyQVOto4pEz/Doku--Helper-components-%E2%9C%85?node-id=7074-2974&embed-host=share"
-	description="Im `Children Slot` von `↳ Floating Item` das Element einfügen, das an der Parent-Komponente platziert werden soll, wie z.B. einen Tooltip bei Hover des Icon-Buttons oder einen Badge"
-	fullWidth
-/>
-
+	<GuidelineExample
+		figmaUrl="https://embed.figma.com/design/Dr7QvFYRn5AwyQVOto4pEz/Doku--Helper-components-%E2%9C%85?node-id=7074-2974&embed-host=share"
+		description="Füge in den `Children Slot` von `↳ Floating Item` das Element ein, das an der Parent-Komponente sitzen soll, z. B. einen Tooltip bei Hover des Icon Buttons oder eine Badge"
+		fullWidth
+	/>
 </div>
 
-</DBStack>
-
-<DBStack gap="medium">
 ### Resizer
 
-Die 📏 Resizer Helper-Komponente kann in anderen Komponenten verwendet werden, um feste Breiten oder Höhen von Instanzen oder Containern überschreibbar zu machen.
+Die Hilfskomponente 📏 Resizer kannst du in anderen Komponenten nutzen, um feste Breiten oder Höhen von Instanzen oder Containern überschreibbar zu machen.
 
 <div className="guideline-examples">
 <GuidelineExample
 	figmaUrl="https://embed.figma.com/design/Dr7QvFYRn5AwyQVOto4pEz/Doku--Helper-components-%E2%9C%85?node-id=7055-57&embed-host=share"
-	description="Den Resizer-Layer auswählen und den Gap-Wert setzen, um die Größe zu steuern"
+	description="Wähle die Ebene 📏 Resizer aus und setze den Gap-Wert, um die Größe zu steuern"
 />
 
 <DBNotification variant="standalone" semantic="informational" headline="Verwendet in:">
 Custom Select (Dropdown, Mobile), Tab List Vertical, Scrollbar (Thumb, Free Position)
 </DBNotification>
 </div>
-</DBStack>
 
-<DBStack gap="medium">
 ### Scrollbar
 
-Die 🛟 Scrollbar Helper-Komponente stellt einen dekorativen Scrollbar-Indikator für Figma-Komponenten bereit. Sie unterstützt zwei Orientierungen (Vertical, Horizontal) und mehrere Positionen (Start, Center, End, Free).
+Die Hilfskomponente 🛟 Scrollbar stellt einen dekorativen Scrollbar-Indikator für Figma-Komponenten bereit. Sie unterstützt zwei Orientierungen (Vertical, Horizontal) und mehrere Positionen (Start, Center, End, Free).
 
 <div className="guideline-examples">
 <GuidelineExample
@@ -108,238 +187,72 @@ Custom Select Dropdown
 
 </div>
 </div>
-</DBStack>
 
-</DBSection>
+</LearnAside>
 
-<DBSection spacing="small" width="auto">
+</LearnBlock>
 
-## Komponenten
+<LearnBlock>
 
-{/* Tipps und Anleitungen für einzelne Komponenten */}
+## Lass Text wie im Code umbrechen
 
-<DBStack gap="medium">
+In Figma brechen Textebenen oft anders um als in der programmierten Komponente. Stelle das Breitenverhalten der Textebene zwischen **Hug** und **Fill** um, oder nutze die Property `🔀 Multiline`, wo es sie gibt.
+
+<LearnAside>
+
 ### Breadcrumb
 
 #### Lange Labels im Popover Item
 
-In der programmierten Komponente wächst das Popover mit seinem Inhalt, sodass lange Labels einzeilig bleiben. In Figma brechen die Labels standardmäßig um. Setze das Breiten-Resize-Verhalten der betroffenen Layer auf „Hug", damit das Verhalten in Figma dem Code entspricht.
+In der programmierten Komponente wächst das Popover mit seinem Inhalt, sodass lange Labels einzeilig bleiben. In Figma brechen die Labels standardmäßig um. Setze das Breitenverhalten der betroffenen Ebenen auf „Hug“, damit das Verhalten in Figma dem Code entspricht.
 
 <GuidelineExample
 	fullWidth
 	figmaUrl="https://embed.figma.com/design/o2INCfqNJAbAIvNuHwgxsg/Doku--Breadcrumb?node-id=2025-6&embed-host=share"
-	description='Wähle die betroffenen Layer aus und ändere das Breiten-Resize von „Fill" zu „Hug contents", damit das Verhalten dem Code entspricht'
+	description="Wähle die betroffenen Ebenen aus und ändere das Breitenverhalten von „Fill“ auf „Hug contents“, damit das Verhalten dem Code entspricht"
 />
 
-</DBStack>
-
-<DBStack gap="medium">
 ### Button
-#### Mehrzeiliger Text in Full-Width-Buttons
+
+#### Mehrzeiliger Text in Buttons mit Full Width
 
 <DBNotification variant="standalone" semantic="informational">
-	Mehrzeiligen Text nur in Ausnahmefällen verwenden, z. B. wenn der Text durch Übersetzung
-	verlängert wird.
+	Verwende mehrzeiligen Text nur in Ausnahmefällen, z. B. wenn der Text durch eine Übersetzung
+	länger wird.
 </DBNotification>
 
-Um automatische Zeilenumbrüche in einem Full-Width-Button zu aktivieren, den Text-Layer innerhalb des Buttons auswählen und das Breiten-Resize-Verhalten von Hug auf Fill ändern.
+Für automatische Zeilenumbrüche in einem Button mit Full Width wählst du die Ebene „Text“ im Button aus und änderst das Breitenverhalten von „Hug“ auf „Fill“.
 
 <div className="guideline-examples">
 <GuidelineExample
 	figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button-%E2%9C%85?node-id=4627-34&embed-host=share"
-	description="Den Text-Layer innerhalb der Button-Komponente auswählen"
+	description="Wähle die Ebene „Text“ in der Button-Komponente aus"
 />
 
 <GuidelineExample
 	figmaUrl="https://embed.figma.com/design/7ZUEgSRPJtyT8FKRT97Dzq/Doku--Button-%E2%9C%85?node-id=4627-834&embed-host=share"
-	description="Das Breiten-Resize-Verhalten von Hug auf Fill ändern"
+	description="Ändere das Breitenverhalten von „Hug“ auf „Fill“"
 />
 </div>
 
-</DBStack>
-
-<DBStack gap="medium">
-### Checkbox
-
-#### Full Width – Pflichtfeld-Kennzeichnung
-
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/3sTqkyZLQuIgT27PyPmIbz/Doku--Checkbox-%E2%9C%85?node-id=5608-40&embed-host=share"
-	layout="side"
->
-Checkboxen haben eine Toggle-Eigenschaft für das Pflichtfeld-Sternchen.
-
-Bei Full-Width-Checkboxen muss das Sternchen \* manuell im Label-Feld ergänzt werden.
-
-Required Toggle = true setzen für korrekte Dev Properties.
-
-</GuidelineExample>
-
-</DBStack>
-
-<DBStack gap="medium">
-### Control Panel & Shell
-
-#### Eigenes Logo mit dem DB Logo Importer hinzufügen
-
-<DBNotification variant="standalone" semantic="informational">
-	Erstelle dein markenkonformes Logo-SVG über das Marketingportal. Der Plugin-Import stellt
-	systemkonforme Farbvariablen und Größen sicher.
-</DBNotification>
-
-Im Brand-Bereich des ControlPanel kannst du nur in der Variante **Brand → Logozusatz** ein markenkonformes eigenes Logo mit Logozusatz hinzufügen. Nutze das Figma-Plugin <DBLink href="https://www.figma.com/community/plugin/1590462040996560100/concept-db-logo-importer" target="_blank" rel="noopener noreferrer" variant="inline">DB Logo Importer</DBLink>, um ein SVG aus dem <DBLink href="https://marketingportal.extranet.deutschebahn.com/marketingportal/Marke-und-Design/Basiselemente/Logo/Logozusatz-mit-Tool#unit=Regio&mode=unit&breaking=true" target="_blank" rel="noopener noreferrer" variant="inline">DB Markenlogo-Generator</DBLink> zu importieren. Das Plugin weist die korrekten Farbvariablen zu und platziert das Logo direkt im **Logo Slot**.
-
-<div className="guideline-examples">
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel-%E2%9C%85?node-id=4617-5&embed-host=share"
-	description="Das eigene Logo-SVG über den DB Markenlogo-Generator im Marketingportal erstellen"
-/>
-
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel-%E2%9C%85?node-id=4621-3&embed-host=share"
-	description="In Figma eine Shell- oder ControlPanel-Instanz auswählen, dann das Plugin DB Logo Importer starten und das SVG importieren"
-/>
-
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel-%E2%9C%85?node-id=4621-5&embed-host=share"
-	description="Das Plugin platziert das Logo im Logo Slot – mit korrekten Farbvariablen, Größen und gesperrtem Seitenverhältnis"
-/>
-</div>
-
-#### Popover Navigation Horizontal: Overflow-Buttons
-
-<DBNotification variant="standalone" semantic="informational">
-	Nur Desktop – Mobile Popover Horizontal ist auf SubNavigation (Level 2) mit einer einzelnen Ebene
-	begrenzt und zeigt keine Overflow-Buttons, keinen Active Indicator und keine ausgeklappten
-	Popover-Items.
-</DBNotification>
-
-Die Einstellung **Clip Content**, die für korrektes horizontales Overflow-Verhalten nötig ist, entfernt alle Elemente außerhalb des Children-Containers der Popover Navigation – einschließlich ausgeklappter Popover-Items und des Active Indicator (Level 1). Zeige entweder das Overflow-Verhalten oder den ausgeklappten bzw. aktiven Zustand, nicht beides gleichzeitig.
-
-<div className="guideline-examples">
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell-%E2%9C%85?node-id=4236-4&embed-host=share"
-	description="Für das Overflow-Verhalten Clip Content am Slot CP Navigation Popover Children aktivieren – ausgeklappte Items und der Active Indicator sind dann nicht sichtbar"
-/>
-
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell-%E2%9C%85?node-id=4236-11&embed-host=share"
-	description="Für ein ausgeklapptes Popover-Item oder den Active Indicator Clip Content deaktivieren – der horizontale Overflow wird dann nicht korrekt beschnitten"
-/>
-</div>
-
-#### Scrollverhalten vertikale Navigation und Meta
-
-In der vertikalen Navigation dockt die Meta-Navigation am unteren Rand an. Das gilt für die Varianten Drill Down und Tree.
-
-Füllen viele Navigation-Items den verfügbaren Platz, laufen sie unter die Meta-Navigation, anstatt sie zu verdrängen. Ändere in Figma das Auto-Layout-Verhalten der Navigation von Fill auf Hug, damit die Meta-Navigation unterhalb aller Navigation-Items bleibt und von der Navigation aus dem sichtbaren Bereich verdrängt wird.
-
-<div className="guideline-examples">
-<GuidelineExample
-fullWidth
-	figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel-%E2%9C%85?node-id=5533-28082&embed-host=share"
-	description="Bei wenigen Items bleibt die Meta-Navigation sichtbar – bei vielen Items laufen die Navigation-Items unter die Meta-Navigation"
-/>
-
-<GuidelineExample
-fullWidth
-	figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel-%E2%9C%85?node-id=5534-31129&embed-host=share"
-	description="Die Ebene CP Navigation auswählen und das vertikale Resizing von Fill container auf Hug contents ändern"
-/>
-</div>
-
-#### Shell Content Auto: Children Inhalt überlagert den End Slot
-
-In der Variante `Auto` von Shell Content dockt der `End Slot` am unteren Rand an. Dafür ist das Auto-Layout-Höhenverhalten des `Children` Slots initial auf Fill gesetzt.
-
-Wird der Inhalt höher als der verfügbare Platz, überlagert er in Figma den `End Slot`. Ändere dann das Höhenverhalten des `Children` Slot von `Fill` auf `Hug`, damit der `End Slot` unterhalb des Inhalts bleibt.
-
-<GuidelineExample
-	fullWidth
-	figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell-%E2%9C%85?node-id=4551-193&embed-host=share"
-	description="Die Ebene Children auswählen und das vertikale Resizing von Fill container auf Hug contents ändern"
-/>
-
-</DBStack>
-
-<DBStack gap="medium">
-### Custom Select
-
-#### Sonderfall Mobile Landscape
-
-Setze die Dropdown Height von (Def) Auto auf Fill, um die Dropdown-Höhe in begrenzten Viewport-Szenarien wie Mobile Landscape einzuschränken.
-
-<div className="guideline-examples">
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select-%E2%9C%85?node-id=5315-6&embed-host=share"
-	description="Standard: Dropdown Height auf (Def) Auto gesetzt"
-/>
-
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select-%E2%9C%85?node-id=5320-4&embed-host=share"
-	description="Dropdown Height auf Fill setzen für eingeschränkte Viewports"
-/>
-</div>
-
-</DBStack>
-
-<DBStack gap="medium">
-### Dialog
-
-#### Ausrichtung der Slot-Inhalte zum Close-Button
-
-Start Slot und End Slot des Dialog Headers richten ihren Inhalt an der Höhe des Close-Buttons aus. Für welche Elemente das relevant wird, hängt von ihrer Höhe ab.
-
-<GuidelineExample
-	figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=2025-4&embed-host=share"
-	fullWidth
-></GuidelineExample>
-
-- Elemente **kleiner als `sizing-md`** (Höhe des Close-Buttons): Container mit `min-height=sizing-md` und vertikaler Zentrierung
-- Elemente **höher als `sizing-md`**: Container mit `padding-top=spacing-X` (abhängig von der Höhe des Elements in der ersten Zeile), sodass die erste Zeile vertikal zum Close-Button zentriert bleibt
-
-</DBStack>
-
-<DBStack gap="medium">
 ### Heading
-
-#### Alignment einstellen
-
-Das Alignment steht nicht mehr als Component Property zur Verfügung. Für ein anderes Alignment als „Left“ stellst du es direkt an der Ebene innerhalb der Komponente ein.
-
-<div className="guideline-examples">
-<GuidelineExample
-	fullWidth
-	figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4160-87&embed-host=share"
-	description='Default Heading: Wähle die „Heading“-Textebene und stelle die Textausrichtung ein'
-/>
-
-<GuidelineExample
-	fullWidth
-	figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4161-368&embed-host=share"
-	description='Custom Heading: Wähle die „Container“-Ebene und stelle die Ausrichtung des Auto Layouts ein'
-/>
-</div>
 
 #### Mehrzeiliger Text bei Custom Headings
 
-Um automatische Zeilenumbrüche in einer Custom Heading zu ermöglichen, wähle die „Heading"-Ebene innerhalb der Komponente und ändere das Breitenverhalten von „Hug" auf „Fill".
+Für automatische Zeilenumbrüche in einer Custom Heading wählst du die Ebene „Heading“ in der Komponente aus und änderst das Breitenverhalten von „Hug“ auf „Fill“.
 
 <div className="guideline-examples">
 <GuidelineExample
 	figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4118-2706&embed-host=share"
-	description='Wähle die „Text"-Ebene innerhalb der Custom-Heading-Komponente'
+	description="Wähle die Ebene „Text“ in der Custom Heading aus"
 />
 
 <GuidelineExample
 	figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4118-3117&embed-host=share"
-	description='Ändere das Breitenverhalten von „Hug" auf „Fill"'
+	description="Ändere das Breitenverhalten von „Hug“ auf „Fill“"
 />
 </div>
 
-</DBStack>
-
-<DBStack gap="medium">
 ### Loading Indicator
 
 #### Mehrzeilige Labels bei fixer Breite
@@ -352,14 +265,38 @@ Bekommt ein Loading Indicator Circular eine fixe Breite und ist das Label länge
 
 </GuidelineExample>
 
-</DBStack>
+</LearnAside>
 
-<DBStack gap="medium">
+</LearnBlock>
+
+<LearnBlock>
+
+## Lass Inhalte wie im Code wachsen
+
+Ist ein Inhalt höher oder breiter, als die Komponente erwartet, läuft er in Figma über oder verdeckt andere Bereiche. Stelle das Größenverhalten des betroffenen Containers von **Fill** auf **Hug** um – oder umgekehrt.
+
+<LearnAside>
+
+### Textarea
+
+#### Vertikales Größenverhalten
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea-%E2%9C%85?node-id=4884-2&embed-host=share"
+	layout="side"
+>
+Passe nach dem Platzieren der Komponente und dem Setzen der Properties die Größe an und setze das vertikale Größenverhalten auf „Fill Container“ für:
+
+- Container
+- Textarea Container
+
+</GuidelineExample>
+
 ### Pagination
 
 #### Sonderfall Zeilenumbruch
 
-Der Slot `📦 Children` ist auf Hug gestellt, die Reihe kann daher nicht umbrechen. Ist die Pagination schmaler als die Reihe braucht, laufen die Items aus der Komponente heraus, statt in eine zweite Zeile zu rutschen. Zwei Schritte ermöglichen den Umbruch.
+Der Slot `📦 Children` ist auf Hug gestellt, die Reihe kann daher nicht umbrechen. Ist die Pagination schmaler, als die Reihe braucht, laufen die Items aus der Komponente heraus, statt in eine zweite Zeile zu rutschen. Zwei Schritte ermöglichen den Umbruch.
 
 <GuidelineExample
 	figmaUrl="https://embed.figma.com/design/diQoICeEsfVztFnf55Fufq/Doku--Pagination?node-id=2025-4&embed-host=share"
@@ -367,73 +304,112 @@ Der Slot `📦 Children` ist auf Hug gestellt, die Reihe kann daher nicht umbrec
 />
 
 - Beide Instanzen `Icon Button → Ghost` auf Ebene der Pagination ausblenden und als erstes und letztes Element in den Slot `📦 Children` einfügen
-- Das Breiten-Resize-Verhalten des Containers `📦 Children` von Hug auf Fill stellen
+- Das Breitenverhalten des Containers `📦 Children` von Hug auf Fill stellen
 
-</DBStack>
+### Custom Select
 
-<DBStack gap="medium">
-### Radio
+#### Sonderfall Mobile Landscape
 
-#### Full Width – Pflichtfeld-Kennzeichnung
+Setze „Dropdown Height“ von „(Def) Auto“ auf „Fill“, um die Höhe des Dropdowns bei wenig Platz im Viewport zu begrenzen, etwa in Mobile Landscape.
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select-%E2%9C%85?node-id=5315-6&embed-host=share"
+	description="Standard: „Dropdown Height“ steht auf „(Def) Auto“"
+/>
 
 <GuidelineExample
-	figmaUrl="https://embed.figma.com/design/kO9Hk3PMKNvggHWUNQZNFf/Doku--Radio-%E2%9C%85?node-id=4721-38&embed-host=share"
-	layout="side"
->
-Radio Buttons haben eine Toggle-Eigenschaft für das Pflichtfeld-Sternchen.
+	figmaUrl="https://embed.figma.com/design/BsjfnHsHqRefsWqazGyNHw/Doku--Custom-Select-%E2%9C%85?node-id=5320-4&embed-host=share"
+	description="Setze „Dropdown Height“ für begrenzte Viewports auf „Fill“"
+/>
+</div>
 
-Bei Full-Width-Radio-Buttons muss das Sternchen \* manuell im Label-Feld ergänzt werden.
+### Control Panel & Shell
 
-Required Toggle = true setzen für korrekte Dev Properties.
+#### Scrollverhalten von vertikaler Navigation und Meta
 
-</GuidelineExample>
+In der vertikalen Navigation dockt die Meta-Navigation am unteren Rand an. Das gilt für die Varianten Drill Down und Tree.
 
-</DBStack>
+Füllen viele Navigation Items den verfügbaren Platz, laufen sie unter die Meta-Navigation, statt sie zu verdrängen. Ändere in Figma das Auto-Layout-Verhalten der Navigation von Fill auf Hug. Dann bleibt die Meta-Navigation unter allen Navigation Items und wird von der Navigation aus dem sichtbaren Bereich geschoben.
 
-<DBStack gap="medium">
-### Switch
-
-#### Full Width – Pflichtfeld-Kennzeichnung
+<div className="guideline-examples">
+<GuidelineExample
+	fullWidth
+	figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel-%E2%9C%85?node-id=5533-28082&embed-host=share"
+	description="Bei wenigen Items bleibt die Meta-Navigation sichtbar – bei vielen Items laufen die Navigation Items unter die Meta-Navigation"
+/>
 
 <GuidelineExample
-	figmaUrl="https://embed.figma.com/design/LIYooyKYqaul7irlJKDflt/Doku--Switch-%E2%9C%85?node-id=5430-39&embed-host=share"
-	layout="side"
->
-Switches haben eine Toggle-Eigenschaft für das Pflichtfeld-Sternchen.
+	fullWidth
+	figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel-%E2%9C%85?node-id=5534-31129&embed-host=share"
+	description="Wähle die Ebene CP Navigation aus und ändere das vertikale Größenverhalten von Fill container auf Hug contents"
+/>
+</div>
 
-Bei Full-Width-Switches muss das Sternchen \* manuell im Label-Feld ergänzt werden.
+#### Shell Content Auto: Inhalt im Children Slot überlagert den End Slot
 
-Required Toggle = true setzen für korrekte Dev Properties.
+In der Variante `Auto` von Shell Content dockt der `End Slot` am unteren Rand an. Dafür ist das Höhenverhalten des Slots `Children` im Auto Layout initial auf Fill gesetzt.
 
-</GuidelineExample>
-
-</DBStack>
-
-<DBStack gap="medium">
-### Textarea
-
-#### Vertikales Resize-Verhalten
+Wird der Inhalt höher als der verfügbare Platz, überlagert er in Figma den `End Slot`. Ändere dann das Höhenverhalten des Slots `Children` von `Fill` auf `Hug`, damit der `End Slot` unter dem Inhalt bleibt.
 
 <GuidelineExample
-	figmaUrl="https://embed.figma.com/design/2gF67xeMuiyGIlW6lHHNC1/Doku--Textarea-%E2%9C%85?node-id=4884-2&embed-host=share"
-	layout="side"
->
-Nach dem Platzieren der Komponente und dem Setzen der Eigenschaften die Größe anpassen und das vertikale Resize-Verhalten auf Fill Container setzen für:
+	fullWidth
+	figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell-%E2%9C%85?node-id=4551-193&embed-host=share"
+	description="Wähle die Ebene Children aus und ändere das vertikale Größenverhalten von Fill container auf Hug contents"
+/>
 
-- Container
-- Textarea Container
+</LearnAside>
 
-</GuidelineExample>
+</LearnBlock>
 
-</DBStack>
+<LearnBlock>
 
-<DBStack gap="medium">
+## Stelle die Ausrichtung an der Ebene ein
+
+Manche Ausrichtungen sind keine Component Properties. Du stellst sie direkt an der Ebene in der Komponente ein – bei der Heading, den Slots im Dialog Header und dem Pfeil des Tooltips.
+
+<LearnAside>
+
+### Heading
+
+#### Alignment einstellen
+
+Das Alignment steht nicht mehr als Component Property zur Verfügung. Für ein anderes Alignment als „Left“ stellst du es direkt an der Ebene innerhalb der Komponente ein.
+
+<div className="guideline-examples">
+<GuidelineExample
+	fullWidth
+	figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4160-87&embed-host=share"
+	description="Default Heading: Wähle die Textebene „Heading“ und stelle die Textausrichtung ein"
+/>
+
+<GuidelineExample
+	fullWidth
+	figmaUrl="https://embed.figma.com/design/GAQwQI1UNW8HRMXnr4q8DC/Doku--Heading?node-id=4161-368&embed-host=share"
+	description="Custom Heading: Wähle die Ebene „Container“ und stelle die Ausrichtung des Auto Layouts ein"
+/>
+</div>
+
+### Dialog
+
+#### Ausrichtung der Slot-Inhalte zum Close-Button
+
+Start Slot und End Slot des Dialog Headers richten ihren Inhalt an der Höhe des Close-Buttons aus. Für welche Elemente das relevant wird, hängt von ihrer Höhe ab.
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/TBG73nKNPgXcLTluGz6dLM/Doku--Dialog?node-id=2025-4&embed-host=share"
+	fullWidth
+/>
+
+- Elemente **kleiner als `sizing-md`** (Höhe des Close-Buttons): Container mit `min-height=sizing-md` und vertikaler Zentrierung
+- Elemente **höher als `sizing-md`**: Container mit `padding-top=spacing-X` (abhängig von der Höhe des Elements in der ersten Zeile), sodass die erste Zeile vertikal zum Close-Button zentriert bleibt
+
 ### Tooltip
 
-#### Den Tooltip-Pfeil auf eine flexible Position ändern
+#### Den Pfeil des Tooltips flexibel positionieren
 
 <DBNotification variant="standalone" semantic="informational">
-	Der Pfeil für Tooltip links/rechts sollte nur mit width: fixed positioniert werden.
+	Positioniere den Pfeil für Tooltips links oder rechts nur mit width: fixed.
 </DBNotification>
 
 <GuidelineExample
@@ -444,15 +420,108 @@ Nach dem Platzieren der Komponente und dem Setzen der Eigenschaften die Größe 
 <div className="guideline-examples">
 <GuidelineExample
 	figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%9C%85?node-id=5371-6&embed-host=share"
-	description="Den Layer Arrow Container auswählen und Alignment auf top left / top right oder top left / bottom left statt top center oder center left setzen"
+	description="Wähle die Ebene „📐 Arrow Container“ und setze das Alignment auf „top left / top right“ oder „top left / bottom left“ statt „top center“ oder „center left“"
 />
 
 <GuidelineExample
 	figmaUrl="https://embed.figma.com/design/OBFhxnOw4VTa8sP9Wz36p4/Doku--Tooltip-%E2%9C%85?node-id=5371-7&embed-host=share"
-	description="Padding setzen, um den Pfeil zu positionieren"
+	description="Setze das Padding, um den Pfeil zu positionieren"
 />
 </div>
 
-</DBStack>
+</LearnAside>
 
-</DBSection>
+</LearnBlock>
+
+<LearnBlock>
+
+## Logo und Overflow im Control Panel
+
+Das Plugin **DB Logo Importer** setzt ein markenkonformes Logo mit Logozusatz in das Control Panel. Bei der horizontalen Popover Navigation zeigst du entweder den Overflow oder den ausgeklappten Zustand – nicht beides.
+
+<LearnAside>
+
+### Control Panel & Shell
+
+#### Eigenes Logo mit dem DB Logo Importer hinzufügen
+
+<DBNotification variant="standalone" semantic="informational">
+	Erstelle dein markenkonformes Logo-SVG über das Marketingportal. Der Plugin-Import stellt
+	systemkonforme Farbvariablen und Größen sicher.
+</DBNotification>
+
+Im Brand-Bereich des Control Panels kannst du nur in der Variante **Brand → Logozusatz** ein markenkonformes eigenes Logo mit Logozusatz hinzufügen. Nutze das Figma-Plugin <DBLink href="https://www.figma.com/community/plugin/1590462040996560100/concept-db-logo-importer" target="_blank" rel="noopener noreferrer" variant="inline">DB Logo Importer</DBLink>, um ein SVG aus dem <DBLink href="https://marketingportal.extranet.deutschebahn.com/marketingportal/Marke-und-Design/Basiselemente/Logo/Logozusatz-mit-Tool#unit=Regio&mode=unit&breaking=true" target="_blank" rel="noopener noreferrer" variant="inline">DB Markenlogo-Generator</DBLink> zu importieren. Das Plugin weist die korrekten Farbvariablen zu und platziert das Logo direkt im **Logo Slot**.
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel-%E2%9C%85?node-id=4617-5&embed-host=share"
+	description="Erstelle das eigene Logo-SVG über den DB Markenlogo-Generator im Marketingportal"
+/>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel-%E2%9C%85?node-id=4621-3&embed-host=share"
+	description="Wähle in Figma eine Instanz von Shell oder Control Panel aus, starte das Plugin DB Logo Importer und importiere das SVG"
+/>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/pElrqVUyojrzYzSagyJPS6/Doku--ControlPanel-%E2%9C%85?node-id=4621-5&embed-host=share"
+	description="Das Plugin platziert das Logo im Logo Slot – mit korrekten Farbvariablen, Größen und gesperrtem Seitenverhältnis"
+/>
+</div>
+
+#### Popover Navigation Horizontal: Overflow-Buttons
+
+<DBNotification variant="standalone" semantic="informational">
+	Nur Desktop – Mobile Popover Horizontal ist auf die Sub Navigation (Level 2) mit einer einzelnen
+	Ebene begrenzt und zeigt keine Overflow-Buttons, keinen Active Indicator und keine ausgeklappten
+	Popover Items.
+</DBNotification>
+
+Die Einstellung **Clip Content**, die für korrektes horizontales Overflow-Verhalten nötig ist, entfernt alle Elemente außerhalb des Children-Containers der Popover Navigation – einschließlich ausgeklappter Popover Items und des Active Indicators (Level 1). Zeige entweder das Overflow-Verhalten oder den ausgeklappten bzw. aktiven Zustand, nicht beides gleichzeitig.
+
+<div className="guideline-examples">
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell-%E2%9C%85?node-id=4236-4&embed-host=share"
+	description="Aktiviere für das Overflow-Verhalten Clip Content am Slot CP Navigation Popover Children – ausgeklappte Items und der Active Indicator sind dann nicht sichtbar"
+/>
+
+<GuidelineExample
+	figmaUrl="https://embed.figma.com/design/RcpbbqfJwjNRlOwPhAX1im/Doku--Shell-%E2%9C%85?node-id=4236-11&embed-host=share"
+	description="Deaktiviere für ein ausgeklapptes Popover Item oder den Active Indicator Clip Content – der horizontale Overflow wird dann nicht korrekt beschnitten"
+/>
+</div>
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Gestalte weiter
+
+Wende die Tipps in einem vollständigen Screen an, oder erfahre, wie dein Design in die Entwicklung kommt.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Ein Kontaktformular in Figma gestalten',
+			description:
+				'Gestalte Schritt für Schritt ein Kontaktformular und übergib es mit Code Connect.',
+			url: '/de/dokumentation/lernen/figma-tutorial',
+		},
+		{
+			title: 'Designs mit Code Connect übergeben',
+			description: 'Alles zu ⚙️-Properties und den Snippets im Dev Mode.',
+			url: '/de/dokumentation/lernen/code-connect',
+		},
+		{
+			title: 'Logos und eigene Farben in Figma ergänzen',
+			description: 'Figma-Plugins für Logos, eigene Farben und mehr.',
+			url: '/de/dokumentation/lernen/plugins',
+		},
+	]}
+/>
+
+</LearnBlock>

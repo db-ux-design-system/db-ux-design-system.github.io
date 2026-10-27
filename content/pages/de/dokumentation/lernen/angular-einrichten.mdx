@@ -1,0 +1,273 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Komponenten in Angular einbinden'
+headline: 'Komponenten in Angular einbinden'
+description: 'Binde die Komponenten in ein Angular-Projekt ein und prüfe, ob Styles, Schriften und Icons laden.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 11
+category: 'Development'
+keywords:
+  [
+    'angular',
+    'setup',
+    'installation',
+    'install',
+    'getting started',
+    'npm',
+    'pnpm',
+    'standalone components',
+    'angular.json',
+    'output hashing',
+    'ngmodel',
+    'styles',
+    'whitelabel theme',
+    'ngx-core-components',
+    'core-components',
+    'core-foundations',
+    'troubleshooting',
+    'fonts not loading',
+  ]
+stepper: true
+---
+
+import { DBNotification } from '@db-ux/react-core-components';
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Du brauchst ein Angular-Projekt und Node.js
+
+Jedes Angular-Projekt mit **Standalone Components** funktioniert. Die Befehle auf dieser Seite nutzen pnpm.
+
+<LearnAside>
+
+- **Paketmanager:** Mit npm nutzt du `npm i` statt `pnpm add`.
+- **Browser:** die letzten drei Versionen von Chrome und Edge, Firefox ESR und die letzten zwei Major-Versionen von Safari.
+- **Versionen:** Die Showcases im Repository core-web laufen mit Angular 21 und Version 6 der Pakete des Design Systems.
+- **DB Theme:** Produkte der Deutschen Bahn brauchen zusätzlich das DB Theme. Du kannst ohne anfangen, denn das Whitelabel-Theme funktioniert sofort.
+
+### Alternativ mit einem Beispielprojekt starten
+
+Statt mit einem leeren Projekt kannst du das passende Beispielprojekt kopieren. Es enthält die Pakete und das Styling-Setup schon:
+
+```shell
+npx degit db-ux-design-system/examples/angular-example my-app
+cd my-app
+npm install
+npm run dev
+```
+
+Die Beispiele nutzen das Whitelabel-Theme und eine ältere Version des Design Systems. Aktualisiere die Pakete, bevor du auf einem Beispiel aufbaust, und ergänze für ein Produkt der Deutschen Bahn das [DB Theme](/de/dokumentation/lernen/db-theme-einrichten). Alle Beispielprojekte findest du unter [Mit einem Beispielprojekt starten](/de/dokumentation/lernen/beispiele).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Installiere drei Pakete
+
+Die Angular-Komponenten brauchen beide Style-Pakete: die Styles der Komponenten und die Foundation darunter.
+
+```shell
+pnpm add @db-ux/ngx-core-components @db-ux/core-components @db-ux/core-foundations
+```
+
+<LearnAside>
+
+| Paket                        | Inhalt                                            |
+| ---------------------------- | ------------------------------------------------- |
+| `@db-ux/ngx-core-components` | Die Komponenten als Angular-Komponenten           |
+| `@db-ux/core-components`     | Die Styles der Komponenten                        |
+| `@db-ux/core-foundations`    | Tokens, das Whitelabel-Theme, Schriften und Icons |
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Bei den Styles zählt die Reihenfolge
+
+Importiere in deinem globalen Stylesheet zuerst das Theme, danach die Styles der Komponenten. Die Zeile mit `@layer` legt das fest.
+
+```css
+/* src/styles.css */
+@layer whitelabel-theme, db-ux;
+@import '@db-ux/core-foundations/build/styles/theme/rollup.css' layer(whitelabel-theme);
+@import '@db-ux/core-components/build/styles/bundle.css' layer(db-ux);
+```
+
+<LearnAside>
+
+### Die passende Datei für deinen Bundler
+
+| Datei          | Nutze sie, wenn …                                                 |
+| -------------- | ----------------------------------------------------------------- |
+| `rollup.css`   | die Asset-Pfade gegen das Paket aufgelöst werden (Standard)       |
+| `webpack.css`  | du mit Webpack baust                                              |
+| `relative.css` | du Icons und Schriften in deinen eigenen `public`-Ordner kopierst |
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Lass Angular die Schriften finden
+
+Ohne Output-Hashing laden die Schriften im Entwicklungs-Build oft nicht. Setze `outputHashing` in `angular.json` auf `media`.
+
+```json
+"development": {
+	"outputHashing": "media"
+}
+```
+
+<LearnAside>
+
+Der vollständige Pfad ist `projects.<name>.architect.build.configurations.development`. Die Produktionskonfiguration nutzt Output-Hashing bereits, deshalb braucht nur die Entwicklungskonfiguration diese Einstellung.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Prüfe das Setup mit einem Button
+
+Importiere `DBButton` in deiner Standalone Component. Ein Button mit Icon zeigt, ob Styles, Schrift und Icons laden.
+
+```ts
+import { DBButton } from '@db-ux/ngx-core-components';
+@Component({ imports: [DBButton],
+	template: `<db-button variant="brand" icon="arrow_right">Artikel in den Warenkorb</db-button>`,
+})
+```
+
+<LearnAside>
+
+| Prüfung | Erwartet                                                                                            |
+| ------- | --------------------------------------------------------------------------------------------------- |
+| Styles  | Der Button hat einen gefüllten Hintergrund in der Markenfarbe und abgerundete Ecken.                |
+| Schrift | Die DevTools zeigen `OpenSans` als gerenderte Schrift – oder `DB Neo Screen Sans` mit dem DB Theme. |
+| Icon    | Vor dem Text erscheint ein Pfeil.                                                                   |
+
+### Werte und Events binden
+
+Formular-Komponenten kennen drei Wege, Werte zu binden: `ngModel`, `FormControl` und einfaches Event-Binding. Alle drei beschreibt das [README des Pakets](https://github.com/db-ux-design-system/core-web/tree/main/output/angular).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Wenn etwas nicht richtig aussieht
+
+Die meisten Probleme beim Setup kommen von der Reihenfolge der Styles oder vom Output-Hashing im Entwicklungs-Build.
+
+<LearnAside>
+
+| Symptom                                 | Ursache und Lösung                                                                                                                                                             |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Komponenten erscheinen ohne Styles      | Der CSS-Import fehlt, oder das Theme wird nach den Styles der Komponenten geladen. Setze `@layer whitelabel-theme, db-ux;` als erste Anweisung.                                |
+| Schriften laden nicht                   | Das Output-Hashing ist in der Entwicklungskonfiguration abgeschaltet. Setze `"outputHashing": "media"` wie im vorigen Schritt.                                                 |
+| Icons fehlen                            | Der Browser findet die Asset-Dateien nicht. Im Network-Tab schlägt eine Anfrage für eine `.woff2`-Datei fehl. Wechsle zwischen `rollup.css`, `webpack.css` und `relative.css`. |
+| `db-button` ist ein unbekanntes Element | `DBButton` fehlt in den `imports` der Komponente, die ihn nutzt.                                                                                                               |
+| PostCSS-Plugin greift nicht             | Die Angular CLI ignoriert JavaScript-basierte PostCSS-Konfigurationen. Nutze eine `postcss.config.json`.                                                                       |
+
+Wenn nichts davon hilft, eröffne ein Issue im [core-web-Repository](https://github.com/db-ux-design-system/core-web/issues/new/choose). Prüfe vorher, ob es das Issue schon gibt.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Mach mit deinem Projekt weiter
+
+Ergänze das DB Theme oder starte mit einem Beispiel.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'DB Theme',
+			description: 'Ergänze die Farben, Schriften und Icons der Marke Deutsche Bahn.',
+			url: '/de/dokumentation/lernen/db-theme-einrichten',
+		},
+		{
+			title: 'Komponenten',
+			description: 'Props, Varianten und Richtlinien für jede Komponente.',
+			url: '/de/dokumentation/komponenten',
+		},
+		{
+			title: 'Beispielprojekte',
+			description: 'Fertige Beispielprojekte zum Öffnen im Browser oder als Ausgangspunkt.',
+			url: '/de/dokumentation/lernen/beispiele',
+		},
+	]}
+/>
+
+<LearnAside>
+
+Keines der beiden Plugins brauchst du für den Start. Ergänze sie, sobald deine erste Komponente erscheint.
+
+### PostCSS-Plugin
+
+Reduziert die Bundle-Größe, indem es `var()`, `calc()`, `color-mix()` und `light-dark()` zur Build-Zeit auflöst und ungenutzte Deklarationen entfernt.
+
+```shell
+pnpm add @db-ux/core-postcss-plugin --save-dev
+```
+
+```json
+{
+	"plugins": {
+		"@db-ux/core-postcss-plugin": {}
+	}
+}
+```
+
+<DBNotification
+	variant="standalone"
+	semantic="informational"
+	headline="JSON-Konfiguration erforderlich"
+>
+	Die Angular CLI (`@angular/build:application`) liest nur JSON-basierte PostCSS-Konfigurationen und
+	lädt Plugins über ihren Namen. Lege die Konfiguration als `postcss.config.json` im Projektstamm ab
+	– dann funktioniert sie in `ng build` und `ng serve`.
+</DBNotification>
+
+### ESLint-Plugin
+
+Meldet falsche Komponentennutzung direkt im Editor.
+
+```shell
+pnpm add eslint @db-ux/core-eslint-plugin @typescript-eslint/parser --save-dev
+```
+
+### Ressourcen
+
+| Ressource        | Link                                                                                                               |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------ |
+| npm-Paket        | [@db-ux/ngx-core-components](https://www.npmjs.com/package/@db-ux/ngx-core-components)                             |
+| Storybook        | [Angular Storybook](https://design-system.deutschebahn.com/core-web/review/main/angular-storybook)                 |
+| Quellcode        | [core-web/output/angular](https://github.com/db-ux-design-system/core-web/tree/main/output/angular)                |
+| README (Events)  | [ngModel, FormControl und Event-Binding](https://github.com/db-ux-design-system/core-web/tree/main/output/angular) |
+| Komponentendoku  | [Komponenten](/de/dokumentation/komponenten)                                                                       |
+| Migration Guides | [Migration Guides](/de/dokumentation/releases/migration-guides)                                                    |
+| Issues           | [core-web-Repository](https://github.com/db-ux-design-system/core-web/issues/new/choose)                           |
+
+</LearnAside>
+
+</LearnBlock>

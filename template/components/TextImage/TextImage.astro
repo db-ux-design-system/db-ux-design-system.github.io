@@ -76,6 +76,9 @@ const hasVisual = visualHtml !== '';
 			<Fragment set:html={visualHtml} />
 		) : imageSrc ? (
 			<>
+				{/* The dark image is only rendered when a separate asset exists. Without it both
+				    tags would carry the same src, which costs a redundant node and makes the
+				    global content spacing (`img + img`) apply a top margin to the second one. */}
 				<img
 					class="lightmode-image"
 					src={imageSrc}
@@ -83,13 +86,15 @@ const hasVisual = visualHtml !== '';
 					loading="lazy"
 					data-rounded={rounded ? 'true' : undefined}
 				/>
-				<img
-					class="darkmode-image"
-					src={imageSrcDark ?? imageSrc}
-					alt={imageAlt ?? ''}
-					loading="lazy"
-					data-rounded={rounded ? 'true' : undefined}
-				/>
+				{imageSrcDark && (
+					<img
+						class="darkmode-image"
+						src={imageSrcDark}
+						alt={imageAlt ?? ''}
+						loading="lazy"
+						data-rounded={rounded ? 'true' : undefined}
+					/>
+				)}
 			</>
 		) : null}
 	</div>
