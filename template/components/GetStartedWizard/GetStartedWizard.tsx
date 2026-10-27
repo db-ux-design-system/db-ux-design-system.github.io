@@ -65,6 +65,9 @@ function readAnswers(): Answers {
  * only changed the URL and kept the other page on screen. All steps share the index
  * of the page entry, which keeps the router's back/forward detection right.
  */
+/** The popstate hook read by the first popstate listener, see HtmlHead.astro. */
+type PopStateWindow = Window & { __dbUxPopState?: (event: PopStateEvent) => boolean };
+
 function writeAnswers(answers: Answers) {
 	const params = new URLSearchParams();
 	for (const id of askedQuestions(answers)) params.set(id, answers[id]!);
@@ -105,14 +108,16 @@ const GetStartedWizard = ({ lang = 'en' }: { lang?: Lang }) => {
 
 	useEffect(() => {
 		const { pathname } = window.location;
-		const onPopState = (event: PopStateEvent) => {
+		const popStateWindow = window as PopStateWindow;
+		const onPopState = () => {
 			// An entry of another page: ClientRouter swaps the page.
-			if (window.location.pathname !== pathname) return;
+			if (window.location.pathname !== pathname) return false;
 			// A step of this wizard: the wizard re-renders itself. The steps carry the
 			// ClientRouter state, so the router would otherwise fetch and swap the whole
-			// page. Registered in the capture phase, this runs before the router's
-			// listener on window and can stop it.
-			event.stopImmediatePropagation();
+			// page. A listener of the wizard itself would come too late: listeners on
+			// window run in registration order, and the router registers before the
+			// island hydrates. The listener in HtmlHead.astro runs first and calls this
+			// hook; returning true stops the router.
 			moveFocus.current = true;
 			const nextAnswers = readAnswers();
 			// Going Back drops the last answer from the URL: the step now shown is the
@@ -123,9 +128,12 @@ const GetStartedWizard = ({ lang = 'en' }: { lang?: Lang }) => {
 				return 'question' in back ? (answers[back.question.id] ?? previous) : undefined;
 			});
 			setAnswers(nextAnswers);
+			return true;
 		};
-		window.addEventListener('popstate', onPopState, { capture: true });
-		return () => window.removeEventListener('popstate', onPopState, { capture: true });
+		popStateWindow.__dbUxPopState = onPopState;
+		return () => {
+			if (popStateWindow.__dbUxPopState === onPopState) delete popStateWindow.__dbUxPopState;
+		};
 		// `answers` is read in the handler to recover the preselection; re-register so
 		// the closure sees the current answers.
 	}, [answers]);
