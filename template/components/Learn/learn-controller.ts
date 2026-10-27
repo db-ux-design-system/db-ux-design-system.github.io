@@ -203,6 +203,32 @@ function setup(root: HTMLElement): boolean {
 		}
 		const rawStep = Number(params.get('step'));
 		stepIndex = Number.isFinite(rawStep) && rawStep > 0 ? Math.min(rawStep - 1, total - 1) : 0;
+		// A link to a section (#anchor) wins over the step: open the step that holds it.
+		const hashStep = stepOfHash();
+		if (hashStep !== undefined) stepIndex = hashStep;
+	};
+
+	/**
+	 * Index of the step that contains the target of the URL hash, or undefined without
+	 * a hash or without a matching element. Links from the wizard and the reading list
+	 * point to sections (e.g. #where-to-get-help); in the stepper only one step is
+	 * visible, so without this the target would stay hidden behind step 1.
+	 */
+	const stepOfHash = (): number | undefined => {
+		const id = decodeURIComponent(window.location.hash.slice(1));
+		if (!id) return undefined;
+		const target = document.getElementById(id);
+		if (!target) return undefined;
+		const index = steps.findIndex((step) => step.element?.contains(target));
+		// Not in a block: the target is in the hero, which is the intro step.
+		return index === -1 ? 0 : index;
+	};
+
+	/** Scrolls the hash target into view once its step is shown. */
+	const revealHash = () => {
+		const id = decodeURIComponent(window.location.hash.slice(1));
+		const target = id ? document.getElementById(id) : null;
+		if (target) requestAnimationFrame(() => target.scrollIntoView());
 	};
 
 	const writeUrl = () => {
@@ -369,8 +395,30 @@ function setup(root: HTMLElement): boolean {
 	root.addEventListener('toggle', () => fit(), true);
 	root.addEventListener('load', () => fit(), true);
 
+	// A link to a section on the same page (e.g. from the reading list while the page is
+	// open): switch to the step that holds it.
+	// The step in the query string is not updated here: replaceState would drop the hash,
+	// and on a reload the hash wins over the step anyway.
+	const onHashChange = () => {
+		if (view !== 'stepper') return;
+		const index = stepOfHash();
+		if (index === undefined) return;
+		stepIndex = index;
+		render(false);
+		revealHash();
+	};
+	window.addEventListener('hashchange', onHashChange);
+	// The listener belongs to this page; a ClientRouter navigation replaces it.
+	document.addEventListener(
+		'astro:before-swap',
+		() => window.removeEventListener('hashchange', onHashChange),
+		{ once: true },
+	);
+
 	readInitial();
 	render(false);
+	// readInitial sets the view; render mirrors it on the root.
+	if (root.dataset.learnView === 'stepper') revealHash();
 	return true;
 }
 
