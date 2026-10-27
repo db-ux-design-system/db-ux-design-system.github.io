@@ -44,6 +44,36 @@ export default defineConfig({
 		'/documentation/releases/versioning': '/documentation/learn/versioning',
 		'/de/dokumentation/releases/versionierung': '/de/dokumentation/lernen/versionierung',
 	},
+	markdown: {
+		shikiConfig: {
+			// Same theme as before (Astro's default). Code blocks stay dark in both modes.
+			theme: 'github-dark',
+			transformers: [
+				{
+					name: 'db-ux-dark-code',
+					// The block is dark in light mode as well, so the tokens inside need
+					// their dark mode values.
+					pre(node) {
+						node.properties['data-mode'] = 'dark';
+					},
+					// The comment color #6a737d has 3.05:1 on the code background (#24292e),
+					// below WCAG 1.4.3 (4.5:1). It is replaced with a DB UX token, resolved in
+					// dark mode (see pre above): #8a919e, 4.63:1. All other colors pass and
+					// stay. Done per token: Shiki's colorReplacements missed the first line of
+					// some blocks.
+					span(node) {
+						const { style } = node.properties;
+						if (typeof style === 'string' && /#6a737d/i.test(style)) {
+							node.properties.style = style.replace(
+								/#6a737d/gi,
+								'var(--db-adaptive-on-bg-basic-emphasis-70-default)',
+							);
+						}
+					},
+				},
+			],
+		},
+	},
 	srcDir: './content',
 	outDir: './public',
 	publicDir: './static',

@@ -50,7 +50,14 @@ const { title, loadModelViewer } = Astro.props as {
 	<script is:inline>
 		(() => {
 			const apply = () => {
-				const stored = window.localStorage.getItem('db-ux-mode');
+				let stored = null;
+				// Reading throws when storage is blocked (e.g. some private modes). The
+				// default mode applies then, and the listener below is still registered.
+				try {
+					stored = window.localStorage.getItem('db-ux-mode');
+				} catch {
+					// Keep the default.
+				}
 				document.documentElement.setAttribute('data-mode', stored === 'dark' ? 'dark' : 'light');
 			};
 			apply();

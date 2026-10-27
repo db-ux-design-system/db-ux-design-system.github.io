@@ -68,14 +68,33 @@ function writeRaw(value: string) {
 	window.dispatchEvent(new Event(CHANGE_EVENT));
 }
 
+/**
+ * Ids of pages whose EN anchor changed. Lists saved before keep working: the old id is
+ * read as the new one. The roadmap section was dropped from the EN About page; every
+ * release note links to the roadmap of its version instead. Status and versioning
+ * moved from the About page and from Releases into their own Learn articles.
+ */
+const RENAMED_IDS: Record<string, string> = {
+	'documentation/learn/about#where-to-ask-which-question':
+		'documentation/learn/about#where-to-get-help',
+	'documentation/learn/about#what-a-status-means': 'documentation/learn/status',
+	'documentation/learn/about#every-content-has-a-status': 'documentation/learn/status',
+	'documentation/learn/about#roadmap': 'documentation/releases/release-notes',
+	'documentation/releases/versioning': 'documentation/learn/versioning',
+	'documentation/releases/content-status': 'documentation/learn/status',
+};
+
 function parse(raw: string | null): ReadingList {
 	if (!raw) return EMPTY;
 	try {
 		const value = JSON.parse(raw) as Partial<ReadingList>;
 		if (value?.version === 1 && Array.isArray(value.items)) {
-			const items = value.items.filter(
-				(item): item is ReadingListItem => typeof item?.id === 'string',
-			);
+			const seen = new Set<string>();
+			const items = value.items
+				.filter((item): item is ReadingListItem => typeof item?.id === 'string')
+				.map((item) => (RENAMED_IDS[item.id] ? { ...item, id: RENAMED_IDS[item.id] } : item))
+				// A renamed id can match a page that is on the list already.
+				.filter((item) => !seen.has(item.id) && Boolean(seen.add(item.id)));
 			return { version: 1, items, wizard: value.wizard };
 		}
 	} catch {
@@ -121,8 +140,9 @@ export function removeItem(id: string) {
 }
 
 /**
- * Removes all pages. The key of the last wizard result stays, so showing that result
- * again (e.g. after a reload) does not bring its pages back, as with single deletes.
+ * Removes all pages. The key of the last wizard result stays, so a reload of that
+ * result does not bring its pages back. Going through the wizard again adds them (see
+ * addWizardResult, force).
  */
 export function clearItems() {
 	const list = getSnapshot();
@@ -143,11 +163,15 @@ const isWizardItem = (item: ReadingListItem) =>
  * the pages of the previous one are dropped, the pages saved with the bookmark button
  * stay and keep their place. A page of the result that is already a bookmark stays a
  * bookmark. The same result is only added once in a row (see ReadingList.wizard), so
- * a reload does not bring back pages that were deleted.
+ * a reload does not bring back pages that were deleted. force skips that check, for a
+ * result the user reached by going through the wizard.
  */
-export function addWizardResult(answersKey: string, ids: string[]) {
+export function addWizardResult(answersKey: string, ids: string[], force = false) {
 	const list = getSnapshot();
-	if (list.wizard === answersKey) return;
+	// Skipped for the result added last, unless the user reached it again by going
+	// through the wizard (force): a reload or a shared link must not bring back pages
+	// that were deleted, a deliberate new run must.
+	if (list.wizard === answersKey && !force) return;
 	const withoutPrevious = { ...list, items: list.items.filter((item) => !isWizardItem(item)) };
 	write({
 		version: 1,

@@ -1,5 +1,12 @@
 import { type CSSProperties, useEffect, useId, useRef, useState } from 'react';
-import { DBBadge, DBButton, DBPopover } from '@db-ux/react-core-components';
+import {
+	DBBadge,
+	DBButton,
+	DBDialog,
+	DBDialogFooter,
+	DBDialogHeader,
+	DBPopover,
+} from '@db-ux/react-core-components';
 import { useLanguage } from '@template/context/language-context';
 import { roleColors, wizardHref } from '@template/components/GetStartedWizard/wizard-flow';
 import { clearItems, removeItem, useReadingList } from './reading-list-store';
@@ -21,6 +28,11 @@ import { readingListTexts } from './texts';
  * the trigger and shows the popover again once the pointer and the focus have left,
  * or on a click on the trigger.
  */
+/** The pending delete of the confirmation dialog; opener gets the focus on Cancel. */
+type Confirm =
+	| { kind: 'one'; id: string; label: string; index: number; opener: HTMLElement }
+	| { kind: 'all'; opener: HTMLElement };
+
 const ReadingListButton = ({ size }: { size?: 'small' }) => {
 	const { language: lang } = useLanguage();
 	const text = readingListTexts[lang];
@@ -45,7 +57,8 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 			setDismissed(value);
 		};
 		const onKeyDown = (event: KeyboardEvent) => {
-			if (event.key !== 'Escape' || dismissedRef.current) return;
+			// Escape in an open confirmation dialog belongs to the dialog.
+			if (event.key !== 'Escape' || dismissedRef.current || confirmRef.current) return;
 			const focusInside = wrapper.contains(document.activeElement);
 			if (!focusInside && !wrapper.matches(':hover')) return;
 			if (focusInside) {
@@ -95,27 +108,63 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 		.map((source) => ({ source, items: items.filter((item) => item.source === source) }))
 		.filter((group) => group.items.length > 0);
 
+	// Both deletes ask first. While the dialog is open the focus is in the dialog, so the
+	// popover (open on hover and focus) is closed. Afterwards the focus goes to the
+	// trigger first, which opens the popover again, and then to the control inside.
+	const [confirm, setConfirm] = useState<Confirm | null>(null);
+	const confirmRef = useRef<Confirm | null>(null);
+	confirmRef.current = confirm;
+	const descriptionId = `${idPrefix}-confirm-text`;
+
+	// Runs after the dialog has closed: closing a modal dialog moves the focus back to
+	// the element it was opened from, which is hidden in the closed popover then, and
+	// that would override the focus set here.
+	const focusInPopover = (target?: HTMLElement | null) => {
+		const trigger = wrapperRef.current?.querySelector<HTMLElement>('.rl-trigger');
+		window.setTimeout(() => {
+			trigger?.focus();
+			// One frame for the popover to show before its content can take the focus.
+			requestAnimationFrame(() => {
+				if (target?.isConnected) target.focus();
+			});
+		}, 0);
+	};
+
 	// index: position across both groups, in the order of the delete buttons.
 	const remove = (id: string, label: string, index: number) => {
 		// The row disappears, so the focus moves to the delete button that takes its
-		// place, or to the one above. With the last page gone, it moves to the trigger,
+		// place, or to the one above. With the last page gone, it stays on the trigger,
 		// which keeps the popover open.
 		const wrapper = wrapperRef.current;
 		const buttons = [...(wrapper?.querySelectorAll<HTMLElement>('.rl-item-remove') ?? [])];
 		const target = buttons[index + 1] ?? buttons[index - 1];
-		const trigger = wrapper?.querySelector<HTMLElement>('.rl-trigger');
 		removeItem(id);
 		setStatus(text.removed(label));
-		requestAnimationFrame(() => (target?.isConnected ? target : trigger)?.focus());
+		focusInPopover(target);
 	};
 
 	// The button disappears with the entries, so the focus moves to the trigger, which
 	// keeps the popover open on the empty state.
 	const removeAll = () => {
-		const trigger = wrapperRef.current?.querySelector<HTMLElement>('.rl-trigger');
 		clearItems();
 		setStatus(text.removedAll);
-		requestAnimationFrame(() => trigger?.focus());
+		focusInPopover();
+	};
+
+	const cancelConfirm = () => {
+		const current = confirmRef.current;
+		if (!current) return;
+		setConfirm(null);
+		// Back to the bin button the dialog was opened from.
+		focusInPopover(current.opener);
+	};
+
+	const acceptConfirm = () => {
+		const current = confirmRef.current;
+		if (!current) return;
+		setConfirm(null);
+		if (current.kind === 'all') removeAll();
+		else remove(current.id, current.label, current.index);
 	};
 
 	return (
@@ -179,7 +228,7 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 								icon="bin"
 								noText
 								className="rl-remove-all"
-								onClick={removeAll}
+								onClick={(event) => setConfirm({ kind: 'all', opener: event.currentTarget })}
 							>
 								{text.removeAll}
 							</DBButton>
@@ -241,7 +290,15 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 													icon="bin"
 													noText
 													className="rl-item-remove"
-													onClick={() => remove(item.id, item.label, offset + index)}
+													onClick={(event) =>
+														setConfirm({
+															kind: 'one',
+															id: item.id,
+															label: item.label,
+															index: offset + index,
+															opener: event.currentTarget,
+														})
+													}
 												>
 													{text.remove(item.label)}
 												</DBButton>
@@ -257,6 +314,38 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 					</span>
 				</div>
 			</DBPopover>
+			{/* Outside the popover: inside, it would be hidden together with the popover
+			    once the focus moves into the dialog. Modal, like the "Finished reading?"
+			    dialog: Escape, the close button and the backdrop cancel. */}
+			<DBDialog
+				open={Boolean(confirm)}
+				onClose={cancelConfirm}
+				aria-describedby={descriptionId}
+				header={
+					<DBDialogHeader
+						closeButtonText={text.finishedClose}
+						text={confirm?.kind === 'all' ? text.confirmRemoveAllTitle : text.confirmRemoveTitle}
+					/>
+				}
+				footer={
+					<DBDialogFooter>
+						<DBButton type="button" variant="ghost" onClick={cancelConfirm}>
+							{text.confirmCancel}
+						</DBButton>
+						<DBButton type="button" variant="brand" onClick={acceptConfirm}>
+							{confirm?.kind === 'all' ? text.removeAll : text.confirmRemove}
+						</DBButton>
+					</DBDialogFooter>
+				}
+			>
+				<p id={descriptionId} className="rl-confirm-text">
+					{confirm?.kind === 'all'
+						? text.confirmRemoveAllText(count)
+						: confirm
+							? text.confirmRemoveText(confirm.label)
+							: ''}
+				</p>
+			</DBDialog>
 		</div>
 	);
 };

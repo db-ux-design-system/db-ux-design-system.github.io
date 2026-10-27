@@ -21,6 +21,14 @@ const waitForToggle = async (page: Page) => {
 	await expect(page.locator('astro-island:has(> .rl-toggle)')).not.toHaveAttribute('ssr', /.*/);
 };
 
+// Deleting asks first: confirms the dialog of the desktop reading list.
+const confirmDelete = async (page: Page, button = 'Remove') => {
+	const dialog = page.locator('.db-control-panel-desktop .rl-control dialog[open]');
+	await expect(dialog).toBeVisible();
+	await dialog.getByRole('button', { name: button, exact: true }).click();
+	await expect(dialog).toHaveCount(0);
+};
+
 const readList = (page: Page) =>
 	page.evaluate((key) => JSON.parse(localStorage.getItem(key) ?? 'null'), KEY);
 
@@ -52,12 +60,12 @@ test('reading list is always visible and filled by the wizard result', async ({ 
 	const cta = page.locator('.gsw-start');
 	await expect(cta).toHaveText('Start learning package');
 	await expect(cta).toHaveAttribute('data-icon-trailing', 'arrow_right');
-	await expect(cta).toHaveAttribute('href', '/documentation/resources/design');
+	await expect(cta).toHaveAttribute('href', '/documentation/learn/figma-setup');
 	await expect(page.locator('.gsw-package-list a[data-variant=brand]')).toHaveCount(0);
 	const firstArrow = page.locator('.gsw-package-button').first();
 	await expect(firstArrow).toHaveAttribute('data-variant', 'ghost');
 	await expect(firstArrow).toHaveAttribute('data-icon', 'arrow_right');
-	await expect(firstArrow).toHaveAccessibleName('Open: Design Resources');
+	await expect(firstArrow).toHaveAccessibleName('Open: Set up the Figma libraries');
 
 	// Hint that the pages are on the reading list: an overlay notification below the
 	// control panel, with the bookmark icon of the header button.
@@ -99,9 +107,9 @@ test('reading list is always visible and filled by the wizard result', async ({ 
 
 	const stored = await readList(page);
 	expect(stored.items.map((item: { id: string }) => item.id)).toEqual([
-		'documentation/resources/design',
+		'documentation/learn/figma-setup',
 		'documentation/learn/figma-tutorial',
-		'documentation/learn/about#where-to-ask-which-question',
+		'documentation/learn/about#where-to-get-help',
 	]);
 	await expect(trigger).toHaveAccessibleName('Reading list, 3 pages');
 	await expect(trigger.locator('.db-badge')).toHaveText('3');
@@ -117,19 +125,18 @@ test('reading list is always visible and filled by the wizard result', async ({ 
 		'Suggested in Get Started',
 	);
 	await expect(popover.locator('.rl-item-link')).toHaveText([
-		'Design Resources',
-		'Figma Tutorial',
-		'Where to ask which question',
+		'Set up the Figma libraries',
+		'Design a contact form in Figma',
+		'Where to get help',
 	]);
 	await expect(popover.locator('input[type=checkbox]')).toHaveCount(0);
 	await expect(popover.getByRole('button', { name: /Start again|Remove$/ })).toHaveCount(0);
 
 	// Delete: the focus moves to the delete button that takes the row's place.
-	await popover.getByRole('button', { name: 'Remove: Figma Tutorial' }).click();
+	await popover.getByRole('button', { name: 'Remove: Design a contact form in Figma' }).click();
+	await confirmDelete(page);
 	await expect(popover.locator('.rl-item')).toHaveCount(2);
-	await expect(
-		popover.getByRole('button', { name: 'Remove: Where to ask which question' }),
-	).toBeFocused();
+	await expect(popover.getByRole('button', { name: 'Remove: Where to get help' })).toBeFocused();
 	await expect(trigger).toHaveAccessibleName('Reading list, 2 pages');
 
 	// The same result again (reload) does not bring the deleted page back.
@@ -169,7 +176,7 @@ test('bookmark button adds and removes the page', async ({ page }) => {
 	await expect(toggle).not.toHaveAttribute('data-icon-variant', 'db-filled');
 	await expect(toggle.locator('.db-tooltip')).toHaveText('Add to reading list');
 	// The button sits outside the heading, so the heading name stays the headline.
-	await expect(page.locator('h1')).toHaveAccessibleName('Figma');
+	await expect(page.locator('h1')).toHaveAccessibleName('Work with the components in Figma');
 
 	await waitForToggle(page);
 	await toggle.click();
@@ -190,7 +197,7 @@ test('bookmark button adds and removes the page', async ({ page }) => {
 	await expect(deToggle).toHaveAccessibleName('Von der Leseliste entfernen');
 	await trigger.hover();
 	const link = page.locator('.db-control-panel-desktop .rl-item-link');
-	await expect(link).toHaveText('Figma-Tipps');
+	await expect(link).toHaveText('Mit den Komponenten in Figma arbeiten');
 	await expect(link).toHaveAttribute('href', '/de/dokumentation/lernen/figma');
 
 	await page.mouse.move(0, 0);
@@ -216,15 +223,18 @@ test('bookmarks come first, wizard suggestions below as their own group', async 
 	await expect(lists).toHaveCount(2);
 	await expect(lists.nth(0)).toHaveAttribute('data-source', 'bookmark');
 	await expect(lists.nth(0)).toHaveAccessibleName('Saved by you');
-	await expect(lists.nth(0).locator('.rl-item-link')).toHaveText(['Connect your AI coding agent']);
+	await expect(lists.nth(0).locator('.rl-item-link')).toHaveText(['Work with AI coding agents']);
 	await expect(lists.nth(1)).toHaveAttribute('data-source', 'wizard');
 	await expect(lists.nth(1).locator('.rl-item')).toHaveCount(3);
 	await expect(lists.nth(1)).toHaveCSS('border-inline-start-width', '2px');
 
 	// Deleting the last bookmark moves the focus into the wizard group.
-	await lists.nth(0).getByRole('button', { name: 'Remove: Connect your AI coding agent' }).click();
+	await lists.nth(0).getByRole('button', { name: 'Remove: Work with AI coding agents' }).click();
+	await confirmDelete(page);
 	await expect(control.locator('.rl-list')).toHaveCount(1);
-	await expect(control.getByRole('button', { name: 'Remove: Design Resources' })).toBeFocused();
+	await expect(
+		control.getByRole('button', { name: 'Remove: Set up the Figma libraries' }),
+	).toBeFocused();
 });
 
 test('a new result replaces the pages of the one before', async ({ page }) => {
@@ -244,9 +254,9 @@ test('a new result replaces the pages of the one before', async ({ page }) => {
 		.poll(sources)
 		.toEqual([
 			'bookmark:documentation/learn/figma',
-			'wizard:documentation/resources/design',
+			'wizard:documentation/learn/figma-setup',
 			'wizard:documentation/learn/figma-tutorial',
-			'wizard:documentation/learn/about#where-to-ask-which-question',
+			'wizard:documentation/learn/about#where-to-get-help',
 		]);
 
 	// Start again with another role: only the pages of the new package are left, the
@@ -273,6 +283,86 @@ test('a new result replaces the pages of the one before', async ({ page }) => {
 	expect((await readList(page)).items).toHaveLength(3);
 });
 
+test('going through the wizard again adds the same result after Remove all', async ({ page }) => {
+	await page.goto('/documentation/get-started?role=design&designIntent=new');
+	await waitForDBShell(page);
+	await expect.poll(async () => (await readList(page))?.items.length).toBe(3);
+	const control = page.locator('.db-control-panel-desktop .rl-control');
+	await control.locator('button.rl-trigger').hover();
+	await control.getByRole('button', { name: 'Remove all' }).click();
+	await confirmDelete(page, 'Remove all');
+	await expect.poll(async () => (await readList(page)).items).toEqual([]);
+
+	// A reload of the result must not bring the pages back, and the hint says nothing.
+	await page.reload();
+	await waitForDBShell(page);
+	await expect(page.locator('#gsw-heading')).toBeVisible();
+	expect((await readList(page)).items).toEqual([]);
+	await expect(page.locator('.gsw-saved')).toHaveCount(0);
+
+	// Going through the wizard to the same result adds its pages again.
+	await page.mouse.move(0, 0);
+	await page.getByRole('button', { name: 'Start again' }).click();
+	await page
+		.locator('.gsw-option', { has: page.getByRole('radio', { name: 'Designer', exact: true }) })
+		.click();
+	await page.getByRole('button', { name: 'Next', exact: true }).click();
+	await page
+		.locator('.gsw-option', { has: page.getByRole('radio', { name: 'Start a new project' }) })
+		.click();
+	await page.getByRole('button', { name: 'Next', exact: true }).click();
+	await expect.poll(async () => (await readList(page)).items.length).toBe(3);
+	await expect(page.locator('.gsw-saved')).toBeVisible();
+});
+
+test('the saved hint comes back on the next result after it was closed', async ({ page }) => {
+	await page.goto('/documentation/get-started?role=design&designIntent=new');
+	await waitForDBShell(page);
+	const saved = page.locator('.gsw-saved');
+	await expect(saved).toBeVisible();
+	await saved.getByRole('button').click();
+	await expect(saved).toHaveCount(0);
+
+	await page.getByRole('button', { name: 'Start again' }).click();
+	await page
+		.locator('.gsw-option', { has: page.getByRole('radio', { name: 'Designer', exact: true }) })
+		.click();
+	await page.getByRole('button', { name: 'Next', exact: true }).click();
+	await page
+		.locator('.gsw-option', { has: page.getByRole('radio', { name: 'Explore the design system' }) })
+		.click();
+	await page.getByRole('button', { name: 'Next', exact: true }).click();
+	await expect(page.locator('#gsw-heading')).toBeVisible();
+	await expect(saved).toBeVisible();
+});
+
+test('pages saved under a renamed anchor are kept with the new id', async ({ page }) => {
+	await page.goto('/documentation/learn');
+	await waitForDBShell(page);
+	await page.evaluate(
+		(key) =>
+			localStorage.setItem(
+				key,
+				JSON.stringify({
+					version: 1,
+					items: [
+						{ id: 'documentation/learn/about#where-to-ask-which-question', source: 'wizard' },
+						{ id: 'documentation/learn/about#where-to-get-help', source: 'wizard' },
+					],
+				}),
+			),
+		KEY,
+	);
+	await page.reload();
+	await waitForDBShell(page);
+	const control = page.locator('.db-control-panel-desktop .rl-control');
+	await control.locator('button.rl-trigger').hover();
+	// Old and new id are the same page: listed once, linking to the current anchor.
+	const link = control.locator('.rl-item-link');
+	await expect(link).toHaveCount(1);
+	await expect(link).toHaveAttribute('href', '/documentation/learn/about#where-to-get-help');
+});
+
 test('Remove all empties the list and is only shown with entries', async ({ page }) => {
 	await page.goto('/documentation/learn');
 	await waitForDBShell(page);
@@ -294,6 +384,7 @@ test('Remove all empties the list and is only shown with entries', async ({ page
 	await trigger.hover();
 	await expect(removeAll).toBeVisible();
 	await removeAll.click();
+	await confirmDelete(page, 'Remove all');
 	await expect.poll(async () => (await readList(page)).items).toEqual([]);
 	await expect(popover.locator('.rl-empty')).toBeVisible();
 	await expect(removeAll).toHaveCount(0);
@@ -302,6 +393,47 @@ test('Remove all empties the list and is only shown with entries', async ({ page
 	await expect(popover.locator('[role=status]')).toHaveText(
 		'All pages removed from the reading list',
 	);
+});
+
+test('deleting asks first; cancel and Escape keep the entry', async ({ page }) => {
+	await page.goto('/de/dokumentation/erste-schritte?role=design&designIntent=new');
+	await waitForDBShell(page);
+	await expect.poll(async () => (await readList(page))?.items.length).toBe(3);
+	const control = page.locator('.db-control-panel-desktop .rl-control');
+	const dialog = control.locator('dialog');
+	const bin = control.getByRole('button', {
+		name: 'Entfernen: Ein Kontaktformular in Figma gestalten',
+	});
+
+	await control.locator('button.rl-trigger').hover();
+	await bin.click();
+	await expect(dialog).toBeVisible();
+	await expect(dialog).toHaveAccessibleName('Eintrag entfernen?');
+	await expect(dialog).toHaveAccessibleDescription(
+		'„Ein Kontaktformular in Figma gestalten“ wird von deiner Leseliste entfernt.',
+	);
+
+	// Cancel: nothing removed, the focus returns to the bin button.
+	await dialog.getByRole('button', { name: 'Abbrechen' }).click();
+	await expect(dialog).toBeHidden();
+	await expect(bin).toBeFocused();
+	expect((await readList(page)).items).toHaveLength(3);
+
+	// Escape cancels as well.
+	await bin.click();
+	await expect(dialog).toBeVisible();
+	await page.keyboard.press('Escape');
+	await expect(dialog).toBeHidden();
+	expect((await readList(page)).items).toHaveLength(3);
+
+	// "Remove all" asks with the number of pages.
+	await control.getByRole('button', { name: 'Alle entfernen' }).click();
+	await expect(dialog).toHaveAccessibleName('Alle Einträge entfernen?');
+	await expect(dialog).toHaveAccessibleDescription(
+		'Alle 3 Seiten werden von deiner Leseliste entfernt.',
+	);
+	await dialog.getByRole('button', { name: 'Abbrechen' }).click();
+	expect((await readList(page)).items).toHaveLength(3);
 });
 
 test('Escape closes the reading list popover by hover and from inside', async ({ page }) => {
@@ -381,7 +513,7 @@ test('wizard steps by click, with focus, check icon and Back', async ({ page }) 
 	).toHaveCount(1);
 
 	await page.getByRole('button', { name: 'Next' }).click();
-	const newProject = page.getByRole('radio', { name: 'New project' });
+	const newProject = page.getByRole('radio', { name: 'Start a new project' });
 	await page.locator('.gsw-option', { has: newProject }).click();
 	await expect(newProject).toBeChecked();
 	await page.getByRole('button', { name: 'Next' }).click();
@@ -399,7 +531,7 @@ test('browser Back and Forward between steps and from a result link', async ({ p
 	await page.getByRole('button', { name: 'Next', exact: true }).click();
 	await expect(heading).toHaveText('What are you about to do?');
 	await page
-		.locator('.gsw-option', { has: page.getByRole('radio', { name: 'New project' }) })
+		.locator('.gsw-option', { has: page.getByRole('radio', { name: 'Start a new project' }) })
 		.click();
 	await page.getByRole('button', { name: 'Next', exact: true }).click();
 	await expect(heading).toHaveText('Your next steps');
@@ -418,7 +550,7 @@ test('browser Back and Forward between steps and from a result link', async ({ p
 
 	// A result link navigates to another page; Back shows the result again.
 	await page.locator('.gsw-start').click();
-	await page.waitForURL(/\/documentation\/resources\/design$/);
+	await page.waitForURL(/\/documentation\/learn\/figma-setup$/);
 	await expect(page.locator('.gsw')).toHaveCount(0);
 	await page.goBack();
 	await expect(page).toHaveURL(/\/documentation\/get-started\?role=design&designIntent=new$/);
@@ -445,25 +577,25 @@ test('German wizard path', async ({ page }) => {
 	await page.getByRole('button', { name: 'Weiter' }).click();
 	await expect(heading).toHaveText('Was hast du vor?');
 	await page
-		.locator('.gsw-option', { has: page.getByRole('radio', { name: 'Neues Projekt' }) })
+		.locator('.gsw-option', { has: page.getByRole('radio', { name: 'Neues Projekt starten' }) })
 		.click();
 	await page.getByRole('button', { name: 'Weiter' }).click();
 
 	await expect(heading).toHaveText('Deine nächsten Schritte');
 	const cta = page.locator('.gsw-start');
 	await expect(cta).toHaveText('Lernpaket starten');
-	await expect(cta).toHaveAttribute('href', '/de/dokumentation/ressourcen/design');
+	await expect(cta).toHaveAttribute('href', '/de/dokumentation/lernen/figma-einrichten');
 	await expect(page.locator('.gsw-package-button').first()).toHaveAccessibleName(
-		'Öffnen: Design-Ressourcen',
+		'Öffnen: Figma-Bibliotheken einrichten',
 	);
-	await expect(cta).toHaveAttribute('href', '/de/dokumentation/ressourcen/design');
+	await expect(cta).toHaveAttribute('href', '/de/dokumentation/lernen/figma-einrichten');
 	const hrefs = await page
 		.locator('.gsw-package-button')
 		.evaluateAll((links) => links.map((link) => link.getAttribute('href')));
 	expect(hrefs).toHaveLength(3);
 	for (const href of hrefs) expect(href).toMatch(/^\/de\/dokumentation\//);
 	// The anchor of the help item is localized as well.
-	expect(hrefs.at(-1)).toMatch(/#wohin-welche-frage-geh/);
+	expect(hrefs.at(-1)).toMatch(/#wo-du-hilfe-bekommst/);
 });
 
 test('the hint stays the first time and disappears on the next result', async ({ page }) => {
