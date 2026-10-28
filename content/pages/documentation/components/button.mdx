@@ -15,24 +15,16 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 - Trigger an action (e.g., Send, Save, Delete)
 - Indicate that interaction or confirmation is expected
 - Highlight a primary or secondary action
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbbutton-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -157,6 +149,14 @@ The small button in functional density has a height of 20 px. To meet accessibil
 </DBSection>
 
 <FigmaLearnTeaser componentName="Button" />
+
+<DBSection spacing="small" width="auto">
+
+## Code
+
+<ComponentCode component="button" storybookExample="components-dbbutton-variant" />
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

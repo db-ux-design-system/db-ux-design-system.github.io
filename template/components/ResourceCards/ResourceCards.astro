@@ -16,13 +16,17 @@ interface Resource {
 interface Props {
 	path?: string;
 	resources?: Resource[];
+	/** Storybook deployment to link to, e.g. a released version. Defaults to `review/main`. */
+	baseUrl?: string;
 }
 
-const { path = '', resources: customResources } = Astro.props;
+const {
+	path = '',
+	resources: customResources,
+	baseUrl = 'https://design-system.deutschebahn.com/core-web/review/main',
+} = Astro.props;
 
 const isDE = Astro.url.pathname.startsWith('/de/') || Astro.url.pathname === '/de';
-
-const baseUrl = 'https://design-system.deutschebahn.com/core-web/review/main';
 
 const defaultResources: Resource[] = [
 	{
@@ -113,7 +117,9 @@ const getIconPath = (icon: string): string => {
 		);
 		return isDisabled ? (
 			<DisabledWrapper label={comingSoonLabel} size="small">
-				<DBCard spacing="small" className="resource-card-item">{cardContent}</DBCard>
+				<DBCard spacing="small" className="resource-card-item">
+					{cardContent}
+				</DBCard>
 			</DisabledWrapper>
 		) : (
 			<a href={resource.url} target="_blank" rel="noopener noreferrer" class="resource-card-link">

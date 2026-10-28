@@ -1,0 +1,50 @@
+.component-code {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-sm);
+
+	h3 {
+		margin-block-start: var(--db-spacing-fixed-lg);
+	}
+
+	pre {
+		overflow-x: auto;
+		padding: var(--db-spacing-fixed-md);
+		border-radius: var(--db-border-radius-sm);
+	}
+}
+
+.component-code-note,
+.component-code-version {
+	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+}
+
+.component-code-setup-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--db-spacing-fixed-xs) var(--db-spacing-fixed-md);
+	padding-inline-start: 0;
+	list-style: none;
+}
+
+/* Wide API tables scroll inside the content column instead of widening it. */
+.component-code-table {
+	overflow-x: auto;
+
+	td:first-child code {
+		white-space: nowrap;
+	}
+}
+
+.component-code-storybook {
+	inline-size: 100%;
+	block-size: 70dvh;
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-md);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}
+
+.component-code-migration summary {
+	cursor: pointer;
+	font-weight: 700;
+}
