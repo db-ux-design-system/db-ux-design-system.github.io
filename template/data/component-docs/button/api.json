@@ -1,0 +1,131 @@
+{
+	"properties": [
+		{
+			"name": "type",
+			"type": "\"button\" | \"reset\" | \"submit\"",
+			"description": "The type attribute specifies the [type of button](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#type)."
+		},
+		{
+			"name": "commandfor",
+			"type": "string",
+			"description": "The [commandfor](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#commandfor) attribute turns a `<button>` into a command button that controls the given interactive element referenced by `id`."
+		},
+		{
+			"name": "id",
+			"type": "DBButtonProps[\"id\"]",
+			"description": ""
+		},
+		{
+			"name": "propOverrides",
+			"type": "DBButtonProps[\"propOverrides\"]",
+			"description": ""
+		},
+		{
+			"name": "className",
+			"type": "DBButtonProps[\"className\"]",
+			"description": ""
+		},
+		{
+			"name": "disabled",
+			"type": "boolean | string",
+			"description": "The disabled attribute can be set to [keep a user from clicking on the button](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#disabled)."
+		},
+		{
+			"name": "iconLeading",
+			"type": "IconTypes",
+			"description": "Define an icon by its identifier (like e.g. _user_, compare to [Icons](https://design-system.deutschebahn.com/core-web/review/main/foundations/icons/overview)) to get displayed in front of the elements content."
+		},
+		{
+			"name": "icon",
+			"type": "IconTypes",
+			"description": "Define an icon by its identifier (like e.g. _user_, compare to [Icons](https://design-system.deutschebahn.com/core-web/review/main/foundations/icons/overview)) to get displayed in front of the elements content."
+		},
+		{
+			"name": "showIconLeading",
+			"type": "boolean | string",
+			"description": "Enables or disables the visibility of the leading icon.\nFor many components this property is optional to reflect Figma properties."
+		},
+		{
+			"name": "showIcon",
+			"type": "boolean | string",
+			"description": "Enables or disables the visibility of the icon. The default value depends on the component.\nFor many components this property is optional to reflect Figma properties."
+		},
+		{
+			"name": "iconTrailing",
+			"type": "IconTypes",
+			"description": "Define an icon by its identifier (like e.g. _user_, compare to [Icons](https://design-system.deutschebahn.com/core-web/review/main/foundations/icons/overview)) to get displayed in front of the elements content."
+		},
+		{
+			"name": "showIconTrailing",
+			"type": "boolean | string",
+			"description": "Enables or disables the visibility of the trailing icon.\nFor many components this property is optional to reflect Figma properties."
+		},
+		{
+			"name": "size",
+			"type": "\"small\" | \"medium\"",
+			"description": "The size attribute changes the font-size and other related sizes of the component."
+		},
+		{
+			"name": "width",
+			"type": "\"full\" | \"auto\" | string",
+			"description": "Width of the component. Auto width based on children size, full width based on parent elements width."
+		},
+		{
+			"name": "variant",
+			"type": "\"outlined\" | \"brand\" | \"filled\" | \"ghost\" | string",
+			"description": "Variant of the button. Only use one primary button as a CTA on a page; otherwise, use one of the adaptive buttons."
+		},
+		{
+			"name": "wrap",
+			"type": "boolean | string",
+			"description": "Determines whether the text should wrap when its parent container is too small, preventing overflow."
+		},
+		{
+			"name": "noText",
+			"type": "boolean | string",
+			"description": "Define the text next to the icon specified via the icon Property to get hidden."
+		},
+		{
+			"name": "name",
+			"type": "string",
+			"description": "The name attribute specifies a [name attributes value](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#name) for the button."
+		},
+		{
+			"name": "form",
+			"type": "string",
+			"description": "Associates the control with a form element"
+		},
+		{
+			"name": "value",
+			"type": "string",
+			"description": "The value attribute specifies an initial [value for the button](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#value)."
+		},
+		{
+			"name": "command",
+			"type": "string",
+			"description": "The [command](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#command) attribute specifies the action to perform on the element controlled by a `<button>` element."
+		},
+		{
+			"name": "text",
+			"type": "string",
+			"description": "Alternative for default slot/children. Do not use together with a text children/slot, as both will be rendered and result in duplicate labels."
+		},
+		{
+			"name": "observer",
+			"type": "",
+			"description": ""
+		}
+	],
+	"slots": [
+		{
+			"name": "children",
+			"description": "This is a default/unnamed slot"
+		}
+	],
+	"events": [
+		{
+			"name": "click",
+			"description": ""
+		}
+	]
+}
