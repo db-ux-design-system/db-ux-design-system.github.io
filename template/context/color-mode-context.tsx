@@ -32,6 +32,9 @@ export const ColorModeProvider = ({ children }: { children: ReactNode }) => {
 	useEffect(() => {
 		window.localStorage.setItem(STORAGE_KEY, colorMode);
 
+		// Keep <html> in sync, so the inline script in HtmlHead and a toggle agree.
+		document.documentElement.setAttribute('data-mode', colorMode);
+
 		const shell = document.querySelector(SHELL_SELECTOR);
 		if (shell instanceof HTMLElement) {
 			shell.setAttribute('data-mode', colorMode);

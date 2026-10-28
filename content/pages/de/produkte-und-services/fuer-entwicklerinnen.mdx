@@ -41,7 +41,8 @@ sections:
     visual: 'smooth-handoff'
 ---
 
-import { ContentSections, ContactUsSection } from '@components';
+import { DBSection } from '@db-ux/react-core-components';
+import { ContentSections, CTA } from '@components';
 import EfficientWorkflowsVisual from '@components/ForDeveloperVisuals/EfficientWorkflowsVisual.astro';
 import FlexibleIntegrationVisual from '@components/ForDeveloperVisuals/FlexibleIntegrationVisual.astro';
 import ReleaseTimelineVisual from '@components/ForDeveloperVisuals/ReleaseTimelineVisual.astro';
@@ -57,4 +58,19 @@ import SmoothHandoffVisual from '@components/ForDesignerVisuals/SmoothHandoffVis
 	}}
 />
 
-<ContactUsSection />
+<DBSection width="medium" spacing="medium">
+	<CTA
+		title="Jetzt entwickeln"
+		text="Installiere das Paket für dein Framework und baue dein erstes Formular – Schritt für Schritt geprüft bis zum Produktions-Build."
+		primaryAction={{
+			label: 'Mit Code starten',
+			href: '/de/dokumentation/erste-schritte?role=development',
+			variant: 'brand',
+		}}
+		secondaryAction={{
+			label: 'Ein Kontaktformular in React bauen',
+			href: '/de/dokumentation/lernen/react-tutorial',
+			variant: 'outlined',
+		}}
+	/>
+</DBSection>

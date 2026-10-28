@@ -1,0 +1,170 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Komponenten in Astro einbinden'
+headline: 'Komponenten in Astro einbinden'
+description: 'Richte ein Astro-Projekt für eine statische oder inhaltsgetriebene Website mit der Integration des Design Systems ein.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 15
+category: 'Development'
+keywords:
+  [
+    'astro',
+    'setup',
+    'installation',
+    'install',
+    'getting started',
+    'integration',
+    'static site',
+    'content website',
+    'npm create',
+    'create-astro',
+    'astro.config',
+    'react components',
+    'peer dependencies',
+    'troubleshooting',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Die Integration ist eine frühe Version
+
+`@db-ux/astro` erwartet noch ältere Versionen von Core und Astro. Für ein aktuelles Setup folgst du stattdessen dem [Setup für React](/de/dokumentation/lernen/react-einrichten 'Nutze die Komponenten mit den aktuellen Versionen.').
+
+<LearnAside>
+
+- **Stand:** `@db-ux/astro` liegt in Version 0.1.0 vor. Es erwartet `@db-ux/core-components` 4.x und Astro 5 als Peer-Dependencies – beide liegen hinter den aktuellen Versionen.
+- **Bevor du anfängst:** Prüfe den Stand im [astro-Repository](https://github.com/db-ux-design-system/astro), bevor du ein neues Projekt damit beginnst.
+- **Astro:** [Astro](https://astro.build/) ist ein Framework für schnelle, inhaltsgetriebene Websites. Die Integration verbindet es mit den React-Komponenten des Design Systems und übernimmt das Setup für dich.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Starte mit einem leeren Astro-Projekt
+
+Lege ein neues Projekt an und wähle im Fragebogen `Use minimal (empty) template`. Die Integration ist für ein leeres Projekt gedacht.
+
+```shell
+npm create astro@latest
+```
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Installiere die Integration mit dem Installationsskript
+
+Das Skript installiert `@db-ux/astro` mit allen nötigen Peer-Dependencies.
+
+```shell
+npm i
+npm create @db-ux/astro
+```
+
+<LearnAside>
+
+Das Installationsskript erkennt deinen Paketmanager und prüft, ob du dich in einem Astro-Projekt befindest. Das Paket heißt `@db-ux/create-astro`, der Befehl lautet deshalb `npm create @db-ux/astro`.
+
+| Paket                 | Inhalt                                                            |
+| --------------------- | ----------------------------------------------------------------- |
+| `@db-ux/astro`        | Die Astro-Integration, konfiguriert in `astro.config.mjs`         |
+| `@db-ux/create-astro` | Das Installationsskript, aufgerufen mit `npm create @db-ux/astro` |
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Trage die Integration in die Konfiguration ein
+
+Registriere `dbUxAstro` in `astro.config.mjs` und gib deiner App einen Namen.
+
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import { dbUxAstro } from '@db-ux/astro';
+
+export default defineConfig({
+	integrations: [dbUxAstro({ appName: 'Meine App' })],
+});
+```
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Wenn etwas nicht funktioniert
+
+Die meisten Probleme kommen vom Ort, an dem du das Installationsskript ausführst, oder von Versionskonflikten bei den Peer-Dependencies.
+
+<LearnAside>
+
+| Symptom                                                          | Ursache und Lösung                                                                                                          |
+| ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Das Installationsskript meldet, dass kein Astro-Projekt vorliegt | Führe es im Stammverzeichnis deines Astro-Projekts aus, dort, wo `astro.config.mjs` liegt.                                  |
+| `npm create db-ux-astro` schlägt fehl                            | Das Paket heißt `@db-ux/create-astro`. Nutze `npm create @db-ux/astro`.                                                     |
+| Konflikte bei Peer-Dependencies während der Installation         | Die Integration erwartet Core 4.x und Astro 5. Neuere Versionen führen zu Konflikten, bis die Integration aktualisiert ist. |
+
+Wenn nichts davon hilft, eröffne ein Issue im [astro-Repository](https://github.com/db-ux-design-system/astro/issues). Prüfe vorher, ob es das Issue schon gibt.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Mach mit deinem Projekt weiter
+
+Schlag alle Optionen nach oder nutze React direkt.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Dokumentation der Integration',
+			description: 'Alle Optionen der Integration @db-ux/astro.',
+			url: 'https://design-system.deutschebahn.com/astro/',
+		},
+		{
+			title: 'Komponenten in React einbinden',
+			description: 'Binde die Komponenten in ein React-Projekt ein.',
+			url: '/de/dokumentation/lernen/react-einrichten',
+		},
+		{
+			title: 'astro-Repository',
+			description: 'Quellcode und aktueller Stand der Integration.',
+			url: 'https://github.com/db-ux-design-system/astro',
+		},
+	]}
+/>
+
+<LearnAside>
+
+### Ressourcen
+
+| Ressource           | Link                                                                      |
+| ------------------- | ------------------------------------------------------------------------- |
+| Dokumentation       | [@db-ux/astro](https://design-system.deutschebahn.com/astro/)             |
+| Quellcode           | [db-ux-design-system/astro](https://github.com/db-ux-design-system/astro) |
+| npm-Paket           | [@db-ux/astro](https://www.npmjs.com/package/@db-ux/astro)                |
+| Installationsskript | [@db-ux/create-astro](https://www.npmjs.com/package/@db-ux/create-astro)  |
+| Issues              | [astro-Repository](https://github.com/db-ux-design-system/astro/issues)   |
+
+</LearnAside>
+
+</LearnBlock>

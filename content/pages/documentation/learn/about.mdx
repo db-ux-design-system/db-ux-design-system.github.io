@@ -1,0 +1,239 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'What the design system is'
+headline: 'What the design system is'
+description: 'The shared base for the digital products of Deutsche Bahn – what it is, what it contains and how binding it is.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 1
+category: 'Foundations'
+keywords:
+  [
+    'overview',
+    'design system',
+    'generation 3',
+    'db ui',
+    'status',
+    'stable',
+    'beta',
+    'concept',
+    'db theme',
+    'support',
+    'contact',
+    'parts',
+    'foundation',
+    'components',
+    'patterns',
+    'extensions',
+    'versioning',
+    'release',
+    'license',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## One base for design and code
+
+The DB UX Design System is the shared base for the digital products of Deutsche Bahn. Design and development use the same foundations, the same components and the same names – in Figma and in code.
+
+This documentation covers Generation 3, the current generation.
+
+</LearnBlock>
+
+<LearnBlock>
+
+## What it contains
+
+Foundation for the tokens, components as building blocks, patterns that combine them, extensions for special domains, and themes that apply the brand. The components ship for CSS, Web Components, Angular, React and Vue.
+
+<LearnAside>
+
+| Part       | Contains                                                    | Documentation                                   |
+| ---------- | ----------------------------------------------------------- | ----------------------------------------------- |
+| Foundation | Tokens for colors, typography, spacing and density          | [Foundation](/documentation/foundation)         |
+| Components | Interface building blocks for design and code               | [Components](/documentation/components)         |
+| Patterns   | Recurring solutions that combine several components         | [Patterns](/documentation/patterns)             |
+| Extensions | Libraries for domains like passenger information or DataViz | [Extensions](/documentation/extensions)         |
+| Themes     | Apply a brand to everything above, for example the DB Theme | [DB Theme](/documentation/learn/db-theme-setup) |
+
+Native components for iOS and Android live in [separate packages](#native-platforms).
+
+### Which packages you need
+
+Pick the package for your framework. Each setup article takes you from install to the first component.
+
+| You build with …              | Package                        | Setup                                                                             |
+| ----------------------------- | ------------------------------ | --------------------------------------------------------------------------------- |
+| React                         | `@db-ux/react-core-components` | [Add the components to React](/documentation/learn/react-setup)                   |
+| Angular                       | `@db-ux/ngx-core-components`   | [Add the components to Angular](/documentation/learn/angular-setup)               |
+| Vue                           | `@db-ux/v-core-components`     | [Add the components to Vue](/documentation/learn/vue-setup)                       |
+| Any other framework           | `@db-ux/wc-core-components`    | [Use the components as Web Components](/documentation/learn/web-components-setup) |
+| HTML and CSS, your own markup | `@db-ux/core-components`       | [Use the components with HTML and CSS](/documentation/learn/html-css-setup)       |
+| Astro, static websites        | `@db-ux/astro`                 | [Add the components to Astro](/documentation/learn/astro-setup)                   |
+| Your own components           | `@db-ux/core-foundations`      | [Use the tokens without components](/documentation/learn/foundation-setup)        |
+| iOS or Android                | Still in development           | [Native platforms](#native-platforms)                                             |
+
+Starting a new project with React? The [React tutorial](/documentation/learn/react-tutorial) takes you from an empty project to a working form, with a check after every step.
+
+#### How the packages relate to each other
+
+Three layers build on each other. You only install the top layer you need – the ones below come with it.
+
+| Layer                | Package                                                                      | Contains                                                  |
+| -------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------- |
+| Framework components | `@db-ux/react-core-components` and the Angular, Vue and Web Components twins | Components for one framework                              |
+| Component styles     | `@db-ux/core-components`                                                     | CSS and SCSS for all components, includes the layer below |
+| Tokens and assets    | `@db-ux/core-foundations`                                                    | Colors, spacing, typography, density, icons, fonts        |
+
+`@db-ux/core-components` pulls in `@db-ux/core-foundations` as a dependency. With npm that happens automatically. With pnpm you install both explicitly.
+
+#### Themes and assets
+
+All framework setup articles use the whitelabel theme, because it works without further access. Products of Deutsche Bahn additionally need the DB Theme – without it, colors, typography and assets stay on the whitelabel defaults. Theme and icons are encrypted and need credentials from the Marketing Portal.
+
+| Target                  | Install                 | Guide                                                                   |
+| ----------------------- | ----------------------- | ----------------------------------------------------------------------- |
+| Deutsche Bahn brand     | `@db-ux/db-theme`       | [Add the DB Theme for DB products](/documentation/learn/db-theme-setup) |
+| S-Bahn brand            | `@db-ux/s-bahn-theme`   | [S-Bahn Theme](/documentation/learn/db-theme-setup#s-bahn-theme)        |
+| Icons without the theme | `@db-ux/db-theme-icons` | [Show icons in your interface](/documentation/learn/icons-setup)        |
+
+#### Optional tooling
+
+None of these are needed to get started. Add them once your first component renders. The configuration is in the setup article of your framework.
+
+| Package                      | Purpose                                                                                                  | Recommendation                    |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------- | --------------------------------- |
+| `@db-ux/core-postcss-plugin` | Resolves `var()`, `calc()`, `color-mix()` and `light-dark()` at build time and drops unused declarations | Recommended for production builds |
+| `@db-ux/core-vite-plugin`    | Reduces the CSS setup to a single import                                                                 | Recommended when you use Vite     |
+| `@db-ux/core-eslint-plugin`  | Reports incorrect component usage in your editor                                                         | Optional, but helpful in teams    |
+| `@db-ux/core-stylelint`      | Checks your CSS and SCSS against the design system rules                                                 | Optional                          |
+
+For AI coding agents, use `@db-ux/mcp-server` and `@db-ux/agent-cli`. Both are covered in [the MCP Server article](/documentation/learn/mcp-server).
+
+### Native platforms
+
+The native libraries for iOS (SwiftUI) and Android (Jetpack Compose) are in development. Neither has a published release, and there is no installation guide for products yet. The repositories describe how to set up the project for contribution, not how to use it in an app.
+
+| Platform | Technology                      | Minimum version | Repository                                                          |
+| -------- | ------------------------------- | --------------- | ------------------------------------------------------------------- |
+| iOS      | SwiftUI, Swift Package `DBUXDS` | iOS 18          | [core-ios](https://github.com/db-ux-design-system/core-ios)         |
+| Android  | Jetpack Compose                 | Android API 30  | [core-android](https://github.com/db-ux-design-system/core-android) |
+
+Both libraries are split into **Foundation** – colors, typography, spacing as tokens – and **Components**.
+
+#### Available components
+
+| Component | iOS | Android |
+| --------- | --- | ------- |
+| Accordion | ✅  | ✅      |
+| Badge     | ✅  | ✅      |
+| Button    | ✅  | ✅      |
+| Card      | ✅  | ✅      |
+| Checkbox  | ✅  | ✅      |
+| Icon      | –   | ✅      |
+| Infotext  | ✅  | ✅      |
+| Link      | ✅  | ✅      |
+| Switch    | ✅  | –       |
+
+This list reflects the source code in the repositories. It does not say anything about the status of a component – the web components and their status are documented under [Components](/documentation/components).
+
+#### What to do now
+
+| You want to …                            | Do this                                                                                                                                                               |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Plan a native app with the design system | Contact Luis Schroff, Product Owner of the design system, before you plan with these libraries: [luis.schroff@deutschebahn.com](mailto:luis.schroff@deutschebahn.com) |
+| Design a native app                      | Use the Figma libraries – see [Set up the Figma libraries](/documentation/learn/figma-setup).                                                                         |
+| Contribute                               | Follow the `DEVELOPMENT.md` in the repository.                                                                                                                        |
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Every content has a status
+
+A status tells you how mature a component, pattern or template is. **Stable** is mandatory as the UX standard, **Beta** is recommended, **Concept** is a design reference only.
+
+<LearnAside>
+
+What each status means in detail is described in [What a status means](/documentation/learn/status). Releases follow Semantic Versioning: Major releases are announced in advance, Minor and Patch releases ship continuously – see [How releases work](/documentation/learn/versioning).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## How binding it is
+
+Stable content is the mandatory UX standard. The DB Theme is required for all websites and applications of Deutsche Bahn and may not be used outside of them.
+
+<LearnAside>
+
+The code of the design system is published under the Apache 2.0 license. The DB Theme and its assets are an exception: they may only be used for websites and applications of Deutsche Bahn.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Coming from DB UI?
+
+Generation 2 was known as DB UI. If you still work with it, start with the [migration from DB UI](/documentation/learn/migration 'Switch from Generation 2 to Generation 3 step by step.'). It walks you through the switch step by step.
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Where to get help
+
+Found a bug or have a feature request? Open an issue on [GitHub](https://github.com/db-ux-design-system/core/issues/new/choose 'Report bugs and request features.'). For anything else, email [db-ux-designsystem@deutschebahn.com](mailto:db-ux-designsystem@deutschebahn.com 'Questions that fit nowhere else.').
+
+<LearnAside>
+
+- Questions and exchange: the Teams channels for [Overall & Design](https://teams.microsoft.com/l/channel/19%3A7dd9929be1fe494c823b11e0e2d22341%40thread.skype/DB%20UX%20Design%20System?groupId=72c53609-2941-46dd-8be9-e4d1d2c45c77&tenantId=a1a72d9c-49e6-4f6d-9af6-5aafa1183bfd) and [Development](https://teams.microsoft.com/l/channel/19%3A6c0e92ce4aef409598ff77c4cd06e001%40thread.skype/SIG%20-%20DB%20UX%20Design%20System?groupId=2f363785-c59e-4763-9bc3-8e13998a4588&tenantId=a1a72d9c-49e6-4f6d-9af6-5aafa1183bfd)
+- Consultation hour Help, Hints & Hugs: every two weeks on Wednesday at 9:00, in the community calendar
+- Bugs and features in the code packages: [GitHub: core-web](https://github.com/db-ux-design-system/core-web/issues/new/choose)
+- Extensions: [DataViz](https://github.com/db-ux-design-system/extension-dataviz/issues), [Passenger Information](https://github.com/db-ux-design-system/extension-ri/issues), [Table](https://github.com/db-ux-design-system/extension-table/issues)
+- More ways to get involved: [Contribution](/documentation/contribution)
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Choose your path
+
+Ready to start? Pick your role and we set up a reading list for you.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Design',
+			description: 'Get access to the Figma libraries and design your first screen.',
+			url: '/documentation/get-started?role=design',
+		},
+		{
+			title: 'Development',
+			description: 'Install the package for your framework and render your first component.',
+			url: '/documentation/get-started?role=development',
+		},
+	]}
+/>
+
+</LearnBlock>

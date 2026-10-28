@@ -8,7 +8,9 @@
 .resource-text {
 	display: flex;
 	flex-direction: column;
-	gap: 0;
+
+	/* Same as the card padding (spacing small), like TeaserCard and CardTeaser. */
+	gap: var(--db-spacing-fixed-sm);
 }
 
 .resource-cards .resource-card-link {
@@ -26,7 +28,7 @@
 .resource-cards .resource-protected-icon {
 	position: absolute;
 	inset-block-start: var(--db-spacing-fixed-sm);
-	inset-inline-end: 0;
+	inset-inline-end: var(--db-spacing-fixed-sm);
 	font-size: var(--db-sizing-md);
 	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
 }

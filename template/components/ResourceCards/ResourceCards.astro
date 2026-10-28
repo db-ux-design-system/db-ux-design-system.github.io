@@ -113,11 +113,11 @@ const getIconPath = (icon: string): string => {
 		);
 		return isDisabled ? (
 			<DisabledWrapper label={comingSoonLabel} size="small">
-				<DBCard className="resource-card-item">{cardContent}</DBCard>
+				<DBCard spacing="small" className="resource-card-item">{cardContent}</DBCard>
 			</DisabledWrapper>
 		) : (
 			<a href={resource.url} target="_blank" rel="noopener noreferrer" class="resource-card-link">
-				<DBCard behavior="interactive" className="resource-card-item">
+				<DBCard behavior="interactive" spacing="small" className="resource-card-item">
 					{cardContent}
 					<strong class="resource-link-label" data-icon-trailing="arrow_up_right">
 						{resource.label || defaultLabel}

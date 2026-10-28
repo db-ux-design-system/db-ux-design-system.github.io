@@ -1,0 +1,177 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Was ein Status bedeutet'
+headline: 'Was ein Status bedeutet'
+description: 'Jede Komponente, jedes Pattern und jedes Template hat einen Status. Er zeigt dir, wie ausgereift der Inhalt ist und worauf du dich verlassen kannst.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 1.5
+category: 'Foundations'
+keywords:
+  [
+    'status',
+    'content status',
+    'concept',
+    'beta',
+    'stable',
+    'legacy',
+    'deprecated',
+    'maturity',
+    'lifecycle',
+    'production ready',
+    'mandatory',
+    'breaking changes',
+    'migration',
+    'ux standard',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Inhalte reifen von Concept zu Stable
+
+Neue Inhalte starten als **Concept**, werden zu **Beta** und enden als **Stable**. **Legacy** und **Deprecated** kennzeichnen Inhalte, die abgelöst werden.
+
+<LearnAside>
+
+| Status     | Phase                       | Kurz gesagt                                    |
+| ---------- | --------------------------- | ---------------------------------------------- |
+| Concept    | Aktiver Entwicklungszyklus  | Design-Referenz, nichts ist final              |
+| Beta       | Aktiver Entwicklungszyklus  | Funktionsfähig, kleine Änderungen noch möglich |
+| Stable     | Aktiver Entwicklungszyklus  | Ausgereift und verpflichtend als UX-Standard   |
+| Legacy     | Abgelöst oder wird entfernt | Veraltet, nur kritische Fehlerbehebungen       |
+| Deprecated | Abgelöst oder wird entfernt | Wird in einem kommenden Major-Release entfernt |
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Concept ist eine Design-Referenz
+
+Concept-Inhalte zeigen erste Richtungen, und **nichts ist final**. Nutze sie als Referenz für dein Design und rechne mit Änderungen.
+
+<LearnAside>
+
+Designs und Implementierungen können sich wesentlich ändern, während Ideen getestet und verfeinert werden. Das Design ist immer verfügbar. Eine Umsetzung im Code gibt es eventuell noch nicht, sie folgt meist in der Beta-Phase.
+
+### Was du erwarten kannst
+
+- **Design verfügbar**, die Umsetzung im Code kann später folgen
+- **Keine Stabilitätsgarantien** – API, Design und Barrierefreiheit sind noch nicht validiert und können sich jederzeit ändern
+- **Eingeschränkte Dokumentation** und Nutzungsrichtlinien
+- **Nacharbeit einplanen**, wenn der Inhalt Richtung Beta und Stable reift
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Beta kannst du im Projekt testen
+
+Beta-Inhalte sind **funktionsfähig und weitgehend stabil**, Design und Entwicklung sind abgestimmt. Teste sie gründlich und gib Feedback.
+
+<LearnAside>
+
+Kleinere visuelle oder funktionale Änderungen sind noch möglich. Der Inhalt wurde erstmals mit Nutzer:innen getestet und erfüllt ein validiertes User Need.
+
+### Was du erwarten kannst
+
+- **Zwischen Design und Entwicklung abgestimmt**
+- Geeignet für den Projekteinsatz, aber **kleinere Breaking Changes sind noch möglich**
+- Dokumentation und Nutzungsrichtlinien sind verfügbar, aber möglicherweise unvollständig
+- Tests zu Barrierefreiheit und Browsern sind **in Arbeit, aber noch nicht vollständig validiert**
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Stable ist der verpflichtende Standard
+
+Stable-Inhalte sind ausgereift, barrierefrei und markenkonform. Sie sind als UX-Standard **verpflichtend**.
+
+<LearnAside>
+
+Stable-Inhalte werden laufend aktualisiert und verbessert, damit sie den User Needs und aktuellen Standards entsprechen.
+
+### Was du erwarten kannst
+
+- **Vollständig validiert** für Barrierefreiheit, Browser und Frameworks
+- **Vollständige Dokumentation**, Nutzungsrichtlinien und Design-Spezifikationen
+- **API-Stabilität** – Breaking Changes nur in Major-Releases
+- **Laufende Wartung** und regelmäßige Verbesserungen
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Legacy und Deprecated werden abgelöst
+
+**Legacy**-Inhalte bekommen nur noch kritische Fehlerbehebungen. **Deprecated**-Inhalte werden in einem kommenden Major-Release entfernt – plane deine Migration.
+
+<LearnAside>
+
+### Legacy
+
+Legacy-Inhalte sind veraltet und werden nicht mehr aktiv weiterentwickelt. Migriere auf aktuelle Inhalte des Design Systems.
+
+- **Keine neuen Features** oder Verbesserungen
+- Nur **kritische Fehlerbehebungen**
+- Eine **empfohlene Alternative** gibt es im Design System
+
+### Deprecated
+
+Deprecated-Inhalte sind zur Entfernung vorgemerkt. Im Design werden sie zuerst visuell gekennzeichnet. So bleibt dir Zeit für die Migration, bevor sie entfernt werden.
+
+- **Der Inhalt wird entfernt** – plane deine Migration
+- **Keine Fehlerbehebungen** oder Wartung
+- Eine **ausreichende Übergangszeit** vor der Entfernung in einem Major-Release
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Prüfe den Status, bevor du Inhalte nutzt
+
+Jede Komponentenseite zeigt ihren Status. Die Übersicht gruppiert alle Komponenten nach Status.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Komponenten',
+			description: 'Alle Komponenten, gruppiert nach Stable, Beta und Concept.',
+			url: '/de/dokumentation/komponenten',
+		},
+		{
+			title: 'Wie Releases funktionieren',
+			description: 'Versionen, Release-Arten und wo sie angekündigt werden.',
+			url: '/de/dokumentation/lernen/versionierung',
+		},
+		{
+			title: 'Mitwirken',
+			description: 'Gib Feedback zu Beta- und Concept-Inhalten.',
+			url: '/de/dokumentation/mitwirken',
+		},
+	]}
+/>
+
+</LearnBlock>

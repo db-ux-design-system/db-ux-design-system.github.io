@@ -1,0 +1,299 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Komponenten als Web Components nutzen'
+headline: 'Komponenten als Web Components nutzen'
+description: 'Binde die Komponenten als Custom Elements in ein beliebiges Webprojekt ein und prüfe, ob Styles, Schriften und Icons laden.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 13
+category: 'Development'
+keywords:
+  [
+    'web components',
+    'custom elements',
+    'stencil',
+    'setup',
+    'installation',
+    'install',
+    'getting started',
+    'vanilla javascript',
+    'npm',
+    'pnpm',
+    'vite',
+    'definecustomelements',
+    'bundle',
+    'whitelabel theme',
+    'wc-core-components',
+    'core-components',
+    'core-foundations',
+    'troubleshooting',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Du brauchst ein Webprojekt und Node.js
+
+Jedes Webprojekt funktioniert, mit oder ohne Framework. **Custom Elements** brauchen keine Framework-Laufzeit. Die Befehle auf dieser Seite nutzen pnpm.
+
+<LearnAside>
+
+- **Paketmanager:** Mit npm nutzt du `npm i` statt `pnpm add`.
+- **Browser:** die letzten drei Versionen von Chrome und Edge, Firefox ESR und die letzten zwei Major-Versionen von Safari.
+- **Versionen:** Das Setup gilt für Version 6 der Pakete des Design Systems.
+- **DB Theme:** Produkte der Deutschen Bahn brauchen zusätzlich das DB Theme. Du kannst ohne anfangen, denn das Whitelabel-Theme funktioniert sofort.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Installiere drei Pakete
+
+Die Custom Elements brauchen beide Style-Pakete: die Styles der Komponenten und die Foundation darunter.
+
+```shell
+pnpm add @db-ux/wc-core-components @db-ux/core-components @db-ux/core-foundations
+```
+
+<LearnAside>
+
+| Paket                       | Inhalt                                            |
+| --------------------------- | ------------------------------------------------- |
+| `@db-ux/wc-core-components` | Die Komponenten als Custom Elements               |
+| `@db-ux/core-components`    | Die Styles der Komponenten                        |
+| `@db-ux/core-foundations`   | Tokens, das Whitelabel-Theme, Schriften und Icons |
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Bei den Styles zählt die Reihenfolge
+
+Importiere zuerst das Theme, danach die Styles der Komponenten. Die Zeile mit `@layer` legt das fest.
+
+```css
+/* index.css */
+@layer whitelabel-theme, db-ux;
+@import '@db-ux/core-foundations/build/styles/theme/rollup.css' layer(whitelabel-theme);
+@import '@db-ux/core-components/build/styles/bundle.css' layer(db-ux);
+```
+
+<LearnAside>
+
+### Alternativ mit dem Vite-Plugin
+
+Mit Vite ersetzt das Plugin die beiden Imports:
+
+```shell
+pnpm add @db-ux/core-vite-plugin --save-dev
+```
+
+```ts
+// vite.config.ts
+import { defineConfig } from 'vite';
+import dbUxPlugin from '@db-ux/core-vite-plugin';
+
+export default defineConfig({
+	plugins: [dbUxPlugin()],
+});
+```
+
+```css
+/* index.css */
+@import '@db-ux/core-vite-plugin/index.css';
+```
+
+### Die passende Datei für deinen Bundler
+
+| Datei          | Nutze sie, wenn …                                                 |
+| -------------- | ----------------------------------------------------------------- |
+| `rollup.css`   | du mit Vite oder Rollup baust                                     |
+| `webpack.css`  | du mit Webpack baust                                              |
+| `relative.css` | du Icons und Schriften in deinen eigenen `public`-Ordner kopierst |
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Registriere die Custom Elements einmal
+
+Rufe **`defineCustomElements()`** einmal beim Start der Anwendung auf. Die Funktion meldet alle Tags wie `<db-button>` beim Browser an.
+
+```js
+// main.js
+import { defineCustomElements } from '@db-ux/wc-core-components/bundle/index.js';
+
+defineCustomElements();
+```
+
+<LearnAside>
+
+### Ausgabevariante wählen
+
+Das Paket bringt zwei Entry Points mit. Sie unterscheiden sich nur darin, wie die Stencil-Runtime ausgeliefert wird.
+
+| Variante | Entry Point                                 | Braucht `@stencil/core`               |
+| -------- | ------------------------------------------- | ------------------------------------- |
+| Standard | `@db-ux/wc-core-components`                 | Ja, als separate Peer-Dependency      |
+| Bundle   | `@db-ux/wc-core-components/bundle/index.js` | Nein, die Runtime ist mit eingebunden |
+
+Das Beispiel oben nutzt das Bundle. Für die Standard-Variante installierst du die Runtime und importierst aus dem Paket selbst:
+
+```shell
+pnpm add @stencil/core
+```
+
+```js
+// main.js
+import { defineCustomElements } from '@db-ux/wc-core-components';
+
+defineCustomElements();
+```
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Prüfe das Setup mit einem Button
+
+Ein Button mit Icon zeigt an einer Stelle, ob Registrierung, Styles, Schrift und Icons funktionieren.
+
+```html
+<db-button variant="brand" icon="arrow_right">Artikel in den Warenkorb</db-button>
+```
+
+<LearnAside>
+
+| Prüfung       | Erwartet                                                                                            |
+| ------------- | --------------------------------------------------------------------------------------------------- |
+| Registrierung | Der Tag `<db-button>` zeigt einen Button.                                                           |
+| Styles        | Der Button hat einen gefüllten Hintergrund in der Markenfarbe und abgerundete Ecken.                |
+| Schrift       | Die DevTools zeigen `OpenSans` als gerenderte Schrift – oder `DB Neo Screen Sans` mit dem DB Theme. |
+| Icon          | Vor dem Text erscheint ein Pfeil.                                                                   |
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Wenn etwas nicht richtig aussieht
+
+Die meisten Probleme beim Setup kommen von einer fehlenden Registrierung, der Reihenfolge der Styles oder Asset-Pfaden, die nicht zu deinem Bundler passen.
+
+<LearnAside>
+
+| Symptom                                 | Ursache und Lösung                                                                                                                                                                |
+| --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Custom-Element-Tags bleiben leer        | `defineCustomElements()` wurde nicht ausgeführt oder läuft, bevor das Modul geladen ist. Rufe es einmal beim Start der Anwendung auf.                                             |
+| Build scheitert an einem Stencil-Import | Der Standard-Entry-Point erwartet `@stencil/core` als Peer-Dependency. Installiere es oder wechsle auf den Bundle-Entry-Point.                                                    |
+| Komponenten erscheinen ohne Styles      | Der CSS-Import fehlt, oder das Theme wird nach den Styles der Komponenten geladen. Setze `@layer whitelabel-theme, db-ux;` als erste Anweisung.                                   |
+| Schrift oder Icons fehlen               | Der Browser findet die Asset-Dateien nicht. Im Network-Tab schlägt eine Anfrage für eine `.woff2`-Datei fehl. Wechsle zwischen `rollup.css`, `webpack.css` und `relative.css`.    |
+| Farben sind nur im Build kaputt         | Vite 8 minifiziert CSS mit LightningCSS. Das zerstört `light-dark()`. Setze `build: { cssMinify: 'esbuild' }` in `vite.config.ts` und installiere `esbuild` als Dev-Abhängigkeit. |
+
+Wenn nichts davon hilft, eröffne ein Issue im [core-web-Repository](https://github.com/db-ux-design-system/core-web/issues/new/choose). Prüfe vorher, ob es das Issue schon gibt.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Mach mit deinem Projekt weiter
+
+Ergänze das DB Theme oder starte mit einem Beispiel.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'DB Theme',
+			description: 'Ergänze die Farben, Schriften und Icons der Marke Deutsche Bahn.',
+			url: '/de/dokumentation/lernen/db-theme-einrichten',
+		},
+		{
+			title: 'Komponenten',
+			description: 'Props, Varianten und Richtlinien für jede Komponente.',
+			url: '/de/dokumentation/komponenten',
+		},
+		{
+			title: 'Beispielprojekte',
+			description: 'Fertige Beispielprojekte zum Öffnen im Browser oder als Ausgangspunkt.',
+			url: '/de/dokumentation/lernen/beispiele',
+		},
+	]}
+/>
+
+<LearnAside>
+
+Nichts davon brauchst du für den Start. Ergänze es, sobald deine erste Komponente erscheint.
+
+### Autovervollständigung im Editor
+
+Trage die mitgelieferte Custom-Data-Datei in deine VS-Code-Einstellungen ein, um Vorschläge für Tags und Attribute zu erhalten.
+
+```json
+{
+	"html.customData": ["./node_modules/@db-ux/wc-core-components/dist/vscode.html-custom-data.json"]
+}
+```
+
+### PostCSS-Plugin
+
+Reduziert die Bundle-Größe, indem es `var()`, `calc()`, `color-mix()` und `light-dark()` zur Build-Zeit auflöst und ungenutzte Deklarationen entfernt.
+
+```shell
+pnpm add @db-ux/core-postcss-plugin esbuild --save-dev
+```
+
+```ts
+// vite.config.ts
+import { defineConfig } from 'vite';
+import { dbUxFlatten } from '@db-ux/core-postcss-plugin';
+
+export default defineConfig({
+	css: {
+		// Ab Vite 8 Standard ist LightningCSS – ohne diese Zeile laufen keine PostCSS-Plugins
+		transformer: 'postcss',
+		postcss: {
+			plugins: [dbUxFlatten()],
+		},
+	},
+	build: {
+		// Ab Vite 8: erhält light-dark() im Produktions-Build (braucht esbuild)
+		cssMinify: 'esbuild',
+	},
+});
+```
+
+### Ressourcen
+
+| Ressource        | Link                                                                                                |
+| ---------------- | --------------------------------------------------------------------------------------------------- |
+| npm-Paket        | [@db-ux/wc-core-components](https://www.npmjs.com/package/@db-ux/wc-core-components)                |
+| Quellcode        | [core-web/output/stencil](https://github.com/db-ux-design-system/core-web/tree/main/output/stencil) |
+| Komponentendoku  | [Komponenten](/de/dokumentation/komponenten)                                                        |
+| Migration Guides | [Migration Guides](/de/dokumentation/releases/migration-guides)                                     |
+| Issues           | [core-web-Repository](https://github.com/db-ux-design-system/core-web/issues/new/choose)            |
+
+</LearnAside>
+
+</LearnBlock>

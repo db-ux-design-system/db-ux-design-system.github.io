@@ -4,6 +4,7 @@ import DisabledWrapper from '@template/components/DisabledWrapper/DisabledWrappe
 import TextImage from '@template/components/TextImage/TextImage.astro';
 import Visual from '@template/components/Visual/Visual.astro';
 import type { VisualName } from '@template/visuals';
+import type { VisualImageName } from '@template/visuals/images';
 import './TeaserCard.css';
 
 /**
@@ -16,8 +17,12 @@ import './TeaserCard.css';
  * | `teasers`      | `Teaser[]`                            | required  | Array of teaser items to render as cards                           |
  * | `columns`      | `number`                              | auto-fit  | Fixed column count (1–4). Uses responsive auto-fit when omitted    |
  * | `spacing`      | `'none' \| 'small' \| 'medium' \| 'large'` | `'small'` | Card padding passed to DBCard                                 |
- * | `headlineSize` | `'small' \| 'medium' \| 'large'`      | `'small'` | Headline font size (3xs / 2xs / sm)                                |
- * | `headlineLevel`| `1 \| 2 \| 3 \| 4 \| 5 \| 6`         | `3`       | Heading level for card titles                                      |
+ * | `headlineLevel`| `1 \| 2 \| 3 \| 4 \| 5 \| 6`         | `3`       | Heading level for card titles. Does not change the size    |
+ *
+ * ## Card sizes
+ *
+ * The size follows the card type: cards without an image are small (bold body-md title),
+ * cards with an image or visual are large (headline-sm title). See TeaserCard.css.
  *
  * ## Teaser Item Props
  *
@@ -32,8 +37,10 @@ import './TeaserCard.css';
  * | `imageSrcDark`  | `string`                                          | –           | Image URL (dark mode). Falls back to imageSrc        |
  * | `imageAlt`      | `string`                                          | `title`     | Alt text for the image                               |
  * | `visual`        | `VisualName`                                      | –           | Decorative inline visual from template/visuals/. Replaces imageSrc |
+ * | `visualImage`   | `VisualImageName`                                 | –           | Decorative PNG visual from static/assets/teasers/. Replaces imageSrc, visual wins over it |
  * | `imagePosition` | `'top' \| 'bottom' \| 'left' \| 'right'`         | `'top'`     | Image placement relative to text                     |
  * | `imageWidth`    | `'50' \| '33' \| '66' \| '25'`                    | –           | Image/text ratio for horizontal layouts              |
+ * | `searchText`    | `string`                                          | –           | Search text for linked teasers (`data-search`)       |
  */
 
 interface Props {
@@ -49,35 +56,36 @@ interface Props {
 		imageAlt?: string;
 		/** Decorative inline visual from `template/visuals/`. Replaces `imageSrc`. */
 		visual?: VisualName;
+		/**
+		 * Decorative PNG visual from `static/assets/teasers/`. Replaces `imageSrc`,
+		 * `visual` takes precedence over it.
+		 */
+		visualImage?: VisualImageName;
 		imagePosition?: 'top' | 'bottom' | 'left' | 'right';
 		imageWidth?: '50' | '33' | '66' | '25';
+		/** Text a search filter matches against, e.g. title, description and keywords. Rendered as `data-search` on linked teasers. */
+		searchText?: string;
+		/** Category a filter matches against. Rendered as `data-category` on linked teasers. */
+		category?: string;
 	}[];
 	/** Fixed number of columns (e.g. 2 or 3). Uses auto-fit when omitted. */
 	columns?: number;
 	/** Card spacing passed to DBCard. Defaults to 'small'. */
 	spacing?: 'none' | 'small' | 'medium' | 'large';
-	/** Headline size inside cards. Defaults to 'small' (headline-3xs). */
-	headlineSize?: 'small' | 'medium' | 'large';
 	/** Heading level for card titles (1–6). Defaults to 3. */
 	headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
-const {
-	teasers,
-	columns,
-	spacing = 'small',
-	headlineSize = 'small',
-	headlineLevel = 3,
-} = Astro.props;
+const { teasers, columns, spacing = 'small', headlineLevel = 3 } = Astro.props;
 const isDE = Astro.url.pathname.startsWith('/de/');
 const disabledLabel = isDE ? 'Demnächst verfügbar' : 'Coming Soon';
 ---
 
-<div
-	class={`teaser-cards${columns ? ` teaser-cards-cols-${columns}` : ''}${headlineSize === 'large' ? ' teaser-cards-large' : headlineSize === 'medium' ? ' teaser-cards-medium' : ''}`}
->
+<div class={`teaser-cards${columns ? ` teaser-cards-cols-${columns}` : ''}`}>
 	{teasers.map((teaser) => {
-		const hasImage = !!teaser.imageSrc || !!teaser.visual;
+		// An SVG visual or a PNG visual both fill the `visual` slot, which replaces the images
+		const hasVisual = !!teaser.visual || !!teaser.visualImage;
+		const hasImage = !!teaser.imageSrc || hasVisual;
 		const isDisabled = teaser.disabled === true;
 
 		const cardContent = hasImage ? (
@@ -85,13 +93,15 @@ const disabledLabel = isDE ? 'Demnächst verfügbar' : 'Coming Soon';
 				title={teaser.title}
 				imagePosition={teaser.imagePosition ?? 'top'}
 				imageWidth={teaser.imageWidth}
-				imageSrc={teaser.visual ? undefined : teaser.imageSrc}
-				imageSrcDark={teaser.visual ? undefined : teaser.imageSrcDark}
-				imageAlt={teaser.visual ? undefined : (teaser.imageAlt ?? teaser.title)}
+				imageSrc={hasVisual ? undefined : teaser.imageSrc}
+				imageSrcDark={hasVisual ? undefined : teaser.imageSrcDark}
+				imageAlt={hasVisual ? undefined : (teaser.imageAlt ?? teaser.title)}
 				headlineLevel={headlineLevel}
 			>
-				{teaser.visual && (
+				{teaser.visual ? (
 					<Visual slot="visual" name={teaser.visual} strokeScaling="scale" surface />
+				) : (
+					teaser.visualImage && <Visual slot="visual" image={teaser.visualImage} surface />
 				)}
 				{teaser.description}
 			</TextImage>
@@ -114,6 +124,11 @@ const disabledLabel = isDE ? 'Demnächst verfügbar' : 'Coming Soon';
 			</div>
 		);
 
+		const search = {
+			...(teaser.searchText ? { 'data-search': teaser.searchText } : {}),
+			...(teaser.category ? { 'data-category': teaser.category } : {}),
+		};
+
 		return isDisabled ? (
 			<DisabledWrapper label={disabledLabel} size={hasImage ? 'medium' : 'small'}>
 				<DBCard spacing={spacing}>{cardContent}</DBCard>
@@ -122,6 +137,7 @@ const disabledLabel = isDE ? 'Demnächst verfügbar' : 'Coming Soon';
 			<a
 				href={teaser.url}
 				class="teaser-card-link"
+				{...search}
 				{...(teaser.external ? { target: '_blank', rel: 'noreferrer' } : {})}
 			>
 				<DBCard behavior="interactive" spacing={spacing}>

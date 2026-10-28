@@ -23,6 +23,64 @@ const { title, loadModelViewer } = Astro.props as {
 	{loadModelViewer && (
 		<script type="module" is:inline src={`${appConfig.basePath}model-viewer.min.js`} />
 	)}
+	{loadModelViewer && <script
+		is:inline
+		define:vars={{ decoder: `${appConfig.basePath}meshopt_decoder.js` }}
+	>
+		// The teaser glb files are meshopt-compressed. Without a decoder location model-viewer
+		// fails to load them and keeps showing the PNG poster.
+		customElements.whenDefined('model-viewer').then(() => {
+			const ModelViewer = customElements.get('model-viewer');
+			if (ModelViewer && !ModelViewer.meshoptDecoderLocation) {
+				ModelViewer.meshoptDecoderLocation = decoder;
+			}
+		});
+	</script>}
 
+	<!--
+		Lets an island handle browser Back/Forward between its own history entries before
+		the ClientRouter fetches and swaps the page (the Get Started wizard steps).
+		Listeners on window run in registration order, the capture flag does not change
+		that, and in the production build the router registers before any island
+		hydrates. This inline script runs before the router module, so its listener comes
+		first. An island sets window.__dbUxPopState; returning true stops the router.
+	-->
+	<script is:inline>
+		if (!window.__dbUxPopStateListener) {
+			window.__dbUxPopStateListener = true;
+			window.addEventListener('popstate', (event) => {
+				if (window.__dbUxPopState?.(event)) event.stopImmediatePropagation();
+			});
+		}
+	</script>
 	<ClientRouter />
+
+	<!--
+		Apply the stored color mode to <html> before the first paint and after every
+		client-side navigation. The Shell is client:only and is recreated on each
+		navigation without data-mode until its effect runs; without this, the page
+		briefly falls back to the OS color scheme (a dark or white flash when the
+		site mode differs from the OS). Keep the key and the default in sync with
+		template/context/color-mode-context.tsx.
+	-->
+	<script is:inline>
+		(() => {
+			const apply = () => {
+				let stored = null;
+				// Reading throws when storage is blocked (e.g. some private modes). The
+				// default mode applies then, and the listener below is still registered.
+				try {
+					stored = window.localStorage.getItem('db-ux-mode');
+				} catch {
+					// Keep the default.
+				}
+				document.documentElement.setAttribute('data-mode', stored === 'dark' ? 'dark' : 'light');
+			};
+			apply();
+			if (!window.__dbUxColorModeListener) {
+				window.__dbUxColorModeListener = true;
+				document.addEventListener('astro:after-swap', apply);
+			}
+		})();
+	</script>
 </head>

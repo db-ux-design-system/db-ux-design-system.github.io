@@ -1,0 +1,175 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Build accessible products'
+headline: 'Build accessible products'
+description: 'What the components already do for accessibility, how they are tested and what stays with your team in design and development.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 23
+category: 'Accessibility'
+keywords:
+  [
+    'accessibility',
+    'a11y',
+    'wcag',
+    'wcag 2.2',
+    'screen reader',
+    'keyboard',
+    'focus',
+    'contrast',
+    'aria',
+    'axe-core',
+    'nvda',
+    'voiceover',
+    'eslint',
+    'audit',
+    'labels',
+    'alternative text',
+    'barrier-free',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Components help, but do not make your product accessible
+
+The components bring **semantics, keyboard operation and contrast** with them. The structure of your page, your own colors and the content you pass in stay with your team.
+
+<LearnAside>
+
+| The design system takes care of …                                    | Your team takes care of …                                              |
+| -------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Semantic structure and roles inside each component                   | The structure of your page: headings, landmarks, order of content      |
+| Keyboard operation and focus styles of each component                | The focus order across your page and focus handling in your own flows  |
+| Color contrast within the components, checked by the automated tests | Colors you add yourself, for example custom colors or images with text |
+| Automated and screen reader tests of each component                  | Labels, alternative texts and error messages – the content you pass in |
+
+Components that pass on their own can still form a page that does not. Content with the status Stable has been validated for accessibility within the component. What each status means is explained in [What a status means](/documentation/learn/status).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Every component is tested automatically
+
+Two rule engines scan every component showcase, and ARIA snapshots make changes to roles and names visible. **Screen reader tests** and manual reviews cover a growing number of components.
+
+<LearnAside>
+
+| Test                      | What it checks                                                                               |
+| ------------------------- | -------------------------------------------------------------------------------------------- |
+| axe-core                  | Every component showcase is scanned. The test fails as soon as a violation is found.         |
+| IBM Accessibility Checker | A second automated rule engine on the same showcases.                                        |
+| ARIA snapshots            | The accessibility tree of each component, so that changes to roles and names become visible. |
+| Screen reader tests       | Automated tests with NVDA on Windows and VoiceOver on macOS.                                 |
+| Accessibility reviews     | Manual reviews of individual components.                                                     |
+
+Screen reader tests exist for: Accordion, Badge, Brand, Button, Card, Checkbox, Control Panel, Drawer, Header, Icon, Infotext, Input, Link, Navigation, Notification, Popover, Radio, Section, Select, Switch, Tabs, Tag, Textarea and Tooltip.
+
+Manual accessibility reviews are completed for: Badge, Button, Card, Checkbox, Drawer, Infotext, Input, Link, Notification, Radio, Select, Switch, Tag and Textarea.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## In design, use the components and write the content
+
+Use the components from the Figma library instead of rebuilding them – their structure matches the tested code. Fill in **labels, messages and alternative texts** in the design, so development does not have to invent them later.
+
+<LearnAside>
+
+- Use the components from the Figma library instead of rebuilding them
+- Fill in labels, messages and alternative texts in the design. Developers need them, and they are easy to forget later
+- Check the Guidelines section of each component page in the [component documentation](/documentation/components) for the rules that apply to it
+- Check the contrast of colors you add yourself, for example custom colors or text on images
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## In code, pass the content and let the linter check it
+
+Pass `aria-*` attributes directly to the components – they forward them to the right element. The **ESLint plugin** reports missing labels and similar issues while you type.
+
+<LearnAside>
+
+- `aria-*` attributes are forwarded automatically – no extra property is needed
+- Don't hide labels or messages without a replacement. A visually hidden label still has to exist
+
+| ESLint rule                           | Reports                                                                        |
+| ------------------------------------- | ------------------------------------------------------------------------------ |
+| `form-label-required`                 | Form components without a label                                                |
+| `button-no-text-requires-tooltip`     | Buttons without text that lack an icon or a tooltip                            |
+| `close-button-text-required`          | Close buttons of Notification, Drawer, Dialog and Custom Select without a text |
+| `header-burger-menu-label-required`   | A burger menu without a label                                                  |
+| `no-interactive-tooltip-content`      | Interactive elements inside a tooltip                                          |
+| `tooltip-requires-interactive-parent` | Tooltips that are not placed inside an interactive element                     |
+
+The setup of the plugin is described in the setup articles for [React](/documentation/learn/react-setup#eslint-plugin), [Angular](/documentation/learn/angular-setup#eslint-plugin) and [Vue](/documentation/learn/vue-setup#eslint-plugin).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Test your product as a whole
+
+Automated tools find only part of the issues, so also test with the **keyboard and a screen reader**. The [MCP Server](/documentation/learn/mcp-server 'Its prompt audit_accessibility checks code against WCAG 2.2 AA.') offers a first audit.
+
+<LearnAside>
+
+The prompt `audit_accessibility` checks a code snippet against WCAG 2.2 AA and generates manual test scripts. It does not replace the manual checks.
+
+A possible order of checks:
+
+1. Run the automated checks, for example axe-core in your browser or in your tests
+2. Operate every flow with the keyboard only and watch the focus
+3. Go through the main flows with a screen reader, for example NVDA on Windows or VoiceOver on macOS
+4. Review with people who use assistive technology
+
+How to connect the MCP Server to your IDE is described in [Connect your agent to the MCP Server](/documentation/learn/mcp-server).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Put it into practice
+
+Read the rules of the components you use, or try them in a small accessible form.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Components',
+			description: 'Read the Guidelines and accessibility notes of each component.',
+			url: '/documentation/components',
+		},
+		{
+			title: 'Build a contact form in React',
+			description: 'Build a contact form with labels, messages and an accessible notification.',
+			url: '/documentation/learn/react-tutorial',
+		},
+	]}
+/>
+
+</LearnBlock>

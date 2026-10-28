@@ -1,0 +1,300 @@
+/* Reading list: the popover in the control panel and the bookmark button in the page
+   hero. Loaded through global.css, because styles imported inside the client-only
+   islands are missing after client-side navigation. */
+
+/* Both groups share one scroll area. It scrolls from the 8th page on: 7 rows of
+   one line each stay visible. A row is as tall as the small delete button plus the
+   block padding of the row. With both groups shown, the gap between them is added,
+   so the 7 rows stay visible. */
+.rl-lists {
+	--rl-row-size: calc(var(--db-sizing-sm) + 2 * var(--db-spacing-fixed-2xs));
+
+	display: grid;
+	gap: var(--db-spacing-fixed-sm);
+	max-block-size: calc(7 * var(--rl-row-size));
+	overflow-y: auto;
+
+	/* "none" instead of "contain": both keep the scroll inside the box, but "contain"
+	   also keeps the elastic overscroll of the platform. On a trackpad the rows could
+	   then be dragged inside the box even while the list is short enough to fit. */
+	overscroll-behavior: none;
+
+	&:has(> .rl-list + .rl-list) {
+		max-block-size: calc(7 * var(--rl-row-size) + var(--db-spacing-fixed-sm));
+	}
+}
+
+.rl-list {
+	display: grid;
+	margin: 0;
+	padding: 0;
+
+	/* Keeps the hover background of a row off the bar: 2 px, the smallest spacing. */
+	padding-inline-start: var(--db-spacing-fixed-3xs);
+	list-style: none;
+
+	/* Every group carries a bar, so the rows of both groups start at the same inline
+	   position. Own bookmarks keep it quiet at emphasis 60, the wizard group colors
+	   it. */
+	border-inline-start: var(--db-border-width-2xs) solid
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
+}
+
+/* Wizard suggestions: grouped by a continuous bar on the start side, in the color of
+   the role of the stored result (--rl-wizard-color), like the lines of the result list.
+   Brand as the fallback when no role can be read from the stored answers. */
+.rl-list[data-source='wizard'] {
+	border-inline-start-color: var(
+		--rl-wizard-color,
+		var(--db-brand-on-bg-basic-emphasis-70-default)
+	);
+}
+
+/* One row per page: link and delete button side by side on one surface. The row
+   carries the hover background, so the button stands on it. The column of the button
+   keeps its width while the button is hidden, so nothing moves on hover. */
+.rl-item {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	gap: var(--db-spacing-fixed-2xs);
+	align-items: center;
+	padding-inline: var(--db-spacing-fixed-2xs);
+	border-radius: var(--db-border-radius-sm);
+
+	/* Keyboard focus inside the row gets the same background as hover. */
+	&:hover,
+	&:focus-within {
+		background-color: var(--db-adaptive-bg-basic-transparent-full-hovered);
+	}
+
+	&:has(.rl-item-link:active) {
+		background-color: var(--db-adaptive-bg-basic-transparent-full-pressed);
+	}
+}
+
+/* The link of the page: arrow on the start side, label next to it. The background
+   comes from the row, so the delete button next to it stands on the same surface. */
+.rl-item-link {
+	display: flex;
+	align-items: center;
+	min-inline-size: 0;
+	padding-block: var(--db-spacing-fixed-2xs);
+	padding-inline: var(--db-spacing-fixed-2xs);
+	border-radius: var(--db-border-radius-sm);
+	font: var(--db-type-body-md);
+	color: inherit;
+
+	/* A list of links, like a navigation: the box background and the focus ring mark
+	   them, so no underline. */
+	text-decoration: none;
+
+	/* The arrow of data-icon, hidden until the box is hovered or focused. It grows out
+	   of zero width, so it takes room from the label instead of pushing it out of the
+	   box. */
+	&::before {
+		flex: none;
+		inline-size: 0;
+		margin-inline-end: 0;
+		overflow: hidden;
+		opacity: 0;
+		transition:
+			inline-size var(--db-transition-straight-emotional),
+			margin-inline-end var(--db-transition-straight-emotional),
+			opacity var(--db-transition-straight-emotional);
+
+		@media (prefers-reduced-motion: reduce) {
+			transition: none;
+		}
+	}
+
+	/* The arrow comes in on hover of the row, so it also shows while the pointer is on
+	   the delete button: the row is one surface. */
+	.rl-item:hover > &::before,
+	&:focus-visible::before {
+		inline-size: var(--db-sizing-sm);
+		margin-inline-end: var(--db-spacing-fixed-2xs);
+		opacity: 1;
+	}
+
+	&:focus-visible {
+		/* Same focus ring as the library: 2xs outline with the library fallback color.
+		   The inset offset keeps it inside the popover, so the popover does not clip it. */
+		outline: var(--db-border-width-2xs) solid
+			var(--db-focus-outline-color, var(--db-informational-on-bg-basic-emphasis-70-default));
+		outline-offset: calc(-1 * var(--db-border-width-2xs));
+	}
+}
+
+/* One line per page: a long title is truncated, so the rows keep their height and the
+   delete buttons stay on one column. */
+.rl-item-label {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+/* The delete button appears with the row. Its column is there either way, so the
+   label does not move. */
+.rl-item-remove {
+	opacity: 0;
+	transition: opacity var(--db-transition-straight-emotional);
+
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
+	}
+
+	.rl-item:hover &,
+	.rl-item:focus-within &,
+	&:focus-visible {
+		opacity: 1;
+	}
+}
+
+/* Without hover there is no way to reveal the button, so it stays visible. */
+@media (hover: none) {
+	.rl-item-remove {
+		opacity: 1;
+	}
+}
+
+/* Popover in the control panel. The library sizes it with inline-size: max-content,
+   so it would grow as soon as the arrow of a row takes its space. A fixed width keeps
+   it still, no matter which row is hovered and how long the titles are. */
+.rl-popover > .db-popover-content {
+	inline-size: var(--db-container-xs);
+	max-inline-size: calc(100vw - 2 * var(--db-spacing-fixed-sm));
+}
+
+.rl-popover-body {
+	display: grid;
+	gap: var(--db-spacing-fixed-xs);
+	inline-size: 100%;
+	min-inline-size: 0;
+}
+
+.rl-popover-title {
+	margin: 0;
+	font: var(--db-type-headline-2xs);
+}
+
+/* Title and "Remove all" in one row. The min-block-size keeps the row as tall with
+   and without the button, so the list does not jump when the last entry goes. */
+.rl-popover-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--db-spacing-fixed-xs);
+	min-block-size: var(--db-sizing-sm);
+}
+
+/* Bookmark icon inside the hint of the empty list, at text size. */
+.rl-inline-icon {
+	/* The icon size the library uses next to body-sm text. A custom size (e.g. 1.25em)
+	   grew the icon box but not the glyph, so the glyph sat in the top start corner. */
+	--db-icon-font-size: var(--db-base-body-icon-font-size-sm);
+
+	display: inline-block;
+	vertical-align: text-bottom;
+}
+
+.rl-empty {
+	display: grid;
+	gap: var(--db-spacing-fixed-xs);
+	font: var(--db-type-body-sm);
+
+	& p {
+		margin: 0;
+	}
+}
+
+/* Link to the wizard in the empty list: a row like the list items, including the
+   arrow that comes in on hover and focus. At rest the label sits flush with the hint
+   above. One column: the row has no delete button, so the label gets the full width. */
+.rl-suggest {
+	grid-template-columns: minmax(0, 1fr);
+	margin-inline: calc(-1 * var(--db-spacing-fixed-2xs));
+
+	& .rl-item-link {
+		padding-inline-start: 0;
+	}
+}
+
+/* Mobile menu bar: the button sits close to the end edge, and the popover is wider
+   than the space on either side of it. The library then centers it below the button
+   and it runs out of the viewport. Pinned to both viewport edges instead, still below
+   the menu bar. The library writes the position as inline styles, so the inset needs
+   !important. */
+.db-control-panel-mobile .rl-popover > .db-popover-content {
+	/* stylelint-disable-next-line declaration-no-important */
+	inset-inline: var(--db-spacing-fixed-sm) !important;
+	inline-size: auto;
+	max-inline-size: none;
+	max-block-size: calc(100dvh - var(--db-sizing-xl));
+	overflow-y: auto;
+	overscroll-behavior: none;
+
+	/* No horizontal centering: the library shifts by these offsets. */
+	--db-popover-center-x: 0%;
+	--db-popover-translate-x: 0%;
+}
+
+/* Closed with Escape (see ReadingListButton): hidden although the pointer or the
+   focus is still on it. The library shows the popover through this property. */
+.rl-control[data-dismissed='true'] .rl-popover > .db-popover-content {
+	--db-show-popover-visibility: hidden;
+}
+
+/* Count badge: the library centers a corner badge on the corner of the button. The
+   icon-only button is larger than its icon, so the badge floated beside the icon.
+   Moved in, so it overlaps the top end corner of the bookmark glyph slightly. */
+.rl-trigger > .db-badge[data-placement='corner-top-right'] {
+	inset-inline-end: calc(var(--db-spacing-fixed-xs) + var(--db-spacing-fixed-3xs));
+	inset-block-start: calc(var(--db-spacing-fixed-xs) - var(--db-spacing-fixed-3xs));
+}
+
+/* Small button in the mobile menu bar: less space around the icon. */
+.rl-trigger[data-size='small'] > .db-badge[data-placement='corner-top-right'] {
+	inset-inline-end: var(--db-spacing-fixed-2xs);
+	inset-block-start: var(--db-spacing-fixed-3xs);
+}
+
+/* Desktop header: the language switch is a button with text and 16 px inline
+   padding, the reading list button is icon-only with 8 px around the icon. The extra
+   8 px give the icon the same visible gap to the color mode switch as the switch has
+   to the globe icon. The badge stays within the button, see above. */
+.shell-preference-switches > .rl-control {
+	margin-inline-end: var(--db-spacing-fixed-xs);
+}
+
+/* Bookmark button in the page hero, right after the headline. */
+.rl-toggle {
+	display: flex;
+	flex-shrink: 0;
+}
+
+/* "Finished reading?" at the end of a saved page: an overlay notification below the
+   control panel, at the same place as the hint on the wizard result
+   (GetStartedWizard.css, .gsw-saved). --rl-finished-top is the lower edge of the
+   visible control panel, measured by the island; the sizing token is only the fallback
+   before the first measurement. */
+.rl-finished.db-notification {
+	position: fixed;
+	inset-block-start: calc(
+		var(--rl-finished-top, var(--db-sizing-2xl)) + var(--db-spacing-fixed-sm)
+	);
+	inset-inline-end: var(--db-spacing-fixed-sm);
+	z-index: 100;
+	max-inline-size: min(calc(100vw - 2 * var(--db-spacing-fixed-sm)), 28rem);
+
+	/* The semantic colors its icon through the ::before itself, so --db-icon-color on
+	   the notification has no effect. */
+	&::before {
+		color: var(--db-informational-on-bg-basic-emphasis-100-default);
+	}
+}
+
+/* Text and action stacked: the action reads as the answer to the question. Scoped to
+   the notification, as ".db-notification p" (db-ux-overrides.css) resets the margin. */
+.rl-finished .rl-finished-text {
+	margin: 0 0 var(--db-spacing-fixed-md);
+}

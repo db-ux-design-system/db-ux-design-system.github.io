@@ -23,6 +23,16 @@
 	stroke-linecap: butt;
 }
 
+/*
+ * Raster visual (`image` prop): a PNG from static/assets/teasers/, rendered as <img>.
+ * It shares `.db-visual`, so sizing, the surface and the hover scaling behave like for an SVG.
+ * `contain` keeps the aspect ratio of the file inside the box the size props define.
+ */
+.db-visual-image {
+	display: block;
+	object-fit: contain;
+}
+
 .db-visual .v-stroke {
 	stroke: var(--visual-stroke, currentcolor);
 }

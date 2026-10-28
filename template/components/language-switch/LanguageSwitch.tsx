@@ -12,6 +12,7 @@ const LanguageSwitch = () => {
 
 	return (
 		<DBPopover
+			className="language-switch-popover"
 			trigger={
 				<DBButton
 					type="button"
