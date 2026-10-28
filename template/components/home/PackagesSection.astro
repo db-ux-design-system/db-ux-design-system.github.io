@@ -61,7 +61,7 @@ const openPageLabel = (title: string) => (isDE ? `Seite ${title} öffnen` : `Ope
 		>
 			<DBCard behavior="interactive" spacing="large">
 				<TextImage title={foundationTitle} imagePosition="right" imageWidth="25">
-					<Visual slot="visual" image="foundation" surface />
+					<Visual slot="visual" name="foundation" strokeScaling="scale" surface />
 					{foundationText}
 				</TextImage>
 			</DBCard>
@@ -72,7 +72,7 @@ const openPageLabel = (title: string) => (isDE ? `Seite ${title} öffnen` : `Ope
 		>
 			<DBCard behavior="interactive" spacing="large">
 				<TextImage title={componentsTitle} imagePosition="right" imageWidth="25">
-					<Visual slot="visual" image="components" surface />
+					<Visual slot="visual" name="components" strokeScaling="scale" surface />
 					{componentsText}
 				</TextImage>
 			</DBCard>
@@ -83,7 +83,7 @@ const openPageLabel = (title: string) => (isDE ? `Seite ${title} öffnen` : `Ope
 		>
 			<DBCard behavior="interactive" spacing="large">
 				<TextImage imagePosition="right" imageWidth="25" title={extensionsTitle}>
-					<Visual slot="visual" image="extensions" surface />
+					<Visual slot="visual" name="extensions" strokeScaling="scale" surface />
 					{extensionsText}
 				</TextImage>
 			</DBCard>
@@ -96,7 +96,7 @@ const openPageLabel = (title: string) => (isDE ? `Seite ${title} öffnen` : `Ope
 			>
 				<DBCard spacing="large">
 					<TextImage imagePosition="right" imageWidth="33" title={patternsTitle}>
-						<Visual slot="visual" image="patterns" surface />
+						<Visual slot="visual" name="patterns" strokeScaling="scale" surface />
 						{patternsText}
 					</TextImage>
 				</DBCard>
@@ -108,7 +108,7 @@ const openPageLabel = (title: string) => (isDE ? `Seite ${title} öffnen` : `Ope
 			>
 				<DBCard spacing="large">
 					<TextImage imagePosition="right" imageWidth="33" title={templatesTitle}>
-						<Visual slot="visual" image="templates" surface />
+						<Visual slot="visual" name="templates" strokeScaling="scale" surface />
 						{templatesText}
 					</TextImage>
 				</DBCard>
