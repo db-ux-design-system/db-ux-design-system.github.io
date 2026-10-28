@@ -1,16 +1,25 @@
 # Visuals
 
-Internal SVG library for illustrative visuals on documentation pages (MDX) and page components (`.astro`). The `Visual` component renders the SVGs inline at build time, so colors and stroke width follow DB UX tokens and Light/Dark Mode.
+Internal library for illustrative visuals on documentation pages (MDX) and page components (`.astro`). The `Visual` component supports two sources:
+
+| Source                        | Prop    | Rendered as                | Tokens and stroke             |
+| ----------------------------- | ------- | -------------------------- | ----------------------------- |
+| `template/visuals/*.svg`      | `name`  | inline `<svg>`             | follow DB UX tokens and modes |
+| `static/assets/teasers/*.png` | `image` | `<img>` to the static file | none – the file as it is      |
+
+The SVGs are inlined at build time, so colors and stroke width follow DB UX tokens and Light/Dark Mode. The PNGs are raster images and have to work in both color modes on their own, see [Raster visuals](#raster-visuals).
 
 ## Folder layout
 
-| Path                                  | Content                                                  |
-| ------------------------------------- | -------------------------------------------------------- |
-| `template/visuals/*.svg`              | SVG sources, one file per visual                         |
-| `template/visuals/index.ts`           | Typed registry – generated, do not edit                  |
-| `template/components/Visual/`         | `Visual.astro`, `Visual.css`, helpers in `visual-svg.ts` |
-| `scripts/visuals/svgo.config.ts`      | SVGO 4.1.0 config incl. the `normalizeVisual` plugin     |
-| `scripts/visuals/optimize-visuals.ts` | Normalize, optimize and regenerate the registry          |
+| Path                                  | Content                                                                        |
+| ------------------------------------- | ------------------------------------------------------------------------------ |
+| `template/visuals/*.svg`              | SVG sources, one file per visual                                               |
+| `template/visuals/index.ts`           | Typed SVG registry – generated, do not edit                                    |
+| `static/assets/teasers/*.png`         | Raster sources, one file per visual                                            |
+| `template/visuals/images.ts`          | Typed raster registry – generated, do not edit                                 |
+| `template/components/Visual/`         | `Visual.astro`, `Visual.css`, helpers in `visual-svg.ts` and `visual-image.ts` |
+| `scripts/visuals/svgo.config.ts`      | SVGO 4.1.0 config incl. the `normalizeVisual` plugin                           |
+| `scripts/visuals/optimize-visuals.ts` | Normalize, optimize and regenerate both registries                             |
 
 ## Adding a visual
 
@@ -61,6 +70,7 @@ import Visual from '@template/components/Visual/Visual.astro';
 <Visual name="foundation" size="3xl" />
 <Visual name="development" stroke="neutral-emphasis-70" strokeWidth={1.5} />
 <Visual name="patterns" size="3xl" strokeScaling="scale" strokeWidth={1} />
+<Visual image="getting-started" size="3xl" />
 ```
 
 Page component (`.astro`):
@@ -71,15 +81,19 @@ import { Visual } from '@components';
 ---
 
 <Visual name="templates" stroke="brand" strokeWidth="2xs" width="50%" />
+<Visual image="templates" width="50%" />
 ```
 
 The component can't be used inside React (`.tsx`) components.
 
 ## Props
 
+Set either `name` or `image`, never both. The stroke and color props apply to `name` only.
+
 | Prop            | Type                  | Default        | Description                                                                                                                                                                            |
 | --------------- | --------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`          | `VisualName`          | required       | File name without `.svg`                                                                                                                                                               |
+| `name`          | `VisualName`          | –              | SVG file name without `.svg`. Required unless `image` is set                                                                                                                           |
+| `image`         | `VisualImageName`     | –              | PNG file name without `.png`, see [Raster visuals](#raster-visuals)                                                                                                                    |
 | `stroke`        | `VisualColor`         | `currentColor` | Primary stroke color                                                                                                                                                                   |
 | `accent`        | `VisualColor`         | `stroke`       | Accent strokes and details                                                                                                                                                             |
 | `fill`          | `VisualColor`         | `none`         | Surfaces (`v-fill`)                                                                                                                                                                    |
@@ -138,9 +152,49 @@ Available properties:
 
 Each `<svg>` also has `data-visual="<name>"`.
 
+## Raster visuals
+
+PNGs in `static/assets/teasers/` are available through the `image` prop. They are served as static files and rendered as `<img class="db-visual db-visual-image">`, so sizing, the surface and the hover scaling behave exactly like for an SVG.
+
+```astro
+<Visual image="getting-started" surface />
+<Visual image="figma" size="2xl" />
+<Visual image="mail" label="Write to the team" />
+```
+
+A raster image has no tokens, no stroke and no geometry the component can address. That limits what applies:
+
+| Applies                                                | Throws                                                     |
+| ------------------------------------------------------ | ---------------------------------------------------------- |
+| `size`, `width`, `height`, `surface`, `label`, `class` | `stroke`, `accent`, `fill`, `strokeWidth`, `strokeScaling` |
+
+The SVG-only props throw instead of being dropped silently, which would look like a styling bug on the page. The same applies to setting `name` and `image` together, and to an unknown `image` – each fails the build with a message naming the file.
+
+### Adding a raster visual
+
+1. Save the PNG as `static/assets/teasers/<name>.png`. Use lowercase kebab-case, e.g. `product-management.png`
+2. Export with a transparent background. The visual sits on `--visual-surface-bg` with `surface`, and on the page background without it
+3. Check the file in Light **and** Dark Mode. The image is identical in both, so it can't rely on the page background for contrast – a near-black or near-white detail disappears in one of the modes
+4. Keep the file size reasonable. These are teaser-sized visuals, not full-width images
+5. Run `pnpm run optimize:visuals` to regenerate `template/visuals/images.ts`, then commit the PNG and the registry
+
+The script only registers the names, it does not touch or optimize the PNGs. `pnpm run lint:visuals` fails when the registry is out of date.
+
+### WebP in the build
+
+Keep the source a `.png` and reference it by name – the component always writes a `.png` URL. The `astro-integration-png-to-webp` integration converts every PNG in the build output to WebP (max 512 px, quality 50), deletes the PNG and rewrites the references in the generated HTML, CSS and JS. So the dev server serves `/assets/teasers/<name>.png` and the built page requests `/assets/teasers/<name>.webp`. The 512 px cap is the reason an oversized export brings no benefit.
+
+A name can exist as both an SVG and a PNG – the registries are separate and `name` and `image` select the source explicitly.
+
+### Sizing
+
+The intrinsic aspect ratio of the file is kept (`object-fit: contain`), so a non-square PNG is not stretched. Unlike an SVG the component doesn't know the dimensions before the image loads, so there is no `aspect-ratio` on the element: with `surface` the square surface defines the box, without it the height follows once the file is loaded.
+
 ## Light/Dark Mode
 
 The color tokens use `light-dark()`. Because the SVG is inline, the tokens resolve against the current color mode and the visual switches together with the page. Don't use fixed color values.
+
+A raster visual does not switch – the same file is shown in both modes. There is no light and dark variant for `image`; if a visual needs one, add it as an SVG instead.
 
 ## Accent and fill
 
@@ -229,14 +283,16 @@ Inside `TextImage` (slot `visual`) in a `DBCard`, `TextImage.css` places the sur
 
 ## Accessibility
 
-- Decorative (default): `aria-hidden="true"` and `focusable="false"`. Use this when the visual adds no information beyond the surrounding text.
-- Informative: set `label`. The component renders `role="img"`, a `<title>` with a unique ID and `aria-labelledby` pointing to it. Describe the content, not the shape.
+- Decorative (default): `aria-hidden="true"` and `focusable="false"` on an SVG, `alt=""` on a raster visual. Use this when the visual adds no information beyond the surrounding text.
+- Informative: set `label`. On an SVG the component renders `role="img"`, a `<title>` with a unique ID and `aria-labelledby` pointing to it; on a raster visual the label becomes the `alt` text. Describe the content, not the shape.
 
 Every ID inside a visual (e.g. clip paths, gradients) is prefixed per instance (`visual-<name>-<n>-…`), so a visual can appear several times on one page without duplicate IDs.
 
 ## Optimization
 
-| Command                     | Purpose                                                                                |
-| --------------------------- | -------------------------------------------------------------------------------------- |
-| `pnpm run optimize:visuals` | Normalize and optimize all SVGs, regenerate `index.ts`                                 |
-| `pnpm run lint:visuals`     | Check only. Fails if an SVG or the registry is not up to date. Part of `pnpm run lint` |
+| Command                     | Purpose                                                                              |
+| --------------------------- | ------------------------------------------------------------------------------------ |
+| `pnpm run optimize:visuals` | Normalize and optimize all SVGs, regenerate `index.ts` and `images.ts`               |
+| `pnpm run lint:visuals`     | Check only. Fails if an SVG or a registry is not up to date. Part of `pnpm run lint` |
+
+The PNGs are only registered by name – the script neither reads nor optimizes them.

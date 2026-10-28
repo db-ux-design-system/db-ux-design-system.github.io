@@ -22,7 +22,10 @@ const response = await fetch('http://localhost:4321/api/app-navigation.json');
 const appNavigation = await response.json();
 // These are redirect path, that we don't want to collect in the allPaths object. In case that those become "real" pages, remove them from the `redirectPaths` array
 const redirectPaths = ['documentation/extensions', 'documentation/support'];
-const allPaths = [...collectAllPaths(appNavigation), 'demo-b2b', 'demo-b2c'].filter(
+// Deduplicated: a group with `navOverview: true` gets an "Overview" child with the
+// group's own path, so the same page appears twice in the navigation. Two tests with
+// the same title make Playwright abort before any test runs.
+const allPaths = [...new Set([...collectAllPaths(appNavigation), 'demo-b2b', 'demo-b2c'])].filter(
 	(path) => !redirectPaths.includes(path),
 );
 

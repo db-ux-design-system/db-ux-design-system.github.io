@@ -1,0 +1,253 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Use the tokens without components'
+headline: 'Use the tokens without components'
+description: 'Load the tokens, fonts and icons without the components and check the setup with a first token.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 16
+category: 'Development'
+keywords:
+  [
+    'foundation',
+    'core foundation',
+    'tokens',
+    'design tokens',
+    'css custom properties',
+    'setup',
+    'installation',
+    'own components',
+    'helper classes',
+    'data attributes',
+    'density',
+    'adaptive coloring',
+    'icons',
+    'fonts',
+    'whitelabel theme',
+    'core-foundations',
+    'troubleshooting',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Tokens only, no components
+
+Use it alone for your own components or for icons and fonts only. For the components, follow the [HTML and CSS setup](/documentation/learn/html-css-setup 'Includes the Foundation.') instead.
+
+<LearnAside>
+
+- **Formats:** CSS, SCSS and Tailwind.
+- **Package manager:** the commands on this page use pnpm. With npm, use `npm i` instead of `pnpm add`.
+- **Browsers:** the last three versions of Chrome and Edge, Firefox ESR and the last two major versions of Safari.
+- **DB Theme:** products of Deutsche Bahn also need the DB Theme from the Marketing Portal. You can start without it, because the whitelabel theme works right away.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Install one package
+
+`@db-ux/core-foundations` contains all tokens and assets: colors, spacing, typography, density, icons and fonts.
+
+```shell
+pnpm add @db-ux/core-foundations
+```
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Load the theme before the bundle
+
+The theme carries all tokens as CSS custom properties and handles Light Mode and Dark Mode. The bundle after it adds the helper classes.
+
+```css
+/* index.css */
+@layer whitelabel-theme, db-ux;
+@import '@db-ux/core-foundations/build/styles/theme/rollup.css' layer(whitelabel-theme);
+@import '@db-ux/core-foundations/build/styles/bundle.css' layer(db-ux);
+```
+
+<LearnAside>
+
+The bundle applies two defaults: density `regular` and adaptive coloring `neutral-bg-lvl-1`.
+
+### Pick the asset path variant
+
+| Variant        | Asset path                        | Use when                                               |
+| -------------- | --------------------------------- | ------------------------------------------------------ |
+| `rollup.css`   | `@db-ux/core-foundations/assets`  | Your bundler resolves package paths                    |
+| `webpack.css`  | `~@db-ux/core-foundations/assets` | You build with Webpack                                 |
+| `relative.css` | `../../assets`                    | You copy icons and fonts into your own `public` folder |
+
+### DB Theme
+
+The import loads the whitelabel theme. Products of Deutsche Bahn additionally need the [DB Theme](/documentation/learn/db-theme-setup).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Add helper classes only where you need them
+
+Each helper class file makes one group of data attributes available everywhere. Import only the groups you use.
+
+```css
+@import '@db-ux/core-foundations/build/styles/density/classes/all.css' layer(db-ux);
+```
+
+<LearnAside>
+
+```css
+/* Use [data-divider] and [data-focus] everywhere */
+@import '@db-ux/core-foundations/build/styles/helpers/classes/all.css' layer(db-ux);
+/* Use [data-density] everywhere */
+@import '@db-ux/core-foundations/build/styles/density/classes/all.css' layer(db-ux);
+/* Use [data-font-size] everywhere */
+@import '@db-ux/core-foundations/build/styles/fonts/classes/all.css' layer(db-ux);
+/* Use [data-color] everywhere */
+@import '@db-ux/core-foundations/build/styles/colors/classes/all.css' layer(db-ux);
+```
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Use a first token to check the setup
+
+A container with a spacing token and an icon shows in one place whether tokens, font and icons load.
+
+```html
+<div style="padding: var(--db-spacing-fixed-md)">
+	<span data-icon="arrow_right">Text with icon</span>
+</div>
+```
+
+<LearnAside>
+
+| Check  | Expected                                                                                       |
+| ------ | ---------------------------------------------------------------------------------------------- |
+| Tokens | The container has a padding of 16 px in the DevTools.                                          |
+| Font   | The DevTools show `OpenSans` as the rendered font – or `DB Neo Screen Sans` with the DB Theme. |
+| Icon   | An arrow appears in front of the text.                                                         |
+
+### Tokens in your own CSS
+
+Reference tokens as CSS custom properties:
+
+```css
+.my-container {
+	padding: var(--db-spacing-fixed-md);
+}
+```
+
+Density and color are set through data attributes on a container and passed down to its children:
+
+```html
+<div class="my-container" data-density="functional" data-color="successful-bg-lvl-1"></div>
+```
+
+All available tokens are listed under [Foundation](/documentation/foundation).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## If something does not look right
+
+Most setup problems come from a missing theme import or from asset paths that do not match your setup.
+
+<LearnAside>
+
+| Symptom                              | Cause and fix                                                                                                                                        |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Custom properties resolve to nothing | No theme is imported. The theme file defines the tokens – the bundle alone is not enough. Without it, the padding is 0.                              |
+| Font or icons are missing            | The browser cannot find the asset files. A `.woff2` request fails in the Network tab. Switch between `rollup.css`, `webpack.css` and `relative.css`. |
+| Data attributes have no effect       | The matching helper class file is not imported. Add the import for that group.                                                                       |
+
+If none of this helps, open an issue in the [core-web repository](https://github.com/db-ux-design-system/core-web/issues/new/choose). Please check first whether the issue already exists.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Continue with your project
+
+Look up tokens and icons, or add the DB Theme.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Foundation',
+			description: 'All tokens for colors, spacing, typography and density.',
+			url: '/documentation/foundation',
+		},
+		{
+			title: 'DB Theme',
+			description: 'Add the colors, fonts and icons of the Deutsche Bahn brand.',
+			url: '/documentation/learn/db-theme-setup',
+		},
+		{
+			title: 'Icons',
+			description: 'All icons with their names for the `data-icon` attribute.',
+			url: '/documentation/icons',
+		},
+	]}
+/>
+
+<LearnAside>
+
+Neither plugin is required to get started. Add them once your first token resolves.
+
+### PostCSS plugin
+
+Reduces the bundle size by resolving `var()`, `calc()`, `color-mix()` and `light-dark()` at build time and removing unused declarations.
+
+```shell
+pnpm add @db-ux/core-postcss-plugin --save-dev
+```
+
+### Stylelint plugin
+
+Checks your own CSS and SCSS against the design system rules, for example whether you reference tokens instead of fixed values.
+
+```shell
+pnpm add @db-ux/core-stylelint --save-dev
+```
+
+### Resources
+
+| Resource         | Link                                                                                                            |
+| ---------------- | --------------------------------------------------------------------------------------------------------------- |
+| npm package      | [@db-ux/core-foundations](https://www.npmjs.com/package/@db-ux/core-foundations)                                |
+| Source code      | [core-web/packages/foundations](https://github.com/db-ux-design-system/core-web/tree/main/packages/foundations) |
+| Token reference  | [Foundation](/documentation/foundation)                                                                         |
+| Icons            | [Icons](/documentation/icons)                                                                                   |
+| Migration Guides | [Migration Guides](/documentation/releases/migration-guides)                                                    |
+| Issues           | [core-web repository](https://github.com/db-ux-design-system/core-web/issues/new/choose)                        |
+
+</LearnAside>
+
+</LearnBlock>

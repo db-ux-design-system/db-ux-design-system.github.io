@@ -1,0 +1,240 @@
+/* Vertical rhythm like the Foundation and Components pages: there, the hero and each
+   content block sit in their own DBSection with spacing="small", so two section
+   paddings separate them. The wizard uses the same distance between the headline and
+   the options, and between the options and the buttons. */
+.gsw {
+	display: flex;
+	flex-direction: column;
+	gap: calc(2 * var(--db-spacing-responsive-sm));
+
+	/* All text of the wizard uses the highest emphasis (100). */
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+
+	/* The page has no hero, so the wizard takes over its top spacing: the same token
+	   as DBSection with spacing="small", which wraps the hero on other pages. */
+	padding-block-start: var(--db-spacing-responsive-sm);
+}
+
+/* Headline, intro and the hint of the result, with the gap of the page hero. The
+   hint sits in this block, so it stays close to the copy text above it and keeps the
+   full distance of the wizard rhythm to the list below. */
+.gsw-hero {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-lg);
+}
+
+.gsw-fieldset {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	min-inline-size: 0;
+}
+
+.gsw-legend {
+	padding: 0;
+	margin-block-end: calc(2 * var(--db-spacing-responsive-sm));
+}
+
+/* The page has no hero, so the question is the page's h1. Its size stays at the h2
+   size the question had below the hero; the levels below shift up accordingly. */
+.gsw-heading {
+	margin: 0;
+	font: var(--db-type-headline-lg);
+
+	/* Receives focus after each step so screen readers announce the new question. */
+	&:focus-visible {
+		/* Same focus ring as the library: 2xs outline with the library fallback color. */
+		outline: var(--db-border-width-2xs) solid
+			var(--db-focus-outline-color, var(--db-informational-on-bg-basic-emphasis-70-default));
+		outline-offset: var(--db-border-width-xs);
+	}
+}
+
+/* Columns on every step, at most three per row: a column takes at least a third of
+   the row (minus the two gaps) and at least 16rem, so the grid drops to two columns
+   and then to one before the labels get too narrow. All rows get the
+   height of the tallest card, so every card of a step has the same size, also when
+   one label wraps or has a description. */
+.gsw-options {
+	display: grid;
+	grid-template-columns: repeat(
+		auto-fit,
+		minmax(min(100%, max(16rem, calc((100% - 2 * var(--db-spacing-fixed-md)) / 3))), 1fr)
+	);
+	grid-auto-rows: 1fr;
+	gap: var(--db-spacing-fixed-md);
+
+	/* Exactly 3 options: 3 columns or 1, never 2 + 1. The clamp() switch picks a third
+	   of the row while 3 columns of at least 16rem fit, otherwise the full row. */
+	&:has(> .gsw-option:nth-child(3):last-child) {
+		grid-template-columns: repeat(
+			auto-fit,
+			minmax(
+				clamp(
+					calc((100% - 2 * var(--db-spacing-fixed-md)) / 3),
+					(3 * 16rem + 2 * var(--db-spacing-fixed-md) - 100%) * 999,
+					100%
+				),
+				1fr
+			)
+		);
+	}
+
+	/* Exactly 4 options (Product management): at most 2 columns, so they show as 2 × 2
+	   instead of 3 + 1. */
+	&:has(> .gsw-option:nth-child(4):last-child) {
+		grid-template-columns: repeat(
+			auto-fit,
+			minmax(min(100%, max(16rem, calc((100% - var(--db-spacing-fixed-md)) / 2))), 1fr)
+		);
+	}
+}
+
+/* Each option is a DBCard: border, radius, padding (spacing="large") and the hover and
+   pressed backgrounds come from the card. The radio is visually hidden, so the selected
+   card is marked by elevationLevel 3 plus the data-color of the chosen role (see
+   roleColors in wizard-flow.ts), and by a check icon, so the selection does not rely
+   on color alone. The border keeps its width. */
+.gsw-option {
+	/* Anchors the visually hidden radio and the check icon. */
+	position: relative;
+	gap: var(--db-spacing-fixed-xs);
+
+	&:has(input:focus-visible) {
+		/* Same focus ring as the library: 2xs outline with the library fallback color. */
+		outline: var(--db-border-width-2xs) solid
+			var(--db-focus-outline-color, var(--db-informational-on-bg-basic-emphasis-70-default));
+		outline-offset: var(--db-border-width-xs);
+	}
+}
+
+/* The answer label: headline font, but no heading element. Every label keeps room for
+   the check icon (sizing md) plus a safety gap (spacing sm) at its end, so a long label wraps before the icon and nothing reflows
+   when a card gets selected. */
+.gsw-option-label {
+	/* Room for the check icon (sizing md) plus a small gap, so a wrapped label keeps clear
+	   of the icon. The gap is xs rather than sm because "Produktmanager:in" needs every
+	   pixel to stay on one line in the single-column layout. */
+	padding-inline-end: calc(var(--db-sizing-md) + var(--db-spacing-fixed-xs));
+	font: var(--db-type-headline-sm);
+
+	/* No `overflow-wrap: break-word` here. It lets the browser split a word at any
+	   character, which produced "Produktmanager:i|n". The long labels either contain a
+	   space or carry a soft hyphen (see wizard-flow.ts), so a break opportunity always
+	   exists and the word never has to overflow.
+	   manual, not auto: labels break at spaces and only hyphenate at a soft hyphen.
+	   With auto the browser also split words that wrap fine between words, such as
+	   "Pro-jekt" or "proj-ect". */
+	hyphens: manual;
+}
+
+/* Check icon of the selected card: sizing md in the top-right corner, inside
+   the card padding (spacing="large" = fixed lg). It uses the label font, so 1lh is the
+   height of the first label line and the icon is centered on it. */
+.gsw-option-check {
+	--db-icon-font-size: var(--db-sizing-md);
+
+	position: absolute;
+	inset-block-start: var(--db-spacing-fixed-lg);
+	inset-inline-end: var(--db-spacing-fixed-lg);
+	display: flex;
+	align-items: center;
+	block-size: 1lh;
+	font: var(--db-type-headline-sm);
+	color: var(--db-adaptive-on-bg-basic-emphasis-70-default);
+}
+
+/* Lists with more than 5 options: xs headline font for the label and the icon line. */
+.gsw-option-label[data-size='xs'],
+.gsw-option:has(.gsw-option-label[data-size='xs']) .gsw-option-check {
+	font: var(--db-type-headline-xs);
+}
+
+.gsw-option-description {
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+}
+
+/* Headline of a tinted card (selected option, role tiles before a pick). */
+.gsw-option[data-color] .gsw-option-label {
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+}
+
+.gsw-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--db-spacing-fixed-sm);
+	justify-content: flex-end;
+}
+
+/* The hint hangs below the control panel at the end edge, over the page, not in its
+   flow. --gsw-saved-top is the lower edge of the visible control panel, measured by
+   the island; the sizing token is only the fallback before the first measurement. */
+.gsw-saved.db-notification {
+	position: fixed;
+	inset-block-start: calc(var(--gsw-saved-top, var(--db-sizing-2xl)) + var(--db-spacing-fixed-sm));
+	inset-inline-end: var(--db-spacing-fixed-sm);
+	z-index: 100;
+	max-inline-size: min(calc(100vw - 2 * var(--db-spacing-fixed-sm)), 28rem);
+
+	/* The semantic colors its icon through the ::before itself, so --db-icon-color on
+	   the notification has no effect. */
+	&::before {
+		color: var(--db-informational-on-bg-basic-emphasis-100-default);
+	}
+}
+
+/* The call to action of the package, in the button row below the list.
+   position: relative anchors the trailing icon: the library places it absolutely at
+   the end of the button, and the DBButton component brings that position with it, a
+   plain anchor with the button class does not. */
+.gsw-start {
+	position: relative;
+}
+
+/* No frame around the list and no dividers. No gap either: the lines of the items
+   form one continuous line, like the group bar in the reading list popover. Spacing
+   inside the wizard comes from the gaps only: the content margins of
+   content-spacing.css are excluded for .gsw there. */
+.gsw-package-list {
+	display: grid;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+/* Headline of an item: two steps below the h1 of the page (headline lg). DBHeading
+   has no size property, so the font comes from here. */
+.gsw-package-item .db-heading {
+	font: var(--db-type-headline-sm);
+}
+
+/* One item per page: a 2 px line on the start side in the color of the chosen role
+   (--gsw-role-color, set on the list, emphasis 70). Text on the start side, button on
+   the end side; in a narrow column the button wraps below the text. */
+.gsw-package-item {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--db-spacing-fixed-xs) var(--db-spacing-fixed-md);
+	align-items: center;
+	justify-content: space-between;
+	padding-block: var(--db-spacing-fixed-sm);
+	padding-inline-start: var(--db-spacing-fixed-md);
+	border-inline-start: var(--db-border-width-2xs) solid
+		var(--gsw-role-color, var(--db-adaptive-on-bg-basic-emphasis-70-default));
+}
+
+.gsw-package-text {
+	display: grid;
+	flex: 1 1 20rem;
+	gap: var(--db-spacing-fixed-xs);
+}
+
+.gsw-package-button {
+	flex: none;
+}
+
+.gsw-package-description {
+	font: var(--db-type-body-sm);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+}

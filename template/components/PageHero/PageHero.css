@@ -47,9 +47,60 @@
 	inline-size: 100%;
 }
 
+.page-hero-actions {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: var(--db-spacing-fixed-sm);
+}
+
+.page-hero[data-layout='split'] .page-hero-actions {
+	justify-content: flex-start;
+}
+
 /* DBHeading v6 always sets text-align: start; keep the hero alignment */
 .page-hero-text-group .db-heading {
 	text-align: inherit;
+}
+
+/* Headline with controls after it. */
+.page-hero-headline-row {
+	display: flex;
+	align-items: center;
+	gap: var(--db-spacing-fixed-xs);
+}
+
+/* With a page toolbar the hero content spans the full section, so the toolbar ends on
+   the same right edge as the page content below. */
+.page-hero:has(.page-hero-toolbar) .page-hero-content {
+	max-inline-size: none;
+}
+
+.page-hero-headline-row:has(.page-hero-toolbar) {
+	inline-size: 100%;
+}
+
+/* Page toolbar for page actions (reading list, view toggle, …) at the end of the
+   headline row, pushed to the right edge instead of sitting next to the headline. */
+.page-hero-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	flex: none;
+	align-items: center;
+	justify-content: flex-end;
+	gap: var(--db-spacing-fixed-sm);
+	margin-inline-start: auto;
+
+	/* Top-aligned with the headline, so it stays in place when the headline wraps. */
+	align-self: flex-start;
+}
+
+/* The global content spacing (content-spacing.css) adds a top margin to an element that
+   follows an astro-island, so a control placed after the reading list island would sit
+   lower than it. The toolbar aligns its items itself; the extra classes outrank that
+   rule. */
+.dba-main-content .page-hero-headline-row .page-hero-toolbar > * {
+	margin-block: 0;
 }
 
 .page-hero-description {
@@ -84,6 +135,82 @@
 	max-block-size: var(--db-container-xs);
 	inline-size: auto;
 	block-size: auto;
+}
+
+/* Wrapper that wires the pause/play button, see HeroMedia.astro. It adds no box. */
+hero-model {
+	display: contents;
+}
+
+/* Pause/play button in the bottom right corner. It shows on hover and keyboard focus, and stays
+   visible while paused. Touch devices have no hover, so it is always visible there. */
+.page-hero-model-toggle {
+	position: absolute;
+	inset-block-end: var(--db-spacing-fixed-sm);
+	inset-inline-end: var(--db-spacing-fixed-sm);
+	opacity: 0;
+	transition: opacity var(--db-transition-duration-medium, 0.2s) ease;
+}
+
+.page-hero-model:hover .page-hero-model-toggle,
+.page-hero-model-toggle:focus-visible,
+hero-model[data-paused] .page-hero-model-toggle {
+	opacity: 1;
+}
+
+@media (hover: none) {
+	.page-hero-model-toggle {
+		opacity: 1;
+	}
+}
+
+/* Leave room for model-viewer's AR button, which sits in the same corner on AR devices.
+   It is 40 px wide and 16 px from the edge, so the toggle moves to 64 px (4rem). */
+hero-model[data-ar] .page-hero-model-toggle {
+	inset-inline-end: 4rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.page-hero-model-toggle {
+		transition: none;
+	}
+}
+
+/* 3D teaser – a model-viewer has no intrinsic size, so the box is set here (28rem = 448 px).
+   The model is rendered without a ground shadow on a transparent background. */
+.page-hero-model {
+	inline-size: var(--db-container-md);
+	block-size: var(--db-container-md);
+	max-inline-size: 100%;
+
+	/* Transparent until the poster or the model is shown. */
+	--poster-color: transparent;
+
+	background-color: transparent;
+}
+
+/* Poster shown while the glb loads. The rendered model fills about 64 % of the box at the camera
+   distance in visual-model.ts, so the PNG is scaled to the same size. Change both together. */
+.page-hero-model-poster {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.page-hero-media .page-hero-model-poster img {
+	inline-size: 64%;
+	block-size: 64%;
+	max-block-size: none;
+	object-fit: contain;
+}
+
+@media (width <= 767px) {
+	.page-hero-model {
+		inline-size: var(--db-container-xs);
+		block-size: var(--db-container-xs);
+	}
 }
 
 /* Visual size for P&S hero – tune here (14rem = 224 px).

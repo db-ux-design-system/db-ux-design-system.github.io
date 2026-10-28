@@ -1,0 +1,309 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Komponenten in Vue einbinden'
+headline: 'Komponenten in Vue einbinden'
+description: 'Binde die Komponenten in ein Vue-Projekt ein und prüfe, ob Styles, Schriften und Icons laden.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 12
+category: 'Development'
+keywords:
+  [
+    'vue',
+    'vue 3',
+    'setup',
+    'installation',
+    'install',
+    'getting started',
+    'npm',
+    'pnpm',
+    'vite',
+    'v-model',
+    'events',
+    'composition api',
+    'css import',
+    'whitelabel theme',
+    'v-core-components',
+    'core-components',
+    'core-foundations',
+    'troubleshooting',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Du brauchst ein Vue-3-Projekt und Node.js
+
+Jedes Projekt mit **Vue 3** funktioniert, zum Beispiel eines, das mit Vite erstellt wurde. Die Beispiele nutzen die Composition API, die Befehle nutzen pnpm.
+
+<LearnAside>
+
+- **Paketmanager:** Mit npm nutzt du `npm i` statt `pnpm add`.
+- **Browser:** die letzten drei Versionen von Chrome und Edge, Firefox ESR und die letzten zwei Major-Versionen von Safari.
+- **Versionen:** Die Showcases im Repository core-web laufen mit Vue 3.5 und Version 6 der Pakete des Design Systems.
+- **DB Theme:** Produkte der Deutschen Bahn brauchen zusätzlich das DB Theme. Du kannst ohne anfangen, denn das Whitelabel-Theme funktioniert sofort.
+
+### Alternativ mit einem Beispielprojekt starten
+
+Statt mit einem leeren Projekt kannst du das passende Beispielprojekt kopieren. Es enthält die Pakete und das Styling-Setup schon:
+
+```shell
+npx degit db-ux-design-system/examples/vue-example my-app
+cd my-app
+npm install
+npm run dev
+```
+
+Die Beispiele nutzen das Whitelabel-Theme und eine ältere Version des Design Systems. Aktualisiere die Pakete, bevor du auf einem Beispiel aufbaust, und ergänze für ein Produkt der Deutschen Bahn das [DB Theme](/de/dokumentation/lernen/db-theme-einrichten). Alle Beispielprojekte findest du unter [Mit einem Beispielprojekt starten](/de/dokumentation/lernen/beispiele).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Installiere drei Pakete
+
+Die Vue-Komponenten brauchen beide Style-Pakete: die Styles der Komponenten und die Foundation darunter.
+
+```shell
+pnpm add @db-ux/v-core-components @db-ux/core-components @db-ux/core-foundations
+```
+
+<LearnAside>
+
+| Paket                      | Inhalt                                            |
+| -------------------------- | ------------------------------------------------- |
+| `@db-ux/v-core-components` | Die Komponenten als Vue-Komponenten               |
+| `@db-ux/core-components`   | Die Styles der Komponenten                        |
+| `@db-ux/core-foundations`  | Tokens, das Whitelabel-Theme, Schriften und Icons |
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Bei den Styles zählt die Reihenfolge
+
+Importiere zuerst das Theme, danach die Styles der Komponenten. Die Zeile mit `@layer` legt das fest.
+
+```css
+/* src/style.css */
+@layer whitelabel-theme, db-ux;
+@import '@db-ux/core-foundations/build/styles/theme/rollup.css' layer(whitelabel-theme);
+@import '@db-ux/core-components/build/styles/bundle.css' layer(db-ux);
+```
+
+<LearnAside>
+
+### Alternativ mit dem Vite-Plugin
+
+Mit Vite ersetzt das Plugin die beiden Imports:
+
+```shell
+pnpm add @db-ux/core-vite-plugin --save-dev
+```
+
+```ts
+// vite.config.ts
+import { defineConfig } from 'vite';
+import dbUxPlugin from '@db-ux/core-vite-plugin';
+
+export default defineConfig({
+	plugins: [dbUxPlugin()],
+});
+```
+
+```css
+/* src/style.css */
+@import '@db-ux/core-vite-plugin/index.css';
+```
+
+### Die passende Datei für deinen Bundler
+
+| Datei          | Nutze sie, wenn …                                                 |
+| -------------- | ----------------------------------------------------------------- |
+| `rollup.css`   | du mit Vite oder Rollup baust                                     |
+| `webpack.css`  | du mit Webpack baust                                              |
+| `relative.css` | du Icons und Schriften in deinen eigenen `public`-Ordner kopierst |
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Prüfe das Setup mit einem Button
+
+Ein Button mit Icon zeigt, ob Styles, Schrift und Icons laden.
+
+```vue
+<script setup lang="ts">
+import { DBButton } from '@db-ux/v-core-components';
+</script>
+<template>
+	<DBButton variant="brand" icon="arrow_right">Artikel in den Warenkorb</DBButton>
+</template>
+```
+
+<LearnAside>
+
+| Prüfung | Erwartet                                                                                            |
+| ------- | --------------------------------------------------------------------------------------------------- |
+| Styles  | Der Button hat einen gefüllten Hintergrund in der Markenfarbe und abgerundete Ecken.                |
+| Schrift | Die DevTools zeigen `OpenSans` als gerenderte Schrift – oder `DB Neo Screen Sans` mit dem DB Theme. |
+| Icon    | Vor dem Text erscheint ein Pfeil.                                                                   |
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Binde Formularwerte mit v-model
+
+Formular-Komponenten unterstützen **`v-model`**, das den Wert bei jeder Änderung aktualisiert. Gib dabei die gebundene Eigenschaft an, zum Beispiel `v-model:value`.
+
+```vue
+<DBInput label="Name" name="name" v-model:value="name" />
+```
+
+<LearnAside>
+
+Einfaches Event-Binding mit `@` funktioniert ebenso. Beide Eingabefelder unten tun dasselbe:
+
+```vue
+<script setup lang="ts">
+import { DBInput } from '@db-ux/v-core-components';
+import { ref } from 'vue';
+
+const input = ref('');
+</script>
+
+<template>
+	<DBInput label="Eingabefeld" name="input-name" v-model:value="input"></DBInput>
+	<DBInput
+		label="Eingabefeld"
+		name="input-name"
+		:value="input"
+		@change="(e) => (input = e.target.value)"
+	></DBInput>
+</template>
+```
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Wenn etwas nicht richtig aussieht
+
+Die meisten Probleme beim Setup kommen von der Reihenfolge der Styles oder von Asset-Pfaden, die nicht zu deinem Bundler passen.
+
+<LearnAside>
+
+| Symptom                            | Ursache und Lösung                                                                                                                                                                |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Komponenten erscheinen ohne Styles | Der CSS-Import fehlt, oder das Theme wird nach den Styles der Komponenten geladen. Setze `@layer whitelabel-theme, db-ux;` als erste Anweisung.                                   |
+| Schrift oder Icons fehlen          | Der Browser findet die Asset-Dateien nicht. Im Network-Tab schlägt eine Anfrage für eine `.woff2`-Datei fehl. Wechsle zwischen `rollup.css`, `webpack.css` und `relative.css`.    |
+| Farben sind nur im Build kaputt    | Vite 8 minifiziert CSS mit LightningCSS. Das zerstört `light-dark()`. Setze `build: { cssMinify: 'esbuild' }` in `vite.config.ts` und installiere `esbuild` als Dev-Abhängigkeit. |
+
+Wenn nichts davon hilft, eröffne ein Issue im [core-web-Repository](https://github.com/db-ux-design-system/core-web/issues/new/choose). Prüfe vorher, ob es das Issue schon gibt.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Mach mit deinem Projekt weiter
+
+Ergänze das DB Theme oder starte mit einem Beispiel.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'DB Theme',
+			description: 'Ergänze die Farben, Schriften und Icons der Marke Deutsche Bahn.',
+			url: '/de/dokumentation/lernen/db-theme-einrichten',
+		},
+		{
+			title: 'Komponenten',
+			description: 'Props, Varianten und Richtlinien für jede Komponente.',
+			url: '/de/dokumentation/komponenten',
+		},
+		{
+			title: 'Beispielprojekte',
+			description: 'Fertige Beispielprojekte zum Öffnen im Browser oder als Ausgangspunkt.',
+			url: '/de/dokumentation/lernen/beispiele',
+		},
+	]}
+/>
+
+<LearnAside>
+
+Keines der beiden Plugins brauchst du für den Start. Ergänze sie, sobald deine erste Komponente erscheint.
+
+### PostCSS-Plugin
+
+Reduziert die Bundle-Größe, indem es `var()`, `calc()`, `color-mix()` und `light-dark()` zur Build-Zeit auflöst und ungenutzte Deklarationen entfernt.
+
+```shell
+pnpm add @db-ux/core-postcss-plugin esbuild --save-dev
+```
+
+```ts
+// vite.config.ts
+import { defineConfig } from 'vite';
+import { dbUxFlatten } from '@db-ux/core-postcss-plugin';
+
+export default defineConfig({
+	css: {
+		// Ab Vite 8 Standard ist LightningCSS – ohne diese Zeile laufen keine PostCSS-Plugins
+		transformer: 'postcss',
+		postcss: {
+			plugins: [dbUxFlatten()],
+		},
+	},
+	build: {
+		// Ab Vite 8: erhält light-dark() im Produktions-Build (braucht esbuild)
+		cssMinify: 'esbuild',
+	},
+});
+```
+
+### ESLint-Plugin
+
+Meldet falsche Komponentennutzung direkt im Editor.
+
+```shell
+pnpm add eslint @db-ux/core-eslint-plugin @typescript-eslint/parser --save-dev
+```
+
+### Ressourcen
+
+| Ressource        | Link                                                                                        |
+| ---------------- | ------------------------------------------------------------------------------------------- |
+| npm-Paket        | [@db-ux/v-core-components](https://www.npmjs.com/package/@db-ux/v-core-components)          |
+| Storybook        | [Vue Storybook](https://design-system.deutschebahn.com/core-web/review/main/vue-storybook)  |
+| Quellcode        | [core-web/output/vue](https://github.com/db-ux-design-system/core-web/tree/main/output/vue) |
+| Komponentendoku  | [Komponenten](/de/dokumentation/komponenten)                                                |
+| Migration Guides | [Migration Guides](/de/dokumentation/releases/migration-guides)                             |
+| Issues           | [core-web-Repository](https://github.com/db-ux-design-system/core-web/issues/new/choose)    |
+
+</LearnAside>
+
+</LearnBlock>

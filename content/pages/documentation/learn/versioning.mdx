@@ -1,0 +1,178 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'How releases work'
+headline: 'How releases work'
+description: 'The version number tells you what a release changes – and design and development share it.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 1.6
+category: 'Foundations'
+keywords:
+  [
+    'versioning',
+    'semantic versioning',
+    'semver',
+    'release',
+    'major',
+    'minor',
+    'patch',
+    'breaking changes',
+    'cadence',
+    'release notes',
+    'roadmap',
+    'announcements',
+    'teams channel',
+    'update',
+    'upgrade',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Three numbers, three kinds of change
+
+Every version has the form `MAJOR.MINOR.PATCH`, following **Semantic Versioning**. The number that goes up tells you how much changes.
+
+<LearnAside>
+
+<img
+	src="/assets/documentation/releases/release-types.png"
+	alt="Semantic Versioning overview: v1.2.3 – Major (breaking changes), Minor (new features, backward-compatible), Patch (bug fixes, no API changes)"
+	style={{ maxWidth: '100%' }}
+/>
+
+| Release | Changes                                       | Backward-compatible |
+| ------- | --------------------------------------------- | ------------------- |
+| Major   | Breaking Changes in the API or design library | No                  |
+| Minor   | New features and improvements                 | Yes                 |
+| Patch   | Bug fixes and very small improvements         | Yes                 |
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Design and development share one version
+
+The Major and Minor numbers are the same in Figma and in code. Patches are counted separately for each side.
+
+<LearnAside>
+
+If only design or only development introduces a change, the shared version number still goes up for both. This keeps the versions in sync.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Major releases bring Breaking Changes
+
+A Major release is not backward-compatible, so you adapt your implementation. Major releases are planned at least 2–3 months apart and announced in advance.
+
+<LearnAside>
+
+The planned scope is announced in the Teams channel of the DB UX Design System. Each Major release comes with a [Migration Guide](/documentation/releases/migration-guides).
+
+**Examples:**
+
+- An overhaul of the color structure or the visual identity
+- Renamed component settings
+- New components that change existing behavior
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Minor releases add features every sprint
+
+A Minor release adds features and improvements without changing the API. It follows the two-week sprint cycle of the team.
+
+<LearnAside>
+
+A Minor release is skipped if no relevant changes are ready. Once a month, a summary post in the Teams channel covers all releases of the past weeks.
+
+**Examples:**
+
+- Enhancements to existing components
+- New components without Breaking Changes
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Patch releases fix bugs when needed
+
+A Patch release contains bug fixes or very small improvements. It ships outside the regular cadence, whenever it is needed.
+
+<LearnAside>
+
+**Example:** a bug fix for a component that has no impact on other features.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Follow the announcements
+
+Announcements and the monthly roundup appear in the Teams channels. The [Release Notes](/documentation/releases/release-notes 'Detailed changelog of every release.') list every change.
+
+<LearnAside>
+
+| Channel                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Major | Minor | Patch | Content                        |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- | ----- | ----- | ------------------------------ |
+| Teams: [Overall & Design](https://teams.microsoft.com/l/channel/19%3A7dd9929be1fe494c823b11e0e2d22341%40thread.skype/DB%20UX%20Design%20System?groupId=72c53609-2941-46dd-8be9-e4d1d2c45c77&tenantId=a1a72d9c-49e6-4f6d-9af6-5aafa1183bfd) and [Development](https://teams.microsoft.com/l/channel/19%3A6c0e92ce4aef409598ff77c4cd06e001%40thread.skype/SIG%20-%20DB%20UX%20Design%20System?groupId=2f363785-c59e-4763-9bc3-8e13998a4588&tenantId=a1a72d9c-49e6-4f6d-9af6-5aafa1183bfd) | ✓     | ✓     |       | Announcements, monthly roundup |
+| [Release Notes](/documentation/releases/release-notes)                                                                                                                                                                                                                                                                                                                                                                                                                                  | ✓     | ✓     |       | Detailed changelog             |
+| [GitHub (Roadmap)](https://github.com/orgs/db-ux-design-system/projects/4/views/12)                                                                                                                                                                                                                                                                                                                                                                                                     | ✓     | ✓     | ✓     | Upcoming scope and planning    |
+| [GitHub (Design Releases)](https://github.com/db-ux-design-system/core/milestones?state=closed), Figma version history                                                                                                                                                                                                                                                                                                                                                                  | ✓     | ✓     | ✓     | Design release history         |
+| [GitHub (Dev Releases)](https://github.com/db-ux-design-system/core-web/milestones?state=closed)                                                                                                                                                                                                                                                                                                                                                                                        | ✓     | ✓     | ✓     | Development release history    |
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Plan your updates
+
+Read the Release Notes before you update, and follow the Migration Guide for a Major release.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Release Notes',
+			description: 'Detailed changelog of every release.',
+			url: '/documentation/releases/release-notes',
+		},
+		{
+			title: 'Migration Guides',
+			description: 'Upgrade between Major versions step by step.',
+			url: '/documentation/releases/migration-guides',
+		},
+		{
+			title: 'What a status means',
+			description: 'How mature a component is and what you can rely on.',
+			url: '/documentation/learn/status',
+		},
+	]}
+/>
+
+</LearnBlock>

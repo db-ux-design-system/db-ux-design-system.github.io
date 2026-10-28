@@ -78,26 +78,58 @@ if (frontmatter.externalUrl) {
 			<slot name="script" />
 			<script>
 				import '@template/components/ComponentPlayground/playground-init';
+				// Learn articles opt in to a stepper view. The controller is a no-op on
+				// pages without a #learn-article, so it is safe to run on every doc page.
+				// It lives here, not in the MDX-embedded LearnArticle component, because
+				// Astro does not hoist <script> from .astro components used inside MDX.
+				import { initLearnArticle } from '@template/components/Learn/learn-controller';
+				initLearnArticle();
+				// Search field of ChildPageOverview (e.g. on the Learn overview). Delegated
+				// listeners, so it works with the client-side mounted Shell.
+				import { initChildPageSearch } from '@template/components/ChildPageOverview/child-page-search';
+				initChildPageSearch();
 			</script>
 			<!-- Deep-link scroll fix: The Shell renders client-side (client:only="react"),
 				     so anchor targets don't exist yet when the browser performs its native
 				     hash scroll. This script retries scrolling until the target element
-				     appears in the DOM (up to ~3 s after page load). -->
+				     appears in the DOM (up to ~3 s), and scrolls again while the layout
+				     above it is still settling.
+				     It runs on astro:page-load, not only once: after a client-side
+				     navigation (ClientRouter) this inline script is not executed again,
+				     so links with an anchor from another page landed at the top. The
+				     window flag keeps the listener from being registered twice. -->
 			<script is:inline>
-				if (window.location.hash) {
-					var id = decodeURIComponent(window.location.hash.slice(1));
-					var attempts = 0;
+				(function () {
+					if (window.__dbUxHashScroll) return;
+					window.__dbUxHashScroll = true;
 					var scrollToHash = function () {
-						var el = document.getElementById(id);
-						if (el) {
-							el.scrollIntoView();
-						} else if (attempts < 20) {
-							attempts++;
-							setTimeout(scrollToHash, 150);
-						}
+						if (!window.location.hash) return;
+						var id = decodeURIComponent(window.location.hash.slice(1));
+						var attempts = 0;
+						var lastTop = null;
+						var stopped = false;
+						// Stop as soon as the user scrolls or navigates by keyboard,
+						// so the retries never fight their own scrolling.
+						var stop = function () {
+							stopped = true;
+						};
+						['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (type) {
+							window.addEventListener(type, stop, { once: true, passive: true });
+						});
+						var tick = function () {
+							if (stopped) return;
+							var el = document.getElementById(id);
+							if (el) {
+								var top = el.getBoundingClientRect().top;
+								if (lastTop === null || Math.abs(top - lastTop) > 1) el.scrollIntoView();
+								lastTop = el.getBoundingClientRect().top;
+							}
+							if (attempts++ < 20) setTimeout(tick, 150);
+						};
+						setTimeout(tick, 150);
 					};
-					setTimeout(scrollToHash, 300);
-				}
+					document.addEventListener('astro:page-load', scrollToHash);
+				})();
 			</script>
 		</body>
 	</html>

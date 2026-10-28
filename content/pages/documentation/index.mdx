@@ -1,8 +1,82 @@
 ---
 order: 10
 layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
 title: 'Documentation'
-hidePage: true
-redirectTo: '/documentation/get-started'
+headline: 'Documentation'
+description: 'Guidelines, components and resources of the DB UX Design System for design and development.'
+align: start
 isSubNavigation: true
 ---
+
+import { DBStack, DBNotification, DBLink } from '@db-ux/react-core-components';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<DBStack gap="medium">
+
+<TeaserCard
+	columns={1}
+	spacing="large"
+	headlineLevel={2}
+	teasers={[
+		{
+			title: 'New to the design system?',
+			description:
+				'Answer a few questions and find the start that fits your role and your project.',
+			url: '/documentation/get-started',
+			visualImage: 'getting-started',
+			imagePosition: 'right',
+			imageWidth: '25',
+		},
+	]}
+/>
+
+## Quick access
+
+<TeaserCard
+	columns={2}
+	spacing="large"
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Foundation',
+			description: 'Colors, typography, spacing and other tokens.',
+			url: '/documentation/foundation',
+			visual: 'foundation',
+			imagePosition: 'right',
+			imageWidth: '33',
+		},
+		{
+			title: 'Components',
+			description: 'Guidelines, examples and status of all components.',
+			url: '/documentation/components',
+			visual: 'components',
+			imagePosition: 'right',
+			imageWidth: '33',
+		},
+		{
+			title: 'Release Notes',
+			description: 'All changes per version.',
+			url: '/documentation/releases/release-notes',
+			visual: 'releases',
+			imagePosition: 'right',
+			imageWidth: '33',
+		},
+		{
+			title: 'Resources',
+			description: 'Figma libraries for designers and code packages for developers.',
+			url: '/documentation/resources',
+			visual: 'resources',
+			imagePosition: 'right',
+			imageWidth: '33',
+		},
+	]}
+/>
+
+{/* prettier-ignore */}
+<DBNotification variant="standalone" semantic="informational" headline="Note">
+	All examples in this documentation are based on the <DBLink href="/documentation/learn/db-theme-setup" variant="inline">DB Theme</DBLink>. If you use the design system as a white label or with a different theme, visual results can differ because a different Foundation applies.
+</DBNotification>
+
+</DBStack>
