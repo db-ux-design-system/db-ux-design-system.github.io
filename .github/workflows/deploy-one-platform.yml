@@ -63,6 +63,18 @@ jobs:
           npx playwright install --with-deps chromium
           pnpm run test
 
+      # Keep the actual/expected/diff screenshots of failing tests. The PR and
+      # main runs build the site differently (e.g. `cache:figma` only runs on
+      # main), so a snapshot regenerated on a PR can still fail on main. The
+      # artifact is the only way to get at the image main actually renders.
+      - name: 📤 Upload Playwright results
+        if: ${{ !cancelled() && steps.playwright.outcome == 'failure' }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: playwright-results-${{ github.event_name }}-${{ github.run_attempt }}
+          path: test-results/
+          retention-days: 7
+
       # Skip for Dependabot: its runs have a read-only token and no access to
       # the GitHub App secrets, so the auto-commit cannot push. Renovate PRs
       # come from our own GitHub App and are allowed. Same gate as core-web's
