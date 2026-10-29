@@ -29,6 +29,18 @@ interface Props {
 	 * e.g. `components-dbbutton-variant`.
 	 */
 	storybookExample?: string;
+	/**
+	 * PROTOTYPE – `full` shows API and migration on the platform, `slim` only
+	 * the entry (setup, usage, embedded example) and moves the rest to the
+	 * Storybook overview page. Both are compared via `?code=slim`.
+	 */
+	variant?: 'full' | 'slim';
+	/** Slim variant: Storybook deployment that contains the overview page. */
+	storybookBaseUrl?: string;
+	/** Slim variant: id of the Storybook overview docs page, without `--docs`. */
+	storybookOverview?: string;
+	/** Slim variant: id of the story to embed, e.g. `components-dbbutton-overview--variants`. */
+	storybookStory?: string;
 }
 
 interface ApiEntry {
@@ -49,7 +61,14 @@ interface Meta {
 	docs: string[];
 }
 
-const { component, storybookExample } = Astro.props;
+const {
+	component,
+	storybookExample,
+	variant = 'full',
+	storybookOverview,
+	storybookStory,
+} = Astro.props;
+const isSlim = variant === 'slim';
 
 const lang: 'en' | 'de' =
 	Astro.url.pathname.startsWith('/de/') || Astro.url.pathname === '/de' ? 'de' : 'en';
@@ -90,10 +109,18 @@ for (const [file, label] of [
 
 const MigrationDoc = Doc('Migration')?.Content;
 
-const storybookBaseUrl = `https://design-system.deutschebahn.com/core-web/version/v${meta.version}`;
-const storybookEmbedUrl = storybookExample
-	? `${storybookBaseUrl}/react-storybook/iframe.html?id=${storybookExample}--docs&viewMode=docs`
-	: undefined;
+const storybookBaseUrl =
+	(isSlim && Astro.props.storybookBaseUrl) ||
+	`https://design-system.deutschebahn.com/core-web/version/v${meta.version}`;
+const storybookEmbedUrl = isSlim
+	? storybookStory &&
+		`${storybookBaseUrl}/react-storybook/iframe.html?id=${storybookStory}&viewMode=story`
+	: storybookExample &&
+		`${storybookBaseUrl}/react-storybook/iframe.html?id=${storybookExample}--docs&viewMode=docs`;
+/** Slim variant: the overview page only exists in the React Storybook so far. */
+const storybookLinkPath = isSlim
+	? storybookOverview && `?path=/docs/${storybookOverview}--docs`
+	: storybookExample && `?path=/docs/${storybookExample}--docs`;
 
 const setupLinks = [
 	{ label: 'React', en: 'react-setup', de: 'react-einrichten' },
@@ -129,6 +156,11 @@ const t = isDE
 			migration: 'Migration',
 			migrationSummary: 'Migration von DB UX Design System – Generation 2 (aka DB UI)',
 			version: `Stand: @db-ux/core-components ${meta.version}`,
+			slimExamplesText:
+				'Properties, alle Beispiele mit Code und die Migrationshinweise findest du auf der Übersichtsseite im Storybook.',
+			prototypeNote: 'Prototyp – Variante vergleichen:',
+			variantFull: 'Vollständig (API auf der Platform)',
+			variantSlim: 'Schlank (API im Storybook)',
 		}
 	: {
 			languageNote: undefined,
@@ -151,13 +183,22 @@ const t = isDE
 			migration: 'Migration',
 			migrationSummary: 'Migrating from DB UX Design System – Generation 2 (aka DB UI)',
 			version: `Version: @db-ux/core-components ${meta.version}`,
+			slimExamplesText:
+				'Properties, all examples with code and the migration notes are on the overview page in Storybook.',
+			prototypeNote: 'Prototype – compare variants:',
+			variantFull: 'Full (API on the platform)',
+			variantSlim: 'Slim (API in Storybook)',
 		};
 
 const describe = (entry: ApiEntry): string =>
 	entry.description ? renderInlineMarkdown(entry.description, lang) : '–';
 ---
 
-<div class="component-code">
+<div class="component-code" data-code-variant={variant}>
+	<p class="component-code-prototype">
+		{t.prototypeNote} <a href="?code=full#code">{t.variantFull}</a> ·{' '}
+		<a href="?code=slim#code">{t.variantSlim}</a>
+	</p>
 	{t.languageNote && <p class="component-code-note">{t.languageNote}</p>}
 	<p class="component-code-version">{t.version}</p>
 
@@ -188,104 +229,106 @@ const describe = (entry: ApiEntry): string =>
 		))}
 	</div>
 
-	<h3>{t.api}</h3>
-
-	<h4>{t.properties}</h4>
-	<div class="component-code-table">
-		<table>
-			<thead>
-				<tr>
-					<th scope="col">{t.name}</th>
-					<th scope="col">{t.type}</th>
-					<th scope="col">{t.description}</th>
-				</tr>
-			</thead>
-			<tbody>
-				{api.properties.map((prop) => (
-					<tr>
-						<td>
-							<code>{prop.name}</code>
-						</td>
-						<td>
-							<code>{prop.type}</code>
-						</td>
-						<td lang={docLang} set:html={describe(prop)} />
-					</tr>
-				))}
-			</tbody>
-		</table>
-	</div>
-
-	{api.slots.length > 0 && (
+	{!isSlim && (
 		<>
-			<h4>{t.slots}</h4>
+			<h3>{t.api}</h3>
+
+			<h4>{t.properties}</h4>
 			<div class="component-code-table">
 				<table>
 					<thead>
 						<tr>
 							<th scope="col">{t.name}</th>
+							<th scope="col">{t.type}</th>
 							<th scope="col">{t.description}</th>
 						</tr>
 					</thead>
 					<tbody>
-						{api.slots.map((slot) => (
+						{api.properties.map((prop) => (
 							<tr>
 								<td>
-									<code>{slot.name}</code>
+									<code>{prop.name}</code>
 								</td>
-								<td lang={docLang} set:html={describe(slot)} />
+								<td>
+									<code>{prop.type}</code>
+								</td>
+								<td lang={docLang} set:html={describe(prop)} />
 							</tr>
 						))}
 					</tbody>
 				</table>
 			</div>
-		</>
-	)}
 
-	{api.events.length > 0 && (
-		<>
-			<h4>{t.events}</h4>
-			<div class="component-code-table">
-				<table>
-					<thead>
-						<tr>
-							<th scope="col">{t.name}</th>
-							<th scope="col">{t.description}</th>
-						</tr>
-					</thead>
-					<tbody>
-						{api.events.map((event) => (
-							<tr>
-								<td>
-									<code>{event.name}</code>
-								</td>
-								<td lang={docLang} set:html={describe(event)} />
-							</tr>
-						))}
-					</tbody>
-				</table>
-			</div>
+			{api.slots.length > 0 && (
+				<>
+					<h4>{t.slots}</h4>
+					<div class="component-code-table">
+						<table>
+							<thead>
+								<tr>
+									<th scope="col">{t.name}</th>
+									<th scope="col">{t.description}</th>
+								</tr>
+							</thead>
+							<tbody>
+								{api.slots.map((slot) => (
+									<tr>
+										<td>
+											<code>{slot.name}</code>
+										</td>
+										<td lang={docLang} set:html={describe(slot)} />
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
+				</>
+			)}
+
+			{api.events.length > 0 && (
+				<>
+					<h4>{t.events}</h4>
+					<div class="component-code-table">
+						<table>
+							<thead>
+								<tr>
+									<th scope="col">{t.name}</th>
+									<th scope="col">{t.description}</th>
+								</tr>
+							</thead>
+							<tbody>
+								{api.events.map((event) => (
+									<tr>
+										<td>
+											<code>{event.name}</code>
+										</td>
+										<td lang={docLang} set:html={describe(event)} />
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
+				</>
+			)}
 		</>
 	)}
 
 	<h3>{t.examples}</h3>
-	<p>{t.examplesText}</p>
+	<p>{isSlim ? t.slimExamplesText : t.examplesText}</p>
 	{storybookEmbedUrl && (
 		<iframe
-			class="component-code-storybook"
+			class:list={['component-code-storybook', { 'component-code-storybook-story': isSlim }]}
 			src={storybookEmbedUrl}
+			data-storybook-embed={isSlim ? storybookEmbedUrl : undefined}
 			title={t.embedTitle}
 			loading="lazy"
 		/>
 	)}
 	<div>
-		<ResourceCards
-			baseUrl={storybookBaseUrl}
-			path={storybookExample ? `?path=/docs/${storybookExample}--docs` : ''}
-		/>
+		<ResourceCards baseUrl={storybookBaseUrl} path={storybookLinkPath ?? ''} />
 	</div>
 
-	{MigrationDoc && (
+	{!isSlim && MigrationDoc && (
 		<>
 			<h3>{t.migration}</h3>
 			<details class="component-code-migration">

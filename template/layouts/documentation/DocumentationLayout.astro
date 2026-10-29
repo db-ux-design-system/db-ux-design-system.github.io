@@ -81,6 +81,8 @@ if (frontmatter.externalUrl) {
 				// Framework tabs of the Code section on component pages (see the file for
 				// why they are not a client:load island).
 				import '@template/components/ComponentCode/framework-tabs-init';
+				import '@template/components/ComponentCode/storybook-embed-init';
+				import '@template/components/ComponentCode/code-variant-init';
 				// Learn articles opt in to a stepper view. The controller is a no-op on
 				// pages without a #learn-article, so it is safe to run on every doc page.
 				// It lives here, not in the MDX-embedded LearnArticle component, because
