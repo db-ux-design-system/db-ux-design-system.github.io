@@ -1,0 +1,38 @@
+.component-code {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-sm);
+
+	h3 {
+		margin-block-start: var(--db-spacing-fixed-lg);
+	}
+
+	pre {
+		overflow-x: auto;
+		padding: var(--db-spacing-fixed-md);
+		border-radius: var(--db-border-radius-sm);
+	}
+}
+
+/*
+ * DBTabs lays out list and panels as a wrapping flex column. In a wrapping
+ * flex container the line is as wide as its widest item, so the panel grows
+ * to the longest code line and pushes text and code out of the content
+ * column. Capping it at the container width lets the `pre` scroll instead.
+ */
+.component-code-framework-tabs .db-tab-panel {
+	max-inline-size: 100%;
+}
+
+.component-code-note,
+.component-code-version {
+	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+}
+
+.component-code-setup-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--db-spacing-fixed-xs) var(--db-spacing-fixed-md);
+	padding-inline-start: 0;
+	list-style: none;
+}

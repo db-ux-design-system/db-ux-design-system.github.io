@@ -15,24 +15,16 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
 
 - Eine Aktion auslösen (z. B. Senden, Speichern, Löschen)
 - Signalisieren, dass eine Interaktion oder Bestätigung erwartet wird
 - Eine primäre oder sekundäre Aktion hervorheben
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbbutton-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -157,6 +149,19 @@ Der kleine Button in „functional“ Density hat eine Höhe von 20 px. Um die A
 </DBSection>
 
 <FigmaLearnTeaser componentName="Button" locale="de" />
+
+<DBSection spacing="small" width="auto">
+
+## Code
+
+<ComponentCode
+	component="button"
+	storybookExample="components-dbbutton-variant"
+	storybookOverview="components-dbbutton-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 
