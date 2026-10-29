@@ -24,14 +24,15 @@ interface Props {
 	/** Folder name in core-web, e.g. `button`. */
 	component: string;
 	/**
-	 * Storybook docs page every framework Storybook has today, without the
-	 * `--docs` suffix, e.g. `components-dbbutton-variant`.
+	 * Fallback: Storybook docs page of the released version, without the
+	 * `--docs` suffix, e.g. `components-dbbutton-variant`. Used while
+	 * `storybookOverview` is not set.
 	 */
 	storybookExample: string;
 	/**
-	 * PROTOTYPE – overview page in the React Storybook (core-web#8649), without
-	 * `--docs`. Once every framework Storybook has it, all cards link to it and
-	 * `storybookExample` goes away.
+	 * PROTOTYPE – overview page in the framework Storybooks (core-web#8649),
+	 * without `--docs`. Once it is released, the cards link to it in the
+	 * versioned Storybooks and `storybookExample` goes away.
 	 */
 	storybookOverview?: string;
 	/** PROTOTYPE – Storybook deployment that contains the overview page. */
@@ -82,27 +83,18 @@ const storybookDescription = isDE
 	: 'Properties, all examples with code and migration notes.';
 
 const storybookResources = [
-	{
-		title: 'React',
-		icon: 'react',
-		description: storybookDescription,
-		url:
-			storybookOverview && storybookOverviewBaseUrl
-				? docsUrl(storybookOverviewBaseUrl, 'react', storybookOverview)
-				: docsUrl(versionBaseUrl, 'react', storybookExample),
-	},
-	{
-		title: 'Angular',
-		icon: 'angular',
-		description: storybookDescription,
-		url: docsUrl(versionBaseUrl, 'angular', storybookExample),
-	},
-	{
-		title: 'Vue',
-		icon: 'vue',
-		description: storybookDescription,
-		url: docsUrl(versionBaseUrl, 'vue', storybookExample),
-	},
+	...(['React', 'Angular', 'Vue'] as const).map((title) => {
+		const framework = title.toLowerCase();
+		return {
+			title,
+			icon: framework,
+			description: storybookDescription,
+			url:
+				storybookOverview && storybookOverviewBaseUrl
+					? docsUrl(storybookOverviewBaseUrl, framework, storybookOverview)
+					: docsUrl(versionBaseUrl, framework, storybookExample),
+		};
+	}),
 	// No Storybook yet; shown as "Coming Soon", like in the default ResourceCards.
 	{
 		title: 'Web Components',
