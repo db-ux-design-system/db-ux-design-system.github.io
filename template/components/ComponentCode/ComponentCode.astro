@@ -1,0 +1,188 @@
+---
+/*
+ * Code section of a component page (pilot, see PR #832).
+ *
+ * A short code entry on the platform; the full developer documentation
+ * (properties, all examples with code, accessibility, migration) lives on the
+ * component's overview page in Storybook.
+ *
+ * - Getting started: links to the framework setup pages
+ * - Usage: framework docs from core-web, switchable per framework, from the
+ *   docs snapshot in `template/data/component-docs/<component>/` (built by
+ *   `scripts/component-docs/build-snapshot.ts` for the pinned core-web version)
+ * - Storybook: links to the component docs per framework
+ *
+ * The section headings are h3, so they nest under the page's `## Code`.
+ * Docs from core-web are English only; DE pages show a short note.
+ */
+import type { MarkdownInstance } from 'astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import type { FrameworkPanel } from './FrameworkTabs';
+import './ComponentCode.css';
+
+interface Props {
+	/** Folder name in core-web, e.g. `button`. */
+	component: string;
+	/**
+	 * Storybook docs page every framework Storybook has today, without the
+	 * `--docs` suffix, e.g. `components-dbbutton-variant`.
+	 */
+	storybookExample: string;
+	/**
+	 * PROTOTYPE – overview page in the React Storybook (core-web#8649), without
+	 * `--docs`. Once every framework Storybook has it, all cards link to it and
+	 * `storybookExample` goes away.
+	 */
+	storybookOverview?: string;
+	/** PROTOTYPE – Storybook deployment that contains the overview page. */
+	storybookOverviewBaseUrl?: string;
+}
+
+interface Meta {
+	component: string;
+	version: string;
+	docs: string[];
+}
+
+const { component, storybookExample, storybookOverview, storybookOverviewBaseUrl } = Astro.props;
+
+const isDE = Astro.url.pathname.startsWith('/de/') || Astro.url.pathname === '/de';
+/** Docs from core-web are English; marked as such on DE pages for screen readers. */
+const docLang = isDE ? 'en' : undefined;
+
+const markdownFiles = import.meta.glob<MarkdownInstance<Record<string, never>>>(
+	'../../data/component-docs/*/*.md',
+	{ eager: true },
+);
+const metaFiles = import.meta.glob<{ default: Meta }>('../../data/component-docs/*/meta.json', {
+	eager: true,
+});
+
+const base = `../../data/component-docs/${component}`;
+const meta = metaFiles[`${base}/meta.json`]?.default;
+
+if (!meta) {
+	throw new Error(
+		`[ComponentCode] No docs snapshot for "${component}". Run: node scripts/component-docs/build-snapshot.ts ${component}`,
+	);
+}
+
+const frameworkPanels: FrameworkPanel[] = [];
+for (const label of ['HTML', 'Angular', 'React', 'Vue'] as const) {
+	const doc = markdownFiles[`${base}/${label}.md`];
+	if (doc) frameworkPanels.push({ label, html: await doc.compiledContent() });
+}
+
+const versionBaseUrl = `https://design-system.deutschebahn.com/core-web/version/v${meta.version}`;
+const docsUrl = (baseUrl: string, framework: string, id: string) =>
+	`${baseUrl}/${framework}-storybook/?path=/docs/${id}--docs`;
+
+const storybookDescription = isDE
+	? 'Properties, alle Beispiele mit Code und Migrationshinweise.'
+	: 'Properties, all examples with code and migration notes.';
+
+const storybookResources = [
+	{
+		title: 'React',
+		icon: 'react',
+		description: storybookDescription,
+		url:
+			storybookOverview && storybookOverviewBaseUrl
+				? docsUrl(storybookOverviewBaseUrl, 'react', storybookOverview)
+				: docsUrl(versionBaseUrl, 'react', storybookExample),
+	},
+	{
+		title: 'Angular',
+		icon: 'angular',
+		description: storybookDescription,
+		url: docsUrl(versionBaseUrl, 'angular', storybookExample),
+	},
+	{
+		title: 'Vue',
+		icon: 'vue',
+		description: storybookDescription,
+		url: docsUrl(versionBaseUrl, 'vue', storybookExample),
+	},
+	// No Storybook yet; shown as "Coming Soon", like in the default ResourceCards.
+	{
+		title: 'Web Components',
+		icon: 'web-components',
+		description: storybookDescription,
+		url: docsUrl(versionBaseUrl, 'web-components', storybookExample),
+		disabled: true,
+	},
+];
+
+const setupLinks = [
+	{ label: 'React', en: 'react-setup', de: 'react-einrichten' },
+	{ label: 'Angular', en: 'angular-setup', de: 'angular-einrichten' },
+	{ label: 'Vue', en: 'vue-setup', de: 'vue-einrichten' },
+	{ label: 'Web Components', en: 'web-components-setup', de: 'web-components-einrichten' },
+	{ label: 'HTML/CSS', en: 'html-css-setup', de: 'html-css-einrichten' },
+].map(({ label, en, de }) => ({
+	label,
+	url: isDE ? `/de/dokumentation/lernen/${de}` : `/documentation/learn/${en}`,
+}));
+
+const t = isDE
+	? {
+			languageNote:
+				'Die technische Dokumentation kommt direkt aus dem Code und ist nur auf Englisch verfügbar.',
+			gettingStarted: 'Einstieg',
+			gettingStartedText:
+				'Installation und Konfiguration der Pakete findest du auf den Setup-Seiten:',
+			usage: 'Verwendung',
+			frameworkTabsLabel: 'Framework',
+			storybook: 'Storybook',
+			storybookText:
+				'Die vollständige technische Dokumentation findest du im Storybook deines Frameworks.',
+			version: `Stand: @db-ux/core-components ${meta.version}`,
+		}
+	: {
+			languageNote: undefined,
+			gettingStarted: 'Getting started',
+			gettingStartedText:
+				'For installation and configuration of the packages, see the setup pages:',
+			usage: 'Usage',
+			frameworkTabsLabel: 'Framework',
+			storybook: 'Storybook',
+			storybookText: 'The complete technical documentation is in the Storybook of your framework.',
+			version: `Version: @db-ux/core-components ${meta.version}`,
+		};
+---
+
+<div class="component-code">
+	{t.languageNote && <p class="component-code-note">{t.languageNote}</p>}
+	<p class="component-code-version">{t.version}</p>
+
+	<h3>{t.gettingStarted}</h3>
+	<p>{t.gettingStartedText}</p>
+	<ul class="component-code-setup-links">
+		{setupLinks.map(({ label, url }) => (
+			<li>
+				<a href={url}>{label}</a>
+			</li>
+		))}
+	</ul>
+
+	<h3>{t.usage}</h3>
+	<div
+		class="component-code-framework-root"
+		data-framework-tabs={JSON.stringify({
+			label: t.frameworkTabsLabel,
+			panels: frameworkPanels,
+			contentLang: docLang,
+		})}
+	>
+		{frameworkPanels.map((panel) => (
+			<>
+				<h4>{panel.label}</h4>
+				<div lang={docLang} set:html={panel.html} />
+			</>
+		))}
+	</div>
+
+	<h3>{t.storybook}</h3>
+	<p>{t.storybookText}</p>
+	<ResourceCards resources={storybookResources} />
+</div>
