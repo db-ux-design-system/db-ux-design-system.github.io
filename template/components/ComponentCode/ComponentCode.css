@@ -1,0 +1,81 @@
+.component-code {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-sm);
+
+	h3 {
+		margin-block-start: var(--db-spacing-fixed-lg);
+	}
+
+	pre {
+		overflow-x: auto;
+		padding: var(--db-spacing-fixed-md);
+		border-radius: var(--db-border-radius-sm);
+	}
+}
+
+/*
+ * DBTabs lays out list and panels as a wrapping flex column. In a wrapping
+ * flex container the line is as wide as its widest item, so the panel grows
+ * to the longest code line and pushes text and code out of the content
+ * column. Capping it at the container width lets the `pre` scroll instead.
+ */
+.component-code-framework-tabs .db-tab-panel {
+	max-inline-size: 100%;
+}
+
+.component-code-note,
+.component-code-version {
+	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+}
+
+.component-code-setup-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--db-spacing-fixed-xs) var(--db-spacing-fixed-md);
+	padding-inline-start: 0;
+	list-style: none;
+}
+
+/* Wide API tables scroll inside the content column instead of widening it. */
+.component-code-table {
+	overflow-x: auto;
+
+	td:first-child code {
+		white-space: nowrap;
+	}
+}
+
+.component-code-storybook {
+	inline-size: 100%;
+	block-size: 70dvh;
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	border-radius: var(--db-border-radius-md);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+}
+
+.component-code-migration summary {
+	cursor: pointer;
+	font-weight: 700;
+}
+
+/* A single story needs less room than a whole Storybook docs page. */
+.component-code-storybook-story {
+	block-size: 25dvh;
+}
+
+/* PROTOTYPE – variant comparison, see code-variant-init.ts */
+.component-code-prototype {
+	padding: var(--db-spacing-fixed-xs) var(--db-spacing-fixed-sm);
+	border-radius: var(--db-border-radius-sm);
+	background-color: var(--db-informational-bg-basic-level-2-default);
+}
+
+.component-code[data-code-variant='slim'],
+html[data-code-variant='slim'] .component-code[data-code-variant='full'] {
+	display: none;
+}
+
+html[data-code-variant='slim'] .component-code[data-code-variant='slim'] {
+	display: flex;
+}

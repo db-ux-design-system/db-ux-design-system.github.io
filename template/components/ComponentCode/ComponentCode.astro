@@ -1,0 +1,342 @@
+---
+/*
+ * Code section of a component page (pilot, see PR description).
+ *
+ * Renders the developer documentation of a component from the docs snapshot in
+ * `template/data/component-docs/<component>/` (built by
+ * `scripts/component-docs/build-snapshot.ts` for the pinned core-web version):
+ *
+ * - Getting started: links to the framework setup pages
+ * - Usage: framework docs from core-web, switchable per framework
+ * - API: properties, slots and events from the web-types
+ * - Examples: Storybook of the same version, embedded and linked
+ * - Migration: core-web migration notes, collapsed
+ *
+ * The section headings are h3, so they nest under the page's `## Code`.
+ * Docs from core-web are English only; DE pages show a short note.
+ */
+import type { MarkdownInstance } from 'astro';
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import type { FrameworkPanel } from './FrameworkTabs';
+import { renderInlineMarkdown } from './inline-markdown';
+import './ComponentCode.css';
+
+interface Props {
+	/** Folder name in core-web, e.g. `button`. */
+	component: string;
+	/**
+	 * Storybook docs entry to embed, without the `--docs` suffix,
+	 * e.g. `components-dbbutton-variant`.
+	 */
+	storybookExample?: string;
+	/**
+	 * PROTOTYPE – `full` shows API and migration on the platform, `slim` only
+	 * the entry (setup, usage, embedded example) and moves the rest to the
+	 * Storybook overview page. Both are compared via `?code=slim`.
+	 */
+	variant?: 'full' | 'slim';
+	/** Slim variant: Storybook deployment that contains the overview page. */
+	storybookBaseUrl?: string;
+	/** Slim variant: id of the Storybook overview docs page, without `--docs`. */
+	storybookOverview?: string;
+	/** Slim variant: id of the story to embed, e.g. `components-dbbutton-overview--variants`. */
+	storybookStory?: string;
+}
+
+interface ApiEntry {
+	name: string;
+	description: string;
+	type?: string;
+}
+
+interface Api {
+	properties: ApiEntry[];
+	slots: ApiEntry[];
+	events: ApiEntry[];
+}
+
+interface Meta {
+	component: string;
+	version: string;
+	docs: string[];
+}
+
+const {
+	component,
+	storybookExample,
+	variant = 'full',
+	storybookOverview,
+	storybookStory,
+} = Astro.props;
+const isSlim = variant === 'slim';
+
+const lang: 'en' | 'de' =
+	Astro.url.pathname.startsWith('/de/') || Astro.url.pathname === '/de' ? 'de' : 'en';
+const isDE = lang === 'de';
+/** Docs from core-web are English; marked as such on DE pages for screen readers. */
+const docLang = isDE ? 'en' : undefined;
+
+const markdownFiles = import.meta.glob<MarkdownInstance<Record<string, never>>>(
+	'../../data/component-docs/*/*.md',
+	{ eager: true },
+);
+const jsonFiles = import.meta.glob<{ default: Api | Meta }>('../../data/component-docs/*/*.json', {
+	eager: true,
+});
+
+const base = `../../data/component-docs/${component}`;
+const meta = jsonFiles[`${base}/meta.json`]?.default as Meta | undefined;
+const api = jsonFiles[`${base}/api.json`]?.default as Api | undefined;
+
+if (!meta || !api) {
+	throw new Error(
+		`[ComponentCode] No docs snapshot for "${component}". Run: node scripts/component-docs/build-snapshot.ts ${component}`,
+	);
+}
+
+const Doc = (name: string) => markdownFiles[`${base}/${name}.md`];
+
+const frameworkPanels: FrameworkPanel[] = [];
+for (const [file, label] of [
+	['HTML', 'HTML'],
+	['Angular', 'Angular'],
+	['React', 'React'],
+	['Vue', 'Vue'],
+] as const) {
+	const doc = Doc(file);
+	if (doc) frameworkPanels.push({ label, html: await doc.compiledContent() });
+}
+
+const MigrationDoc = Doc('Migration')?.Content;
+
+const storybookBaseUrl =
+	(isSlim && Astro.props.storybookBaseUrl) ||
+	`https://design-system.deutschebahn.com/core-web/version/v${meta.version}`;
+const storybookEmbedUrl = isSlim
+	? storybookStory &&
+		`${storybookBaseUrl}/react-storybook/iframe.html?id=${storybookStory}&viewMode=story`
+	: storybookExample &&
+		`${storybookBaseUrl}/react-storybook/iframe.html?id=${storybookExample}--docs&viewMode=docs`;
+/** Slim variant: the overview page only exists in the React Storybook so far. */
+const storybookLinkPath = isSlim
+	? storybookOverview && `?path=/docs/${storybookOverview}--docs`
+	: storybookExample && `?path=/docs/${storybookExample}--docs`;
+
+const setupLinks = [
+	{ label: 'React', en: 'react-setup', de: 'react-einrichten' },
+	{ label: 'Angular', en: 'angular-setup', de: 'angular-einrichten' },
+	{ label: 'Vue', en: 'vue-setup', de: 'vue-einrichten' },
+	{ label: 'Web Components', en: 'web-components-setup', de: 'web-components-einrichten' },
+	{ label: 'HTML/CSS', en: 'html-css-setup', de: 'html-css-einrichten' },
+].map(({ label, en, de }) => ({
+	label,
+	url: isDE ? `/de/dokumentation/lernen/${de}` : `/documentation/learn/${en}`,
+}));
+
+const t = isDE
+	? {
+			languageNote:
+				'Die technische Dokumentation kommt direkt aus dem Code und ist nur auf Englisch verfügbar.',
+			gettingStarted: 'Einstieg',
+			gettingStartedText:
+				'Installation und Konfiguration der Pakete findest du auf den Setup-Seiten:',
+			usage: 'Verwendung',
+			frameworkTabsLabel: 'Framework',
+			api: 'API',
+			properties: 'Properties',
+			slots: 'Slots',
+			events: 'Events',
+			name: 'Name',
+			type: 'Typ',
+			description: 'Beschreibung',
+			examples: 'Beispiele',
+			examplesText:
+				'Alle Beispiele mit Code-Snippets findest du im Storybook. Die Vorschau zeigt das React-Storybook.',
+			embedTitle: `Storybook-Beispiel ${component}`,
+			migration: 'Migration',
+			migrationSummary: 'Migration von DB UX Design System – Generation 2 (aka DB UI)',
+			version: `Stand: @db-ux/core-components ${meta.version}`,
+			slimExamplesText:
+				'Properties, alle Beispiele mit Code und die Migrationshinweise findest du auf der Übersichtsseite im Storybook.',
+			prototypeNote: 'Prototyp – Variante vergleichen:',
+			variantFull: 'Vollständig (API auf der Platform)',
+			variantSlim: 'Schlank (API im Storybook)',
+		}
+	: {
+			languageNote: undefined,
+			gettingStarted: 'Getting started',
+			gettingStartedText:
+				'For installation and configuration of the packages, see the setup pages:',
+			usage: 'Usage',
+			frameworkTabsLabel: 'Framework',
+			api: 'API',
+			properties: 'Properties',
+			slots: 'Slots',
+			events: 'Events',
+			name: 'Name',
+			type: 'Type',
+			description: 'Description',
+			examples: 'Examples',
+			examplesText:
+				'Storybook contains all examples with code snippets. The preview shows the React Storybook.',
+			embedTitle: `Storybook example ${component}`,
+			migration: 'Migration',
+			migrationSummary: 'Migrating from DB UX Design System – Generation 2 (aka DB UI)',
+			version: `Version: @db-ux/core-components ${meta.version}`,
+			slimExamplesText:
+				'Properties, all examples with code and the migration notes are on the overview page in Storybook.',
+			prototypeNote: 'Prototype – compare variants:',
+			variantFull: 'Full (API on the platform)',
+			variantSlim: 'Slim (API in Storybook)',
+		};
+
+const describe = (entry: ApiEntry): string =>
+	entry.description ? renderInlineMarkdown(entry.description, lang) : '–';
+---
+
+<div class="component-code" data-code-variant={variant}>
+	<p class="component-code-prototype">
+		{t.prototypeNote} <a href="?code=full#code">{t.variantFull}</a> ·{' '}
+		<a href="?code=slim#code">{t.variantSlim}</a>
+	</p>
+	{t.languageNote && <p class="component-code-note">{t.languageNote}</p>}
+	<p class="component-code-version">{t.version}</p>
+
+	<h3>{t.gettingStarted}</h3>
+	<p>{t.gettingStartedText}</p>
+	<ul class="component-code-setup-links">
+		{setupLinks.map(({ label, url }) => (
+			<li>
+				<a href={url}>{label}</a>
+			</li>
+		))}
+	</ul>
+
+	<h3>{t.usage}</h3>
+	<div
+		class="component-code-framework-root"
+		data-framework-tabs={JSON.stringify({
+			label: t.frameworkTabsLabel,
+			panels: frameworkPanels,
+			contentLang: docLang,
+		})}
+	>
+		{frameworkPanels.map((panel) => (
+			<>
+				<h4>{panel.label}</h4>
+				<div lang={docLang} set:html={panel.html} />
+			</>
+		))}
+	</div>
+
+	{!isSlim && (
+		<>
+			<h3>{t.api}</h3>
+
+			<h4>{t.properties}</h4>
+			<div class="component-code-table">
+				<table>
+					<thead>
+						<tr>
+							<th scope="col">{t.name}</th>
+							<th scope="col">{t.type}</th>
+							<th scope="col">{t.description}</th>
+						</tr>
+					</thead>
+					<tbody>
+						{api.properties.map((prop) => (
+							<tr>
+								<td>
+									<code>{prop.name}</code>
+								</td>
+								<td>
+									<code>{prop.type}</code>
+								</td>
+								<td lang={docLang} set:html={describe(prop)} />
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
+
+			{api.slots.length > 0 && (
+				<>
+					<h4>{t.slots}</h4>
+					<div class="component-code-table">
+						<table>
+							<thead>
+								<tr>
+									<th scope="col">{t.name}</th>
+									<th scope="col">{t.description}</th>
+								</tr>
+							</thead>
+							<tbody>
+								{api.slots.map((slot) => (
+									<tr>
+										<td>
+											<code>{slot.name}</code>
+										</td>
+										<td lang={docLang} set:html={describe(slot)} />
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
+				</>
+			)}
+
+			{api.events.length > 0 && (
+				<>
+					<h4>{t.events}</h4>
+					<div class="component-code-table">
+						<table>
+							<thead>
+								<tr>
+									<th scope="col">{t.name}</th>
+									<th scope="col">{t.description}</th>
+								</tr>
+							</thead>
+							<tbody>
+								{api.events.map((event) => (
+									<tr>
+										<td>
+											<code>{event.name}</code>
+										</td>
+										<td lang={docLang} set:html={describe(event)} />
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
+				</>
+			)}
+		</>
+	)}
+
+	<h3>{t.examples}</h3>
+	<p>{isSlim ? t.slimExamplesText : t.examplesText}</p>
+	{storybookEmbedUrl && (
+		<iframe
+			class:list={['component-code-storybook', { 'component-code-storybook-story': isSlim }]}
+			src={storybookEmbedUrl}
+			data-storybook-embed={isSlim ? storybookEmbedUrl : undefined}
+			title={t.embedTitle}
+			loading="lazy"
+		/>
+	)}
+	<div>
+		<ResourceCards baseUrl={storybookBaseUrl} path={storybookLinkPath ?? ''} />
+	</div>
+
+	{!isSlim && MigrationDoc && (
+		<>
+			<h3>{t.migration}</h3>
+			<details class="component-code-migration">
+				<summary>{t.migrationSummary}</summary>
+				<div lang={docLang}>
+					<MigrationDoc />
+				</div>
+			</details>
+		</>
+	)}
+</div>
