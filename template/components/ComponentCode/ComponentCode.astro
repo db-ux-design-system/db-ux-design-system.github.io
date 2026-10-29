@@ -103,6 +103,14 @@ const storybookResources = [
 		description: storybookDescription,
 		url: docsUrl(versionBaseUrl, 'vue', storybookExample),
 	},
+	// No Storybook yet; shown as "Coming Soon", like in the default ResourceCards.
+	{
+		title: 'Web Components',
+		icon: 'web-components',
+		description: storybookDescription,
+		url: docsUrl(versionBaseUrl, 'web-components', storybookExample),
+		disabled: true,
+	},
 ];
 
 const setupLinks = [
