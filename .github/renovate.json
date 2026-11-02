@@ -40,6 +40,22 @@
 			"minimumReleaseAge": null
 		},
 		{
+			"description": "DB UX core packages in one PR, so the platform shows the current release (Dependabot ignores them). No automerge: an update can change the Shell and the visual snapshots, and the Storybook links point to version/latest, so platform and Storybook should move together after a human check.",
+			"matchPackageNames": [
+				"@db-ux/agent-cli",
+				"@db-ux/core-components",
+				"@db-ux/core-eslint-plugin",
+				"@db-ux/core-foundations",
+				"@db-ux/core-stylelint",
+				"@db-ux/react-core-components"
+			],
+			"enabled": true,
+			"groupName": "DB UX core",
+			"automerge": false,
+			"separateMajorMinor": true,
+			"minimumReleaseAge": null
+		},
+		{
 			"description": "Node itself",
 			"matchManagers": ["nvm"],
 			"matchPackageNames": ["node"],
