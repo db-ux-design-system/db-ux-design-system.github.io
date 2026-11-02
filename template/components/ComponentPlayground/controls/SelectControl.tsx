@@ -6,7 +6,6 @@ const SelectControl = ({ property, value, onChange, defaultValue }: ControlProps
 	const options = property.options ?? [];
 
 	return (
-		// eslint-disable-next-line db-ux/select-requires-options
 		<DBSelect
 			label={property.label}
 			id={controlId}
