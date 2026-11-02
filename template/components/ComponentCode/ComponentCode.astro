@@ -2,27 +2,23 @@
 /*
  * Code section of a component page (pilot, see PR #832).
  *
- * A short code entry on the platform; the full developer documentation
- * (properties, all examples with code, accessibility, migration) lives on the
- * component's overview page in Storybook.
+ * A short entry for developers. The technical documentation (installation,
+ * usage per framework, all examples with code, properties, migration) lives
+ * in Storybook, versioned per release; the platform shows the current version
+ * only and links there.
  *
  * - Getting started: links to the framework setup pages
- * - Usage: framework docs from core-web, switchable per framework, from the
- *   docs snapshot in `template/data/component-docs/<component>/` (built by
- *   `scripts/component-docs/build-snapshot.ts` for the pinned core-web version)
- * - Storybook: links to the component docs per framework
+ * - Storybook: one card to the component's entry page in the composition
+ *   Storybook, where the framework is chosen
  *
  * The section headings are h3, so they nest under the page's `## Code`.
- * Docs from core-web are English only; DE pages show a short note.
+ * Storybook is English only; DE pages say so.
  */
-import type { MarkdownInstance } from 'astro';
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
-import type { FrameworkPanel } from './FrameworkTabs';
+import pkg from '../../../package.json';
 import './ComponentCode.css';
 
 interface Props {
-	/** Folder name in core-web, e.g. `button`. */
-	component: string;
 	/**
 	 * Fallback: Storybook docs page of the released version, without the
 	 * `--docs` suffix, e.g. `components-dbbutton-variant`. Used while
@@ -36,51 +32,22 @@ interface Props {
 	 * `storybookExample` goes away.
 	 */
 	storybookOverview?: string;
-	/** PROTOTYPE – Storybook deployment that contains the overview page. */
+	/** PROTOTYPE – Storybook deployment that contains the entry page. */
 	storybookOverviewBaseUrl?: string;
 }
 
-interface Meta {
-	component: string;
-	version: string;
-	docs: string[];
-}
-
-const { component, storybookExample, storybookOverview, storybookOverviewBaseUrl } = Astro.props;
+const { storybookExample, storybookOverview, storybookOverviewBaseUrl } = Astro.props;
 
 const isDE = Astro.url.pathname.startsWith('/de/') || Astro.url.pathname === '/de';
-/** Docs from core-web are English; marked as such on DE pages for screen readers. */
-const docLang = isDE ? 'en' : undefined;
 
-const markdownFiles = import.meta.glob<MarkdownInstance<Record<string, never>>>(
-	'../../data/component-docs/*/*.md',
-	{ eager: true },
-);
-const metaFiles = import.meta.glob<{ default: Meta }>('../../data/component-docs/*/meta.json', {
-	eager: true,
-});
-
-const base = `../../data/component-docs/${component}`;
-const meta = metaFiles[`${base}/meta.json`]?.default;
-
-if (!meta) {
-	throw new Error(
-		`[ComponentCode] No docs snapshot for "${component}". Run: node scripts/component-docs/build-snapshot.ts ${component}`,
-	);
-}
-
-const frameworkPanels: FrameworkPanel[] = [];
-for (const label of ['HTML', 'Angular', 'React', 'Vue'] as const) {
-	const doc = markdownFiles[`${base}/${label}.md`];
-	if (doc) frameworkPanels.push({ label, html: await doc.compiledContent() });
-}
-
-const versionBaseUrl = `https://design-system.deutschebahn.com/core-web/version/v${meta.version}`;
+/** The components on the platform are rendered with this exact version. */
+const version = pkg.devDependencies['@db-ux/core-components'];
+const versionBaseUrl = `https://design-system.deutschebahn.com/core-web/version/v${version}`;
 
 /*
  * One card for all frameworks: it opens the component's entry page in the
  * composition Storybook, which leads to the overview of each framework
- * Storybook. Until the overview pages are released, the fallback links to the
+ * Storybook. Until the entry pages are released, the fallback links to the
  * composition Storybook of the pinned version.
  */
 const storybookUrl =
@@ -121,36 +88,26 @@ const setupLinks = [
 
 const t = isDE
 	? {
-			languageNote:
-				'Die technische Dokumentation kommt direkt aus dem Code und ist nur auf Englisch verfügbar.',
 			gettingStarted: 'Einstieg',
 			gettingStartedText:
 				'Installation und Konfiguration der Pakete findest du auf den Setup-Seiten:',
-			usage: 'Verwendung',
-			frameworkTabsLabel: 'Framework',
 			storybook: 'Storybook',
 			storybookText:
-				'Die vollständige technische Dokumentation findest du im Storybook. Dort wählst du dein Framework.',
-			version: `Stand: @db-ux/core-components ${meta.version}`,
+				'Die vollständige technische Dokumentation findest du im Storybook. Dort wählst du dein Framework und die Version. Storybook ist nur auf Englisch verfügbar.',
+			version: `Diese Seite zeigt @db-ux/core-components ${version}.`,
 		}
 	: {
-			languageNote: undefined,
 			gettingStarted: 'Getting started',
 			gettingStartedText:
 				'For installation and configuration of the packages, see the setup pages:',
-			usage: 'Usage',
-			frameworkTabsLabel: 'Framework',
 			storybook: 'Storybook',
 			storybookText:
-				'The complete technical documentation is in Storybook, where you choose your framework.',
-			version: `Version: @db-ux/core-components ${meta.version}`,
+				'The complete technical documentation is in Storybook, where you choose your framework and version.',
+			version: `This page shows @db-ux/core-components ${version}.`,
 		};
 ---
 
 <div class="component-code">
-	{t.languageNote && <p class="component-code-note">{t.languageNote}</p>}
-	<p class="component-code-version">{t.version}</p>
-
 	<h3>{t.gettingStarted}</h3>
 	<p>{t.gettingStartedText}</p>
 	<ul class="component-code-setup-links">
@@ -161,24 +118,8 @@ const t = isDE
 		))}
 	</ul>
 
-	<h3>{t.usage}</h3>
-	<div
-		class="component-code-framework-root"
-		data-framework-tabs={JSON.stringify({
-			label: t.frameworkTabsLabel,
-			panels: frameworkPanels,
-			contentLang: docLang,
-		})}
-	>
-		{frameworkPanels.map((panel) => (
-			<>
-				<h4>{panel.label}</h4>
-				<div lang={docLang} set:html={panel.html} />
-			</>
-		))}
-	</div>
-
 	<h3>{t.storybook}</h3>
 	<p>{t.storybookText}</p>
 	<ResourceCards resources={storybookResources} />
+	<p class="component-code-version">{t.version}</p>
 </div>
