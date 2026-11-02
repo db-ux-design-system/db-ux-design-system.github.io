@@ -30,9 +30,10 @@ interface Props {
 	 */
 	storybookExample: string;
 	/**
-	 * PROTOTYPE – overview page in the framework Storybooks (core-web#8649),
-	 * without `--docs`. Once it is released, the cards link to it in the
-	 * versioned Storybooks and `storybookExample` goes away.
+	 * PROTOTYPE – entry page of the component in the composition Storybook
+	 * (core-web#8649), without `--docs`, e.g. `components-dbbutton`. Once it is
+	 * released, the card links to it in the versioned Storybook and
+	 * `storybookExample` goes away.
 	 */
 	storybookOverview?: string;
 	/** PROTOTYPE – Storybook deployment that contains the overview page. */
@@ -75,32 +76,34 @@ for (const label of ['HTML', 'Angular', 'React', 'Vue'] as const) {
 }
 
 const versionBaseUrl = `https://design-system.deutschebahn.com/core-web/version/v${meta.version}`;
-const docsUrl = (baseUrl: string, framework: string, id: string) =>
-	`${baseUrl}/${framework}-storybook/?path=/docs/${id}--docs`;
 
-const storybookDescription = isDE
-	? 'Properties, alle Beispiele mit Code und Migrationshinweise.'
-	: 'Properties, all examples with code and migration notes.';
+/*
+ * One card for all frameworks: it opens the component's entry page in the
+ * composition Storybook, which leads to the overview of each framework
+ * Storybook. Until the overview pages are released, the fallback links to the
+ * composition Storybook of the pinned version.
+ */
+const storybookUrl =
+	storybookOverview && storybookOverviewBaseUrl
+		? `${storybookOverviewBaseUrl}/composition-storybook/?path=/docs/${storybookOverview}--docs`
+		: `${versionBaseUrl}/composition-storybook/?path=/docs/react_${storybookExample}--docs`;
 
 const storybookResources = [
-	...(['React', 'Angular', 'Vue'] as const).map((title) => {
-		const framework = title.toLowerCase();
-		return {
-			title,
-			icon: framework,
-			description: storybookDescription,
-			url:
-				storybookOverview && storybookOverviewBaseUrl
-					? docsUrl(storybookOverviewBaseUrl, framework, storybookOverview)
-					: docsUrl(versionBaseUrl, framework, storybookExample),
-		};
-	}),
+	{
+		title: 'Storybook',
+		description: isDE
+			? 'React, Angular, Vue und HTML: Installation, Beispiele mit Code, Properties und Migration.'
+			: 'React, Angular, Vue and HTML: installation, examples with code, properties and migration.',
+		url: storybookUrl,
+	},
 	// No Storybook yet; shown as "Coming Soon", like in the default ResourceCards.
 	{
 		title: 'Web Components',
 		icon: 'web-components',
-		description: storybookDescription,
-		url: docsUrl(versionBaseUrl, 'web-components', storybookExample),
+		description: isDE
+			? 'Interaktive Beispiele und Dokumentation.'
+			: 'Interactive examples and documentation.',
+		url: storybookUrl,
 		disabled: true,
 	},
 ];
@@ -127,7 +130,7 @@ const t = isDE
 			frameworkTabsLabel: 'Framework',
 			storybook: 'Storybook',
 			storybookText:
-				'Die vollständige technische Dokumentation findest du im Storybook deines Frameworks.',
+				'Die vollständige technische Dokumentation findest du im Storybook. Dort wählst du dein Framework.',
 			version: `Stand: @db-ux/core-components ${meta.version}`,
 		}
 	: {
@@ -138,7 +141,8 @@ const t = isDE
 			usage: 'Usage',
 			frameworkTabsLabel: 'Framework',
 			storybook: 'Storybook',
-			storybookText: 'The complete technical documentation is in the Storybook of your framework.',
+			storybookText:
+				'The complete technical documentation is in Storybook, where you choose your framework.',
 			version: `Version: @db-ux/core-components ${meta.version}`,
 		};
 ---
