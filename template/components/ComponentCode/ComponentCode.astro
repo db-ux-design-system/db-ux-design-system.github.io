@@ -1,6 +1,6 @@
 ---
 /*
- * Code section of a component page (pilot, see PR #832).
+ * Development section of a component page (pilot, see PR #832).
  *
  * A short entry for developers. The technical documentation (installation,
  * usage per framework, all examples with code, properties, migration) lives
@@ -11,7 +11,7 @@
  * - Storybook: one card to the component's entry page in the composition
  *   Storybook, where the framework is chosen
  *
- * The section headings are h3, so they nest under the page's `## Code`.
+ * The section headings are h3, so they nest under the page's `## Development` (DE: `## Entwicklung`).
  * Storybook is English only; DE pages say so.
  */
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
@@ -59,19 +59,9 @@ const storybookResources = [
 	{
 		title: 'Storybook',
 		description: isDE
-			? 'React, Angular, Vue und HTML: Installation, Beispiele mit Code, Properties und Migration.'
-			: 'React, Angular, Vue and HTML: installation, examples with code, properties and migration.',
+			? 'React, Angular, Vue, Web Components und HTML: Installation, Beispiele mit Code, Properties und Migration.'
+			: 'React, Angular, Vue, Web Components and HTML: installation, examples with code, properties and migration.',
 		url: storybookUrl,
-	},
-	// No Storybook yet; shown as "Coming Soon", like in the default ResourceCards.
-	{
-		title: 'Web Components',
-		icon: 'web-components',
-		description: isDE
-			? 'Interaktive Beispiele und Dokumentation.'
-			: 'Interactive examples and documentation.',
-		url: storybookUrl,
-		disabled: true,
 	},
 ];
 
