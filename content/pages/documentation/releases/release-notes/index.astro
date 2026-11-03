@@ -54,7 +54,7 @@ const releaseNotes: ReleaseNote[] = Object.values(releaseNoteFiles)
 	})
 	.sort((a: ReleaseNote, b: ReleaseNote) => b.date.getTime() - a.date.getTime());
 
-const categoryOrder = ['Core', 'DB Theme Icons', 'DB Theme Illustrative Icons'];
+const categoryOrder = ['Core', 'DB Theme Icons'];
 const categoriesFromData = Array.from(new Set(releaseNotes.map((note) => note.category)));
 const categories = [
 	...categoryOrder.filter((cat) => categoriesFromData.includes(cat)),
@@ -74,10 +74,6 @@ function getRoadmapUrl(category: string, version: string): string | null {
 		case 'DB Theme Icons':
 			baseUrl = 'https://github.com/orgs/db-ux-design-system/projects/4/views/15';
 			filterQuery = `has:milestone label:🖼️icons,🚅DBTheme milestone:"${v} (functional icons)"`;
-			break;
-		case 'DB Theme Illustrative Icons':
-			baseUrl = 'https://github.com/orgs/db-ux-design-system/projects/4/views/15';
-			filterQuery = `has:milestone label:🖼️icons,🚅DBTheme milestone:"${v} (illustrative icons)"`;
 			break;
 		default:
 			return null;

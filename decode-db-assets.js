@@ -4,7 +4,6 @@ const scripts = [
 	'node_modules/@db-ux/db-theme/build/scripts/index.js',
 	'node_modules/@db-ux/db-theme-fonts/build/scripts/index.js',
 	'node_modules/@db-ux/db-theme-icons/build/scripts/index.js',
-	'node_modules/@db-ux/db-theme-illustrative-icons/build/scripts/index.js',
 ];
 
 function decodeDbThemeAssets() {
