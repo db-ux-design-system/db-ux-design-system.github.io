@@ -1,6 +1,14 @@
 ---
 import { DBFooter, DBFooterMeta, DBLink } from '@db-ux/react-core-components';
 
+interface Props {
+	/**
+	 * Browsing context for the links. The Theme Builder preview renders the footer inside
+	 * an iframe and sets `_top`, so the links open in the main window, not in the frame.
+	 */
+	linkTarget?: '_top';
+}
+const { linkTarget } = Astro.props;
 const currentPath = Astro.url?.pathname ?? '';
 const isDE = currentPath.startsWith('/de/') || currentPath === '/de';
 const imprintLabel = isDE ? 'Impressum' : 'Imprint';
@@ -21,17 +29,17 @@ const copyright = 'Deutsche Bahn AG';
 		<nav aria-label={footerNavLabel}>
 			<ul>
 				<li>
-					<DBLink variant="inline" size="small" href={imprintHref}>
+					<DBLink variant="inline" size="small" href={imprintHref} target={linkTarget}>
 						{imprintLabel}
 					</DBLink>
 				</li>
 				<li>
-					<DBLink variant="inline" size="small" href={privacyHref}>
+					<DBLink variant="inline" size="small" href={privacyHref} target={linkTarget}>
 						{privacyLabel}
 					</DBLink>
 				</li>
 				<li>
-					<DBLink variant="inline" size="small" href={contactHref}>
+					<DBLink variant="inline" size="small" href={contactHref} target={linkTarget}>
 						{contactLabel}
 					</DBLink>
 				</li>

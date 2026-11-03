@@ -23,6 +23,10 @@ declare interface FrontMatter {
 	 */
 	headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 	/**
+	 * Hides the hero section while keeping `title` for the document title and navigation.
+	 */
+	hideHero?: boolean;
+	/**
 	 * Optional hero image URL.
 	 */
 	heroImage?: string;

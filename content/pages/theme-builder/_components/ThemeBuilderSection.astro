@@ -1,0 +1,24 @@
+---
+import type { ThemeBuilderLang } from '@template/components/ThemeBuilder/messages.ts';
+
+interface Props {
+	lang: ThemeBuilderLang;
+}
+const { lang } = Astro.props;
+---
+
+<!-- Mounted by template/components/ThemeBuilder/mount-init.ts (loaded by the page script) -->
+<div class="theme-builder-page">
+	<div data-theme-builder-mount data-lang={lang}></div>
+</div>
+
+<style is:global>
+	/*
+	 * The builder fills the content area edge to edge: the settings panel sits flush
+	 * against the left edge and the preview takes the rest. The surrounding DBSection
+	 * adds an inline padding for normal pages, which is cancelled here.
+	 */
+	#main-content-section:has(.theme-builder-page) {
+		padding-inline: 0;
+	}
+</style>
