@@ -8,8 +8,8 @@
  * only and links there.
  *
  * - Getting started: links to the framework setup pages
- * - Storybook: one card to the component's entry page in the composition
- *   Storybook, where the framework is chosen
+ * - Storybook: one card per framework to the component's overview page,
+ *   opened in the composition Storybook
  *
  * The section headings are h3, so they nest under the page's `## Development` (DE: `## Entwicklung`).
  * Storybook is English only; DE pages say so.
@@ -26,13 +26,13 @@ interface Props {
 	 */
 	storybookExample: string;
 	/**
-	 * PROTOTYPE – entry page of the component in the composition Storybook
-	 * (core-web#8649), without `--docs`, e.g. `components-dbbutton`. Once it is
-	 * released, the card links to it in the versioned Storybook and
+	 * PROTOTYPE – overview page of the component in the framework Storybooks
+	 * (core-web#8649), without `--docs`, e.g. `components-dbbutton-overview`.
+	 * Once it is released, the cards link to it in the versioned Storybook and
 	 * `storybookExample` goes away.
 	 */
 	storybookOverview?: string;
-	/** PROTOTYPE – Storybook deployment that contains the entry page. */
+	/** PROTOTYPE – Storybook deployment that contains the overview pages. */
 	storybookOverviewBaseUrl?: string;
 }
 
@@ -45,25 +45,35 @@ const version = pkg.devDependencies['@db-ux/core-components'];
 const versionBaseUrl = `https://design-system.deutschebahn.com/core-web/version/v${version}`;
 
 /*
- * One card for all frameworks: it opens the component's entry page in the
- * composition Storybook, which leads to the overview of each framework
- * Storybook. Until the entry pages are released, the fallback links to the
- * composition Storybook of the pinned version.
+ * One card per framework. Each opens the component's overview page of that
+ * framework directly, but inside the composition Storybook: the sidebar shows
+ * all frameworks, the Foundations pages and the version dropdown.
+ * `ref` is the key of the framework Storybook in the composition config.
+ * Until the overview pages are released, the fallback opens an example page
+ * of the pinned version.
  */
-const storybookUrl =
-	storybookOverview && storybookOverviewBaseUrl
-		? `${storybookOverviewBaseUrl}/composition-storybook/?path=/docs/${storybookOverview}--docs`
-		: `${versionBaseUrl}/composition-storybook/?path=/docs/react_${storybookExample}--docs`;
-
-const storybookResources = [
-	{
-		title: 'Storybook',
-		description: isDE
-			? 'React, Angular, Vue, Web Components und HTML: Installation, Beispiele mit Code, Properties und Migration.'
-			: 'React, Angular, Vue, Web Components and HTML: installation, examples with code, properties and migration.',
-		url: storybookUrl,
-	},
+const frameworks = [
+	{ title: 'React', ref: 'react', icon: 'react' },
+	{ title: 'Angular', ref: 'angular', icon: 'angular' },
+	{ title: 'Vue', ref: 'vue', icon: 'vue' },
+	{ title: 'Web Components', ref: 'webcomponents', icon: 'web-components' },
+	{ title: 'HTML', ref: 'html', icon: 'html5' },
 ];
+
+const compositionUrl =
+	storybookOverview && storybookOverviewBaseUrl
+		? `${storybookOverviewBaseUrl}/composition-storybook`
+		: `${versionBaseUrl}/composition-storybook`;
+const docsId = storybookOverview && storybookOverviewBaseUrl ? storybookOverview : storybookExample;
+
+const storybookResources = frameworks.map(({ title, ref, icon }) => ({
+	title,
+	icon,
+	description: isDE
+		? 'Beispiele mit Code, Properties, Barrierefreiheit und Migration.'
+		: 'Examples with code, properties, accessibility and migration.',
+	url: `${compositionUrl}/?path=/docs/${ref}_${docsId}--docs`,
+}));
 
 const setupLinks = [
 	{ label: 'React', en: 'react-setup', de: 'react-einrichten' },
@@ -83,7 +93,7 @@ const t = isDE
 				'Installation und Konfiguration der Pakete findest du auf den Setup-Seiten:',
 			storybook: 'Storybook',
 			storybookText:
-				'Die vollständige technische Dokumentation findest du im Storybook. Dort wählst du dein Framework und die Version. Storybook ist nur auf Englisch verfügbar.',
+				'Die vollständige technische Dokumentation findest du im Storybook deines Frameworks. Ältere Versionen wählst du dort in der Sidebar. Storybook ist nur auf Englisch verfügbar.',
 			version: `Diese Seite zeigt @db-ux/core-components ${version}.`,
 		}
 	: {
@@ -92,7 +102,7 @@ const t = isDE
 				'For installation and configuration of the packages, see the setup pages:',
 			storybook: 'Storybook',
 			storybookText:
-				'The complete technical documentation is in Storybook, where you choose your framework and version.',
+				'The complete technical documentation is in the Storybook of your framework. Earlier versions are in its sidebar.',
 			version: `This page shows @db-ux/core-components ${version}.`,
 		};
 ---
