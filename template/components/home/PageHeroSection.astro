@@ -12,9 +12,9 @@ interface Props {
 const isDE = Astro.url.pathname.startsWith('/de/') || Astro.url.pathname === '/de';
 
 const {
-	title = 'DB UX Design System',
-	headline = 'A Design System designed to align teams and streamline product delivery.',
-	description = 'Brings clarity to design and implementation through shared standards and reusable components.',
+	title = '',
+	headline = 'DB Design System designed to align teams and streamline product delivery.',
+	description = '',
 	startLabel = 'Get started',
 } = Astro.props;
 
@@ -28,6 +28,13 @@ const actions = [
 ];
 ---
 
-<DBSection width="medium" spacing="medium" id="home--page-hero-section">
-	<PageHero title={title} headline={headline} description={description} actions={actions} />
+<DBSection width="medium" spacing="medium" id="home--page-hero-section" className="home-page-hero">
+	<PageHero
+		title={title}
+		headline={headline}
+		description={description}
+		actions={actions}
+		headlineLevel={1}
+		headlineHighlight="DB Design System"
+	/>
 </DBSection>

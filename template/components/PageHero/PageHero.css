@@ -32,7 +32,7 @@
 	gap: var(--db-spacing-fixed-lg);
 	flex-direction: column;
 	align-items: center;
-	max-inline-size: var(--db-container-3xl);
+	max-inline-size: 72rem;
 	inline-size: 100%;
 }
 
@@ -52,6 +52,13 @@
 	flex-wrap: wrap;
 	justify-content: center;
 	gap: var(--db-spacing-fixed-sm);
+}
+
+/* The global content spacing adds a top margin to a div that follows another div
+   (content-spacing.css, specificity 0,3,0). The actions sit right under the text group,
+   so the repeated class outranks that rule and removes the gap above the button. */
+.dba-main-content .page-hero-actions.page-hero-actions {
+	margin-block-start: 0;
 }
 
 .page-hero[data-layout='split'] .page-hero-actions {
@@ -101,6 +108,28 @@
    rule. */
 .dba-main-content .page-hero-headline-row .page-hero-toolbar > * {
 	margin-block: 0;
+}
+
+/* DB Neo Head Extra Wide: the wideextrablack weight (1000) of DB Neo Screen Head from db-theme. */
+.page-hero-headline-highlight {
+	font-family: var(--db-font-family-head);
+	font-weight: 1000;
+	text-transform: uppercase;
+
+	/* Own line between the text before and after it, set larger than the headline. */
+	display: block;
+	font-size: 1.5em;
+	line-height: 1.1;
+	overflow-wrap: anywhere;
+
+	/* Breathing room to the headline lines above and below. */
+	margin-block: var(--db-spacing-fixed-2xl);
+}
+
+/* Home hero only: the headline text around the highlight is set in regular weight.
+   The highlight span keeps its own weight (1000) through the rule above. */
+.home-page-hero .page-hero-headline {
+	font-weight: 400;
 }
 
 .page-hero-description {
