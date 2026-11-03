@@ -346,7 +346,7 @@ The Markdown notation used in this section documents the structure only. The fin
 
 - Only include categories that have entries – omit empty ones
 - Entry format: `- **Component**: Description`, translated to German, following the same content as the release note entry
-- Multiple libraries in the same cycle: one block per library, separated by a blank line, ordered by `categoryOrder` (Core → DB Theme Icons → DB Theme Illustrative Icons)
+- Multiple libraries in the same cycle: one block per library, separated by a blank line, ordered by `categoryOrder` (Core → DB Theme Icons)
 
 ### Breaking changes
 
