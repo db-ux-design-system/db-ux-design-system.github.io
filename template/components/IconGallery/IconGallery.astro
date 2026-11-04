@@ -133,10 +133,8 @@ const [hintBefore, codeWeight, hintMiddle, codeVariant, hintAfter] = text.hint.s
 		{hintAfter}
 	</p>
 
-	<p class="icon-gallery-status" id="icon-gallery-status" role="status">
-		{text.count.replace('{count}', String(icons.length))}
-	</p>
-	<!-- Announces the copied name to screen readers; sighted users see the tooltip. -->
+	<!-- Screen reader announcements: the number of matching icons after a search or filter change, and the copied name. Sighted users see the gallery and the tooltip. -->
+	<p id="icon-gallery-status" role="status" data-visually-hidden="true"></p>
 	<p id="icon-gallery-copied" role="status" data-visually-hidden="true"></p>
 
 	<div class="icon-gallery" id="icon-gallery" style={`--icon-gallery-size: ${defaultSize};`}>
