@@ -79,3 +79,20 @@ import { DBSection } from '@db-ux/react-core-components';
 />
 
 </DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Wo welche Dokumentation liegt
+
+Die Dokumentation ist auf zwei Orte verteilt. Trage dort bei, wo dein Thema hingehört.
+
+| Ort                                                                                                    | Inhalt                                                                                                                                    | Sprache, Versionen                     |
+| ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| **Design System Platform** (diese Website)                                                             | Inhalt und Design: Richtlinien mit Do- und Dont-Beispielen, wann du eine Komponente einsetzt, der Playground, Setup-Artikel und Beispiele | Deutsch und Englisch, aktuelle Version |
+| **[Storybook](https://design-system.deutschebahn.com/core-web/version/latest/composition-storybook/)** | Technische Details: Properties, Code-Beispiele, Getting Started pro Framework, Migration, technische Guides und Foundations               | Englisch, eine Version pro Release     |
+
+- **Technisches ins Storybook, Inhaltliches auf die Platform:** Erklärt ein Text, wie du eine Komponente im Code nutzt, gehört er ins Storybook. Erklärt er, wann oder warum du sie einsetzt, gehört er auf die Platform.
+- **Eine Quelle pro Inhalt:** Storybook wird aus dem [core-web-Repository](https://github.com/db-ux-design-system/core-web) generiert. Änderungen an der technischen Dokumentation gehören dorthin, nicht direkt ins Storybook.
+- **Verlinken statt kopieren:** Beide Orte verlinken aufeinander und wiederholen keine Inhalte.
+
+</DBSection>
