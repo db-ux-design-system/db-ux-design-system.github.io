@@ -90,15 +90,14 @@ pnpm add @db-ux/db-theme
 
 You do not install them separately.
 
-| Package                              | Contains                                      |
-| ------------------------------------ | --------------------------------------------- |
-| `@db-ux/db-theme-fonts`              | The DB Neo Screen fonts                       |
-| `@db-ux/db-theme-icons`              | The DB icon font and SVG icons                |
-| `@db-ux/db-theme-illustrative-icons` | Illustrative icons as SVG and React component |
+| Package                 | Contains                       |
+| ----------------------- | ------------------------------ |
+| `@db-ux/db-theme-fonts` | The DB Neo Screen fonts        |
+| `@db-ux/db-theme-icons` | The DB icon font and SVG icons |
 
 ### Allow the install scripts with pnpm
 
-pnpm runs install scripts of dependencies only after you allow them. Run `pnpm approve-builds` and allow the four `@db-ux/db-theme*` packages. With npm, use `npm i @db-ux/db-theme`.
+pnpm runs install scripts of dependencies only after you allow them. Run `pnpm approve-builds` and allow the three `@db-ux/db-theme*` packages. With npm, use `npm i @db-ux/db-theme`.
 
 ### Decrypt manually
 
@@ -108,7 +107,6 @@ If your setup disables lifecycle scripts – for example with the `ignore-script
 node node_modules/@db-ux/db-theme/build/scripts/index.js
 node node_modules/@db-ux/db-theme-fonts/build/scripts/index.js
 node node_modules/@db-ux/db-theme-icons/build/scripts/index.js
-node node_modules/@db-ux/db-theme-illustrative-icons/build/scripts/index.js
 ```
 
 </LearnAside>
@@ -184,7 +182,7 @@ Instead of the combined theme file, you can import each part separately. This gi
 
 ### S-Bahn Theme
 
-For S-Bahn products, `@db-ux/s-bahn-theme` provides the regional logos and the S-Bahn brand colors. It uses the same credentials and the same decryption. It depends on the DB fonts and DB icons, but not on the illustrative icons. Install it and import it in place of the DB Theme:
+For S-Bahn products, `@db-ux/s-bahn-theme` provides the regional logos and the S-Bahn brand colors. It uses the same credentials and the same decryption. It depends on the DB fonts and DB icons. Install it and import it in place of the DB Theme:
 
 ```shell
 pnpm add @db-ux/s-bahn-theme
@@ -255,7 +253,7 @@ Add icons or look up the package on npm.
 	teasers={[
 		{
 			title: 'Show icons in your interface',
-			description: 'Show functional and illustrative icons in your components.',
+			description: 'Show functional icons in your components.',
 			url: '/documentation/learn/icons-setup',
 		},
 		{
