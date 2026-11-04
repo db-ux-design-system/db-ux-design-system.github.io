@@ -31,8 +31,10 @@ import {
 	PRESETS,
 	RADII,
 	shuffleConfig,
-	toCss,
+	toFontsCss,
+	toReadme,
 	toStyleDictionary,
+	toThemeCss,
 	type ColorConfig,
 	type ColorKey,
 	type FamilyConfig,
@@ -51,6 +53,7 @@ import {
 	type PreviewView,
 } from './preview-runtime.ts';
 import { configFromUrl, shareSearchParams, storePreset } from './preset-store.ts';
+import { createZip } from './zip.ts';
 import {
 	themeBuilderMessages,
 	type ThemeBuilderLang,
@@ -62,7 +65,8 @@ type Props = {
 	lang?: ThemeBuilderLang;
 };
 
-type CodeFormat = 'css' | 'sd';
+/** The files that make up the downloaded ZIP, selectable in the code dialog. */
+type CodeFileKey = 'theme.css' | 'theme.fonts.css' | 'theme.tokens.json' | 'README.md';
 
 /** Same breakpoint as the CSS: below it the settings panel lives in a drawer. */
 const COMPACT_QUERY = '(width < 64em)';
@@ -83,10 +87,18 @@ const useMediaQuery = (query: string): boolean => {
 /** The sections of the settings panel; one is open at a time. */
 type SettingsSection = 'colors' | 'semantic' | 'families' | 'shape';
 
-/** File name, MIME type and label per code format. */
-const CODE_FILES: Record<CodeFormat, { name: string; type: string; label: string }> = {
-	css: { name: 'theme.css', type: 'text/css', label: 'CSS' },
-	sd: { name: 'theme.tokens.json', type: 'application/json', label: 'Style Dictionary' },
+/** The ZIP files in display order, with a short label for the file select. */
+const CODE_FILE_ORDER: readonly CodeFileKey[] = [
+	'theme.css',
+	'theme.fonts.css',
+	'theme.tokens.json',
+	'README.md',
+];
+const CODE_FILE_LABELS: Record<CodeFileKey, string> = {
+	'theme.css': 'theme.css',
+	'theme.fonts.css': 'theme.fonts.css',
+	'theme.tokens.json': 'theme.tokens.json',
+	'README.md': 'README.md',
 };
 
 const SITE_MODE_KEY = 'db-ux-mode';
@@ -439,7 +451,7 @@ const ThemeBuilder = ({ lang = 'en' }: Props) => {
 	const [config, setConfig] = useState<ThemeConfig>(getInitialConfig);
 	const [view, setView] = useState<PreviewView>(getInitialView);
 	const [codeOpen, setCodeOpen] = useState(false);
-	const [codeFormat, setCodeFormat] = useState<CodeFormat>('css');
+	const [codeFile, setCodeFile] = useState<CodeFileKey>('theme.css');
 	const isCompact = useMediaQuery(COMPACT_QUERY);
 	const [settingsOpen, setSettingsOpen] = useState(false);
 	// The open settings section. One at a time, controlled here so every item's state
@@ -462,11 +474,18 @@ const ThemeBuilder = ({ lang = 'en' }: Props) => {
 		() => `${previewPath}${createPreviewHash(storePreset(config), view)}`,
 	);
 
-	const code = useMemo(
-		() =>
-			codeFormat === 'sd' ? toStyleDictionary(config, theme.tokens) : toCss(config, theme.tokens),
-		[codeFormat, config, theme.tokens],
+	// The content of every file in the download, so the dialog can preview and copy each one
+	// and the ZIP is built from the same source.
+	const codeFiles = useMemo<Record<CodeFileKey, string>>(
+		() => ({
+			'theme.css': toThemeCss(config, theme.tokens),
+			'theme.fonts.css': toFontsCss(config, theme.tokens),
+			'theme.tokens.json': toStyleDictionary(config, theme.tokens),
+			'README.md': toReadme(config),
+		}),
+		[config, theme.tokens],
 	);
+	const code = codeFiles[codeFile];
 
 	// Push live updates into the preview without changing its URL or reloading it.
 	useEffect(() => {
@@ -609,13 +628,15 @@ const ThemeBuilder = ({ lang = 'en' }: Props) => {
 		frameWindow.postMessage(message, window.location.origin);
 	}, [config, view]);
 
+	// One download for the whole theme: the two CSS files, the Style Dictionary tokens and a
+	// README with the @layer import, bundled as a ZIP. The dialog's format toggle only drives
+	// what the Copy button shows; the download always carries everything.
 	const downloadCode = () => {
-		const file = CODE_FILES[codeFormat];
-		const blob = new Blob([code], { type: file.type });
-		const url = URL.createObjectURL(blob);
+		const zip = createZip(codeFiles);
+		const url = URL.createObjectURL(zip);
 		const anchor = document.createElement('a');
 		anchor.href = url;
-		anchor.download = file.name;
+		anchor.download = 'db-ux-theme.zip';
 		anchor.click();
 		URL.revokeObjectURL(url);
 	};
@@ -999,38 +1020,30 @@ const ThemeBuilder = ({ lang = 'en' }: Props) => {
 			>
 				<div className="tb-code-body">
 					<section aria-labelledby="tb-usage-title">
-						{/* Headline left, format switch right in one row */}
-						<div className="tb-usage-head">
-							<h2 id="tb-usage-title" className="tb-usage-title">
-								{codeFormat === 'sd' ? m.usageSdTitle : m.usageTitle}
-							</h2>
-							{/* Segmented button group, same look as the Learn article/steps toggle */}
-							<div
-								className="tb-format-switch db-button-group"
-								role="group"
-								aria-label={m.codeFormat}
-							>
-								{(['css', 'sd'] as const).map((format) => (
-									<button
-										key={format}
-										type="button"
-										className="db-button"
-										data-variant="filled"
-										data-size="small"
-										aria-pressed={codeFormat === format}
-										onClick={() => setCodeFormat(format)}
-									>
-										{CODE_FILES[format].label}
-									</button>
-								))}
-							</div>
-						</div>
+						<h2 id="tb-usage-title" className="tb-usage-title">
+							{m.usageTitle}
+						</h2>
 						<ol className="tb-usage">
-							{(codeFormat === 'sd' ? m.usageSdSteps : m.usageSteps).map((step) => (
+							{m.usageSteps.map((step) => (
 								<li key={step}>{step}</li>
 							))}
 						</ol>
 					</section>
+
+					{/* The file select sits in the reading flow above the preview: pick which file
+					    of the ZIP to show and copy. The download bundles all of them. */}
+					<div className="tb-file-switch">
+						<SelectField
+							id="tb-code-file"
+							label={m.codeFile}
+							value={codeFile}
+							onChange={setCodeFile}
+							options={CODE_FILE_ORDER.map((file) => ({
+								value: file,
+								label: CODE_FILE_LABELS[file],
+							}))}
+						/>
+					</div>
 
 					{/* data-mode="dark" so the DB UX tokens below resolve to their dark values,
 					    keeping the block dark in both color modes without hardcoded hex. */}

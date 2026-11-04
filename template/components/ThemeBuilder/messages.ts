@@ -132,20 +132,14 @@ const en = {
 	darkMode: 'Activate Dark Mode',
 	lightMode: 'Activate Light Mode',
 	code: 'Code',
-	codeFormat: 'Format',
+	codeFile: 'File',
 	copy: 'Copy',
 	copied: 'Copied to clipboard.',
 	download: 'Download',
 	usageTitle: 'How to use the theme',
 	usageSteps: [
-		'Download the CSS file and add it to your project as theme.css.',
-		'Import it after the DB theme, so the generated values override the defaults.',
-	],
-	usageSdTitle: 'Use with Style Dictionary',
-	usageSdSteps: [
-		'Download the token file and add it to your project as theme.tokens.json.',
-		'Reference it as a source in your Style Dictionary config (DTCG format).',
-		'Build the platforms you need, e.g. CSS variables, iOS or Android.',
+		'Download the ZIP: it contains theme.css, theme.fonts.css, theme.tokens.json and a README.',
+		'Import the CSS files in their own cascade layer after the design system, so they replace its tokens (see README.md).',
 	],
 };
 
@@ -272,20 +266,14 @@ const de: ThemeBuilderMessages = {
 	darkMode: 'Dark Mode aktivieren',
 	lightMode: 'Light Mode aktivieren',
 	code: 'Code',
-	codeFormat: 'Format',
+	codeFile: 'Datei',
 	copy: 'Kopieren',
 	copied: 'In die Zwischenablage kopiert.',
 	download: 'Herunterladen',
 	usageTitle: 'So verwendest du das Theme',
 	usageSteps: [
-		'Lade die CSS-Datei herunter und lege sie als theme.css in deinem Projekt ab.',
-		'Importiere sie nach dem DB Theme, damit die generierten Werte die Standardwerte überschreiben.',
-	],
-	usageSdTitle: 'Mit Style Dictionary verwenden',
-	usageSdSteps: [
-		'Lade die Token-Datei herunter und lege sie als theme.tokens.json in deinem Projekt ab.',
-		'Referenziere sie als Source in deiner Style-Dictionary-Konfiguration (DTCG-Format).',
-		'Baue die benötigten Plattformen, z. B. CSS-Variablen, iOS oder Android.',
+		'Lade das ZIP herunter: Es enthält theme.css, theme.fonts.css, theme.tokens.json und eine README.',
+		'Importiere die CSS-Dateien in einem eigenen Cascade Layer nach dem Design System, damit sie dessen Tokens ersetzen (siehe README.md).',
 	],
 };
 

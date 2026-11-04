@@ -15,6 +15,7 @@ import {
 	type ColorMode,
 	type OriginDirection,
 } from './color/palette-rule.ts';
+import { ADAPTIVE_COLOR_TOKENS } from './color/adaptive-tokens.ts';
 
 /** Colors that are edited freely in the builder. */
 export const COLOR_KEYS = ['brand', 'neutral'] as const;
@@ -444,7 +445,37 @@ const PALETTE_STEPS = Array.from({ length: 15 }, (_, index) => index);
 const SCHEMES = ['light', 'dark'] as const;
 const STATES = ['default', 'hovered', 'pressed'] as const;
 
-/** All token suffixes a color provides, e.g. `7` or `origin-light-hovered`. */
+/**
+ * The scheme-less origin aggregators. The design system exposes `--db-<c>-origin-default`
+ * (and hovered/pressed, plus on-origin-default) as `light-dark(...)` over the per-scheme
+ * values the builder emits, so a family can be used without picking a mode. Suffix → value.
+ */
+const ORIGIN_AGGREGATORS: ReadonlyArray<readonly [string, (c: string) => string]> = [
+	...STATES.map(
+		(state) =>
+			[
+				`origin-${state}`,
+				(c: string) =>
+					`light-dark(var(--db-${c}-origin-light-${state}), var(--db-${c}-origin-dark-${state}))`,
+			] as const,
+	),
+	[
+		'on-origin-default',
+		(c: string) =>
+			`light-dark(var(--db-${c}-on-origin-light-default), var(--db-${c}-on-origin-dark-default))`,
+	],
+];
+
+/**
+ * Emits the aggregated origin tokens and the full adaptive semantic set for one color key,
+ * so a custom or additional family is usable like a built-in design system color.
+ */
+const emitAdaptiveTokens = (tokens: Record<string, string>, key: string): void => {
+	for (const [suffix, value] of ORIGIN_AGGREGATORS) tokens[`--db-${key}-${suffix}`] = value(key);
+	for (const [suffix, value] of ADAPTIVE_COLOR_TOKENS) tokens[`--db-${key}-${suffix}`] = value(key);
+};
+
+/** All token suffixes a color provides, e.g. `7`, `origin-light-hovered` or an adaptive one. */
 const COLOR_TOKEN_SUFFIXES = [
 	...PALETTE_STEPS.map(String),
 	'origin-base',
@@ -452,6 +483,8 @@ const COLOR_TOKEN_SUFFIXES = [
 		...STATES.map((state) => `origin-${scheme}-${state}`),
 		`on-origin-${scheme}-default`,
 	]),
+	...ORIGIN_AGGREGATORS.map(([suffix]) => suffix),
+	...ADAPTIVE_COLOR_TOKENS.map(([suffix]) => suffix),
 ];
 
 /**
@@ -500,6 +533,8 @@ export const buildTheme = (config: ThemeConfig): ThemeResult => {
 			tokens[`--db-${key}-origin-${scheme}-pressed`] = mode.origin.pressed;
 			tokens[`--db-${key}-on-origin-${scheme}-default`] = mode.onOrigin;
 		}
+		// The adaptive semantic set, so an additional color is usable like a design system color
+		emitAdaptiveTokens(tokens, key);
 	}
 
 	// Semantic colors alias a color family instead of carrying a palette of their own
@@ -533,6 +568,7 @@ export const buildTheme = (config: ThemeConfig): ThemeResult => {
 			tokens[`--db-${key}-origin-${scheme}-pressed`] = schemeMode.origin.pressed;
 			tokens[`--db-${key}-on-origin-${scheme}-default`] = schemeMode.onOrigin;
 		}
+		emitAdaptiveTokens(tokens, key);
 	}
 
 	RADIUS_SIZES.forEach((size, index) => {
@@ -623,38 +659,61 @@ export const tokensToDeclarations = (tokens: Record<string, string>, indent = '\
 		.map(([name, value]) => `${indent}${name}: ${value};`)
 		.join('\n');
 
-export const toCss = (config: ThemeConfig, tokens: Record<string, string>): string => {
-	const groups: string[] = [];
-	const colorGroups: { key: string; label: string }[] = [
-		...COLOR_KEYS.map((key) => ({ key, label: key === 'brand' ? 'primary (brand)' : key })),
-		...config.families.map(({ key, name }) => ({ key, label: name })),
-		...SEMANTIC_KEYS.map((key) => ({ key, label: `${key} → ${config.semantic[key]}` })),
-	];
-	for (const { key, label } of colorGroups) {
-		const entries = Object.fromEntries(
-			Object.entries(tokens).filter(([name]) => name.startsWith(`--db-${key}-`)),
-		);
-		groups.push(`\t/* ${cssComment(label)} */\n${tokensToDeclarations(entries)}`);
-	}
-	const rest = Object.fromEntries(
-		Object.entries(tokens).filter(
-			([name]) => !colorGroups.some(({ key }) => name.startsWith(`--db-${key}-`)),
-		),
-	);
-	groups.push(`\t/* border radius & fonts */\n${tokensToDeclarations(rest)}`);
+// ---------- Grouped token model (the single source for the exports) ----------
+//
+// The flat `tokens` map from buildTheme is grouped once into `{ colors, border, font }`.
+// Both the JSON download and the CSS downloads are derived from this structure, so there is
+// one source of truth and the shapes stay in sync (see the review on theme.ts).
 
-	return `/**
- * DB UX Design System – generated theme (${config.preset})
- * Palette rule: New Foundation color generator (HSLuv)
- *
- * Load this file after @db-ux/db-theme.
- * Density: set data-density="${config.density}" on <body> or a container.
- * Mode: set data-mode="${config.mode}" (or leave it unset to follow the OS).
+export type ThemeLayer = '@db-ux/core-components' | '@db-ux/db-theme';
+
+export type GroupedTheme = {
+	/** Every color key (primary, neutral, each family and each semantic) with its tokens. */
+	colors: Record<string, Record<string, string>>;
+	/** Border radius tokens, keyed by size (`xs`, `md`, …). */
+	border: Record<string, string>;
+	/** Font family tokens, keyed by role (`head`, `sans`). */
+	font: Record<string, string>;
+};
+
+/** The layer the exported theme is imported into (see the @layer usage in the README). */
+export const THEME_LAYER = 'db-ux-theme';
+
+/** Strips the shared `--db-<key>-` prefix from a token name, leaving the suffix. */
+const suffixAfter = (name: string, key: string): string => name.slice(`--db-${key}-`.length);
+
+/**
+ * Groups the flat token map into `{ colors, border, font }`. The color keys are the two main
+ * colors, the configured families and the semantic colors; everything else is a border
+ * radius or a font family token.
  */
-:root {
-${groups.join('\n\n')}
-}
-${typographyCss(config) ? `\n/* Apply the chosen fonts over the DB typography shorthands */\n${typographyCss(config)}\n` : ''}${componentCss(config) ? `\n/* Component adjustments for rounded corners */\n${componentCss(config)}\n` : ''}${config.icons === 'lucide' ? `\n/* Icons: Lucide (white label icon fonts of @db-ux/core-foundations) */\n${iconCss(config)}\n` : ''}`;
+export const groupTokens = (config: ThemeConfig, tokens: Record<string, string>): GroupedTheme => {
+	const colorKeys = [...COLOR_KEYS, ...config.families.map(({ key }) => key), ...SEMANTIC_KEYS];
+	const colors: Record<string, Record<string, string>> = {};
+	for (const key of colorKeys) {
+		const entries = Object.entries(tokens).filter(([name]) => name.startsWith(`--db-${key}-`));
+		if (entries.length === 0) continue;
+		colors[key] = Object.fromEntries(
+			entries.map(([name, value]) => [suffixAfter(name, key), value]),
+		);
+	}
+	const border: Record<string, string> = {};
+	const font: Record<string, string> = {};
+	for (const [name, value] of Object.entries(tokens)) {
+		if (name.startsWith('--db-border-radius-')) border[suffixAfter(name, 'border-radius')] = value;
+		else if (name.startsWith('--db-font-family-')) font[suffixAfter(name, 'font-family')] = value;
+	}
+	return { colors, border, font };
+};
+
+/** Human label for a color group in a CSS comment. */
+const colorLabel = (config: ThemeConfig, key: string): string => {
+	if (key === 'brand') return 'primary (brand)';
+	if ((SEMANTIC_KEYS as readonly string[]).includes(key)) {
+		return `${key} → ${config.semantic[key as SemanticKey]}`;
+	}
+	const family = config.families.find((f) => f.key === key);
+	return family ? family.name : key;
 };
 
 export const toJson = (config: ThemeConfig, tokens: Record<string, string>): string =>
@@ -662,11 +721,143 @@ export const toJson = (config: ThemeConfig, tokens: Record<string, string>): str
 		{
 			$schema: 'db-ux-theme-builder/v1',
 			config,
-			tokens,
+			...groupTokens(config, tokens),
 		},
 		null,
 		2,
 	);
+
+// ---------- CSS export (generated from the grouped model) ----------
+
+/** `@property` registration for a color custom property (typed, so it animates and validates). */
+const colorProperty = (name: string, value: string): string =>
+	`@property ${name} {\n\tsyntax: "<color>";\n\tinitial-value: ${value};\n\tinherits: true;\n}`;
+
+/**
+ * The theme CSS: every color token registered as a typed `@property`, grouped by color and
+ * wrapped in the theme layer. A `light-dark(...)` or `var(...)` value is not a valid
+ * `<color>` initial value, so those are registered with `syntax: "*"` instead, and the
+ * concrete value is written in the layer block below.
+ */
+export const toThemeCss = (config: ThemeConfig, tokens: Record<string, string>): string => {
+	const grouped = groupTokens(config, tokens);
+	const properties: string[] = [];
+	const declarations: string[] = [];
+	for (const [key, entries] of Object.entries(grouped.colors)) {
+		const decls: string[] = [];
+		for (const [suffix, value] of Object.entries(entries)) {
+			const name = `--db-${key}-${suffix}`;
+			const isPlainColor = /^#|^rgb|^hsl/i.test(value);
+			properties.push(
+				isPlainColor
+					? colorProperty(name, value)
+					: `@property ${name} {\n\tsyntax: "*";\n\tinherits: true;\n}`,
+			);
+			decls.push(`\t${name}: ${value};`);
+		}
+		declarations.push(`\t/* ${cssComment(colorLabel(config, key))} */\n${decls.join('\n')}`);
+	}
+	const border = Object.entries(grouped.border).map(
+		([size, value]) => `\t--db-border-radius-${size}: ${value};`,
+	);
+
+	const header = `/**
+ * DB UX Design System – generated theme (${config.preset})
+ * Palette rule: New Foundation color generator (HSLuv)
+ *
+ * This file replaces the color and border tokens of the DB theme. Import it in its own
+ * cascade layer after the components, so it overrides them:
+ *
+ *   @layer db-ux, ${THEME_LAYER};
+ *   @import "@db-ux/core-components/build/styles/bundle.css" layer(db-ux);
+ *   @import "./theme.css" layer(${THEME_LAYER});
+ *
+ * The fonts are in theme.fonts.css (they need a different @property syntax). See README.md.
+ * Density: set data-density="${config.density}" on <body> or a container.
+ * Mode: set data-mode="${config.mode}" (or leave it unset to follow the OS).
+ */`;
+
+	const layerBlock = `@layer ${THEME_LAYER} {
+\t:root {
+${[...declarations, `\t/* border radius */\n${border.join('\n')}`].join('\n\n')}
+\t}
+${componentCss(config) ? `\n\t/* Component adjustments for rounded corners */\n${indentBlock(componentCss(config))}\n` : ''}${config.icons === 'lucide' ? `\n\t/* Icons: Lucide (white label icon fonts of @db-ux/core-foundations) */\n${indentBlock(iconCss(config))}\n` : ''}}`;
+
+	return `${header}\n${properties.join('\n')}\n\n${layerBlock}\n`;
+};
+
+/** Indents every line of a block by one tab, for nesting inside the @layer rule. */
+const indentBlock = (css: string): string =>
+	css
+		.split('\n')
+		.map((line) => (line ? `\t${line}` : line))
+		.join('\n');
+
+/**
+ * The fonts CSS. The font families are registered with `syntax: "*"` (a font stack is not a
+ * typed value), plus a `:root` workaround that sets the concrete stacks for the current DB
+ * implementation. The chosen fonts are also re-applied over the DB typography shorthands.
+ */
+export const toFontsCss = (config: ThemeConfig, tokens: Record<string, string>): string => {
+	const { font } = groupTokens(config, tokens);
+	const properties = Object.entries(font)
+		.map(
+			([role, value]) =>
+				`@property --db-font-family-${role} {\n\tsyntax: "*";\n\tinitial-value: ${value};\n\tinherits: true;\n}`,
+		)
+		.join('\n');
+	const workaround = Object.entries(font)
+		.map(([role, value]) => `\t--db-font-family-${role}: ${value};`)
+		.join('\n');
+	const typography = typographyCss(config);
+	return `/**
+ * DB UX Design System – generated theme fonts (${config.preset})
+ *
+ * Import this file the same way as theme.css (see README.md). The @property registrations
+ * carry the font stacks; the :root block is a workaround for the current DB implementation.
+ */
+${properties}
+
+:root {
+\t/* Workaround for the current implementation */
+${workaround}
+}
+${typography ? `\n/* Apply the chosen fonts over the DB typography shorthands */\n${typography}\n` : ''}`;
+};
+
+/** The README that ships in the ZIP: what the files are and how to import them. */
+export const toReadme = (config: ThemeConfig): string =>
+	`# DB UX Design System – generated theme
+
+Preset: ${config.preset}
+Density: data-density="${config.density}"
+Mode: data-mode="${config.mode}" (or leave unset to follow the OS)
+
+## Files
+
+- theme.css        Color and border tokens, registered as @property and set in a cascade layer.
+- theme.fonts.css  Font family tokens (@property) plus the typography overrides.
+- theme.tokens.json  The same theme as Style Dictionary (DTCG) tokens, grouped into colors, border and font.
+
+## Usage
+
+Import the generated files in their own cascade layer, after the design system, so they
+replace its tokens:
+
+\`\`\`css
+@layer db-ux, ${THEME_LAYER};
+@import "@db-ux/core-components/build/styles/bundle.css" layer(db-ux);
+@import "./theme.css" layer(${THEME_LAYER});
+@import "./theme.fonts.css" layer(${THEME_LAYER});
+\`\`\`
+`;
+
+/**
+ * Kept for the live preview, which injects a plain `:root { … }` block (no @layer, no
+ * @property) into the iframe. The downloads use toThemeCss / toFontsCss instead.
+ */
+export const toCss = (config: ThemeConfig, tokens: Record<string, string>): string =>
+	`${toThemeCss(config, tokens)}\n${toFontsCss(config, tokens)}`;
 
 // ---------- Style Dictionary export (DTCG) ----------
 
@@ -682,18 +873,19 @@ const sdTypeFor = (name: string): SdTokenType => {
 	return 'color';
 };
 
-const VAR_PATTERN = /^var\(\s*(--[a-z0-9-]+)\s*\)$/i;
+const VAR_PATTERN = /^var\(\s*--db-([a-z0-9-]+)\s*\)$/i;
 
 /**
- * Turns a token value into a DTCG value. A `var(--db-x)` reference becomes a Style
- * Dictionary alias `{db.x}`, so the semantic-color aliases stay references instead of being
- * flattened. Other values are passed through unchanged.
+ * Turns a token value into a DTCG value. A semantic alias `var(--db-<color>-<suffix>)`
+ * becomes a Style Dictionary reference into the grouped tree, `{colors.<color>.<suffix>}`,
+ * so changing the target family updates everything that uses it. Other values pass through.
+ * Only single `var(--db-…)` color references are aliased; composite values (light-dark,
+ * color-mix) stay literal, which is what the design system ships for those tokens too.
  */
 const sdValue = (value: string): string => {
 	const match = value.match(VAR_PATTERN);
 	if (!match) return value;
-	const path = match[1].replace(/^--/, '').split('-').join('.');
-	return `{${path}}`;
+	return `{colors.${match[1].split('-').join('.')}}`;
 };
 
 /** A group node with no inherited keys, so segments like `constructor` cannot collide
@@ -706,8 +898,8 @@ const sdGroup = (): SdNode => Object.create(null) as SdNode;
  * inherited `Object` constructor, and a leaf never silently replaces a populated group (or
  * the other way round). On such a conflict the existing node is kept and the token skipped.
  */
-const setSdToken = (root: SdNode, name: string, value: string): void => {
-	const segments = name.replace(/^--/, '').split('-');
+const setSdToken = (root: SdNode, path: string, value: string, type: SdTokenType): void => {
+	const segments = path.split('-');
 	let node = root;
 	for (let i = 0; i < segments.length - 1; i += 1) {
 		const segment = segments[i];
@@ -717,8 +909,8 @@ const setSdToken = (root: SdNode, name: string, value: string): void => {
 			node[segment] = group;
 			node = group;
 		} else if ('$value' in next) {
-			// A leaf already sits here (e.g. --db-neutral-2 before --db-neutral-2-0): keep it
-			// and drop this token rather than overwriting the other export silently.
+			// A leaf already sits here (e.g. `2` before `2-0`): keep it and drop this token
+			// rather than overwriting the other export silently.
 			return;
 		} else {
 			node = next as SdNode;
@@ -727,23 +919,42 @@ const setSdToken = (root: SdNode, name: string, value: string): void => {
 	const leaf = segments[segments.length - 1];
 	// Do not overwrite a populated group with a leaf of the same path either.
 	if (Object.hasOwn(node, leaf) && !('$value' in (node[leaf] as SdNode | SdToken))) return;
-	node[leaf] = { $type: sdTypeFor(name), $value: sdValue(value) };
+	node[leaf] = { $type: type, $value: sdValue(value) };
 };
 
 /**
- * Serializes the theme as Amazon Style Dictionary tokens (DTCG: `$type`/`$value`, nested).
- * Feed the file to a `style-dictionary` build as a source. Semantic colors stay aliases
+ * Builds a nested DTCG tree from suffix → value entries. The suffix (e.g.
+ * `bg-basic-level-1-default`) is the path inside the group; `fullName` reconstructs the
+ * token name only so `sdTypeFor` can still tell a color from a dimension or font family.
+ */
+const sdTreeFrom = (entries: [string, string][], fullName: (suffix: string) => string): SdNode => {
+	const root = sdGroup();
+	for (const [suffix, value] of entries) {
+		setSdToken(root, suffix, value, sdTypeFor(fullName(suffix)));
+	}
+	return root;
+};
+
+/**
+ * Serializes the theme as Amazon Style Dictionary tokens (DTCG: `$type`/`$value`, nested),
+ * grouped into `colors`, `border` and `font` – the same structure as the JSON export. Feed
+ * the file to a `style-dictionary` build as a source. Semantic colors stay aliases
  * (`{db.red.7}`), so changing the target family in one place updates everything that uses it.
  */
 export const toStyleDictionary = (config: ThemeConfig, tokens: Record<string, string>): string => {
-	const root: SdNode = sdGroup();
-	for (const [name, value] of Object.entries(tokens)) {
-		setSdToken(root, name, value);
+	const grouped = groupTokens(config, tokens);
+	const colors = sdGroup();
+	for (const [key, entries] of Object.entries(grouped.colors)) {
+		colors[key] = sdTreeFrom(Object.entries(entries), (suffix) => `--db-${key}-${suffix}`);
 	}
+	const border = sdTreeFrom(Object.entries(grouped.border), (s) => `--db-border-radius-${s}`);
+	const font = sdTreeFrom(Object.entries(grouped.font), (s) => `--db-font-family-${s}`);
 	return JSON.stringify(
 		{
 			$description: `DB UX Design System – generated theme (${config.preset}). Style Dictionary (DTCG) tokens. Density: data-density="${config.density}". Mode: data-mode="${config.mode}".`,
-			...root,
+			colors,
+			border,
+			font,
 		},
 		null,
 		2,

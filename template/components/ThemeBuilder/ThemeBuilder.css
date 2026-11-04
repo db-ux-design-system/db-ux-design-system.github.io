@@ -102,18 +102,6 @@
 		var(--db-adaptive-on-bg-basic-emphasis-60-default);
 }
 
-/* Code dialog: usage headline on the left, format switch on the far right */
-.tb-usage-head {
-	display: flex;
-
-	/* On narrow dialogs the format switch moves below the headline */
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: space-between;
-	gap: var(--db-spacing-fixed-sm);
-	margin-block-end: var(--db-spacing-fixed-sm);
-}
-
 .tb-usage-title {
 	margin: 0;
 	font: var(--db-type-body-sm);
@@ -268,34 +256,13 @@
 	border: none;
 }
 
-/*
- * Segmented button group, same look as the Learn article/steps toggle: filled buttons
- * joined into one control, square inner corners, the active one on the hovered surface.
- */
-.tb-format-switch {
-	display: inline-flex;
-	flex: none;
+/* File select in the code dialog: in the reading flow between the usage steps and the
+ * preview. It keeps its visible "File" label and does not stretch to the full width. */
+.tb-file-switch {
+	margin-block: var(--db-spacing-fixed-md) var(--db-spacing-fixed-sm);
 
-	& .db-button {
-		border-radius: 0;
-	}
-
-	& .db-button:first-child {
-		border-start-start-radius: var(--db-border-radius-sm);
-		border-end-start-radius: var(--db-border-radius-sm);
-	}
-
-	& .db-button:last-child {
-		border-start-end-radius: var(--db-border-radius-sm);
-		border-end-end-radius: var(--db-border-radius-sm);
-	}
-
-	& .db-button[aria-pressed='true'] {
-		background-color: var(--db-adaptive-bg-basic-transparent-semi-hovered);
-	}
-
-	& .db-button[aria-pressed='true']:is(:hover, :focus-visible, :active) {
-		background-color: var(--db-adaptive-bg-basic-transparent-semi-pressed);
+	& .db-select {
+		max-inline-size: var(--db-container-2xs);
 	}
 }
 
