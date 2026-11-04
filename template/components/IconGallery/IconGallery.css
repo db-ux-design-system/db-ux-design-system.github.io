@@ -1,0 +1,47 @@
+.icon-gallery-controls {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: end;
+	gap: var(--db-spacing-fixed-md);
+	margin-block-end: var(--db-spacing-fixed-md);
+}
+
+.icon-gallery-controls .icon-search {
+	flex: 1 1 16rem;
+}
+
+/* Same height as the fields, so the checkbox sits on their center line. */
+.icon-gallery-controls .db-checkbox > label {
+	display: flex;
+	align-items: center;
+	min-block-size: var(--db-sizing-md);
+}
+
+.icon-gallery-version,
+.icon-gallery-hint,
+.icon-gallery-status {
+	margin-block: 0 var(--db-spacing-fixed-sm);
+}
+
+/*
+ * The preview settings are set on the gallery as custom properties by
+ * icons.client.ts. This file is not in a cascade layer, so it wins over the
+ * icon size, weight and family the button sets in the db-ux layer.
+ * The weight selects the font optimized for that size (see the @font-face
+ * rules of @db-ux/db-theme-icons).
+ */
+.icon-gallery {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(var(--db-sizing-xl), 1fr));
+	gap: var(--db-spacing-fixed-sm);
+	padding: var(--db-spacing-fixed-lg) 0;
+}
+
+.icon-gallery .db-button.icon-item {
+	--db-icon-font-size: calc(var(--icon-gallery-size, 24) * 1px);
+	--db-icon-font-weight: var(--icon-gallery-size, 24);
+	--db-icon-font-family: var(--icon-gallery-family, 'db-default'), icon-font-fallback;
+
+	inline-size: var(--db-sizing-xl);
+	block-size: var(--db-sizing-xl);
+}

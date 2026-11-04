@@ -1,93 +1,121 @@
+/**
+ * Behaviour of the icon gallery (template/components/IconGallery):
+ * search, size and family of the preview, filter for icons with a filled
+ * form, copying the name, and the status message for screen readers.
+ */
 import iconDescriptions from '@db-ux/db-theme-icons/build/assets/descriptions.json';
 import { waitForElements } from '@template/utils/client.utils.ts';
 
+type Descriptions = Record<
+	string,
+	Record<'en' | 'de', { default?: string[]; contextual?: string[] } | undefined>
+>;
+
+const descriptions = iconDescriptions as Descriptions;
+
+/** All search terms of an icon: its name and the EN and DE descriptions. */
+const searchTerms = (key: string, name: string): string[] => {
+	const entry = descriptions[key];
+	return [
+		name,
+		...(entry?.en?.default ?? []),
+		...(entry?.en?.contextual ?? []),
+		...(entry?.de?.default ?? []),
+		...(entry?.de?.contextual ?? []),
+	].map((term) => term.toLowerCase());
+};
+
+const inputOf = <T extends HTMLElement>(id: string, selector: string): T | null =>
+	document.getElementById(id)?.querySelector<T>(selector) ??
+	(document.getElementById(id) as T | null);
+
 function initIconGallery(): boolean {
+	const wrapper = document.querySelector<HTMLElement>('.icon-gallery-wrapper');
 	const gallery = document.getElementById('icon-gallery');
-	const searchInputWrapper = document.getElementById('icon-search-input');
+	const status = document.getElementById('icon-gallery-status');
+	const search = inputOf<HTMLInputElement>('icon-search-input', 'input');
+	const size = inputOf<HTMLSelectElement>('icon-size-select', 'select');
+	const family = inputOf<HTMLSelectElement>('icon-family-select', 'select');
+	const onlyFilled = inputOf<HTMLInputElement>('icon-filled-filter', 'input');
+	const buttons = gallery
+		? Array.from(gallery.querySelectorAll<HTMLButtonElement>('.icon-item'))
+		: [];
 
-	if (!gallery || !searchInputWrapper) return false;
-
-	let searchInput = searchInputWrapper.querySelector('input');
-	if (!searchInput) {
-		searchInput = document.querySelector('input[type="search"]');
+	if (
+		!wrapper ||
+		!gallery ||
+		!status ||
+		!search ||
+		!size ||
+		!family ||
+		!onlyFilled ||
+		buttons.length === 0
+	) {
+		return false;
 	}
-	if (!searchInput) return false;
 
-	const buttons = Array.from(gallery.querySelectorAll<HTMLButtonElement>('.icon-item'));
-	const iconMap = new Map();
+	const texts = {
+		count: wrapper.dataset.textCount ?? '{count}',
+		copied: wrapper.dataset.textCopied ?? '{name}',
+		copiedTooltip: wrapper.dataset.textCopiedTooltip ?? '',
+	};
 
-	buttons.forEach((button) => {
-		const iconKey = button.getAttribute('data-icon-key');
-		const iconName = button.getAttribute('data-icon-name');
-		if (iconKey && iconName) {
-			iconMap.set(button, { iconKey, iconName });
-		}
+	const icons = buttons.map((button) => {
+		const name = button.dataset.iconName ?? '';
+		return {
+			button,
+			name,
+			terms: searchTerms(button.dataset.iconKey ?? '', name),
+			hasFilled: button.dataset.hasFilled === 'true',
+		};
 	});
 
-	gallery.addEventListener('click', (e) => {
-		if (!(e.target instanceof Element)) return;
+	const update = () => {
+		const query = search.value.trim().toLowerCase();
+		let visible = 0;
+		for (const icon of icons) {
+			const matches =
+				(!query || icon.terms.some((term) => term.includes(query))) &&
+				(!onlyFilled.checked || icon.hasFilled);
+			icon.button.style.display = matches ? '' : 'none';
+			if (matches) visible++;
+		}
+		status.textContent = texts.count.replace('{count}', String(visible));
+	};
 
-		const button = e.target.closest<HTMLButtonElement>('.icon-item');
-		if (!button) return;
+	const updatePreview = () => {
+		gallery.style.setProperty('--icon-gallery-size', size.value);
+		gallery.style.setProperty(
+			'--icon-gallery-family',
+			family.value === 'filled' ? "'db-filled'" : "'db-default'",
+		);
+	};
 
-		const iconData = iconMap.get(button);
-		if (!iconData) return;
+	// The selects are uncontrolled (a `value` prop would reset them on every
+	// render), so the default size is selected here.
+	size.value = wrapper.dataset.defaultSize ?? size.value;
 
-		navigator.clipboard.writeText(iconData.iconName);
+	search.addEventListener('input', update);
+	onlyFilled.addEventListener('change', update);
+	size.addEventListener('change', updatePreview);
+	family.addEventListener('change', updatePreview);
+
+	gallery.addEventListener('click', (event) => {
+		if (!(event.target instanceof Element)) return;
+		const button = event.target.closest<HTMLButtonElement>('.icon-item');
+		const name = button?.dataset.iconName;
+		if (!button || !name) return;
+
+		void navigator.clipboard.writeText(name);
+		status.textContent = texts.copied.replace('{name}', name);
 
 		const tooltip = button.querySelector('.db-tooltip');
-		if (tooltip) {
-			const originalText = tooltip.textContent;
-			tooltip.textContent = 'Copied!';
+		if (tooltip && texts.copiedTooltip) {
+			tooltip.textContent = texts.copiedTooltip;
 			setTimeout(() => {
-				tooltip.textContent = originalText;
+				tooltip.textContent = name;
 			}, 2000);
 		}
-	});
-
-	searchInput.addEventListener('input', (e) => {
-		const target = e.target as HTMLInputElement;
-		const query = target.value.toLowerCase();
-
-		buttons.forEach((button: HTMLButtonElement) => {
-			const iconData = iconMap.get(button);
-			if (!iconData) {
-				button.style.display = 'none';
-				return;
-			}
-
-			if (!query) {
-				button.style.display = '';
-				return;
-			}
-
-			const descData = (iconDescriptions as any)[iconData.iconKey];
-			if (!descData) {
-				button.style.display = 'none';
-				return;
-			}
-
-			if (iconData.iconName.toLowerCase().includes(query)) {
-				button.style.display = '';
-				return;
-			}
-
-			const enDefault = descData.en?.default || [];
-			const enContextual = descData.en?.contextual || [];
-			if ([...enDefault, ...enContextual].some((desc) => desc.toLowerCase().includes(query))) {
-				button.style.display = '';
-				return;
-			}
-
-			const deDefault = descData.de?.default || [];
-			const deContextual = descData.de?.contextual || [];
-			if ([...deDefault, ...deContextual].some((desc) => desc.toLowerCase().includes(query))) {
-				button.style.display = '';
-				return;
-			}
-
-			button.style.display = 'none';
-		});
 	});
 
 	return true;
