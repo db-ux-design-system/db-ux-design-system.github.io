@@ -134,6 +134,12 @@ export const applyPreviewFromHash = (doc: Document = document): void => {
 	applyConfig(config, asView(params.get('view')), doc);
 };
 
+/** True when the hash carries neither a preset nor a view, e.g. after a bare `#` link. */
+const hashHasPreviewParams = (doc: Document): boolean => {
+	const params = new URLSearchParams(doc.location.hash.replace(/^#/, ''));
+	return params.has('preset') || params.has('view');
+};
+
 export const initPreview = (): void => {
 	applyPreviewFromHash();
 	// "Show more" in the single-column modules view reveals the remaining modules
@@ -147,7 +153,12 @@ export const initPreview = (): void => {
 			next.focus({ preventScroll: true });
 		}
 	});
-	window.addEventListener('hashchange', () => applyPreviewFromHash());
+	// A specimen link like the forgot-password placeholder (`href="#"`) clears the hash. Only
+	// re-apply when the hash still carries preview params, so interacting with a specimen does
+	// not silently reset the preview to the default theme.
+	window.addEventListener('hashchange', () => {
+		if (hashHasPreviewParams(document)) applyPreviewFromHash();
+	});
 	window.addEventListener('message', (event: MessageEvent) => {
 		// Same-origin only: the builder and the preview are served from the same site.
 		if (event.origin !== window.location.origin) return;

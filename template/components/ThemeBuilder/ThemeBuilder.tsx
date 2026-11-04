@@ -1032,7 +1032,9 @@ const ThemeBuilder = ({ lang = 'en' }: Props) => {
 						</ol>
 					</section>
 
-					<pre className="tb-code-block" tabIndex={0}>
+					{/* data-mode="dark" so the DB UX tokens below resolve to their dark values,
+					    keeping the block dark in both color modes without hardcoded hex. */}
+					<pre className="tb-code-block" data-mode="dark" tabIndex={0}>
 						<code>{code}</code>
 					</pre>
 				</div>

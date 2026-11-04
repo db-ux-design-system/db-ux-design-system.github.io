@@ -315,7 +315,9 @@
  * in both modes, light text, and the article's padding and radius (see markdown.css).
  * The export is plain text, so there is no syntax highlighting here. This is the only
  * part of the dialog that scrolls: it fills the remaining height and scrolls vertically,
- * while long lines wrap instead of scrolling sideways.
+ * while long lines wrap instead of scrolling sideways. The block carries data-mode="dark"
+ * (set in ThemeBuilder.tsx), so these DB UX tokens resolve to their dark values and the
+ * block stays dark in both modes without hardcoded hex.
  */
 .tb-code-block {
 	flex: 1;
@@ -327,8 +329,8 @@
 	padding: var(--db-spacing-fixed-xs);
 	overflow: hidden auto;
 	border-radius: var(--db-border-radius-xs);
-	background-color: #24292e;
-	color: #e1e4e8;
+	background-color: var(--db-neutral-bg-basic-level-1-default);
+	color: var(--db-neutral-on-bg-basic-emphasis-100-default);
 	font: var(--db-type-body-xs);
 	font-family: ui-monospace, Menlo, Consolas, monospace;
 	white-space: pre-wrap;
