@@ -8,6 +8,20 @@
 	inline-size: 100%;
 }
 
+/* The support banner stays at the bottom of the content area, even with few table rows.
+   The content area (.db-main) is made a column that fills the shell height, then the auto
+   top margin on the last section pushes it down. The astro-slot between them is
+   display:contents, so the section is still the flex child. */
+.db-shell-content .db-main {
+	display: flex;
+	flex-direction: column;
+	min-block-size: 100%;
+}
+
+.cta-section {
+	margin-block-start: auto;
+}
+
 .cards-container {
 	flex-wrap: wrap;
 }
