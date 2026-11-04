@@ -54,7 +54,7 @@ const releaseNotes: ReleaseNote[] = Object.values(releaseNoteFiles)
 	})
 	.sort((a: ReleaseNote, b: ReleaseNote) => b.date.getTime() - a.date.getTime());
 
-const categoryOrder = ['Core', 'DB Theme Icons', 'DB Theme Illustrative Icons'];
+const categoryOrder = ['Core', 'DB Theme Icons', 'DB Theme Illustrative Icons']; // DB Theme Illustrative Icons is deprecated, but we leave it in here so that the previous changelogs are still being included
 const categoriesFromData = Array.from(new Set(releaseNotes.map((note) => note.category)));
 const categories = [
 	...categoryOrder.filter((cat) => categoriesFromData.includes(cat)),
