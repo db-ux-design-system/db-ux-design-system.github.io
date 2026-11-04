@@ -330,8 +330,8 @@
 		align-self: flex-start;
 	}
 
-	/* Mobile: textGap stets sm, egal welche Variante gewählt wurde */
+	/* Mobile: textGap stets lg (Standard), egal welche Variante gewählt wurde */
 	.text-image .text-image-content {
-		gap: var(--db-spacing-fixed-sm) !important;
+		gap: var(--db-spacing-fixed-lg) !important;
 	}
 }
