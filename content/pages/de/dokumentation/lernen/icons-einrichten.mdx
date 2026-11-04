@@ -25,6 +25,12 @@ keywords:
     'autocomplete',
     'troubleshooting',
     'icons not loading',
+    'icon size',
+    'data-icon-weight',
+    'filled',
+    'icon color',
+    'custom icons',
+    'woff2',
   ]
 stepper: true
 ---
@@ -157,6 +163,48 @@ Kopiere die SVG-Dateien aus `node_modules/@db-ux/db-theme-icons/build/assets`.
 
 <LearnBlock>
 
+## Passe Größe, Family und Farbe an
+
+`data-icon-weight` wählt die Schrift für die Icon-Größe, `data-icon-variant="db-filled"` die gefüllte Family. Die Farbe kommt aus `--db-icon-color`.
+
+```html
+<span data-icon="user" data-icon-weight="32" data-icon-variant="db-filled">Profil</span>
+```
+
+<LearnAside>
+
+### Größen
+
+Jede Größe hat eine eigene Schrift mit mehr oder weniger Details. Die DB-Icons gibt es in `12`, `14`, `16`, `20`, `24` und `32`. Die Standard-Icons der Komponenten ohne DB Theme gibt es in `16`, `20`, `24`, `32`, `48` und `64`.
+
+Um ein Icon genauer zu skalieren, setze zusätzlich `--db-icon-font-size`. Behalte ein `data-icon-weight` nahe am Ergebnis, damit der Detailgrad passt.
+
+### Icons vor und nach dem Text
+
+`data-icon` setzt ein Icon vor den Text, `data-icon-trailing` dahinter. Größe und Family setzt du pro Seite:
+
+| Seite    | Größe                          | Family                                 |
+| -------- | ------------------------------ | -------------------------------------- |
+| beide    | `data-icon-weight="24"`        | `data-icon-variant="db-filled"`        |
+| davor    | `data-icon-weight-before="24"` | `data-icon-variant-before="db-filled"` |
+| dahinter | `data-icon-weight-after="24"`  | `data-icon-variant-after="db-filled"`  |
+
+Ohne DB Theme heißen die Families `default` und `filled`.
+
+### Gefüllte Form
+
+Nicht jedes Icon hat eine eigene gefüllte Form. Die [Icon-Liste](/de/dokumentation/icons) zeigt, welche.
+
+### Farbe
+
+`--db-icon-color` überschreibt die Farbe der Icon-Schriften und der SVG-Dateien.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
 ## Wenn ein Icon nicht erscheint
 
 Die meisten Probleme kommen von einer nicht geladenen Icon-Schrift oder einem fehlenden `data-icon-variant`.
@@ -205,6 +253,23 @@ Such dir die Icons aus der vollständigen Liste aus.
 />
 
 <LearnAside>
+
+### Eigene Icons nutzen
+
+Eigene Icons müssen wie die DB-Icons als **woff2**-Icon-Schrift vorliegen. Erzeuge sie aus deinen SVG-Dateien mit den [icon-font-tools](https://github.com/db-ux-design-system/icon-font-tools/blob/main/docs/GenerateIconFonts.md). Das Beispielprojekt [custom-theme-example](https://github.com/db-ux-design-system/examples/tree/main/custom-theme-example) zeigt ein Theme mit eigener Icon-Schrift.
+
+Für die Autovervollständigung deiner eigenen Icon-Namen erweiterst du die Icon-Typen:
+
+```ts
+import '@db-ux/core-foundations';
+import { IconTypes } from '@db-ux/db-theme-icons';
+
+declare module '@db-ux/core-foundations' {
+	interface OverwriteIcons {
+		types: IconTypes | 'my-custom-icon';
+	}
+}
+```
 
 ### Typen, Exporte und Assets
 
