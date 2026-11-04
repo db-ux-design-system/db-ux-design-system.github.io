@@ -136,6 +136,8 @@ const [hintBefore, codeWeight, hintMiddle, codeVariant, hintAfter] = text.hint.s
 	<p class="icon-gallery-status" id="icon-gallery-status" role="status">
 		{text.count.replace('{count}', String(icons.length))}
 	</p>
+	<!-- Announces the copied name to screen readers; sighted users see the tooltip. -->
+	<p id="icon-gallery-copied" role="status" data-visually-hidden="true"></p>
 
 	<div class="icon-gallery" id="icon-gallery" style={`--icon-gallery-size: ${defaultSize};`}>
 		{icons.map(({ key, name, hasFilled }) => (

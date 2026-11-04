@@ -33,6 +33,7 @@ function initIconGallery(): boolean {
 	const wrapper = document.querySelector<HTMLElement>('.icon-gallery-wrapper');
 	const gallery = document.getElementById('icon-gallery');
 	const status = document.getElementById('icon-gallery-status');
+	const copiedStatus = document.getElementById('icon-gallery-copied');
 	const search = inputOf<HTMLInputElement>('icon-search-input', 'input');
 	const size = inputOf<HTMLSelectElement>('icon-size-select', 'select');
 	const family = inputOf<HTMLSelectElement>('icon-family-select', 'select');
@@ -107,7 +108,9 @@ function initIconGallery(): boolean {
 		if (!button || !name) return;
 
 		void navigator.clipboard.writeText(name);
-		status.textContent = texts.copied.replace('{name}', name);
+		if (copiedStatus) {
+			copiedStatus.textContent = texts.copied.replace('{name}', name);
+		}
 
 		const tooltip = button.querySelector('.db-tooltip');
 		if (tooltip && texts.copiedTooltip) {
