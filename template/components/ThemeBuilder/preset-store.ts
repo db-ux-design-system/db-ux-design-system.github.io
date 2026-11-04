@@ -18,29 +18,68 @@ import {
 } from './theme.ts';
 
 const STORAGE_PREFIX = 'db-ux-theme-builder:preset:';
-const KEY_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-const KEY_LENGTH = 9;
 const BUILTIN = new Set<string>(PRESETS);
+/** How many stored custom presets to keep before evicting the oldest on write. */
+const MAX_STORED_PRESETS = 20;
 
 const isBuiltin = (value: string): value is Exclude<Preset, 'custom'> => BUILTIN.has(value);
 
-const randomKey = (): string => {
-	const bytes = new Uint8Array(KEY_LENGTH);
-	crypto.getRandomValues(bytes);
-	return Array.from(bytes, (byte) => KEY_ALPHABET[byte % KEY_ALPHABET.length]).join('');
+/**
+ * A built-in preset can be shared by name only when it is shown exactly as defined. Once the
+ * user changes mode or density on top of it, the name alone would drop that on reload, so
+ * such a config has to be encoded in full.
+ */
+const isPlainBuiltin = (
+	config: ThemeConfig,
+): config is ThemeConfig & { preset: Exclude<Preset, 'custom'> } =>
+	config.preset !== 'custom' &&
+	isBuiltin(config.preset) &&
+	config.mode === DEFAULT_CONFIG.mode &&
+	config.density === DEFAULT_CONFIG.density;
+
+/** A short, stable key derived from the encoded config, so the same theme reuses one entry
+ *  instead of writing a new one on every call. */
+const keyForConfig = (encoded: string): string => {
+	let hash = 0x811c9dc5;
+	for (let i = 0; i < encoded.length; i += 1) {
+		hash ^= encoded.charCodeAt(i);
+		hash = Math.imul(hash, 0x01000193);
+	}
+	return (hash >>> 0).toString(36);
+};
+
+/** Keeps the stored presets under the cap by removing the oldest extra entries. */
+const prunePresets = (keepKey: string): void => {
+	try {
+		const keys: string[] = [];
+		for (let i = 0; i < window.localStorage.length; i += 1) {
+			const k = window.localStorage.key(i);
+			if (k?.startsWith(STORAGE_PREFIX) && k !== STORAGE_PREFIX + keepKey) keys.push(k);
+		}
+		// localStorage has no insertion order guarantee, but removing any excess entries keeps
+		// the origin from filling up; the just-written key is always kept.
+		for (const k of keys.slice(0, Math.max(0, keys.length + 1 - MAX_STORED_PRESETS))) {
+			window.localStorage.removeItem(k);
+		}
+	} catch {
+		// ignore: pruning is best-effort
+	}
 };
 
 /**
  * Returns a short key for the config and persists a custom theme so the key resolves later.
- * A built-in preset returns its name; a custom theme returns a stored random key.
+ * A plain built-in preset returns its name; anything else returns a stable hashed key and is
+ * stored once. Repeated calls with the same config reuse the entry instead of growing storage.
  */
 export const storePreset = (config: ThemeConfig): string => {
-	if (config.preset !== 'custom' && isBuiltin(config.preset)) {
+	if (isPlainBuiltin(config)) {
 		return config.preset;
 	}
-	const key = randomKey();
+	const encoded = encodeConfig(config);
+	const key = keyForConfig(encoded);
 	try {
-		window.localStorage.setItem(STORAGE_PREFIX + key, encodeConfig(config));
+		window.localStorage.setItem(STORAGE_PREFIX + key, encoded);
+		prunePresets(key);
 	} catch {
 		// Storage can be unavailable (private mode, quota). The link still carries the key;
 		// it simply will not resolve, and the builder falls back to the default.
@@ -68,9 +107,11 @@ export const resolvePreset = (key: string): ThemeConfig | undefined => {
  */
 export const shareSearchParams = (config: ThemeConfig, view?: string): URLSearchParams => {
 	const params = new URLSearchParams();
-	if (config.preset !== 'custom' && isBuiltin(config.preset)) {
+	if (isPlainBuiltin(config)) {
 		params.set('preset', config.preset);
 	} else {
+		// Includes a built-in preset shown with a changed mode or density: encode it in full
+		// so the link restores exactly what is displayed, not the preset defaults.
 		params.set('theme', encodeConfig(config));
 	}
 	// The active tab, so a shared link opens on the same view (e.g. `?view=components`)

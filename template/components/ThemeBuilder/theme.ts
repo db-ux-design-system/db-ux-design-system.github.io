@@ -214,6 +214,21 @@ export const familyKeyFromName = (name: string): string =>
 
 export type FamilyNameError = 'empty' | 'reserved' | 'duplicate';
 
+/**
+ * A family name is rejected when it contains a CSS comment terminator or a non-printable
+ * character. `familyKeyFromName` only shapes the key; the name itself is kept verbatim and
+ * lands in the exported CSS comment, so these have to be caught on the name, not the key.
+ */
+const hasUnsafeNameChars = (name: string): boolean =>
+	name.includes('*/') || /[\u0000-\u001f\u007f]/.test(name);
+
+/**
+ * The key is a dash path; its first segment must not be a reserved color key. Otherwise a
+ * key like `neutral-2` collides with the built-in `neutral` color in the Style Dictionary
+ * export (`db.neutral.2`) and drops tokens.
+ */
+const hasReservedFirstSegment = (key: string): boolean => RESERVED_KEYS.has(key.split('-')[0]);
+
 /** Validates the name of a new family against the reserved and existing keys. */
 export const validateFamilyName = (
 	name: string,
@@ -221,7 +236,8 @@ export const validateFamilyName = (
 ): FamilyNameError | undefined => {
 	const key = familyKeyFromName(name);
 	if (!key) return 'empty';
-	if (RESERVED_KEYS.has(key)) return 'reserved';
+	if (hasUnsafeNameChars(name)) return 'reserved';
+	if (RESERVED_KEYS.has(key) || hasReservedFirstSegment(key)) return 'reserved';
 	if (families.some((family) => family.key === key)) return 'duplicate';
 	return undefined;
 };
@@ -583,13 +599,24 @@ export const typographyCss = (config: ThemeConfig, bodyScope = 'body'): string =
 			`${bodyScope},\n${bodyScope} * {\n\tfont-family: var(--db-font-family-sans) !important;\n}`,
 		);
 	}
-	if (config.headingFont !== 'db') {
+	// A heading rule is needed whenever either font is overridden: when only the heading font
+	// changes, to apply it; and when the body font changes, to keep headings on the heading
+	// font instead of inheriting the body override from `body *`. The selector is doubled so
+	// it outranks `body *` (and `.tb-preview-main *` in the preview) at higher specificity.
+	if (config.headingFont !== 'db' || config.bodyFont !== 'db') {
 		rules.push(
-			`h1, h2, h3, h4, h5, h6, .db-heading, .db-heading * {\n\tfont-family: var(--db-font-family-head) !important;\n}`,
+			`h1, h2, h3, h4, h5, h6, .db-heading, .db-heading *,\n${bodyScope} :is(h1, h2, h3, h4, h5, h6, .db-heading, .db-heading *) {\n\tfont-family: var(--db-font-family-head) !important;\n}`,
 		);
 	}
 	return rules.join('\n\n');
 };
+
+/**
+ * Makes a string safe inside a CSS comment. A custom family name is user-controlled and
+ * ends up in `/* … *\/` of the exported theme; without escaping, a name containing `*\/`
+ * would close the comment early and inject arbitrary CSS into the file the user copies.
+ */
+const cssComment = (text: string): string => text.replace(/\*\//g, '*\\/');
 
 export const tokensToDeclarations = (tokens: Record<string, string>, indent = '\t'): string =>
 	Object.entries(tokens)
@@ -607,7 +634,7 @@ export const toCss = (config: ThemeConfig, tokens: Record<string, string>): stri
 		const entries = Object.fromEntries(
 			Object.entries(tokens).filter(([name]) => name.startsWith(`--db-${key}-`)),
 		);
-		groups.push(`\t/* ${label} */\n${tokensToDeclarations(entries)}`);
+		groups.push(`\t/* ${cssComment(label)} */\n${tokensToDeclarations(entries)}`);
 	}
 	const rest = Object.fromEntries(
 		Object.entries(tokens).filter(
@@ -669,17 +696,38 @@ const sdValue = (value: string): string => {
 	return `{${path}}`;
 };
 
-/** Inserts a token at the dotted path (`db.brand.7`) into the nested tree. */
+/** A group node with no inherited keys, so segments like `constructor` cannot collide
+ *  with `Object.prototype`. */
+const sdGroup = (): SdNode => Object.create(null) as SdNode;
+
+/**
+ * Inserts a token at the dotted path (`db.brand.7`) into the nested tree. Uses own-property
+ * checks and null-prototype groups, so a family keyed `constructor` does not resolve to the
+ * inherited `Object` constructor, and a leaf never silently replaces a populated group (or
+ * the other way round). On such a conflict the existing node is kept and the token skipped.
+ */
 const setSdToken = (root: SdNode, name: string, value: string): void => {
 	const segments = name.replace(/^--/, '').split('-');
 	let node = root;
 	for (let i = 0; i < segments.length - 1; i += 1) {
 		const segment = segments[i];
-		const next = node[segment];
-		if (!next || '$value' in next) node[segment] = {};
-		node = node[segment] as SdNode;
+		const next = Object.hasOwn(node, segment) ? node[segment] : undefined;
+		if (next === undefined) {
+			const group = sdGroup();
+			node[segment] = group;
+			node = group;
+		} else if ('$value' in next) {
+			// A leaf already sits here (e.g. --db-neutral-2 before --db-neutral-2-0): keep it
+			// and drop this token rather than overwriting the other export silently.
+			return;
+		} else {
+			node = next as SdNode;
+		}
 	}
-	node[segments[segments.length - 1]] = { $type: sdTypeFor(name), $value: sdValue(value) };
+	const leaf = segments[segments.length - 1];
+	// Do not overwrite a populated group with a leaf of the same path either.
+	if (Object.hasOwn(node, leaf) && !('$value' in (node[leaf] as SdNode | SdToken))) return;
+	node[leaf] = { $type: sdTypeFor(name), $value: sdValue(value) };
 };
 
 /**
@@ -688,7 +736,7 @@ const setSdToken = (root: SdNode, name: string, value: string): void => {
  * (`{db.red.7}`), so changing the target family in one place updates everything that uses it.
  */
 export const toStyleDictionary = (config: ThemeConfig, tokens: Record<string, string>): string => {
-	const root: SdNode = {};
+	const root: SdNode = sdGroup();
 	for (const [name, value] of Object.entries(tokens)) {
 		setSdToken(root, name, value);
 	}
@@ -708,6 +756,20 @@ const pick = <T extends string>(value: unknown, allowed: readonly T[], fallback:
 
 const finiteOrUndefined = (value: unknown): number | undefined =>
 	typeof value === 'number' && Number.isFinite(value) ? value : undefined;
+
+/** Clamps a finite number into `[min, max]`, or returns undefined for anything else. These
+ *  come from an untrusted `?theme=` link and feed the HSLuv math, so out-of-range values
+ *  would produce malformed colors. */
+const clampOrUndefined = (value: unknown, min: number, max: number): number | undefined => {
+	const n = finiteOrUndefined(value);
+	return n === undefined ? undefined : Math.min(max, Math.max(min, n));
+};
+
+/** Hue is modulo 360; a value outside `[0, 360)` is wrapped instead of clamped. */
+const hueOrUndefined = (value: unknown): number | undefined => {
+	const n = finiteOrUndefined(value);
+	return n === undefined ? undefined : ((n % 360) + 360) % 360;
+};
 
 /** Validates untrusted input (URL hash, JSON) and merges it onto the defaults. */
 export const sanitizeConfig = (input: unknown): ThemeConfig => {
@@ -735,8 +797,8 @@ export const sanitizeConfig = (input: unknown): ThemeConfig => {
 				key === 'brand' && isHex(candidate.originDark)
 					? candidate.originDark.toLowerCase()
 					: undefined,
-			h: keepRamp ? finiteOrUndefined(candidate.h) : fallback.h,
-			s: keepRamp ? finiteOrUndefined(candidate.s) : fallback.s,
+			h: keepRamp ? hueOrUndefined(candidate.h) : fallback.h,
+			s: keepRamp ? clampOrUndefined(candidate.s, 0, 100) : fallback.s,
 			direction: pick(candidate.direction, ['auto', 'darker', 'lighter'] as const, 'auto'),
 		};
 	}
@@ -784,8 +846,8 @@ const sanitizeFamilies = (input: unknown): FamilyConfig[] => {
 		return {
 			...fallback,
 			origin,
-			h: changed ? finiteOrUndefined(candidate.h) : fallback.h,
-			s: changed ? finiteOrUndefined(candidate.s) : fallback.s,
+			h: changed ? hueOrUndefined(candidate.h) : fallback.h,
+			s: changed ? clampOrUndefined(candidate.s, 0, 100) : fallback.s,
 			direction: direction(candidate.direction),
 		};
 	});
@@ -793,7 +855,9 @@ const sanitizeFamilies = (input: unknown): FamilyConfig[] => {
 		const key = candidate.key as string;
 		const name = typeof candidate.name === 'string' ? candidate.name.trim().slice(0, 40) : '';
 		if (isBuiltinFamily(key) || !name || !isHex(candidate.origin)) continue;
+		if (hasUnsafeNameChars(name)) continue;
 		if (familyKeyFromName(name) !== key || RESERVED_KEYS.has(key)) continue;
+		if (hasReservedFirstSegment(key)) continue;
 		if (result.some((family) => family.key === key)) continue;
 		result.push({
 			key,

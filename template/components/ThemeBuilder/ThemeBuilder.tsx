@@ -94,7 +94,14 @@ const SITE_MODE_KEY = 'db-ux-mode';
 const getInitialConfig = (): ThemeConfig => {
 	const fromUrl = configFromUrl();
 	if (fromUrl) return fromUrl;
-	const siteMode = window.localStorage.getItem(SITE_MODE_KEY);
+	// Guarded: where storage is blocked (private mode, hardened settings) this read throws,
+	// and since it runs in the useState initializer that would stop the builder from mounting.
+	let siteMode: string | null = null;
+	try {
+		siteMode = window.localStorage.getItem(SITE_MODE_KEY);
+	} catch {
+		// ignore: fall back to the default mode
+	}
 	return { ...DEFAULT_CONFIG, mode: siteMode === 'dark' ? 'dark' : 'light' };
 };
 
@@ -567,7 +574,9 @@ const ThemeBuilder = ({ lang = 'en' }: Props) => {
 	const buildShareUrl = useCallback((): string => {
 		const url = new URL(basePath, window.location.origin);
 		url.search = shareSearchParams(config, view).toString();
-		window.history.replaceState(null, '', url.pathname + url.search);
+		// Keep Astro's ClientRouter navigation state; replacing it with null makes the router
+		// ignore the entry, so pressing Back later restores the URL but not the page.
+		window.history.replaceState(window.history.state, '', url.pathname + url.search);
 		return url.href;
 	}, [config, view, basePath]);
 
@@ -581,7 +590,9 @@ const ThemeBuilder = ({ lang = 'en' }: Props) => {
 		} else {
 			url.searchParams.set('view', next);
 		}
-		window.history.replaceState(null, '', url.pathname + url.search);
+		// Preserve the ClientRouter state (see buildShareUrl), so Back after leaving the page
+		// restores both the URL and the rendered page.
+		window.history.replaceState(window.history.state, '', url.pathname + url.search);
 	}, []);
 
 	// Open the standalone preview in a new tab, carrying the current state and view.
