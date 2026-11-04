@@ -1,0 +1,28 @@
+/*
+ * Package cards keep their visual beside the text below the TextImage breakpoint.
+ *
+ * These cards use TextImage directly, not the TeaserCard component, so they don't get its
+ * mobile fix. Without this, TextImage.css stacks every `.text-image` at 767 px and turns
+ * the visual surface into a fixed square at the card edge, which leaves a tall empty gap
+ * above it. The cards are short, so the visual stays in the column next to the text.
+ *
+ * Mirrors the rule in TeaserCard.css. The order and flex values from the mobile block in
+ * TextImage.css keep applying (they carry `!important`) and already match a row with the
+ * visual on the trailing side. Only direction, gap and the surface sizing are reverted.
+ */
+@media (width <= 767px) {
+	[id='home--unified-model-section'] .text-image[data-image-position='right'] {
+		flex-direction: row;
+		gap: var(--db-spacing-fixed-md);
+	}
+
+	/* The (0,4,0) selector outranks the stacked rules in TextImage.css (0,2,0 and 0,3,0). */
+	[id='home--unified-model-section']
+		.text-image[data-image-position='right']
+		> .text-image-visual
+		> .db-visual-surface {
+		flex: 1 0 auto;
+		align-self: auto;
+		inline-size: 100%;
+	}
+}
