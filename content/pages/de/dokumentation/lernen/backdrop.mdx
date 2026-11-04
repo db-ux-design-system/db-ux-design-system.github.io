@@ -1,0 +1,122 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Einen Backdrop gestalten'
+headline: 'Einen Backdrop gestalten'
+description: 'Gib deinen eigenen Overlays und Dialogen denselben Backdrop wie dem Drawer – mit den Tokens für Farbe und Transparenz.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 20.5
+category: 'Development'
+keywords:
+  [
+    'backdrop',
+    'overlay',
+    'dialog',
+    '::backdrop',
+    'modal',
+    'scrim',
+    'opacity',
+    'tokens',
+    'css',
+    'scss',
+    'drawer',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Es gibt keine Backdrop-Komponente
+
+Der **Drawer** bringt seinen Backdrop selbst mit. Für eigene Overlays setzt du dieselbe Farbe mit zwei Tokens: der stärksten Textfarbe und einer Transparenz.
+
+<LearnAside>
+
+Der Backdrop nutzt `--db-adaptive-on-bg-basic-emphasis-100-default` als Farbe und `--db-opacity-lg` als Transparenz. Beide passen sich an Light Mode und Dark Mode an.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Nutze die Tokens in CSS
+
+Mische Farbe und Transparenz mit der relativen Farbsyntax, entweder an deinem eigenen Element oder an `::backdrop` eines Dialogs.
+
+```css
+.my-backdrop,
+dialog::backdrop {
+	background-color: color(
+		from var(--db-adaptive-on-bg-basic-emphasis-100-default) srgb r g b / var(--db-opacity-lg)
+	);
+}
+```
+
+<LearnAside>
+
+Für einen schwächeren Backdrop wie den Wert `weak` des Drawers nutzt du `--db-opacity-sm` statt `--db-opacity-lg`.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Nutze die Tokens in SCSS
+
+Mit Sass nimmst du dieselben Tokens aus dem Foundation-Paket.
+
+```scss
+@use '@db-ux/core-foundations/build/styles/colors';
+@use '@db-ux/core-foundations/build/styles/variables';
+
+.my-backdrop,
+dialog::backdrop {
+	background-color: color(
+		from #{colors.$db-adaptive-on-bg-basic-emphasis-100-default} srgb r g b /
+			#{variables.$db-opacity-lg}
+	);
+}
+```
+
+<LearnAside>
+
+Die schwächere Variante nutzt `variables.$db-opacity-sm`.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Mach mit den Tokens weiter
+
+Die Tokens für Transparenz und Farbe beschreibt die Foundation.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Transparenz',
+			description: 'Die Transparenz-Tokens und wann du sie nutzt.',
+			url: '/de/dokumentation/foundation/transparenz',
+		},
+		{
+			title: 'Drawer',
+			description: 'Die Komponente mit eingebautem Backdrop.',
+			url: '/de/dokumentation/komponenten/drawer',
+		},
+	]}
+/>
+
+</LearnBlock>

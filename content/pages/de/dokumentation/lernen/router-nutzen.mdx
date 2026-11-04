@@ -1,0 +1,196 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Router-Links nutzen'
+headline: 'Router-Links nutzen'
+description: 'Verbinde die Navigationskomponenten mit dem Router deines Frameworks, damit Links ohne Neuladen die Seite wechseln.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 20.1
+category: 'Development'
+keywords:
+  [
+    'router',
+    'routing',
+    'router link',
+    'routerlink',
+    'react router',
+    'angular router',
+    'vue router',
+    'single page application',
+    'spa',
+    'navigation',
+    'navigation item',
+    'control panel',
+    'pagination',
+    'link',
+    'aria-current',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Der Router-Link gehört in die Komponente
+
+Komponenten mit Router-Unterstützung nehmen den **Router-Link deines Frameworks** als Inhalt auf. Die Komponente gestaltet den Link, dein Router übernimmt die Navigation.
+
+<LearnAside>
+
+| Komponente                                     | So nutzt du den Router-Link                                    |
+| ---------------------------------------------- | -------------------------------------------------------------- |
+| Navigation Item, Control Panel Navigation Item | Router-Link im Default-Slot                                    |
+| Pagination                                     | Router-Link in jedem Pagination Item                           |
+| Link (nur Angular)                             | Direktive `routerLink` direkt auf `db-link`                    |
+| Button                                         | Nicht unterstützt – ein Link in einem Button ist nicht erlaubt |
+
+Getestet sind die Standard-Router von Angular, React (React Router) und Vue (Vue Router). Andere Router funktionieren genauso, solange sie ein `<a>`-Element rendern.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Setze den Link in ein Navigation Item
+
+Lege den Router-Link in den Default-Slot des **Navigation Items** oder des **Control Panel Navigation Items**.
+
+```tsx
+// React – Link aus react-router-dom
+<DBControlPanelNavigationItem>
+	<Link to="/destination">Destination</Link>
+</DBControlPanelNavigationItem>
+```
+
+<LearnAside>
+
+### Angular
+
+Importiere `RouterLink` aus `@angular/router` in deiner Komponente.
+
+```html
+<db-control-panel-navigation-item>
+	<a [routerLink]="link.path">{{ link.label }}</a>
+</db-control-panel-navigation-item>
+```
+
+### Vue
+
+`RouterLink` ist global verfügbar. Setze `ariaCurrentValue="page"`: Der aktive Zustand des Items folgt `aria-current="page"`.
+
+```html
+<DBControlPanelNavigationItem>
+	<RouterLink :to="link.path" ariaCurrentValue="page">{{ link.label }}</RouterLink>
+</DBControlPanelNavigationItem>
+```
+
+Dasselbe funktioniert mit `DBNavigationItem` bzw. `db-navigation-item`.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Markiere die aktuelle Seite mit aria-current
+
+Die aktive Darstellung eines Navigation Items folgt `aria-current="page"` am Link. Die meisten Router setzen das Attribut für den Link der aktuellen Route selbst.
+
+<LearnAside>
+
+- **Vue Router:** Setze `ariaCurrentValue="page"` an `RouterLink`.
+- **React Router:** `NavLink` setzt `aria-current="page"` am aktiven Link.
+- **Angular:** Nutze `ariaCurrentWhenActive="page"` am `routerLink`.
+
+Items lassen sich auch mit der Property `active` aktiv setzen. Das setzt kein `aria-current`, Screenreader sagen die aktuelle Seite dann nicht an. Nutze deshalb besser den Router.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Nutze Router-Links in der Pagination
+
+Übergib die Seiten selbst als **Pagination Items** mit einem Router-Link darin. Die Pagination setzt Seitenzahlen, `aria-current` und die Pfeil-Buttons für dich.
+
+```tsx
+<DBPagination currentPage={2} onPageChange={(page) => setPage(page)}>
+	<DBPaginationItem>
+		<Link to="/results/1" aria-label="Seite 1 von 2">
+			1
+		</Link>
+	</DBPaginationItem>
+	<DBPaginationItem>
+		<Link to="/results/2" aria-label="Seite 2 von 2">
+			2
+		</Link>
+	</DBPaginationItem>
+</DBPagination>
+```
+
+<LearnAside>
+
+Lass `totalCount` und `items` weg, wenn du die Items selbst übergibst. Kürzen und responsives Zusammenklappen gibt es in diesem Modus nicht, weil die Komponente nicht weiß, für welche Seiten deine Items stehen. Die Code-Beispiele für jedes Framework findest du im [Storybook](https://design-system.deutschebahn.com/core-web/version/latest/composition-storybook/).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Nutze für Navigation einen Link statt eines Buttons
+
+Ein Button kann keinen Router-Link enthalten. Führt eine Aktion auf eine andere Seite, nutze einen **Link** oder ein Navigation Item statt eines Buttons.
+
+<LearnAside>
+
+In Angular funktioniert die Direktive `routerLink` direkt auf der Link-Komponente:
+
+```html
+<db-link routerLink="/destination" variant="brand">Router-Link</db-link>
+```
+
+Importiere `RouterLink` zusammen mit `DBLink` in den `imports` deiner Komponente.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Mach mit deinem Framework weiter
+
+Die Setup-Artikel zeigen, wie du die Komponenten in dein Projekt einbindest.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Komponenten in React einbinden',
+			description: 'Installiere die Pakete und lade die Styles.',
+			url: '/de/dokumentation/lernen/react-einrichten',
+		},
+		{
+			title: 'Komponenten in Angular einbinden',
+			description: 'Installiere die Pakete und lade die Styles.',
+			url: '/de/dokumentation/lernen/angular-einrichten',
+		},
+		{
+			title: 'Komponenten in Vue einbinden',
+			description: 'Installiere die Pakete und lade die Styles.',
+			url: '/de/dokumentation/lernen/vue-einrichten',
+		},
+	]}
+/>
+
+</LearnBlock>
