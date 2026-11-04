@@ -1,0 +1,345 @@
+/*
+ * The page does not scroll while the builder is shown, only its panels and the preview do.
+ * This holds at every width: below 64em the settings move into a drawer instead.
+ * `clip` instead of `hidden`: a hidden container can still be scrolled by the browser
+ * (focus, scrollIntoView), e.g. while the content is briefly taller during a resize.
+ * The builder then stayed pushed up after switching from mobile to desktop.
+ */
+.db-shell-content.tb-scroll-lock {
+	overflow: clip;
+}
+
+/* The site footer is rendered at the end of the preview document instead */
+.db-shell-content.tb-scroll-lock .db-footer {
+	display: none;
+}
+
+/* Theme Builder: settings | live preview (the code opens in a modal dialog) */
+.theme-builder {
+	--tb-panel-width: 20rem;
+
+	display: grid;
+	grid-template-columns: var(--tb-panel-width) minmax(0, 1fr);
+	/* stylelint-disable-next-line db-ux/use-sizing -- fills the visible area below the header */
+	block-size: var(--tb-height, 80svh);
+	position: relative;
+
+	/* Compact: the preview takes the whole area, the settings open in a drawer */
+	@media (width < 64em) {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+/* Settings panel: a column separated from the stage by a divider, no card frame */
+.tb-controls {
+	display: flex;
+	flex-direction: column;
+	min-block-size: 0;
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+	border-inline-end: var(--db-border-width-3xs) solid
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
+}
+
+/*
+ * In the drawer the panel fills the content area: preset on top, the sections scroll,
+ * the actions stay at the bottom, the same structure as in the column.
+ */
+.tb-settings-drawer .db-drawer-content {
+	display: flex;
+	flex-direction: column;
+
+	/* The panel brings its own padding, so the dividers run edge to edge as in the column */
+	padding: 0;
+	overflow: hidden;
+}
+
+.tb-settings-drawer .tb-controls {
+	flex: 1;
+	/* stylelint-disable-next-line db-ux/use-border-width, db-ux/use-border-color */
+	border-inline-end: none;
+}
+
+/*
+ * The dialog content area itself must not scroll: the format switch and usage stay
+ * in place, only the code block below scrolls. So the content area is a flex column
+ * that is bounded to the dialog height, and nothing overflows it.
+ */
+.tb-code-dialog .db-dialog-content {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+/* Format switch, usage and the code block stacked; the body fills the content area */
+.tb-code-body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-md);
+	min-block-size: 0;
+}
+
+.tb-controls-scroll {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	min-block-size: 0;
+	overflow-y: auto;
+}
+
+/* Preset on top, then the accordion items; dividers span the full panel width */
+.tb-preset {
+	display: flex;
+	flex-direction: column;
+	flex: none;
+	justify-content: center;
+	padding: var(--db-spacing-fixed-md);
+
+	/* Same height as the stage bar (max of both, measured onto --tb-header-height) */
+	/* stylelint-disable-next-line db-ux/use-sizing -- measured pixel height shared by both headers */
+	min-block-size: var(--tb-header-height, auto);
+	border-block-end: var(--db-border-width-3xs) solid
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
+}
+
+.tb-usage-title {
+	margin: 0;
+	font: var(--db-type-body-sm);
+	font-weight: 700;
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+}
+
+.tb-actions {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-xs);
+	padding: var(--db-spacing-fixed-md);
+	border-block-start: var(--db-border-width-3xs) solid
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
+}
+
+.tb-hint {
+	margin: 0;
+	font: var(--db-type-body-sm);
+	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+}
+
+/* Color field */
+.tb-color-field {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-xs);
+}
+
+/* The color swatch is placed inside the input, in front of the hex value */
+.tb-color-row {
+	--tb-swatch-size: var(--db-sizing-xs);
+	--tb-swatch-inset: var(--db-spacing-fixed-xs);
+
+	position: relative;
+
+	& .db-input input {
+		padding-inline-start: calc(var(--tb-swatch-size) + 2 * var(--tb-swatch-inset));
+	}
+}
+
+.tb-color-swatch {
+	position: absolute;
+	inset-inline-start: var(--tb-swatch-inset);
+
+	/* Vertically centered on the input, which sits at the bottom of the row */
+	inset-block-end: calc((var(--db-sizing-md) - var(--tb-swatch-size)) / 2);
+	inline-size: var(--tb-swatch-size);
+	block-size: var(--tb-swatch-size);
+	padding: 0;
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-70-default);
+	border-radius: var(--db-border-radius-xs);
+	background: none;
+	cursor: pointer;
+
+	&::-webkit-color-swatch-wrapper {
+		padding: 0;
+	}
+
+	&::-webkit-color-swatch,
+	&::-moz-color-swatch {
+		/* stylelint-disable-next-line db-ux/use-border-width, db-ux/use-border-color */
+		border: none;
+		border-radius: var(--db-border-radius-xs);
+	}
+
+	&:focus-visible {
+		outline: var(--db-border-width-xs) solid var(--db-focus-outline-color, currentcolor);
+		outline-offset: var(--db-spacing-fixed-3xs);
+	}
+}
+
+.tb-ramp {
+	display: grid;
+	grid-template-columns: repeat(15, minmax(0, 1fr));
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	border-radius: var(--db-border-radius-xs);
+	overflow: hidden;
+
+	& li {
+		block-size: var(--db-sizing-2xs);
+	}
+}
+
+/*
+ * Preview: the bar on top, the frame fills the rest. The stage itself does not scroll;
+ * only the preview document inside the frame does, and its footer sits at the very end.
+ */
+.tb-stage {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	min-inline-size: 0;
+	overflow: hidden;
+	background-color: var(--db-adaptive-bg-basic-level-2-default);
+}
+
+.tb-stage-bar {
+	display: flex;
+	align-items: end;
+	justify-content: space-between;
+	gap: var(--db-spacing-fixed-md);
+	padding: var(--db-spacing-fixed-lg);
+
+	/* Same height as the panel header (measured onto --tb-header-height), so both bars align */
+	/* stylelint-disable-next-line db-ux/use-sizing -- measured pixel height from the panel header */
+	min-block-size: var(--tb-header-height, auto);
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+	border-block-end: var(--db-border-width-3xs) solid
+		var(--db-adaptive-on-bg-basic-emphasis-60-default);
+
+	/* The tabs take the space between the settings button and the actions, and scroll if narrow */
+	& .db-tabs {
+		flex: 1;
+		align-self: end;
+		min-inline-size: 0;
+	}
+
+	@media (width < 64em) {
+		align-items: center;
+		gap: var(--db-spacing-fixed-xs);
+		padding: var(--db-spacing-fixed-sm);
+	}
+}
+
+/* Compact view switch: takes the space between the settings button and the actions */
+.tb-view-select {
+	flex: 1;
+	min-inline-size: 0;
+}
+
+/* Settings button in the compact layout, left of the tabs */
+.tb-settings-toggle {
+	flex: none;
+}
+
+/* The tab underline sits on the bar's bottom border, so only the buttons get vertical air */
+.tb-stage-actions {
+	display: flex;
+	flex: none;
+	gap: var(--db-spacing-fixed-xs);
+}
+
+.tb-frame {
+	display: block;
+	flex: 1;
+	inline-size: 100%;
+	min-block-size: 0;
+	/* stylelint-disable-next-line db-ux/use-border-width, db-ux/use-border-color */
+	border: none;
+}
+
+/* File select in the code dialog: in the reading flow between the usage steps and the
+ * preview. It keeps its visible "File" label and does not stretch to the full width. */
+.tb-file-switch {
+	margin-block: var(--db-spacing-fixed-md) var(--db-spacing-fixed-sm);
+
+	& .db-select {
+		max-inline-size: var(--db-container-2xs);
+	}
+}
+
+/* Code panel */
+.tb-usage {
+	margin: 0 0 var(--db-spacing-fixed-sm);
+	padding-inline-start: var(--db-spacing-fixed-md);
+	font: var(--db-type-body-sm);
+
+	& li + li {
+		margin-block-start: var(--db-spacing-fixed-2xs);
+	}
+}
+
+/*
+ * Same look as the code blocks in the Learn articles: a dark fill that stays dark
+ * in both modes, light text, and the article's padding and radius (see markdown.css).
+ * The export is plain text, so there is no syntax highlighting here. This is the only
+ * part of the dialog that scrolls: it fills the remaining height and scrolls vertically,
+ * while long lines wrap instead of scrolling sideways. The block carries data-mode="dark"
+ * (set in ThemeBuilder.tsx), so these DB UX tokens resolve to their dark values and the
+ * block stays dark in both modes without hardcoded hex.
+ */
+.tb-code-block {
+	flex: 1;
+	min-block-size: var(--db-container-2xs);
+
+	/* Lower than the viewport, so the dialog stays compact; the block scrolls inside */
+	max-block-size: var(--db-container-xs);
+	margin: 0;
+	padding: var(--db-spacing-fixed-xs);
+	overflow: hidden auto;
+	border-radius: var(--db-border-radius-xs);
+	background-color: var(--db-neutral-bg-basic-level-1-default);
+	color: var(--db-neutral-on-bg-basic-emphasis-100-default);
+	font: var(--db-type-body-xs);
+	font-family: ui-monospace, Menlo, Consolas, monospace;
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+}
+
+/* Live region for copy feedback; stays in the DOM so screen readers announce changes */
+.tb-status {
+	position: fixed;
+	inset-block-end: var(--db-spacing-fixed-md);
+	inset-inline-end: var(--db-spacing-fixed-md);
+	margin: 0;
+	padding: var(--db-spacing-fixed-xs) var(--db-spacing-fixed-md);
+	border-radius: var(--db-border-radius-sm);
+	background-color: var(--db-neutral-bg-inverted-contrast-max-default);
+	color: var(--db-neutral-on-bg-inverted-default);
+	box-shadow: var(--db-elevation-md);
+	z-index: 10;
+}
+
+.tb-status:empty {
+	padding: 0;
+	box-shadow: none;
+	background: none;
+}
+
+/* Color families: one block per family, the add form below with a divider */
+.tb-family {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-xs);
+}
+
+.tb-family .db-button {
+	align-self: flex-start;
+}
+
+/* Accordion in the panel: the divider sits directly between the items, without extra gap */
+.tb-controls .db-accordion .db-accordion-item + .db-accordion-item {
+	margin-block-start: 0;
+
+	&::before {
+		inset-block-start: 0;
+	}
+}
