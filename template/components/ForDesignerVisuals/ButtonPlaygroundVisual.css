@@ -138,11 +138,3 @@
 	border-radius: var(--db-border-radius-full);
 	background-color: var(--db-adaptive-on-bg-inverted-default);
 }
-
-/* The global content spacing must not add to the layout (0,4,0 beats its 0,3,0) */
-.dba-main-content
-	.button-playground-visual
-	> .button-playground-visual-preview
-	+ .button-playground-visual-controls {
-	margin-block-start: 0;
-}

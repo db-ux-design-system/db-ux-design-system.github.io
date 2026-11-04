@@ -69,11 +69,3 @@
 		padding-block-end: 0;
 	}
 }
-
-/* The global content spacing must not add to the layout (0,4,0 beats its 0,3,0) */
-.dba-main-content
-	.practical-guidance-visual
-	> .practical-guidance-visual-panel
-	+ .practical-guidance-visual-panel {
-	margin-block-start: 0;
-}

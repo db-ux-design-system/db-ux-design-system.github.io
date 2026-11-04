@@ -4,12 +4,22 @@
  * Unified vertical rhythm for documentation content.
  * Scoped to .dba-main-content, excludes component internals.
  *
- * Strategy: Target content-level elements (headings, paragraphs, lists,
- * code blocks, notifications, guidelines) wherever they appear in the
- * content tree, using adjacent sibling selectors for spacing.
+ * Strategy: Space content-level elements (headings, paragraphs, lists,
+ * code blocks, notifications, guidelines) with adjacent sibling selectors,
+ * but only as direct children of a flow container – the places where MDX
+ * content is written:
+ *   .db-section          page sections (also #main-content-section)
+ *   .learn-block         a block of a Learn article
+ *   .learn-aside-body    the additional info of a Learn block
+ *   .collapsible-wrapper collapsible guideline content
+ *   .guideline-example-side-content  text beside a guideline example
+ *   .db-stack            a column stack written in MDX
+ *   div without a class  a plain wrapper written in MDX (not an inline grid or flex)
+ *   li                   paragraphs and nested lists inside a list item
+ * Inside components (cards, grids, row stacks, styled wrappers) the rules do not apply;
+ * components space their children themselves, usually with gap.
  *
- * Excluded: .db-card internals, .db-notification internals, table cells,
- * the Get Started wizard (.gsw).
+ * Components therefore need no overrides against this file.
  */
 
 /* Reset browser default margins on all content elements.
@@ -21,9 +31,21 @@
 	margin-block: 0;
 }
 
-/* Base rule: content element preceded by another content element gets md spacing */
+/* Base rule: content element preceded by another content element gets md spacing.
+ * Only between direct children of a flow container (see the header), never inside a
+ * component. The :where() keeps the specificity at (0,3,0) as before. */
 .dba-main-content
-	:is(
+	:where(
+		.db-section,
+		.learn-block,
+		.learn-aside-body,
+		.collapsible-wrapper,
+		.guideline-example-side-content,
+		.db-stack:not([data-direction='row']),
+		div:not([class], [style]),
+		li
+	)
+	> :is(
 		h2,
 		h3,
 		h4,
@@ -76,7 +98,17 @@
 
 /* Headlines after content get large spacing to separate sections */
 .dba-main-content
-	:is(
+	:where(
+		.db-section,
+		.learn-block,
+		.learn-aside-body,
+		.collapsible-wrapper,
+		.guideline-example-side-content,
+		.db-stack:not([data-direction='row']),
+		div:not([class], [style]),
+		li
+	)
+	> :is(
 		p,
 		ul,
 		ol,
@@ -111,211 +143,19 @@
 
 /* Headlines after headlines get tighter spacing (sub-section) */
 .dba-main-content
-	:is(h2, h3, h4, h5, h6)
+	:where(
+		.db-section,
+		.learn-block,
+		.learn-aside-body,
+		.collapsible-wrapper,
+		.guideline-example-side-content,
+		.db-stack:not([data-direction='row']),
+		div:not([class], [style]),
+		li
+	)
+	> :is(h2, h3, h4, h5, h6)
 	+ :is(h2, h3, h4, h5, h6):where(:not(.db-text-group > *)) {
 	margin-block-start: var(--db-spacing-fixed-md);
-}
-
-/* Exclude: don't bleed into card or notification internals */
-.dba-main-content .db-card :is(h2, h3, h4, h5, h6, p),
-.dba-main-content .db-notification :is(h2, h3, h4, h5, h6, p) {
-	margin-block-start: 0;
-}
-
-/* Exclude: don't bleed into custom component internals that use flex gap */
-.dba-main-content .text-image > div + div,
-.dba-main-content .text-image-content > * + * {
-	margin-block-start: 0;
-}
-
-/* Exclude: Carousel items and the TextImage inside them align via flex gap.
- * The base rule above has a specificity of (0,3,0) through its two :is() lists,
- * so these selectors need (0,4,0) to win. Without them, every card after the
- * first gets a top margin (first card stretches taller) and the image gets a
- * top margin (more space above than below). */
-.dba-main-content .carousel > .db-card + .db-card,
-.dba-main-content .carousel .text-image-content + .text-image-image {
-	margin-block-start: 0;
-}
-
-/* Exclude: don't add margins inside grid or flex containers (spacing via gap) */
-.dba-main-content
-	[style*='grid']
-	> :is(
-		h2,
-		h3,
-		h4,
-		h5,
-		h6,
-		p,
-		ul,
-		ol,
-		pre,
-		table,
-		div,
-		img,
-		.db-notification,
-		.guideline-examples,
-		.db-stack,
-		.question-form,
-		.card-teaser,
-		.card-teaser-row,
-		.component-playground-root,
-		astro-island
-	)
-	+ :is(
-		p,
-		ul,
-		ol,
-		pre,
-		table,
-		div,
-		img,
-		.db-notification,
-		.guideline-examples,
-		.db-stack,
-		.question-form,
-		.card-teaser,
-		.card-teaser-row,
-		.component-playground-root,
-		astro-island
-	),
-.dba-main-content
-	.content-grid
-	> :is(
-		h2,
-		h3,
-		h4,
-		h5,
-		h6,
-		p,
-		ul,
-		ol,
-		pre,
-		table,
-		div,
-		img,
-		.db-notification,
-		.guideline-examples,
-		.db-stack,
-		.question-form,
-		.card-teaser,
-		.card-teaser-row,
-		.component-playground-root,
-		astro-island
-	)
-	+ :is(
-		p,
-		ul,
-		ol,
-		pre,
-		table,
-		div,
-		img,
-		.db-notification,
-		.guideline-examples,
-		.db-stack,
-		.question-form,
-		.card-teaser,
-		.card-teaser-row,
-		.component-playground-root,
-		astro-island
-	),
-.dba-main-content
-	[style*='flex']
-	> :is(
-		h2,
-		h3,
-		h4,
-		h5,
-		h6,
-		p,
-		ul,
-		ol,
-		pre,
-		table,
-		div,
-		img,
-		.db-notification,
-		.guideline-examples,
-		.db-stack,
-		.question-form,
-		.card-teaser,
-		.card-teaser-row,
-		.component-playground-root,
-		astro-island
-	)
-	+ :is(
-		p,
-		ul,
-		ol,
-		pre,
-		table,
-		div,
-		img,
-		.db-notification,
-		.guideline-examples,
-		.db-stack,
-		.question-form,
-		.card-teaser,
-		.card-teaser-row,
-		.component-playground-root,
-		astro-island
-	),
-.dba-main-content
-	.content-flex
-	> :is(
-		h2,
-		h3,
-		h4,
-		h5,
-		h6,
-		p,
-		ul,
-		ol,
-		pre,
-		table,
-		div,
-		img,
-		.db-notification,
-		.guideline-examples,
-		.db-stack,
-		.question-form,
-		.card-teaser,
-		.card-teaser-row,
-		.component-playground-root,
-		astro-island
-	)
-	+ :is(
-		p,
-		ul,
-		ol,
-		pre,
-		table,
-		div,
-		img,
-		.db-notification,
-		.guideline-examples,
-		.db-stack,
-		.question-form,
-		.card-teaser,
-		.card-teaser-row,
-		.component-playground-root,
-		astro-island
-	),
-.dba-main-content .card-teaser-row > .card-teaser + .card-teaser,
-.dba-main-content .actionbar .actionbar-group + .actionbar-group,
-.dba-main-content .db-stack[data-direction='row'] > * + *,
-.dba-main-content .component-playground.component-playground * + * {
-	margin-block-start: 0;
-}
-
-/* Exclude: the Get Started wizard (GetStartedWizard.css) spaces its steps, cards and
- * result rows with grid and flex gaps only. The repeated class raises the selector to
- * (0,3,0), the specificity of the base rule and of the headline rules above. It sits
- * after all of them in this file, so it wins by source order. */
-.dba-main-content .gsw.gsw * + * {
-	margin-block-start: 0;
 }
 
 /* Utility: 2-column grid for side-by-side content */
