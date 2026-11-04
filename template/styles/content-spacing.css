@@ -4,9 +4,20 @@
  * Unified vertical rhythm for documentation content.
  * Scoped to .dba-main-content, excludes component internals.
  *
- * Strategy: Target content-level elements (headings, paragraphs, lists,
- * code blocks, notifications, guidelines) wherever they appear in the
- * content tree, using adjacent sibling selectors for spacing.
+ * Strategy: Space content-level elements (headings, paragraphs, lists,
+ * code blocks, notifications, guidelines) with adjacent sibling selectors,
+ * but only as direct children of a flow container – the places where MDX
+ * content is written:
+ *   .db-section          page sections (also #main-content-section)
+ *   .learn-block         a block of a Learn article
+ *   .learn-aside-body    the additional info of a Learn block
+ *   .collapsible-wrapper collapsible guideline content
+ *   .guideline-example-side-content  text beside a guideline example
+ *   .db-stack            a column stack written in MDX
+ *   div without a class  a plain wrapper written in MDX
+ *   li                   paragraphs and nested lists inside a list item
+ * Inside components (cards, grids, row stacks, styled wrappers) the rules do not apply;
+ * components space their children themselves, usually with gap.
  *
  * Excluded: .db-card internals, .db-notification internals, table cells,
  * the Get Started wizard (.gsw).
@@ -21,9 +32,21 @@
 	margin-block: 0;
 }
 
-/* Base rule: content element preceded by another content element gets md spacing */
+/* Base rule: content element preceded by another content element gets md spacing.
+ * Only between direct children of a flow container (see the header), never inside a
+ * component. The :where() keeps the specificity at (0,3,0) as before. */
 .dba-main-content
-	:is(
+	:where(
+		.db-section,
+		.learn-block,
+		.learn-aside-body,
+		.collapsible-wrapper,
+		.guideline-example-side-content,
+		.db-stack:not([data-direction='row']),
+		div:not([class]),
+		li
+	)
+	> :is(
 		h2,
 		h3,
 		h4,
@@ -76,7 +99,17 @@
 
 /* Headlines after content get large spacing to separate sections */
 .dba-main-content
-	:is(
+	:where(
+		.db-section,
+		.learn-block,
+		.learn-aside-body,
+		.collapsible-wrapper,
+		.guideline-example-side-content,
+		.db-stack:not([data-direction='row']),
+		div:not([class]),
+		li
+	)
+	> :is(
 		p,
 		ul,
 		ol,
@@ -111,7 +144,17 @@
 
 /* Headlines after headlines get tighter spacing (sub-section) */
 .dba-main-content
-	:is(h2, h3, h4, h5, h6)
+	:where(
+		.db-section,
+		.learn-block,
+		.learn-aside-body,
+		.collapsible-wrapper,
+		.guideline-example-side-content,
+		.db-stack:not([data-direction='row']),
+		div:not([class]),
+		li
+	)
+	> :is(h2, h3, h4, h5, h6)
 	+ :is(h2, h3, h4, h5, h6):where(:not(.db-text-group > *)) {
 	margin-block-start: var(--db-spacing-fixed-md);
 }
