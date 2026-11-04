@@ -13,7 +13,7 @@ const isDE = Astro.url.pathname.startsWith('/de/') || Astro.url.pathname === '/d
 
 const {
 	title = '',
-	headline = 'DB Design System designed to align teams and streamline product delivery.',
+	headline = 'designed to align teams and streamline product delivery.',
 	description = '',
 	startLabel = 'Get started',
 } = Astro.props;
@@ -28,13 +28,13 @@ const actions = [
 ];
 ---
 
-<DBSection width="medium" spacing="medium" id="home--page-hero-section" className="home-page-hero">
+<DBSection width="full" spacing="large" id="home--page-hero-section" className="home-page-hero">
 	<PageHero
 		title={title}
 		headline={headline}
 		description={description}
 		actions={actions}
 		headlineLevel={1}
-		headlineHighlight="DB Design System"
+		headlineTop="DB Design System"
 	/>
 </DBSection>

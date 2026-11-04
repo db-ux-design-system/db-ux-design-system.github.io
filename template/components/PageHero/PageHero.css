@@ -32,7 +32,6 @@
 	gap: var(--db-spacing-fixed-lg);
 	flex-direction: column;
 	align-items: center;
-	max-inline-size: 72rem;
 	inline-size: 100%;
 }
 
@@ -110,26 +109,72 @@
 	margin-block: 0;
 }
 
-/* DB Neo Head Extra Wide: the wideextrablack weight (1000) of DB Neo Screen Head from db-theme. */
-.page-hero-headline-highlight {
+/* Top line above the headline, DB Neo Head Extra Wide: the wideextrablack weight (1000)
+   of DB Neo Screen Head from db-theme. It is its own block, so it takes its own width and
+   wraps independently of the line below it. Larger than the headline (2em). */
+.page-hero-headline-top {
+	display: block;
 	font-family: var(--db-font-family-head);
 	font-weight: 1000;
-	text-transform: uppercase;
-
-	/* Own line between the text before and after it, set larger than the headline. */
-	display: block;
-	font-size: 1.5em;
+	font-size: 2em;
 	line-height: 1.1;
+	text-transform: uppercase;
 	overflow-wrap: anywhere;
 
-	/* Breathing room to the headline lines above and below. */
-	margin-block: var(--db-spacing-fixed-2xl);
+	/* Breathing room to the headline line below it. */
+	margin-block-end: var(--db-spacing-fixed-2xl);
 }
 
-/* Home hero only: the headline text around the highlight is set in regular weight.
-   The highlight span keeps its own weight (1000) through the rule above. */
+/* The headline text below the top line. A block of its own so its width is independent
+   of the top line: the two spans are siblings inside the heading, not nested. */
+.page-hero-headline-main {
+	display: block;
+}
+
+/* Home hero only: the first section fills the visible area below the header, the content
+   is centered vertically. The visible area is the scroll container .db-shell-content; as a
+   size container it gives the section its height (100cqb) without measuring the header. */
+.db-shell-content:has(.home-page-hero) {
+	container-type: size;
+
+	/* Share of the visible area the demo section below reaches into the hero
+	   (InteractiveDemoSection.css). Set here, so the hero can leave room for it. */
+	--home-demo-overlap: 20cqb;
+}
+
+.db-section.home-page-hero {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	box-sizing: border-box;
+	min-block-size: 100cqb; /* stylelint-disable-line db-ux/use-sizing */
+
+	/* The spacer below takes the place of the bottom padding; the padding of the demo
+	   section keeps the distance to the iframe. */
+	padding-block-end: 0;
+}
+
+/* Spacer as tall as the overlap: the content is centered in the part of the hero that
+   the demo does not cover. */
+.db-section.home-page-hero::after {
+	content: '';
+	flex: none;
+	block-size: var(--home-demo-overlap, 0); /* stylelint-disable-line db-ux/use-sizing */
+}
+
+/* Home hero only: the headline line below the top line is set in regular weight.
+   The top line keeps its own weight (1000) through its own rule above. The text line is
+   capped at the 3xl container so it wraps earlier than the wider top line, and centered
+   under it. The cap sits on this inner span, not the heading, so the top line stays wide. */
 .home-page-hero .page-hero-headline {
 	font-weight: 400;
+}
+
+.home-page-hero .page-hero-headline-main {
+	max-inline-size: 56rem; /* stylelint-disable-line db-ux/use-sizing */
+	margin-inline: auto;
+	text-wrap: wrap;
+	text-align: center;
 }
 
 .page-hero-description {
