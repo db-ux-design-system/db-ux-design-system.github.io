@@ -10,6 +10,13 @@
 	flex: 1 1 16rem;
 }
 
+/* Same height as the fields, so the checkbox sits on their center line. */
+.icon-gallery-controls .db-checkbox > label {
+	display: flex;
+	align-items: center;
+	min-block-size: var(--db-sizing-md);
+}
+
 .icon-gallery-version,
 .icon-gallery-hint,
 .icon-gallery-status {
