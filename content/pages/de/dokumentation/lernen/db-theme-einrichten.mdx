@@ -97,7 +97,7 @@ Du installierst sie nicht separat.
 
 ### Install-Skripte mit pnpm erlauben
 
-pnpm führt Install-Skripte von Abhängigkeiten erst aus, wenn du sie erlaubst. Führe `pnpm approve-builds` aus und erlaube die vier Pakete `@db-ux/db-theme*`. Mit npm nutzt du `npm i @db-ux/db-theme`.
+pnpm führt Install-Skripte von Abhängigkeiten erst aus, wenn du sie erlaubst. Führe `pnpm approve-builds` aus und erlaube die drei Pakete `@db-ux/db-theme*`. Mit npm nutzt du `npm i @db-ux/db-theme`.
 
 ### Manuell entschlüsseln
 
@@ -182,7 +182,7 @@ Statt der kombinierten Theme-Datei kannst du jeden Teil einzeln importieren. So 
 
 ### S-Bahn Theme
 
-Für Produkte der S-Bahn liefert `@db-ux/s-bahn-theme` die regionalen Logos und die Markenfarben der S-Bahn. Es nutzt dieselben Zugangsdaten und dieselbe Entschlüsselung. Es hängt von den DB-Schriften und DB-Icons ab, aber nicht von den illustrativen Icons. Installiere es und importiere es anstelle des DB Themes:
+Für Produkte der S-Bahn liefert `@db-ux/s-bahn-theme` die regionalen Logos und die Markenfarben der S-Bahn. Es nutzt dieselben Zugangsdaten und dieselbe Entschlüsselung. Es hängt von den DB-Schriften und DB-Icons ab. Installiere es und importiere es anstelle des DB Themes:
 
 ```shell
 pnpm add @db-ux/s-bahn-theme
@@ -253,7 +253,7 @@ Ergänze Icons oder schlag das Paket auf npm nach.
 	teasers={[
 		{
 			title: 'Icons im Interface anzeigen',
-			description: 'Zeige funktionale und illustrative Icons in deinen Komponenten an.',
+			description: 'Zeige funktionale Icons in deinen Komponenten an.',
 			url: '/de/dokumentation/lernen/icons-einrichten',
 		},
 		{
