@@ -95,14 +95,6 @@
 	align-self: flex-start;
 }
 
-/* The global content spacing (content-spacing.css) adds a top margin to an element that
-   follows an astro-island, so a control placed after the reading list island would sit
-   lower than it. The toolbar aligns its items itself; the extra classes outrank that
-   rule. */
-.dba-main-content .page-hero-headline-row .page-hero-toolbar > * {
-	margin-block: 0;
-}
-
 .page-hero-description {
 	max-inline-size: var(--db-container-md);
 	opacity: 0.75;

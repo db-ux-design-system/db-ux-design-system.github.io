@@ -54,55 +54,6 @@
 }
 
 /*
- * content-spacing.css gives any `div + div` inside the content area a top margin
- * for vertical rhythm. Inside the grid that offsets every cell except the first
- * one, so cells in the same row no longer line up. The grid gap already provides
- * the spacing here, so the margin is reset. The class is repeated to match the
- * specificity of the content-spacing rule.
- *
- * Only the cells, never their contents. A reset reaching further cannot tell our
- * margin from one a component sets itself, so it takes the component's own
- * spacing with it — the gap between a checkbox and its message, the gaps between
- * accordion items. Where the rhythm reaches into a component, it is stopped at
- * that one place instead (see the custom select further down).
- *
- * A `dialog` is left out. An open dialog is no longer part of this grid: it moves
- * to the top layer and centers itself in the viewport with `margin: auto`, which
- * is the only placement the component has — there is no property to set it with.
- * Zeroing the start margin would resolve that `auto` to zero on one side only and
- * pin the dialog to the upper edge.
- *
- * The class is repeated to match the specificity of the content-spacing rule.
- */
-.dba-main-content .overview-grid.overview-grid > *:not(dialog),
-.dba-main-content .overview-grid.overview-grid .overview-stack > * {
-	margin-block-start: 0;
-}
-
-/*
- * Where the vertical rhythm reaches into a component.
- *
- * The rule in content-spacing.css matches on element types, and `div` is one of
- * them. Component internals are often sibling divs, so the rhythm lands inside
- * them: it pushed the second tag of a custom select onto its own line and opened
- * gaps between the rows of a dialog. The places are listed one by one rather than
- * reset in bulk — a reset on everything below a cell cannot tell this margin from
- * one a component sets itself and would flatten the component's own spacing with
- * it, as the gap between a checkbox and its message.
- *
- * Every element below declares no block-start margin of its own, in any state, so
- * zero is what the component itself lays out with: the tags, the rows of a
- * dropdown and the rows of a dialog or drawer are all spaced with flex gap, grid
- * or padding. Checked against the component styles before adding them here.
- */
-.dba-main-content .overview-grid .db-custom-select .db-tag,
-.dba-main-content .overview-grid .db-custom-select-dropdown > *,
-.dba-main-content .overview-grid .db-dialog > :is(.db-dialog-content, .db-dialog-footer),
-.dba-main-content .overview-grid .db-drawer-container > :is(.db-drawer-content, .db-drawer-footer) {
-	margin-block-start: 0;
-}
-
-/*
  * The same rhythm, reaching into the footer.
  *
  * The footer stacks its areas as sibling divs, so the meta area was pushed 16 px
@@ -117,73 +68,6 @@
  */
 .dba-main-content .overview-grid .db-footer > .db-footer-meta,
 .dba-main-content .overview-grid .db-footer-meta .db-footer-meta-content {
-	margin-block-start: 0;
-}
-
-/*
- * The same rhythm, reaching into a row of heading specimens.
- *
- * The rule in content-spacing.css matches on element types and `h2` to `h6` are
- * among them, so the second and any further specimen in a row picked up a 16 px
- * top margin and dropped out of the row it shares. Measured at 16 px, which is
- * the rhythm step.
- *
- * A heading sets `margin-block: 0` itself, so zero is the component's own layout
- * and nothing of it is overridden here. Bound to the rows of this page, so no
- * heading outside them is affected.
- */
-.dba-main-content .overview-grid .overview-row > .db-heading {
-	margin-block-start: 0;
-}
-
-/*
- * The same rhythm, reaching into a row of switch specimens.
- *
- * A switch is a `label` wrapping a `div`, so the sibling-div half of the rule in
- * content-spacing.css still matches: every specimen after the first one in a row
- * picked up a 16 px top margin, which centring then turned into each switch
- * sitting on its own baseline instead of the row's shared one. Measured at
- * 16 px, which is the rhythm step.
- *
- * The component declares no block-start margin of its own — the control and its
- * message are laid out with the label's own flow — so zero is what it lays out
- * with. Bound to the rows of this page.
- */
-.dba-main-content .overview-grid .overview-row > .db-switch {
-	margin-block-start: 0;
-}
-
-/*
- * The same rhythm, reaching into a column of tag specimens.
- *
- * A tag is a `div`, which is one of the element types the rule in
- * content-spacing.css matches, so every specimen after the first one in a
- * column picked up a 16 px top margin on top of the gap the column already
- * lays out with. Measured at 16 px, which is the rhythm step. Not a direct
- * child selector: the interactive column wraps its pairs in `.overview-row`,
- * so a tag inside it is a grandchild of the column, not a child.
- *
- * The component declares no block-start margin of its own — a tag sizes itself
- * to its content and is spaced by whatever lays it out — so zero is what it
- * lays out with. Bound to this page's tag column.
- */
-.dba-main-content .overview-grid .overview-tag-column .db-tag {
-	margin-block-start: 0;
-}
-
-/*
- * The same rhythm, reaching into a row of popover specimens.
- *
- * A popover is a `div` around its trigger, and `div` is one of the element types
- * the rule in content-spacing.css matches, so every specimen after the first one
- * in a row picked up a 16 px top margin and sank below its neighbours. Measured
- * at 16 px, which is the rhythm step.
- *
- * The component declares no block-start margin of its own — it is a positioning
- * context around the trigger and sizes itself to its content — so zero is what it
- * lays out with. Bound to the rows of this page.
- */
-.dba-main-content .overview-grid .overview-row > .db-popover {
 	margin-block-start: 0;
 }
 
@@ -445,6 +329,24 @@
  * same breathing room as a heading so it reads as a control for the whole page
  * instead of belonging to the first component below it.
  */
+
+/*
+ * The probe sits in the page section, where content-spacing.css gives a div after a
+ * div a top margin. The probe is not content, so the bar following it keeps its own
+ * spacing.
+ */
+.dba-main-content .overview-controls-sentinel + .overview-controls {
+	margin-block-start: 0;
+}
+
+/*
+ * The specimens of a stack sit on its gap only. This also keeps the divider's own
+ * block-start margin at zero, as before.
+ */
+.dba-main-content .overview-grid .overview-stack > * {
+	margin-block-start: 0;
+}
+
 .dba-main-content .overview-controls {
 	/*
 	 * Stays reachable while scrolling through the specimens, so the comparison can
@@ -509,14 +411,6 @@
 .dba-main-content .overview-controls-sentinel {
 	block-size: var(--db-sizing-3xs);
 	margin-block-start: calc(-1 * var(--db-sizing-3xs));
-}
-
-/*
- * content-spacing.css gives any `div + div` inside the content area a top margin.
- * The probe is not content, so the bar following it keeps its own spacing.
- */
-.dba-main-content .overview-controls-sentinel + .overview-controls {
-	margin-block-start: 0;
 }
 
 /*
@@ -813,21 +707,6 @@
 }
 
 /*
- * The vertical rhythm, reaching into the backdrop box.
- *
- * The dim layer and the dialog follow the box's text as sibling divs, so the
- * `div + div` rule in content-spacing.css gives each a 16 px block-start margin.
- * On the dialog that margin adds to its `inset-block-start: 50%` and pushes it
- * below the centre of the box. The layer and the dialog are both positioned off
- * the box edges, so neither lays itself out with a block-start margin — zero is
- * their own placement. The class is repeated to match the specificity of the
- * content-spacing rule.
- */
-.dba-main-content .overview-backdrop.overview-backdrop > * {
-	margin-block-start: 0;
-}
-
-/*
  * Neutral placeholder item for the layout components.
  *
  * Section and Stack have no optics of their own — they only arrange what sits
@@ -894,21 +773,6 @@ button:has(.db-card) {
 	display: flex;
 	align-items: center;
 	gap: var(--db-spacing-fixed-sm);
-}
-
-/*
- * The vertical rhythm, reaching into the heading row.
- *
- * The row holds the native `h2` and, after it, the link in a
- * `div.db-custom-button`. The `h2 + div` half of the base rule in
- * content-spacing.css matches that pair and pushed the link down off the shared
- * baseline. Neither child lays itself out with a block-start margin — the heading
- * sets `margin-block: 0` and the button is spaced by the row's flex gap — so zero
- * is the row's own layout. The class is repeated to match the specificity of the
- * content-spacing rule.
- */
-.dba-main-content .overview-heading.overview-heading > * {
-	margin-block-start: 0;
 }
 
 /*

@@ -148,8 +148,3 @@
 	border-color: transparent;
 	background-color: var(--db-adaptive-bg-basic-transparent-full-default);
 }
-
-/* The global content spacing must not add to the flex gap (0,4,0 beats its 0,3,0) */
-.dba-main-content .materials-visual > .materials-visual-surface + .materials-visual-levels {
-	margin-block-start: 0;
-}
