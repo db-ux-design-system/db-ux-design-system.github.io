@@ -39,7 +39,6 @@ const TEXTS = {
 		version: 'DB Theme Icons',
 		releaseNotes: 'Release notes',
 		releaseNotesUrl: '/documentation/releases/release-notes',
-		hint: 'Click an icon to copy its name. Size and family change the preview only; in code, set them with `data-icon-weight` and `data-icon-variant="db-filled"`.',
 	},
 	de: {
 		search: 'Icons suchen',
@@ -52,7 +51,6 @@ const TEXTS = {
 		version: 'DB Theme Icons',
 		releaseNotes: 'Release Notes',
 		releaseNotesUrl: '/de/dokumentation/releases/release-notes',
-		hint: 'Klicke auf ein Icon, um seinen Namen zu kopieren. Größe und Family ändern nur die Vorschau; im Code setzt du sie mit `data-icon-weight` und `data-icon-variant="db-filled"`.',
 	},
 } as const;
 const text = TEXTS[lang];
@@ -83,7 +81,6 @@ const icons = Object.keys(iconDescriptions).map((key) => {
 	const name = key.replaceAll('-', '_');
 	return { key, name, hasFilled: hasFilledForm(name) };
 });
-const [hintBefore, codeWeight, hintMiddle, codeVariant, hintAfter] = text.hint.split('`');
 ---
 
 <div
@@ -124,14 +121,6 @@ const [hintBefore, codeWeight, hintMiddle, codeVariant, hintAfter] = text.hint.s
 			{text.onlyFilled}
 		</DBCheckbox>
 	</div>
-
-	<p class="icon-gallery-hint">
-		{hintBefore}
-		<code>{codeWeight}</code>
-		{hintMiddle}
-		<code>{codeVariant}</code>
-		{hintAfter}
-	</p>
 
 	<!-- Screen reader announcements: the number of matching icons after a search or filter change, and the copied name. Sighted users see the gallery and the tooltip. -->
 	<p id="icon-gallery-status" role="status" data-visually-hidden="true"></p>
