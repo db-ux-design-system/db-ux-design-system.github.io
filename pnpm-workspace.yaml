@@ -2,7 +2,6 @@ allowBuilds:
   '@db-ux/db-theme': true
   '@db-ux/db-theme-fonts': true
   '@db-ux/db-theme-icons': true
-  '@db-ux/db-theme-illustrative-icons': true
   esbuild: true
   sharp: false
 
@@ -10,7 +9,6 @@ minimumReleaseAgeExclude:
   - '@db-ux/db-theme'
   - '@db-ux/db-theme-fonts'
   - '@db-ux/db-theme-icons'
-  - '@db-ux/db-theme-illustrative-icons'
   - '@db-ux/agent-cli'
   - '@db-ux/core-components'
   - '@db-ux/core-eslint-plugin'
