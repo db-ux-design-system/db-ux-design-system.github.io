@@ -1,0 +1,181 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Editor und Build einrichten'
+headline: 'Editor und Build einrichten'
+description: 'Lass dir Tokens und Klassen im Editor vorschlagen und verkleinere das CSS in deinem Build.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 18.6
+category: 'Tooling'
+keywords:
+  [
+    'ide',
+    'editor',
+    'autocomplete',
+    'vs code',
+    'jetbrains',
+    'intellij',
+    'webstorm',
+    'css variables',
+    'performance',
+    'bundle size',
+    'purgecss',
+    'csso',
+    'postcss',
+    'minify',
+    'unused css',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Die Foundation bringt eine Datei für die Autovervollständigung mit
+
+`@db-ux/core-foundations/build/ide` listet alle Klassen und Custom Properties. Verweise deinen Editor darauf, importiere die Datei aber nicht in deine Anwendung.
+
+<LearnAside>
+
+Die Datei dient nur deinem Editor. Ihre Werte und Selektoren sind nicht die echten, weil die echten Werte von Modus, Density und Bildschirmgröße abhängen.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Binde sie in JetBrains-IDEs ein
+
+In IntelliJ IDEA, WebStorm und anderen JetBrains-IDEs fügst du den Ordner als JavaScript-Bibliothek hinzu. Danach schlagen `class="db-` und `color: db-` Klassen und Custom Properties vor.
+
+<LearnAside>
+
+1. Öffne **File → Settings → Languages & Frameworks → JavaScript → Libraries**.
+2. Wähle **Add**, gib einen Namen wie `db-ux` ein und behalte **Framework type: Custom** und **Visibility: Project**.
+3. Wähle **➕ → Attach Directories…** und dann `node_modules/@db-ux/core-foundations/build/ide`.
+4. Wähle **Apply**.
+
+Drückst du im CSS bei einem Vorschlag Enter, fügt die IDE `var(--db-…)` ein.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Binde sie in VS Code ein
+
+Installiere die Erweiterung **CSS Variable Autocomplete** und ergänze die Datei in `.vscode/settings.json` in ihrer Suchliste.
+
+```json
+{
+	"cssVariables.lookupFiles": [
+		"**/*.css",
+		"**/*.scss",
+		"node_modules/@db-ux/core-foundations/build/ide/db.ide.css"
+	]
+}
+```
+
+<LearnAside>
+
+Die Erweiterung vervollständigt Custom Properties in CSS und SCSS. Für Klassennamen in HTML und JSX gibt es für VS Code keine Erweiterung, die zuverlässig mit der Datei funktioniert. Für Web Components vervollständigt VS Code Tags und Attribute mit der Custom-Data-Datei aus [Komponenten als Web Components nutzen](/de/dokumentation/lernen/web-components-einrichten).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Verkleinere das CSS mit dem PostCSS-Plugin
+
+Das **PostCSS-Plugin** löst `var()`, `calc()`, `color-mix()` und `light-dark()` beim Build auf und entfernt ungenutzte Deklarationen.
+
+```shell
+pnpm add @db-ux/core-postcss-plugin --save-dev
+```
+
+<LearnAside>
+
+Wie du das Plugin in deinen Build einbindest, beschreibt der Setup-Artikel deines Frameworks, zum Beispiel [Komponenten in React einbinden](/de/dokumentation/lernen/react-einrichten).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Oder entferne ungenutzte Klassen nach dem Build
+
+**PurgeCSS** entfernt Klassen, die deine Seiten nicht nutzen, **CSSO** verkleinert das Ergebnis. Lass beide nach dem Build über den Ausgabeordner laufen.
+
+```shell
+pnpm add purgecss csso --save-dev
+```
+
+<LearnAside>
+
+```js
+// purgecss.js – nach dem Build ausführen, z. B. "postbuild": "node purgecss.js"
+import { writeFileSync } from 'node:fs';
+import { PurgeCSS } from 'purgecss';
+import { minify } from 'csso';
+
+const dist = 'dist';
+
+const results = await new PurgeCSS().purge({
+	content: [`${dist}/**/*.html`, `${dist}/**/*.js`],
+	css: [`${dist}/**/*.css`],
+	defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
+	variables: true,
+	safelist: {
+		// Behalte die Densities, die du nutzt, und die Farbzustände.
+		variables: [/-functional-/, /-regular-/, /-expressive-/, /-default$/, /-hovered$/, /-pressed$/],
+		// Komponenten, die zur Laufzeit Klassen setzen.
+		greedy: [/db-tabs/],
+	},
+});
+
+for (const result of results) {
+	writeFileSync(result.file, minify(result.css).css);
+}
+```
+
+Prüfe das Ergebnis im Browser: Klassen, die erst JavaScript setzt, brauchen einen Eintrag in der Safelist.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Mach mit den Plugins weiter
+
+Das Design System hat weitere Plugins für Linting und Figma.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Foundation einrichten',
+			description: 'Tokens, Helper-Klassen und das Stylelint-Plugin.',
+			url: '/de/dokumentation/lernen/foundation-einrichten',
+		},
+		{
+			title: 'Plugins',
+			description: 'Figma-Plugins für Logos und Farben.',
+			url: '/de/dokumentation/lernen/plugins',
+		},
+	]}
+/>
+
+</LearnBlock>

@@ -1,0 +1,156 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Apply font sizes'
+headline: 'Apply font sizes'
+description: 'Set body and headline sizes on your elements and use the type tokens in your own components.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 18.3
+category: 'Development'
+keywords:
+  [
+    'typography',
+    'font size',
+    'font sizes',
+    'headline size',
+    'data-font-size',
+    'data-headline-size',
+    'db-font-size',
+    'line-height',
+    'type tokens',
+    'db-type-body',
+    'headings',
+    'h1',
+    'scss placeholder',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Text and headings have sizes by default
+
+`body`, `h1` to `h6` and the components already have their sizes. Change a size only where your layout needs it.
+
+<LearnAside>
+
+There are two sets with 9 sizes each: **body sizes** for running text and **headline sizes** for headings. The sizes are `3xl`, `2xl`, `xl`, `lg`, `md`, `sm`, `xs`, `2xs` and `3xs`.
+
+All sizes follow the density and the screen size, so two sizes can have the same value in some cases.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Set a body size on an element
+
+`data-font-size` sets font size and line height of an element and of the text inside it. It does not change the components inside.
+
+```html
+<p data-font-size="sm">Additional information</p>
+```
+
+<LearnAside>
+
+| Use           | Attribute                 | Class                 |
+| ------------- | ------------------------- | --------------------- |
+| Body size     | `data-font-size="sm"`     | `db-font-size-sm`     |
+| Headline size | `data-headline-size="lg"` | `db-headline-size-lg` |
+
+The headline sizes change how a heading looks without changing its level, for example an `h2` with the size of an `h3`.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Load the font classes with the foundation only
+
+The component styles contain the font classes. With the foundation only, import them after the other foundation files.
+
+```css
+@import '@db-ux/core-foundations/build/styles/fonts/classes/all.css' layer(db-ux);
+```
+
+<LearnAside>
+
+If another file sets `font-size` later, it overrides the classes. In that case, let your elements inherit the size:
+
+```css
+* {
+	font-size: inherit;
+	line-height: inherit;
+}
+```
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Use the type tokens in your own components
+
+In your own CSS, the `font` shorthand with a **type token** sets size and line height together.
+
+```css
+.my-label {
+	font: var(--db-type-body-sm);
+}
+```
+
+<LearnAside>
+
+The headline tokens are `--db-type-headline-3xl` to `--db-type-headline-3xs`.
+
+With Sass, extend a placeholder. It also sets the custom properties that some components need inside your element:
+
+```scss
+@use '@db-ux/core-foundations/build/styles/fonts';
+
+.my-label {
+	@extend %db-overwrite-font-size-sm;
+}
+```
+
+Prefer the classes or placeholders over the tokens where you can.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Continue with the typography
+
+The foundation shows all sizes with their values.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Typography',
+			description: 'Type scale, sizes and guidelines.',
+			url: '/documentation/foundation/typography',
+		},
+		{
+			title: 'Apply a density',
+			description: 'Make areas more compact or more spacious.',
+			url: '/documentation/learn/density',
+		},
+	]}
+/>
+
+</LearnBlock>
