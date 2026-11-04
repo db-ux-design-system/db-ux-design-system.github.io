@@ -75,15 +75,15 @@ Außen-, Innenabstände und Lücken in Seiten und Komponenten nutzen **Spacing f
 
 ## Nutze Spacing responsive für Abstände im Layout
 
-**Spacing responsive** ist auf großen Bildschirmen größer, zum Beispiel beim Innenabstand des Hauptbereichs. Die Komponente **Section** setzt es in deinem Seitenlayout schon für dich.
+**Spacing responsive** wächst mit dem Bildschirm, zum Beispiel beim Innenabstand des Hauptbereichs. **Section** setzt es schon für dich.
+
+<LearnAside>
 
 ```css
 .my-main {
 	padding-inline: var(--db-spacing-responsive-md);
 }
 ```
-
-<LearnAside>
 
 Nutze lieber `DBSection` als einen eigenen responsiven Innenabstand: Die Komponente wählt den passenden Abstand für jede Bildschirmgröße.
 

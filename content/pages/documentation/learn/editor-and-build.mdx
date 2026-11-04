@@ -77,17 +77,13 @@ Install the extension **CSS Variable Autocomplete** and add the file to its look
 
 ```json
 {
-	"cssVariables.lookupFiles": [
-		"**/*.css",
-		"**/*.scss",
-		"node_modules/@db-ux/core-foundations/build/ide/db.ide.css"
-	]
+	"cssVariables.lookupFiles": ["node_modules/@db-ux/core-foundations/build/ide/db.ide.css"]
 }
 ```
 
 <LearnAside>
 
-The extension completes custom properties in CSS and SCSS. For class names in HTML and JSX, VS Code has no extension that works reliably with the file. For Web Components, VS Code completes tags and attributes with the custom data file described in [Use the components as Web Components](/documentation/learn/web-components-setup).
+Keep your own files in the list as well, for example `"**/*.css"` and `"**/*.scss"`, so their custom properties stay available. The extension completes custom properties in CSS and SCSS. For class names in HTML and JSX, VS Code has no extension that works reliably with the file. For Web Components, VS Code completes tags and attributes with the custom data file described in [Use the components as Web Components](/documentation/learn/web-components-setup).
 
 </LearnAside>
 

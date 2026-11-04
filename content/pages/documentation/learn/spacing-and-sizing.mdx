@@ -75,15 +75,15 @@ Margins, paddings and gaps inside pages and components use **spacing fixed**. Do
 
 ## Use spacing responsive for layout spacing
 
-**Spacing responsive** is larger on large screens, for example the padding of the main area. The **Section** component already applies it to your page layout.
+**Spacing responsive** grows with the screen, for example the padding of the main area. **Section** already applies it.
+
+<LearnAside>
 
 ```css
 .my-main {
 	padding-inline: var(--db-spacing-responsive-md);
 }
 ```
-
-<LearnAside>
 
 Prefer `DBSection` over your own responsive padding: it picks the right spacing for every screen size.
 
