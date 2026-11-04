@@ -65,6 +65,8 @@ import '@db-ux/core-components/build/styles/bundle.css';
 
 With **React Testing Library**, query the rendered component by role and trigger events on it.
 
+<LearnAside>
+
 ```tsx
 import { render, screen, fireEvent } from '@testing-library/react';
 import { DBButton } from '@db-ux/react-core-components';
@@ -77,8 +79,6 @@ test('calls the handler on click', () => {
 	expect(handleClick).toHaveBeenCalledTimes(1);
 });
 ```
-
-<LearnAside>
 
 With Jest, use `jest.fn()` instead of `vi.fn()`.
 
@@ -99,6 +99,8 @@ export const DBButton = ({ children, ...props }) => <button {...props}>{children
 
 With **Vue Test Utils**, mount the component and check the events it emits. The form components use `v-model:value`, so the event is `update:value`.
 
+<LearnAside>
+
 ```ts
 import { mount } from '@vue/test-utils';
 import { DBInput } from '@db-ux/v-core-components';
@@ -110,8 +112,6 @@ test('emits the typed value', async () => {
 	expect(wrapper.emitted('update:value')?.[0]).toEqual(['Ada']);
 });
 ```
-
-<LearnAside>
 
 To replace a component in a test, pass a stub in `global.components`:
 
@@ -135,6 +135,8 @@ mount(MyForm, {
 
 The components are standalone. Import them in the `TestBed` together with your component.
 
+<LearnAside>
+
 ```ts
 import { TestBed } from '@angular/core/testing';
 import { DBButton } from '@db-ux/ngx-core-components';
@@ -146,8 +148,6 @@ beforeEach(async () => {
 	}).compileComponents();
 });
 ```
-
-<LearnAside>
 
 To replace a component, declare a standalone stub with the same selector, for example `db-button`, and import it instead of `DBButton`.
 
@@ -185,6 +185,8 @@ For the full behavior, an end-to-end test in a real browser is often simpler tha
 
 Run **axe** in an end-to-end test of your pages. It finds problems in how you combine the components, for example missing labels.
 
+<LearnAside>
+
 ```ts
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
@@ -195,8 +197,6 @@ test('page has no accessibility violations', async ({ page }) => {
 	expect(results.violations).toEqual([]);
 });
 ```
-
-<LearnAside>
 
 Automated checks find only part of the problems. Test the main flows with the keyboard and a screen reader as well. More on this in [Accessibility](/documentation/learn/accessibility).
 

@@ -122,6 +122,8 @@ Items lassen sich auch mit der Property `active` aktiv setzen. Das setzt kein `a
 
 Übergib die Seiten selbst als **Pagination Items** mit einem Router-Link darin. Die Pagination setzt Seitenzahlen, `aria-current` und die Pfeil-Buttons für dich.
 
+<LearnAside>
+
 ```tsx
 <DBPagination currentPage={2} onPageChange={(page) => setPage(page)}>
 	<DBPaginationItem>
@@ -136,8 +138,6 @@ Items lassen sich auch mit der Property `active` aktiv setzen. Das setzt kein `a
 	</DBPaginationItem>
 </DBPagination>
 ```
-
-<LearnAside>
 
 Lass `totalCount` und `items` weg, wenn du die Items selbst übergibst. Kürzen und responsives Zusammenklappen gibt es in diesem Modus nicht, weil die Komponente nicht weiß, für welche Seiten deine Items stehen. Die Code-Beispiele für jedes Framework findest du im [Storybook](https://design-system.deutschebahn.com/core-web/version/latest/composition-storybook/).
 

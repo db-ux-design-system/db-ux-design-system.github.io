@@ -41,7 +41,7 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 
 ## Lade die Styles im Test-Setup
 
-Deine Tests prüfen, was **deine Anwendung** mit den Komponenten macht. Manches davon hängt von den Styles ab, zum Beispiel Sichtbarkeit und Validierungszustände. Importiere deshalb dieselben Styles wie in deiner Anwendung.
+Deine Tests prüfen, was **deine Anwendung** mit den Komponenten macht. Importiere dieselben Styles wie in der Anwendung, denn zum Beispiel Sichtbarkeit und Validierungszustände hängen davon ab.
 
 ```ts
 // setupTests.ts oder vitest.setup.ts
@@ -65,6 +65,8 @@ import '@db-ux/core-components/build/styles/bundle.css';
 
 Mit der **React Testing Library** suchst du die gerenderte Komponente über ihre Rolle und löst Events daran aus.
 
+<LearnAside>
+
 ```tsx
 import { render, screen, fireEvent } from '@testing-library/react';
 import { DBButton } from '@db-ux/react-core-components';
@@ -77,8 +79,6 @@ test('calls the handler on click', () => {
 	expect(handleClick).toHaveBeenCalledTimes(1);
 });
 ```
-
-<LearnAside>
 
 Mit Jest nutzt du `jest.fn()` statt `vi.fn()`.
 
@@ -99,6 +99,8 @@ export const DBButton = ({ children, ...props }) => <button {...props}>{children
 
 Mit **Vue Test Utils** mountest du die Komponente und prüfst die Events, die sie auslöst. Die Formularkomponenten nutzen `v-model:value`, das Event heißt deshalb `update:value`.
 
+<LearnAside>
+
 ```ts
 import { mount } from '@vue/test-utils';
 import { DBInput } from '@db-ux/v-core-components';
@@ -110,8 +112,6 @@ test('emits the typed value', async () => {
 	expect(wrapper.emitted('update:value')?.[0]).toEqual(['Ada']);
 });
 ```
-
-<LearnAside>
 
 Um eine Komponente im Test zu ersetzen, übergibst du einen Stub in `global.components`:
 
@@ -135,6 +135,8 @@ mount(MyForm, {
 
 Die Komponenten sind standalone. Importiere sie im `TestBed` zusammen mit deiner Komponente.
 
+<LearnAside>
+
 ```ts
 import { TestBed } from '@angular/core/testing';
 import { DBButton } from '@db-ux/ngx-core-components';
@@ -146,8 +148,6 @@ beforeEach(async () => {
 	}).compileComponents();
 });
 ```
-
-<LearnAside>
 
 Um eine Komponente zu ersetzen, deklarierst du einen Standalone-Stub mit demselben Selektor, zum Beispiel `db-button`, und importierst ihn statt `DBButton`.
 
@@ -185,6 +185,8 @@ Für das vollständige Verhalten ist ein End-to-End-Test in einem echten Browser
 
 Lass **axe** in einem End-to-End-Test deiner Seiten laufen. Es findet Probleme in der Art, wie du die Komponenten kombinierst, zum Beispiel fehlende Labels.
 
+<LearnAside>
+
 ```ts
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
@@ -195,8 +197,6 @@ test('page has no accessibility violations', async ({ page }) => {
 	expect(results.violations).toEqual([]);
 });
 ```
-
-<LearnAside>
 
 Automatische Prüfungen finden nur einen Teil der Probleme. Teste die wichtigsten Abläufe zusätzlich mit der Tastatur und einem Screenreader. Mehr dazu unter [Barrierefreiheit](/de/dokumentation/lernen/barrierefreiheit).
 

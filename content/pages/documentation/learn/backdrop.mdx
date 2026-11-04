@@ -52,6 +52,8 @@ The backdrop uses `--db-adaptive-on-bg-basic-emphasis-100-default` as color and 
 
 Mix the color with the opacity using relative color syntax, either on your own element or on `::backdrop` of a dialog.
 
+<LearnAside>
+
 ```css
 .my-backdrop,
 dialog::backdrop {
@@ -60,8 +62,6 @@ dialog::backdrop {
 	);
 }
 ```
-
-<LearnAside>
 
 For a weaker backdrop, like the `weak` variant of the Drawer, use `--db-opacity-sm` instead of `--db-opacity-lg`.
 
@@ -75,6 +75,8 @@ For a weaker backdrop, like the `weak` variant of the Drawer, use `--db-opacity-
 
 With Sass, take the same tokens from the foundation package.
 
+<LearnAside>
+
 ```scss
 @use '@db-ux/core-foundations/build/styles/colors';
 @use '@db-ux/core-foundations/build/styles/variables';
@@ -87,8 +89,6 @@ dialog::backdrop {
 	);
 }
 ```
-
-<LearnAside>
 
 The weaker variant uses `variables.$db-opacity-sm`.
 

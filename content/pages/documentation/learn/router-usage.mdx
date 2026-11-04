@@ -122,6 +122,8 @@ Items can also be set active with the `active` property. This does not set `aria
 
 Pass the pages yourself as **Pagination Items** with a router link inside. The pagination sets the page numbers, `aria-current` and the arrow buttons for you.
 
+<LearnAside>
+
 ```tsx
 <DBPagination currentPage={2} onPageChange={(page) => setPage(page)}>
 	<DBPaginationItem>
@@ -136,8 +138,6 @@ Pass the pages yourself as **Pagination Items** with a router link inside. The p
 	</DBPaginationItem>
 </DBPagination>
 ```
-
-<LearnAside>
 
 Leave `totalCount` and `items` out when you pass the items yourself. Truncation and responsive collapsing do not apply in this mode, because the component cannot know which pages your items stand for. The code examples for every framework are in the [Storybook of the pagination](https://design-system.deutschebahn.com/core-web/version/latest/composition-storybook/).
 

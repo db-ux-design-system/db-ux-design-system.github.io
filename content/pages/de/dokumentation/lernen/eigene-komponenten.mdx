@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 title: 'Eigene Komponenten bauen'
 headline: 'Eigene Komponenten bauen'
-description: 'Baue Komponenten, die das Design System nicht anbietet, so dass sie aussehen und sich verhalten wie der Rest – mit Tokens, den Foundation-Styles und den vorhandenen Komponenten.'
+description: 'Baue Komponenten, die das Design System nicht anbietet, sodass sie zum restlichen Interface passen.'
 readingList: true
 align: start
 toc: true
@@ -43,6 +43,8 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 
 Nimm jeden Abstand, jede Größe, Farbe und Schrift aus den **Tokens** der Foundation. Deine Komponente folgt dann dem Theme, der Density sowie Light Mode und Dark Mode wie der Rest des Interface.
 
+<LearnAside>
+
 ```css
 .my-card {
 	padding-inline: var(--db-spacing-responsive-md);
@@ -51,8 +53,6 @@ Nimm jeden Abstand, jede Größe, Farbe und Schrift aus den **Tokens** der Found
 	min-block-size: var(--db-sizing-md);
 }
 ```
-
-<LearnAside>
 
 Die Styles müssen geladen sein, wie im Setup-Artikel deines Frameworks beschrieben. Die Tokens sind CSS Custom Properties und funktionieren deshalb in reinem CSS, in CSS-Modulen und in jedem Framework.
 
@@ -79,6 +79,8 @@ Mit Sass gibt es dieselben Tokens als Variablen:
 
 Wähle zuerst das Token für den Hintergrund und dann eine passende **On-Color** für Text, Icons und Rahmen. Die Paare sind so gebaut, dass der Kontrast reicht.
 
+<LearnAside>
+
 ```css
 .my-card {
 	background-color: var(--db-adaptive-bg-basic-level-1-default);
@@ -94,8 +96,6 @@ Wähle zuerst das Token für den Hintergrund und dann eine passende **On-Color**
 	background-color: var(--db-adaptive-bg-basic-level-1-pressed);
 }
 ```
-
-<LearnAside>
 
 - **Zustände:** Jedes Hintergrund-Token gibt es als `-default`, `-hovered` und `-pressed`.
 - **Hintergründe:** `bg-basic` in den Stufen 1–3 für Seiten, Bereiche und Komponenten. `bg-basic-transparent` nur für Hintergründe von Komponenten. `bg-inverted` und `bg-vibrant` für Komponenten und kleine Akzente.
@@ -114,6 +114,8 @@ Welches Token du wann nutzt, beschreiben die [Richtlinien zu Farben](/de/dokumen
 
 Setze die Schrift mit einem **Type-Token** und Icons mit dem Attribut `data-icon`, wie es die Komponenten tun.
 
+<LearnAside>
+
 ```css
 .my-card {
 	font: var(--db-type-body-md);
@@ -128,8 +130,6 @@ Setze die Schrift mit einem **Type-Token** und Icons mit dem Attribut `data-icon
 ```html
 <div class="my-card" data-icon="information">…</div>
 ```
-
-<LearnAside>
 
 Mit Sass nutzt du die Platzhalter und das Icon-Mixin:
 
@@ -158,6 +158,8 @@ Alle Icon-Namen findest du in der [Icon-Galerie](/de/dokumentation/icons).
 
 Ändere das Layout an denselben **Breakpoints**, die auch die Komponenten nutzen. Das Sass-Mixin `screen` schreibt die Media Query für dich.
 
+<LearnAside>
+
 ```scss
 @use '@db-ux/core-foundations/build/styles/screen-sizes';
 @use '@db-ux/core-foundations/build/styles/variables';
@@ -173,8 +175,6 @@ Alle Icon-Namen findest du in der [Icon-Galerie](/de/dokumentation/icons).
 }
 ```
 
-<LearnAside>
-
 `screen('md')` greift ab dem Breakpoint `md` (1024 px). Nutze für Abstände responsive Tokens, damit sich die Abstände mit dem Layout ändern.
 
 </LearnAside>
@@ -187,14 +187,14 @@ Alle Icon-Namen findest du in der [Icon-Galerie](/de/dokumentation/icons).
 
 Willst du eine vorhandene Komponente ändern, ergänze eine **Variante mit einem Data-Attribut** und gestalte sie mit Tokens. Überschreibe die Komponente nicht mit `!important`: Das bricht bei jedem Update, und die Zustände gehen verloren.
 
+<LearnAside>
+
 ```css
 .db-button[data-variant='custom'] {
 	background-color: var(--db-warning-bg-basic-level-1-default);
 	color: var(--db-warning-on-bg-basic-emphasis-100-default);
 }
 ```
-
-<LearnAside>
 
 ### Nutze die Komponenten in deinen eigenen
 

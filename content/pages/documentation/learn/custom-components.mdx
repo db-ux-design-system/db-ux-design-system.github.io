@@ -4,7 +4,7 @@ sectionSpacing: 'small'
 sectionWidth: 'auto'
 title: 'Build your own components'
 headline: 'Build your own components'
-description: 'Build components the design system does not offer, so they look and behave like the rest – with tokens, the foundation styles and the existing components.'
+description: 'Build components the design system does not offer, so they match the rest of the interface.'
 readingList: true
 align: start
 toc: true
@@ -43,6 +43,8 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 
 Take every spacing, size, color and font from the **tokens** of the foundation. Your component then follows the theme, the density and Light Mode or Dark Mode like the rest of the interface.
 
+<LearnAside>
+
 ```css
 .my-card {
 	padding-inline: var(--db-spacing-responsive-md);
@@ -51,8 +53,6 @@ Take every spacing, size, color and font from the **tokens** of the foundation. 
 	min-block-size: var(--db-sizing-md);
 }
 ```
-
-<LearnAside>
 
 The styles must be loaded as described in the setup article of your framework. The tokens are CSS custom properties, so they work in plain CSS, in CSS modules and in every framework.
 
@@ -79,6 +79,8 @@ With Sass, the same tokens are available as variables:
 
 Choose the background token first, then a matching **on-color** for text, icons and borders. The pairs are built to have enough contrast.
 
+<LearnAside>
+
 ```css
 .my-card {
 	background-color: var(--db-adaptive-bg-basic-level-1-default);
@@ -94,8 +96,6 @@ Choose the background token first, then a matching **on-color** for text, icons 
 	background-color: var(--db-adaptive-bg-basic-level-1-pressed);
 }
 ```
-
-<LearnAside>
 
 - **States:** every background token has `-default`, `-hovered` and `-pressed`.
 - **Backgrounds:** `bg-basic` in levels 1–3 for pages, sections and components. `bg-basic-transparent` only for component backgrounds. `bg-inverted` and `bg-vibrant` for components and small accents.
@@ -114,6 +114,8 @@ Which token to use when is described in the [color guidelines](/documentation/fo
 
 Set the font with a **type token** and add icons with the `data-icon` attribute, like the components do.
 
+<LearnAside>
+
 ```css
 .my-card {
 	font: var(--db-type-body-md);
@@ -128,8 +130,6 @@ Set the font with a **type token** and add icons with the `data-icon` attribute,
 ```html
 <div class="my-card" data-icon="information">…</div>
 ```
-
-<LearnAside>
 
 With Sass, use the placeholders and the icon mixin:
 
@@ -158,6 +158,8 @@ All icon names are in the [icon gallery](/documentation/icons).
 
 Change the layout at the same **breakpoints** the components use. The Sass mixin `screen` writes the media query for you.
 
+<LearnAside>
+
 ```scss
 @use '@db-ux/core-foundations/build/styles/screen-sizes';
 @use '@db-ux/core-foundations/build/styles/variables';
@@ -173,8 +175,6 @@ Change the layout at the same **breakpoints** the components use. The Sass mixin
 }
 ```
 
-<LearnAside>
-
 `screen('md')` applies from the `md` breakpoint (1024 px) upwards. Use responsive spacing tokens for gaps, so the spacing changes together with the layout.
 
 </LearnAside>
@@ -187,14 +187,14 @@ Change the layout at the same **breakpoints** the components use. The Sass mixin
 
 To change an existing component, add a **variant with a data attribute** and style it with tokens. Don't override the component with `!important`: it breaks with every update and loses the states.
 
+<LearnAside>
+
 ```css
 .db-button[data-variant='custom'] {
 	background-color: var(--db-warning-bg-basic-level-1-default);
 	color: var(--db-warning-on-bg-basic-emphasis-100-default);
 }
 ```
-
-<LearnAside>
 
 ### Use the components inside your own
 
