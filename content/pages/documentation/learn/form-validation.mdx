@@ -1,0 +1,153 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Validate form fields'
+headline: 'Validate form fields'
+description: 'How the form components show valid and invalid states, which message they show and how to control the validation yourself.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 20.2
+category: 'Development'
+keywords:
+  [
+    'validation',
+    'form validation',
+    'forms',
+    'required',
+    'invalid message',
+    'valid message',
+    'error message',
+    'invalidmessage',
+    'validmessage',
+    'user-valid',
+    'user-invalid',
+    'pattern',
+    'minlength',
+    'input',
+    'select',
+    'textarea',
+    'checkbox',
+    'radio',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## The form components validate with HTML attributes
+
+Input, Textarea, Select, Custom Select, Checkbox, Radio and Switch use the **validation of the browser**. Attributes like `required`, `pattern` or `minlength` are enough to get valid and invalid states.
+
+<LearnAside>
+
+- **Input:** `required`, `type`, `minlength`, `maxlength`, `pattern`, `min`, `max`
+- **Textarea:** `required`, `minlength`, `maxlength`
+- **Select, Custom Select, Checkbox, Switch:** `required`
+- **Radio:** with `required`, the radios are highlighted right away.
+
+All attributes are described under [built-in form validation on MDN](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation#using_built-in_form_validation).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## The state appears after the first interaction
+
+Input, Textarea and Select show valid or invalid only after a change or a submit attempt. Users are not shown an error before they have entered anything.
+
+<LearnAside>
+
+The components use the CSS pseudo classes `:user-valid` and `:user-invalid`. They only apply after the user has interacted with the field.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Set a message for both states
+
+Set `invalidMessage` and `validMessage` on every field you validate. Without them, the field shows the browser default for errors and a `TODO` note as a reminder.
+
+```html
+<DBInput
+	label="Email"
+	type="email"
+	required
+	invalidMessage="Please enter a valid email address."
+	validMessage="Thank you."
+/>
+```
+
+<LearnAside>
+
+### Which error message is shown
+
+The first match wins:
+
+| Priority | Source                                | Example                                                                               |
+| -------- | ------------------------------------- | ------------------------------------------------------------------------------------- |
+| 1        | `invalidMessage` property             | Set on the component                                                                  |
+| 2        | Message of the forms framework        | Angular Signal Forms: `errors[0].message` from the schema                             |
+| 3        | Browser default (`validationMessage`) | "Please fill out this field" for `required`                                           |
+| 4        | `TODO: Add an invalidMessage`         | Validation by framework logic only, for example a custom validator, without a message |
+
+React, Vue and Web Components have no framework messages, so step 2 is skipped. The cascade is the same for all form components.
+
+### Plain HTML
+
+Without a framework, add two `.db-infotext` elements to the form element: one with `data-semantic="successful"` and one with `data-semantic="critical"`.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Control the state yourself only when needed
+
+The `validation` property sets the state directly: `invalid`, `valid` or `no-validation`. It overrides the validation of the browser.
+
+<LearnAside>
+
+In plain HTML, use the `data-validation` attribute with the same values.
+
+Use it only for conditions that HTML attributes cannot express. A state set by hand can contradict the state the browser reports, for example to screen readers.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Continue with the form components
+
+The examples of each form component show the validation states in every framework.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Input',
+			description: 'Guidelines for text fields, including error messages.',
+			url: '/documentation/components/input',
+		},
+		{
+			title: 'Build a contact form in React',
+			description: 'A form with required fields, step by step.',
+			url: '/documentation/learn/react-tutorial',
+		},
+	]}
+/>
+
+</LearnBlock>

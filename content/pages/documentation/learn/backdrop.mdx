@@ -1,0 +1,122 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Style a backdrop'
+headline: 'Style a backdrop'
+description: 'Give your own overlays and dialogs the same backdrop as the Drawer, with the color and opacity tokens.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 20.5
+category: 'Development'
+keywords:
+  [
+    'backdrop',
+    'overlay',
+    'dialog',
+    '::backdrop',
+    'modal',
+    'scrim',
+    'opacity',
+    'tokens',
+    'css',
+    'scss',
+    'drawer',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## There is no Backdrop component
+
+The **Drawer** brings its own backdrop. For your own overlays, apply the same color with two tokens: the strongest text color and an opacity.
+
+<LearnAside>
+
+The backdrop uses `--db-adaptive-on-bg-basic-emphasis-100-default` as color and `--db-opacity-lg` as opacity. Both adapt to Light Mode and Dark Mode.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Use the tokens in CSS
+
+Mix the color with the opacity using relative color syntax, either on your own element or on `::backdrop` of a dialog.
+
+```css
+.my-backdrop,
+dialog::backdrop {
+	background-color: color(
+		from var(--db-adaptive-on-bg-basic-emphasis-100-default) srgb r g b / var(--db-opacity-lg)
+	);
+}
+```
+
+<LearnAside>
+
+For a weaker backdrop, like the `weak` variant of the Drawer, use `--db-opacity-sm` instead of `--db-opacity-lg`.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Use the tokens in SCSS
+
+With Sass, take the same tokens from the foundation package.
+
+```scss
+@use '@db-ux/core-foundations/build/styles/colors';
+@use '@db-ux/core-foundations/build/styles/variables';
+
+.my-backdrop,
+dialog::backdrop {
+	background-color: color(
+		from #{colors.$db-adaptive-on-bg-basic-emphasis-100-default} srgb r g b /
+			#{variables.$db-opacity-lg}
+	);
+}
+```
+
+<LearnAside>
+
+The weaker variant uses `variables.$db-opacity-sm`.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Continue with the tokens
+
+The opacity and color tokens are described in the foundation.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Opacity',
+			description: 'The opacity tokens and when to use them.',
+			url: '/documentation/foundation/opacity',
+		},
+		{
+			title: 'Drawer',
+			description: 'The component with a built-in backdrop.',
+			url: '/documentation/components/drawer',
+		},
+	]}
+/>
+
+</LearnBlock>

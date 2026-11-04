@@ -1,0 +1,263 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Eigene Komponenten bauen'
+headline: 'Eigene Komponenten bauen'
+description: 'Baue Komponenten, die das Design System nicht anbietet, so dass sie aussehen und sich verhalten wie der Rest – mit Tokens, den Foundation-Styles und den vorhandenen Komponenten.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 20.4
+category: 'Development'
+keywords:
+  [
+    'custom components',
+    'own components',
+    'extend',
+    'tokens',
+    'design tokens',
+    'css variables',
+    'scss',
+    'spacing',
+    'colors',
+    'typography',
+    'icons',
+    'responsive',
+    'breakpoints',
+    'stylelint',
+    'hardcoded values',
+    'data attributes',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Nutze Tokens statt fester Werte
+
+Nimm jeden Abstand, jede Größe, Farbe und Schrift aus den **Tokens** der Foundation. Deine Komponente folgt dann dem Theme, der Density sowie Light Mode und Dark Mode wie der Rest des Interface.
+
+```css
+.my-card {
+	padding-inline: var(--db-spacing-responsive-md);
+	margin-block-end: var(--db-spacing-fixed-lg);
+	border-radius: var(--db-border-radius-sm);
+	min-block-size: var(--db-sizing-md);
+}
+```
+
+<LearnAside>
+
+Die Styles müssen geladen sein, wie im Setup-Artikel deines Frameworks beschrieben. Die Tokens sind CSS Custom Properties und funktionieren deshalb in reinem CSS, in CSS-Modulen und in jedem Framework.
+
+Mit Sass gibt es dieselben Tokens als Variablen:
+
+```scss
+@use '@db-ux/core-foundations/build/styles/variables';
+
+.my-card {
+	padding-inline: variables.$db-spacing-responsive-md;
+	border-radius: variables.$db-border-radius-sm;
+}
+```
+
+**Feste oder responsive Abstände:** `fixed` behält seinen Wert, `responsive` wächst mit der Bildschirmgröße. Alle Werte stehen unter [Abstände](/de/dokumentation/foundation/abstaende).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Wähle Farben nach Hintergrund und Rolle
+
+Wähle zuerst das Token für den Hintergrund und dann eine passende **On-Color** für Text, Icons und Rahmen. Die Paare sind so gebaut, dass der Kontrast reicht.
+
+```css
+.my-card {
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+}
+
+.my-card:hover {
+	background-color: var(--db-adaptive-bg-basic-level-1-hovered);
+}
+
+.my-card:active {
+	background-color: var(--db-adaptive-bg-basic-level-1-pressed);
+}
+```
+
+<LearnAside>
+
+- **Zustände:** Jedes Hintergrund-Token gibt es als `-default`, `-hovered` und `-pressed`.
+- **Hintergründe:** `bg-basic` in den Stufen 1–3 für Seiten, Bereiche und Komponenten. `bg-basic-transparent` nur für Hintergründe von Komponenten. `bg-inverted` und `bg-vibrant` für Komponenten und kleine Akzente.
+- **Kontrast:** Text-Tokens haben auf ihrem Hintergrund mindestens 4,5:1, Icon-Tokens mindestens 3:1. Für Rahmen-Tokens gibt es keinen garantierten Kontrast.
+- **bg-vibrant** kann auf `bg-basic` zu wenig Kontrast haben. Ergänze einen Rahmen mit `on-bg-basic-emphasis-70`.
+
+Welches Token du wann nutzt, beschreiben die [Richtlinien zu Farben](/de/dokumentation/foundation/farben).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Nutze die Tokens für Schrift und Icons
+
+Setze die Schrift mit einem **Type-Token** und Icons mit dem Attribut `data-icon`, wie es die Komponenten tun.
+
+```css
+.my-card {
+	font: var(--db-type-body-md);
+}
+
+.my-card-title {
+	font: var(--db-type-body-lg);
+	font-weight: 700;
+}
+```
+
+```html
+<div class="my-card" data-icon="information">…</div>
+```
+
+<LearnAside>
+
+Mit Sass nutzt du die Platzhalter und das Icon-Mixin:
+
+```scss
+@use '@db-ux/core-foundations/build/styles/fonts';
+@use '@db-ux/core-foundations/build/styles/icons';
+
+.my-card {
+	@extend %db-overwrite-font-size-md;
+}
+
+.my-card-icon {
+	@include icons.set-icon('information', 'before');
+}
+```
+
+Alle Icon-Namen findest du in der [Icon-Galerie](/de/dokumentation/icons).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Passe das Layout an den Breakpoints an
+
+Ändere das Layout an denselben **Breakpoints**, die auch die Komponenten nutzen. Das Sass-Mixin `screen` schreibt die Media Query für dich.
+
+```scss
+@use '@db-ux/core-foundations/build/styles/screen-sizes';
+@use '@db-ux/core-foundations/build/styles/variables';
+
+.my-list {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: variables.$db-spacing-responsive-sm;
+
+	@include screen-sizes.screen('md') {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+```
+
+<LearnAside>
+
+`screen('md')` greift ab dem Breakpoint `md` (1024 px). Nutze für Abstände responsive Tokens, damit sich die Abstände mit dem Layout ändern.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Erweitere Komponenten mit eigenen Varianten
+
+Willst du eine vorhandene Komponente ändern, ergänze eine **Variante mit einem Data-Attribut** und gestalte sie mit Tokens. Überschreibe die Komponente nicht mit `!important`: Das bricht bei jedem Update, und die Zustände gehen verloren.
+
+```css
+.db-button[data-variant='custom'] {
+	background-color: var(--db-warning-bg-basic-level-1-default);
+	color: var(--db-warning-on-bg-basic-emphasis-100-default);
+}
+```
+
+<LearnAside>
+
+### Nutze die Komponenten in deinen eigenen
+
+Kombiniere die vorhandenen Komponenten, statt sie nachzubauen. Für Links, die wie Buttons aussehen, funktionieren die Button-Styles auch an einem `<a>`:
+
+```html
+<a class="db-button" data-variant="ghost" data-size="small" href="/details">Details</a>
+```
+
+### Achte auf Barrierefreiheit
+
+- Nutze native Elemente: einen `<button>` statt eines `<div>` mit Klick-Handler.
+- Unterstütze die Tastatur und gib jedem interaktiven Element einen zugänglichen Namen.
+- Teste mit der Tastatur und einem Screenreader.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Lass Stylelint deine Styles prüfen
+
+Das **Stylelint-Plugin** des Design Systems meldet feste Werte, wo es ein Token gibt. Binde es in dein Projekt ein, damit du sie vor dem Review findest.
+
+```shell
+pnpm add @db-ux/core-stylelint --save-dev
+```
+
+<LearnAside>
+
+Das Plugin und das PostCSS-Plugin stehen auch unter [Foundation einrichten](/de/dokumentation/lernen/foundation-einrichten). Die Konfiguration beschreibt das [README des Plugins](https://www.npmjs.com/package/@db-ux/core-stylelint).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Mach mit der Foundation weiter
+
+Die Foundation beschreibt alle Tokens mit ihren Werten und ihrem Einsatz.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Farben',
+			description: 'Farb-Tokens und wie du sie kombinierst.',
+			url: '/de/dokumentation/foundation/farben',
+		},
+		{
+			title: 'Abstände',
+			description: 'Feste und responsive Abstands-Tokens.',
+			url: '/de/dokumentation/foundation/abstaende',
+		},
+		{
+			title: 'Foundation einrichten',
+			description: 'Lade Tokens und Styles in dein Projekt.',
+			url: '/de/dokumentation/lernen/foundation-einrichten',
+		},
+	]}
+/>
+
+</LearnBlock>
