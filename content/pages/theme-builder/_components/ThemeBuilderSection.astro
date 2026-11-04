@@ -5,10 +5,15 @@ interface Props {
 	lang: ThemeBuilderLang;
 }
 const { lang } = Astro.props;
+// The page sets hideHero, so the PageHero h1 is gone and the only other h1 lives inside
+// the preview iframe. The host document needs its own top-level heading; it is visually
+// hidden because the builder UI carries its visible headings itself.
+const pageTitle = lang === 'de' ? 'Theme Builder' : 'Theme Builder';
 ---
 
 <!-- Mounted by template/components/ThemeBuilder/mount-init.ts (loaded by the page script) -->
 <div class="theme-builder-page">
+	<h1 class="theme-builder-visually-hidden">{pageTitle}</h1>
 	<div data-theme-builder-mount data-lang={lang}></div>
 </div>
 
@@ -20,5 +25,17 @@ const { lang } = Astro.props;
 	 */
 	#main-content-section:has(.theme-builder-page) {
 		padding-inline: 0;
+	}
+
+	.theme-builder-visually-hidden {
+		position: absolute;
+		inline-size: 1px;
+		block-size: 1px;
+		margin: -1px;
+		padding: 0;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+		border: 0;
 	}
 </style>

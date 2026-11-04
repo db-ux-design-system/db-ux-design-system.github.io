@@ -75,7 +75,9 @@ const bars = [48, 72, 60, 88, 54, 96, 78];
 		<style is:inline id="theme-builder-tokens"></style>
 	</head>
 	<body data-density="regular" data-mode="light">
-		<main class="tb-preview-main">
+		{/* aria-label makes this landmark unique: axe scans into the iframe, where the shell's
+		    own <main> is also present, and two unlabelled main landmarks fail landmark-unique. */}
+		<main class="tb-preview-main" aria-label={t.title}>
 			<h1 class="tb-visually-hidden">{t.title}</h1>
 
 			<!-- View 01: modules -->
@@ -115,13 +117,28 @@ const bars = [48, 72, 60, 88, 54, 96, 78];
 							<h2>{t.payout.title}</h2>
 							<p class="tb-muted">{t.payout.subtitle}</p>
 						</DBStack>
-						<DBSelect label={t.payout.currency}>
+						{/* The DB form components wire the label/control id only in a useEffect, so a
+						    server-rendered control has no label association (axe: label / select-name).
+						    Hydrating them runs that effect; client:visible keeps the cost low. */}
+						<DBSelect client:visible id="tb-payout-currency" label={t.payout.currency}>
 							{t.payout.currencies.map((value) => (
 								<option value={value}>{value}</option>
 							))}
 						</DBSelect>
-						<DBInput label={t.payout.amount} type="number" value="2500" />
-						<DBTextarea label={t.payout.notes} placeholder={t.payout.notesPlaceholder} rows={3} />
+						<DBInput
+							client:visible
+							id="tb-payout-amount"
+							label={t.payout.amount}
+							type="number"
+							value="2500"
+						/>
+						<DBTextarea
+							client:visible
+							id="tb-payout-notes"
+							label={t.payout.notes}
+							placeholder={t.payout.notesPlaceholder}
+							rows={3}
+						/>
 						<DBButton wrap={false} variant="brand" width="full" type="button">
 							{t.payout.cta}
 						</DBButton>
@@ -235,8 +252,20 @@ const bars = [48, 72, 60, 88, 54, 96, 78];
 							<h2>{t.signIn.title}</h2>
 							<p class="tb-muted">{t.signIn.subtitle}</p>
 						</DBStack>
-						<DBInput label={t.signIn.email} type="email" placeholder="name@example.com" />
-						<DBInput label={t.signIn.password} type="password" value="password" />
+						<DBInput
+							client:visible
+							id="tb-signin-email"
+							label={t.signIn.email}
+							type="email"
+							placeholder="name@example.com"
+						/>
+						<DBInput
+							client:visible
+							id="tb-signin-password"
+							label={t.signIn.password}
+							type="password"
+							value="password"
+						/>
 						<DBCheckbox name="tb-remember" defaultChecked={true}>
 							{t.signIn.remember}
 						</DBCheckbox>
