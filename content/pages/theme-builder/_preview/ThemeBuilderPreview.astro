@@ -119,21 +119,22 @@ const bars = [48, 72, 60, 88, 54, 96, 78];
 						</DBStack>
 						{/* The DB form components wire the label/control id only in a useEffect, so a
 						    server-rendered control has no label association (axe: label / select-name).
-						    Hydrating them runs that effect; client:visible keeps the cost low. */}
-						<DBSelect client:visible id="tb-payout-currency" label={t.payout.currency}>
+						    client:load hydrates them immediately; client:visible is not enough because the
+						    full-page axe scan runs before an off-screen module scrolls into view. */}
+						<DBSelect client:load id="tb-payout-currency" label={t.payout.currency}>
 							{t.payout.currencies.map((value) => (
 								<option value={value}>{value}</option>
 							))}
 						</DBSelect>
 						<DBInput
-							client:visible
+							client:load
 							id="tb-payout-amount"
 							label={t.payout.amount}
 							type="number"
 							value="2500"
 						/>
 						<DBTextarea
-							client:visible
+							client:load
 							id="tb-payout-notes"
 							label={t.payout.notes}
 							placeholder={t.payout.notesPlaceholder}
@@ -253,14 +254,14 @@ const bars = [48, 72, 60, 88, 54, 96, 78];
 							<p class="tb-muted">{t.signIn.subtitle}</p>
 						</DBStack>
 						<DBInput
-							client:visible
+							client:load
 							id="tb-signin-email"
 							label={t.signIn.email}
 							type="email"
 							placeholder="name@example.com"
 						/>
 						<DBInput
-							client:visible
+							client:load
 							id="tb-signin-password"
 							label={t.signIn.password}
 							type="password"
