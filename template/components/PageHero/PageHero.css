@@ -32,6 +32,7 @@
 	gap: var(--db-spacing-fixed-lg);
 	flex-direction: column;
 	align-items: center;
+	max-inline-size: 72rem; /* stylelint-disable-line db-ux/use-sizing */
 	inline-size: 100%;
 }
 
@@ -148,6 +149,13 @@
 	justify-content: center;
 	box-sizing: border-box;
 	min-block-size: 100cqb; /* stylelint-disable-line db-ux/use-sizing */
+
+	/* The top line spans the full section; the text line caps itself at 56rem. So the
+	   content is not capped here, unlike the 72rem default of other heroes. */
+}
+
+.home-page-hero .page-hero-content {
+	max-inline-size: none;
 
 	/* The spacer below takes the place of the bottom padding; the padding of the demo
 	   section keeps the distance to the iframe. */
