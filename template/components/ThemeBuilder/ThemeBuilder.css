@@ -138,9 +138,25 @@
 
 	position: relative;
 
+	/* Input and the optional remove button sit on one row, bottom-aligned on the input */
+	display: flex;
+	align-items: flex-end;
+	gap: var(--db-spacing-fixed-xs);
+
+	& .db-input {
+		/* The input takes the remaining width; with a remove button it ends up narrower */
+		flex: 1 1 auto;
+		min-inline-size: 0;
+	}
+
 	& .db-input input {
 		padding-inline-start: calc(var(--tb-swatch-size) + 2 * var(--tb-swatch-inset));
 	}
+}
+
+/* Remove button for a custom color: icon only, next to the input, does not shrink */
+.tb-color-remove {
+	flex: 0 0 auto;
 }
 
 .tb-color-swatch {
@@ -329,10 +345,6 @@
 	display: flex;
 	flex-direction: column;
 	gap: var(--db-spacing-fixed-xs);
-}
-
-.tb-family .db-button {
-	align-self: flex-start;
 }
 
 /* Accordion in the panel: the divider sits directly between the items, without extra gap */

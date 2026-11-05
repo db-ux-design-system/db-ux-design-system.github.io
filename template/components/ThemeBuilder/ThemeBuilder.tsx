@@ -1,4 +1,12 @@
-import { type ReactElement, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+	type ReactElement,
+	type ReactNode,
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from 'react';
 import {
 	DBAccordion,
 	DBAccordionItem,
@@ -319,6 +327,7 @@ function HexField({
 	pickerLabel,
 	invalidMessage,
 	onChange,
+	trailing,
 }: {
 	id: string;
 	label: string;
@@ -326,6 +335,8 @@ function HexField({
 	pickerLabel: string;
 	invalidMessage: string;
 	onChange: (value: string) => void;
+	/** Optional control placed at the end of the input row, e.g. a remove button. */
+	trailing?: ReactNode;
 }) {
 	const [draft, setDraft] = useState(value);
 	useEffect(() => setDraft(value), [value]);
@@ -356,6 +367,7 @@ function HexField({
 					aria-label={pickerLabel}
 					onChange={(event) => onChange(event.target.value.toLowerCase())}
 				/>
+				{trailing}
 			</div>
 			{invalid ? (
 				<DBInfotext size="small" semantic="critical">
@@ -376,6 +388,8 @@ function ColorField({
 	allowDarkOrigin,
 	onOriginChange,
 	onDarkOriginChange,
+	onRemove,
+	removeLabel,
 }: {
 	id: string;
 	name: string;
@@ -387,6 +401,9 @@ function ColorField({
 	allowDarkOrigin?: boolean;
 	onOriginChange: (value: string) => void;
 	onDarkOriginChange?: (value: string | undefined) => void;
+	/** Custom families can be removed; the icon button sits next to the color input. */
+	onRemove?: () => void;
+	removeLabel?: string;
 }) {
 	const contrastOk = mode.contrastOnOrigin >= 4.5;
 	const hasDark = color.originDark != null;
@@ -400,6 +417,22 @@ function ColorField({
 				pickerLabel={m.colorPicker(name)}
 				invalidMessage={m.hexInvalid}
 				onChange={onOriginChange}
+				trailing={
+					onRemove ? (
+						<DBButton
+							className="tb-color-remove"
+							variant="ghost"
+							size="small"
+							icon="cross"
+							noText
+							type="button"
+							onClick={onRemove}
+						>
+							{removeLabel}
+							<DBTooltip placement="left">{removeLabel}</DBTooltip>
+						</DBButton>
+					) : undefined
+				}
 			/>
 			{allowDarkOrigin ? (
 				hasDark ? (
@@ -803,19 +836,11 @@ const ThemeBuilder = ({ lang = 'en' }: Props) => {
 													m={m}
 													lang={lang}
 													onOriginChange={(origin) => updateFamily(family.key, { origin })}
+													onRemove={family.builtin ? undefined : () => removeFamily(family.key)}
+													removeLabel={
+														family.builtin ? undefined : m.removeFamily(familyLabel(family, m))
+													}
 												/>
-												{family.builtin ? null : (
-													<DBButton
-														wrap={false}
-														variant="ghost"
-														size="small"
-														icon="cross"
-														type="button"
-														onClick={() => removeFamily(family.key)}
-													>
-														{m.removeFamily(family.name)}
-													</DBButton>
-												)}
 											</div>
 										))}
 										<AddFamilyDialog families={config.families} m={m} onAdd={addFamily} />
