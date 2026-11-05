@@ -41,6 +41,7 @@ import './TeaserCard.css';
  * | `imagePosition` | `'top' \| 'bottom' \| 'left' \| 'right'`         | `'top'`     | Image placement relative to text                     |
  * | `imageWidth`    | `'50' \| '33' \| '66' \| '25'`                    | –           | Image/text ratio for horizontal layouts              |
  * | `searchText`    | `string`                                          | –           | Search text for linked teasers (`data-search`)       |
+ * | `ariaLabel`     | `string`                                          | –           | Accessible name for the linked card                  |
  */
 
 interface Props {
@@ -67,6 +68,12 @@ interface Props {
 		searchText?: string;
 		/** Category a filter matches against. Rendered as `data-category` on linked teasers. */
 		category?: string;
+		/**
+		 * Accessible name for the linked card. Set it when the link should be announced as
+		 * something other than its content, e.g. "Open Foundation page". Applied to the link,
+		 * and to the disabled wrapper when the teaser is disabled.
+		 */
+		ariaLabel?: string;
 	}[];
 	/** Fixed number of columns (e.g. 2 or 3). Uses auto-fit when omitted. */
 	columns?: number;
@@ -130,13 +137,18 @@ const disabledLabel = isDE ? 'Demnächst verfügbar' : 'Coming Soon';
 		};
 
 		return isDisabled ? (
-			<DisabledWrapper label={disabledLabel} size={hasImage ? 'medium' : 'small'}>
+			<DisabledWrapper
+				label={disabledLabel}
+				size={hasImage ? 'medium' : 'small'}
+				ariaLabel={teaser.ariaLabel}
+			>
 				<DBCard spacing={spacing}>{cardContent}</DBCard>
 			</DisabledWrapper>
 		) : teaser.url ? (
 			<a
 				href={teaser.url}
 				class="teaser-card-link"
+				{...(teaser.ariaLabel ? { 'aria-label': teaser.ariaLabel } : {})}
 				{...search}
 				{...(teaser.external ? { target: '_blank', rel: 'noreferrer' } : {})}
 			>

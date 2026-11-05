@@ -4,6 +4,7 @@ import visualDesign from './design.svg?raw';
 import visualDevelopment from './development.svg?raw';
 import visualExtensions from './extensions.svg?raw';
 import visualFoundation from './foundation.svg?raw';
+import visualOnboarding from './onboarding.svg?raw';
 import visualPatterns from './patterns.svg?raw';
 import visualProductManagement from './product-management.svg?raw';
 import visualReleases from './releases.svg?raw';
@@ -16,6 +17,7 @@ export const visuals = {
 	development: visualDevelopment,
 	extensions: visualExtensions,
 	foundation: visualFoundation,
+	onboarding: visualOnboarding,
 	patterns: visualPatterns,
 	'product-management': visualProductManagement,
 	releases: visualReleases,

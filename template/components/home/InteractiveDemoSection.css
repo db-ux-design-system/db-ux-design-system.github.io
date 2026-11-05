@@ -1,3 +1,21 @@
+/* The demo reaches into the full-height hero above it, so its top shows in the first
+   viewport. The overlap is a share of the visible area: cqb refers to .db-shell-content,
+   the size container set in PageHero.css. Margin percentages would refer to the width. */
+[id='home--interactive-demo-section'] {
+	position: relative;
+	z-index: 1;
+
+	/* --home-demo-overlap is set in PageHero.css, next to the hero that leaves room for it. */
+	margin-block-start: calc(-1 * var(--home-demo-overlap, 0));
+}
+
+/* Between the section widths medium (64em) and large (90em): the section stays large,
+   the demo is capped at 80em (1280 px) and centered. */
+[id='home--interactive-demo-section'] > .db-stack {
+	max-inline-size: 80em; /* stylelint-disable-line db-ux/use-sizing */
+	margin-inline: auto;
+}
+
 [id='demo-iframe'] {
 	inline-size: 100%;
 
@@ -20,8 +38,11 @@
 	max-inline-size: 100%;
 	margin: auto;
 	padding: var(--db-spacing-fixed-2xs);
+
+	/* Below the demo, so it is not in the first viewport. It sticks to the bottom edge
+	   while the demo is in view, so the theme controls stay reachable. */
 	position: sticky;
-	inset-block-start: var(--db-spacing-fixed-md);
+	inset-block-end: var(--db-spacing-fixed-md);
 }
 
 .db-card.actionbar .db-stack {
