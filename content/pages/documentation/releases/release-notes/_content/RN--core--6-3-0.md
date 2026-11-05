@@ -11,11 +11,6 @@ _version bump_
 
 ### Development
 
-#### Added
-
-- Layout: The tablet and desktop breakpoints are now customizable via the `--db-tablet-breakpoint` and `--db-desktop-breakpoint` custom properties.
-  - The Shell Control Panel now switches at 1024px (was 768px), aligned with Header. Set `--db-desktop-breakpoint: 48rem` to restore the previous value.
-
 #### Fixed
 
 - Custom Select: Removing a selected tag in a `multiple` + `selectedType="tag"` select no longer crashes the Web Component.
