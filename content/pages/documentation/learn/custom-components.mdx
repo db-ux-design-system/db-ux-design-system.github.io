@@ -1,0 +1,263 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Build your own components'
+headline: 'Build your own components'
+description: 'Build components the design system does not offer, so they match the rest of the interface.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 20.4
+category: 'Development'
+keywords:
+  [
+    'custom components',
+    'own components',
+    'extend',
+    'tokens',
+    'design tokens',
+    'css variables',
+    'scss',
+    'spacing',
+    'colors',
+    'typography',
+    'icons',
+    'responsive',
+    'breakpoints',
+    'stylelint',
+    'hardcoded values',
+    'data attributes',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Use tokens instead of fixed values
+
+Take every spacing, size, color and font from the **tokens** of the foundation. Your component then follows the theme, the density and Light Mode or Dark Mode like the rest of the interface.
+
+<LearnAside>
+
+```css
+.my-card {
+	padding-inline: var(--db-spacing-responsive-md);
+	margin-block-end: var(--db-spacing-fixed-lg);
+	border-radius: var(--db-border-radius-sm);
+	min-block-size: var(--db-sizing-md);
+}
+```
+
+The styles must be loaded as described in the setup article of your framework. The tokens are CSS custom properties, so they work in plain CSS, in CSS modules and in every framework.
+
+With Sass, the same tokens are available as variables:
+
+```scss
+@use '@db-ux/core-foundations/build/styles/variables';
+
+.my-card {
+	padding-inline: variables.$db-spacing-responsive-md;
+	border-radius: variables.$db-border-radius-sm;
+}
+```
+
+**Fixed or responsive spacing:** `fixed` keeps its value, `responsive` grows with the screen size. All values are listed under [Spacing](/documentation/foundation/spacing).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Pick colors by background and role
+
+Choose the background token first, then a matching **on-color** for text, icons and borders. The pairs are built to have enough contrast.
+
+<LearnAside>
+
+```css
+.my-card {
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+	color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+}
+
+.my-card:hover {
+	background-color: var(--db-adaptive-bg-basic-level-1-hovered);
+}
+
+.my-card:active {
+	background-color: var(--db-adaptive-bg-basic-level-1-pressed);
+}
+```
+
+- **States:** every background token has `-default`, `-hovered` and `-pressed`.
+- **Backgrounds:** `bg-basic` in levels 1–3 for pages, sections and components. `bg-basic-transparent` only for component backgrounds. `bg-inverted` and `bg-vibrant` for components and small accents.
+- **Contrast:** text tokens on their background have at least 4.5:1, icon tokens at least 3:1. Border tokens have no guaranteed contrast.
+- **bg-vibrant** can have too little contrast against `bg-basic`. Add a border with `on-bg-basic-emphasis-70`.
+
+Which token to use when is described in the [color guidelines](/documentation/foundation/colors).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Use the font and icon tokens
+
+Set the font with a **type token** and add icons with the `data-icon` attribute, like the components do.
+
+<LearnAside>
+
+```css
+.my-card {
+	font: var(--db-type-body-md);
+}
+
+.my-card-title {
+	font: var(--db-type-body-lg);
+	font-weight: 700;
+}
+```
+
+```html
+<div class="my-card" data-icon="information">…</div>
+```
+
+With Sass, use the placeholders and the icon mixin:
+
+```scss
+@use '@db-ux/core-foundations/build/styles/fonts';
+@use '@db-ux/core-foundations/build/styles/icons';
+
+.my-card {
+	@extend %db-overwrite-font-size-md;
+}
+
+.my-card-icon {
+	@include icons.set-icon('information', 'before');
+}
+```
+
+All icon names are in the [icon gallery](/documentation/icons).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Adapt the layout with the breakpoints
+
+Change the layout at the same **breakpoints** the components use. The Sass mixin `screen` writes the media query for you.
+
+<LearnAside>
+
+```scss
+@use '@db-ux/core-foundations/build/styles/screen-sizes';
+@use '@db-ux/core-foundations/build/styles/variables';
+
+.my-list {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: variables.$db-spacing-responsive-sm;
+
+	@include screen-sizes.screen('md') {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+```
+
+`screen('md')` applies from the `md` breakpoint (1024 px) upwards. Use responsive spacing tokens for gaps, so the spacing changes together with the layout.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Extend components with your own variants
+
+To change an existing component, add a **variant with a data attribute** and style it with tokens. Don't override the component with `!important`: it breaks with every update and loses the states.
+
+<LearnAside>
+
+```css
+.db-button[data-variant='custom'] {
+	background-color: var(--db-warning-bg-basic-level-1-default);
+	color: var(--db-warning-on-bg-basic-emphasis-100-default);
+}
+```
+
+### Use the components inside your own
+
+Combine the existing components instead of rebuilding them. For links that look like buttons, the button styles also work on an `<a>`:
+
+```html
+<a class="db-button" data-variant="ghost" data-size="small" href="/details">Details</a>
+```
+
+### Keep it accessible
+
+- Use native elements: a `<button>` instead of a `<div>` with a click handler.
+- Support the keyboard and give every interactive element an accessible name.
+- Test with the keyboard and a screen reader.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Let Stylelint check your styles
+
+The **Stylelint plugin** of the design system reports fixed values where a token exists. Add it to your project to find them before review.
+
+```shell
+pnpm add @db-ux/core-stylelint --save-dev
+```
+
+<LearnAside>
+
+The plugin and the PostCSS plugin are also listed in [Set up the foundation](/documentation/learn/foundation-setup). The configuration is described in the [README of the plugin](https://www.npmjs.com/package/@db-ux/core-stylelint).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Continue with the foundation
+
+The foundation describes all tokens with their values and use.
+
+<TeaserCard
+	columns={3}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Colors',
+			description: 'Color tokens and how to combine them.',
+			url: '/documentation/foundation/colors',
+		},
+		{
+			title: 'Spacing',
+			description: 'Fixed and responsive spacing tokens.',
+			url: '/documentation/foundation/spacing',
+		},
+		{
+			title: 'Set up the foundation',
+			description: 'Load the tokens and styles in your project.',
+			url: '/documentation/learn/foundation-setup',
+		},
+	]}
+/>
+
+</LearnBlock>
