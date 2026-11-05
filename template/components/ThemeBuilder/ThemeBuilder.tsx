@@ -422,7 +422,7 @@ function ColorField({
 						<DBButton
 							className="tb-color-remove"
 							variant="ghost"
-							size="small"
+							size="medium"
 							icon="cross"
 							noText
 							type="button"
