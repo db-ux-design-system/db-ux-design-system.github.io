@@ -80,3 +80,21 @@ import { DBSection } from '@db-ux/react-core-components';
 />
 
 </DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Where documentation lives
+
+The documentation is split into two places. Contribute to the place that matches your topic.
+
+| Place                                                                                                  | Content                                                                                                                                                                                                 | Language, versions                  |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| **Design System Platform** (this website)                                                              | Content and design: guidelines with Do and Don't examples, when to use a component, the playground and the Learn articles: setup, examples and guides such as router links, form validation and testing | German and English, current version |
+| **[Storybook](https://design-system.deutschebahn.com/core-web/version/latest/composition-storybook/)** | Technical details: properties, code examples, getting started per framework, migration, technical guides and foundations                                                                                | English, one version per release    |
+
+- **Technical in Storybook, content on the platform:** If a text explains how to use a component in code, it belongs in Storybook. If it explains when or why to use it, it belongs on the platform.
+- **One source per content:** Storybook is generated from the [core-web repository](https://github.com/db-ux-design-system/core-web). Changes to technical documentation go there, not into Storybook directly.
+- **Link instead of copying:** Both places link to each other and do not repeat content.
+- **Guides across components in Learn:** How-tos that are not tied to one component, such as router links or testing, are [Learn](/documentation/learn) articles here – also when they are technical.
+
+</DBSection>

@@ -1,0 +1,132 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Eine Density setzen'
+headline: 'Eine Density setzen'
+description: 'Mach einen Bereich oder die ganze Seite kompakter oder großzügiger – Komponenten, Schriftgrößen und Abstände folgen der Density.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 18.2
+category: 'Development'
+keywords:
+  [
+    'density',
+    'densities',
+    'data-density',
+    'functional',
+    'regular',
+    'expressive',
+    'compact',
+    'spacious',
+    'volume',
+    'meta navigation',
+    'business app',
+    'tokens',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Eine Density legt die Lautstärke eines Bereichs fest
+
+Es gibt drei **Densities**: `functional`, `regular` und `expressive`. Komponenten, Schriftgrößen und Abstände im Bereich ändern sich mit ihr.
+
+<LearnAside>
+
+| Density              | Einsatz                                          |
+| -------------------- | ------------------------------------------------ |
+| `functional`         | Fachanwendungen mit vielen Daten, große Tabellen |
+| `regular` (Standard) | Anwendungen für Endkundinnen und Endkunden       |
+| `expressive`         | Marketing-Seiten und Einzelseiten                |
+
+Eine kleinere Density setzt auch Prioritäten: Eine Meta-Navigation in `functional` über einer Hauptnavigation in `regular` zieht weniger Aufmerksamkeit auf sich als die Hauptnavigation.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Setze die Density an einem Container
+
+Setze `data-density` an ein beliebiges Element. Alles darin nutzt diese Density.
+
+```html
+<div data-density="functional">
+	<DBButton>Speichern</DBButton>
+	<DBInput label="Name" />
+</div>
+```
+
+<LearnAside>
+
+Die Klassen `db-density-functional`, `db-density-regular` und `db-density-expressive` funktionieren wie das Attribut.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Ändere die Density der ganzen Seite
+
+Setze das Attribut an `body`. Bereiche darin können trotzdem eine andere Density haben.
+
+```html
+<body data-density="functional">
+	…
+</body>
+```
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Lade die Density-Klassen, wenn du nur die Foundation nutzt
+
+Die Styles der Komponenten enthalten die Density-Klassen. Nutzt du die Foundation ohne die Komponenten, importierst du sie selbst.
+
+```css
+@import '@db-ux/core-foundations/build/styles/density/classes/all.css' layer(db-ux);
+```
+
+<LearnAside>
+
+Ohne den Import gilt überall `regular`. Dein eigenes CSS folgt der Density, solange es die Tokens für Abstände, Größen und Schrift nutzt, weil sich ihre Werte mit der Density ändern.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Mach mit den Tokens weiter
+
+Abstände, Größen und Schriftgrößen ändern sich mit der Density.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Abstände und Größen umsetzen',
+			description: 'Nutze die Tokens für Abstände und Größen in deinem CSS.',
+			url: '/de/dokumentation/lernen/abstaende-und-groessen',
+		},
+		{
+			title: 'Schriftgrößen umsetzen',
+			description: 'Setze Body- und Headline-Größen an deinen Elementen.',
+			url: '/de/dokumentation/lernen/typografie',
+		},
+	]}
+/>
+
+</LearnBlock>

@@ -1,0 +1,156 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Schriftgrößen umsetzen'
+headline: 'Schriftgrößen umsetzen'
+description: 'Setze Body- und Headline-Größen an deinen Elementen und nutze die Type-Tokens in deinen eigenen Komponenten.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 18.3
+category: 'Development'
+keywords:
+  [
+    'typography',
+    'font size',
+    'font sizes',
+    'headline size',
+    'data-font-size',
+    'data-headline-size',
+    'db-font-size',
+    'line-height',
+    'type tokens',
+    'db-type-body',
+    'headings',
+    'h1',
+    'scss placeholder',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Text und Überschriften haben schon Größen
+
+`body`, `h1` bis `h6` und die Komponenten haben ihre Größen schon. Ändere eine Größe nur dort, wo dein Layout es braucht.
+
+<LearnAside>
+
+Es gibt zwei Sätze mit je neun Größen: **Body-Größen** für Fließtext und **Headline-Größen** für Überschriften. Die Größen sind `3xl`, `2xl`, `xl`, `lg`, `md`, `sm`, `xs`, `2xs` und `3xs`.
+
+Alle Größen folgen der Density und der Bildschirmgröße. Zwei Größen können deshalb manchmal denselben Wert haben.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Setze eine Body-Größe an einem Element
+
+`data-font-size` setzt Schriftgröße und Zeilenhöhe eines Elements und des Texts darin. Die Komponenten darin ändert es nicht.
+
+```html
+<p data-font-size="sm">Zusätzliche Information</p>
+```
+
+<LearnAside>
+
+| Einsatz        | Attribut                  | Klasse                |
+| -------------- | ------------------------- | --------------------- |
+| Body-Größe     | `data-font-size="sm"`     | `db-font-size-sm`     |
+| Headline-Größe | `data-headline-size="lg"` | `db-headline-size-lg` |
+
+Die Headline-Größen ändern das Aussehen einer Überschrift, ohne ihre Ebene zu ändern, zum Beispiel ein `h2` in der Größe eines `h3`.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Lade die Schriftklassen, wenn du nur die Foundation nutzt
+
+Die Styles der Komponenten enthalten die Schriftklassen. Nutzt du nur die Foundation, importiere sie nach den anderen Foundation-Dateien.
+
+```css
+@import '@db-ux/core-foundations/build/styles/fonts/classes/all.css' layer(db-ux);
+```
+
+<LearnAside>
+
+Setzt eine andere Datei später `font-size`, überschreibt sie die Klassen. Lass deine Elemente die Größe dann erben:
+
+```css
+* {
+	font-size: inherit;
+	line-height: inherit;
+}
+```
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Nutze die Type-Tokens in deinen eigenen Komponenten
+
+`font` mit einem **Type-Token** setzt Größe und Zeilenhöhe zusammen.
+
+```css
+.my-label {
+	font: var(--db-type-body-sm);
+}
+```
+
+<LearnAside>
+
+Die Headline-Tokens heißen `--db-type-headline-3xl` bis `--db-type-headline-3xs`.
+
+Mit Sass erweiterst du einen Platzhalter. Er setzt zusätzlich die Custom Properties, die manche Komponenten in deinem Element brauchen:
+
+```scss
+@use '@db-ux/core-foundations/build/styles/fonts';
+
+.my-label {
+	@extend %db-overwrite-font-size-sm;
+}
+```
+
+Nutze die Klassen oder Platzhalter, wo es geht, statt der Tokens.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Mach mit der Typografie weiter
+
+Die Foundation zeigt alle Größen mit ihren Werten.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Typografie',
+			description: 'Typo-Skala, Größen und Richtlinien.',
+			url: '/de/dokumentation/foundation/typografie',
+		},
+		{
+			title: 'Eine Density setzen',
+			description: 'Mach Bereiche kompakter oder großzügiger.',
+			url: '/de/dokumentation/lernen/density',
+		},
+	]}
+/>
+
+</LearnBlock>
