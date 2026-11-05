@@ -60,11 +60,8 @@
  *   Same as ResourceCards and CardTeaser.
  * - Large card, with image or visual: headline-sm title, see TextImage.css.
  * The size follows the card type, not the heading level, so an h3 looks like an h2.
- * The global content spacing (content-spacing.css) adds a top margin to a paragraph
- * after a heading; its selector counts three classes, so these need four to win.
  */
 .dba-main-content .teaser-cards .teaser-content > .teaser-description {
-	margin-block-start: 0;
 	font: var(--db-type-body-md);
 }
 

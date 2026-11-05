@@ -194,8 +194,7 @@
 
 /* No frame around the list and no dividers. No gap either: the lines of the items
    form one continuous line, like the group bar in the reading list popover. Spacing
-   inside the wizard comes from the gaps only: the content margins of
-   content-spacing.css are excluded for .gsw there. */
+   inside the wizard comes from the gaps only. */
 .gsw-package-list {
 	display: grid;
 	margin: 0;

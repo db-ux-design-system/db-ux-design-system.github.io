@@ -95,14 +95,6 @@
 	align-self: flex-start;
 }
 
-/* The global content spacing (content-spacing.css) adds a top margin to an element that
-   follows an astro-island, so a control placed after the reading list island would sit
-   lower than it. The toolbar aligns its items itself; the extra classes outrank that
-   rule. */
-.dba-main-content .page-hero-headline-row .page-hero-toolbar > * {
-	margin-block: 0;
-}
-
 .page-hero-description {
 	max-inline-size: var(--db-container-md);
 	opacity: 0.75;
@@ -250,8 +242,10 @@ hero-model[data-ar] .page-hero-model-toggle {
 
 /* Mobile Anpassungen */
 @media (width <= 767px) {
+	/* Text and visual are stacked: the gap is the distance between them (2xl), so the
+	   visual itself has no top margin here. */
 	.page-hero {
-		gap: var(--db-spacing-fixed-md);
+		gap: var(--db-spacing-fixed-2xl);
 		margin-block-end: var(--db-spacing-fixed-xl);
 	}
 
@@ -266,7 +260,6 @@ hero-model[data-ar] .page-hero-model-toggle {
 	}
 
 	.page-hero[data-layout='split'] .page-hero-media {
-		margin-block-start: var(--db-spacing-fixed-lg);
 		justify-content: center; /* Mobile immer zentriert */
 	}
 
@@ -281,6 +274,6 @@ hero-model[data-ar] .page-hero-model-toggle {
 	}
 
 	.page-hero-media {
-		margin-block-start: var(--db-spacing-fixed-lg);
+		margin-block-start: 0;
 	}
 }
