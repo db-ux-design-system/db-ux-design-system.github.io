@@ -24,7 +24,8 @@ export type ColorKey = (typeof COLOR_KEYS)[number];
 /**
  * The built-in color families of the New Foundation (Figma collection "🎨 Color"). Their
  * origin can be changed, and further families can be added with a name and an origin.
- * Semantic colors point at one of them.
+ * Semantic colors point at one of them. The DB theme already ships the adaptive token set
+ * for these, so the builder does not re-emit it for them (see `emitAdaptiveTokens`).
  */
 export const BUILTIN_FAMILY_KEYS = [
 	'yellow',
@@ -37,9 +38,20 @@ export const BUILTIN_FAMILY_KEYS = [
 	'cyan',
 	'turquoise',
 	'green',
-	'lilac',
 ] as const;
 export type BuiltinFamilyKey = (typeof BUILTIN_FAMILY_KEYS)[number];
+
+/**
+ * Families that ship with the DB theme as a custom (deletable) color rather than a built-in.
+ * Lilac is part of the New Foundation palette but is not a core color of the DB theme, so it
+ * is seeded like a manually added color: it carries the adaptive token set and can be removed
+ * in the builder.
+ */
+export const DEFAULT_CUSTOM_FAMILY_KEYS = ['lilac'] as const;
+export type DefaultCustomFamilyKey = (typeof DEFAULT_CUSTOM_FAMILY_KEYS)[number];
+
+/** Every family key the builder knows a default origin/name for (built-in + default custom). */
+export type SeededFamilyKey = BuiltinFamilyKey | DefaultCustomFamilyKey;
 /** Key of a built-in or a custom family; also the CSS prefix (`--db-<key>-0`). */
 export type FamilyKey = string;
 
@@ -70,7 +82,7 @@ type Family = {
  * export (`Import/figma-export.json`). Lilac is not part of COLORS yet (it still lists
  * Light Green), so its h/s are fitted to the Figma ramp.
  */
-const FAMILIES: Record<BuiltinFamilyKey, Family> = {
+const FAMILIES: Record<SeededFamilyKey, Family> = {
 	yellow: {
 		...hs('Yellow'),
 		origin: '#ffd800',
@@ -147,7 +159,10 @@ function hs(name: string): { h: number; s: number } {
 const isBuiltinFamily = (key: string): key is BuiltinFamilyKey =>
 	(BUILTIN_FAMILY_KEYS as readonly string[]).includes(key);
 
-const BUILTIN_NAMES: Record<BuiltinFamilyKey, string> = {
+/** Whether the builder knows a default origin/name for this key (built-in or default custom). */
+const isSeededFamily = (key: string): key is SeededFamilyKey => key in FAMILIES;
+
+const SEEDED_FAMILY_NAMES: Record<SeededFamilyKey, string> = {
 	yellow: 'Yellow',
 	orange: 'Orange',
 	red: 'Red',
@@ -161,15 +176,24 @@ const BUILTIN_NAMES: Record<BuiltinFamilyKey, string> = {
 	lilac: 'Lilac',
 };
 
-export const DEFAULT_FAMILIES: FamilyConfig[] = BUILTIN_FAMILY_KEYS.map((key) => ({
+const seededFamily = (key: SeededFamilyKey, builtin: boolean): FamilyConfig => ({
 	key,
-	name: BUILTIN_NAMES[key],
-	builtin: true,
+	name: SEEDED_FAMILY_NAMES[key],
+	builtin,
 	origin: FAMILIES[key].origin,
 	h: FAMILIES[key].h,
 	s: FAMILIES[key].s,
 	direction: 'auto',
-}));
+});
+
+/**
+ * The families a fresh config starts with: the built-in families (not deletable) followed by
+ * the default custom families (Lilac), which carry the adaptive token set and can be removed.
+ */
+export const DEFAULT_FAMILIES: FamilyConfig[] = [
+	...BUILTIN_FAMILY_KEYS.map((key) => seededFamily(key, true)),
+	...DEFAULT_CUSTOM_FAMILY_KEYS.map((key) => seededFamily(key, false)),
+];
 
 /**
  * Keys that already carry tokens in the DB UX packages. A custom family must not use them,
@@ -467,16 +491,23 @@ const ORIGIN_AGGREGATORS: ReadonlyArray<readonly [string, (c: string) => string]
 ];
 
 /**
- * Emits the aggregated origin tokens and the full adaptive semantic set for one color key,
- * so a custom or additional family is usable like a built-in design system color.
+ * Emits the aggregated origin tokens and the full adaptive semantic set (`bg-*`, `on-bg-*`)
+ * for one color key, so a manually added family is usable like a built-in design system color.
+ * Only called for custom families – the built-in families and the core colors already ship
+ * this set with the DB theme.
  */
 const emitAdaptiveTokens = (tokens: Record<string, string>, key: string): void => {
 	for (const [suffix, value] of ORIGIN_AGGREGATORS) tokens[`--db-${key}-${suffix}`] = value(key);
 	for (const [suffix, value] of ADAPTIVE_COLOR_TOKENS) tokens[`--db-${key}-${suffix}`] = value(key);
 };
 
-/** All token suffixes a color provides, e.g. `7`, `origin-light-hovered` or an adaptive one. */
-const COLOR_TOKEN_SUFFIXES = [
+/**
+ * The base token suffixes every color provides: the 15 palette steps, the origin base and the
+ * per-scheme origin/on-origin states, plus the scheme-less origin aggregators. These are the
+ * inputs the DB theme derives its adaptive (`bg-*`/`on-bg-*`) tokens from; the adaptive set
+ * itself is added separately (see `ADAPTIVE_COLOR_TOKENS`), only for custom families.
+ */
+const BASE_TOKEN_SUFFIXES = [
 	...PALETTE_STEPS.map(String),
 	'origin-base',
 	...SCHEMES.flatMap((scheme) => [
@@ -484,7 +515,6 @@ const COLOR_TOKEN_SUFFIXES = [
 		`on-origin-${scheme}-default`,
 	]),
 	...ORIGIN_AGGREGATORS.map(([suffix]) => suffix),
-	...ADAPTIVE_COLOR_TOKENS.map(([suffix]) => suffix),
 ];
 
 /**
@@ -516,7 +546,7 @@ export const buildTheme = (config: ThemeConfig): ThemeResult => {
 		const { key, origin, h, s } = family;
 		// The state direction is always automatic
 		const mode = buildColorMode(h == null ? origin : { origin, h, s });
-		const figma = isBuiltinFamily(key) ? FAMILIES[key] : undefined;
+		const figma = isSeededFamily(key) ? FAMILIES[key] : undefined;
 		const keepFigmaStates = figma && origin === figma.origin;
 		if (keepFigmaStates) {
 			mode.origin = { default: figma.origin, hovered: figma.hovered, pressed: figma.pressed };
@@ -533,14 +563,17 @@ export const buildTheme = (config: ThemeConfig): ThemeResult => {
 			tokens[`--db-${key}-origin-${scheme}-pressed`] = mode.origin.pressed;
 			tokens[`--db-${key}-on-origin-${scheme}-default`] = mode.onOrigin;
 		}
-		// The adaptive semantic set, so an additional color is usable like a design system color
-		emitAdaptiveTokens(tokens, key);
+		// Only a manually added (custom) family gets the adaptive set. The built-in families
+		// already ship it with the DB theme, so re-emitting it would only bloat the export.
+		if (!family.builtin) emitAdaptiveTokens(tokens, key);
 	}
 
-	// Semantic colors alias a color family instead of carrying a palette of their own
+	// Semantic colors alias a color family instead of carrying a palette of their own. Only the
+	// base tokens are aliased: the DB theme's adaptive semantic tokens reference `--db-<key>-N`,
+	// so they follow the aliased palette automatically and must not be overwritten here.
 	for (const key of SEMANTIC_KEYS) {
 		const family = config.semantic[key];
-		for (const suffix of COLOR_TOKEN_SUFFIXES) {
+		for (const suffix of BASE_TOKEN_SUFFIXES) {
 			tokens[`--db-${key}-${suffix}`] = `var(--db-${family}-${suffix})`;
 		}
 	}
@@ -568,7 +601,7 @@ export const buildTheme = (config: ThemeConfig): ThemeResult => {
 			tokens[`--db-${key}-origin-${scheme}-pressed`] = schemeMode.origin.pressed;
 			tokens[`--db-${key}-on-origin-${scheme}-default`] = schemeMode.onOrigin;
 		}
-		emitAdaptiveTokens(tokens, key);
+		// Primary and neutral are core colors the DB theme already provides the adaptive set for.
 	}
 
 	RADIUS_SIZES.forEach((size, index) => {
@@ -733,30 +766,52 @@ export const toJson = (config: ThemeConfig, tokens: Record<string, string>): str
 const colorProperty = (name: string, value: string): string =>
 	`@property ${name} {\n\tsyntax: "<color>";\n\tinitial-value: ${value};\n\tinherits: true;\n}`;
 
+/** A plain color is a concrete value (hex/rgb/hsl); everything else is computed (light-dark/var). */
+const isPlainColor = (value: string): boolean => /^#|^rgb|^hsl/i.test(value);
+
 /**
- * The theme CSS: every color token registered as a typed `@property`, grouped by color and
- * wrapped in the theme layer. A `light-dark(...)` or `var(...)` value is not a valid
- * `<color>` initial value, so those are registered with `syntax: "*"` instead, and the
- * concrete value is written in the layer block below.
+ * Splits a color group into plain and computed declarations. A plain color carries its value
+ * through the typed `@property` `initial-value`, so its `:root` line is only a fallback (it
+ * goes to theme.legacy.css). A computed color (`light-dark(...)` / `var(...)`) can not be a
+ * `<color>` initial value, so it is registered with `syntax: "*"` and its value stays in the
+ * theme.css layer block.
+ */
+const groupColorDeclarations = (
+	config: ThemeConfig,
+	grouped: GroupedTheme,
+): { properties: string[]; computed: string[]; legacy: string[] } => {
+	const properties: string[] = [];
+	const computed: string[] = [];
+	const legacy: string[] = [];
+	for (const [key, entries] of Object.entries(grouped.colors)) {
+		const computedDecls: string[] = [];
+		const legacyDecls: string[] = [];
+		for (const [suffix, value] of Object.entries(entries)) {
+			const name = `--db-${key}-${suffix}`;
+			if (isPlainColor(value)) {
+				properties.push(colorProperty(name, value));
+				legacyDecls.push(`\t${name}: ${value};`);
+			} else {
+				properties.push(`@property ${name} {\n\tsyntax: "*";\n\tinherits: true;\n}`);
+				computedDecls.push(`\t${name}: ${value};`);
+			}
+		}
+		const label = cssComment(colorLabel(config, key));
+		if (computedDecls.length > 0) computed.push(`\t/* ${label} */\n${computedDecls.join('\n')}`);
+		if (legacyDecls.length > 0) legacy.push(`\t/* ${label} */\n${legacyDecls.join('\n')}`);
+	}
+	return { properties, computed, legacy };
+};
+
+/**
+ * The theme CSS: every color token registered as a typed `@property`, wrapped in the theme
+ * layer. Plain colors carry their value in the `@property` `initial-value`; the computed
+ * `light-dark(...)` / `var(...)` tokens and the border radii are set in the layer block.
+ * The concrete `:root` fallback for the plain colors lives in theme.legacy.css.
  */
 export const toThemeCss = (config: ThemeConfig, tokens: Record<string, string>): string => {
 	const grouped = groupTokens(config, tokens);
-	const properties: string[] = [];
-	const declarations: string[] = [];
-	for (const [key, entries] of Object.entries(grouped.colors)) {
-		const decls: string[] = [];
-		for (const [suffix, value] of Object.entries(entries)) {
-			const name = `--db-${key}-${suffix}`;
-			const isPlainColor = /^#|^rgb|^hsl/i.test(value);
-			properties.push(
-				isPlainColor
-					? colorProperty(name, value)
-					: `@property ${name} {\n\tsyntax: "*";\n\tinherits: true;\n}`,
-			);
-			decls.push(`\t${name}: ${value};`);
-		}
-		declarations.push(`\t/* ${cssComment(colorLabel(config, key))} */\n${decls.join('\n')}`);
-	}
+	const { properties, computed } = groupColorDeclarations(config, grouped);
 	const border = Object.entries(grouped.border).map(
 		([size, value]) => `\t--db-border-radius-${size}: ${value};`,
 	);
@@ -770,20 +825,46 @@ export const toThemeCss = (config: ThemeConfig, tokens: Record<string, string>):
  *
  *   @layer db-ux, ${THEME_LAYER};
  *   @import "@db-ux/core-components/build/styles/bundle.css" layer(db-ux);
+ *   @import "./theme.legacy.css" layer(${THEME_LAYER});
  *   @import "./theme.css" layer(${THEME_LAYER});
  *
- * The fonts are in theme.fonts.css (they need a different @property syntax). See README.md.
+ * The plain color values are registered as typed @property, so no :root block is needed for
+ * them. theme.legacy.css ships the same values as a plain :root fallback for engines that do
+ * not honor @property initial values. The fonts are in theme.fonts.css. See README.md.
  * Density: set data-density="${config.density}" on <body> or a container.
  * Mode: set data-mode="${config.mode}" (or leave it unset to follow the OS).
  */`;
 
+	const rootEntries = [...computed, `\t/* border radius */\n${border.join('\n')}`].join('\n\n');
 	const layerBlock = `@layer ${THEME_LAYER} {
 \t:root {
-${[...declarations, `\t/* border radius */\n${border.join('\n')}`].join('\n\n')}
+${rootEntries}
 \t}
 ${componentCss(config) ? `\n\t/* Component adjustments for rounded corners */\n${indentBlock(componentCss(config))}\n` : ''}${config.icons === 'lucide' ? `\n\t/* Icons: Lucide (white label icon fonts of @db-ux/core-foundations) */\n${indentBlock(iconCss(config))}\n` : ''}}`;
 
 	return `${header}\n${properties.join('\n')}\n\n${layerBlock}\n`;
+};
+
+/**
+ * The legacy CSS: the plain color tokens as a flat `:root` block, with their concrete values.
+ * These are the same values the typed `@property` registrations in theme.css carry as their
+ * `initial-value`; this file is the fallback for engines that do not apply `@property` initial
+ * values. Import it before theme.css so the typed properties win where they are supported.
+ */
+export const toLegacyCss = (config: ThemeConfig, tokens: Record<string, string>): string => {
+	const grouped = groupTokens(config, tokens);
+	const { legacy } = groupColorDeclarations(config, grouped);
+	const header = `/**
+ * DB UX Design System – generated theme, legacy fallback (${config.preset})
+ *
+ * Plain :root color variables with their concrete values. theme.css registers the same
+ * tokens as typed @property; this file is only needed for engines that do not honor the
+ * @property initial values. Import it in the theme layer, before theme.css:
+ *
+ *   @import "./theme.legacy.css" layer(${THEME_LAYER});
+ *   @import "./theme.css" layer(${THEME_LAYER});
+ */`;
+	return `${header}\n:root {\n${legacy.join('\n\n')}\n}\n`;
 };
 
 /** Indents every line of a block by one tab, for nesting inside the @layer rule. */
@@ -835,21 +916,27 @@ Mode: data-mode="${config.mode}" (or leave unset to follow the OS)
 
 ## Files
 
-- theme.css        Color and border tokens, registered as @property and set in a cascade layer.
-- theme.fonts.css  Font family tokens (@property) plus the typography overrides.
+- theme.css          Color and border tokens, registered as @property and set in a cascade layer.
+- theme.legacy.css   The plain color tokens as a :root fallback, for engines that do not honor @property initial values.
+- theme.fonts.css    Font family tokens (@property) plus the typography overrides.
 - theme.tokens.json  The same theme as Style Dictionary (DTCG) tokens, grouped into colors, border and font.
 
 ## Usage
 
 Import the generated files in their own cascade layer, after the design system, so they
-replace its tokens:
+replace its tokens. Import theme.legacy.css before theme.css so the typed @property values
+win wherever they are supported:
 
 \`\`\`css
 @layer db-ux, ${THEME_LAYER};
 @import "@db-ux/core-components/build/styles/bundle.css" layer(db-ux);
+@import "./theme.legacy.css" layer(${THEME_LAYER});
 @import "./theme.css" layer(${THEME_LAYER});
 @import "./theme.fonts.css" layer(${THEME_LAYER});
 \`\`\`
+
+theme.legacy.css is optional: drop it if you only target engines that apply @property initial
+values.
 `;
 
 /**
@@ -1049,19 +1136,30 @@ const sanitizeFamilies = (input: unknown): FamilyConfig[] => {
 		}
 	}
 	const direction = (value: unknown) => pick(value, ['auto', 'darker', 'lighter'] as const, 'auto');
-	const result: FamilyConfig[] = DEFAULT_FAMILIES.map((fallback) => {
+	const result: FamilyConfig[] = [];
+	for (const fallback of DEFAULT_FAMILIES) {
 		const candidate = byKey.get(fallback.key);
-		if (!candidate || !isHex(candidate.origin)) return { ...fallback };
+		// Built-in families are never deletable, so they are always restored. A default custom
+		// family (Lilac) is only restored when the saved config still contains it – otherwise a
+		// family the user deleted would reappear on reload.
+		if (!candidate) {
+			if (fallback.builtin) result.push({ ...fallback });
+			continue;
+		}
+		if (!isHex(candidate.origin)) {
+			if (fallback.builtin) result.push({ ...fallback });
+			continue;
+		}
 		const origin = candidate.origin.toLowerCase();
 		const changed = origin !== fallback.origin;
-		return {
+		result.push({
 			...fallback,
 			origin,
 			h: changed ? hueOrUndefined(candidate.h) : fallback.h,
 			s: changed ? clampOrUndefined(candidate.s, 0, 100) : fallback.s,
 			direction: direction(candidate.direction),
-		};
-	});
+		});
+	}
 	for (const candidate of byKey.values()) {
 		const key = candidate.key as string;
 		const name = typeof candidate.name === 'string' ? candidate.name.trim().slice(0, 40) : '';

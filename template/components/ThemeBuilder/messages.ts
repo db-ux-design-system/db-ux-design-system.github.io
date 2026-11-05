@@ -1,5 +1,4 @@
 import type {
-	BuiltinFamilyKey,
 	ColorKey,
 	Density,
 	FamilyNameError,
@@ -7,6 +6,7 @@ import type {
 	Mode,
 	Preset,
 	Radius,
+	SeededFamilyKey,
 	SemanticKey,
 } from './theme.ts';
 import type { PreviewView } from './preview-runtime.ts';
@@ -59,7 +59,7 @@ const en = {
 		turquoise: 'Turquoise',
 		green: 'Green',
 		lilac: 'Lilac',
-	} satisfies Record<BuiltinFamilyKey, string>,
+	} satisfies Record<SeededFamilyKey, string>,
 	colorNames: {
 		brand: 'Primary',
 		neutral: 'Neutral',
@@ -138,7 +138,7 @@ const en = {
 	download: 'Download',
 	usageTitle: 'How to use the theme',
 	usageSteps: [
-		'Download the ZIP: it contains theme.css, theme.fonts.css, theme.tokens.json and a README.',
+		'Download the ZIP: it contains theme.css, theme.legacy.css, theme.fonts.css, theme.tokens.json and a README.',
 		'Import the CSS files in their own cascade layer after the design system, so they replace its tokens (see README.md).',
 	],
 };
@@ -272,7 +272,7 @@ const de: ThemeBuilderMessages = {
 	download: 'Herunterladen',
 	usageTitle: 'So verwendest du das Theme',
 	usageSteps: [
-		'Lade das ZIP herunter: Es enthält theme.css, theme.fonts.css, theme.tokens.json und eine README.',
+		'Lade das ZIP herunter: Es enthält theme.css, theme.legacy.css, theme.fonts.css, theme.tokens.json und eine README.',
 		'Importiere die CSS-Dateien in einem eigenen Cascade Layer nach dem Design System, damit sie dessen Tokens ersetzen (siehe README.md).',
 	],
 };

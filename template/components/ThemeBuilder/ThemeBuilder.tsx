@@ -32,6 +32,7 @@ import {
 	RADII,
 	shuffleConfig,
 	toFontsCss,
+	toLegacyCss,
 	toReadme,
 	toStyleDictionary,
 	toThemeCss,
@@ -66,7 +67,8 @@ type Props = {
 };
 
 /** The files that make up the downloaded ZIP, selectable in the code dialog. */
-type CodeFileKey = 'theme.css' | 'theme.fonts.css' | 'theme.tokens.json' | 'README.md';
+type CodeFileKey =
+	'theme.css' | 'theme.legacy.css' | 'theme.fonts.css' | 'theme.tokens.json' | 'README.md';
 
 /** Same breakpoint as the CSS: below it the settings panel lives in a drawer. */
 const COMPACT_QUERY = '(width < 64em)';
@@ -90,12 +92,14 @@ type SettingsSection = 'colors' | 'semantic' | 'families' | 'shape';
 /** The ZIP files in display order, with a short label for the file select. */
 const CODE_FILE_ORDER: readonly CodeFileKey[] = [
 	'theme.css',
+	'theme.legacy.css',
 	'theme.fonts.css',
 	'theme.tokens.json',
 	'README.md',
 ];
 const CODE_FILE_LABELS: Record<CodeFileKey, string> = {
 	'theme.css': 'theme.css',
+	'theme.legacy.css': 'theme.legacy.css',
 	'theme.fonts.css': 'theme.fonts.css',
 	'theme.tokens.json': 'theme.tokens.json',
 	'README.md': 'README.md',
@@ -159,11 +163,12 @@ function SelectField<T extends string>({
 	);
 }
 
-/** Built-in families use their translated name, custom families the name given by the user. */
+/**
+ * Seeded families (built-in and the default custom Lilac) use their translated name; a
+ * family the user added or renamed uses the name stored in the config.
+ */
 const familyLabel = (family: FamilyConfig, m: ThemeBuilderMessages): string =>
-	family.builtin
-		? (m.familyNames[family.key as keyof ThemeBuilderMessages['familyNames']] ?? family.name)
-		: family.name;
+	m.familyNames[family.key as keyof ThemeBuilderMessages['familyNames']] ?? family.name;
 
 /** Semantic colors pick one of the color families; the ramp shows the chosen family. */
 function SemanticField({
@@ -479,6 +484,7 @@ const ThemeBuilder = ({ lang = 'en' }: Props) => {
 	const codeFiles = useMemo<Record<CodeFileKey, string>>(
 		() => ({
 			'theme.css': toThemeCss(config, theme.tokens),
+			'theme.legacy.css': toLegacyCss(config, theme.tokens),
 			'theme.fonts.css': toFontsCss(config, theme.tokens),
 			'theme.tokens.json': toStyleDictionary(config, theme.tokens),
 			'README.md': toReadme(config),
