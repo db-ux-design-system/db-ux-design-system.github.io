@@ -318,6 +318,15 @@
 	margin-block-start: 0;
 }
 
+/* Exclude: the Theme Builder lays its panels, preview and controls out with flex and grid
+ * gaps. Same approach as the wizard above: the repeated class reaches (0,3,0) and the rule
+ * sits last, so it resets the content spacing for everything inside the builder.
+ * Dialogs are excluded: a modal centers itself with `margin: auto`, a reset top margin
+ * would pin it to the top edge of the viewport. */
+.dba-main-content .theme-builder-page.theme-builder-page * + :not(dialog) {
+	margin-block-start: 0;
+}
+
 /* Utility: 2-column grid for side-by-side content */
 .content-grid {
 	display: grid;
