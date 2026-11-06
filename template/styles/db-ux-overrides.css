@@ -255,3 +255,48 @@
 	align-items: center;
 	min-block-size: calc(var(--db-sizing-md) + 2 * var(--db-spacing-fixed-sm));
 }
+
+/* Motion Library (MDK) enhancement: the desktop popover flyouts grow open from the top-left
+   corner. The animation itself comes from MDK (createGrowTransition via createPresenceMotion
+   in main-navigation.tsx); this only provides the grow origin and keeps the surface opaque,
+   gated by the data-nav-motion marker the script sets once the controllers are live. Without
+   scripting the navigation keeps its native instant behavior. */
+
+/* Consistent gap below the trigger for every popover flyout, including nested ones. */
+.db-control-panel-navigation[data-variant='popover'] .db-control-panel-navigation-item-group-menu {
+	--db-popover-distance: 0.75rem;
+}
+
+.db-control-panel-navigation[data-nav-motion='grow'][data-variant='popover']
+	.db-control-panel-navigation-item-group-menu {
+	/* Grow from the top-left corner: the flyout sits below the button, aligned to its start. */
+	--motion-scale-origin: left top;
+
+	/* Start fully collapsed (motion.css defaults this to .92). */
+	--motion-scale-from: 0;
+
+	/* The surface fades in from transparent as it grows. */
+	--motion-scale-opacity: 0;
+}
+
+/* MDK owns presence while animating: keep the menu visible from opening through the shrink,
+   also after the pointer or focus left. Closed falls back to the navigation's own visibility. */
+.db-control-panel-navigation[data-nav-motion='grow'][data-variant='popover']
+	.db-control-panel-navigation-item-group-menu:is(
+		[data-motion-state='opening'],
+		[data-motion-state='open'],
+		[data-motion-state='closing']
+	) {
+	visibility: visible;
+}
+
+/* Keep the menu hidden while closed, even under the navigation's hover/focus visibility.
+   The hover CSS turns the menu visible one frame before aria-expanded flips and MDK starts,
+   which showed the flyout at full size for a moment before it grew (a double open). Holding it
+   hidden until MDK reports opening lets the grow start from the collapsed corner. transition:
+   none so it also disappears at once when the shrink settles, with no trailing visible frame. */
+.db-control-panel-navigation[data-nav-motion='grow'][data-variant='popover']
+	.db-control-panel-navigation-item-group-menu[data-motion-state='closed'] {
+	visibility: hidden;
+	transition: none;
+}

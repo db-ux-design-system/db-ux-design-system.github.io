@@ -1,0 +1,60 @@
+/* Language switch popover. Same approach as the reading list: the popover's article is only
+   the box the library measures and places; the visible surface is .language-switch-surface,
+   which the Motion Library grows. Splitting them keeps the Grow transform from changing what
+   the library measures (it reads getBoundingClientRect, transform included). */
+.language-switch-popover > .db-popover-content {
+	/* Match the navigation flyouts' gap below the trigger (0.75rem). */
+	--db-popover-distance: 0.75rem;
+
+	/* stylelint-disable-next-line db-ux/use-border-width, db-ux/use-border-color */
+	border: none;
+	background: none;
+	box-shadow: none;
+}
+
+/* The visible surface, with the library's popover styling (spacing medium). */
+.language-switch-surface {
+	display: grid;
+	inline-size: max-content;
+	min-inline-size: var(--db-sizing-3xl);
+	padding: var(--db-spacing-fixed-2xs);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	/* stylelint-disable-next-line db-ux/use-border-radius */
+	border-radius: var(--default-card-border-radius, var(--db-border-radius-sm));
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+	box-shadow: var(--db-elevation-md);
+}
+
+/* Motion Library enhancement (set by LanguageSwitch once the Grow controller is live). The
+   marker gates this, so without JS/MDK the popover keeps its native behavior. */
+.language-switch[data-motion-enhanced='true'] .language-switch-surface {
+	/* Grow from the top-right corner: it stays fixed while the panel expands left and down.
+	   transform-origin takes physical keywords only (no logical inline-end/block-start). */
+	--motion-scale-origin: right top;
+
+	/* Start fully collapsed; fade in from transparent; grow across the full duration. */
+	--motion-scale-from: 0;
+	--motion-scale-opacity: 0;
+	--motion-scale-geometry-end: 1;
+}
+
+/* MDK owns the presence while it animates: keep the panel visible from opening through the
+   shrink, also after the pointer or focus has left. Closed falls back to the popover's own
+   hover/focus visibility. */
+.language-switch[data-motion-enhanced='true']
+	.language-switch-popover
+	> .db-popover-content:is(
+		[data-motion-state='opening'],
+		[data-motion-state='open'],
+		[data-motion-state='closing']
+	) {
+	visibility: visible;
+}
+
+/* Keep the panel hidden while closed, even under the popover's hover/focus visibility, so the
+   grow starts from the collapsed corner instead of flashing at full size for one frame. */
+.language-switch[data-motion-enhanced='true']
+	.language-switch-popover
+	> .db-popover-content[data-motion-state='closed'] {
+	visibility: hidden;
+}

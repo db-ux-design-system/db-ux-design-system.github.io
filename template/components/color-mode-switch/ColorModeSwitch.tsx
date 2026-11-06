@@ -1,4 +1,4 @@
-import { DBSwitch, DBTooltip } from '@db-ux/react-core-components';
+import { DBButton, DBTooltip } from '@db-ux/react-core-components';
 import { useColorMode } from '@template/context/color-mode-context.tsx';
 import { useTranslation } from '@template/i18n';
 
@@ -8,18 +8,19 @@ const ColorModeSwitch = () => {
 	const isDark = colorMode === 'dark';
 
 	return (
-		<DBSwitch
-			label={t('shell.colorModeToggle')}
-			checked={isDark}
-			visualAid
-			icon="sun"
-			iconTrailing="moon"
-			showLabel={false}
-			onChange={toggleColorMode}
+		<DBButton
+			type="button"
+			variant="ghost"
+			// Show the mode it switches to: a moon in light mode, a sun in dark mode.
+			icon={isDark ? 'sun' : 'moon'}
+			noText
+			aria-pressed={isDark}
+			className="color-mode-switch"
+			onClick={toggleColorMode}
 		>
-			<DBTooltip>{t('shell.colorModeToggle')}</DBTooltip>
 			{t('shell.colorModeToggle')}
-		</DBSwitch>
+			<DBTooltip>{t('shell.colorModeToggle')}</DBTooltip>
+		</DBButton>
 	);
 };
 

@@ -7,6 +7,7 @@ import {
 	DBDialogHeader,
 	DBPopover,
 } from '@db-ux/react-core-components';
+import { createGrowTransition, createPresenceMotion } from '@tobiasoberpaul/mdk';
 import { useLanguage } from '@template/context/language-context';
 import { roleColors, wizardHref } from '@template/components/GetStartedWizard/wizard-flow';
 import { clearItems, pruneItems, removeItem, useReadingList } from './reading-list-store';
@@ -90,6 +91,74 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 			window.removeEventListener('keydown', onKeyDown, true);
 			wrapper.removeEventListener('mouseleave', onMouseLeave);
 			wrapper.removeEventListener('focusout', onFocusOut);
+		};
+	}, []);
+
+	// Motion Library (MDK) enhancement: a Grow transition opens the panel from its top
+	// end corner and shrinks it back on close. The DB popover keeps its placement, focus and
+	// dismissal (hover/focus, Escape, the dismissed state). MDK reflects its state as
+	// data-motion-state on the panel; ReadingList.css keeps the panel visible while that state
+	// is opening, open or closing, so the shrink can play after the pointer or focus has left.
+	useEffect(() => {
+		const wrapper = wrapperRef.current;
+		if (!wrapper) return;
+		// panel: the article the popover measures and places. surface: the visible box inside
+		// it, which MDK grows. Animating the article itself broke the placement, because the
+		// popover measures it with getBoundingClientRect (transform included) while it opens.
+		const panel = wrapper.querySelector<HTMLElement>('.rl-popover > .db-popover-content');
+		const surface = panel?.querySelector<HTMLElement>(':scope > .rl-popover-body');
+		if (!panel || !surface) return;
+		// Only enhance when the browser can actually run the Web Animations timeline.
+		if (typeof surface.animate !== 'function') return;
+
+		// The reveal targets are the visible content rows, not the single body wrapper:
+		// the header, and the empty-state hint plus the "Get page suggestions" row, or the
+		// list rows. Revealing the body's one child would animate everything as a single
+		// block and leave the suggestion row out of the staggered content reveal. The
+		// selectors pick leaf rows only, so no target is nested inside another.
+		const revealTargets = (): HTMLElement[] => [
+			...surface.querySelectorAll<HTMLElement>('.rl-popover-header, .rl-empty > p, .rl-item'),
+		];
+
+		const presence = createPresenceMotion({
+			// The article carries data-motion-state, which ReadingList.css uses to hold it
+			// visible through the shrink.
+			stateTarget: panel,
+			// No `trigger`: a trigger-edge Grow would take over the geometry and fight the
+			// popover's own placement. resize: 'transform' scales the surface around
+			// --motion-scale-origin instead of resizing its box.
+			createTransition: (lifecycle) =>
+				createGrowTransition({
+					...lifecycle,
+					content: surface,
+					resize: 'transform',
+					reveal: revealTargets(),
+				}),
+		});
+		wrapper.dataset.motionEnhanced = 'true';
+
+		// The popover shows and hides itself via :hover / :focus-within (pure CSS, no JS event).
+		// Grab those transitions to drive the Grow: open when the pointer or focus enters, close
+		// when both leave. The panel keeps its layout box while hidden (visibility, not display),
+		// so the Grow geometry measures correctly even on the first open.
+		// The read is deferred one frame: focusout/mouseleave fire before :hover and
+		// document.activeElement settle, and the dismissed state also hides the panel.
+		const isVisible = () =>
+			(wrapper.matches(':hover') || wrapper.contains(document.activeElement)) &&
+			wrapper.dataset.dismissed !== 'true';
+		let frame = 0;
+		const sync = () => {
+			cancelAnimationFrame(frame);
+			frame = requestAnimationFrame(() => presence.setOpen(isVisible()));
+		};
+		const events = ['mouseenter', 'mouseleave', 'focusin', 'focusout'] as const;
+		for (const name of events) wrapper.addEventListener(name, sync);
+
+		return () => {
+			cancelAnimationFrame(frame);
+			for (const name of events) wrapper.removeEventListener(name, sync);
+			presence.destroy();
+			delete wrapper.dataset.motionEnhanced;
 		};
 	}, []);
 
@@ -178,8 +247,12 @@ const ReadingListButton = ({ size }: { size?: 'small' }) => {
 			<DBPopover
 				className="rl-popover"
 				placement="bottom-end"
-				spacing="medium"
+				// The padding sits on .rl-popover-body, the surface (see ReadingList.css).
+				spacing="none"
 				width="fixed"
+				// The Motion Library owns the open animation (Grow from the top-right corner),
+				// so the popover's own opacity keyframe is turned off. See the motion effect below.
+				animation={false}
 				trigger={
 					// No tooltip: the popover opens on hover and focus as well, so a
 					// tooltip would overlap it. The popover title names the button visually,
