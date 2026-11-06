@@ -504,7 +504,7 @@ const ThemeBuilder = ({ lang = 'en' }: Props) => {
 	const rootRef = useRef<HTMLDivElement>(null);
 
 	const theme = useMemo(() => buildTheme(config), [config]);
-	const basePath = lang === 'de' ? '/de/theme-builder' : '/theme-builder';
+	const basePath = lang === 'de' ? '/de/themebuilder' : '/themebuilder';
 	const previewPath = `${basePath}/preview`;
 	// The iframe loads once with the current state as a preset key; later updates go through
 	// postMessage, so the frame never reloads while the builder is used.
