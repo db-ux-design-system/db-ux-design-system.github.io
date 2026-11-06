@@ -34,9 +34,17 @@ interface Props {
 	storybookOverview?: string;
 	/** PROTOTYPE – Storybook deployment that contains the overview pages. */
 	storybookOverviewBaseUrl?: string;
+	/**
+	 * Section of a part on the overview page of its main component, e.g.
+	 * `dbtabitem` for DBTabItem on the DBTabs page (core-web#8649 documents
+	 * parts as `### DBTabItem` there). Storybook scrolls to the heading with
+	 * this id. Only used together with `storybookOverview`.
+	 */
+	storybookAnchor?: string;
 }
 
-const { storybookExample, storybookOverview, storybookOverviewBaseUrl } = Astro.props;
+const { storybookExample, storybookOverview, storybookOverviewBaseUrl, storybookAnchor } =
+	Astro.props;
 
 const isDE = Astro.url.pathname.startsWith('/de/') || Astro.url.pathname === '/de';
 
@@ -64,7 +72,10 @@ const compositionUrl =
 	storybookOverview && storybookOverviewBaseUrl
 		? `${storybookOverviewBaseUrl}/composition-storybook`
 		: `${versionBaseUrl}/composition-storybook`;
-const docsId = storybookOverview && storybookOverviewBaseUrl ? storybookOverview : storybookExample;
+const usesOverview = Boolean(storybookOverview && storybookOverviewBaseUrl);
+const docsId = usesOverview ? storybookOverview : storybookExample;
+// The example pages of the fallback have no part sections.
+const anchor = usesOverview && storybookAnchor ? `#${encodeURIComponent(storybookAnchor)}` : '';
 
 const storybookResources = frameworks.map(({ title, ref, icon }) => ({
 	title,
@@ -72,7 +83,7 @@ const storybookResources = frameworks.map(({ title, ref, icon }) => ({
 	description: isDE
 		? 'Beispiele mit Code, Properties, Barrierefreiheit und Migration.'
 		: 'Examples with code, properties, accessibility and migration.',
-	url: `${compositionUrl}/?path=/docs/${ref}_${docsId}--docs`,
+	url: `${compositionUrl}/?path=/docs/${ref}_${docsId}--docs${anchor}`,
 }));
 
 const setupLinks = [
