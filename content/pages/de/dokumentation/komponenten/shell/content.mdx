@@ -15,22 +15,14 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Inhalt über Start Slot, Children und End Slot gliedern
 - Mit Fixed Start Slot und End Slot beim Scrollen sichtbar halten
 - Mit Auto den gesamten Bereich einschließlich der Slots scrollen
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbshell-position--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -134,6 +126,19 @@ Was im End Slot liegt, entscheidet über das Scroll-Verhalten: ein Footer mit re
 </DBSection>
 
 <FigmaLearnTeaser componentName="Shell Content" locale="de" anchor="control-panel--shell" />
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbshell-position"
+	storybookOverview="components-dbshell-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+	storybookAnchor="dbshellcontent"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

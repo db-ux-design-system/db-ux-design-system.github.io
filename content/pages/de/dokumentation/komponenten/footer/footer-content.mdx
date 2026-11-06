@@ -19,6 +19,7 @@ import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleW
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Weiterführende Inhalte am Ende des Layouts anbieten: Links, Unternehmensinfos, Zahlungsarten oder Social Media
 - Sekundäre Navigation über alle Seiten hinweg bereitstellen
@@ -113,6 +114,19 @@ Footer Content nimmt neben sekundärer Navigation auch nicht-navigatorische Inha
 		description="Social-Media-Links: Verlinke die Social-Media-Kanäle des Produkts."
 	/>
 </div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbfooter-complex-composition"
+	storybookOverview="components-dbfooter-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+	storybookAnchor="dbfootercontent"
+/>
 
 </DBSection>
 

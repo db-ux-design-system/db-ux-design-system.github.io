@@ -1,0 +1,160 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Apply spacing and sizing'
+headline: 'Apply spacing and sizing'
+description: 'Use the spacing and sizing tokens for margins, paddings, gaps and fixed heights in your own CSS.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 18.4
+category: 'Development'
+keywords:
+  [
+    'spacing',
+    'sizing',
+    'variables',
+    'tokens',
+    'padding',
+    'margin',
+    'gap',
+    'height',
+    'spacing fixed',
+    'spacing responsive',
+    'db-spacing',
+    'db-sizing',
+    'section',
+    'scss variables',
+    't-shirt sizes',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Three kinds of tokens for space and size
+
+**Spacing fixed** for margins, paddings and gaps, **spacing responsive** for spacing that grows with the screen, **sizing** for fixed heights. Their values follow the density and the theme.
+
+<LearnAside>
+
+| Kind               | Sizes                                      | Base |
+| ------------------ | ------------------------------------------ | ---- |
+| Spacing fixed      | `3xs`, `2xs`, `xs`, `sm`, `md`, `lg`, `xl` | `md` |
+| Spacing responsive | `xs`, `sm`, `md`, `lg`, `xl`               | `md` |
+| Sizing             | `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl` | `md` |
+
+The tokens are part of the theme and need no extra import.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Use spacing fixed for most spacing
+
+Margins, paddings and gaps inside pages and components use **spacing fixed**. Don't use spacing tokens for `width` or `height`.
+
+```css
+.my-card {
+	padding: var(--db-spacing-fixed-md);
+	gap: var(--db-spacing-fixed-sm);
+}
+```
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Use spacing responsive for layout spacing
+
+**Spacing responsive** grows with the screen, for example the padding of the main area. **Section** already applies it.
+
+<LearnAside>
+
+```css
+.my-main {
+	padding-inline: var(--db-spacing-responsive-md);
+}
+```
+
+Prefer `DBSection` over your own responsive padding: it picks the right spacing for every screen size.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Use sizing for fixed heights
+
+**Sizing** sets the height of elements that line up with components, for example a custom control next to a button.
+
+```css
+.my-control {
+	block-size: var(--db-sizing-md);
+}
+```
+
+<LearnAside>
+
+Don't use sizing for padding or margin. The exception are absolutely positioned elements inside a component with a fixed height.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Use the Sass variables
+
+With Sass, the same tokens are available as variables.
+
+```scss
+@use '@db-ux/core-foundations/build/styles/variables';
+
+.my-card {
+	padding: variables.$db-spacing-fixed-md;
+	block-size: variables.$db-sizing-md;
+}
+```
+
+<LearnAside>
+
+The variables resolve to the CSS custom properties, so the values still change with density and theme.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Continue with the values
+
+The foundation shows the values of all tokens.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Spacing',
+			description: 'Fixed and responsive spacing with their values.',
+			url: '/documentation/foundation/spacing',
+		},
+		{
+			title: 'Sizing',
+			description: 'Sizing tokens with their values.',
+			url: '/documentation/foundation/sizing',
+		},
+	]}
+/>
+
+</LearnBlock>
