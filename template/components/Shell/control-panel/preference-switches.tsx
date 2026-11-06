@@ -3,7 +3,7 @@ import ColorModeSwitch from '@template/components/color-mode-switch/ColorModeSwi
 import LanguageSwitch from '@template/components/language-switch/LanguageSwitch.tsx';
 import ReadingListButton from '@template/components/ReadingList/ReadingListButton.tsx';
 /**
- * Color mode and language switches as a single row.
+ * Language and color mode switches as a single row (color mode last, on the end edge).
  *
  * Content only - the caller wraps this in the actions slot that matches the
  * intended position. Grouping both switches keeps them together as one item, so
@@ -15,10 +15,10 @@ import ReadingListButton from '@template/components/ReadingList/ReadingListButto
  * drawer footer has no room for it, so Shell.tsx puts it into the menu bar instead.
  */
 const PreferenceSwitches = ({ readingList = false }: { readingList?: boolean }) => (
-	<DBStack className="shell-preference-switches" direction="row" alignment="center" gap="x-small">
+	<DBStack className="shell-preference-switches" direction="row" alignment="center" gap="none">
 		{readingList && <ReadingListButton />}
-		<ColorModeSwitch />
 		<LanguageSwitch />
+		<ColorModeSwitch />
 	</DBStack>
 );
 export default PreferenceSwitches;

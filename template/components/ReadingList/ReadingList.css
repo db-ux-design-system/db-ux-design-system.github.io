@@ -163,13 +163,67 @@
 .rl-popover > .db-popover-content {
 	inline-size: var(--db-container-xs);
 	max-inline-size: calc(100vw - 2 * var(--db-spacing-fixed-sm));
+
+	/* Match the navigation flyouts' gap below the trigger (0.75rem). */
+	--db-popover-distance: 0.75rem;
+
+	/* The article is only the box the library measures and places. The visible surface is
+	   .rl-popover-body (below), so the Grow transform never changes what the library
+	   measures: it reads getBoundingClientRect, which includes transforms, and placed the
+	   panel by its scaled width while the Grow was running. */
+	/* stylelint-disable-next-line db-ux/use-border-width, db-ux/use-border-color */
+	border: none;
+	background: none;
+	box-shadow: none;
 }
 
+/* Motion Library enhancement (set by ReadingListButton once the Grow controller is live).
+   The marker gates this, so without JS/MDK the popover keeps its native behavior. */
+.rl-control[data-motion-enhanced='true'] .rl-popover > .db-popover-content {
+	/* Grow from the top-right corner: it stays fixed while the panel expands left and down.
+	   transform-origin takes physical keywords only (no logical inline-end/block-start). */
+	--motion-scale-origin: right top;
+
+	/* Start fully collapsed at that corner, like the library demos (default is .92). */
+	--motion-scale-from: 0;
+
+	/* Keep the surface opaque while it grows (motion.css defaults this to 0, which fades the
+	   whole surface in and lets the page, border and shadow show through). Only the content
+	   reveals by blur and fade. */
+	--motion-scale-opacity: 1;
+
+	/* The surface grows across the full duration instead of finishing at 80%, so there is no
+	   still frame at the end. */
+	--motion-scale-geometry-end: 1;
+}
+
+/* MDK owns the presence while it animates: the panel stays visible from opening until the
+   shrink has finished, also after the pointer or focus has left. Closed falls back to the
+   popover's own hover/focus visibility. */
+.rl-control[data-motion-enhanced='true']
+	.rl-popover
+	> .db-popover-content:is(
+		[data-motion-state='opening'],
+		[data-motion-state='open'],
+		[data-motion-state='closing']
+	) {
+	visibility: visible;
+}
+
+/* The popover surface, with the library's popover styles (spacing medium). It is the
+   element the Motion Library grows; the article around it stays still. */
 .rl-popover-body {
 	display: grid;
 	gap: var(--db-spacing-fixed-xs);
+	box-sizing: border-box;
 	inline-size: 100%;
 	min-inline-size: 0;
+	padding: var(--db-spacing-fixed-md);
+	border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	/* stylelint-disable-next-line db-ux/use-border-radius */
+	border-radius: var(--default-card-border-radius, var(--db-border-radius-sm));
+	background-color: var(--db-adaptive-bg-basic-level-1-default);
+	box-shadow: var(--db-elevation-md);
 }
 
 .rl-popover-title {
@@ -229,13 +283,17 @@
 	inset-inline: var(--db-spacing-fixed-sm) !important;
 	inline-size: auto;
 	max-inline-size: none;
-	max-block-size: calc(100dvh - var(--db-sizing-xl));
-	overflow-y: auto;
-	overscroll-behavior: none;
 
 	/* No horizontal centering: the library shifts by these offsets. */
 	--db-popover-center-x: 0%;
 	--db-popover-translate-x: 0%;
+}
+
+/* The surface scrolls, so its border and rounded corners stay in place with a long list. */
+.db-control-panel-mobile .rl-popover-body {
+	max-block-size: calc(100dvh - var(--db-sizing-xl));
+	overflow-y: auto;
+	overscroll-behavior: none;
 }
 
 /* Closed with Escape (see ReadingListButton): hidden although the pointer or the
@@ -256,14 +314,6 @@
 .rl-trigger[data-size='small'] > .db-badge[data-placement='corner-top-right'] {
 	inset-inline-end: var(--db-spacing-fixed-2xs);
 	inset-block-start: var(--db-spacing-fixed-3xs);
-}
-
-/* Desktop header: the language switch is a button with text and 16 px inline
-   padding, the reading list button is icon-only with 8 px around the icon. The extra
-   8 px give the icon the same visible gap to the color mode switch as the switch has
-   to the globe icon. The badge stays within the button, see above. */
-.shell-preference-switches > .rl-control {
-	margin-inline-end: var(--db-spacing-fixed-xs);
 }
 
 /* Bookmark button in the page hero, right after the headline. */

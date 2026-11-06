@@ -255,3 +255,134 @@
 	align-items: center;
 	min-block-size: calc(var(--db-sizing-md) + 2 * var(--db-spacing-fixed-sm));
 }
+
+/* Motion Library (MDK) enhancement: the desktop popover flyouts grow open from the top-left
+   corner. The animation itself comes from MDK (createGrowTransition via createPresenceMotion
+   in main-navigation.tsx); this only provides the grow origin and keeps the surface opaque,
+   gated by the data-nav-motion marker the script sets once the controllers are live. Without
+   scripting the navigation keeps its native instant behavior. */
+
+/* Consistent gap below the trigger for every popover flyout, including nested ones. */
+.db-control-panel-navigation[data-variant='popover'] .db-control-panel-navigation-item-group-menu {
+	--db-popover-distance: 0.75rem;
+}
+
+.db-control-panel-navigation[data-nav-motion='grow'][data-variant='popover']
+	.db-control-panel-navigation-item-group-menu {
+	/* Grow from the top-left corner: the flyout sits below the button, aligned to its start. */
+	--motion-scale-origin: left top;
+
+	/* Start fully collapsed (motion.css defaults this to .92). */
+	--motion-scale-from: 0;
+
+	/* Keep the surface opaque while it grows (motion.css defaults this to 0, which fades the
+	   whole surface in and lets the content behind, border and shadow show through). Only the
+	   items reveal by blur and fade. */
+	--motion-scale-opacity: 1;
+}
+
+/* MDK owns presence while animating: keep the menu visible from opening through the shrink,
+   also after the pointer or focus left. Closed falls back to the navigation's own visibility. */
+.db-control-panel-navigation[data-nav-motion='grow'][data-variant='popover']
+	.db-control-panel-navigation-item-group-menu:is(
+		[data-motion-state='opening'],
+		[data-motion-state='open'],
+		[data-motion-state='closing']
+	) {
+	visibility: visible;
+}
+
+/* Keep the menu hidden while closed, even under the navigation's hover/focus visibility.
+   The hover CSS turns the menu visible one frame before aria-expanded flips and MDK starts,
+   which showed the flyout at full size for a moment before it grew (a double open). Holding it
+   hidden until MDK reports opening lets the grow start from the collapsed corner. transition:
+   none so it also disappears at once when the shrink settles, with no trailing visible frame. */
+.db-control-panel-navigation[data-nav-motion='grow'][data-variant='popover']
+	.db-control-panel-navigation-item-group-menu[data-motion-state='closed'] {
+	visibility: hidden;
+	transition: none;
+}
+
+/* Motion Library (MDK) enhancement for the drilldown navigation (sub-navigation): each level
+   slides in over the level behind it and back out on close. The animation comes from MDK
+   (createSlideTransition in use-drilldown-slide.ts); the navigation keeps aria-expanded,
+   inert, focus and the back button. Gated by the data-nav-motion marker the script sets on the
+   first interaction, so without scripting the native margin-inline-start slide stays. */
+
+/* MDK owns the movement: park every menu at its final position and drop the library's
+   margin-inline-start and delayed-visibility transitions. MDK translates from 100% to 0. */
+.db-control-panel-navigation[data-nav-motion='slide'][data-variant='drilldown']
+	.db-control-panel-navigation-item-group-menu {
+	/* No positional overshoot, like the MDK Slide example: the level stops at its place
+	   instead of shooting past it and settling back (motion.css defaults this to .75rem). */
+	--motion-overshoot-max: 0rem;
+
+	margin-inline-start: 0;
+	transition: none;
+}
+
+/* Hide a closed level at once. The library hides it 410ms after close, which would show the
+   settled menu at position 0 for a moment after MDK's slide-out ends. Only applies while
+   aria-expanded is false: on open, the library's visibility rule takes over in the same frame,
+   so its focus move into the first link still finds a visible target. */
+.db-control-panel-navigation[data-nav-motion='slide'][data-variant='drilldown']
+	.db-control-panel-navigation-item-group-expand-button:not([aria-expanded='true'])
+	~ .db-control-panel-navigation-item-group-menu:not([data-motion-state='closing']) {
+	visibility: hidden;
+}
+
+/* Keep the level visible while it slides out after aria-expanded turned false. */
+.db-control-panel-navigation[data-nav-motion='slide'][data-variant='drilldown']
+	.db-control-panel-navigation-item-group-menu[data-motion-state='closing'] {
+	visibility: visible;
+}
+
+/* The library also shifts the level behind an open sub-level out with its own transition
+   (translateX(-100%), 500ms, emotional easing), so both levels moved on different timelines.
+   That level now follows the incoming MDK slide via inline transforms (see
+   use-drilldown-slide.ts), so the native transform and its transition are turned off. Without
+   that, every per-frame inline transform would start a new 500ms CSS transition. The library's
+   collapse of the covered level (padding and block-size to 0) stays. Its delay only gives the
+   script time to read the items' sizes; the script then holds them inline for the whole slide,
+   because a busy main thread can start the slide after the delay has run out. The targets
+   mirror the library's selector. */
+.db-control-panel-navigation[data-nav-motion='slide'][data-variant='drilldown']
+	:is(
+		.db-control-panel-navigation-item-group-back-button,
+		.db-control-panel-navigation-item,
+		.db-control-panel-navigation-item-group-expand-button
+	) {
+	transition: none;
+}
+
+.db-control-panel-navigation[data-nav-motion='slide'][data-variant='drilldown']
+	menu:has(.db-control-panel-navigation-item-group-expand-button[aria-expanded='true'])
+	> :is(.db-control-panel-navigation-item-group-back-button, .db-control-panel-navigation-item),
+.db-control-panel-navigation[data-nav-motion='slide'][data-variant='drilldown']
+	menu:has(.db-control-panel-navigation-item-group-expand-button[aria-expanded='true'])
+	> .db-control-panel-navigation-item-group
+	> .db-control-panel-navigation-item-group-expand-button {
+	transform: none;
+
+	/* With reduced motion the library sets no transition, and the collapse applies at once. */
+	@media (prefers-reduced-motion: no-preference) {
+		transition:
+			padding 0ms linear var(--motion-duration-slide),
+			block-size 0ms linear var(--motion-duration-slide),
+			min-block-size 0ms linear var(--motion-duration-slide);
+		transition-behavior: allow-discrete;
+	}
+}
+
+/* Hide the back button's "Back" tooltip while its level slides. After a click on the back
+   button, the pointer still hovers it and the button keeps focus, so the tooltip opened and
+   then travelled and blurred out with the row: it read as a second, ghosted back button. */
+.db-control-panel-navigation[data-nav-motion='slide'][data-variant='drilldown']
+	.db-control-panel-navigation-item-group-menu:is(
+		[data-motion-state='opening'],
+		[data-motion-state='closing']
+	)
+	> .db-control-panel-navigation-item-group-back-button
+	.db-tooltip {
+	visibility: hidden;
+}

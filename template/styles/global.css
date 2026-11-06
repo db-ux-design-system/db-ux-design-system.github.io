@@ -3,6 +3,10 @@
 /* External libraries */
 @import url('@db-ux/core-components/build/styles/rollup.css') layer(db-ux);
 
+/* Motion Library (MDK) design tokens. Unlayered :root defaults read by the controllers via
+   getComputedStyle; surfaces can override the --motion-* properties locally. */
+@import url('@tobiasoberpaul/mdk/motion.css');
+
 /* TODO: remove together with v6-preview.css once @db-ux/core-foundations adds Lilac to its
    speaking colors and color classes. In the db-ux layer, like the mappings of the other colors,
    so it does not outrank the package styles. */
@@ -27,6 +31,7 @@
 @import url('../components/CardTeaser/CardTeaser.css');
 @import url('../components/CardTeaser/CardTeaserRow.css');
 @import url('../components/ReadingList/ReadingList.css');
+@import url('../components/language-switch/LanguageSwitch.css');
 
 /* App-level custom properties */
 :root {
