@@ -43,11 +43,6 @@ export default defineConfig({
 		'/de/dokumentation/releases/content-status': '/de/dokumentation/lernen/status',
 		'/documentation/releases/versioning': '/documentation/learn/versioning',
 		'/de/dokumentation/releases/versionierung': '/de/dokumentation/lernen/versionierung',
-		// The Theme Builder moved to /themebuilder, as the GitHub Pages project site of the
-		// db-ux-design-system/theme-builder repo controls /theme-builder on this domain. Only the
-		// DE path was reachable (that repo claims the first path segment only), so only it needs
-		// a redirect for links shared since the Theme Builder release.
-		'/de/theme-builder': '/de/themebuilder',
 	},
 	markdown: {
 		shikiConfig: {
