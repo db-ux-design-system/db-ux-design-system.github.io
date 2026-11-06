@@ -187,8 +187,10 @@
 	/* Start fully collapsed at that corner, like the library demos (default is .92). */
 	--motion-scale-from: 0;
 
-	/* The surface fades in from fully transparent as it grows. */
-	--motion-scale-opacity: 0;
+	/* Keep the surface opaque while it grows (motion.css defaults this to 0, which fades the
+	   whole surface in and lets the page, border and shadow show through). Only the content
+	   reveals by blur and fade. */
+	--motion-scale-opacity: 1;
 
 	/* The surface grows across the full duration instead of finishing at 80%, so there is no
 	   still frame at the end. */

@@ -32,9 +32,10 @@
 	   transform-origin takes physical keywords only (no logical inline-end/block-start). */
 	--motion-scale-origin: right top;
 
-	/* Start fully collapsed; fade in from transparent; grow across the full duration. */
+	/* Start fully collapsed; keep the surface opaque (only the content reveals); grow across
+	   the full duration. motion.css defaults the opacity to 0, which lets the page show through. */
 	--motion-scale-from: 0;
-	--motion-scale-opacity: 0;
+	--motion-scale-opacity: 1;
 	--motion-scale-geometry-end: 1;
 }
 
