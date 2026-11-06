@@ -15,20 +15,12 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Wartezeit eines Systemvorgangs sichtbar machen
 - Messbaren Fortschritt als Wert anzeigen
 - Abschluss eines Vorgangs bestätigen: erfolgreich oder abgebrochen
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbloadingindicator-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -210,6 +202,18 @@ Laufen mehrere Vorgänge gleichzeitig, trägt jeder seinen eigenen Loading Indic
 		description="Zeige je Zeile einer Liste den Vorgang an, der zu dieser Zeile gehört."
 	/>
 </div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbloadingindicator-density"
+	storybookOverview="components-dbloadingindicator-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+/>
 
 </DBSection>
 

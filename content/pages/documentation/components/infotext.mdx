@@ -15,49 +15,14 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Give short hints or explanations near UI elements (e.g., what a setting changes)
 - Provide brief warnings or important notes in context (e.g., constraints or limitations)
 - Support form usage with concise guidance or validation-related context
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'TBD',
-			url: '#',
-			icon: 'react',
-		},
-		{
-			title: 'Vue',
-			description: 'TBD',
-			url: '#',
-			icon: 'vue',
-		},
-		{
-			title: 'Angular',
-			description: 'TBD',
-			url: '#',
-			icon: 'angular',
-		},
-		{
-			title: 'Web Components',
-			description: 'TBD',
-			url: '#',
-			icon: 'html5',
-		},
-	]}
-/>
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -161,6 +126,18 @@ In forms, Infotext can support understanding (format, constraints) and complemen
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbinfotext-density"
+	storybookOverview="components-dbinfotext-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+/>
 
 </DBSection>
 

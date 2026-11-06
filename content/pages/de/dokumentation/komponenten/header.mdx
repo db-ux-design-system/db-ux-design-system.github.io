@@ -16,21 +16,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Globale Einstiegspunkte der Navigation und Kontext zum aktuellen Standort bieten
 - Schnellen Zugriff auf häufige Aktionen wie Suche, Menü oder Profil ermöglichen
 - Markenpräsenz konsistent über Seiten und Breakpoints hinweg verstärken
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbheader-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -92,6 +84,18 @@ Wenn die Meta-Navigation externe Links enthält, kommuniziere klar, dass sie die
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbheader-density"
+	storybookOverview="components-dbheader-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+/>
 
 </DBSection>
 

@@ -16,21 +16,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Split long lists and tables into pages
 - Jump directly to a specific page
 - Make the size of a data set visible
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbpagination-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -188,6 +180,18 @@ Below the `sm` breakpoint the page list collapses. The same configuration appear
 </DBSection>
 
 <FigmaLearnTeaser componentName="Pagination" />
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbpagination-density"
+	storybookOverview="components-dbpagination-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

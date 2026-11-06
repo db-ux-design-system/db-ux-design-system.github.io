@@ -16,21 +16,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Lange Listen und Tabellen in Seiten aufteilen
 - Gezielt zu einer bestimmten Seite springen
 - Umfang eines Datensatzes sichtbar machen
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbpagination-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -188,6 +180,18 @@ Unterhalb des `sm`-Breakpoints klappt die Seitenliste zusammen. Dieselbe Konfigu
 </DBSection>
 
 <FigmaLearnTeaser componentName="Pagination" locale="de" />
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbpagination-density"
+	storybookOverview="components-dbpagination-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 
