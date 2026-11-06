@@ -1,6 +1,6 @@
 ---
 /*
- * Development section of a component page (pilot, see PR #832).
+ * Development section of a component page.
  *
  * A short entry for developers. The technical documentation (installation,
  * usage per framework, all examples with code, properties, migration) lives
@@ -26,13 +26,16 @@ interface Props {
 	 */
 	storybookExample: string;
 	/**
-	 * PROTOTYPE – overview page of the component in the framework Storybooks
+	 * Overview page of the component in the framework Storybooks
 	 * (core-web#8649), without `--docs`, e.g. `components-dbbutton-overview`.
 	 * Once it is released, the cards link to it in the versioned Storybook and
 	 * `storybookExample` goes away.
 	 */
 	storybookOverview?: string;
-	/** PROTOTYPE – Storybook deployment that contains the overview pages. */
+	/**
+	 * Storybook deployment that contains the overview pages: the review build
+	 * of core-web#8649 until it is released, then this prop goes away.
+	 */
 	storybookOverviewBaseUrl?: string;
 	/**
 	 * Section of a part on the overview page of its main component, e.g.
