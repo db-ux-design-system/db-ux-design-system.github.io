@@ -112,7 +112,7 @@ const en = {
 		eyebrow: 'Guide',
 		title: 'Designing with one system for many brands',
 		lead: 'A white label design system separates structure from brand expression. Components stay the same, tokens carry the identity.',
-		p1: 'Every theme starts with a few decisions: an <strong>origin color</strong>, a neutral tone, the shape of corners and the typefaces. The <a href="/theme-builder?view=palettes" target="_top">color generator</a> turns each origin color into a complete palette.',
+		p1: 'Every theme starts with a few decisions: an <strong>origin color</strong>, a neutral tone, the shape of corners and the typefaces. The <a href="/themebuilder?view=palettes" target="_top">color generator</a> turns each origin color into a complete palette.',
 		h2: 'From one color to a full palette',
 		p2: 'The generator works in HSLuv. Its lightness equals CIELUV L*, which depends on luminance only. Colors on the same step therefore have the same contrast against white and black, whatever their hue.',
 		list: [
@@ -249,7 +249,7 @@ const de: PreviewTexts = {
 		eyebrow: 'Leitfaden',
 		title: 'Mit einem System für viele Marken gestalten',
 		lead: 'Ein White-Label-Design-System trennt Struktur und Markenausdruck. Die Komponenten bleiben gleich, die Tokens tragen die Identität.',
-		p1: 'Jedes Theme beginnt mit wenigen Entscheidungen: einer <strong>Origin-Farbe</strong>, einem neutralen Grundton, der Form der Ecken und den Schriften. Der <a href="/de/theme-builder?view=palettes" target="_top">Farbgenerator</a> macht aus jeder Origin-Farbe eine vollständige Palette.',
+		p1: 'Jedes Theme beginnt mit wenigen Entscheidungen: einer <strong>Origin-Farbe</strong>, einem neutralen Grundton, der Form der Ecken und den Schriften. Der <a href="/de/themebuilder?view=palettes" target="_top">Farbgenerator</a> macht aus jeder Origin-Farbe eine vollständige Palette.',
 		h2: 'Von einer Farbe zur ganzen Palette',
 		p2: 'Der Generator arbeitet in HSLuv. Dessen Helligkeit entspricht CIELUV L* und hängt nur von der Luminanz ab. Farben auf derselben Stufe haben daher denselben Kontrast zu Weiß und Schwarz, unabhängig vom Farbton.',
 		list: [
