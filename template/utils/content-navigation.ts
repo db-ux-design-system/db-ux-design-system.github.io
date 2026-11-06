@@ -175,7 +175,7 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 				// The home page carries no nav metadata; excluded so its CSS stays off other pages
 				'!../../content/pages/index.astro',
 				// Standalone iframe document of the Theme Builder, not a navigation destination
-				'!../../content/pages/theme-builder/preview.astro',
+				'!../../content/pages/themebuilder/preview.astro',
 			],
 			{ eager: true },
 		),
@@ -231,7 +231,7 @@ export function buildAppNavigationFromContent(mobile?: boolean): AppNavigation {
 		'documentation/icons': { titleDe: 'Icons' },
 		'documentation/get-started': { titleDe: 'Erste Schritte', order: 1 },
 		'documentation/releases/release-notes': { titleDe: 'Release Notes' },
-		'theme-builder': { titleDe: 'Theme Builder', order: 3 },
+		themebuilder: { titleDe: 'Theme Builder', order: 3 },
 		'documentation/components/overview': {
 			// No `title`: the slug already yields "Overview".
 			titleDe: 'Übersicht',
