@@ -18,6 +18,7 @@ import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleW
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Display legal information at the end of the layout
 - Provide secondary navigation across all pages
@@ -113,6 +114,18 @@ Footer Content and Footer Meta are filled independently. The resulting combinati
 		fullWidth={true}
 	/>
 </div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbfooter-complex-composition"
+	storybookOverview="components-dbfooter-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+/>
 
 </DBSection>
 

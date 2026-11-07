@@ -14,22 +14,14 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Layout einer mobilen Anwendung aufbauen
 - Control Panel oben oder unten positionieren
 - Hauptnavigation über einen Drawer zugänglich machen
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbshell-position--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -129,6 +121,18 @@ Das Control Panel kann oben oder unten positioniert werden. Beide Positionen sin
 </DBSection>
 
 <FigmaLearnTeaser componentName="Shell Mobile" locale="de" anchor="control-panel--shell" />
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbshell-position"
+	storybookOverview="components-dbshell-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

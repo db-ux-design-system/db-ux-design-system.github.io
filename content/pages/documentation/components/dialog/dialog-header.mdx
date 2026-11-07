@@ -17,22 +17,14 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Provide a title for the dialog
 - Offer a close button for dismissal
 - Add a badge or icon next to the title
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbdialog-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -132,6 +124,19 @@ The start and end slot hold additional elements next to the title, such as a bad
 </DBSection>
 
 <FigmaLearnTeaser componentName="Dialog Header" locale="en" anchor="dialog" />
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbdialog-density"
+	storybookOverview="components-dbdialog-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+	storybookAnchor="dbdialogheader"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

@@ -1,0 +1,230 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Test your application'
+headline: 'Test your application'
+description: 'Set up tests for your application with the components – for React, Vue, Angular and Web Components, with accessibility checks.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 20.3
+category: 'Development'
+keywords:
+  [
+    'testing',
+    'tests',
+    'unit test',
+    'component test',
+    'e2e',
+    'testing library',
+    'react testing library',
+    'vue test utils',
+    'testbed',
+    'jest',
+    'vitest',
+    'playwright',
+    'axe',
+    'accessibility test',
+    'mock',
+    'data-testid',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Load the styles in the test setup
+
+Your tests check what **your application** does with the components. Some of it depends on the styles, for example visibility and the validation states, so import the same styles as in your application.
+
+```ts
+// setupTests.ts or vitest.setup.ts
+import '@db-ux/core-components/build/styles/bundle.css';
+```
+
+<LearnAside>
+
+- **Angular:** add the styles to the `styles` of the test target in `angular.json`, as in the build target.
+- **Icons:** jsdom does not load fonts, so icons do not render in unit tests. This is expected and does not affect the result.
+- **Selecting elements:** prefer queries by role and label, like a user. `data-*` attributes such as `data-testid` are passed through to the element of the component.
+- **The components themselves** are tested in the design system for every release: visual snapshots, axe, aria snapshots and screen readers. The [test table in Storybook](https://design-system.deutschebahn.com/core-web/version/latest/composition-storybook/?path=/docs/foundations-test-table--docs) lists them per component.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## React: render and interact like a user
+
+With **React Testing Library**, query the rendered component by role and trigger events on it.
+
+<LearnAside>
+
+```tsx
+import { render, screen, fireEvent } from '@testing-library/react';
+import { DBButton } from '@db-ux/react-core-components';
+
+test('calls the handler on click', () => {
+	const handleClick = vi.fn();
+	render(<DBButton onClick={handleClick}>Save</DBButton>);
+
+	fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+	expect(handleClick).toHaveBeenCalledTimes(1);
+});
+```
+
+With Jest, use `jest.fn()` instead of `vi.fn()`.
+
+To test your own logic without the components, mock the package:
+
+```tsx
+// __mocks__/@db-ux/react-core-components.tsx
+export const DBButton = ({ children, ...props }) => <button {...props}>{children}</button>;
+```
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Vue: mount and check the emitted events
+
+With **Vue Test Utils**, mount the component and check the events it emits. The form components use `v-model:value`, so the event is `update:value`.
+
+<LearnAside>
+
+```ts
+import { mount } from '@vue/test-utils';
+import { DBInput } from '@db-ux/v-core-components';
+
+test('emits the typed value', async () => {
+	const wrapper = mount(DBInput, { props: { label: 'Name', value: '' } });
+
+	await wrapper.find('input').setValue('Ada');
+	expect(wrapper.emitted('update:value')?.[0]).toEqual(['Ada']);
+});
+```
+
+To replace a component in a test, pass a stub in `global.components`:
+
+```ts
+mount(MyForm, {
+	global: {
+		components: {
+			DBButton: { template: '<button @click="$emit(\'click\', $event)"><slot /></button>' },
+		},
+	},
+});
+```
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Angular: import the standalone components
+
+The components are standalone. Import them in the `TestBed` together with your component.
+
+<LearnAside>
+
+```ts
+import { TestBed } from '@angular/core/testing';
+import { DBButton } from '@db-ux/ngx-core-components';
+import { MyComponent } from './my.component';
+
+beforeEach(async () => {
+	await TestBed.configureTestingModule({
+		imports: [MyComponent, DBButton],
+	}).compileComponents();
+});
+```
+
+To replace a component, declare a standalone stub with the same selector, for example `db-button`, and import it instead of `DBButton`.
+
+Events use the Angular syntax: `(click)` instead of `onClick` or `@click`.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Web Components: register them first
+
+Custom elements only render after they are registered. Call `defineCustomElements()` once in the test setup.
+
+```ts
+import { defineCustomElements } from '@db-ux/wc-core-components';
+
+defineCustomElements();
+```
+
+<LearnAside>
+
+The components render asynchronously. Wait until the element is defined before you query its content, for example with `await customElements.whenDefined('db-button')`.
+
+For the full behavior, an end-to-end test in a real browser is often simpler than a unit test in jsdom.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Check accessibility in the browser
+
+Run **axe** in an end-to-end test of your pages. It finds problems in how you combine the components, for example missing labels.
+
+<LearnAside>
+
+```ts
+import { test, expect } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+
+test('page has no accessibility violations', async ({ page }) => {
+	await page.goto('/');
+	const results = await new AxeBuilder({ page }).analyze();
+	expect(results.violations).toEqual([]);
+});
+```
+
+Automated checks find only part of the problems. Test the main flows with the keyboard and a screen reader as well. More on this in [Accessibility](/documentation/learn/accessibility).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Continue with your setup
+
+The setup articles show which packages and styles your application needs.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'All setup articles',
+			description: 'React, Angular, Vue, Web Components and more.',
+			url: '/documentation/learn',
+		},
+		{
+			title: 'Accessibility',
+			description: 'What the components do and what remains your task.',
+			url: '/documentation/learn/accessibility',
+		},
+	]}
+/>
+
+</LearnBlock>

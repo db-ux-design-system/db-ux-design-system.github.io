@@ -15,23 +15,15 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Select multiple items from a longer list with optional "Select all"
 - Search and filter within options to quickly find values
 - Manage selected options clearly (e.g., chips/tags or selected list)
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbcustomselect-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -139,6 +131,18 @@ Enable search when the list is long or users know what they want. Use grouping o
 </DBSection>
 
 <FigmaLearnTeaser componentName="Custom Select" />
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbcustomselect-density"
+	storybookOverview="components-dbcustomselect-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

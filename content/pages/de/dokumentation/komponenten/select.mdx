@@ -15,23 +15,15 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Einen Wert aus einer bekannten Menge wählen (z. B. Land, Kategorie, Priorität)
 - Platz sparen im Vergleich zur Anzeige aller Optionen als Radios
 - Eine kontrollierte Eingabe bieten, wenn Freitext nicht erlaubt ist
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbselect-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -135,6 +127,18 @@ Select sollte sich an umgebenden Inputs orientieren und Container-Breiten einhal
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbselect-density"
+	storybookOverview="components-dbselect-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+/>
 
 </DBSection>
 

@@ -15,23 +15,15 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Capture longer free-text input (e.g., feedback, comments, descriptions)
 - Support structured longer entries with hints (e.g., formatting expectations, character limits)
 - Allow users to review and edit multi-line content comfortably before submitting
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbtextarea-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -122,6 +114,18 @@ Helper text prevents errors (format, tone, limits). Validation messages explain 
 </DBSection>
 
 <FigmaLearnTeaser componentName="Textarea" />
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbtextarea-density"
+	storybookOverview="components-dbtextarea-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 
