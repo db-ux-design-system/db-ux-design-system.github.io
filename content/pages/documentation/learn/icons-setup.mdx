@@ -25,6 +25,12 @@ keywords:
     'autocomplete',
     'troubleshooting',
     'icons not loading',
+    'icon size',
+    'data-icon-weight',
+    'filled',
+    'icon color',
+    'custom icons',
+    'woff2',
   ]
 stepper: true
 ---
@@ -157,6 +163,48 @@ Copy the SVG files from `node_modules/@db-ux/db-theme-icons/build/assets`.
 
 <LearnBlock>
 
+## Adjust size, family and color
+
+`data-icon-weight` picks the font for the icon size, `data-icon-variant="db-filled"` the filled family. The color comes from `--db-icon-color`.
+
+```html
+<span data-icon="user" data-icon-weight="32" data-icon-variant="db-filled">User profile</span>
+```
+
+<LearnAside>
+
+### Sizes
+
+Each size has its own font with more or fewer details. The DB icons come in `12`, `14`, `16`, `20`, `24` and `32`. The default icons of the components without DB Theme come in `16`, `20`, `24`, `32`, `48` and `64`.
+
+To scale an icon more precisely, also set `--db-icon-font-size`. Keep a `data-icon-weight` that is close to the result, so the level of detail fits.
+
+### Leading and trailing icons
+
+`data-icon` adds an icon before the text, `data-icon-trailing` after it. Set size and family per side:
+
+| Side   | Size                           | Family                                 |
+| ------ | ------------------------------ | -------------------------------------- |
+| both   | `data-icon-weight="24"`        | `data-icon-variant="db-filled"`        |
+| before | `data-icon-weight-before="24"` | `data-icon-variant-before="db-filled"` |
+| after  | `data-icon-weight-after="24"`  | `data-icon-variant-after="db-filled"`  |
+
+Without the DB Theme, the families are `default` and `filled`.
+
+### Filled form
+
+Not every icon has its own filled form. The [icon list](/documentation/icons) shows which ones do.
+
+### Color
+
+`--db-icon-color` overrides the color of the icon fonts and of the SVG files.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
 ## If an icon does not show up
 
 Most problems come from an icon font that is not loaded or from a missing `data-icon-variant`.
@@ -205,6 +253,23 @@ Your icons load. Pick the icons for your interface from the full list.
 />
 
 <LearnAside>
+
+### Use your own icons
+
+Custom icons have to be a **woff2** icon font, like the DB icons. Generate it from your SVG files with the [icon-font-tools](https://github.com/db-ux-design-system/icon-font-tools/blob/main/docs/GenerateIconFonts.md). The example project [custom-theme-example](https://github.com/db-ux-design-system/examples/tree/main/custom-theme-example) shows a theme with its own icon font.
+
+To get autocomplete for your own icon names, extend the icon types:
+
+```ts
+import '@db-ux/core-foundations';
+import { IconTypes } from '@db-ux/db-theme-icons';
+
+declare module '@db-ux/core-foundations' {
+	interface OverwriteIcons {
+		types: IconTypes | 'my-custom-icon';
+	}
+}
+```
 
 ### Types, exports and assets
 

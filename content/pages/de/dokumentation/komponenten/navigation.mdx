@@ -17,21 +17,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Primäre Ziele auf oberster Ebene anbieten (globale Navigation)
 - Strukturierte Unternavigation für tiefere Bereiche unterstützen (verschachtelte Ebenen)
 - Navigations-Pattern für Mobile mit kompaktem, touch-freundlichem Verhalten anpassen
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbnavigation-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -134,6 +126,18 @@ Halte die Hierarchie flach und vorhersehbar. Verwende bei zu vielen Elementen ei
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbnavigation-density"
+	storybookOverview="components-dbnavigation-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+/>
 
 </DBSection>
 

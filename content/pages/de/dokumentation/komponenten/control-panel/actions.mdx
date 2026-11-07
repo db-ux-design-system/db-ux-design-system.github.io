@@ -15,20 +15,12 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Hauptaktion und Utility-Aktionen getrennt anordnen
 - Aktionen auf zwei Slots verteilen: nach Inhalt oder Hierarchie
 - Aktionen adaptiv anordnen: horizontal, vertikal oder im Drawer
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbcontrolpanelactions--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -191,6 +183,19 @@ Auf Mobile bleibt Actions 1 in der Menüleiste sichtbar, Actions 2 liegt im Draw
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Alle Beispiele anzeigen" expandedText="Weniger Beispiele anzeigen" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbcontrolpanelactions"
+	storybookOverview="components-dbcontrolpaneldesktop-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+	storybookAnchor="dbcontrolpanelactions1"
+/>
 
 </DBSection>
 

@@ -19,6 +19,7 @@ import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleW
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Rechtlich verpflichtende Links am Ende des Layouts ausweisen
 - Rechteinhaber der Anwendung benennen
@@ -69,6 +70,19 @@ Ist die Anwendung zur Angabe eines Rechteinhabers verpflichtet, trägt der Copyr
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbfooter-complex-composition"
+	storybookOverview="components-dbfooter-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+	storybookAnchor="dbfootermeta"
+/>
 
 </DBSection>
 

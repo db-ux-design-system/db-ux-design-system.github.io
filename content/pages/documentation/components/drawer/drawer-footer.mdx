@@ -17,21 +17,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Offer actions for the drawer content
 - Keep a note about an action visible
 - Secure reachability while scrolling
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbdrawer-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -80,6 +72,19 @@ Both arrangements are valid. For the horizontal one the content is grouped in an
 		description="Vertical: The default arrangement: the content sits one below the other across the full width."
 	/>
 </div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbdrawer-density"
+	storybookOverview="components-dbdrawer-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+	storybookAnchor="dbdrawerfooter"
+/>
 
 </DBSection>
 

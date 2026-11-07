@@ -29,6 +29,10 @@ keywords:
     'htmx',
     'custom theme',
     'shell',
+    'reproduction',
+    'bug report',
+    'fork',
+    'playground',
   ]
 stepper: true
 ---
@@ -41,9 +45,11 @@ import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 
 ## Probiere es zuerst im Browser aus
 
-Drei React-Demos laufen in **StackBlitz** ganz ohne lokales Setup. Der Editor öffnet sich in einem neuen Tab und startet die App.
+Die Beispiele laufen in **StackBlitz** ganz ohne lokales Setup. Der Editor öffnet sich in einem neuen Tab und startet die App.
 
 <LearnAside>
+
+Drei React-Demos zeigen vollständige Anwendungen. Auch die Framework-Beispiele im nächsten Schritt lassen sich in StackBlitz öffnen.
 
 | Beispiel      | Zeigt                                                  | Öffnen                                                                                          |
 | ------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
@@ -65,14 +71,16 @@ Jedes Projekt im [examples-Repository](https://github.com/db-ux-design-system/ex
 
 <LearnAside>
 
-| Framework          | Projekt                                                                                                      | Gebaut mit                    |
-| ------------------ | ------------------------------------------------------------------------------------------------------------ | ----------------------------- |
-| React              | [react-example](https://github.com/db-ux-design-system/examples/tree/main/react-example)                     | Vite, Sass                    |
-| React mit Tailwind | [react-tailwind-template](https://github.com/db-ux-design-system/examples/tree/main/react-tailwind-template) | Vite, Tailwind, Vite-Plugin   |
-| Angular            | [angular-example](https://github.com/db-ux-design-system/examples/tree/main/angular-example)                 | Angular CLI, SCSS             |
-| Vue                | [vue-example](https://github.com/db-ux-design-system/examples/tree/main/vue-example)                         | Vite, Sass                    |
-| Python mit htmx    | [htmx-jinja-example](https://github.com/db-ux-design-system/examples/tree/main/python/htmx-jinja-example)    | Flask, Jinja2, Web Components |
-| Eigenes Theme      | [custom-theme-example](https://github.com/db-ux-design-system/examples/tree/main/custom-theme-example)       | React, eigene Icon-Schrift    |
+| Framework          | Projekt                                                                                                      | Gebaut mit                    | Öffnen                                                                                                                                  |
+| ------------------ | ------------------------------------------------------------------------------------------------------------ | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| React              | [react-example](https://github.com/db-ux-design-system/examples/tree/main/react-example)                     | Vite, Sass                    | [StackBlitz](https://stackblitz.com/fork/github/db-ux-design-system/examples/tree/main/react-example?file=src/App.tsx)                  |
+| React mit Tailwind | [react-tailwind-template](https://github.com/db-ux-design-system/examples/tree/main/react-tailwind-template) | Vite, Tailwind, Vite-Plugin   | [StackBlitz](https://stackblitz.com/fork/github/db-ux-design-system/examples/tree/main/react-tailwind-template?file=src/App.tsx)        |
+| Angular            | [angular-example](https://github.com/db-ux-design-system/examples/tree/main/angular-example)                 | Angular CLI, SCSS             | [StackBlitz](https://stackblitz.com/fork/github/db-ux-design-system/examples/tree/main/angular-example?file=src/app/app.component.html) |
+| Vue                | [vue-example](https://github.com/db-ux-design-system/examples/tree/main/vue-example)                         | Vite, Sass                    | [StackBlitz](https://stackblitz.com/fork/github/db-ux-design-system/examples/tree/main/vue-example?file=src/App.vue)                    |
+| Python mit htmx    | [htmx-jinja-example](https://github.com/db-ux-design-system/examples/tree/main/python/htmx-jinja-example)    | Flask, Jinja2, Web Components | –                                                                                                                                       |
+| Eigenes Theme      | [custom-theme-example](https://github.com/db-ux-design-system/examples/tree/main/custom-theme-example)       | React, eigene Icon-Schrift    | [StackBlitz](https://stackblitz.com/fork/github/db-ux-design-system/examples/tree/main/custom-theme-example?file=src/App.tsx)           |
+
+**StackBlitz** öffnet eine Kopie des Beispiels (einen Fork), die du frei ändern kannst. Das Python-Beispiel braucht ein lokales Python-Setup und läuft nicht in StackBlitz.
 
 Das README hilft dir, wenn du das Setup in deinem eigenen Projekt nachbauen willst.
 
@@ -131,6 +139,27 @@ npm install @db-ux/react-core-components@latest @db-ux/core-components@latest @d
 ```
 
 Nutze für andere Frameworks das passende Paket, zum Beispiel `@db-ux/ngx-core-components` oder `@db-ux/v-core-components`. Springst du dabei über eine Major-Version, prüfe die [Release Notes](/de/dokumentation/releases/release-notes) auf Breaking Changes.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Teile ein lauffähiges Beispiel
+
+Du hast einen Fehler in einer Komponente gefunden? Stelle ihn in einer StackBlitz-Kopie eines Beispiels nach und füge den Link deinem [Issue in core-web](https://github.com/db-ux-design-system/core-web/issues/new/choose 'Melde einen Fehler oder wünsche dir ein Feature für die Komponenten.') hinzu.
+
+<LearnAside>
+
+Ein lauffähiges Beispiel zeigt das Problem schneller als eine Beschreibung, und das Team kann eine Korrektur direkt daran testen.
+
+1. Öffne das Beispiel deines Frameworks in StackBlitz (siehe Tabelle oben).
+2. Aktualisiere die Pakete des Design Systems auf die Version, die du nutzt.
+3. Reduziere den Code auf das, was das Problem zeigt.
+4. Speichere das Projekt in StackBlitz und kopiere seine URL ins Issue.
+
+Nutze nur Beispieldaten. Teile keine internen Informationen – keine internen URLs, keine echten Kunden- oder Projektdaten, auch nicht auf Screenshots.
 
 </LearnAside>
 

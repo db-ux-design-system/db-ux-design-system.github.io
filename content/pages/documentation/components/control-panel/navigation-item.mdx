@@ -15,22 +15,14 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Offer a navigation destination within the Control Panel Navigation
 - Make the current path traceable through Active
 - Group sub-navigation through Navigation Item Groups
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbcontrolpaneldesktop-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -138,6 +130,19 @@ In Tree, Navigation Items show a small circle by default, which can be replaced 
 </DBSection>
 
 <FigmaLearnTeaser componentName="Control Panel Navigation Item" anchor="control-panel--shell" />
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbcontrolpaneldesktop-density"
+	storybookOverview="components-dbcontrolpaneldesktop-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+	storybookAnchor="dbcontrolpanelnavigationitem"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 
