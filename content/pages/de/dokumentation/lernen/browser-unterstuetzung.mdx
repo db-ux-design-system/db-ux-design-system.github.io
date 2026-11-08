@@ -1,0 +1,109 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Unterstützte Browser'
+headline: 'Unterstützte Browser'
+description: 'Welche Browser die Komponenten unterstützen, welche neueren Web-Features sie nutzen und was das für ältere Browser bedeutet.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 18.5
+category: 'Development'
+keywords:
+  [
+    'browser support',
+    'browsers',
+    'browserslist',
+    'chrome',
+    'firefox',
+    'safari',
+    'edge',
+    'esr',
+    'evergreen',
+    'interop',
+    'progressive enhancement',
+    'polyfill',
+    'older browsers',
+    'compatibility',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Die Komponenten unterstützen aktuelle Browser
+
+Unterstützt werden die **letzten drei Versionen** von Chrome und Edge, **Firefox ESR** und neuer sowie die **letzten zwei Major-Versionen** von Safari.
+
+<LearnAside>
+
+Die Liste ist die [Browserslist-Konfiguration](https://github.com/db-ux-design-system/core-web/blob/main/.browserslistrc) des Design Systems. Sie umfasst zusätzlich Browser mit mehr als 0,9 % Nutzung, die noch gepflegt werden.
+
+Getestet werden die Komponenten mit Playwright in den aktuellen Versionen von Chrome, Firefox und Safari. Welche Tests es pro Komponente gibt, zeigt die [Test-Tabelle im Storybook](https://design-system.deutschebahn.com/core-web/version/latest/composition-storybook/?path=/docs/foundations-test-table--docs).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Neuere Web-Features kommen früh zum Einsatz
+
+Die Komponenten nutzen Features der **Interop-Initiative**, sobald die unterstützten Browser sie haben. Manche Features verbessern das Ergebnis, wo sie verfügbar sind, andere sind Voraussetzung.
+
+<LearnAside>
+
+Beispiele für stabile Features im Einsatz: benannte `details`-Elemente für Accordions, `requestClose()` für Dialoge und die Pseudoklasse `:open`.
+
+Die vollständige Liste mit den Browser-Versionen steht unter [Browser Support im Storybook](https://design-system.deutschebahn.com/core-web/version/latest/composition-storybook/?path=/docs/foundations-browser-support--docs).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Manche Features sind Progressive Enhancement
+
+Fehlt einem Browser eines dieser Features, funktioniert die Komponente trotzdem, nur mit weniger Komfort. Ein Beispiel ist `field-sizing: content`, mit dem eine Textarea mit ihrem Inhalt wächst.
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Manche Features ersetzt JavaScript
+
+Für Features wie `light-dark()`, `@property` oder Invoker Commands bringen die Komponenten JavaScript für Browser mit, die sie noch nicht unterstützen. Dieses JavaScript fällt weg, sobald alle unterstützten Browser das Feature haben.
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Du musst ältere Browser unterstützen?
+
+Muss dein Produkt ältere Browser unterstützen, prüfe zuerst die vollständige Feature-Liste: Ihnen können Features fehlen, auf die die Komponenten angewiesen sind. Noch eine Weile bei DB UI zu bleiben, kann die bessere Wahl sein.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Browser Support im Storybook',
+			description: 'Alle Features mit den Browser-Versionen, die sie unterstützen.',
+			url: 'https://design-system.deutschebahn.com/core-web/version/latest/composition-storybook/?path=/docs/foundations-browser-support--docs',
+		},
+		{
+			title: 'Von DB UI auf Generation 3 wechseln',
+			description: 'Was sich beim Wechsel ändert.',
+			url: '/de/dokumentation/lernen/migration',
+		},
+	]}
+/>
+
+</LearnBlock>

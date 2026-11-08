@@ -15,21 +15,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Layout einer Desktop-Anwendung aufbauen: nur der Inhaltsbereich scrollt
 - Control Panel oben oder links positionieren
 - Sub Navigation für Unterseiten ergänzen
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbshell-position--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -98,6 +90,18 @@ Die folgende Tabelle zeigt, welche Kombinationen aus Positionen und Navigationsv
 </DBSection>
 
 <FigmaLearnTeaser componentName="Shell Desktop" locale="de" anchor="control-panel--shell" />
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbshell-position"
+	storybookOverview="components-dbshell-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

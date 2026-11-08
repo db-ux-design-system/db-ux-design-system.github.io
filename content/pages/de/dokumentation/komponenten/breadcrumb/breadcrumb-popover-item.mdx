@@ -17,22 +17,14 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Zwischenebenen zu einer Truncation einklappen
 - Eingeklappte Ebenen im Popover einsehen
 - Platz auf schmalen Viewports sparen
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbbreadcrumbpopoveritem-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -98,6 +90,19 @@ Das erste Item und die aktuelle Seite begrenzen den Pfad und tragen die Orientie
 </DBSection>
 
 <FigmaLearnTeaser componentName="Breadcrumb Popover Item" locale="de" anchor="breadcrumb" />
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbbreadcrumbpopoveritem-density"
+	storybookOverview="components-dbbreadcrumb-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+	storybookAnchor="dbbreadcrumbpopoveritem"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

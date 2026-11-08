@@ -15,22 +15,14 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Unterseiten eines Hauptbereichs erreichbar machen
 - Tiefere Ebenen auf Desktop über Drill Down oder Tree erschließen
 - Bereichsnavigation neben der Hauptnavigation des Control Panels sichtbar halten
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbshell-sub-navigation--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -107,6 +99,19 @@ Auf Desktop können Nutzer:innen Sub Navigation Left einklappen; initial ist sie
 </DBSection>
 
 <FigmaLearnTeaser componentName="Shell Sub Navigation" locale="de" anchor="control-panel--shell" />
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbshell-sub-navigation"
+	storybookOverview="components-dbshell-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+	storybookAnchor="dbshellsubnavigation"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 
