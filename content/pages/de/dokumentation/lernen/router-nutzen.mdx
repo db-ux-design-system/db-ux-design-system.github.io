@@ -64,9 +64,9 @@ Getestet sind die Standard-Router von Angular, React (React Router) und Vue (Vue
 Lege den Router-Link in den Default-Slot des **Navigation Items** oder des **Control Panel Navigation Items**.
 
 ```tsx
-// React – Link aus react-router-dom
+// React – NavLink aus react-router-dom setzt aria-current="page" am aktiven Link
 <DBControlPanelNavigationItem>
-	<Link to="/destination">Destination</Link>
+	<NavLink to="/destination">Destination</NavLink>
 </DBControlPanelNavigationItem>
 ```
 
@@ -74,11 +74,11 @@ Lege den Router-Link in den Default-Slot des **Navigation Items** oder des **Con
 
 ### Angular
 
-Importiere `RouterLink` aus `@angular/router` in deiner Komponente.
+Importiere `RouterLink` und `RouterLinkActive` aus `@angular/router` in deiner Komponente. `ariaCurrentWhenActive` ist ein Input von `RouterLinkActive`, deshalb braucht der Link zusätzlich `routerLinkActive`.
 
 ```html
 <db-control-panel-navigation-item>
-	<a [routerLink]="link.path">{{ link.label }}</a>
+	<a [routerLink]="link.path" routerLinkActive ariaCurrentWhenActive="page">{{ link.label }}</a>
 </db-control-panel-navigation-item>
 ```
 
@@ -102,15 +102,11 @@ Dasselbe funktioniert mit `DBNavigationItem` bzw. `db-navigation-item`.
 
 ## Markiere die aktuelle Seite mit aria-current
 
-Die aktive Darstellung eines Navigation Items folgt `aria-current="page"` am Link. Die meisten Router setzen das Attribut für den Link der aktuellen Route selbst.
+Die aktive Darstellung eines Navigation Items folgt `aria-current="page"` am Link. Der Router setzt das Attribut am Link der aktuellen Route, wie in den Beispielen oben.
 
 <LearnAside>
 
-- **Vue Router:** Setze `ariaCurrentValue="page"` an `RouterLink`.
-- **React Router:** `NavLink` setzt `aria-current="page"` am aktiven Link.
-- **Angular:** Nutze `ariaCurrentWhenActive="page"` am `routerLink`.
-
-Items lassen sich auch mit der Property `active` aktiv setzen. Das setzt kein `aria-current`, Screenreader sagen die aktuelle Seite dann nicht an. Nutze deshalb besser den Router.
+Die Property `active` setzt nur `data-active`. Sie setzt kein `aria-current`, das Item wird dann nicht aktiv dargestellt und Screenreader sagen die aktuelle Seite nicht an. Nutze stattdessen den Router.
 
 </LearnAside>
 

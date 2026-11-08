@@ -12,6 +12,8 @@ type Frontmatter = {
 	description?: string;
 	shortDescription?: string;
 	status?: string;
+	/** Index pages of a family that only forward to one of its pages. */
+	redirectTo?: string;
 };
 
 type Component = {
@@ -57,12 +59,30 @@ const toUrl = (path: string): string =>
 		.replace(/^\.\.\/documentation\/components\//, '')
 		.replace(/(\/index)?\.mdx$/, '')}`;
 
-const components: Record<string, Component> = {};
-// A family folder has an `index.mdx` (overview of the family) and a page of
-// the component itself (`drawer/drawer.mdx`, with the guidelines). The index
-// comes first, the component page overrides it; fields only the index has
-// (e.g. `shortDescription`) stay.
+const fields = (frontmatter: Frontmatter) =>
+	Object.fromEntries(
+		Object.entries({
+			title: frontmatter.title,
+			description: frontmatter.description,
+			shortDescription: frontmatter.shortDescription,
+			status: frontmatter.status,
+		}).filter(([, value]) => value !== undefined),
+	);
+
 const isIndex = (path: string) => path.endsWith('/index.mdx');
+const indexOf = (path: string) => path.replace(/[^/]+\.mdx$/, 'index.mdx');
+/** Page a `redirectTo` path (`/documentation/components/shell/desktop`) points to. */
+const pathOf = (redirectTo: string) =>
+	Object.keys(pages).find((path) => toUrl(path) === `${appConfig.hostname}${redirectTo}`);
+
+const components: Record<string, Component> = {};
+// A family folder has an `index.mdx` (overview of the family) and its pages.
+// - The index comes first, the page named like the folder (`drawer/drawer.mdx`)
+//   overrides it; fields only the index has (e.g. `shortDescription`) stay.
+// - An index that only redirects takes the missing fields and the URL of its
+//   target page, e.g. `shell` the description and URL of `shell/desktop.mdx`.
+// - Pages without a status of their own inherit the status of the index
+//   (`control-panel/desktop.mdx` -> `beta`); `sub` and others stay.
 const paths = Object.keys(pages).sort(
 	(a, b) => Number(isIndex(b)) - Number(isIndex(a)) || a.localeCompare(b),
 );
@@ -73,15 +93,19 @@ for (const path of paths) {
 		continue;
 	}
 
-	const defined = Object.fromEntries(
-		Object.entries({
-			title: frontmatter.title,
-			description: frontmatter.description,
-			shortDescription: frontmatter.shortDescription,
-			status: frontmatter.status,
-		}).filter(([, value]) => value !== undefined),
-	);
-	components[name] = { ...components[name], ...defined, url: toUrl(path) } as Component;
+	const target =
+		isIndex(path) && frontmatter.redirectTo ? pathOf(frontmatter.redirectTo) : undefined;
+	const isInFamily = /\/components\/[^/]+\/[^/]+\.mdx$/.test(path);
+	const inherited = isInFamily && !isIndex(path) ? pages[indexOf(path)]?.status : undefined;
+	const merged = {
+		...components[name],
+		...(target ? fields(pages[target]) : {}),
+		...fields(frontmatter),
+	};
+	components[name] = {
+		...fields({ ...merged, status: merged.status ?? inherited }),
+		url: toUrl(target ?? path),
+	} as Component;
 }
 
 export const GET: APIRoute = () =>
