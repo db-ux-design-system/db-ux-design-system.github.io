@@ -6,8 +6,3 @@
 	gap: var(--db-spacing-fixed-xs);
 	inline-size: 100%;
 }
-
-/* The global content spacing must not add to the flex gap (0,4,0 beats its 0,3,0) */
-.dba-main-content .adaptive-colors-visual > .db-notification + .db-notification {
-	margin-block-start: 0;
-}

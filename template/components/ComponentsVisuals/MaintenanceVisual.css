@@ -65,9 +65,3 @@
 	margin-block: calc(3 * var(--db-spacing-fixed-md)) 0;
 	margin-inline-start: calc(3 * var(--db-spacing-fixed-md));
 }
-
-/* The global content spacing must not add to the card gap (0,4,0 beats its 0,3,0) */
-.dba-main-content .maintenance-visual-card > .maintenance-visual-title + .maintenance-visual-meta,
-.dba-main-content .maintenance-visual-card > .maintenance-visual-meta + .maintenance-visual-text {
-	margin-block-start: 0;
-}

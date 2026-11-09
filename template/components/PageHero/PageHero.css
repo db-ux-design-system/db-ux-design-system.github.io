@@ -80,6 +80,54 @@
 	inline-size: 100%;
 }
 
+/* Top line above the headline, DB Neo Head Extra Wide and caps. A block of its own, so it
+   wraps independently and the headline below starts on a new line. Larger than the headline (2em). */
+.page-hero-headline-top {
+	display: block;
+	font-family: var(--db-font-family-head);
+	font-weight: 1000;
+	font-size: 2em;
+	line-height: 1.1;
+	text-transform: uppercase;
+	overflow-wrap: anywhere;
+	margin-block-end: var(--db-spacing-fixed-2xl);
+}
+
+/* The headline text below the top line. A block of its own, so it never runs into the top line. */
+.page-hero-headline-main {
+	display: block;
+}
+
+/* Home hero only: first section fills the visible area below the header and centers its content. */
+.db-shell-content:has(.home-page-hero) {
+	container-type: size;
+
+	--home-demo-overlap: 20cqb;
+}
+
+.db-section.home-page-hero {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	box-sizing: border-box;
+	min-block-size: 100cqb; /* stylelint-disable-line db-ux/use-sizing */
+}
+
+.home-page-hero .page-hero-content {
+	max-inline-size: none;
+}
+
+.home-page-hero .page-hero-headline {
+	font-weight: 400;
+}
+
+.home-page-hero .page-hero-headline-main {
+	max-inline-size: 56rem; /* stylelint-disable-line db-ux/use-sizing */
+	margin-inline: auto;
+	text-wrap: wrap;
+	text-align: center;
+}
+
 /* Page toolbar for page actions (reading list, view toggle, …) at the end of the
    headline row, pushed to the right edge instead of sitting next to the headline. */
 .page-hero-toolbar {
@@ -93,14 +141,6 @@
 
 	/* Top-aligned with the headline, so it stays in place when the headline wraps. */
 	align-self: flex-start;
-}
-
-/* The global content spacing (content-spacing.css) adds a top margin to an element that
-   follows an astro-island, so a control placed after the reading list island would sit
-   lower than it. The toolbar aligns its items itself; the extra classes outrank that
-   rule. */
-.dba-main-content .page-hero-headline-row .page-hero-toolbar > * {
-	margin-block: 0;
 }
 
 .page-hero-description {
@@ -214,7 +254,7 @@ hero-model[data-ar] .page-hero-model-toggle {
 }
 
 /* Visual size for P&S hero – tune here (14rem = 224 px).
- * Stroke: strokeScaling="scale" in the markup, width from --visual-stroke-ratio (Visual.css) */
+* Stroke: strokeScaling="scale" in the markup, width from --visual-stroke-ratio (Visual.css) */
 .page-hero-visual {
 	--visual-inline-size: var(--db-container-3xs);
 }
@@ -250,8 +290,10 @@ hero-model[data-ar] .page-hero-model-toggle {
 
 /* Mobile Anpassungen */
 @media (width <= 767px) {
+	/* Text and visual are stacked: the gap is the distance between them (2xl), so the
+       visual itself has no top margin here. */
 	.page-hero {
-		gap: var(--db-spacing-fixed-md);
+		gap: var(--db-spacing-fixed-2xl);
 		margin-block-end: var(--db-spacing-fixed-xl);
 	}
 
@@ -266,7 +308,6 @@ hero-model[data-ar] .page-hero-model-toggle {
 	}
 
 	.page-hero[data-layout='split'] .page-hero-media {
-		margin-block-start: var(--db-spacing-fixed-lg);
 		justify-content: center; /* Mobile immer zentriert */
 	}
 
@@ -281,6 +322,6 @@ hero-model[data-ar] .page-hero-model-toggle {
 	}
 
 	.page-hero-media {
-		margin-block-start: var(--db-spacing-fixed-lg);
+		margin-block-start: 0;
 	}
 }
