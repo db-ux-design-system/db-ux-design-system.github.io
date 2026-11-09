@@ -20,21 +20,22 @@ const toc = (headings?.length ?? 0) > 0 && frontmatter.toc === true;
 	/>
 )}
 <div class="dba-main-content">
-	{(frontmatter.title || frontmatter.headline || frontmatter.description) && (
-		<DBSection id={frontmatter.title} width="full" spacing="large">
-			<PageHero
-				title={frontmatter.title}
-				headline={frontmatter.headline}
-				description={frontmatter.description}
-				headlineLevel={frontmatter.headlineLevel ?? 1}
-				imageSrc={frontmatter.heroImage}
-				imageAlt={frontmatter.heroImageAlt}
-				visual={frontmatter.heroVisual}
-				visualImage={frontmatter.heroVisualImage}
-				align={frontmatter.align}
-			/>
-		</DBSection>
-	)}
+	{!frontmatter.hideHero &&
+		(frontmatter.title || frontmatter.headline || frontmatter.description) && (
+			<DBSection id={frontmatter.title} width="full" spacing="large">
+				<PageHero
+					title={frontmatter.title}
+					headline={frontmatter.headline}
+					description={frontmatter.description}
+					headlineLevel={frontmatter.headlineLevel ?? 1}
+					imageSrc={frontmatter.heroImage}
+					imageAlt={frontmatter.heroImageAlt}
+					visual={frontmatter.heroVisual}
+					visualImage={frontmatter.heroVisualImage}
+					align={frontmatter.align}
+				/>
+			</DBSection>
+		)}
 	<DBSection id="main-content-section" width="full" spacing="none">
 		<slot />
 	</DBSection>
