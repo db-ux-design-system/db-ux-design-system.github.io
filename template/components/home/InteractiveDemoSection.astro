@@ -8,6 +8,9 @@ interface Props {
 	lightModeLabel?: string;
 	fullscreenLabel?: string;
 	demoTitle?: string;
+	themeLabel?: string;
+	showB2CLabel?: string;
+	showB2BLabel?: string;
 }
 
 const {
@@ -15,44 +18,48 @@ const {
 	lightModeLabel = 'Activate Light Mode',
 	fullscreenLabel = 'Fullscreen',
 	demoTitle = 'Interactive demo',
+	themeLabel = 'Theme',
+	showB2CLabel = 'Show B2C demo',
+	showB2BLabel = 'Show B2B demo',
 } = Astro.props;
 ---
 
-<DBSection width="medium" spacing="medium" id="home--interactive-demo-section">
+<DBSection width="large" spacing="medium" id="home--interactive-demo-section">
 	<DBStack>
+		<DBCard spacing="none">
+			<iframe id="demo-iframe" src="/demo-b2b" title={demoTitle}></iframe>
+		</DBCard>
 		<DBCard spacing="small" className="actionbar">
 			<DBStack direction="row" gap="2x-small">
 				<div class="actionbar-group">
-					<DBButton variant="brand" data-action="theme" data-value="default">
-						<span class="label-full">Deutsche Bahn</span>
-						<span class="label-short">DB</span>
-					</DBButton>
-					<DBButton
-						data-theme="station"
-						variant="brand"
-						data-action="theme"
-						data-value="station"
-						text="Station"
-					/>
-					<DBButton
-						data-theme="s-bahn"
-						variant="brand"
-						data-action="theme"
-						data-value="s-bahn"
-						text="S-Bahn"
-					/>
-					<DBButton
-						data-theme="neutral"
-						variant="brand"
-						data-action="theme"
-						data-value="neutral"
-						text="Neutral"
-					/>
+					{/* Native select, so the actionbar stays a static island without hydration.
+					    home-demo.client.ts listens for its change and reloads the iframe. */}
+					<div class="db-select actionbar-theme" data-hide-label="true">
+						<label for="demo-theme-select">{themeLabel}</label>
+						<select id="demo-theme-select" data-action="theme">
+							<option value="default">Deutsche Bahn</option>
+							<option value="station">Station</option>
+							<option value="s-bahn">S-Bahn</option>
+							<option value="neutral">Neutral</option>
+						</select>
+					</div>
 				</div>
 				<div class="actionbar-group">
-					<DBButton variant="filled" icon="circular_arrows" id="toggle-demo" text="B2C" />
 					<DBButton
-						title={darkModeLabel}
+						aria-label={showB2CLabel}
+						data-has-tooltip="true"
+						variant="filled"
+						noText="true"
+						icon="circular_arrows"
+						id="toggle-demo"
+						data-label-b2c={showB2CLabel}
+						data-label-b2b={showB2BLabel}
+					>
+						<DBTooltip placement="top">{showB2CLabel}</DBTooltip>
+					</DBButton>
+					<DBButton
+						aria-label={darkModeLabel}
+						data-has-tooltip="true"
 						variant="filled"
 						noText="true"
 						icon="moon"
@@ -60,10 +67,11 @@ const {
 						data-label-dark={darkModeLabel}
 						data-label-light={lightModeLabel}
 					>
-						<DBTooltip>{darkModeLabel}</DBTooltip>
+						<DBTooltip placement="top">{darkModeLabel}</DBTooltip>
 					</DBButton>
 					<a
-						title={fullscreenLabel}
+						aria-label={fullscreenLabel}
+						data-has-tooltip="true"
 						class="db-button"
 						target="_blank"
 						referrerpolicy="no-referrer"
@@ -72,13 +80,10 @@ const {
 						data-icon="fullscreen"
 						id="fullscreen-anchor"
 					>
-						{fullscreenLabel}
+						<DBTooltip placement="top">{fullscreenLabel}</DBTooltip>
 					</a>
 				</div>
 			</DBStack>
-		</DBCard>
-		<DBCard spacing="none">
-			<iframe id="demo-iframe" src="/demo-b2b" title={demoTitle}></iframe>
 		</DBCard>
 	</DBStack>
 </DBSection>

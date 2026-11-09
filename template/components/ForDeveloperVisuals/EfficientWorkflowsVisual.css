@@ -308,19 +308,3 @@
 		padding-inline-start: var(--db-spacing-fixed-sm);
 	}
 }
-
-/* The global content spacing must not add to the layout (0,4,0 beats its 0,3,0) */
-.dba-main-content
-	.efficient-workflows-visual
-	> .efficient-workflows-visual-features
-	+ .efficient-workflows-visual-connector,
-.dba-main-content
-	.efficient-workflows-visual
-	> .efficient-workflows-visual-connector
-	+ .efficient-workflows-visual-shared,
-.dba-main-content
-	.efficient-workflows-visual-shared
-	> .efficient-workflows-visual-design
-	+ .efficient-workflows-visual-code {
-	margin-block-start: 0;
-}

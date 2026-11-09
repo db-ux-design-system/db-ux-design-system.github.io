@@ -142,3 +142,12 @@
 		}
 	}
 }
+
+/* The preview shows a component as it is, without the content rhythm of
+   content-spacing.css. Needed because a column Stack counts as a flow container there,
+   e.g. the Stack example with tags. It also keeps the block-start margins of the
+   previewed components at zero, as before (e.g. between Accordion items).
+   content-spacing.css loads after this file, so the selector needs (0,4,0). */
+.dba-main-content .component-playground.component-playground.component-playground * + * {
+	margin-block-start: 0;
+}

@@ -68,8 +68,3 @@
 .base-tokens-visual-item[data-step='5'] .base-tokens-visual-swatch {
 	background-color: var(--db-red-9);
 }
-
-/* The global content spacing must not add to the flex gap (0,4,0 beats its 0,3,0) */
-.dba-main-content .base-tokens-visual > .base-tokens-visual-title + .base-tokens-visual-list {
-	margin-block-start: 0;
-}
