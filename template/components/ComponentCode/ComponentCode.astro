@@ -34,11 +34,6 @@ interface Props {
 	 */
 	storybookOverview?: string;
 	/**
-	 * Storybook deployment that contains the overview pages: the review build
-	 * of core-web#8649 until it is released, then this prop goes away.
-	 */
-	storybookOverviewBaseUrl?: string;
-	/**
 	 * Section of a part on the overview page of its main component, e.g.
 	 * `dbtabitem` for DBTabItem on the DBTabs page (core-web#8649 documents
 	 * parts as `### DBTabItem` there). Storybook scrolls to the heading with
@@ -47,8 +42,18 @@ interface Props {
 	storybookAnchor?: string;
 }
 
-const { storybookExample, storybookOverview, storybookOverviewBaseUrl, storybookAnchor } =
-	Astro.props;
+const { storybookExample, storybookOverview, storybookAnchor } = Astro.props;
+
+/*
+ * Storybook deployment with the overview pages before they are released,
+ * e.g. the review build of core-web#8649:
+ * STORYBOOK_OVERVIEW_BASE_URL=https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview
+ * Build-time only and not set in CI, so production never links to a preview
+ * that is deleted with its branch. Without it, the cards open the Storybook
+ * of the pinned version. Once the overview pages are released, the cards
+ * always use them and this goes away.
+ */
+const overviewBaseUrl = import.meta.env.STORYBOOK_OVERVIEW_BASE_URL?.replace(/\/+$/, '');
 
 const pathname = stripBasePath(Astro.url.pathname);
 const isDE = pathname.startsWith('/de/') || pathname === '/de';
@@ -83,11 +88,8 @@ const frameworks = [
 	{ title: 'HTML', ref: 'html', icon: 'html5' },
 ];
 
-const compositionUrl =
-	storybookOverview && storybookOverviewBaseUrl
-		? `${storybookOverviewBaseUrl}/composition-storybook`
-		: `${versionBaseUrl}/composition-storybook`;
-const usesOverview = Boolean(storybookOverview && storybookOverviewBaseUrl);
+const usesOverview = Boolean(storybookOverview && overviewBaseUrl);
+const compositionUrl = `${usesOverview ? overviewBaseUrl : versionBaseUrl}/composition-storybook`;
 const docsId = usesOverview ? storybookOverview : storybookExample;
 // The example pages of the fallback have no part sections.
 const anchor = usesOverview && storybookAnchor ? `#${encodeURIComponent(storybookAnchor)}` : '';
@@ -120,7 +122,9 @@ const t = isDE
 			storybook: 'Storybook',
 			storybookText:
 				'Die vollständige technische Dokumentation findest du im Storybook deines Frameworks. Ältere Versionen wählst du dort in der Sidebar. Storybook ist nur auf Englisch verfügbar.',
-			version: `Diese Seite zeigt @db-ux/core-components ${version}.`,
+			version: usesOverview
+				? `Diese Seite zeigt @db-ux/core-components ${version}. Die Storybook-Links öffnen eine Vorschau der nächsten Version.`
+				: `Diese Seite zeigt @db-ux/core-components ${version}.`,
 		}
 	: {
 			gettingStarted: 'Getting started',
@@ -129,7 +133,9 @@ const t = isDE
 			storybook: 'Storybook',
 			storybookText:
 				'The complete technical documentation is in the Storybook of your framework. Earlier versions are in its sidebar.',
-			version: `This page shows @db-ux/core-components ${version}.`,
+			version: usesOverview
+				? `This page shows @db-ux/core-components ${version}. The Storybook links open a preview of the next version.`
+				: `This page shows @db-ux/core-components ${version}.`,
 		};
 ---
 
