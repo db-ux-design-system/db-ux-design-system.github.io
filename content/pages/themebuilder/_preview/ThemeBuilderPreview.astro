@@ -1,0 +1,406 @@
+---
+/**
+ * Preview document of the Theme Builder. It is rendered inside an iframe so that the
+ * generated theme (applied on :root) never touches the platform itself.
+ * The theme and the active view come from the URL hash, see preview-runtime.ts.
+ */
+import './preview.css';
+import {
+	DBAccordion,
+	DBAccordionItem,
+	DBBadge,
+	DBButton,
+	DBCard,
+	DBCheckbox,
+	DBHeadingH1,
+	DBHeadingH2,
+	DBHeadingH3,
+	DBHeadingH4,
+	DBInput,
+	DBLink,
+	DBLoadingIndicator,
+	DBParagraph,
+	DBRadio,
+	DBSelect,
+	DBStack,
+	DBSwitch,
+	DBTextarea,
+	DBTextGroup,
+} from '@db-ux/react-core-components';
+import Footer from '@template/components/Footer/Footer.astro';
+import { previewTexts, type PreviewLang } from './preview-texts';
+import {
+	ComponentOverview,
+	OverviewMount,
+	type MountedComponent,
+} from '../../documentation/components/overview/_ComponentOverview.tsx';
+import {
+	columns,
+	MOUNT_COLUMNS,
+	MOUNT_FIT_CONTENT,
+} from '../../documentation/components/overview/_components/_shared.tsx';
+import { SECTIONS } from '../../documentation/components/overview/_sections.ts';
+import '../../documentation/components/overview/ComponentOverview.css';
+
+interface Props {
+	lang: PreviewLang;
+}
+const { lang } = Astro.props;
+const t = previewTexts[lang];
+// Specimens that need JavaScript. The preview is not inside the client-only shell,
+// so they can hydrate as regular islands.
+const mountedComponents = Object.keys(MOUNT_COLUMNS) as MountedComponent[];
+const isMounted = (component: string): component is MountedComponent =>
+	mountedComponents.includes(component as MountedComponent);
+const bars = [48, 72, 60, 88, 54, 96, 78];
+---
+
+<!doctype html>
+<html lang={lang} data-view="modules">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="robots" content="noindex" />
+		<title>{t.title}</title>
+		{/* Set the view from the hash before first paint, so the default view never flashes */}
+		<script is:inline>
+			(function () {
+				var views = ['modules', 'components', 'typography', 'palettes'];
+				var view = new URLSearchParams(location.hash.replace(/^#/, '')).get('view');
+				if (views.indexOf(view) !== -1) {
+					document.documentElement.dataset.view = view;
+				}
+			})();
+		</script>
+		<style is:inline id="theme-builder-tokens"></style>
+	</head>
+	<body data-density="regular" data-mode="light">
+		{/* aria-label makes this landmark unique: axe scans into the iframe, where the shell's
+		    own <main> is also present, and two unlabelled main landmarks fail landmark-unique. */}
+		<main class="tb-preview-main" aria-label={t.title}>
+			<h1 class="tb-visually-hidden">{t.title}</h1>
+
+			<!-- View 01: modules -->
+			<div class="tb-view tb-masonry" data-view-name="modules">
+				<DBCard spacing="medium" className="tb-module">
+					<DBStack gap="medium">
+						<DBStack gap="none">
+							<h2>{t.contribution.title}</h2>
+							<p class="tb-muted">{t.contribution.subtitle}</p>
+						</DBStack>
+						<div class="tb-chart" role="img" aria-label={t.contribution.chartLabel}>
+							{bars.map((value, index) => (
+								<div class="tb-chart-bar">
+									<span style={`--tb-bar: ${value}%`} />
+									<small>{t.contribution.months[index]}</small>
+								</div>
+							))}
+						</div>
+						<div class="tb-tiles">
+							{t.contribution.stats.map((stat) => (
+								<div class="tb-tile">
+									<small class="tb-eyebrow">{stat.label}</small>
+									<strong>{stat.value}</strong>
+									<small class="tb-muted">{stat.meta}</small>
+								</div>
+							))}
+						</div>
+						<DBButton wrap={false} variant="filled" width="full" type="button">
+							{t.contribution.cta}
+						</DBButton>
+					</DBStack>
+				</DBCard>
+
+				<DBCard spacing="medium" className="tb-module">
+					<DBStack gap="medium">
+						<DBStack gap="none">
+							<h2>{t.payout.title}</h2>
+							<p class="tb-muted">{t.payout.subtitle}</p>
+						</DBStack>
+						{/* The DB form components wire the label/control id only in a useEffect, so a
+						    server-rendered control has no label association (axe: label / select-name).
+						    client:load hydrates them immediately; client:visible is not enough because the
+						    full-page axe scan runs before an off-screen module scrolls into view. */}
+						<DBSelect client:load id="tb-payout-currency" label={t.payout.currency}>
+							{t.payout.currencies.map((value) => (
+								<option value={value}>{value}</option>
+							))}
+						</DBSelect>
+						<DBInput
+							client:load
+							id="tb-payout-amount"
+							label={t.payout.amount}
+							type="number"
+							value="2500"
+						/>
+						<DBTextarea
+							client:load
+							id="tb-payout-notes"
+							label={t.payout.notes}
+							placeholder={t.payout.notesPlaceholder}
+							rows={3}
+						/>
+						<DBButton wrap={false} variant="brand" width="full" type="button">
+							{t.payout.cta}
+						</DBButton>
+					</DBStack>
+				</DBCard>
+
+				<DBCard spacing="medium" className="tb-module">
+					<DBStack gap="medium">
+						<DBStack direction="row" justifyContent="space-between" alignment="start" gap="small">
+							<DBStack gap="none" className="tb-grow">
+								<h2>{t.savings.title}</h2>
+								<p class="tb-muted">{t.savings.subtitle}</p>
+							</DBStack>
+							<DBButton wrap={false} variant="filled" size="small" type="button">
+								{t.savings.newGoal}
+							</DBButton>
+						</DBStack>
+						{t.savings.goals.map((goal) => (
+							<div class="tb-tile">
+								<small class="tb-eyebrow">{goal.label}</small>
+								<p class="tb-figure">{goal.value}</p>
+								{/* Hydrated, so the determinate value is applied (it is set client-side) */}
+								{/* `indeterminate={false}` is required for a determinate value (it defaults to true) */}
+								<DBLoadingIndicator
+									client:load
+									variant="bar"
+									indeterminate={false}
+									value={goal.progress}
+									max={100}
+									showLabel={false}
+									label={`${goal.label}: ${goal.progress} % ${t.savings.achieved}`}
+								/>
+								<DBStack direction="row" justifyContent="space-between">
+									<small class="tb-muted">
+										{goal.progress} % {t.savings.achieved}
+									</small>
+									<small>{goal.target}</small>
+								</DBStack>
+							</div>
+						))}
+						<small class="tb-muted">{t.savings.note}</small>
+					</DBStack>
+				</DBCard>
+
+				<DBCard spacing="medium" className="tb-module tb-empty">
+					<DBStack gap="small" alignment="center">
+						<span class="tb-empty-icon" data-icon="plus" aria-hidden="true"></span>
+						<h2>{t.empty.title}</h2>
+						<p class="tb-muted">{t.empty.text}</p>
+						<DBButton wrap={false} variant="brand" size="small" type="button">
+							{t.empty.cta}
+						</DBButton>
+					</DBStack>
+				</DBCard>
+
+				<DBCard spacing="medium" className="tb-module">
+					<DBStack gap="small">
+						<p class="tb-muted">{t.balance.title}</p>
+						<p class="tb-balance">{t.balance.value}</p>
+						<div>
+							<DBBadge semantic="warning">{t.balance.status}</DBBadge>
+						</div>
+						<dl class="tb-rows">
+							{t.balance.rows.map((row) => (
+								<div>
+									<dt>{row.label}</dt>
+									<dd>{row.value}</dd>
+								</div>
+							))}
+						</dl>
+						<small class="tb-muted">{t.balance.note}</small>
+					</DBStack>
+				</DBCard>
+
+				<DBCard spacing="medium" className="tb-module">
+					<DBStack gap="small">
+						<DBStack gap="none">
+							<h2>{t.transactions.title}</h2>
+							<p class="tb-muted">{t.transactions.subtitle}</p>
+						</DBStack>
+						<ul class="tb-list">
+							{t.transactions.items.map((item) => (
+								<li>
+									<span class="tb-list-icon" data-icon={item.icon} aria-hidden="true" />
+									<span class="tb-list-text">
+										<strong>{item.title}</strong>
+										<small class="tb-muted">{item.meta}</small>
+									</span>
+									<span class="tb-list-value">{item.value}</span>
+								</li>
+							))}
+						</ul>
+					</DBStack>
+				</DBCard>
+
+				<DBCard spacing="medium" className="tb-module">
+					<DBStack gap="medium">
+						<DBStack gap="none">
+							<h2>{t.notifications.title}</h2>
+							<p class="tb-muted">{t.notifications.subtitle}</p>
+						</DBStack>
+						{t.notifications.items.map((item, index) => (
+							<DBSwitch defaultChecked={index < 2}>{item}</DBSwitch>
+						))}
+					</DBStack>
+				</DBCard>
+
+				<DBCard spacing="medium" className="tb-module">
+					<DBStack gap="medium">
+						<DBStack gap="none">
+							<h2>{t.signIn.title}</h2>
+							<p class="tb-muted">{t.signIn.subtitle}</p>
+						</DBStack>
+						<DBInput
+							client:load
+							id="tb-signin-email"
+							label={t.signIn.email}
+							type="email"
+							placeholder="name@example.com"
+						/>
+						<DBInput
+							client:load
+							id="tb-signin-password"
+							label={t.signIn.password}
+							type="password"
+							value="password"
+						/>
+						<DBCheckbox name="tb-remember" defaultChecked={true}>
+							{t.signIn.remember}
+						</DBCheckbox>
+						<DBButton wrap={false} variant="brand" width="full" type="button">
+							{t.signIn.cta}
+						</DBButton>
+						<DBLink href="#" content="internal">
+							{t.signIn.forgot}
+						</DBLink>
+					</DBStack>
+				</DBCard>
+
+				<DBCard spacing="medium" className="tb-module">
+					<DBStack gap="medium">
+						<h2>{t.plan.title}</h2>
+						{t.plan.options.map((option, index) => (
+							<div class="tb-tile tb-option">
+								<DBRadio name="tb-plan" defaultChecked={index === 0}>
+									{option.label}
+								</DBRadio>
+								<small class="tb-muted">{option.meta}</small>
+							</div>
+						))}
+						<DBCheckbox name="tb-addon">{t.plan.addon}</DBCheckbox>
+						<DBButton wrap={false} variant="brand" icon="arrow_right" width="full" type="button">
+							{t.plan.cta}
+						</DBButton>
+					</DBStack>
+				</DBCard>
+
+				<DBCard spacing="medium" className="tb-module">
+					<DBStack gap="small">
+						<h2>{t.faq.title}</h2>
+						<DBAccordion>
+							{t.faq.items.map((item, index) => (
+								<DBAccordionItem headline={item.question} defaultOpen={index === 0}>
+									{item.answer}
+								</DBAccordionItem>
+							))}
+						</DBAccordion>
+					</DBStack>
+				</DBCard>
+
+				<div data-color="brand" class="tb-module tb-context-card">
+					<DBStack gap="small">
+						<h2>{t.promo.title}</h2>
+						<p>{t.promo.text}</p>
+						<DBStack direction="row" gap="small">
+							<DBButton wrap={false} variant="brand" type="button">
+								{t.promo.cta}
+							</DBButton>
+							<DBButton wrap={false} variant="ghost" type="button">
+								{t.promo.secondary}
+							</DBButton>
+						</DBStack>
+					</DBStack>
+				</div>
+
+				<!-- Only shown in the single-column layout, where the first 4 modules are listed.
+				     preview-runtime.ts reveals the rest on click. -->
+				<div data-tb-show-more>
+					<DBButton wrap={false} variant="filled" width="full" type="button">
+						{t.showMore}
+					</DBButton>
+				</div>
+			</div>
+
+			<!-- View 02: all components, reusing the specimens of the Component Overview.
+			     No cards: each section is a divider-separated block, the specimens sit in a
+			     preview area like the Component Playground (without the settings column). -->
+			<div class="tb-view dba-main-content tb-components" data-view-name="components">
+				{SECTIONS.map(({ id, title, component }) => (
+					<section class="tb-component-section">
+						<h2 id={`tb-component-${id}`} class="tb-component-title">
+							{title}
+						</h2>
+						<div class="tb-component-preview">
+							{isMounted(component) ? (
+								<div
+									class="overview-grid"
+									data-fit={MOUNT_FIT_CONTENT.includes(component) ? 'content' : undefined}
+									style={columns(MOUNT_COLUMNS[component])}
+								>
+									<OverviewMount client:only="react" component={component} locale={lang} />
+								</div>
+							) : (
+								<ComponentOverview component={component} locale={lang} />
+							)}
+						</div>
+					</section>
+				))}
+			</div>
+
+			<!-- View 03: typography. The design system's text components own the type scale and
+			     rhythm: a Text Group spaces its block-text children (headings, paragraphs,
+			     lists), so the theme's fonts and spacing drive the look, not custom CSS. -->
+			<div class="tb-view tb-typography-view" data-view-name="typography">
+				<DBTextGroup textSpacing className="tb-article">
+					<DBParagraph size="sm">{t.typography.eyebrow}</DBParagraph>
+					<DBHeadingH1>{t.typography.title}</DBHeadingH1>
+					<DBParagraph size="lg">{t.typography.lead}</DBParagraph>
+					<DBParagraph set:html={t.typography.p1} />
+					<DBHeadingH2>{t.typography.h2}</DBHeadingH2>
+					<DBParagraph>{t.typography.p2}</DBParagraph>
+					<ul>
+						{t.typography.list.map((item) => (
+							<li set:html={item} />
+						))}
+					</ul>
+					<DBParagraph>{t.typography.quote}</DBParagraph>
+					<DBHeadingH3>{t.typography.h3}</DBHeadingH3>
+					<DBParagraph>{t.typography.p3}</DBParagraph>
+					<pre><code>{`@import url('@db-ux/db-theme/build/styles/rollup.css');
+@import url('./theme.css');`}</code></pre>
+					<DBHeadingH4>{t.typography.h4}</DBHeadingH4>
+					<DBParagraph>{t.typography.p4}</DBParagraph>
+				</DBTextGroup>
+			</div>
+
+			<!-- View 04: palettes (sits directly on the stage, no card) -->
+			<div class="tb-view tb-palettes-view" data-view-name="palettes">
+				{/* Filled by preview-runtime.ts: primary, neutral and every color family of the config */}
+				<div class="tb-palettes" data-tb-palettes></div>
+			</div>
+
+			<!-- Site footer at the end of the preview content: it scrolls in with the content
+			     and only shows at the very bottom. The shell footer is hidden on this page. -->
+			<div class="tb-preview-footer">
+				<Footer linkTarget="_top" />
+			</div>
+		</main>
+		<script>
+			import { initPreview } from '@template/components/ThemeBuilder/preview-runtime.ts';
+			initPreview();
+		</script>
+	</body>
+</html>

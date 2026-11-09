@@ -36,6 +36,12 @@ interface Props {
 	imageSide?: 'left' | 'right';
 	/** Semantic level of the headline. Ignored when a title is set: the title is the H1, the headline the H2. */
 	headlineLevel?: 1 | 2 | 3 | 4 | 5 | 6;
+	/**
+	 * A separate line above the headline, set in DB Neo Head Extra Wide and caps. It is its
+	 * own block, so it wraps to its own width independent of the headline below it. Rendered
+	 * inside the same heading as the top line.
+	 */
+	headlineTop?: string;
 	/** Optional link buttons below the description. The first one is styled as brand. */
 	actions?: { label: string; href: string }[];
 	/** Shows a right-aligned page toolbar row for page actions (e.g. reading list, view toggle). */
@@ -58,6 +64,7 @@ const {
 	layout = 'stack',
 	imageSide = 'right',
 	headlineLevel = 2,
+	headlineTop,
 	actions = [],
 	toolbar = false,
 } = Astro.props as Props;
@@ -109,7 +116,8 @@ const hasMedia = hasVisual || Boolean(imageSrc);
 							// row, aligned with the right edge of the content.
 							<div class="page-hero-headline-row">
 								<Headline className="page-hero-headline" visualSize="h1" fontWeight="black">
-									{headline}
+									{headlineTop && <span class="page-hero-headline-top">{headlineTop}</span>}
+									<span class="page-hero-headline-main">{headline}</span>
 								</Headline>
 								{hasHeadlineEnd && <slot name="headline-end" />}
 								{hasToolbar && (
@@ -123,7 +131,8 @@ const hasMedia = hasVisual || Boolean(imageSrc);
 							</div>
 						) : (
 							<Headline className="page-hero-headline" visualSize="h1" fontWeight="black">
-								{headline}
+								{headlineTop && <span class="page-hero-headline-top">{headlineTop}</span>}
+								<span class="page-hero-headline-main">{headline}</span>
 							</Headline>
 						))}
 					{description && (
