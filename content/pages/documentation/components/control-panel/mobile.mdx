@@ -14,22 +14,14 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Combine logo, Actions 1, and access to the navigation in one mobile bar
 - Open the full navigation in a Drawer instead of showing it permanently
 - Position the bar at the top or bottom edge of the screen
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbcontrolpanelmobile-position--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -88,6 +80,18 @@ The first level holds the Brand, Actions 1, and the menu button. Navigation, Met
 </DBSection>
 
 <FigmaLearnTeaser componentName="Control Panel Mobile" anchor="control-panel--shell" />
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbcontrolpanelmobile-position"
+	storybookOverview="components-dbcontrolpanelmobile-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

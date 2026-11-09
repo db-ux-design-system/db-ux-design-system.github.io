@@ -15,21 +15,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Zusammengehörige Inhalte in einen eigenständigen Seitenbereich gruppieren (z. B. „Übersicht“, „Details“, „Nächste Schritte“)
 - Konsistente vertikale Abstände zwischen großen Inhaltsblöcken erzeugen
 - Inhaltsbreite für Lesbarkeit beschränken und gleichzeitig Full-Bleed-Hintergründe ermöglichen
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbsection-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -78,6 +70,18 @@ Section ist ein Layout-Werkzeug, kein semantischer Ersatz. Stelle sicher, dass I
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbsection-density"
+	storybookOverview="components-dbsection-overview"
+	storybookOverviewBaseUrl="https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview"
+/>
 
 </DBSection>
 
