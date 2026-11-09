@@ -15,24 +15,16 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Mehrere Optionen aus einer Liste auswählen (z. B. Benachrichtigungskanäle)
 - Zustimmung oder Bestätigung einholen (z. B. Nutzungsbedingungen akzeptieren)
 - Filter anwenden, die kombiniert werden können (z. B. Kategorien, Attribute)
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbcheckbox-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -106,6 +98,17 @@ Halte in Checkbox-Gruppen die Optionen in Wortwahl und Länge einheitlich. Wenn 
 </DBSection>
 
 <FigmaLearnTeaser componentName="Checkbox" locale="de" />
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbcheckbox-density"
+	storybookOverview="components-dbcheckbox-overview"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

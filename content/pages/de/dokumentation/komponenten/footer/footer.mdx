@@ -18,6 +18,7 @@ import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleW
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Rechtliche Informationen am Ende des Layouts ausweisen
 - Sekundäre Navigation über alle Seiten hinweg bereitstellen
@@ -113,6 +114,17 @@ Footer Content und Footer Meta werden unabhängig voneinander befüllt. Welche K
 		fullWidth={true}
 	/>
 </div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbfooter-complex-composition"
+	storybookOverview="components-dbfooter-overview"
+/>
 
 </DBSection>
 

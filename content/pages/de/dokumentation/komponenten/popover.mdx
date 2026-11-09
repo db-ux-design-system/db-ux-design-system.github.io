@@ -15,22 +15,14 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Kontextbezogene Aktionen oder Einstellungen in der Nähe eines Steuerelements bereitstellen (z. B. „Weitere Optionen“, Schnelleinstellungen)
 - Kurze erklärende Inhalte mit Links oder kleinen Steuerelementen anzeigen (z. B. Hilfe + „Mehr erfahren“)
 - Kompakte, interaktive Inhalte ohne Seitenwechsel darstellen (z. B. Schnellfilter)
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbpopover-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -100,6 +92,17 @@ Wähle eine Platzierung, die das Popover nah am Trigger und innerhalb des Viewpo
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbpopover-density"
+	storybookOverview="components-dbpopover-overview"
+/>
 
 </DBSection>
 

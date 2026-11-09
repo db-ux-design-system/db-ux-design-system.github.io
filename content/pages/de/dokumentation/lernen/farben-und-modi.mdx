@@ -1,0 +1,174 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Farben und Modi umsetzen'
+headline: 'Farben und Modi umsetzen'
+description: 'Färbe Bereiche deiner Seite ein, nutze die Farb-Tokens in deinem eigenen CSS und steuere Light Mode und Dark Mode.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 18.1
+category: 'Development'
+keywords:
+  [
+    'colors',
+    'color',
+    'data-color',
+    'color classes',
+    'adaptive colors',
+    'background',
+    'bg-basic',
+    'tokens',
+    'dark mode',
+    'light mode',
+    'data-mode',
+    'color-scheme',
+    'prefers-color-scheme',
+    'scss placeholder',
+    'theming',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Komponenten passen sich der Farbe ihres Bereichs an
+
+Setze mit `data-color` eine Farbe an einem Container. Der Container bekommt Hintergrund- und Textfarbe, und jede Komponente darin nutzt die passenden **adaptiven Farben**.
+
+```html
+<div data-color="informational">…</div>
+```
+
+<LearnAside>
+
+Die Werte sind `neutral`, `brand`, `critical`, `successful`, `warning`, `informational` und die Zusatzfarben `blue`, `burgundy`, `cyan`, `green`, `light-green`, `orange`, `pink`, `red`, `turquoise`, `violet` und `yellow`. Statt des Attributs funktioniert die Klasse `db-color-informational` genauso.
+
+Welche Farbe zu welchem Zweck passt, beschreiben die [Richtlinien zu Farben](/de/dokumentation/foundation/farben).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Lade die Farbklassen
+
+Die Styles der Komponenten enthalten die Farbklassen schon. Nutzt du nur die Foundation, importierst du sie selbst.
+
+```css
+@import '@db-ux/core-foundations/build/styles/colors/classes/all.css' layer(db-ux);
+```
+
+<LearnAside>
+
+Damit die Datei klein bleibt, importiere nur die Farben, die du nutzt, zum Beispiel `colors/classes/informational.css`.
+
+Mit Sass erweiterst du statt der Klasse einen Platzhalter:
+
+```scss
+@use '@db-ux/core-foundations/build/styles/colors/placeholder';
+
+.my-hint {
+	@extend %db-informational-bg-basic-level-1;
+}
+```
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Wähle die Stufe des Hintergrunds
+
+Die Klassen `db-bg-color-basic-level-1` bis `-level-3` setzen den Hintergrund innerhalb eines eingefärbten Bereichs. Damit staffelst du Bereiche, ohne eine neue Farbe einzuführen.
+
+```html
+<section data-color="informational">
+	<div class="db-bg-color-basic-level-2">…</div>
+</section>
+```
+
+<LearnAside>
+
+| Klasse                               | Einsatz                                       |
+| ------------------------------------ | --------------------------------------------- |
+| `db-bg-color-basic-level-1` bis `-3` | Hintergründe von Seiten, Bereichen und Karten |
+| `db-bg-color-basic-transparent-semi` | Nur Hintergründe von Komponenten              |
+| `db-bg-color-basic-transparent-full` | Nur Hintergründe von Komponenten              |
+
+In deinem eigenen CSS nutzt du die adaptiven Tokens direkt, zum Beispiel `var(--db-adaptive-bg-basic-level-1-default)` mit `-hovered` und `-pressed` für die Zustände. Sie folgen der Farbe des Bereichs.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Light Mode und Dark Mode folgen dem System
+
+Die Tokens wechseln mit der Einstellung des Betriebssystems. Ergänze ein `color-scheme`-Meta-Tag, damit der Browser die Modi schon vor dem CSS kennt.
+
+```html
+<meta name="color-scheme" content="dark light" />
+```
+
+<LearnAside>
+
+Soll die ganze Seite nur einen Modus haben, setze das Meta-Tag auf `only light`, `light` oder `dark`.
+
+Beide Modi testest du, ohne das System umzustellen: Die Entwicklertools des Browsers können das [Farbschema emulieren](https://developer.chrome.com/docs/devtools/rendering/emulate-css/).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Erzwinge einen Modus für einen Bereich
+
+`data-mode="dark"` oder `data-mode="light"` setzt den Modus für einen Container und alles darin, unabhängig vom System.
+
+```html
+<div data-mode="dark">…</div>
+```
+
+<LearnAside>
+
+Der Container mit `data-mode` bekommt den Basis-Hintergrund des Modus. Soll er eine andere Hintergrundfarbe haben, setze `data-mode` an ein umschließendes Element und die Farbe darin.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Mach mit den Farb-Tokens weiter
+
+Die Foundation listet alle Farb-Tokens mit ihrem Einsatz.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Farben',
+			description: 'Farb-Tokens, ihre Kombinationen und die Richtlinien.',
+			url: '/de/dokumentation/foundation/farben',
+		},
+		{
+			title: 'Foundation einrichten',
+			description: 'Lade die Tokens und die Helper-Klassen.',
+			url: '/de/dokumentation/lernen/foundation-einrichten',
+		},
+	]}
+/>
+
+</LearnBlock>

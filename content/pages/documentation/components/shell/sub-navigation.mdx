@@ -15,22 +15,14 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Make the sub-pages of a main section reachable
 - Open up deeper levels on desktop through Drill Down or Tree
 - Keep section navigation visible alongside the main Control Panel navigation
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbshell-sub-navigation--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -104,6 +96,18 @@ On desktop, users can collapse Sub Navigation Left; it always starts expanded. I
 </DBSection>
 
 <FigmaLearnTeaser componentName="Shell Sub Navigation" anchor="control-panel--shell" />
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbshell-sub-navigation"
+	storybookOverview="components-dbshell-overview"
+	storybookAnchor="dbshellsubnavigation"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

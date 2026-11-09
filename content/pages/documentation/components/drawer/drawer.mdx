@@ -16,22 +16,14 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Show additional details without leaving the page
 - Enable a short input in context
 - Provide secondary navigation in tight layouts
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbdrawer-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -145,6 +137,17 @@ The four sizes cover different kinds of content. More area than needed only cove
 		description="Full: Without a limit, when the drawer temporarily replaces the page context."
 	/>
 </div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbdrawer-density"
+	storybookOverview="components-dbdrawer-overview"
+/>
 
 </DBSection>
 
