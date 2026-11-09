@@ -7,15 +7,15 @@
  * in Storybook, versioned per release; the platform shows the current version
  * only and links there.
  *
- * - Getting started: links to the framework setup pages
- * - Storybook: one card per framework to the component's overview page,
- *   opened in the composition Storybook
+ * One card per framework to the component's overview page, opened in the
+ * composition Storybook. The setup of each framework is linked from its
+ * Storybook overview page, so it is not repeated here.
  *
- * The section headings are h3, so they nest under the page's `## Development` (DE: `## Entwicklung`).
+ * The section heading is h3, so it nests under the page's `## Development` (DE: `## Entwicklung`).
  * Storybook is English only; DE pages say so.
  */
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
-import { stripBasePath, withBasePath } from '@template/utils/base-path';
+import { stripBasePath } from '@template/utils/base-path';
 import pkg from '../../../package.json';
 import './ComponentCode.css';
 
@@ -103,22 +103,8 @@ const storybookResources = frameworks.map(({ title, ref, icon }) => ({
 	url: `${compositionUrl}/?path=/docs/${ref}_${docsId}--docs${anchor}`,
 }));
 
-const setupLinks = [
-	{ label: 'React', en: 'react-setup', de: 'react-einrichten' },
-	{ label: 'Angular', en: 'angular-setup', de: 'angular-einrichten' },
-	{ label: 'Vue', en: 'vue-setup', de: 'vue-einrichten' },
-	{ label: 'Web Components', en: 'web-components-setup', de: 'web-components-einrichten' },
-	{ label: 'HTML/CSS', en: 'html-css-setup', de: 'html-css-einrichten' },
-].map(({ label, en, de }) => ({
-	label,
-	url: withBasePath(isDE ? `/de/dokumentation/lernen/${de}` : `/documentation/learn/${en}`),
-}));
-
 const t = isDE
 	? {
-			gettingStarted: 'Einstieg',
-			gettingStartedText:
-				'Installation und Konfiguration der Pakete findest du auf den Setup-Seiten:',
 			storybook: 'Storybook',
 			storybookText:
 				'Die vollständige technische Dokumentation findest du im Storybook deines Frameworks. Ältere Versionen wählst du dort in der Sidebar. Storybook ist nur auf Englisch verfügbar.',
@@ -127,9 +113,6 @@ const t = isDE
 				: `Diese Seite zeigt @db-ux/core-components ${version}.`,
 		}
 	: {
-			gettingStarted: 'Getting started',
-			gettingStartedText:
-				'For installation and configuration of the packages, see the setup pages:',
 			storybook: 'Storybook',
 			storybookText:
 				'The complete technical documentation is in the Storybook of your framework. Earlier versions are in its sidebar.',
@@ -140,16 +123,6 @@ const t = isDE
 ---
 
 <div class="component-code">
-	<h3>{t.gettingStarted}</h3>
-	<p>{t.gettingStartedText}</p>
-	<ul class="component-code-setup-links">
-		{setupLinks.map(({ label, url }) => (
-			<li>
-				<a href={url}>{label}</a>
-			</li>
-		))}
-	</ul>
-
 	<h3>{t.storybook}</h3>
 	<p>{t.storybookText}</p>
 	<ResourceCards resources={storybookResources} />
