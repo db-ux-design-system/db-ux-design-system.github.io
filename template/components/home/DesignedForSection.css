@@ -33,12 +33,3 @@
 	transform-origin: 0 0;
 	transform: scale(var(--designed-for-visual-scale));
 }
-
-/*
- * The global content spacing (0,3,0) adds margin-block-start to the image column, because it
- * follows the text column in the DOM. TextImage's own reset (0,2,2) loses against it, so the
- * reset is repeated here with higher specificity (0,4,0) for the home cards only.
- */
-.dba-main-content .text-image > .text-image-visual:has(.designed-for-visual) {
-	margin-block-start: 0;
-}

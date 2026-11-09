@@ -1,0 +1,487 @@
+@layer db-ux, db-theme, preview;
+
+@import url('@db-ux/core-components/build/styles/rollup.css') layer(db-ux);
+@import url('@db-ux/db-theme/build/styles/rollup.css') layer(db-theme);
+
+/* White label (Lucide based) icon fonts, used when the icon library is Lucide */
+@import url('@db-ux/core-foundations/build/styles/icons/rollup.css') layer(db-ux);
+
+@layer preview {
+	html,
+	body {
+		block-size: 100%;
+	}
+
+	body {
+		margin: 0;
+
+		/*
+		 * The body stays fixed to the viewport and the content scrolls inside
+		 * `.tb-preview-main`. Otherwise opening a modal dialog in the components view
+		 * scrolls the whole document to the top, because the browser scrolls the dialog
+		 * into view on the document's own scroll container.
+		 */
+		block-size: 100%;
+		overflow: hidden;
+		background-color: var(--db-adaptive-bg-basic-level-2-default);
+		color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+		font-family: var(--db-font-family-sans);
+	}
+
+	.tb-visually-hidden {
+		position: absolute;
+		/* stylelint-disable db-ux/use-sizing -- standard visually hidden pattern */
+		inline-size: 1px;
+		block-size: 1px;
+		/* stylelint-enable db-ux/use-sizing */
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+
+	/* Buttons keep their label on one line (wrap={false}) and do not shrink in a row */
+	.db-button {
+		flex-shrink: 0;
+	}
+
+	/* Text next to a button takes the remaining space and wraps instead of the button */
+	.tb-grow {
+		flex: 1;
+		min-inline-size: 0;
+	}
+
+	/* Only the active view is visible */
+	.tb-view {
+		display: none;
+	}
+
+	html[data-view='modules'] [data-view-name='modules'],
+	html[data-view='components'] [data-view-name='components'],
+	html[data-view='typography'] [data-view-name='typography'],
+	html[data-view='palettes'] [data-view-name='palettes'] {
+		display: block;
+	}
+
+	/*
+	 * Reset default margins, but not inside a Text Group: there the DB text-spacing rule
+	 * owns the vertical rhythm, and this reset would otherwise flatten it (it only kept
+	 * the h1 margin because h1 was missing from the list).
+	 */
+	:is(h2, h3, h4, h5, p):not(.db-text-group *) {
+		margin: 0;
+	}
+
+	.tb-module h2 {
+		font: var(--db-type-body-md);
+		font-family: var(--db-font-family-head);
+		font-weight: 700;
+	}
+
+	.tb-muted {
+		color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+	}
+
+	.tb-eyebrow {
+		color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+		font: var(--db-type-body-2xs);
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+
+	/* The only scroll container: the active view, then the footer at the very end */
+	.tb-preview-main {
+		/* Outer padding, smaller on narrow frames; the footer pulls itself out of it */
+		--tb-main-padding: var(--db-spacing-fixed-lg);
+
+		display: flex;
+		flex-direction: column;
+		/* stylelint-disable db-ux/use-spacings -- the variable holds a spacing token (lg or sm) */
+		gap: var(--tb-main-padding);
+		block-size: 100%;
+		overflow-y: auto;
+		padding: var(--tb-main-padding);
+		/* stylelint-enable db-ux/use-spacings */
+
+		@media (width < 40em) {
+			--tb-main-padding: var(--db-spacing-fixed-sm);
+		}
+	}
+
+	/*
+	 * Pushed to the bottom when a view is shorter than the frame, and pulled out of the
+	 * main padding, so it spans the full width and sits flush with the bottom edge.
+	 */
+	.tb-preview-footer {
+		flex: none;
+		margin-block: auto calc(-1 * var(--tb-main-padding));
+		margin-inline: calc(-1 * var(--tb-main-padding));
+	}
+
+	/* Masonry of independent modules, similar to block galleries */
+	.tb-masonry {
+		/* stylelint-disable-next-line db-ux/use-sizing -- column width of the masonry */
+		column-width: 18rem;
+		column-gap: var(--db-spacing-fixed-md);
+	}
+
+	.tb-module {
+		break-inside: avoid;
+		margin-block-end: var(--db-spacing-fixed-md);
+	}
+
+	/*
+	 * Single-column layout (the masonry has room for one 18rem column only): the first 4
+	 * modules are listed, "Show more" reveals the rest. Wider frames show all modules.
+	 */
+	[data-tb-show-more] {
+		display: none;
+		column-span: all;
+	}
+
+	@media (width < 40em) {
+		html:not([data-modules-expanded]) {
+			& .tb-masonry > .tb-module:nth-child(n + 5) {
+				display: none;
+			}
+
+			& [data-tb-show-more] {
+				display: block;
+			}
+		}
+	}
+
+	/* Components view: sections separated by dividers, using the full width */
+	html[data-view='components'] .tb-components {
+		display: flex;
+		flex-direction: column;
+		max-inline-size: 100%;
+	}
+
+	/* Sections are spaced apart, without a divider between them */
+	.tb-component-section + .tb-component-section {
+		margin-block-start: var(--db-spacing-fixed-xl);
+	}
+
+	/* The selector beats the global margin reset (:is()+:not() = 0,1,1), so the title keeps its gap */
+	h2.tb-component-title {
+		margin-block-end: var(--db-spacing-fixed-md);
+		font: var(--db-type-headline-xs);
+		font-family: var(--db-font-family-head);
+	}
+
+	/*
+	 * Preview area like the Component Playground, but without the settings column.
+	 * The specimen grid fills the width, so it is stretched, not centered.
+	 */
+	.tb-component-preview {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		min-block-size: var(--db-sizing-2xl);
+		padding: var(--db-spacing-fixed-lg);
+		border-radius: var(--db-border-radius-md);
+		border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+		background-color: var(--db-adaptive-bg-basic-level-3-default);
+
+		/* A specimen wider than a narrow frame scrolls sideways instead of being cut off */
+		overflow: auto hidden;
+
+		& > * {
+			inline-size: 100%;
+			min-inline-size: 0;
+		}
+
+		@media (width < 40em) {
+			padding: var(--db-spacing-fixed-sm);
+		}
+	}
+
+	/* Tiles inside modules */
+	.tb-tiles {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: var(--db-spacing-fixed-xs);
+	}
+
+	.tb-tile {
+		display: flex;
+		flex-direction: column;
+		gap: var(--db-spacing-fixed-3xs);
+		padding: var(--db-spacing-fixed-sm);
+		border-radius: var(--db-border-radius-sm);
+		background-color: var(--db-adaptive-bg-basic-level-3-default);
+	}
+
+	.tb-option {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.tb-figure {
+		font: var(--db-type-headline-xs);
+		font-family: var(--db-font-family-head);
+	}
+
+	/* Balance */
+	.tb-balance {
+		font: var(--db-type-headline-lg);
+		font-family: var(--db-font-family-head);
+	}
+
+	.tb-rows {
+		display: flex;
+		flex-direction: column;
+		margin: 0;
+		padding: var(--db-spacing-fixed-sm);
+		border-radius: var(--db-border-radius-sm);
+		background-color: var(--db-adaptive-bg-basic-level-3-default);
+
+		& div {
+			display: flex;
+			justify-content: space-between;
+			padding-block: var(--db-spacing-fixed-2xs);
+		}
+
+		& div:last-child {
+			border-block-start: var(--db-border-width-3xs) solid
+				var(--db-adaptive-on-bg-basic-emphasis-60-default);
+			font-weight: 700;
+		}
+
+		& dd {
+			margin: 0;
+		}
+	}
+
+	/* Chart */
+	.tb-chart {
+		display: flex;
+		align-items: end;
+		gap: var(--db-spacing-fixed-xs);
+		block-size: var(--db-container-3xs);
+	}
+
+	.tb-chart-bar {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		justify-content: end;
+		align-items: center;
+		gap: var(--db-spacing-fixed-2xs);
+		block-size: 100%;
+
+		& span {
+			inline-size: 100%;
+			/* stylelint-disable-next-line db-ux/use-sizing -- bar height in percent from markup */
+			block-size: var(--tb-bar);
+			border-radius: var(--db-border-radius-xs);
+
+			/* Origin surfaces need a border, like the brand button, so they stay visible in dark mode */
+			border: var(--db-border-width-3xs) solid var(--db-brand-on-bg-basic-emphasis-70-default);
+			background-color: var(--db-brand-origin-default);
+		}
+
+		& small {
+			color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+		}
+	}
+
+	/* Empty state */
+	.tb-empty {
+		text-align: center;
+	}
+
+	.tb-empty-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		inline-size: var(--db-sizing-lg);
+		block-size: var(--db-sizing-lg);
+		border-radius: var(--db-border-radius-full);
+		background-color: var(--db-adaptive-bg-basic-level-3-default);
+	}
+
+	/* Activity list */
+	.tb-list {
+		display: flex;
+		flex-direction: column;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		& li {
+			display: flex;
+			align-items: center;
+			gap: var(--db-spacing-fixed-sm);
+			padding-block: var(--db-spacing-fixed-xs);
+		}
+
+		& li + li {
+			border-block-start: var(--db-border-width-3xs) solid
+				var(--db-adaptive-on-bg-basic-emphasis-60-default);
+		}
+	}
+
+	.tb-list-icon {
+		display: inline-flex;
+		flex: none;
+		align-items: center;
+		justify-content: center;
+		inline-size: var(--db-sizing-md);
+		block-size: var(--db-sizing-md);
+		border-radius: var(--db-border-radius-sm);
+		background-color: var(--db-adaptive-bg-basic-level-3-default);
+	}
+
+	.tb-list-text {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		min-inline-size: 0;
+	}
+
+	.tb-list-value {
+		font-weight: 700;
+		white-space: nowrap;
+	}
+
+	/* Adaptive color surfaces */
+	.tb-context-card {
+		padding: var(--db-spacing-fixed-md);
+		border-radius: var(--db-border-radius-md);
+		background-color: var(--db-adaptive-bg-basic-level-3-default);
+		color: var(--db-adaptive-on-bg-basic-emphasis-100-default);
+	}
+
+	.tb-contexts {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: var(--db-spacing-fixed-xs);
+
+		& .tb-context-card {
+			padding: var(--db-spacing-fixed-sm);
+			text-transform: capitalize;
+		}
+	}
+
+	/*
+	 * Typography article: the DB Text Group and the DB heading/paragraph components own
+	 * the type scale and the vertical rhythm (0.5lh between block-text children). Only a
+	 * readable measure and the non-text blocks (list, quote, code) are styled here.
+	 */
+	.tb-article {
+		max-inline-size: var(--db-container-2xl);
+		margin-inline: auto;
+		padding: var(--db-spacing-fixed-xl) 0;
+
+		/* Links pick up the theme's brand color */
+		& a {
+			color: var(--db-brand-on-bg-basic-emphasis-100-default);
+		}
+
+		/*
+		 * The Text Group only spaces direct heading/paragraph children; the list and the
+		 * code block are direct children too, so they get the same rhythm here.
+		 */
+		& ul,
+		& pre {
+			margin-block: var(--db-spacing-fixed-md);
+		}
+
+		/* The list items carry DBParagraphs, so only the marker and item gap are set here */
+		& ul {
+			display: flex;
+			flex-direction: column;
+			gap: var(--db-spacing-fixed-2xs);
+			padding-inline-start: var(--db-spacing-fixed-lg);
+		}
+
+		& pre {
+			overflow: auto;
+			padding: var(--db-spacing-fixed-md);
+			border-radius: var(--db-border-radius-sm);
+			background-color: var(--db-adaptive-bg-basic-level-3-default);
+		}
+	}
+
+	/* Palettes view: uses the full width, title then the palette list */
+	.tb-palettes-view {
+		max-inline-size: 100%;
+	}
+
+	.tb-palettes {
+		display: flex;
+		flex-direction: column;
+		gap: var(--db-spacing-fixed-lg);
+	}
+
+	.tb-palette-group {
+		display: flex;
+		flex-direction: column;
+		gap: var(--db-spacing-fixed-xs);
+	}
+
+	.tb-origin-chips {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--db-spacing-fixed-xs);
+	}
+
+	/* Same size as the component titles, so section headings are consistent across views */
+	.tb-palette-title {
+		font: var(--db-type-headline-xs);
+		font-family: var(--db-font-family-head);
+		text-transform: capitalize;
+	}
+
+	.tb-palette {
+		display: grid;
+		grid-template-columns: repeat(15, minmax(0, 1fr));
+		gap: var(--db-spacing-fixed-3xs);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		/* 15 steps get too narrow for their hex value; on small frames they wrap in rows of 5 */
+		@media (width < 48em) {
+			grid-template-columns: repeat(5, minmax(0, 1fr));
+			row-gap: var(--db-spacing-fixed-xs);
+		}
+
+		& li {
+			display: flex;
+			flex-direction: column;
+			gap: var(--db-spacing-fixed-3xs);
+			min-inline-size: 0;
+		}
+	}
+
+	/* Square, so the height scales with the column width at every size */
+	.tb-swatch {
+		aspect-ratio: 1 / 1;
+		border-radius: var(--db-border-radius-xs);
+		background-color: var(--tb-swatch);
+		border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+	}
+
+	.tb-swatch-step {
+		font: var(--db-type-body-2xs);
+		font-weight: 700;
+	}
+
+	.tb-swatch-hex {
+		overflow: hidden;
+		font: var(--db-type-body-3xs);
+		text-overflow: ellipsis;
+		color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+	}
+
+	/* DB Tag showing an origin state: size and shape come from the Tag, only the colors are set */
+	.db-tag.tb-origin-tag {
+		/* An origin surface needs a border to stay visible on a same-dark background */
+		border: var(--db-border-width-3xs) solid var(--db-adaptive-on-bg-basic-emphasis-60-default);
+		background-color: var(--tb-chip-bg);
+		color: var(--tb-chip-fg);
+	}
+}

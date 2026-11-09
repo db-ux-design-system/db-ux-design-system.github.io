@@ -68,11 +68,3 @@
 		gap: var(--db-spacing-fixed-xs);
 	}
 }
-
-/* The global content spacing must not add to the layout (0,4,0 beats its 0,3,0) */
-.dba-main-content
-	.configurable-visual
-	> .configurable-visual-preview
-	+ .configurable-visual-controls {
-	margin-block-start: 0;
-}

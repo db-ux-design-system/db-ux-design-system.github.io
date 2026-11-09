@@ -85,11 +85,3 @@
 		padding: var(--db-spacing-fixed-sm);
 	}
 }
-
-/* The global content spacing must not add to the layout (0,4,0 beats its 0,3,0) */
-.dba-main-content
-	.smooth-handoff-visual
-	> .smooth-handoff-visual-design
-	+ .smooth-handoff-visual-inspect {
-	margin-block-start: 0;
-}
