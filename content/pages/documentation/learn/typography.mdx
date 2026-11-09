@@ -85,13 +85,11 @@ The component styles contain the font classes. With the foundation only, import 
 
 <LearnAside>
 
-If another file sets `font-size` later, it overrides the classes. In that case, let your elements inherit the size:
+If another stylesheet sets `font-size`, it overrides the classes: styles outside a layer always win over the `db-ux` layer. Load that stylesheet in a layer before `db-ux`, at the start of your root CSS file:
 
 ```css
-* {
-	font-size: inherit;
-	line-height: inherit;
-}
+@layer base, db-ux;
+@import 'your-styles.css' layer(base);
 ```
 
 </LearnAside>

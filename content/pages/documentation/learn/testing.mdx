@@ -86,7 +86,11 @@ To test your own logic without the components, mock the package:
 
 ```tsx
 // __mocks__/@db-ux/react-core-components.tsx
-export const DBButton = ({ children, ...props }) => <button {...props}>{children}</button>;
+import type { ComponentProps } from 'react';
+
+export const DBButton = ({ children, ...props }: ComponentProps<'button'>) => (
+	<button {...props}>{children}</button>
+);
 ```
 
 </LearnAside>

@@ -121,18 +121,23 @@ Die Property `active` setzt nur `data-active`. Sie setzt kein `aria-current`, da
 <LearnAside>
 
 ```tsx
-<DBPagination currentPage={2} onPageChange={(page) => setPage(page)}>
-	<DBPaginationItem>
-		<Link to="/results/1" aria-label="Seite 1 von 2">
-			1
-		</Link>
-	</DBPaginationItem>
-	<DBPaginationItem>
-		<Link to="/results/2" aria-label="Seite 2 von 2">
-			2
-		</Link>
-	</DBPaginationItem>
-</DBPagination>
+const { page } = useParams();
+const navigate = useNavigate();
+
+return (
+	<DBPagination currentPage={Number(page)} onPageChange={(next) => navigate(`/results/${next}`)}>
+		<DBPaginationItem>
+			<Link to="/results/1" aria-label="Seite 1 von 2">
+				1
+			</Link>
+		</DBPaginationItem>
+		<DBPaginationItem>
+			<Link to="/results/2" aria-label="Seite 2 von 2">
+				2
+			</Link>
+		</DBPaginationItem>
+	</DBPagination>
+);
 ```
 
 Lass `totalCount` und `items` weg, wenn du die Items selbst übergibst. Kürzen und responsives Zusammenklappen gibt es in diesem Modus nicht, weil die Komponente nicht weiß, für welche Seiten deine Items stehen. Die Code-Beispiele für jedes Framework findest du im [Storybook](https://design-system.deutschebahn.com/core-web/version/latest/composition-storybook/).

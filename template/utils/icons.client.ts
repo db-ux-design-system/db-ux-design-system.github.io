@@ -25,19 +25,35 @@ const searchTerms = (key: string, name: string): string[] => {
 	].map((term) => term.toLowerCase());
 };
 
-const inputOf = <T extends HTMLElement>(id: string, selector: string): T | null =>
-	document.getElementById(id)?.querySelector<T>(selector) ??
-	(document.getElementById(id) as T | null);
+/**
+ * The form element with the id, or the one inside it (the React components
+ * may put the id on a wrapper). Null until the element of that type exists.
+ */
+const inputOf = <T extends HTMLElement>(
+	id: string,
+	type: new () => T,
+	selector: string,
+): T | null => {
+	const element = document.getElementById(id);
+	if (element instanceof type) return element;
+	const inner = element?.querySelector(selector);
+	return inner instanceof type ? inner : null;
+};
+
+/** Time without typing before the match count is announced. */
+const STATUS_DELAY = 500;
+/** How long the tooltip shows "Copied". */
+const COPIED_DURATION = 2000;
 
 function initIconGallery(): boolean {
 	const wrapper = document.querySelector<HTMLElement>('.icon-gallery-wrapper');
 	const gallery = document.getElementById('icon-gallery');
 	const status = document.getElementById('icon-gallery-status');
 	const copiedStatus = document.getElementById('icon-gallery-copied');
-	const search = inputOf<HTMLInputElement>('icon-search-input', 'input');
-	const size = inputOf<HTMLSelectElement>('icon-size-select', 'select');
-	const family = inputOf<HTMLSelectElement>('icon-family-select', 'select');
-	const onlyFilled = inputOf<HTMLInputElement>('icon-filled-filter', 'input');
+	const search = inputOf('icon-search-input', HTMLInputElement, 'input');
+	const size = inputOf('icon-size-select', HTMLSelectElement, 'select');
+	const family = inputOf('icon-family-select', HTMLSelectElement, 'select');
+	const onlyFilled = inputOf('icon-filled-filter', HTMLInputElement, 'input');
 	const buttons = gallery
 		? Array.from(gallery.querySelectorAll<HTMLButtonElement>('.icon-item'))
 		: [];
@@ -58,7 +74,7 @@ function initIconGallery(): boolean {
 	const texts = {
 		count: wrapper.dataset.textCount ?? '{count}',
 		copied: wrapper.dataset.textCopied ?? '{name}',
-		copiedTooltip: wrapper.dataset.textCopiedTooltip ?? '',
+		copyFailed: wrapper.dataset.textCopyFailed ?? '{name}',
 	};
 
 	const icons = buttons.map((button) => {
@@ -67,9 +83,12 @@ function initIconGallery(): boolean {
 			button,
 			name,
 			terms: searchTerms(button.dataset.iconKey ?? '', name),
-			hasFilled: button.dataset.hasFilled === 'true',
+			// Sizes in which the icon has a filled form, e.g. "28 32".
+			filledSizes: (button.dataset.filledSizes ?? '').split(' ').filter(Boolean),
 		};
 	});
+
+	let statusTimer: ReturnType<typeof setTimeout> | undefined;
 
 	const update = () => {
 		const query = search.value.trim().toLowerCase();
@@ -77,11 +96,15 @@ function initIconGallery(): boolean {
 		for (const icon of icons) {
 			const matches =
 				(!query || icon.terms.some((term) => term.includes(query))) &&
-				(!onlyFilled.checked || icon.hasFilled);
+				(!onlyFilled.checked || icon.filledSizes.includes(size.value));
 			icon.button.style.display = matches ? '' : 'none';
 			if (matches) visible++;
 		}
-		status.textContent = texts.count.replace('{count}', String(visible));
+		// Announce the count once typing pauses, not on every keystroke.
+		clearTimeout(statusTimer);
+		statusTimer = setTimeout(() => {
+			status.textContent = texts.count.replace('{count}', String(visible));
+		}, STATUS_DELAY);
 	};
 
 	const updatePreview = () => {
@@ -98,27 +121,46 @@ function initIconGallery(): boolean {
 
 	search.addEventListener('input', update);
 	onlyFilled.addEventListener('change', update);
-	size.addEventListener('change', updatePreview);
+	size.addEventListener('change', () => {
+		updatePreview();
+		// Which icons have a filled form depends on the size.
+		if (onlyFilled.checked) update();
+	});
 	family.addEventListener('change', updatePreview);
 
-	gallery.addEventListener('click', (event) => {
+	/** Sets the text of a live region so that it is announced again even if it is unchanged. */
+	const announce = (region: HTMLElement, message: string) => {
+		region.textContent = '';
+		requestAnimationFrame(() => {
+			region.textContent = message;
+		});
+	};
+
+	const copiedTimers = new WeakMap<HTMLElement, ReturnType<typeof setTimeout>>();
+
+	gallery.addEventListener('click', async (event) => {
 		if (!(event.target instanceof Element)) return;
 		const button = event.target.closest<HTMLButtonElement>('.icon-item');
 		const name = button?.dataset.iconName;
 		if (!button || !name) return;
 
-		void navigator.clipboard.writeText(name);
-		if (copiedStatus) {
-			copiedStatus.textContent = texts.copied.replace('{name}', name);
+		try {
+			await navigator.clipboard.writeText(name);
+		} catch {
+			if (copiedStatus) announce(copiedStatus, texts.copyFailed.replace('{name}', name));
+			return;
 		}
+		if (copiedStatus) announce(copiedStatus, texts.copied.replace('{name}', name));
 
-		const tooltip = button.querySelector('.db-tooltip');
-		if (tooltip && texts.copiedTooltip) {
-			tooltip.textContent = texts.copiedTooltip;
+		// The tooltip switches to "Copied" via CSS; its content stays untouched.
+		clearTimeout(copiedTimers.get(button));
+		button.dataset.copied = 'true';
+		copiedTimers.set(
+			button,
 			setTimeout(() => {
-				tooltip.textContent = name;
-			}, 2000);
-		}
+				delete button.dataset.copied;
+			}, COPIED_DURATION),
+		);
 	});
 
 	return true;

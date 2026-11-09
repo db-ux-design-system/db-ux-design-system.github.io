@@ -121,18 +121,23 @@ Pass the pages yourself as **Pagination Items** with a router link inside. The p
 <LearnAside>
 
 ```tsx
-<DBPagination currentPage={2} onPageChange={(page) => setPage(page)}>
-	<DBPaginationItem>
-		<Link to="/results/1" aria-label="Page 1 of 2">
-			1
-		</Link>
-	</DBPaginationItem>
-	<DBPaginationItem>
-		<Link to="/results/2" aria-label="Page 2 of 2">
-			2
-		</Link>
-	</DBPaginationItem>
-</DBPagination>
+const { page } = useParams();
+const navigate = useNavigate();
+
+return (
+	<DBPagination currentPage={Number(page)} onPageChange={(next) => navigate(`/results/${next}`)}>
+		<DBPaginationItem>
+			<Link to="/results/1" aria-label="Page 1 of 2">
+				1
+			</Link>
+		</DBPaginationItem>
+		<DBPaginationItem>
+			<Link to="/results/2" aria-label="Page 2 of 2">
+				2
+			</Link>
+		</DBPaginationItem>
+	</DBPagination>
+);
 ```
 
 Leave `totalCount` and `items` out when you pass the items yourself. Truncation and responsive collapsing do not apply in this mode, because the component cannot know which pages your items stand for. The code examples for every framework are in the [Storybook of the pagination](https://design-system.deutschebahn.com/core-web/version/latest/composition-storybook/).

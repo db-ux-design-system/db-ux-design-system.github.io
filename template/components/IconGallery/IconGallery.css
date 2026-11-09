@@ -43,3 +43,9 @@
 	inline-size: var(--db-sizing-xl);
 	block-size: var(--db-sizing-xl);
 }
+
+/* The tooltip shows the name, and "Copied" for 2 s after a click (data-copied, set by icons.client.ts). */
+.icon-item:not([data-copied]) .icon-tooltip-copied,
+.icon-item[data-copied] .icon-tooltip-name {
+	display: none;
+}

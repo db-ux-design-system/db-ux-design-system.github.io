@@ -85,13 +85,11 @@ Die Styles der Komponenten enthalten die Schriftklassen. Nutzt du nur die Founda
 
 <LearnAside>
 
-Setzt eine andere Datei später `font-size`, überschreibt sie die Klassen. Lass deine Elemente die Größe dann erben:
+Setzt eine andere Datei `font-size`, überschreibt sie die Klassen: Styles ohne Layer gewinnen immer gegen den Layer `db-ux`. Lade diese Datei deshalb in einem Layer vor `db-ux`, am Anfang deiner zentralen CSS-Datei:
 
 ```css
-* {
-	font-size: inherit;
-	line-height: inherit;
-}
+@layer base, db-ux;
+@import 'deine-styles.css' layer(base);
 ```
 
 </LearnAside>

@@ -15,6 +15,7 @@
  * Storybook is English only; DE pages say so.
  */
 import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import { stripBasePath, withBasePath } from '@template/utils/base-path';
 import pkg from '../../../package.json';
 import './ComponentCode.css';
 
@@ -49,10 +50,21 @@ interface Props {
 const { storybookExample, storybookOverview, storybookOverviewBaseUrl, storybookAnchor } =
 	Astro.props;
 
-const isDE = Astro.url.pathname.startsWith('/de/') || Astro.url.pathname === '/de';
+const pathname = stripBasePath(Astro.url.pathname);
+const isDE = pathname.startsWith('/de/') || pathname === '/de';
 
-/** The components on the platform are rendered with this exact version. */
+/**
+ * The components on the platform are rendered with this exact version. It is
+ * part of the Storybook URL, so a range or a drift to the React package (which
+ * renders the examples here) would point to the wrong or no Storybook.
+ */
 const version = pkg.devDependencies['@db-ux/core-components'];
+const reactVersion = pkg.devDependencies['@db-ux/react-core-components'];
+if (!/^\d+\.\d+\.\d+$/.test(version) || version !== reactVersion) {
+	throw new Error(
+		`ComponentCode: @db-ux/core-components (${version}) and @db-ux/react-core-components (${reactVersion}) must be pinned to the same exact version.`,
+	);
+}
 const versionBaseUrl = `https://design-system.deutschebahn.com/core-web/version/v${version}`;
 
 /*
@@ -97,7 +109,7 @@ const setupLinks = [
 	{ label: 'HTML/CSS', en: 'html-css-setup', de: 'html-css-einrichten' },
 ].map(({ label, en, de }) => ({
 	label,
-	url: isDE ? `/de/dokumentation/lernen/${de}` : `/documentation/learn/${en}`,
+	url: withBasePath(isDE ? `/de/dokumentation/lernen/${de}` : `/documentation/learn/${en}`),
 }));
 
 const t = isDE
