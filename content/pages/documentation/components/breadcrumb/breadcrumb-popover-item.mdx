@@ -17,22 +17,14 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Collapse intermediate levels into a truncation
 - Review the collapsed levels in a popover
 - Save space on narrow viewports
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbbreadcrumbpopoveritem-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -98,6 +90,18 @@ The first item and the current page frame the path and carry the orientation. On
 </DBSection>
 
 <FigmaLearnTeaser componentName="Breadcrumb Popover Item" anchor="breadcrumb" />
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbbreadcrumb-density"
+	storybookOverview="components-dbbreadcrumb-overview"
+	storybookAnchor="dbbreadcrumbpopoveritem"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

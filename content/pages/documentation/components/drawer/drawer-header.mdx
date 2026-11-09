@@ -17,21 +17,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Provide a title for the drawer
 - Offer a close button for dismissal
 - Place a badge or an additional action next to the title
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbdrawer-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -127,6 +119,18 @@ The start and end slot hold additional elements next to the title, such as a bad
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbdrawer-density"
+	storybookOverview="components-dbdrawer-overview"
+	storybookAnchor="dbdrawerheader"
+/>
 
 </DBSection>
 

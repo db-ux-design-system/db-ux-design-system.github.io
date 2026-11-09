@@ -15,22 +15,14 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Inhaltsblöcke innerhalb einer Seite oder Card trennen (horizontaler Divider)
 - Spalten oder nebeneinanderliegende Bereiche in einem Layout aufteilen (vertikaler Divider)
 - Eine dezente Grenze zwischen Gruppen zusammengehöriger Items setzen (z. B. Listenabschnitte)
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbdivider-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -100,6 +92,17 @@ Richte Divider am Inhaltscontainer und Grid aus. Vermeide partielle oder „schw
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbdivider-density"
+	storybookOverview="components-dbdivider-overview"
+/>
 
 </DBSection>
 

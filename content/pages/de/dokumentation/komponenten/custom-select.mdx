@@ -15,23 +15,15 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Mehrere Items aus einer längeren Liste mit optionalem „Alle auswählen“ selektieren
 - Innerhalb der Optionen suchen und filtern, um Werte schnell zu finden
 - Ausgewählte Optionen klar verwalten (z. B. Chips/Tags oder Auswahlliste)
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbcustomselect-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -139,6 +131,17 @@ Aktiviere Suche, wenn die Liste lang ist oder Nutzer:innen wissen, was sie suche
 </DBSection>
 
 <FigmaLearnTeaser componentName="Custom Select" locale="de" />
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbcustomselect-density"
+	storybookOverview="components-dbcustomselect-overview"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

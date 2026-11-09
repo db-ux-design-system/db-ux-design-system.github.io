@@ -13,21 +13,13 @@ status: 'beta'
 
 import { DBSection } from '@db-ux/react-core-components';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Fortlaufenden Bodytext als einzelnen Block ausgeben
 - Einzelne Wörter oder Passagen betonen
 - Mehrere Paragraphen in einer Text Group stapeln
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbparagraph-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -49,6 +41,17 @@ Betonung wirkt über Kontrast. Fett und Kursiv heben einzelne Stellen heraus, so
 		description="Ein ganzer Paragraph in Fett oder Kursiv nimmt den Kontrast, dann sticht nichts mehr heraus. Lange Passagen werden dadurch außerdem schwerer zu lesen. Beschränke Fett und Kursiv auf die Stellen, die Betonung brauchen."
 	/>
 </div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbparagraph-sizes"
+	storybookOverview="components-dbparagraph-overview"
+/>
 
 </DBSection>
 

@@ -16,21 +16,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Arranges Tab Items horizontally or vertically
 - Handles overflow with scroll arrows when items exceed the available space
 - Supports alignment options (Start, Center, End) in Full Width mode
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbtabs-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -72,6 +64,18 @@ Keep the number of visible tabs manageable. When too many items cause horizontal
 		fullWidth={true}
 	/>
 </div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbtabs-density"
+	storybookOverview="components-dbtabs-overview"
+	storybookAnchor="dbtablist"
+/>
 
 </DBSection>
 

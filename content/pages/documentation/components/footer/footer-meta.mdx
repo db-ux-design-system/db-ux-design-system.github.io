@@ -19,6 +19,7 @@ import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleW
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Display legally required links at the end of the layout
 - Name the application's copyright holder
@@ -69,6 +70,18 @@ If the application is required to name a copyright holder, the copyright notice 
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbfooter-complex-composition"
+	storybookOverview="components-dbfooter-overview"
+	storybookAnchor="dbfootermeta"
+/>
 
 </DBSection>
 

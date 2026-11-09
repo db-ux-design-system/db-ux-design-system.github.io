@@ -15,24 +15,16 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Eine Einstellung sofort ein- oder ausschalten (z. B. „Benachrichtigungen aktivieren“)
 - Eine Funktion im Kontext aktivieren/deaktivieren, ohne die Seite zu verlassen
 - Verfügbarkeit einer Option steuern, die die UI sofort aktualisiert
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbswitch-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -106,6 +98,17 @@ Halte Labels knapp und vermeide negative Formulierungen, die Verwirrung stiften 
 </DBSection>
 
 <FigmaLearnTeaser componentName="Switch" locale="de" />
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbswitch-density"
+	storybookOverview="components-dbswitch-overview"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

@@ -15,23 +15,15 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Zu einer anderen Seite innerhalb der Anwendung navigieren
 - Zu einer externen Website oder einem Dokument navigieren
 - Zu einem bestimmten Abschnitt auf derselben Seite springen
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dblink-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -113,6 +105,17 @@ Setze die Brand-Variante sparsam ein, um besonders wichtige Navigationslinks her
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dblink-density"
+	storybookOverview="components-dblink-overview"
+/>
 
 </DBSection>
 

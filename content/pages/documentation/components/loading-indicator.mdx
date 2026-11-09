@@ -15,20 +15,12 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Make the wait time of a system process visible
 - Show measurable progress as a value
 - Confirm the end of a process: successful or failed
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbloadingindicator-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -210,6 +202,17 @@ When several processes run at the same time, each one carries its own Loading In
 		description="Show the process belonging to each row of a list in that row."
 	/>
 </div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbloadingindicator-density"
+	storybookOverview="components-dbloadingindicator-overview"
+/>
 
 </DBSection>
 
