@@ -84,6 +84,22 @@ const setupPage = async (page: Page, path: string) => {
 	await page.waitForLoadState('domcontentloaded');
 	await waitForDBShell(page);
 
+	// An image without fixed height that is still loading makes the content
+	// shorter when setScrollViewport measures it, so the screenshot height
+	// flakes (e.g. the migration guides with their many screenshots).
+	// Lazy images outside the viewport would never load, so they load now:
+	// the full-page screenshot shows them anyway.
+	await page.evaluate(() => {
+		for (const image of document.querySelectorAll('img[loading="lazy"]')) {
+			image.setAttribute('loading', 'eager');
+		}
+	});
+	await page.waitForFunction(
+		() => [...document.images].every((image) => image.complete),
+		undefined,
+		{ polling: 250, timeout: 30_000 },
+	);
+
 	// Wait for icons to render before measuring viewport.
 	// Icons are `client:only` React buttons that hydrate in bursts, so we wait
 	// until every expected `.icon-item` exists rather than sleeping a fixed 10s.
