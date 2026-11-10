@@ -15,23 +15,15 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Indicate status or state of an item (e.g. new, error, success)
 - Label or categorize content with a short descriptor
 - Highlight supplementary information next to UI elements
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbbadge-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -135,6 +127,17 @@ Ensure badge information is available to assistive technologies and not conveyed
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbbadge-density"
+	storybookOverview="components-dbbadge-overview"
+/>
 
 </DBSection>
 

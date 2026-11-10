@@ -15,49 +15,14 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Kurze Hinweise oder Erklärungen in der Nähe von UI-Elementen geben (z. B. was eine Einstellung bewirkt)
 - Kurze Warnungen oder wichtige Hinweise im Kontext anzeigen (z. B. Einschränkungen oder Limitierungen)
 - Formulareingabe mit knapper Anleitung oder validierungsbezogenem Kontext unterstützen
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards
-	resources={[
-		{
-			title: 'React',
-			description: 'TBD',
-			url: '#',
-			icon: 'react',
-		},
-		{
-			title: 'Vue',
-			description: 'TBD',
-			url: '#',
-			icon: 'vue',
-		},
-		{
-			title: 'Angular',
-			description: 'TBD',
-			url: '#',
-			icon: 'angular',
-		},
-		{
-			title: 'Web Components',
-			description: 'TBD',
-			url: '#',
-			icon: 'html5',
-		},
-	]}
-/>
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -161,6 +126,17 @@ In Formularen kann Infotext das Verständnis unterstützen (Format, Einschränku
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbinfotext-density"
+	storybookOverview="components-dbinfotext-overview"
+/>
 
 </DBSection>
 

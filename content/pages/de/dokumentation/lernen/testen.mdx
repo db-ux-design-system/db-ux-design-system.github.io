@@ -1,0 +1,234 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Deine Anwendung testen'
+headline: 'Deine Anwendung testen'
+description: 'Richte Tests für deine Anwendung mit den Komponenten ein – für React, Vue, Angular und Web Components, mit Prüfungen auf Barrierefreiheit.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 20.3
+category: 'Development'
+keywords:
+  [
+    'testing',
+    'tests',
+    'unit test',
+    'component test',
+    'e2e',
+    'testing library',
+    'react testing library',
+    'vue test utils',
+    'testbed',
+    'jest',
+    'vitest',
+    'playwright',
+    'axe',
+    'accessibility test',
+    'mock',
+    'data-testid',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Lade die Styles im Test-Setup
+
+Deine Tests prüfen, was **deine Anwendung** mit den Komponenten macht. Importiere dieselben Styles wie in der Anwendung, denn zum Beispiel Sichtbarkeit und Validierungszustände hängen davon ab.
+
+```ts
+// setupTests.ts oder vitest.setup.ts
+import '@db-ux/core-components/build/styles/bundle.css';
+```
+
+<LearnAside>
+
+- **Angular:** Trage die Styles in `angular.json` unter `styles` des Test-Targets ein, wie beim Build-Target.
+- **Icons:** jsdom lädt keine Schriften, deshalb erscheinen Icons in Unit-Tests nicht. Das ist erwartet und ändert nichts am Ergebnis.
+- **Elemente finden:** Suche Elemente wie ein Mensch über Rolle und Label. `data-*`-Attribute wie `data-testid` reichen die Komponenten an ihr Element durch.
+- **Die Komponenten selbst** testet das Design System bei jedem Release: visuelle Snapshots, axe, Aria-Snapshots und Screenreader. Die [Test-Tabelle im Storybook](https://design-system.deutschebahn.com/core-web/version/latest/composition-storybook/?path=/docs/foundations-test-table--docs) listet sie pro Komponente.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## React: rendern und bedienen wie ein Mensch
+
+Mit der **React Testing Library** suchst du die gerenderte Komponente über ihre Rolle und löst Events daran aus.
+
+<LearnAside>
+
+```tsx
+import { render, screen, fireEvent } from '@testing-library/react';
+import { DBButton } from '@db-ux/react-core-components';
+
+test('calls the handler on click', () => {
+	const handleClick = vi.fn();
+	render(<DBButton onClick={handleClick}>Save</DBButton>);
+
+	fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+	expect(handleClick).toHaveBeenCalledTimes(1);
+});
+```
+
+Mit Jest nutzt du `jest.fn()` statt `vi.fn()`.
+
+Um deine eigene Logik ohne die Komponenten zu testen, mockst du das Paket:
+
+```tsx
+// __mocks__/@db-ux/react-core-components.tsx
+import type { ComponentProps } from 'react';
+
+export const DBButton = ({ children, ...props }: ComponentProps<'button'>) => (
+	<button {...props}>{children}</button>
+);
+```
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Vue: mounten und die Events prüfen
+
+Mit **Vue Test Utils** mountest du die Komponente und prüfst die Events, die sie auslöst. Die Formularkomponenten nutzen `v-model:value`, das Event heißt deshalb `update:value`.
+
+<LearnAside>
+
+```ts
+import { mount } from '@vue/test-utils';
+import { DBInput } from '@db-ux/v-core-components';
+
+test('emits the typed value', async () => {
+	const wrapper = mount(DBInput, { props: { label: 'Name', value: '' } });
+
+	await wrapper.find('input').setValue('Ada');
+	expect(wrapper.emitted('update:value')?.[0]).toEqual(['Ada']);
+});
+```
+
+Um eine Komponente im Test zu ersetzen, übergibst du einen Stub in `global.components`:
+
+```ts
+mount(MyForm, {
+	global: {
+		components: {
+			DBButton: { template: '<button @click="$emit(\'click\', $event)"><slot /></button>' },
+		},
+	},
+});
+```
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Angular: importiere die Standalone-Komponenten
+
+Die Komponenten sind standalone. Importiere sie im `TestBed` zusammen mit deiner Komponente.
+
+<LearnAside>
+
+```ts
+import { TestBed } from '@angular/core/testing';
+import { DBButton } from '@db-ux/ngx-core-components';
+import { MyComponent } from './my.component';
+
+beforeEach(async () => {
+	await TestBed.configureTestingModule({
+		imports: [MyComponent, DBButton],
+	}).compileComponents();
+});
+```
+
+Um eine Komponente zu ersetzen, deklarierst du einen Standalone-Stub mit demselben Selektor, zum Beispiel `db-button`, und importierst ihn statt `DBButton`.
+
+Events nutzen die Angular-Syntax: `(click)` statt `onClick` oder `@click`.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Web Components: zuerst registrieren
+
+Custom Elements rendern erst, nachdem sie registriert sind. Rufe `defineCustomElements()` einmal im Test-Setup auf.
+
+```ts
+import { defineCustomElements } from '@db-ux/wc-core-components';
+
+defineCustomElements();
+```
+
+<LearnAside>
+
+Die Komponenten rendern asynchron. Warte, bis das Element definiert ist, bevor du seinen Inhalt abfragst, zum Beispiel mit `await customElements.whenDefined('db-button')`.
+
+Für das vollständige Verhalten ist ein End-to-End-Test in einem echten Browser oft einfacher als ein Unit-Test in jsdom.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Prüfe die Barrierefreiheit im Browser
+
+Lass **axe** in einem End-to-End-Test deiner Seiten laufen. Es findet Probleme in der Art, wie du die Komponenten kombinierst, zum Beispiel fehlende Labels.
+
+<LearnAside>
+
+```ts
+import { test, expect } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+
+test('page has no accessibility violations', async ({ page }) => {
+	await page.goto('/');
+	const results = await new AxeBuilder({ page }).analyze();
+	expect(results.violations).toEqual([]);
+});
+```
+
+Automatische Prüfungen finden nur einen Teil der Probleme. Teste die wichtigsten Abläufe zusätzlich mit der Tastatur und einem Screenreader. Mehr dazu unter [Barrierefreiheit](/de/dokumentation/lernen/barrierefreiheit).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Mach mit deinem Setup weiter
+
+Die Setup-Artikel zeigen, welche Pakete und Styles deine Anwendung braucht.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Alle Setup-Artikel',
+			description: 'React, Angular, Vue, Web Components und mehr.',
+			url: '/de/dokumentation/lernen',
+		},
+		{
+			title: 'Barrierefreiheit',
+			description: 'Was die Komponenten leisten und was deine Aufgabe bleibt.',
+			url: '/de/dokumentation/lernen/barrierefreiheit',
+		},
+	]}
+/>
+
+</LearnBlock>

@@ -15,24 +15,16 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Eine Option aus einer kleinen Gruppe auswählen (z. B. Sprache, Lieferart)
 - Eine einzelne Präferenz in den Einstellungen konfigurieren (z. B. „Hell / Dunkel / System“)
 - Eine Formularoption wählen, bei der nur eine gültig ist (z. B. Kontaktmethode)
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbradio-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -127,6 +119,17 @@ Bevorzuge vertikale Stapelung für Lesbarkeit und Barrierefreiheit. Verwende hor
 </DBSection>
 
 <FigmaLearnTeaser componentName="Radio" locale="de" />
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbradio-density"
+	storybookOverview="components-dbradio-overview"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

@@ -1,0 +1,130 @@
+---
+/*
+ * Development section of a component page.
+ *
+ * A short entry for developers. The technical documentation (installation,
+ * usage per framework, all examples with code, properties, migration) lives
+ * in Storybook, versioned per release; the platform shows the current version
+ * only and links there.
+ *
+ * One card per framework to the component's overview page, opened in the
+ * composition Storybook. The setup of each framework is linked from its
+ * Storybook overview page, so it is not repeated here.
+ *
+ * The section heading is h3, so it nests under the page's `## Development` (DE: `## Entwicklung`).
+ * Storybook is English only; DE pages say so.
+ */
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import { stripBasePath } from '@template/utils/base-path';
+import pkg from '../../../package.json';
+import './ComponentCode.css';
+
+interface Props {
+	/**
+	 * Fallback: Storybook docs page of the released version, without the
+	 * `--docs` suffix, e.g. `components-dbbutton-variant`. Used while
+	 * `storybookOverview` is not set.
+	 */
+	storybookExample: string;
+	/**
+	 * Overview page of the component in the framework Storybooks
+	 * (core-web#8649), without `--docs`, e.g. `components-dbbutton-overview`.
+	 * Once it is released, the cards link to it in the versioned Storybook and
+	 * `storybookExample` goes away.
+	 */
+	storybookOverview?: string;
+	/**
+	 * Section of a part on the overview page of its main component, e.g.
+	 * `dbtabitem` for DBTabItem on the DBTabs page (core-web#8649 documents
+	 * parts as `### DBTabItem` there). Storybook scrolls to the heading with
+	 * this id. Only used together with `storybookOverview`.
+	 */
+	storybookAnchor?: string;
+}
+
+const { storybookExample, storybookOverview, storybookAnchor } = Astro.props;
+
+/*
+ * Storybook deployment with the overview pages before they are released,
+ * e.g. the review build of core-web#8649:
+ * STORYBOOK_OVERVIEW_BASE_URL=https://design-system.deutschebahn.com/core-web/review/feat-storybook-component-overview
+ * Build-time only and not set in CI, so production never links to a preview
+ * that is deleted with its branch. Without it, the cards open the Storybook
+ * of the pinned version. Once the overview pages are released, the cards
+ * always use them and this goes away.
+ */
+const overviewBaseUrl = import.meta.env.STORYBOOK_OVERVIEW_BASE_URL?.replace(/\/+$/, '');
+
+const pathname = stripBasePath(Astro.url.pathname);
+const isDE = pathname.startsWith('/de/') || pathname === '/de';
+
+/**
+ * The components on the platform are rendered with this exact version. It is
+ * part of the Storybook URL, so a range or a drift to the React package (which
+ * renders the examples here) would point to the wrong or no Storybook.
+ */
+const version = pkg.devDependencies['@db-ux/core-components'];
+const reactVersion = pkg.devDependencies['@db-ux/react-core-components'];
+if (!/^\d+\.\d+\.\d+$/.test(version) || version !== reactVersion) {
+	throw new Error(
+		`ComponentCode: @db-ux/core-components (${version}) and @db-ux/react-core-components (${reactVersion}) must be pinned to the same exact version.`,
+	);
+}
+const versionBaseUrl = `https://design-system.deutschebahn.com/core-web/version/v${version}`;
+
+/*
+ * One card per framework. Each opens the component's overview page of that
+ * framework directly, but inside the composition Storybook: the sidebar shows
+ * all frameworks, the Foundations pages and the version dropdown.
+ * `ref` is the key of the framework Storybook in the composition config.
+ * Until the overview pages are released, the fallback opens an example page
+ * of the pinned version.
+ */
+const frameworks = [
+	{ title: 'React', ref: 'react', icon: 'react' },
+	{ title: 'Angular', ref: 'angular', icon: 'angular' },
+	{ title: 'Vue', ref: 'vue', icon: 'vue' },
+	{ title: 'Web Components', ref: 'webcomponents', icon: 'web-components' },
+	{ title: 'HTML', ref: 'html', icon: 'html5' },
+];
+
+const usesOverview = Boolean(storybookOverview && overviewBaseUrl);
+const compositionUrl = `${usesOverview ? overviewBaseUrl : versionBaseUrl}/composition-storybook`;
+const docsId = usesOverview ? storybookOverview : storybookExample;
+// The example pages of the fallback have no part sections.
+const anchor = usesOverview && storybookAnchor ? `#${encodeURIComponent(storybookAnchor)}` : '';
+
+const storybookResources = frameworks.map(({ title, ref, icon }) => ({
+	title,
+	icon,
+	description: isDE
+		? 'Beispiele mit Code, Properties, Barrierefreiheit und Migration.'
+		: 'Examples with code, properties, accessibility and migration.',
+	url: `${compositionUrl}/?path=/docs/${ref}_${docsId}--docs${anchor}`,
+}));
+
+const t = isDE
+	? {
+			storybook: 'Storybook',
+			storybookText:
+				'Die vollständige technische Dokumentation findest du im Storybook deines Frameworks. Ältere Versionen wählst du dort in der Sidebar. Storybook ist nur auf Englisch verfügbar.',
+			version: usesOverview
+				? `Diese Seite zeigt @db-ux/core-components ${version}. Die Storybook-Links öffnen eine Vorschau der nächsten Version.`
+				: `Diese Seite zeigt @db-ux/core-components ${version}.`,
+		}
+	: {
+			storybook: 'Storybook',
+			storybookText:
+				'The complete technical documentation is in the Storybook of your framework. Earlier versions are in its sidebar.',
+			version: usesOverview
+				? `This page shows @db-ux/core-components ${version}. The Storybook links open a preview of the next version.`
+				: `This page shows @db-ux/core-components ${version}.`,
+		};
+---
+
+<div class="component-code">
+	<h3>{t.storybook}</h3>
+	<p>{t.storybookText}</p>
+	<ResourceCards resources={storybookResources} />
+	<p class="component-code-version">{t.version}</p>
+</div>

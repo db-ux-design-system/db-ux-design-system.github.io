@@ -15,21 +15,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Navigationsziele in der Variante darstellen, die zur Struktur passt
 - Tiefere Ebenen über Popover, Tree oder Drill Down erschließen
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbcontrolpaneldesktop-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -132,6 +124,18 @@ Auf Desktop lässt sich die Popover-Navigation über Overflow-Chevrons scrollen,
 	locale="de"
 	anchor="control-panel--shell"
 />
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbcontrolpaneldesktop-density"
+	storybookOverview="components-dbcontrolpaneldesktop-overview"
+	storybookAnchor="dbcontrolpanelnavigation"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

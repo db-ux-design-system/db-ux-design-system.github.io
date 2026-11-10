@@ -16,21 +16,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Displays a text label identifying the associated panel content
 - Supports a Children slot for additional elements like a Badge
 - Shows the active indicator (horizontal or vertical) depending on orientation
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbtabs-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -75,6 +67,18 @@ Use short, descriptive labels that clearly name the tab content. Long or vague l
 		description="Truncation: In vertical orientation, long labels are truncated when they exceed the available width. A Tooltip shows the full label on hover."
 	/>
 </div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbtabs-density"
+	storybookOverview="components-dbtabs-overview"
+	storybookAnchor="dbtabitem"
+/>
 
 </DBSection>
 

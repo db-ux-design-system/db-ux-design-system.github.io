@@ -16,21 +16,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Zeigt den Inhalt an, der mit dem aktuell aktiven Tab Item verknüpft ist
 - Wird unterhalb der Tab List (horizontal) oder daneben (vertikal) positioniert
 - Kann beliebige Inhalte enthalten, darunter Text, Formulare, Tabellen oder andere Komponenten
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbtabs-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -58,6 +50,18 @@ Das Verschachteln einer Tab-Komponente innerhalb eines Tab Panels erzeugt Orient
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbtabs-density"
+	storybookOverview="components-dbtabs-overview"
+	storybookAnchor="dbtabpanel"
+/>
 
 </DBSection>
 

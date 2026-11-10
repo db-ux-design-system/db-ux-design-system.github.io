@@ -16,21 +16,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Übergeordnete Ebenen direkt ansteuern
 - Orientierung neben der Hauptnavigation geben
 - Lange Pfade über eine Truncation einklappen
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbbreadcrumb-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -134,6 +126,17 @@ Auf Mobile reduziert sich die Breadcrumb automatisch auf die aktuelle Seite und 
 		description="Sichtbar sind nur die übergeordnete Ebene und die aktuelle Seite. Das vorangestellte Item führt eine Ebene nach oben."
 	/>
 </div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbbreadcrumb-density"
+	storybookOverview="components-dbbreadcrumb-overview"
+/>
 
 </DBSection>
 

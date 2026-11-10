@@ -15,20 +15,12 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Arrange the main action and utility actions separately
 - Distribute actions across two slots: by content or hierarchy
 - Arrange actions responsively: horizontally, vertically, or in the Drawer
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbcontrolpanelactions--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -188,6 +180,18 @@ On mobile, Actions 1 stays visible in the menu bar, while Actions 2 sits in the 
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Show all Examples" expandedText="Hide some Examples" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbcontrolpaneldesktop-examples"
+	storybookOverview="components-dbcontrolpaneldesktop-overview"
+	storybookAnchor="dbcontrolpanelactions1"
+/>
 
 </DBSection>
 
