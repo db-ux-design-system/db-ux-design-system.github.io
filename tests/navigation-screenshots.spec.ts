@@ -87,6 +87,13 @@ const setupPage = async (page: Page, path: string) => {
 	// An image without fixed height that is still loading makes the content
 	// shorter when setScrollViewport measures it, so the screenshot height
 	// flakes (e.g. the migration guides with their many screenshots).
+	// Lazy images outside the viewport would never load, so they load now:
+	// the full-page screenshot shows them anyway.
+	await page.evaluate(() => {
+		for (const image of document.querySelectorAll('img[loading="lazy"]')) {
+			image.setAttribute('loading', 'eager');
+		}
+	});
 	await page.waitForFunction(
 		() => [...document.images].every((image) => image.complete),
 		undefined,
