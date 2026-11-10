@@ -120,7 +120,20 @@ const renderPalettes = (
 			chip.textContent = `origin ${state}`;
 			chips.append(chip);
 		}
-		// Order: headline, origin tags, then the palette swatches below
+		// Vibrant tags next to the origin tags. Vibrant is defined so black text always meets
+		// AA, so the on-color is black regardless of the family.
+		for (const state of ['default', 'hovered', 'pressed']) {
+			const chip = element('span', 'db-tag tb-origin-tag');
+			chip.dataset['emphasis'] = 'strong';
+			chip.style.setProperty(
+				'--tb-chip-bg',
+				`var(--db-${key}-vibrant-${state}, ${tokens[`--db-${key}-vibrant-${state}`] ?? 'transparent'})`,
+			);
+			chip.style.setProperty('--tb-chip-fg', '#000000');
+			chip.textContent = `vibrant ${state}`;
+			chips.append(chip);
+		}
+		// Order: headline, origin + vibrant tags, then the palette swatches below
 		group.append(title, chips, list);
 		fragment.append(group);
 	}

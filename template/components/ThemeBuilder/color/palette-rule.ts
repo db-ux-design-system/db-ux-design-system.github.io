@@ -82,26 +82,28 @@ export const ALIGN_FROM = 11;
 /** Neutral axis ends in real black and white. */
 export const GREY_ANCHORS: Record<number, string> = { 0: '#000000', 14: '#ffffff' };
 
-type ColorSpec = { h: number; s: number; neutral?: boolean };
-
-/** Built-in hue families (h/s fitted to the Figma file). Used for the shared chroma ceiling. */
-export const COLORS: Record<string, ColorSpec> = {
-	Grey: { h: 249.09, s: 12.18, neutral: true },
-	Brand: { h: 11.47, s: 99.95 },
-	Yellow: { h: 69.33, s: 100 },
-	Orange: { h: 39.62, s: 100 },
-	Red: { h: 11.47, s: 99.95 },
-	Burgundy: { h: 0.62, s: 55.72 },
-	Pink: { h: 348.68, s: 80.17 },
-	Violet: { h: 293.02, s: 54.9 },
-	Blue: { h: 258.35, s: 95.89 },
-	Cyan: { h: 233.63, s: 91.54 },
-	Turquoise: { h: 184.95, s: 100 },
-	'Light Green': { h: 115.48, s: 97.0 },
-	Green: { h: 124.7, s: 76.69 },
+/**
+ * Built-in color origins. These hex values are the single source of truth: every ramp
+ * (hue, saturation and lightness) is derived from its origin via `hsluvOf`, and the shared
+ * chroma ceiling derives its reference hues from the chromatic origins below. Nothing carries
+ * pre-fitted h/s constants anymore – an origin is all a palette needs.
+ */
+export const BUILTIN_ORIGINS: Record<string, string> = {
+	Yellow: '#ffd800',
+	Orange: '#f69400',
+	Red: '#ec0016',
+	Burgundy: '#a9455d',
+	Pink: '#e93e8f',
+	Violet: '#814997',
+	Blue: '#1455c0',
+	Cyan: '#309fd1',
+	Turquoise: '#00a099',
+	Lilac: '#aa99ff',
+	Green: '#408335',
 };
-const NAMES = Object.keys(COLORS);
-const CHROMATIC = NAMES.filter((n) => !COLORS[n].neutral);
+
+/** Hues that define the shared chroma ceiling, derived from the chromatic built-in origins. */
+const CEILING_HUES = Object.values(BUILTIN_ORIGINS).map((hex) => hsluvOf(hex).h);
 
 const withLightEnd = (five: number[]): number[] => LIGHTNESS_STEPS.slice(0, TINT_FROM).concat(five);
 
@@ -129,7 +131,7 @@ export function chromaCeiling(steps?: number[], tintFrom?: number): (number | nu
 	const cached = ceilingCache.get(key);
 	if (cached) return cached;
 	const result = st.map((l, i) =>
-		i < tf ? null : Math.min(...CHROMATIC.map((n) => getMaxChroma(COLORS[n].h, l))),
+		i < tf ? null : Math.min(...CEILING_HUES.map((h) => getMaxChroma(h, l))),
 	);
 	ceilingCache.set(key, result);
 	return result;
@@ -217,6 +219,8 @@ export type ColorModeOptions = PaletteOptions & {
 	neutral?: boolean;
 };
 
+export type ColorStates = { default: string; hovered: string; pressed: string };
+
 export type ColorMode = {
 	hex: string;
 	h: number;
@@ -224,11 +228,39 @@ export type ColorMode = {
 	l: number;
 	direction: 'darker' | 'lighter';
 	palette: string[];
-	origin: { default: string; hovered: string; pressed: string };
+	origin: ColorStates;
+	/**
+	 * The most colorful usable form of the color: the lightness where the color reaches its
+	 * highest chroma at the origin's own saturation while black text still meets AA (>=4.5:1).
+	 * Hover/pressed shift lightness like the origin states. Keeps muted identities muted
+	 * (uses the origin's saturation, not full chroma) and lifts hues like yellow out of the
+	 * dark/olive range into their vivid lightness.
+	 */
+	vibrant: ColorStates;
 	onOrigin: string;
 	warnings: ColorModeWarning[];
 	contrastOnOrigin: number;
 };
+
+/** Black-on-color must meet WCAG AA for body text. */
+const VIBRANT_MIN_BLACK_CONTRAST = 4.5;
+
+/**
+ * Finds the vibrant base for a hue at a given saturation fraction (0..1 of the gamut): the
+ * lightness that maximizes chroma while black text stays AA-readable on top. Returns the hex.
+ */
+export function vibrantBase(h: number, sFraction: number): string {
+	let best: { l: number; chroma: number; hex: string } | null = null;
+	for (let l = 1; l <= 99; l += 0.5) {
+		const chroma = getMaxChroma(h, l) * sFraction;
+		const hex = lchToHex(l, chroma, h);
+		if (contrast('#000000', hex) < VIBRANT_MIN_BLACK_CONTRAST) continue;
+		if (!best || chroma > best.chroma) best = { l, chroma, hex };
+	}
+	// Fallback: if no lightness satisfies black AA at this saturation (very rare), use the
+	// darkest black-usable step at full clamp.
+	return best ? best.hex : lchToHex(ORIGIN_FLIP_L, getMaxChroma(h, ORIGIN_FLIP_L) * sFraction, h);
+}
 
 /**
  * Builds one complete color mode from a brand color: 15 palette values,
@@ -265,6 +297,33 @@ export function buildColorMode(input: ColorModeInput, o?: ColorModeOptions): Col
 		? buildPalette(base.h, base.s, c, GREY_ANCHORS, true)
 		: buildPalette(base.h, base.s, c, null, false);
 	const origin = { default: hex, hovered: atL(step.hovered), pressed: atL(step.pressed) };
+
+	// Vibrant: most colorful usable form at the origin's own saturation, with black text AA on
+	// every state. Each state is clamped to the origin's saturation so a muted color stays muted.
+	// Hover/pressed shift lightness; the direction is chosen per color so black text stays
+	// >= 4.5:1: darker states are preferred (more vivid), but a bright base whose default already
+	// sits near the black-AA limit would wash out when lightened and break AA when darkened, so
+	// the direction that keeps every state black-readable wins. Bright hues (e.g. yellow) go
+	// darker, dark hues (e.g. blue, lilac) go lighter.
+	// Use the ramp's effective saturation (already capped for neutral), so vibrant carries the
+	// same undertone as the palette instead of snapping to pure grey.
+	const sFraction = base.s / 100;
+	const vibrantDefault = vibrantBase(base.h, sFraction);
+	const vibrantL = hsluvOf(vibrantDefault).l;
+	const vibrantAtL = (dl: number): string => {
+		const L = Math.max(0, Math.min(100, vibrantL + dl));
+		return lchToHex(L, getMaxChroma(base.h, L) * sFraction, base.h);
+	};
+	const vibrantStatesFor = (sign: 1 | -1): ColorStates => ({
+		default: vibrantDefault,
+		hovered: vibrantAtL(sign * Math.abs(ORIGIN_STATES.darker.hovered)),
+		pressed: vibrantAtL(sign * Math.abs(ORIGIN_STATES.darker.pressed)),
+	});
+	const blackAA = (states: ColorStates): boolean =>
+		contrast('#000000', states.hovered) >= VIBRANT_MIN_BLACK_CONTRAST &&
+		contrast('#000000', states.pressed) >= VIBRANT_MIN_BLACK_CONTRAST;
+	const darker = vibrantStatesFor(-1);
+	const vibrant = blackAA(darker) ? darker : vibrantStatesFor(1);
 	const top = palette[palette.length - 1];
 	const bottom = palette[0];
 	const onOrigin = contrast(top, origin.default) >= contrast(bottom, origin.default) ? top : bottom;
@@ -293,6 +352,7 @@ export function buildColorMode(input: ColorModeInput, o?: ColorModeOptions): Col
 		direction: dir,
 		palette,
 		origin,
+		vibrant,
 		onOrigin,
 		warnings,
 		contrastOnOrigin: cOn,

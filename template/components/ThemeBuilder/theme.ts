@@ -9,7 +9,6 @@
 import {
 	buildColorMode,
 	contrast,
-	COLORS,
 	hsluvOf,
 	hsluvToHex,
 	type ColorMode,
@@ -70,91 +69,29 @@ export const SEMANTIC_DEFAULTS: Record<SemanticKey, FamilyKey> = {
 };
 
 type Family = {
-	h: number;
-	s: number;
 	origin: string;
 	hovered: string;
 	pressed: string;
 };
 
 /**
- * Ramp hue/saturation from the palette rule (COLORS) and origin states from the Figma
- * export (`Import/figma-export.json`). Lilac is not part of COLORS yet (it still lists
- * Light Green), so its h/s are fitted to the Figma ramp.
+ * Seeded families: only an origin and the Figma origin states. Ramp hue, saturation and
+ * lightness are derived from the origin by the palette rule – no pre-fitted h/s constants.
+ * Origin states come from the Figma export (`Import/figma-export.json`).
  */
 const FAMILIES: Record<SeededFamilyKey, Family> = {
-	yellow: {
-		...hs('Yellow'),
-		origin: '#ffd800',
-		hovered: '#e2bf00',
-		pressed: '#c9ab00',
-	},
-	orange: {
-		...hs('Orange'),
-		origin: '#f69400',
-		hovered: '#ffaf6f',
-		pressed: '#ffcbab',
-	},
-	red: {
-		...hs('Red'),
-		origin: '#ec0016',
-		hovered: '#cb0011',
-		pressed: '#af000d',
-	},
-	burgundy: {
-		...hs('Burgundy'),
-		origin: '#a9455d',
-		hovered: '#8f394e',
-		pressed: '#782f40',
-	},
-	pink: {
-		...hs('Pink'),
-		origin: '#e93e8f',
-		hovered: '#ed69a4',
-		pressed: '#f18ab3',
-	},
-	violet: {
-		...hs('Violet'),
-		origin: '#814997',
-		hovered: '#6c3c7e',
-		pressed: '#593169',
-	},
-	blue: {
-		...hs('Blue'),
-		origin: '#1455c0',
-		hovered: '#0f46a0',
-		pressed: '#0b3883',
-	},
-	cyan: {
-		...hs('Cyan'),
-		origin: '#309fd1',
-		hovered: '#5ab4e2',
-		pressed: '#80c7f2',
-	},
-	turquoise: {
-		...hs('Turquoise'),
-		origin: '#00a099',
-		hovered: '#00b7af',
-		pressed: '#00cdc4',
-	},
-	green: {
-		...hs('Green'),
-		origin: '#408335',
-		hovered: '#36702c',
-		pressed: '#2d5f24',
-	},
-	lilac: {
-		h: 270.98,
-		s: 99.92,
-		origin: '#aa99ff',
-		hovered: '#beb3ff',
-		pressed: '#d3cbff',
-	},
+	yellow: { origin: '#ffd800', hovered: '#e2bf00', pressed: '#c9ab00' },
+	orange: { origin: '#f69400', hovered: '#ffaf6f', pressed: '#ffcbab' },
+	red: { origin: '#ec0016', hovered: '#cb0011', pressed: '#af000d' },
+	burgundy: { origin: '#a9455d', hovered: '#8f394e', pressed: '#782f40' },
+	pink: { origin: '#e93e8f', hovered: '#ed69a4', pressed: '#f18ab3' },
+	violet: { origin: '#814997', hovered: '#6c3c7e', pressed: '#593169' },
+	blue: { origin: '#1455c0', hovered: '#0f46a0', pressed: '#0b3883' },
+	cyan: { origin: '#309fd1', hovered: '#5ab4e2', pressed: '#80c7f2' },
+	turquoise: { origin: '#00a099', hovered: '#00b7af', pressed: '#00cdc4' },
+	green: { origin: '#408335', hovered: '#36702c', pressed: '#2d5f24' },
+	lilac: { origin: '#aa99ff', hovered: '#beb3ff', pressed: '#d3cbff' },
 };
-
-function hs(name: string): { h: number; s: number } {
-	return { h: COLORS[name].h, s: COLORS[name].s };
-}
 
 const isBuiltinFamily = (key: string): key is BuiltinFamilyKey =>
 	(BUILTIN_FAMILY_KEYS as readonly string[]).includes(key);
@@ -181,8 +118,6 @@ const seededFamily = (key: SeededFamilyKey, builtin: boolean): FamilyConfig => (
 	name: SEEDED_FAMILY_NAMES[key],
 	builtin,
 	origin: FAMILIES[key].origin,
-	h: FAMILIES[key].h,
-	s: FAMILIES[key].s,
 	direction: 'auto',
 });
 
@@ -391,8 +326,19 @@ const color = (origin: string, h?: number, s?: number): ColorConfig => ({
 const tintedNeutral = (hue: number, saturation: number): ColorConfig =>
 	color(hsluvToHex(hue, saturation, hsluvOf('#646973').l));
 
-/** DB grey ramp (h/s fitted in the New Foundation generator). Shared by the DB brands. */
-const DB_NEUTRAL = color('#646973', 249.09, 12.18);
+/**
+ * Default ramp saturation for a neutral color. A dark origin like #090F1B carries a high
+ * derived saturation (~52), which would tint the light steps blue. Capping the neutral ramp
+ * at this value keeps the grey steps neutral with only a faint, constant cool undertone.
+ * Editable per theme via the Neutral saturation input in the builder.
+ */
+export const NEUTRAL_RAMP_SATURATION = 15;
+
+/** DB neutral ramp from the Cold Black origin, with a controlled low ramp saturation. */
+const DB_NEUTRAL = color('#090f1b', hsluvOf('#090f1b').h, NEUTRAL_RAMP_SATURATION);
+
+/** The neutral preset uses a pure black origin instead of the tinted Cold Black. */
+const PLAIN_NEUTRAL = color('#000000', hsluvOf('#000000').h, NEUTRAL_RAMP_SATURATION);
 
 const presetColors = (brand: ColorConfig, neutral: ColorConfig): Record<ColorKey, ColorConfig> => ({
 	brand,
@@ -418,8 +364,7 @@ const DB_BASE: Omit<PresetDefinition, 'colors'> = {
 export const PRESET_DEFINITIONS: Record<Exclude<Preset, 'custom'>, PresetDefinition> = {
 	db: {
 		...DB_BASE,
-		// h/s of the DB brand ramp as fitted in the New Foundation generator
-		colors: presetColors(color('#ec0016', 11.47, 99.95), DB_NEUTRAL),
+		colors: presetColors(color('#ec0016'), DB_NEUTRAL),
 	},
 	station: {
 		...DB_BASE,
@@ -431,8 +376,9 @@ export const PRESET_DEFINITIONS: Record<Exclude<Preset, 'custom'>, PresetDefinit
 	},
 	neutral: {
 		...DB_BASE,
-		// Dark mode uses a white primary, so it stays visible on the dark background
-		colors: presetColors({ ...color('#1a1a1a'), originDark: '#ffffff' }, DB_NEUTRAL),
+		// Dark mode uses a white primary, so it stays visible on the dark background.
+		// This preset uses a pure black primary and neutral instead of the tinted Cold Black.
+		colors: presetColors({ ...color('#000000'), originDark: '#ffffff' }, PLAIN_NEUTRAL),
 	},
 };
 
@@ -510,6 +456,7 @@ const emitAdaptiveTokens = (tokens: Record<string, string>, key: string): void =
 const BASE_TOKEN_SUFFIXES = [
 	...PALETTE_STEPS.map(String),
 	'origin-base',
+	...STATES.map((state) => `vibrant-${state}`),
 	...SCHEMES.flatMap((scheme) => [
 		...STATES.map((state) => `origin-${scheme}-${state}`),
 		`on-origin-${scheme}-default`,
@@ -557,6 +504,9 @@ export const buildTheme = (config: ThemeConfig): ThemeResult => {
 			tokens[`--db-${key}-${index}`] = value;
 		});
 		tokens[`--db-${key}-origin-base`] = mode.origin.default;
+		tokens[`--db-${key}-vibrant-default`] = mode.vibrant.default;
+		tokens[`--db-${key}-vibrant-hovered`] = mode.vibrant.hovered;
+		tokens[`--db-${key}-vibrant-pressed`] = mode.vibrant.pressed;
 		for (const scheme of SCHEMES) {
 			tokens[`--db-${key}-origin-${scheme}-default`] = mode.origin.default;
 			tokens[`--db-${key}-origin-${scheme}-hovered`] = mode.origin.hovered;
@@ -580,8 +530,16 @@ export const buildTheme = (config: ThemeConfig): ThemeResult => {
 
 	for (const key of COLOR_KEYS) {
 		const { origin, originDark, h, s } = config.colors[key];
+		// The neutral color caps its ramp saturation at the configured value instead of using
+		// the origin's own saturation directly. A tinted dark origin (e.g. #090F1B, s≈52) is
+		// damped to the cap so the light steps stay neutral; a pure grey origin (e.g. #1a1a1a,
+		// s≈0) carries no hue and therefore stays fully neutral regardless of the cap.
+		const neutralInput =
+			key === 'neutral'
+				? { origin, h: h ?? hsluvOf(origin).h, s: Math.min(hsluvOf(origin).s, s ?? 100) }
+				: null;
 		// The state direction is always automatic
-		const mode = buildColorMode(h == null ? origin : { origin, h, s }, {
+		const mode = buildColorMode(neutralInput ?? (h == null ? origin : { origin, h, s }), {
 			neutral: key === 'neutral',
 		});
 		applyPureOnOrigin(mode);
@@ -590,6 +548,9 @@ export const buildTheme = (config: ThemeConfig): ThemeResult => {
 			tokens[`--db-${key}-${index}`] = value;
 		});
 		tokens[`--db-${key}-origin-base`] = mode.origin.default;
+		tokens[`--db-${key}-vibrant-default`] = mode.vibrant.default;
+		tokens[`--db-${key}-vibrant-hovered`] = mode.vibrant.hovered;
+		tokens[`--db-${key}-vibrant-pressed`] = mode.vibrant.pressed;
 		// A separate dark origin (Primary only) gets its own states and on-origin color;
 		// otherwise dark uses the same origin as light.
 		const darkMode = originDark ? applyPureOnOrigin(buildColorMode(originDark)) : mode;

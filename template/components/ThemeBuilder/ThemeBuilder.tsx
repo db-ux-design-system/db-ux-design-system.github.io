@@ -36,6 +36,7 @@ import {
 	FONTS,
 	ICON_LIBRARIES,
 	isHex,
+	NEUTRAL_RAMP_SATURATION,
 	PRESETS,
 	RADII,
 	shuffleConfig,
@@ -52,7 +53,7 @@ import {
 	type Preset,
 	type ThemeConfig,
 } from './theme.ts';
-import type { ColorMode } from './color/palette-rule.ts';
+import { hsluvOf, type ColorMode } from './color/palette-rule.ts';
 import {
 	asView,
 	createPreviewHash,
@@ -388,6 +389,8 @@ function ColorField({
 	allowDarkOrigin,
 	onOriginChange,
 	onDarkOriginChange,
+	saturation,
+	onSaturationChange,
 	onRemove,
 	removeLabel,
 }: {
@@ -401,6 +404,9 @@ function ColorField({
 	allowDarkOrigin?: boolean;
 	onOriginChange: (value: string) => void;
 	onDarkOriginChange?: (value: string | undefined) => void;
+	/** When set, a ramp-saturation input is shown (used for the neutral color). */
+	saturation?: number;
+	onSaturationChange?: (value: number) => void;
 	/** Custom families can be removed; the icon button sits next to the color input. */
 	onRemove?: () => void;
 	removeLabel?: string;
@@ -423,7 +429,7 @@ function ColorField({
 							className="tb-color-remove"
 							variant="ghost"
 							size="medium"
-							icon="cross"
+							icon="bin"
 							noText
 							type="button"
 							onClick={onRemove}
@@ -436,32 +442,32 @@ function ColorField({
 			/>
 			{allowDarkOrigin ? (
 				hasDark ? (
-					<>
-						<HexField
-							id={`tb-${id}-hex-dark`}
-							label={m.originDark(name)}
-							value={color.originDark ?? color.origin}
-							pickerLabel={m.colorPickerDark(name)}
-							invalidMessage={m.hexInvalid}
-							onChange={(value) => onDarkOriginChange?.(value)}
-						/>
-						<DBButton
-							wrap={false}
-							variant="ghost"
-							size="small"
-							icon="cross"
-							width="full"
-							type="button"
-							onClick={() => onDarkOriginChange?.(undefined)}
-						>
-							{m.removeDarkOrigin}
-						</DBButton>
-					</>
+					<HexField
+						id={`tb-${id}-hex-dark`}
+						label={m.originDark(name)}
+						value={color.originDark ?? color.origin}
+						pickerLabel={m.colorPickerDark(name)}
+						invalidMessage={m.hexInvalid}
+						onChange={(value) => onDarkOriginChange?.(value)}
+						trailing={
+							<DBButton
+								className="tb-color-remove"
+								variant="ghost"
+								size="medium"
+								icon="bin"
+								noText
+								type="button"
+								onClick={() => onDarkOriginChange?.(undefined)}
+							>
+								{m.removeDarkOrigin}
+								<DBTooltip placement="left">{m.removeDarkOrigin}</DBTooltip>
+							</DBButton>
+						}
+					/>
 				) : (
 					<DBButton
 						wrap={false}
 						variant="ghost"
-						size="small"
 						icon="plus"
 						width="full"
 						type="button"
@@ -470,6 +476,25 @@ function ColorField({
 						{m.addDarkOrigin}
 					</DBButton>
 				)
+			) : null}
+			{onSaturationChange ? (
+				<DBInput
+					id={`tb-${id}-saturation`}
+					label={m.neutralSaturation}
+					message={m.neutralSaturationHint}
+					invalidMessage={m.neutralSaturationInvalid}
+					type="number"
+					min={0}
+					max={100}
+					step={1}
+					value={String(Math.round(saturation ?? 0))}
+					onChange={(event) => {
+						const next = Number(event.target.value);
+						if (Number.isFinite(next)) {
+							onSaturationChange(Math.max(0, Math.min(100, next)));
+						}
+					}}
+				/>
 			) : null}
 			<ol className="tb-ramp" aria-hidden="true">
 				{mode.palette.map((value, index) => (
@@ -600,16 +625,27 @@ const ThemeBuilder = ({ lang = 'en' }: Props) => {
 		setConfig((previous) => {
 			const current = previous.colors[key];
 			const originChanged = patch.origin != null && patch.origin !== current.origin;
+			// The neutral color keeps a controlled ramp saturation instead of deriving it from
+			// the origin, so a dark origin (e.g. #090F1B) does not tint the light steps. On an
+			// origin change the hue follows the new origin but the saturation is preserved.
+			const next =
+				key === 'neutral'
+					? originChanged
+						? {
+								...current,
+								...patch,
+								h: patch.origin != null ? hsluvOf(patch.origin).h : current.h,
+								s: current.s ?? NEUTRAL_RAMP_SATURATION,
+							}
+						: { ...current, ...patch }
+					: originChanged
+						? // A new origin defines the ramp, so the fitted h/s of a preset are dropped
+							{ ...current, ...patch, h: undefined, s: undefined }
+						: { ...current, ...patch };
 			return {
 				...previous,
 				preset: 'custom',
-				colors: {
-					...previous.colors,
-					// A new origin defines the ramp, so the fitted h/s of a preset are dropped
-					[key]: originChanged
-						? { ...current, ...patch, h: undefined, s: undefined }
-						: { ...current, ...patch },
-				},
+				colors: { ...previous.colors, [key]: next },
 			};
 		});
 	}, []);
@@ -741,6 +777,19 @@ const ThemeBuilder = ({ lang = 'en' }: Props) => {
 			allowDarkOrigin={key === 'brand'}
 			onOriginChange={(origin) => updateColor(key, { origin })}
 			onDarkOriginChange={(originDark) => updateColor(key, { originDark })}
+			saturation={
+				key === 'neutral' ? (config.colors.neutral.s ?? NEUTRAL_RAMP_SATURATION) : undefined
+			}
+			onSaturationChange={
+				key === 'neutral'
+					? (s) =>
+							updateColor('neutral', {
+								s,
+								// Keep the hue bound to the current origin so the slider only moves chroma
+								h: hsluvOf(config.colors.neutral.origin).h,
+							})
+					: undefined
+			}
 		/>
 	);
 
