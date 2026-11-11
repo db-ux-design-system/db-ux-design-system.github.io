@@ -16,21 +16,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Displays content associated with the currently active Tab Item
 - Positioned below the Tab List (horizontal) or beside it (vertical)
 - Can hold any type of content including text, forms, tables, or other components
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbtabs-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -58,6 +50,18 @@ Nesting a Tab component inside a Tab Panel creates orientation problems and incr
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbtabs-density"
+	storybookOverview="components-dbtabs-overview"
+	storybookAnchor="dbtabpanel"
+/>
 
 </DBSection>
 

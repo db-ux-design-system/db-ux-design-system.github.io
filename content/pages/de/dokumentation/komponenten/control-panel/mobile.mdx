@@ -14,22 +14,14 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Logo, Actions 1 und den Zugang zur Navigation in einer mobilen Leiste bündeln
 - Die vollständige Navigation im Drawer öffnen, statt sie dauerhaft anzuzeigen
 - Die Leiste oben oder unten am Bildschirmrand positionieren
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbcontrolpanelmobile-position--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -91,6 +83,17 @@ Auf der ersten Ebene liegen Brand, Actions 1 und der Menu-Button. Navigation, Me
 </DBSection>
 
 <FigmaLearnTeaser componentName="Control Panel Mobile" locale="de" anchor="control-panel--shell" />
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbcontrolpanelmobile-position"
+	storybookOverview="components-dbcontrolpanelmobile-overview"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

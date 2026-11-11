@@ -15,22 +15,14 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Zusammengehörige Informationen und Aktionen in einem einzelnen, scannbaren Block gruppieren
 - Mehrere Items in einem Grid/einer Liste konsistenter Flächen darstellen (Card-Gruppen)
 - Eine interaktive Vorschau bereitstellen, die zu Details verlinkt (interaktive Card)
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbcard-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -134,6 +126,17 @@ Wenn die Card interaktiv ist, muss sie per Tastatur erreichbar sein und korrekte
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbcard-density"
+	storybookOverview="components-dbcard-overview"
+/>
 
 </DBSection>
 

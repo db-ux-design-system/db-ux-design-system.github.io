@@ -15,23 +15,15 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Kurze Textwerte erfassen (z. B. Name, Stadt, E-Mail, IBAN je nach Produktregeln)
 - Strukturierte Eingabe mit Formatierungshinweisen unterstützen (z. B. „Keine Leerzeichen“, „Format TT.MM.JJJJ verwenden“)
 - Sofortiges oder bei Absendung ausgelöstes Feedback zur Gültigkeit (Erfolg/Fehler) mit Hilfstext anzeigen
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbinput-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -143,6 +135,17 @@ Stelle sicher, dass jedes Input einen barrierefreien Namen hat, der mit dem sich
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbinput-density"
+	storybookOverview="components-dbinput-overview"
+/>
 
 </DBSection>
 

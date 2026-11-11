@@ -17,21 +17,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Offer primary destinations at the top level (global navigation)
 - Support structured sub-navigation for deeper sections (nested levels)
 - Adapt navigation patterns to mobile with compact, touch-friendly behavior
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbnavigation-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -134,6 +126,17 @@ Keep hierarchy shallow and predictable. If there are too many items, use an over
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Show all Guidelines" expandedText="Hide some Guidelines" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbnavigation-density"
+	storybookOverview="components-dbnavigation-overview"
+/>
 
 </DBSection>
 

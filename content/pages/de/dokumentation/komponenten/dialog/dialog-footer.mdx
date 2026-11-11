@@ -17,21 +17,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Aktionen zum Abschließen und Abbrechen anbieten
 - Sternchentext dauerhaft sichtbar halten
 - Aktionen beim Scrollen erreichbar halten
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbdialog-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -110,6 +102,18 @@ Die bestätigende Aktion steht rechts, abbrechende und ergänzende Aktionen link
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbdialog-density"
+	storybookOverview="components-dbdialog-overview"
+	storybookAnchor="dbdialogfooter"
+/>
 
 </DBSection>
 

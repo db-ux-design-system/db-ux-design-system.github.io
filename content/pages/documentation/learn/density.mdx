@@ -1,0 +1,132 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Apply a density'
+headline: 'Apply a density'
+description: 'Make an area or the whole page more compact or more spacious – components, font sizes and spacing follow the density.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 18.2
+category: 'Development'
+keywords:
+  [
+    'density',
+    'densities',
+    'data-density',
+    'functional',
+    'regular',
+    'expressive',
+    'compact',
+    'spacious',
+    'volume',
+    'meta navigation',
+    'business app',
+    'tokens',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## A density sets the volume of an area
+
+There are three **densities**: `functional`, `regular` and `expressive`. Components, font sizes and spacing inside the area change with it.
+
+<LearnAside>
+
+| Density             | Use for                                                |
+| ------------------- | ------------------------------------------------------ |
+| `functional`        | Business applications with a lot of data, large tables |
+| `regular` (default) | Consumer applications                                  |
+| `expressive`        | Marketing pages and single pages                       |
+
+A smaller density also sets priorities: a meta navigation in `functional` above a main navigation in `regular` draws less attention than the main navigation.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Set the density on a container
+
+Put `data-density` on any element. Everything inside it uses that density.
+
+```tsx
+<div data-density="functional">
+	<DBButton>Save</DBButton>
+	<DBInput label="Name" />
+</div>
+```
+
+<LearnAside>
+
+The classes `db-density-functional`, `db-density-regular` and `db-density-expressive` work the same way as the attribute.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Change the density of the whole page
+
+Set the attribute on `body`. Areas inside can still use another density.
+
+```html
+<body data-density="functional">
+	…
+</body>
+```
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Load the density classes with the foundation only
+
+The component styles contain the density classes. If you use the foundation without the components, import them yourself.
+
+```css
+@import '@db-ux/core-foundations/build/styles/density/classes/all.css' layer(db-ux);
+```
+
+<LearnAside>
+
+Without the import, `regular` applies everywhere. Your own CSS follows the density as long as it uses the spacing, sizing and font tokens, because their values change with the density.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Continue with the tokens
+
+Spacing, sizing and font sizes change with the density.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Apply spacing and sizing',
+			description: 'Use the spacing and sizing tokens in your own CSS.',
+			url: '/documentation/learn/spacing-and-sizing',
+		},
+		{
+			title: 'Apply font sizes',
+			description: 'Set body and headline sizes on your elements.',
+			url: '/documentation/learn/typography',
+		},
+	]}
+/>
+
+</LearnBlock>

@@ -1,0 +1,13 @@
+.component-code {
+	display: flex;
+	flex-direction: column;
+	gap: var(--db-spacing-fixed-sm);
+
+	h3 {
+		margin-block-start: var(--db-spacing-fixed-lg);
+	}
+}
+
+.component-code-version {
+	color: var(--db-adaptive-on-bg-basic-emphasis-80-default);
+}

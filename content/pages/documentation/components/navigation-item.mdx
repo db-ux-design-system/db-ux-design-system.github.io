@@ -16,7 +16,7 @@ import { DBSection } from '@db-ux/react-core-components';
 
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Always wrap content in an anchor element for proper navigation semantics
 - Use the `active` property or `aria-current="page"` to indicate the current location
@@ -24,9 +24,13 @@ import ResourceCards from '@template/components/ResourceCards/ResourceCards.astr
 
 <DBSection spacing="small" width="auto">
 
-## Resources
+## Development
 
-<ResourceCards path="?path=/docs/components-dbnavigationitem-density--docs" />
+<ComponentCode
+	storybookExample="components-dbnavigationitem-density"
+	storybookOverview="components-dbnavigation-overview"
+	storybookAnchor="dbnavigationitem"
+/>
 
 </DBSection>
 

@@ -14,22 +14,14 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Combine logo, navigation, and global actions in one permanently visible frame
 - Position the Control Panel at the top as a horizontal bar or on the left as a vertical sidebar
 - Users can collapse the Control Panel Left to give the page content more width
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbcontrolpaneldesktop-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -55,6 +47,17 @@ On desktop, users can collapse the Control Panel Left in the Drill Down and Tree
 </DBSection>
 
 <FigmaLearnTeaser componentName="Control Panel Desktop" anchor="control-panel--shell" />
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbcontrolpaneldesktop-density"
+	storybookOverview="components-dbcontrolpaneldesktop-overview"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 
