@@ -15,21 +15,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Meta-Navigationslinks im Control Panel unterbringen
 - Rechtliche Hinweise global erreichbar halten
 - Ergänzende Inhalte von der primären Navigation trennen
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbcontrolpaneldesktop-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -89,6 +81,18 @@ Die Position von Meta unterscheidet sich je Variante: bei Top über der Navigati
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Alle Beispiele anzeigen" expandedText="Weniger Beispiele anzeigen" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbcontrolpaneldesktop-density"
+	storybookOverview="components-dbcontrolpaneldesktop-overview"
+	storybookAnchor="dbcontrolpanelmeta"
+/>
 
 </DBSection>
 

@@ -15,21 +15,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Zwischen verschiedenen Ansichten zusammengehöriger Inhalte auf derselben Hierarchieebene wechseln
 - Einstellungen, Datenansichten oder Inhaltskategorien innerhalb einer Seite gruppieren
 - Horizontale und vertikale Ausrichtung unterstützen
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbtabs-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -88,6 +80,17 @@ Nur ein Tab ist gleichzeitig aktiv. Der aktive Tab zeigt sein zugehöriges Panel
 		fullWidth={true}
 	/>
 </div>
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbtabs-density"
+	storybookOverview="components-dbtabs-overview"
+/>
 
 </DBSection>
 

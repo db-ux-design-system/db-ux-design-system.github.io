@@ -15,22 +15,14 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import ComponentPlayground from '@template/components/ComponentPlayground/ComponentPlaygroundWrapper.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Formularelemente, Buttons oder Inhaltsblöcke mit konsistenten Abständen anordnen
 - Vertikale oder horizontale Layouts ohne eigenes CSS erstellen
 - Responsive Layouts bauen, die sich an verschiedene Bildschirmgrößen anpassen
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbstack-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -100,6 +92,17 @@ Aktiviere Wrap für Stacks, die sich an kleinere Bildschirme anpassen sollen.
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbstack-density"
+	storybookOverview="components-dbstack-overview"
+/>
 
 </DBSection>
 

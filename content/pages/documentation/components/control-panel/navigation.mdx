@@ -15,21 +15,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Present navigation destinations in the variant that fits the structure
 - Open up deeper levels through Popover, Tree, or Drill Down
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbcontrolpaneldesktop-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -125,6 +117,18 @@ On desktop, the Popover navigation can be scrolled via overflow chevrons when no
 </DBSection>
 
 <FigmaLearnTeaser componentName="Control Panel Navigation" anchor="control-panel--shell" />
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbcontrolpaneldesktop-density"
+	storybookOverview="components-dbcontrolpaneldesktop-overview"
+	storybookAnchor="dbcontrolpanelnavigation"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 

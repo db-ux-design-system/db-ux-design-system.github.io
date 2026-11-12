@@ -15,21 +15,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Mehrere Paragraphen und Headings zu einem Textabschnitt gruppieren
 - Abstand zwischen Blöcken aus der Zeilenhöhe ableiten
 - Lesehierarchie aus Headings und Paragraphen aufbauen
-
-<DBSection spacing="small" width="auto">
-
-## Ressourcen
-
-<ResourceCards path="?path=/docs/components-dbtextgroup-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -91,6 +83,17 @@ Das `h1` benennt die Seite als Ganzes und kommt deshalb nur einmal vor, auch bei
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Alle Richtlinien anzeigen" expandedText="Richtlinien ausblenden" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Entwicklung
+
+<ComponentCode
+	storybookExample="components-dbtextgroup-with-components"
+	storybookOverview="components-dbtextgroup-overview"
+/>
 
 </DBSection>
 

@@ -15,21 +15,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import QuestionForm from '@template/components/QuestionForm/QuestionForm.astro';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Offer equally weighted destinations at the top level
 - Present a flat hierarchy with visually dominant icons
 - Enable quick access to up to ten destinations on desktop and six on mobile
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbcontrolpanelflaticon-density--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -100,6 +92,17 @@ In Flat Icon, the label can be hidden so that only the icon remains visible.
 </CollapsibleWrapper>
 
 <CollapseButton collapsedText="Show all Examples" expandedText="Hide some Examples" />
+
+</DBSection>
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbcontrolpanelflaticon-density"
+	storybookOverview="components-dbcontrolpanelflaticon-overview"
+/>
 
 </DBSection>
 

@@ -15,21 +15,13 @@ import { DBSection } from '@db-ux/react-core-components';
 import CollapseButton from '@template/components/CollapseButton/CollapseButton.astro';
 import CollapsibleWrapper from '@template/components/CollapseButton/CollapsibleWrapper.astro';
 import GuidelineExample from '@template/components/GuidelineExample/GuidelineExample.astro';
-import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
 import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
 import FigmaLearnTeaser from '@template/components/CardTeaser/FigmaLearnTeaser';
+import ComponentCode from '@template/components/ComponentCode/ComponentCode.astro';
 
 - Set up a desktop application layout: only the content area scrolls
 - Position the Control Panel at the top or on the left
 - Add Sub Navigation for sub-pages
-
-<DBSection spacing="small" width="auto">
-
-## Resources
-
-<ResourceCards path="?path=/docs/components-dbshell-position--docs" />
-
-</DBSection>
 
 <DBSection spacing="small" width="auto">
 
@@ -95,6 +87,17 @@ The following table shows which combinations of Control Panel and Sub Navigation
 </DBSection>
 
 <FigmaLearnTeaser componentName="Shell Desktop" anchor="control-panel--shell" />
+
+<DBSection spacing="small" width="auto">
+
+## Development
+
+<ComponentCode
+	storybookExample="components-dbshell-position"
+	storybookOverview="components-dbshell-overview"
+/>
+
+</DBSection>
 
 <DBSection spacing="small" width="auto">
 
