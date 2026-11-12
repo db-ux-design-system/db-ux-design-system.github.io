@@ -220,20 +220,20 @@ importers:
         specifier: 4.13.0
         version: 4.13.0(playwright-core@1.63.0)
       '@db-ux/agent-cli':
-        specifier: 6.3.2
-        version: 6.3.2
+        specifier: 6.4.0
+        version: 6.4.0
       '@db-ux/core-components':
-        specifier: 6.3.2
-        version: 6.3.2
+        specifier: 6.4.0
+        version: 6.4.0
       '@db-ux/core-eslint-plugin':
-        specifier: 6.3.2
-        version: 6.3.2(eslint@10.14.0(supports-color@10.2.2))(supports-color@10.2.2)(typescript@6.0.3)
+        specifier: 6.4.0
+        version: 6.4.0(eslint@10.14.0(supports-color@10.2.2))(supports-color@10.2.2)(typescript@6.0.3)
       '@db-ux/core-foundations':
-        specifier: 6.3.2
-        version: 6.3.2
+        specifier: 6.4.0
+        version: 6.4.0
       '@db-ux/core-stylelint':
-        specifier: 6.3.2
-        version: 6.3.2(stylelint@18.0.0)
+        specifier: 6.4.0
+        version: 6.4.0(stylelint@18.0.0)
       '@db-ux/db-theme':
         specifier: 7.2.0
         version: 7.2.0
@@ -244,8 +244,8 @@ importers:
         specifier: 4.4.0
         version: 4.4.0
       '@db-ux/react-core-components':
-        specifier: 6.3.2
-        version: 6.3.2
+        specifier: 6.4.0
+        version: 6.4.0
       '@double-great/stylelint-a11y':
         specifier: 3.8.3
         version: 3.8.3(stylelint@18.0.0)
@@ -711,23 +711,23 @@ packages:
     peerDependencies:
       postcss-selector-parser: ^7.1.1
 
-  '@db-ux/agent-cli@6.3.2':
-    resolution: {integrity: sha512-kPn0hy7HVX7JAMLq4krJJ1cfBgebBHB7dwnaAVU14eUbOP9HKjvk0IMcSsqD0UR6nmppQeB5bBJYKsAp4F0H+w==}
+  '@db-ux/agent-cli@6.4.0':
+    resolution: {integrity: sha512-T2Vd06RvqF2pdie6NyFnKDKHBT6r0XyUHsMJosQSvwHxxUQaC7WKlnv7ciewxn2eXF3EReAlgWTECeNts8lTbw==}
     hasBin: true
 
-  '@db-ux/core-components@6.3.2':
-    resolution: {integrity: sha512-Z2jb+n72s2yy7MqN6ahsOX4oK4XwjEvkoR48KONDd+GlDwKL35tbThavRyhtKgOl533k7e0BhaYfuqk59jOeOg==}
+  '@db-ux/core-components@6.4.0':
+    resolution: {integrity: sha512-J89SJGv12o956kCI4f6dMR6hO4nJIdOx724QbkC/MPlWUr8HMcWbkQkf6kRPd9ojdW1awVkVF9+chsr+u0c8Nw==}
 
-  '@db-ux/core-eslint-plugin@6.3.2':
-    resolution: {integrity: sha512-2a+MS8kcm8vGMJ2hc6JPQ3zYYRvHnB75JkHMtCwIwDG8lduP569y/pEQv/MJwNL9UwE6S364qPYLvtoXeLD8KQ==}
+  '@db-ux/core-eslint-plugin@6.4.0':
+    resolution: {integrity: sha512-/fdKgrDhUCddIpgY+ueN1BTn+ecxhnag2yLYSxtHJNl3DDis2HgrNmerlGcydXLMBdCqBDhxC3/xXfOxBIMhyg==}
     peerDependencies:
       eslint: '>=9.0.0'
 
-  '@db-ux/core-foundations@6.3.2':
-    resolution: {integrity: sha512-/jxjkJgMJe5ZdEaTQsN0czalVcyLofDYurF7wec2WMred0OC4Bm3WcqN2mDuX/S6MuiztmD9GEUuZTLTaFq5vw==}
+  '@db-ux/core-foundations@6.4.0':
+    resolution: {integrity: sha512-CpIpUCq0Rn+eTtmJdBrDrribO3IbDtjtuHXUaQWsCiNbp6w7DQdjAOMbRsNNTfgT2yEcoV2JPtcb3rfI3l+Atw==}
 
-  '@db-ux/core-stylelint@6.3.2':
-    resolution: {integrity: sha512-Q9pbAEh7R/nLcAEM3Jf75uPon/ruJG4FiBTxaH8r0FvERQeMYUlABf24KHfkVI2ntXU4MLtPCfHhmdGF8Y8Pqw==}
+  '@db-ux/core-stylelint@6.4.0':
+    resolution: {integrity: sha512-gruNX/qgCudkuV+LX/4Eyy/zy8jIU2EyvTmdO7QOlH3psvtxZC8sLEBVRXVCBYJofLDNyYumUcNlLla0k9OaiQ==}
     peerDependencies:
       stylelint: '>=14.0.0'
 
@@ -740,8 +740,8 @@ packages:
   '@db-ux/db-theme@7.2.0':
     resolution: {integrity: sha512-XxXKBGYoTiFIUygCEjSqM67oJh2FxccckPyCBJXpG6RWEPHJgB3x+DdICNeQBQdH7kW3ttgcVDui22ULOrHWgQ==}
 
-  '@db-ux/react-core-components@6.3.2':
-    resolution: {integrity: sha512-7GHfjlONuINPg5vquPgdJjgahscthp4m1BlpUfKgT0rLAZuI9bTQ3PXqw+0jApiTXA6OfTAh2gYSLQB3qf1mKQ==}
+  '@db-ux/react-core-components@6.4.0':
+    resolution: {integrity: sha512-OYuk8+ZPucG5CILAN3Q0R0wHQRvB3DM0frzdQObV3n0KZ0mSG6JEFn1nKRF5/AUZ7KRgQadED8PeBnfMxPkmeQ==}
 
   '@double-great/stylelint-a11y@3.8.3':
     resolution: {integrity: sha512-mSRv32ygqKXLJSvJd8xjol2q9TBwWA7D3Cukk2xrpCME+BZ/oIv5lSA+MWn1yqZ7QP9/puiORLX/E02QVBZd+w==}
@@ -3475,15 +3475,15 @@ snapshots:
     dependencies:
       postcss-selector-parser: 7.1.7
 
-  '@db-ux/agent-cli@6.3.2':
+  '@db-ux/agent-cli@6.4.0':
     dependencies:
       commander: 15.1.0
 
-  '@db-ux/core-components@6.3.2':
+  '@db-ux/core-components@6.4.0':
     dependencies:
-      '@db-ux/core-foundations': 6.3.2
+      '@db-ux/core-foundations': 6.4.0
 
-  '@db-ux/core-eslint-plugin@6.3.2(eslint@10.14.0(supports-color@10.2.2))(supports-color@10.2.2)(typescript@6.0.3)':
+  '@db-ux/core-eslint-plugin@6.4.0(eslint@10.14.0(supports-color@10.2.2))(supports-color@10.2.2)(typescript@6.0.3)':
     dependencies:
       '@typescript-eslint/utils': 8.72.1(eslint@10.14.0(supports-color@10.2.2))(supports-color@10.2.2)(typescript@6.0.3)
       eslint: 10.14.0(supports-color@10.2.2)
@@ -3491,9 +3491,9 @@ snapshots:
       - supports-color
       - typescript
 
-  '@db-ux/core-foundations@6.3.2': {}
+  '@db-ux/core-foundations@6.4.0': {}
 
-  '@db-ux/core-stylelint@6.3.2(stylelint@18.0.0)':
+  '@db-ux/core-stylelint@6.4.0(stylelint@18.0.0)':
     dependencies:
       stylelint: 18.0.0
 
@@ -3506,10 +3506,10 @@ snapshots:
       '@db-ux/db-theme-fonts': 2.2.0
       '@db-ux/db-theme-icons': 4.4.0
 
-  '@db-ux/react-core-components@6.3.2':
+  '@db-ux/react-core-components@6.4.0':
     dependencies:
-      '@db-ux/core-components': 6.3.2
-      '@db-ux/core-foundations': 6.3.2
+      '@db-ux/core-components': 6.4.0
+      '@db-ux/core-foundations': 6.4.0
 
   '@double-great/stylelint-a11y@3.8.3(stylelint@18.0.0)':
     dependencies:
