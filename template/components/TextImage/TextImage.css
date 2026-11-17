@@ -285,6 +285,9 @@
 /* Typographie entfernt – globale Styles sollen greifen */
 .text-image-title {
 	margin: 0;
+
+	/* Shows a line break (\n) from the title prop, e.g. "Develop with\nease". */
+	white-space: pre-line;
 }
 
 /* Large card (a card with image or visual): one title size, whatever the heading level.
