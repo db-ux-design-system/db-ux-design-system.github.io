@@ -209,10 +209,11 @@ Set `aria-*` and `data-*` attributes on the custom element. The component moves 
 
 <LearnAside>
 
-- `role`, `title` and `style` are moved as well
+- `role`, `title` and `style` are moved as well. Classes from `class` are added to the main element
 - The attributes are removed from the custom element. Target the inner element in tests, CSS and scripts: `[data-testid="filter-toggle"]` instead of `db-button[data-testid="filter-toggle"]`
 - `data-density` stays on the custom element, because it sets the density for everything inside
-- Table Body, Table Row, Table Footer, Table Header Cell and Table Data Cell keep all attributes on the custom element
+- Table Body, Table Row, Table Footer, Table Header Cell and Table Data Cell move the attributes only on the first render. Later changes on the custom element are not passed on
+- Custom Select moves the attributes to its outer element, not to a form field. Use its properties, such as `label`, for the accessible name
 
 </LearnAside>
 

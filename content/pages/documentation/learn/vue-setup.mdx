@@ -234,7 +234,7 @@ This is the default behavior of Vue for [fallthrough attributes](https://vuejs.o
 | Accordion Item                            | `<li>`             | `<details>` |
 | Table                                     | Wrapper `<div>`    | `<table>`   |
 
-For form fields, use the component properties instead: `label` for the accessible name and `ariaDescribedBy` to replace the automatic description. React, Angular and Web Components forward the attributes to the form field itself.
+For form fields, use the component properties instead: `label` for the accessible name and, for Input, Textarea, Select and Checkbox, `ariaDescribedBy` to replace the automatic description. React, Angular and Web Components forward the attributes to the form field itself. Custom Select keeps them on its outer element in every framework.
 
 </LearnAside>
 

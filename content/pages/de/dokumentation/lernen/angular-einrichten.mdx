@@ -190,10 +190,11 @@ Setze `aria-*`- und `data-*`-Attribute auf den Tag der Komponente. Die Komponent
 
 <LearnAside>
 
-- `role`, `title` und `style` werden ebenfalls verschoben
+- `role`, `title` und `style` werden ebenfalls verschoben. Klassen aus `class` kommen zusätzlich auf das Hauptelement
 - Die Attribute werden vom Tag der Komponente entfernt. Sprich in Tests und CSS deshalb das innere Element an: `[data-testid="filter-toggle"]` statt `db-button[data-testid="filter-toggle"]`
 - `data-density` bleibt auf dem Tag der Komponente, weil es die Density für alles darin festlegt
-- Table Body, Table Row, Table Footer, Table Header Cell und Table Data Cell behalten alle Attribute auf dem Tag der Komponente
+- Table Body, Table Row, Table Footer, Table Header Cell und Table Data Cell verschieben die Attribute nur beim ersten Rendern. Spätere Änderungen am Tag der Komponente kommen nicht an
+- Custom Select verschiebt die Attribute auf sein äußeres Element, nicht auf ein Formularfeld. Nutze für den zugänglichen Namen seine Properties wie `label`
 
 </LearnAside>
 

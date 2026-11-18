@@ -236,7 +236,7 @@ Das ist das Standardverhalten von Vue für [Fallthrough-Attribute](https://vuejs
 | Accordion Item                            | `<li>`               | `<details>`  |
 | Table                                     | Wrapper-`<div>`      | `<table>`    |
 
-Nutze bei Formularfeldern stattdessen die Properties der Komponente: `label` für den zugänglichen Namen und `ariaDescribedBy`, um die automatische Beschreibung zu ersetzen. React, Angular und Web Components reichen die Attribute direkt an das Formularfeld weiter.
+Nutze bei Formularfeldern stattdessen die Properties der Komponente: `label` für den zugänglichen Namen und bei Input, Textarea, Select und Checkbox `ariaDescribedBy`, um die automatische Beschreibung zu ersetzen. React, Angular und Web Components reichen die Attribute direkt an das Formularfeld weiter. Custom Select behält sie in jedem Framework auf seinem äußeren Element.
 
 </LearnAside>
 
