@@ -30,6 +30,9 @@ keywords:
     'core-components',
     'core-foundations',
     'troubleshooting',
+    'aria attributes',
+    'data attributes',
+    'attribute forwarding',
     'fonts not loading',
   ]
 stepper: true
@@ -163,6 +166,34 @@ import { DBButton } from '@db-ux/ngx-core-components';
 ### Werte und Events binden
 
 Formular-Komponenten kennen drei Wege, Werte zu binden: `ngModel`, `FormControl` und einfaches Event-Binding. Alle drei beschreibt das [README des Pakets](https://github.com/db-ux-design-system/core-web/tree/main/output/angular).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Übergib aria- und data-Attribute direkt
+
+Setze `aria-*`- und `data-*`-Attribute auf den Tag der Komponente. Die Komponente verschiebt sie auf ihr Hauptelement – bei Formular-Komponenten auf das `<input>`, `<select>` oder `<textarea>`.
+
+```html
+<db-button
+	[attr.aria-expanded]="isOpen"
+	aria-controls="filter-panel"
+	data-testid="filter-toggle"
+	(click)="toggle()"
+>
+	Filter
+</db-button>
+```
+
+<LearnAside>
+
+- `role`, `title` und `style` werden ebenfalls verschoben
+- Die Attribute werden vom Tag der Komponente entfernt. Sprich in Tests und CSS deshalb das innere Element an: `[data-testid="filter-toggle"]` statt `db-button[data-testid="filter-toggle"]`
+- `data-density` bleibt auf dem Tag der Komponente, weil es die Density für alles darin festlegt
+- Table Body, Table Row, Table Footer, Table Header Cell und Table Data Cell behalten alle Attribute auf dem Tag der Komponente
 
 </LearnAside>
 

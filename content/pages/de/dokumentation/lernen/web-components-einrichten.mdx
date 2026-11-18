@@ -31,6 +31,9 @@ keywords:
     'core-components',
     'core-foundations',
     'troubleshooting',
+    'aria attributes',
+    'data attributes',
+    'attribute forwarding',
   ]
 stepper: true
 ---
@@ -187,6 +190,29 @@ Ein Button mit Icon zeigt an einer Stelle, ob Registrierung, Styles, Schrift und
 | Styles        | Der Button hat einen gefüllten Hintergrund in der Markenfarbe und abgerundete Ecken.                |
 | Schrift       | Die DevTools zeigen `OpenSans` als gerenderte Schrift – oder `DB Neo Screen Sans` mit dem DB Theme. |
 | Icon          | Vor dem Text erscheint ein Pfeil.                                                                   |
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Übergib aria- und data-Attribute direkt
+
+Setze `aria-*`- und `data-*`-Attribute auf das Custom Element. Die Komponente verschiebt sie auf ihr Hauptelement – bei Formular-Komponenten auf das `<input>`, `<select>` oder `<textarea>`.
+
+```html
+<db-button aria-expanded="false" aria-controls="filter-panel" data-testid="filter-toggle"
+	>Filter</db-button
+>
+```
+
+<LearnAside>
+
+- `role`, `title` und `style` werden ebenfalls verschoben
+- Die Attribute werden vom Custom Element entfernt. Sprich in Tests, CSS und Skripten deshalb das innere Element an: `[data-testid="filter-toggle"]` statt `db-button[data-testid="filter-toggle"]`
+- `data-density` bleibt auf dem Custom Element, weil es die Density für alles darin festlegt
+- Table Body, Table Row, Table Footer, Table Header Cell und Table Data Cell behalten alle Attribute auf dem Custom Element
 
 </LearnAside>
 
