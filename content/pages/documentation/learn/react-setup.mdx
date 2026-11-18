@@ -28,6 +28,9 @@ keywords:
     'core-components',
     'core-foundations',
     'troubleshooting',
+    'aria attributes',
+    'data attributes',
+    'attribute forwarding',
     'icons not loading',
   ]
 stepper: true
@@ -180,6 +183,36 @@ export default defineConfig({
 <LearnAside>
 
 Install esbuild as a dev dependency: `pnpm add esbuild --save-dev`. Other bundlers and older Vite versions do not need this setting.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Pass aria and data attributes directly
+
+Components forward `aria-*` and `data-*` attributes to their main element, so you do not need a separate property. For form components, this is the `<input>`, `<select>` or `<textarea>`, not the wrapper around it.
+
+```tsx
+<DBButton
+	aria-expanded={isOpen}
+	aria-controls="filter-panel"
+	data-testid="filter-toggle"
+	onClick={toggle}
+>
+	Filter
+</DBButton>
+```
+
+<LearnAside>
+
+The main element is the native element a component is built around, for example the `<button>` of a Button. These props reach it as well:
+
+- `role`, `title`, `style`, `lang`, `dir`, `hidden` and `tabIndex`
+- Event handlers such as `onClick` or `onKeyDown`
+
+Foundation attributes such as `data-density`, `data-color` or `data-icon-variant` are the exception. They stay on the outermost element of the component, because they style everything inside it. Custom Select also keeps all attributes on its outer element. Use its properties, such as `label`, for the accessible name.
 
 </LearnAside>
 

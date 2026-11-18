@@ -31,6 +31,9 @@ keywords:
     'core-components',
     'core-foundations',
     'troubleshooting',
+    'aria attributes',
+    'data attributes',
+    'attribute forwarding',
   ]
 stepper: true
 ---
@@ -187,6 +190,30 @@ A button with an icon shows in one place whether registration, styles, font and 
 | Styles       | The button has a filled background in the brand color and rounded corners.                     |
 | Font         | The DevTools show `OpenSans` as the rendered font – or `DB Neo Screen Sans` with the DB Theme. |
 | Icon         | An arrow appears in front of the text.                                                         |
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Pass aria and data attributes directly
+
+Set `aria-*` and `data-*` attributes on the custom element. The component moves them to its main element – for form components, to the `<input>`, `<select>` or `<textarea>`.
+
+```html
+<db-button aria-expanded="false" aria-controls="filter-panel" data-testid="filter-toggle"
+	>Filter</db-button
+>
+```
+
+<LearnAside>
+
+- `role`, `title` and `style` are moved as well. Classes from `class` are added to the main element
+- The attributes are removed from the custom element. Target the inner element in tests, CSS and scripts: `[data-testid="filter-toggle"]` instead of `db-button[data-testid="filter-toggle"]`
+- `data-density` stays on the custom element, because it sets the density for everything inside
+- Table Body, Table Row, Table Footer, Table Header Cell and Table Data Cell move the attributes only on the first render. Later changes on the custom element are not passed on
+- Custom Select moves the attributes to its outer element, not to a form field. Use its properties, such as `label`, for the accessible name
 
 </LearnAside>
 

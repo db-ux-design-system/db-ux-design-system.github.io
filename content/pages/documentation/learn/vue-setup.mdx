@@ -31,6 +31,9 @@ keywords:
     'core-components',
     'core-foundations',
     'troubleshooting',
+    'aria attributes',
+    'data attributes',
+    'attribute forwarding',
   ]
 stepper: true
 ---
@@ -198,6 +201,40 @@ const input = ref('');
 	></DBInput>
 </template>
 ```
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Check where aria and data attributes land
+
+Vue sets `aria-*` and `data-*` attributes on the outermost element of a component, which is the main element for most components. Form components are the exception: there, the attributes land on the wrapper and not on the form field.
+
+```vue
+<DBButton
+	:aria-expanded="isOpen"
+	aria-controls="filter-panel"
+	data-testid="filter-toggle"
+	@click="toggle"
+>
+	Filter
+</DBButton>
+```
+
+<LearnAside>
+
+This is the default behavior of Vue for [fallthrough attributes](https://vuejs.org/guide/components/attrs.html). It affects the components whose outermost element is not the native element they are built around:
+
+| Component                                 | Attributes land on | Not on      |
+| ----------------------------------------- | ------------------ | ----------- |
+| Input, Textarea, Select, Checkbox, Switch | Wrapper `<div>`    | Form field  |
+| Radio                                     | `<label>`          | `<input>`   |
+| Accordion Item                            | `<li>`             | `<details>` |
+| Table                                     | Wrapper `<div>`    | `<table>`   |
+
+For form fields, use the component properties instead: `label` for the accessible name and, for Input, Textarea, Select and Checkbox, `ariaDescribedBy` to replace the automatic description. React, Angular and Web Components forward the attributes to the form field itself. Custom Select keeps them on its outer element in every framework.
 
 </LearnAside>
 

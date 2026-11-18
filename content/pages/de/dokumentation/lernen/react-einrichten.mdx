@@ -28,6 +28,9 @@ keywords:
     'core-components',
     'core-foundations',
     'troubleshooting',
+    'aria attributes',
+    'data attributes',
+    'attribute forwarding',
     'icons not loading',
   ]
 stepper: true
@@ -180,6 +183,36 @@ export default defineConfig({
 <LearnAside>
 
 Installiere esbuild als Dev-Abhängigkeit: `pnpm add esbuild --save-dev`. Andere Bundler und ältere Vite-Versionen brauchen diese Einstellung nicht.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Übergib aria- und data-Attribute direkt
+
+Die Komponenten reichen `aria-*`- und `data-*`-Attribute an ihr Hauptelement weiter – eine eigene Property brauchst du nicht. Bei Formular-Komponenten ist das Hauptelement das `<input>`, `<select>` oder `<textarea>` und nicht der Wrapper darum.
+
+```tsx
+<DBButton
+	aria-expanded={isOpen}
+	aria-controls="filter-panel"
+	data-testid="filter-toggle"
+	onClick={toggle}
+>
+	Filter
+</DBButton>
+```
+
+<LearnAside>
+
+Das Hauptelement ist das native Element, auf dem eine Komponente aufbaut, z. B. der `<button>` eines Buttons. Diese Props kommen dort ebenfalls an:
+
+- `role`, `title`, `style`, `lang`, `dir`, `hidden` und `tabIndex`
+- Event-Handler wie `onClick` oder `onKeyDown`
+
+Foundation-Attribute wie `data-density`, `data-color` oder `data-icon-variant` sind die Ausnahme. Sie bleiben auf dem äußersten Element der Komponente, weil sie alles darin gestalten. Auch Custom Select behält alle Attribute auf seinem äußeren Element. Nutze für den zugänglichen Namen seine Properties wie `label`.
 
 </LearnAside>
 

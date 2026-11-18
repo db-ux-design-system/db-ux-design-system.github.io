@@ -30,6 +30,9 @@ keywords:
     'core-components',
     'core-foundations',
     'troubleshooting',
+    'aria attributes',
+    'data attributes',
+    'attribute forwarding',
     'fonts not loading',
   ]
 stepper: true
@@ -163,6 +166,35 @@ import { DBButton } from '@db-ux/ngx-core-components';
 ### Bind values and events
 
 Form components support three ways to bind values: `ngModel`, `FormControl` and plain event binding. All three are documented in the [package README](https://github.com/db-ux-design-system/core-web/tree/main/output/angular).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Pass aria and data attributes directly
+
+Set `aria-*` and `data-*` attributes on the component tag. The component moves them to its main element – for form components, to the `<input>`, `<select>` or `<textarea>`.
+
+```html
+<db-button
+	[attr.aria-expanded]="isOpen"
+	aria-controls="filter-panel"
+	data-testid="filter-toggle"
+	(click)="toggle()"
+>
+	Filter
+</db-button>
+```
+
+<LearnAside>
+
+- `role`, `title` and `style` are moved as well. Classes from `class` are added to the main element
+- The attributes are removed from the component tag. Target the inner element in tests and CSS: `[data-testid="filter-toggle"]` instead of `db-button[data-testid="filter-toggle"]`
+- `data-density` stays on the component tag, because it sets the density for everything inside
+- Table Body, Table Row, Table Footer, Table Header Cell and Table Data Cell move the attributes only on the first render. Later changes on the component tag are not passed on
+- Custom Select moves the attributes to its outer element, not to a form field. Use its properties, such as `label`, for the accessible name
 
 </LearnAside>
 

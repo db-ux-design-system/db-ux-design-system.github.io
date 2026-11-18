@@ -31,6 +31,9 @@ keywords:
     'core-components',
     'core-foundations',
     'troubleshooting',
+    'aria attributes',
+    'data attributes',
+    'attribute forwarding',
   ]
 stepper: true
 ---
@@ -200,6 +203,40 @@ const input = ref('');
 	></DBInput>
 </template>
 ```
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Prüfe, wo aria- und data-Attribute landen
+
+Vue setzt `aria-*`- und `data-*`-Attribute auf das äußerste Element einer Komponente – bei den meisten Komponenten ist das ihr Hauptelement. Formular-Komponenten sind die Ausnahme: Dort landen die Attribute auf dem Wrapper und nicht auf dem Formularfeld.
+
+```vue
+<DBButton
+	:aria-expanded="isOpen"
+	aria-controls="filter-panel"
+	data-testid="filter-toggle"
+	@click="toggle"
+>
+	Filter
+</DBButton>
+```
+
+<LearnAside>
+
+Das ist das Standardverhalten von Vue für [Fallthrough-Attribute](https://vuejs.org/guide/components/attrs.html). Es betrifft die Komponenten, deren äußerstes Element nicht das native Element ist, auf dem sie aufbauen:
+
+| Komponente                                | Attribute landen auf | Nicht auf    |
+| ----------------------------------------- | -------------------- | ------------ |
+| Input, Textarea, Select, Checkbox, Switch | Wrapper-`<div>`      | Formularfeld |
+| Radio                                     | `<label>`            | `<input>`    |
+| Accordion Item                            | `<li>`               | `<details>`  |
+| Table                                     | Wrapper-`<div>`      | `<table>`    |
+
+Nutze bei Formularfeldern stattdessen die Properties der Komponente: `label` für den zugänglichen Namen und bei Input, Textarea, Select und Checkbox `ariaDescribedBy`, um die automatische Beschreibung zu ersetzen. React, Angular und Web Components reichen die Attribute direkt an das Formularfeld weiter. Custom Select behält sie in jedem Framework auf seinem äußeren Element.
 
 </LearnAside>
 
