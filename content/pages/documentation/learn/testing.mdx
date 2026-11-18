@@ -52,7 +52,7 @@ import '@db-ux/core-components/build/styles/bundle.css';
 
 - **Angular:** add the styles to the `styles` of the test target in `angular.json`, as in the build target.
 - **Icons:** jsdom does not load fonts, so icons do not render in unit tests. This is expected and does not affect the result.
-- **Selecting elements:** prefer queries by role and label, like a user. `data-*` attributes such as `data-testid` are passed through to the element of the component.
+- **Selecting elements:** prefer queries by role and label, like a user. `data-*` attributes such as `data-testid` are passed through to the element of the component. Where they end up per framework is described in [Pass attributes to components](/documentation/learn/attribute-forwarding).
 - **The components themselves** are tested in the design system for every release: visual snapshots, axe, aria snapshots and screen readers. The [test table in Storybook](https://design-system.deutschebahn.com/core-web/version/latest/composition-storybook/?path=/docs/foundations-test-table--docs) lists them per component.
 
 </LearnAside>

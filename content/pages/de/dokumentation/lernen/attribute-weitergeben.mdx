@@ -1,0 +1,166 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Attribute an Komponenten übergeben'
+headline: 'Attribute an Komponenten übergeben'
+description: 'Wo aria- und data-Attribute an einer Komponente landen – in React, Angular, Web Components und Vue.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 20.25
+category: 'Development'
+keywords:
+  [
+    'attributes',
+    'aria attributes',
+    'data attributes',
+    'aria-label',
+    'data-testid',
+    'attribute forwarding',
+    'pass through',
+    'fallthrough attributes',
+    'host element',
+    'custom element',
+    'react',
+    'angular',
+    'vue',
+    'web components',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Für aria und data brauchst du keine Property
+
+Setze `aria-*`- und `data-*`-Attribute direkt an eine Komponente. Sie reicht sie an ihr **Hauptelement** weiter, bei den meisten Formular-Komponenten an das `<input>`, `<select>` oder `<textarea>`.
+
+<LearnAside>
+
+Das Hauptelement ist das native Element, auf dem eine Komponente aufbaut, z. B. der `<button>` eines Buttons. Einige weitere Attribute werden ebenfalls weitergereicht:
+
+| Framework               | Ebenfalls weitergereicht                                                                   |
+| ----------------------- | ------------------------------------------------------------------------------------------ |
+| React                   | `role`, `title`, `style`, `lang`, `dir`, `hidden`, `tabIndex`, Event-Handler wie `onClick` |
+| Angular, Web Components | `role`, `title`, `style`; Klassen aus `class` kommen zusätzlich auf das Hauptelement       |
+| Vue                     | Alle Fallthrough-Attribute, aber auf das äußerste Element – siehe den Schritt zu Vue       |
+
+**Custom Select** ist in jedem Framework die Ausnahme: Es behält die Attribute auf seinem äußeren Element. Nutze für den zugänglichen Namen seine Properties wie `label`.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## React reicht die Props durch
+
+Übergib die Attribute als Props. Die Komponente setzt sie auf ihr Hauptelement.
+
+```tsx
+<DBButton
+	aria-expanded={isOpen}
+	aria-controls="filter-panel"
+	data-testid="filter-toggle"
+	onClick={toggle}
+>
+	Filter
+</DBButton>
+```
+
+<LearnAside>
+
+Foundation-Attribute wie `data-density`, `data-color` oder `data-icon-variant` bleiben auf dem äußersten Element der Komponente, weil sie alles darin gestalten.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Angular und Web Components verschieben sie vom Tag
+
+Setze die Attribute auf den Tag der Komponente. Die Komponente verschiebt sie auf ihr Hauptelement und entfernt sie vom Tag.
+
+```html
+<db-button aria-expanded="false" aria-controls="filter-panel" data-testid="filter-toggle"
+	>Filter</db-button
+>
+```
+
+<LearnAside>
+
+- **Selektoren:** Sprich in Tests, CSS und Skripten das innere Element an: `[data-testid="filter-toggle"]` statt `db-button[data-testid="filter-toggle"]`
+- **Bindings in Angular:** Nutze `[attr.aria-expanded]="isOpen"`. Spätere Änderungen am Tag werden ebenfalls weitergereicht
+- **`data-density`** bleibt auf dem Tag, weil es die Density für alles darin festlegt
+- **Table Body, Table Row, Table Footer, Table Header Cell und Table Data Cell** verschieben die Attribute nur beim ersten Rendern. Spätere Änderungen am Tag kommen nicht an
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Vue lässt sie auf dem äußersten Element
+
+Vue setzt die Attribute auf das äußerste Element einer Komponente – bei den meisten Komponenten ist das ihr Hauptelement. Bei Formular-Komponenten ist es der Wrapper, ein `aria-label` erreicht das Formularfeld also nicht.
+
+```vue
+<DBButton
+	:aria-expanded="isOpen"
+	aria-controls="filter-panel"
+	data-testid="filter-toggle"
+	@click="toggle"
+>
+	Filter
+</DBButton>
+```
+
+<LearnAside>
+
+Das ist das Standardverhalten von Vue für [Fallthrough-Attribute](https://vuejs.org/guide/components/attrs.html). Es betrifft die Komponenten, deren äußerstes Element nicht ihr Hauptelement ist:
+
+| Komponente                                | Attribute landen auf | Nicht auf    |
+| ----------------------------------------- | -------------------- | ------------ |
+| Input, Textarea, Select, Checkbox, Switch | Wrapper-`<div>`      | Formularfeld |
+| Radio                                     | `<label>`            | `<input>`    |
+| Accordion Item                            | `<li>`               | `<details>`  |
+| Table                                     | Wrapper-`<div>`      | `<table>`    |
+
+Nutze bei Formularfeldern stattdessen die Properties der Komponente: `label` für den zugänglichen Namen und bei Input, Textarea, Select und Checkbox `ariaDescribedBy`, um die automatische Beschreibung zu ersetzen.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Mach mit Barrierefreiheit und Tests weiter
+
+Beide Themen sind darauf angewiesen, dass Attribute am richtigen Element ankommen.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Barrierefreiheit',
+			description: 'Was die Komponenten leisten und was deine Aufgabe bleibt.',
+			url: '/de/dokumentation/lernen/barrierefreiheit',
+		},
+		{
+			title: 'Deine Anwendung testen',
+			description:
+				'Richte Tests mit den Komponenten ein, inklusive Prüfungen zur Barrierefreiheit.',
+			url: '/de/dokumentation/lernen/testen',
+		},
+	]}
+/>
+
+</LearnBlock>

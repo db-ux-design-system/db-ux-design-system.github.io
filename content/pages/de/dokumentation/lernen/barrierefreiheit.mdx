@@ -104,11 +104,11 @@ Nutze die Komponenten aus der Figma-Bibliothek, statt sie nachzubauen – ihre S
 
 ## Im Code: Inhalte übergeben und den Linter prüfen lassen
 
-Übergib `aria-*`-Attribute direkt an die Komponenten – sie reichen sie an das richtige Element weiter. Das **ESLint-Plugin** meldet fehlende Labels und ähnliche Probleme schon beim Schreiben.
+Übergib `aria-*`-Attribute direkt an die Komponenten – sie reichen sie an ihr Hauptelement weiter. Das **ESLint-Plugin** meldet fehlende Labels und ähnliche Probleme schon beim Schreiben.
 
 <LearnAside>
 
-- `aria-*`-Attribute werden automatisch weitergereicht – eine eigene Property ist nicht nötig
+- `aria-*`-Attribute werden automatisch weitergereicht – eine eigene Property ist nicht nötig. In Vue behalten Formular-Komponenten sie auf dem Wrapper; nutze dort `label` und, wo vorhanden, `ariaDescribedBy` ([Attribute an Komponenten übergeben](/de/dokumentation/lernen/attribute-weitergeben))
 - Blende Labels oder Meldungen nicht ersatzlos aus. Auch ein visuell verstecktes Label muss existieren
 
 | ESLint-Regel                          | Meldet                                                                         |
