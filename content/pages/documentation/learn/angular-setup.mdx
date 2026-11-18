@@ -30,9 +30,6 @@ keywords:
     'core-components',
     'core-foundations',
     'troubleshooting',
-    'aria attributes',
-    'data attributes',
-    'attribute forwarding',
     'fonts not loading',
   ]
 stepper: true
@@ -173,35 +170,6 @@ Form components support three ways to bind values: `ngModel`, `FormControl` and 
 
 <LearnBlock>
 
-## Pass aria and data attributes directly
-
-Set `aria-*` and `data-*` attributes on the component tag. The component moves them to its main element – for form components, to the `<input>`, `<select>` or `<textarea>`.
-
-```html
-<db-button
-	[attr.aria-expanded]="isOpen"
-	aria-controls="filter-panel"
-	data-testid="filter-toggle"
-	(click)="toggle()"
->
-	Filter
-</db-button>
-```
-
-<LearnAside>
-
-- `role`, `title` and `style` are moved as well. Classes from `class` are added to the main element
-- The attributes are removed from the component tag. Target the inner element in tests and CSS: `[data-testid="filter-toggle"]` instead of `db-button[data-testid="filter-toggle"]`
-- `data-density` stays on the component tag, because it sets the density for everything inside
-- Table Body, Table Row, Table Footer, Table Header Cell and Table Data Cell move the attributes only on the first render. Later changes on the component tag are not passed on
-- Custom Select moves the attributes to its outer element, not to a form field. Use its properties, such as `label`, for the accessible name
-
-</LearnAside>
-
-</LearnBlock>
-
-<LearnBlock>
-
 ## If something does not look right
 
 Most setup problems come from the order of the styles or from the output hashing of the development build.
@@ -293,6 +261,7 @@ pnpm add eslint @db-ux/core-eslint-plugin @typescript-eslint/parser --save-dev
 | Source code      | [core-web/output/angular](https://github.com/db-ux-design-system/core-web/tree/main/output/angular)                |
 | README (events)  | [ngModel, FormControl and event binding](https://github.com/db-ux-design-system/core-web/tree/main/output/angular) |
 | Component docs   | [Components](/documentation/components)                                                                            |
+| Attributes       | [Pass attributes to components](/documentation/learn/attribute-forwarding)                                         |
 | Migration Guides | [Migration Guides](/documentation/releases/migration-guides)                                                       |
 | Issues           | [core-web repository](https://github.com/db-ux-design-system/core-web/issues/new/choose)                           |
 

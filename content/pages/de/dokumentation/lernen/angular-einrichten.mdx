@@ -30,9 +30,6 @@ keywords:
     'core-components',
     'core-foundations',
     'troubleshooting',
-    'aria attributes',
-    'data attributes',
-    'attribute forwarding',
     'fonts not loading',
   ]
 stepper: true
@@ -173,35 +170,6 @@ Formular-Komponenten kennen drei Wege, Werte zu binden: `ngModel`, `FormControl`
 
 <LearnBlock>
 
-## Übergib aria- und data-Attribute direkt
-
-Setze `aria-*`- und `data-*`-Attribute auf den Tag der Komponente. Die Komponente verschiebt sie auf ihr Hauptelement – bei Formular-Komponenten auf das `<input>`, `<select>` oder `<textarea>`.
-
-```html
-<db-button
-	[attr.aria-expanded]="isOpen"
-	aria-controls="filter-panel"
-	data-testid="filter-toggle"
-	(click)="toggle()"
->
-	Filter
-</db-button>
-```
-
-<LearnAside>
-
-- `role`, `title` und `style` werden ebenfalls verschoben. Klassen aus `class` kommen zusätzlich auf das Hauptelement
-- Die Attribute werden vom Tag der Komponente entfernt. Sprich in Tests und CSS deshalb das innere Element an: `[data-testid="filter-toggle"]` statt `db-button[data-testid="filter-toggle"]`
-- `data-density` bleibt auf dem Tag der Komponente, weil es die Density für alles darin festlegt
-- Table Body, Table Row, Table Footer, Table Header Cell und Table Data Cell verschieben die Attribute nur beim ersten Rendern. Spätere Änderungen am Tag der Komponente kommen nicht an
-- Custom Select verschiebt die Attribute auf sein äußeres Element, nicht auf ein Formularfeld. Nutze für den zugänglichen Namen seine Properties wie `label`
-
-</LearnAside>
-
-</LearnBlock>
-
-<LearnBlock>
-
 ## Wenn etwas nicht richtig aussieht
 
 Die meisten Probleme beim Setup kommen von der Reihenfolge der Styles oder vom Output-Hashing im Entwicklungs-Build.
@@ -297,6 +265,7 @@ pnpm add eslint @db-ux/core-eslint-plugin @typescript-eslint/parser --save-dev
 | Quellcode        | [core-web/output/angular](https://github.com/db-ux-design-system/core-web/tree/main/output/angular)                |
 | README (Events)  | [ngModel, FormControl und Event-Binding](https://github.com/db-ux-design-system/core-web/tree/main/output/angular) |
 | Komponentendoku  | [Komponenten](/de/dokumentation/komponenten)                                                                       |
+| Attribute        | [Attribute an Komponenten übergeben](/de/dokumentation/lernen/attribute-weitergeben)                               |
 | Migration Guides | [Migration Guides](/de/dokumentation/releases/migration-guides)                                                    |
 | Issues           | [core-web-Repository](https://github.com/db-ux-design-system/core-web/issues/new/choose)                           |
 

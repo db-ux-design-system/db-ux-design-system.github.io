@@ -55,6 +55,7 @@ const segmentMap: Record<string, string> = {
 	'router-usage': 'router-nutzen',
 	'form-validation': 'formular-validierung',
 	testing: 'testen',
+	'attribute-forwarding': 'attribute-weitergeben',
 	'custom-components': 'eigene-komponenten',
 	contribution: 'mitwirken',
 	resources: 'ressourcen',
