@@ -104,11 +104,11 @@ Use the components from the Figma library instead of rebuilding them – their s
 
 ## In code, pass the content and let the linter check it
 
-Pass `aria-*` attributes directly to the components – they forward them to the right element. The **ESLint plugin** reports missing labels and similar issues while you type.
+Pass `aria-*` attributes directly to the components – they forward them to their main element. The **ESLint plugin** reports missing labels and similar issues while you type.
 
 <LearnAside>
 
-- `aria-*` attributes are forwarded automatically – no extra property is needed
+- `aria-*` attributes are forwarded automatically – no extra property is needed. In Vue, form components keep them on the wrapper; use `label` there and, where available, `ariaDescribedBy` ([Pass attributes to components](/documentation/learn/attribute-forwarding))
 - Don't hide labels or messages without a replacement. A visually hidden label still has to exist
 
 | ESLint rule                           | Reports                                                                        |
