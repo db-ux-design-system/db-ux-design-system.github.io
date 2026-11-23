@@ -1,0 +1,120 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Was der Theme Builder ist'
+headline: 'Was der Theme Builder ist'
+description: 'Die Grundlage für individuelle Farbwelten im Design System.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 6.1
+category: 'Tooling'
+keywords:
+  [
+    'theme builder',
+    'theme',
+    'custom theme',
+    'white label',
+    'brand',
+    'branding',
+    'db theme',
+    'colors',
+    'color palette',
+    'origin color',
+    'additional colors',
+    'accessibility',
+    'contrast',
+    'open source',
+    'tokens',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Warum ein Theme Builder?
+
+Der Theme Builder ermöglicht die einfache Erstellung und Anpassung von Themes auf Basis des Design Systems. Das Feature befähigt insbesondere Produktteams, die White-Label-Produkte entwickeln: Sie können mit wenigen Klicks eigene Farbwelten erstellen, die zentrale Anforderungen an Design und Barrierefreiheit einhalten.
+
+<LearnAside>
+
+Außerdem können für DB-Produkte benötigte Zusatzfarben schnell und systemkonform generiert werden.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Farben flexibel anpassen
+
+Die sogenannten Origin-Farben können frei gewählt und jederzeit angepasst werden. Auf dieser Basis wird das Theme automatisch neu berechnet.
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Automatische Farbableitung
+
+Aus den definierten Origin-Farben generiert das Design System die benötigten Farbvarianten selbstständig. Dadurch entfällt die manuelle Pflege umfangreicher Farbsysteme.
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Barrierefreiheit standardmäßig berücksichtigt
+
+Bei der Generierung werden Anforderungen an die Barrierefreiheit berücksichtigt, um ausreichende Kontraste und eine nutzbare Farbpalette für unterschiedliche Anwendungsfälle sicherzustellen.
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Open Source und frei nutzbar
+
+Der Theme Builder steht allen Teams frei zur Verfügung und kann genutzt werden, um eigene Themes innerhalb des Design Systems zu erstellen und weiterzuentwickeln.
+
+**Hinweis:** Das DB Theme ist nicht Open Source, aber alle neu erstellten White-Label-Themes sind es.
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Wann sollte der Theme Builder eingesetzt werden?
+
+Der Theme Builder eignet sich insbesondere, wenn ein Produkt aus fachlichen Gründen ein eigenes Theme benötigt. **Wichtig:** Das DB Theme ist der Standard für alle DB-Produkte.
+
+<TeaserCard
+	columns={1}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Theme Builder starten',
+			description: 'Passe die Farben an und sieh das Ergebnis direkt in der Vorschau.',
+			url: '/de/themebuilder',
+		},
+	]}
+/>
+
+<LearnAside>
+
+Der Theme Builder eignet sich insbesondere, wenn:
+
+- ein Produkt aus fachlichen Gründen ein eigenes Theme benötigt,
+- White-Label-Produkte bewusst vom DB-Branding abweichen sollen,
+- die Möglichkeiten des bestehenden DB Themes für die Produktanforderungen nicht ausreichen,
+- zusätzliche oder angepasste Farbwelten benötigt werden,
+- Anforderungen an die Barrierefreiheit frühzeitig berücksichtigt werden sollen,
+- Design- und Entwicklungsteams auf einer gemeinsamen, systemkonformen Grundlage arbeiten möchten.
+
+Eigene Themes sollten nur eingesetzt werden, wenn dafür ein nachvollziehbarer Bedarf besteht. Mit jeder Abweichung vom DB Theme wird ein markenkonformes Erscheinungsbild schwieriger sicherzustellen.
+
+</LearnAside>
+
+</LearnBlock>
