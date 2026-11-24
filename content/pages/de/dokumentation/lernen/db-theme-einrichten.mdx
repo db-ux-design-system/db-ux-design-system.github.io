@@ -97,12 +97,12 @@ Du installierst sie nicht separat.
 
 ### Install-Skripte erlauben
 
-pnpm und npm 11 führen Install-Skripte von Abhängigkeiten erst aus, wenn du sie erlaubst. Ohne Freigabe bleiben die Dateien verschlüsselt.
+pnpm und npm 12 führen Install-Skripte von Abhängigkeiten erst aus, wenn du sie erlaubst. Ohne Freigabe bleiben die Dateien verschlüsselt.
 
 - **pnpm:** Führe `pnpm approve-builds` aus und erlaube die drei Pakete `@db-ux/db-theme*`.
-- **npm 11:** Installiere mit `npm i @db-ux/db-theme`, führe dann `npm install-scripts approve @db-ux/db-theme @db-ux/db-theme-fonts @db-ux/db-theme-icons` und erneut `npm install` aus.
+- **npm 12:** Installiere mit `npm i @db-ux/db-theme`. Erlaube die Skripte dann mit `npm install-scripts approve @db-ux/db-theme @db-ux/db-theme-fonts @db-ux/db-theme-icons` und führe sie mit `npm rebuild @db-ux/db-theme @db-ux/db-theme-fonts @db-ux/db-theme-icons` aus.
 
-Legst du die `.env`-Datei erst nach der Installation an oder korrigierst sie, starte die Entschlüsselung erneut, zum Beispiel mit `npm rebuild @db-ux/db-theme @db-ux/db-theme-fonts @db-ux/db-theme-icons`. Die Entschlüsselung hat geklappt, wenn `node_modules/@db-ux/db-theme-fonts/build/assets/` `.woff2`-Dateien enthält und nicht nur `.woff2.enc`-Dateien.
+Legst du die `.env`-Datei erst nach der Installation an oder korrigierst sie, starte die Entschlüsselung erneut, zum Beispiel mit demselben `npm rebuild`-Befehl. Die Entschlüsselung hat geklappt, wenn `node_modules/@db-ux/db-theme-fonts/build/assets/` `.woff2`-Dateien enthält und nicht nur `.woff2.enc`-Dateien.
 
 ### Manuell entschlüsseln
 
