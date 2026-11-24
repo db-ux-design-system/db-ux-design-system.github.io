@@ -32,7 +32,7 @@ keywords:
     'breaking changes',
     'migration guide',
     'review',
-    'checklist',
+    'custom components',
   ]
 stepper: true
 ---
@@ -68,14 +68,15 @@ The [MCP Server](/documentation/learn/mcp-server 'Connects the design system to 
 
 <LearnAside>
 
-| Tool / prompt                 | What it does                                                                                                                                                                          |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `scan_generation_2_migration` | Scans a file for Generation 2 patterns – packages, CSS classes, Web Components and their React and Vue wrappers, color tokens and icon names – and returns a report with suggestions. |
-| `migrate_component`           | Migrates a code snippet step by step, checks the result with the TypeScript compiler and lists the decisions and checks that stay with you.                                           |
+| Tool / prompt                 | What it does                                                                                                                                                                                                                           |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `plan_migration`              | Asks for the kind of application, the framework, what your interface is built with, the DB Theme and whether the app runs locally. Then returns the steps that fit your project.                                                       |
+| `scan_generation_2_migration` | Scans a file for Generation 2 patterns – packages, CSS classes, Web Components and their React and Vue wrappers, color tokens and icon names – as well as self-built controls and fixed values, and returns a report with suggestions. |
+| `migrate_component`           | Migrates a code snippet step by step, checks the result with the TypeScript compiler and lists the decisions and checks that stay with you.                                                                                            |
 
-The agent follows the same mappings as this article. Scan every file before you change any code. Then migrate file by file, starting with the entry point and the global styles.
+The agent follows the same mappings as this article. Start with `plan_migration` and scan every file before you change any code. Then migrate file by file, starting with the entry point and the global styles.
 
-The scanner does not report fixed values, properties and their values yet. Check them yourself with the tables under [Replace the components](#replace-the-components) and [Replace tokens and icons](#replace-tokens-and-icons).
+The scanner does not report properties and their values yet, and it finds fixed values only in single-line declarations. Check them yourself with the tables under [Replace the components](#replace-the-components) and [Replace tokens and icons](#replace-tokens-and-icons).
 
 </LearnAside>
 
@@ -136,6 +137,8 @@ The most frequent cases:
 | `cmp-dialog`                           | `db-dialog`               | The `open` property controls the dialog instead of `showModal()` and `close()`. Header and footer go into Dialog Header and Dialog Footer.                                                                                                                                                                                   |
 | `elm-loadingindicator`, `elm-progress` | `db-loading-indicator`    | The component is a live region and announces its label. Remove a separate text with `role="status"`, otherwise it is announced twice.                                                                                                                                                                                        |
 | `rea-footer`                           | `db-footer`               | Composed of Footer Content and Footer Meta. Legal links and the copyright notice go into Footer Meta.                                                                                                                                                                                                                        |
+
+**Self-built components:** Your own buttons, selects or cards have no mapping. The agent classifies each one by its markup, behavior and styles and shows you a table of the DB UX components it suggests. Confirm the table before the agent changes code. If the app runs locally, the agent can also look at the components in the browser, for example with the [Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp). Otherwise it asks you for a screenshot.
 
 **Header and navigation:** `rea-header` and `cmp-mainnavigation` have equivalents in Generation 3 (Header and Navigation), but both are deprecated. Build new layouts with [Shell](/documentation/components/shell) and Control Panel instead. The brand with the logo becomes Control Panel Brand, the main content becomes Shell Content.
 

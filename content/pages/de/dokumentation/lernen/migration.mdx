@@ -32,7 +32,7 @@ keywords:
     'breaking changes',
     'migration guide',
     'review',
-    'checklist',
+    'custom components',
   ]
 stepper: true
 ---
@@ -68,14 +68,15 @@ Der [MCP Server](/de/dokumentation/lernen/mcp-server 'Verbindet das Design Syste
 
 <LearnAside>
 
-| Werkzeug / Prompt             | Was es tut                                                                                                                                                                                            |
-| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `scan_generation_2_migration` | Durchsucht eine Datei nach Mustern aus Generation 2 – Paketen, CSS-Klassen, Web Components und ihren React- und Vue-Wrappern, Farb-Tokens und Icon-Namen – und liefert einen Bericht mit Vorschlägen. |
-| `migrate_component`           | Migriert einen Code-Schnipsel Schritt für Schritt, prüft das Ergebnis mit dem TypeScript-Compiler und listet die Entscheidungen und Prüfungen auf, die bei dir bleiben.                               |
+| Werkzeug / Prompt             | Was es tut                                                                                                                                                                                                                                                         |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `plan_migration`              | Fragt nach der Art der Anwendung, dem Framework, womit dein Interface gebaut ist, dem DB Theme und ob die App lokal läuft. Liefert dann die Schritte, die zu deinem Projekt passen.                                                                                |
+| `scan_generation_2_migration` | Durchsucht eine Datei nach Mustern aus Generation 2 – Paketen, CSS-Klassen, Web Components und ihren React- und Vue-Wrappern, Farb-Tokens und Icon-Namen – sowie nach selbst gebauten Bedienelementen und festen Werten und liefert einen Bericht mit Vorschlägen. |
+| `migrate_component`           | Migriert einen Code-Schnipsel Schritt für Schritt, prüft das Ergebnis mit dem TypeScript-Compiler und listet die Entscheidungen und Prüfungen auf, die bei dir bleiben.                                                                                            |
 
-Der Agent folgt denselben Zuordnungen wie dieser Artikel. Scanne alle Dateien, bevor du Code änderst. Migriere dann Datei für Datei und beginne mit dem Einstiegspunkt und den globalen Styles.
+Der Agent folgt denselben Zuordnungen wie dieser Artikel. Beginne mit `plan_migration` und scanne alle Dateien, bevor du Code änderst. Migriere dann Datei für Datei und beginne mit dem Einstiegspunkt und den globalen Styles.
 
-Feste Werte, Properties und ihre Werte meldet der Scanner noch nicht. Prüfe sie selbst mit den Tabellen unter [Ersetze die Komponenten](#ersetze-die-komponenten) und [Ersetze Tokens und Icons](#ersetze-tokens-und-icons).
+Properties und ihre Werte meldet der Scanner noch nicht, feste Werte findet er nur in einzeiligen Deklarationen. Prüfe sie selbst mit den Tabellen unter [Ersetze die Komponenten](#ersetze-die-komponenten) und [Ersetze Tokens und Icons](#ersetze-tokens-und-icons).
 
 </LearnAside>
 
@@ -136,6 +137,8 @@ Die häufigsten Fälle:
 | `cmp-dialog`                           | `db-dialog`               | Die Property `open` steuert den Dialog statt `showModal()` und `close()`. Kopf und Fuß kommen in Dialog Header und Dialog Footer.                                                                                                                                                                                                                   |
 | `elm-loadingindicator`, `elm-progress` | `db-loading-indicator`    | Die Komponente ist eine Live-Region und sagt ihr Label an. Entferne einen separaten Text mit `role="status"`, sonst wird er doppelt angesagt.                                                                                                                                                                                                       |
 | `rea-footer`                           | `db-footer`               | Besteht aus Footer Content und Footer Meta. Rechtliche Links und der Copyright-Hinweis kommen in Footer Meta.                                                                                                                                                                                                                                       |
+
+**Selbst gebaute Komponenten:** Für eigene Buttons, Selects oder Cards gibt es keine Zuordnung. Der Agent ordnet jede Komponente anhand von Markup, Verhalten und Styles ein und zeigt dir eine Tabelle mit den DB-UX-Komponenten, die er vorschlägt. Bestätige die Tabelle, bevor der Agent Code ändert. Läuft die App lokal, kann sich der Agent die Komponenten auch im Browser ansehen, zum Beispiel mit dem [Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp). Sonst bittet er dich um einen Screenshot.
 
 **Header und Navigation:** `rea-header` und `cmp-mainnavigation` haben in Generation 3 Entsprechungen (Header und Navigation), beide sind aber deprecated. Baue neue Layouts stattdessen mit [Shell](/de/dokumentation/komponenten/shell) und Control Panel. Die Marke mit dem Logo wird zu Control Panel Brand, der Hauptinhalt zu Shell Content.
 
