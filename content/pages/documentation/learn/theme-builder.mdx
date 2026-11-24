@@ -1,0 +1,120 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'What the Theme Builder is'
+headline: 'What the Theme Builder is'
+description: 'The foundation for creating custom color themes within the Design System.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 6.1
+category: 'Tooling'
+keywords:
+  [
+    'theme builder',
+    'theme',
+    'custom theme',
+    'white label',
+    'brand',
+    'branding',
+    'db theme',
+    'colors',
+    'color palette',
+    'origin color',
+    'additional colors',
+    'accessibility',
+    'contrast',
+    'open source',
+    'tokens',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Why a Theme Builder?
+
+The Theme Builder enables the easy creation and customization of themes based on the Design System. It is particularly valuable for product teams developing white-label products, allowing them to create their own color themes in just a few clicks while maintaining core design and accessibility standards.
+
+<LearnAside>
+
+In addition, teams can quickly generate the additional colors needed for DB products in a system-compliant way.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Flexible color customization
+
+Origin colors can be freely defined and adjusted at any time. Based on these colors, the theme is automatically recalculated and updated.
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Automatic color generation
+
+The Design System automatically generates the required color variations from the defined origin colors, eliminating the need to manually maintain complex color systems.
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Accessibility built in
+
+Accessibility requirements are considered during theme generation to help ensure sufficient contrast levels and a usable color palette across a wide range of use cases.
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Open source and freely available
+
+The Theme Builder is available to all teams and can be used to create, customize, and evolve themes within the Design System.
+
+**Note:** The DB Theme is not open source, but all newly created white-label themes are.
+
+</LearnBlock>
+
+<LearnBlock>
+
+## When should the Theme Builder be used?
+
+The Theme Builder is particularly useful when a product requires its own theme for business or domain-specific reasons. **Important:** The DB Theme is the standard for all DB products.
+
+<TeaserCard
+	columns={1}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Launch the Theme Builder',
+			description: 'Adjust the colors and see the result right away in the preview.',
+			url: '/themebuilder',
+		},
+	]}
+/>
+
+<LearnAside>
+
+The Theme Builder is particularly useful when:
+
+- a product requires its own theme for business or domain-specific reasons,
+- white-label products intentionally need to differentiate from the DB brand,
+- the existing DB Theme does not fully meet product requirements,
+- additional or customized color themes are needed,
+- accessibility requirements should be considered from the start,
+- design and development teams want to work from a shared, system-compliant foundation.
+
+Custom themes should only be introduced when there is a clear and justified need. The further a product diverges from the DB Theme, the more difficult it becomes to maintain a consistent, brand-aligned user experience.
+
+</LearnAside>
+
+</LearnBlock>
