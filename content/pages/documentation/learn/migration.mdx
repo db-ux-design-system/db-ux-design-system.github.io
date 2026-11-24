@@ -66,12 +66,14 @@ The [MCP Server](/documentation/learn/mcp-server 'Connects the design system to 
 
 <LearnAside>
 
-| Tool / prompt                 | What it does                                                                                                 |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `scan_generation_2_migration` | Scans a file for Generation 2 patterns – element prefixes and color tokens – and returns a report.           |
-| `migrate_component`           | Migrates a code snippet step by step and checks the result with the TypeScript compiler before returning it. |
+| Tool / prompt                 | What it does                                                                                                                                                                   |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `scan_generation_2_migration` | Scans a file for Generation 2 patterns – packages, CSS classes, React and Vue wrappers, color tokens and icon names – and returns a report with a suggestion for each finding. |
+| `migrate_component`           | Migrates a code snippet step by step and checks the result with the TypeScript compiler before returning it.                                                                   |
 
-The agent follows the same mappings as this article.
+The agent follows the same mappings as this article. Start with a scan of every file before you change any code, then migrate file by file: entry point, styles, then the pages.
+
+The scanner does not report hard-coded values, props and variant values yet. Check them yourself with the list under [Check what the agent can't decide](#check-what-the-agent-cant-decide).
 
 </LearnAside>
 
@@ -84,6 +86,10 @@ The agent follows the same mappings as this article.
 Replace the DB UI packages with the `@db-ux` package for your framework. Products of Deutsche Bahn also need the [DB Theme](/documentation/learn/db-theme-setup 'Install and load the DB brand theme.').
 
 <LearnAside>
+
+The single Generation 2 stylesheet becomes two imports: first the component styles, then the DB Theme. The DB Theme ships fonts and icons encrypted, so you need the credentials from the Marketing Portal before you install it. Vite also needs an alias for the asset paths. The [DB Theme setup](/documentation/learn/db-theme-setup) covers all three.
+
+Remove workarounds for Generation 2 once the old packages are gone, for example a disabled CSS minification in the build config.
 
 Setup per framework:
 
@@ -109,21 +115,27 @@ All packages and their details are listed under [Which packages you need](/docum
 
 The most frequent cases:
 
-| Generation 2                | Generation 3              | What changes                                                                                                                                                                                                   |
-| --------------------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `elm-button`                | `db-button`               | Variants: `brand-primary` → `brand`, `secondary-outline` → `outlined`, `secondary-solid` → `filled`, `tertiary-plain` → `ghost`. `iconOnly` → `noText`. Sizes `large` and `regular` are removed – use density. |
-| `elm-input`, `elm-textarea` | `db-input`, `db-textarea` | `description` → `message`. The message is now always visible. Set `showMessage={false}` to hide it as before.                                                                                                  |
-| `elm-notification`          | `db-notification`         | The color variants move to the property `semantic`: `error` → `critical`, `informative` → `informational`, `success` → `successful`.                                                                           |
-| `elm-tag`                   | `db-tag`                  | Chip and tag are merged. For interactive tags, put a button, link, checkbox or radio inside the tag.                                                                                                           |
-| `elm-toggle`                | `db-switch`               | `htmlid` → `id`.                                                                                                                                                                                               |
-| `elm-checkbox`, `elm-radio` | `db-checkbox`, `db-radio` | `input_id` → `id` in React and Vue.                                                                                                                                                                            |
-| `elm-select`                | `db-select`               | `multiple` and `size` are removed. For multiple selection, use Custom Select.                                                                                                                                  |
-| `cmp-card`                  | `db-card`                 | The card has no image properties anymore – place the image in the content. `variant="interactive"` → `behavior="interactive"`. Header and content are passed as children.                                      |
-| `elm-link`                  | `db-link`                 | Icon properties are removed.                                                                                                                                                                                   |
-| `cmp-accordion`             | `db-accordion-item`       | One item per element, grouped in `db-accordion`. `summary` → `headline`.                                                                                                                                       |
-| `cmp-tab-bar`, `cmp-db-tab` | `db-tabs`, `db-tab-item`  | Tabs are composed of Tab List, Tab Item and Tab Panel.                                                                                                                                                         |
+| Generation 2                           | Generation 3              | What changes                                                                                                                                                                                                                                                                                          |
+| -------------------------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `elm-button`                           | `db-button`               | Variants: `brand-primary` → `brand`, `secondary-outline` → `outlined`, `secondary-solid` → `filled`, `tertiary-plain` → `ghost`. `iconOnly` → `noText`. Sizes `large` and `regular` are removed – use density.                                                                                        |
+| `elm-input`, `elm-textarea`            | `db-input`, `db-textarea` | `description` → `message`. The message is now always visible. Set `showMessage={false}` to hide it as before.                                                                                                                                                                                         |
+| `elm-select`                           | `db-select`               | `multiple` and `size` are removed. For multiple selection, use Custom Select. A separate `<label>` becomes the `label` property.                                                                                                                                                                      |
+| `elm-toggle`                           | `db-switch`               | `htmlid` → `id`.                                                                                                                                                                                                                                                                                      |
+| `elm-checkbox`, `elm-radio`            | `db-checkbox`, `db-radio` | `input_id` → `id` in React and Vue.                                                                                                                                                                                                                                                                   |
+| `elm-headline`                         | `db-heading`              | Choose the level from the page outline, not from the visual size. Use `visualSize` for the look.                                                                                                                                                                                                      |
+| `elm-link`                             | `db-link`                 | Icon properties are removed. Drop the icon, or use a button if the icon carries meaning.                                                                                                                                                                                                              |
+| `elm-tag`, `elm-chip`                  | `db-tag`                  | Chip and tag are merged. The color variants move to `semantic`. For an interactive filter, put a checkbox inside the tag and keep `showCheckState` on, so the selected state does not depend on color alone.                                                                                          |
+| `cmp-notification`                     | `db-notification`         | The color moves to `semantic`: `error` → `critical`, `informative` → `informational`, `success` → `successful`. For a framed notice inside the content, use `variant="standalone"` and drop the wrapper `section[data-variant="hovering"]`. The default `docked` is meant for global alerts.          |
+| `cmp-card`                             | `db-card`                 | Header and content are passed as children. The card has no image properties anymore – place the image in the content. `variant="interactive"` → `behavior="interactive"`. The card sets its own `display`, so a layout class on the card is overridden. Put your layout on a wrapper inside the card. |
+| `cmp-accordion`                        | `db-accordion-item`       | One item per element, grouped in `db-accordion`. `summary` → `headline`.                                                                                                                                                                                                                              |
+| `cmp-tab-bar`, `cmp-db-tab`            | `db-tabs`, `db-tab-item`  | Tabs are composed of Tab List, Tab Item and Tab Panel.                                                                                                                                                                                                                                                |
+| `cmp-breadcrumb`                       | `db-breadcrumb`           | One Breadcrumb Item per link. Long trails collapse automatically (`maxItems`).                                                                                                                                                                                                                        |
+| `cmp-table`                            | `db-table`                | Composed of Table Head, Table Body, Table Row, Table Header Cell and Table Data Cell. Keep the caption and the row headers (`scope="row"`) for screen readers.                                                                                                                                        |
+| `cmp-dialog`                           | `db-dialog`               | The `open` property controls the dialog instead of `showModal()` and `close()`. Header and footer go into Dialog Header and Dialog Footer.                                                                                                                                                            |
+| `elm-loadingindicator`, `elm-progress` | `db-loading-indicator`    | Brings its own label and announces it to screen readers. Remove a separate `role="status"` text, otherwise it is announced twice.                                                                                                                                                                     |
+| `rea-footer`                           | `db-footer`               | Composed of Footer Content and Footer Meta. Legal links and the copyright go into Footer Meta or Footer Content, depending on the layout.                                                                                                                                                             |
 
-**Header and navigation:** `rea-header` and `cmp-mainnavigation` have equivalents in Generation 3 (Header and Navigation), but both are deprecated. Build new layouts with [Shell](/documentation/components/shell) and Control Panel instead.
+**Header and navigation:** `rea-header` and `cmp-mainnavigation` have equivalents in Generation 3 (Header and Navigation), but both are deprecated. Build new layouts with [Shell](/documentation/components/shell) and Control Panel instead. The brand with the logo becomes Control Panel Brand, the main content becomes Shell Content. Whether you use Control Panel Desktop, Mobile or Flat Icon is a layout decision – the agent can't make it for you.
 
 </LearnAside>
 
@@ -164,6 +176,46 @@ Hyphens become underscores, and many icons have new, more descriptive names:
 | `settings`   | `gear_wheel`         |
 
 The [complete icon mapping](https://github.com/db-ux-design-system/core-web/blob/main/docs/migration/db-ui/icon-migration.md) covers all icons. All current names are listed under [Icons](/documentation/icons).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Check what the agent can't decide
+
+The agent maps components, properties, tokens and icons. Layout decisions, behavior and accessibility need your review – go through this list after each file.
+
+<LearnAside>
+
+### Decisions
+
+| Topic         | What to decide                                                                                                                                                                            |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Control Panel | Desktop, Mobile or Flat Icon – choose the variant that fits your layout.                                                                                                                  |
+| Fixed values  | Whether a hard-coded value was a design decision or a workaround. Replace it with a token or a component property, or drop it.                                                            |
+| Page width    | A fixed `max-width` on the page container becomes [Section](/documentation/components/section) with the property `width`.                                                                 |
+| Running text  | Plain `<p>` elements can stay. [Paragraph](/documentation/components/paragraph) and [Text Group](/documentation/components/text-group) are available if you want consistent running text. |
+
+### Behavior
+
+- **Form fields:** Code that reads or writes form fields through the DOM, for example to swap two values, may break. Keep the values in state instead.
+- **Form submit:** Check that the form still reads its values, for example with `FormData`, and that a disabled submit button still prevents a second submit.
+- **Dialog:** Check that Escape, the close button and all footer buttons close the dialog, and that the focus returns to the element that opened it.
+
+### Accessibility
+
+- **Announcements:** Check notifications and loading states with a screen reader. Generation 3 components announce their state themselves, so visually hidden texts like `<em>Information:</em>` or a separate status text are often no longer needed.
+- **Accessible names:** Icon-only buttons need a text that is visually hidden with `noText`. The close button of a dialog needs one too.
+- **State without color:** Selected filters and status must not depend on color alone. Keep `showCheckState` on for tags with a checkbox.
+
+### Expected visual changes
+
+Not every difference in a before-and-after comparison is a mistake:
+
+- Generation 2 capitalized every word of a chip label with CSS. In Generation 3 the label appears as written.
+- Spacing, sizes and colors follow the tokens of the current density and the current mode.
 
 </LearnAside>
 
