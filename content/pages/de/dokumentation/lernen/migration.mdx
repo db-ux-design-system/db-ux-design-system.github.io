@@ -31,6 +31,8 @@ keywords:
     'figma libraries',
     'breaking changes',
     'migration guide',
+    'review',
+    'custom components',
   ]
 stepper: true
 ---
@@ -66,12 +68,17 @@ Der [MCP Server](/de/dokumentation/lernen/mcp-server 'Verbindet das Design Syste
 
 <LearnAside>
 
-| Werkzeug / Prompt             | Was es tut                                                                                                                  |
-| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `scan_generation_2_migration` | Durchsucht eine Datei nach Mustern aus Generation 2 – Element-Präfixen und Farb-Tokens – und liefert einen Bericht.         |
-| `migrate_component`           | Migriert einen Code-Schnipsel Schritt für Schritt und prüft das Ergebnis mit dem TypeScript-Compiler, bevor es zurückkommt. |
+| Werkzeug / Prompt             | Was es tut                                                                                                                                                                                                                                                         |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `plan_migration`              | Fragt nach der Art der Anwendung, dem Framework, womit dein Interface gebaut ist, dem DB Theme und ob die App lokal läuft. Liefert dann die Schritte, die zu deinem Projekt passen.                                                                                |
+| `scan_generation_2_migration` | Durchsucht eine Datei nach Mustern aus Generation 2 – Paketen, CSS-Klassen, Web Components und ihren React- und Vue-Wrappern, Farb-Tokens und Icon-Namen – sowie nach selbst gebauten Bedienelementen und festen Werten und liefert einen Bericht mit Vorschlägen. |
+| `migrate_component`           | Migriert einen Code-Schnipsel Schritt für Schritt, prüft das Ergebnis mit dem TypeScript-Compiler und listet die Entscheidungen und Prüfungen auf, die bei dir bleiben.                                                                                            |
 
-Der Agent folgt denselben Zuordnungen wie dieser Artikel.
+Der Agent folgt denselben Zuordnungen wie dieser Artikel. Beginne mit `plan_migration` und scanne alle Code- und Style-Dateien, bevor du Code änderst. Migriere dann Datei für Datei und beginne mit dem Einstiegspunkt und den globalen Styles.
+
+Kann der Agent einen Browser nutzen, macht er vor der ersten Änderung Screenshots der Originalseiten und vergleicht sie am Ende mit dem Ergebnis. Er committet nichts, damit du die Änderungen prüfen kannst.
+
+Properties und ihre Werte meldet der Scanner noch nicht, feste Werte findet er nur in einzeiligen Deklarationen. Prüfe sie selbst mit den Tabellen unter [Ersetze die Komponenten](#ersetze-die-komponenten) und [Ersetze Tokens und Icons](#ersetze-tokens-und-icons).
 
 </LearnAside>
 
@@ -95,6 +102,10 @@ Einrichtung je Framework:
 
 Alle Pakete und ihre Details stehen unter [Welche Pakete du brauchst](/de/dokumentation/lernen/ueber#welche-pakete-du-brauchst).
 
+Bei DB-Produkten werden aus dem einen Stylesheet von Generation 2 zwei Imports in fester Reihenfolge: zuerst die Styles der Komponenten, danach das DB Theme. Die Dateien des Themes sind verschlüsselt. Du brauchst deshalb die Zugangsdaten aus dem Marketingportal, bevor du das Theme installierst. Findet Vite die Pfade der Assets nicht, ergänze einen Alias. Alle drei Schritte beschreibt die [Einrichtung des DB Themes](/de/dokumentation/lernen/db-theme-einrichten).
+
+Entferne Workarounds für Generation 2, sobald die alten Pakete weg sind, zum Beispiel eine abgeschaltete CSS-Minifizierung in der Build-Konfiguration.
+
 </LearnAside>
 
 </LearnBlock>
@@ -109,21 +120,29 @@ Aus `elm-*`, `cmp-*` und `rea-*` wird `db-*` in HTML und Angular, `DB*` in React
 
 Die häufigsten Fälle:
 
-| Generation 2                | Generation 3              | Was sich ändert                                                                                                                                                                                                      |
-| --------------------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `elm-button`                | `db-button`               | Varianten: `brand-primary` → `brand`, `secondary-outline` → `outlined`, `secondary-solid` → `filled`, `tertiary-plain` → `ghost`. `iconOnly` → `noText`. Die Größen `large` und `regular` entfallen – nutze Density. |
-| `elm-input`, `elm-textarea` | `db-input`, `db-textarea` | `description` → `message`. Die Message ist jetzt immer sichtbar. Setze `showMessage={false}`, um sie wie bisher auszublenden.                                                                                        |
-| `elm-notification`          | `db-notification`         | Die Farbvarianten wandern in die Property `semantic`: `error` → `critical`, `informative` → `informational`, `success` → `successful`.                                                                               |
-| `elm-tag`                   | `db-tag`                  | Chip und Tag sind zusammengeführt. Für interaktive Tags setzt du einen Button, Link, eine Checkbox oder ein Radio in den Tag.                                                                                        |
-| `elm-toggle`                | `db-switch`               | `htmlid` → `id`.                                                                                                                                                                                                     |
-| `elm-checkbox`, `elm-radio` | `db-checkbox`, `db-radio` | `input_id` → `id` in React und Vue.                                                                                                                                                                                  |
-| `elm-select`                | `db-select`               | `multiple` und `size` entfallen. Für Mehrfachauswahl nutzt du Custom Select.                                                                                                                                         |
-| `cmp-card`                  | `db-card`                 | Die Card hat keine Bild-Properties mehr – setze das Bild in den Inhalt. `variant="interactive"` → `behavior="interactive"`. Header und Inhalt werden als Children übergeben.                                         |
-| `elm-link`                  | `db-link`                 | Die Icon-Properties entfallen.                                                                                                                                                                                       |
-| `cmp-accordion`             | `db-accordion-item`       | Ein Item pro Element, gruppiert in `db-accordion`. `summary` → `headline`.                                                                                                                                           |
-| `cmp-tab-bar`, `cmp-db-tab` | `db-tabs`, `db-tab-item`  | Tabs bestehen aus Tab List, Tab Item und Tab Panel.                                                                                                                                                                  |
+| Generation 2                           | Generation 3              | Was sich ändert                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| -------------------------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `elm-button`                           | `db-button`               | Varianten: `brand-primary` → `brand`, `secondary-outline` → `outlined`, `secondary-solid` → `filled`, `tertiary-plain` → `ghost`. `iconOnly` → `noText`, und aus der Property `tooltip` wird ein Tooltip mit `variant="label"` im Button. Die Größen `large` und `regular` entfallen – nutze Density.                                                                                                                                    |
+| `elm-input`, `elm-textarea`            | `db-input`, `db-textarea` | `description` → `message`. Die Message ist jetzt immer sichtbar. Setze `showMessage={false}`, um sie wie bisher auszublenden. Das Label steht standardmäßig über dem Feld – mit `variant="floating"` bleibt es wie in Generation 2 im Feld.                                                                                                                                                                                              |
+| `elm-select`                           | `db-select`               | Für Mehrfachauswahl nutzt du Custom Select – `multiple` funktioniert weiterhin, die native Mehrfachauswahl ist aber nicht gestaltet. Ein separates `<label>` wird zur Property `label`.                                                                                                                                                                                                                                                  |
+| `elm-toggle`                           | `db-switch`               | `htmlid` → `id`.                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `elm-checkbox`, `elm-radio`            | `db-checkbox`, `db-radio` | `input_id` → `id` in React und Vue.                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `elm-headline`                         | `db-heading`              | Wähle die Ebene nach der Gliederung der Seite, nicht nach der optischen Größe. Für die Optik nutzt du `visualSize`.                                                                                                                                                                                                                                                                                                                      |
+| `elm-link`                             | `db-link`                 | Die Icon-Properties entfallen. Einen Pfeil hinter dem Link zeigst du mit `content="internal"` oder `content="external"`.                                                                                                                                                                                                                                                                                                                 |
+| `elm-tag`, `elm-chip`                  | `db-tag`                  | Chip und Tag sind zusammengeführt. Die Farbvarianten wandern in `semantic`. Für interaktive Tags setzt du einen Button, Link, eine Checkbox oder ein Radio in den Tag. Ein Tag mit Checkbox zeigt im ausgewählten Zustand ein Häkchen (`showCheckState`, standardmäßig aktiv). Ein kurzes, nicht interaktives Label auf einer Card oder einem Button, etwa „Beliebt“, wird stattdessen zur [Badge](/de/dokumentation/komponenten/badge). |
+| `cmp-notification`                     | `db-notification`         | Die Farbe wandert von `data-type` in `semantic`: `error` → `critical`, `informative` → `informational`, `success` → `successful`. Für einen Hinweis im Inhalt nutzt du `variant="standalone"` und entfernst den Wrapper `section[data-variant="hovering"]`. `docked` ist für globale Hinweise zwischen Header und Hauptinhalt gedacht.                                                                                                   |
+| `cmp-card`                             | `db-card`                 | Header und Inhalt werden als Children übergeben. Die Card hat keine Bild-Properties mehr – setze das Bild in den Inhalt. `variant="interactive"` → `behavior="interactive"`. Die Card setzt ihr eigenes `display`, ein `display` in deiner eigenen Klasse auf der Card wird deshalb überschrieben. Setze dein Layout auf einen Wrapper in der Card.                                                                                      |
+| `cmp-accordion`                        | `db-accordion-item`       | Ein Item pro Element, gruppiert in `db-accordion`. `summary` → `headline`.                                                                                                                                                                                                                                                                                                                                                               |
+| `cmp-tab-bar`, `cmp-db-tab`            | `db-tabs`, `db-tab-item`  | Tabs bestehen aus Tab List, Tab Item und Tab Panel.                                                                                                                                                                                                                                                                                                                                                                                      |
+| `cmp-breadcrumb`                       | `db-breadcrumb`           | Ein Breadcrumb Item pro Link. Lange Pfade klappen automatisch zusammen (`maxItems`).                                                                                                                                                                                                                                                                                                                                                     |
+| `cmp-table`                            | `db-table`                | Besteht aus Table Head, Table Body, Table Row, Table Header Cell und Table Data Cell. Behalte die Caption und die Zeilenköpfe (`scope="row"`) für Screenreader. Die Caption ist standardmäßig visuell versteckt – mit `showCaption` zeigst du sie an.                                                                                                                                                                                    |
+| `cmp-dialog`                           | `db-dialog`               | Die Property `open` steuert den Dialog statt `showModal()` und `close()`. Kopf und Fuß kommen in Dialog Header und Dialog Footer.                                                                                                                                                                                                                                                                                                        |
+| `elm-loadingindicator`, `elm-progress` | `db-loading-indicator`    | Die Komponente ist eine Live-Region und sagt ihr Label an. Bleibt sie auf der Seite, entferne einen separaten Text mit `role="status"`, sonst wird er doppelt angesagt. Erscheint sie nur während des Ladens, behalte den Statustext: Eine Live-Region, die zusammen mit ihrem Text erscheint, wird nicht zuverlässig angesagt.                                                                                                          |
+| `rea-footer`                           | `db-footer`               | Besteht aus Footer Content und Footer Meta. Rechtliche Links und der Copyright-Hinweis kommen in Footer Meta.                                                                                                                                                                                                                                                                                                                            |
 
-**Header und Navigation:** `rea-header` und `cmp-mainnavigation` haben in Generation 3 Entsprechungen (Header und Navigation), beide sind aber deprecated. Baue neue Layouts stattdessen mit [Shell](/de/dokumentation/komponenten/shell) und Control Panel.
+**Selbst gebaute Komponenten:** Für eigene Buttons, Selects oder Cards gibt es keine Zuordnung. Der Agent ordnet jede Komponente anhand von Markup, Verhalten und Styles ein und zeigt dir eine Tabelle mit den DB-UX-Komponenten, die er vorschlägt. Bestätige die Tabelle, bevor der Agent Code ändert. Läuft die App lokal, kann sich der Agent die Komponenten auch im Browser ansehen, zum Beispiel mit dem [Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp). Sonst bittet er dich um einen Screenshot.
+
+**Header und Navigation:** `rea-header` und `cmp-mainnavigation` haben in Generation 3 Entsprechungen (Header und Navigation), beide sind aber deprecated. Baue neue Layouts stattdessen mit [Shell](/de/dokumentation/komponenten/shell) und Control Panel. Die Marke mit dem Logo wird zu Control Panel Brand, der Hauptinhalt zu Shell Content.
 
 </LearnAside>
 
@@ -150,6 +169,8 @@ Semantische Tokens passen sich automatisch an Light Mode, Dark Mode und Density 
 
 Zwei Regeln gelten überall: Simuliere hellere Farben nicht mit `opacity`, und nutze keine Farb-Tokens für Schatten. Inline-`style`-Attribute umgehen Theming, Density und Dark Mode – verschiebe sie in CSS mit Tokens.
 
+Für Layout-Größen wie eine Spaltenbreite oder eine Bildhöhe gibt es kein Token. Behalte sie, aber in `rem` statt `px`, damit sie mit der Schriftgröße des Browsers skalieren. Behalte logische Properties wie `margin-block` oder `text-align: start` – physische wie `margin-top` oder `text-align: left` brechen Layouts von rechts nach links.
+
 ### Icons
 
 Aus Bindestrichen werden Unterstriche, und viele Icons haben neue, sprechendere Namen:
@@ -164,6 +185,51 @@ Aus Bindestrichen werden Unterstriche, und viele Icons haben neue, sprechendere 
 | `settings`   | `gear_wheel`         |
 
 Die [vollständige Icon-Zuordnung](https://github.com/db-ux-design-system/core-web/blob/main/docs/migration/db-ui/icon-migration.md) deckt alle Icons ab. Alle aktuellen Namen stehen unter [Icons](/de/dokumentation/icons).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Prüfe, was der Agent nicht entscheiden kann
+
+Der Agent ordnet Komponenten, Properties, Tokens und Icons zu. Layout-Entscheidungen, Verhalten und Barrierefreiheit musst du selbst prüfen – geh diese Liste nach jeder Datei durch.
+
+<LearnAside>
+
+### Entscheidungen
+
+| Thema         | Was du entscheidest                                                                                                                                                                               |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Control Panel | Wo das Control Panel sitzt – oben oder links auf dem Desktop, oben oder unten auf Mobilgeräten – und ob die Navigation Flat Icon nutzt. Login und Profil kommen in Actions 2, nicht in Meta.      |
+| Feste Werte   | Ob ein fester Wert eine Design-Entscheidung oder ein Workaround war. Ersetze ihn durch ein Token oder eine Property der Komponente, oder entferne ihn.                                            |
+| Seitenbreite  | Der Agent ersetzt ein festes `max-width` durch [Section](/de/dokumentation/komponenten/section) mit der nächstliegenden `width` und gibt dem Footer dieselbe `width`. Prüfe, ob die Breite passt. |
+| Fließtext     | Einfache `<p>`-Elemente können bleiben. Für einheitlichen Fließtext gibt es [Paragraph](/de/dokumentation/komponenten/paragraph) und [Text Group](/de/dokumentation/komponenten/text-group).      |
+
+### Verhalten
+
+- **Formularfelder:** Code, der Formularfelder über das DOM liest oder schreibt, zum Beispiel um zwei Werte zu tauschen, funktioniert mit den Framework-Komponenten eventuell nicht mehr. Halte die Werte stattdessen im State deiner Komponente. In React macht ein `value` oder `checked` ohne `onChange` das Feld schreibgeschützt.
+- **Absenden:** Prüfe, ob das Formular seine Werte weiterhin liest, zum Beispiel mit `FormData`, und ob ein deaktivierter Absende-Button ein zweites Absenden weiterhin verhindert.
+- **Dialog:** Prüfe, ob Escape, der Schließen-Button und alle Buttons im Footer den Dialog schließen und ob der Fokus danach zum auslösenden Element zurückkehrt.
+
+### Barrierefreiheit
+
+- **Ansagen:** Prüfe Notifications und Ladezustände mit einem Screenreader. Loading Indicator und Notification mit einem anderen `semantic` als `adaptive` oder `neutral` sind Live-Regionen und sagen sich selbst an. Visuell versteckte Texte wie `<em>Information:</em>` sind dann nicht mehr nötig. Einen separaten Statustext behältst du nur, wenn der Loading Indicator erst beim Laden erscheint.
+- **Zugängliche Namen:** Buttons nur mit Icon behalten ihren Text, verstecken ihn mit `noText` visuell und bekommen einen Tooltip. Dialog Header beschriftet seinen Schließen-Button mit `closeButtonText`. Der Standardwert ist „Close“ – setze ihn in der Sprache deiner Seite.
+- **Zustand ohne Farbe:** Ausgewählte Filter dürfen nicht nur an der Farbe erkennbar sein. Lass `showCheckState` bei Tags mit Checkbox aktiv.
+- **Überschriften und Kontrast:** Prüfe die Reihenfolge der Überschriften auf der ganzen Seite und den Kontrast der Texte in Light Mode und Dark Mode, zum Beispiel mit Lighthouse. Schon das Original kann eine Überschriftenebene überspringen oder zu helle Texte haben.
+- **Gültiges Markup:** Tag, Loading Indicator, Notification und Card rendern ein `div`, das in einem `<p>` nicht erlaubt ist. Nutze ein `div` als Wrapper.
+
+### Erwartete optische Änderungen
+
+Nicht jeder Unterschied im Vorher-nachher-Vergleich ist ein Fehler:
+
+- Generation 2 hat jedes Wort im Label eines Chips per CSS großgeschrieben. In Generation 3 erscheint das Label so, wie es im Code steht.
+- Abstände, Größen und Farben folgen den Tokens der aktuellen Density und von Light Mode oder Dark Mode.
+- Labels von Formularfeldern stehen über dem Feld statt darin.
+- Pflichtfelder werden grün mit Häkchen, sobald sie richtig ausgefüllt sind.
+- Überschriften sind standardmäßig größer. Passe die Optik mit `visualSize` an, nicht mit der Ebene.
 
 </LearnAside>
 

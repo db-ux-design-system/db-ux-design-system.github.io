@@ -95,9 +95,14 @@ You do not install them separately.
 | `@db-ux/db-theme-fonts` | The DB Neo Screen fonts        |
 | `@db-ux/db-theme-icons` | The DB icon font and SVG icons |
 
-### Allow the install scripts with pnpm
+### Allow the install scripts
 
-pnpm runs install scripts of dependencies only after you allow them. Run `pnpm approve-builds` and allow the three `@db-ux/db-theme*` packages. With npm, use `npm i @db-ux/db-theme`.
+pnpm and npm 12 run install scripts of dependencies only after you allow them. Without the approval, the files stay encrypted.
+
+- **pnpm:** Run `pnpm approve-builds` and allow the three `@db-ux/db-theme*` packages.
+- **npm 12:** Install with `npm i @db-ux/db-theme`. Then allow the scripts with `npm install-scripts approve @db-ux/db-theme @db-ux/db-theme-fonts @db-ux/db-theme-icons` and run them with `npm rebuild @db-ux/db-theme @db-ux/db-theme-fonts @db-ux/db-theme-icons`.
+
+If you add or fix the `.env` file after the installation, run the decryption again, for example with the same `npm rebuild` command. The decryption worked if `node_modules/@db-ux/db-theme-fonts/build/assets/` contains `.woff2` files and not only `.woff2.enc` files.
 
 ### Decrypt manually
 
