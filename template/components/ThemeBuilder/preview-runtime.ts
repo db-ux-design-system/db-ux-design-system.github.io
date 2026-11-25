@@ -106,7 +106,7 @@ const renderPalettes = (
 		// preview mode (a separate dark origin shows in dark mode); the light values are
 		// the fallback when a family defines no scheme-aware variable.
 		const chips = element('div', 'tb-origin-chips');
-		for (const state of ['default', 'hovered', 'pressed']) {
+		for (const state of ['default', 'hovered']) {
 			const chip = element('span', 'db-tag tb-origin-tag');
 			chip.dataset['emphasis'] = 'strong';
 			chip.style.setProperty(
@@ -120,16 +120,19 @@ const renderPalettes = (
 			chip.textContent = `origin ${state}`;
 			chips.append(chip);
 		}
-		// Vibrant tags next to the origin tags. Vibrant is defined so black text always meets
-		// AA, so the on-color is black regardless of the family.
-		for (const state of ['default', 'hovered', 'pressed']) {
+		// Vibrant tags next to the origin tags. Vibrant is the same in light and dark mode and
+		// carries its own on-color (black).
+		for (const state of ['default', 'hovered']) {
 			const chip = element('span', 'db-tag tb-origin-tag');
 			chip.dataset['emphasis'] = 'strong';
 			chip.style.setProperty(
 				'--tb-chip-bg',
 				`var(--db-${key}-vibrant-${state}, ${tokens[`--db-${key}-vibrant-${state}`] ?? 'transparent'})`,
 			);
-			chip.style.setProperty('--tb-chip-fg', '#000000');
+			chip.style.setProperty(
+				'--tb-chip-fg',
+				`var(--db-${key}-on-vibrant-default, ${tokens[`--db-${key}-on-vibrant-default`] ?? '#000000'})`,
+			);
 			chip.textContent = `vibrant ${state}`;
 			chips.append(chip);
 		}

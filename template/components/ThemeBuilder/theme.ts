@@ -11,7 +11,9 @@ import {
 	contrast,
 	hsluvOf,
 	hsluvToHex,
+	ON_VIBRANT,
 	type ColorMode,
+	type ColorStates,
 	type OriginDirection,
 } from './color/palette-rule.ts';
 import { ADAPTIVE_COLOR_TOKENS } from './color/adaptive-tokens.ts';
@@ -70,34 +72,29 @@ export const SEMANTIC_DEFAULTS: Record<SemanticKey, FamilyKey> = {
 
 type Family = {
 	origin: string;
-	hovered: string;
-	pressed: string;
 };
 
 /**
- * Seeded families: only an origin and the Figma origin states. Ramp hue, saturation and
- * lightness are derived from the origin by the palette rule – no pre-fitted h/s constants.
- * Origin states come from the Figma export (`Import/figma-export.json`).
+ * Seeded families: only an origin. Ramp hue, saturation and lightness are derived from the
+ * origin by the palette rule – no pre-fitted h/s constants – and so is the hovered state, which
+ * reaches a minimum contrast of 1.5:1 against the default.
  */
 const FAMILIES: Record<SeededFamilyKey, Family> = {
-	yellow: { origin: '#ffd800', hovered: '#e2bf00', pressed: '#c9ab00' },
-	orange: { origin: '#f69400', hovered: '#ffaf6f', pressed: '#ffcbab' },
-	red: { origin: '#ec0016', hovered: '#cb0011', pressed: '#af000d' },
-	burgundy: { origin: '#a9455d', hovered: '#8f394e', pressed: '#782f40' },
-	pink: { origin: '#e93e8f', hovered: '#ed69a4', pressed: '#f18ab3' },
-	violet: { origin: '#814997', hovered: '#6c3c7e', pressed: '#593169' },
-	blue: { origin: '#1455c0', hovered: '#0f46a0', pressed: '#0b3883' },
-	cyan: { origin: '#309fd1', hovered: '#5ab4e2', pressed: '#80c7f2' },
-	turquoise: { origin: '#00a099', hovered: '#00b7af', pressed: '#00cdc4' },
-	green: { origin: '#408335', hovered: '#36702c', pressed: '#2d5f24' },
-	lilac: { origin: '#aa99ff', hovered: '#beb3ff', pressed: '#d3cbff' },
+	yellow: { origin: '#ffd800' },
+	orange: { origin: '#f69400' },
+	red: { origin: '#ec0016' },
+	burgundy: { origin: '#a9455d' },
+	pink: { origin: '#e93e8f' },
+	violet: { origin: '#814997' },
+	blue: { origin: '#1455c0' },
+	cyan: { origin: '#309fd1' },
+	turquoise: { origin: '#00a099' },
+	green: { origin: '#80bf40' },
+	lilac: { origin: '#aa99ff' },
 };
 
 const isBuiltinFamily = (key: string): key is BuiltinFamilyKey =>
 	(BUILTIN_FAMILY_KEYS as readonly string[]).includes(key);
-
-/** Whether the builder knows a default origin/name for this key (built-in or default custom). */
-const isSeededFamily = (key: string): key is SeededFamilyKey => key in FAMILIES;
 
 const SEEDED_FAMILY_NAMES: Record<SeededFamilyKey, string> = {
 	yellow: 'Yellow',
@@ -413,11 +410,11 @@ export type ThemeResult = {
 
 const PALETTE_STEPS = Array.from({ length: 15 }, (_, index) => index);
 const SCHEMES = ['light', 'dark'] as const;
-const STATES = ['default', 'hovered', 'pressed'] as const;
+const STATES = ['default', 'hovered'] as const;
 
 /**
  * The scheme-less origin aggregators. The design system exposes `--db-<c>-origin-default`
- * (and hovered/pressed, plus on-origin-default) as `light-dark(...)` over the per-scheme
+ * (and hovered, plus on-origin-default) as `light-dark(...)` over the per-scheme
  * values the builder emits, so a family can be used without picking a mode. Suffix → value.
  */
 const ORIGIN_AGGREGATORS: ReadonlyArray<readonly [string, (c: string) => string]> = [
@@ -435,6 +432,26 @@ const ORIGIN_AGGREGATORS: ReadonlyArray<readonly [string, (c: string) => string]
 			`light-dark(var(--db-${c}-on-origin-light-default), var(--db-${c}-on-origin-dark-default))`,
 	],
 ];
+
+/**
+ * Vibrant tokens (`vibrant-default|hovered`, `on-vibrant-default`). Identical in light
+ * and dark mode: vibrant is a self-contained surface with black as its on-color, so there is
+ * no per-scheme split and no `light-dark(...)` aggregator.
+ */
+const VIBRANT_TOKEN_SUFFIXES = [...STATES.map((state) => `vibrant-${state}`), 'on-vibrant-default'];
+
+/**
+ * Emits the vibrant tokens of one color key for every color (core colors and families), since
+ * the DB theme does not ship them yet.
+ */
+const emitVibrantTokens = (
+	tokens: Record<string, string>,
+	key: string,
+	vibrant: ColorStates,
+): void => {
+	for (const state of STATES) tokens[`--db-${key}-vibrant-${state}`] = vibrant[state];
+	tokens[`--db-${key}-on-vibrant-default`] = ON_VIBRANT;
+};
 
 /**
  * Emits the aggregated origin tokens and the full adaptive semantic set (`bg-*`, `on-bg-*`)
@@ -456,7 +473,7 @@ const emitAdaptiveTokens = (tokens: Record<string, string>, key: string): void =
 const BASE_TOKEN_SUFFIXES = [
 	...PALETTE_STEPS.map(String),
 	'origin-base',
-	...STATES.map((state) => `vibrant-${state}`),
+	...VIBRANT_TOKEN_SUFFIXES,
 	...SCHEMES.flatMap((scheme) => [
 		...STATES.map((state) => `origin-${scheme}-${state}`),
 		`on-origin-${scheme}-default`,
@@ -486,31 +503,23 @@ export const buildTheme = (config: ThemeConfig): ThemeResult => {
 	const tokens: Record<string, string> = {};
 	const modes = {} as Record<ColorKey, ColorMode>;
 
-	// Color families: palette from the palette rule. Unchanged built-in families keep the
-	// origin states defined in Figma; a changed or custom origin gets the generator convention.
+	// Color families: palette and hovered state from the palette rule, for built-in and custom
+	// families alike.
 	const familyModes: Record<FamilyKey, ColorMode> = {};
 	for (const family of config.families) {
 		const { key, origin, h, s } = family;
 		// The state direction is always automatic
 		const mode = buildColorMode(h == null ? origin : { origin, h, s });
-		const figma = isSeededFamily(key) ? FAMILIES[key] : undefined;
-		const keepFigmaStates = figma && origin === figma.origin;
-		if (keepFigmaStates) {
-			mode.origin = { default: figma.origin, hovered: figma.hovered, pressed: figma.pressed };
-		}
 		applyPureOnOrigin(mode);
 		familyModes[key] = mode;
 		mode.palette.forEach((value, index) => {
 			tokens[`--db-${key}-${index}`] = value;
 		});
 		tokens[`--db-${key}-origin-base`] = mode.origin.default;
-		tokens[`--db-${key}-vibrant-default`] = mode.vibrant.default;
-		tokens[`--db-${key}-vibrant-hovered`] = mode.vibrant.hovered;
-		tokens[`--db-${key}-vibrant-pressed`] = mode.vibrant.pressed;
+		emitVibrantTokens(tokens, key, mode.vibrant);
 		for (const scheme of SCHEMES) {
 			tokens[`--db-${key}-origin-${scheme}-default`] = mode.origin.default;
 			tokens[`--db-${key}-origin-${scheme}-hovered`] = mode.origin.hovered;
-			tokens[`--db-${key}-origin-${scheme}-pressed`] = mode.origin.pressed;
 			tokens[`--db-${key}-on-origin-${scheme}-default`] = mode.onOrigin;
 		}
 		// Only a manually added (custom) family gets the adaptive set. The built-in families
@@ -548,18 +557,16 @@ export const buildTheme = (config: ThemeConfig): ThemeResult => {
 			tokens[`--db-${key}-${index}`] = value;
 		});
 		tokens[`--db-${key}-origin-base`] = mode.origin.default;
-		tokens[`--db-${key}-vibrant-default`] = mode.vibrant.default;
-		tokens[`--db-${key}-vibrant-hovered`] = mode.vibrant.hovered;
-		tokens[`--db-${key}-vibrant-pressed`] = mode.vibrant.pressed;
 		// A separate dark origin (Primary only) gets its own states and on-origin color;
 		// otherwise dark uses the same origin as light.
 		const darkMode = originDark ? applyPureOnOrigin(buildColorMode(originDark)) : mode;
 		const perScheme = { light: mode, dark: darkMode };
+		// Vibrant is the same in both modes and derives from the main origin.
+		emitVibrantTokens(tokens, key, mode.vibrant);
 		for (const scheme of ['light', 'dark'] as const) {
 			const schemeMode = perScheme[scheme];
 			tokens[`--db-${key}-origin-${scheme}-default`] = schemeMode.origin.default;
 			tokens[`--db-${key}-origin-${scheme}-hovered`] = schemeMode.origin.hovered;
-			tokens[`--db-${key}-origin-${scheme}-pressed`] = schemeMode.origin.pressed;
 			tokens[`--db-${key}-on-origin-${scheme}-default`] = schemeMode.onOrigin;
 		}
 		// Primary and neutral are core colors the DB theme already provides the adaptive set for.

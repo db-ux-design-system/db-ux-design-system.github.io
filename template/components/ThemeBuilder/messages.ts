@@ -83,7 +83,7 @@ const en = {
 		`The ${state} state is hard to tell apart from the default (ΔL* ${value}). Choose the other state direction.`,
 	warningStateChroma: (state: string) =>
 		`The ${state} state loses more than half of its chroma. Choose the other state direction.`,
-	stateDirection: 'State direction (hover, pressed)',
+	stateDirection: 'State direction (hover)',
 	directions: { auto: 'Automatic', darker: 'Darker', lighter: 'Lighter' },
 	shapeAndType: 'Shape & typography',
 	radius: 'Border radius',
@@ -221,7 +221,7 @@ const de: ThemeBuilderMessages = {
 		`Der Zustand ${state} ist kaum vom Default zu unterscheiden (ΔL* ${value}). Wähle die andere Zustandsrichtung.`,
 	warningStateChroma: (state: string) =>
 		`Der Zustand ${state} verliert mehr als die Hälfte seiner Buntheit. Wähle die andere Zustandsrichtung.`,
-	stateDirection: 'Zustandsrichtung (Hover, Pressed)',
+	stateDirection: 'Zustandsrichtung (Hover)',
 	directions: { auto: 'Automatisch', darker: 'Dunkler', lighter: 'Heller' },
 	shapeAndType: 'Form & Typografie',
 	radius: 'Eckenradius',
