@@ -7,6 +7,9 @@
  * - `buildColorMode` returns warnings as structured objects so the UI can translate them.
  * - `buildColorMode` accepts `neutral: true` to build a neutral ramp (grey anchors, no chroma
  *   ceiling), which the original only does for the built-in Grey palette in `buildAll`.
+ * - Tint floor (TINT_FLOOR, 50 %): the light steps keep at least half of each color's own
+ *   chroma, plus a hue shift for yellow. This deviates from the generator on purpose and only
+ *   changes Yellow, Green and Turquoise. `tintFloor: 0` restores the generator output.
  *
  * Color space: HSLuv / CIELUV LCh. HSLuv L equals CIELUV L*, which is a pure function of
  * luminance. Every color on the same step therefore has the same WCAG contrast.
@@ -79,6 +82,37 @@ export const LIGHTNESS_STEPS = [4, 8, 14, 20, 26, 32, 40, 50, 60, 70, 80, 90, 94
 export const TINT_FROM = 10;
 /** From this step on, the ceiling is a target instead of a cap. */
 export const ALIGN_FROM = 11;
+/**
+ * Tint floor (not part of the generator yet).
+ *
+ * The shared ceiling is the minimum chroma all hues reach, which red/pink dictate on the light
+ * steps. Wide-gamut hues (yellow, green, turquoise) keep only about a third of their own
+ * chroma there; yellow then reads beige instead of pastel. With the tint floor (TINT_FLOOR,
+ * overridable via `tintFloor`, 0..1) every chromatic color keeps at least that share of its
+ * own chroma (at the origin's saturation) on the light steps – the same rule for all hues.
+ * 50 % balances color identity against an even look of the levels: step 10 stays at the
+ * shared ceiling for every hue unless the transition into the lifted steps needs smoothing.
+ * Hues whose gamut is already at the ceiling (red, pink, blue …) do not change; the floor
+ * only lifts hues that have room.
+ * On top, a yellow hue below YELLOW_TINT_HUE turns apricot when it gets light, so the light
+ * steps of such hues rotate towards YELLOW_TINT_HUE (fading out towards ±YELLOW_BAND around
+ * YELLOW_HUE). Hues at or above it keep their hue.
+ * Everything the floor adds is capped at the origin's chroma, so a tint never gets more
+ * colorful than the origin. Lightness is untouched: contrast stays identical on every step.
+ * `tintFloor: 0` turns the rule off completely (no floor, no hue shift).
+ */
+export const TINT_FLOOR = 0.5;
+export const YELLOW_HUE = 70;
+export const YELLOW_BAND = 30;
+/** Lowest HSLuv hue a light yellow tint may have without reading apricot. */
+export const YELLOW_TINT_HUE = 76;
+
+/** 1 at YELLOW_HUE, cosine falloff to 0 at ±YELLOW_BAND. */
+export const yellowWeight = (h: number): number => {
+	const d = Math.abs(((h - YELLOW_HUE + 540) % 360) - 180);
+	return d >= YELLOW_BAND ? 0 : 0.5 * (1 + Math.cos((Math.PI * d) / YELLOW_BAND));
+};
+
 /** Neutral axis ends in real black and white. */
 export const GREY_ANCHORS: Record<number, string> = { 0: '#000000', 14: '#ffffff' };
 
@@ -144,6 +178,15 @@ export type PaletteOptions = {
 	alignFrom?: number;
 	raw?: boolean;
 	separation?: number;
+	/** Chroma floor on the light steps for all hues (0..1, default TINT_FLOOR, 0 = generator). */
+	tintFloor?: number;
+	/** Upper limit for everything the tint floor adds: the chroma of the origin (LCh). */
+	originChroma?: number;
+	/**
+	 * Experimental, not used by the Theme Builder: no step gets more chroma than the origin,
+	 * neither absolutely (origin chroma) nor relatively (origin saturation). Off by default.
+	 */
+	capAtOrigin?: boolean;
 };
 
 const FLARE = 0.005;
@@ -157,6 +200,9 @@ function opt(o?: PaletteOptions) {
 		alignFrom: options.alignFrom == null ? ALIGN_FROM : options.alignFrom,
 		raw: !!options.raw,
 		separation: options.separation == null ? SEPARATION_DL : options.separation,
+		tintFloor: Math.max(0, Math.min(1, options.tintFloor ?? TINT_FLOOR)),
+		originChroma: options.originChroma == null ? Infinity : options.originChroma,
+		capAtOrigin: !!options.capAtOrigin,
 		flare: FLARE,
 		chromaScale: 1,
 	};
@@ -179,17 +225,47 @@ export function buildPalette(
 	const c = opt(o);
 	const ceiling = c.raw ? [] : chromaCeiling(c.steps, c.tintFrom);
 	const achromatic = neutral || s < 1;
-	return c.steps.map((l, i) => {
-		if (anchors && anchors[i]) return anchors[i];
-		const gamut = getMaxChroma(h, l);
+	const floorOn = c.tintFloor > 0 && !achromatic;
+	const yw = floorOn ? yellowWeight(h) : 0;
+	const tones = c.steps.map((l, i) => {
+		const tint = floorOn && i >= c.tintFrom;
+		// The yellow hue shift ramps in over two steps (half on the first tint step), so the
+		// ramp does not jump in hue between the last full step and the first tint.
+		const ramp = tint ? Math.min(1, (i - c.tintFrom + 1) / 2) : 0;
+		// Only hues below YELLOW_TINT_HUE are rotated (towards green); greener yellows keep theirs.
+		const hue = h + Math.max(0, YELLOW_TINT_HUE - h) * yw * ramp;
+		const gamut = getMaxChroma(hue, l);
 		let chroma = gamut * (s / 100);
 		const cap = ceiling[i];
 		if (cap != null && !achromatic) {
 			const t = cap * c.chromaScale;
 			chroma = i >= c.alignFrom ? Math.min(t, gamut) : Math.min(chroma, t);
 		}
-		return lchToHex(l, chroma, h);
+		// Experimental: no step may be more colorful than the origin. This caps the absolute
+		// chroma at the origin's chroma (mid steps of wide-gamut hues) and the relative one at the
+		// origin's saturation (the aligned light steps), so a muted origin keeps muted tints.
+		if (c.capAtOrigin && !achromatic) {
+			chroma = Math.min(chroma, gamut * (s / 100), c.originChroma);
+		}
+		// Never lift a tint above the origin itself: the floor is capped at the origin's chroma.
+		const floor = tint ? Math.min(gamut * (s / 100) * c.tintFloor, c.originChroma) : 0;
+		const lifted = floor > chroma;
+		if (lifted) chroma = floor;
+		return { l, hue, gamut, chroma, lifted };
 	});
+	// The first tint step sits between the last full step and the floor-lifted steps above.
+	// Hues with a wide light gamut (yellow, green) would otherwise dip on it (ceiling) and rise
+	// again on the next step (floor). Lifting it to at least the midpoint of its neighbours
+	// keeps chroma falling steadily from the last full step into the tints. Only colors whose
+	// next step was lifted are touched; colors at the ceiling keep their first tint step.
+	const tf = c.tintFrom;
+	if (floorOn && tones[tf - 1] && tones[tf + 1]?.lifted) {
+		const mid = Math.min((tones[tf - 1].chroma + tones[tf + 1].chroma) / 2, c.originChroma);
+		tones[tf].chroma = Math.min(tones[tf].gamut, Math.max(tones[tf].chroma, mid));
+	}
+	return tones.map(({ l, hue, chroma }, i) =>
+		anchors && anchors[i] ? anchors[i] : lchToHex(l, chroma, hue),
+	);
 }
 
 const lToY = Hsluv.lToY;
@@ -347,9 +423,11 @@ export function buildColorMode(input: ColorModeInput, o?: ColorModeOptions): Col
 				: 'lighter';
 	const atL = (L: number): string =>
 		lchToHex(L, Math.min(getMaxChroma(og.h, L), getMaxChroma(og.h, og.l) * (og.s / 100)), og.h);
+	// The tint floor must never make a tint more colorful than the origin itself.
+	const paletteOptions = { ...c, originChroma: chromaOf(hex) };
 	const palette = o?.neutral
-		? buildPalette(base.h, base.s, c, GREY_ANCHORS, true)
-		: buildPalette(base.h, base.s, c, null, false);
+		? buildPalette(base.h, base.s, paletteOptions, GREY_ANCHORS, true)
+		: buildPalette(base.h, base.s, paletteOptions, null, false);
 	// Hovered is the only state: the smallest shift that reaches HOVER_MIN_CONTRAST, in the
 	// preferred direction (darker for dark origins, lighter for light ones) or the other one when
 	// the preferred direction hits black or white first.
