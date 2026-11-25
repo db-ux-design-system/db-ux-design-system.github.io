@@ -96,7 +96,7 @@ export const ALIGN_FROM = 11;
  * only lifts hues that have room.
  * On top, a yellow hue below YELLOW_TINT_HUE turns apricot when it gets light, so the light
  * steps of such hues rotate towards YELLOW_TINT_HUE (fading out towards ±YELLOW_BAND around
- * YELLOW_HUE). Hues at or above it keep their hue.
+ * YELLOW_HUE). Hues at or above it, e.g. the DB yellow #ffea00, keep their hue.
  * Everything the floor adds is capped at the origin's chroma, so a tint never gets more
  * colorful than the origin. Lightness is untouched: contrast stays identical on every step.
  * `tintFloor: 0` turns the rule off completely (no floor, no hue shift).
@@ -121,17 +121,21 @@ export const GREY_ANCHORS: Record<number, string> = { 0: '#000000', 14: '#ffffff
  * (hue, saturation and lightness) is derived from its origin via `hsluvOf`, and the shared
  * chroma ceiling derives its reference hues from the chromatic origins below. Nothing carries
  * pre-fitted h/s constants anymore – an origin is all a palette needs.
+ * Red (#ec0016) and Lilac (#aa99ff) are brand colors and fixed. The other origins use round
+ * HSL values (e.g. Blue 220/80/40) chosen so every color keeps its name in perceptual hue
+ * (OKLCH), in particular Blue and Violet stay clearly apart from Lilac. This deviates from
+ * the generator's origins.
  */
 export const BUILTIN_ORIGINS: Record<string, string> = {
-	Yellow: '#ffd800',
-	Orange: '#f69400',
+	Yellow: '#ffea00',
+	Orange: '#f58f00',
 	Red: '#ec0016',
-	Burgundy: '#a9455d',
-	Pink: '#e93e8f',
-	Violet: '#814997',
-	Blue: '#1455c0',
-	Cyan: '#309fd1',
-	Turquoise: '#00a099',
+	Burgundy: '#a1455c',
+	Pink: '#eb4799',
+	Violet: '#9145a1',
+	Blue: '#144bb8',
+	Cyan: '#269dd9',
+	Turquoise: '#00998c',
 	Lilac: '#aa99ff',
 	Green: '#80bf40',
 };

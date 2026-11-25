@@ -80,15 +80,15 @@ type Family = {
  * reaches a minimum contrast of 1.5:1 against the default.
  */
 const FAMILIES: Record<SeededFamilyKey, Family> = {
-	yellow: { origin: '#ffd800' },
-	orange: { origin: '#f69400' },
+	yellow: { origin: '#ffea00' },
+	orange: { origin: '#f58f00' },
 	red: { origin: '#ec0016' },
-	burgundy: { origin: '#a9455d' },
-	pink: { origin: '#e93e8f' },
-	violet: { origin: '#814997' },
-	blue: { origin: '#1455c0' },
-	cyan: { origin: '#309fd1' },
-	turquoise: { origin: '#00a099' },
+	burgundy: { origin: '#a1455c' },
+	pink: { origin: '#eb4799' },
+	violet: { origin: '#9145a1' },
+	blue: { origin: '#144bb8' },
+	cyan: { origin: '#269dd9' },
+	turquoise: { origin: '#00998c' },
 	green: { origin: '#80bf40' },
 	lilac: { origin: '#aa99ff' },
 };
