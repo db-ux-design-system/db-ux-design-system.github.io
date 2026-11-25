@@ -355,6 +355,14 @@ const VIBRANT_MIN_CONTRAST = 4.5;
  * on saturated mid tones like red or blue, so vibrant also has to pass this APCA threshold.
  */
 export const VIBRANT_MIN_APCA = 50;
+/**
+ * Upper lightness limit (L*) of the vibrant default. Dark hues sit at L* ≈ 64–71 because of the
+ * APCA floor above. Wide-gamut hues (yellow, green, turquoise) reach their highest chroma at the
+ * tip of the gamut around L* 91 and would turn neon next to them. Capping the lightness keeps
+ * them in a shared band and only touches those three; chroma stays free. Not part of the
+ * generator.
+ */
+export const VIBRANT_MAX_L = 85;
 /** The on-color of vibrant, identical in light and dark mode. */
 export const ON_VIBRANT = '#000000';
 
@@ -387,12 +395,12 @@ const vibrantReadableOn = (onColor: string, background: string): boolean =>
 
 /**
  * Finds the vibrant base for a hue at a given saturation fraction (0..1 of the gamut): the
- * lightness that maximizes chroma while the on-color stays readable on top (WCAG AA and the
- * APCA floor). Returns the hex.
+ * lightness (up to VIBRANT_MAX_L) that maximizes chroma while the on-color stays readable on
+ * top (WCAG AA and the APCA floor). Returns the hex.
  */
 export function vibrantBase(h: number, sFraction: number, onColor: string): string {
 	let best: { l: number; chroma: number; hex: string } | null = null;
-	for (let l = 1; l <= 99; l += 0.5) {
+	for (let l = 1; l <= VIBRANT_MAX_L; l += 0.5) {
 		const chroma = getMaxChroma(h, l) * sFraction;
 		const hex = lchToHex(l, chroma, h);
 		if (!vibrantReadableOn(onColor, hex)) continue;
