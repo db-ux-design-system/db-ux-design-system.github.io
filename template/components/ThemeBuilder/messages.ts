@@ -27,7 +27,7 @@ const en = {
 		'Primary, Neutral and the status colors use one of the color families. Change the assignment to use another family.',
 	colorFamilies: 'Color families',
 	colorFamiliesHint:
-		'Change the origin of a family, add a separate dark mode color, add your own or remove the ones you do not need. Each family gets a full palette and can be assigned to Primary, Neutral or a semantic color.',
+		'Change the origin of a family, add a separate dark mode color, add your own or remove the ones you do not need. Each family gets a full palette and can be assigned to a semantic color.',
 	addFamily: 'Add Color',
 	familyName: 'Name',
 	familyOrigin: 'Origin',
@@ -165,7 +165,7 @@ const de: ThemeBuilderMessages = {
 		'Primary, Neutral und die Statusfarben nutzen eine der Farbfamilien. Ändere die Zuordnung, um eine andere Familie zu verwenden.',
 	colorFamilies: 'Farbfamilien',
 	colorFamiliesHint:
-		'Ändere die Origin einer Familie, ergänze eine eigene Farbe für den Dark Mode, füge eigene Familien hinzu oder entferne nicht benötigte. Jede Familie erhält eine vollständige Palette und lässt sich Primary, Neutral oder einer semantischen Farbe zuordnen.',
+		'Ändere die Origin einer Familie, ergänze eine eigene Farbe für den Dark Mode, füge eigene Familien hinzu oder entferne nicht benötigte. Jede Familie erhält eine vollständige Palette und lässt sich einer semantischen Farbe zuordnen.',
 	addFamily: 'Farbe hinzufügen',
 	familyName: 'Name',
 	familyOrigin: 'Origin',
