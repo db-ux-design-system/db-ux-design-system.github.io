@@ -1,0 +1,153 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Formularfelder validieren'
+headline: 'Formularfelder validieren'
+description: 'Wie die Formularkomponenten gültige und ungültige Zustände zeigen, welche Meldung erscheint und wie du die Validierung selbst steuerst.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 20.2
+category: 'Development'
+keywords:
+  [
+    'validation',
+    'form validation',
+    'forms',
+    'required',
+    'invalid message',
+    'valid message',
+    'error message',
+    'invalidmessage',
+    'validmessage',
+    'user-valid',
+    'user-invalid',
+    'pattern',
+    'minlength',
+    'input',
+    'select',
+    'textarea',
+    'checkbox',
+    'radio',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Die Formularkomponenten validieren mit HTML-Attributen
+
+Input, Textarea, Select, Custom Select, Checkbox, Radio und Switch nutzen die **Validierung des Browsers**. Attribute wie `required`, `pattern` oder `minlength` reichen für gültige und ungültige Zustände.
+
+<LearnAside>
+
+- **Input:** `required`, `type`, `minlength`, `maxlength`, `pattern`, `min`, `max`
+- **Textarea:** `required`, `minlength`, `maxlength`
+- **Select, Custom Select, Checkbox, Switch:** `required`
+- **Radio:** Mit `required` werden die Radios sofort hervorgehoben.
+
+Alle Attribute beschreibt [MDN unter „Using built-in form validation“](https://developer.mozilla.org/de/docs/Learn/Forms/Form_validation#using_built-in_form_validation).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Der Zustand erscheint nach der ersten Eingabe
+
+Input, Textarea und Select zeigen gültig oder ungültig erst nach einer Änderung oder einem Absendeversuch. So sieht niemand einen Fehler, bevor er etwas eingegeben hat.
+
+<LearnAside>
+
+Die Komponenten nutzen die CSS-Pseudoklassen `:user-valid` und `:user-invalid`. Sie greifen erst, nachdem jemand mit dem Feld interagiert hat.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Setze eine Meldung für beide Zustände
+
+Setze `invalidMessage` und `validMessage` an jedem Feld, das du validierst. Fehlen sie, zeigt das Feld bei Fehlern die Meldung des Browsers und als Erinnerung einen `TODO`-Hinweis.
+
+<LearnAside>
+
+```html
+<DBInput
+	label="E-Mail"
+	type="email"
+	required
+	invalidMessage="Bitte gib eine gültige E-Mail-Adresse ein."
+	validMessage="Danke."
+/>
+```
+
+### Welche Fehlermeldung erscheint
+
+Der erste Treffer gilt:
+
+| Priorität | Quelle                                     | Beispiel                                                                         |
+| --------- | ------------------------------------------ | -------------------------------------------------------------------------------- |
+| 1         | Property `invalidMessage`                  | An der Komponente gesetzt                                                        |
+| 2         | Meldung des Formular-Frameworks            | Angular Signal Forms: `errors[0].message` aus dem Schema                         |
+| 3         | Meldung des Browsers (`validationMessage`) | „Fülle dieses Feld aus“ bei `required`                                           |
+| 4         | `TODO: Add an invalidMessage`              | Validierung nur durch Framework-Logik, z. B. ein eigener Validator, ohne Meldung |
+
+React, Vue und Web Components haben keine Framework-Meldungen, Stufe 2 entfällt dort. Die Reihenfolge ist für alle Formularkomponenten gleich.
+
+### Reines HTML
+
+Ohne Framework ergänzt du im Formularelement zwei `.db-infotext`-Elemente: eines mit `data-semantic="successful"` und eines mit `data-semantic="critical"`.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Steuere den Zustand nur bei Bedarf selbst
+
+Die Property `validation` setzt den Zustand direkt: `invalid`, `valid` oder `no-validation`. Sie überschreibt die Validierung des Browsers.
+
+<LearnAside>
+
+In reinem HTML nutzt du dafür das Attribut `data-validation` mit denselben Werten.
+
+Nutze es nur für Bedingungen, die sich mit HTML-Attributen nicht ausdrücken lassen. Ein von Hand gesetzter Zustand kann dem widersprechen, was der Browser meldet, zum Beispiel an Screenreader.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Mach mit den Formularkomponenten weiter
+
+Die Beispiele jeder Formularkomponente zeigen die Validierungszustände in jedem Framework.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Input',
+			description: 'Richtlinien für Textfelder, auch zu Fehlermeldungen.',
+			url: '/de/dokumentation/komponenten/input',
+		},
+		{
+			title: 'Ein Kontaktformular in React bauen',
+			description: 'Ein Formular mit Pflichtfeldern, Schritt für Schritt.',
+			url: '/de/dokumentation/lernen/react-tutorial',
+		},
+	]}
+/>
+
+</LearnBlock>

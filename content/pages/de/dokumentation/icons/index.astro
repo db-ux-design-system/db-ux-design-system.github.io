@@ -1,8 +1,6 @@
 ---
 import DocumentationLayout from '@template/layouts/documentation/DocumentationLayout.astro';
-import { DBButton, DBInput, DBTooltip } from '@db-ux/react-core-components';
-import iconDescriptions from '@db-ux/db-theme-icons/build/assets/descriptions.json';
-import '../../../documentation/icons/icons.css';
+import IconGallery from '@template/components/IconGallery/IconGallery.astro';
 
 // eslint-disable-next-line astro/no-exports-from-components -- Exported for ChildPageOverview glob
 export const frontmatter: DocumentationFrontMatter = {
@@ -12,46 +10,12 @@ export const frontmatter: DocumentationFrontMatter = {
 	headline: 'Icons',
 	title: 'Icons',
 	description:
-		'Alle verfügbaren DB UX Icon-Namen durchsuchen und für die Verwendung im Code kopieren.',
+		'Durchsuche alle DB UX Icons, sieh sie in jeder Größe und Family an und kopiere ihre Namen für die Verwendung im Code.',
 	align: 'start',
 	order: 4,
 };
-
-const iconNames = Object.keys(iconDescriptions);
 ---
 
 <DocumentationLayout frontmatter={frontmatter} headings={[]}>
-	<DBInput
-		id="icon-search-input"
-		className="icon-search"
-		label="Icons suchen"
-		type="search"
-		client:only="react"
-	/>
-
-	<div class="icon-gallery" id="icon-gallery">
-		{iconNames.map((icon) => {
-			const iconName = icon.replace(/-/g, '_');
-			const tooltipId = `tooltip-${icon}`;
-			return (
-				<DBButton
-					className="icon-item"
-					variant="filled"
-					noText
-					icon={iconName}
-					data-icon-name={iconName}
-					data-icon-key={icon}
-					client:only="react"
-					data-has-tooltip="true"
-				>
-					{iconName}
-					<DBTooltip id={tooltipId}>{iconName}</DBTooltip>
-				</DBButton>
-			);
-		})}
-	</div>
+	<IconGallery lang="de" />
 </DocumentationLayout>
-
-<script>
-	import '@template/utils/icons.client.ts';
-</script>

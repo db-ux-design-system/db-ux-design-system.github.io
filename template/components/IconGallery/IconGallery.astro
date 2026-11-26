@@ -1,0 +1,193 @@
+---
+/**
+ * Icon gallery of the icons page (EN and DE): search, size, family, a filter
+ * for icons with a filled form, and the version of the icon package.
+ *
+ * Everything comes from the installed `@db-ux/db-theme-icons` package at build
+ * time, so an icon update needs no change here:
+ * - icons and search terms: `build/assets/descriptions.json`
+ * - sizes: the `@font-face` weights of `build/styles/absolute.css`
+ * - filled form per size: icons whose glyph in `fonts/filled_<size>` differs
+ *   from `fonts/default_<size>` (a size can lack the filled form of an icon)
+ * - version: the package's `package.json`
+ *
+ * The behaviour lives in `template/utils/icons.client.ts`.
+ */
+import { DBButton, DBCheckbox, DBInput, DBSelect, DBTooltip } from '@db-ux/react-core-components';
+import iconDescriptions from '@db-ux/db-theme-icons/build/assets/descriptions.json';
+import iconStyles from '@db-ux/db-theme-icons/build/styles/absolute.css?raw';
+import { withBasePath } from '@template/utils/base-path';
+import { existsSync, readFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
+import { dirname, resolve } from 'node:path';
+import './IconGallery.css';
+
+interface Props {
+	lang: 'en' | 'de';
+}
+
+const { lang } = Astro.props;
+
+const TEXTS = {
+	en: {
+		search: 'Search Icons',
+		size: 'Size',
+		family: 'Family',
+		onlyFilled: 'Only icons with a filled form',
+		count: '{count} icons',
+		copied: '{name} copied',
+		copiedTooltip: 'Copied!',
+		copyFailed: '{name} could not be copied',
+		version: 'DB Theme Icons',
+		releaseNotes: 'Release notes',
+		releaseNotesUrl: '/documentation/releases/release-notes',
+	},
+	de: {
+		search: 'Icons suchen',
+		size: 'Größe',
+		family: 'Family',
+		onlyFilled: 'Nur Icons mit gefüllter Form',
+		count: '{count} Icons',
+		copied: '{name} kopiert',
+		copiedTooltip: 'Kopiert!',
+		copyFailed: '{name} konnte nicht kopiert werden',
+		version: 'DB Theme Icons',
+		releaseNotes: 'Release Notes',
+		releaseNotesUrl: '/de/dokumentation/releases/release-notes',
+	},
+} as const;
+const text = TEXTS[lang];
+
+// Sizes with an own optimized font, read from the package's @font-face rules.
+const sizes = [
+	...new Set(
+		[...iconStyles.matchAll(/font-family:\s*"db-default";[^}]*?font-weight:\s*(\d+);/g)].map(
+			(match) => Number(match[1]),
+		),
+	),
+].sort((a, b) => a - b);
+if (sizes.length === 0) {
+	throw new Error(
+		'IconGallery: no icon sizes found in @db-ux/db-theme-icons/build/styles/absolute.css. Has the @font-face format changed?',
+	);
+}
+const defaultSize = sizes.includes(24) ? 24 : sizes[0];
+
+/*
+ * The package exports no package.json, so its root is resolved from an
+ * exported file (`build/*`) instead of relying on the working directory.
+ */
+const packageRoot = resolve(
+	dirname(
+		createRequire(import.meta.url).resolve('@db-ux/db-theme-icons/build/assets/descriptions.json'),
+	),
+	'../..',
+);
+const readJson = <T,>(path: string): T =>
+	JSON.parse(readFileSync(resolve(packageRoot, path), 'utf8')) as T;
+
+const { version } = readJson<{ version: string }>('package.json');
+
+/*
+ * Each size has its own optimized fonts. The filled font contains every icon;
+ * icons without a filled form in that size repeat the default glyph.
+ */
+type Glyphs = Record<string, unknown>;
+const fontOf = (family: 'default' | 'filled', size: number): Glyphs => {
+	const path = `build/fonts/${family}_${size}/db.json`;
+	if (!existsSync(resolve(packageRoot, path))) {
+		throw new Error(`IconGallery: ${path} is missing in @db-ux/db-theme-icons.`);
+	}
+	return readJson<Glyphs>(path);
+};
+const fonts = sizes.map((size) => ({
+	size,
+	default: fontOf('default', size),
+	filled: fontOf('filled', size),
+}));
+const filledSizesOf = (name: string) =>
+	fonts
+		.filter(
+			(font) =>
+				name in font.filled &&
+				JSON.stringify(font.filled[name]) !== JSON.stringify(font.default[name]),
+		)
+		.map((font) => font.size)
+		.join(' ');
+
+const icons = Object.keys(iconDescriptions).map((key) => {
+	const name = key.replaceAll('-', '_');
+	return { key, name, filledSizes: filledSizesOf(name) };
+});
+---
+
+<div
+	class="icon-gallery-wrapper"
+	data-default-size={String(defaultSize)}
+	data-text-count={text.count}
+	data-text-copied={text.copied}
+	data-text-copy-failed={text.copyFailed}
+>
+	<p class="icon-gallery-version">
+		{text.version} v{version} · <a href={withBasePath(text.releaseNotesUrl)}>{text.releaseNotes}</a>
+	</p>
+
+	<div class="icon-gallery-controls">
+		<DBInput
+			id="icon-search-input"
+			className="icon-search"
+			label={text.search}
+			type="search"
+			client:only="react"
+		/>
+		<DBSelect
+			id="icon-size-select"
+			label={text.size}
+			options={sizes.map((size) => ({ value: String(size), label: `${size} px` }))}
+			client:only="react"
+		/>
+		<DBSelect
+			id="icon-family-select"
+			label={text.family}
+			options={[
+				{ value: 'default', label: 'default' },
+				{ value: 'filled', label: 'filled' },
+			]}
+			client:only="react"
+		/>
+		<DBCheckbox id="icon-filled-filter" client:only="react">
+			{text.onlyFilled}
+		</DBCheckbox>
+	</div>
+
+	<!-- Screen reader announcements: the number of matching icons after a search or filter change, and the copied name. Sighted users see the gallery and the tooltip. -->
+	<p id="icon-gallery-status" role="status" data-visually-hidden="true"></p>
+	<p id="icon-gallery-copied" role="status" data-visually-hidden="true"></p>
+
+	<div class="icon-gallery" id="icon-gallery" style={`--icon-gallery-size: ${defaultSize};`}>
+		{icons.map(({ key, name, filledSizes }) => (
+			<DBButton
+				className="icon-item"
+				variant="filled"
+				noText
+				icon={name}
+				data-icon-name={name}
+				data-icon-key={key}
+				data-filled-sizes={filledSizes}
+				client:only="react"
+				data-has-tooltip="true"
+			>
+				{name}
+				{/* Both texts are rendered; icons.client.ts only toggles data-copied on the button. */}
+				<DBTooltip id={`tooltip-${key}`}>
+					<span class="icon-tooltip-name">{name}</span>
+					<span class="icon-tooltip-copied">{text.copiedTooltip}</span>
+				</DBTooltip>
+			</DBButton>
+		))}
+	</div>
+</div>
+
+<script>
+	import '@template/utils/icons.client.ts';
+</script>

@@ -1,0 +1,177 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Set up your editor and build'
+headline: 'Set up your editor and build'
+description: 'Get autocomplete for tokens and classes in your editor and reduce the size of the CSS in your build.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 18.6
+category: 'Tooling'
+keywords:
+  [
+    'ide',
+    'editor',
+    'autocomplete',
+    'vs code',
+    'jetbrains',
+    'intellij',
+    'webstorm',
+    'css variables',
+    'performance',
+    'bundle size',
+    'purgecss',
+    'csso',
+    'postcss',
+    'minify',
+    'unused css',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## The foundation ships a file for autocomplete
+
+`@db-ux/core-foundations/build/ide` lists all classes and custom properties. Point your editor to it, but don't import it in your application.
+
+<LearnAside>
+
+The file only serves your editor. Its values and selectors are not the real ones, because the real values depend on mode, density and screen size.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Add it to JetBrains IDEs
+
+In IntelliJ IDEA, WebStorm and other JetBrains IDEs, add the folder as a JavaScript library. Then `class="db-` and `color: db-` suggest classes and custom properties.
+
+<LearnAside>
+
+1. Open **File → Settings → Languages & Frameworks → JavaScript → Libraries**.
+2. Choose **Add**, enter a name such as `db-ux` and keep **Framework type: Custom** and **Visibility: Project**.
+3. Choose **➕ → Attach Directories…** and select `node_modules/@db-ux/core-foundations/build/ide`.
+4. Choose **Apply**.
+
+Pressing Enter on a suggestion in CSS inserts `var(--db-…)`.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Add it to VS Code
+
+Install the extension **CSS Variable Autocomplete** and add the file to its lookup list in `.vscode/settings.json`.
+
+```json
+{
+	"cssVariables.lookupFiles": ["node_modules/@db-ux/core-foundations/build/ide/db.ide.css"]
+}
+```
+
+<LearnAside>
+
+Keep your own files in the list as well, for example `"**/*.css"` and `"**/*.scss"`, so their custom properties stay available. The extension completes custom properties in CSS and SCSS. For class names in HTML and JSX, VS Code has no extension that works reliably with the file. For Web Components, VS Code completes tags and attributes with the custom data file described in [Use the components as Web Components](/documentation/learn/web-components-setup).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Reduce the CSS with the PostCSS plugin
+
+The **PostCSS plugin** resolves `var()`, `calc()`, `color-mix()` and `light-dark()` at build time and removes unused declarations.
+
+```shell
+pnpm add @db-ux/core-postcss-plugin --save-dev
+```
+
+<LearnAside>
+
+How to add the plugin to your build is described in the setup article of your framework, for example [Add the components to React](/documentation/learn/react-setup).
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Or remove unused classes after the build
+
+**PurgeCSS** removes classes your pages don't use, **CSSO** minifies the result. Run both after your build on the output folder.
+
+```shell
+pnpm add purgecss csso --save-dev
+```
+
+<LearnAside>
+
+```js
+// purgecss.js – run after the build, e.g. "postbuild": "node purgecss.js"
+import { writeFileSync } from 'node:fs';
+import { PurgeCSS } from 'purgecss';
+import { minify } from 'csso';
+
+const dist = 'dist';
+
+const results = await new PurgeCSS().purge({
+	content: [`${dist}/**/*.html`, `${dist}/**/*.js`],
+	css: [`${dist}/**/*.css`],
+	defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
+	variables: true,
+	safelist: {
+		// Keep the densities you use and the color states.
+		variables: [/-functional-/, /-regular-/, /-expressive-/, /-default$/, /-hovered$/, /-pressed$/],
+		// Components that add classes at runtime.
+		greedy: [/db-tabs/],
+	},
+});
+
+for (const result of results) {
+	writeFileSync(result.file, minify(result.css).css);
+}
+```
+
+Check the result in the browser: classes that are only added by JavaScript need an entry in the safelist.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Continue with the plugins
+
+The design system has more plugins for linting and Figma.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Set up the foundation',
+			description: 'Tokens, helper classes and the Stylelint plugin.',
+			url: '/documentation/learn/foundation-setup',
+		},
+		{
+			title: 'Plugins',
+			description: 'Figma plugins for logos and colors.',
+			url: '/documentation/learn/plugins',
+		},
+	]}
+/>
+
+</LearnBlock>

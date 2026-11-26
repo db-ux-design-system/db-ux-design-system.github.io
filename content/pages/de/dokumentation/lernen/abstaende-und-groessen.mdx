@@ -1,0 +1,160 @@
+---
+layout: '@template/layouts/documentation'
+sectionSpacing: 'small'
+sectionWidth: 'auto'
+title: 'Abstände und Größen umsetzen'
+headline: 'Abstände und Größen umsetzen'
+description: 'Nutze die Tokens für Abstände und Größen für Außen- und Innenabstände, Lücken und feste Höhen in deinem eigenen CSS.'
+readingList: true
+align: start
+toc: true
+tocMaxDepth: 2
+order: 18.4
+category: 'Development'
+keywords:
+  [
+    'spacing',
+    'sizing',
+    'variables',
+    'tokens',
+    'padding',
+    'margin',
+    'gap',
+    'height',
+    'spacing fixed',
+    'spacing responsive',
+    'db-spacing',
+    'db-sizing',
+    'section',
+    'scss variables',
+    't-shirt sizes',
+  ]
+stepper: true
+---
+
+import LearnBlock from '@template/components/Learn/LearnBlock.astro';
+import LearnAside from '@template/components/Learn/LearnAside.astro';
+import TeaserCard from '@template/components/TeaserCard/TeaserCard.astro';
+
+<LearnBlock>
+
+## Drei Arten von Tokens für Abstand und Größe
+
+**Spacing fixed** für Außen-, Innenabstände und Lücken, **Spacing responsive** für Abstände, die mit dem Bildschirm wachsen, **Sizing** für feste Höhen. Ihre Werte folgen der Density und dem Theme.
+
+<LearnAside>
+
+| Art                | Größen                                     | Basis |
+| ------------------ | ------------------------------------------ | ----- |
+| Spacing fixed      | `3xs`, `2xs`, `xs`, `sm`, `md`, `lg`, `xl` | `md`  |
+| Spacing responsive | `xs`, `sm`, `md`, `lg`, `xl`               | `md`  |
+| Sizing             | `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl` | `md`  |
+
+Die Tokens gehören zum Theme und brauchen keinen eigenen Import.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Nutze Spacing fixed für die meisten Abstände
+
+Außen-, Innenabstände und Lücken in Seiten und Komponenten nutzen **Spacing fixed**. Nutze Spacing-Tokens nicht für `width` oder `height`.
+
+```css
+.my-card {
+	padding: var(--db-spacing-fixed-md);
+	gap: var(--db-spacing-fixed-sm);
+}
+```
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Nutze Spacing responsive für Abstände im Layout
+
+**Spacing responsive** wächst mit dem Bildschirm, zum Beispiel beim Innenabstand des Hauptbereichs. **Section** setzt es schon für dich.
+
+<LearnAside>
+
+```css
+.my-main {
+	padding-inline: var(--db-spacing-responsive-md);
+}
+```
+
+Nutze lieber `DBSection` als einen eigenen responsiven Innenabstand: Die Komponente wählt den passenden Abstand für jede Bildschirmgröße.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Nutze Sizing für feste Höhen
+
+**Sizing** setzt die Höhe von Elementen, die mit Komponenten in einer Linie stehen, zum Beispiel ein eigenes Bedienelement neben einem Button.
+
+```css
+.my-control {
+	block-size: var(--db-sizing-md);
+}
+```
+
+<LearnAside>
+
+Nutze Sizing nicht für Innen- oder Außenabstände. Ausnahme sind absolut positionierte Elemente in einer Komponente mit fester Höhe.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Nutze die Sass-Variablen
+
+Mit Sass gibt es dieselben Tokens als Variablen.
+
+```scss
+@use '@db-ux/core-foundations/build/styles/variables';
+
+.my-card {
+	padding: variables.$db-spacing-fixed-md;
+	block-size: variables.$db-sizing-md;
+}
+```
+
+<LearnAside>
+
+Die Variablen verweisen auf die CSS Custom Properties. Die Werte ändern sich also weiter mit Density und Theme.
+
+</LearnAside>
+
+</LearnBlock>
+
+<LearnBlock>
+
+## Mach mit den Werten weiter
+
+Die Foundation zeigt die Werte aller Tokens.
+
+<TeaserCard
+	columns={2}
+	headlineLevel={3}
+	teasers={[
+		{
+			title: 'Abstände',
+			description: 'Feste und responsive Abstände mit ihren Werten.',
+			url: '/de/dokumentation/foundation/abstaende',
+		},
+		{
+			title: 'Größen',
+			description: 'Sizing-Tokens mit ihren Werten.',
+			url: '/de/dokumentation/foundation/groessen',
+		},
+	]}
+/>
+
+</LearnBlock>

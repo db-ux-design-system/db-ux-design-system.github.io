@@ -1,0 +1,100 @@
+---
+/*
+ * Development section of a component page.
+ *
+ * A short entry for developers. The technical documentation (installation,
+ * usage per framework, all examples with code, properties, migration) lives
+ * in Storybook, versioned per release; the platform shows the current version
+ * only and links there.
+ *
+ * One card per framework to the component's overview page, opened in the
+ * composition Storybook of the pinned version. The setup of each framework is
+ * linked from its Storybook overview page, so it is not repeated here.
+ *
+ * The section heading is h3, so it nests under the page's `## Development` (DE: `## Entwicklung`).
+ * Storybook is English only; DE pages say so.
+ */
+import ResourceCards from '@template/components/ResourceCards/ResourceCards.astro';
+import { stripBasePath } from '@template/utils/base-path';
+import pkg from '../../../package.json';
+import './ComponentCode.css';
+
+interface Props {
+	/**
+	 * Overview page of the component in the framework Storybooks, without
+	 * `--docs`, e.g. `components-dbbutton-overview`.
+	 */
+	storybookOverview: string;
+	/**
+	 * Section of a part on the overview page of its main component, e.g.
+	 * `dbtabitem` for DBTabItem on the DBTabs page (parts are documented as
+	 * `### DBTabItem` there). Storybook scrolls to the heading with this id.
+	 */
+	storybookAnchor?: string;
+}
+
+const { storybookOverview, storybookAnchor } = Astro.props;
+
+const pathname = stripBasePath(Astro.url.pathname);
+const isDE = pathname.startsWith('/de/') || pathname === '/de';
+
+/**
+ * The components on the platform are rendered with this exact version. It is
+ * part of the Storybook URL, so a range or a drift to the React package (which
+ * renders the examples here) would point to the wrong or no Storybook.
+ */
+const version = pkg.devDependencies['@db-ux/core-components'];
+const reactVersion = pkg.devDependencies['@db-ux/react-core-components'];
+if (!/^\d+\.\d+\.\d+$/.test(version) || version !== reactVersion) {
+	throw new Error(
+		`ComponentCode: @db-ux/core-components (${version}) and @db-ux/react-core-components (${reactVersion}) must be pinned to the same exact version.`,
+	);
+}
+const compositionUrl = `https://design-system.deutschebahn.com/core-web/version/v${version}/composition-storybook`;
+
+/*
+ * One card per framework. Each opens the component's overview page of that
+ * framework directly, but inside the composition Storybook: the sidebar shows
+ * all frameworks, the Foundations pages and the version dropdown.
+ * `ref` is the key of the framework Storybook in the composition config.
+ */
+const frameworks = [
+	{ title: 'React', ref: 'react', icon: 'react' },
+	{ title: 'Angular', ref: 'angular', icon: 'angular' },
+	{ title: 'Vue', ref: 'vue', icon: 'vue' },
+	{ title: 'Web Components', ref: 'webcomponents', icon: 'web-components' },
+	{ title: 'HTML', ref: 'html', icon: 'html5' },
+];
+
+const anchor = storybookAnchor ? `#${encodeURIComponent(storybookAnchor)}` : '';
+
+const storybookResources = frameworks.map(({ title, ref, icon }) => ({
+	title,
+	icon,
+	description: isDE
+		? 'Beispiele mit Code, Properties, Barrierefreiheit und Migration.'
+		: 'Examples with code, properties, accessibility and migration.',
+	url: `${compositionUrl}/?path=/docs/${ref}_${storybookOverview}--docs${anchor}`,
+}));
+
+const t = isDE
+	? {
+			storybook: 'Storybook',
+			storybookText:
+				'Die vollständige technische Dokumentation findest du im Storybook deines Frameworks. Ältere Versionen wählst du dort in der Sidebar. Storybook ist nur auf Englisch verfügbar.',
+			version: `Diese Seite zeigt @db-ux/core-components ${version}.`,
+		}
+	: {
+			storybook: 'Storybook',
+			storybookText:
+				'The complete technical documentation is in the Storybook of your framework. Earlier versions are in its sidebar.',
+			version: `This page shows @db-ux/core-components ${version}.`,
+		};
+---
+
+<div class="component-code">
+	<h3>{t.storybook}</h3>
+	<p>{t.storybookText}</p>
+	<ResourceCards resources={storybookResources} />
+	<p class="component-code-version">{t.version}</p>
+</div>
