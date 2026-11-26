@@ -1181,11 +1181,9 @@ const sanitizeFamilies = (input: unknown): FamilyConfig[] => {
 		const originDark = isHex(candidate.originDark) ? candidate.originDark.toLowerCase() : undefined;
 		const seeded = DEFAULT_FAMILIES.find((family) => family.key === key);
 		// The saturation cap is opt-in for every family (seeded or custom) and independent of
-		// the ramp hue/saturation fit below. Grey (the only `neutral: true` family) keeps its
-		// cap even when the saved value is invalid, so it cannot silently lose its neutrality.
-		const saturationCap = seeded?.neutral
-			? (clampOrUndefined(candidate.saturationCap, 0, 100) ?? NEUTRAL_RAMP_SATURATION)
-			: clampOrUndefined(candidate.saturationCap, 0, 100);
+		// the ramp hue/saturation fit below. A missing cap means it was removed, also for Grey;
+		// configs from before Grey existed get theirs from the migration (`migrateLegacyColors`).
+		const saturationCap = clampOrUndefined(candidate.saturationCap, 0, 100);
 		if (seeded && isSeededFamily(key)) {
 			const origin = isHex(candidate.origin) ? candidate.origin.toLowerCase() : seeded.origin;
 			const changed = origin !== seeded.origin;
@@ -1197,7 +1195,8 @@ const sanitizeFamilies = (input: unknown): FamilyConfig[] => {
 				// carries its own ramp fit.
 				h: changed ? hueOrUndefined(candidate.h) : seeded.h,
 				s: changed ? clampOrUndefined(candidate.s, 0, 100) : seeded.s,
-				...(saturationCap != null ? { saturationCap } : {}),
+				// Set explicitly: the seeded default (Grey's cap) must not survive a removed cap
+				saturationCap,
 				direction: rawDirection(candidate.direction),
 			});
 			continue;
