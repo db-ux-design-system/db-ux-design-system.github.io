@@ -18,15 +18,20 @@ import {
 } from './color/palette-rule.ts';
 import { ADAPTIVE_COLOR_TOKENS } from './color/adaptive-tokens.ts';
 
-/** Colors that are edited freely in the builder. */
-export const COLOR_KEYS = ['brand', 'neutral'] as const;
-export type ColorKey = (typeof COLOR_KEYS)[number];
+/**
+ * Default ramp saturation for a neutral color family. A dark origin like #090F1B carries a high
+ * derived saturation (~52), which would tint the light steps blue. Capping the neutral ramp
+ * at this value keeps the grey steps neutral with only a faint, constant cool undertone.
+ * Editable per theme via the Neutral saturation input in the builder.
+ */
+export const NEUTRAL_RAMP_SATURATION = 15;
 
 /**
- * The built-in color families of the New Foundation (Figma collection "🎨 Color"). Their
- * origin can be changed, and further families can be added with a name and an origin.
- * Semantic colors point at one of them. The DB theme already ships the adaptive token set
- * for these, so the builder does not re-emit it for them (see `emitAdaptiveTokens`).
+ * The color families of the New Foundation (Figma collection "🎨 Color") that the DB theme
+ * ships tokens for. Their origin can be changed, they can be removed and further families can
+ * be added with a name and an origin. Semantic colors point at one of them. The DB theme
+ * already ships the adaptive token set for these, so the builder does not re-emit it for them
+ * (see `emitAdaptiveTokens`).
  */
 export const BUILTIN_FAMILY_KEYS = [
 	'yellow',
@@ -43,12 +48,12 @@ export const BUILTIN_FAMILY_KEYS = [
 export type BuiltinFamilyKey = (typeof BUILTIN_FAMILY_KEYS)[number];
 
 /**
- * Families that ship with the DB theme as a custom (deletable) color rather than a built-in.
- * Lilac is part of the New Foundation palette but is not a core color of the DB theme, so it
- * is seeded like a manually added color: it carries the adaptive token set and can be removed
- * in the builder.
+ * Families that are seeded like a manually added color: the DB theme does not ship tokens for
+ * them, so they carry the adaptive token set. Grey is the neutral family (its ramp saturation is
+ * capped, see `FamilyConfig.neutral`); Lilac is part of the New Foundation palette but is not a
+ * core color of the DB theme.
  */
-export const DEFAULT_CUSTOM_FAMILY_KEYS = ['lilac'] as const;
+export const DEFAULT_CUSTOM_FAMILY_KEYS = ['grey', 'lilac'] as const;
 export type DefaultCustomFamilyKey = (typeof DEFAULT_CUSTOM_FAMILY_KEYS)[number];
 
 /** Every family key the builder knows a default origin/name for (built-in + default custom). */
@@ -56,14 +61,33 @@ export type SeededFamilyKey = BuiltinFamilyKey | DefaultCustomFamilyKey;
 /** Key of a built-in or a custom family; also the CSS prefix (`--db-<key>-0`). */
 export type FamilyKey = string;
 
-/** A color family in the config. `name` is only used for custom families. */
-export type FamilyConfig = ColorConfig & { key: FamilyKey; name: string; builtin: boolean };
+/**
+ * A color family in the config. Every family can be removed and can carry a separate dark mode
+ * origin. `builtin` only says that the DB theme already ships the adaptive token set for it.
+ * `name` is only used for custom families. A `neutral` family caps its ramp saturation at `s`
+ * instead of using the origin's own saturation, so the grey steps stay neutral.
+ */
+export type FamilyConfig = ColorConfig & {
+	key: FamilyKey;
+	name: string;
+	builtin: boolean;
+	neutral?: boolean;
+};
 
-/** Semantic colors are no palettes of their own, but an alias of a color family. */
-export const SEMANTIC_KEYS = ['informational', 'successful', 'warning', 'critical'] as const;
+/** Primary and neutral are the main colors: no palettes of their own, but aliases of a family. */
+export const MAIN_COLOR_KEYS = ['brand', 'neutral'] as const;
+/** Status colors, aliases of a family as well. */
+export const STATUS_COLOR_KEYS = ['informational', 'successful', 'warning', 'critical'] as const;
+/**
+ * Semantic colors are no palettes of their own, but an alias of a color family. `brand`
+ * (labelled Primary) and `neutral` keep their CSS prefix, so the DB theme tokens stay valid.
+ */
+export const SEMANTIC_KEYS = [...MAIN_COLOR_KEYS, ...STATUS_COLOR_KEYS] as const;
 export type SemanticKey = (typeof SEMANTIC_KEYS)[number];
 
 export const SEMANTIC_DEFAULTS: Record<SemanticKey, FamilyKey> = {
+	brand: 'red',
+	neutral: 'grey',
 	informational: 'blue',
 	successful: 'green',
 	warning: 'orange',
@@ -72,14 +96,18 @@ export const SEMANTIC_DEFAULTS: Record<SemanticKey, FamilyKey> = {
 
 type Family = {
 	origin: string;
+	/** Neutral family: the ramp saturation is capped at `NEUTRAL_RAMP_SATURATION`. */
+	neutral?: boolean;
 };
 
 /**
  * Seeded families: only an origin. Ramp hue, saturation and lightness are derived from the
  * origin by the palette rule – no pre-fitted h/s constants – and so is the hovered state, which
- * reaches a minimum contrast of 1.5:1 against the default.
+ * reaches a minimum contrast of 1.5:1 against the default. The neutral family is the exception:
+ * it keeps a capped saturation.
  */
 const FAMILIES: Record<SeededFamilyKey, Family> = {
+	grey: { origin: '#090f1b', neutral: true },
 	yellow: { origin: '#ffea00' },
 	orange: { origin: '#f58f00' },
 	red: { origin: '#ec0016' },
@@ -93,10 +121,8 @@ const FAMILIES: Record<SeededFamilyKey, Family> = {
 	lilac: { origin: '#aa99ff' },
 };
 
-const isBuiltinFamily = (key: string): key is BuiltinFamilyKey =>
-	(BUILTIN_FAMILY_KEYS as readonly string[]).includes(key);
-
 const SEEDED_FAMILY_NAMES: Record<SeededFamilyKey, string> = {
+	grey: 'Grey',
 	yellow: 'Yellow',
 	orange: 'Orange',
 	red: 'Red',
@@ -110,29 +136,37 @@ const SEEDED_FAMILY_NAMES: Record<SeededFamilyKey, string> = {
 	lilac: 'Lilac',
 };
 
-const seededFamily = (key: SeededFamilyKey, builtin: boolean): FamilyConfig => ({
-	key,
-	name: SEEDED_FAMILY_NAMES[key],
-	builtin,
-	origin: FAMILIES[key].origin,
-	direction: 'auto',
-});
+const seededFamily = (key: SeededFamilyKey, builtin: boolean): FamilyConfig => {
+	const { origin, neutral } = FAMILIES[key];
+	return {
+		key,
+		name: SEEDED_FAMILY_NAMES[key],
+		builtin,
+		origin,
+		// Grey starts with the saturation cap already on, so it stays neutral out of the box
+		...(neutral ? { neutral: true, saturationCap: NEUTRAL_RAMP_SATURATION } : {}),
+		direction: 'auto',
+	};
+};
+
+const isSeededFamily = (key: string): key is SeededFamilyKey => key in FAMILIES;
 
 /**
- * The families a fresh config starts with: the built-in families (not deletable) followed by
- * the default custom families (Lilac), which carry the adaptive token set and can be removed.
+ * The families a fresh config starts with: Grey, the families the DB theme ships tokens for and
+ * Lilac. All of them can be removed; the adaptive token set is only emitted for the ones the DB
+ * theme does not ship (Grey, Lilac and every added family).
  */
 export const DEFAULT_FAMILIES: FamilyConfig[] = [
+	seededFamily('grey', false),
 	...BUILTIN_FAMILY_KEYS.map((key) => seededFamily(key, true)),
-	...DEFAULT_CUSTOM_FAMILY_KEYS.map((key) => seededFamily(key, false)),
+	seededFamily('lilac', false),
 ];
 
 /**
  * Keys that already carry tokens in the DB UX packages. A custom family must not use them,
  * otherwise its palette would overwrite unrelated tokens.
  */
-const RESERVED_KEYS = new Set([
-	...COLOR_KEYS,
+const RESERVED_KEYS = new Set<string>([
 	...SEMANTIC_KEYS,
 	'adaptive',
 	'base',
@@ -200,16 +234,23 @@ export const validateFamilyName = (
 };
 
 export type ColorConfig = {
-	/** The origin (brand) color as 6-digit hex. */
+	/** The origin color as 6-digit hex. */
 	origin: string;
 	/**
-	 * Optional separate origin for dark mode (Primary only). Lets the dark scheme use a
-	 * different brand color, e.g. a light one so it stays visible on a dark background.
+	 * Optional separate origin for dark mode. Lets the dark scheme use a different color,
+	 * e.g. a light one so it stays visible on a dark background.
 	 */
 	originDark?: string;
 	/** Optional ramp hue/saturation (HSLuv). If not set, both are derived from the origin. */
 	h?: number;
 	s?: number;
+	/**
+	 * Optional ceiling (0-100) on the ramp saturation (HSLuv), opt-in per family. A tinted
+	 * origin (e.g. a dark blue-black) is damped to this value instead of using its own
+	 * saturation, so the steps keep only a faint, constant undertone – this is how the
+	 * built-in Grey family stays neutral despite a tinted origin.
+	 */
+	saturationCap?: number;
 	direction: OriginDirection;
 };
 
@@ -234,7 +275,6 @@ export type Preset = (typeof PRESETS)[number] | 'custom';
 
 export type ThemeConfig = {
 	preset: Preset;
-	colors: Record<ColorKey, ColorConfig>;
 	families: FamilyConfig[];
 	semantic: Record<SemanticKey, FamilyKey>;
 	radius: Radius;
@@ -312,44 +352,39 @@ const FONT_STACKS: Record<Font, { head: string; sans: string }> = {
 	},
 };
 
-const color = (origin: string, h?: number, s?: number): ColorConfig => ({
+/** Neutral origin tinted towards a hue, at the lightness of the DB neutral origin. */
+const tintedNeutral = (hue: number, saturation: number): string =>
+	hsluvToHex(hue, saturation, hsluvOf('#646973').l);
+
+/** A family that only carries a name and an origin, e.g. the primary color of a sub-brand. */
+const brandFamily = (
+	key: FamilyKey,
+	name: string,
+	origin: string,
+	originDark?: string,
+): FamilyConfig => ({
+	key,
+	name,
+	builtin: false,
 	origin,
-	h,
-	s,
+	...(originDark ? { originDark } : {}),
 	direction: 'auto',
 });
 
-/** Neutral color tinted towards a hue, at the lightness of the DB neutral origin. */
-const tintedNeutral = (hue: number, saturation: number): ColorConfig =>
-	color(hsluvToHex(hue, saturation, hsluvOf('#646973').l));
-
-/**
- * Default ramp saturation for a neutral color. A dark origin like #090F1B carries a high
- * derived saturation (~52), which would tint the light steps blue. Capping the neutral ramp
- * at this value keeps the grey steps neutral with only a faint, constant cool undertone.
- * Editable per theme via the Neutral saturation input in the builder.
- */
-export const NEUTRAL_RAMP_SATURATION = 15;
-
-/** DB neutral ramp from the Cold Black origin, with a controlled low ramp saturation. */
-const DB_NEUTRAL = color('#090f1b', hsluvOf('#090f1b').h, NEUTRAL_RAMP_SATURATION);
-
-/** The neutral preset uses a pure black origin instead of the tinted Cold Black. */
-const PLAIN_NEUTRAL = color('#000000', hsluvOf('#000000').h, NEUTRAL_RAMP_SATURATION);
-
-const presetColors = (brand: ColorConfig, neutral: ColorConfig): Record<ColorKey, ColorConfig> => ({
-	brand,
-	neutral,
-});
+/** The default families with the grey origin replaced, keeping the capped ramp saturation. */
+const familiesWithGrey = (origin: string): FamilyConfig[] =>
+	DEFAULT_FAMILIES.map((family) =>
+		family.key === 'grey' ? { ...family, origin, h: hsluvOf(origin).h } : family,
+	);
 
 type PresetDefinition = Omit<ThemeConfig, 'preset' | 'density' | 'mode'>;
 
 /**
  * Shape, typography and supporting colors of the DB theme. The DB sub-brands are
- * identical to it and only swap the brand origin, so every component, semantic color,
- * density and font stays the same – only the brand hue changes.
+ * identical to it and only swap the primary color, so every component, semantic color,
+ * density and font stays the same – only the primary hue changes.
  */
-const DB_BASE: Omit<PresetDefinition, 'colors'> = {
+const DB_BASE: PresetDefinition = {
 	families: DEFAULT_FAMILIES,
 	semantic: SEMANTIC_DEFAULTS,
 	radius: 'none',
@@ -359,23 +394,23 @@ const DB_BASE: Omit<PresetDefinition, 'colors'> = {
 };
 
 export const PRESET_DEFINITIONS: Record<Exclude<Preset, 'custom'>, PresetDefinition> = {
-	db: {
-		...DB_BASE,
-		colors: presetColors(color('#ec0016'), DB_NEUTRAL),
-	},
+	db: DB_BASE,
 	station: {
 		...DB_BASE,
-		colors: presetColors(color('#17217c'), DB_NEUTRAL),
+		families: [...DEFAULT_FAMILIES, brandFamily('station', 'Station', '#17217c')],
+		semantic: { ...SEMANTIC_DEFAULTS, brand: 'station' },
 	},
 	's-bahn': {
 		...DB_BASE,
-		colors: presetColors(color('#408335'), DB_NEUTRAL),
+		families: [...DEFAULT_FAMILIES, brandFamily('s-bahn', 'S-Bahn', '#408335')],
+		semantic: { ...SEMANTIC_DEFAULTS, brand: 's-bahn' },
 	},
 	neutral: {
 		...DB_BASE,
-		// Dark mode uses a white primary, so it stays visible on the dark background.
-		// This preset uses a pure black primary and neutral instead of the tinted Cold Black.
-		colors: presetColors({ ...color('#000000'), originDark: '#ffffff' }, PLAIN_NEUTRAL),
+		// This preset uses a pure black primary and grey instead of the tinted Cold Black. Dark
+		// mode uses a white primary, so it stays visible on the dark background.
+		families: [...familiesWithGrey('#000000'), brandFamily('black', 'Black', '#000000', '#ffffff')],
+		semantic: { ...SEMANTIC_DEFAULTS, brand: 'black' },
 	},
 };
 
@@ -386,7 +421,6 @@ export const applyPreset = (
 	const definition = PRESET_DEFINITIONS[preset];
 	return {
 		...definition,
-		colors: structuredClone(definition.colors),
 		families: structuredClone(definition.families),
 		semantic: { ...definition.semantic },
 		preset,
@@ -403,7 +437,6 @@ export const isHex = (value: unknown): value is string =>
 
 export type ThemeResult = {
 	tokens: Record<string, string>;
-	modes: Record<ColorKey, ColorMode>;
 	/** Generated mode per family key (palette, origin states, contrast). */
 	familyModes: Record<FamilyKey, ColorMode>;
 };
@@ -498,78 +531,78 @@ const applyPureOnOrigin = (mode: ColorMode): ColorMode => {
 	return mode;
 };
 
+/**
+ * Builds the color mode of one family. A saturation cap (opt-in per family) limits the ramp
+ * saturation to the configured value instead of using the origin's own saturation directly. A
+ * tinted origin (e.g. #090F1B, s≈52) is damped to the cap so the steps keep only a faint,
+ * constant undertone; a pure grey origin (e.g. #1a1a1a, s≈0) carries no hue and therefore stays
+ * fully neutral regardless of the cap. The built-in Grey family additionally gets real black
+ * and white ramp ends (`neutral: true` on the palette rule) – that part stays specific to it,
+ * since only the one family used for the Neutral semantic color needs to reach the extremes.
+ */
+const buildFamilyMode = ({ origin, h, s, saturationCap, neutral }: FamilyConfig): ColorMode => {
+	if (saturationCap != null) {
+		return applyPureOnOrigin(
+			buildColorMode(
+				{ origin, h: h ?? hsluvOf(origin).h, s: Math.min(hsluvOf(origin).s, saturationCap) },
+				{ neutral },
+			),
+		);
+	}
+	// The state direction is always automatic
+	return applyPureOnOrigin(buildColorMode(h == null ? origin : { origin, h, s }));
+};
+
+/** The family a semantic color falls back to when its assignment is missing or was removed. */
+export const defaultFamilyFor = (
+	key: SemanticKey,
+	families: readonly { key: FamilyKey }[],
+): FamilyKey =>
+	families.some((family) => family.key === SEMANTIC_DEFAULTS[key])
+		? SEMANTIC_DEFAULTS[key]
+		: (families[0]?.key ?? SEMANTIC_DEFAULTS[key]);
+
 /** Generates all color modes and the CSS custom properties for a config. */
 export const buildTheme = (config: ThemeConfig): ThemeResult => {
 	const tokens: Record<string, string> = {};
-	const modes = {} as Record<ColorKey, ColorMode>;
 
-	// Color families: palette and hovered state from the palette rule, for built-in and custom
-	// families alike.
+	// Color families: palette and hovered state from the palette rule, for the families the DB
+	// theme ships and for custom ones alike.
 	const familyModes: Record<FamilyKey, ColorMode> = {};
 	for (const family of config.families) {
-		const { key, origin, h, s } = family;
-		// The state direction is always automatic
-		const mode = buildColorMode(h == null ? origin : { origin, h, s });
-		applyPureOnOrigin(mode);
+		const { key, originDark } = family;
+		const mode = buildFamilyMode(family);
 		familyModes[key] = mode;
 		mode.palette.forEach((value, index) => {
 			tokens[`--db-${key}-${index}`] = value;
 		});
 		tokens[`--db-${key}-origin-base`] = mode.origin.default;
-		emitVibrantTokens(tokens, key, mode.vibrant);
-		for (const scheme of SCHEMES) {
-			tokens[`--db-${key}-origin-${scheme}-default`] = mode.origin.default;
-			tokens[`--db-${key}-origin-${scheme}-hovered`] = mode.origin.hovered;
-			tokens[`--db-${key}-on-origin-${scheme}-default`] = mode.onOrigin;
-		}
-		// Only a manually added (custom) family gets the adaptive set. The built-in families
-		// already ship it with the DB theme, so re-emitting it would only bloat the export.
-		if (!family.builtin) emitAdaptiveTokens(tokens, key);
-	}
-
-	// Semantic colors alias a color family instead of carrying a palette of their own. Only the
-	// base tokens are aliased: the DB theme's adaptive semantic tokens reference `--db-<key>-N`,
-	// so they follow the aliased palette automatically and must not be overwritten here.
-	for (const key of SEMANTIC_KEYS) {
-		const family = config.semantic[key];
-		for (const suffix of BASE_TOKEN_SUFFIXES) {
-			tokens[`--db-${key}-${suffix}`] = `var(--db-${family}-${suffix})`;
-		}
-	}
-
-	for (const key of COLOR_KEYS) {
-		const { origin, originDark, h, s } = config.colors[key];
-		// The neutral color caps its ramp saturation at the configured value instead of using
-		// the origin's own saturation directly. A tinted dark origin (e.g. #090F1B, s≈52) is
-		// damped to the cap so the light steps stay neutral; a pure grey origin (e.g. #1a1a1a,
-		// s≈0) carries no hue and therefore stays fully neutral regardless of the cap.
-		const neutralInput =
-			key === 'neutral'
-				? { origin, h: h ?? hsluvOf(origin).h, s: Math.min(hsluvOf(origin).s, s ?? 100) }
-				: null;
-		// The state direction is always automatic
-		const mode = buildColorMode(neutralInput ?? (h == null ? origin : { origin, h, s }), {
-			neutral: key === 'neutral',
-		});
-		applyPureOnOrigin(mode);
-		modes[key] = mode;
-		mode.palette.forEach((value, index) => {
-			tokens[`--db-${key}-${index}`] = value;
-		});
-		tokens[`--db-${key}-origin-base`] = mode.origin.default;
-		// A separate dark origin (Primary only) gets its own states and on-origin color;
-		// otherwise dark uses the same origin as light.
+		// A separate dark origin gets its own states and on-origin color; otherwise dark uses
+		// the same origin as light.
 		const darkMode = originDark ? applyPureOnOrigin(buildColorMode(originDark)) : mode;
 		const perScheme = { light: mode, dark: darkMode };
 		// Vibrant is the same in both modes and derives from the main origin.
 		emitVibrantTokens(tokens, key, mode.vibrant);
-		for (const scheme of ['light', 'dark'] as const) {
+		for (const scheme of SCHEMES) {
 			const schemeMode = perScheme[scheme];
 			tokens[`--db-${key}-origin-${scheme}-default`] = schemeMode.origin.default;
 			tokens[`--db-${key}-origin-${scheme}-hovered`] = schemeMode.origin.hovered;
 			tokens[`--db-${key}-on-origin-${scheme}-default`] = schemeMode.onOrigin;
 		}
-		// Primary and neutral are core colors the DB theme already provides the adaptive set for.
+		// Only a family the DB theme does not ship gets the adaptive set. The families the DB
+		// theme ships already carry it, so re-emitting it would only bloat the export.
+		if (!family.builtin) emitAdaptiveTokens(tokens, key);
+	}
+
+	// Semantic colors (primary, neutral and the status colors) alias a color family instead of
+	// carrying a palette of their own. Only the base tokens are aliased: the DB theme's adaptive
+	// semantic tokens reference `--db-<key>-N`, so they follow the aliased palette automatically
+	// and must not be overwritten here.
+	for (const key of SEMANTIC_KEYS) {
+		const family = config.semantic[key];
+		for (const suffix of BASE_TOKEN_SUFFIXES) {
+			tokens[`--db-${key}-${suffix}`] = `var(--db-${family}-${suffix})`;
+		}
 	}
 
 	RADIUS_SIZES.forEach((size, index) => {
@@ -580,7 +613,7 @@ export const buildTheme = (config: ThemeConfig): ThemeResult => {
 	tokens['--db-font-family-head'] = FONT_STACKS[config.headingFont].head;
 	tokens['--db-font-family-sans'] = FONT_STACKS[config.bodyFont].sans;
 
-	return { tokens, modes, familyModes };
+	return { tokens, familyModes };
 };
 
 /**
@@ -669,7 +702,7 @@ export const tokensToDeclarations = (tokens: Record<string, string>, indent = '\
 export type ThemeLayer = '@db-ux/core-components' | '@db-ux/db-theme';
 
 export type GroupedTheme = {
-	/** Every color key (primary, neutral, each family and each semantic) with its tokens. */
+	/** Every color key (each family and each semantic color) with its tokens. */
 	colors: Record<string, Record<string, string>>;
 	/** Border radius tokens, keyed by size (`xs`, `md`, …). */
 	border: Record<string, string>;
@@ -684,12 +717,12 @@ export const THEME_LAYER = 'db-ux-theme';
 const suffixAfter = (name: string, key: string): string => name.slice(`--db-${key}-`.length);
 
 /**
- * Groups the flat token map into `{ colors, border, font }`. The color keys are the two main
- * colors, the configured families and the semantic colors; everything else is a border
+ * Groups the flat token map into `{ colors, border, font }`. The color keys are the configured
+ * families and the semantic colors (primary, neutral and the status colors); everything else is a border
  * radius or a font family token.
  */
 export const groupTokens = (config: ThemeConfig, tokens: Record<string, string>): GroupedTheme => {
-	const colorKeys = [...COLOR_KEYS, ...config.families.map(({ key }) => key), ...SEMANTIC_KEYS];
+	const colorKeys = [...config.families.map(({ key }) => key), ...SEMANTIC_KEYS];
 	const colors: Record<string, Record<string, string>> = {};
 	for (const key of colorKeys) {
 		const entries = Object.entries(tokens).filter(([name]) => name.startsWith(`--db-${key}-`));
@@ -709,9 +742,9 @@ export const groupTokens = (config: ThemeConfig, tokens: Record<string, string>)
 
 /** Human label for a color group in a CSS comment. */
 const colorLabel = (config: ThemeConfig, key: string): string => {
-	if (key === 'brand') return 'primary (brand)';
 	if ((SEMANTIC_KEYS as readonly string[]).includes(key)) {
-		return `${key} → ${config.semantic[key as SemanticKey]}`;
+		const label = key === 'brand' ? 'primary (brand)' : key;
+		return `${label} → ${config.semantic[key as SemanticKey]}`;
 	}
 	const family = config.families.find((f) => f.key === key);
 	return family ? family.name : key;
@@ -1037,50 +1070,91 @@ const hueOrUndefined = (value: unknown): number | undefined => {
 	return n === undefined ? undefined : ((n % 360) + 360) % 360;
 };
 
+const rawDirection = (value: unknown) =>
+	pick(value, ['auto', 'darker', 'lighter'] as const, 'auto');
+
+/**
+ * Brings a config saved before Primary and Neutral became semantic colors up to date. Those
+ * configs carry `colors.brand` and `colors.neutral` with a palette of their own and no Grey
+ * family. The neutral values move into the Grey family; the brand maps to a family with the
+ * same origin (e.g. Red) or, when it differs, to a new "Primary" family that carries the origin,
+ * the dark origin and the ramp.
+ */
+const migrateLegacyColors = (
+	families: FamilyConfig[],
+	rawColors: Record<string, Partial<Record<keyof ColorConfig, unknown>> | undefined>,
+): { families: FamilyConfig[]; semantic: Partial<Record<SemanticKey, FamilyKey>> } => {
+	const result = families.map((family) => ({ ...family }));
+	const semantic: Partial<Record<SemanticKey, FamilyKey>> = {};
+
+	const neutral = rawColors.neutral ?? {};
+	const grey = result.find((family) => family.key === 'grey') ?? seededFamily('grey', false);
+	if (isHex(neutral.origin)) {
+		const origin = neutral.origin.toLowerCase();
+		grey.origin = origin;
+		grey.h = hueOrUndefined(neutral.h) ?? hsluvOf(origin).h;
+		grey.saturationCap = clampOrUndefined(neutral.s, 0, 100) ?? NEUTRAL_RAMP_SATURATION;
+		grey.direction = rawDirection(neutral.direction);
+	}
+	if (!result.includes(grey)) result.unshift(grey);
+	semantic.neutral = 'grey';
+
+	const brand = rawColors.brand ?? {};
+	const origin = isHex(brand.origin) ? brand.origin.toLowerCase() : SEEDED_ORIGIN_RED;
+	const originDark = isHex(brand.originDark) ? brand.originDark.toLowerCase() : undefined;
+	const plain =
+		hueOrUndefined(brand.h) === undefined && clampOrUndefined(brand.s, 0, 100) === undefined;
+	const sameOrigin = result.find(
+		(family) => !family.neutral && family.origin === origin && !family.originDark,
+	);
+	if (sameOrigin && !originDark && plain) {
+		semantic.brand = sameOrigin.key;
+	} else {
+		let key = 'primary';
+		for (let n = 2; result.some((family) => family.key === key); n += 1) key = `primary-${n}`;
+		result.push({
+			key,
+			name: 'Primary',
+			builtin: false,
+			origin,
+			...(originDark ? { originDark } : {}),
+			h: hueOrUndefined(brand.h),
+			s: clampOrUndefined(brand.s, 0, 100),
+			direction: rawDirection(brand.direction),
+		});
+		semantic.brand = key;
+	}
+	return { families: result, semantic };
+};
+
+const SEEDED_ORIGIN_RED = FAMILIES.red.origin;
+
 /** Validates untrusted input (URL hash, JSON) and merges it onto the defaults. */
 export const sanitizeConfig = (input: unknown): ThemeConfig => {
 	const raw = (input && typeof input === 'object' ? input : {}) as Partial<
-		Record<keyof ThemeConfig, unknown>
-	>;
-	const rawColors = (raw.colors && typeof raw.colors === 'object' ? raw.colors : {}) as Record<
-		string,
-		Partial<Record<keyof ColorConfig, unknown>> | undefined
+		Record<keyof ThemeConfig | 'colors', unknown>
 	>;
 	const rawSemantic = (
 		raw.semantic && typeof raw.semantic === 'object' ? raw.semantic : {}
 	) as Record<string, unknown>;
-	const families = sanitizeFamilies(raw.families);
-	const colors = {} as Record<ColorKey, ColorConfig>;
-	for (const key of COLOR_KEYS) {
-		const fallback = DEFAULT_CONFIG.colors[key];
-		const candidate = rawColors[key] ?? {};
-		const origin = isHex(candidate.origin) ? candidate.origin.toLowerCase() : fallback.origin;
-		const keepRamp = isHex(candidate.origin);
-		colors[key] = {
-			origin,
-			// A separate dark origin is only kept for Primary (brand)
-			originDark:
-				key === 'brand' && isHex(candidate.originDark)
-					? candidate.originDark.toLowerCase()
-					: undefined,
-			h: keepRamp ? hueOrUndefined(candidate.h) : fallback.h,
-			s: keepRamp ? clampOrUndefined(candidate.s, 0, 100) : fallback.s,
-			direction: pick(candidate.direction, ['auto', 'darker', 'lighter'] as const, 'auto'),
-		};
+	let families = sanitizeFamilies(raw.families);
+	let migrated: Partial<Record<SemanticKey, FamilyKey>> = {};
+	// Configs from before Primary and Neutral became semantic colors still carry `colors`
+	if (raw.colors && typeof raw.colors === 'object') {
+		({ families, semantic: migrated } = migrateLegacyColors(
+			families,
+			raw.colors as Record<string, Partial<Record<keyof ColorConfig, unknown>> | undefined>,
+		));
 	}
+	const familyKeys = families.map((family) => family.key);
 	return {
 		preset: pick(raw.preset, [...PRESETS, 'custom'] as const, 'custom'),
-		colors,
 		families,
 		semantic: Object.fromEntries(
-			SEMANTIC_KEYS.map((key) => [
-				key,
-				pick(
-					rawSemantic[key],
-					families.map((family) => family.key),
-					SEMANTIC_DEFAULTS[key],
-				),
-			]),
+			SEMANTIC_KEYS.map((key) => {
+				const fallback = migrated[key] ?? defaultFamilyFor(key, families);
+				return [key, pick(rawSemantic[key], familyKeys, fallback)];
+			}),
 		) as Record<SemanticKey, FamilyKey>,
 		radius: pick(raw.radius, RADII, DEFAULT_CONFIG.radius),
 		headingFont: pick(raw.headingFont, FONTS, DEFAULT_CONFIG.headingFont),
@@ -1092,59 +1166,58 @@ export const sanitizeConfig = (input: unknown): ThemeConfig => {
 };
 
 /**
- * Built-in families are always present (missing ones get their defaults, a valid origin is
- * kept). Custom families are kept when key, name and origin are valid.
+ * Keeps the families of a saved config in their saved order. Every family can be removed, so
+ * a missing one is not restored. A seeded family (e.g. Red, Grey) keeps its defaults where the
+ * saved value is invalid; a custom family is kept when key, name and origin are valid. Without
+ * a family list (or without a single valid family) the default families are used.
  */
 const sanitizeFamilies = (input: unknown): FamilyConfig[] => {
-	const list = Array.isArray(input) ? input : [];
-	const byKey = new Map<string, Record<string, unknown>>();
-	for (const item of list) {
-		if (item && typeof item === 'object' && typeof (item as { key?: unknown }).key === 'string') {
-			byKey.set((item as { key: string }).key, item as Record<string, unknown>);
-		}
-	}
-	const direction = (value: unknown) => pick(value, ['auto', 'darker', 'lighter'] as const, 'auto');
+	if (!Array.isArray(input)) return structuredClone(DEFAULT_FAMILIES);
 	const result: FamilyConfig[] = [];
-	for (const fallback of DEFAULT_FAMILIES) {
-		const candidate = byKey.get(fallback.key);
-		// Built-in families are never deletable, so they are always restored. A default custom
-		// family (Lilac) is only restored when the saved config still contains it – otherwise a
-		// family the user deleted would reappear on reload.
-		if (!candidate) {
-			if (fallback.builtin) result.push({ ...fallback });
+	for (const candidate of input as Record<string, unknown>[]) {
+		if (!candidate || typeof candidate !== 'object' || typeof candidate.key !== 'string') continue;
+		const key = candidate.key;
+		if (result.some((family) => family.key === key)) continue;
+		const originDark = isHex(candidate.originDark) ? candidate.originDark.toLowerCase() : undefined;
+		const seeded = DEFAULT_FAMILIES.find((family) => family.key === key);
+		// The saturation cap is opt-in for every family (seeded or custom) and independent of
+		// the ramp hue/saturation fit below. Grey (the only `neutral: true` family) keeps its
+		// cap even when the saved value is invalid, so it cannot silently lose its neutrality.
+		const saturationCap = seeded?.neutral
+			? (clampOrUndefined(candidate.saturationCap, 0, 100) ?? NEUTRAL_RAMP_SATURATION)
+			: clampOrUndefined(candidate.saturationCap, 0, 100);
+		if (seeded && isSeededFamily(key)) {
+			const origin = isHex(candidate.origin) ? candidate.origin.toLowerCase() : seeded.origin;
+			const changed = origin !== seeded.origin;
+			result.push({
+				...seeded,
+				origin,
+				...(originDark ? { originDark } : {}),
+				// The others derive hue and saturation from the origin, unless the saved origin
+				// carries its own ramp fit.
+				h: changed ? hueOrUndefined(candidate.h) : seeded.h,
+				s: changed ? clampOrUndefined(candidate.s, 0, 100) : seeded.s,
+				...(saturationCap != null ? { saturationCap } : {}),
+				direction: rawDirection(candidate.direction),
+			});
 			continue;
 		}
-		if (!isHex(candidate.origin)) {
-			if (fallback.builtin) result.push({ ...fallback });
-			continue;
-		}
-		const origin = candidate.origin.toLowerCase();
-		const changed = origin !== fallback.origin;
-		result.push({
-			...fallback,
-			origin,
-			h: changed ? hueOrUndefined(candidate.h) : fallback.h,
-			s: changed ? clampOrUndefined(candidate.s, 0, 100) : fallback.s,
-			direction: direction(candidate.direction),
-		});
-	}
-	for (const candidate of byKey.values()) {
-		const key = candidate.key as string;
 		const name = typeof candidate.name === 'string' ? candidate.name.trim().slice(0, 40) : '';
-		if (isBuiltinFamily(key) || !name || !isHex(candidate.origin)) continue;
+		if (!name || !isHex(candidate.origin)) continue;
 		if (hasUnsafeNameChars(name)) continue;
 		if (familyKeyFromName(name) !== key || RESERVED_KEYS.has(key)) continue;
 		if (hasReservedFirstSegment(key)) continue;
-		if (result.some((family) => family.key === key)) continue;
 		result.push({
 			key,
 			name,
 			builtin: false,
 			origin: candidate.origin.toLowerCase(),
-			direction: direction(candidate.direction),
+			...(originDark ? { originDark } : {}),
+			...(saturationCap != null ? { saturationCap } : {}),
+			direction: rawDirection(candidate.direction),
 		});
 	}
-	return result;
+	return result.length > 0 ? result : structuredClone(DEFAULT_FAMILIES);
 };
 
 /*
@@ -1171,18 +1244,41 @@ export const decodeConfig = (value: string): ThemeConfig | undefined => {
 const randomBetween = (min: number, max: number): number => min + Math.random() * (max - min);
 const randomOf = <T>(values: readonly T[]): T => values[Math.floor(Math.random() * values.length)];
 
+/** Replaces the family with the same key, or appends it. */
+const upsertFamily = (families: FamilyConfig[], family: FamilyConfig): FamilyConfig[] =>
+	families.some(({ key }) => key === family.key)
+		? families.map((item) => (item.key === family.key ? family : item))
+		: [...families, family];
+
 export const shuffleConfig = (current: ThemeConfig): ThemeConfig => {
 	const hue = randomBetween(0, 360);
 	const brand = hsluvToHex(hue, randomBetween(70, 100), randomBetween(38, 56));
 	const neutralHue = Math.random() < 0.5 ? hue : randomBetween(0, 360);
+	// The primary color gets a family of its own, so shuffling it does not recolor the status
+	// colors that may use the same family (e.g. Red for critical).
+	let families = upsertFamily(current.families, {
+		key: 'primary',
+		name: 'Primary',
+		builtin: false,
+		origin: brand,
+		direction: 'auto',
+	});
+	// The neutral family is tinted; any other family assigned to neutral stays untouched.
+	const neutralFamily = families.find(({ key }) => key === current.semantic.neutral);
+	if (neutralFamily?.neutral) {
+		families = upsertFamily(families, {
+			...neutralFamily,
+			origin: tintedNeutral(neutralHue, randomBetween(2, 16)),
+			originDark: undefined,
+			h: undefined,
+			saturationCap: neutralFamily.saturationCap ?? NEUTRAL_RAMP_SATURATION,
+		});
+	}
 	return {
 		...current,
 		preset: 'custom',
-		colors: {
-			...current.colors,
-			brand: color(brand),
-			neutral: tintedNeutral(neutralHue, randomBetween(2, 16)),
-		},
+		families,
+		semantic: { ...current.semantic, brand: 'primary' },
 		radius: randomOf(RADII),
 		headingFont: randomOf(FONTS.filter((font) => font !== 'db')),
 		bodyFont: randomOf(FONTS.filter((font) => font !== 'db' && font !== 'mono')),

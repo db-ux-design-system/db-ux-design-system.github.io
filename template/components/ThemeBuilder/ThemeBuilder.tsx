@@ -30,8 +30,8 @@ import {
 	buildTheme,
 	DEFAULT_CONFIG,
 	familyKeyFromName,
+	defaultFamilyFor,
 	SEMANTIC_KEYS,
-	SEMANTIC_DEFAULTS,
 	validateFamilyName,
 	FONTS,
 	ICON_LIBRARIES,
@@ -46,7 +46,6 @@ import {
 	toStyleDictionary,
 	toThemeCss,
 	type ColorConfig,
-	type ColorKey,
 	type FamilyConfig,
 	type FamilyKey,
 	type SemanticKey,
@@ -96,7 +95,7 @@ const useMediaQuery = (query: string): boolean => {
 };
 
 /** The sections of the settings panel; one is open at a time. */
-type SettingsSection = 'colors' | 'semantic' | 'families' | 'shape';
+type SettingsSection = 'semantic' | 'families' | 'shape';
 
 /** The ZIP files in display order, with a short label for the file select. */
 const CODE_FILE_ORDER: readonly CodeFileKey[] = [
@@ -379,6 +378,36 @@ function HexField({
 	);
 }
 
+/**
+ * A small icon-only toggle next to a hex field, e.g. add/remove dark origin or saturation cap.
+ * Its label always shows as a tooltip.
+ */
+function FieldToggleButton({
+	icon,
+	label,
+	onClick,
+}: {
+	icon: string;
+	label: string;
+	onClick: () => void;
+}) {
+	return (
+		<DBButton
+			className="tb-field-toggle"
+			variant="ghost"
+			size="medium"
+			icon={icon}
+			noText
+			type="button"
+			onClick={onClick}
+		>
+			{label}
+			{/* End-aligned below the button, so it stays inside the settings panel */}
+			<DBTooltip placement="bottom-end">{label}</DBTooltip>
+		</DBButton>
+	);
+}
+
 function ColorField({
 	id,
 	name,
@@ -389,8 +418,8 @@ function ColorField({
 	allowDarkOrigin,
 	onOriginChange,
 	onDarkOriginChange,
-	saturation,
-	onSaturationChange,
+	allowSaturationCap,
+	onSaturationCapChange,
 	onRemove,
 	removeLabel,
 }: {
@@ -400,19 +429,20 @@ function ColorField({
 	mode: ColorMode;
 	m: ThemeBuilderMessages;
 	lang: ThemeBuilderLang;
-	/** Primary offers a separate dark-mode origin; the other colors do not. */
+	/** Offers a separate dark-mode origin. */
 	allowDarkOrigin?: boolean;
 	onOriginChange: (value: string) => void;
 	onDarkOriginChange?: (value: string | undefined) => void;
-	/** When set, a ramp-saturation input is shown (used for the neutral color). */
-	saturation?: number;
-	onSaturationChange?: (value: number) => void;
-	/** Custom families can be removed; the icon button sits next to the color input. */
+	/** Offers a ramp-saturation cap (opt-in per family; the built-in Grey starts with it on). */
+	allowSaturationCap?: boolean;
+	onSaturationCapChange?: (value: number | undefined) => void;
+	/** Families can be removed; the icon button sits next to the color input. */
 	onRemove?: () => void;
 	removeLabel?: string;
 }) {
 	const contrastOk = mode.contrastOnOrigin >= 4.5;
 	const hasDark = color.originDark != null;
+	const hasSaturationCap = color.saturationCap != null;
 
 	return (
 		<div className="tb-color-field">
@@ -424,77 +454,80 @@ function ColorField({
 				invalidMessage={m.hexInvalid}
 				onChange={onOriginChange}
 				trailing={
-					onRemove ? (
-						<DBButton
-							className="tb-color-remove"
-							variant="ghost"
-							size="medium"
-							icon="bin"
-							noText
-							type="button"
-							onClick={onRemove}
-						>
-							{removeLabel}
-							<DBTooltip placement="left">{removeLabel}</DBTooltip>
-						</DBButton>
-					) : undefined
+					<>
+						{allowDarkOrigin && !hasDark ? (
+							<FieldToggleButton
+								icon="moon"
+								label={m.addDarkOrigin}
+								onClick={() => onDarkOriginChange?.(color.origin)}
+							/>
+						) : null}
+						{allowSaturationCap && !hasSaturationCap ? (
+							<FieldToggleButton
+								icon="water_drop"
+								label={m.addSaturationCap}
+								onClick={() => onSaturationCapChange?.(NEUTRAL_RAMP_SATURATION)}
+							/>
+						) : null}
+						{onRemove ? (
+							<FieldToggleButton icon="bin" label={removeLabel ?? ''} onClick={onRemove} />
+						) : null}
+					</>
 				}
 			/>
-			{allowDarkOrigin ? (
-				hasDark ? (
-					<HexField
-						id={`tb-${id}-hex-dark`}
-						label={m.originDark(name)}
-						value={color.originDark ?? color.origin}
-						pickerLabel={m.colorPickerDark(name)}
-						invalidMessage={m.hexInvalid}
-						onChange={(value) => onDarkOriginChange?.(value)}
-						trailing={
-							<DBButton
-								className="tb-color-remove"
-								variant="ghost"
-								size="medium"
-								icon="bin"
-								noText
-								type="button"
-								onClick={() => onDarkOriginChange?.(undefined)}
-							>
-								{m.removeDarkOrigin}
-								<DBTooltip placement="left">{m.removeDarkOrigin}</DBTooltip>
-							</DBButton>
-						}
-					/>
-				) : (
-					<DBButton
-						wrap={false}
-						variant="ghost"
-						icon="plus"
-						width="full"
-						type="button"
-						onClick={() => onDarkOriginChange?.(color.origin)}
-					>
-						{m.addDarkOrigin}
-					</DBButton>
-				)
-			) : null}
-			{onSaturationChange ? (
-				<DBInput
-					id={`tb-${id}-saturation`}
-					label={m.neutralSaturation}
-					message={m.neutralSaturationHint}
-					invalidMessage={m.neutralSaturationInvalid}
-					type="number"
-					min={0}
-					max={100}
-					step={1}
-					value={String(Math.round(saturation ?? 0))}
-					onChange={(event) => {
-						const next = Number(event.target.value);
-						if (Number.isFinite(next)) {
-							onSaturationChange(Math.max(0, Math.min(100, next)));
-						}
-					}}
+			{allowDarkOrigin && hasDark ? (
+				<HexField
+					id={`tb-${id}-hex-dark`}
+					label={m.originDark(name)}
+					value={color.originDark ?? color.origin}
+					pickerLabel={m.colorPickerDark(name)}
+					invalidMessage={m.hexInvalid}
+					onChange={(value) => onDarkOriginChange?.(value)}
+					trailing={
+						<FieldToggleButton
+							icon="bin"
+							label={m.removeDarkOrigin}
+							onClick={() => onDarkOriginChange?.(undefined)}
+						/>
+					}
 				/>
+			) : null}
+			{allowSaturationCap && hasSaturationCap ? (
+				<div className="tb-color-row">
+					<DBInput
+						id={`tb-${id}-saturation`}
+						className="tb-saturation-input"
+						label={m.saturationCap}
+						invalidMessage={m.saturationCapInvalid}
+						type="number"
+						min={0}
+						max={100}
+						step={1}
+						// The tooltip is aria-hidden, so the input references its text directly
+						ariaDescribedBy={`tb-${id}-saturation-hint`}
+						value={String(Math.round(color.saturationCap ?? 0))}
+						onChange={(event) => {
+							const next = Number(event.target.value);
+							if (Number.isFinite(next)) {
+								onSaturationCapChange?.(Math.max(0, Math.min(100, next)));
+							}
+						}}
+					>
+						{/*
+						 * The hint sits in a tooltip on the input instead of a permanent message below
+						 * it, so the field stays compact. It shows on hover and, via ThemeBuilder.css,
+						 * on keyboard focus of the input.
+						 */}
+						<DBTooltip id={`tb-${id}-saturation-hint`} placement="bottom-start">
+							{m.saturationCapHint}
+						</DBTooltip>
+					</DBInput>
+					<FieldToggleButton
+						icon="bin"
+						label={m.removeSaturationCap}
+						onClick={() => onSaturationCapChange?.(undefined)}
+					/>
+				</div>
 			) : null}
 			<ol className="tb-ramp" aria-hidden="true">
 				{mode.palette.map((value, index) => (
@@ -519,7 +552,7 @@ const ThemeBuilder = ({ lang = 'en' }: Props) => {
 	const [settingsOpen, setSettingsOpen] = useState(false);
 	// The open settings section. One at a time, controlled here so every item's state
 	// matches what is shown (see the accordion below).
-	const [openSection, setOpenSection] = useState<SettingsSection | null>('colors');
+	const [openSection, setOpenSection] = useState<SettingsSection | null>('semantic');
 	const sectionProps = (section: SettingsSection) => ({
 		open: openSection === section,
 		onToggle: (open: boolean) => setOpenSection(open ? section : null),
@@ -621,35 +654,6 @@ const ThemeBuilder = ({ lang = 'en' }: Props) => {
 		}));
 	}, []);
 
-	const updateColor = useCallback((key: ColorKey, patch: Partial<ColorConfig>) => {
-		setConfig((previous) => {
-			const current = previous.colors[key];
-			const originChanged = patch.origin != null && patch.origin !== current.origin;
-			// The neutral color keeps a controlled ramp saturation instead of deriving it from
-			// the origin, so a dark origin (e.g. #090F1B) does not tint the light steps. On an
-			// origin change the hue follows the new origin but the saturation is preserved.
-			const next =
-				key === 'neutral'
-					? originChanged
-						? {
-								...current,
-								...patch,
-								h: patch.origin != null ? hsluvOf(patch.origin).h : current.h,
-								s: current.s ?? NEUTRAL_RAMP_SATURATION,
-							}
-						: { ...current, ...patch }
-					: originChanged
-						? // A new origin defines the ramp, so the fitted h/s of a preset are dropped
-							{ ...current, ...patch, h: undefined, s: undefined }
-						: { ...current, ...patch };
-			return {
-				...previous,
-				preset: 'custom',
-				colors: { ...previous.colors, [key]: next },
-			};
-		});
-	}, []);
-
 	const copyText = async (text: string, message: string) => {
 		try {
 			await navigator.clipboard.writeText(text);
@@ -723,10 +727,15 @@ const ThemeBuilder = ({ lang = 'en' }: Props) => {
 			families: previous.families.map((family) => {
 				if (family.key !== key) return family;
 				const originChanged = patch.origin != null && patch.origin !== family.origin;
-				// A new origin defines the ramp, so the fitted h/s of the built-in family are dropped
-				return originChanged
-					? { ...family, ...patch, h: undefined, s: undefined }
-					: { ...family, ...patch };
+				if (!originChanged) return { ...family, ...patch };
+				// A family with a saturation cap keeps it instead of deriving the ramp from the
+				// origin as-is, so a strongly tinted origin (e.g. #090F1B) does not tint the steps
+				// beyond the cap. On an origin change the hue follows the new origin, the cap stays.
+				if (family.saturationCap != null) {
+					return { ...family, ...patch, h: hsluvOf(patch.origin as string).h };
+				}
+				// A new origin defines the ramp, so the fitted h/s of the family are dropped
+				return { ...family, ...patch, h: undefined, s: undefined };
 			}),
 		}));
 	};
@@ -749,46 +758,42 @@ const ThemeBuilder = ({ lang = 'en' }: Props) => {
 	};
 
 	const removeFamily = (key: FamilyKey) => {
-		setConfig((previous) => ({
-			...previous,
-			preset: 'custom',
-			families: previous.families.filter((family) => family.key !== key),
-			// Semantic colors that used the removed family fall back to their default
-			semantic: Object.fromEntries(
-				SEMANTIC_KEYS.map((semanticKey) => [
-					semanticKey,
-					previous.semantic[semanticKey] === key
-						? SEMANTIC_DEFAULTS[semanticKey]
-						: previous.semantic[semanticKey],
-				]),
-			) as ThemeConfig['semantic'],
-		}));
+		setConfig((previous) => {
+			// The last family stays, so every semantic color still has one to point at
+			if (previous.families.length <= 1) return previous;
+			const families = previous.families.filter((family) => family.key !== key);
+			return {
+				...previous,
+				preset: 'custom',
+				families,
+				// Colors that used the removed family fall back to their default, or to the first
+				// remaining family when that default was removed as well
+				semantic: Object.fromEntries(
+					SEMANTIC_KEYS.map((semanticKey) => [
+						semanticKey,
+						previous.semantic[semanticKey] === key
+							? defaultFamilyFor(semanticKey, families)
+							: previous.semantic[semanticKey],
+					]),
+				) as ThemeConfig['semantic'],
+			};
+		});
 	};
 
-	const renderColor = (key: ColorKey) => (
-		<ColorField
+	const renderSemantic = (key: SemanticKey) => (
+		<SemanticField
 			key={key}
-			id={key}
-			name={m.colorNames[key]}
-			color={config.colors[key]}
-			mode={theme.modes[key]}
+			semanticKey={key}
+			family={config.semantic[key]}
+			families={config.families}
+			palette={theme.familyModes[config.semantic[key]]?.palette ?? []}
 			m={m}
-			lang={lang}
-			allowDarkOrigin={key === 'brand'}
-			onOriginChange={(origin) => updateColor(key, { origin })}
-			onDarkOriginChange={(originDark) => updateColor(key, { originDark })}
-			saturation={
-				key === 'neutral' ? (config.colors.neutral.s ?? NEUTRAL_RAMP_SATURATION) : undefined
-			}
-			onSaturationChange={
-				key === 'neutral'
-					? (s) =>
-							updateColor('neutral', {
-								s,
-								// Keep the hue bound to the current origin so the slider only moves chroma
-								h: hsluvOf(config.colors.neutral.origin).h,
-							})
-					: undefined
+			onChange={(family) =>
+				setConfig((previous) => ({
+					...previous,
+					preset: 'custom',
+					semantic: { ...previous.semantic, [key]: family },
+				}))
 			}
 		/>
 	);
@@ -844,32 +849,10 @@ const ThemeBuilder = ({ lang = 'en' }: Props) => {
 							 * keeps its own state open, so the next click on it did nothing.
 							 */}
 							<DBAccordion variant="divider">
-								<DBAccordionItem headline={m.colors} {...sectionProps('colors')}>
-									<DBStack gap="small">
-										{renderColor('brand')}
-										{renderColor('neutral')}
-									</DBStack>
-								</DBAccordionItem>
 								<DBAccordionItem headline={m.semanticColors} {...sectionProps('semantic')}>
 									<DBStack gap="small">
 										<p className="tb-hint">{m.semanticHint}</p>
-										{SEMANTIC_KEYS.map((key) => (
-											<SemanticField
-												key={key}
-												semanticKey={key}
-												family={config.semantic[key]}
-												families={config.families}
-												palette={theme.familyModes[config.semantic[key]]?.palette ?? []}
-												m={m}
-												onChange={(family) =>
-													setConfig((previous) => ({
-														...previous,
-														preset: 'custom',
-														semantic: { ...previous.semantic, [key]: family },
-													}))
-												}
-											/>
-										))}
+										{SEMANTIC_KEYS.map(renderSemantic)}
 									</DBStack>
 								</DBAccordionItem>
 								<DBAccordionItem headline={m.colorFamilies} {...sectionProps('families')}>
@@ -884,11 +867,23 @@ const ThemeBuilder = ({ lang = 'en' }: Props) => {
 													mode={theme.familyModes[family.key]}
 													m={m}
 													lang={lang}
+													allowDarkOrigin
 													onOriginChange={(origin) => updateFamily(family.key, { origin })}
-													onRemove={family.builtin ? undefined : () => removeFamily(family.key)}
-													removeLabel={
-														family.builtin ? undefined : m.removeFamily(familyLabel(family, m))
+													onDarkOriginChange={(originDark) =>
+														updateFamily(family.key, { originDark })
 													}
+													allowSaturationCap
+													onSaturationCapChange={(saturationCap) =>
+														updateFamily(family.key, {
+															saturationCap,
+															// Keep the hue bound to the current origin so the field only moves chroma
+															h: saturationCap != null ? hsluvOf(family.origin).h : undefined,
+														})
+													}
+													onRemove={
+														config.families.length > 1 ? () => removeFamily(family.key) : undefined
+													}
+													removeLabel={m.removeFamily(familyLabel(family, m))}
 												/>
 											</div>
 										))}

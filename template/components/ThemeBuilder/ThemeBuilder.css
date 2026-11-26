@@ -149,14 +149,33 @@
 		min-inline-size: 0;
 	}
 
-	& .db-input input {
+	/* Only rows with a swatch reserve room for it; the saturation cap row has none */
+	&:has(> .tb-color-swatch) .db-input input {
 		padding-inline-start: calc(var(--tb-swatch-size) + 2 * var(--tb-swatch-inset));
 	}
 }
 
-/* Remove button for a custom color: icon only, next to the input, does not shrink */
-.tb-color-remove {
+/* Toggle/remove button next to a field (dark origin, saturation cap, remove family): icon
+   only, does not shrink. Several can sit in a row (see HexField's trailing slot). */
+.tb-field-toggle {
 	flex: 0 0 auto;
+}
+
+/*
+ * The saturation cap hint is a DBTooltip on the input wrapper. The library shows it on
+ * `:hover` and `:focus-visible` of that wrapper, but the wrapper never receives focus itself –
+ * the input inside it does. The visible state is therefore mirrored for `:focus-within`, so the
+ * hint also appears when the field is reached by keyboard.
+ */
+.tb-saturation-input .db-tooltip {
+	/* About as wide as the input, so the hint stays below it and inside the settings panel */
+	max-inline-size: var(--db-sizing-3xl);
+}
+
+.tb-saturation-input[data-has-tooltip='true']:focus-within .db-tooltip:first-of-type {
+	visibility: var(--db-show-popover-visibility, visible);
+	opacity: 1;
+	transform: translate(var(--db-popover-center-x, 0), var(--db-popover-center-y, 0));
 }
 
 .tb-color-swatch {

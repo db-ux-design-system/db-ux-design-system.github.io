@@ -73,11 +73,8 @@ const renderPalettes = (
 ): void => {
 	const container = doc.querySelector<HTMLElement>('[data-tb-palettes]');
 	if (!container) return;
-	const groups = [
-		{ key: 'brand', label: 'Primary' },
-		{ key: 'neutral', label: 'Neutral' },
-		...config.families.map(({ key, name }) => ({ key, label: name })),
-	];
+	// Primary and neutral are aliases of a family, so the families cover every palette
+	const groups = config.families.map(({ key, name }) => ({ key, label: name }));
 	const element = <K extends keyof HTMLElementTagNameMap>(tag: K, className: string) => {
 		const node = doc.createElement(tag);
 		node.className = className;
