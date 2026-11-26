@@ -13,16 +13,17 @@ _version bump_
 
 #### Added
 
-- Table: Rows can now be expanded with a `<details>` element in a cell of an interactive row, its `<summary>` with `data-table-row-trigger="true"` toggles the content below the whole row. This works in the default layout and with `mobileVariant="list"`. [see commit 0a6edf1](https://github.com/db-ux-design-system/core-web/commit/0a6edf193237f97372d1a5c94343a3cf0b166108)
-- Table: The new CSS Custom Property `--db-table-mobile-variant-list-grid-columns` sets the column split of label and content in `mobileVariant="list"`. [see commit 19587f4](https://github.com/db-ux-design-system/core-web/commit/19587f46b1e3124283dd0477ed54db2205ee70af)
-- Web Components: An opt-in build variant with Stencil's `experimentalSlotFixes` is available via `@db-ux/wc-core-components/slot-fixes` and `@db-ux/wc-core-components/bundle-slot-fixes`. Use it when a framework reorders slotted children at runtime. [see commit b32948e](https://github.com/db-ux-design-system/core-web/commit/b32948edd73c7268995cd7815e87157197218dcd)
+- Table: Rows can now be expanded. Put a `<details>` into a cell of an interactive row and mark its `<summary>` with `data-table-row-trigger="true"`, the opened content then spans the full row below the cells, also with `mobileVariant="list"`.
+- Table: The new `--db-table-mobile-variant-list-grid-columns` CSS Custom Property sets the column split of label and content in `mobileVariant="list"`, e.g. `30% 1fr` instead of the default `40% 1fr`.
+- Web Components: An opt-in build with Stencil's `experimentalSlotFixes` is now available via `@db-ux/wc-core-components/slot-fixes` and `@db-ux/wc-core-components/bundle-slot-fixes`, for frameworks that reorder slotted children at runtime. The default entry points stay unchanged.
 
 #### Changed
 
-- Table: `data-header` is now only set for columns with a visible header text. Cells of a column whose header cell uses `noText` no longer get a `data-header` attribute. [see commit 0a6edf1](https://github.com/db-ux-design-system/core-web/commit/0a6edf193237f97372d1a5c94343a3cf0b166108)
+- Table: Cells of a column whose header cell has `noText` no longer get a `data-header` attribute, so they no longer show the header text as a visual label in `mobileVariant="list"`.
+  - If you write the markup yourself, set `data-header` only for columns with a visible header text.
 
 #### Fixed
 
-- Table: The dividers in `mobileVariant="list"` are now drawn consistently, a header row with interactive controls stays visible and the colon after the label has been removed. [see commit 19587f4](https://github.com/db-ux-design-system/core-web/commit/19587f46b1e3124283dd0477ed54db2205ee70af)
-- Table: The spaced styles of `mobileVariant="list"` now only apply below the `sm` breakpoint of the table. [see commit 0a6edf1](https://github.com/db-ux-design-system/core-web/commit/0a6edf193237f97372d1a5c94343a3cf0b166108)
-- Popover: The trigger is now found independently of its position, so `aria-expanded` and `aria-haspopup` are set reliably in Web Components as well. [see commit b32948e](https://github.com/db-ux-design-system/core-web/commit/b32948edd73c7268995cd7815e87157197218dcd)
+- Table: The dividers in `mobileVariant="list"` are now drawn consistently. A header row with interactive controls stays visible, and the colon after the label has been removed.
+- Table: `mobileVariant="list"` no longer applies the spaced styles on wide screens, only below the `sm` breakpoint of the table.
+- Popover: The trigger is now found independently of its position, so `aria-expanded` and `aria-haspopup` are also set reliably in the Web Components.
