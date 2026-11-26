@@ -23,6 +23,13 @@ const en = {
 		neutral: 'Neutral',
 		custom: 'Custom',
 	} satisfies Record<Preset, string>,
+	introTitle: 'Welcome to the Theme Builder',
+	introText:
+		'Create your own color theme based on the Design System. Set the origin colors, assign them to the semantic colors and download the generated tokens. Every color family gets a full palette with checked contrast values.',
+	introClose: 'Close',
+	introLearn: 'Read more about the Theme Builder',
+	introDismiss: 'Do not show again',
+	introStart: 'Get started',
 	colors: 'Main Colors',
 	semanticColors: 'Semantic colors',
 	semanticHint:
@@ -157,6 +164,13 @@ const de: ThemeBuilderMessages = {
 		neutral: 'Neutral',
 		custom: 'Eigene Einstellung',
 	},
+	introTitle: 'Willkommen im Theme Builder',
+	introText:
+		'Erstelle ein eigenes Farb-Theme auf Basis des Design Systems. Lege die Origin-Farben fest, ordne sie den semantischen Farben zu und lade die generierten Tokens herunter. Jede Farbfamilie erhält eine vollständige Palette mit geprüften Kontrastwerten.',
+	introClose: 'Schließen',
+	introLearn: 'Mehr über den Theme Builder lesen',
+	introDismiss: 'Nicht mehr anzeigen',
+	introStart: 'Loslegen',
 	colors: 'Hauptfarben',
 	semanticColors: 'Semantische Farben',
 	semanticHint:
