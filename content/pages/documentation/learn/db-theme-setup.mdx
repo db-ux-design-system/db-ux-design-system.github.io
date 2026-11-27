@@ -97,10 +97,10 @@ You do not install them separately.
 
 ### Allow the install scripts
 
-pnpm and npm 12 run install scripts of dependencies only after you allow them. Without the approval, the files stay encrypted.
+pnpm runs install scripts of dependencies only after you allow them. From npm 11.19 on, npm checks them against `allowScripts` in `package.json`: depending on the version it skips unapproved scripts or only lists them. Allow them in either case. Without the approval, the files can stay encrypted.
 
 - **pnpm:** Run `pnpm approve-builds` and allow the three `@db-ux/db-theme*` packages.
-- **npm 12:** Install with `npm i @db-ux/db-theme`. Then allow the scripts with `npm install-scripts approve @db-ux/db-theme @db-ux/db-theme-fonts @db-ux/db-theme-icons` and run them with `npm rebuild @db-ux/db-theme @db-ux/db-theme-fonts @db-ux/db-theme-icons`.
+- **npm 11.19 and later:** Install with `npm i @db-ux/db-theme`. Then allow the scripts with `npm install-scripts approve @db-ux/db-theme @db-ux/db-theme-fonts @db-ux/db-theme-icons` and run them with `npm rebuild @db-ux/db-theme @db-ux/db-theme-fonts @db-ux/db-theme-icons`.
 
 If you add or fix the `.env` file after the installation, run the decryption again, for example with the same `npm rebuild` command. The decryption worked if `node_modules/@db-ux/db-theme-fonts/build/assets/` contains `.woff2` files and not only `.woff2.enc` files.
 
