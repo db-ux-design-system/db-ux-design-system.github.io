@@ -95,9 +95,14 @@ Du installierst sie nicht separat.
 | `@db-ux/db-theme-fonts` | Die Schriften DB Neo Screen       |
 | `@db-ux/db-theme-icons` | Die DB-Icon-Schrift und SVG-Icons |
 
-### Install-Skripte mit pnpm erlauben
+### Install-Skripte erlauben
 
-pnpm führt Install-Skripte von Abhängigkeiten erst aus, wenn du sie erlaubst. Führe `pnpm approve-builds` aus und erlaube die drei Pakete `@db-ux/db-theme*`. Mit npm nutzt du `npm i @db-ux/db-theme`.
+pnpm führt Install-Skripte von Abhängigkeiten erst aus, wenn du sie erlaubst. Ab npm 11.19 prüft npm sie gegen `allowScripts` in der `package.json`: Je nach Version überspringt npm nicht freigegebene Skripte oder listet sie nur auf. Erlaube sie in jedem Fall. Ohne Freigabe können die Dateien verschlüsselt bleiben.
+
+- **pnpm:** Führe `pnpm approve-builds` aus und erlaube die drei Pakete `@db-ux/db-theme*`.
+- **npm ab 11.19:** Installiere mit `npm i @db-ux/db-theme`. Erlaube die Skripte dann mit `npm install-scripts approve @db-ux/db-theme @db-ux/db-theme-fonts @db-ux/db-theme-icons` und führe sie mit `npm rebuild @db-ux/db-theme @db-ux/db-theme-fonts @db-ux/db-theme-icons` aus.
+
+Legst du die `.env`-Datei erst nach der Installation an oder korrigierst sie, starte die Entschlüsselung erneut, zum Beispiel mit demselben `npm rebuild`-Befehl. Die Entschlüsselung hat geklappt, wenn `node_modules/@db-ux/db-theme-fonts/build/assets/` `.woff2`-Dateien enthält und nicht nur `.woff2.enc`-Dateien.
 
 ### Manuell entschlüsseln
 
