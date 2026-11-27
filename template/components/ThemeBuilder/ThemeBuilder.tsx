@@ -11,6 +11,7 @@ import {
 	DBAccordion,
 	DBAccordionItem,
 	DBButton,
+	DBCheckbox,
 	DBDialog,
 	DBDialogFooter,
 	DBDialogHeader,
@@ -18,6 +19,7 @@ import {
 	DBDrawerHeader,
 	DBInfotext,
 	DBInput,
+	DBLink,
 	DBSelect,
 	DBStack,
 	DBTabItem,
@@ -209,6 +211,68 @@ function SemanticField({
 				))}
 			</ol>
 		</div>
+	);
+}
+
+/** localStorage key that hides the intro dialog once the user opted out. */
+const INTRO_DISMISSED_KEY = 'db-ux-theme-builder:intro-dismissed';
+
+/** Reads the opt-out. Storage can be blocked (private mode), so a failed read shows the intro. */
+const isIntroDismissed = (): boolean => {
+	try {
+		return window.localStorage.getItem(INTRO_DISMISSED_KEY) === 'true';
+	} catch {
+		return false;
+	}
+};
+
+/**
+ * Short introduction shown when the builder opens, with a link to the Learn article. With
+ * "Do not show again" checked, closing it by any means (button, close icon, Escape) stores the
+ * opt-out, so it does not open again on this device.
+ */
+function IntroDialog({ m, learnHref }: { m: ThemeBuilderMessages; learnHref: string }) {
+	const [open, setOpen] = useState(() => !isIntroDismissed());
+	const [dismiss, setDismiss] = useState(false);
+
+	const close = () => {
+		if (dismiss) {
+			try {
+				window.localStorage.setItem(INTRO_DISMISSED_KEY, 'true');
+			} catch {
+				// ignore: without storage the intro simply shows again next time
+			}
+		}
+		setOpen(false);
+	};
+
+	return (
+		<DBDialog
+			open={open}
+			onClose={close}
+			containerSize="medium"
+			header={<DBDialogHeader closeButtonText={m.introClose} text={m.introTitle} />}
+			footer={
+				<DBDialogFooter className="tb-intro-footer">
+					<DBCheckbox
+						label={m.introDismiss}
+						checked={dismiss}
+						onChange={(event) => setDismiss(event.target.checked)}
+					/>
+					<DBButton wrap={false} variant="brand" type="button" onClick={close}>
+						{m.introStart}
+					</DBButton>
+				</DBDialogFooter>
+			}
+		>
+			<DBStack gap="small">
+				<p>{m.introText}</p>
+				{/* Wraps on narrow screens; the default nowrap would push the arrow out of the dialog */}
+				<DBLink href={learnHref} wrap>
+					{m.introLearn}
+				</DBLink>
+			</DBStack>
+		</DBDialog>
 	);
 }
 
@@ -505,6 +569,8 @@ const ThemeBuilder = ({ lang = 'en' }: Props) => {
 
 	const theme = useMemo(() => buildTheme(config), [config]);
 	const basePath = lang === 'de' ? '/de/themebuilder' : '/themebuilder';
+	const learnHref =
+		lang === 'de' ? '/de/dokumentation/lernen/theme-builder' : '/documentation/learn/theme-builder';
 	const previewPath = `${basePath}/preview`;
 	// The iframe loads once with the current state as a preset key; later updates go through
 	// postMessage, so the frame never reloads while the builder is used.
@@ -772,6 +838,7 @@ const ThemeBuilder = ({ lang = 'en' }: Props) => {
 
 	return (
 		<>
+			<IntroDialog m={m} learnHref={learnHref} />
 			<div ref={rootRef} className="theme-builder">
 				{wrapSettings(
 					<aside className="tb-controls" aria-label={m.settings}>
