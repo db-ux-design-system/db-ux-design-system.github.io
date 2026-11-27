@@ -200,12 +200,14 @@ Der Agent ordnet Komponenten, Properties, Tokens und Icons zu. Layout-Entscheidu
 
 ### Entscheidungen
 
-| Thema         | Was du entscheidest                                                                                                                                                                               |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Control Panel | Wo das Control Panel sitzt – oben oder links auf dem Desktop, oben oder unten auf Mobilgeräten – und ob die Navigation Flat Icon nutzt. Login und Profil kommen in Actions 2, nicht in Meta.      |
-| Feste Werte   | Ob ein fester Wert eine Design-Entscheidung oder ein Workaround war. Ersetze ihn durch ein Token oder eine Property der Komponente, oder entferne ihn.                                            |
-| Seitenbreite  | Der Agent ersetzt ein festes `max-width` durch [Section](/de/dokumentation/komponenten/section) mit der nächstliegenden `width` und gibt dem Footer dieselbe `width`. Prüfe, ob die Breite passt. |
-| Fließtext     | Einfache `<p>`-Elemente können bleiben. Für einheitlichen Fließtext gibt es [Paragraph](/de/dokumentation/komponenten/paragraph) und [Text Group](/de/dokumentation/komponenten/text-group).      |
+| Thema          | Was du entscheidest                                                                                                                                                                                                             |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Control Panel  | Wo das Control Panel sitzt – oben oder links auf dem Desktop, oben oder unten auf Mobilgeräten – und ob die Navigation Flat Icon nutzt. Login und Profil kommen in Actions 2, nicht in Meta.                                    |
+| Feste Werte    | Ob ein fester Wert eine Design-Entscheidung oder ein Workaround war. Ersetze ihn durch ein Token oder eine Property der Komponente, oder entferne ihn.                                                                          |
+| Seitenbreite   | Der Agent ersetzt ein festes `max-width` durch [Section](/de/dokumentation/komponenten/section) mit der nächstliegenden `width` und gibt dem Footer dieselbe `width`. Prüfe, ob die Breite passt.                               |
+| Fließtext      | Einfache `<p>`-Elemente können bleiben. Für einheitlichen Fließtext gibt es [Paragraph](/de/dokumentation/komponenten/paragraph) und [Text Group](/de/dokumentation/komponenten/text-group).                                    |
+| Icons an Links | Link hat keine Icon-Properties. Willst du ein Icon behalten, zum Beispiel die Person bei „Log in“, setze den Link in einen Custom Button mit `variant="ghost"` und `icon`. Behandle alle Links mit Icon auf einer Seite gleich. |
+| Rote Labels    | Ein rotes Label, das etwas hervorhebt, aber keinen Fehler meldet, hat kein passendes `semantic` – `critical` steht für Fehler. Der Agent schlägt `informational` mit `emphasis="strong"` vor und fragt dich.                    |
 
 ### Verhalten
 
@@ -218,6 +220,7 @@ Der Agent ordnet Komponenten, Properties, Tokens und Icons zu. Layout-Entscheidu
 - **Ansagen:** Prüfe Notifications und Ladezustände mit einem Screenreader. Loading Indicator und Notification mit einem anderen `semantic` als `adaptive` oder `neutral` sind Live-Regionen und sagen sich selbst an. Visuell versteckte Texte wie `<em>Information:</em>` sind dann nicht mehr nötig. Einen separaten Statustext behältst du nur, wenn der Loading Indicator erst beim Laden erscheint.
 - **Zugängliche Namen:** Buttons nur mit Icon behalten ihren Text, verstecken ihn mit `noText` visuell und bekommen einen Tooltip. Dialog Header beschriftet seinen Schließen-Button mit `closeButtonText`. Der Standardwert ist „Close“ – setze ihn in der Sprache deiner Seite.
 - **Zustand ohne Farbe:** Ausgewählte Filter dürfen nicht nur an der Farbe erkennbar sein. Lass `showCheckState` bei Tags mit Checkbox aktiv.
+- **Gleiche Buttons:** Buttons mit demselben Text in einer Liste von Cards, etwa „Select“, brauchen `aria-describedby` auf die Überschrift ihrer Card. Sonst kann ein Screenreader sie nicht unterscheiden.
 - **Überschriften und Kontrast:** Prüfe die Reihenfolge der Überschriften auf der ganzen Seite und den Kontrast der Texte in Light Mode und Dark Mode, zum Beispiel mit Lighthouse. Schon das Original kann eine Überschriftenebene überspringen oder zu helle Texte haben.
 - **Gültiges Markup:** Tag, Loading Indicator, Notification und Card rendern ein `div`, das in einem `<p>` nicht erlaubt ist. Nutze ein `div` als Wrapper.
 
@@ -227,6 +230,8 @@ Nicht jeder Unterschied im Vorher-nachher-Vergleich ist ein Fehler:
 
 - Generation 2 hat jedes Wort im Label eines Chips per CSS großgeschrieben. In Generation 3 erscheint das Label so, wie es im Code steht.
 - Abstände, Größen und Farben folgen den Tokens der aktuellen Density und von Light Mode oder Dark Mode.
+- Generation 2 hatte keinen Dark Mode. Generation 3 folgt dem Farbschema des Systems. Vergleiche deshalb beide Versionen im Light Mode.
+- Icons gehören nicht mehr zum zugänglichen Namen. Screenreader lesen „Log in“ statt eines Icon-Zeichens vor „Log in“.
 - Labels von Formularfeldern stehen über dem Feld statt darin.
 - Pflichtfelder werden grün mit Häkchen, sobald sie richtig ausgefüllt sind.
 - Überschriften sind standardmäßig größer. Passe die Optik mit `visualSize` an, nicht mit der Ebene.

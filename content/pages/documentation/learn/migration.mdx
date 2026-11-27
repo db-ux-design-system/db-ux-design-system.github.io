@@ -200,12 +200,14 @@ The agent maps components, properties, tokens and icons. Layout decisions, behav
 
 ### Decisions
 
-| Topic         | What to decide                                                                                                                                                                            |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Control Panel | Where the Control Panel sits – top or left on desktop, top or bottom on mobile – and whether the navigation uses Flat Icon. Login and profile go into Actions 2, not into Meta.           |
-| Fixed values  | Whether a fixed value was a design decision or a workaround. Replace it with a token or a component property, or remove it.                                                               |
-| Page width    | The agent replaces a fixed `max-width` with [Section](/documentation/components/section) and the `width` closest to it, and gives Footer the same `width`. Check whether the width fits.  |
-| Running text  | Plain `<p>` elements can stay. [Paragraph](/documentation/components/paragraph) and [Text Group](/documentation/components/text-group) are available if you want consistent running text. |
+| Topic          | What to decide                                                                                                                                                                                 |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Control Panel  | Where the Control Panel sits – top or left on desktop, top or bottom on mobile – and whether the navigation uses Flat Icon. Login and profile go into Actions 2, not into Meta.                |
+| Fixed values   | Whether a fixed value was a design decision or a workaround. Replace it with a token or a component property, or remove it.                                                                    |
+| Page width     | The agent replaces a fixed `max-width` with [Section](/documentation/components/section) and the `width` closest to it, and gives Footer the same `width`. Check whether the width fits.       |
+| Running text   | Plain `<p>` elements can stay. [Paragraph](/documentation/components/paragraph) and [Text Group](/documentation/components/text-group) are available if you want consistent running text.      |
+| Icons on links | Link has no icon properties. To keep an icon, for example a person on "Log in", wrap the link in Custom Button with `variant="ghost"` and `icon`. Treat all icon links of a page the same way. |
+| Red labels     | A red label that highlights something but is no error has no matching `semantic` – `critical` means error. The agent suggests `informational` with `emphasis="strong"` and asks you.           |
 
 ### Behavior
 
@@ -218,6 +220,7 @@ The agent maps components, properties, tokens and icons. Layout decisions, behav
 - **Announcements:** Check notifications and loading states with a screen reader. Loading Indicator and Notification with a `semantic` other than `adaptive` or `neutral` are live regions and announce themselves. Visually hidden texts like `<em>Information:</em>` are then no longer needed. Keep a separate status text only if the Loading Indicator appears just while loading.
 - **Accessible names:** Icon-only buttons keep their text, hide it visually with `noText` and get a Tooltip. Dialog Header labels its close button with `closeButtonText`, which defaults to "Close" – set it in the language of your page.
 - **State without color:** Selected filters must not depend on color alone. Leave `showCheckState` on for tags with a checkbox.
+- **Repeated buttons:** Buttons with the same text in a list of cards, such as "Select", need `aria-describedby` pointing to the card heading, so screen readers can tell them apart.
 - **Headings and contrast:** Check the heading order of the whole page and the text contrast in Light Mode and Dark Mode, for example with Lighthouse. The original can already skip a heading level or use text that is too light.
 - **Valid markup:** Tag, Loading Indicator, Notification and Card render a `div`, which is not allowed inside a `<p>`. Use a `div` as wrapper.
 
@@ -227,6 +230,8 @@ Not every difference in a before-and-after comparison is a mistake:
 
 - Generation 2 capitalized every word of a chip label with CSS. In Generation 3 the label appears as written.
 - Spacing, sizes and colors follow the tokens of the current density and of Light Mode or Dark Mode.
+- Generation 2 had no Dark Mode. Generation 3 follows the color scheme of the system, so compare both versions in Light Mode.
+- Icons are no longer part of the accessible name. Screen readers read "Log in" instead of an icon glyph followed by "Log in".
 - Form labels sit above the field instead of inside it.
 - Required fields turn green with a check mark once they are filled in correctly.
 - Headings are larger by default. Adjust the look with `visualSize`, not with the level.
