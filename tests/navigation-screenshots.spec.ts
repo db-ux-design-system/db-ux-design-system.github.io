@@ -79,7 +79,17 @@ export const setScrollViewport = async (page: Page) => {
 	expect(page.viewportSize()?.height).toEqual(height);
 };
 
+/** localStorage key of the Theme Builder intro dialog, see theme-builder-intro.spec.ts. */
+const THEME_BUILDER_INTRO_KEY = 'db-ux-theme-builder:intro-dismissed';
+
 const setupPage = async (page: Page, path: string) => {
+	// The Theme Builder opens a modal intro dialog on load. Opted out here, so the screenshot
+	// and the Axe scan cover the builder instead of the dialog (the modal makes the rest of the
+	// page inert). The key has no effect on other pages.
+	await page.addInitScript(
+		(key) => window.localStorage.setItem(key, 'true'),
+		THEME_BUILDER_INTRO_KEY,
+	);
 	await page.goto(`/${path}`);
 	await page.waitForLoadState('domcontentloaded');
 	await waitForDBShell(page);
