@@ -355,3 +355,9 @@
 		inset-block-start: 0;
 	}
 }
+
+/* Intro dialog: the opt-out sits on the start of the footer, the action on its end */
+.tb-intro-footer {
+	align-items: center;
+	justify-content: space-between;
+}
